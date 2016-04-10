@@ -1,7 +1,6 @@
 # Modding Guide
 
 ## Disclaimer
-------
 
 By submitting a Workshop creation for Wayward, you understand that Wayward is a work in progress. As such, many things will change and be added over time. This can result in the following:
 
@@ -18,7 +17,6 @@ That being said, we hope this not hinder you from making Wayward into whatever y
 Have fun!
 
 ## Intro
-------
 
 Wayward is primarily built using HTML5 technologies, and uses TypeScript (a superset of JavaScript), which compiles down to normal JavaScript. This is then run through Electron, a cross-platform application that runs browser languages as a desktop app, outside of your browser. 
 
@@ -29,7 +27,6 @@ Wayward uses a combination of HTML, CSS, JavaScript, and WebGL (shaders) for all
 NOTE: Wayward modding support is Early Access (or beta), just like Wayward itself is. Many things will change and improve over time. Let us know any issues you run into or if you have any ideas for us.
 
 ## Workflow/Editor
-------
 
 Follow along in this section if you are not familiar with TypeScript. To compile and write mods for Wayward, you will need an IDE or editor that supports TypeScript. If you are comfortable with the likes of Node.js and NPM you can set up TypeScript yourself with a variety of editors including Sublime, Atom, WebStorm, Visual Studio and more. Visit the [TypeScript site](http://www.typescriptlang.org/#download-links) for more information. This guide will use a Visual Studio Code setup below if you need help getting started.
 
@@ -50,7 +47,6 @@ If you install it with the default options and settings, you will now have acces
 `npm install -g typescript`
 
 ## Examples
-------
 
 All official Wayward modifications are open source, allowing you to see how to mod various elements of Wayward. We have a GitHub organization with repositories for all of our mods and examples located here: [https://github.com/WaywardGame](https://github.com/WaywardGame)
 
@@ -64,7 +60,6 @@ GitHub Desktop also has a handy help section which will help you get started:
 * [Contributing to Projects with GitHub Desktop](https://help.github.com/desktop/guides/contributing/)
 
 ## Hooks
-------
 
 The main functionality of Wayward modding comes from hooks. Hooks are special places in our code where we have enabled mods to overwrite or modify functionality within Wayward. If you are not familiar with hooks, you will see how they can be used in the _Hello World_ section.
 
@@ -108,7 +103,6 @@ Here's a listing of all the current hooks in Wayward:
 * ShouldRender
 
 ## Hello World
-------
 
 ### **Intro**
 
@@ -358,7 +352,6 @@ You can compile your script with "Ctrl+Shift+B" by default. After it is compiled
 It's not much of a mod, but it works! Please review the *Example* section for a better grasp on what is possible and how to accomplish more in your mods.
 
 ## Publishing
-------
 
 After you are happy with your mod, why not publish it to Steam Workshop? You will be able to edit most things via the Steam interface after publishing it, but you'll want to include a few things before releasing it as described below.
 
