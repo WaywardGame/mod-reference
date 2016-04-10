@@ -18,7 +18,7 @@ Have fun!
 
 ## Intro
 
-Wayward is primarily built using HTML5 technologies, and uses TypeScript (a superset of JavaScript), which compiles down to normal JavaScript. This is then run through Electron, a cross-platform application that runs browser languages as a desktop app, outside of your browser. 
+Wayward is primarily built using HTML5 technologies, and uses TypeScript (a strict superset of JavaScript), which compiles down to normal JavaScript. This is then run through Electron, a cross-platform application that runs browser languages as a desktop app, outside of your browser. 
 
 You are not required to use TypeScript in your mods; however, it will become harder to maintain and manage your mods using standard JavaScript. Plus, with TypeScript you will get auto completion on all our internal functions and hooks. TypeScript also has strict compilation and error checking, removing a lot of debugging work. This guide is only tailored towards building TypeScript modifications for Wayward.
 
@@ -42,7 +42,7 @@ Install it with the default options/settings.
 
 Before you can build/compile in VS Code (or other editors/IDEs) you will need Node.js (NPM) and TypeScript. Download and install Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
-If you install it with the default options and settings, you will now have access to NPM, or "Node Package Manager" which will allow you to finally install TypeScript. After the install, open your terminal (Linux/Mac OS X) or command prompt (Windows) and run the following command: 
+Once you install Node.js, you will have access to NPM, or "Node Package Manager", which allows you to install TypeScript. Open your terminal (Linux/Mac OS X) or command prompt (Windows) and run the following command: 
 
 `npm install -g typescript`
 
@@ -54,7 +54,7 @@ If you are familiar with Git and/or GitHub, checking out or cloning the reposito
 
 If you are not familiar with Git or GitHub at all and want to learn, we would suggest you try out GitHub Desktop: [https://desktop.github.com/](https://desktop.github.com/)
 
-GitHub Desktop also has a handy help section which will help you get started:
+GitHub Desktop also has a handy help section to you get started:
 
 * [Getting Started with GitHub Desktop](https://help.github.com/desktop/guides/getting-started/)
 * [Contributing to Projects with GitHub Desktop](https://help.github.com/desktop/guides/contributing/)
@@ -63,7 +63,7 @@ GitHub Desktop also has a handy help section which will help you get started:
 
 The main functionality of Wayward modding comes from hooks. Hooks are special places in our code where we have enabled mods to overwrite or modify functionality within Wayward. If you are not familiar with hooks, you will see how they can be used in the _Hello World_ section.
 
-Here's a listing of all the current hooks in Wayward:
+Here's a list of all the current Wayward hooks:
 
 * CalculateMonsterMoveType
 * CanConsumeItem
@@ -166,11 +166,13 @@ You can think of the mod.json file as the description file for your mod. It desc
 		]
 	}
 	
-Most of this should be fairly self-explanatory; however, `compatible_minor_versions` will allow your mod to stop from being loaded if the Wayward's game version doesn't match what is set in the array. If you have "0" set here, and Wayward beta version 2.**0**.0 is loaded, then it will run. If you had `"compatible_minor_versions": [ 1 ]` set, then it would only work in version 2.**1**.0. `"compatible_minor_versions": [ 0, 1 ]` would load in both versions 2.0, and 2.1. You can also omit this property completely to remove this functionality.
+Most of this should be fairly self-explanatory.
 
-`unloadable` can be set to true if you are *not* adding new things into the game which modify the save data. If you are creating a mod that adds new monsters, items, doodads, terrain you will want to set this to false or omit it completely.
+`compatible_minor_versions` will allow your mod to stop from being loaded if the Wayward's game version doesn't match what is set in the array. If you have "0" set here, and Wayward beta version 2.**0**.0 is loaded, then it will run. If you have `"compatible_minor_versions": [ 1 ]` set, then it will only work in version 2.**1**.0. `"compatible_minor_versions": [ 0, 1 ]` will load in both versions 2.0, and 2.1. You may omit this property if you always wants your mod to run, regardless of the game version.
 
-`hooks` will contain all the functionality in which you are modifying from Wayward. Refer to the *Hooks* section for more information. Please make note that the hook names in this section are fully *CamelHump* cased.
+`unloadable` should be set to true if you are *not* adding new things into the game which modify the save data. If you are creating a mod that adds new monsters, items, doodads, terrain you will want to set this to false or omit it completely.
+
+`hooks` will contain a list of Hooks, which represent all the functionality you are modifying in Wayward. Refer to the *Hooks* section for more information. Please note that the hook names in this section are fully *CamelHump* cased.
 
 Other mod.json properties include:
 
@@ -182,7 +184,7 @@ Other mod.json properties include:
 	
 Set this if you want to require another mod from the Workshop for your mod.
 
-`publishedFileId` is a property that will show up after you have published the mod to the Steam Workshop. Do not modify this.
+`publishedFileId` is a property that is automatically filled in after your mod is published to the Steam Workshop. Do not modify or manually add this property. Wayward will use this when you publish updates to your mod.
 
 `image_overrides` is a property that will allow you to override default graphics in the game. It will appear like:
 
