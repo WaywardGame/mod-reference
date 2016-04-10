@@ -125,15 +125,16 @@ After you are inside the "mods" folder, create a new folder called "helloworld".
 ### **/.vscode/tasks.json**
 
 Visual Studio Code needs to know that we want to build our mods with TypeScript. Adding a tasks.json file in a new folder named ".vscode" with the following inserted will build your project with Ctrl+Shift+B.
-
-	{
-		"version": "0.1.0",
-		"command": "tsc",
-		"isShellCommand": true,
-		"showOutput": "silent",
-		"args": [],
-		"problemMatcher": "$tsc"
-	}
+```json
+{
+	"version": "0.1.0",
+	"command": "tsc",
+	"isShellCommand": true,
+	"showOutput": "silent",
+	"args": [],
+	"problemMatcher": "$tsc"
+}
+```
 
 ### **/mod-reference/**
 
@@ -146,26 +147,27 @@ It is recommended you keep this up to date with what is located on GitHub as thi
 ### **mod.json**
 
 You can think of the mod.json file as the description file for your mod. It describes what it does and how it behaves. It does this through a set of properties, which we will describe below. It should be updated every time you publish it to Steam. Here's a sample of what it should look like for Hello World:
+```json
+{
+	"name": "Hello World",
+	"description": "Hello World is an example mod, shown in the Modding Guide, located here: https://github.com/WaywardGame/mod-reference",
+	"version": "1.0.0",
+	"author": "Your Name Here",
+	"compatible_minor_versions": [
+		0
+	],
+	"unloadable": true,
+	"files": [
+		"helloworld.js"
+	],
+	"hooks": [
+		"OnGameStart",
+		"OnItemEquip",
+		"OnMove"
+	]
+}
+```
 
-	{
-		"name": "Hello World",
-		"description": "Hello World is an example mod, shown in the Modding Guide, located here: https://github.com/WaywardGame/mod-reference",
-		"version": "1.0.0",
-		"author": "Your Name Here",
-		"compatible_minor_versions": [
-			0
-		],
-		"unloadable": true,
-		"files": [
-			"helloworld.js"
-		],
-		"hooks": [
-			"OnGameStart",
-			"OnItemEquip",
-			"OnMove"
-		]
-	}
-	
 Most of this should be fairly self-explanatory.
 
 `compatible_minor_versions` will allow your mod to stop from being loaded if the Wayward's game version doesn't match what is set in the array. If you have "0" set here, and Wayward beta version 2.**0**.0 is loaded, then it will run. If you have `"compatible_minor_versions": [ 1 ]` set, then it will only work in version 2.**1**.0. `"compatible_minor_versions": [ 0, 1 ]` will load in both versions 2.0, and 2.1. You may omit this property if you always wants your mod to run, regardless of the game version.
@@ -177,92 +179,162 @@ Most of this should be fairly self-explanatory.
 Other mod.json properties include:
 
 `required_mods` is an array which contains strings of Steam Workshop IDs. It is not included in this example, but looks like the following:
+```json
+"required_mods": [
+	"474819610"
+]
+```
 
-	"required_mods": [
-		"474819610"
-	]
-	
 Set this if you want to require another mod from the Workshop for your mod.
 
 `publishedFileId` is a property that is automatically filled in after your mod is published to the Steam Workshop. Do not modify or manually add this property. Wayward will use this when you publish updates to your mod.
 
 `image_overrides` is a property that will allow you to override default graphics in the game. It will appear like:
+```json
+"image_overrides": [
+	"images/doodad/tree.png"
+]
+```
 
-	"image_overrides": [
-		"images/doodad/tree.png"
-	]
-	
 You can see an example of this in action in the [Trees on Fire](https://github.com/WaywardGame/treesonfire) mod.
 
 ### **tsconfig.json**
 
 tsconfig gives instructions for how TypeScript should compile your project.
-
-	{
-		"compilerOptions": {
-			"target": "es5",
-			"module": "commonjs",
-			"declaration": true,
-			"noImplicitAny": true,
-			"removeComments": true,
-			"preserveConstEnums": true,
-			"outDir": "",
-			"sourceMap": true
-		}
+```json
+{
+	"compilerOptions": {
+		"target": "es5",
+		"module": "commonjs",
+		"declaration": true,
+		"noImplicitAny": true,
+		"removeComments": true,
+		"preserveConstEnums": true,
+		"outDir": "",
+		"sourceMap": true
 	}
-	
+}
+```
+
 This will be the same across all your mods generally. If you want to know more on tsconfig, review the official documentation on it [here](http://www.typescriptlang.org/docs/handbook/tsconfig.json.html).
 
 ### **helloworld.ts**
 
 Finally we get to the actual functionality and coding of our mod in helloworld.ts. Let's start with the basics.
+```typescript
+/// <reference path="mod-reference/modreference.d.ts"/>
 
-	/// <reference path="mod-reference/modreference.d.ts"/>
-
-	class Mod extends Mods.Mod {
-		public onInitialize(saveDataGlobal: any): any {
-		}
-
-		public onLoad(saveData: any): void {
-		}
-
-		public onUnload(): void {
-		}
-
-		public onSave(): any {
-		}
+class Mod extends Mods.Mod {
+	public onInitialize(saveDataGlobal: any): any {
 	}
 
-You can use this as the basis for all your mods. The first line is for finding the references. This will allow you to autocomplete Wayward functionality and compile correctly. Each modification will use these four events. They are different from hooks in that they will not alter Wayward code directly. Let's add some functionality:
+	public onLoad(saveData: any): void {
+	}
 
+	public onUnload(): void {
+	}
+
+	public onSave(): any {
+	}
+}
+```
+
+You can use this as the basis for all your mods. The first line is for finding the references. This will allow you to autocomplete Wayward functionality and compile correctly. Each modification will use these four events. They are different from hooks in that they will not alter Wayward code directly. Let's add some functionality:
+```typescript
+private helloWorld: number;
+
+public onLoad(saveData: any): void {
+	console.log("Hello World!");
+	this.helloWorld = this.addMessage("HelloWorld", "Hello World!");
+}
+
+public onUnload(): void {
+	console.log("Goodbye World!");
+}
+
+// Hooks
+public onGameStart(isLoadingSave: boolean, playedCount: number): void {
+	ui.displayMessage(this.helloWorld, MessageType.Good);
+}
+```
+
+Here's where the name of the mod comes from. As you can see, we added new message to the game. It will display "Hello World!" when you start a new game, hence the new onGameStart hook. We also added some console logs to the game. These will not be shown to the player, but can be useful for debbuging or logging information. They will only show when you have your console open. You can do this from the Options menu under "Developer". Let's add some more functionality:
+```typescript
+private helloLeftHand: number;
+private helloRightHand: number;
+
+public onLoad(saveData: any): void {
+	console.log("Hello World!");
+	this.helloWorld = this.addMessage("HelloWorld", "Hello World!");
+	this.helloLeftHand = this.addMessage("HelloLeftHand", "Hello Left Hand!");
+	this.helloRightHand = this.addMessage("HelloRightHand", "Hello Right Hand!");
+}
+
+public onGameStart(isLoadingSave: boolean, playedCount: number): void {
+	ui.displayMessage(this.helloWorld, MessageType.Good);
+	Item.defines[ItemType.Branch].name = "A Greetings Stick";
+}
+
+public onItemEquip(item: Item.IItem, slot: EquipType): void {
+	if (item.type === ItemType.Branch) {
+		if (slot === EquipType.LeftHand) {
+			ui.displayMessage(this.helloLeftHand, MessageType.None);
+		} else {
+			ui.displayMessage(this.helloRightHand, MessageType.None);
+		}
+	}
+}
+```
+
+Now we have renamed the branches in the game to "A Greetings Stick". We added a new hook (onItemEquip) so that when we equip them, they say hello to our hands. Why? There's so many reasons I don't know where to start! Let's continue:
+```typescript
+private helloTerrain: number;
+
+public onLoad(saveData: any): void {
+	console.log("Hello World!");
+	this.helloWorld = this.addMessage("HelloWorld", "Hello World!");
+	this.helloLeftHand = this.addMessage("HelloLeftHand", "Hello Left Hand!");
+	this.helloRightHand = this.addMessage("HelloRightHand", "Hello Right Hand!");
+	this.helloTerrain = this.addMessage("HelloTerrain", "Hello _0_!");
+}
+
+public onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean {
+	var getTile = game.getTile(player.x, player.y, player.z);
+	var tileType = Utilities.TileHelpers.getType(getTile);
+	ui.displayMessage(this.helloTerrain, MessageType.Stat, terrains[tileType].name);
+	return undefined;
+}
+```
+
+Now we say hello to the world, literally. As your player moves, you will say hello to the ground beneath your feet, by name! The full mod now:
+```typescript
+/// <reference path="mod-reference/modreference.d.ts"/>
+
+class Mod extends Mods.Mod {
 	private helloWorld: number;
+	private helloLeftHand: number;
+	private helloRightHand: number;
+	private helloTerrain: number;
+
+	public onInitialize(saveDataGlobal: any): any {
+	}
 
 	public onLoad(saveData: any): void {
 		console.log("Hello World!");
 		this.helloWorld = this.addMessage("HelloWorld", "Hello World!");
+		this.helloLeftHand = this.addMessage("HelloLeftHand", "Hello Left Hand!");
+		this.helloRightHand = this.addMessage("HelloRightHand", "Hello Right Hand!");
+		this.helloTerrain = this.addMessage("HelloTerrain", "Hello _0_!");
 	}
 
 	public onUnload(): void {
 		console.log("Goodbye World!");
 	}
 
+	public onSave(): any {
+	}
+
 	// Hooks
-	public onGameStart(isLoadingSave: boolean, playedCount: number): void {
-		ui.displayMessage(this.helloWorld, MessageType.Good);
-	}
-	
-Here's where the name of the mod comes from. As you can see, we added new message to the game. It will display "Hello World!" when you start a new game, hence the new onGameStart hook. We also added some console logs to the game. These will not be shown to the player, but can be useful for debbuging or logging information. They will only show when you have your console open. You can do this from the Options menu under "Developer". Let's add some more functionality:
-
-	private helloLeftHand: number;
-	private helloRightHand: number;
-	
-	public onLoad(saveData: any): void {
-		console.log("Hello World!");
-		this.helloWorld = this.addMessage("HelloWorld", "Hello World!");
-		this.helloLeftHand = this.addMessage("HelloLeftHand", "Hello Left Hand!");
-		this.helloRightHand = this.addMessage("HelloRightHand", "Hello Right Hand!");
-	}
-
 	public onGameStart(isLoadingSave: boolean, playedCount: number): void {
 		ui.displayMessage(this.helloWorld, MessageType.Good);
 		Item.defines[ItemType.Branch].name = "A Greetings Stick";
@@ -277,18 +349,6 @@ Here's where the name of the mod comes from. As you can see, we added new messag
 			}
 		}
 	}
-	
-Now we have renamed the branches in the game to "A Greetings Stick". We added a new hook (onItemEquip) so that when we equip them, they say hello to our hands. Why? There's so many reasons I don't know where to start! Let's continue:
-
-	private helloTerrain: number;
-
-	public onLoad(saveData: any): void {
-		console.log("Hello World!");
-		this.helloWorld = this.addMessage("HelloWorld", "Hello World!");
-		this.helloLeftHand = this.addMessage("HelloLeftHand", "Hello Left Hand!");
-		this.helloRightHand = this.addMessage("HelloRightHand", "Hello Right Hand!");
-		this.helloTerrain = this.addMessage("HelloTerrain", "Hello _0_!");
-	}
 
 	public onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean {
 		var getTile = game.getTile(player.x, player.y, player.z);
@@ -296,58 +356,8 @@ Now we have renamed the branches in the game to "A Greetings Stick". We added a 
 		ui.displayMessage(this.helloTerrain, MessageType.Stat, terrains[tileType].name);
 		return undefined;
 	}
-	
-Now we say hello to the world, literally. As your player moves, you will say hello to the ground beneath your feet, by name! The full mod now:
-
-	/// <reference path="mod-reference/modreference.d.ts"/>
-
-	class Mod extends Mods.Mod {
-		private helloWorld: number;
-		private helloLeftHand: number;
-		private helloRightHand: number;
-		private helloTerrain: number;
-
-		public onInitialize(saveDataGlobal: any): any {
-		}
-
-		public onLoad(saveData: any): void {
-			console.log("Hello World!");
-			this.helloWorld = this.addMessage("HelloWorld", "Hello World!");
-			this.helloLeftHand = this.addMessage("HelloLeftHand", "Hello Left Hand!");
-			this.helloRightHand = this.addMessage("HelloRightHand", "Hello Right Hand!");
-			this.helloTerrain = this.addMessage("HelloTerrain", "Hello _0_!");
-		}
-
-		public onUnload(): void {
-			console.log("Goodbye World!");
-		}
-
-		public onSave(): any {
-		}
-
-		// Hooks
-		public onGameStart(isLoadingSave: boolean, playedCount: number): void {
-			ui.displayMessage(this.helloWorld, MessageType.Good);
-			Item.defines[ItemType.Branch].name = "A Greetings Stick";
-		}
-
-		public onItemEquip(item: Item.IItem, slot: EquipType): void {
-			if (item.type === ItemType.Branch) {
-				if (slot === EquipType.LeftHand) {
-					ui.displayMessage(this.helloLeftHand, MessageType.None);
-				} else {
-					ui.displayMessage(this.helloRightHand, MessageType.None);
-				}
-			}
-		}
-
-		public onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean {
-			var getTile = game.getTile(player.x, player.y, player.z);
-			var tileType = Utilities.TileHelpers.getType(getTile);
-			ui.displayMessage(this.helloTerrain, MessageType.Stat, terrains[tileType].name);
-			return undefined;
-		}
-	}
+}
+```
 
 You can compile your script with "Ctrl+Shift+B" by default. After it is compiled, you will see a bunch of new files in your helloworld directory. These are the files Wayward will use. If you load Wayward, under "Manage Mods", you will now see your Hello World mod under "Local Mods".
 
