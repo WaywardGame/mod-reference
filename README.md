@@ -1,5 +1,22 @@
 # Modding Guide
 
+## Table of Contents
+
+* [Disclaimer](https://github.com/WaywardGame/mod-reference#disclaimer)
+* [Intro](https://github.com/WaywardGame/mod-reference#intro)
+* [Workflow/Editor](https://github.com/WaywardGame/mod-reference#workfloweditor)
+* [Examples](https://github.com/WaywardGame/mod-reference#examples)
+* [Hooks](https://github.com/WaywardGame/mod-reference#hooks)
+* [Hello World](https://github.com/WaywardGame/mod-reference#hello-world)
+	* [Intro](https://github.com/WaywardGame/mod-reference#intro-1)
+	* [Setup](https://github.com/WaywardGame/mod-reference#setup)
+	* [/.vscode/tasks.json](https://github.com/WaywardGame/mod-reference#vscodetasksjson)
+	* [/mod-reference/](https://github.com/WaywardGame/mod-reference#mod-reference)
+	* [mod.json](https://github.com/WaywardGame/mod-reference#modjson)
+	* [tsconfig.json](https://github.com/WaywardGame/mod-reference#tsconfigjson)
+	* [helloworld.ts](https://github.com/WaywardGame/mod-reference#helloworldts)
+* [Publishing](https://github.com/WaywardGame/mod-reference#publishing)
+	
 ## Disclaimer
 
 By submitting a Workshop creation for Wayward, you understand that Wayward is a work in progress. As such, many things will change and be added over time. This can result in the following:
