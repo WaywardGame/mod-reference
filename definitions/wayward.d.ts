@@ -1192,52 +1192,56 @@ declare module Languages {
         OptionsDropOnGather = 86,
         OptionsEffects = 87,
         OptionsEnableHints = 88,
-        OptionsFullscreenMode = 89,
-        OptionsGame = 90,
-        OptionsGraphics = 91,
-        OptionsKeyBindDefault = 92,
-        OptionsKeyBindRebinding = 93,
-        OptionsKeyBinds = 94,
-        OptionsLanguage = 95,
-        OptionsMusic = 96,
-        OptionsMute = 97,
-        OptionsNextSong = 98,
-        OptionsPixelFont = 99,
-        OptionsSaveData = 100,
-        OptionsVisionDither = 101,
-        OptionsVisionFade = 102,
-        OptionsWindowedMode = 103,
-        OptionsZoomIn = 104,
-        OptionsZoomOut = 105,
-        Overburdened = 106,
-        Poisoned = 107,
-        PreviousHint = 108,
-        QuickSlot1 = 109,
-        QuickSlot2 = 110,
-        QuickSlot3 = 111,
-        QuickSlot4 = 112,
-        QuickSlot5 = 113,
-        QuickSlot6 = 114,
-        QuickSlot7 = 115,
-        QuickSlot8 = 116,
-        QuickSlot9 = 117,
-        ReturnToTitleScreen = 118,
-        Stamina = 119,
-        Starving = 120,
-        Talent = 121,
-        Thirst = 122,
-        Version = 123,
-        Weight = 124,
-        WindowTitleContainer = 125,
-        WindowTitleCrafting = 126,
-        WindowTitleEquipment = 127,
-        WindowTitleHighscores = 128,
-        WindowTitleInventory = 129,
-        WindowTitleMap = 130,
-        WindowTitleMessages = 131,
-        WindowTitleMilestones = 132,
-        WindowTitleOptions = 133,
-        WindowTitleSkills = 134,
+        OptionsEnableMouseMovement = 89,
+        OptionsFullscreenMode = 90,
+        OptionsGame = 91,
+        OptionsGraphics = 92,
+        OptionsKeyBindDefault = 93,
+        OptionsKeyBindRebinding = 94,
+        OptionsKeyBinds = 95,
+        OptionsLanguage = 96,
+        OptionsMusic = 97,
+        OptionsMute = 98,
+        OptionsNextSong = 99,
+        OptionsPixelFont = 100,
+        OptionsSaveData = 101,
+        OptionsScaleDefault = 102,
+        OptionsScaleIn = 103,
+        OptionsScaleOut = 104,
+        OptionsVisionDither = 105,
+        OptionsVisionFade = 106,
+        OptionsWindowedMode = 107,
+        OptionsZoomIn = 108,
+        OptionsZoomOut = 109,
+        Overburdened = 110,
+        Poisoned = 111,
+        PreviousHint = 112,
+        QuickSlot1 = 113,
+        QuickSlot2 = 114,
+        QuickSlot3 = 115,
+        QuickSlot4 = 116,
+        QuickSlot5 = 117,
+        QuickSlot6 = 118,
+        QuickSlot7 = 119,
+        QuickSlot8 = 120,
+        QuickSlot9 = 121,
+        ReturnToTitleScreen = 122,
+        Stamina = 123,
+        Starving = 124,
+        Talent = 125,
+        Thirst = 126,
+        Version = 127,
+        Weight = 128,
+        WindowTitleContainer = 129,
+        WindowTitleCrafting = 130,
+        WindowTitleEquipment = 131,
+        WindowTitleHighscores = 132,
+        WindowTitleInventory = 133,
+        WindowTitleMap = 134,
+        WindowTitleMessages = 135,
+        WindowTitleMilestones = 136,
+        WindowTitleOptions = 137,
+        WindowTitleSkills = 138,
     }
     enum Dictionary {
         ItemTypes = 0,
@@ -1379,426 +1383,428 @@ declare enum Message {
     CannotSeeHere = 69,
     CannotSleepHere = 70,
     CannotStartFireHere = 71,
-    CarryingTooMuchWeight = 72,
-    CarvedUpCorpse = 73,
-    CastYourLine = 74,
-    Category = 75,
-    CaughtFish = 76,
-    Chest = 77,
-    ClearMessages = 78,
-    CloseDoor = 79,
-    Consumed = 80,
-    Container = 81,
-    Cook = 82,
-    Cooked = 83,
-    Corpse = 84,
-    CorruptSaveDetected = 85,
-    CouldNotDecipher = 86,
-    Craft = 87,
-    Crafted = 88,
-    Crafts = 89,
-    CreatureAppears = 90,
-    CreatureAppearsHealthy = 91,
-    CreatureAppearsUnhealthy = 92,
-    CreatureIsAtPercentHealth = 93,
-    CreatureLooksBarelyHurt = 94,
-    CreatureLooksHealthyAndUndamaged = 95,
-    CreatureLooksInjured = 96,
-    CreatureLooksSeverelyDamaged = 97,
-    CreatureSeemsHurt = 98,
-    CreatureSeemsInjured = 99,
-    CreatureSeemsUnimpaired = 100,
-    CuredYourPoison = 101,
-    DailyChallengeMode = 102,
-    DamageAppearedEffective = 103,
-    DamageAppearedIneffective = 104,
-    DamagedByPouringWater = 105,
-    DealtNoDamageToYou = 106,
-    DefaultGameName = 107,
-    DependencyIssue = 108,
-    DestroyedFromUse = 109,
-    DestroyedGrowingByPickingItUp = 110,
-    DidNotSeemToBeHurting = 111,
-    Disassemble = 112,
-    DiscoveredCaveEntrance = 113,
-    DiscoveredInTheBottle = 114,
-    DoNotForgetToAddRequiredModsOnWorkshop = 115,
-    DoNotHaveTreasureMaps = 116,
-    DrewSurroundings = 117,
-    Drink = 118,
-    Drop = 119,
-    DropAll = 120,
-    DropAllOfSameQuality = 121,
-    DroppedAllIntoDepths = 122,
-    DroppedIntoDepths = 123,
-    DroppedIntoFire = 124,
-    DueToDehydration = 125,
-    DueToStarvation = 126,
-    DugTreasureOut = 127,
-    DumpContentsOfContainerInInventory = 128,
-    DyingOfDehydration = 129,
-    EarnedMilestone = 130,
-    EquipTo = 131,
-    EquipmentProtectedYouFromHeat = 132,
-    ErrorHasOccured = 133,
-    Expert = 134,
-    ExtinguishedFire = 135,
-    ExtinguishedTorch = 136,
-    FailedToAddFuelToTorch = 137,
-    FailedToCatchFish = 138,
-    FailedToCauseDamage = 139,
-    FailedToDrawMap = 140,
-    FailedToPickLock = 141,
-    FailedToPlant = 142,
-    FailedToPreserve = 143,
-    FailedToReinforce = 144,
-    FailedToRepair = 145,
-    FailedToStartFire = 146,
-    FailedToTransmogrify = 147,
-    FarAwayFromTreasure = 148,
-    Feet = 149,
-    FeltBurningPainLostHealth = 150,
-    FewMinutes = 151,
-    Filled = 152,
-    FilledFrom = 153,
-    FinalizingWorld = 154,
-    Fire = 155,
-    FireAlmostExtinguished = 156,
-    FireFacingYouIsWarm = 157,
-    FireIsHealthy = 158,
-    FireIsRaging = 159,
-    FireIsStruggling = 160,
-    FireSource = 161,
-    FiredIntoObstacle = 162,
-    FirstQuarterOfDay = 163,
-    FirstQuarterOfNight = 164,
-    Food = 165,
-    FoodAlreadyPreserved = 166,
-    FourthQuarterOfDay = 167,
-    FourthQuarterOfNight = 168,
-    FullyDecodedMap = 169,
-    GainedHealth = 170,
-    GainedHunger = 171,
-    GainedStamina = 172,
-    GainedThirst = 173,
-    GameHasBeenSavedIsTakingUpMB = 174,
-    Gather = 175,
-    GeneratingWorld = 176,
-    GettingStronger = 177,
-    GrabAll = 178,
-    Group = 179,
-    Hands = 180,
-    HasBeenHurtByATrap = 181,
-    HasBeenHurtByYourTrap = 182,
-    HasDecayed = 183,
-    HasHitYouForDamage = 184,
-    HasSplit = 185,
-    Head = 186,
-    Held = 187,
-    Help = 188,
-    Hints = 189,
-    HintsDisabled = 190,
-    HintsEnabled = 191,
-    HitForDamage = 192,
-    Hour = 193,
-    Hours = 194,
-    HowDoYouWantToExportSave = 195,
-    HurtHandsByGatheringWithNoTool = 196,
-    HurtHandsHittingWithoutWeapons = 197,
-    InExactLocationOfTreasure = 198,
-    InNeedOfRepair = 199,
-    IncompatibleVersion = 200,
-    InjuredFromTrap = 201,
-    Inspect = 202,
-    Intermediate = 203,
-    Inventory = 204,
-    Jump = 205,
-    Killed = 206,
-    LabelAttackFromTactics = 207,
-    LabelAuthor = 208,
-    LabelBase = 209,
-    LabelBaseAttack = 210,
-    LabelBaseDefense = 211,
-    LabelBluntResist = 212,
-    LabelDecay = 213,
-    LabelDefense = 214,
-    LabelDefenseFromParrying = 215,
-    LabelDoodadRequired = 216,
-    LabelDurability = 217,
-    LabelEquip = 218,
-    LabelFireResist = 219,
-    LabelGrouping = 220,
-    LabelHave = 221,
-    LabelLastUpdated = 222,
-    LabelLeftHandAttack = 223,
-    LabelLevel = 224,
-    LabelMaximumWeight = 225,
-    LabelOnEquip = 226,
-    LabelPiercingResist = 227,
-    LabelRange = 228,
-    LabelRanged = 229,
-    LabelRangedAttack = 230,
-    LabelRangedDamage = 231,
-    LabelRequiredMods = 232,
-    LabelRequires = 233,
-    LabelResists = 234,
-    LabelRightHandAttack = 235,
-    LabelSkill = 236,
-    LabelSlashingResist = 237,
-    LabelUse = 238,
-    LabelUses = 239,
-    LabelVersion = 240,
-    LabelVulnerabilities = 241,
-    LabelWeight = 242,
-    LabelWeightReduction = 243,
-    LastPlaceYouLeftOff = 244,
-    LearnedHowToCreate = 245,
-    LeftHand = 246,
-    Legs = 247,
-    LoadingMods = 248,
-    LoadingSprites = 249,
-    LoadingWorld = 250,
-    LocalFile = 251,
-    LocalVersionOfModDetected = 252,
-    LoseBonesLayBleaching = 253,
-    LoseEndIsBeginning = 254,
-    LoseSadlyNoTrace = 255,
-    LostHealth = 256,
-    LostHunger = 257,
-    LostStamina = 258,
-    LostThirst = 259,
-    MapNotOfThisArea = 260,
-    MaterialsDestroyed = 261,
-    MetabolismSlowed = 262,
-    MilestoneIsHidden = 263,
-    MilestoneIsInvisible = 264,
-    MissedWith = 265,
-    MissingRequiredMods = 266,
-    ModImportedSaveGame = 267,
-    ModLoadError = 268,
-    ModRequiresItself = 269,
-    ModWithNameAlreadyExists = 270,
-    MonsterIdolAttractedCreature = 271,
-    MoveAllOfSameQualityToInventory = 272,
-    MoveAllOfSameQualityToOpenedContainer = 273,
-    MoveAllToInventory = 274,
-    MoveAllToOpenedContainer = 275,
-    MoveOverTrapButDoNotSetOff = 276,
-    MoveToInventory = 277,
-    MoveToOpenedContainer = 278,
-    MustCastIntoWater = 279,
-    Mysteriously = 280,
-    Name = 281,
-    Neck = 282,
-    NeedAShovelToDigTreasure = 283,
-    NeedDeeperWaterForRaft = 284,
-    NeedFishingNetForTreasure = 285,
-    NeedToBuildUpLandAround = 286,
-    NeedToEquipToShoot = 287,
-    NeedToStartTravelsOutside = 288,
-    Newest = 289,
-    No = 290,
-    NoAmmunitionForThatWeapon = 291,
-    NoBlackPowderToFireWeapon = 292,
-    NoFireToStokeWith = 293,
-    NoFishAtLocation = 294,
-    NoFuelItemsToStartFire = 295,
-    NoInkToDrawMap = 296,
-    NoKindlingToStartFire = 297,
-    NoLongerFeelPainOfBurning = 298,
-    NoMoreRoomInContainer = 299,
-    NoRoomToDrop = 300,
-    NoTinderToStartFire = 301,
-    NoWaterInStill = 302,
-    NoWhereNearTreasure = 303,
-    NotAvailable = 304,
-    NotEnoughFoodToTravel = 305,
-    NotEnoughPurifiedWaterYet = 306,
-    NotEnoughStrengthToThrow = 307,
-    NotEnoughTreasureToReturn = 308,
-    NotFacingLockedObject = 309,
-    NotFacingValidFoodForPreservation = 310,
-    NotFacingValidItemForReinforcement = 311,
-    NotFacingValidItemForRepair = 312,
-    NotFacingValidItemToTransmogrify = 313,
-    NotInRangeOfTreasure = 314,
-    NothingHereToCarve = 315,
-    NothingHereToFill = 316,
-    NothingHereToGardenWith = 317,
-    NumberEight = 318,
-    NumberFive = 319,
-    NumberFour = 320,
-    NumberNine = 321,
-    NumberOne = 322,
-    NumberSeven = 323,
-    NumberSix = 324,
-    NumberTen = 325,
-    NumberThree = 326,
-    NumberTwo = 327,
-    ObjectIsLocked = 328,
-    Ok = 329,
-    Oldest = 330,
-    OpenDoor = 331,
-    OverEatingLostStamina = 332,
-    OverHydratingLostStamina = 333,
-    PaperTurnedToMush = 334,
-    PartiallyDecodedMap = 335,
-    PastExperiencesProvideBenefits = 336,
-    PickupItem = 337,
-    PickupObject = 338,
-    Piercing = 339,
-    Place = 340,
-    PlacedOnGround = 341,
-    Plant = 342,
-    PlantIsFertile = 343,
-    PlantIsNotFertile = 344,
-    PlantVeryHealthy = 345,
-    PlantedInGround = 346,
-    PoisonWorkedItsCourse = 347,
-    Poisoned = 348,
-    PoisonedLostHealth = 349,
-    PouredOutWater = 350,
-    PouredWaterIntoStill = 351,
-    PreservedFood = 352,
-    PublishingMod = 353,
-    PurifiedWaterInStill = 354,
-    RefreshingMods = 355,
-    Reinforce = 356,
-    RemoveFromQuickslot = 357,
-    RemovedBlood = 358,
-    Repair = 359,
-    RequiredModsMissingWantToContinue = 360,
-    RequiredModsNotLoaded = 361,
-    RequiresFacingFireSource = 362,
-    RequiresFireToBeLit = 363,
-    RequiresYouToBeFacingToCraft = 364,
-    Rest = 365,
-    RestInterrupted = 366,
-    Rested = 367,
-    Resting = 368,
-    ReturnToTitleScreenNoSaveInDailyChallenge = 369,
-    ReturnToTitleScreenProgressWillBeSaved = 370,
-    ReturnedToCivilization = 371,
-    ReturningToCivilizationSetOffAgain = 372,
-    RightHand = 373,
-    SailedToCivilization = 374,
-    SavingGame = 375,
-    ScrollProvidedNoUsefulInsight = 376,
-    SeaweedFromWater = 377,
-    SecondQuarterOfDay = 378,
-    SecondQuarterOfNight = 379,
-    SeeGrowing = 380,
-    SeemsToHaveDrawnEnergy = 381,
-    SetTrapOffButNoDamage = 382,
-    SetUp = 383,
-    ShadowInTheWater = 384,
-    Simple = 385,
-    Skill = 386,
-    SkillHasRaised = 387,
-    Slashing = 388,
-    SleepInterrupted = 389,
-    Sleeping = 390,
-    Slept = 391,
-    SoilWouldHaveNoEffect = 392,
-    SomethingInTheWayOfCarving = 393,
-    SomethingInTheWayOfDigging = 394,
-    SomethingInTheWayOfDiggingCarveFirst = 395,
-    SomethingInTheWayOfFishing = 396,
-    SomethingInTheWayOfPlacing = 397,
-    SoothedYourBurningPain = 398,
-    Sort = 399,
-    SortedByCategory = 400,
-    SortedByGroup = 401,
-    SortedByName = 402,
-    SortedByNewest = 403,
-    SortedByOldest = 404,
-    SortedBySkill = 405,
-    SortedByWeight = 406,
-    StaminaIsFull = 407,
-    StartTravelInWater = 408,
-    StartedFire = 409,
-    StarvingToDeath = 410,
-    SteamWorkshop = 411,
-    SteppingOnHasInjuredYouForDamage = 412,
-    StillHasNoWaterToPurify = 413,
-    StirredUpCreature = 414,
-    StopUsingRaft = 415,
-    StoppedYourBleeding = 416,
-    SummonedGuardiansByDiggingTreasure = 417,
-    SunIsRising = 418,
-    SunIsSetting = 419,
-    SunNotBrightEnoughToStartFire = 420,
-    Talent = 421,
-    TeleportBlocked = 422,
-    Teleported = 423,
-    ThereIsNoSunToStartFire = 424,
-    ThirdQuarterOfDay = 425,
-    ThirdQuarterOfNight = 426,
-    ThisContains = 427,
-    Throw = 428,
-    ThrownIntoDepths = 429,
-    ThrownIntoObstacle = 430,
-    TooDamaged = 431,
-    TooExhaustedToJump = 432,
-    ToolAppearedEffectiveForGathering = 433,
-    TrampleIntoGround = 434,
-    TrampledFire = 435,
-    TrampledIntoGround = 436,
-    Trampling = 437,
-    Transmogrified = 438,
-    TravelAway = 439,
-    TravelToFarOffLands = 440,
-    TreasureIsBlocked = 441,
-    URLHasOpenedInWebBrowser = 442,
-    UnEquip = 443,
-    UnableToLoadRequiredMods = 444,
-    UnknownItem = 445,
-    UnlockedChest = 446,
-    UnpurifiedWaterInStill = 447,
-    UpdatingMod = 448,
-    UsedSoilToIncreaseFertility = 449,
-    UsedSoilToSpeedUpGrowing = 450,
-    UsingBareFistsToFight = 451,
-    UsingBareHandsToGather = 452,
-    WaitUntilFireCooledToGetWater = 453,
-    WalkingDistanceOfTreasure = 454,
-    WantToDeleteAllSavedData = 455,
-    WantToDeleteThisGame = 456,
-    WantToPublishThisMod = 457,
-    WantToPublishUpdateToMod = 458,
-    WantToUninstallThisMod = 459,
-    Water = 460,
-    WaterDoesNotNeedDesalination = 461,
-    WaterIncreaseFertilityOfPlant = 462,
-    WaterPutOutFire = 463,
-    WaterWouldHaveNoEffect = 464,
-    Weight = 465,
-    WinFindWayBackToCivilization = 466,
-    WinSailBackWithRiches = 467,
-    WinTravelledBackToCivilization = 468,
-    With = 469,
-    WorkingYourselfIntoExhaustion = 470,
-    WorkshopHasBeenOpenedPressOkAfter = 471,
-    Yes = 472,
-    YouAte = 473,
-    YouBeginResting = 474,
-    YouCrafted = 475,
-    YouDied = 476,
-    YouDisassembled = 477,
-    YouDrank = 478,
-    YouEquip = 479,
-    YouFailedTo = 480,
-    YouFire = 481,
-    YouGathered = 482,
-    YouHaveKilled = 483,
-    YouOpen = 484,
-    YouPickedUp = 485,
-    YouSalvaged = 486,
-    YouSee = 487,
-    YouThrew = 488,
-    YouUnequip = 489,
-    YouUsed = 490,
-    YourFist = 491,
+    CannotToTellTime = 72,
+    CarryingTooMuchWeight = 73,
+    CarvedUpCorpse = 74,
+    CastYourLine = 75,
+    Category = 76,
+    CaughtFish = 77,
+    Chest = 78,
+    ClearMessages = 79,
+    CloseDoor = 80,
+    Consumed = 81,
+    Container = 82,
+    Cook = 83,
+    Cooked = 84,
+    Corpse = 85,
+    CorruptSaveDetected = 86,
+    CouldNotDecipher = 87,
+    Craft = 88,
+    Crafted = 89,
+    Crafts = 90,
+    CreatureAppears = 91,
+    CreatureAppearsHealthy = 92,
+    CreatureAppearsUnhealthy = 93,
+    CreatureIsAtPercentHealth = 94,
+    CreatureLooksBarelyHurt = 95,
+    CreatureLooksHealthyAndUndamaged = 96,
+    CreatureLooksInjured = 97,
+    CreatureLooksSeverelyDamaged = 98,
+    CreatureSeemsHurt = 99,
+    CreatureSeemsInjured = 100,
+    CreatureSeemsUnimpaired = 101,
+    CuredYourPoison = 102,
+    DailyChallengeMode = 103,
+    DamageAppearedEffective = 104,
+    DamageAppearedIneffective = 105,
+    DamagedByPouringWater = 106,
+    DealtNoDamageToYou = 107,
+    DefaultGameName = 108,
+    DependencyIssue = 109,
+    DestroyedFromUse = 110,
+    DestroyedGrowingByPickingItUp = 111,
+    DidNotSeemToBeHurting = 112,
+    Disassemble = 113,
+    DiscoveredCaveEntrance = 114,
+    DiscoveredInTheBottle = 115,
+    DoNotForgetToAddRequiredModsOnWorkshop = 116,
+    DoNotHaveTreasureMaps = 117,
+    DrewSurroundings = 118,
+    Drink = 119,
+    Drop = 120,
+    DropAll = 121,
+    DropAllOfSameQuality = 122,
+    DroppedAllIntoDepths = 123,
+    DroppedIntoDepths = 124,
+    DroppedIntoFire = 125,
+    DueToDehydration = 126,
+    DueToStarvation = 127,
+    DugTreasureOut = 128,
+    DumpContentsOfContainerInInventory = 129,
+    DyingOfDehydration = 130,
+    EarnedMilestone = 131,
+    EquipTo = 132,
+    EquipmentProtectedYouFromHeat = 133,
+    ErrorHasOccured = 134,
+    Expert = 135,
+    ExtinguishedFire = 136,
+    ExtinguishedTorch = 137,
+    FailedToAddFuelToTorch = 138,
+    FailedToCatchFish = 139,
+    FailedToCauseDamage = 140,
+    FailedToDrawMap = 141,
+    FailedToPickLock = 142,
+    FailedToPlant = 143,
+    FailedToPreserve = 144,
+    FailedToReinforce = 145,
+    FailedToRepair = 146,
+    FailedToStartFire = 147,
+    FailedToTransmogrify = 148,
+    FarAwayFromTreasure = 149,
+    Feet = 150,
+    FeltBurningPainLostHealth = 151,
+    FewMinutes = 152,
+    Filled = 153,
+    FilledFrom = 154,
+    FinalizingWorld = 155,
+    Fire = 156,
+    FireAlmostExtinguished = 157,
+    FireFacingYouIsWarm = 158,
+    FireIsHealthy = 159,
+    FireIsRaging = 160,
+    FireIsStruggling = 161,
+    FireSource = 162,
+    FiredIntoObstacle = 163,
+    FirstQuarterOfDay = 164,
+    FirstQuarterOfNight = 165,
+    Food = 166,
+    FoodAlreadyPreserved = 167,
+    FourthQuarterOfDay = 168,
+    FourthQuarterOfNight = 169,
+    FullyDecodedMap = 170,
+    GainedHealth = 171,
+    GainedHunger = 172,
+    GainedStamina = 173,
+    GainedThirst = 174,
+    GameHasBeenSavedIsTakingUpMB = 175,
+    Gather = 176,
+    GeneratingWorld = 177,
+    GettingStronger = 178,
+    GrabAll = 179,
+    Group = 180,
+    Hands = 181,
+    HasBeenHurtByATrap = 182,
+    HasBeenHurtByYourTrap = 183,
+    HasDecayed = 184,
+    HasHitYouForDamage = 185,
+    HasSplit = 186,
+    Head = 187,
+    Held = 188,
+    Help = 189,
+    Hints = 190,
+    HintsDisabled = 191,
+    HintsEnabled = 192,
+    HitForDamage = 193,
+    Hour = 194,
+    Hours = 195,
+    HowDoYouWantToExportSave = 196,
+    HurtHandsByGatheringWithNoTool = 197,
+    HurtHandsHittingWithoutWeapons = 198,
+    InExactLocationOfTreasure = 199,
+    InNeedOfRepair = 200,
+    IncompatibleVersion = 201,
+    InjuredFromTrap = 202,
+    Inspect = 203,
+    Intermediate = 204,
+    Inventory = 205,
+    Jump = 206,
+    Killed = 207,
+    LabelAttackFromTactics = 208,
+    LabelAuthor = 209,
+    LabelBase = 210,
+    LabelBaseAttack = 211,
+    LabelBaseDefense = 212,
+    LabelBluntResist = 213,
+    LabelDecay = 214,
+    LabelDefense = 215,
+    LabelDefenseFromParrying = 216,
+    LabelDoodadRequired = 217,
+    LabelDurability = 218,
+    LabelEquip = 219,
+    LabelFireResist = 220,
+    LabelGrouping = 221,
+    LabelHave = 222,
+    LabelLastUpdated = 223,
+    LabelLeftHandAttack = 224,
+    LabelLevel = 225,
+    LabelMaximumWeight = 226,
+    LabelOnEquip = 227,
+    LabelPiercingResist = 228,
+    LabelRange = 229,
+    LabelRanged = 230,
+    LabelRangedAttack = 231,
+    LabelRangedDamage = 232,
+    LabelRequiredMods = 233,
+    LabelRequires = 234,
+    LabelResists = 235,
+    LabelRightHandAttack = 236,
+    LabelSkill = 237,
+    LabelSlashingResist = 238,
+    LabelUse = 239,
+    LabelUses = 240,
+    LabelVersion = 241,
+    LabelVulnerabilities = 242,
+    LabelWeight = 243,
+    LabelWeightReduction = 244,
+    LastPlaceYouLeftOff = 245,
+    LearnedHowToCreate = 246,
+    LeftHand = 247,
+    Legs = 248,
+    LoadingMods = 249,
+    LoadingSprites = 250,
+    LoadingWorld = 251,
+    LocalFile = 252,
+    LocalVersionOfModDetected = 253,
+    LoseBonesLayBleaching = 254,
+    LoseEndIsBeginning = 255,
+    LoseSadlyNoTrace = 256,
+    LostHealth = 257,
+    LostHunger = 258,
+    LostStamina = 259,
+    LostThirst = 260,
+    MapNotOfThisArea = 261,
+    MaterialsDestroyed = 262,
+    MetabolismSlowed = 263,
+    MilestoneIsHidden = 264,
+    MilestoneIsInvisible = 265,
+    MissedWith = 266,
+    MissingRequiredMods = 267,
+    ModImportedSaveGame = 268,
+    ModLoadError = 269,
+    ModRequiresItself = 270,
+    ModWithNameAlreadyExists = 271,
+    MonsterIdolAttractedCreature = 272,
+    MoveAllOfSameQualityToInventory = 273,
+    MoveAllOfSameQualityToOpenedContainer = 274,
+    MoveAllToInventory = 275,
+    MoveAllToOpenedContainer = 276,
+    MoveOverTrapButDoNotSetOff = 277,
+    MoveToInventory = 278,
+    MoveToOpenedContainer = 279,
+    MustCastIntoWater = 280,
+    Mysteriously = 281,
+    Name = 282,
+    Neck = 283,
+    NeedAShovelToDigTreasure = 284,
+    NeedDeeperWaterForRaft = 285,
+    NeedFishingNetForTreasure = 286,
+    NeedToBuildUpLandAround = 287,
+    NeedToEquipToShoot = 288,
+    NeedToStartTravelsOutside = 289,
+    Newest = 290,
+    No = 291,
+    NoAmmunitionForThatWeapon = 292,
+    NoBlackPowderToFireWeapon = 293,
+    NoFireToStokeWith = 294,
+    NoFishAtLocation = 295,
+    NoFuelItemsToStartFire = 296,
+    NoInkToDrawMap = 297,
+    NoKindlingToStartFire = 298,
+    NoLongerFeelPainOfBurning = 299,
+    NoMoreRoomInContainer = 300,
+    NoRoomToDrop = 301,
+    NoTinderToStartFire = 302,
+    NoWaterInStill = 303,
+    NoWhereNearTreasure = 304,
+    NotAvailable = 305,
+    NotEnoughFoodToTravel = 306,
+    NotEnoughPurifiedWaterYet = 307,
+    NotEnoughStrengthToThrow = 308,
+    NotEnoughTreasureToReturn = 309,
+    NotFacingLockedObject = 310,
+    NotFacingValidFoodForPreservation = 311,
+    NotFacingValidItemForReinforcement = 312,
+    NotFacingValidItemForRepair = 313,
+    NotFacingValidItemToTransmogrify = 314,
+    NotInRangeOfTreasure = 315,
+    NothingHereToCarve = 316,
+    NothingHereToFill = 317,
+    NothingHereToGardenWith = 318,
+    NumberEight = 319,
+    NumberFive = 320,
+    NumberFour = 321,
+    NumberNine = 322,
+    NumberOne = 323,
+    NumberSeven = 324,
+    NumberSix = 325,
+    NumberTen = 326,
+    NumberThree = 327,
+    NumberTwo = 328,
+    ObjectIsLocked = 329,
+    Ok = 330,
+    Oldest = 331,
+    OpenDoor = 332,
+    OverEatingLostStamina = 333,
+    OpenFolderFailed = 334,
+    OverHydratingLostStamina = 335,
+    PaperTurnedToMush = 336,
+    PartiallyDecodedMap = 337,
+    PastExperiencesProvideBenefits = 338,
+    PickupItem = 339,
+    PickupObject = 340,
+    Piercing = 341,
+    Place = 342,
+    PlacedOnGround = 343,
+    Plant = 344,
+    PlantIsFertile = 345,
+    PlantIsNotFertile = 346,
+    PlantVeryHealthy = 347,
+    PlantedInGround = 348,
+    PoisonWorkedItsCourse = 349,
+    Poisoned = 350,
+    PoisonedLostHealth = 351,
+    PouredOutWater = 352,
+    PouredWaterIntoStill = 353,
+    PreservedFood = 354,
+    PublishingMod = 355,
+    PurifiedWaterInStill = 356,
+    RefreshingMods = 357,
+    Reinforce = 358,
+    RemoveFromQuickslot = 359,
+    RemovedBlood = 360,
+    Repair = 361,
+    RequiredModsMissingWantToContinue = 362,
+    RequiredModsNotLoaded = 363,
+    RequiresFacingFireSource = 364,
+    RequiresFireToBeLit = 365,
+    RequiresYouToBeFacingToCraft = 366,
+    Rest = 367,
+    RestInterrupted = 368,
+    Rested = 369,
+    Resting = 370,
+    ReturnToTitleScreenNoSaveInDailyChallenge = 371,
+    ReturnToTitleScreenProgressWillBeSaved = 372,
+    ReturnedToCivilization = 373,
+    ReturningToCivilizationSetOffAgain = 374,
+    RightHand = 375,
+    SailedToCivilization = 376,
+    SavingGame = 377,
+    ScrollProvidedNoUsefulInsight = 378,
+    SeaweedFromWater = 379,
+    SecondQuarterOfDay = 380,
+    SecondQuarterOfNight = 381,
+    SeeGrowing = 382,
+    SeemsToHaveDrawnEnergy = 383,
+    SetTrapOffButNoDamage = 384,
+    SetUp = 385,
+    ShadowInTheWater = 386,
+    Simple = 387,
+    Skill = 388,
+    SkillHasRaised = 389,
+    Slashing = 390,
+    SleepInterrupted = 391,
+    Sleeping = 392,
+    Slept = 393,
+    SoilWouldHaveNoEffect = 394,
+    SomethingInTheWayOfCarving = 395,
+    SomethingInTheWayOfDigging = 396,
+    SomethingInTheWayOfDiggingCarveFirst = 397,
+    SomethingInTheWayOfFishing = 398,
+    SomethingInTheWayOfPlacing = 399,
+    SoothedYourBurningPain = 400,
+    Sort = 401,
+    SortedByCategory = 402,
+    SortedByGroup = 403,
+    SortedByName = 404,
+    SortedByNewest = 405,
+    SortedByOldest = 406,
+    SortedBySkill = 407,
+    SortedByWeight = 408,
+    StaminaIsFull = 409,
+    StartTravelInWater = 410,
+    StartedFire = 411,
+    StarvingToDeath = 412,
+    SteamWorkshop = 413,
+    SteppingOnHasInjuredYouForDamage = 414,
+    StillHasNoWaterToPurify = 415,
+    StirredUpCreature = 416,
+    StopUsingRaft = 417,
+    StoppedYourBleeding = 418,
+    SummonedGuardiansByDiggingTreasure = 419,
+    SunIsRising = 420,
+    SunIsSetting = 421,
+    SunNotBrightEnoughToStartFire = 422,
+    Talent = 423,
+    TeleportBlocked = 424,
+    Teleported = 425,
+    ThereIsNoSunToStartFire = 426,
+    ThirdQuarterOfDay = 427,
+    ThirdQuarterOfNight = 428,
+    ThisContains = 429,
+    Throw = 430,
+    ThrownIntoDepths = 431,
+    ThrownIntoObstacle = 432,
+    TooDamaged = 433,
+    TooExhaustedToJump = 434,
+    ToolAppearedEffectiveForGathering = 435,
+    TrampleIntoGround = 436,
+    TrampledFire = 437,
+    TrampledIntoGround = 438,
+    Trampling = 439,
+    Transmogrified = 440,
+    TravelAway = 441,
+    TravelToFarOffLands = 442,
+    TreasureIsBlocked = 443,
+    URLHasOpenedInWebBrowser = 444,
+    UnEquip = 445,
+    UnableToLoadRequiredMods = 446,
+    UnknownItem = 447,
+    UnlockedChest = 448,
+    UnpurifiedWaterInStill = 449,
+    UpdatingMod = 450,
+    UsedSoilToIncreaseFertility = 451,
+    UsedSoilToSpeedUpGrowing = 452,
+    UsingBareFistsToFight = 453,
+    UsingBareHandsToGather = 454,
+    WaitUntilFireCooledToGetWater = 455,
+    WalkingDistanceOfTreasure = 456,
+    WantToDeleteAllSavedData = 457,
+    WantToDeleteThisGame = 458,
+    WantToPublishThisMod = 459,
+    WantToPublishUpdateToMod = 460,
+    WantToUninstallThisMod = 461,
+    Water = 462,
+    WaterDoesNotNeedDesalination = 463,
+    WaterIncreaseFertilityOfPlant = 464,
+    WaterPutOutFire = 465,
+    WaterWouldHaveNoEffect = 466,
+    Weight = 467,
+    WinFindWayBackToCivilization = 468,
+    WinSailBackWithRiches = 469,
+    WinTravelledBackToCivilization = 470,
+    With = 471,
+    WorkingYourselfIntoExhaustion = 472,
+    WorkshopHasBeenOpenedPressOkAfter = 473,
+    Yes = 474,
+    YouAte = 475,
+    YouBeginResting = 476,
+    YouCrafted = 477,
+    YouDied = 478,
+    YouDisassembled = 479,
+    YouDrank = 480,
+    YouEquip = 481,
+    YouFailedTo = 482,
+    YouFire = 483,
+    YouGathered = 484,
+    YouHaveKilled = 485,
+    YouOpen = 486,
+    YouPickedUp = 487,
+    YouSalvaged = 488,
+    YouSee = 489,
+    YouThrew = 490,
+    YouUnequip = 491,
+    YouUsed = 492,
+    YourFist = 493,
 }
 declare var equipTypeToMessage: Message[];
 declare var recipeLevelToMessage: Message[];
@@ -2135,6 +2141,7 @@ declare namespace UI {
         showOptionsScreen(): void;
         hideOptionsScreen(): void;
         onWindowResize(): void;
+        updateWindowMode(): void;
         onUpdateWindowMode(): void;
         launchFullScreen(): void;
         cancelFullscreen(): void;
@@ -2186,6 +2193,7 @@ declare namespace UI {
         updateItem(item: Item.IItem): void;
         hideActionsMenu(): void;
         openMapDialog(): void;
+        closeMapDialog(): void;
         setFontStyle(): void;
         updateKeybind(key: KeyBind, element: JQuery): void;
         addOptionsSection(elementId: string, sectionName: string): JQuery;
@@ -2310,6 +2318,10 @@ declare module Steamworks {
     function createSaveGameMod(name: string, slot: number, callback: (success: boolean) => void): void;
     function deleteSaveGameMod(name: string): void;
     function debugLog(...args: any[]): void;
+    function addZoomFactor(change: number): void;
+    function setDefaultZoomFactor(): void;
+    function updateZoomFactor(): void;
+    function onUpdateZoomFactor(): void;
 }
 declare module Mods {
     enum Hook {
@@ -2816,11 +2828,13 @@ declare class Game implements IPropSerializable {
         currentGame: number;
         fontStyle: boolean;
         hints: boolean;
+        mouseMovement: boolean;
         mute: boolean;
         music: number;
         effects: number;
         windowMode: boolean;
         zoomLevel: number;
+        zoomFactor: number;
         visionMode: boolean;
         dropOnGather: boolean;
         keyBinds: IKeyBind;
@@ -2838,6 +2852,8 @@ declare class Game implements IPropSerializable {
     debugRenderer: TextureDebugRenderer;
     notifier: Notifier.Notifier;
     cartographyTexture: WebGLTexture;
+    refreshOverlayCanvas: HTMLCanvasElement;
+    refreshOverlayContext: CanvasRenderingContext2D;
     private loadedWorld;
     private tileContainers;
     constructor();
@@ -3018,6 +3034,7 @@ declare namespace Item {
         decaysInto?: ItemType;
         twoHanded?: boolean;
         recipes?: ItemType[];
+        keepDurabilityOnCraft?: boolean;
     }
     interface IGroupDescription {
         name: string;
@@ -3087,7 +3104,7 @@ declare namespace Item {
         function update(item: IItem, quality: ItemQuality): void;
         function createRandom(legendable: boolean, bonusQuality?: number): ItemQuality;
     }
-    function hasRequiredDoodad(craftType: ItemType): boolean;
+    function hasRequiredDoodad(craftType: ItemType, message?: boolean): boolean;
     class ItemRecipeRequirementChecker {
         private recipe;
         private trackItems;
@@ -3132,6 +3149,10 @@ declare namespace Item {
     function loadReferences(): void;
     function saveTileReferences(tileContainers: ITileContainer[]): void;
     function loadTileReferences(tileContainers: ITileContainer[]): void;
+}
+declare class MapGen200 implements MapGen.IMapGen {
+    generateWorld(generateNewWorld: boolean): void;
+    private setupTiles(tileGenArray, templateSpawns, caveSpawns, generateNewWorld);
 }
 declare namespace Notifier {
     class Notifier {
@@ -3395,7 +3416,7 @@ declare class SpriteBatch {
     private colorArray;
     private gl;
     private begun;
-    constructor(gl: WebGLRenderingContext, maxSprites?: number);
+    constructor(gl: WebGLRenderingContext, maxSprites: number);
     clear(): void;
     begin(): void;
     add(tileX: number, tileY: number, spriteSize: number, sourceX: number, sourceY: number, sourceSize: number, red?: number, green?: number, blue?: number, alpha?: number): void;
@@ -3475,6 +3496,331 @@ declare module TileAdaptor {
     }
     class Floor extends Default {
         adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+    }
+}
+declare namespace UI {
+    class BaseScreen implements IUiScreen {
+        element: JQuery;
+        visible: boolean;
+        constructor();
+        selector(): string;
+        bindElements(): void;
+        unbindElements(): void;
+        onGameEnd(showBlocker: boolean): void;
+        isVisible(): boolean;
+        show(data?: any): void;
+        doShow(): void;
+        hide(): void;
+        doHide(): void;
+        protected onShow(data?: any): void;
+        protected onHide(): void;
+        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
+        onKeyUp(event: JQueryEventObject): void;
+    }
+}
+declare namespace UI {
+    class ConfirmScreen extends BaseScreen {
+        elementOverlay: JQuery;
+        elementMessage: JQuery;
+        elementButtonRow: JQuery;
+        selector(): string;
+        bindElements(): void;
+        onShow(data: any): void;
+        onHide(): void;
+    }
+}
+declare namespace UI {
+    class CoverScreen extends BaseScreen {
+        private fadingOut;
+        selector(): string;
+        bindElements(): void;
+        doShow(): void;
+        onShow(): void;
+        onHide(): void;
+        private fadeOut();
+        private createParticles();
+    }
+}
+declare namespace UI {
+    class HelpScreen extends BaseScreen {
+        elementOverlay: JQuery;
+        elementTitle: JQuery;
+        elementHeader: JQuery;
+        elementContent: JQuery;
+        elementButtonRow: JQuery;
+        selector(): string;
+        bindElements(): void;
+        setHeight(): void;
+        onShow(data: any): void;
+        onHide(): void;
+        displayHint(hintType: HintType): void;
+        onButtonClick(id: string): void;
+        reloadToggleHintsState(): void;
+    }
+}
+declare namespace UI {
+    enum TextElementId {
+        Weight = 0,
+        Attack = 1,
+        Defense = 2,
+        Talent = 3,
+    }
+    class InGameScreen extends BaseScreen {
+        elementVisibleInGame: JQuery;
+        elementGame: JQuery;
+        elementBlocker: JQuery;
+        elementBlockerMouse: JQuery;
+        elementStatHealth: JQuery;
+        elementStatStamina: JQuery;
+        elementStatHunger: JQuery;
+        elementStatThirst: JQuery;
+        elementStatBurn: JQuery;
+        elementStatBleed: JQuery;
+        elementStatPoison: JQuery;
+        elementAttributeWeight: JQuery;
+        elementAttributeAttack: JQuery;
+        elementAttributeDefense: JQuery;
+        elementAttributeTalent: JQuery;
+        elementButtons: JQuery;
+        elementQuickSlotsContainer: JQuery;
+        elementMessagesOverlay: JQuery;
+        elementActions: JQuery;
+        elementDialogs: JQuery;
+        elementDialogInventory: JQuery;
+        elementDialogInventoryContainer: JQuery;
+        elementDialogCrafting: JQuery;
+        elementDialogCraftingContainer: JQuery;
+        elementDialogEquipment: JQuery;
+        elementDialogEquipmentContainer: JQuery;
+        elementDialogSkills: JQuery;
+        elementDialogSkillsContainer: JQuery;
+        elementDialogMilestones: JQuery;
+        elementDialogMilestonesContainer: JQuery;
+        elementDialogMessages: JQuery;
+        elementDialogMessagesContainer: JQuery;
+        elementDialogMap: JQuery;
+        elementContainerDialogs: JQuery[];
+        elementOtherDialogs: JQuery[];
+        private mouseEvent;
+        private touchEvent;
+        private mouseX;
+        private mouseY;
+        private lastText;
+        private lastStats;
+        private contextMenuTarget;
+        private contextMenuActions;
+        private contextMenuOpen;
+        private closingContextMenu;
+        private contextMenuBlocking;
+        private lastContextMenuPosition;
+        private actionsMenuOpen;
+        private openedContainer;
+        private sortableElement;
+        private craftableItemTypes;
+        private nonCraftableItemTypes;
+        selector(): string;
+        bindElements(): void;
+        unbindElements(): void;
+        bindSortable(element: JQuery): void;
+        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
+        onKeyUp(event: JQueryEventObject): void;
+        pressHotKey(hotKeyNumber: number, hotKey: KeyBind): void;
+        useQuickSlot(slot: number): void;
+        isSorting(): boolean;
+        cancelSorting(): void;
+        setupContextMenu(): any;
+        onShow(): void;
+        onHide(): void;
+        initializeGameState(): void;
+        onGameEnd(showBlocker: boolean): void;
+        setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
+        onMouseDown(event: JQueryEventObject): void;
+        onMouseUpOrLeave(event: JQueryEventObject): void;
+        onOtherClick(event: JQueryEventObject): void;
+        onTouchStart(event: JQueryEventObject): void;
+        onMouseMove(event: JQueryEventObject): void;
+        onBlockerMouseUpOrLeave(event: JQueryEventObject): void;
+        onBlockerMouseMove(event: JQueryEventObject): void;
+        highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
+        getMovementDirection(event: any): FacingDirection;
+        getTilePositionFromMouseEvent(event: any): {
+            x: number;
+            y: number;
+        };
+        onMouseScroll(event: JQueryEventObject): void;
+        canUseHotkeys(): boolean;
+        refreshStats(): void;
+        refreshAttributes(): void;
+        updateTextIfChanged(id: TextElementId, element: JQuery, text: string): void;
+        onButtonBarClick(button: string): void;
+        blurFilters(): void;
+        toggleDialog(dialog: JQuery): boolean;
+        openDialog(dialog: JQuery): boolean;
+        closeDialog(dialog: JQuery): boolean;
+        openMapDialog(): void;
+        closeMapDialog(): void;
+        closeAllDialogs(): void;
+        clampDialogs(): void;
+        getItemClass(item: Item.IItem, itemType?: ItemType): string;
+        createItemElementByItemType(itemType: ItemType, item?: Item.IItem): JQuery;
+        createItemElementByItem(item: Item.IItem): JQuery;
+        syncItemElements(itemId: number, selector?: JQuery): void;
+        syncDamaged(item: Item.IItem, element: JQuery): void;
+        addItemToContainer(item: Item.IItem, container: Item.IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
+        onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery, isInventoryContainer: boolean): void;
+        afterAddingMultipleItemsToContainer(container: Item.IContainer): void;
+        removeItemFromContainer(item: Item.IItem, container: Item.IContainer): void;
+        refreshQuickSlots(): void;
+        getInventoryItemsInOrder(): any[];
+        loadQuickSlots(): void;
+        saveItemOrder(containerElement: JQuery): void;
+        showItemContextMenu(element: JQuery, isContainer?: boolean): void;
+        onContextMenuAction(element: JQuery, action: string, data: any): void;
+        onInventoryItemRightClick(element: JQuery): void;
+        onContainerItemRightClick(element: JQuery): void;
+        onCraftingItemClick(element: JQuery): void;
+        onQuickSlotItemRightClick(element: JQuery): void;
+        onEquipmentItemRightClick(element: JQuery): void;
+        getTooltipHtml(element: JQuery): string;
+        tooltipEnable(): void;
+        tooltipDisable(): void;
+        tooltipHide(): void;
+        onTooltipClose(): void;
+        getTooltipHtmlForItem(element: JQuery, item: Item.IItem, itemType: ItemType, isQuickSlot: boolean): string;
+        displayMessage(message: Message, messageType?: MessageType, ...args: any[]): void;
+        createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
+        getMessageCount(): number;
+        removeOldestMessage(): void;
+        getUsedQuickSlots(): number[];
+        getFreeQuickSlots(): number[];
+        getQuickSlotItemElement(quickSlot: number): JQuery;
+        getItemIdInQuickSlot(quickSlot: number): number;
+        setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
+        setQuickSlotByItemType(quickSlot: number, itemType: ItemType, disabled: boolean): JQuery;
+        addItemToFreeQuickSlot(itemId: number): void;
+        clearQuickSlot(quickSlot: number, internal?: boolean): void;
+        removeItemFromQuickSlot(itemId: number): void;
+        updateQuickSlotItem(quickSlot: number): void;
+        onSortableItemReceive(event: Event, uiObject: any): void;
+        getEquipSlotItemElement(equip: EquipType): JQuery;
+        getItemIdInEquipSlot(equip: EquipType): number;
+        setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
+        removeItemFromEquipSlot(itemId: number, internal?: boolean): void;
+        updateSkillsDialog(): void;
+        updateMilestonesDialog(): void;
+        updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
+        createCraftItemElements(): void;
+        updateItem(item: Item.IItem): void;
+        getDialogElementForContainer(container: Item.IContainer): JQuery;
+        isContainerOpen(container: Item.IContainer): boolean;
+        openContainer(container: Item.IContainer, containerName?: string): void;
+        closeContainer(container: Item.IContainer): void;
+        closeContainerDialog(containerDialog: JQuery): void;
+        onContainerClose(container: Item.IContainer): JQuery;
+        closeStaticContainers(): void;
+        closeAllContainers(): void;
+        updateContainerName(containerDialogElement: JQuery): void;
+        updateOpenedContainer(): void;
+        hideContextMenu(): boolean;
+        hideActionsMenu(): boolean;
+        toggleActionsMenu(center?: boolean): void;
+        onClearMessages(): void;
+        onFilterInput(containerElement: JQuery): void;
+        showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
+        sortItems(containerElement: JQuery, sortType: SortType, messageType: Message): void;
+        sortItemElements(itemElements: JQuery, sortType: SortType): void;
+        onUpdateCrafting(): void;
+        updateSort(container: JQuery): void;
+        isContainerDialogOver(x: number, y: number): boolean;
+    }
+}
+declare namespace UI {
+    class LoadingScreen extends BaseScreen {
+        visible: boolean;
+        elementMessage: JQuery;
+        elementNormal: JQuery;
+        elementRest: JQuery;
+        selector(): string;
+        bindElements(): void;
+        onShow(data?: any): void;
+        onHide(): void;
+        setMessage(message: Message): void;
+    }
+}
+declare namespace UI {
+    class OptionsScreen extends BaseScreen {
+        elementOverlay: JQuery;
+        elementTitleScreenOptions: JQuery;
+        elementLanguageSelect: JQuery;
+        elementKeybindList: JQuery;
+        elementKeybindDefault: JQuery;
+        keybindDefaultWidth: number;
+        selector(): string;
+        bindElements(): void;
+        onShow(): void;
+        onHide(): void;
+        setRangeValue(id: string, value: number): void;
+        setCheckboxValue(id: string, checked: boolean): void;
+        setButtonChoiceValue(id: string, firstSelected: boolean): void;
+        onClickKeybind(element: JQuery, id: KeyBind): void;
+        onClickKeyBindDefault(): void;
+        resetKeybindState(setDefault?: boolean): KeyBind;
+        updateKeybind(key: KeyBind, element: JQuery): void;
+        onClickCheckbox(element: JQuery, id: string): void;
+        onClickButton(element: JQuery, id: string): void;
+        onClickButtonChoice(element: JQuery, id: string): void;
+        onRangeChange(element: JQuery, id: string, value: number): void;
+        addOptionsSection(elementId: string, sectionName: string): JQuery;
+        removeOptionsSection(sectionName: string): void;
+    }
+}
+declare namespace UI {
+    class TitleScreen extends BaseScreen {
+        openedMenu: string;
+        elementPlayGameContainer: JQuery;
+        elementNewGame: JQuery;
+        elementPlayGameSeparater: JQuery;
+        elementSavedGameTemplate: JQuery;
+        elementNoMods: JQuery;
+        elementModContainer: JQuery;
+        elementLocalMods: JQuery;
+        elementLocalModsContainer: JQuery;
+        elementWorkshopMods: JQuery;
+        elementWorkshopModsContainer: JQuery;
+        elementInternalMods: JQuery;
+        elementInternalModsContainer: JQuery;
+        elementModTemplate: JQuery;
+        elementImportGameInput: JQuery;
+        elementHighscoresContainer: JQuery;
+        elementHighscoresNoHighscores: JQuery;
+        elementHighscoreTemplate: JQuery;
+        elementAboutContainer: JQuery;
+        elementEndGameHeaderBottom: JQuery;
+        elementEndGameHighscore: JQuery;
+        selector(): string;
+        bindElements(): void;
+        unbindElements(): void;
+        onShow(data?: any): void;
+        onHide(): void;
+        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
+        showMainMenuId(mainMenuId: string): void;
+        refreshSlots(): void;
+        refreshMods(): void;
+        refreshHighscores(): void;
+        updateModState(element: JQuery, id: number): void;
+        postUpdateModState(): void;
+        onAction(actionId: string, element: JQuery): void;
+        actionNewGame(): void;
+        actionEditGame(slot: number, inputElement: JQuery): void;
+        actionContinueGame(slot: number): void;
+        playSlot(slot: number): void;
+        actionDeleteGame(slot: number): void;
+        getTooltipHtml(element: JQuery): string;
+        onImportGame(e: Event): any;
+        onSlotNameChange(slot: number, inputElement: JQuery): void;
+        refreshEndGame(): void;
+        exportToFile(slot: number): void;
+        exportToSteamWorkshop(name: string, slot: number): void;
     }
 }
 declare namespace Utilities {
@@ -3705,328 +4051,4 @@ declare class TileLayer {
     sendToGPU(gl: WebGLRenderingContext): void;
     render(gl: WebGLRenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
     clear(): void;
-}
-declare class MapGen200 implements MapGen.IMapGen {
-    generateWorld(generateNewWorld: boolean): void;
-    private setupTiles(tileGenArray, templateSpawns, caveSpawns, generateNewWorld);
-}
-declare namespace UI {
-    class BaseScreen implements IUiScreen {
-        element: JQuery;
-        visible: boolean;
-        constructor();
-        selector(): string;
-        bindElements(): void;
-        unbindElements(): void;
-        onGameEnd(showBlocker: boolean): void;
-        isVisible(): boolean;
-        show(data?: any): void;
-        doShow(): void;
-        hide(): void;
-        doHide(): void;
-        protected onShow(data?: any): void;
-        protected onHide(): void;
-        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
-        onKeyUp(event: JQueryEventObject): void;
-    }
-}
-declare namespace UI {
-    class ConfirmScreen extends BaseScreen {
-        elementOverlay: JQuery;
-        elementMessage: JQuery;
-        elementButtonRow: JQuery;
-        selector(): string;
-        bindElements(): void;
-        onShow(data: any): void;
-        onHide(): void;
-    }
-}
-declare namespace UI {
-    class CoverScreen extends BaseScreen {
-        private fadingOut;
-        selector(): string;
-        bindElements(): void;
-        doShow(): void;
-        onShow(): void;
-        onHide(): void;
-        private fadeOut();
-        private createParticles();
-    }
-}
-declare namespace UI {
-    class HelpScreen extends BaseScreen {
-        elementOverlay: JQuery;
-        elementTitle: JQuery;
-        elementHeader: JQuery;
-        elementContent: JQuery;
-        elementButtonRow: JQuery;
-        selector(): string;
-        bindElements(): void;
-        setHeight(): void;
-        onShow(data: any): void;
-        onHide(): void;
-        displayHint(hintType: HintType): void;
-        onButtonClick(id: string): void;
-        reloadToggleHintsState(): void;
-    }
-}
-declare namespace UI {
-    enum TextElementId {
-        Weight = 0,
-        Attack = 1,
-        Defense = 2,
-        Talent = 3,
-    }
-    class InGameScreen extends BaseScreen {
-        elementVisibleInGame: JQuery;
-        elementGame: JQuery;
-        elementBlocker: JQuery;
-        elementBlockerMouse: JQuery;
-        elementStatHealth: JQuery;
-        elementStatStamina: JQuery;
-        elementStatHunger: JQuery;
-        elementStatThirst: JQuery;
-        elementStatBurn: JQuery;
-        elementStatBleed: JQuery;
-        elementStatPoison: JQuery;
-        elementAttributeWeight: JQuery;
-        elementAttributeAttack: JQuery;
-        elementAttributeDefense: JQuery;
-        elementAttributeTalent: JQuery;
-        elementButtons: JQuery;
-        elementQuickSlotsContainer: JQuery;
-        elementMessagesOverlay: JQuery;
-        elementActions: JQuery;
-        elementDialogs: JQuery;
-        elementDialogInventory: JQuery;
-        elementDialogInventoryContainer: JQuery;
-        elementDialogCrafting: JQuery;
-        elementDialogCraftingContainer: JQuery;
-        elementDialogEquipment: JQuery;
-        elementDialogEquipmentContainer: JQuery;
-        elementDialogSkills: JQuery;
-        elementDialogSkillsContainer: JQuery;
-        elementDialogMilestones: JQuery;
-        elementDialogMilestonesContainer: JQuery;
-        elementDialogMessages: JQuery;
-        elementDialogMessagesContainer: JQuery;
-        elementDialogMap: JQuery;
-        elementContainerDialogs: JQuery[];
-        elementOtherDialogs: JQuery[];
-        private mouseEvent;
-        private touchEvent;
-        private mouseX;
-        private mouseY;
-        private lastText;
-        private lastStats;
-        private contextMenuTarget;
-        private contextMenuActions;
-        private contextMenuOpen;
-        private contextMenuBlocking;
-        private actionsMenuOpen;
-        private openedContainer;
-        private craftableItemTypes;
-        private nonCraftableItemTypes;
-        selector(): string;
-        bindElements(): void;
-        unbindElements(): void;
-        bindSortable(element: JQuery): void;
-        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
-        onKeyUp(event: JQueryEventObject): void;
-        pressHotKey(hotKeyNumber: number, hotKey: KeyBind): void;
-        useQuickSlot(slot: number): void;
-        isSorting(): boolean;
-        setupContextMenu(): any;
-        onShow(): void;
-        onHide(): void;
-        initializeGameState(): void;
-        onGameEnd(showBlocker: boolean): void;
-        setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
-        onMouseDown(event: JQueryEventObject): void;
-        onMouseUpOrLeave(event: JQueryEventObject): void;
-        onOtherClick(event: JQueryEventObject): void;
-        onTouchStart(event: JQueryEventObject): void;
-        onMouseMove(event: JQueryEventObject): void;
-        onBlockerMouseUpOrLeave(event: JQueryEventObject): void;
-        onBlockerMouseMove(event: JQueryEventObject): void;
-        highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
-        getMovementDirection(event: any): FacingDirection;
-        getTilePositionFromMouseEvent(event: any): {
-            x: number;
-            y: number;
-        };
-        onMouseScroll(event: JQueryEventObject): void;
-        canUseHotkeys(): boolean;
-        refreshStats(): void;
-        refreshAttributes(): void;
-        updateTextIfChanged(id: TextElementId, element: JQuery, text: string): void;
-        onButtonBarClick(button: string): void;
-        blurFilters(): void;
-        toggleDialog(dialog: JQuery): boolean;
-        openDialog(dialog: JQuery): boolean;
-        closeDialog(dialog: JQuery): boolean;
-        openMapDialog(): void;
-        closeAllDialogs(): void;
-        clampDialogs(): void;
-        getItemClass(item: Item.IItem, itemType?: ItemType): string;
-        createItemElementByItemType(itemType: ItemType, item?: Item.IItem): JQuery;
-        createItemElementByItem(item: Item.IItem): JQuery;
-        syncItemElements(itemId: number, selector?: JQuery): void;
-        syncDamaged(item: Item.IItem, element: JQuery): void;
-        addItemToContainer(item: Item.IItem, container: Item.IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
-        onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery, isInventoryContainer: boolean): void;
-        afterAddingMultipleItemsToContainer(container: Item.IContainer): void;
-        removeItemFromContainer(item: Item.IItem, container: Item.IContainer): void;
-        refreshQuickSlots(): void;
-        getInventoryItemsInOrder(): any[];
-        loadQuickSlots(): void;
-        saveItemOrder(containerElement: JQuery): void;
-        showItemContextMenu(element: JQuery, isContainer?: boolean): void;
-        onContextMenuAction(element: JQuery, action: string, data: any): void;
-        onInventoryItemRightClick(element: JQuery): void;
-        onContainerItemRightClick(element: JQuery): void;
-        onCraftingItemClick(element: JQuery): void;
-        onQuickSlotItemRightClick(element: JQuery): void;
-        onEquipmentItemRightClick(element: JQuery): void;
-        getTooltipHtml(element: JQuery): string;
-        tooltipEnable(): void;
-        tooltipDisable(): void;
-        tooltipHide(): void;
-        onTooltipClose(): void;
-        getTooltipHtmlForItem(element: JQuery, item: Item.IItem, itemType: ItemType, isQuickSlot: boolean): string;
-        displayMessage(message: Message, messageType?: MessageType, ...args: any[]): void;
-        createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
-        getMessageCount(): number;
-        removeOldestMessage(): void;
-        getUsedQuickSlots(): number[];
-        getFreeQuickSlots(): number[];
-        getQuickSlotItemElement(quickSlot: number): JQuery;
-        getItemIdInQuickSlot(quickSlot: number): number;
-        setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
-        setQuickSlotByItemType(quickSlot: number, itemType: ItemType, disabled: boolean): JQuery;
-        addItemToFreeQuickSlot(itemId: number): void;
-        clearQuickSlot(quickSlot: number, internal?: boolean): void;
-        removeItemFromQuickSlot(itemId: number): void;
-        updateQuickSlotItem(quickSlot: number): void;
-        onSortableItemReceive(event: Event, uiObject: any): void;
-        getEquipSlotItemElement(equip: EquipType): JQuery;
-        getItemIdInEquipSlot(equip: EquipType): number;
-        setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
-        removeItemFromEquipSlot(itemId: number, internal?: boolean): void;
-        updateSkillsDialog(): void;
-        updateMilestonesDialog(): void;
-        updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
-        createCraftItemElements(): void;
-        updateItem(item: Item.IItem): void;
-        getDialogElementForContainer(container: Item.IContainer): JQuery;
-        isContainerOpen(container: Item.IContainer): boolean;
-        openContainer(container: Item.IContainer, containerName?: string): void;
-        closeContainer(container: Item.IContainer): void;
-        closeContainerDialog(containerDialog: JQuery): void;
-        onContainerClose(container: Item.IContainer): JQuery;
-        closeStaticContainers(): void;
-        closeAllContainers(): void;
-        updateContainerName(containerDialogElement: JQuery): void;
-        updateOpenedContainer(): void;
-        hideContextMenu(): boolean;
-        hideActionsMenu(): boolean;
-        toggleActionsMenu(center?: boolean): void;
-        onClearMessages(): void;
-        onFilterInput(containerElement: JQuery): void;
-        showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
-        sortItems(containerElement: JQuery, sortType: SortType, messageType: Message): void;
-        sortItemElements(itemElements: JQuery, sortType: SortType): void;
-        onUpdateCrafting(): void;
-        updateSort(container: JQuery): void;
-        isContainerDialogOver(x: number, y: number): boolean;
-    }
-}
-declare namespace UI {
-    class LoadingScreen extends BaseScreen {
-        visible: boolean;
-        elementMessage: JQuery;
-        elementNormal: JQuery;
-        elementRest: JQuery;
-        selector(): string;
-        bindElements(): void;
-        onShow(data?: any): void;
-        onHide(): void;
-        setMessage(message: Message): void;
-    }
-}
-declare namespace UI {
-    class OptionsScreen extends BaseScreen {
-        elementOverlay: JQuery;
-        elementTitleScreenOptions: JQuery;
-        elementLanguageSelect: JQuery;
-        elementKeybindList: JQuery;
-        elementKeybindDefault: JQuery;
-        keybindDefaultWidth: number;
-        selector(): string;
-        bindElements(): void;
-        onShow(): void;
-        onHide(): void;
-        setRangeValue(id: string, value: number): void;
-        setCheckboxValue(id: string, checked: boolean): void;
-        setButtonChoiceValue(id: string, firstSelected: boolean): void;
-        onClickKeybind(element: JQuery, id: KeyBind): void;
-        onClickKeyBindDefault(): void;
-        resetKeybindState(setDefault?: boolean): KeyBind;
-        updateKeybind(key: KeyBind, element: JQuery): void;
-        onClickCheckbox(element: JQuery, id: string): void;
-        onClickButton(element: JQuery, id: string): void;
-        onClickButtonChoice(element: JQuery, id: string): void;
-        onRangeChange(element: JQuery, id: string, value: number): void;
-        addOptionsSection(elementId: string, sectionName: string): JQuery;
-        removeOptionsSection(sectionName: string): void;
-    }
-}
-declare namespace UI {
-    class TitleScreen extends BaseScreen {
-        openedMenu: string;
-        elementPlayGameContainer: JQuery;
-        elementNewGame: JQuery;
-        elementPlayGameSeparater: JQuery;
-        elementSavedGameTemplate: JQuery;
-        elementNoMods: JQuery;
-        elementModContainer: JQuery;
-        elementLocalMods: JQuery;
-        elementLocalModsContainer: JQuery;
-        elementWorkshopMods: JQuery;
-        elementWorkshopModsContainer: JQuery;
-        elementInternalMods: JQuery;
-        elementInternalModsContainer: JQuery;
-        elementModTemplate: JQuery;
-        elementImportGameInput: JQuery;
-        elementHighscoresContainer: JQuery;
-        elementHighscoresNoHighscores: JQuery;
-        elementHighscoreTemplate: JQuery;
-        elementAboutContainer: JQuery;
-        elementEndGameHeaderBottom: JQuery;
-        elementEndGameHighscore: JQuery;
-        selector(): string;
-        bindElements(): void;
-        unbindElements(): void;
-        onShow(data?: any): void;
-        onHide(): void;
-        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
-        showMainMenuId(mainMenuId: string): void;
-        refreshSlots(): void;
-        refreshMods(): void;
-        refreshHighscores(): void;
-        updateModState(element: JQuery, id: number): void;
-        postUpdateModState(): void;
-        onAction(actionId: string, element: JQuery): void;
-        actionNewGame(): void;
-        actionEditGame(slot: number, inputElement: JQuery): void;
-        actionContinueGame(slot: number): void;
-        playSlot(slot: number): void;
-        actionDeleteGame(slot: number): void;
-        getTooltipHtml(element: JQuery): string;
-        onImportGame(e: Event): any;
-        onSlotNameChange(slot: number, inputElement: JQuery): void;
-        refreshEndGame(): void;
-        exportToFile(slot: number): void;
-        exportToSteamWorkshop(name: string, slot: number): void;
-    }
 }
