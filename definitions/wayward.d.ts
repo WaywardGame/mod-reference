@@ -546,7 +546,7 @@ declare enum StatType {
 declare enum StatusType {
     Bleeding = 0,
     Poisoned = 1,
-    Burning = 2,
+    Burned = 2,
 }
 declare enum ItemQuality {
     None = 0,
@@ -619,6 +619,7 @@ declare enum TurnType {
     Resting = 0,
     CheckUnderPlayer = 1,
     DontEnterCaves = 2,
+    ForcePickUp = 3,
 }
 declare enum HintType {
     First = 0,
@@ -641,7 +642,7 @@ declare enum HintType {
     Bugs = 17,
     HeldItems = 18,
     Milestones = 19,
-    Burning = 20,
+    Burned = 20,
     Crafting = 21,
     Encumbered = 22,
     DailyChallengeMode = 23,
@@ -1007,7 +1008,7 @@ declare namespace Doodad {
     function gather(doodad: IDoodad): void;
     function canPickup(doodad: IDoodad): boolean;
     function pickup(x: number, y: number, z: number): void;
-    function checkForTrampling(doodad: IDoodad, isPlayer: boolean, monsterId?: number): boolean;
+    function checkForTrampling(doodad: IDoodad, monsterId?: number): boolean;
     function messageGardenFertility(spread: number): void;
     function inspect(doodad: IDoodad): void;
 }
@@ -1104,7 +1105,7 @@ declare module Languages {
     };
     enum UiTranslation {
         Bleeding = 0,
-        Burning = 1,
+        Burned = 1,
         Dehydrated = 2,
         DisableHints = 3,
         EnableHints = 4,
@@ -1168,7 +1169,7 @@ declare module Languages {
         MenuNoHighscores = 62,
         MenuNoMods = 63,
         MenuOpenLogsFolder = 64,
-        MenuOpenModFolder = 65,
+        MenuOpenModsFolder = 65,
         MenuOptions = 66,
         MenuOptionsMessage = 67,
         MenuPlayGame = 68,
@@ -1192,7 +1193,7 @@ declare module Languages {
         OptionsDropOnGather = 86,
         OptionsEffects = 87,
         OptionsEnableHints = 88,
-        OptionsEnableMouseMovement = 89,
+        OptionsMouseClickMovement = 89,
         OptionsFullscreenMode = 90,
         OptionsGame = 91,
         OptionsGraphics = 92,
@@ -1349,9 +1350,9 @@ declare enum Message {
     BrokenOnImpact = 35,
     BrokenWhileFiring = 36,
     Build = 37,
-    BurningToDeath = 38,
-    By = 39,
-    ByBleedingOut = 40,
+    By = 38,
+    ByBleedingOut = 39,
+    ByBurnInjuries = 40,
     ByEatingSomethingBad = 41,
     ByPoisoning = 42,
     BySteppingOnA = 43,
@@ -1392,266 +1393,266 @@ declare enum Message {
     Chest = 78,
     ClearMessages = 79,
     CloseDoor = 80,
-    Consumed = 81,
-    Container = 82,
-    Cook = 83,
-    Cooked = 84,
-    Corpse = 85,
-    CorruptSaveDetected = 86,
-    CouldNotDecipher = 87,
-    Craft = 88,
-    Crafted = 89,
-    Crafts = 90,
-    CreatureAppears = 91,
-    CreatureAppearsHealthy = 92,
-    CreatureAppearsUnhealthy = 93,
-    CreatureIsAtPercentHealth = 94,
-    CreatureLooksBarelyHurt = 95,
-    CreatureLooksHealthyAndUndamaged = 96,
-    CreatureLooksInjured = 97,
-    CreatureLooksSeverelyDamaged = 98,
-    CreatureSeemsHurt = 99,
-    CreatureSeemsInjured = 100,
-    CreatureSeemsUnimpaired = 101,
-    CuredYourPoison = 102,
-    DailyChallengeMode = 103,
-    DamageAppearedEffective = 104,
-    DamageAppearedIneffective = 105,
-    DamagedByPouringWater = 106,
-    DealtNoDamageToYou = 107,
-    DefaultGameName = 108,
-    DependencyIssue = 109,
-    DestroyedFromUse = 110,
-    DestroyedGrowingByPickingItUp = 111,
-    DidNotSeemToBeHurting = 112,
-    Disassemble = 113,
-    DiscoveredCaveEntrance = 114,
-    DiscoveredInTheBottle = 115,
-    DoNotForgetToAddRequiredModsOnWorkshop = 116,
-    DoNotHaveTreasureMaps = 117,
-    DrewSurroundings = 118,
-    Drink = 119,
-    Drop = 120,
-    DropAll = 121,
-    DropAllOfSameQuality = 122,
-    DroppedAllIntoDepths = 123,
-    DroppedIntoDepths = 124,
-    DroppedIntoFire = 125,
-    DueToDehydration = 126,
-    DueToStarvation = 127,
-    DugTreasureOut = 128,
-    DumpContentsOfContainerInInventory = 129,
-    DyingOfDehydration = 130,
-    EarnedMilestone = 131,
-    EquipTo = 132,
-    EquipmentProtectedYouFromHeat = 133,
-    ErrorHasOccured = 134,
-    Expert = 135,
-    ExtinguishedFire = 136,
-    ExtinguishedTorch = 137,
-    FailedToAddFuelToTorch = 138,
-    FailedToCatchFish = 139,
-    FailedToCauseDamage = 140,
-    FailedToDrawMap = 141,
-    FailedToPickLock = 142,
-    FailedToPlant = 143,
-    FailedToPreserve = 144,
-    FailedToReinforce = 145,
-    FailedToRepair = 146,
-    FailedToStartFire = 147,
-    FailedToTransmogrify = 148,
-    FarAwayFromTreasure = 149,
-    Feet = 150,
-    FeltBurningPainLostHealth = 151,
-    FewMinutes = 152,
-    Filled = 153,
-    FilledFrom = 154,
-    FinalizingWorld = 155,
-    Fire = 156,
-    FireAlmostExtinguished = 157,
-    FireFacingYouIsWarm = 158,
-    FireIsHealthy = 159,
-    FireIsRaging = 160,
-    FireIsStruggling = 161,
-    FireSource = 162,
-    FiredIntoObstacle = 163,
-    FirstQuarterOfDay = 164,
-    FirstQuarterOfNight = 165,
-    Food = 166,
-    FoodAlreadyPreserved = 167,
-    FourthQuarterOfDay = 168,
-    FourthQuarterOfNight = 169,
-    FullyDecodedMap = 170,
-    GainedHealth = 171,
-    GainedHunger = 172,
-    GainedStamina = 173,
-    GainedThirst = 174,
-    GameHasBeenSavedIsTakingUpMB = 175,
-    Gather = 176,
-    GeneratingWorld = 177,
-    GettingStronger = 178,
-    GrabAll = 179,
-    Group = 180,
-    Hands = 181,
-    HasBeenHurtByATrap = 182,
-    HasBeenHurtByYourTrap = 183,
-    HasDecayed = 184,
-    HasHitYouForDamage = 185,
-    HasSplit = 186,
-    Head = 187,
-    Held = 188,
-    Help = 189,
-    Hints = 190,
-    HintsDisabled = 191,
-    HintsEnabled = 192,
-    HitForDamage = 193,
-    Hour = 194,
-    Hours = 195,
-    HowDoYouWantToExportSave = 196,
-    HurtHandsByGatheringWithNoTool = 197,
-    HurtHandsHittingWithoutWeapons = 198,
-    InExactLocationOfTreasure = 199,
-    InNeedOfRepair = 200,
-    IncompatibleVersion = 201,
-    InjuredFromTrap = 202,
-    Inspect = 203,
-    Intermediate = 204,
-    Inventory = 205,
-    Jump = 206,
-    Killed = 207,
-    LabelAttackFromTactics = 208,
-    LabelAuthor = 209,
-    LabelBase = 210,
-    LabelBaseAttack = 211,
-    LabelBaseDefense = 212,
-    LabelBluntResist = 213,
-    LabelDecay = 214,
-    LabelDefense = 215,
-    LabelDefenseFromParrying = 216,
-    LabelDoodadRequired = 217,
-    LabelDurability = 218,
-    LabelEquip = 219,
-    LabelFireResist = 220,
-    LabelGrouping = 221,
-    LabelHave = 222,
-    LabelLastUpdated = 223,
-    LabelLeftHandAttack = 224,
-    LabelLevel = 225,
-    LabelMaximumWeight = 226,
-    LabelOnEquip = 227,
-    LabelPiercingResist = 228,
-    LabelRange = 229,
-    LabelRanged = 230,
-    LabelRangedAttack = 231,
-    LabelRangedDamage = 232,
-    LabelRequiredMods = 233,
-    LabelRequires = 234,
-    LabelResists = 235,
-    LabelRightHandAttack = 236,
-    LabelSkill = 237,
-    LabelSlashingResist = 238,
-    LabelUse = 239,
-    LabelUses = 240,
-    LabelVersion = 241,
-    LabelVulnerabilities = 242,
-    LabelWeight = 243,
-    LabelWeightReduction = 244,
-    LastPlaceYouLeftOff = 245,
-    LearnedHowToCreate = 246,
-    LeftHand = 247,
-    Legs = 248,
-    LoadingMods = 249,
-    LoadingSprites = 250,
-    LoadingWorld = 251,
-    LocalFile = 252,
-    LocalVersionOfModDetected = 253,
-    LoseBonesLayBleaching = 254,
-    LoseEndIsBeginning = 255,
-    LoseSadlyNoTrace = 256,
-    LostHealth = 257,
-    LostHunger = 258,
-    LostStamina = 259,
-    LostThirst = 260,
-    MapNotOfThisArea = 261,
-    MaterialsDestroyed = 262,
-    MetabolismSlowed = 263,
-    MilestoneIsHidden = 264,
-    MilestoneIsInvisible = 265,
-    MissedWith = 266,
-    MissingRequiredMods = 267,
-    ModImportedSaveGame = 268,
-    ModLoadError = 269,
-    ModRequiresItself = 270,
-    ModWithNameAlreadyExists = 271,
-    MonsterIdolAttractedCreature = 272,
-    MoveAllOfSameQualityToInventory = 273,
-    MoveAllOfSameQualityToOpenedContainer = 274,
-    MoveAllToInventory = 275,
-    MoveAllToOpenedContainer = 276,
-    MoveOverTrapButDoNotSetOff = 277,
-    MoveToInventory = 278,
-    MoveToOpenedContainer = 279,
-    MustCastIntoWater = 280,
-    Mysteriously = 281,
-    Name = 282,
-    Neck = 283,
-    NeedAShovelToDigTreasure = 284,
-    NeedDeeperWaterForRaft = 285,
-    NeedFishingNetForTreasure = 286,
-    NeedToBuildUpLandAround = 287,
-    NeedToEquipToShoot = 288,
-    NeedToStartTravelsOutside = 289,
-    Newest = 290,
-    No = 291,
-    NoAmmunitionForThatWeapon = 292,
-    NoBlackPowderToFireWeapon = 293,
-    NoFireToStokeWith = 294,
-    NoFishAtLocation = 295,
-    NoFuelItemsToStartFire = 296,
-    NoInkToDrawMap = 297,
-    NoKindlingToStartFire = 298,
-    NoLongerFeelPainOfBurning = 299,
-    NoMoreRoomInContainer = 300,
-    NoRoomToDrop = 301,
-    NoTinderToStartFire = 302,
-    NoWaterInStill = 303,
-    NoWhereNearTreasure = 304,
-    NotAvailable = 305,
-    NotEnoughFoodToTravel = 306,
-    NotEnoughPurifiedWaterYet = 307,
-    NotEnoughStrengthToThrow = 308,
-    NotEnoughTreasureToReturn = 309,
-    NotFacingLockedObject = 310,
-    NotFacingValidFoodForPreservation = 311,
-    NotFacingValidItemForReinforcement = 312,
-    NotFacingValidItemForRepair = 313,
-    NotFacingValidItemToTransmogrify = 314,
-    NotInRangeOfTreasure = 315,
-    NothingHereToCarve = 316,
-    NothingHereToFill = 317,
-    NothingHereToGardenWith = 318,
-    NumberEight = 319,
-    NumberFive = 320,
-    NumberFour = 321,
-    NumberNine = 322,
-    NumberOne = 323,
-    NumberSeven = 324,
-    NumberSix = 325,
-    NumberTen = 326,
-    NumberThree = 327,
-    NumberTwo = 328,
-    ObjectIsLocked = 329,
-    Ok = 330,
-    Oldest = 331,
-    OpenDoor = 332,
-    OverEatingLostStamina = 333,
-    OpenFolderFailed = 334,
-    OverHydratingLostStamina = 335,
-    PaperTurnedToMush = 336,
-    PartiallyDecodedMap = 337,
-    PastExperiencesProvideBenefits = 338,
-    PickupItem = 339,
-    PickupObject = 340,
+    CollectObject = 81,
+    Consumed = 82,
+    Container = 83,
+    Cook = 84,
+    Cooked = 85,
+    Corpse = 86,
+    CorruptSaveDetected = 87,
+    CouldNotDecipher = 88,
+    Craft = 89,
+    Crafted = 90,
+    Crafts = 91,
+    CreatureAppears = 92,
+    CreatureAppearsHealthy = 93,
+    CreatureAppearsUnhealthy = 94,
+    CreatureIsAtPercentHealth = 95,
+    CreatureLooksBarelyHurt = 96,
+    CreatureLooksHealthyAndUndamaged = 97,
+    CreatureLooksInjured = 98,
+    CreatureLooksSeverelyDamaged = 99,
+    CreatureSeemsHurt = 100,
+    CreatureSeemsInjured = 101,
+    CreatureSeemsUnimpaired = 102,
+    CuredYourPoison = 103,
+    DailyChallengeMode = 104,
+    DamageAppearedEffective = 105,
+    DamageAppearedIneffective = 106,
+    DamagedByPouringWater = 107,
+    DealtNoDamageToYou = 108,
+    DefaultGameName = 109,
+    DependencyIssue = 110,
+    DestroyedFromUse = 111,
+    DestroyedGrowingByPickingItUp = 112,
+    DidNotSeemToBeHurting = 113,
+    Disassemble = 114,
+    DiscoveredCaveEntrance = 115,
+    DiscoveredInTheBottle = 116,
+    DoNotForgetToAddRequiredModsOnWorkshop = 117,
+    DoNotHaveTreasureMaps = 118,
+    DrewSurroundings = 119,
+    Drink = 120,
+    Drop = 121,
+    DropAll = 122,
+    DropAllOfSameQuality = 123,
+    DroppedAllIntoDepths = 124,
+    DroppedIntoDepths = 125,
+    DroppedIntoFire = 126,
+    DueToDehydration = 127,
+    DueToStarvation = 128,
+    DugTreasureOut = 129,
+    DumpContentsOfContainerInInventory = 130,
+    DyingOfDehydration = 131,
+    EarnedMilestone = 132,
+    EquipTo = 133,
+    EquipmentProtectedYouFromHeat = 134,
+    ErrorHasOccured = 135,
+    Expert = 136,
+    ExtinguishedFire = 137,
+    ExtinguishedTorch = 138,
+    FailedToAddFuelToTorch = 139,
+    FailedToCatchFish = 140,
+    FailedToCauseDamage = 141,
+    FailedToDrawMap = 142,
+    FailedToPickLock = 143,
+    FailedToPlant = 144,
+    FailedToPreserve = 145,
+    FailedToReinforce = 146,
+    FailedToRepair = 147,
+    FailedToStartFire = 148,
+    FailedToTransmogrify = 149,
+    FarAwayFromTreasure = 150,
+    Feet = 151,
+    FeltBurningPainLostHealth = 152,
+    FewMinutes = 153,
+    Filled = 154,
+    FilledFrom = 155,
+    FinalizingWorld = 156,
+    Fire = 157,
+    FireAlmostExtinguished = 158,
+    FireFacingYouIsWarm = 159,
+    FireIsHealthy = 160,
+    FireIsRaging = 161,
+    FireIsStruggling = 162,
+    FireSource = 163,
+    FiredIntoObstacle = 164,
+    FirstQuarterOfDay = 165,
+    FirstQuarterOfNight = 166,
+    Food = 167,
+    FoodAlreadyPreserved = 168,
+    FourthQuarterOfDay = 169,
+    FourthQuarterOfNight = 170,
+    FullyDecodedMap = 171,
+    GainedHealth = 172,
+    GainedHunger = 173,
+    GainedStamina = 174,
+    GainedThirst = 175,
+    GameHasBeenSavedIsTakingUpMB = 176,
+    Gather = 177,
+    GeneratingWorld = 178,
+    GettingStronger = 179,
+    GrabAll = 180,
+    Group = 181,
+    Hands = 182,
+    HasBeenHurtByATrap = 183,
+    HasBeenHurtByYourTrap = 184,
+    HasDecayed = 185,
+    HasHitYouForDamage = 186,
+    HasSplit = 187,
+    Head = 188,
+    Held = 189,
+    Help = 190,
+    Hints = 191,
+    HintsDisabled = 192,
+    HintsEnabled = 193,
+    HitForDamage = 194,
+    Hour = 195,
+    Hours = 196,
+    HowDoYouWantToExportSave = 197,
+    HurtHandsByGatheringWithNoTool = 198,
+    HurtHandsHittingWithoutWeapons = 199,
+    InExactLocationOfTreasure = 200,
+    InNeedOfRepair = 201,
+    IncompatibleVersion = 202,
+    InjuredFromTrap = 203,
+    Inspect = 204,
+    Intermediate = 205,
+    Inventory = 206,
+    Jump = 207,
+    Killed = 208,
+    LabelAttackFromTactics = 209,
+    LabelAuthor = 210,
+    LabelBase = 211,
+    LabelBaseAttack = 212,
+    LabelBaseDefense = 213,
+    LabelBluntResist = 214,
+    LabelDecay = 215,
+    LabelDefense = 216,
+    LabelDefenseFromParrying = 217,
+    LabelDoodadRequired = 218,
+    LabelDurability = 219,
+    LabelEquip = 220,
+    LabelFireResist = 221,
+    LabelGrouping = 222,
+    LabelHave = 223,
+    LabelLastUpdated = 224,
+    LabelLeftHandAttack = 225,
+    LabelLevel = 226,
+    LabelMaximumWeight = 227,
+    LabelOnEquip = 228,
+    LabelPiercingResist = 229,
+    LabelRange = 230,
+    LabelRanged = 231,
+    LabelRangedAttack = 232,
+    LabelRangedDamage = 233,
+    LabelRequiredMods = 234,
+    LabelRequires = 235,
+    LabelResists = 236,
+    LabelRightHandAttack = 237,
+    LabelSkill = 238,
+    LabelSlashingResist = 239,
+    LabelUse = 240,
+    LabelUses = 241,
+    LabelVersion = 242,
+    LabelVulnerabilities = 243,
+    LabelWeight = 244,
+    LabelWeightReduction = 245,
+    LastPlaceYouLeftOff = 246,
+    LearnedHowToCreate = 247,
+    LeftHand = 248,
+    Legs = 249,
+    LoadingMods = 250,
+    LoadingSprites = 251,
+    LoadingWorld = 252,
+    LocalFile = 253,
+    LocalVersionOfModDetected = 254,
+    LoseBonesLayBleaching = 255,
+    LoseEndIsBeginning = 256,
+    LoseSadlyNoTrace = 257,
+    LostHealth = 258,
+    LostHunger = 259,
+    LostStamina = 260,
+    LostThirst = 261,
+    MapNotOfThisArea = 262,
+    MaterialsDestroyed = 263,
+    MetabolismSlowed = 264,
+    MilestoneIsHidden = 265,
+    MilestoneIsInvisible = 266,
+    MissedWith = 267,
+    MissingRequiredMods = 268,
+    ModImportedSaveGame = 269,
+    ModLoadError = 270,
+    ModRequiresItself = 271,
+    ModWithNameAlreadyExists = 272,
+    MonsterIdolAttractedCreature = 273,
+    MoveAllOfSameQualityToInventory = 274,
+    MoveAllOfSameQualityToOpenedContainer = 275,
+    MoveAllToInventory = 276,
+    MoveAllToOpenedContainer = 277,
+    MoveOverTrapButDoNotSetOff = 278,
+    MoveToInventory = 279,
+    MoveToOpenedContainer = 280,
+    MustCastIntoWater = 281,
+    Mysteriously = 282,
+    Name = 283,
+    Neck = 284,
+    NeedAShovelToDigTreasure = 285,
+    NeedDeeperWaterForRaft = 286,
+    NeedFishingNetForTreasure = 287,
+    NeedToBuildUpLandAround = 288,
+    NeedToEquipToShoot = 289,
+    NeedToStartTravelsOutside = 290,
+    Newest = 291,
+    No = 292,
+    NoAmmunitionForThatWeapon = 293,
+    NoBlackPowderToFireWeapon = 294,
+    NoFireToStokeWith = 295,
+    NoFishAtLocation = 296,
+    NoFuelItemsToStartFire = 297,
+    NoInkToDrawMap = 298,
+    NoKindlingToStartFire = 299,
+    NoLongerFeelPainOBeingfBurned = 300,
+    NoMoreRoomInContainer = 301,
+    NoRoomToDrop = 302,
+    NoTinderToStartFire = 303,
+    NoWaterInStill = 304,
+    NoWhereNearTreasure = 305,
+    NotAvailable = 306,
+    NotEnoughFoodToTravel = 307,
+    NotEnoughPurifiedWaterYet = 308,
+    NotEnoughStrengthToThrow = 309,
+    NotEnoughTreasureToReturn = 310,
+    NotFacingLockedObject = 311,
+    NotFacingValidFoodForPreservation = 312,
+    NotFacingValidItemForReinforcement = 313,
+    NotFacingValidItemForRepair = 314,
+    NotFacingValidItemToTransmogrify = 315,
+    NotInRangeOfTreasure = 316,
+    NothingHereToCarve = 317,
+    NothingHereToFill = 318,
+    NothingHereToGardenWith = 319,
+    NumberEight = 320,
+    NumberFive = 321,
+    NumberFour = 322,
+    NumberNine = 323,
+    NumberOne = 324,
+    NumberSeven = 325,
+    NumberSix = 326,
+    NumberTen = 327,
+    NumberThree = 328,
+    NumberTwo = 329,
+    ObjectIsLocked = 330,
+    Ok = 331,
+    Oldest = 332,
+    OpenDoor = 333,
+    OverEatingLostStamina = 334,
+    OpenFolderFailed = 335,
+    OverHydratingLostStamina = 336,
+    PaperTurnedToMush = 337,
+    PartiallyDecodedMap = 338,
+    PastExperiencesProvideBenefits = 339,
+    PickupItem = 340,
     Piercing = 341,
     Place = 342,
     PlacedOnGround = 343,
@@ -1709,102 +1710,104 @@ declare enum Message {
     SomethingInTheWayOfCarving = 395,
     SomethingInTheWayOfDigging = 396,
     SomethingInTheWayOfDiggingCarveFirst = 397,
-    SomethingInTheWayOfFishing = 398,
-    SomethingInTheWayOfPlacing = 399,
-    SoothedYourBurningPain = 400,
-    Sort = 401,
-    SortedByCategory = 402,
-    SortedByGroup = 403,
-    SortedByName = 404,
-    SortedByNewest = 405,
-    SortedByOldest = 406,
-    SortedBySkill = 407,
-    SortedByWeight = 408,
-    StaminaIsFull = 409,
-    StartTravelInWater = 410,
-    StartedFire = 411,
-    StarvingToDeath = 412,
-    SteamWorkshop = 413,
-    SteppingOnHasInjuredYouForDamage = 414,
-    StillHasNoWaterToPurify = 415,
-    StirredUpCreature = 416,
-    StopUsingRaft = 417,
-    StoppedYourBleeding = 418,
-    SummonedGuardiansByDiggingTreasure = 419,
-    SunIsRising = 420,
-    SunIsSetting = 421,
-    SunNotBrightEnoughToStartFire = 422,
-    Talent = 423,
-    TeleportBlocked = 424,
-    Teleported = 425,
-    ThereIsNoSunToStartFire = 426,
-    ThirdQuarterOfDay = 427,
-    ThirdQuarterOfNight = 428,
-    ThisContains = 429,
-    Throw = 430,
-    ThrownIntoDepths = 431,
-    ThrownIntoObstacle = 432,
-    TooDamaged = 433,
-    TooExhaustedToJump = 434,
-    ToolAppearedEffectiveForGathering = 435,
-    TrampleIntoGround = 436,
-    TrampledFire = 437,
-    TrampledIntoGround = 438,
-    Trampling = 439,
-    Transmogrified = 440,
-    TravelAway = 441,
-    TravelToFarOffLands = 442,
-    TreasureIsBlocked = 443,
-    URLHasOpenedInWebBrowser = 444,
-    UnEquip = 445,
-    UnableToLoadRequiredMods = 446,
-    UnknownItem = 447,
-    UnlockedChest = 448,
-    UnpurifiedWaterInStill = 449,
-    UpdatingMod = 450,
-    UsedSoilToIncreaseFertility = 451,
-    UsedSoilToSpeedUpGrowing = 452,
-    UsingBareFistsToFight = 453,
-    UsingBareHandsToGather = 454,
-    WaitUntilFireCooledToGetWater = 455,
-    WalkingDistanceOfTreasure = 456,
-    WantToDeleteAllSavedData = 457,
-    WantToDeleteThisGame = 458,
-    WantToPublishThisMod = 459,
-    WantToPublishUpdateToMod = 460,
-    WantToUninstallThisMod = 461,
-    Water = 462,
-    WaterDoesNotNeedDesalination = 463,
-    WaterIncreaseFertilityOfPlant = 464,
-    WaterPutOutFire = 465,
-    WaterWouldHaveNoEffect = 466,
-    Weight = 467,
-    WinFindWayBackToCivilization = 468,
-    WinSailBackWithRiches = 469,
-    WinTravelledBackToCivilization = 470,
-    With = 471,
-    WorkingYourselfIntoExhaustion = 472,
-    WorkshopHasBeenOpenedPressOkAfter = 473,
-    Yes = 474,
-    YouAte = 475,
-    YouBeginResting = 476,
-    YouCrafted = 477,
-    YouDied = 478,
-    YouDisassembled = 479,
-    YouDrank = 480,
-    YouEquip = 481,
-    YouFailedTo = 482,
-    YouFire = 483,
-    YouGathered = 484,
-    YouHaveKilled = 485,
-    YouOpen = 486,
-    YouPickedUp = 487,
-    YouSalvaged = 488,
-    YouSee = 489,
-    YouThrew = 490,
-    YouUnequip = 491,
-    YouUsed = 492,
-    YourFist = 493,
+    SomethingInTheWayOfGatheringCarveFirst = 398,
+    SomethingInTheWayOfFishing = 399,
+    SomethingInTheWayOfPlacing = 400,
+    SoothedYourBurnInjuries = 401,
+    Sort = 402,
+    SortedByCategory = 403,
+    SortedByGroup = 404,
+    SortedByName = 405,
+    SortedByNewest = 406,
+    SortedByOldest = 407,
+    SortedBySkill = 408,
+    SortedByWeight = 409,
+    StaminaIsFull = 410,
+    StartTravelInWater = 411,
+    StartedFire = 412,
+    StarvingToDeath = 413,
+    SteamWorkshop = 414,
+    SteppingOnHasInjuredYouForDamage = 415,
+    StillHasNoWaterToPurify = 416,
+    StirredUpCreature = 417,
+    StopUsingRaft = 418,
+    StoppedYourBleeding = 419,
+    SummonedGuardiansByDiggingTreasure = 420,
+    SunIsRising = 421,
+    SunIsSetting = 422,
+    SunNotBrightEnoughToStartFire = 423,
+    Talent = 424,
+    TeleportBlocked = 425,
+    Teleported = 426,
+    ThereIsNoSunToStartFire = 427,
+    ThirdQuarterOfDay = 428,
+    ThirdQuarterOfNight = 429,
+    ThisContains = 430,
+    Throw = 431,
+    ThrownIntoDepths = 432,
+    ThrownIntoObstacle = 433,
+    TooDamaged = 434,
+    TooExhaustedToJump = 435,
+    ToolAppearedEffectiveForGathering = 436,
+    TrampleIntoGround = 437,
+    TrampledFire = 438,
+    TrampledIntoGround = 439,
+    Trampling = 440,
+    Transmogrified = 441,
+    TravelAway = 442,
+    TravelToFarOffLands = 443,
+    TreasureIsBlocked = 444,
+    URLHasOpenedInWebBrowser = 445,
+    UnEquip = 446,
+    UnableToLoadRequiredMods = 447,
+    UnknownItem = 448,
+    UnlockedChest = 449,
+    UnpurifiedWaterInStill = 450,
+    UpdatingMod = 451,
+    UsedSoilToIncreaseFertility = 452,
+    UsedSoilToSpeedUpGrowing = 453,
+    UsingBareFistsToFight = 454,
+    UsingBareHandsToGather = 455,
+    WaitUntilFireCooledToGetWater = 456,
+    WalkingDistanceOfTreasure = 457,
+    WantToDeleteAllSavedData = 458,
+    WantToDeleteThisGame = 459,
+    WantToPublishThisMod = 460,
+    WantToPublishUpdateToMod = 461,
+    WantToUninstallThisMod = 462,
+    Water = 463,
+    WaterDoesNotNeedDesalination = 464,
+    WaterIncreaseFertilityOfPlant = 465,
+    WaterPutOutFire = 466,
+    WaterWouldHaveNoEffect = 467,
+    Weight = 468,
+    WinFindWayBackToCivilization = 469,
+    WinSailBackWithRiches = 470,
+    WinTravelledBackToCivilization = 471,
+    With = 472,
+    WorkingYourselfIntoExhaustion = 473,
+    WorkshopHasBeenOpenedPressOkAfter = 474,
+    Yes = 475,
+    YouAte = 476,
+    YouBeginResting = 477,
+    YouCollected = 478,
+    YouCrafted = 479,
+    YouDied = 480,
+    YouDisassembled = 481,
+    YouDrank = 482,
+    YouEquip = 483,
+    YouFailedTo = 484,
+    YouFire = 485,
+    YouGathered = 486,
+    YouHaveKilled = 487,
+    YouOpen = 488,
+    YouPickedUp = 489,
+    YouSalvaged = 490,
+    YouSee = 491,
+    YouThrew = 492,
+    YouUnequip = 493,
+    YouUsed = 494,
+    YourFist = 495,
 }
 declare var equipTypeToMessage: Message[];
 declare var recipeLevelToMessage: Message[];
@@ -2029,14 +2032,85 @@ declare class FieldOfViewDebugRenderer implements TextureDebugRenderer {
     constructor(gl: WebGLRenderingContext, fov: FieldOfView);
     renderDebug(): void;
 }
+declare namespace Utilities {
+    module Random {
+        var seed: number;
+        var saved: number;
+        function randomFromInterval(min: any, max: any): number;
+        function nextFloat(): number;
+        function nextInt(max: number): number;
+        function getSeed(): number;
+        function setSeed(newSeed: any): void;
+    }
+    module TileHelpers {
+        var maskGfx: number;
+        var maskType: number;
+        function getGfx(tile: ITile): number;
+        function getGfxRaw(data: number): number;
+        function setGfx(tile: ITile, value: number): void;
+        function setGfxRaw(data: number, value: number): number;
+        function getType(tile: ITile): TerrainType;
+        function getTypeRaw(data: number): TerrainType;
+        function setType(tile: ITile, value: TerrainType): void;
+        function setTypeRaw(data: number, value: TerrainType): number;
+    }
+    module WebWorkerHelpers {
+        function create(workerFunction: (data: any) => void, messageCallbackFunction: (evt: any) => void): Worker;
+        function enumToString(name: string, values: any): string;
+        function moduleToString(moduleName: string, name: string, moduleToConvert: any, globalVariables?: string[]): string;
+    }
+    module ItemImageCache {
+        function getItemImageUrl(itemType: ItemType, itemImage: ItemImage): string;
+        function queueCreateItemImageOutlines(image: HTMLImageElement, itemType: ItemType): void;
+        function cacheAllItemImageOutlines(): void;
+    }
+    function roundNumber(num: any, dec: any): number;
+    function loadImage(src: any, callback: any): void;
+    function getTileVariation(x: number, y: number): number;
+    function lerp(from: number, to: number, t: number): number;
+    function easeInQuad(time: number, start: number, change: number, duration: number): number;
+    function easeInCubic(time: number, start: number, change: number, duration: number): number;
+    function isInBound2Wrapped(bound: Bound2, x: number, y: number): boolean;
+    function shuffle(array: number[]): number[];
+    class Queue<T> {
+        private queue;
+        private offset;
+        constructor();
+        getLength(): number;
+        isEmpty(): boolean;
+        enqueue(value: T): void;
+        dequeue(): T;
+    }
+}
+interface JQuery {
+    smartResize: any;
+    filterByData(name: string, value: any): JQuery;
+    contextmenu(p: any, p2?: any, p3?: any): any;
+    isSorting(): boolean;
+    isVisible(): boolean;
+    quickShow(): void;
+    quickHide(): void;
+    preload(): void;
+    getItemType(): ItemType;
+    getQuickSlot(): number;
+    getEquipSlot(): number;
+}
+interface Array<T> {
+    equals: (object: any) => boolean;
+}
+import Queue = Utilities.Queue;
 declare class FlowField {
+    delegate: DebugRendererDelegate;
     fieldWater: ByteGrid;
     fieldLand: ByteGrid;
     fieldFlying: ByteGrid;
-    tileX: number;
-    tileY: number;
-    size: number;
-    delegate: DebugRendererDelegate;
+    private updateQueue;
+    private penaltyFieldWater;
+    private penaltyFieldLand;
+    private penaltyFieldFlying;
+    private tileX;
+    private tileY;
+    private size;
     constructor(radius: number);
     setDelegate(delegate: DebugRendererDelegate): void;
     getWidth(): number;
@@ -2047,7 +2121,10 @@ declare class FlowField {
     setCenter(worldX: number, worldY: number): void;
     update(): void;
     private flowFieldFromMoveType(moveType);
-    private getMovePenaltyForType(worldX, worldY, moveType);
+    private getMovePenaltyForFlying(tile);
+    private getMovePenaltyForLand(tile);
+    private getMovePenaltyForWater(tile);
+    private updatePenaltyField(field, cost);
     private updateField(field, moveType);
 }
 interface DebugRendererDelegate {
@@ -2088,6 +2165,8 @@ declare namespace UI {
         maxHeight?: number;
         maxWidth?: number;
         canResizeHeight?: boolean;
+        onOpen?: () => void;
+        onClose?: () => void;
         onResizeStop?: () => void;
     }
     enum MouseButton {
@@ -2223,6 +2302,7 @@ declare namespace UI {
         afterAddingMultipleItemsToContainer(container: Item.IContainer): void;
         removeItemFromContainer(item: Item.IItem, container: Item.IContainer): void;
         getDialogInfo(dialogId: DialogId): IDialogInfo;
+        setVersionExtra(msg: string): void;
     }
 }
 interface JQuery {
@@ -2262,6 +2342,10 @@ declare var tooltipsMap: {
     [index: string]: number;
 };
 declare var globalTooltipId: number;
+declare class MapGen200 implements MapGen.IMapGen {
+    generateWorld(generateNewWorld: boolean): void;
+    private setupTiles(tileGenArray, templateSpawns, caveSpawns, generateNewWorld);
+}
 declare module MapGen {
     interface IMapGen {
         generateWorld(generateNewWorld: boolean): void;
@@ -2275,6 +2359,7 @@ declare module MapGen {
     function spawnTemplate(templateType: TileTemplateType, templateX: number, templateY: number, templateZ: number): void;
 }
 declare var globalRequire: (path: string) => any;
+declare var installDir: string;
 declare module Steamworks {
     interface ISteamId {
         accountId: number;
@@ -2295,12 +2380,14 @@ declare module Steamworks {
         steamIDOwner: string;
     }
     function isElectron(): boolean;
+    function isOverlayWorking(): boolean;
     function isGreenworksEnabled(): boolean;
     function getAbsolutePath(p: string): any;
     function isLinux(): boolean;
     function initialize(): void;
     function initializeMods(callback: () => void): void;
     function getSteamId(): ISteamId;
+    function getBetaName(): string;
     function getPublishedMods(): IWorkshopItem[];
     function getPublishedMod(publishFileId: string): IWorkshopItem;
     function fillOutMod(index: number, item?: IWorkshopItem): void;
@@ -2309,12 +2396,12 @@ declare module Steamworks {
     function getPublishedItems(callback: (err: string, items: IWorkshopItem[]) => void): void;
     function openUrl(url: string): void;
     function openWorkshop(publishId?: string): void;
-    function openModFolder(): void;
+    function openModsFolder(): void;
     function openLogsFolder(): void;
     function unsubscribe(publishId: string, callback: (err: string) => void): void;
     function sendMessage(name: string, data: string): void;
     function toggleDeveloperTools(): void;
-    function getModPath(name: string, modType: Mods.Type, file?: string): string;
+    function getModPath(name: string, modType: Mods.Type, file?: string, checkIfExists?: boolean): string;
     function createSaveGameMod(name: string, slot: number, callback: (success: boolean) => void): void;
     function deleteSaveGameMod(name: string): void;
     function debugLog(...args: any[]): void;
@@ -2322,6 +2409,9 @@ declare module Steamworks {
     function setDefaultZoomFactor(): void;
     function updateZoomFactor(): void;
     function onUpdateZoomFactor(): void;
+    function setupReporting(): void;
+    function recordEvent(categorySuffix: string, action: string): void;
+    function recordProblem(message: string): void;
 }
 declare module Mods {
     enum Hook {
@@ -2351,16 +2441,17 @@ declare module Mods {
         OnMove = 23,
         OnMoveDirectionUpdate = 24,
         OnNoInputReceived = 25,
-        OnShowInGameScreen = 26,
-        OnSpawnMonsterFromGroup = 27,
-        OnTurnComplete = 28,
-        OnTurnStart = 29,
-        PostGenerateWorld = 30,
-        PostRender = 31,
-        PreRender = 32,
-        PreRenderWorld = 33,
-        ProcessInput = 34,
-        ShouldRender = 35,
+        OnPlayerDamage = 26,
+        OnShowInGameScreen = 27,
+        OnSpawnMonsterFromGroup = 28,
+        OnTurnComplete = 29,
+        OnTurnStart = 30,
+        PostGenerateWorld = 31,
+        PostRender = 32,
+        PreRender = 33,
+        PreRenderWorld = 34,
+        ProcessInput = 35,
+        ShouldRender = 36,
     }
     abstract class BaseMod {
         private index;
@@ -2584,6 +2675,13 @@ declare module Mods {
          */
         onNoInputReceived(): void;
         /**
+         * Called when the player takes damage
+         * @param amount The amount of damage taken
+         * @param damageMessage The message associated with the damaged
+         * @preturns False to stop the player from taking damage or undefined to use the default logic
+         */
+        onPlayerDamage(amount: number, damageMessage: string): boolean;
+        /**
          * Called when the in game screen is shown
          */
         onShowInGameScreen(): void;
@@ -2733,6 +2831,242 @@ declare module Mods {
     function getState(index: number): State;
     function setState(index: number, state: State, force?: boolean): boolean;
 }
+declare type TerrainData = number;
+declare enum TerrainMask {
+    Type = 63,
+    Wall = 64,
+    Fence = 128,
+}
+declare class ExploreMap extends ByteGrid {
+    private encodedData;
+    encode(): void;
+    decode(): void;
+    getSerializationProperties(version: string): string[];
+}
+declare class World implements ISerializable {
+    private gl;
+    width: number;
+    height: number;
+    layers: WorldLayer[];
+    private loaded;
+    constructor(gl: WebGLRenderingContext, width: number, height: number);
+    toLocal(world: number, local: number): number;
+    addLayer(level: number): void;
+    load(): void;
+    isLoaded(): boolean;
+    updateAll(): void;
+    resetExploredMap(): void;
+    updateTile(x: number, y: number, z: number, tile: ITile): void;
+    serializeObject(serializer: Serializer): void;
+    deserializeObject(serializer: Serializer): void;
+}
+declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean) => void;
+declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType, doodadVariation: number, flushImmediate: boolean) => void;
+declare class WorldLayer {
+    private gl;
+    width: number;
+    height: number;
+    level: number;
+    lightLevelMap: ByteGrid;
+    lightBlockMap: ByteGrid;
+    exploredMap: ExploreMap;
+    onTileUpdate: onTileUpdateDelegate;
+    onDoodadUpdate: onDoodadUpdateDelegate;
+    private terrainMap;
+    constructor(gl: WebGLRenderingContext, width: number, height: number, level: number);
+    resetExploredMap(): void;
+    getTileType(x: number, y: number): TerrainType;
+    getTile(x: number, y: number): TerrainData;
+    isWall(terrain: TerrainData): boolean;
+    isFence(terrain: TerrainData): boolean;
+    setTile(x: number, y: number, terrainType: TerrainType, isWall?: boolean, isFence?: boolean): void;
+    updateAll(): void;
+    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean): void;
+    private mapIndex(x, y);
+    private updateLightBlockValue(x, y, oldValue);
+    private setTileInteral(x, y, tile);
+}
+declare module TileAdaptor {
+    interface ITileAdaptation {
+        topLeftFG: Vec2;
+        topRightFG: Vec2;
+        bottomLeftFG: Vec2;
+        bottomRightFG: Vec2;
+        topLeftBG: Vec2;
+        topRightBG: Vec2;
+        bottomLeftBG: Vec2;
+        bottomRightBG: Vec2;
+    }
+    interface ITileAdaptor {
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+    }
+    interface IDoodadAdaptor {
+        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
+    }
+    function setDefaultBackground(tileInfo: TerrainTileInfo): void;
+    class Default implements ITileAdaptor {
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+    }
+    class Mountain extends Default {
+        private mountainTopFlag;
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+        private getTileType(tileMask);
+    }
+    function getWaterType(terrainType: TerrainType): number;
+    class Water extends Default {
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+    }
+    class Dirt implements ITileAdaptor {
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+    }
+    class Fence implements IDoodadAdaptor {
+        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
+    }
+    class Door implements IDoodadAdaptor {
+        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
+    }
+    class Wall implements IDoodadAdaptor {
+        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
+    }
+    class Floor extends Default {
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+    }
+}
+declare module Shaders {
+    function loadShaders(callback: () => void): void;
+    function compileShaders(): void;
+    class CompiledProgram {
+        private gl;
+        private vertexName;
+        private fragmentName;
+        program: WebGLProgram;
+        uniforms: {
+            [index: string]: number;
+        };
+        attribs: {
+            [index: string]: number;
+        };
+        constructor(gl: WebGLRenderingContext, vertexName: string, fragmentName: string);
+        compileProgram(): void;
+    }
+}
+import CompiledProgram = Shaders.CompiledProgram;
+declare class WorldRenderer {
+    private gl;
+    private world;
+    static positionTextureBuffer: WebGLBuffer;
+    static positionBuffer: WebGLBuffer;
+    static ditherTexture: WebGLTexture;
+    private static subTileSize;
+    layers: WorldLayerRenderer[];
+    dirtAdaptor: TileAdaptor.Dirt;
+    waterAdaptor: TileAdaptor.Water;
+    fenceAdaptor: TileAdaptor.Fence;
+    mountainAdaptor: TileAdaptor.Mountain;
+    wallAdaptor: TileAdaptor.Wall;
+    doorAdaptor: TileAdaptor.Door;
+    defaultAdaptor: TileAdaptor.Default;
+    floorAdaptor: TileAdaptor.Floor;
+    private ambientIntensity;
+    private ambientColorDay;
+    private ambientColorNight;
+    private ambientColorCave;
+    private textureShaderProgram;
+    private fogShaderProgram;
+    private screenspaceViewport;
+    private worldspaceViewport;
+    private tileScale;
+    private zoom;
+    private layerFramebuffer;
+    private layerTexture;
+    private fogFramebuffer;
+    private fogTexture;
+    private fogTextureStorage;
+    private itemBatch;
+    private corpseBatch;
+    private monsterBatch;
+    private flyingMonsterBatch;
+    private monstersInViewport;
+    constructor(gl: WebGLRenderingContext, world: World);
+    static getSubTileSize(): number;
+    updateAll(): void;
+    setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
+    getPixelSize(): number;
+    getZoom(): number;
+    getTileScale(): number;
+    setZoom(zoom: number): void;
+    setViewport(view: Vec2): void;
+    getViewport(): Vec2;
+    getTileViewport(): Vec2;
+    render(x: number, y: number, z: number): void;
+    screenToTile(screenX: number, screenY: number): Vec2;
+    getViewportBounds(): Bound2;
+    computeSpritesInViewport(): void;
+    batchMonsters(): void;
+    private batchShadow(fromX, fromY, toX, toY, t, anim);
+    private batchPlayer(batchLayer);
+    private spriteBatchForLayer(layer);
+}
+declare class WorldLayerRenderer {
+    private gl;
+    private renderer;
+    private worldLayer;
+    private width;
+    private height;
+    terrainLayer: TileLayer;
+    doodadLayer: TileLayer;
+    doodadOverLayer: TileLayer;
+    texLightBlock: WebGLTexture;
+    texLightLevel: WebGLTexture;
+    texExplored: WebGLTexture;
+    private dirty;
+    constructor(gl: WebGLRenderingContext, renderer: WorldRenderer, worldLayer: WorldLayer, width: number, height: number);
+    updateAll(): void;
+    setDoodad(x: number, y: number, doodad: DoodadType, variation: number, flushImmediate?: boolean): void;
+    renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
+    postRenderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
+    private computeTile(x, y, flushImmediate?);
+    private updateTileLightBlock(x, y, value);
+    private flush();
+}
+/**
+ * Each tile in the wayward world is rendered as 4 subtiles (topleft, topright, bottomleft, bottomright).
+ * The world consists of 3 tile layers (terrain, doodad, doodadOver).
+ * Each subtile is a RGBA 32bit pixel representing a foreground and background tile.
+ * Red,Green make up the x,y coordinate in the tilesheet of the foreground tile.
+ * Blue,Alpha make up the x,y coordinate in the tilesheet of the background tile.
+ * If Red and Green are both 0, the subtile foreground is not rendered.
+ * If Blue and Alpha are both 0, the subtile background is not rendered.
+ */
+declare class TileLayer {
+    private width;
+    private height;
+    private static texTileSprites;
+    private static inverseTileSpriteTextureSize;
+    private static tileShaderProgram;
+    private singleTileData;
+    private singleTileDataU8;
+    private singleTileDataU32;
+    private tileData;
+    private tileDataU8;
+    private tileDataU32;
+    private texTiles;
+    private inverseTileDataTextureSize;
+    constructor(width: number, height: number, gl: WebGLRenderingContext);
+    static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
+    setTileTopLeft(dataIndex: number, tileX: number, tileY: number): void;
+    setTileTopRight(dataIndex: number, tileX: number, tileY: number): void;
+    setTileBottomLeft(dataIndex: number, tileX: number, tileY: number): void;
+    setTileBottomRight(dataIndex: number, tileX: number, tileY: number): void;
+    setTileTopLeftBG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileTopRightBG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileBottomLeftBG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileBottomRightBG(dataIndex: number, tileX: number, tileY: number): void;
+    sendTileToGPU(x: number, y: number, gl: WebGLRenderingContext): void;
+    sendToGPU(gl: WebGLRenderingContext): void;
+    render(gl: WebGLRenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
+    clear(): void;
+}
 declare var gameVersion: string;
 declare var gameVersionMinor: number;
 declare var quickLoad: number;
@@ -2768,6 +3102,7 @@ declare class Game implements IPropSerializable {
     private static gameMovement;
     interval: number;
     mapSize: number;
+    mapSizeSq: number;
     halfMapSize: number;
     slot: number;
     loadedResources: boolean;
@@ -2852,8 +3187,8 @@ declare class Game implements IPropSerializable {
     debugRenderer: TextureDebugRenderer;
     notifier: Notifier.Notifier;
     cartographyTexture: WebGLTexture;
-    refreshOverlayCanvas: HTMLCanvasElement;
-    refreshOverlayContext: CanvasRenderingContext2D;
+    refreshOverlayContext1: CanvasRenderingContext2D;
+    refreshOverlayContext2: CanvasRenderingContext2D;
     private loadedWorld;
     private tileContainers;
     constructor();
@@ -2866,6 +3201,7 @@ declare class Game implements IPropSerializable {
     getWrappedCoord(x: number): number;
     getTileInFrontOfPlayer(): ITile;
     getTile(x: number, y: number, z?: number): ITile;
+    getTileUnsafe(x: number, y: number, z?: number): ITile;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
     getOrCreateTile(x: number, y: number, z: number): ITile;
     gameLoop: (timeStamp: any) => void;
@@ -2883,7 +3219,7 @@ declare class Game implements IPropSerializable {
     deleteMonsters(id: number): void;
     resetGameState(): void;
     initializeGameState(isTravelling?: boolean): void;
-    checkUnderPlayer(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean): void;
+    checkUnderPlayer(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean): void;
     setPlayerZ(z: number): void;
     shouldRender(): number;
     placeCorpse(corpse: ICorpse): void;
@@ -3150,10 +3486,6 @@ declare namespace Item {
     function saveTileReferences(tileContainers: ITileContainer[]): void;
     function loadTileReferences(tileContainers: ITileContainer[]): void;
 }
-declare class MapGen200 implements MapGen.IMapGen {
-    generateWorld(generateNewWorld: boolean): void;
-    private setupTiles(tileGenArray, templateSpawns, caveSpawns, generateNewWorld);
-}
 declare namespace Notifier {
     class Notifier {
         private capacity;
@@ -3225,7 +3557,7 @@ declare class Player implements IPropSerializable {
     starvation: number;
     status: {
         bleeding: boolean;
-        burning: boolean;
+        burned: boolean;
         poisoned: boolean;
     };
     swimming: boolean;
@@ -3253,7 +3585,7 @@ declare class Player implements IPropSerializable {
     staminaCheck(): boolean;
     checkWeight(): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
-    damage(mod: any, damageMessage: string, soundDelay?: number): void;
+    damage(amount: number, damageMessage: string, soundDelay?: number): void;
     calculateEquipmentStats(): void;
     updateDirection(direction: FacingDirection): void;
     directionToMovement(direction: FacingDirection): IPoint;
@@ -3379,24 +3711,6 @@ declare class Serializer {
     private isIntegerSigned(num);
     private isIntegerUnsigned(num);
 }
-declare module Shaders {
-    function loadShaders(callback: () => void): void;
-    function compileShaders(): void;
-    class CompiledProgram {
-        private gl;
-        private vertexName;
-        private fragmentName;
-        program: WebGLProgram;
-        uniforms: {
-            [index: string]: number;
-        };
-        attribs: {
-            [index: string]: number;
-        };
-        constructor(gl: WebGLRenderingContext, vertexName: string, fragmentName: string);
-        compileProgram(): void;
-    }
-}
 declare enum SpriteBatchLayer {
     Corpse = 0,
     Item = 1,
@@ -3450,52 +3764,6 @@ declare module SpriteUtil {
         private checkFinished(callback);
         private pack();
         private packSprite(gl, image);
-    }
-}
-declare module TileAdaptor {
-    interface ITileAdaptation {
-        topLeftFG: Vec2;
-        topRightFG: Vec2;
-        bottomLeftFG: Vec2;
-        bottomRightFG: Vec2;
-        topLeftBG: Vec2;
-        topRightBG: Vec2;
-        bottomLeftBG: Vec2;
-        bottomRightBG: Vec2;
-    }
-    interface ITileAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
-    }
-    interface IDoodadAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
-    }
-    function setDefaultBackground(tileInfo: TerrainTileInfo): void;
-    class Default implements ITileAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
-    }
-    class Mountain extends Default {
-        private mountainTopFlag;
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
-        private getTileType(tileMask);
-    }
-    function getWaterType(terrainType: TerrainType): number;
-    class Water extends Default {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
-    }
-    class Dirt implements ITileAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
-    }
-    class Fence implements IDoodadAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
-    }
-    class Door implements IDoodadAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
-    }
-    class Wall implements IDoodadAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
-    }
-    class Floor extends Default {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
     }
 }
 declare namespace UI {
@@ -3641,6 +3909,7 @@ declare namespace UI {
         onMouseMove(event: JQueryEventObject): void;
         onBlockerMouseUpOrLeave(event: JQueryEventObject): void;
         onBlockerMouseMove(event: JQueryEventObject): void;
+        completeBlockerMouseMovement(): void;
         highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
         getMovementDirection(event: any): FacingDirection;
         getTilePositionFromMouseEvent(event: any): {
@@ -3754,6 +4023,7 @@ declare namespace UI {
         elementLanguageSelect: JQuery;
         elementKeybindList: JQuery;
         elementKeybindDefault: JQuery;
+        elementKeybindDefaultParent: JQuery;
         keybindDefaultWidth: number;
         selector(): string;
         bindElements(): void;
@@ -3822,233 +4092,4 @@ declare namespace UI {
         exportToFile(slot: number): void;
         exportToSteamWorkshop(name: string, slot: number): void;
     }
-}
-declare namespace Utilities {
-    module Random {
-        var seed: number;
-        var saved: number;
-        function randomFromInterval(min: any, max: any): number;
-        function nextFloat(): number;
-        function nextInt(max: number): number;
-        function getSeed(): number;
-        function setSeed(newSeed: any): void;
-    }
-    module TileHelpers {
-        var maskGfx: number;
-        var maskType: number;
-        function getGfx(tile: ITile): number;
-        function getGfxRaw(data: number): number;
-        function setGfx(tile: ITile, value: number): void;
-        function setGfxRaw(data: number, value: number): number;
-        function getType(tile: ITile): TerrainType;
-        function getTypeRaw(data: number): TerrainType;
-        function setType(tile: ITile, value: TerrainType): void;
-        function setTypeRaw(data: number, value: TerrainType): number;
-    }
-    module WebWorkerHelpers {
-        function create(workerFunction: (data: any) => void, messageCallbackFunction: (evt: any) => void): Worker;
-        function enumToString(name: string, values: any): string;
-        function moduleToString(moduleName: string, name: string, moduleToConvert: any, globalVariables?: string[]): string;
-    }
-    module ItemImageCache {
-        function getItemImageUrl(itemType: ItemType, itemImage: ItemImage): string;
-        function queueCreateItemImageOutlines(image: HTMLImageElement, itemType: ItemType): void;
-        function cacheAllItemImageOutlines(): void;
-    }
-    function roundNumber(num: any, dec: any): number;
-    function loadImage(src: any, callback: any): void;
-    function getTileVariation(x: number, y: number): number;
-    function lerp(from: number, to: number, t: number): number;
-    function easeInQuad(time: number, start: number, change: number, duration: number): number;
-    function easeInCubic(time: number, start: number, change: number, duration: number): number;
-    function isInBound2Wrapped(bound: Bound2, x: number, y: number): boolean;
-    function shuffle(array: number[]): number[];
-}
-interface JQuery {
-    smartResize: any;
-    filterByData(name: string, value: any): JQuery;
-    contextmenu(p: any, p2?: any, p3?: any): any;
-    isSorting(): boolean;
-    isVisible(): boolean;
-    quickShow(): void;
-    quickHide(): void;
-    preload(): void;
-    getItemType(): ItemType;
-    getQuickSlot(): number;
-    getEquipSlot(): number;
-}
-interface Array<T> {
-    equals: (object: any) => boolean;
-}
-declare type TerrainData = number;
-declare enum TerrainMask {
-    Type = 63,
-    Wall = 64,
-    Fence = 128,
-}
-declare class ExploreMap extends ByteGrid {
-    private encodedData;
-    encode(): void;
-    decode(): void;
-    getSerializationProperties(version: string): string[];
-}
-declare class World implements ISerializable {
-    private gl;
-    width: number;
-    height: number;
-    layers: WorldLayer[];
-    private loaded;
-    constructor(gl: WebGLRenderingContext, width: number, height: number);
-    toLocal(world: number, local: number): number;
-    addLayer(level: number): void;
-    load(): void;
-    isLoaded(): boolean;
-    updateAll(): void;
-    resetExploredMap(): void;
-    updateTile(x: number, y: number, z: number, tile: ITile): void;
-    serializeObject(serializer: Serializer): void;
-    deserializeObject(serializer: Serializer): void;
-}
-declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean) => void;
-declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType, doodadVariation: number, flushImmediate: boolean) => void;
-declare class WorldLayer {
-    private gl;
-    width: number;
-    height: number;
-    level: number;
-    lightLevelMap: ByteGrid;
-    lightBlockMap: ByteGrid;
-    exploredMap: ExploreMap;
-    onTileUpdate: onTileUpdateDelegate;
-    onDoodadUpdate: onDoodadUpdateDelegate;
-    private terrainMap;
-    constructor(gl: WebGLRenderingContext, width: number, height: number, level: number);
-    resetExploredMap(): void;
-    getTileType(x: number, y: number): TerrainType;
-    getTile(x: number, y: number): TerrainData;
-    isWall(terrain: TerrainData): boolean;
-    isFence(terrain: TerrainData): boolean;
-    setTile(x: number, y: number, terrainType: TerrainType, isWall?: boolean, isFence?: boolean): void;
-    updateAll(): void;
-    updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean): void;
-    private mapIndex(x, y);
-    private updateLightBlockValue(x, y, oldValue);
-    private setTileInteral(x, y, tile);
-}
-import CompiledProgram = Shaders.CompiledProgram;
-declare class WorldRenderer {
-    private gl;
-    private world;
-    static positionTextureBuffer: WebGLBuffer;
-    static positionBuffer: WebGLBuffer;
-    static ditherTexture: WebGLTexture;
-    private static subTileSize;
-    layers: WorldLayerRenderer[];
-    dirtAdaptor: TileAdaptor.Dirt;
-    waterAdaptor: TileAdaptor.Water;
-    fenceAdaptor: TileAdaptor.Fence;
-    mountainAdaptor: TileAdaptor.Mountain;
-    wallAdaptor: TileAdaptor.Wall;
-    doorAdaptor: TileAdaptor.Door;
-    defaultAdaptor: TileAdaptor.Default;
-    floorAdaptor: TileAdaptor.Floor;
-    private ambientIntensity;
-    private ambientColorDay;
-    private ambientColorNight;
-    private ambientColorCave;
-    private textureShaderProgram;
-    private fogShaderProgram;
-    private screenspaceViewport;
-    private worldspaceViewport;
-    private tileScale;
-    private zoom;
-    private layerFramebuffer;
-    private layerTexture;
-    private fogFramebuffer;
-    private fogTexture;
-    private fogTextureStorage;
-    private itemBatch;
-    private corpseBatch;
-    private monsterBatch;
-    private flyingMonsterBatch;
-    private monstersInViewport;
-    constructor(gl: WebGLRenderingContext, world: World);
-    static getSubTileSize(): number;
-    updateAll(): void;
-    setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
-    getPixelSize(): number;
-    getZoom(): number;
-    getTileScale(): number;
-    setZoom(zoom: number): void;
-    setViewport(view: Vec2): void;
-    getViewport(): Vec2;
-    getTileViewport(): Vec2;
-    render(x: number, y: number, z: number): void;
-    screenToTile(screenX: number, screenY: number): Vec2;
-    getViewportBounds(): Bound2;
-    computeSpritesInViewport(): void;
-    batchMonsters(): void;
-    private batchShadow(fromX, fromY, toX, toY, t, anim);
-    private batchPlayer(batchLayer);
-    private spriteBatchForLayer(layer);
-}
-declare class WorldLayerRenderer {
-    private gl;
-    private renderer;
-    private worldLayer;
-    private width;
-    private height;
-    terrainLayer: TileLayer;
-    doodadLayer: TileLayer;
-    doodadOverLayer: TileLayer;
-    texLightBlock: WebGLTexture;
-    texLightLevel: WebGLTexture;
-    texExplored: WebGLTexture;
-    private dirty;
-    constructor(gl: WebGLRenderingContext, renderer: WorldRenderer, worldLayer: WorldLayer, width: number, height: number);
-    updateAll(): void;
-    setDoodad(x: number, y: number, doodad: DoodadType, variation: number, flushImmediate?: boolean): void;
-    renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
-    postRenderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
-    private computeTile(x, y, flushImmediate?);
-    private updateTileLightBlock(x, y, value);
-    private flush();
-}
-/**
- * Each tile in the wayward world is rendered as 4 subtiles (topleft, topright, bottomleft, bottomright).
- * The world consists of 3 tile layers (terrain, doodad, doodadOver).
- * Each subtile is a RGBA 32bit pixel representing a foreground and background tile.
- * Red,Green make up the x,y coordinate in the tilesheet of the foreground tile.
- * Blue,Alpha make up the x,y coordinate in the tilesheet of the background tile.
- * If Red and Green are both 0, the subtile foreground is not rendered.
- * If Blue and Alpha are both 0, the subtile background is not rendered.
- */
-declare class TileLayer {
-    private width;
-    private height;
-    private static texTileSprites;
-    private static inverseTileSpriteTextureSize;
-    private static tileShaderProgram;
-    private singleTileData;
-    private singleTileDataU8;
-    private singleTileDataU32;
-    private tileData;
-    private tileDataU8;
-    private tileDataU32;
-    private texTiles;
-    private inverseTileDataTextureSize;
-    constructor(width: number, height: number, gl: WebGLRenderingContext);
-    static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
-    setTileTopLeft(dataIndex: number, tileX: number, tileY: number): void;
-    setTileTopRight(dataIndex: number, tileX: number, tileY: number): void;
-    setTileBottomLeft(dataIndex: number, tileX: number, tileY: number): void;
-    setTileBottomRight(dataIndex: number, tileX: number, tileY: number): void;
-    setTileTopLeftBG(dataIndex: number, tileX: number, tileY: number): void;
-    setTileTopRightBG(dataIndex: number, tileX: number, tileY: number): void;
-    setTileBottomLeftBG(dataIndex: number, tileX: number, tileY: number): void;
-    setTileBottomRightBG(dataIndex: number, tileX: number, tileY: number): void;
-    sendTileToGPU(x: number, y: number, gl: WebGLRenderingContext): void;
-    sendToGPU(gl: WebGLRenderingContext): void;
-    render(gl: WebGLRenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
-    clear(): void;
 }

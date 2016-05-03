@@ -2,7 +2,6 @@
 
 ## Table of Contents
 
-* [Disclaimer](https://github.com/WaywardGame/mod-reference#disclaimer)
 * [Intro](https://github.com/WaywardGame/mod-reference#intro)
 * [Workflow/Editor](https://github.com/WaywardGame/mod-reference#workfloweditor)
 * [Examples](https://github.com/WaywardGame/mod-reference#examples)
@@ -16,22 +15,7 @@
 	* [tsconfig.json](https://github.com/WaywardGame/mod-reference#tsconfigjson)
 	* [helloworld.ts](https://github.com/WaywardGame/mod-reference#helloworldts)
 * [Publishing](https://github.com/WaywardGame/mod-reference#publishing)
-	
-## Disclaimer
-
-By submitting a Workshop creation for Wayward, you understand that Wayward is a work in progress. As such, many things will change and be added over time. This can result in the following:
-
-* Your submission becoming obsolete.
-* Your submission breaking in functionality as updates are released.
-* Your submission becoming an eventual feature within the game.
-
-In the case of breaking functionality, we will try our best to limit such things from happening; however, due to the very nature of a beta/Early Access title, many new ideas, systems, and additions will eventually make it into Wayward. As this is the case, we cannot guarantee your Workshop submission will continue to work indefinitely, nor cannot guarantee that your submission will always be necessary as we may build certain features/functionality/content into the game directly.
-
-Our "[todo](https://trello.com/b/PWX1Hpjn/wayward-todo)" and idea list is huge and it's likely many ideas are already planned for Wayward or were submitted to us previously. If we have in fact taken direct inspiration from your idea/submission, we will always contact you beforehand. The community and player-base has always delivered us great ideas. Steam Workshop allows for those ideas to become reality faster than they would otherwise appear in the game by us.
-
-That being said, we hope this not hinder you from making Wayward into whatever you want and sharing your creativity with the community.
-
-Have fun!
+* [Disclaimer](https://github.com/WaywardGame/mod-reference#disclaimer)
 
 ## Intro
 
@@ -108,6 +92,7 @@ Here's a list of all the current Wayward hooks:
 * OnMove
 * OnMoveDirectionUpdate
 * OnNoInputReceived
+* OnPlayerDamage
 * OnShowInGameScreen
 * OnSpawnMonsterFromGroup
 * OnTurnComplete
@@ -391,3 +376,19 @@ If you place a square formatted .png image in the root mod folder named "mod.png
 When you are ready to go, and you have performed all the steps outlined in _Hello World_ section, upon launching Wayward and going in the _Manage Mods_ menu, you will see an "arrow" icon to the right hand side of your mod. Clicking it will allow you to publish your mod to the Steam Workshop. At any point you make changes and build/compile your mod, you can simply click this again to send an update to Steam.
 
 Everything else about your entry is controlled via Steam. This includes uploading screenshots, links, required mod displaying, stats, and more. You can quickly get to your Workshop entry by clicking the "eye" icon next to your mod in the _Manage Mods_ menu listing. You will see a full suite of administrative options on that page if you are logged in to Steam.
+
+## Disclaimer
+
+By submitting a Workshop creation for Wayward, you understand that Wayward is a work in progress. As such, many things will change and be added over time. This can result in the following:
+
+* Your submission becoming obsolete.
+* Your submission breaking in functionality as updates are released.
+* Your submission becoming an eventual feature within the game.
+
+In the case of breaking functionality, we will try our best to limit such things from happening; however, due to the very nature of a beta/Early Access title, many new ideas, systems, and additions will eventually make it into Wayward. As this is the case, we cannot guarantee your Workshop submission will continue to work indefinitely, nor cannot guarantee that your submission will always be necessary as we may build certain features/functionality/content into the game directly.
+
+Our "[todo](https://trello.com/b/PWX1Hpjn/wayward-todo)" and idea list is huge and it's likely many ideas are already planned for Wayward or were submitted to us previously. If we have in fact taken direct inspiration from your idea/submission, we will always contact you beforehand. The community and player-base has always delivered us great ideas. Steam Workshop allows for those ideas to become reality faster than they would otherwise appear in the game by us.
+
+That being said, we hope this not hinder you from making Wayward into whatever you want and sharing your creativity with the community.
+
+Have fun!
