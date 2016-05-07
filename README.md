@@ -71,6 +71,10 @@ Here's a list of all the current Wayward hooks:
 * CanMonsterAttack
 * CanMonsterMove
 * CanSeeMonster
+* GetAmbientColorCave
+* GetAmbientColorDay
+* GetAmbientColorNight
+* GetAmbientLightLevel
 * GetMonsterSpriteBatchLayer
 * GetPlayerSpriteBatchLayer
 * IsPlayerSwimming
@@ -99,8 +103,11 @@ Here's a list of all the current Wayward hooks:
 * OnTurnStart
 * PostGenerateWorld
 * PostRender
+* PostRenderWorld
+* PostRenderPostProcess
 * PreRender
 * PreRenderWorld
+* PreRenderPostProcess
 * ProcessInput
 * ShouldRender
 
