@@ -2510,28 +2510,30 @@ declare module Mods {
         private unallocateEnum(enumInfo);
     }
     abstract class Mod extends BaseMod {
+        
+        abstract onInitialize(saveDataGlobal: any): any;
         /**
          * Called when the mod is initialized (mod files are read/loaded when the title screen loads)
          * @param saveDataGlobal The save data object you previously saved via onInitialize()
          * @returns An object containing the data you want to save (saved globally, not per slot)
          */
-        abstract onInitialize(saveDataGlobal: any): any;
+        abstract onLoad(saveData: any): void;
         /**
          * Called when the mod is loaded called after a player starts/loads a world.
          * Called before the world is loaded
          * @param saveData The save data object you previously saved via onSave()
          */
-        abstract onLoad(saveData: any): void;
+        abstract onUnload(): void;
         /**
          * Called when the mod is unloaded
          */
-        abstract onUnload(): void;
+        abstract onSave(): any;
         /**
          * Called when the game is saved or the mod is unloaded
          * This will be called before onUnload
          * @returns An object containing the data you want to save
          */
-        abstract onSave(): any;
+        calculateMonsterMoveType(monsterId: number, monster: IMonster, moveType: MoveType): MoveType;
         /**
          * Called when the game is calculating the move type of a monster
          * @param monsterId The monster id
@@ -2539,21 +2541,21 @@ declare module Mods {
          * @param moveType The monsters move type
          * @returns The move type the monster should use or undefined to use the default logic
          */
-        calculateMonsterMoveType(monsterId: number, monster: IMonster, moveType: MoveType): MoveType;
+        canConsumeItem(itemType: ItemType, actionType: ActionType): boolean;
         /**
          * Called before consuming an item
          * @param itemType The item type
          * @param actionType The action type
          * @returns True if the player can consume the item, false if the player cannot consume the item, or undefined to use the default logic
          */
-        canConsumeItem(itemType: ItemType, actionType: ActionType): boolean;
+        canMonsterAttack(monsterId: number, monster: IMonster): boolean;
         /**
          * Called before a monster attacks
          * @param monsterId The monster id
          * @param monster The monster object
          * @returns False if the monster cannot attack, or undefined to use the default logic
          */
-        canMonsterAttack(monsterId: number, monster: IMonster): boolean;
+        canMonsterMove(monsterId: number, monster: IMonster, tile: ITile, moveType: MoveType): boolean;
         /**
          * Called when a monster tries to move
          * @param monsterId The monster id
@@ -2562,7 +2564,7 @@ declare module Mods {
          * @param moveType The monsters move type
          * @returns True if the monster can move, false if the monster cannot move, or undefined to use the default logic
          */
-        canMonsterMove(monsterId: number, monster: IMonster, tile: ITile, moveType: MoveType): boolean;
+        canSeeMonster(monsterId: number, monster: IMonster, tile: ITile): boolean;
         /**
          * Called when calculating monsters in the viewport
          * @param monsterId The monster id
@@ -2570,7 +2572,7 @@ declare module Mods {
          * @param tile The tile the monster is on
          * @returns False if the player should not see the monster or undefined to use the default logic
          */
-        canSeeMonster(monsterId: number, monster: IMonster, tile: ITile): boolean;
+        getMonsterSpriteBatchLayer(monsterId: number, monster: IMonster, batchLayer: SpriteBatchLayer): SpriteBatchLayer;
         /**
          * Called when rendering monsters in the viewport
          * @param monsterId The monster id
@@ -2578,39 +2580,39 @@ declare module Mods {
          * @param batchLayer The batch layer the monster will render in
          * @returns The batch layer the monster should render in or undefined to use the default logic
          */
-        getMonsterSpriteBatchLayer(monsterId: number, monster: IMonster, batchLayer: SpriteBatchLayer): SpriteBatchLayer;
+        getPlayerSpriteBatchLayer(player: Player, batchLayer: SpriteBatchLayer): SpriteBatchLayer;
         /**
          * Called when rendering the player in the viewport
          * @param player The player object
          * @param batchLayer The batch layer the player will render in
          * @returns The batch layer the player should render in or undefined to use the default logic
          */
-        getPlayerSpriteBatchLayer(player: Player, batchLayer: SpriteBatchLayer): SpriteBatchLayer;
+        isPlayerSwimming(player: Player, isSwimming: boolean): boolean;
         /**
          * Called when checking if a player is swimming
          * @param player The player object
          * @param isSwimming True if the player is swimming
          * @returns True if the player should be swimming, false if the player should not be swimming, or undefined to use the default logic
          */
-        isPlayerSwimming(player: Player, isSwimming: boolean): boolean;
+        onAddOrUpdateInventoryItem(item: Item.IItem, container: Item.IContainer): void;
         /**
          * Called when an item is added or updated in the players inventory
          * @param item The item object
          * @param container The container object the item was added to
          */
-        onAddOrUpdateInventoryItem(item: Item.IItem, container: Item.IContainer): void;
+        onBuild(item: Item.IItem, tile: ITile, doodad: Doodad.IDoodad): void;
         /**
          * Called when something is built on a tile
          * @param item The item used to build the object
          * @param tile The tile something was built on
          * @param doodad The doodad that was created on the tile
          */
-        onBuild(item: Item.IItem, tile: ITile, doodad: Doodad.IDoodad): void;
+        onCreateWorld(world: World): void;
         /**
          * Called right after the world is created, but before the renderer
          * @param world The world object
          */
-        onCreateWorld(world: World): void;
+        onDisplayMessage(message: Message, messageType?: MessageType, ...args: any[]): boolean;
         /**
          * Called when a message is about to be displayed to the player
          * @param message The message
@@ -2618,52 +2620,46 @@ declare module Mods {
          * @param args The message arguments
          * @returns False to not display the message or undefined to use the default logic
          */
-        onDisplayMessage(message: Message, messageType?: MessageType, ...args: any[]): boolean;
+        onGameEnd(playerState: PlayerState): void;
         /**
          * Called when the game is ending
          * @param playerState The ending player state
          */
-        onGameEnd(playerState: PlayerState): void;
+        onGameStart(isLoadingSave: boolean, playedCount: number): void;
         /**
          * Called when the game is starting
          * @param isLoadingSave True if a save game was loaded
          * @param playedCount The number of times the player has played the game (globally, not per slot)
          */
-        onGameStart(isLoadingSave: boolean, playedCount: number): void;
+        onItemEquip(item: Item.IItem, slot: EquipType): void;
         /**
          * Called when the player equips an item to a slot
          * @param item The item being equipped
          * @param slot The slot
          */
-        onItemEquip(item: Item.IItem, slot: EquipType): void;
+        onKeyBindPress(keyBind: KeyBind): boolean;
         /**
          * Called when a keybind is pressed
          * @param keyBind The keybind
          * @returns False to cancel the keybind press or undefined to use the default logic
          */
-        onKeyBindPress(keyBind: KeyBind): boolean;
+        onKeyDown(event: JQueryEventObject): boolean;
         /**
          * Called when a key is pressed down
          * @param event The event object
          * @returns False to cancel the event or undefined to use the default logic
          */
-        onKeyDown(event: JQueryEventObject): boolean;
+        onKeyUp(event: JQueryEventObject): boolean;
         /**
          * Called when a key is let go
          * @param event The event object
          * @returns False to cancel the event or undefined to use the default logic
          */
-        onKeyUp(event: JQueryEventObject): boolean;
+        onMonsterDeath(monsterId: number, monster: IMonster): void;
         /**
          * Called when a monster dies
          * @param monsterId The monster id
          * @param monster The monster object
-         */
-        onMonsterDeath(monsterId: number, monster: IMonster): void;
-        /**
-         * Called when a mouse button is pressed
-         * @param event The mouse event object
-         * @returns False to cancel the mouse event or undefined to use the default logic
          */
         onMouseDown(event: JQueryEventObject): boolean;
         /**
@@ -2673,18 +2669,24 @@ declare module Mods {
          */
         onMouseMove(event: JQueryEventObject): boolean;
         /**
-         * Called when a mouse button is pressed
+         * Called when the mouse is moved
          * @param event The mouse event object
          * @returns False to cancel the mouse event or undefined to use the default logic
          */
         onMouseScroll(event: JQueryEventObject): boolean;
         /**
-         * Called when a mouse button is let go or if the mouse leaves the screen
+         * Called when the mouse is scrolled
          * @param event The mouse event object
          * @returns False to cancel the event or undefined to use the default logic
          */
         onMouseUpOrLeave(event: JQueryEventObject): boolean;
         /**
+         * Called when the mouse moves or leaves the screen
+         * @param event The mouse event object
+         * @returns False to cancel the event or undefined to use the default logic
+         **/
+        onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean;
+         /**
          * Called when the player is moving
          * @param nextX The x position the player is moving to
          * @param nextY The y position the player is moving to
@@ -2692,27 +2694,27 @@ declare module Mods {
          * @param direction The direction the player is facing
          * @returns False to cancel the move or undefined to use the default logic
          */
-        onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean;
+        onMoveDirectionUpdate(direction: FacingDirection): void;
         /**
          * Called when the player faces a different direction
          * @param direction The direction the player is now facing
          */
-        onMoveDirectionUpdate(direction: FacingDirection): void;
+        onNoInputReceived(): void;
         /**
          * Called when no input is received
          */
-        onNoInputReceived(): void;
+        onPlayerDamage(amount: number, damageMessage: string): boolean;
         /**
          * Called when the player takes damage
          * @param amount The amount of damage taken
          * @param damageMessage The message associated with the damaged
          * @preturns False to stop the player from taking damage or undefined to use the default logic
          */
-        onPlayerDamage(amount: number, damageMessage: string): boolean;
+        onShowInGameScreen(): void;
         /**
          * Called when the in game screen is shown
          */
-        onShowInGameScreen(): void;
+        onSpawnMonsterFromGroup(monsterGroup: MonsterSpawnGroup, monsterPool: MonsterType[], x: number, y: number, z: number): boolean;
         /**
          * Called when a monster is spawned from a monster group
          * @param monsterGroup The monster group
@@ -2722,44 +2724,43 @@ declare module Mods {
          * @param z The z position to spawn the monster
          * @returns False to cancel spawning the monster or undefined to use the default logic
          */
-        onSpawnMonsterFromGroup(monsterGroup: MonsterSpawnGroup, monsterPool: MonsterType[], x: number, y: number, z: number): boolean;
+        onTurnComplete(): void;
         /**
          * Called when a turn is completing
          */
-        onTurnComplete(): void;
+        onTurnStart(): void;
         /**
          * Called when a turn is starting
          */
-        onTurnStart(): void;
+        postGenerateWorld(generateNewWorld: boolean): void;
         /**
          * Called after the world is generating
          * @param generateNewWorld True if a new world is being generated
          */
-        postGenerateWorld(generateNewWorld: boolean): void;
+        postRender(): void;
         /**
          * Called after rendering
          */
-        postRender(): void;
+        preRender(): void;
         /**
          * Called before rendering
          */
-        preRender(): void;
+        preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
         /**
          * Called before rendering the world
          * @param tileScale The tile scale
          * @param viewWidth The width of the view port
          * @param viewHeight The height of the view port
          */
-        preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
+        processInput(): void;
         /**
          * Called when input is being processed
          */
-        processInput(): void;
+        shouldRender(): RenderFlag;
         /**
          * Called when different object types are rendered
          * @returns A bitwise list of render flags or undefined to use the default logic
          */
-        shouldRender(): RenderFlag;
     }
 }
 declare module Mods {
