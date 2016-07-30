@@ -1,57 +1,666 @@
-declare type ActionCallback = (item: Item.IItem) => void;
-declare namespace Actions {
-    function add(use: ActionType, callback: ActionCallback): void;
-    function remove(use: ActionType): void;
-    function execute(use: ActionType, item: Item.IItem): void;
-    function preserve(preserver: Item.IItem, preservee?: Item.IItem): void;
-    function addFuel(fuel: Item.IItem, torch: Item.IItem): void;
-    function consume(itemType: ItemType, actionType: ActionType): boolean;
-    function consumeItem(item: Item.IItem, actionType: ActionType): void;
-    function openContainer(container: Item.IContainer, containerName: string, silent?: boolean): void;
-    function reinforce(reinforcer: Item.IItem, reinforcee?: Item.IItem): void;
-    function repair(repairer: Item.IItem, repairee?: Item.IItem): void;
-    function transmogrify(transmogrifier: Item.IItem, transmogrifee?: Item.IItem): void;
-    function inspect(tileX: any, tileY: number): void;
-    function hurtTerrain(x: number, y: number, z: number, tile: ITile): boolean;
+interface Math {
+    clamp255(value: number): number;
+    clamp01(value: number): number;
 }
-declare class WAudio {
-    private sfx;
-    private music;
-    private soundList;
-    private musicPlaylist;
-    private musicTrack;
-    private fileFormat;
-    constructor();
-    playMusic(): void;
-    pauseMusic(): void;
-    nextTrack(): void;
-    playEffect(sound: SfxType): void;
-    updateVolume(): void;
-    queueEffect(soundEffect: SfxType, delay?: number): void;
-    processEffects(): void;
+declare namespace Utilities {
+    module Console {
+        function log(source: Source, ...args: any[]): void;
+        function info(source: Source, ...args: any[]): void;
+        function debug(source: Source, ...args: any[]): void;
+        function warn(source: Source, ...args: any[]): void;
+        function error(source: Source, ...args: any[]): void;
+    }
+    module Random {
+        var seed: number;
+        var saved: number;
+        function randomFromInterval(min: any, max: any): number;
+        function nextFloat(): number;
+        function nextInt(max: number): number;
+        function getSeed(): number;
+        function setSeed(newSeed: any): void;
+    }
+    module TileHelpers {
+        var maskGfx: number;
+        var maskType: number;
+        function getGfx(tile: ITile): number;
+        function getGfxRaw(data: number): number;
+        function setGfx(tile: ITile, value: number): void;
+        function setGfxRaw(data: number, value: number): number;
+        function getType(tile: ITile): TerrainType;
+        function getTypeRaw(data: number): TerrainType;
+        function setType(tile: ITile, value: TerrainType): void;
+        function setTypeRaw(data: number, value: TerrainType): number;
+    }
+    module WebWorkerHelpers {
+        function create(workerFunction: (data: any) => void, messageCallbackFunction: (evt: any) => void): Worker;
+        function enumToString(name: string, values: any, withStrings?: boolean): string;
+        function moduleToString(moduleName: string, name: string, moduleToConvert: any, globalVariables?: string[]): string;
+    }
+    module ItemImageCache {
+        function initialize(): void;
+        function getItemImageUrl(itemType: ItemType, itemImage: ItemImage): string;
+        function queueCreateItemImageOutlines(image: HTMLImageElement, itemType: ItemType): void;
+        function cacheAllItemImageOutlines(): void;
+    }
+    module Enums {
+        interface IEnumInfo {
+            enumName: string;
+            name: string;
+            enumNumber: number;
+            object?: any;
+            onUnallocate: ((index: number) => void) | null;
+        }
+        interface IEnumInfoInternal extends IEnumInfo {
+            objectValue?: any;
+            windowKeys: string[] | null;
+        }
+        var allocatedEnums: {
+            [index: string]: IEnumInfoInternal;
+        };
+        function initializeGameState(): void;
+        function setup(enumObject: any, modStart: number, max: number): void;
+        function isValid(enumObject: any, index: number): boolean;
+        function getMax(enumObject: any): number;
+        function getOfficialMax(enumObject: any): number;
+        function isModdable(enumObject: any): boolean;
+        function restore(): void;
+        function reset(): void;
+        function allocate(enumName: string, name: string, windowKeys?: string[] | null, objectValue?: ((enumNumber: number) => any) | null, onAllocate?: ((enumNumber: number) => void) | null, onUnallocate?: ((enumNumber: number) => void) | null): IEnumInfo | null;
+        function unallocate(enumInfo: Utilities.Enums.IEnumInfo): void;
+    }
+    module String {
+        function formatCase(text: string, textCase: TextCase): string;
+    }
+    function roundNumber(num: any, dec: any): number;
+    function loadImage(src: any, callback: any): void;
+    function getTileVariation(x: number, y: number): number;
+    function lerp(from: number, to: number, t: number): number;
+    function easeInQuad(time: number, start: number, change: number, duration: number): number;
+    function easeInCubic(time: number, start: number, change: number, duration: number): number;
+    function isInBound2Wrapped(bound: Bound2, x: number, y: number): boolean;
+    function shuffle(array: number[]): number[];
+    class Queue<T> {
+        private queue;
+        private offset;
+        constructor();
+        getLength(): number;
+        isEmpty(): boolean;
+        enqueue(value: T): void;
+        dequeue(): T | null;
+    }
+    function debounce(id: string, callback: () => void, timeout: number): void;
+    function windowKeysToObject(keys: string[]): any;
+    function windowKeysToParentObject(keys: string[]): any;
 }
-declare enum SfxType {
-    Bow = 0,
-    Craft = 1,
-    Death = 2,
-    Eating = 3,
-    Exceptional = 4,
-    Fail = 5,
-    TreeHit = 6,
-    Hit = 7,
-    Hurt = 8,
-    Miss = 9,
-    MonsterHit = 10,
-    MonsterNoise = 11,
-    PickUp = 12,
-    RockHit = 13,
-    SandstoneHit = 14,
-    Swim = 15,
-    Throw = 16,
-    Trample = 17,
-    Walk = 18,
-    Water = 19,
-    Click = 20,
+interface JQuery {
+    filterByData(name: string, value: any): JQuery;
+    contextmenu(p: any, p2?: any, p3?: any): any;
+    isSorting(): boolean;
+    isVisible(): boolean;
+    quickShow(): void;
+    quickHide(): void;
+    preload(): void;
+    getItemType(): ItemType;
+    getQuickSlot(): number;
+    getEquipSlot(): number;
+}
+declare function ArrayEquals(arr1: any[], arr2: any[]): boolean;
+interface IMessages {
+    [index: number]: string;
+}
+declare const messages: IMessages;
+declare function makeString(msg: Message, ...variables: any[]): string;
+declare enum MessageType {
+    None = 0,
+    Bad = 1,
+    Good = 2,
+    Miss = 3,
+    Attack = 4,
+    Stat = 5,
+    Skill = 6,
+}
+declare enum Message {
+    None = 0,
+    AberrantCreatureDroppedItem = 1,
+    AboutHours = 2,
+    AddedFuelToFire = 3,
+    AddedFuelToTorch = 4,
+    AddFuel = 5,
+    AddToQuickslot = 6,
+    Advanced = 7,
+    AlreadyFullyRepaired = 8,
+    AlreadyWaterInStill = 9,
+    AppearsToBeDawn = 10,
+    AppearsToBeDusk = 11,
+    AppearsToBeMidDay = 12,
+    AppearsToBeNight = 13,
+    AreYouSureYouWantToSail = 14,
+    ArmorAppearedResistant = 15,
+    ArmorAppearedVulnerable = 16,
+    ArmorProtectedFromInjuryAgainst = 17,
+    Attack = 18,
+    AttemptedToDropAllIntoFire = 19,
+    AttemptToPlaceAllOnGround = 20,
+    AutomaticallySavingGame = 21,
+    AwakeToFindYourself = 22,
+    Back = 23,
+    BadlyBurnedLostHealth = 24,
+    BeenPoisoned = 25,
+    BeginSleeping = 26,
+    BeginUsingRaft = 27,
+    Belt = 28,
+    BleedingHasStopped = 29,
+    BleedingProfusely = 30,
+    BleedingToDeathLostHealth = 31,
+    Blunt = 32,
+    BrokeIntoPieces = 33,
+    BrokenOnImpact = 34,
+    BrokenWhileFiring = 35,
+    Build = 36,
+    Burned = 37,
+    By = 38,
+    ByBleedingOut = 39,
+    ByBurnInjuries = 40,
+    ByEatingSomethingBad = 41,
+    ByPoisoning = 42,
+    BySteppingOnA = 43,
+    BySteppingOnTrap = 44,
+    ByWorkingYourselfIntoExhaustion = 45,
+    Cancel = 46,
+    CannotBePerformedOverWater = 47,
+    CannotBePreserved = 48,
+    CannotBeReinforced = 49,
+    CannotBeRepaired = 50,
+    CannotBeTransmogrified = 51,
+    CannotBuildHere = 52,
+    CannotDigHere = 53,
+    CannotDropHere = 54,
+    CannotEquipThatThere = 55,
+    CannotFishFor = 56,
+    CannotGatherFromWhileOnFire = 57,
+    CannotGatherHere = 58,
+    CannotImproveGrowingSpeed = 59,
+    CannotInWater = 60,
+    CannotPickupWhenFull = 61,
+    CannotPickUpWhileLit = 62,
+    CannotPickUpWithItemsInside = 63,
+    CannotPlaceContainerInItself = 64,
+    CannotPlaceHere = 65,
+    CannotPlaceThatFromHere = 66,
+    CannotPlaceThatHere = 67,
+    CannotPlantHere = 68,
+    CannotRepairWhileLit = 69,
+    CannotRestHere = 70,
+    CannotSeeHere = 71,
+    CannotSleepHere = 72,
+    CannotStartFireHere = 73,
+    CannotToTellTime = 74,
+    CarryingTooMuchWeight = 75,
+    CarvedUpCorpse = 76,
+    CastYourLine = 77,
+    Category = 78,
+    CaughtFish = 79,
+    Chest = 80,
+    ClearMessages = 81,
+    CloseDoor = 82,
+    CollectObject = 83,
+    Consumed = 84,
+    Container = 85,
+    Cook = 86,
+    Cooked = 87,
+    Corpse = 88,
+    CorruptSaveDetected = 89,
+    CouldNotDecipher = 90,
+    Craft = 91,
+    Crafted = 92,
+    Crafts = 93,
+    CreatureAppears = 94,
+    CreatureAppearsHealthy = 95,
+    CreatureAppearsUnhealthy = 96,
+    CreatureIsAtPercentHealth = 97,
+    CreatureLooksBarelyHurt = 98,
+    CreatureLooksHealthyAndUndamaged = 99,
+    CreatureLooksInjured = 100,
+    CreatureLooksSeverelyDamaged = 101,
+    CreatureSeemsHurt = 102,
+    CreatureSeemsInjured = 103,
+    CreatureSeemsUnimpaired = 104,
+    CuredYourPoison = 105,
+    Cut = 106,
+    DailyChallengeMode = 107,
+    DamageAppearedEffective = 108,
+    DamageAppearedIneffective = 109,
+    DamagedByPouringWater = 110,
+    DealtNoDamageToYou = 111,
+    Decay = 112,
+    DefaultGameName = 113,
+    DependencyIssue = 114,
+    DestroyedFromUse = 115,
+    DestroyedGrowingByPickingItUp = 116,
+    DexterityIncreasing = 117,
+    DidNotSeemToBeHurting = 118,
+    Disassemble = 119,
+    DisassembleAction = 120,
+    DiscoveredCaveEntrance = 121,
+    DiscoveredInTheBottle = 122,
+    Dismantle = 123,
+    DismantleAction = 124,
+    DismantleLabel = 125,
+    DismantlingRequires = 126,
+    DoNotForgetToAddRequiredModsOnWorkshop = 127,
+    DoNotHaveTreasureMaps = 128,
+    DoodadAppearsDamaged = 129,
+    DoodadAppearsOnVergeOfBreaking = 130,
+    DoodadAppearsUnscathed = 131,
+    DoodadCauseStatus = 132,
+    DoodadShowsSignsOfWear = 133,
+    DrewSurroundings = 134,
+    Drink = 135,
+    Drop = 136,
+    DropAll = 137,
+    DropAllOfSameQuality = 138,
+    DroppedAllIntoDepths = 139,
+    DroppedIntoDepths = 140,
+    DroppedIntoFire = 141,
+    DueToDehydration = 142,
+    DueToStarvation = 143,
+    DugTreasureOut = 144,
+    DumpContentsOfContainerInInventory = 145,
+    Durability = 146,
+    DyingOfDehydration = 147,
+    EarnedMilestone = 148,
+    EquipTo = 149,
+    ErrorHasOccured = 150,
+    Expert = 151,
+    ExtinguishedFire = 152,
+    ExtinguishedTorch = 153,
+    FailedToAddFuelToTorch = 154,
+    FailedToCatchFish = 155,
+    FailedToCauseDamage = 156,
+    FailedToDrawMap = 157,
+    FailedToPickLock = 158,
+    FailedToPlant = 159,
+    FailedToPreserve = 160,
+    FailedToReinforce = 161,
+    FailedToRepair = 162,
+    FailedToStartFire = 163,
+    FailedToTransmogrify = 164,
+    FarAwayFromTreasure = 165,
+    Feet = 166,
+    FeltBurningPainLostHealth = 167,
+    FewMinutes = 168,
+    Filled = 169,
+    FilledFrom = 170,
+    FinalizingWorld = 171,
+    Fire = 172,
+    FireAlmostExtinguished = 173,
+    FiredIntoObstacle = 174,
+    FireFacingYouIsWarm = 175,
+    FireIsHealthy = 176,
+    FireIsRaging = 177,
+    FireIsStruggling = 178,
+    FireSource = 179,
+    FirstQuarterOfDay = 180,
+    FirstQuarterOfNight = 181,
+    Food = 182,
+    FoodAlreadyPreserved = 183,
+    FourthQuarterOfDay = 184,
+    FourthQuarterOfNight = 185,
+    FullyDecodedMap = 186,
+    GainedHealth = 187,
+    GainedHunger = 188,
+    GainedStamina = 189,
+    GainedThirst = 190,
+    GameHasBeenSavedIsTakingUpMB = 191,
+    Gather = 192,
+    GeneratingWorld = 193,
+    GrabAll = 194,
+    Group = 195,
+    Hands = 196,
+    HasBeenHurtByATrap = 197,
+    HasBeenHurtByYourTrap = 198,
+    HasDecayed = 199,
+    HasHitYouForDamage = 200,
+    HasSplit = 201,
+    Head = 202,
+    Held = 203,
+    Help = 204,
+    Hints = 205,
+    HintsDisabled = 206,
+    HintsEnabled = 207,
+    HitForDamage = 208,
+    Hour = 209,
+    Hours = 210,
+    HowDoYouWantToExportSave = 211,
+    HurtHandsByGatheringWithNoTool = 212,
+    HurtHandsHittingWithoutWeapons = 213,
+    IncompatibleVersion = 214,
+    InExactLocationOfTreasure = 215,
+    InjuredFromTrap = 216,
+    InNeedOfRepair = 217,
+    Inspect = 218,
+    Intermediate = 219,
+    Inventory = 220,
+    ItContains = 221,
+    ItsWeightCapacity = 222,
+    Jump = 223,
+    Killed = 224,
+    LabelAttackFromTactics = 225,
+    LabelAuthor = 226,
+    LabelBase = 227,
+    LabelBaseAttack = 228,
+    LabelBaseDefense = 229,
+    LabelBluntResist = 230,
+    LabelDecay = 231,
+    LabelDefense = 232,
+    LabelDefenseFromParrying = 233,
+    LabelDoodadRequired = 234,
+    LabelDurability = 235,
+    LabelEquip = 236,
+    LabelFireResist = 237,
+    LabelGrouping = 238,
+    LabelHave = 239,
+    LabelHp = 240,
+    LabelLastUpdated = 241,
+    LabelLeftHandAttack = 242,
+    LabelLevel = 243,
+    LabelMalignityNegative = 244,
+    LabelMalignityPlus = 245,
+    LabelOnEquip = 246,
+    LabelPiercingResist = 247,
+    LabelRange = 248,
+    LabelRanged = 249,
+    LabelRangedAttack = 250,
+    LabelRangedDamage = 251,
+    LabelRequiredMods = 252,
+    LabelRequires = 253,
+    LabelResists = 254,
+    LabelRightHandAttack = 255,
+    LabelScore = 256,
+    LabelSkill = 257,
+    LabelSlashingResist = 258,
+    LabelStokeFireStrength = 259,
+    LabelUse = 260,
+    LabelUses = 261,
+    LabelVersion = 262,
+    LabelVulnerabilities = 263,
+    LabelWeight = 264,
+    LabelWeightCapacity = 265,
+    LabelWeightReduction = 266,
+    LastPlaceYouLeftOff = 267,
+    LearnedHowToCreate = 268,
+    LeftHand = 269,
+    Legs = 270,
+    LikelyFailures = 271,
+    LoadingMods = 272,
+    LoadingSprites = 273,
+    LoadingWorld = 274,
+    LocalFile = 275,
+    LocalVersionOfModDetected = 276,
+    LoseBonesLayBleaching = 277,
+    LoseEndIsBeginning = 278,
+    LoseSadlyNoTrace = 279,
+    LostHealth = 280,
+    LostHunger = 281,
+    LostStamina = 282,
+    LostThirst = 283,
+    MapNotOfThisArea = 284,
+    MaterialsDestroyedDisassembly = 285,
+    MaterialsDestroyedDismantle = 286,
+    MetabolismSlowed = 287,
+    MilestoneIsHidden = 288,
+    MilestoneIsInvisible = 289,
+    MissedWith = 290,
+    MissingRequiredMods = 291,
+    ModImportedSaveGame = 292,
+    ModLoadError = 293,
+    ModRequiresItself = 294,
+    ModWithNameAlreadyExists = 295,
+    MonsterIdolAttractedCreature = 296,
+    MouseButton = 297,
+    MoveAllOfSameQualityToInventory = 298,
+    MoveAllOfSameQualityToOpenedContainer = 299,
+    MoveAllToInventory = 300,
+    MoveAllToOpenedContainer = 301,
+    MoveOverTrapButDoNotSetOff = 302,
+    MoveToInventory = 303,
+    MoveToOpenedContainer = 304,
+    MustCastIntoWater = 305,
+    Mysteriously = 306,
+    Name = 307,
+    NearlyBurnedEquipmentProtectedYou = 308,
+    Neck = 309,
+    NeedAShovelToDigTreasure = 310,
+    NeedDeepWaterForRaft = 311,
+    NeedFishingNetForTreasure = 312,
+    NeedToBuildUpLandAround = 313,
+    NeedToEquipToShoot = 314,
+    NeedToStartTravelsOutside = 315,
+    No = 316,
+    NoAmmunitionForThatWeapon = 317,
+    NoBlackPowderToFireWeapon = 318,
+    NoFireToStokeWith = 319,
+    NoFishAtLocation = 320,
+    NoFuelItemsToStartFire = 321,
+    NoInkToDrawMap = 322,
+    NoKindlingToStartFire = 323,
+    NoLongerFeelPainOBeingfBurned = 324,
+    NoMoreRoomInContainer = 325,
+    NoNeedToStokeFire = 326,
+    NoRoomToDrop = 327,
+    NotAvailable = 328,
+    NotEnoughFoodToTravel = 329,
+    NotEnoughPurifiedWaterYet = 330,
+    NotEnoughStrengthToThrow = 331,
+    NotEnoughTreasureToReturn = 332,
+    NotFacingLockedObject = 333,
+    NotFacingValidFoodForPreservation = 334,
+    NotFacingValidItemForReinforcement = 335,
+    NotFacingValidItemForRepair = 336,
+    NotFacingValidItemToTransmogrify = 337,
+    NothingHereToCarve = 338,
+    NothingHereToFill = 339,
+    NothingHereToGardenWith = 340,
+    NoTinderToStartFire = 341,
+    NotInRangeOfTreasure = 342,
+    NoWaterInStill = 343,
+    NoWhereNearTreasure = 344,
+    NumberEight = 345,
+    NumberFive = 346,
+    NumberFour = 347,
+    NumberNine = 348,
+    NumberOne = 349,
+    NumberSeven = 350,
+    NumberSix = 351,
+    NumberTen = 352,
+    NumberThree = 353,
+    NumberTwo = 354,
+    ObjectIsLocked = 355,
+    Ok = 356,
+    OpenDoor = 357,
+    OpenFolderFailed = 358,
+    OverEatingLostStamina = 359,
+    OverHydratingLostStamina = 360,
+    PaperTurnedToMush = 361,
+    PartiallyDecodedMap = 362,
+    PastExperiencesProvideBenefits = 363,
+    PenultimateAnd = 364,
+    PickupItem = 365,
+    Piercing = 366,
+    Place = 367,
+    PlacedOnGround = 368,
+    Plant = 369,
+    PlantedInGround = 370,
+    PlantIsFertile = 371,
+    PlantIsNotFertile = 372,
+    PlantVeryHealthy = 373,
+    Poisoned = 374,
+    PoisonedLostHealth = 375,
+    PoisonWorkedItsCourse = 376,
+    PouredOutWater = 377,
+    PouredOutWaterOnYourself = 378,
+    PouredWaterIntoStill = 379,
+    PreservedFood = 380,
+    PublishingMod = 381,
+    PurifiedWaterInStill = 382,
+    Quality = 383,
+    Recent = 384,
+    RefreshingMods = 385,
+    Reinforce = 386,
+    RemovedBlood = 387,
+    RemoveFromQuickslot = 388,
+    Repair = 389,
+    RequiredForDisassembly = 390,
+    RequiredModsMissingWantToContinue = 391,
+    RequiredModsNotLoaded = 392,
+    RequiresFacingFireSource = 393,
+    RequiresFireToBeLit = 394,
+    RequiresYouToBeFacingTo = 395,
+    Rest = 396,
+    Rested = 397,
+    Resting = 398,
+    RestInterrupted = 399,
+    ReturnedToCivilization = 400,
+    ReturningToCivilizationSetOffAgain = 401,
+    ReturnsToLife = 402,
+    ReturnToTitleScreenNoSaveInDailyChallenge = 403,
+    ReturnToTitleScreenProgressWillBeSaved = 404,
+    RightHand = 405,
+    SailedToCivilization = 406,
+    SavingGame = 407,
+    Score = 408,
+    ScrollProvidedNoUsefulInsight = 409,
+    SeaweedFromWater = 410,
+    SecondQuarterOfDay = 411,
+    SecondQuarterOfNight = 412,
+    SeeGrowing = 413,
+    SeemsToHaveDrawnEnergy = 414,
+    SetTrapOffButNoDamage = 415,
+    SetUp = 416,
+    ShadowInTheWater = 417,
+    Simple = 418,
+    Skill = 419,
+    SkillHasRaised = 420,
+    Slashing = 421,
+    Sleeping = 422,
+    SleepInterrupted = 423,
+    Slept = 424,
+    Soil = 425,
+    SoilWouldHaveNoEffect = 426,
+    SomethingInTheWayOfCarving = 427,
+    SomethingInTheWayOfDigging = 428,
+    SomethingInTheWayOfDiggingCarveFirst = 429,
+    SomethingInTheWayOfFishing = 430,
+    SomethingInTheWayOfGatheringCarveFirst = 431,
+    SomethingInTheWayOfPerforming = 432,
+    SomethingInTheWayOfPlacing = 433,
+    SomethingInWayOfClosingDoor = 434,
+    SoothedYourBurnInjuries = 435,
+    Sort = 436,
+    SortedByCategory = 437,
+    SortedByDecay = 438,
+    SortedByDurability = 439,
+    SortedByGroup = 440,
+    SortedByName = 441,
+    SortedByQuality = 442,
+    SortedByRecent = 443,
+    SortedBySkill = 444,
+    SortedByWeight = 445,
+    StaminaIsFull = 446,
+    StartedFire = 447,
+    StartTravelInWater = 448,
+    StarvingToDeath = 449,
+    SteamWorkshop = 450,
+    SteppingOnHasInjuredYouForDamage = 451,
+    StillHasNoWaterToPurify = 452,
+    StirredUpClawWorm = 453,
+    StirredUpCreature = 454,
+    StoppedYourBleeding = 455,
+    StopUsingRaft = 456,
+    StrengthIncreasing = 457,
+    SummonedGuardiansByDiggingTreasure = 458,
+    SunIsRising = 459,
+    SunIsSetting = 460,
+    SunNotBrightEnoughToStartFire = 461,
+    TeleportBlocked = 462,
+    Teleported = 463,
+    ThereIsNoSunToStartFire = 464,
+    ThirdQuarterOfDay = 465,
+    ThirdQuarterOfNight = 466,
+    Throw = 467,
+    ThrownIntoDepths = 468,
+    ThrownIntoObstacle = 469,
+    TooDamaged = 470,
+    TooExhaustedToJump = 471,
+    ToolAppearedEffectiveForGathering = 472,
+    TrampledFire = 473,
+    TrampledIntoGround = 474,
+    TrampleIntoGround = 475,
+    Trampling = 476,
+    Transmogrified = 477,
+    TravelAway = 478,
+    TravelToFarOffLands = 479,
+    TreasureIsBlocked = 480,
+    True = 481,
+    UnableToImportSave = 482,
+    UnableToLoadRequiredMods = 483,
+    UnEquip = 484,
+    Unknown = 485,
+    UnknownItem = 486,
+    UnlockedChest = 487,
+    UnpurifiedWaterInStill = 488,
+    UpdatingMod = 489,
+    URLHasOpenedInWebBrowser = 490,
+    UsedSoilToIncreaseFertility = 491,
+    UsedToSpeedUpGrowing = 492,
+    UsingBareFistsToFight = 493,
+    UsingBareHandsToGather = 494,
+    WaitUntilFireCooledToGetWater = 495,
+    WalkingDistanceOfTreasure = 496,
+    WantToDeleteAllSavedData = 497,
+    WantToDeleteThisGame = 498,
+    WantToPublishThisMod = 499,
+    WantToPublishUpdateToMod = 500,
+    WantToUninstallThisMod = 501,
+    Water = 502,
+    WaterDoesNotNeedDesalination = 503,
+    WaterIncreaseFertilityOfPlant = 504,
+    WaterPutOutFire = 505,
+    WaterWouldHaveNoEffect = 506,
+    Weight = 507,
+    WeightCapacity = 508,
+    WelcomeToWayward21 = 509,
+    WinFindWayBackToCivilization = 510,
+    WinSailBackWithRiches = 511,
+    WinTravelledBackToCivilization = 512,
+    With = 513,
+    WorkingYourselfIntoExhaustion = 514,
+    WorkshopHasBeenOpenedPressOkAfter = 515,
+    Yes = 516,
+    YouAte = 517,
+    YouBeginResting = 518,
+    YouCollected = 519,
+    YouCrafted = 520,
+    YouDied = 521,
+    YouDisassembled = 522,
+    YouDismantled = 523,
+    YouDrank = 524,
+    YouEquip = 525,
+    YouFailedTo = 526,
+    YouFailedToHeal = 527,
+    YouFire = 528,
+    YouGathered = 529,
+    YouHaveKilled = 530,
+    YouOpen = 531,
+    YouPickedUp = 532,
+    YouRepair = 533,
+    YourFist = 534,
+    YouSalvaged = 535,
+    YouSee = 536,
+    YouSeparate = 537,
+    YouThrew = 538,
+    YouUnequip = 539,
+    YouUsed = 540,
 }
 declare var Z_MIN: number;
 declare var Z_CAVE: number;
@@ -59,15 +668,18 @@ declare var Z_NORMAL: number;
 declare var Z_MAX: number;
 declare enum Source {
     Actions = 0,
-    Game = 1,
-    Item = 2,
-    Languages = 3,
-    MapGen = 4,
-    Mods = 5,
-    ResourceLoader = 6,
-    SaveLoad = 7,
-    Steamworks = 8,
-    Ui = 9,
+    Audio = 1,
+    Game = 2,
+    Item = 3,
+    Languages = 4,
+    MapGen = 5,
+    Mods = 6,
+    ResourceLoader = 7,
+    SaveLoad = 8,
+    Shaders = 9,
+    Steamworks = 10,
+    Ui = 11,
+    Utilities = 12,
 }
 declare enum AttackType {
     Melee = 0,
@@ -77,12 +689,20 @@ declare enum AttackType {
     Fire = 4,
     ThrowItem = 5,
 }
+declare enum InspectType {
+    None = 0,
+    Tile = 1,
+    Doodad = 2,
+    Monster = 3,
+    Items = 4,
+}
 declare enum DamageType {
     Blunt = 1,
     Slashing = 2,
     Piercing = 4,
     Fire = 8,
-    Last = 16,
+    True = 16,
+    Last = 32,
 }
 declare function fullDamageType(damageType: DamageType): string;
 declare class Resistances {
@@ -124,6 +744,7 @@ declare enum LootGroupType {
     High = 1,
     Treasure = 2,
     SeaTreasure = 3,
+    CaveChest = 4,
 }
 declare enum EquipType {
     None = 0,
@@ -181,7 +802,7 @@ declare enum ActionType {
     OpenContainer = 32,
     Preserve = 33,
     Open = 34,
-    Cure = 35,
+    DrinkCure = 35,
     TellTime = 36,
     SailToCivilization = 37,
     Transmogrify = 38,
@@ -189,6 +810,9 @@ declare enum ActionType {
     Teleport = 40,
     Extinguish = 41,
     DrawMap = 42,
+    Dismantle = 43,
+    PourOnYourself = 44,
+    Squeeze = 45,
 }
 declare enum ItemType {
     None = 0,
@@ -244,7 +868,7 @@ declare enum ItemType {
     Raft = 50,
     RawMeat = 51,
     RedBerries = 52,
-    SpottedRedMushrooms = 53,
+    SpottedRedMushroom = 53,
     Rope = 54,
     Sapling = 55,
     Seaweed = 56,
@@ -466,15 +1090,31 @@ declare enum ItemType {
     FlowerPetals = 272,
     Thistles = 273,
     DrawnMap = 274,
+    TatteredShirt = 275,
+    TatteredPants = 276,
+    WoodenGate = 277,
+    PoisonIvyLeaves = 278,
+    PoisonIvySeeds = 279,
+    WroughtIronChest = 280,
+    IronChest = 281,
+    TallGrassSeeds = 282,
+    Acorn = 283,
+    SpiderEggs = 284,
+    TailFeathers = 285,
+    BigRedBerry = 286,
+    VenomGland = 287,
+    OrnateWoodenChest = 288,
+    RollOfRedCarpet = 289,
+    OrnateCape = 290,
+    FireBladder = 291,
+    GoldenKey = 292,
 }
-declare let ItemTypeLast: number;
-declare let ItemTypeMax: number;
 declare enum ItemTypeGroup {
     Invalid = 800,
     Sharpened = 801,
     Carbon = 802,
     Arrow = 803,
-    Utensil = 804,
+    Skewer = 804,
     Bone = 805,
     Fuel = 806,
     Medicinal = 807,
@@ -495,7 +1135,7 @@ declare enum ItemTypeGroup {
     Repair = 822,
     Tongs = 823,
     Hammer = 824,
-    Preserve = 825,
+    Preservative = 825,
     Reinforce = 826,
     GlassBottleOfPotableWater = 827,
     Bullet = 828,
@@ -526,211 +1166,6 @@ declare enum ItemTypeGroup {
     ContainerOfUnpurifiedFreshWater = 853,
     Last = 854,
 }
-declare enum PlayerState {
-    None = 0,
-    Dead = 1,
-    Won = 2,
-    Traveling = 3,
-}
-declare enum ObjectContext {
-    None = 0,
-    Inventory = 1,
-    TileItem = 2,
-    Doodad = 3,
-    TileEvent = 4,
-    Corpse = 5,
-}
-declare enum Delay {
-    None = 0,
-    LongPause = 25,
-    Movement = 10,
-    ShortPause = 12,
-    Collision = 40,
-}
-declare enum StatType {
-    EnemyHealth = 0,
-    Talent = 1,
-    Stamina = 2,
-    Hunger = 3,
-    Health = 4,
-    Thirst = 5,
-}
-declare enum StatusType {
-    Bleeding = 0,
-    Poisoned = 1,
-    Burned = 2,
-}
-declare enum ItemQuality {
-    None = 0,
-    Random = 1,
-    Exceptional = 2,
-    Remarkable = 3,
-    Legendary = 4,
-}
-declare enum ItemImage {
-    Default = 0,
-    Exceptional = 1,
-    Remarkable = 2,
-    Legendary = 3,
-    Damaged = 4,
-    Selected = 5,
-}
-declare enum RenderFlag {
-    None = 0,
-    Corpse = 1,
-    Item = 2,
-    Player = 4,
-    Monster = 8,
-    Terrain = 16,
-    All = 65535,
-}
-declare enum OnEquipType {
-    LightSource = 0,
-    Telescopy = 1,
-}
-interface IOnEquipType {
-    [index: number]: {};
-}
-declare var onEquipTypes: IOnEquipType;
-declare enum KeyBind {
-    Up = 0,
-    Down = 1,
-    Left = 2,
-    Right = 3,
-    Idle = 4,
-    One = 5,
-    Two = 6,
-    Three = 7,
-    Four = 8,
-    Five = 9,
-    Six = 10,
-    Seven = 11,
-    Eight = 12,
-    Nine = 13,
-    Escape = 14,
-    Inventory = 15,
-    Help = 16,
-    Skills = 17,
-    Messages = 18,
-    Options = 19,
-    Alt = 20,
-    Shift = 21,
-    Equipment = 22,
-    Crafting = 23,
-    Actions = 24,
-    Milestones = 25,
-    Enter = 26,
-}
-interface IKeyBind {
-    [index: number]: number;
-}
-declare var keybindCount: number;
-declare var defaultKeyBinds: IKeyBind;
-declare var hotKeyNumbers: KeyBind[];
-declare enum TurnType {
-    Resting = 0,
-    CheckUnderPlayer = 1,
-    DontEnterCaves = 2,
-    ForcePickUp = 3,
-}
-declare enum HintType {
-    First = 0,
-    WelcomeToWayward = 1,
-    Controls = 2,
-    CorpseCarving = 3,
-    Doodads = 4,
-    CaveDarkness = 5,
-    Nightfall = 6,
-    StaminaReplenishment = 7,
-    HealthProblems = 8,
-    Bleeding = 9,
-    Poisoned = 10,
-    Dehydration = 11,
-    UseATool = 12,
-    Durability = 13,
-    Death = 14,
-    ConsumingBadThings = 15,
-    FastPickup = 16,
-    Bugs = 17,
-    HeldItems = 18,
-    Milestones = 19,
-    Burned = 20,
-    Crafting = 21,
-    Encumbered = 22,
-    DailyChallengeMode = 23,
-    Last = 24,
-}
-interface IHint {
-    name?: string;
-    description?: string;
-}
-declare var hints: IHint[];
-declare var keyCodes: string[];
-declare enum ScreenId {
-    None = 0,
-    Cover = 1,
-    Title = 2,
-    Game = 3,
-}
-declare enum TitleScreenId {
-    Default = 0,
-    EndGame = 1,
-}
-declare enum DialogId {
-    Inventory = 0,
-    Crafting = 1,
-    Equipment = 2,
-    Messages = 3,
-    Skills = 4,
-    Milestones = 5,
-    Map = 6,
-    Container = 7,
-    Custom = 8,
-}
-declare enum SortType {
-    Name = 0,
-    Group = 1,
-    Weight = 2,
-    Oldest = 3,
-    Newest = 4,
-    Skill = 5,
-    Category = 6,
-}
-declare enum RestType {
-    Resting = 0,
-    Sleeping = 1,
-}
-declare enum LoadingType {
-    Normal = 0,
-    Rest = 1,
-}
-declare enum InputRecordType {
-    KeyDown = 0,
-    KeyUp = 1,
-    MouseDown = 2,
-    MouseUpOrLeave = 3,
-    MouseMove = 4,
-    MouseScroll = 5,
-}
-import Vec2 = TSM.vec2;
-declare enum TileType {
-    Top = 0,
-    TopLeft = 1,
-    Left = 2,
-    BottomLeft = 3,
-    Bottom = 4,
-    BottomRight = 5,
-    Right = 6,
-    TopRight = 7,
-    InnerTopLeft = 8,
-    InnerBottomLeft = 9,
-    InnerBottomRight = 10,
-    InnerTopRight = 11,
-    CenterTopLeft = 12,
-    CenterBottomLeft = 13,
-    CenterBottomRight = 14,
-    CenterTopRight = 15,
-}
 declare enum TerrainType {
     DeepSeawater = 0,
     Seawater = 1,
@@ -739,14 +1174,14 @@ declare enum TerrainType {
     FreshWater = 4,
     ShallowFreshWater = 5,
     Grass = 6,
-    Trees = 7,
-    BareTrees = 8,
-    TreesWithVines = 9,
-    TreesWithBerries = 10,
-    TreesWithFungus = 11,
-    PalmTrees = 12,
-    BarePalmTrees = 13,
-    PalmTreesWithCoconuts = 14,
+    Tree = 7,
+    BareTree = 8,
+    TreeWithVines = 9,
+    TreeWithBerries = 10,
+    TreeWithFungus = 11,
+    PalmTree = 12,
+    BarePalmTree = 13,
+    PalmTreeWithCoconuts = 14,
     Gravel = 15,
     Dirt = 16,
     Sand = 17,
@@ -759,270 +1194,15 @@ declare enum TerrainType {
     RocksWithTalc = 24,
     RocksWithCoal = 25,
     RocksWithLimestone = 26,
-    Cobblestone = 27,
+    CobblestoneFlooring = 27,
     Sandstone = 28,
-    SandstoneFloor = 29,
+    SandstoneFlooring = 29,
     SandstoneWithIron = 30,
     SandstoneWithNiter = 31,
-    WoodenFloor = 32,
-    ClayBrickFloor = 33,
+    WoodenFlooring = 32,
+    ClayBrickFlooring = 33,
     CaveEntrance = 34,
-}
-declare function rotateTileType90Deg(tileType: TileType, times: number): TileType;
-declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation: number): Vec2;
-declare class Bound2 {
-    min: Vec2;
-    max: Vec2;
-    constructor(min: Vec2, max: Vec2);
-}
-declare class TerrainTileInfo {
-    top: Vec2[];
-    left: Vec2[];
-    right: Vec2[];
-    bottom: Vec2[];
-    topLeft: Vec2;
-    topRight: Vec2;
-    bottomLeft: Vec2;
-    bottomRight: Vec2;
-    innerTopLeft: Vec2;
-    innerTopRight: Vec2;
-    innerBottomLeft: Vec2;
-    innerBottomRight: Vec2;
-    centerTopLeft: Vec2[];
-    centerTopRight: Vec2[];
-    centerBottomLeft: Vec2[];
-    centerBottomRight: Vec2[];
-    constructor(xOffset: number, yOffset: number);
-    getCenterTopLeft(variation: number): Vec2;
-    getCenterTopRight(variation: number): Vec2;
-    getCenterBottomLeft(variation: number): Vec2;
-    getCenterBottomRight(variation: number): Vec2;
-    getLeft(variation: number): Vec2;
-    getRight(variation: number): Vec2;
-    getTop(variation: number): Vec2;
-    getBottom(variation: number): Vec2;
-}
-declare class MountainTileInfo extends TerrainTileInfo {
-    extendedInfo: TerrainTileInfo;
-    constructor(xOffset: number, yOffset: number);
-}
-declare class TileAtlas {
-    static terrain: {
-        [index: number]: TerrainTileInfo;
-    };
-    static doodads: {
-        [index: number]: Doodad.DoodadInfo;
-    };
-    static isMountain(type: TerrainType): boolean;
-    static isOre(type: TerrainType): boolean;
-    static isWater(type: TerrainType): boolean;
-    static isFloor(type: TerrainType): boolean;
-}
-interface IMonster {
-    x: number;
-    y: number;
-    z: number;
-    fromX: number;
-    fromY: number;
-    direction: FacingDirection;
-    ai: MonsterAiType;
-    type: MonsterType;
-    anim: number;
-    aberrant: boolean;
-    hp: number;
-    maxhp: number;
-    loot: ItemType[];
-    lootChance?: number;
-}
-declare enum MoveType {
-    None = 0,
-    Water = 1,
-    ShallowWater = 2,
-    Land = 4,
-    Tree = 8,
-    Mountain = 16,
-    Flying = 15,
-}
-declare enum MonsterType {
-    Slime = 0,
-    JellyCube = 1,
-    GiantSpider = 2,
-    Bear = 3,
-    Rabbit = 4,
-    Snake = 5,
-    GiantRat = 6,
-    Rat = 7,
-    VampireBat = 8,
-    GreyWolf = 9,
-    Imp = 10,
-    Bogling = 11,
-    LivingRock = 12,
-    Shark = 13,
-    Zombie = 14,
-    Skeleton = 15,
-    PirateGhost = 16,
-    TimeSkitter = 17,
-    Chicken = 18,
-    TrapdoorSpider = 19,
-    FireElemental = 20,
-    Cod = 21,
-    Hobgoblin = 22,
-    LivingMushroom = 23,
-    Kraken = 24,
-    Blindfish = 25,
-    Harpy = 26,
-    AcidSpitterDemon = 27,
-    SkeletalMage = 28,
-    Blood = 29,
-}
-declare enum MonsterSpawnGroup {
-    Any = 0,
-    Guardians = 1,
-    Water = 2,
-}
-declare enum MonsterAiType {
-    Neutral = 0,
-    Hostile = 1,
-    Scared = 2,
-    Random = 4,
-    Hidden = 8,
-    Fearless = 16,
-}
-declare enum MonsterSpawnableTiles {
-    None = 0,
-    Default = 1,
-    DefaultWithWater = 2,
-    DeepWater = 3,
-    Water = 4,
-    Flying = 5,
-    Ghost = 6,
-}
-declare var spawnableTiles: TerrainType[][];
-interface IMonsterDescription {
-    name?: string;
-    minhp: number;
-    maxhp: number;
-    minatk: number;
-    maxatk: number;
-    defense: Defense;
-    damageType: DamageType;
-    ai: MonsterAiType;
-    moveType: MoveType;
-    fishable?: boolean;
-    blood?: number[];
-    loot?: ItemType[];
-    lootChance?: number;
-    spawnTiles: MonsterSpawnableTiles;
-    spawnTalent?: number;
-    makeNoise?: boolean;
-    canCauseStatus?: StatusType[];
-    lootGroup?: LootGroupType;
-    breaksWalls?: boolean;
-    jumpOver?: boolean;
-    mod?: number;
-    noCorpse?: boolean;
-}
-declare var monsters: IMonsterDescription[];
-declare enum SkillType {
-    Chemistry = 0,
-    Anatomy = 1,
-    Archery = 2,
-    Blacksmithing = 3,
-    Botany = 4,
-    Camping = 5,
-    Cartography = 6,
-    Claythrowing = 7,
-    Cooking = 8,
-    Fishing = 9,
-    Fletching = 10,
-    Glassblowing = 11,
-    Leatherworking = 12,
-    LockPicking = 13,
-    Lumberjacking = 14,
-    Mining = 15,
-    Mycology = 16,
-    Parrying = 17,
-    Stonecrafting = 18,
-    Swimming = 19,
-    Tactics = 20,
-    Tailoring = 21,
-    Throwing = 22,
-    Tinkering = 23,
-    Trapping = 24,
-    Woodworking = 25,
-}
-declare class SkillLevel {
-    percent: number;
-    bonus: number;
-    core: number;
-}
-interface ISkillSet extends Array<SkillLevel> {
-}
-declare function skillSet(): ISkillSet;
-interface ISkillDescription {
-    name?: string;
-    attribute: StatType;
-    description?: string;
-    talent: number;
-}
-declare var skillDescriptions: ISkillDescription[];
-interface IMonsterCorpses {
-    name?: string;
-    decay?: number;
-    resource?: ItemType[];
-    carve?: boolean;
-    skill?: SkillType;
-    blood?: number[];
-    damage?: number;
-}
-interface ICorpse {
-    x: number;
-    y: number;
-    z: number;
-    type: MonsterType;
-    decay?: number;
-    aberrant?: boolean;
-}
-declare var corpses: IMonsterCorpses[];
-declare namespace Doodad {
-    class DoodadInfo {
-        type: DoodadType;
-        tall: boolean;
-        animated: boolean;
-        topLeft: Vec2;
-        topRight: Vec2;
-        bottomLeft: Vec2;
-        bottomRight: Vec2;
-        constructor(type: DoodadType, tall: boolean, xOffset: number, yOffset: number, animated: boolean);
-    }
-    interface IDoodad extends Item.IObject {
-        type: DoodadType;
-        spread?: number;
-        growInto?: DoodadType;
-        gatherWater?: boolean;
-        gatherReady?: boolean;
-        torch?: any;
-        x: number;
-        y: number;
-        z: number;
-    }
-    interface IDoodadFurnace extends IDoodad {
-        lit: boolean;
-    }
-    interface IDoodadDoor extends IDoodad {
-        orientation: DoorOrientation;
-    }
-    function create(type: DoodadType, x: number, y: number, z: number, spread?: number, decay?: number, minDur?: number, maxDur?: number): IDoodad;
-    function remove(doodad: IDoodad): void;
-    function updateAll(doodads: IDoodad[]): void;
-    function update(doodad: IDoodad): void;
-    function canGrowInCaves(doodad: IDoodad): boolean;
-    function gather(doodad: IDoodad): void;
-    function canPickup(doodad: IDoodad): boolean;
-    function pickup(x: number, y: number, z: number): void;
-    function checkForTrampling(doodad: IDoodad, monsterId?: number): boolean;
-    function messageGardenFertility(spread: number): void;
-    function inspect(doodad: IDoodad): void;
+    RedCarpet = 35,
 }
 declare enum DoodadType {
     WoodenDoor = 0,
@@ -1039,7 +1219,7 @@ declare enum DoodadType {
     WoodenChest = 11,
     LockedWoodenChest = 12,
     MonsterIdol = 13,
-    GrassSeeds = 14,
+    GrowingGrass = 14,
     Vines = 15,
     Thistles = 16,
     GrowingMushroom = 17,
@@ -1079,782 +1259,290 @@ declare enum DoodadType {
     LitForgeAndAnvil = 51,
     Acid = 52,
     CaveEntrance = 53,
-    OpenWoodenDoor = 54,
+    WoodenDoorOpen = 54,
+    WoodenGate = 55,
+    WoodenGateOpen = 56,
+    PoisonIvy = 57,
+    WroughtIronChest = 58,
+    IronChest = 59,
+    OrnateWoodenChest = 60,
 }
-declare namespace Doodad {
-    interface IDoodadDescription extends Item.IObjectDescription {
-        allowedTiles?: TerrainType[];
-        animated?: boolean;
-        blockDig?: boolean;
-        blockJump?: boolean;
-        blockMove?: boolean;
-        canPickupWithoutTool?: boolean;
-        caveGrow?: boolean;
-        damage?: number;
-        fire?: boolean;
-        flammable?: boolean;
-        garden?: boolean;
-        graphicVariation?: boolean;
-        growing?: boolean;
-        growth?: DoodadType;
-        isLocked?: boolean;
-        lit?: DoodadType;
-        mod?: number;
-        onBurn?: ItemType;
-        resource?: ItemType[];
-        revert?: DoodadType;
-        spreadMax?: number;
-        tall?: boolean;
-        trample?: boolean;
-        trap?: boolean;
-        variation?: boolean;
-        waterSource?: boolean;
-    }
-    var defines: IDoodadDescription[];
+declare enum SkillType {
+    Chemistry = 0,
+    Anatomy = 1,
+    Archery = 2,
+    Blacksmithing = 3,
+    Botany = 4,
+    Camping = 5,
+    Cartography = 6,
+    Claythrowing = 7,
+    Cooking = 8,
+    Fishing = 9,
+    Fletching = 10,
+    Glassblowing = 11,
+    Leatherworking = 12,
+    LockPicking = 13,
+    Lumberjacking = 14,
+    Mining = 15,
+    Mycology = 16,
+    Parrying = 17,
+    Stonecrafting = 18,
+    Swimming = 19,
+    Tactics = 20,
+    Tailoring = 21,
+    Throwing = 22,
+    Tinkering = 23,
+    Trapping = 24,
+    Woodworking = 25,
 }
-declare module Languages {
-    var saveData: {
-        language: string;
-    };
-    enum UiTranslation {
-        Bleeding = 0,
-        Burned = 1,
-        Dehydrated = 2,
-        DisableHints = 3,
-        EnableHints = 4,
-        Encumbered = 5,
-        EquipmentBack = 6,
-        EquipmentBelt = 7,
-        EquipmentChest = 8,
-        EquipmentFeet = 9,
-        EquipmentHands = 10,
-        EquipmentHead = 11,
-        EquipmentLeftHand = 12,
-        EquipmentLegs = 13,
-        EquipmentNeck = 14,
-        EquipmentRightHand = 15,
-        Exhausted = 16,
-        Health = 17,
-        Healthy = 18,
-        HudActions = 19,
-        HudCrafting = 20,
-        HudEquipment = 21,
-        HudFilter = 22,
-        HudHelp = 23,
-        HudInventory = 24,
-        HudMessages = 25,
-        HudMilestones = 26,
-        HudOptions = 27,
-        HudSave = 28,
-        HudSkills = 29,
-        HudTitleScreen = 30,
-        Hunger = 31,
-        MenuAbout = 32,
-        MenuAboutCredits = 33,
-        MenuAboutDonators = 34,
-        MenuAboutIntro = 35,
-        MenuAboutLibraries = 36,
-        MenuAboutLibrariesIntro = 37,
-        MenuAboutMessage = 38,
-        MenuAboutThanks = 39,
-        MenuAboutThanksIntro = 40,
-        MenuDailyChallenge = 41,
-        MenuDeleteAllGameData = 42,
-        MenuDeleteGame = 43,
-        MenuEditGame = 44,
-        MenuEndGameDead = 45,
-        MenuEndGameWon = 46,
-        MenuExportGame = 47,
-        MenuExportSave = 48,
-        MenuImportGame = 49,
-        MenuImportSave = 50,
-        MenuManageMods = 51,
-        MenuManageModsInternal = 52,
-        MenuManageModsLocal = 53,
-        MenuManageModsMessage = 54,
-        MenuManageModsPublishMod = 55,
-        MenuManageModsUninstallMod = 56,
-        MenuManageModsViewInSteamWorkshop = 57,
-        MenuManageModsWorkshop = 58,
-        MenuModdingGuide = 59,
-        MenuNoHighscores = 60,
-        MenuNoMods = 61,
-        MenuOpenLogsFolder = 62,
-        MenuOpenModsFolder = 63,
-        MenuOptions = 64,
-        MenuOptionsMessage = 65,
-        MenuPlayGame = 66,
-        MenuPlayGameMessage = 67,
-        MenuPlayGameNewGame = 68,
-        MenuPostATweet = 69,
-        MenuQuitGame = 70,
-        MenuReloadGame = 71,
-        MenuShareOnFacebook = 72,
-        MenuToggleDeveloperTools = 73,
-        MenuViewHighscores = 74,
-        MenuViewHighscoresMessage = 75,
-        MenuVisitSteamWorkshop = 76,
-        NearDeath = 77,
-        NextHint = 78,
-        OptionsAlternateFont = 79,
-        OptionsAudio = 80,
-        OptionsAutoGather = 81,
-        OptionsAutoPickup = 82,
-        OptionsDeveloper = 83,
-        OptionsDropOnGather = 84,
-        OptionsEffects = 85,
-        OptionsEnableHints = 86,
-        OptionsMouseClickMovement = 87,
-        OptionsFullscreenMode = 88,
-        OptionsGame = 89,
-        OptionsGraphics = 90,
-        OptionsKeyBindDefault = 91,
-        OptionsKeyBindRebinding = 92,
-        OptionsKeyBinds = 93,
-        OptionsLanguage = 94,
-        OptionsMusic = 95,
-        OptionsMute = 96,
-        OptionsNextSong = 97,
-        OptionsPixelFont = 98,
-        OptionsSaveData = 99,
-        OptionsScaleDefault = 100,
-        OptionsScaleIn = 101,
-        OptionsScaleOut = 102,
-        OptionsVisionDither = 103,
-        OptionsVisionFade = 104,
-        OptionsWindowedMode = 105,
-        OptionsZoomIn = 106,
-        OptionsZoomOut = 107,
-        Overburdened = 108,
-        Poisoned = 109,
-        PreviousHint = 110,
-        QuickSlot1 = 111,
-        QuickSlot2 = 112,
-        QuickSlot3 = 113,
-        QuickSlot4 = 114,
-        QuickSlot5 = 115,
-        QuickSlot6 = 116,
-        QuickSlot7 = 117,
-        QuickSlot8 = 118,
-        QuickSlot9 = 119,
-        ReturnToTitleScreen = 120,
-        Stamina = 121,
-        Starving = 122,
-        Talent = 123,
-        Thirst = 124,
-        Version = 125,
-        Weight = 126,
-        WindowTitleContainer = 127,
-        WindowTitleCrafting = 128,
-        WindowTitleEquipment = 129,
-        WindowTitleHighscores = 130,
-        WindowTitleInventory = 131,
-        WindowTitleMap = 132,
-        WindowTitleMessages = 133,
-        WindowTitleMilestones = 134,
-        WindowTitleOptions = 135,
-        WindowTitleSkills = 136,
-    }
-    enum Dictionary {
-        ItemTypes = 0,
-        Doodads = 1,
-        ActionTypes = 2,
-        Ui = 3,
-        Messages = 4,
-        Terrains = 5,
-        Monsters = 6,
-        Skills = 7,
-        Corpses = 8,
-        Hints = 9,
-        Milestones = 10,
-        OnEquipTypes = 11,
-        TileEvents = 12,
-    }
-    interface IStringArray {
-        [index: number]: string;
-    }
-    interface INameDescription {
-        name: string;
-        description?: string;
-    }
-    interface INameDescriptionArray {
-        [index: number]: INameDescription;
-    }
-    class Language {
-        private name;
-        private alternateFontStyle;
-        private dictionary;
-        constructor(name: string, alternateFontStyle?: boolean);
-        getName(): string;
-        useAlternateFontStyle(): boolean;
-        item(key: ItemType, name: string, description?: string): void;
-        itemGroup(key: ItemTypeGroup, name: string, description?: string): void;
-        doodad(key: DoodadType, name: string, description?: string): void;
-        use(key: ActionType, name: string, description: string): any;
-        ui(key: UiTranslation, value: string): void;
-        message(key: Message, value: string): void;
-        terrain(key: TerrainType, value: string): void;
-        monster(key: MonsterType, value: string): void;
-        monsterCorpse(key: MonsterType, value: string): void;
-        skill(key: SkillType, name: string, description: string): any;
-        milestone(key: MilestoneType, name: string, description: string): void;
-        hint(key: HintType, name: string, description: string): void;
-        tileEvent(key: TileEvent.Type, value: string): void;
-        onEquipType(key: OnEquipType, value: string): void;
-        getDictionary(dictionary: Dictionary): INameDescriptionArray;
-    }
-    function add(language: Language): void;
-    function remove(name: string): void;
-    function addTranslateSelector(id: UiTranslation, selector: string | string[], attribute?: string, html?: boolean, func?: (translation: string) => string): void;
-    function getLanguages(): Language[];
-    function getLoaded(): Language;
-    function reload(): void;
-    function refreshUiTranslation(id: UiTranslation): void;
-    function load(name: string): boolean;
+declare enum SfxType {
+    Bow = 0,
+    Craft = 1,
+    Death = 2,
+    Eating = 3,
+    Exceptional = 4,
+    Fail = 5,
+    TreeHit = 6,
+    Hit = 7,
+    Hurt = 8,
+    Miss = 9,
+    MonsterHit = 10,
+    MonsterNoise = 11,
+    PickUp = 12,
+    RockHit = 13,
+    SandstoneHit = 14,
+    Swim = 15,
+    Throw = 16,
+    Trample = 17,
+    Walk = 18,
+    Water = 19,
+    Click = 20,
+    Damaged = 21,
 }
-declare function makeString(msg: Message, ...variables: any[]): string;
-declare enum MessageType {
+declare const equipTypeToMessage: Message[];
+declare const recipeLevelToMessage: Message[];
+declare const damageTypeToMessage: Message[];
+declare enum PlayerState {
     None = 0,
-    Bad = 1,
-    Good = 2,
-    Miss = 3,
-    Attack = 4,
-    Stat = 5,
-    Skill = 6,
+    Dead = 1,
+    Won = 2,
+    Traveling = 3,
 }
-declare enum Message {
+declare enum ObjectContext {
     None = 0,
-    AberrantCreatureDroppedItem = 1,
-    AboutHours = 2,
-    AddFuel = 3,
-    AddToQuickslot = 4,
-    AddedFuelToFire = 5,
-    AddedFuelToTorch = 6,
-    Advanced = 7,
-    AllSavedContentRemoved = 8,
-    AlreadyFullyRepaired = 9,
-    AlreadyWaterInStill = 10,
-    AppearsToBeDawn = 11,
-    AppearsToBeDusk = 12,
-    AppearsToBeMidDay = 13,
-    AppearsToBeNight = 14,
-    AreYouSureYouWantToSail = 15,
-    ArmorAppearedResistant = 16,
-    ArmorAppearedVulnerable = 17,
-    ArmorProtectedFromInjuryAgainst = 18,
-    Attack = 19,
-    AttemptToPlaceAllOnGround = 20,
-    AttemptedToDropAllIntoFire = 21,
-    AutomaticallySavingGame = 22,
-    AwakeToFindYourself = 23,
-    Back = 24,
-    BadlyBurnedLostHealth = 25,
-    BecomingMoreAgile = 26,
-    BeginSleeping = 27,
-    BeginUsingRaft = 28,
-    Belt = 29,
-    BleedingHasStopped = 30,
-    BleedingProfusely = 31,
-    BleedingToDeathLostHealth = 32,
-    Blunt = 33,
-    BrokeIntoPieces = 34,
-    BrokenOnImpact = 35,
-    BrokenWhileFiring = 36,
-    Build = 37,
-    By = 38,
-    ByBleedingOut = 39,
-    ByBurnInjuries = 40,
-    ByEatingSomethingBad = 41,
-    ByPoisoning = 42,
-    BySteppingOnA = 43,
-    BySteppingOnTrap = 44,
-    ByWorkingYourselfIntoExhaustion = 45,
-    Cancel = 46,
-    CannotBePreserved = 47,
-    CannotBeReinforced = 48,
-    CannotBeRepaired = 49,
-    CannotBeTransmogrified = 50,
-    CannotBuildHere = 51,
-    CannotCraftHere = 52,
-    CannotDigHere = 53,
-    CannotDropHere = 54,
-    CannotEquipThatThere = 55,
-    CannotFishFor = 56,
-    CannotGatherFromWhileOnFire = 57,
-    CannotGatherHere = 58,
-    CannotImproveGrowingSpeed = 59,
-    CannotPickUpWhileLit = 60,
-    CannotPickUpWithItemsInside = 61,
-    CannotPickupWhenFull = 62,
-    CannotPlaceContainerInItself = 63,
-    CannotPlaceHere = 64,
-    CannotPlaceThatFromHere = 65,
-    CannotPlaceThatHere = 66,
-    CannotPlantHere = 67,
-    CannotRestHere = 68,
-    CannotSeeHere = 69,
-    CannotSleepHere = 70,
-    CannotStartFireHere = 71,
-    CannotToTellTime = 72,
-    CarryingTooMuchWeight = 73,
-    CarvedUpCorpse = 74,
-    CastYourLine = 75,
-    Category = 76,
-    CaughtFish = 77,
-    Chest = 78,
-    ClearMessages = 79,
-    CloseDoor = 80,
-    CollectObject = 81,
-    Consumed = 82,
-    Container = 83,
-    Cook = 84,
-    Cooked = 85,
-    Corpse = 86,
-    CorruptSaveDetected = 87,
-    CouldNotDecipher = 88,
-    Craft = 89,
-    Crafted = 90,
-    Crafts = 91,
-    CreatureAppears = 92,
-    CreatureAppearsHealthy = 93,
-    CreatureAppearsUnhealthy = 94,
-    CreatureIsAtPercentHealth = 95,
-    CreatureLooksBarelyHurt = 96,
-    CreatureLooksHealthyAndUndamaged = 97,
-    CreatureLooksInjured = 98,
-    CreatureLooksSeverelyDamaged = 99,
-    CreatureSeemsHurt = 100,
-    CreatureSeemsInjured = 101,
-    CreatureSeemsUnimpaired = 102,
-    CuredYourPoison = 103,
-    DailyChallengeMode = 104,
-    DamageAppearedEffective = 105,
-    DamageAppearedIneffective = 106,
-    DamagedByPouringWater = 107,
-    DealtNoDamageToYou = 108,
-    DefaultGameName = 109,
-    DependencyIssue = 110,
-    DestroyedFromUse = 111,
-    DestroyedGrowingByPickingItUp = 112,
-    DidNotSeemToBeHurting = 113,
-    Disassemble = 114,
-    DiscoveredCaveEntrance = 115,
-    DiscoveredInTheBottle = 116,
-    DoNotForgetToAddRequiredModsOnWorkshop = 117,
-    DoNotHaveTreasureMaps = 118,
-    DrewSurroundings = 119,
-    Drink = 120,
-    Drop = 121,
-    DropAll = 122,
-    DropAllOfSameQuality = 123,
-    DroppedAllIntoDepths = 124,
-    DroppedIntoDepths = 125,
-    DroppedIntoFire = 126,
-    DueToDehydration = 127,
-    DueToStarvation = 128,
-    DugTreasureOut = 129,
-    DumpContentsOfContainerInInventory = 130,
-    DyingOfDehydration = 131,
-    EarnedMilestone = 132,
-    EquipTo = 133,
-    EquipmentProtectedYouFromHeat = 134,
-    ErrorHasOccured = 135,
-    Expert = 136,
-    ExtinguishedFire = 137,
-    ExtinguishedTorch = 138,
-    FailedToAddFuelToTorch = 139,
-    FailedToCatchFish = 140,
-    FailedToCauseDamage = 141,
-    FailedToDrawMap = 142,
-    FailedToPickLock = 143,
-    FailedToPlant = 144,
-    FailedToPreserve = 145,
-    FailedToReinforce = 146,
-    FailedToRepair = 147,
-    FailedToStartFire = 148,
-    FailedToTransmogrify = 149,
-    FarAwayFromTreasure = 150,
-    Feet = 151,
-    FeltBurningPainLostHealth = 152,
-    FewMinutes = 153,
-    Filled = 154,
-    FilledFrom = 155,
-    FinalizingWorld = 156,
-    Fire = 157,
-    FireAlmostExtinguished = 158,
-    FireFacingYouIsWarm = 159,
-    FireIsHealthy = 160,
-    FireIsRaging = 161,
-    FireIsStruggling = 162,
-    FireSource = 163,
-    FiredIntoObstacle = 164,
-    FirstQuarterOfDay = 165,
-    FirstQuarterOfNight = 166,
-    Food = 167,
-    FoodAlreadyPreserved = 168,
-    FourthQuarterOfDay = 169,
-    FourthQuarterOfNight = 170,
-    FullyDecodedMap = 171,
-    GainedHealth = 172,
-    GainedHunger = 173,
-    GainedStamina = 174,
-    GainedThirst = 175,
-    GameHasBeenSavedIsTakingUpMB = 176,
-    Gather = 177,
-    GeneratingWorld = 178,
-    GettingStronger = 179,
-    GrabAll = 180,
-    Group = 181,
-    Hands = 182,
-    HasBeenHurtByATrap = 183,
-    HasBeenHurtByYourTrap = 184,
-    HasDecayed = 185,
-    HasHitYouForDamage = 186,
-    HasSplit = 187,
-    Head = 188,
-    Held = 189,
-    Help = 190,
-    Hints = 191,
-    HintsDisabled = 192,
-    HintsEnabled = 193,
-    HitForDamage = 194,
-    Hour = 195,
-    Hours = 196,
-    HowDoYouWantToExportSave = 197,
-    HurtHandsByGatheringWithNoTool = 198,
-    HurtHandsHittingWithoutWeapons = 199,
-    InExactLocationOfTreasure = 200,
-    InNeedOfRepair = 201,
-    IncompatibleVersion = 202,
-    InjuredFromTrap = 203,
-    Inspect = 204,
-    Intermediate = 205,
-    Inventory = 206,
-    Jump = 207,
-    Killed = 208,
-    LabelAttackFromTactics = 209,
-    LabelAuthor = 210,
-    LabelBase = 211,
-    LabelBaseAttack = 212,
-    LabelBaseDefense = 213,
-    LabelBluntResist = 214,
-    LabelDecay = 215,
-    LabelDefense = 216,
-    LabelDefenseFromParrying = 217,
-    LabelDoodadRequired = 218,
-    LabelDurability = 219,
-    LabelEquip = 220,
-    LabelFireResist = 221,
-    LabelGrouping = 222,
-    LabelHave = 223,
-    LabelLastUpdated = 224,
-    LabelLeftHandAttack = 225,
-    LabelLevel = 226,
-    LabelMaximumWeight = 227,
-    LabelOnEquip = 228,
-    LabelPiercingResist = 229,
-    LabelRange = 230,
-    LabelRanged = 231,
-    LabelRangedAttack = 232,
-    LabelRangedDamage = 233,
-    LabelRequiredMods = 234,
-    LabelRequires = 235,
-    LabelResists = 236,
-    LabelRightHandAttack = 237,
-    LabelSkill = 238,
-    LabelSlashingResist = 239,
-    LabelUse = 240,
-    LabelUses = 241,
-    LabelVersion = 242,
-    LabelVulnerabilities = 243,
-    LabelWeight = 244,
-    LabelWeightReduction = 245,
-    LastPlaceYouLeftOff = 246,
-    LearnedHowToCreate = 247,
-    LeftHand = 248,
-    Legs = 249,
-    LoadingMods = 250,
-    LoadingSprites = 251,
-    LoadingWorld = 252,
-    LocalFile = 253,
-    LocalVersionOfModDetected = 254,
-    LoseBonesLayBleaching = 255,
-    LoseEndIsBeginning = 256,
-    LoseSadlyNoTrace = 257,
-    LostHealth = 258,
-    LostHunger = 259,
-    LostStamina = 260,
-    LostThirst = 261,
-    MapNotOfThisArea = 262,
-    MaterialsDestroyed = 263,
-    MetabolismSlowed = 264,
-    MilestoneIsHidden = 265,
-    MilestoneIsInvisible = 266,
-    MissedWith = 267,
-    MissingRequiredMods = 268,
-    ModImportedSaveGame = 269,
-    ModLoadError = 270,
-    ModRequiresItself = 271,
-    ModWithNameAlreadyExists = 272,
-    MonsterIdolAttractedCreature = 273,
-    MoveAllOfSameQualityToInventory = 274,
-    MoveAllOfSameQualityToOpenedContainer = 275,
-    MoveAllToInventory = 276,
-    MoveAllToOpenedContainer = 277,
-    MoveOverTrapButDoNotSetOff = 278,
-    MoveToInventory = 279,
-    MoveToOpenedContainer = 280,
-    MustCastIntoWater = 281,
-    Mysteriously = 282,
-    Name = 283,
-    Neck = 284,
-    NeedAShovelToDigTreasure = 285,
-    NeedDeepWaterForRaft = 286,
-    NeedFishingNetForTreasure = 287,
-    NeedToBuildUpLandAround = 288,
-    NeedToEquipToShoot = 289,
-    NeedToStartTravelsOutside = 290,
-    Newest = 291,
-    No = 292,
-    NoAmmunitionForThatWeapon = 293,
-    NoBlackPowderToFireWeapon = 294,
-    NoFireToStokeWith = 295,
-    NoFishAtLocation = 296,
-    NoFuelItemsToStartFire = 297,
-    NoInkToDrawMap = 298,
-    NoKindlingToStartFire = 299,
-    NoLongerFeelPainOBeingfBurned = 300,
-    NoMoreRoomInContainer = 301,
-    NoRoomToDrop = 302,
-    NoTinderToStartFire = 303,
-    NoWaterInStill = 304,
-    NoWhereNearTreasure = 305,
-    NotAvailable = 306,
-    NotEnoughFoodToTravel = 307,
-    NotEnoughPurifiedWaterYet = 308,
-    NotEnoughStrengthToThrow = 309,
-    NotEnoughTreasureToReturn = 310,
-    NotFacingLockedObject = 311,
-    NotFacingValidFoodForPreservation = 312,
-    NotFacingValidItemForReinforcement = 313,
-    NotFacingValidItemForRepair = 314,
-    NotFacingValidItemToTransmogrify = 315,
-    NotInRangeOfTreasure = 316,
-    NothingHereToCarve = 317,
-    NothingHereToFill = 318,
-    NothingHereToGardenWith = 319,
-    NumberEight = 320,
-    NumberFive = 321,
-    NumberFour = 322,
-    NumberNine = 323,
-    NumberOne = 324,
-    NumberSeven = 325,
-    NumberSix = 326,
-    NumberTen = 327,
-    NumberThree = 328,
-    NumberTwo = 329,
-    ObjectIsLocked = 330,
-    Ok = 331,
-    Oldest = 332,
-    OpenDoor = 333,
-    OverEatingLostStamina = 334,
-    OpenFolderFailed = 335,
-    OverHydratingLostStamina = 336,
-    PaperTurnedToMush = 337,
-    PartiallyDecodedMap = 338,
-    PastExperiencesProvideBenefits = 339,
-    PickupItem = 340,
-    Piercing = 341,
-    Place = 342,
-    PlacedOnGround = 343,
-    Plant = 344,
-    PlantIsFertile = 345,
-    PlantIsNotFertile = 346,
-    PlantVeryHealthy = 347,
-    PlantedInGround = 348,
-    PoisonWorkedItsCourse = 349,
-    Poisoned = 350,
-    PoisonedLostHealth = 351,
-    PouredOutWater = 352,
-    PouredWaterIntoStill = 353,
-    PreservedFood = 354,
-    PublishingMod = 355,
-    PurifiedWaterInStill = 356,
-    RefreshingMods = 357,
-    Reinforce = 358,
-    RemoveFromQuickslot = 359,
-    RemovedBlood = 360,
-    Repair = 361,
-    RequiredModsMissingWantToContinue = 362,
-    RequiredModsNotLoaded = 363,
-    RequiresFacingFireSource = 364,
-    RequiresFireToBeLit = 365,
-    RequiresYouToBeFacingToCraft = 366,
-    Rest = 367,
-    RestInterrupted = 368,
-    Rested = 369,
-    Resting = 370,
-    ReturnToTitleScreenNoSaveInDailyChallenge = 371,
-    ReturnToTitleScreenProgressWillBeSaved = 372,
-    ReturnedToCivilization = 373,
-    ReturningToCivilizationSetOffAgain = 374,
-    RightHand = 375,
-    SailedToCivilization = 376,
-    SavingGame = 377,
-    ScrollProvidedNoUsefulInsight = 378,
-    SeaweedFromWater = 379,
-    SecondQuarterOfDay = 380,
-    SecondQuarterOfNight = 381,
-    SeeGrowing = 382,
-    SeemsToHaveDrawnEnergy = 383,
-    SetTrapOffButNoDamage = 384,
-    SetUp = 385,
-    ShadowInTheWater = 386,
-    Simple = 387,
-    Skill = 388,
-    SkillHasRaised = 389,
-    Slashing = 390,
-    SleepInterrupted = 391,
-    Sleeping = 392,
-    Slept = 393,
-    SoilWouldHaveNoEffect = 394,
-    SomethingInTheWayOfCarving = 395,
-    SomethingInTheWayOfDigging = 396,
-    SomethingInTheWayOfDiggingCarveFirst = 397,
-    SomethingInTheWayOfGatheringCarveFirst = 398,
-    SomethingInTheWayOfFishing = 399,
-    SomethingInTheWayOfPlacing = 400,
-    SoothedYourBurnInjuries = 401,
-    Sort = 402,
-    SortedByCategory = 403,
-    SortedByGroup = 404,
-    SortedByName = 405,
-    SortedByNewest = 406,
-    SortedByOldest = 407,
-    SortedBySkill = 408,
-    SortedByWeight = 409,
-    StaminaIsFull = 410,
-    StartTravelInWater = 411,
-    StartedFire = 412,
-    StarvingToDeath = 413,
-    SteamWorkshop = 414,
-    SteppingOnHasInjuredYouForDamage = 415,
-    StillHasNoWaterToPurify = 416,
-    StirredUpCreature = 417,
-    StopUsingRaft = 418,
-    StoppedYourBleeding = 419,
-    SummonedGuardiansByDiggingTreasure = 420,
-    SunIsRising = 421,
-    SunIsSetting = 422,
-    SunNotBrightEnoughToStartFire = 423,
-    Talent = 424,
-    TeleportBlocked = 425,
-    Teleported = 426,
-    ThereIsNoSunToStartFire = 427,
-    ThirdQuarterOfDay = 428,
-    ThirdQuarterOfNight = 429,
-    ThisContains = 430,
-    Throw = 431,
-    ThrownIntoDepths = 432,
-    ThrownIntoObstacle = 433,
-    TooDamaged = 434,
-    TooExhaustedToJump = 435,
-    ToolAppearedEffectiveForGathering = 436,
-    TrampleIntoGround = 437,
-    TrampledFire = 438,
-    TrampledIntoGround = 439,
-    Trampling = 440,
-    Transmogrified = 441,
-    TravelAway = 442,
-    TravelToFarOffLands = 443,
-    TreasureIsBlocked = 444,
-    URLHasOpenedInWebBrowser = 445,
-    UnEquip = 446,
-    UnableToLoadRequiredMods = 447,
-    UnknownItem = 448,
-    UnlockedChest = 449,
-    UnpurifiedWaterInStill = 450,
-    UpdatingMod = 451,
-    UsedSoilToIncreaseFertility = 452,
-    UsedSoilToSpeedUpGrowing = 453,
-    UsingBareFistsToFight = 454,
-    UsingBareHandsToGather = 455,
-    WaitUntilFireCooledToGetWater = 456,
-    WalkingDistanceOfTreasure = 457,
-    WantToDeleteAllSavedData = 458,
-    WantToDeleteThisGame = 459,
-    WantToPublishThisMod = 460,
-    WantToPublishUpdateToMod = 461,
-    WantToUninstallThisMod = 462,
-    Water = 463,
-    WaterDoesNotNeedDesalination = 464,
-    WaterIncreaseFertilityOfPlant = 465,
-    WaterPutOutFire = 466,
-    WaterWouldHaveNoEffect = 467,
-    Weight = 468,
-    WinFindWayBackToCivilization = 469,
-    WinSailBackWithRiches = 470,
-    WinTravelledBackToCivilization = 471,
-    With = 472,
-    WorkingYourselfIntoExhaustion = 473,
-    WorkshopHasBeenOpenedPressOkAfter = 474,
-    Yes = 475,
-    YouAte = 476,
-    YouBeginResting = 477,
-    YouCollected = 478,
-    YouCrafted = 479,
-    YouDied = 480,
-    YouDisassembled = 481,
-    YouDrank = 482,
-    YouEquip = 483,
-    YouFailedTo = 484,
-    YouFire = 485,
-    YouGathered = 486,
-    YouHaveKilled = 487,
-    YouOpen = 488,
-    YouPickedUp = 489,
-    YouSalvaged = 490,
-    YouSee = 491,
-    YouThrew = 492,
-    YouUnequip = 493,
-    YouUsed = 494,
-    YourFist = 495,
+    Inventory = 1,
+    TileItem = 2,
+    Doodad = 3,
+    TileEvent = 4,
+    Corpse = 5,
 }
-declare var equipTypeToMessage: Message[];
-declare var recipeLevelToMessage: Message[];
-declare var damageTypeToMessage: Message[];
-interface IMessages {
-    [index: number]: string;
+declare enum Delay {
+    None = 0,
+    LongPause = 25,
+    Movement = 11,
+    ShortPause = 13,
+    Collision = 40,
+    HotKey = 20,
 }
-declare var messages: IMessages;
-declare namespace TileEvent {
-    interface ITileEventDescription extends Item.IObjectDescription {
-        spreadMax: number;
-    }
-    interface ITileEvent {
-        type: Type;
-        spread: number;
-        decay: number;
-        x: number;
-        y: number;
-        z: number;
-    }
-    var tileEvents: ITileEventDescription[];
-    enum Type {
-        None = 0,
-        Fire = 1,
-    }
-    function create(type: Type, x: number, y: number, z: number): ITileEvent;
-    function remove(tileEventId: number): void;
-    function updateAll(tileEvents2: ITileEvent[]): void;
+declare enum StatType {
+    EnemyHealth = 0,
+    Stat = 1,
+    Stamina = 2,
+    Hunger = 3,
+    Health = 4,
+    Thirst = 5,
 }
-declare namespace Item {
-    var lootGroup: ItemType[][];
-    var groups: IGroupDescription[];
-    var actionDescriptions: IActionDescription[];
-    var defines: IItemDescription[];
-    function RecipeComponent(type: (ItemType | ItemTypeGroup), requiredAmount: number, consumedAmount: number, disassembleAmount?: number): number[];
-    function generateLookups(): void;
+declare enum StatusType {
+    Bleeding = 0,
+    Poisoned = 1,
+    Burned = 2,
+}
+declare enum ItemQuality {
+    None = 0,
+    Random = 1,
+    Exceptional = 2,
+    Remarkable = 3,
+    Legendary = 4,
+}
+declare enum ItemImage {
+    Default = 0,
+    Exceptional = 1,
+    Remarkable = 2,
+    Legendary = 3,
+    Damaged = 4,
+    Selected = 5,
+    Highlighted = 6,
+}
+declare enum RenderFlag {
+    None = 0,
+    Corpse = 1,
+    Item = 2,
+    Player = 4,
+    Monster = 8,
+    Terrain = 16,
+    All = 65535,
+}
+declare enum OnEquipType {
+    LightSource = 0,
+    Telescopy = 1,
+}
+interface IOnEquipType {
+    [index: number]: {};
+}
+declare const itemQualitySortOrder: {
+    [index: number]: number;
+};
+declare const onEquipTypes: IOnEquipType;
+declare enum KeyBind {
+    Up = 0,
+    Down = 1,
+    Left = 2,
+    Right = 3,
+    Idle = 4,
+    One = 5,
+    Two = 6,
+    Three = 7,
+    Four = 8,
+    Five = 9,
+    Six = 10,
+    Seven = 11,
+    Eight = 12,
+    Nine = 13,
+    Escape = 14,
+    Inventory = 15,
+    Help = 16,
+    Skills = 17,
+    Messages = 18,
+    Options = 19,
+    Alt = 20,
+    Shift = 21,
+    Equipment = 22,
+    Crafting = 23,
+    Actions = 24,
+    Milestones = 25,
+    Enter = 26,
+    Ten = 27,
+    Eleven = 28,
+    Twelve = 29,
+    PrimaryMouse = 30,
+    SecondaryMouse = 31,
+    Touch = 32,
+}
+declare enum BindType {
+    Keyboard = 0,
+    Mouse = 1,
+    Other = 2,
+}
+interface IBindArray {
+    [index: number]: IBind;
+}
+interface IBind {
+    value: number;
+    type: BindType;
+}
+interface IKeyBind {
+    [index: number]: number;
+}
+declare const keybindOrder: KeyBind[];
+declare const defaultBinds: IBindArray;
+declare function addDefaultBind(key: KeyBind, value: number, type?: BindType, bindable?: boolean): void;
+declare function removeDefaultKeybind(key: KeyBind): void;
+declare var hotKeyNumbers: KeyBind[];
+declare enum TurnType {
+    Resting = 0,
+    CheckUnderPlayer = 1,
+    DontEnterCaves = 2,
+    ForcePickUp = 3,
+}
+declare enum HintType {
+    First = 0,
+    WelcomeToWayward = 1,
+    Controls = 2,
+    CorpseCarving = 3,
+    Doodads = 4,
+    CaveDarkness = 5,
+    Nightfall = 6,
+    StaminaReplenishment = 7,
+    HealthProblems = 8,
+    Bleeding = 9,
+    Poisoned = 10,
+    Dehydration = 11,
+    UseATool = 12,
+    Durability = 13,
+    Death = 14,
+    ConsumingBadThings = 15,
+    FastPickup = 16,
+    Bugs = 17,
+    HeldItems = 18,
+    Milestones = 19,
+    Burned = 20,
+    Crafting = 21,
+    Encumbered = 22,
+    DailyChallengeMode = 23,
+    MovingItems = 24,
+    CraftingFailure = 25,
+    Malignity = 26,
+    Last = 27,
+}
+interface IHint {
+    name?: string;
+    description?: string;
+    highlightElementSelector?: string[];
+}
+declare const hints: IHint[];
+declare const keyCodes: string[];
+declare enum ScreenId {
+    None = 0,
+    Cover = 1,
+    Title = 2,
+    Game = 3,
+}
+declare enum TitleScreenId {
+    Default = 0,
+    EndGame = 1,
+}
+declare enum DialogId {
+    Inventory = 0,
+    Crafting = 1,
+    Equipment = 2,
+    Messages = 3,
+    Skills = 4,
+    Milestones = 5,
+    Map = 6,
+    Container = 7,
+    Custom = 8,
+}
+declare enum SortType {
+    Name = 0,
+    Group = 1,
+    Weight = 2,
+    Recent = 3,
+    Skill = 4,
+    Decay = 5,
+    Quality = 6,
+    Category = 7,
+    Durability = 8,
+}
+declare enum RestType {
+    Resting = 0,
+    Sleeping = 1,
+}
+declare enum LoadingType {
+    Normal = 0,
+    Rest = 1,
+}
+declare enum InputRecordType {
+    KeyDown = 0,
+    KeyUp = 1,
+    MouseDown = 2,
+    MouseUpOrLeave = 3,
+    MouseMove = 4,
+    MouseScroll = 5,
+}
+declare enum TextCase {
+    None = 0,
+    Title = 1,
+    Sentence = 2,
 }
 interface ITile {
     monsterId: number;
@@ -1903,20 +1591,21 @@ interface ITerrainDescription {
     noBackground?: boolean;
     mod?: number;
     isOre?: boolean;
+    suffix?: string;
+    prefix?: string;
 }
-declare var resource: any[];
-declare var terrains: ITerrainDescription[];
-/**
- * Resource definitions
- * Item drop, chance, <tile to transform into>, <chance for tile to turn - if not set = 100%>
- * NOTE: For regathered tiles above, make sure their equivalent item is in position [0] in their resource array.
- * This is so that we can force a regather of the placed tile.
- */
+declare const terrains: ITerrainDescription[];
+declare const resource: ITerrainResource[];
 interface ITerrainResource {
-    item: ItemType;
-    itemChance: number;
-    tileToTransform?: TerrainType;
-    tileToTransformChance?: number;
+    items: ITerrainResourceItem[];
+    defaultItem?: ItemType;
+}
+interface ITerrainResourceItem {
+    type: ItemType;
+    chance: number;
+    chanceOutOf?: number;
+    tileChange?: TerrainType;
+    tileChangeChance?: number;
 }
 declare enum TileTemplateType {
     House = 0,
@@ -1939,11 +1628,371 @@ interface ITemplate {
     doodad?: Array<string>;
     degrade: number;
 }
-declare var templates: {
+declare const templates: {
     [id: number]: {
         [id: string]: ITemplate;
     };
 };
+import Vec2 = TSM.vec2;
+declare enum TileType {
+    Top = 0,
+    TopLeft = 1,
+    Left = 2,
+    BottomLeft = 3,
+    Bottom = 4,
+    BottomRight = 5,
+    Right = 6,
+    TopRight = 7,
+    InnerTopLeft = 8,
+    InnerBottomLeft = 9,
+    InnerBottomRight = 10,
+    InnerTopRight = 11,
+    CenterTopLeft = 12,
+    CenterBottomLeft = 13,
+    CenterBottomRight = 14,
+    CenterTopRight = 15,
+}
+declare function rotateTileType90Deg(tileType: TileType, times: number): TileType;
+declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation: number): Vec2;
+declare class Bound2 {
+    min: Vec2;
+    max: Vec2;
+    constructor(min: Vec2, max: Vec2);
+}
+declare class TerrainTileInfo {
+    top: Vec2[];
+    left: Vec2[];
+    right: Vec2[];
+    bottom: Vec2[];
+    topLeft: Vec2;
+    topRight: Vec2;
+    bottomLeft: Vec2;
+    bottomRight: Vec2;
+    innerTopLeft: Vec2;
+    innerTopRight: Vec2;
+    innerBottomLeft: Vec2;
+    innerBottomRight: Vec2;
+    centerTopLeft: Vec2[];
+    centerTopRight: Vec2[];
+    centerBottomLeft: Vec2[];
+    centerBottomRight: Vec2[];
+    constructor(xOffset: number, yOffset: number);
+    getCenterTopLeft(variation: number): Vec2;
+    getCenterTopRight(variation: number): Vec2;
+    getCenterBottomLeft(variation: number): Vec2;
+    getCenterBottomRight(variation: number): Vec2;
+    getLeft(variation: number): Vec2;
+    getRight(variation: number): Vec2;
+    getTop(variation: number): Vec2;
+    getBottom(variation: number): Vec2;
+}
+declare class MountainTileInfo extends TerrainTileInfo {
+    extendedInfo: TerrainTileInfo;
+    constructor(xOffset: number, yOffset: number);
+}
+declare class TileAtlas {
+    static terrain: {
+        [index: number]: TerrainTileInfo;
+    };
+    static doodads: {
+        [index: number]: Doodad.DoodadInfo;
+    };
+    static isMountain(type: TerrainType): boolean;
+    static isOre(type: TerrainType): boolean | undefined;
+    static isWater(type: TerrainType): boolean;
+    static isFloor(type: TerrainType): boolean;
+}
+interface IMonster {
+    x: number;
+    y: number;
+    z: number;
+    fromX: number;
+    fromY: number;
+    direction: FacingDirection;
+    ai: MonsterAiType;
+    type: MonsterType;
+    anim: number;
+    aberrant: boolean;
+    hp: number;
+    maxhp: number;
+    loot: ItemType[];
+    respawned?: boolean;
+}
+declare enum MoveType {
+    None = 0,
+    Water = 1,
+    ShallowWater = 2,
+    Land = 4,
+    Tree = 8,
+    Mountain = 16,
+    Flying = 15,
+}
+declare enum MonsterType {
+    Slime = 0,
+    JellyCube = 1,
+    GiantSpider = 2,
+    Bear = 3,
+    Rabbit = 4,
+    Snake = 5,
+    GiantRat = 6,
+    Rat = 7,
+    VampireBat = 8,
+    GreyWolf = 9,
+    Imp = 10,
+    Bogling = 11,
+    LivingRock = 12,
+    Shark = 13,
+    Zombie = 14,
+    Skeleton = 15,
+    PirateGhost = 16,
+    TimeSkitter = 17,
+    Chicken = 18,
+    TrapdoorSpider = 19,
+    FireElemental = 20,
+    Cod = 21,
+    Hobgoblin = 22,
+    LivingMushroom = 23,
+    Kraken = 24,
+    Blindfish = 25,
+    Harpy = 26,
+    AcidSpitterDemon = 27,
+    SkeletalMage = 28,
+    Blood = 29,
+    ClawWorm = 30,
+    Drake = 31,
+}
+declare enum MonsterSpawnGroup {
+    Any = 0,
+    Guardians = 1,
+    Water = 2,
+}
+declare enum MonsterAiType {
+    Neutral = 0,
+    Hostile = 1,
+    Scared = 2,
+    Random = 4,
+    Hidden = 8,
+    Fearless = 16,
+}
+declare enum MonsterSpawnableTiles {
+    None = 0,
+    Default = 1,
+    DefaultWithWater = 2,
+    DeepWater = 3,
+    Water = 4,
+    Flying = 5,
+    Ghost = 6,
+}
+declare const spawnableTiles: TerrainType[][];
+interface IMonsterDescription {
+    name?: string;
+    minhp: number;
+    maxhp: number;
+    minatk: number;
+    maxatk: number;
+    defense: Defense;
+    damageType: DamageType;
+    ai: MonsterAiType;
+    moveType: MoveType;
+    fishable?: boolean;
+    blood?: number[];
+    aberrantBlood?: number[];
+    loot?: IMonsterLoot[];
+    spawnTiles: MonsterSpawnableTiles;
+    spawnMalignity?: number;
+    spawnOnNegativeMalignity?: boolean;
+    makeNoise?: boolean;
+    canCauseStatus?: StatusType[];
+    lootGroup?: LootGroupType;
+    breaksWalls?: boolean;
+    jumpOver?: boolean;
+    mod?: number;
+    noCorpse?: boolean;
+    respawn?: boolean;
+    malignity: number;
+    prefix?: string;
+    suffix?: string;
+    waterAnimations?: boolean;
+}
+interface IMonsterLoot {
+    item: ItemType;
+    chance?: number;
+}
+declare const monsters: IMonsterDescription[];
+declare class SkillLevel {
+    percent: number;
+    bonus: number;
+    core: number;
+}
+interface ISkillSet extends Array<SkillLevel> {
+}
+interface ISkillDescription {
+    name?: string;
+    attribute: StatType;
+    description?: string;
+    malignity?: number;
+}
+declare function skillSet(): ISkillSet;
+declare function skillChance(level: number): number;
+declare const skillDescriptions: ISkillDescription[];
+interface IMonsterCorpses {
+    name?: string;
+    decay?: number;
+    resource?: IMonsterResource[];
+    carve?: boolean;
+    skill?: SkillType;
+    damage?: number;
+    prefix?: string;
+}
+interface IMonsterResource {
+    item: ItemType;
+    chance?: number;
+}
+interface ICorpse {
+    x: number;
+    y: number;
+    z: number;
+    type: MonsterType;
+    decay?: number;
+    aberrant?: boolean;
+}
+declare const corpses: IMonsterCorpses[];
+declare type ActionCallback = (item: Item.IItem | null) => void;
+declare namespace Actions {
+    function add(use: ActionType, callback: ActionCallback): void;
+    function remove(use: ActionType): void;
+    function execute(use: ActionType, item: Item.IItem | null): void;
+    function preserve(preserver: Item.IItem, preservee?: Item.IItem | null): void;
+    function addFuel(fuel: Item.IItem, torch: Item.IItem): void;
+    function consume(itemType: ItemType, actionType: ActionType): boolean;
+    function consumeItem(item: Item.IItem, actionType: ActionType): void;
+    function openContainer(container: Item.IContainer, containerName: string, silent?: boolean): void;
+    function reinforce(reinforcer: Item.IItem, reinforcee?: Item.IItem | null): void;
+    function repair(repairer: Item.IItem, repairee?: Item.IItem | Doodad.IDoodad | null): void;
+    function transmogrify(transmogrifier: Item.IItem, transmogrifee?: Item.IItem | null): void;
+    function inspect(tileX: any, tileY: number): void;
+    function canTryCarve(): boolean;
+    function hurtTerrain(x: number, y: number, z: number, tile: ITile): boolean;
+    function openDoor(): boolean;
+    function closeDoor(): boolean;
+    function squeeze(item: Item.IItem): void;
+}
+declare class WAudio {
+    musicSpeed: number;
+    fadingOut: boolean;
+    fadingIn: boolean;
+    private sfx;
+    private music;
+    private soundList;
+    private musicPlaylist;
+    private musicTrack;
+    private fileFormat;
+    constructor();
+    playMusic(): void;
+    updateMusicSpeed(speed: number): void;
+    pauseMusic(): void;
+    fadeOut(): void;
+    fadeIn(): void;
+    nextTrack(): void;
+    playEffect(sound: SfxType, speed?: number): void;
+    updateVolume(): void;
+    queueEffect(soundEffect: SfxType, delay?: number, speed?: number): void;
+    processEffects(): void;
+    private play(mediaElement);
+}
+declare namespace Doodad {
+    class DoodadInfo {
+        type: DoodadType;
+        tall: boolean;
+        animated: boolean;
+        topLeft: Vec2;
+        topRight: Vec2;
+        bottomLeft: Vec2;
+        bottomRight: Vec2;
+        constructor(type: DoodadType, tall: boolean, xOffset: number, yOffset: number, animated: boolean);
+    }
+    interface IDoodad extends Item.IObject {
+        type: DoodadType;
+        spread?: number;
+        growInto?: DoodadType;
+        gatherReady?: boolean;
+        torch?: any;
+        weight?: number;
+        x: number;
+        y: number;
+        z: number;
+        treasure?: boolean;
+    }
+    interface IDoodadFurnace extends IDoodad {
+        lit: boolean;
+    }
+    interface IDoodadDoor extends IDoodad {
+        orientation: DoorOrientation;
+    }
+    function create(type: DoodadType, x: number, y: number, z: number, spread?: number, decay?: number, minDur?: number, maxDur?: number, weight?: number): IDoodad;
+    function remove(doodad: IDoodad): void;
+    function updateAll(doodads: IDoodad[]): void;
+    function update(doodad: IDoodad): void;
+    function canGrowInCaves(doodad: IDoodad): boolean;
+    function gather(doodad: IDoodad): void;
+    function canPickup(doodad: IDoodad, message?: boolean): boolean;
+    function pickup(x: number, y: number, z: number): void;
+    function checkForTrampling(doodad: IDoodad, monsterId?: number | null): boolean;
+    function getGardenFertilityMessage(spread: number): Message;
+    function getDurabilityMessage(doodad: IDoodad): Message;
+    function messageGardenFertility(spread: number): void;
+    function inspect(doodad: IDoodad): IInspect[];
+    function causeStatus(doodadDesc: IDoodadDescription): void;
+    function damage(doodad: IDoodad, forceBreak?: boolean): void;
+    function addTreasureChestLoot(doodad: IDoodad): void;
+}
+declare namespace Doodad {
+    interface IDoodadDescription extends Item.IObjectDescription {
+        allowedTiles?: TerrainType[];
+        animated?: boolean;
+        blockDig?: boolean;
+        blockJump?: boolean;
+        blockMove?: boolean;
+        canPickupWithoutTool?: boolean;
+        caveGrow?: boolean;
+        damage?: number;
+        fire?: boolean;
+        flammable?: boolean;
+        garden?: boolean;
+        graphicVariation?: boolean;
+        growing?: boolean;
+        growth?: DoodadType;
+        isLocked?: boolean;
+        lit?: DoodadType;
+        mod?: number;
+        onBurn?: ItemType;
+        resource?: IDoodadResource[];
+        revert?: DoodadType;
+        spreadMax?: number;
+        tall?: boolean;
+        trample?: boolean;
+        trap?: boolean;
+        variation?: boolean;
+        waterSource?: boolean;
+        causesStatus?: Array<StatusType>;
+        repairable?: boolean;
+        stokable?: boolean;
+        particles?: number[];
+    }
+    interface IDoodadResource {
+        item: ItemType;
+        chance?: number;
+    }
+    var defines: IDoodadDescription[];
+}
+declare namespace Item {
+    var lootGroup: ItemType[][];
+    var groups: IGroupDescription[];
+    var actionDescriptions: IActionDescription[];
+    var defines: IItemDescription[];
+    function RecipeComponent(type: (ItemType | ItemTypeGroup), requiredAmount: number, consumedAmount: number, disassembleAmount?: number, ignoreWeight?: boolean): IRecipeComponent;
+    function generateLookups(): void;
+}
 declare enum MilestoneType {
     Abnormalizer = 0,
     Chef = 1,
@@ -1963,6 +2012,11 @@ declare enum MilestoneType {
     Grandmaster = 15,
     Prepared = 16,
     Doctor = 17,
+    Artificer = 18,
+    Seafarer = 19,
+    Navigator = 20,
+    DragonSlayer = 21,
+    Treasurer = 22,
 }
 declare enum MilestoneVisibilityType {
     Visible = 0,
@@ -1979,15 +2033,258 @@ interface IMilestone {
     amount: number;
     skills?: SkillType[];
     dataType?: MilestoneDataType;
+    visibility?: MilestoneVisibilityType;
 }
 interface IMilestoneData {
     amount: number;
-    type?: MilestoneVisibilityType;
     data?: any[];
 }
-declare var milestones: IMilestone[];
-declare var milestoneData: IMilestoneData[];
-declare var english: Languages.Language;
+declare const milestones: IMilestone[];
+declare const milestoneData: IMilestoneData[];
+declare module Languages {
+    var saveData: {
+        language: string | null;
+    };
+    enum UiTranslation {
+        Bleeding = 0,
+        Burned = 1,
+        Dehydrated = 2,
+        DisableHints = 3,
+        EnableHints = 4,
+        Encumbered = 5,
+        EquipmentBack = 6,
+        EquipmentBelt = 7,
+        EquipmentChest = 8,
+        EquipmentFeet = 9,
+        EquipmentHands = 10,
+        EquipmentHead = 11,
+        EquipmentLeftHand = 12,
+        EquipmentLegs = 13,
+        EquipmentNeck = 14,
+        EquipmentRightHand = 15,
+        Exhausted = 16,
+        Health = 17,
+        Healthy = 18,
+        HudActions = 19,
+        HudCrafting = 20,
+        HudEquipment = 21,
+        HudFilter = 22,
+        HudHelp = 23,
+        HudInventory = 24,
+        HudMessages = 25,
+        HudMilestones = 26,
+        HudOptions = 27,
+        HudSave = 28,
+        HudSkills = 29,
+        HudTitleScreen = 30,
+        Hunger = 31,
+        Malignity = 32,
+        MenuAbout = 33,
+        MenuAboutCredits = 34,
+        MenuAboutDonators = 35,
+        MenuAboutIntro = 36,
+        MenuAboutLibraries = 37,
+        MenuAboutLibrariesIntro = 38,
+        MenuAboutMessage = 39,
+        MenuAboutThanks = 40,
+        MenuAboutThanksIntro = 41,
+        MenuDailyChallenge = 42,
+        MenuDeleteAllGameData = 43,
+        MenuDeleteGame = 44,
+        MenuEditGame = 45,
+        MenuEndGameDead = 46,
+        MenuEndGameWon = 47,
+        MenuExportGame = 48,
+        MenuExportSave = 49,
+        MenuImportGame = 50,
+        MenuImportSave = 51,
+        MenuManageMods = 52,
+        MenuManageModsInternal = 53,
+        MenuManageModsLocal = 54,
+        MenuManageModsMessage = 55,
+        MenuManageModsPublishMod = 56,
+        MenuManageModsUninstallMod = 57,
+        MenuManageModsViewInSteamWorkshop = 58,
+        MenuManageModsWorkshop = 59,
+        MenuModdingGuide = 60,
+        MenuNoHighscores = 61,
+        MenuNoMods = 62,
+        MenuOpenLogsFolder = 63,
+        MenuOpenModsFolder = 64,
+        MenuOptions = 65,
+        MenuOptionsMessage = 66,
+        MenuPlayGame = 67,
+        MenuPlayGameMessage = 68,
+        MenuPlayGameNewGame = 69,
+        MenuPostATweet = 70,
+        MenuQuitGame = 71,
+        MenuReloadGame = 72,
+        MenuShareOnFacebook = 73,
+        MenuToggleDeveloperTools = 74,
+        MenuViewHighscores = 75,
+        MenuViewHighscoresMessage = 76,
+        MenuVisitSteamWorkshop = 77,
+        NearDeath = 78,
+        NextHint = 79,
+        OptionsAlternateContextMenu = 80,
+        OptionsAlternateContextMenuTooltip = 81,
+        OptionsAlternateFont = 82,
+        OptionsAudio = 83,
+        OptionsAutoGather = 84,
+        OptionsAutoGatherTooltip = 85,
+        OptionsAutoPickup = 86,
+        OptionsAutoPickupTooltip = 87,
+        OptionsDeveloper = 88,
+        OptionsDialogOpacity = 89,
+        OptionsDropOnGather = 90,
+        OptionsDropOnGatherTooltip = 91,
+        OptionsEffects = 92,
+        OptionsEnableHints = 93,
+        OptionsEnableHintsTooltip = 94,
+        OptionsFullscreenMode = 95,
+        OptionsGame = 96,
+        OptionsGraphics = 97,
+        OptionsKeepSortActive = 98,
+        OptionsKeepSortActiveTooltip = 99,
+        OptionsBindDefault = 100,
+        OptionsKeyBindRebinding = 101,
+        OptionsBinds = 102,
+        OptionsLanguage = 103,
+        OptionsMouseClickMovement = 104,
+        OptionsMouseClickMovementTooltip = 105,
+        OptionsMusic = 106,
+        OptionsMute = 107,
+        OptionsNextSong = 108,
+        OptionsPixelFont = 109,
+        OptionsSaveData = 110,
+        OptionsScaleDefault = 111,
+        OptionsScaleIn = 112,
+        OptionsScaleOut = 113,
+        OptionsSkipIntro = 114,
+        OptionsSkipIntroTooltip = 115,
+        OptionsVisionDither = 116,
+        OptionsVisionFade = 117,
+        OptionsWindowedMode = 118,
+        OptionsWorldTooltips = 119,
+        OptionsWorldTooltipsTooltip = 120,
+        OptionsZoomIn = 121,
+        OptionsZoomOnScroll = 122,
+        OptionsZoomOnScrollTooltip = 123,
+        OptionsZoomOut = 124,
+        Overburdened = 125,
+        Poisoned = 126,
+        PreviousHint = 127,
+        QuickSlot1 = 128,
+        QuickSlot2 = 129,
+        QuickSlot3 = 130,
+        QuickSlot4 = 131,
+        QuickSlot5 = 132,
+        QuickSlot6 = 133,
+        QuickSlot7 = 134,
+        QuickSlot8 = 135,
+        QuickSlot9 = 136,
+        ReturnToTitleScreen = 137,
+        Stamina = 138,
+        Starving = 139,
+        Thirst = 140,
+        Version = 141,
+        Weight = 142,
+        WindowTitleContainer = 143,
+        WindowTitleCrafting = 144,
+        WindowTitleEquipment = 145,
+        WindowTitleHighscores = 146,
+        WindowTitleInventory = 147,
+        WindowTitleMap = 148,
+        WindowTitleMessages = 149,
+        WindowTitleMilestones = 150,
+        WindowTitleOptions = 151,
+        WindowTitleSkills = 152,
+    }
+    enum Dictionary {
+        ItemTypes = 0,
+        Doodads = 1,
+        ActionTypes = 2,
+        Ui = 3,
+        Messages = 4,
+        Terrains = 5,
+        Monsters = 6,
+        Skills = 7,
+        Corpses = 8,
+        Hints = 9,
+        Milestones = 10,
+        OnEquipTypes = 11,
+        TileEvents = 12,
+    }
+    interface IStringArray {
+        [index: number]: string;
+    }
+    interface INameDescription {
+        name: string;
+        description?: string;
+        prefix?: string;
+        suffix?: string;
+    }
+    interface INameDescriptionArray {
+        [index: number]: INameDescription | null;
+    }
+    class Language {
+        private name;
+        private alternateFontStyle;
+        private shouldPluralize;
+        private dictionary;
+        constructor(name: string, alternateFontStyle?: boolean, shouldPluralize?: boolean);
+        getName(): string;
+        useAlternateFontStyle(): boolean;
+        plural(str: string): string;
+        addPluralRule(from: string, to: string): void;
+        item(key: ItemType, name: string, description?: string, prefix?: string): void;
+        itemGroup(key: ItemTypeGroup, name: string, prefix?: string, suffix?: string): void;
+        doodad(key: DoodadType, name: string, prefix?: string): void;
+        use(key: ActionType, name: string, description: string): any;
+        ui(key: UiTranslation, value: string): void;
+        message(key: Message, value: string): void;
+        terrain(key: TerrainType, name: string, prefix?: string): void;
+        monster(key: MonsterType, name: string, prefix?: string): void;
+        monsterCorpse(key: MonsterType, name: string, prefix?: string): void;
+        skill(key: SkillType, name: string, description: string): any;
+        milestone(key: MilestoneType, name: string, description: string): void;
+        hint(key: HintType, name: string, description: string): void;
+        tileEvent(key: TileEvent.Type, value: string): void;
+        onEquipType(key: OnEquipType, value: string): void;
+        getDictionary(dictionary: Dictionary): INameDescriptionArray;
+    }
+    function add(language: Language): void;
+    function remove(name: string): void;
+    function addTranslateSelector(id: UiTranslation, selector: string | string[], attribute?: string, html?: boolean, func?: (translation: string) => string): void;
+    function getLanguages(): Language[];
+    function getLoaded(): Language;
+    function reload(): void;
+    function refreshUiTranslation(id: UiTranslation): void;
+    function evalString(str: string): string;
+    function load(name: string): boolean;
+}
+declare namespace TileEvent {
+    interface ITileEventDescription extends Item.IObjectDescription {
+        spreadMax: number;
+    }
+    interface ITileEvent {
+        type: Type;
+        spread: number;
+        decay: number;
+        x: number;
+        y: number;
+        z: number;
+    }
+    var tileEvents: ITileEventDescription[];
+    enum Type {
+        None = 0,
+        Fire = 1,
+    }
+    function create(type: Type, x: number, y: number, z: number): ITileEvent;
+    function remove(tileEventId: number): void;
+    function updateAll(tileEvents2: ITileEvent[]): void;
+}
+declare const english: Languages.Language;
 declare class ByteGrid {
     width: number;
     height: number;
@@ -2031,10 +2328,10 @@ declare class FieldOfView {
     private updateExplored();
     private bresenham(x0, y0, x1, y1);
 }
-interface TextureDebugRenderer {
+interface ITextureDebugRenderer {
     renderDebug(): void;
 }
-declare class FieldOfViewDebugRenderer implements TextureDebugRenderer {
+declare class FieldOfViewDebugRenderer implements ITextureDebugRenderer {
     private fov;
     private gl;
     private viewQuadBuffer;
@@ -2043,85 +2340,14 @@ declare class FieldOfViewDebugRenderer implements TextureDebugRenderer {
     constructor(gl: WebGLRenderingContext, fov: FieldOfView);
     renderDebug(): void;
 }
-declare namespace Utilities {
-    module Console {
-        function log(source: Source, ...args: any[]): void;
-        function info(source: Source, ...args: any[]): void;
-        function debug(source: Source, ...args: any[]): void;
-        function warn(source: Source, ...args: any[]): void;
-        function error(source: Source, ...args: any[]): void;
-    }
-    module Random {
-        var seed: number;
-        var saved: number;
-        function randomFromInterval(min: any, max: any): number;
-        function nextFloat(): number;
-        function nextInt(max: number): number;
-        function getSeed(): number;
-        function setSeed(newSeed: any): void;
-    }
-    module TileHelpers {
-        var maskGfx: number;
-        var maskType: number;
-        function getGfx(tile: ITile): number;
-        function getGfxRaw(data: number): number;
-        function setGfx(tile: ITile, value: number): void;
-        function setGfxRaw(data: number, value: number): number;
-        function getType(tile: ITile): TerrainType;
-        function getTypeRaw(data: number): TerrainType;
-        function setType(tile: ITile, value: TerrainType): void;
-        function setTypeRaw(data: number, value: TerrainType): number;
-    }
-    module WebWorkerHelpers {
-        function create(workerFunction: (data: any) => void, messageCallbackFunction: (evt: any) => void): Worker;
-        function enumToString(name: string, values: any, withStrings?: boolean): string;
-        function moduleToString(moduleName: string, name: string, moduleToConvert: any, globalVariables?: string[]): string;
-    }
-    module ItemImageCache {
-        function getItemImageUrl(itemType: ItemType, itemImage: ItemImage): string;
-        function queueCreateItemImageOutlines(image: HTMLImageElement, itemType: ItemType): void;
-        function cacheAllItemImageOutlines(): void;
-    }
-    function roundNumber(num: any, dec: any): number;
-    function loadImage(src: any, callback: any): void;
-    function getTileVariation(x: number, y: number): number;
-    function lerp(from: number, to: number, t: number): number;
-    function easeInQuad(time: number, start: number, change: number, duration: number): number;
-    function easeInCubic(time: number, start: number, change: number, duration: number): number;
-    function isInBound2Wrapped(bound: Bound2, x: number, y: number): boolean;
-    function shuffle(array: number[]): number[];
-    class Queue<T> {
-        private queue;
-        private offset;
-        constructor();
-        getLength(): number;
-        isEmpty(): boolean;
-        enqueue(value: T): void;
-        dequeue(): T;
-    }
-}
-interface JQuery {
-    smartResize: any;
-    filterByData(name: string, value: any): JQuery;
-    contextmenu(p: any, p2?: any, p3?: any): any;
-    isSorting(): boolean;
-    isVisible(): boolean;
-    quickShow(): void;
-    quickHide(): void;
-    preload(): void;
-    getItemType(): ItemType;
-    getQuickSlot(): number;
-    getEquipSlot(): number;
-}
-interface Array<T> {
-    equals: (object: any) => boolean;
-}
 import Queue = Utilities.Queue;
 declare class FlowField {
+    private static blockedPenalty;
     delegate: DebugRendererDelegate;
     fieldWater: ByteGrid;
     fieldLand: ByteGrid;
     fieldFlying: ByteGrid;
+    fieldLandWater: ByteGrid;
     private updateQueue;
     private penaltyFieldWater;
     private penaltyFieldLand;
@@ -2148,12 +2374,13 @@ declare class FlowField {
 interface DebugRendererDelegate {
     update(): void;
 }
-declare class FlowFieldDebugRenderer implements TextureDebugRenderer {
+declare class FlowFieldDebugRenderer implements ITextureDebugRenderer {
     private ff;
     private gl;
     private viewQuadBuffer;
     private shaderProgramAlphaDebug;
     private tex;
+    private field;
     constructor(gl: WebGLRenderingContext, ff: FlowField);
     update(): void;
     renderDebug(): void;
@@ -2167,8 +2394,12 @@ declare namespace UI {
         hide(): void;
         onGameEnd(showBlocker: boolean): void;
         isVisible(): void;
-        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
-        onKeyUp(event: JQueryEventObject): void;
+        onMouseDown(event: JQueryEventObject): void;
+        onMouseUpOrLeave(event: JQueryEventObject): void;
+        onMouseMove(event: JQueryEventObject): void;
+        onMouseScroll(event: JQueryEventObject): void;
+        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | null;
+        onKeyUp(event: JQueryEventObject): boolean | null;
     }
     interface IDialogInfo {
         id?: string;
@@ -2187,23 +2418,35 @@ declare namespace UI {
         onClose?: () => void;
         onResizeStop?: () => void;
     }
-    enum MouseButton {
-        Primary = 0,
-        Middle = 1,
-        Secondary = 2,
-        Touch = 26,
+    interface IQuickSlotInfo {
+        itemType: ItemType;
+        action: IContextMenuAction | null | undefined;
+    }
+    interface IContainerSortInfo {
+        sortType: SortType;
+        reverse?: boolean;
+    }
+    interface IContextMenuAction {
+        action: string;
+        text: string;
+        data?: any;
+    }
+    interface IMessagePack {
+        message: Message | null;
+        type?: MessageType;
+        args?: any[];
     }
     class Ui implements IPropSerializable {
         dialogInfo: {
             [index: string]: IDialogInfo;
         };
         dialogContainerInfo: IDialogInfo[];
-        quickSlotInfo: ItemType[];
+        quickSlotInfo: IQuickSlotInfo[];
         containerSortInfo: {
-            [index: string]: SortType;
+            [index: string]: IContainerSortInfo;
         };
-        private keyState;
-        private mouseState;
+        currentHint: HintType;
+        private bindState;
         private rebindingKey;
         private rebindingKeyElement;
         private mousePlayerDirection;
@@ -2220,7 +2463,6 @@ declare namespace UI {
         private screenInGame;
         private screenTitle;
         private objectUrl;
-        private currentHint;
         constructor();
         initialize(): void;
         initializeGameState(): void;
@@ -2244,24 +2486,32 @@ declare namespace UI {
         launchFullScreen(): void;
         cancelFullscreen(): void;
         isInGameScreenShown(): boolean;
+        onMouseDown(event: JQueryEventObject): void;
+        onMouseUpOrLeave(event: JQueryEventObject): void;
+        onMouseMove(event: JQueryEventObject): void;
+        onMouseScroll(event: JQueryEventObject): void;
         onKeyDown(event: JQueryEventObject): void;
         onKeyUp(event: JQueryEventObject): void;
-        setMouseDown(mouseCode: MouseButton, isDown: boolean): void;
-        isMouseDown(mouseCode: MouseButton): boolean;
-        getMouseDownTime(mouseCode: MouseButton): number;
-        setRebindingKey(key: KeyBind, element: JQuery): void;
-        getRebindingKeyElement(): JQuery;
-        isKeyDown(key: KeyBind): boolean;
-        getKeyDownTime(key: KeyBind): number;
-        setKeyDown(key: KeyBind, pressed: boolean): void;
-        getKeyBind(key: KeyBind): number;
-        setKeyBind(key: KeyBind, value: number): void;
-        clearKeyBind(key: KeyBind): void;
+        setRebindingKey(key: KeyBind | null, element: JQuery | null): void;
+        getRebindingKeyElement(): JQuery | null;
+        isBindDown(key: KeyBind): boolean;
+        getBindDownTime(key: KeyBind): number;
+        isBindPressed(key: KeyBind, pressedBind: IBind): boolean;
+        getBind(key: KeyBind): IBind;
+        getKeyBind(key: KeyBind): number | null;
+        getMouseBind(key: KeyBind): number | null;
+        setBind(key: KeyBind, value: number, type: BindType): void;
+        clearBind(key: KeyBind): void;
+        updateBindTranslation(key: KeyBind): void;
         getStringForKeyBind(key: KeyBind): string;
+        getMousePositionFromMouseEvent(event: any): {
+            x: number;
+            y: number;
+        };
         getMousePlayerDirection(): FacingDirection;
         setMousePlayerDirection(playerDirection: FacingDirection): void;
-        getTouchPlayerDirection(): FacingDirection;
-        setTouchPlayerDirection(playerDirection: FacingDirection): void;
+        getTouchPlayerDirection(): FacingDirection | null;
+        setTouchPlayerDirection(playerDirection: FacingDirection | null): void;
         setupItemBackgrounds(): void;
         refreshStats(): void;
         refreshAttributes(): void;
@@ -2278,10 +2528,15 @@ declare namespace UI {
         displayHint(hintType: HintType, force?: boolean): void;
         getCurrentHint(): HintType;
         setCurrentHint(hintType: HintType): void;
+        isMouseMovementBlockerVisible(): boolean;
         toggleHelp(): void;
         hideHelpScreen(): void;
+        tooltipRefresh(): void;
+        refreshWorldTooltips(): void;
         messageIdToText(message: Message): string;
+        getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: TextCase, log?: boolean): string;
         displayMessage(message: Message, messageType?: MessageType, ...args: any[]): void;
+        displayMessagePack(messagePack: IMessagePack): void;
         getMessageCount(): number;
         removeOldestMessage(): void;
         updateMilestonesDialog(): void;
@@ -2293,6 +2548,7 @@ declare namespace UI {
         openMapDialog(): void;
         closeMapDialog(): void;
         setFontStyle(): void;
+        setOpacity(): void;
         updateKeybind(key: KeyBind, element: JQuery): void;
         addOptionsSection(elementId: string, sectionName: string): JQuery;
         removeOptionsSection(sectionName: string): void;
@@ -2309,23 +2565,25 @@ declare namespace UI {
         refreshModManager(): any;
         setObjectUrl(objectUrl: string): void;
         runHotKeys(): void;
-        pressHotKey(hotKeyNumber: number, hotKey: KeyBind): void;
+        pressHotKey(hotKeyNumber: number): boolean;
         onGameEnd(showBlocker: boolean): void;
-        highlightElement(element: JQuery, timeout: number): void;
-        getSerializationProperties(version: string): string[];
-        openContainer(container: Item.IContainer, containerName?: string): void;
+        highlight(selector?: string[] | null, allowMultiple?: boolean): void;
+        getSerializationProperties(_: string): string[];
+        onMove(): void;
+        openContainer(container: Item.IContainer, containerName?: string | null): void;
         closeContainer(container: Item.IContainer): void;
         isContainerOpen(container: Item.IContainer): boolean;
-        closeStaticContainers(): any;
         addItemToContainer(item: Item.IItem, container: Item.IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
         afterAddingMultipleItemsToContainer(container: Item.IContainer): void;
         removeItemFromContainer(item: Item.IItem, container: Item.IContainer): void;
+        updateInventorySort(): void;
         getDialogInfo(dialogId: DialogId): IDialogInfo;
         setVersionExtra(msg: string): void;
+        openDialogs(): void;
     }
 }
 interface JQuery {
-    functionalTooltip(data: string): void;
+    functionalTooltip(data: string, ...args: any[]): void;
     functionalTooltip(data: ITooltipOptions): ITooltip;
 }
 interface ITooltipOptions {
@@ -2339,11 +2597,13 @@ interface ITooltipOptions {
     content: (target: JQuery) => void;
 }
 interface ITooltip extends ITooltipOptions {
-    visible: HTMLElement;
+    visible: HTMLElement | null;
     lastEvent: string;
     element: HTMLElement;
     width: number;
     height: number;
+    show: (event: MouseEvent) => void;
+    updateTooltipPosition: (left: number, top: number, mouseX: number, mouseY: number) => void;
 }
 interface ITooltipPosition {
     startAtRight?: boolean;
@@ -2354,14 +2614,18 @@ interface ITooltipPosition {
     topOffset?: number;
     clampRight?: boolean;
 }
-declare var tooltips: {
+declare let tooltips: {
     [index: number]: ITooltip;
 };
-declare var tooltipsMap: {
+declare let tooltipsMap: {
     [index: string]: number;
 };
-declare var globalTooltipId: number;
+declare let globalTooltipId: number;
 declare class MapGen200 implements MapGen.IMapGen {
+    generateWorld(generateNewWorld: boolean): void;
+    private setupTiles(tileGenArray, templateSpawns, caveSpawns, generateNewWorld);
+}
+declare class MapGen210 implements MapGen.IMapGen {
     generateWorld(generateNewWorld: boolean): void;
     private setupTiles(tileGenArray, templateSpawns, caveSpawns, generateNewWorld);
 }
@@ -2370,15 +2634,14 @@ declare module MapGen {
         generateWorld(generateNewWorld: boolean): void;
     }
     function generateWorld(generateNewWorld: boolean, callback: () => void): void;
-    function initialize(callback: () => void): void;
     function setFinishedLoading(): void;
     function spawnHouseItem(x: number, y: number, z: number): void;
     function spawnShoreItem(x: number, y: number, z: number): void;
     function spawnDoodad(tileType: TerrainType, x: number, y: number, z: number, afterMapGen?: boolean): void;
     function spawnTemplate(templateType: TileTemplateType, templateX: number, templateY: number, templateZ: number): void;
 }
-declare var globalRequire: (path: string) => any;
-declare var installDir: string;
+declare let globalRequire: ((path: string) => any) | undefined;
+declare let installDir: string;
 declare module Steamworks {
     interface ISteamId {
         accountId: number;
@@ -2408,19 +2671,19 @@ declare module Steamworks {
     function getSteamId(): ISteamId;
     function getBetaName(): string;
     function getPublishedMods(): IWorkshopItem[];
-    function getPublishedMod(publishFileId: string): IWorkshopItem;
-    function fillOutMod(index: number, item?: IWorkshopItem): void;
-    function publishMod(modIndex: number, callback: (err: string, publishedFileId: string) => void): void;
-    function createArchive(id: string, source: string, callback: (err: string) => void): void;
-    function getPublishedItems(callback: (err: string, items: IWorkshopItem[]) => void): void;
+    function getPublishedMod(publishFileId: string): IWorkshopItem | null;
+    function fillOutMod(index: number, item?: IWorkshopItem | null): void;
+    function publishMod(modIndex: number, callback: (err: string | null, publishedFileId: string | null) => void): void;
+    function createArchive(id: string, source: string, callback: (err: string | null) => void): void;
+    function getPublishedItems(callback: (err: string | null, items: IWorkshopItem[] | null) => void): void;
     function openUrl(url: string): void;
-    function openWorkshop(publishId?: string): void;
+    function openWorkshop(publishId?: string | null): void;
     function openModsFolder(): void;
     function openLogsFolder(): void;
-    function unsubscribe(publishId: string, callback: (err: string) => void): void;
+    function unsubscribe(publishId: string, callback: (err: string | null) => void): void;
     function sendMessage(name: string, data: string): void;
     function toggleDeveloperTools(): void;
-    function getModPath(name: string, modType: Mods.Type, file?: string, checkIfExists?: boolean): string;
+    function getModPath(name: string, modType: Mods.Type, file?: string | null, checkIfExists?: boolean): string | null;
     function createSaveGameMod(name: string, slot: number, callback: (success: boolean) => void): void;
     function deleteSaveGameMod(name: string): void;
     function debugLog(...args: any[]): void;
@@ -2448,45 +2711,48 @@ declare module Mods {
         IsPlayerSwimming = 11,
         OnAddOrUpdateInventoryItem = 12,
         OnBuild = 13,
-        OnCreateWorld = 14,
-        OnDisplayMessage = 15,
-        OnGameEnd = 16,
-        OnGameStart = 17,
-        OnItemEquip = 18,
-        OnKeyBindPress = 19,
-        OnKeyDown = 20,
-        OnKeyUp = 21,
-        OnMonsterDeath = 22,
-        OnMouseDown = 23,
-        OnMouseMove = 24,
-        OnMouseScroll = 25,
-        OnMouseUpOrLeave = 26,
-        OnMove = 27,
-        OnMoveDirectionUpdate = 28,
-        OnNoInputReceived = 29,
-        OnPlayerDamage = 30,
-        OnShowInGameScreen = 31,
-        OnSpawnMonsterFromGroup = 32,
-        OnTurnComplete = 33,
-        OnTurnStart = 34,
-        PostGenerateWorld = 35,
-        PostRender = 36,
-        PostRenderWorld = 37,
-        PostRenderPostProcess = 38,
-        PreRender = 39,
-        PreRenderWorld = 40,
-        PreRenderPostProcess = 41,
-        ProcessInput = 42,
-        ShouldRender = 43,
+        OnCraft = 14,
+        OnCreateWorld = 15,
+        OnDisplayMessage = 16,
+        OnGameEnd = 17,
+        OnGameStart = 18,
+        OnItemEquip = 19,
+        OnKeyBindPress = 20,
+        OnKeyDown = 21,
+        OnKeyUp = 22,
+        OnMonsterDamage = 23,
+        OnMonsterDeath = 24,
+        OnMouseDown = 25,
+        OnMouseMove = 26,
+        OnMouseScroll = 27,
+        OnMouseUpOrLeave = 28,
+        OnMove = 29,
+        OnMoveDirectionUpdate = 30,
+        OnNoInputReceived = 31,
+        OnPlayerDamage = 32,
+        OnShowInGameScreen = 33,
+        OnSpawnMonsterFromGroup = 34,
+        OnTurnComplete = 35,
+        OnTurnStart = 36,
+        OnUpdateWeight = 37,
+        PostGenerateWorld = 38,
+        PostRender = 39,
+        PostRenderWorld = 40,
+        PostRenderPostProcess = 41,
+        PreRender = 42,
+        PreRenderWorld = 43,
+        PreRenderPostProcess = 44,
+        ProcessInput = 45,
+        ShouldRender = 46,
     }
     abstract class BaseMod {
         private index;
         private optionSectionId;
         private allocatedEnums;
         constructor(index: number);
-        getIndex(): number;
-        getName(): string;
-        getPath(): string;
+        getIndex(): number | null;
+        getName(): string | null;
+        getPath(): string | null;
         createOptionsSection(sectionName: string): JQuery;
         removeOptionsSection(sectionName: string): void;
         createDialog(container: JQuery, dialogInfo: UI.IDialogInfo): JQuery;
@@ -2494,20 +2760,19 @@ declare module Mods {
         addActionType(name: string, description: string, callback: ActionCallback): number;
         addItem(description: Item.IItemDescription): number;
         addMonster(description: IMonsterDescription): number;
-        addTerrain(description: ITerrainDescription, terrainType?: number): number;
-        addTerrainResource(terrainType: number, terrainResource: ITerrainResource[]): void;
+        addTerrain(description: ITerrainDescription, terrainType?: number | null): number;
+        addTerrainResource(terrainType: number, terrainResource: ITerrainResourceItem[], defaultItem?: ItemType): void;
         addDoodad(description: Doodad.IDoodadDescription): number;
         addMessage(name: string, message: string): number;
         addKeyBind(name: string, defaultKeyCode: number): number;
-        itemNameToObjectType(name: string): ItemType;
+        itemNameToObjectType(name: string): ItemType | null;
         getItemByType(itemType: ItemType): Item.IItemDescription;
-        getItemByName(name: string): Item.IItemDescription;
+        getItemByName(name: string): Item.IItemDescription | null;
         /**
          * This is called internally after unloading a mod
          */
         unallocateEnums(): void;
-        private allocateEnum(enumName, name, object?, objectValue?, onAllocate?, onUnallocate?);
-        private unallocateEnum(enumInfo);
+        private allocateEnum(enumName, name, windowKeys?, objectValue?, onAllocate?, onUnallocate?);
     }
     abstract class Mod extends BaseMod {
         /**
@@ -2539,21 +2804,21 @@ declare module Mods {
          * @param moveType The monsters move type
          * @returns The move type the monster should use or undefined to use the default logic
          */
-        calculateMonsterMoveType(monsterId: number, monster: IMonster, moveType: MoveType): MoveType;
+        calculateMonsterMoveType(monsterId: number, monster: IMonster, moveType: MoveType): MoveType | undefined;
         /**
          * Called before consuming an item
          * @param itemType The item type
          * @param actionType The action type
          * @returns True if the player can consume the item, false if the player cannot consume the item, or undefined to use the default logic
          */
-        canConsumeItem(itemType: ItemType, actionType: ActionType): boolean;
+        canConsumeItem(itemType: ItemType, actionType: ActionType): boolean | undefined;
         /**
          * Called before a monster attacks
          * @param monsterId The monster id
          * @param monster The monster object
          * @returns False if the monster cannot attack, or undefined to use the default logic
          */
-        canMonsterAttack(monsterId: number, monster: IMonster): boolean;
+        canMonsterAttack(monsterId: number, monster: IMonster): boolean | undefined;
         /**
          * Called when a monster tries to move
          * @param monsterId The monster id
@@ -2562,7 +2827,7 @@ declare module Mods {
          * @param moveType The monsters move type
          * @returns True if the monster can move, false if the monster cannot move, or undefined to use the default logic
          */
-        canMonsterMove(monsterId: number, monster: IMonster, tile: ITile, moveType: MoveType): boolean;
+        canMonsterMove(monsterId: number, monster: IMonster, tile: ITile, moveType: MoveType): boolean | undefined;
         /**
          * Called when calculating monsters in the viewport
          * @param monsterId The monster id
@@ -2570,7 +2835,7 @@ declare module Mods {
          * @param tile The tile the monster is on
          * @returns False if the player should not see the monster or undefined to use the default logic
          */
-        canSeeMonster(monsterId: number, monster: IMonster, tile: ITile): boolean;
+        canSeeMonster(monsterId: number, monster: IMonster, tile: ITile): boolean | undefined;
         /**
          * Called when rendering monsters in the viewport
          * @param monsterId The monster id
@@ -2578,21 +2843,21 @@ declare module Mods {
          * @param batchLayer The batch layer the monster will render in
          * @returns The batch layer the monster should render in or undefined to use the default logic
          */
-        getMonsterSpriteBatchLayer(monsterId: number, monster: IMonster, batchLayer: SpriteBatchLayer): SpriteBatchLayer;
+        getMonsterSpriteBatchLayer(monsterId: number, monster: IMonster, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
         /**
          * Called when rendering the player in the viewport
          * @param player The player object
          * @param batchLayer The batch layer the player will render in
          * @returns The batch layer the player should render in or undefined to use the default logic
          */
-        getPlayerSpriteBatchLayer(player: Player, batchLayer: SpriteBatchLayer): SpriteBatchLayer;
+        getPlayerSpriteBatchLayer(player: Player, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
         /**
          * Called when checking if a player is swimming
          * @param player The player object
          * @param isSwimming True if the player is swimming
          * @returns True if the player should be swimming, false if the player should not be swimming, or undefined to use the default logic
          */
-        isPlayerSwimming(player: Player, isSwimming: boolean): boolean;
+        isPlayerSwimming(player: Player, isSwimming: boolean): boolean | undefined;
         /**
          * Called when an item is added or updated in the players inventory
          * @param item The item object
@@ -2607,6 +2872,11 @@ declare module Mods {
          */
         onBuild(item: Item.IItem, tile: ITile, doodad: Doodad.IDoodad): void;
         /**
+         * Called when an item is crafted
+         * @param item The item that was crafted
+         */
+        onCraft(item: Item.IItem): void;
+        /**
          * Called right after the world is created, but before the renderer
          * @param world The world object
          */
@@ -2618,7 +2888,7 @@ declare module Mods {
          * @param args The message arguments
          * @returns False to not display the message or undefined to use the default logic
          */
-        onDisplayMessage(message: Message, messageType?: MessageType, ...args: any[]): boolean;
+        onDisplayMessage(message: Message, messageType?: MessageType, ...args: any[]): boolean | undefined;
         /**
          * Called when the game is ending
          * @param playerState The ending player state
@@ -2641,19 +2911,27 @@ declare module Mods {
          * @param keyBind The keybind
          * @returns False to cancel the keybind press or undefined to use the default logic
          */
-        onKeyBindPress(keyBind: KeyBind): boolean;
+        onKeyBindPress(keyBind: KeyBind): boolean | undefined;
         /**
          * Called when a key is pressed down
          * @param event The event object
          * @returns False to cancel the event or undefined to use the default logic
          */
-        onKeyDown(event: JQueryEventObject): boolean;
+        onKeyDown(event: JQueryEventObject): boolean | undefined;
         /**
          * Called when a key is let go
          * @param event The event object
          * @returns False to cancel the event or undefined to use the default logic
          */
-        onKeyUp(event: JQueryEventObject): boolean;
+        onKeyUp(event: JQueryEventObject): boolean | undefined;
+        /**
+         * Called when a monster is damaged
+         *
+         * @param monsterId The monster id
+         * @param monster The monster object
+         * @returns undefined to use the default logic or the amount of damage done to the monster, or null if the monster was not damaged
+         */
+        onMonsterDamage(monsterId: number, monster: IMonster, hitDamage: number, damageType: DamageType, weaponName: string): number | null | undefined;
         /**
          * Called when a monster dies
          * @param monsterId The monster id
@@ -2665,25 +2943,25 @@ declare module Mods {
          * @param event The mouse event object
          * @returns False to cancel the mouse event or undefined to use the default logic
          */
-        onMouseDown(event: JQueryEventObject): boolean;
+        onMouseDown(event: JQueryEventObject): boolean | undefined;
         /**
          * Called when a mouse button is pressed
          * @param event The mouse event object
          * @returns False to cancel the mouse event or undefined to use the default logic
          */
-        onMouseMove(event: JQueryEventObject): boolean;
+        onMouseMove(event: JQueryEventObject): boolean | undefined;
         /**
          * Called when a mouse button is pressed
          * @param event The mouse event object
          * @returns False to cancel the mouse event or undefined to use the default logic
          */
-        onMouseScroll(event: JQueryEventObject): boolean;
+        onMouseScroll(event: JQueryEventObject): boolean | undefined;
         /**
          * Called when a mouse button is let go or if the mouse leaves the screen
          * @param event The mouse event object
          * @returns False to cancel the event or undefined to use the default logic
          */
-        onMouseUpOrLeave(event: JQueryEventObject): boolean;
+        onMouseUpOrLeave(event: JQueryEventObject): boolean | undefined;
         /**
          * Called when the player is moving
          * @param nextX The x position the player is moving to
@@ -2692,7 +2970,7 @@ declare module Mods {
          * @param direction The direction the player is facing
          * @returns False to cancel the move or undefined to use the default logic
          */
-        onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean;
+        onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean | undefined;
         /**
          * Called when the player faces a different direction
          * @param direction The direction the player is now facing
@@ -2708,7 +2986,7 @@ declare module Mods {
          * @param damageMessage The message associated with the damaged
          * @preturns False to stop the player from taking damage or undefined to use the default logic
          */
-        onPlayerDamage(amount: number, damageMessage: string): boolean;
+        onPlayerDamage(amount: number, damageMessage: string): boolean | undefined;
         /**
          * Called when the in game screen is shown
          */
@@ -2722,7 +3000,7 @@ declare module Mods {
          * @param z The z position to spawn the monster
          * @returns False to cancel spawning the monster or undefined to use the default logic
          */
-        onSpawnMonsterFromGroup(monsterGroup: MonsterSpawnGroup, monsterPool: MonsterType[], x: number, y: number, z: number): boolean;
+        onSpawnMonsterFromGroup(monsterGroup: MonsterSpawnGroup, monsterPool: MonsterType[], x: number, y: number, z: number): boolean | undefined;
         /**
          * Called when a turn is completing
          */
@@ -2731,6 +3009,12 @@ declare module Mods {
          * Called when a turn is starting
          */
         onTurnStart(): void;
+        /**
+         * Called when the players weight is being updated
+         * @param newWeight The new weight of the player
+         * @returns A number to set the player weight to or undefined to use the default logic
+         */
+        onUpdateWeight(newWeight: number): number | undefined;
         /**
          * Called after the world is generating
          * @param generateNewWorld True if a new world is being generated
@@ -2759,7 +3043,7 @@ declare module Mods {
          * Called when different object types are rendered
          * @returns A bitwise list of render flags or undefined to use the default logic
          */
-        shouldRender(): RenderFlag;
+        shouldRender(): RenderFlag | undefined;
     }
 }
 declare module Mods {
@@ -2787,7 +3071,7 @@ declare module Mods {
         Workshop = 2,
     }
     interface IModInfo {
-        object: Mod;
+        object: Mod | null;
         info: {
             [index: string]: any;
         };
@@ -2795,9 +3079,9 @@ declare module Mods {
         path: string;
         folderName: string;
         type: Type;
-        publishedFileId: string;
-        steamIDOwner: string;
-        lastUpdated: string;
+        publishedFileId: string | null;
+        steamIDOwner: string | null;
+        lastUpdated: string | null;
     }
     var modState: {
         [index: string]: Mods.State;
@@ -2822,7 +3106,7 @@ declare module Mods {
     function initializeMods(callback: () => void): void;
     function unloadAll(reset?: boolean): void;
     function saveAll(): void;
-    function initializeMod(folderName: string, modType: Type, callback: (id: number) => void, skipOnInitialize?: boolean): void;
+    function initializeMod(folderName: string, modType: Type, callback: (id: number | null) => void, skipOnInitialize?: boolean): void;
     function removeMod(id: number, uninstall?: boolean): void;
     function getMods(): IModInfo[];
     function getLoadedMods(): IModInfo[];
@@ -2839,19 +3123,19 @@ declare module Mods {
     function getName(index: number): string;
     function getDescription(index: number): string;
     function getVersion(index: number): string;
-    function getLastUpdatedDate(index: number): string;
+    function getLastUpdatedDate(index: number): string | null;
     function getAuthor(index: number): string;
     function getType(index: number): Type;
     function getRequiredMods(index: number): string[];
     function getPath(index: number): string;
     function getFolderName(index: number): string;
-    function getPublishFileId(index: number): string;
-    function getSteamIdOwner(index: number): string;
+    function getPublishFileId(index: number): string | null;
+    function getSteamIdOwner(index: number): string | null;
     function canLoad(index: number, fromTitleScreen?: boolean, count?: number): CanLoadState;
     function canLoadFromIdentifier(identifier: string): ICanLoadInfo;
-    function getIndexFromName(name: string): number;
+    function getIndexFromName(name: string): number | null;
     function getIndexFromPublishId(publishFileId: string): number[];
-    function getIndexFromPath(path: string): number;
+    function getIndexFromPath(path: string): number | null;
     function isEnabledByName(name: string): boolean;
     function isLoadedByName(name: string): boolean;
     function setPublishId(index: number, publishedFileId: string): void;
@@ -2873,12 +3157,11 @@ declare class ExploreMap extends ByteGrid {
     getSerializationProperties(version: string): string[];
 }
 declare class World implements ISerializable {
-    private gl;
     width: number;
     height: number;
     layers: WorldLayer[];
     private loaded;
-    constructor(gl: WebGLRenderingContext, width: number, height: number);
+    constructor(width: number, height: number);
     toLocal(world: number, local: number): number;
     addLayer(level: number): void;
     load(): void;
@@ -2890,9 +3173,8 @@ declare class World implements ISerializable {
     deserializeObject(serializer: Serializer): void;
 }
 declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean) => void;
-declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType, doodadVariation: number, flushImmediate: boolean) => void;
+declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | null, doodadVariation: number, flushImmediate: boolean) => void;
 declare class WorldLayer {
-    private gl;
     width: number;
     height: number;
     level: number;
@@ -2902,13 +3184,13 @@ declare class WorldLayer {
     onTileUpdate: onTileUpdateDelegate;
     onDoodadUpdate: onDoodadUpdateDelegate;
     private terrainMap;
-    constructor(gl: WebGLRenderingContext, width: number, height: number, level: number);
+    constructor(width: number, height: number, level: number);
     resetExploredMap(): void;
     getTileType(x: number, y: number): TerrainType;
     getTile(x: number, y: number): TerrainData;
     isWall(terrain: TerrainData): boolean;
     isFence(terrain: TerrainData): boolean;
-    setTile(x: number, y: number, terrainType: TerrainType, isWall?: boolean, isFence?: boolean): void;
+    setTile(x: number, y: number, terrainType: TerrainType | undefined, isWall?: boolean, isFence?: boolean): void;
     updateAll(): void;
     updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean): void;
     private mapIndex(x, y);
@@ -2917,48 +3199,47 @@ declare class WorldLayer {
 }
 declare module TileAdaptor {
     interface ITileAdaptation {
-        topLeftFG: Vec2;
-        topRightFG: Vec2;
-        bottomLeftFG: Vec2;
-        bottomRightFG: Vec2;
-        topLeftBG: Vec2;
-        topRightBG: Vec2;
-        bottomLeftBG: Vec2;
-        bottomRightBG: Vec2;
+        TLFG: Vec2;
+        TRFG: Vec2;
+        BLFG: Vec2;
+        BRFG: Vec2;
+        TLBG: Vec2;
+        TRBG: Vec2;
+        BLBG: Vec2;
+        BRBG: Vec2;
     }
     interface ITileAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
     }
     interface IDoodadAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
+        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
     }
     function setDefaultBackground(tileInfo: TerrainTileInfo): void;
     class Default implements ITileAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
     }
     class Mountain extends Default {
         private mountainTopFlag;
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
         private getTileType(tileMask);
     }
     function getWaterType(terrainType: TerrainType): number;
     class Water extends Default {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
     }
     class Dirt implements ITileAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
     }
     class Fence implements IDoodadAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
-    }
-    class Door implements IDoodadAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
+        adaptGate(world: WorldLayer, x: number, y: number, doodadType: DoodadType, vertical: boolean, result: ITileAdaptation): void;
+        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
     }
     class Wall implements IDoodadAdaptor {
-        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType): ITileAdaptation;
+        adaptDoor(world: WorldLayer, x: number, y: number, doodadType: DoodadType, vertical: boolean, result: ITileAdaptation): void;
+        adapt(world: WorldLayer, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
     }
     class Floor extends Default {
-        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType): ITileAdaptation;
+        adapt(world: WorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
     }
 }
 declare module Shaders {
@@ -2993,7 +3274,6 @@ declare class WorldRenderer {
     fenceAdaptor: TileAdaptor.Fence;
     mountainAdaptor: TileAdaptor.Mountain;
     wallAdaptor: TileAdaptor.Wall;
-    doorAdaptor: TileAdaptor.Door;
     defaultAdaptor: TileAdaptor.Default;
     floorAdaptor: TileAdaptor.Floor;
     private ambientIntensity;
@@ -3011,13 +3291,13 @@ declare class WorldRenderer {
     private compositeTexture;
     private layerFramebuffer;
     private layerTexture;
+    private depthBuffer;
     private fogFramebuffer;
     private fogTexture;
     private fogTextureStorage;
     private itemBatch;
     private corpseBatch;
     private monsterBatch;
-    private flyingMonsterBatch;
     private monstersInViewport;
     static getSubTileSize(): number;
     constructor(gl: WebGLRenderingContext, world: World);
@@ -3033,7 +3313,10 @@ declare class WorldRenderer {
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
     screenToTile(screenX: number, screenY: number): Vec2;
-    getViewportBounds(): Bound2;
+    getViewportBounds(): {
+        min: Vec2;
+        max: Vec2;
+    };
     computeSpritesInViewport(): void;
     batchMonsters(): void;
     private batchShadow(fromX, fromY, toX, toY, t, anim);
@@ -3055,7 +3338,7 @@ declare class WorldLayerRenderer {
     private dirty;
     constructor(gl: WebGLRenderingContext, renderer: WorldRenderer, worldLayer: WorldLayer, width: number, height: number);
     updateAll(): void;
-    setDoodad(x: number, y: number, doodad: DoodadType, variation: number, flushImmediate?: boolean): void;
+    setDoodad(x: number, y: number, doodad: DoodadType | null, variation: number, flushImmediate?: boolean): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
     postRenderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
     private computeTile(x, y, flushImmediate?);
@@ -3087,28 +3370,25 @@ declare class TileLayer {
     private inverseTileDataTextureSize;
     static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
     constructor(width: number, height: number, gl: WebGLRenderingContext);
-    setTileTopLeft(dataIndex: number, tileX: number, tileY: number): void;
-    setTileTopRight(dataIndex: number, tileX: number, tileY: number): void;
-    setTileBottomLeft(dataIndex: number, tileX: number, tileY: number): void;
-    setTileBottomRight(dataIndex: number, tileX: number, tileY: number): void;
-    setTileTopLeftBG(dataIndex: number, tileX: number, tileY: number): void;
-    setTileTopRightBG(dataIndex: number, tileX: number, tileY: number): void;
-    setTileBottomLeftBG(dataIndex: number, tileX: number, tileY: number): void;
-    setTileBottomRightBG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileTLFG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileTRFG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileBLFG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileBRFG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileTLBG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileTRBG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileBLBG(dataIndex: number, tileX: number, tileY: number): void;
+    setTileBRBG(dataIndex: number, tileX: number, tileY: number): void;
     sendTileToGPU(x: number, y: number, gl: WebGLRenderingContext): void;
     sendToGPU(gl: WebGLRenderingContext): void;
-    render(gl: WebGLRenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
+    render(gl: WebGLRenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number, fixedDepth?: boolean): void;
     clear(): void;
 }
-declare var gameVersion: string;
-declare var gameVersionMinor: number;
-declare var quickLoad: number;
-declare var game: Game;
-declare var audio: WAudio;
-declare var ui: UI.Ui;
-declare var player: Player;
-declare var world: World;
-declare var renderer: WorldRenderer;
+interface IVersionInfo {
+    str: string;
+    major: number;
+    minor: number;
+    patch: number;
+}
 interface IInputMovement {
     keyBind: KeyBind;
     direction: FacingDirection;
@@ -3127,9 +3407,14 @@ interface IPointZ {
 interface IHighscore {
     name: string;
     message: string;
-    talent: number;
+    score: number;
     dailyChallenge: boolean;
     date: number;
+    talent?: number;
+}
+interface IInspect {
+    messagePack: UI.IMessagePack;
+    type?: InspectType;
 }
 declare class Game implements IPropSerializable {
     private static gameMovement;
@@ -3140,10 +3425,12 @@ declare class Game implements IPropSerializable {
     slot: number;
     loadedResources: boolean;
     version: string;
+    saveVersion: string;
     isLoadingSave: boolean;
     slotName: string;
     tile: ITileArray;
     tileData: ITileData[][][][];
+    tileContainers: ITileContainer[];
     items: Item.IItemArray;
     monsters: IMonster[];
     doodads: Doodad.IDoodad[];
@@ -3159,21 +3446,17 @@ declare class Game implements IPropSerializable {
     hungerRegen: number;
     moveAnim: number;
     messageTimer: number;
-    monsterSpawnerPool: {
-        [index: number]: MonsterType[];
-    };
     saveClear: boolean;
     playing: boolean;
     savedHighscore: boolean;
     wonGame: boolean;
-    canSave: boolean;
     autoSaveTimer: number;
     staminaRegen: number;
     thirstRegen: number;
     updateRender: boolean;
     walkSoundCounter: number;
     dailyChallenge: boolean;
-    raft: number;
+    raft: number | null;
     fillCount: number;
     fillTile: boolean[][];
     unloading: boolean;
@@ -3182,7 +3465,11 @@ declare class Game implements IPropSerializable {
     dayNight: number;
     dayNightSwitch: number;
     fadeInAmount: number;
+    lastPlayedVersion: string | null;
     crafted: {
+        [index: number]: boolean;
+    };
+    newCrafted: {
         [index: number]: boolean;
     };
     highscores: IHighscore[];
@@ -3191,20 +3478,27 @@ declare class Game implements IPropSerializable {
         saved: number;
     };
     options: {
+        alternateContextMenu: boolean;
         autoGather: boolean;
         autoPickup: boolean;
+        binds: IBindArray;
         currentGame: number;
+        dialogOpacity: number;
+        dropOnGather: boolean;
+        effects: number;
         fontStyle: boolean;
         hints: boolean;
+        keepSortActive: boolean;
         mouseMovement: boolean;
-        mute: boolean;
         music: number;
-        effects: number;
-        windowMode: boolean;
-        zoomLevel: number;
-        zoomFactor: number;
+        mute: boolean;
+        skipIntro: boolean;
         visionMode: boolean;
-        dropOnGather: boolean;
+        windowMode: boolean;
+        worldTooltips: boolean;
+        zoomFactor: number;
+        zoomLevel: number;
+        zoomOnScroll: boolean;
         keyBinds: IKeyBind;
     };
     playedCount: number;
@@ -3217,19 +3511,19 @@ declare class Game implements IPropSerializable {
     particleSystem: ParticleSystem;
     flowField: FlowField;
     fov: FieldOfView;
-    debugRenderer: TextureDebugRenderer;
+    debugRenderer: ITextureDebugRenderer;
     notifier: Notifier.Notifier;
     cartographyTexture: WebGLTexture;
-    refreshOverlayContext1: CanvasRenderingContext2D;
-    refreshOverlayContext2: CanvasRenderingContext2D;
     private loadedWorld;
-    private tileContainers;
+    private shouldUpdateCraftTableAndWeight;
+    static getVersionInfo(version: string | null, defaultVerison?: string): IVersionInfo;
     constructor();
     createWorld(): void;
     createWorldRenderer(): void;
     resizeRenderer(): void;
     setupWorldResources(): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
+    isMonsterHidden(monster: IMonster): boolean;
     checkForHiddenMob(x: number, y: number, z: number): void;
     getWrappedCoord(x: number): number;
     getTileInFrontOfPlayer(): ITile;
@@ -3242,8 +3536,8 @@ declare class Game implements IPropSerializable {
     saveGame(saveType: SaveType): void;
     addZoomLevel(amount: number): void;
     setZoomLevel(): void;
-    fireMessage(decay: number): void;
-    getTileEventStatus(tileEvent: TileEvent.ITileEvent): void;
+    getFireMessage(decay: number): Message;
+    outputFireMessage(decay: number): void;
     play(saveSlot: number): void;
     loadResources(): void;
     postLoadResources(): void;
@@ -3255,23 +3549,21 @@ declare class Game implements IPropSerializable {
     checkUnderPlayer(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean): void;
     setPlayerZ(z: number): void;
     shouldRender(): number;
+    inspect(x: any, y: number, z?: number): IInspect[];
+    inspectTile(tile: ITile): IInspect[];
+    getMonsterInspectMessage(monster: IMonster): UI.IMessagePack;
     placeCorpse(corpse: ICorpse): void;
     placeTileEvent(tileEvent: TileEvent.ITileEvent): void;
-    damageMonster(monsterId: number, hitdamage: number, offsetx: number, offsety: number, bypass: boolean, bypass2: boolean): boolean;
-    healMonster(monsterId: number): void;
-    getLocationOffsets(locationX: number, locationY: number): {
-        x: number;
-        y: number;
-    };
+    damageMonster(monsterId: number, hitDamage: number, damageType: DamageType, weaponName: string, skipMilestones: boolean): number | null;
     blockMove(): void;
-    makeCaveEntrance(): TerrainType;
+    makeCaveEntrance(): TerrainType | null;
     findUnique(a: any, b: any): any[];
-    updateCraftTableAndWeight(): void;
+    updateCraftTableAndWeightNextTurn(): void;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
-    createParticles(r: number, g: number, b: number, offsetX?: number, offsetY?: number, count?: number): void;
-    spawnMonsterFromGroup(monsterGroup: MonsterSpawnGroup, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): boolean;
-    spawnMonster(monsterType: MonsterType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): boolean;
+    createParticles(tileX: number, tileY: number, r: number, g: number, b: number, count?: number): void;
+    spawnMonsterFromGroup(monsterGroup: MonsterSpawnGroup, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): number | null;
+    spawnMonster(monsterType: MonsterType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): number | null;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     getBlackness(): number;
     getAmbientLightLevel(): number;
@@ -3286,6 +3578,7 @@ declare class Game implements IPropSerializable {
     passTurn(turnType?: TurnType): void;
     updateGame(resting?: boolean): void;
     removeCorpse(corpseId: number): void;
+    checkAndRemoveBlood(): boolean;
     checkForMobInRange(range: number): {
         id: number;
         x: number;
@@ -3295,31 +3588,36 @@ declare class Game implements IPropSerializable {
         obstacle: boolean;
         water: boolean;
     };
+    /**
+     * AVOID USING THIS. USE updateCraftTableAndWeightNextTurn INSTEAD!
+     * For most cases you don't need this
+     */
+    updateCraftTableAndWeight(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     getHeight(z0: number, z1: number, d: number): number;
-    onGlobalSlotLoaded(slot: number, success: boolean): void;
-    refreshOverlay: () => void;
-    onSave(slot: number): void;
-    onPostLoad(): void;
-    setRaft(itemId: number): void;
-    getSerializationProperties(version: string): string[];
-    /**
-     * This will generate the monster spawning pool based on monsters.X.spawnTalent dynamically
-     * Will output like this.monsterSpawnerPool[14000] = [MonsterType.Kraken, MonsterType.Zombie,... ];
-     */
-    private generateMonsterSpawnPool();
-    private processInput;
+    setupSave(_: number): void;
+    onGlobalSlotLoaded(_: number, success: boolean): void;
+    onSaveLoaded(): void;
+    upgradeSave(saveVersion: IVersionInfo): void;
+    upgradeGlobalSave(saveVersion: IVersionInfo): void;
+    setRaft(itemId: number | null): void;
+    getSerializationProperties(_: string): string[];
+    getBurned(bypassMessages?: boolean): number | null;
+    spawnClawWorm(): void;
+    getName(desc: Doodad.IDoodadDescription | IMonsterDescription | ITerrainDescription | Item.IItemDescription | Item.IGroupDescription, textCase?: TextCase, withPrefix?: boolean): string;
+    fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
+    private processInput();
     private processMessages();
     private prePlay(mapSeed, isLoadingSave);
     private playPostSeed(seed);
-    private getBurned();
     private render(delta);
     private move(direction);
     private showStatsHint();
     private stats();
     private getPotentialRecipesInContainer(container, typesChecked, potentialRecipes);
     private corpsesUpdate();
-    private monsterMove(turnType);
+    private monsterBurn(monster);
+    private monsterMove(turnType?);
     private swimCheck();
 }
 declare namespace Item {
@@ -3330,14 +3628,14 @@ declare namespace Item {
         level: RecipeLevel;
         requiredDoodadType?: DoodadType;
         requiresFire?: boolean;
+        malignity: number;
     }
-    interface IRecipeComponent extends Array<number> {
-    }
-    enum IRecipeComponentIndex {
-        ItemType = 0,
-        RequiredAmount = 1,
-        ConsumedAmount = 2,
-        DisassembleAmount = 3,
+    interface IRecipeComponent {
+        type: ItemType | ItemTypeGroup;
+        requiredAmount: number;
+        consumedAmount: number;
+        disassembleAmount: number;
+        ignoreWeight: boolean;
     }
     interface IRanged {
         range: number;
@@ -3354,9 +3652,10 @@ declare namespace Item {
         legendary?: any;
         disassembly?: IItemArray;
         order?: number;
+        weight: number;
     }
     interface IContainable {
-        containedWithin: IContainer;
+        containedWithin: IContainer | null;
     }
     interface IContainer extends IContainable {
         weightCapacity: number;
@@ -3372,6 +3671,8 @@ declare namespace Item {
     interface IObjectDescription {
         name?: string;
         description?: string;
+        suffix?: string;
+        prefix?: string;
         decayMax?: number;
         skillUse?: SkillType;
         weightCapacity?: number;
@@ -3387,12 +3688,14 @@ declare namespace Item {
         damageType?: DamageType;
         group?: ItemTypeGroup[];
         torch?: any;
-        weight: number;
+        weight?: number;
+        reducedWeight?: number;
         lit?: ItemType;
         damageModifier?: number;
         isTorch?: boolean;
         equip?: EquipType;
         returnOnUse?: [ItemType, boolean];
+        inheritWeight?: ItemType;
         attack?: number;
         defense?: Defense;
         revert?: ItemType;
@@ -3400,15 +3703,29 @@ declare namespace Item {
         ranged?: IRanged;
         recipe?: IRecipe;
         disassemble?: boolean;
+        requiredForDisassembly?: [ItemType | ItemTypeGroup];
         mod?: number;
         decaysInto?: ItemType;
         twoHanded?: boolean;
         recipes?: ItemType[];
         keepDurabilityOnCraft?: boolean;
+        craftable?: boolean;
+        dismantle?: IDismantleDescription;
+        doodadContainer?: DoodadType;
+        repairable?: boolean;
+        suffix?: string;
+        prefix?: string;
+        decaySpawn?: MonsterType;
+    }
+    interface IDismantleDescription {
+        items: ItemType[];
+        required?: ItemTypeGroup;
     }
     interface IGroupDescription {
         name: string;
         types: ItemType[];
+        suffix?: string;
+        prefix?: string;
     }
     interface IActionDescription {
         name?: string;
@@ -3442,28 +3759,34 @@ declare namespace Item {
     interface IContainerReference {
         type: ContainerReferenceType;
     }
-    function getContainerReference(container: IContainer): IContainerReference;
-    function derefenceContainerReference(containerRef: IContainerReference): Object;
+    function getContainerReference(container: IContainer | null): IContainerReference;
+    function derefenceContainerReference(containerRef: IContainerReference): Object | null;
     function acquireNotify(item: IItem): void;
     function changeInto(item: IItem, type: ItemType): void;
     function removeContainerItems(container: IContainer): void;
     function remove(item: IItem): void;
+    function getDisassemblyComponents(recipe: IRecipe): IItemArray;
+    function getComponentWeight(recipe: IRecipe): number;
+    function getWeight(itemType: ItemType): number;
+    function getDisassemblyWeight(item: IItem): number;
+    function setDisassemblyAndWeight(item: IItem): void;
+    function initialize(itemType: ItemType, quality?: ItemQuality): IItem;
     function create(itemType: ItemType, quality?: ItemQuality, container?: IContainer): IItem;
     function getDecayMax(item: IItem): number;
     function isContainer(obj: any): boolean;
-    function moveAllFromContainerToInventory(container: IContainer, ofQuality?: ItemQuality): void;
+    function moveAllFromContainerToInventory(container: IContainer, ofQuality?: ItemQuality | null): void;
     function computeItemWeight(item: IItem): number;
     function computeContainerWeight(container: IContainer): number;
-    function moveAllFromContainerToContainer(fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality): void;
+    function moveAllFromContainerToContainer(fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | null, ofQuality?: ItemQuality | null): void;
     function moveToContainer(item: IItem, container: IContainer): void;
     function hasRoomInContainer(extraWeight: number, container: IContainer): boolean;
     function unequip(item: IItem): void;
     function equip(item: IItem, slot: EquipType, internal?: boolean): void;
-    function use(item: IItem, itemType: ItemType, use: ActionType): boolean;
+    function use(item: IItem, use: ActionType): boolean;
     function breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
-    function drop(item: IItem, dropAll?: boolean, dropAllQuality?: ItemQuality): void;
+    function drop(item: IItem, dropAll?: boolean, dropAllQuality?: ItemQuality | null): void;
     function dropInWater(item: IItem, itemType: ItemType): void;
-    function spawn(itemTypes: Array<ItemType>, x: number, y: number, z: number): void;
+    function spawn(itemTypes: Array<ItemType> | null, x: number, y: number, z: number): void;
     function initializeMap(map: IItem): void;
     function resetMapsInContainer(container: IContainer): void;
     function getTileContainer(x: number, y: number, z: number): IContainer;
@@ -3472,10 +3795,10 @@ declare namespace Item {
     function damage(item: IItem, mod?: number): void;
     function isDamaged(item: IItem): boolean;
     namespace Quality {
-        function update(item: IItem, quality: ItemQuality): void;
+        function update(item: IItem, quality?: ItemQuality): void;
         function createRandom(legendable: boolean, bonusQuality?: number): ItemQuality;
     }
-    function hasRequiredDoodad(craftType: ItemType, message?: boolean): boolean;
+    function hasRequiredDoodad(craftType: ItemType, message?: Message): boolean;
     class ItemRecipeRequirementChecker {
         private recipe;
         private trackItems;
@@ -3506,20 +3829,23 @@ declare namespace Item {
     function isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
     function countItemsInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     function countItemsInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
-    function getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem;
-    function getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem;
+    function getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | null;
+    function getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | null;
     function getItemsInContainer(container: IContainer, includeSubContainers?: boolean): IItemArray;
     function getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean): IItemArray;
     function getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean): IItemArray;
-    function getItemInInventoryByGroup(itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem;
+    function getItemInInventoryByGroup(itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | null;
     function isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     function isItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignore?: number): boolean;
     function isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     function isInInventory(containable: IContainable): boolean;
-    function isTileContainer(container: IContainer): boolean;
+    function isTileContainer(container: IContainer | null): boolean;
+    function getItemsString(items: IItemArray): string;
     function loadReferences(): void;
     function saveTileReferences(tileContainers: ITileContainer[]): void;
-    function loadTileReferences(tileContainers: ITileContainer[]): void;
+    function loadTileReferences(): void;
+    function returns(item: IItem): boolean;
+    function getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
 }
 declare namespace Notifier {
     class Notifier {
@@ -3536,7 +3862,7 @@ declare namespace Notifier {
         addItem(x: number, y: number, type: ItemType): void;
         addStat(x: number, y: number, type: StatType, value: number): void;
         update(): void;
-        render(x: number, y: number, tileSize: number, tileScale: number, viewWidth: number, viewHeight: number): boolean;
+        render(x: number, y: number, tileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
         private addNote(x, y, type);
         private renderNote(note);
     }
@@ -3554,7 +3880,7 @@ declare class ParticleSystem {
     private particleSize;
     private lastUsedParticle;
     constructor(gl: WebGLRenderingContext, maxParticles?: number);
-    spawn(r: number, g: number, b: number, offsetX: number, offsetY: number, count: number): void;
+    spawn(tileX: number, tileY: number, r: number, g: number, b: number, count: number): void;
     clear(): void;
     simulate(dt: number): boolean;
     render(x: any, y: any): void;
@@ -3567,6 +3893,7 @@ declare class PlayerDefense extends Defense {
     constructor(base: number, resist: Resistances, vulnerable: Vulnerabilities);
 }
 declare class Player implements IPropSerializable {
+    moveType: MoveType;
     attack: number;
     attackFromEquip: number;
     deathBy: string;
@@ -3598,7 +3925,6 @@ declare class Player implements IPropSerializable {
     swimming: boolean;
     stepCounter: number;
     strength: number;
-    talent: number;
     thirst: number;
     turns: number;
     weight: number;
@@ -3613,21 +3939,30 @@ declare class Player implements IPropSerializable {
     fromY: number;
     nextX: number;
     nextY: number;
+    malignityPlus: number;
+    malignityNegative: number;
+    score: number;
+    weightBonus: number;
+    talent: number;
     movement: IInputMovement;
     constructor();
     attributes(): void;
     skillGain(skillType: SkillType, mod: any, bypass: any): void;
     staminaCheck(): boolean;
     checkWeight(): void;
-    addMilestone(milestone: MilestoneType, data?: number): void;
+    addMilestone(milestone: MilestoneType, data?: number | null): void;
     damage(amount: number, damageMessage: string, soundDelay?: number): void;
     calculateEquipmentStats(): void;
     updateDirection(direction: FacingDirection): void;
     directionToMovement(direction: FacingDirection): IPoint;
+    canCarve(): Item.IItem | null;
     canJump(): boolean;
     jump(): void;
     drink(): void;
-    getSerializationProperties(version: string): string[];
+    getSerializationProperties(_: string): string[];
+    staminaReduction(skillType: SkillType): void;
+    updateMalignity(malignity: number): void;
+    getMalignity(): number;
     private statGain(stat, bypass);
     private resetDefense();
 }
@@ -3637,8 +3972,13 @@ declare class SpriteAtlas {
     static tileEvents: Array<SpriteUtil.SpriteInfo>;
     static items: Array<SpriteUtil.SpriteInfo>;
     static itemsSmall: Array<SpriteUtil.SpriteInfo>;
+    static equips: {
+        [index: number]: SpriteUtil.SpriteInfo;
+    };
     static shadow: SpriteUtil.SpriteInfo;
     static player: SpriteUtil.SpriteInfo;
+    static playerHairMan: SpriteUtil.SpriteInfo;
+    static playerHairWoman: SpriteUtil.SpriteInfo;
     static raft: SpriteUtil.SpriteInfo;
     static text: SpriteUtil.SpriteInfo;
 }
@@ -3647,8 +3987,9 @@ declare module ResourceLoader {
         Monster = 0,
         Corpse = 1,
         Item = 2,
-        Terrain = 3,
-        Doodad = 4,
+        Equip = 3,
+        Terrain = 4,
+        Doodad = 5,
     }
     interface IResourceContainer {
         spriteTexture: WebGLTexture;
@@ -3677,16 +4018,16 @@ declare module SaveLoad {
     function getSaveSlots(callback: (slot: number, isUsed: boolean) => void): void;
     function isSlotUsed(slot: number, callback: (slot: number, isUsed: boolean) => void): void;
     function getSaveCount(callback: (usedCount: number, usedSlots: number[]) => void, callbackPerSlot?: (slot: number, isUsed: boolean) => void): void;
-    function getFirstFreeSlot(callback: (slot: number) => void): void;
+    function getFirstFreeSlot(callback: (slot: number | null) => void): void;
     function save(slot: number, callback: (slot: number, bytes: number) => void): void;
     function load(slot: number, callback: (slot: number, success: boolean) => void): void;
     function loadPartial(slot: number, callback: (slot: number, success: boolean, saveObject: SaveObject) => void): void;
     function loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean): void;
-    function loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string): any;
+    function loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string | undefined): any;
     function savePartialData(slot: number, object: any, key: string, saveObjectKey: string, callback: (slot: number, bytes: number) => void): void;
     function savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any, callback: (slot: number, bytes: number) => void): void;
     function exportSave(slot: number, callback: (slot: number, success: boolean, json: string) => void): void;
-    function importSave(slot: number, data: string, callback: (slot: number, bytes: number) => void): void;
+    function importSave(slot: number, data: string, callback: (slot: number | null, bytes: number | null) => void): void;
     function deleteSlot(slot: number, callback: (slot: number, success: boolean) => void): void;
     function deleteAll(callback: () => void): void;
     function transferSaves(): void;
@@ -3750,7 +4091,6 @@ declare enum SpriteBatchLayer {
     Corpse = 0,
     Item = 1,
     Monster = 2,
-    FlyingMonster = 3,
 }
 declare class SpriteBatch {
     private static shaderProgram;
@@ -3768,10 +4108,9 @@ declare class SpriteBatch {
     constructor(gl: WebGLRenderingContext, maxSprites: number);
     clear(): void;
     begin(): void;
-    add(tileX: number, tileY: number, spriteSize: number, sourceX: number, sourceY: number, sourceSize: number, red?: number, green?: number, blue?: number, alpha?: number): void;
+    add(tileX: number, tileY: number, spriteSize: number, sourceX: number, sourceY: number, sourceSize: number, offsetX?: number, offsetY?: number, red?: number, green?: number, blue?: number, alpha?: number): void;
     end(): void;
     render(x: number, y: number, tileScale: number, viewportWidth: number, viewportHeight: number): void;
-    setSpriteImage(image: HTMLImageElement): void;
 }
 declare module SpriteUtil {
     class SpriteInfo {
@@ -3793,7 +4132,7 @@ declare module SpriteUtil {
         private loadedSprites;
         constructor(gl: WebGLRenderingContext, width: number, height: number, nullSprite: boolean, padding: number);
         load(callback: () => void): void;
-        addSprite(src: string, callback: (si: SpriteInfo, imageElement: HTMLImageElement) => void): void;
+        addSprite(src: string, callback: (si: SpriteInfo, imageElement: HTMLImageElement | null) => void): void;
         private loadSprite(sprite, callback, retry?);
         private spriteLoaded(callback);
         private checkFinished(callback);
@@ -3817,19 +4156,30 @@ declare namespace UI {
         doHide(): void;
         protected onShow(data?: any): void;
         protected onHide(): void;
-        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
-        onKeyUp(event: JQueryEventObject): void;
+        onMouseDown(event: JQueryEventObject): void;
+        onMouseUpOrLeave(event: JQueryEventObject): void;
+        onMouseMove(event: JQueryEventObject): void;
+        onMouseScroll(event: JQueryEventObject): void;
+        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | null;
+        onKeyUp(event: JQueryEventObject): boolean | null;
     }
 }
 declare namespace UI {
+    interface ConfirmOptions {
+        message: Message;
+        buttons: Message[];
+        callback?: (id: number | undefined) => void;
+    }
     class ConfirmScreen extends BaseScreen {
+        options: ConfirmOptions;
         elementOverlay: JQuery;
         elementMessage: JQuery;
         elementButtonRow: JQuery;
         selector(): string;
         bindElements(): void;
-        onShow(data: any): void;
+        onShow(options: ConfirmOptions): void;
         onHide(): void;
+        onKeyUp(event: JQueryEventObject): boolean | null;
     }
 }
 declare namespace UI {
@@ -3866,11 +4216,10 @@ declare namespace UI {
         Weight = 0,
         Attack = 1,
         Defense = 2,
-        Talent = 3,
+        Malignity = 3,
     }
     class InGameScreen extends BaseScreen {
         elementVisibleInGame: JQuery;
-        elementGame: JQuery;
         elementBlocker: JQuery;
         elementBlockerMouse: JQuery;
         elementStatHealth: JQuery;
@@ -3883,7 +4232,7 @@ declare namespace UI {
         elementAttributeWeight: JQuery;
         elementAttributeAttack: JQuery;
         elementAttributeDefense: JQuery;
-        elementAttributeTalent: JQuery;
+        elementAttributeMalignity: JQuery;
         elementButtons: JQuery;
         elementQuickSlotsContainer: JQuery;
         elementMessagesOverlay: JQuery;
@@ -3906,12 +4255,14 @@ declare namespace UI {
         elementOtherDialogs: JQuery[];
         private mouseEvent;
         private touchEvent;
+        private hasTouchScreen;
         private mouseX;
         private mouseY;
+        private lastMouseTarget;
         private lastText;
         private lastStats;
+        private contextMenu;
         private contextMenuTarget;
-        private contextMenuActions;
         private contextMenuOpen;
         private closingContextMenu;
         private contextMenuBlocking;
@@ -3919,16 +4270,22 @@ declare namespace UI {
         private actionsMenuOpen;
         private openedContainer;
         private sortableElement;
+        private sortableElementPosition;
+        private quickSlotSortableEnabled;
         private craftableItemTypes;
         private nonCraftableItemTypes;
+        private messages;
+        private messageLoadIndex;
+        private worldTooltip;
         selector(): string;
         bindElements(): void;
         unbindElements(): void;
         bindSortable(element: JQuery): void;
-        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
-        onKeyUp(event: JQueryEventObject): void;
-        pressHotKey(hotKeyNumber: number, hotKey: KeyBind): void;
-        useQuickSlot(slot: number): void;
+        onKeyDown(_: JQueryEventObject, keyCode: number, blockable: boolean): boolean | null;
+        onKeyUp(event: JQueryEventObject): boolean | null;
+        runBind(bind: IBind): boolean | null;
+        pressHotKey(hotKeyNumber: number): boolean;
+        useQuickSlot(slot: number): boolean;
         isSorting(): boolean;
         cancelSorting(): void;
         setupContextMenu(): any;
@@ -3936,21 +4293,22 @@ declare namespace UI {
         onHide(): void;
         initializeGameState(): void;
         onGameEnd(showBlocker: boolean): void;
-        setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
+        getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo | null): string;
+        setupDialog(dialogId: DialogId, highlightItemId?: number | null, customDialogInfo?: IDialogInfo | null): JQueryUI.DialogOptions;
         onMouseDown(event: JQueryEventObject): void;
         onMouseUpOrLeave(event: JQueryEventObject): void;
         onOtherClick(event: JQueryEventObject): void;
-        onTouchStart(event: JQueryEventObject): void;
         onMouseMove(event: JQueryEventObject): void;
-        onBlockerMouseUpOrLeave(event: JQueryEventObject): void;
         onBlockerMouseMove(event: JQueryEventObject): void;
         completeBlockerMouseMovement(): void;
+        isMouseMovementBlockerVisible(): boolean;
+        enableQuickslotSortable(enable: boolean): void;
+        updateQuickslotSortable(event: any, pageX: number, pageY: number): void;
         highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
+        highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
+        highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
+        highlightItemElementBySelector(selector: string, highlight: boolean, force?: boolean, skipCount?: boolean): void;
         getMovementDirection(event: any): FacingDirection;
-        getTilePositionFromMouseEvent(event: any): {
-            x: number;
-            y: number;
-        };
         onMouseScroll(event: JQueryEventObject): void;
         canUseHotkeys(): boolean;
         refreshStats(): void;
@@ -3963,15 +4321,17 @@ declare namespace UI {
         closeDialog(dialog: JQuery): boolean;
         openMapDialog(): void;
         closeMapDialog(): void;
-        closeAllDialogs(): void;
+        closeAllDialogs(): boolean;
+        autoOpenDialog(index: string | number, element: JQuery): boolean;
+        openDialogs(): void;
         clampDialogs(): void;
-        getItemClass(item: Item.IItem, itemType?: ItemType): string;
-        createItemElementByItemType(itemType: ItemType, item?: Item.IItem): JQuery;
-        createItemElementByItem(item: Item.IItem): JQuery;
-        syncItemElements(itemId: number, selector?: JQuery): void;
+        getItemClass(item: Item.IItem | null, itemType?: ItemType | null): string;
+        createItemElementByItemType(itemType: ItemType, item?: Item.IItem | null): JQuery;
+        createItemElementByItem(item: Item.IItem): JQuery | null;
+        syncItemElements(itemId: number, selector?: JQuery | null): void;
         syncDamaged(item: Item.IItem, element: JQuery): void;
         addItemToContainer(item: Item.IItem, container: Item.IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
-        onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery, isInventoryContainer: boolean): void;
+        onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | null, isInventoryContainer: boolean): void;
         afterAddingMultipleItemsToContainer(container: Item.IContainer): void;
         removeItemFromContainer(item: Item.IItem, container: Item.IContainer): void;
         refreshQuickSlots(): void;
@@ -3979,50 +4339,55 @@ declare namespace UI {
         loadQuickSlots(): void;
         saveItemOrder(containerElement: JQuery): void;
         showItemContextMenu(element: JQuery, isContainer?: boolean): void;
-        onContextMenuAction(element: JQuery, action: string, data: any): void;
+        onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement: JQuery | null): boolean;
+        runContextMenuAction(itemId: number, containerId: number | null, action: IContextMenuAction): boolean;
         onInventoryItemRightClick(element: JQuery): void;
         onContainerItemRightClick(element: JQuery): void;
         onCraftingItemClick(element: JQuery): void;
         onQuickSlotItemRightClick(element: JQuery): void;
         onEquipmentItemRightClick(element: JQuery): void;
-        getTooltipHtml(element: JQuery): string;
+        getTooltipHtml(element: JQuery): string | undefined;
         tooltipEnable(): void;
+        tooltipRefresh(): void;
         tooltipDisable(): void;
         tooltipHide(): void;
         onTooltipClose(): void;
-        getTooltipHtmlForItem(element: JQuery, item: Item.IItem, itemType: ItemType, isQuickSlot: boolean): string;
-        displayMessage(message: Message, messageType?: MessageType, ...args: any[]): void;
+        getTooltipHtmlForItem(item: Item.IItem, itemType: ItemType, isQuickSlot: boolean): string;
+        getTooltipHtmlForTile(tile: ITile): string;
+        displayMessagePack(messagePack: IMessagePack): void;
         createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
         getMessageCount(): number;
         removeOldestMessage(): void;
         getUsedQuickSlots(): number[];
         getFreeQuickSlots(): number[];
         getQuickSlotItemElement(quickSlot: number): JQuery;
-        getItemIdInQuickSlot(quickSlot: number): number;
-        setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
+        getItemIdInQuickSlot(quickSlot: number): number | null;
+        setQuickSlot(quickSlot: number, itemId: number | null, internal?: boolean): void;
         setQuickSlotByItemType(quickSlot: number, itemType: ItemType, disabled: boolean): JQuery;
         addItemToFreeQuickSlot(itemId: number): void;
         clearQuickSlot(quickSlot: number, internal?: boolean): void;
-        removeItemFromQuickSlot(itemId: number): void;
+        removeItemFromQuickSlot(itemId: number | null): void;
         updateQuickSlotItem(quickSlot: number): void;
-        onSortableItemReceive(event: Event, uiObject: any): void;
+        onSortableItemReceive(event: JQueryEventObject, uiObject: JQueryUI.SortableUIParams): void;
         getEquipSlotItemElement(equip: EquipType): JQuery;
-        getItemIdInEquipSlot(equip: EquipType): number;
-        setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
+        getItemIdInEquipSlot(equip: EquipType): number | null;
+        setEquipSlot(equip: EquipType, itemId: number | null, internal?: boolean): void;
         removeItemFromEquipSlot(itemId: number, internal?: boolean): void;
         updateSkillsDialog(): void;
         updateMilestonesDialog(): void;
         updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
-        createCraftItemElements(): void;
+        createCraftItemElements(sortType: SortType): void;
         updateItem(item: Item.IItem): void;
-        getDialogElementForContainer(container: Item.IContainer): JQuery;
+        onMove(): void;
+        refreshWorldTooltips(): void;
+        getDialogElementForContainer(container: Item.IContainer): JQuery | null;
         isContainerOpen(container: Item.IContainer): boolean;
-        openContainer(container: Item.IContainer, containerName?: string): void;
+        openContainer(container: Item.IContainer, containerName?: string | null): void;
         closeContainer(container: Item.IContainer): void;
-        closeContainerDialog(containerDialog: JQuery): void;
-        onContainerClose(container: Item.IContainer): JQuery;
+        closeContainerDialog(containerDialog: JQuery | null): void;
+        onContainerClose(container: Item.IContainer): JQuery | null;
         closeStaticContainers(): void;
-        closeAllContainers(): void;
+        closeAllContainers(): boolean;
         updateContainerName(containerDialogElement: JQuery): void;
         updateOpenedContainer(): void;
         hideContextMenu(): boolean;
@@ -4031,11 +4396,15 @@ declare namespace UI {
         onClearMessages(): void;
         onFilterInput(containerElement: JQuery): void;
         showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
-        sortItems(containerElement: JQuery, sortType: SortType, messageType: Message): void;
-        sortItemElements(itemElements: JQuery, sortType: SortType): void;
-        onUpdateCrafting(): void;
-        updateSort(container: JQuery): void;
+        sortItems(containerElement: JQuery, sortType: SortType, messageType: Message | null): void;
+        sortItemElements(itemElements: JQuery, containerSortInfo: IContainerSortInfo): void;
+        updateInventorySort(): void;
+        onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
+        updateSort(container: JQuery, activeSort: boolean): void;
         isContainerDialogOver(x: number, y: number): boolean;
+        private onOpenMessages();
+        private getMessagesHtml();
+        private onCloseMessages();
     }
 }
 declare namespace UI {
@@ -4056,10 +4425,10 @@ declare namespace UI {
         elementOverlay: JQuery;
         elementTitleScreenOptions: JQuery;
         elementLanguageSelect: JQuery;
-        elementKeybindList: JQuery;
-        elementKeybindDefault: JQuery;
-        elementKeybindDefaultParent: JQuery;
-        keybindDefaultWidth: number;
+        elementBindList: JQuery;
+        elementBindDefault: JQuery;
+        elementBindDefaultParent: JQuery;
+        bindDefaultWidth: number;
         selector(): string;
         bindElements(): void;
         onShow(): void;
@@ -4068,8 +4437,8 @@ declare namespace UI {
         setButtonChoiceValue(id: string, firstSelected: boolean): void;
         onClickKeybind(element: JQuery, id: KeyBind): void;
         onClickKeyBindDefault(): void;
-        resetKeybindState(setDefault?: boolean): KeyBind;
-        updateKeybind(key: KeyBind, element: JQuery): void;
+        resetBindState(setDefault?: boolean): KeyBind | null;
+        updateBind(key: KeyBind, element: JQuery): void;
         onClickCheckbox(element: JQuery, id: string): void;
         onClickButton(element: JQuery, id: string): void;
         onClickButtonChoice(element: JQuery, id: string): void;
@@ -4106,7 +4475,7 @@ declare namespace UI {
         unbindElements(): void;
         onShow(data?: any): void;
         onHide(): void;
-        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean;
+        onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | null;
         showMainMenuId(mainMenuId: string): void;
         refreshSlots(): void;
         refreshMods(): void;
