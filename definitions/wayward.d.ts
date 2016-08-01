@@ -1888,9 +1888,9 @@ declare class WAudio {
     private musicTrack;
     private fileFormat;
     constructor();
+    setUpMusic(track: HTMLAudioElement): void;
     playMusic(): void;
     updateMusicSpeed(speed: number): void;
-    pauseMusic(): void;
     fadeOut(): void;
     fadeIn(): void;
     nextTrack(): void;
