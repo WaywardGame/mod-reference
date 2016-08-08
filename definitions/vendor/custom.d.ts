@@ -6,7 +6,7 @@ declare var gameVersionMinor: number;
 
 declare var game: Game;
 declare var audio: WAudio;
-declare var ui: UI.Ui;
+declare var ui: Ui;
 declare var player: Player;
 declare var world: World;
 declare var renderer: WorldRenderer;
