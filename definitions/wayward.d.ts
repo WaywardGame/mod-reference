@@ -1978,7 +1978,7 @@ declare namespace Doodad {
         causesStatus?: Array<StatusType>;
         repairable?: boolean;
         stokable?: boolean;
-        particles?: number[];
+        particles: number[];
     }
     interface IDoodadResource {
         item: ItemType;
