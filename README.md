@@ -14,7 +14,9 @@
 	* [mod.json](https://github.com/WaywardGame/mod-reference#modjson)
 	* [tsconfig.json](https://github.com/WaywardGame/mod-reference#tsconfigjson)
 	* [helloworld.ts](https://github.com/WaywardGame/mod-reference#helloworldts)
+* [Debugging](https://github.com/WaywardGame/mod-reference#debugging)
 * [Publishing](https://github.com/WaywardGame/mod-reference#publishing)
+* [Recommended Plugins](https://github.com/WaywardGame/mod-reference#recommended-plugins)
 * [Disclaimer](https://github.com/WaywardGame/mod-reference#disclaimer)
 
 ## Intro
@@ -33,15 +35,15 @@ Follow along in this section if you are not familiar with TypeScript. To compile
 
 **Visual Studio Code**
 
-Visual Studio Code (currently in beta) is a free, cross-platform, open source editor from Microsoft written with JavaScript and deployed via Electron, just like Wayward! It has built-in support for TypeScript.
+Visual Studio Code is a free, cross-platform, open source editor from Microsoft written with JavaScript and deployed via Electron, just like Wayward! It has built-in support for TypeScript.
 
-Download VS Code here: [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
+Download Visual Studio Code here: [https://code.visualstudio.com/download](https://code.visualstudio.com/download)
 
 Install it with the default options/settings.
 
 **Node.js/NPM/TypeScript**
 
-Before you can build/compile in VS Code (or other editors/IDEs) you will need Node.js (NPM) and TypeScript. Download and install Node.js: [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
+Before you can build/compile in Visual Studio Code (or other editors/IDEs) you will need Node.js (NPM) and TypeScript. Download and install Node.js (using the default installation settings): [https://nodejs.org/en/download/](https://nodejs.org/en/download/)
 
 Once you install Node.js, you will have access to NPM, or "Node Package Manager", which allows you to install TypeScript. Open your terminal (Linux/Mac OS X) or command prompt (Windows) and run the following command: 
 
@@ -66,29 +68,35 @@ The main functionality of Wayward modding comes from hooks. Hooks are special pl
 
 Here's a list of all the current Wayward hooks:
 
-* CalculateMonsterMoveType
+* CalculateCreatureMoveType
 * CanConsumeItem
-* CanMonsterAttack
-* CanMonsterMove
-* CanSeeMonster
+* CanCreatureAttack
+* CanCreatureMove
+* CanPlayerAttack
+* CanSeeCreature
 * GetAmbientColorCave
 * GetAmbientColorDay
 * GetAmbientColorNight
 * GetAmbientLightLevel
-* GetMonsterSpriteBatchLayer
+* GetCreatureSpriteBatchLayer
+* GetPlayerMaxHealth,
 * GetPlayerSpriteBatchLayer
 * IsPlayerSwimming
+* IsTileInspectable
 * OnAddOrUpdateInventoryItem
 * OnBuild
+* OnCraft
 * OnCreateWorld
+* OnCreatureDamage
+* OnCreatureDeath
 * OnDisplayMessage
 * OnGameEnd
 * OnGameStart
+* OnInspectTile
 * OnItemEquip
 * OnKeyBindPress
 * OnKeyDown
 * OnKeyUp
-* OnMonsterDeath
 * OnMouseDown
 * OnMouseMove
 * OnMouseScroll
@@ -98,16 +106,17 @@ Here's a list of all the current Wayward hooks:
 * OnNoInputReceived
 * OnPlayerDamage
 * OnShowInGameScreen
-* OnSpawnMonsterFromGroup
+* OnSpawnCreatureFromGroup
 * OnTurnComplete
 * OnTurnStart
+* OnUpdateWeight
 * PostGenerateWorld
 * PostRender
-* PostRenderWorld
 * PostRenderPostProcess
+* PostRenderWorld
 * PreRender
-* PreRenderWorld
 * PreRenderPostProcess
+* PreRenderWorld
 * ProcessInput
 * ShouldRender
 
@@ -163,12 +172,10 @@ You can think of the mod.json file as the description file for your mod. It desc
 	"version": "1.0.0",
 	"author": "Your Name Here",
 	"compatible_minor_versions": [
-		0
+		2
 	],
 	"unloadable": true,
-	"files": [
-		"helloworld.js"
-	],
+	"file": "helloworld.js",
 	"hooks": [
 		"OnGameStart",
 		"OnItemEquip",
@@ -179,7 +186,7 @@ You can think of the mod.json file as the description file for your mod. It desc
 
 Most of this should be fairly self-explanatory.
 
-`compatible_minor_versions` will allow your mod to stop from being loaded if the Wayward's game version doesn't match what is set in the array. If you have "0" set here, and Wayward beta version 2.**0**.0 is loaded, then it will run. If you have `"compatible_minor_versions": [ 1 ]` set, then it will only work in version 2.**1**.0. `"compatible_minor_versions": [ 0, 1 ]` will load in both versions 2.0, and 2.1. You may omit this property if you always wants your mod to run, regardless of the game version.
+`compatible_minor_versions` will allow your mod to stop from being loaded if the Wayward's game version doesn't match what is set in the array. If you have "1" set here, and Wayward beta version 2.**1**.0 is loaded, then it will run. If you have `"compatible_minor_versions": [ 2 ]` set, then it will only work in version 2.**2**.0. `"compatible_minor_versions": [ 1, 2 ]` will load in both versions 2.1, and 2.2. You may omit this property if you always wants your mod to run, regardless of the game version.
 
 `unloadable` should be set to true if you are *not* adding new things into the game which modify the save data. If you are creating a mod that adds new monsters, items, doodads, terrain you will want to set this to false or omit it completely.
 
@@ -213,13 +220,12 @@ tsconfig gives instructions for how TypeScript should compile your project.
 ```json
 {
 	"compilerOptions": {
-		"target": "es5",
-		"module": "commonjs",
+		"target": "es6",
+		"module": "amd",
 		"declaration": true,
 		"noImplicitAny": true,
 		"removeComments": true,
 		"preserveConstEnums": true,
-		"outDir": "",
 		"sourceMap": true
 	}
 }
@@ -233,7 +239,7 @@ Finally we get to the actual functionality and coding of our mod in helloworld.t
 ```typescript
 /// <reference path="mod-reference/modreference.d.ts"/>
 
-class Mod extends Mods.Mod {
+export default class Mod extends Mods.Mod {
 	public onInitialize(saveDataGlobal: any): any {
 	}
 
@@ -281,7 +287,8 @@ public onLoad(saveData: any): void {
 
 public onGameStart(isLoadingSave: boolean, playedCount: number): void {
 	ui.displayMessage(this.helloWorld, MessageType.Good);
-	Item.defines[ItemType.Branch].name = "A Greetings Stick";
+	Item.defines[ItemType.Branch].prefix = "a ";
+	Item.defines[ItemType.Branch].name = "greetings stick";
 }
 
 public onItemEquip(item: Item.IItem, slot: EquipType): void {
@@ -295,7 +302,7 @@ public onItemEquip(item: Item.IItem, slot: EquipType): void {
 }
 ```
 
-Now we have renamed the branches in the game to "A Greetings Stick". We added a new hook (onItemEquip) so that when we equip them, they say hello to our hands. Why? There's so many reasons I don't know where to start! Let's continue:
+Now we have renamed the branches in the game to "a greetings stick". We added a new hook (onItemEquip) so that when we equip them, they say hello to our hands. Why? There's so many reasons I don't know where to start! Let's continue:
 ```typescript
 private helloTerrain: number;
 
@@ -307,10 +314,10 @@ public onLoad(saveData: any): void {
 	this.helloTerrain = this.addMessage("HelloTerrain", "Hello _0_!");
 }
 
-public onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean {
-	var getTile = game.getTile(player.x, player.y, player.z);
-	var tileType = Utilities.TileHelpers.getType(getTile);
-	ui.displayMessage(this.helloTerrain, MessageType.Stat, terrains[tileType].name);
+public onMove(nextX: number, nextY: number, tile: Terrain.ITile, direction: FacingDirection): boolean | undefined {
+	let getTile = game.getTile(player.x, player.y, player.z);
+	let tileType = Utilities.TileHelpers.getType(getTile);
+	ui.displayMessage(this.helloTerrain, MessageType.Stat, Terrain.defines[tileType].name);
 	return undefined;
 }
 ```
@@ -319,7 +326,7 @@ Now we say hello to the world, literally. As your player moves, you will say hel
 ```typescript
 /// <reference path="mod-reference/modreference.d.ts"/>
 
-class Mod extends Mods.Mod {
+export default class Mod extends Mods.Mod {
 	private helloWorld: number;
 	private helloLeftHand: number;
 	private helloRightHand: number;
@@ -346,7 +353,8 @@ class Mod extends Mods.Mod {
 	// Hooks
 	public onGameStart(isLoadingSave: boolean, playedCount: number): void {
 		ui.displayMessage(this.helloWorld, MessageType.Good);
-		Item.defines[ItemType.Branch].name = "A Greetings Stick";
+		Item.defines[ItemType.Branch].prefix = "a ";
+		Item.defines[ItemType.Branch].name = "greetings stick";
 	}
 
 	public onItemEquip(item: Item.IItem, slot: EquipType): void {
@@ -359,10 +367,10 @@ class Mod extends Mods.Mod {
 		}
 	}
 
-	public onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean {
-		var getTile = game.getTile(player.x, player.y, player.z);
-		var tileType = Utilities.TileHelpers.getType(getTile);
-		ui.displayMessage(this.helloTerrain, MessageType.Stat, terrains[tileType].name);
+	public onMove(nextX: number, nextY: number, tile: Terrain.ITile, direction: FacingDirection): boolean | undefined {
+		let getTile = game.getTile(player.x, player.y, player.z);
+		let tileType = Utilities.TileHelpers.getType(getTile);
+		ui.displayMessage(this.helloTerrain, MessageType.Stat, Terrain.defines[tileType].name);
 		return undefined;
 	}
 }
@@ -371,6 +379,14 @@ class Mod extends Mods.Mod {
 You can compile your script with "Ctrl+Shift+B" by default. After it is compiled, you will see a bunch of new files in your helloworld directory. These are the files Wayward will use. If you load Wayward, under "Manage Mods", you will now see your Hello World mod under "Local Mods".
 
 It's not much of a mod, but it works! Please review the *Example* section for a better grasp on what is possible and how to accomplish more in your mods.
+
+## Debugging
+
+You can open the developer tools at any time within Wayward by clicking the "Toggle Developer Tools" button located in the bottom of the options menu. You can execute arbitrary  code while this menu is opened, log console commands, explore native functions and definitions, inspect UI elements, and more.
+
+If you want them to start open by default when you run Wayward, you can open the `launch_options.json` file within the root directory of Wayward on Steam, and change the following line: `"devtools": false,` to `"devtools": true,`.
+
+We would also recommend subscribing to and enabling the "[Developer Tools](https://steamcommunity.com/sharedfiles/filedetails/?id=474819610)" mod, available on the [Steam Workshop](https://steamcommunity.com/sharedfiles/filedetails/?id=474819610). This mod allows the changing of tiles, spawning of items, creatures, doodads, refreshing stats, noclip, killing all creatures, and more! Furthermore, it adds an interface for refreshing mods within the bottom of the options menu while in-game on the fly so you don't have to reload the full game when developing a modification.
 
 ## Publishing
 
@@ -384,6 +400,14 @@ When you are ready to go, and you have performed all the steps outlined in _Hell
 
 Everything else about your entry is controlled via Steam. This includes uploading screenshots, links, required mod displaying, stats, and more. You can quickly get to your Workshop entry by clicking the "eye" icon next to your mod in the _Manage Mods_ menu listing. You will see a full suite of administrative options on that page if you are logged in to Steam.
 
+## Recommended Plugins
+
+If you are using Visual Studio Code, the following is a listing of recommended plugins to improve your coding experience with Wayward.
+
+**[TSLint](https://marketplace.visualstudio.com/items?itemName=eg2.tslint)**
+
+Integrates the tslint linter for the TypeScript language into VS Code. This requires tslint to be installed locally or globally (using `npm install -g tslint typescript` for example). It drastically improves code quality, corrects inconsistencies, and helps find potential issues in your code.
+
 ## Disclaimer
 
 By submitting a Workshop creation for Wayward, you understand that Wayward is a work in progress. As such, many things will change and be added over time. This can result in the following:
@@ -396,6 +420,6 @@ In the case of breaking functionality, we will try our best to limit such things
 
 Our "[todo](https://trello.com/b/PWX1Hpjn/wayward-todo)" and idea list is huge and it's likely many ideas are already planned for Wayward or were submitted to us previously. If we have in fact taken direct inspiration from your idea/submission, we will always contact you beforehand. The community and player-base has always delivered us great ideas. Steam Workshop allows for those ideas to become reality faster than they would otherwise appear in the game by us.
 
-That being said, we hope this not hinder you from making Wayward into whatever you want and sharing your creativity with the community.
+That being said, we hope this does not hinder you from making Wayward into whatever you want and sharing your creativity with the community.
 
 Have fun!
