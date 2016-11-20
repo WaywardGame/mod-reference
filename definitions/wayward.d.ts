@@ -2019,7 +2019,7 @@ declare namespace Creature {
     }
     function getHappinessLevel(creatureDesc: ICreatureDescription): number;
     function spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): number | null;
-    function spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: number): number | null;
+    function spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): number | null;
     function spawnClawWorm(): void;
     function remove(creature: ICreature): void;
     function updateAll(turnType?: TurnType): void;
@@ -2032,7 +2032,7 @@ declare type ActionCallback = (item: Item.IItem | null) => void;
 declare namespace Actions {
     function add(use: ActionType, callback: ActionCallback): void;
     function remove(use: ActionType): void;
-    function execute(use: ActionType, item: Item.IItem | null): void;
+    function execute(use: ActionType, item: Item.IItem | null, itemBypass?: boolean): void;
     function preserve(preserver: Item.IItem, preservee?: Item.IItem | null): void;
     function addFuel(fuel: Item.IItem, torch: Item.IItem): void;
     function consume(itemType: ItemType, actionType: ActionType): boolean;
@@ -2275,7 +2275,7 @@ interface IMilestoneData {
     data?: any[];
 }
 declare const milestones: IMilestone[];
-declare const milestoneData: IMilestoneData[];
+declare var milestoneData: IMilestoneData[];
 declare module Languages {
     var saveData: {
         language: string | null;
@@ -3926,7 +3926,7 @@ declare class Game implements IPropSerializable {
     getNameFromDescription(description: Item.IObjectDescription | undefined, textCase?: TextCase, withPrefix?: boolean): string;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
     private youNotice(x, y, messageType, messageArg?);
-    private upgradeToClasses<T>(arr, c);
+    private upgradeToClasses<T>(arr, c, onUpdate?);
     private processInput();
     private processMessages();
     private prePlay(mapSeed, isLoadingSave);
@@ -4646,7 +4646,6 @@ declare namespace UI {
         private hasTouchScreen;
         private mouseX;
         private mouseY;
-        private lastMouseTarget;
         private lastText;
         private lastStats;
         private contextMenu;
@@ -4660,7 +4659,6 @@ declare namespace UI {
         private multipleContainersOpened;
         private sortableElement;
         private sortableElementPosition;
-        private quickSlotSortableEnabled;
         private sortingCancelled;
         private craftableItemTypes;
         private nonCraftableItemTypes;
@@ -4693,8 +4691,6 @@ declare namespace UI {
         onBlockerMouseMove(event: JQueryEventObject): void;
         completeBlockerMouseMovement(): void;
         isMouseMovementBlockerVisible(): boolean;
-        enableQuickslotSortable(enable: boolean): void;
-        updateQuickslotSortable(event: any, pageX: number, pageY: number): void;
         highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
         highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
         highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
