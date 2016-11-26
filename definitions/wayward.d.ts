@@ -1733,7 +1733,7 @@ declare namespace Terrain {
         strength?: number;
         minDur?: number;
         maxDur?: number;
-        quality?: string;
+        quality?: ItemQuality;
         gfx?: number;
     }
     interface ITerrainResource {
@@ -1769,7 +1769,7 @@ declare namespace Terrain {
         doodad?: Array<string>;
         degrade: number;
     }
-    const resource: ITerrainResource[];
+    const resource: (ITerrainResource | undefined)[];
     const templates: {
         [id: number]: {
             [id: string]: ITemplate;
@@ -2134,6 +2134,7 @@ declare namespace Doodad {
         lightSource?: number;
         group?: DoodadTypeGroup;
         waterStill?: boolean;
+        reduceDurabilityOnGather?: boolean;
     }
     interface IDoodadResource {
         item: ItemType;
@@ -2272,12 +2273,14 @@ interface IMilestone {
 }
 interface IMilestoneData {
     amount: number;
-    data?: any[];
+    data?: number[];
 }
 declare const milestones: IMilestone[];
-declare var milestoneData: IMilestoneData[];
+declare var milestoneData: {
+    [index: number]: IMilestoneData | undefined;
+} | undefined;
 declare module Languages {
-    var saveData: {
+    let saveData: {
         language: string | null;
     };
     enum UiTranslation {
@@ -3188,7 +3191,7 @@ declare module Mods {
          *
          * @param creatureId The creature id
          * @param creature The creature object
-         * @returns undefined to use the default logic or the amount of damage done to the creature, or null if the creature was not damaged
+         * @returns undefined to use the default logic or null if nothing should happen (do not damage the creature) or the amount of damage the creature should take (the creature will take this damage)
          */
         onCreatureDamage(creatureId: number, creature: Creature.ICreature, hitDamage: number, damageType: DamageType, weaponName: string): number | null | undefined;
         /**
@@ -3395,16 +3398,16 @@ declare module Mods {
         steamIDOwner: string | null;
         lastUpdated: string | null;
     }
-    var modState: {
+    let modState: {
         [index: string]: Mods.State;
     };
-    var saveData: {
+    let saveData: {
         [index: string]: any;
     };
-    var saveDataGlobal: {
+    let saveDataGlobal: {
         [index: string]: any;
     };
-    var unloadable: {
+    let unloadable: {
         [index: string]: {
             name: string;
             unloadable: boolean;
@@ -3782,7 +3785,7 @@ declare class Game implements IPropSerializable {
     fillTile: boolean[][];
     unloading: boolean;
     spawnCoords: any;
-    contaminatedWater: Array<IPointZ>;
+    contaminatedWater: IPointZ[];
     dayNight: number;
     dayNightSwitch: number;
     fadeInAmount: number;
@@ -3921,7 +3924,6 @@ declare class Game implements IPropSerializable {
     upgradeGlobalSave(saveVersion: IVersionInfo): void;
     setRaft(itemId: number | null): void;
     getSerializationProperties(_: string): string[];
-    getBurned(bypassMessages?: boolean): number | null;
     getName(object: Item.IItem | Creature.ICreature | Doodad.IDoodad | undefined, textCase?: TextCase, withPrefix?: boolean): string;
     getNameFromDescription(description: Item.IObjectDescription | undefined, textCase?: TextCase, withPrefix?: boolean): string;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
@@ -4341,15 +4343,16 @@ declare class Player implements IPropSerializable, IPointZ {
     getMalignity(): number;
     hurtHands(message: Message, damageMessage: Message): void;
     pickUpAllItems(): void;
+    getBurned(bypassMessages?: boolean): number | null;
     private statGain(stat, bypass);
     private resetDefense();
 }
 declare class SpriteAtlas {
-    static creatures: Array<SpriteUtil.SpriteInfo>;
-    static corpses: Array<SpriteUtil.SpriteInfo>;
-    static tileEvents: Array<SpriteUtil.SpriteInfo>;
-    static items: Array<SpriteUtil.SpriteInfo>;
-    static itemsSmall: Array<SpriteUtil.SpriteInfo>;
+    static creatures: SpriteUtil.SpriteInfo[];
+    static corpses: SpriteUtil.SpriteInfo[];
+    static tileEvents: SpriteUtil.SpriteInfo[];
+    static items: SpriteUtil.SpriteInfo[];
+    static itemsSmall: SpriteUtil.SpriteInfo[];
     static equips: {
         [index: number]: SpriteUtil.SpriteInfo;
     };
@@ -4384,8 +4387,8 @@ declare module ResourceLoader {
     function getImageOverride(src: string): string;
 }
 declare module SaveLoad {
-    var maxSlots: number;
-    var saveTime: number;
+    let maxSlots: number;
+    let saveTime: number;
     class SaveObject {
         version: string;
         data: any;
@@ -4841,7 +4844,6 @@ declare namespace UI {
         elementBindList: JQuery;
         elementBindDefault: JQuery;
         elementBindDefaultParent: JQuery;
-        bindDefaultWidth: number;
         selector(): string;
         bindElements(): void;
         onShow(): void;
