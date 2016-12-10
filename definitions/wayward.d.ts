@@ -7,8 +7,7 @@ declare namespace Utilities {
         function error(source: Source, ...args: any[]): void;
     }
     module Random {
-        var seed: number;
-        var saved: number;
+        let seed: number;
         function randomFromInterval(min: any, max: any): number;
         function nextFloat(): number;
         function nextInt(max: number): number;
@@ -16,8 +15,8 @@ declare namespace Utilities {
         function setSeed(newSeed: any): void;
     }
     module TileHelpers {
-        var maskGfx: number;
-        var maskType: number;
+        const maskGfx = 3;
+        const maskType = 252;
         function getGfx(tile: Terrain.ITile): number;
         function getGfxRaw(data: number): number;
         function setGfx(tile: Terrain.ITile, value: number): void;
@@ -50,7 +49,7 @@ declare namespace Utilities {
             objectValue?: any;
             windowKeys: string[] | null;
         }
-        var allocatedEnums: {
+        let allocatedEnums: {
             [index: string]: IEnumInfoInternal;
         };
         function initializeGameState(): void;
@@ -446,10 +445,10 @@ declare enum Message {
     NearlyBurnedEquipmentProtectedYou = 331,
     Neck = 332,
     NeedAShovelToDigTreasure = 333,
-    NeedDeepWaterForRaft = 334,
-    NeedFishingNetForTreasure = 335,
-    NeedToEquipToShoot = 336,
-    NeedToStartTravelsOutside = 337,
+    NeedFishingNetForTreasure = 334,
+    NeedToEquipToShoot = 335,
+    NeedToStartTravelsOutside = 336,
+    NeedWaterForRaft = 337,
     No = 338,
     NoAmmunitionForThatWeapon = 339,
     NoBlackPowderToFireWeapon = 340,
@@ -519,198 +518,199 @@ declare enum Message {
     PouredOutWater = 404,
     PouredOutWaterOnYourself = 405,
     PouredWaterIntoStill = 406,
-    PreservedFood = 407,
-    PublishingMod = 408,
-    PurifiedWaterInStill = 409,
-    Quality = 410,
-    Recent = 411,
-    RefreshingMods = 412,
-    Reinforce = 413,
-    Release = 414,
-    RemovedBlood = 415,
-    RemoveFromQuickslot = 416,
-    Rename = 417,
-    Repair = 418,
-    RequiredForDisassembleLabel = 419,
-    RequiredForDisassembly = 420,
-    RequiredModsMissingWantToContinue = 421,
-    RequiredModsNotLoaded = 422,
-    RequiresFireToBeLit = 423,
-    RequiresYouAroundFireSource = 424,
-    RequiresYouToBeAround = 425,
-    Rest = 426,
-    Rested = 427,
-    Resting = 428,
-    RestInterrupted = 429,
-    RestOnGround = 430,
-    ReturnedToCivilization = 431,
-    ReturningToCivilizationSetOffAgain = 432,
-    ReturnsToLife = 433,
-    ReturnToTitleScreenNoSaveInDailyChallenge = 434,
-    ReturnToTitleScreenProgressWillBeSaved = 435,
-    RightHand = 436,
-    SailedToCivilization = 437,
-    SavingGame = 438,
-    Score = 439,
-    ScrollProvidedNoUsefulInsight = 440,
-    SeaweedFromWater = 441,
-    SecondQuarterOfDay = 442,
-    SecondQuarterOfNight = 443,
-    SeeGrowing = 444,
-    SeemsToHaveDrawnEnergy = 445,
-    SetTrapOffButNoDamage = 446,
-    SetUp = 447,
-    ShadowInTheWater = 448,
-    Simple = 449,
-    Skill = 450,
-    SkillHasRaised = 451,
-    Slashing = 452,
-    Sleeping = 453,
-    SleepInterrupted = 454,
-    Slept = 455,
-    Soil = 456,
-    SoilWouldHaveNoEffect = 457,
-    SomethingInTheWayOfCarving = 458,
-    SomethingInTheWayOfDigging = 459,
-    SomethingInTheWayOfDiggingCarveFirst = 460,
-    SomethingInTheWayOfFishing = 461,
-    SomethingInTheWayOfGatheringCarveFirst = 462,
-    SomethingInTheWayOfPerforming = 463,
-    SomethingInTheWayOfPlacing = 464,
-    SomethingInWayOfClosingDoor = 465,
-    SoothedYourBurnInjuries = 466,
-    Sort = 467,
-    SortedByCategory = 468,
-    SortedByDecay = 469,
-    SortedByDurability = 470,
-    SortedByGroup = 471,
-    SortedByName = 472,
-    SortedByQuality = 473,
-    SortedByRecent = 474,
-    SortedBySkill = 475,
-    SortedByWeight = 476,
-    StaminaIsFull = 477,
-    StartedFire = 478,
-    StartTravelInWater = 479,
-    StarvingToDeath = 480,
-    SteamWorkshop = 481,
-    SteppingOnHasInjuredYouForDamage = 482,
-    StillHasNoWaterToPurify = 483,
-    StirredUpClawWorm = 484,
-    StirredUpCreature = 485,
-    StoppedYourBleeding = 486,
-    StopUsingRaft = 487,
-    StrengthIncreasing = 488,
-    SummonedGuardiansByDiggingTreasure = 489,
-    SunIsRising = 490,
-    SunIsSetting = 491,
-    SunNotBrightEnoughToStartFire = 492,
-    Tame = 493,
-    TamedAppearsAngered = 494,
-    TamedAppearsContended = 495,
-    TamedAppearsHappy = 496,
-    TamedAppearsUpset = 497,
-    TamedCreature = 498,
-    TeleportBlocked = 499,
-    Teleported = 500,
-    ThereIsNoSunToStartFire = 501,
-    ThirdQuarterOfDay = 502,
-    ThirdQuarterOfNight = 503,
-    Throw = 504,
-    ThrownIntoDepths = 505,
-    ThrownIntoObstacle = 506,
-    TooDamaged = 507,
-    TooExhaustedToJump = 508,
-    ToolAppearedEffectiveForGathering = 509,
-    TrampledFire = 510,
-    TrampledIntoGround = 511,
-    TrampleIntoGround = 512,
-    Trampling = 513,
-    Transmogrified = 514,
-    TravelAway = 515,
-    TravelToFarOffLands = 516,
-    TreasureIsBlocked = 517,
-    True = 518,
-    UnableToImportSave = 519,
-    UnableToLoadRequiredMods = 520,
-    UnEquip = 521,
-    Unknown = 522,
-    UnknownItem = 523,
-    UnlockedChest = 524,
-    UnpurifiedWaterInStill = 525,
-    UpdatingMod = 526,
-    URLHasOpenedInWebBrowser = 527,
-    UsedSoilToIncreaseFertility = 528,
-    UsedToSpeedUpGrowing = 529,
-    UsingBareFistsToFight = 530,
-    UsingBareHands = 531,
-    VersionWarning = 532,
-    WaitUntilFireCooledToGetWater = 533,
-    WalkingDistanceOfTreasure = 534,
-    WantToDeleteAllSavedData = 535,
-    WantToDeleteThisGame = 536,
-    WantToPublishThisMod = 537,
-    WantToPublishUpdateToMod = 538,
-    WantToUninstallThisMod = 539,
-    Water = 540,
-    WaterDoesNotNeedDesalination = 541,
-    WaterIncreaseFertilityOfPlant = 542,
-    WaterPutOutFire = 543,
-    WaterWouldHaveNoEffect = 544,
-    Weight = 545,
-    WeightCapacity = 546,
-    WelcomeToWayward22 = 547,
-    WhatWouldYouLikeToNameItem = 548,
-    WinFindWayBackToCivilization = 549,
-    WinSailBackWithRiches = 550,
-    WinTravelledBackToCivilization = 551,
-    With = 552,
-    WorkingYourselfIntoExhaustion = 553,
-    WorkshopHasBeenOpenedPressOkAfter = 554,
-    Yes = 555,
-    YouAte = 556,
-    YouBeginResting = 557,
-    YouCollected = 558,
-    YouCrafted = 559,
-    YouDied = 560,
-    YouDisassembled = 561,
-    YouDismantled = 562,
-    YouDrank = 563,
-    YouEquip = 564,
-    YouFailedTo = 565,
-    YouFailedToHeal = 566,
-    YouFailedToHealCreature = 567,
-    YouFire = 568,
-    YouGathered = 569,
-    YouHaveHealedCreature = 570,
-    YouHaveKilled = 571,
-    YouHaveReleased = 572,
-    YouHaveTamed = 573,
-    YouNoticeBecomeEnraged = 574,
-    YouNoticeDying = 575,
-    YouNoticeFertilityDecreasing = 576,
-    YouNoticeFertilityIncreasing = 577,
-    YouNoticeGrowing = 578,
-    YouNoticePerish = 579,
-    YouNoticeStumbleInjureItself = 580,
-    YouNoticeTreeBecameLush = 581,
-    YouNoticeTreeRegrown = 582,
-    YouNoticeWoundsClosing = 583,
-    YouNoticeZombieHorde = 584,
-    YouOfferedToCreature = 585,
-    YouOpen = 586,
-    YouPickedUp = 587,
-    YouRepair = 588,
-    YourFist = 589,
-    YouRub = 590,
-    YouSalvaged = 591,
-    YouSee = 592,
-    YouSeeAnAberrant = 593,
-    YouSeeSpringForth = 594,
-    YouSeparate = 595,
-    YouThrew = 596,
-    YouUnequip = 597,
-    YouUsed = 598,
+    Preserve = 407,
+    PreservedFood = 408,
+    PublishingMod = 409,
+    PurifiedWaterInStill = 410,
+    Quality = 411,
+    Recent = 412,
+    RefreshingMods = 413,
+    Reinforce = 414,
+    Release = 415,
+    RemovedBlood = 416,
+    RemoveFromQuickslot = 417,
+    Rename = 418,
+    Repair = 419,
+    RequiredForDisassembleLabel = 420,
+    RequiredForDisassembly = 421,
+    RequiredModsMissingWantToContinue = 422,
+    RequiredModsNotLoaded = 423,
+    RequiresFireToBeLit = 424,
+    RequiresYouAroundFireSource = 425,
+    RequiresYouToBeAround = 426,
+    Rest = 427,
+    Rested = 428,
+    Resting = 429,
+    RestInterrupted = 430,
+    RestOnGround = 431,
+    ReturnedToCivilization = 432,
+    ReturningToCivilizationSetOffAgain = 433,
+    ReturnsToLife = 434,
+    ReturnToTitleScreenNoSaveInDailyChallenge = 435,
+    ReturnToTitleScreenProgressWillBeSaved = 436,
+    RightHand = 437,
+    SailedToCivilization = 438,
+    SavingGame = 439,
+    Score = 440,
+    ScrollProvidedNoUsefulInsight = 441,
+    SeaweedFromWater = 442,
+    SecondQuarterOfDay = 443,
+    SecondQuarterOfNight = 444,
+    SeeGrowing = 445,
+    SeemsToHaveDrawnEnergy = 446,
+    SetTrapOffButNoDamage = 447,
+    SetUp = 448,
+    ShadowInTheWater = 449,
+    Simple = 450,
+    Skill = 451,
+    SkillHasRaised = 452,
+    Slashing = 453,
+    Sleeping = 454,
+    SleepInterrupted = 455,
+    Slept = 456,
+    Soil = 457,
+    SoilWouldHaveNoEffect = 458,
+    SomethingInTheWayOfCarving = 459,
+    SomethingInTheWayOfDigging = 460,
+    SomethingInTheWayOfDiggingCarveFirst = 461,
+    SomethingInTheWayOfFishing = 462,
+    SomethingInTheWayOfGatheringCarveFirst = 463,
+    SomethingInTheWayOfPerforming = 464,
+    SomethingInTheWayOfPlacing = 465,
+    SomethingInWayOfClosingDoor = 466,
+    SoothedYourBurnInjuries = 467,
+    Sort = 468,
+    SortedByCategory = 469,
+    SortedByDecay = 470,
+    SortedByDurability = 471,
+    SortedByGroup = 472,
+    SortedByName = 473,
+    SortedByQuality = 474,
+    SortedByRecent = 475,
+    SortedBySkill = 476,
+    SortedByWeight = 477,
+    StaminaIsFull = 478,
+    StartedFire = 479,
+    StartTravelInWater = 480,
+    StarvingToDeath = 481,
+    SteamWorkshop = 482,
+    SteppingOnHasInjuredYouForDamage = 483,
+    StillHasNoWaterToPurify = 484,
+    StirredUpClawWorm = 485,
+    StirredUpCreature = 486,
+    StoppedYourBleeding = 487,
+    StopUsingRaft = 488,
+    StrengthIncreasing = 489,
+    SummonedGuardiansByDiggingTreasure = 490,
+    SunIsRising = 491,
+    SunIsSetting = 492,
+    SunNotBrightEnoughToStartFire = 493,
+    Tame = 494,
+    TamedAppearsAngered = 495,
+    TamedAppearsContended = 496,
+    TamedAppearsHappy = 497,
+    TamedAppearsUpset = 498,
+    TamedCreature = 499,
+    TeleportBlocked = 500,
+    Teleported = 501,
+    ThereIsNoSunToStartFire = 502,
+    ThirdQuarterOfDay = 503,
+    ThirdQuarterOfNight = 504,
+    Throw = 505,
+    ThrownIntoDepths = 506,
+    ThrownIntoObstacle = 507,
+    TooDamaged = 508,
+    TooExhaustedToJump = 509,
+    ToolAppearedEffectiveForGathering = 510,
+    TrampledFire = 511,
+    TrampledIntoGround = 512,
+    TrampleIntoGround = 513,
+    Trampling = 514,
+    Transmogrified = 515,
+    TravelAway = 516,
+    TravelToFarOffLands = 517,
+    TreasureIsBlocked = 518,
+    True = 519,
+    UnableToImportSave = 520,
+    UnableToLoadRequiredMods = 521,
+    UnEquip = 522,
+    Unknown = 523,
+    UnknownItem = 524,
+    UnlockedChest = 525,
+    UnpurifiedWaterInStill = 526,
+    UpdatingMod = 527,
+    URLHasOpenedInWebBrowser = 528,
+    UsedSoilToIncreaseFertility = 529,
+    UsedToSpeedUpGrowing = 530,
+    UsingBareFistsToFight = 531,
+    UsingBareHands = 532,
+    VersionWarning = 533,
+    WaitUntilFireCooledToGetWater = 534,
+    WalkingDistanceOfTreasure = 535,
+    WantToDeleteAllSavedData = 536,
+    WantToDeleteThisGame = 537,
+    WantToPublishThisMod = 538,
+    WantToPublishUpdateToMod = 539,
+    WantToUninstallThisMod = 540,
+    Water = 541,
+    WaterDoesNotNeedDesalination = 542,
+    WaterIncreaseFertilityOfPlant = 543,
+    WaterPutOutFire = 544,
+    WaterWouldHaveNoEffect = 545,
+    Weight = 546,
+    WeightCapacity = 547,
+    WelcomeToWayward = 548,
+    WhatWouldYouLikeToNameItem = 549,
+    WinFindWayBackToCivilization = 550,
+    WinSailBackWithRiches = 551,
+    WinTravelledBackToCivilization = 552,
+    With = 553,
+    WorkingYourselfIntoExhaustion = 554,
+    WorkshopHasBeenOpenedPressOkAfter = 555,
+    Yes = 556,
+    YouAte = 557,
+    YouBeginResting = 558,
+    YouCollected = 559,
+    YouCrafted = 560,
+    YouDied = 561,
+    YouDisassembled = 562,
+    YouDismantled = 563,
+    YouDrank = 564,
+    YouEquip = 565,
+    YouFailedTo = 566,
+    YouFailedToHeal = 567,
+    YouFailedToHealCreature = 568,
+    YouFire = 569,
+    YouGathered = 570,
+    YouHaveHealedCreature = 571,
+    YouHaveKilled = 572,
+    YouHaveReleased = 573,
+    YouHaveTamed = 574,
+    YouNoticeBecomeEnraged = 575,
+    YouNoticeDying = 576,
+    YouNoticeFertilityDecreasing = 577,
+    YouNoticeFertilityIncreasing = 578,
+    YouNoticeGrowing = 579,
+    YouNoticePerish = 580,
+    YouNoticeStumbleInjureItself = 581,
+    YouNoticeTreeBecameLush = 582,
+    YouNoticeTreeRegrown = 583,
+    YouNoticeWoundsClosing = 584,
+    YouNoticeZombieHorde = 585,
+    YouOfferedToCreature = 586,
+    YouOpen = 587,
+    YouPickedUp = 588,
+    YouRepair = 589,
+    YourFist = 590,
+    YouRub = 591,
+    YouSalvaged = 592,
+    YouSee = 593,
+    YouSeeAnAberrant = 594,
+    YouSeeSpringForth = 595,
+    YouSeparate = 596,
+    YouThrew = 597,
+    YouUnequip = 598,
+    YouUsed = 599,
 }
 declare var Z_MIN: number;
 declare var Z_CAVE: number;
@@ -1079,7 +1079,7 @@ declare enum ItemType {
     CarbonPowder = 191,
     PileOfCompost = 192,
     MeltedAmber = 193,
-    Tinder = 194,
+    WoodenShavings = 194,
     Deadfall = 195,
     Snare = 196,
     WaterskinOfMedicinalWater = 197,
@@ -1189,7 +1189,7 @@ declare enum ItemType {
     StoneKiln = 301,
     WroughtIronAnvil = 302,
     IronAnvil = 303,
-    MageCloak = 304,
+    MageRobe = 304,
     OrbOfMalign = 305,
     AnimalClaw = 306,
     AnimalPelt = 307,
@@ -1653,7 +1653,8 @@ declare enum HintType {
     CraftingFailure = 25,
     Malignity = 26,
     Interface = 27,
-    Last = 28,
+    CreatureTaming = 28,
+    Last = 29,
 }
 interface IHint {
     name?: string;
@@ -1762,11 +1763,11 @@ declare namespace Terrain {
         terrainTypes: {
             [id: string]: TerrainType;
         };
-        terrain: Array<string>;
+        terrain: string[];
         doodadTypes?: {
             [id: string]: DoodadType;
         };
-        doodad?: Array<string>;
+        doodad?: string[];
         degrade: number;
     }
     const resource: (ITerrainResource | undefined)[];
@@ -1889,8 +1890,8 @@ declare namespace Creature {
         ai: AiType;
         moveType: MoveType;
         fishable?: boolean;
-        blood?: number[];
-        aberrantBlood?: number[];
+        blood?: Particle.RGB;
+        aberrantBlood?: Particle.RGB;
         loot?: ICreatureLoot[];
         spawnTiles: SpawnableTiles;
         spawnMalignity?: number;
@@ -1968,7 +1969,7 @@ declare namespace Creature {
         isDefender(): boolean;
         getInspectMessage(): UI.IMessagePack;
         checkForBurn(): boolean;
-        damage(hitDamage: number, damageType: DamageType, weaponName: string | null, skipMilestones: boolean): number | null;
+        damage(damageInfo: IDamageInfo): number | null;
         isTamed(): boolean;
         tame(): boolean;
         release(): boolean;
@@ -1997,7 +1998,7 @@ declare namespace Creature {
         happiness?: number;
         private shouldSkipNextTurn;
         private _description;
-        constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, bypass?: boolean, aberrant?: boolean);
+        constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
         description(): ICreatureDescription | undefined;
         id(): number | undefined;
         isHidden(): boolean;
@@ -2011,7 +2012,7 @@ declare namespace Creature {
         skipNextTurn(): void;
         update(creatureId: number): boolean;
         moveTo(x: number, y: number): boolean;
-        damage(hitDamage: number, damageType: DamageType, weaponName: string | null, skipMilestones: boolean): number | null;
+        damage(damageInfo: IDamageInfo): number | null;
         getSerializationProperties(_: string): string[];
         onUnserialized(): void;
         private findPath(result);
@@ -2127,10 +2128,10 @@ declare namespace Doodad {
         trap?: boolean;
         variation?: boolean;
         waterSource?: boolean;
-        causesStatus?: Array<StatusType>;
+        causesStatus?: StatusType[];
         repairable?: boolean;
         stokable?: boolean;
-        particles: number[];
+        particles: Particle.RGB;
         lightSource?: number;
         group?: DoodadTypeGroup;
         waterStill?: boolean;
@@ -2190,10 +2191,10 @@ declare namespace Doodad {
     function isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): boolean;
 }
 declare namespace Item {
-    var lootGroup: (ItemType[] | undefined)[];
-    var groups: (IGroupDescription | undefined)[];
-    var actionDescriptions: (IActionDescription | undefined)[];
-    var defines: (IItemDescription | undefined)[];
+    const lootGroup: (ItemType[] | undefined)[];
+    const groups: (IGroupDescription | undefined)[];
+    const actionDescriptions: (IActionDescription | undefined)[];
+    const defines: (IItemDescription | undefined)[];
     function RecipeComponent(type: (ItemType | ItemTypeGroup), requiredAmount: number, consumedAmount: number, disassembleAmount?: number, ignoreWeight?: boolean): IRecipeComponent;
     function generateLookups(): void;
 }
@@ -2201,7 +2202,7 @@ declare namespace Terrain {
     interface ITerrainDescription {
         name?: string;
         passable?: boolean;
-        particles: number[];
+        particles: Particle.RGB;
         durability?: number;
         water?: boolean;
         regathered?: boolean;
@@ -2326,128 +2327,131 @@ declare module Languages {
         MenuAboutMessage = 39,
         MenuAboutThanks = 40,
         MenuAboutThanksIntro = 41,
-        MenuDailyChallenge = 42,
-        MenuDeleteAllGameData = 43,
-        MenuDeleteGame = 44,
-        MenuEditGame = 45,
-        MenuEndGameDead = 46,
-        MenuEndGameWon = 47,
-        MenuExportGame = 48,
-        MenuExportSave = 49,
-        MenuImportGame = 50,
-        MenuImportSave = 51,
-        MenuManageMods = 52,
-        MenuManageModsInternal = 53,
-        MenuManageModsLocal = 54,
-        MenuManageModsMessage = 55,
-        MenuManageModsPublishMod = 56,
-        MenuManageModsUninstallMod = 57,
-        MenuManageModsViewInSteamWorkshop = 58,
-        MenuManageModsWorkshop = 59,
-        MenuModdingGuide = 60,
-        MenuNews = 61,
-        MenuNoHighscores = 62,
-        MenuNoMods = 63,
-        MenuOpenLogsFolder = 64,
-        MenuOpenModsFolder = 65,
-        MenuOptions = 66,
-        MenuOptionsMessage = 67,
-        MenuPlayGame = 68,
-        MenuPlayGameMessage = 69,
-        MenuPlayGameNewGame = 70,
-        MenuPostATweet = 71,
-        MenuQuitGame = 72,
-        MenuReloadGame = 73,
-        MenuShareOnFacebook = 74,
-        MenuToggleDeveloperTools = 75,
-        MenuViewHighscores = 76,
-        MenuViewHighscoresMessage = 77,
-        MenuVisitSteamWorkshop = 78,
-        NearDeath = 79,
-        NextHint = 80,
-        OptionsAlternateContextMenu = 81,
-        OptionsAlternateContextMenuTooltip = 82,
-        OptionsAlternateFont = 83,
-        OptionsAudio = 84,
-        OptionsAutoGather = 85,
-        OptionsAutoGatherTooltip = 86,
-        OptionsAutoPickup = 87,
-        OptionsAutoPickupTooltip = 88,
-        OptionsBindDefault = 89,
-        OptionsBinds = 90,
-        OptionsDeveloper = 91,
-        OptionsDialogOpacity = 92,
-        OptionsDropOnGather = 93,
-        OptionsDropOnGatherTooltip = 94,
-        OptionsDropUnderYourself = 95,
-        OptionsDropUnderYourselfTooltip = 96,
-        OptionsEffects = 97,
-        OptionsEnableHints = 98,
-        OptionsEnableHintsTooltip = 99,
-        OptionsFullscreenMode = 100,
-        OptionsGame = 101,
-        OptionsGraphics = 102,
-        OptionsKeepSortActive = 103,
-        OptionsKeepSortActiveTooltip = 104,
-        OptionsKeyBindRebinding = 105,
-        OptionsLanguage = 106,
-        OptionsMouseClickMovement = 107,
-        OptionsMouseClickMovementTooltip = 108,
-        OptionsMusic = 109,
-        OptionsMute = 110,
-        OptionsNextSong = 111,
-        OptionsPixelFont = 112,
-        OptionsProtectedCraftingItems = 113,
-        OptionsProtectedCraftingItemsTooltip = 114,
-        OptionsSaveData = 115,
-        OptionsScaleDefault = 116,
-        OptionsScaleIn = 117,
-        OptionsScaleOut = 118,
-        OptionsSkipIntro = 119,
-        OptionsSkipIntroTooltip = 120,
-        OptionsVisionDither = 121,
-        OptionsVisionFade = 122,
-        OptionsWarnOnDangerousActions = 123,
-        OptionsWarnOnDangerousActionsTooltip = 124,
-        OptionsWarnWhenBreakingItems = 125,
-        OptionsWarnWhenBreakingItemsTooltip = 126,
-        OptionsWindowedMode = 127,
-        OptionsWorldTooltips = 128,
-        OptionsWorldTooltipsTooltip = 129,
-        OptionsZoomIn = 130,
-        OptionsZoomOnScroll = 131,
-        OptionsZoomOnScrollTooltip = 132,
-        OptionsZoomOut = 133,
-        Overburdened = 134,
-        Poisoned = 135,
-        PreviousHint = 136,
-        QuickSlot1 = 137,
-        QuickSlot2 = 138,
-        QuickSlot3 = 139,
-        QuickSlot4 = 140,
-        QuickSlot5 = 141,
-        QuickSlot6 = 142,
-        QuickSlot7 = 143,
-        QuickSlot8 = 144,
-        QuickSlot9 = 145,
-        ReturnToTitleScreen = 146,
-        Stamina = 147,
-        Starving = 148,
-        TabCrafting = 149,
-        TabDismantle = 150,
-        Thirst = 151,
-        Version = 152,
-        Weight = 153,
-        WindowTitleContainer = 154,
-        WindowTitleCrafting = 155,
-        WindowTitleEquipment = 156,
-        WindowTitleHighscores = 157,
-        WindowTitleInventory = 158,
-        WindowTitleMap = 159,
-        WindowTitleMessages = 160,
-        WindowTitleMilestones = 161,
-        WindowTitleOptions = 162,
-        WindowTitleSkills = 163,
+        MenuAboutUnlok = 42,
+        MenuDailyChallenge = 43,
+        MenuDeleteAllGameData = 44,
+        MenuDeleteGame = 45,
+        MenuEditGame = 46,
+        MenuEndGameDead = 47,
+        MenuEndGameWon = 48,
+        MenuExportGame = 49,
+        MenuExportSave = 50,
+        MenuImportGame = 51,
+        MenuImportSave = 52,
+        MenuManageMods = 53,
+        MenuManageModsDisableAll = 54,
+        MenuManageModsEnableAll = 55,
+        MenuManageModsInternal = 56,
+        MenuManageModsLocal = 57,
+        MenuManageModsMessage = 58,
+        MenuManageModsPublishMod = 59,
+        MenuManageModsUninstallMod = 60,
+        MenuManageModsViewInSteamWorkshop = 61,
+        MenuManageModsWorkshop = 62,
+        MenuModdingGuide = 63,
+        MenuNews = 64,
+        MenuNoHighscores = 65,
+        MenuNoMods = 66,
+        MenuOpenLogsFolder = 67,
+        MenuOpenModsFolder = 68,
+        MenuOptions = 69,
+        MenuOptionsMessage = 70,
+        MenuPlayGame = 71,
+        MenuPlayGameMessage = 72,
+        MenuPlayGameNewGame = 73,
+        MenuPostATweet = 74,
+        MenuQuitGame = 75,
+        MenuReloadGame = 76,
+        MenuShareOnFacebook = 77,
+        MenuToggleDeveloperTools = 78,
+        MenuViewHighscores = 79,
+        MenuViewHighscoresMessage = 80,
+        MenuVisitSteamWorkshop = 81,
+        NearDeath = 82,
+        NextHint = 83,
+        OptionsAlternateContextMenu = 84,
+        OptionsAlternateContextMenuTooltip = 85,
+        OptionsAlternateFont = 86,
+        OptionsAudio = 87,
+        OptionsAutoGather = 88,
+        OptionsAutoGatherTooltip = 89,
+        OptionsAutoPickup = 90,
+        OptionsAutoPickupTooltip = 91,
+        OptionsBindDefault = 92,
+        OptionsBinds = 93,
+        OptionsDeveloper = 94,
+        OptionsDialogOpacity = 95,
+        OptionsDropOnGather = 96,
+        OptionsDropOnGatherTooltip = 97,
+        OptionsDropUnderYourself = 98,
+        OptionsDropUnderYourselfTooltip = 99,
+        OptionsEffects = 100,
+        OptionsEnableHints = 101,
+        OptionsEnableHintsTooltip = 102,
+        OptionsFullscreenMode = 103,
+        OptionsGame = 104,
+        OptionsGraphics = 105,
+        OptionsKeepSortActive = 106,
+        OptionsKeepSortActiveTooltip = 107,
+        OptionsKeyBindRebinding = 108,
+        OptionsLanguage = 109,
+        OptionsMouseClickMovement = 110,
+        OptionsMouseClickMovementTooltip = 111,
+        OptionsMusic = 112,
+        OptionsMute = 113,
+        OptionsNextSong = 114,
+        OptionsPixelFont = 115,
+        OptionsProtectedCraftingItems = 116,
+        OptionsProtectedCraftingItemsTooltip = 117,
+        OptionsSaveData = 118,
+        OptionsScaleDefault = 119,
+        OptionsScaleIn = 120,
+        OptionsScaleOut = 121,
+        OptionsSkipIntro = 122,
+        OptionsSkipIntroTooltip = 123,
+        OptionsVisionDither = 124,
+        OptionsVisionFade = 125,
+        OptionsWarnOnDangerousActions = 126,
+        OptionsWarnOnDangerousActionsTooltip = 127,
+        OptionsWarnWhenBreakingItems = 128,
+        OptionsWarnWhenBreakingItemsTooltip = 129,
+        OptionsWindowedMode = 130,
+        OptionsWorldTooltips = 131,
+        OptionsWorldTooltipsTooltip = 132,
+        OptionsZoomIn = 133,
+        OptionsZoomOnScroll = 134,
+        OptionsZoomOnScrollTooltip = 135,
+        OptionsZoomOut = 136,
+        Overburdened = 137,
+        Poisoned = 138,
+        PreviousHint = 139,
+        QuickSlot1 = 140,
+        QuickSlot2 = 141,
+        QuickSlot3 = 142,
+        QuickSlot4 = 143,
+        QuickSlot5 = 144,
+        QuickSlot6 = 145,
+        QuickSlot7 = 146,
+        QuickSlot8 = 147,
+        QuickSlot9 = 148,
+        ReturnToTitleScreen = 149,
+        Stamina = 150,
+        Starving = 151,
+        TabCrafting = 152,
+        TabDismantle = 153,
+        Thirst = 154,
+        Version = 155,
+        Weight = 156,
+        WindowTitleContainer = 157,
+        WindowTitleCrafting = 158,
+        WindowTitleEquipment = 159,
+        WindowTitleHighscores = 160,
+        WindowTitleInventory = 161,
+        WindowTitleMap = 162,
+        WindowTitleMessages = 163,
+        WindowTitleMilestones = 164,
+        WindowTitleOptions = 165,
+        WindowTitleSkills = 166,
     }
     enum Dictionary {
         ItemTypes = 0,
@@ -2853,48 +2857,8 @@ declare namespace UI {
     }
 }
 interface JQuery {
-    functionalTooltip(data: string, ...args: any[]): void;
-    functionalTooltip(data: ITooltipOptions): ITooltip;
-}
-interface ITooltipOptions {
-    selector: string;
-    disabled?: boolean;
-    trackMouse?: boolean;
-    position?: ITooltipPosition;
-    onOpen?: (target: JQuery) => void;
-    onClose?: (target: JQuery) => void;
-    onPosition?: (target: JQuery) => ITooltipPosition;
-    content: (target: JQuery) => void;
-}
-interface ITooltip extends ITooltipOptions {
-    visible: HTMLElement | null;
-    lastEvent: string;
-    element: HTMLElement;
-    width: number;
-    height: number;
-    show: (event: MouseEvent) => void;
-    updateTooltipPosition: (left: number, top: number, mouseX: number, mouseY: number) => void;
-}
-interface ITooltipPosition {
-    startAtRight?: boolean;
-    startAtBottom?: boolean;
-    centerX?: boolean;
-    centerY?: boolean;
-    leftOffset?: number;
-    topOffset?: number;
-    clampRight?: boolean;
-}
-declare let tooltips: {
-    [index: number]: ITooltip;
-};
-declare let tooltipsMap: {
-    [index: string]: number;
-};
-declare let globalTooltipId: number;
-interface JQuery {
     filterByData(name: string, value: any): JQuery;
     contextmenu(p: any, p2?: any, p3?: any): any;
-    isSorting(): boolean;
     isVisible(): boolean;
     quickShow(): void;
     quickHide(): void;
@@ -3065,6 +3029,25 @@ declare module Mods {
          */
         canCreatureMove(creatureId: number, creature: Creature.ICreature, tile: Terrain.ITile, moveType: MoveType): boolean | undefined;
         /**
+         * Called when a creature is about to be spawned
+         * @param type The type of creature
+         * @param x The x coordinate where the creature will be spawned
+         * @param y The y coordinate where the creature will be spawned
+         * @param z The z coordinate where the creature will be spawned
+         * @param aberrant True if the creature is an aberrant
+         * @returns False if the creature cannot spawn, or undefined to use the default logic
+         */
+        canCreatureSpawn(type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
+        /**
+         * Called when an item is being dropped
+         * @param item The item to be dropped
+         * @param tile The tile the item will be dropped on
+         * @param dropAll True if all items of this type will be dropped
+         * @param dropAllQuality If not null, all items of this quality will be dropped
+         * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
+         */
+        canDropItem(item: Item.IItem, tile: Terrain.ITile, dropAll: boolean, dropAllQuality: ItemQuality | null): boolean | undefined;
+        /**
          * Called before a player attacks
          * @param weapon The weapon used to attack
          * @param attackType The attack type
@@ -3115,12 +3098,6 @@ declare module Mods {
          */
         isTileInspectable(tile: Terrain.ITile): boolean | undefined;
         /**
-         * Called when an item is added or updated in the players inventory
-         * @param item The item object
-         * @param container The container object the item was added to
-         */
-        onAddOrUpdateInventoryItem(item: Item.IItem, container: Item.IContainer): void;
-        /**
          * Called when something is built on a tile
          * @param item The item used to build the object
          * @param tile The tile something was built on
@@ -3163,6 +3140,24 @@ declare module Mods {
          */
         onInspectTile(tile: Terrain.ITile): IInspect[] | undefined;
         /**
+         * Called when an item is added to the players inventory
+         * @param item The item object
+         * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
+         */
+        onInventoryItemAdd(item: Item.IItem, container: Item.IContainer): void;
+        /**
+         * Called when an item is removed from the players inventory
+         * @param item The item object
+         * @param container The container object the item was moved to.
+         */
+        onInventoryItemRemove(item: Item.IItem, container: Item.IContainer): void;
+        /**
+         * Called when an item is moved from one container to another, while still in the players inventory.
+         * @param item The item object
+         * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
+         */
+        onInventoryItemUpdate(item: Item.IItem, container: Item.IContainer): void;
+        /**
          * Called when the player equips an item to a slot
          * @param item The item being equipped
          * @param slot The slot
@@ -3191,15 +3186,23 @@ declare module Mods {
          *
          * @param creatureId The creature id
          * @param creature The creature object
-         * @returns undefined to use the default logic or null if nothing should happen (do not damage the creature) or the amount of damage the creature should take (the creature will take this damage)
+         * @param damageInfo The damage info object
+         * @returns Null if nothing should happen (do not damage the creature) or the amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
          */
-        onCreatureDamage(creatureId: number, creature: Creature.ICreature, hitDamage: number, damageType: DamageType, weaponName: string): number | null | undefined;
+        onCreatureDamage(creatureId: number, creature: Creature.ICreature, damageInfo: IDamageInfo): number | null | undefined;
         /**
          * Called when a creature dies
          * @param creatureId The creature id
          * @param creature The creature object
          */
         onCreatureDeath(creatureId: number, creature: Creature.ICreature): void;
+        /**
+         * Called when a creature spawns
+         * @param creatureId The creature id
+         * @param creature The creature object
+         * @param aberrant True if the creature is an aberrant
+         */
+        onCreatureSpawn(creatureId: number, creature: Creature.ICreature): void;
         /**
          * Called when a mouse button is pressed
          * @param event The mouse event object
@@ -3314,53 +3317,58 @@ declare module Mods {
         CanConsumeItem = 1,
         CanCreatureAttack = 2,
         CanCreatureMove = 3,
-        CanPlayerAttack = 4,
-        CanSeeCreature = 5,
-        GetAmbientColorCave = 6,
-        GetAmbientColorDay = 7,
-        GetAmbientColorNight = 8,
-        GetAmbientLightLevel = 9,
-        GetCreatureSpriteBatchLayer = 10,
-        GetPlayerMaxHealth = 11,
-        GetPlayerSpriteBatchLayer = 12,
-        IsPlayerSwimming = 13,
-        IsTileInspectable = 14,
-        OnAddOrUpdateInventoryItem = 15,
-        OnBuild = 16,
-        OnCraft = 17,
-        OnCreateWorld = 18,
-        OnCreatureDamage = 19,
-        OnCreatureDeath = 20,
-        OnDisplayMessage = 21,
-        OnGameEnd = 22,
-        OnGameStart = 23,
-        OnInspectTile = 24,
-        OnItemEquip = 25,
-        OnKeyBindPress = 26,
-        OnKeyDown = 27,
-        OnKeyUp = 28,
-        OnMouseDown = 29,
-        OnMouseMove = 30,
-        OnMouseScroll = 31,
-        OnMouseUpOrLeave = 32,
-        OnMove = 33,
-        OnMoveDirectionUpdate = 34,
-        OnNoInputReceived = 35,
-        OnPlayerDamage = 36,
-        OnShowInGameScreen = 37,
-        OnSpawnCreatureFromGroup = 38,
-        OnTurnComplete = 39,
-        OnTurnStart = 40,
-        OnUpdateWeight = 41,
-        PostGenerateWorld = 42,
-        PostRender = 43,
-        PostRenderPostProcess = 44,
-        PostRenderWorld = 45,
-        PreRender = 46,
-        PreRenderPostProcess = 47,
-        PreRenderWorld = 48,
-        ProcessInput = 49,
-        ShouldRender = 50,
+        CanCreatureSpawn = 4,
+        CanDropItem = 5,
+        CanPlayerAttack = 6,
+        CanSeeCreature = 7,
+        GetAmbientColorCave = 8,
+        GetAmbientColorDay = 9,
+        GetAmbientColorNight = 10,
+        GetAmbientLightLevel = 11,
+        GetCreatureSpriteBatchLayer = 12,
+        GetPlayerMaxHealth = 13,
+        GetPlayerSpriteBatchLayer = 14,
+        IsPlayerSwimming = 15,
+        IsTileInspectable = 16,
+        OnBuild = 17,
+        OnCraft = 18,
+        OnCreateWorld = 19,
+        OnCreatureDamage = 20,
+        OnCreatureDeath = 21,
+        OnCreatureSpawn = 22,
+        OnDisplayMessage = 23,
+        OnGameEnd = 24,
+        OnGameStart = 25,
+        OnInspectTile = 26,
+        OnInventoryItemAdd = 27,
+        OnInventoryItemRemove = 28,
+        OnInventoryItemUpdate = 29,
+        OnItemEquip = 30,
+        OnKeyBindPress = 31,
+        OnKeyDown = 32,
+        OnKeyUp = 33,
+        OnMouseDown = 34,
+        OnMouseMove = 35,
+        OnMouseScroll = 36,
+        OnMouseUpOrLeave = 37,
+        OnMove = 38,
+        OnMoveDirectionUpdate = 39,
+        OnNoInputReceived = 40,
+        OnPlayerDamage = 41,
+        OnShowInGameScreen = 42,
+        OnSpawnCreatureFromGroup = 43,
+        OnTurnComplete = 44,
+        OnTurnStart = 45,
+        OnUpdateWeight = 46,
+        PostGenerateWorld = 47,
+        PostRender = 48,
+        PostRenderPostProcess = 49,
+        PostRenderWorld = 50,
+        PreRender = 51,
+        PreRenderPostProcess = 52,
+        PreRenderWorld = 53,
+        ProcessInput = 54,
+        ShouldRender = 55,
     }
     enum State {
         Disabled = 0,
@@ -3626,6 +3634,7 @@ declare class WorldRenderer {
     getPixelSize(): number;
     getZoom(): number;
     getTileScale(): number;
+    setTileScale(tileScale: number): void;
     setZoom(zoom: number): void;
     setViewport(view: Vec2): void;
     getViewport(): Vec2;
@@ -3722,6 +3731,13 @@ interface IPointZ extends IPoint {
 interface IInputMovement extends IPoint {
     keyBind: KeyBind;
     direction: FacingDirection;
+}
+interface IDamageInfo {
+    amount: number;
+    type: DamageType;
+    weaponName?: string;
+    creature?: Creature.ICreature;
+    skipMilestones?: boolean;
 }
 interface IHighscore {
     name: string;
@@ -3837,7 +3853,7 @@ declare class Game implements IPropSerializable {
     spriteTextureSizeInversed: Vec2;
     tileTexture: WebGLTexture;
     tileTextureSizeInversed: Vec2;
-    particleSystem: ParticleSystem;
+    particle: Particle.Particle;
     flowFieldManager: FlowFieldManager;
     fov: FieldOfView;
     debugRenderer: ITextureDebugRenderer;
@@ -3887,7 +3903,6 @@ declare class Game implements IPropSerializable {
     updateCraftTableAndWeightNextTurn(): void;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
-    createParticles(tileX: number, tileY: number, r: number, g: number, b: number, count?: number): void;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     getBlackness(): number;
     getAmbientLightLevel(): number;
@@ -4167,7 +4182,7 @@ declare namespace Item {
     function moveToContainer(item: IItem, container: IContainer): void;
     function hasRoomInContainer(extraWeight: number, container: IContainer): boolean;
     function breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
-    function spawn(itemTypes: Array<ItemType> | null, x: number, y: number, z: number): void;
+    function spawn(itemTypes: ItemType[] | null, x: number, y: number, z: number): void;
     function resetMapsInContainer(container: IContainer): void;
     function getTileContainer(x: number, y: number, z: number): IContainer;
     function getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
@@ -4239,24 +4254,38 @@ declare namespace Notifier {
         private renderNote(note);
     }
 }
-declare class ParticleSystem {
-    private static shaderProgram;
-    private count;
-    private capacity;
-    private positionSizeBuf;
-    private colorBuf;
-    private gl;
-    private particles;
-    private positionSizeData;
-    private colorData;
-    private particleSize;
-    private lastUsedParticle;
-    constructor(gl: WebGLRenderingContext, maxParticles?: number);
-    spawn(tileX: number, tileY: number, r: number, g: number, b: number, count: number): void;
-    clear(): void;
-    simulate(dt: number): boolean;
-    render(x: any, y: any): void;
-    private findUnusedParticle();
+declare enum ParticleType {
+    Fire = 0,
+    Water = 1,
+    Blood = 2,
+}
+declare namespace Particle {
+    interface RGB {
+        r: number;
+        g: number;
+        b: number;
+    }
+    const defines: RGB[];
+    class Particle {
+        private static shaderProgram;
+        private count;
+        private capacity;
+        private positionSizeBuf;
+        private colorBuf;
+        private gl;
+        private particles;
+        private positionSizeData;
+        private colorData;
+        private particleSize;
+        private lastUsedParticle;
+        constructor(gl: WebGLRenderingContext, maxParticles?: number);
+        spawn(tileX: number, tileY: number, r: number, g: number, b: number, count: number): void;
+        create(tileX: number, tileY: number, particle: RGB, count?: number): void;
+        clear(): void;
+        simulate(dt: number): boolean;
+        render(x: any, y: any): void;
+        private findUnusedParticle();
+    }
 }
 declare class PlayerDefense extends Defense {
     base: number;
@@ -4583,6 +4612,112 @@ declare namespace UI {
         private createParticles();
     }
 }
+interface JQuery {
+    functionalSortable(data: string, ...args: any[]): void;
+    functionalSortable(data: ISortableOptions): ISortable;
+}
+interface ISortableEvent {
+    item?: JQuery;
+    placeholder?: JQuery;
+    helper?: JQuery;
+    initialContainer: JQuery;
+    targetContainer?: JQuery;
+}
+interface ISortableOptions {
+    connectWith?: string;
+    appendTo?: JQuery;
+    zIndex?: number;
+    distance?: number;
+    cursorAt?: {
+        top: number;
+        left: number;
+    };
+    onlyReceive?: boolean;
+    onStart: (sortableEvent: ISortableEvent) => void;
+    onOver: (sortableEvent: ISortableEvent) => void;
+    onChange: (sortableEvent: ISortableEvent) => void;
+    onOut: (sortableEvent: ISortableEvent) => void;
+    onReceive: (sortableEvent: ISortableEvent) => void;
+    onStop: (sortableeEvent: ISortableEvent) => void;
+}
+interface ISortableItem {
+    element: JQuery;
+    left: number;
+    top: number;
+    width: number;
+    height: number;
+}
+interface ISortable {
+    helper?: JQuery;
+    start: (event: JQueryEventObject) => void;
+    stop: () => void;
+    cancel: () => void;
+    refreshItems: () => void;
+    runAction: (action: string) => (JQuery | boolean | undefined);
+}
+declare class Sortable implements ISortable {
+    item?: JQuery;
+    placeholder?: JQuery;
+    helper?: JQuery;
+    initialContainer: JQuery;
+    targetContainer?: JQuery;
+    private _options;
+    private items;
+    private initialEvent?;
+    constructor(element: JQuery, options: ISortableOptions);
+    start(event: JQueryEventObject): void;
+    stop(): void;
+    cancel(): void;
+    refreshItems(): void;
+    runAction(action: string): JQuery | boolean | undefined;
+    private _refreshItemPositions();
+    private _updateHelperPosition(x, y);
+    private _onMouseDown(event);
+    private _onMouseMove(event);
+    private _onMouseUp(event);
+    private _onMouseLeave(event);
+    private _getMousePosition(event);
+    private _createEvent();
+}
+interface JQuery {
+    functionalTooltip(data: string, ...args: any[]): void;
+    functionalTooltip(data: ITooltipOptions): ITooltip;
+}
+interface ITooltipOptions {
+    selector: string;
+    disabled?: boolean;
+    trackMouse?: boolean;
+    position?: ITooltipPosition;
+    onOpen?: (target: JQuery) => void;
+    onClose?: (target: JQuery) => void;
+    onPosition?: (target: JQuery) => ITooltipPosition;
+    content: (target: JQuery) => void;
+}
+interface ITooltip extends ITooltipOptions {
+    visible: HTMLElement | null;
+    lastEvent: string;
+    element: HTMLElement;
+    width: number;
+    height: number;
+    show: (event: MouseEvent) => void;
+    updateTooltipPosition: (left: number, top: number, mouseX: number, mouseY: number) => void;
+}
+interface ITooltipPosition {
+    startAtRight?: boolean;
+    startAtBottom?: boolean;
+    centerX?: boolean;
+    centerY?: boolean;
+    leftOffset?: number;
+    topOffset?: number;
+    clampRight?: boolean;
+}
+declare let tooltips: {
+    [index: number]: ITooltip;
+};
+declare let tooltipsMap: {
+    [index: string]: number;
+};
+declare let globalTooltipId: number;
 declare namespace UI {
     class HelpScreen extends BaseScreen {
         elementOverlay: JQuery;
@@ -4662,7 +4797,9 @@ declare namespace UI {
         private multipleContainersOpened;
         private sortableElement;
         private sortableElementPosition;
+        private sortableElementTargetContainer;
         private sortingCancelled;
+        private onSortableAction;
         private craftableItemTypes;
         private nonCraftableItemTypes;
         private messages;
@@ -4678,8 +4815,8 @@ declare namespace UI {
         pressHotKey(hotKeyNumber: number): boolean;
         useQuickSlot(slot: number): boolean;
         isSorting(): boolean;
+        runSortableAction(action: string): void;
         cancelSorting(): void;
-        cancelSortingAndRemoveItems(): void;
         setupContextMenu(): any;
         onShow(): void;
         onHide(): void;
@@ -4721,6 +4858,7 @@ declare namespace UI {
         syncItemElements(itemId: number, selector?: JQuery | null): void;
         syncDamagedDecayed(item: Item.IItem, element: JQuery): void;
         addItemToContainer(item: Item.IItem, container: Item.IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
+        insertItemElementToContainer(itemElement: JQuery, containerElement: JQuery): void;
         onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | null, isInventoryContainer: boolean): void;
         afterAddingMultipleItemsToContainer(container: Item.IContainer): void;
         removeItemFromContainer(item: Item.IItem, container: Item.IContainer): void;
@@ -4761,7 +4899,7 @@ declare namespace UI {
         removeItemFromQuickSlot(itemId: number | null): void;
         updateQuickSlotItem(quickSlot: number): boolean;
         onUpdateQuickSlotsOrEquips(): void;
-        onSortableItemReceive(event: JQueryEventObject, uiObject: JQueryUI.SortableUIParams): void;
+        onSortableItemReceive(sortableEvent: ISortableEvent): void;
         getEquipSlotItemElement(equip: EquipType): JQuery;
         getItemIdInEquipSlot(equip: EquipType): number | null;
         setEquipSlot(equip: EquipType, itemId: number | null, internal?: boolean): void;
@@ -4780,7 +4918,6 @@ declare namespace UI {
         openContainer(container: Item.IContainer, containerName?: string | null): void;
         closeContainer(container: Item.IContainer): void;
         closeContainerDialog(containerDialog: JQuery | null): void;
-        onContainerClose(container: Item.IContainer): JQuery | null;
         closeStaticContainers(): void;
         closeAllContainers(): boolean;
         updateContainerName(containerDialogElement: JQuery): void;
@@ -4887,6 +5024,7 @@ declare namespace UI {
         elementEndGameHighscore: JQuery;
         selector(): string;
         bindElements(): void;
+        updateScrollableContainers(this: Element): void;
         unbindElements(): void;
         onShow(data?: any): void;
         onHide(): void;
@@ -4896,6 +5034,7 @@ declare namespace UI {
         refreshMods(): void;
         refreshHighscores(): void;
         updateModState(element: JQuery, id: number): void;
+        setAllModStates(state: Mods.State): void;
         postUpdateModState(): void;
         onAction(actionId: string, element: JQuery): void;
         actionNewGame(): void;
