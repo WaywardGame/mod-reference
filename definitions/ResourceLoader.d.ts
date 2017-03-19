@@ -1,0 +1,36 @@
+import { IResourceContainer, IResourceLoader, PathType } from "IResourceLoader";
+import { IImageOverrideDescription } from "mod/IModManager";
+export default class ResourceLoader implements IResourceLoader {
+    private concurrent;
+    private loadingCount;
+    private loadingInterval;
+    private waitingSlots;
+    private maxConcurrent;
+    private spritePacker;
+    private tilePacker;
+    private subTileSize;
+    private imageOverrides;
+    initialize(gl: WebGLRenderingContext): void;
+    loadResources(container: IResourceContainer): void;
+    continueLoading(): void;
+    takeLoadingSlot(callback: () => void): void;
+    releaseLoadingSlot(): void;
+    getPath(pathType: PathType, index: number): string;
+    getImageOverride(src: string): Partial<IImageOverrideDescription>;
+    private loadResourcesInternal(container);
+    private loadCharacter();
+    private loadCreatures();
+    private loadCreature(creatureType);
+    private loadCorpses();
+    private loadCorpse(creatureType);
+    private loadItems();
+    private loadItem(itemType, path);
+    private loadEquip(itemType, path);
+    private loadTerrains();
+    private loadTerrain(terrainType);
+    private loadDoodads();
+    private loadDoodad(doodadType);
+    private loadHairstyles();
+    private loadHairstyle(hairstyle);
+    private loadOthers();
+}
