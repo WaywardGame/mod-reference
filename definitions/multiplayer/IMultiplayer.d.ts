@@ -13,6 +13,7 @@ export interface IMultiplayer {
     kick(player: IPlayer): void;
     onPlaying(): void;
     sendPacket(player: IPlayer, packet: Packet): void;
+    setMatchmakingServer(host: string): void;
     syncPacket(packet: Packet, clientSide?: () => any): any;
     updatePlayerId(oldPid: number, newPid: number): void;
 }

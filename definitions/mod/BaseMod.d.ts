@@ -2,7 +2,7 @@ import { ActionCallback } from "action/IAction";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import { ItemType } from "Enums";
-import { IItemDescription } from "item/IItem";
+import { IActionDescription, IItemDescription } from "item/IItem";
 import { IHairstyleDescription } from "player/IPlayer";
 import { ISkillDescription } from "player/Skills";
 import { ITerrainDescription, ITerrainResourceItem } from "tile/ITerrain";
@@ -25,7 +25,7 @@ export declare abstract class BaseMod {
     getButtons(): IButton[];
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     getDialog(title: string): JQuery;
-    addActionType(name: string, description: string, callback: ActionCallback): number;
+    addActionType(description: IActionDescription, callback: ActionCallback): number;
     addSkillType(description: ISkillDescription): number;
     addHairstyle(description: IHairstyleDescription): number;
     addItem(description: IItemDescription): number;

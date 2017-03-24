@@ -58,5 +58,6 @@ export interface IItemManager {
     resetMapsInContainer(container: IContainer): void;
     saveTileReferences(tileContainers: ITileContainer[]): void;
     spawn(itemTypes: ItemType[] | null, x: number, y: number, z: number): void;
+    generateLookups(): void;
 }
 export default IItemManager;

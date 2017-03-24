@@ -22,6 +22,7 @@ export default class Multiplayer implements IMultiplayer {
     isServer(): boolean;
     isClient(): boolean;
     getOptions(): IMultiplayerOptions;
+    setMatchmakingServer(host: string): void;
     createServer(channel: string, options?: IMultiplayerOptions): void;
     joinServer(channel: string): void;
     kick(player: IPlayer): void;

@@ -8,4 +8,3 @@ export declare function RecipeComponent(type: (ItemType | ItemTypeGroup), requir
 export declare function isItemTypeGroup(itemType: ItemType | ItemTypeGroup | IItemTypeGroup): itemType is ItemTypeGroup;
 export declare function isCustomItemTypeGroup(itemType: ItemType | ItemTypeGroup | IItemTypeGroup): itemType is IItemTypeGroup;
 export declare function isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup | IItemTypeGroup): boolean;
-export declare function generateLookups(): void;

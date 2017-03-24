@@ -60,6 +60,7 @@ export default class ItemManager implements IItemManager {
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
     checkMilestones(player: IPlayer, item: IItem): void;
     getDefaultDurability(): number;
+    generateLookups(): void;
     private loadReference(container);
     private removeFromContainerInternal(item);
     private updateUiOnItemRemove(player, item, willBeAnywhereInInventory?);
