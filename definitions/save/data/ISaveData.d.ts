@@ -14,7 +14,7 @@ export interface ISaveData {
         };
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Enums.IEnumInfoInternal;
+        [index: string]: Enums.IEnumInfo;
     };
 }
 export default ISaveData;

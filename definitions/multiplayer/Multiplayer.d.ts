@@ -13,12 +13,12 @@ export default class Multiplayer implements IMultiplayer {
     private _isServer;
     private _channel;
     private _options;
-    private _buffer;
     private _isProcessingPacket;
     private _syncPacketCount;
     private _pausedForSyncIssues;
     constructor();
     isConnected(): boolean;
+    isReady(): boolean;
     isServer(): boolean;
     isClient(): boolean;
     getOptions(): IMultiplayerOptions;
@@ -46,6 +46,7 @@ export default class Multiplayer implements IMultiplayer {
     private onDataChannelReceived(connection, event);
     private onDataChannelChanged(connection, event);
     private onDataChannelMessage(connection, event);
+    private processMessage(connection, data);
     private executeSyncedPacketInternal(packetObjectOrType, excludeConnection?);
     private processPacket(connection, packet);
     private synchronizationCheck(packet, expectedSeed, expectedHistory?);

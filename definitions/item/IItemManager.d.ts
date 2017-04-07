@@ -1,5 +1,5 @@
 import { IDoodad } from "doodad/IDoodad";
-import { IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup } from "Enums";
+import { IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
 import { IContainable, IContainer, IContainerReference, IItem, IItemArray, IRecipe } from "IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -16,12 +16,11 @@ export interface IItemManager {
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality, fake?: boolean): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     decayItems(): boolean;
-    derefenceContainerReference(containerRef: IContainerReference): Object | null;
-    getComponentWeight(recipe: IRecipe): number;
+    derefenceContainerReference(containerRef: IContainerReference): object | null;
     getContainerReference(container: IContainer | null): IContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
-    getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality): IItemArray;
+    getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality | undefined): IItemArray;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | null;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | null;
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | null;
@@ -34,7 +33,7 @@ export interface IItemManager {
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;
-    getWeight(itemType: ItemType): number;
+    getWeight(itemType: ItemType, weightType?: WeightType): number;
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;

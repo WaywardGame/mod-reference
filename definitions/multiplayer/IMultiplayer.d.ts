@@ -8,6 +8,7 @@ export interface IMultiplayer {
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
     isConnected(): boolean;
+    isReady(): boolean;
     isServer(): boolean;
     joinServer(serverId: string): void;
     kick(player: IPlayer): void;

@@ -18,6 +18,6 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         language: string | null;
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Enums.IEnumInfoInternal;
+        [index: string]: Enums.IEnumInfo;
     };
 }

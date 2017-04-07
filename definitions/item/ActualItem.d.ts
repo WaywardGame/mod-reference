@@ -26,7 +26,7 @@ export default class ActualItem implements IItem, IContainer, IContainable, IPro
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;
-    setDisassemblyAndWeight(): void;
+    verifyAndFixItem(): void;
     damage(modifier?: number): void;
     isDamaged(): boolean;
     isEquipped(): boolean;

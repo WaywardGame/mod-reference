@@ -17,7 +17,7 @@ export interface ISaveDataGlobal {
         language: string | null;
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Enums.IEnumInfoInternal;
+        [index: string]: Enums.IEnumInfo;
     };
 }
 export default ISaveDataGlobal;

@@ -35,7 +35,6 @@ export interface IGame extends IPropSerializable {
     tileEvents: ITileEvent[];
     corpses: ICorpse[];
     creatureSpawnTimer: number;
-    hintIndex: number;
     messageTimer: number;
     saveClear: boolean;
     playing: boolean;

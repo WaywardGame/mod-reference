@@ -42,7 +42,7 @@ export interface IItem extends IObject, IContainable {
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;
-    setDisassemblyAndWeight(): void;
+    verifyAndFixItem(): void;
     damage(modifier?: number): void;
     isDamaged(): boolean;
     isDecayed(): boolean;

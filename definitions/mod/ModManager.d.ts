@@ -14,6 +14,7 @@ export default class ModManager implements IModManager {
     private cachedHookNames;
     private internalMods;
     private internalModsElectron;
+    constructor();
     isToggleable(mod: IModInfo): boolean;
     loadAll(callback: () => void): void;
     unloadAll(reset?: boolean): void;

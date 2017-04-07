@@ -1,5 +1,5 @@
 import { IDoodad } from "doodad/IDoodad";
-import { IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup } from "Enums";
+import { IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
 import { IContainable, IContainer, IContainerReference, IItem, IItemArray, IRecipe } from "item/IItem";
 import IItemManager from "item/IItemManager";
 import { Message } from "language/Messages";
@@ -8,14 +8,18 @@ import { ITileContainer } from "tile/ITerrain";
 import { ITile } from "tile/ITerrain";
 export default class ItemManager implements IItemManager {
     private worldContainer;
+    private cachedWeights;
+    private cachedDecaysIntoWeights;
+    private cachedDefaultItemForGroup;
+    constructor();
     getContainerReference(container: IContainer | null): IContainerReference;
-    derefenceContainerReference(containerRef: IContainerReference): Object | null;
+    derefenceContainerReference(containerRef: IContainerReference): object | null;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean): void;
     removeContainerItems(container: IContainer): void;
     remove(item: IItem): void;
-    getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality): IItemArray;
-    getComponentWeight(recipe: IRecipe): number;
-    getWeight(itemType: ItemType): number;
+    getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality | undefined): IItemArray;
+    getWeight(itemType: ItemType, weightType?: WeightType): number;
+    weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     isContainer(obj: IItem | IDoodad | IContainer | ITile | IPlayer): obj is IContainer;
@@ -57,7 +61,7 @@ export default class ItemManager implements IItemManager {
     loadReferences(): void;
     saveTileReferences(tileContainers: ITileContainer[]): void;
     loadTileReferences(): void;
-    getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
+    getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup, weightType?: WeightType): ItemType;
     checkMilestones(player: IPlayer, item: IItem): void;
     getDefaultDurability(): number;
     generateLookups(): void;

@@ -15,6 +15,6 @@ export default class SaveData implements ISaveData {
         };
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Enums.IEnumInfoInternal;
+        [index: string]: Enums.IEnumInfo;
     };
 }

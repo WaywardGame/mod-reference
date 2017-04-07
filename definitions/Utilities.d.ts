@@ -99,16 +99,12 @@ export declare module Enums {
         SkinColor = 10,
     }
     interface IEnumInfo {
-        modIndex?: number;
+        enumId: EnumId;
         enumName: string;
-        name: string;
         enumNumber: number;
-        object?: any;
+        name: string;
         onUnallocate?: ((index: number) => void);
-    }
-    interface IEnumInfoInternal extends IEnumInfo {
-        objectValue?: any;
-        windowKeys?: string[];
+        modIndex?: number;
     }
     function initialize(): void;
     function initializeGameState(): void;
@@ -119,7 +115,7 @@ export declare module Enums {
     function isModdable(enumObject: any): boolean;
     function restore(): void;
     function reset(): void;
-    function allocate(modIndex: number, id: Enums.EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): IEnumInfo | null;
+    function allocate(modIndex: number, id: Enums.EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): IEnumInfo | undefined;
     function unallocate(enumInfo: IEnumInfo): void;
     function unallocateMod(modIndex: number): void;
     function getKeys(enumObject: any): string[];

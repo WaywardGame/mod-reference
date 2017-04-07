@@ -12,7 +12,7 @@ export default class CreatureManager implements ICreatureManager {
     spawnClawWorm(player: IPlayer): void;
     remove(creature: ICreature): void;
     isInRange(creatureId: number): void;
-    updateFov(excludeLocal: boolean): void;
+    updateFov(): number;
     updateAll(): void;
     getMoveTypesInFov(): IMoveTypeZ[];
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;

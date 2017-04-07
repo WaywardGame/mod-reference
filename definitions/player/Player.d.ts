@@ -39,7 +39,6 @@ export default class Player implements IPlayer {
         poisoned: boolean;
     };
     swimming: boolean;
-    stepCounter: number;
     resting: boolean;
     dehydration: number;
     dexterity: number;
