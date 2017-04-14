@@ -982,10 +982,9 @@ export declare function addDefaultBind(key: KeyBind, value: number, type?: BindT
 export declare function removeDefaultKeybind(key: KeyBind): void;
 export declare const hotKeyNumbers: KeyBind[];
 export declare enum TurnType {
-    Resting = 0,
-    CheckUnderPlayer = 1,
-    DontEnterCaves = 2,
-    ForcePickUp = 3,
+    CheckUnderPlayer = 0,
+    DontEnterCaves = 1,
+    ForcePickUp = 2,
 }
 export declare const keyCodes: string[];
 export declare enum ScreenId {

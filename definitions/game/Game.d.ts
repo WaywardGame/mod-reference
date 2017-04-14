@@ -38,6 +38,7 @@ export default class Game implements IGame {
     unloading: boolean;
     spawnCoords: IPointZ;
     fadeInAmount: number;
+    flowFieldSyncCount: number;
     contaminatedWater: IPointZ[];
     corpses: ICorpse[];
     creatures: ICreature[];
@@ -75,6 +76,7 @@ export default class Game implements IGame {
     private loadedWorld;
     private shouldUpdateFieldOfView;
     private shouldUpdateCraftTableAndWeight;
+    private playOptions;
     constructor();
     setGlContextSize(width: number, height: number): void;
     resizeRenderer(): void;
@@ -99,9 +101,9 @@ export default class Game implements IGame {
     removePlayer(pid: number): void;
     postLoadResources(): void;
     setRealTime(enabled: boolean): void;
-    synchronizeFlowFields(excludeLocal?: boolean): void;
+    synchronizeFlowFields(plys: IPlayer[]): void;
     enableFlowFieldDebug(): void;
-    resetGameState(): void;
+    resetGameState(skipSave?: boolean): void;
     shouldRender(): number;
     makeCaveEntrance(player: IPlayer): TerrainType | null;
     hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
@@ -109,7 +111,7 @@ export default class Game implements IGame {
     updateCraftTableAndWeightNextTick(): void;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     getBlackness(): number;
-    getAmbientLightLevel(): number;
+    getAmbientLightLevel(z: number): number;
     updateReputation(reputation: number): void;
     getReputation(): number;
     getMalignity(): number;
@@ -126,7 +128,7 @@ export default class Game implements IGame {
     getMovementFinishTime(): number;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     tickRealtime(): void;
-    updateGame(resting?: boolean): void;
+    updateGame(): void;
     checkAndRemoveBlood(player: IPlayer): boolean;
     /**
      * AVOID USING THIS. USE updateCraftTableAndWeightNextTick INSTEAD!
@@ -136,10 +138,15 @@ export default class Game implements IGame {
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     getPlayerAtTile(tile: ITile, includeGhosts?: boolean): IPlayer | undefined;
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean): IPlayer | undefined;
+    getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
+    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
     getNearestPlayer(x: number, y: number): IPlayer | undefined;
+    getPlayerByPid(pid: number): IPlayer | undefined;
+    getPlayerByIdentifier(identifier: string): IPlayer | undefined;
     getPlayerByName(name: string): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean): IPlayer[];
     getHeight(z0: number, z1: number, d: number): number;
+    getLightSourceAt(x: number, y: number, z: number): number;
     setupSave(_: number): void;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
@@ -153,7 +160,7 @@ export default class Game implements IGame {
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
-    private tick(turnType?);
+    private tick();
     private processTimers();
     private processAutoSave();
     private tickDayNightCycle();
@@ -171,8 +178,9 @@ export default class Game implements IGame {
     private initializeGameState(isTravelling?);
     private setupWorldResources();
     private setZoomLevel();
-    private postGenerateWorld();
-    private playGame();
+    private postGenerateWorld(options);
+    private playGame(options);
     private upgradeSave(saveVersion);
+    private upgradeSaveMoveProperty(fromObject, toObject, propertyName, toPropertyName?);
     private upgradeGlobalSave(saveVersion);
 }

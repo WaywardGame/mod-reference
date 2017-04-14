@@ -8,7 +8,6 @@ export interface IFlowFieldManager {
             [index: number]: IFlowField;
         };
     };
-    fullUpdate(): void;
     getHeight(): number;
     getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
     getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;

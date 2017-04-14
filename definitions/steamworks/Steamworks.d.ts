@@ -22,6 +22,7 @@ export default class Steamworks implements ISteamworks {
     private initializingMods;
     private logsPath;
     private logFilePath;
+    private multiplayerLogFilePath;
     private modsPath;
     private workshopPath;
     private workshopModsPath;
@@ -43,12 +44,13 @@ export default class Steamworks implements ISteamworks {
     setOverlayWorks(overlayWorks: boolean): void;
     setupMods(callback: () => void): void;
     getSteamId(): ISteamId;
+    getScreenName(): string | undefined;
     getBetaName(): string;
     getPublishedMods(): IWorkshopItem[];
     setRichPresence(key: string, value: string): boolean;
     clearRichPresence(): void;
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
-    fillOutMod(index: number, item?: IWorkshopItem): void;
+    fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     publishMod(modIndex: number, callback: (err?: string, publishedFileId?: string) => void): void;
     createArchive(id: string, source: string, callback: (err?: string) => void): void;
     getPublishedItems(callback: (err: string | undefined, items?: IWorkshopItem[]) => void): void;
@@ -71,6 +73,11 @@ export default class Steamworks implements ISteamworks {
     onReady(): void;
     setupReporting(): void;
     recordProblem(message: string): void;
+    setupMultiplayerLog(): void;
+    multiplayerLog(...args: any[]): void;
+    multiplayerLogSkipConsole(...args: any[]): void;
+    multiplayerLogError(...args: any[]): void;
+    private appendToMultiplayerLog(...args);
     private setupAndInitializeWorkshopMods(callback, retried?);
     private initializeModsFromFolder(folderName, modType, callback);
     private enumerateInstalledWorkshopMods(callback);
@@ -91,4 +98,5 @@ export default class Steamworks implements ISteamworks {
     private getSharePathForModZip(name);
     private getSharePathForModImage(name);
     private recordEvent(categorySuffix, action);
+    private parseConnectArgument(arg);
 }

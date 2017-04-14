@@ -1,14 +1,15 @@
-import { Delay, EquipType, FacingDirection, IInputMovement, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestType, SfxType, SkillType, TurnType, WorldZ } from "Enums";
+import { Delay, EquipType, FacingDirection, IInputMovement, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, SfxType, SkillType, TurnType, WorldZ } from "Enums";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
-import { UiMessage } from "language/ILanguage";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayer, IPlayerCustomization } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { ITile } from "tile/ITerrain";
+import { HintType } from "ui/IHint";
+import { IContainerSortInfo, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 export default class Player implements IPlayer {
     private static gameMovement;
     id: number;
@@ -94,6 +95,15 @@ export default class Player implements IPlayer {
     equipped: {
         [index: number]: number;
     };
+    dialogInfo: {
+        [index: string]: IDialogInfo;
+    };
+    dialogContainerInfo: IDialogInfo[];
+    quickSlotInfo: IQuickSlotInfo[];
+    containerSortInfo: {
+        [index: string]: IContainerSortInfo;
+    };
+    currentHint: HintType;
     movement: IInputMovement;
     movementProgress: number;
     movementFinishTime: number;
@@ -107,9 +117,11 @@ export default class Player implements IPlayer {
     private lastKeyBindSynced;
     private lastKeyBindSyncedState;
     constructor();
+    resetMovementStates(): void;
     createFlowFieldManager(): void;
     attributes(): void;
     setId(id: number): void;
+    updateName(): void;
     setRaft(itemId: number | undefined): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaCheck(): boolean;
@@ -118,6 +130,7 @@ export default class Player implements IPlayer {
     calculateEquipmentStats(): void;
     canCarve(): IItem | undefined;
     canJump(): boolean;
+    canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     getHandToUse(): EquipType | undefined;
     getEquippedItems(): IItem[];
     getEquippedItem(slot: EquipType): IItem | undefined;
@@ -158,8 +171,8 @@ export default class Player implements IPlayer {
     isLocalPlayer(): boolean;
     isGhost(): boolean;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
-    tick(turnType?: TurnType): void;
-    rest(restType: RestType, cycles: number, loadingMessage: UiMessage, item?: IItem): void;
+    passTurn(turnType?: TurnType): void;
+    tick(isPassTurn?: boolean): void;
     calculateStats(): void;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
@@ -167,8 +180,8 @@ export default class Player implements IPlayer {
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     processInput(): void;
     private processMovement(turnType?);
-    private processTimers(resting?);
-    private swimCheck();
+    private processTimers();
+    private swimCheck(isPassTurn);
     private canTryCarve();
     private statGain(stat, bypass);
     private resetDefense();

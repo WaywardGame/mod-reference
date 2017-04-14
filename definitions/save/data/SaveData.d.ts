@@ -1,4 +1,4 @@
-import ISaveData from "save/data/SaveData";
+import ISaveData from "save/data/ISaveData";
 import { Enums } from "Utilities";
 export default class SaveData implements ISaveData {
     gameSlotName: string;

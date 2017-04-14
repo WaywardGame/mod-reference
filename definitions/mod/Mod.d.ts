@@ -35,6 +35,28 @@ export declare abstract class Mod extends BaseMod {
      */
     onSave(): any;
     /**
+     *  Get the ambient color while in caves
+     * @returns the ambient color channels (3 numbers) or undefined to use the default color
+     */
+    getAmbientColorCave(): number[] | undefined;
+    /**
+     *  Get the ambient color while its day time
+     * @returns the ambient color channels (3 numbers) or undefined to use the default color
+     */
+    getAmbientColorDay(): number[] | undefined;
+    /**
+     *  Get the ambient color while its night time
+     * @returns the ambient color channels (3 numbers) or undefined to use the default color
+     */
+    getAmbientColorNight(): number[] | undefined;
+    /**
+     * Get the ambient light level
+     * @param ambientLight The current ambient light level	 *
+     * @param z The world z index
+     * @returns the ambient light level or undefined to use the default light level
+     */
+    getAmbientLightLevel(ambientLight: number, z: number): number | undefined;
+    /**
      * Called before consuming an item
      * @param itemType The item type
      * @param actionType The action type
@@ -344,13 +366,28 @@ export declare abstract class Mod extends BaseMod {
      */
     postGenerateWorld(generateNewWorld: boolean): void;
     /**
-     * Called after rendering
+     * Called after rendering everything
      */
     postRender(): void;
     /**
-     * Called before rendering
+     * Caller after post processing the world render
+     */
+    postRenderPostProcess(): void;
+    /**
+     * Caller after rendering the world
+     * @param tileScale The tile scale
+     * @param viewWidth The width of the view port
+     * @param viewHeight The height of the view port
+     */
+    postRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
+    /**
+     * Called before rendering everything
      */
     preRender(): void;
+    /**
+     * Caller before post processing the world render
+     */
+    preRenderPostProcess(): void;
     /**
      * Called before rendering the world
      * @param tileScale The tile scale

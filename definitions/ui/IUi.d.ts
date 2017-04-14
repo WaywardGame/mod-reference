@@ -26,8 +26,8 @@ export interface IDialogInfo {
     open?: boolean;
     x?: number;
     y?: number;
-    width?: number;
-    height?: number;
+    width?: number | "auto";
+    height?: number | "auto";
     minWidth?: number;
     minHeight?: number;
     maxHeight?: number;
@@ -36,6 +36,7 @@ export interface IDialogInfo {
     onOpen?: () => void;
     onClose?: () => void;
     onResizeStop?: () => void;
+    resizable?: boolean;
 }
 export interface IQuickSlotInfo {
     itemType: ItemType;
@@ -52,20 +53,13 @@ export interface IContextMenuAction {
     data?: any;
 }
 export interface IUi extends IPropSerializable {
-    dialogInfo: {
-        [index: string]: IDialogInfo;
-    };
-    dialogContainerInfo: IDialogInfo[];
-    quickSlotInfo: IQuickSlotInfo[];
-    containerSortInfo: {
-        [index: string]: IContainerSortInfo;
-    };
     initialize(): void;
     initializeGameState(): void;
     setupButtons(): void;
     getBody(): JQuery;
     getWidth(): number;
     getHeight(): number;
+    removeStyle(id: string): void;
     appendStyle(id: string, styleContent: string): void;
     setRangeValue(id: string, value: number): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
@@ -123,7 +117,7 @@ export interface IUi extends IPropSerializable {
     isOptionsOverlayEnabled(): boolean;
     showTitleScreen(): void;
     refreshSlots(): void;
-    displayConfirmDialog(message: string, buttons: UiMessage[], callback?: (selection: UiMessage) => void, force?: boolean): void;
+    displayConfirmDialog(message: string | UiMessage, buttons: UiMessage[], callback?: (selection: UiMessage) => void, force?: boolean): void;
     displayInputDialog(message: UiMessage, buttonText: UiMessage, inputText: string, placeholder: string, callback?: (input: string) => void): void;
     displayHint(player: IPlayer | undefined, hintType: HintType, force?: boolean): void;
     displayChatMessage(player: IPlayer, message: string): void;

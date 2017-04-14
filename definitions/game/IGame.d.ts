@@ -74,6 +74,7 @@ export interface IGame extends IPropSerializable {
     addPlayer(playerOptions?: IPlayerOptions): IPlayer;
     addZoomLevel(amount: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
+    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
     changeTile(newTile: any, changeX: number, changeY: number, changeZ: number, stackTiles: boolean): void;
     checkAndRemoveBlood(player: IPlayer): boolean;
     checkForHiddenMob(player: IPlayer, x: number, y: number, z: number): void;
@@ -83,13 +84,14 @@ export interface IGame extends IPropSerializable {
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     enableFlowFieldDebug(): void;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
-    getAmbientLightLevel(): number;
+    getAmbientLightLevel(z: number): number;
     getAttack(): number;
     getBenignity(): number;
     getBlackness(): number;
     getCompletedMilestoneCount(): number;
     getFireMessage(decay: number): Message;
     getHeight(z0: number, z1: number, d: number): number;
+    getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number;
     getMovementFinishTime(): number;
     getName(object: IItem | ICreature | IDoodad | IPlayer | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
@@ -98,8 +100,11 @@ export interface IGame extends IPropSerializable {
     getOrCreateTile(x: number, y: number, z: number): ITile;
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean): IPlayer | undefined;
     getPlayerAtTile(tile: ITile, includeGhosts?: boolean): IPlayer | undefined;
+    getPlayerByPid(pid: number): IPlayer | undefined;
+    getPlayerByIdentifier(identifier: string): IPlayer | undefined;
     getPlayerByName(name: string): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean): IPlayer[];
+    getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getReputation(): number;
     getSerializationProperties(_: string): string[];
     getSkillPercent(skill: SkillType): number;
@@ -124,7 +129,7 @@ export interface IGame extends IPropSerializable {
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
-    resetGameState(): void;
+    resetGameState(skipSave?: boolean): void;
     resizeRenderer(): void;
     saveGame(saveType: SaveType, callback?: (slot?: number, bytes?: number, saveObject?: SaveObject) => void): void;
     setGlContextSize(width: number, height: number): void;
@@ -133,13 +138,13 @@ export interface IGame extends IPropSerializable {
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
     setupSave(_: number): void;
     shouldRender(): number;
-    synchronizeFlowFields(excludeLocal?: boolean): void;
+    synchronizeFlowFields(plys: IPlayer[]): void;
     tickRealtime(): void;
     updateCraftTableAndWeight(): void;
     updateCraftTableAndWeightNextTick(): void;
     updateFieldOfViewNextTick(): void;
     updateFlowFieldTile(x: number, y: number, z: number): void;
-    updateGame(resting?: boolean): void;
+    updateGame(): void;
     updateOption(player: IPlayer | undefined, id: string, value: boolean): void;
     updateReputation(reputation: number): void;
 }

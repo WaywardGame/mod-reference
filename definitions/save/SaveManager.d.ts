@@ -2,6 +2,7 @@ import { ISaveManager, SaveObject } from "save/ISaveManager";
 export default class SaveManager implements ISaveManager {
     private loadedGlobalSlot;
     private dataStorage;
+    private multiplayerSlotData;
     isEnabled(): boolean;
     useLocalStorage(): void;
     initialize(): void;

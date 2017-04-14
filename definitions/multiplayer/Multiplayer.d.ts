@@ -1,9 +1,9 @@
-import { IMultiplayer, IMultiplayerOptions } from "multiplayer/IMultiplayer";
+import { IMultiplayer, IMultiplayerOptions, MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
 import { Packet, PacketType } from "multiplayer/IPacket";
 import IPlayer from "player/IPlayer";
 export default class Multiplayer implements IMultiplayer {
-    private _identifier;
-    private _name;
+    private _playerIdentifier;
+    private _matchmakingIdentifier;
     private _server;
     private _serverChannel;
     private _clients;
@@ -13,14 +13,18 @@ export default class Multiplayer implements IMultiplayer {
     private _isServer;
     private _channel;
     private _options;
+    private _processPacketQueue;
+    private _packetProcessorIntervalId;
     private _isProcessingPacket;
     private _syncPacketCount;
-    private _pausedForSyncIssues;
+    private _disconnectedForSyncIssues;
+    private _syncChecks;
     constructor();
     isConnected(): boolean;
     isReady(): boolean;
     isServer(): boolean;
     isClient(): boolean;
+    isProcessingPacket(): boolean;
     getOptions(): IMultiplayerOptions;
     setMatchmakingServer(host: string): void;
     createServer(channel: string, options?: IMultiplayerOptions): void;
@@ -30,8 +34,10 @@ export default class Multiplayer implements IMultiplayer {
     sendPacket(player: IPlayer, packet: Packet): void;
     syncPacket(packet: Packet, clientSide?: () => any): void;
     executeSyncedPacket(packetObjectOrType: Packet | PacketType): number | undefined | void;
-    disconnect(): void;
+    disconnect(message?: string, callback?: () => void): void;
     updatePlayerId(oldPid: number, newPid: number): void;
+    addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
+    private disconnectAndResetGameState(uiMessage);
     private connectMatchmakingServer(channel);
     private disconnectMatchmakingServer();
     private onMatchmakingServerConnected();
@@ -46,14 +52,16 @@ export default class Multiplayer implements IMultiplayer {
     private onDataChannelReceived(connection, event);
     private onDataChannelChanged(connection, event);
     private onDataChannelMessage(connection, event);
-    private processMessage(connection, data);
     private executeSyncedPacketInternal(packetObjectOrType, excludeConnection?);
+    private packetProcessor();
     private processPacket(connection, packet);
-    private synchronizationCheck(packet, expectedSeed, expectedHistory?);
+    private synchronizationCheck(packet, checkBefore);
     private getPacketData(packet);
     private sendPacketInternal(packet, includeConnection?, excludeConnection?, force?);
-    private sendData(dataChannel, data, sendNow?);
+    private _sendData(connection, data, sendNow?);
     private sendMatchmakingMessage(data, channel?);
     private closeConnection(connection);
     private onStateChange();
+    private encodePacket(packet);
+    private decodePacket(buffer);
 }

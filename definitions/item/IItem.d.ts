@@ -157,7 +157,7 @@ export declare enum ContainerReferenceType {
 }
 export interface IInventoryContainerReference extends IContainerReference {
     pid: number;
-    absent?: boolean;
+    identifier?: string;
 }
 export declare type IWorldContainerReference = IContainerReference;
 export declare type ITileContainerReference = IContainerReference & IPointZ;

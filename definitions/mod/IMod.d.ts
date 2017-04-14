@@ -72,6 +72,7 @@ export interface IModConfig {
     multiplayerCompatible?: boolean;
     hooks?: string[];
     languages?: string[];
+    stylesheets?: string[];
     imageOverrides?: boolean;
     customizations?: boolean;
     publishedFileId?: string;

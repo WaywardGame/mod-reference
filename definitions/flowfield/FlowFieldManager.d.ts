@@ -25,9 +25,9 @@ export default class FlowFieldManager implements IFlowFieldManager {
     getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
     update(): void;
-    fullUpdate(): void;
     updateCenter(): boolean;
     private setCenter(worldX, worldY, worldZ);
+    private fullUpdate();
     private updateTileInternal(gridIndex, tile);
     private getDirection(field, localX, localY, toward);
     private getFlowField(z, moveType);

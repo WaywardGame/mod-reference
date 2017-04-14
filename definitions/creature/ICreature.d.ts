@@ -16,6 +16,7 @@ export interface ICreature extends IPointZ {
     enemyAttempts?: number;
     happiness?: number;
     chickenEggCounter?: number;
+    stopNextMovement?: boolean;
     description(): ICreatureDescription | undefined;
     id(): number | undefined;
     isHidden(): boolean;
@@ -36,7 +37,7 @@ export interface ICreature extends IPointZ {
     getMovementProgress(): number;
     getMovementFinishTime(): number;
     update(creatureId: number): boolean;
-    moveTo(x: number, y: number): boolean;
+    moveTo(x: number, y: number, z?: number): boolean;
     canSwapWith(player: IPlayer): boolean;
 }
 export declare enum SpawnGroup {

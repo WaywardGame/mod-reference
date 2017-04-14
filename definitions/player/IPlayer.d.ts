@@ -1,24 +1,33 @@
-import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestType, SfxType, SkillType, SkinColor, TurnType } from "Enums";
+import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, SfxType, SkillType, SkinColor, TurnType } from "Enums";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
-import { UiMessage } from "language/ILanguage";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IPropSerializable } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
+import { HintType } from "../ui/IHint";
+import { IContainerSortInfo, IDialogInfo, IQuickSlotInfo } from "../ui/IUi";
 export interface IPlayer extends IPropSerializable, IPointZ {
+    dialogInfo: {
+        [index: string]: IDialogInfo;
+    };
     attack: number;
     attackFromEquip: IAttackHand;
     benignity: number;
+    containerSortInfo: {
+        [index: string]: IContainerSortInfo;
+    };
+    currentHint: HintType;
     customization: IPlayerCustomization;
     deathBy: string;
     defense: PlayerDefense;
     defenses: number[];
     dehydration: number;
     dexterity: number;
+    dialogContainerInfo: IDialogInfo[];
     direction: IPoint;
     equipped: {
         [index: number]: number;
@@ -47,6 +56,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     nextX: number;
     nextY: number;
     options: IOptions;
+    quickSlotInfo: IQuickSlotInfo[];
     raft: number | undefined;
     resting: boolean;
     score: number;
@@ -70,10 +80,12 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     addDelay(delay: Delay, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number | null): void;
     attributes(): void;
+    burn(skipMessage?: boolean): number | null;
     calculateEquipmentStats(): void;
     calculateStats(): void;
     canCarve(): IItem | undefined;
     canJump(): boolean;
+    canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkReputationMilestones(): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
@@ -84,7 +96,6 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     damageEquipment(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean): void;
     getBindDownTime(key: KeyBind): number | undefined;
-    burn(skipMessage?: boolean): number | null;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
     getEquipSlotForItem(item: IItem): EquipType | undefined;
@@ -101,11 +112,12 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     isBindDown(key: KeyBind): boolean;
     isGhost(): boolean;
     isLocalPlayer(): boolean;
+    passTurn(turnType?: TurnType): void;
     processInput(): void;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     resetKeyBindState(): void;
-    rest(restType: RestType, cycles: number, loadingMessage: UiMessage, item?: IItem): void;
+    resetMovementStates(): void;
     setId(id: number): void;
     setMouseDirection(playerDirection: FacingDirection): void;
     setRaft(itemId: number | undefined): void;
@@ -115,11 +127,12 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaCheck(): boolean;
     staminaReduction(skillType: SkillType): void;
-    tick(turnType?: TurnType): void;
+    tick(isPassTurn?: boolean): void;
     unequip(item: IItem, internal?: boolean): void;
     unequipAll(): void;
     updateCraftTableAndWeight(): void;
     updateKeyBindState(key: KeyBind, state: number | undefined): void;
+    updateName(): void;
     updateReputation(reputation: number): void;
 }
 export default IPlayer;

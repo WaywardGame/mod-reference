@@ -39,6 +39,7 @@ export default class TitleScreen extends BaseScreen {
     elementSavedGameTemplate: JQuery;
     elementWorkshopMods: JQuery;
     elementWorkshopModsContainer: JQuery;
+    private hairstyleImageCache;
     selector(): string;
     bindElements(): void;
     updateClickableLeechList(): void;

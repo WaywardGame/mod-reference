@@ -6,17 +6,8 @@ import { IPlayer } from "player/IPlayer";
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
 import { HintType } from "ui/IHint";
-import { IContainerSortInfo, IDialogInfo, IQuickSlotInfo, IUi } from "ui/IUi";
+import { IDialogInfo, IUi } from "ui/IUi";
 export default class Ui implements IUi {
-    dialogInfo: {
-        [index: string]: IDialogInfo;
-    };
-    dialogContainerInfo: IDialogInfo[];
-    quickSlotInfo: IQuickSlotInfo[];
-    containerSortInfo: {
-        [index: string]: IContainerSortInfo;
-    };
-    currentHint: HintType;
     private keyCodeCache;
     private bindState;
     private rebindingKey;
@@ -43,6 +34,7 @@ export default class Ui implements IUi {
     getBody(): JQuery;
     getWidth(): number;
     getHeight(): number;
+    removeStyle(id: string): void;
     appendStyle(id: string, styleContent: string): void;
     setRangeValue(id: string, value: number): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
@@ -101,7 +93,7 @@ export default class Ui implements IUi {
     isOptionsOverlayEnabled(): boolean;
     showTitleScreen(): void;
     refreshSlots(): void;
-    displayConfirmDialog(message: string, buttons: UiMessage[], callback?: (selection: UiMessage) => void, force?: boolean): void;
+    displayConfirmDialog(message: string | UiMessage, buttons: UiMessage[], callback?: (selection: UiMessage) => void, force?: boolean): void;
     displayInputDialog(message: UiMessage, buttonText: UiMessage, inputText: string, placeholder: string, callback?: (input: string) => void): void;
     displayHint(player: IPlayer | undefined, hintType: HintType, force?: boolean): void;
     displayChatMessage(player: IPlayer, message: string): void;

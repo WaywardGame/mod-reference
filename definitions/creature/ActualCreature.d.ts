@@ -21,6 +21,7 @@ export default class ActualCreature implements ICreature, IPropSerializable, IUn
     respawned?: boolean;
     happiness?: number;
     chickenEggCounter?: number;
+    stopNextMovement?: boolean;
     private _moveType;
     private _shouldSkipNextUpdate;
     private _movementFinishTime;

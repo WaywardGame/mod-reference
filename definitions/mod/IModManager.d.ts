@@ -8,6 +8,7 @@ import Mod from "mod/Mod";
 import { IPlayer } from "player/IPlayer";
 import { IWorld } from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
+import { ILanguage } from "../language/ILanguage";
 export declare enum ModState {
     Disabled = 0,
     Enabled = 1,
@@ -39,6 +40,7 @@ export declare enum ModType {
 export interface IModProvides {
     scripts: boolean;
     languages: number;
+    stylesheets: number;
     imageOverrides: boolean;
     customizations: boolean;
 }
@@ -70,6 +72,8 @@ export interface IModInfo {
     lastUpdated?: string;
     imageOverrides?: IImageOverrides;
     customizations?: ICustomizations;
+    stylesheets?: string[];
+    languages?: ILanguage[];
 }
 export interface IModManager {
     canLoad(index: number, fromTitleScreen?: boolean, count?: number): CanLoadState;
@@ -99,7 +103,6 @@ export interface IModManager {
     isEnabledByName(name: string): boolean;
     isLoaded(index: number): boolean;
     isLoadedByName(name: string): boolean;
-    isToggleable(mod: IModInfo): boolean;
     isValid(index: number): boolean;
     load(index: number): void;
     loadAll(callback: () => void): void;

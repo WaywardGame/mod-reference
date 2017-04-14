@@ -31,10 +31,22 @@ export declare enum PacketType {
 export interface IPacketPlayerTarget {
     pid: number;
 }
+export interface IPacketPlayersTarget {
+    pids: number[];
+}
 export interface IPacketSynchronizationCheck {
+    type: PacketType;
+    packetId?: number;
+    beforeTicks?: number;
+    afterTicks?: number;
     beforeSeed?: number;
     afterSeed?: number;
+    beforePlayerPositions?: IPointZ[];
+    afterPlayerPositions?: IPointZ[];
     afterRandomHistory?: IRandomHistory[];
+    afterSyncChecks?: {
+        [index: number]: any[];
+    };
 }
 export interface IConnectPacket {
     type: PacketType.Connect;
@@ -47,6 +59,7 @@ export interface IWorldPacket extends IPacketPlayerTarget {
     playerCount: number;
     options: IMultiplayerOptions;
     saveObjectString: string;
+    initialFlowFieldPids: number[];
 }
 export interface IConnectedPacket {
     type: PacketType.Connected;
@@ -80,7 +93,7 @@ export interface IReadyPlayerPacket extends IPacketPlayerTarget {
 export interface IRemovePlayerPacket extends IPacketPlayerTarget {
     type: PacketType.RemovePlayer;
 }
-export interface ISynchronizeFlowFieldsPacket {
+export interface ISynchronizeFlowFieldsPacket extends IPacketPlayersTarget {
     type: PacketType.SynchronizeFlowFields;
 }
 export interface IShowLoadingScreenPacket {

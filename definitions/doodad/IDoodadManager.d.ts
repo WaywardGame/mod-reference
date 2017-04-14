@@ -11,7 +11,7 @@ export interface IDoodadManager {
     gather(player: IPlayer, doodad: IDoodad): void;
     canPickup(player: IPlayer, doodad: IDoodad, message?: boolean): boolean;
     pickup(player: IPlayer, x: number, y: number, z: number): void;
-    checkForTrampling(doodad: IDoodad, creatureId?: number | null): boolean;
+    checkForTrampling(playerOrCreatureId: IPlayer | number, doodad: IDoodad): boolean;
     getGardenFertilityMessage(spread: number): Message;
     getDurabilityMessage(doodad: IDoodad): Message;
     messageGardenFertility(player: IPlayer, spread: number): void;
