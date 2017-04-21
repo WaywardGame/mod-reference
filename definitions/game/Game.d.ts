@@ -19,7 +19,7 @@ export default class Game implements IGame {
     mapSize: number;
     mapSizeSq: number;
     halfMapSize: number;
-    realTimeNextTick: number | undefined;
+    realTimeNextTick: number;
     slot: number;
     loadedResources: boolean;
     version: string;
@@ -39,6 +39,12 @@ export default class Game implements IGame {
     spawnCoords: IPointZ;
     fadeInAmount: number;
     flowFieldSyncCount: number;
+    crafted: {
+        [index: number]: boolean;
+    };
+    newCrafted: {
+        [index: number]: boolean;
+    };
     contaminatedWater: IPointZ[];
     corpses: ICorpse[];
     creatures: ICreature[];
@@ -46,6 +52,9 @@ export default class Game implements IGame {
     doodads: IDoodad[];
     isRealTime: boolean;
     items: IItemArray;
+    lastCreationIds: {
+        [index: number]: number;
+    };
     savedHighscore: boolean;
     seeds: ISeeds;
     tile: ITileArray;
@@ -54,14 +63,7 @@ export default class Game implements IGame {
     tileEvents: ITileEvent[];
     time: TimeManager;
     lastPlayedVersion: string;
-    crafted: {
-        [index: number]: boolean;
-    };
-    newCrafted: {
-        [index: number]: boolean;
-    };
     highscores: IHighscore[];
-    visible: boolean;
     playedCount: number;
     glContext: WebGLRenderingContext | null;
     mapContext: CanvasRenderingContext2D | null;
@@ -73,6 +75,7 @@ export default class Game implements IGame {
     debugRenderer: ITextureDebugRenderer;
     notifier: INotifier;
     cartographyTexture: WebGLTexture;
+    visible: boolean;
     private loadedWorld;
     private shouldUpdateFieldOfView;
     private shouldUpdateCraftTableAndWeight;
@@ -114,6 +117,7 @@ export default class Game implements IGame {
     getAmbientLightLevel(z: number): number;
     updateReputation(reputation: number): void;
     getReputation(): number;
+    getDifficulty(): string;
     getMalignity(): number;
     getBenignity(): number;
     getStrength(): number;
@@ -129,7 +133,6 @@ export default class Game implements IGame {
     passTurn(player: IPlayer, turnType?: TurnType): void;
     tickRealtime(): void;
     updateGame(): void;
-    checkAndRemoveBlood(player: IPlayer): boolean;
     /**
      * AVOID USING THIS. USE updateCraftTableAndWeightNextTick INSTEAD!
      * For most cases you don't need this
@@ -143,8 +146,9 @@ export default class Game implements IGame {
     getNearestPlayer(x: number, y: number): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayerByIdentifier(identifier: string): IPlayer | undefined;
-    getPlayerByName(name: string): IPlayer | undefined;
+    getPlayerByName(name: string, ignoreCase?: boolean): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean): IPlayer[];
+    getValidPlayerName(name: string | undefined): string;
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     setupSave(_: number): void;

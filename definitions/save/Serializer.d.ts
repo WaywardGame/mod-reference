@@ -15,9 +15,11 @@ export default class Serializer implements ISerializer {
     private getSerializationProperties(object, version);
     private readObject(object, key);
     private readString();
+    private readArrayV2(object, key);
     private readArrayBuffer();
-    private writeObject(object, properties?);
+    private writeObject(object);
     private writeString(value);
+    private writeArrayV2(value);
     private writeArrayBuffer(object);
     private isInteger(nVal);
     private isByteSigned(num);

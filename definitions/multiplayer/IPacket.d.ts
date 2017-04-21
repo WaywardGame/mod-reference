@@ -1,9 +1,10 @@
 import { IDoodad } from "doodad/IDoodad";
-import { ActionType, AttackType, EquipType, FacingDirection, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, RestType } from "Enums";
-import IOptions from "game/IOptions";
-import { IContainer, IItem } from "item/IItem";
+import { ActionType, AttackType, EquipType, FacingDirection, IPoint, ItemQuality, ItemType, KeyBind, RestType } from "Enums";
+import { IPlayerOptions } from "game/IGame";
+import { IContainer, IContainerReference, IItem } from "item/IItem";
 import { UiMessage } from "language/ILanguage";
 import { IMultiplayerOptions } from "multiplayer/IMultiplayer";
+import { IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IRandomHistory } from "Utilities";
 export declare enum PacketType {
     Connect = 0,
@@ -27,6 +28,9 @@ export declare enum PacketType {
     ChatMessage = 18,
     SetPlayerZ = 19,
     Pause = 20,
+    UpdateItemOrder = 21,
+    UpdateQuickSlotInfo = 22,
+    UpdateDialogInfo = 23,
 }
 export interface IPacketPlayerTarget {
     pid: number;
@@ -37,29 +41,26 @@ export interface IPacketPlayersTarget {
 export interface IPacketSynchronizationCheck {
     type: PacketType;
     packetId?: number;
-    beforeTicks?: number;
-    afterTicks?: number;
-    beforeSeed?: number;
-    afterSeed?: number;
-    beforePlayerPositions?: IPointZ[];
-    afterPlayerPositions?: IPointZ[];
     afterRandomHistory?: IRandomHistory[];
-    afterSyncChecks?: {
-        [index: number]: any[];
-    };
+    beforeSyncChecks?: ISyncCheck;
+    afterSyncChecks?: ISyncCheck;
 }
 export interface IConnectPacket {
     type: PacketType.Connect;
-    name?: string;
-    options: IOptions;
-    completedMilestones: number;
+    playerOptions: IPlayerOptions;
 }
 export interface IWorldPacket extends IPacketPlayerTarget {
     type: PacketType.World;
     playerCount: number;
-    options: IMultiplayerOptions;
+    multiplayerOptions: IMultiplayerOptions;
     saveObjectString: string;
     initialFlowFieldPids: number[];
+    crafted: {
+        [index: number]: boolean;
+    };
+    newCrafted: {
+        [index: number]: boolean;
+    };
 }
 export interface IConnectedPacket {
     type: PacketType.Connected;
@@ -81,11 +82,7 @@ export interface IReorderItemsPacket {
 }
 export interface IAddPlayerPacket {
     type: PacketType.AddPlayer;
-    name?: string;
-    identifier?: string;
-    options: IOptions;
-    position: IPointZ;
-    completedMilestones: number;
+    playerOptions: IPlayerOptions;
 }
 export interface IReadyPlayerPacket extends IPacketPlayerTarget {
     type: PacketType.ReadyPlayer;
@@ -140,7 +137,22 @@ export interface IPausePacket {
     type: PacketType.Pause;
     paused?: boolean;
 }
-export declare type Packet = IConnectPacket | IWorldPacket | IConnectedPacket | ILoadedPacket | ITickPacket | IActionPacket | IReorderItemsPacket | IAddPlayerPacket | IReadyPlayerPacket | IRemovePlayerPacket | IShowLoadingScreenPacket | IHideLoadingScreenPacket | ISynchronizeFlowFieldsPacket | IUpdateOptionPacket | IKeyBindStatePacket | IUpdateDirectionPacket | IDisplayConfirmDialogPacket | IConfirmDialogSelectionPacket | IChatMessagePacket | ISetPlayerZPacket | IPausePacket;
+export interface IUpdateItemOrderPacket {
+    type: PacketType.UpdateItemOrder;
+    container: IContainerReference;
+    itemOrder: number[] | undefined;
+}
+export interface IUpdateQuickSlotInfoPacket {
+    type: PacketType.UpdateQuickSlotInfo;
+    quickSlot: number;
+    quickSlotInfo?: IQuickSlotInfo;
+}
+export interface IUpdateDialogInfoPacket {
+    type: PacketType.UpdateDialogInfo;
+    index: string | number;
+    info: IDialogInfo;
+}
+export declare type Packet = IConnectPacket | IWorldPacket | IConnectedPacket | ILoadedPacket | ITickPacket | IActionPacket | IReorderItemsPacket | IAddPlayerPacket | IReadyPlayerPacket | IRemovePlayerPacket | IShowLoadingScreenPacket | IHideLoadingScreenPacket | ISynchronizeFlowFieldsPacket | IUpdateOptionPacket | IKeyBindStatePacket | IUpdateDirectionPacket | IDisplayConfirmDialogPacket | IConfirmDialogSelectionPacket | IChatMessagePacket | ISetPlayerZPacket | IPausePacket | IUpdateItemOrderPacket | IUpdateQuickSlotInfoPacket | IUpdateDialogInfoPacket;
 export declare enum PacketObjectType {
     Array = 0,
     Item = 1,
@@ -158,6 +170,7 @@ export interface IActionArgumentPacket {
     container?: IPacketObject<IContainer>;
     containerName?: string;
     direction?: FacingDirection;
+    doodad?: IPacketObject<IDoodad>;
     equipSlot?: EquipType;
     item?: IPacketObject<IItem>;
     itemComponentsConsumed?: IPacketObject<IItem[]>;
@@ -165,15 +178,20 @@ export interface IActionArgumentPacket {
     itemComponentsToBeSalvaged?: IPacketObject<IItem[]>;
     itemQuality?: ItemQuality;
     itemType?: ItemType;
+    name?: string;
     point?: IPoint;
     preservee?: IPacketObject<IItem>;
     reinforcee?: IPacketObject<IItem>;
     repairee?: IPacketObject<IItem | IDoodad>;
     restType?: RestType;
     silent?: boolean;
+    switchingHands?: boolean;
     targetContainer?: IPacketObject<IContainer>;
     torch?: IPacketObject<IItem>;
     transmogrifee?: IPacketObject<IItem>;
     type?: ActionType;
     useActionType?: ActionType;
+}
+export interface ISyncCheck {
+    [index: number]: string[];
 }

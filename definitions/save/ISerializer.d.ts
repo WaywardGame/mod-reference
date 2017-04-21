@@ -35,4 +35,5 @@ export declare enum Types {
     Creature = 17,
     TimeManager = 18,
     Player = 19,
+    ArrayV2 = 20,
 }

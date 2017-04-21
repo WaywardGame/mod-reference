@@ -8,7 +8,7 @@ export default class LoadingScreen extends BaseScreen {
     elementRest: JQuery;
     selector(): string;
     bindElements(): void;
-    onShow(): void;
+    onShow(fadeAudio?: boolean): void;
     setLoadingType(loadingType: LoadingType): void;
     onHide(): void;
     setMessage(message: UiMessage): void;

@@ -19,6 +19,6 @@ export default class LanguageManager implements ILanguageManager {
     evalString(str: string): string;
     serialize(language: ILanguage): any;
     load(language: ILanguage): void;
+    shouldWarnOnInvalidOrMissingEntry(str?: string): boolean;
     private setup();
-    private shouldWarn(str);
 }

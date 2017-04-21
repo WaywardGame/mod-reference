@@ -22,6 +22,7 @@ export interface IItemManager {
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
     getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality | undefined): IItemArray;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | null;
+    generateLookups(): void;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | null;
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | null;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean): IItemArray;
@@ -29,6 +30,7 @@ export interface IItemManager {
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean): IItemArray;
     getItemsString(items: IItemArray): string;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean): string;
+    getOrderedContainerItems(container: IContainer): IItem[];
     getPlayerFromInventoryContainer(container: IContainer): IPlayer | undefined;
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
@@ -57,6 +59,6 @@ export interface IItemManager {
     resetMapsInContainer(container: IContainer): void;
     saveTileReferences(tileContainers: ITileContainer[]): void;
     spawn(itemTypes: ItemType[] | null, x: number, y: number, z: number): void;
-    generateLookups(): void;
+    updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
 }
 export default IItemManager;

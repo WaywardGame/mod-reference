@@ -5,6 +5,7 @@ export interface ISteamworks {
     isGreenworksEnabled(): boolean;
     getAbsolutePath(p: string): any;
     isLinux(): boolean;
+    isMac(): boolean;
     initialize(): void;
     setOverlayWorks(ipg: boolean): void;
     setupMods(callback: () => void): void;
@@ -28,7 +29,7 @@ export interface ISteamworks {
     unsubscribe(publishId: string, callback: (err?: string) => void): void;
     sendMessage(name: string, data: string): void;
     toggleDeveloperTools(): void;
-    getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): string | undefined;
+    getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): IModPath | undefined;
     createSaveGameMod(name: string, slot: number, callback: (success: boolean) => void): void;
     deleteSaveGameMod(name: string): void;
     debugLog(...args: any[]): void;
@@ -43,6 +44,10 @@ export interface ISteamworks {
     setRichPresence(key: string, value: string): boolean;
     clearRichPresence(): void;
     onUnload(): void;
+    createLobby(type: LobbyType): void;
+    leaveLobby(): void;
+    joinLobby(lobbyId: string): void;
+    importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
 }
 export default ISteamworks;
 export interface ISteamId {
@@ -62,4 +67,14 @@ export interface IWorkshopItem {
     acceptedForUse: boolean;
     publishedFileId: string;
     steamIDOwner: string;
+}
+export interface IModPath {
+    path: string;
+    uriEncodedPath: string;
+}
+export declare enum LobbyType {
+    Private = 0,
+    FriendsOnly = 1,
+    Public = 2,
+    Invisible = 3,
 }

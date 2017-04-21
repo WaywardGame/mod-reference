@@ -2,19 +2,20 @@ import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, SpriteBatchLayer } from "Enums";
 import { IContainer, IItem } from "item/IItem";
+import Language from "language/Language";
 import { Message, MessageType } from "language/Messages";
 import { Hook, IModConfig } from "mod/IMod";
 import Mod from "mod/Mod";
 import { IPlayer } from "player/IPlayer";
 import { IWorld } from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
-import { ILanguage } from "../language/ILanguage";
 export declare enum ModState {
     Disabled = 0,
     Enabled = 1,
     Loaded = 2,
     Error = 3,
     ChangingState = 4,
+    Temporary = 5,
 }
 export interface ICanLoadInfo {
     name: string;
@@ -73,7 +74,10 @@ export interface IModInfo {
     imageOverrides?: IImageOverrides;
     customizations?: ICustomizations;
     stylesheets?: string[];
-    languages?: ILanguage[];
+    languages?: Array<{
+        path: string;
+        instance?: Language;
+    }>;
 }
 export interface IModManager {
     canLoad(index: number, fromTitleScreen?: boolean, count?: number): CanLoadState;
@@ -112,9 +116,9 @@ export interface IModManager {
     saveAll(): void;
     setLastUpdated(index: number, lastUpdated: string): void;
     setPublishId(index: number, publishedFileId: string): void;
-    setState(index: number, state: ModState, force?: boolean, skipInitialize?: boolean): boolean;
+    setState(index: number, state: ModState, force?: boolean, callback?: () => void): boolean;
     setSteamIdOwner(index: number, steamIdOwner: string): void;
-    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, skipOnInitialize?: boolean): void;
+    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
     setupMods(callback: () => void): void;
     uninitialize(index: number): void;
     uninitializeAll(): void;

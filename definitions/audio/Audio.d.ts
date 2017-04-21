@@ -7,6 +7,7 @@ export default class WAudio implements IAudio {
     private music;
     private sfx;
     private soundQueue;
+    private recentlyPlayedSounds;
     private soundDelay;
     private musicPlaylist;
     private musicTrack;
@@ -24,6 +25,7 @@ export default class WAudio implements IAudio {
     updatePosition(): void;
     queueEffect(type: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
     processEffects(): void;
+    private isComparableSound(soundEffect, x, y, z, type, delay, speed, now, noPosition);
     private playEffect(soundEffect, soundChance?);
     private play(mediaElement);
 }

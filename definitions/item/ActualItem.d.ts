@@ -38,12 +38,12 @@ export default class ActualItem implements IItem, IContainer, IContainable, IPro
     spawnOnDecay(): number | null;
     spawnCreatureOnItem(creatureType: CreatureType | undefined): number | null;
     getLocation(): IPointZ | undefined;
-    dropInWater(player: IPlayer): void;
+    dropInLava(player: IPlayer, x?: number, y?: number): void;
+    dropInWater(player: IPlayer, x?: number, y?: number): void;
     placeOnTile(x: number, y: number, z: number, force: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;
-    rename(): void;
     getSerializationProperties(_: string): string[];
     onUnserialized(): void;
     private getOwner();

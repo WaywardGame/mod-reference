@@ -3,7 +3,7 @@ import { ModState } from "mod/IModManager";
 import { IPlayerCustomization } from "player/IPlayer";
 import BaseScreen from "ui/screens/BaseScreen";
 export default class TitleScreen extends BaseScreen {
-    openedMenu: string;
+    openedMenus: string[];
     elementAboutContainer: JQuery;
     elementChangelogContainer: JQuery;
     elementChangelogLoading: JQuery;
@@ -28,6 +28,8 @@ export default class TitleScreen extends BaseScreen {
     elementImportGameInput: JQuery;
     elementInternalMods: JQuery;
     elementInternalModsContainer: JQuery;
+    elementJoinGameContainer: JQuery;
+    elementJoinGameServerName: JQuery;
     elementLocalMods: JQuery;
     elementLocalModsContainer: JQuery;
     elementModContainer: JQuery;
@@ -44,9 +46,11 @@ export default class TitleScreen extends BaseScreen {
     bindElements(): void;
     updateClickableLeechList(): void;
     unbindElements(): void;
-    onShow(data?: any): void;
+    onShow(showOptions?: any): void;
     onHide(): void;
     onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | null;
+    getOpenedMenu(): string;
+    isMenuOpen(menu: string): boolean;
     showMainMenuId(mainMenuId: string): void;
     refreshSlots(): void;
     refreshMods(): void;
@@ -58,6 +62,7 @@ export default class TitleScreen extends BaseScreen {
     onAction(actionId: string, element: JQuery): void;
     updateCharacterPreviewColors(colorType: string): void;
     actionStartNewGame(): void;
+    actionJoinGame(): void;
     actionEditGame(slot: number, inputElement: JQuery): void;
     actionContinueGame(slot: number): void;
     playSlot(slot: number, options?: IPlayOptions): void;
@@ -67,6 +72,7 @@ export default class TitleScreen extends BaseScreen {
     onImportGame(result: string): any;
     onSlotNameChange(slot: number, inputElement: JQuery): void;
     refreshNewGame(): void;
+    refreshJoinGame(): void;
     refreshCharacterCustomization(customization?: IPlayerCustomization): void;
     refreshEndGame(): void;
     exportToFile(slot: number): void;

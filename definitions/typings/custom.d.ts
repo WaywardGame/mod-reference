@@ -2,10 +2,14 @@ declare var process: any;
 declare var gc: any;
 
 declare var gameVersion: string;
+declare var gameVersionStage: string;
+declare var gameVersionMajor: number;
 declare var gameVersionMinor: number;
+declare var gameVersionPatch: number;
 
 declare var isEdge: boolean;
-declare var quickLoad: number | null;
+declare var quickLoad: number | undefined;
+declare var overlayWorks: boolean | undefined;
 
 interface IRequire {
     (moduleName: string): any;
@@ -13,6 +17,9 @@ interface IRequire {
 }
 
 interface JQuery {
+    reflow(): JQuery;
+    repaint(): JQuery;
+
     filterByData(name: string, value: any): JQuery;
     contextmenu(p: any, p2?: any, p3?: any): any;
     isVisible(): boolean;

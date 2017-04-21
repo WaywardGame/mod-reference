@@ -26,6 +26,7 @@ export default class ResourceLoader implements IResourceLoader {
     private loadItems();
     private loadItem(itemType, path);
     private loadEquip(itemType, path);
+    private loadSleep(itemType, path);
     private loadTerrains();
     private loadTerrain(terrainType);
     private loadDoodads();

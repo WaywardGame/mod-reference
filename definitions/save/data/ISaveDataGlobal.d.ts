@@ -3,6 +3,12 @@ import { ModState } from "mod/IModManager";
 import { IMilestoneData } from "player/IMilestone";
 import { Enums } from "Utilities";
 export interface ISaveDataGlobal {
+    gameCrafted: {
+        [index: number]: boolean;
+    };
+    gameNewCrafted: {
+        [index: number]: boolean;
+    };
     playerMilestoneData: {
         [index: number]: IMilestoneData | undefined;
     };

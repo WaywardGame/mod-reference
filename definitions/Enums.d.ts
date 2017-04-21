@@ -211,6 +211,7 @@ export declare enum ActionType {
     MoveItem = 69,
     Craft = 70,
     Till = 71,
+    Rename = 72,
 }
 export declare enum ItemType {
     None = 0,
@@ -518,7 +519,7 @@ export declare enum ItemType {
     WroughtIronAnvil = 302,
     IronAnvil = 303,
     MageRobe = 304,
-    OrbOfMalign = 305,
+    OrbOfInfluence = 305,
     AnimalClaw = 306,
     AnimalPelt = 307,
     AnimalFur = 308,
@@ -857,6 +858,7 @@ export declare enum SfxType {
     Water = 19,
     Click = 20,
     Damaged = 21,
+    Chat = 22,
 }
 export declare const equipTypeToMessage: Message[];
 export declare const recipeLevelToMessage: Message[];
@@ -996,6 +998,8 @@ export declare enum ScreenId {
 export declare enum TitleScreenId {
     Default = 0,
     EndGame = 1,
+    JoinGame = 2,
+    Options = 3,
 }
 export declare enum DialogId {
     Inventory = 0,
@@ -1124,4 +1128,10 @@ export declare enum WeightType {
     Static = 1,
     Min = 2,
     Max = 3,
+}
+export declare enum RestCancelReason {
+    CreatureNearby = 0,
+    Damaged = 1,
+    FullStamina = 2,
+    NearbyCreatureDamagedDoodad = 3,
 }

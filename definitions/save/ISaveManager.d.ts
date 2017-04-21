@@ -4,10 +4,10 @@ export interface ISaveManager {
     deleteAll(callback: () => void): void;
     deleteSlot(slot: number, callback: (slot: number, success: boolean) => void): void;
     exportSave(slot: number, callback: (slot: number, success: boolean, json: string) => void): void;
-    getFirstFreeSlot(callback: (slot: number | null) => void): void;
+    getFirstFreeSlot(callback: (slot: number | undefined) => void): void;
     getSaveCount(callback: (usedCount: number, usedSlots: number[]) => void, callbackPerSlot?: (slot: number, isUsed: boolean) => void): void;
     getSaveSlots(callback: (slot: number, isUsed: boolean) => void): void;
-    importSave(slot: number, data: string, callback: (slot: number | null, bytes: number | null) => void): void;
+    importSave(slot: number, data: string, callback: (slot: number | undefined, bytes: number | undefined) => void): void;
     initialize(): void;
     isEnabled(): boolean;
     isSlotUsed(slot: number, callback: (slot: number, isUsed: boolean) => void): void;

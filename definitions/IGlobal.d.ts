@@ -7,11 +7,11 @@ import ICorpseManager from "creature/corpse/ICorpseManager";
 import ICreatureManager from "creature/ICreatureManager";
 import IDoodadManager from "doodad/IDoodadManager";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
-import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
 import IItemManager from "item/IItemManager";
 import ILanguageManager from "language/ILanguageManager";
 import IModManager from "mod/IModManager";
+import IMultiplayer from "multiplayer/IMultiplayer";
 import IPlayer from "player/IPlayer";
 import IResourceLoader from "IResourceLoader";
 import ISaveData from "save/data/ISaveData";
@@ -35,13 +35,14 @@ declare global {
     let creatureManager: ICreatureManager;
     let doodadManager: IDoodadManager;
     let fieldOfView: IFieldOfView;
-    let flowFieldManager: IFlowFieldManager;
     let game: IGame;
     let itemManager: IItemManager;
     let languageManager: ILanguageManager;
-    let modManager: IModManager;
     let localPlayer: IPlayer;
+    let modManager: IModManager;
+    let multiplayer: IMultiplayer;
     let players: IPlayer[];
+    let absentPlayers: IPlayer[];
     let renderer: IWorldRenderer;
     let resourceLoader: IResourceLoader;
     let saveData: ISaveData;
@@ -55,6 +56,12 @@ declare global {
     let ui: IUi;
     let world: IWorld;
 
+    interface IMsgPack {
+        encode(object: any): Uint8Array;
+        decode(array: Uint8Array): any;
+    }
+    const msgpack: IMsgPack;
+
     interface JQuery {
         getItemType(): ItemType;
 
@@ -63,5 +70,7 @@ declare global {
 
         functionalTooltip(data: string, ...args: any[]): void;
         functionalTooltip(data: ITooltipOptions): ITooltip;
+
+        import(template: JQuery | HTMLTemplateElement): JQuery;
     }
 }

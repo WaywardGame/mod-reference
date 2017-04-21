@@ -1,15 +1,15 @@
-import { Delay, EquipType, FacingDirection, IInputMovement, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, SfxType, SkillType, TurnType, WorldZ } from "Enums";
+import { Delay, EquipType, FacingDirection, IInputMovement, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WorldZ } from "Enums";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
-import { IAttackHand, IMobCheck, IPlayer, IPlayerCustomization } from "player/IPlayer";
+import { IAttackHand, IMobCheck, IPlayer, IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
-import { IContainerSortInfo, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
+import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 export default class Player implements IPlayer {
     private static gameMovement;
     id: number;
@@ -40,7 +40,7 @@ export default class Player implements IPlayer {
         poisoned: boolean;
     };
     swimming: boolean;
-    resting: boolean;
+    restData: IRestData | undefined;
     dehydration: number;
     dexterity: number;
     starvation: number;
@@ -95,6 +95,7 @@ export default class Player implements IPlayer {
     equipped: {
         [index: number]: number;
     };
+    realTimeTickActionDelay: number;
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
@@ -121,7 +122,6 @@ export default class Player implements IPlayer {
     createFlowFieldManager(): void;
     attributes(): void;
     setId(id: number): void;
-    updateName(): void;
     setRaft(itemId: number | undefined): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaCheck(): boolean;
@@ -135,8 +135,8 @@ export default class Player implements IPlayer {
     getEquippedItems(): IItem[];
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquipSlotForItem(item: IItem): EquipType | undefined;
-    equip(item: IItem, slot: EquipType, internal?: boolean): void;
-    unequip(item: IItem, internal?: boolean, skipMessage?: boolean): void;
+    equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
+    unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
     isBindDown(key: KeyBind): boolean;
     getBindDownTime(key: KeyBind): number | undefined;
@@ -151,9 +151,11 @@ export default class Player implements IPlayer {
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
     setup(completedMilestones: number): void;
     getSerializationProperties(_: string): string[];
+    shakeStat(statType: StatType): void;
     staminaReduction(skillType: SkillType): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;
+    checkAndRemoveBlood(): boolean;
     updateCraftTableAndWeight(): void;
     checkReputationMilestones(): void;
     getReputation(): number;
@@ -170,6 +172,12 @@ export default class Player implements IPlayer {
     setZ(z: number): void;
     isLocalPlayer(): boolean;
     isGhost(): boolean;
+    isResting(): boolean;
+    isRestingCancelled(): boolean;
+    startResting(restData: IRestData): void;
+    cancelResting(reason: RestCancelReason): void;
+    updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
+    updateDialogInfo(dialogIndex: string | number): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     passTurn(turnType?: TurnType): void;
     tick(isPassTurn?: boolean): void;
@@ -181,8 +189,10 @@ export default class Player implements IPlayer {
     processInput(): void;
     private processMovement(turnType?);
     private processTimers();
-    private swimCheck(isPassTurn);
+    private swimCheck();
+    private isOnFire();
     private canTryCarve();
+    private restTick();
     private statGain(stat, bypass);
     private resetDefense();
     private showStatsHint();

@@ -1,4 +1,4 @@
-import { BindType, DialogId, EquipType, IBind, IMessagePack, ItemType, KeyBind, LoadingType, ScreenId, SentenceCaseStyle, TitleScreenId } from "Enums";
+import { BindType, DialogId, EquipType, IBind, IMessagePack, ItemType, KeyBind, LoadingType, ScreenId, SentenceCaseStyle, StatType, TitleScreenId } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { UiMessage } from "language/ILanguage";
 import { Message, MessageType } from "language/Messages";
@@ -39,9 +39,9 @@ export default class Ui implements IUi {
     setRangeValue(id: string, value: number): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
-    switchToScreen(screenId: ScreenId, titleScreenId?: TitleScreenId): void;
+    switchToScreen(screenId: ScreenId, titleScreenId?: TitleScreenId, data?: any): void;
     setLoadingType(loadingType: LoadingType): void;
-    showLoadingScreen(loadingType?: LoadingType, message?: UiMessage): void;
+    showLoadingScreen(loadingType?: LoadingType, message?: UiMessage, fadeAudio?: boolean): void;
     setLoadingMessage(message: UiMessage): void;
     showLoadingScreenAround(func: () => void): void;
     showLoadingScreenAround(message: UiMessage, func: () => void): void;
@@ -50,11 +50,13 @@ export default class Ui implements IUi {
     showOptionsScreen(): void;
     hideOptionsScreen(): void;
     onWindowResize(): void;
+    resetHelpHeight(): void;
     updateWindowMode(): void;
     onUpdateWindowMode(): void;
     launchFullScreen(): void;
     cancelFullscreen(): void;
     isInGameScreenShown(): boolean;
+    isTitleScreenShown(): boolean;
     onMouseDown(event: JQueryEventObject): void;
     onMouseUpOrLeave(event: JQueryEventObject): void;
     onMouseMove(event: JQueryEventObject): void;
@@ -79,6 +81,7 @@ export default class Ui implements IUi {
     };
     setupItemBackgrounds(): void;
     refreshStats(): void;
+    shakeStat(stat: StatType): void;
     refreshAttributes(): void;
     loadQuickSlots(): void;
     isOverlayShown(): boolean;
@@ -143,6 +146,7 @@ export default class Ui implements IUi {
     runHotKeys(): void;
     pressHotKey(hotKeyNumber: number): boolean;
     onGameEnd(showBlocker: boolean): void;
+    onUpdateDirection(): void;
     highlight(selector?: string[] | null, onlyFirstElement?: boolean, timeout?: number): void;
     removeHighlights(): void;
     toggleUIDisplay(): void;

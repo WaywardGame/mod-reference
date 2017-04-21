@@ -11,5 +11,6 @@ export interface ILanguageManager {
     refreshUiTranslation(v: UiMessageStatic | string): void;
     load(language: ILanguage): void;
     evalString(str: string): string;
+    shouldWarnOnInvalidOrMissingEntry(entryName?: string): boolean;
 }
 export default ILanguageManager;

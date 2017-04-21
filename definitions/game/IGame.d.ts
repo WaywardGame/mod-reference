@@ -53,6 +53,9 @@ export interface IGame extends IPropSerializable {
     time: TimeManager;
     absoluteTime: number;
     isRealTime: boolean;
+    lastCreationIds: {
+        [index: number]: number;
+    };
     crafted: {
         [index: number]: boolean;
     };
@@ -60,9 +63,9 @@ export interface IGame extends IPropSerializable {
         [index: number]: boolean;
     };
     highscores: IHighscore[];
-    visible: boolean;
     seeds: ISeeds;
     playedCount: number;
+    visible: boolean;
     spriteTexture: WebGLTexture;
     spriteTextureSizeInversed: Vec2;
     tileTexture: WebGLTexture;
@@ -76,7 +79,6 @@ export interface IGame extends IPropSerializable {
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
     changeTile(newTile: any, changeX: number, changeY: number, changeZ: number, stackTiles: boolean): void;
-    checkAndRemoveBlood(player: IPlayer): boolean;
     checkForHiddenMob(player: IPlayer, x: number, y: number, z: number): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
@@ -89,6 +91,7 @@ export interface IGame extends IPropSerializable {
     getBenignity(): number;
     getBlackness(): number;
     getCompletedMilestoneCount(): number;
+    getDifficulty(): string;
     getFireMessage(decay: number): Message;
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
@@ -100,9 +103,9 @@ export interface IGame extends IPropSerializable {
     getOrCreateTile(x: number, y: number, z: number): ITile;
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean): IPlayer | undefined;
     getPlayerAtTile(tile: ITile, includeGhosts?: boolean): IPlayer | undefined;
-    getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayerByIdentifier(identifier: string): IPlayer | undefined;
     getPlayerByName(name: string): IPlayer | undefined;
+    getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean): IPlayer[];
     getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getReputation(): number;
@@ -112,6 +115,7 @@ export interface IGame extends IPropSerializable {
     getTile(x: number, y: number, z: number): ITile;
     getTileInFrontOfPlayer(player: IPlayer): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
+    getValidPlayerName(name: string | undefined): string;
     getWrappedCoord(x: number): number;
     hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
     isTileEmpty(x: number, y: number, z: number): boolean;
@@ -169,6 +173,7 @@ export interface IPlayerOptions {
     options?: IOptions;
     position?: IPointZ;
     customization?: IPlayerCustomization;
+    completedMilestones?: number;
 }
 export declare const lineOfSightRadius = 20;
 export declare const lineOfSightDetail = 4;

@@ -34,6 +34,9 @@ export interface IActionArgument {
     torch?: IItem;
     transmogrifee?: IItem;
     useActionType?: ActionType;
+    name?: string;
+    doodad?: IDoodad;
+    switchingHands?: boolean;
 }
 export interface IActionResult {
     returnValue?: boolean;

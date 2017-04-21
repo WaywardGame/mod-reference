@@ -1,4 +1,4 @@
-import { BindType, DialogId, EquipType, IBind, IMessagePack, ItemType, KeyBind, LoadingType, ScreenId, SentenceCaseStyle, SortType, TitleScreenId } from "Enums";
+import { BindType, DialogId, EquipType, IBind, IMessagePack, ItemType, KeyBind, LoadingType, ScreenId, SentenceCaseStyle, SortType, StatType, TitleScreenId } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { UiMessage } from "language/ILanguage";
 import { Message, MessageType } from "language/Messages";
@@ -40,7 +40,7 @@ export interface IDialogInfo {
 }
 export interface IQuickSlotInfo {
     itemType: ItemType;
-    action: IContextMenuAction | null | undefined;
+    action: IContextMenuAction | undefined;
 }
 export interface IContainerSortInfo {
     sortType: SortType;
@@ -64,8 +64,8 @@ export interface IUi extends IPropSerializable {
     setRangeValue(id: string, value: number): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
-    switchToScreen(screenId: ScreenId, titleScreenId?: TitleScreenId): void;
-    showLoadingScreen(loadingType?: LoadingType, message?: UiMessage): void;
+    switchToScreen(screenId: ScreenId, titleScreenId?: TitleScreenId, data?: any): void;
+    showLoadingScreen(loadingType?: LoadingType, message?: UiMessage, fadeAudio?: boolean): void;
     setLoadingType(loadingType: LoadingType): void;
     setLoadingMessage(message: UiMessage): void;
     showLoadingScreenAround(func: () => void): void;
@@ -75,11 +75,13 @@ export interface IUi extends IPropSerializable {
     showOptionsScreen(): void;
     hideOptionsScreen(): void;
     onWindowResize(): void;
+    resetHelpHeight(): void;
     updateWindowMode(): void;
     onUpdateWindowMode(): void;
     launchFullScreen(): void;
     cancelFullscreen(): void;
     isInGameScreenShown(): boolean;
+    isTitleScreenShown(): boolean;
     onMouseDown(event: JQueryEventObject): void;
     onMouseUpOrLeave(event: JQueryEventObject): void;
     onMouseMove(event: JQueryEventObject): void;
@@ -103,6 +105,7 @@ export interface IUi extends IPropSerializable {
     };
     setupItemBackgrounds(): void;
     refreshStats(): void;
+    shakeStat(stat: StatType): void;
     refreshAttributes(): void;
     loadQuickSlots(): void;
     isOverlayShown(): boolean;
@@ -183,5 +186,6 @@ export interface IUi extends IPropSerializable {
     openDialogs(): void;
     updateScrollableContainersList(): void;
     updateScrollableContainer(this: Element): void;
+    onUpdateDirection(): void;
 }
 export default IUi;

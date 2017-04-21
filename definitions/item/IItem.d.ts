@@ -54,12 +54,12 @@ export interface IItem extends IObject, IContainable {
     spawnOnDecay(): number | null;
     spawnCreatureOnItem(creatureType: CreatureType | undefined): number | null;
     getLocation(): IPointZ | undefined;
-    dropInWater(player: IPlayer): void;
+    dropInWater(player: IPlayer, x?: number, y?: number): void;
+    dropInLava(player: IPlayer, x?: number, y?: number): void;
     placeOnTile(x: number, y: number, z: number, force: boolean): void;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;
-    rename(): void;
 }
 export interface IItemOld {
     equipped?: EquipType;
@@ -70,6 +70,7 @@ export interface IContainable {
 export interface IContainer extends IContainable {
     weightCapacity: number;
     containedItems: IItemArray;
+    itemOrders?: number[];
 }
 export interface IObject {
     type: number;
@@ -132,10 +133,13 @@ export interface IItemDescription extends IObjectDescription {
     spawnOnDecay?: CreatureType;
     spawnOnBreak?: CreatureType;
     showOverHair?: boolean;
+    hasSleepImage?: boolean;
 }
 export interface IDismantleDescription {
-    items: [ItemType, number][];
+    items: Array<[ItemType, number]>;
     required?: ItemTypeGroup;
+    skill?: SkillType;
+    reputation?: number;
 }
 export interface IGroupDescription {
     name: string;

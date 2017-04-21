@@ -1,9 +1,11 @@
 import { Difficulty } from "Enums";
+import { IPlayerOptions } from "game/IGame";
 import { Packet, PacketType } from "multiplayer/IPacket";
 import { IPlayer } from "player/IPlayer";
+import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayer {
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
-    createServer(serverId: string, options?: IMultiplayerOptions): void;
+    createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
     disconnect(): void;
     executeSyncedPacket(packetObjectOrType: Packet | PacketType): number | undefined | void;
     getOptions(): IMultiplayerOptions;
@@ -12,16 +14,17 @@ export interface IMultiplayer {
     isProcessingPacket(): boolean;
     isReady(): boolean;
     isServer(): boolean;
-    joinServer(serverId: string): void;
+    joinServer(serverId: string, playerOptions?: IPlayerOptions): void;
     kick(player: IPlayer): void;
+    onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
     sendPacket(player: IPlayer, packet: Packet): void;
-    setMatchmakingServer(host: string): void;
-    syncPacket(packet: Packet, clientSide?: () => any): any;
+    syncPacket(packet: Packet, clientSide?: () => any, checkPacketType?: boolean): any;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;
 export interface IMultiplayerOptions {
+    lobbyType: LobbyType;
     difficulty: Difficulty;
     pvp: boolean;
 }
@@ -33,4 +36,10 @@ export declare enum MultiplayerSyncCheck {
     StaminaChanges = 4,
     InventoryCount = 5,
     ItemWeight = 6,
+    Ticks = 7,
+    Seed = 8,
+    PlayerPositions = 9,
+    Container = 10,
+    ItemOrder = 11,
+    LastCreationIds = 12,
 }

@@ -10,17 +10,18 @@ import { IWorld } from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 export default class ModManager implements IModManager {
     private mods;
-    private cachedHooks;
-    private cachedHookNames;
     private internalMods;
     private internalModsElectron;
+    private cachedHooks;
+    private cachedHookNames;
+    private onLanguageLoadCallbacks;
     constructor();
     loadAll(callback: () => void): void;
     unloadAll(reset?: boolean): void;
     setupMods(callback: () => void): void;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
-    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, skipOnInitialize?: boolean): void;
+    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
     removeMod(id: number, uninstall?: boolean): void;
     getMods(): IModInfo[];
     getLoadedMods(): IModInfo[];
@@ -108,8 +109,9 @@ export default class ModManager implements IModManager {
     setLastUpdated(index: number, lastUpdated: string): void;
     getState(index: number): ModState;
     isInitializing(index: number): ModState;
-    setState(index: number, state: ModState, force?: boolean, skipInitialize?: boolean): boolean;
+    setState(index: number, state: ModState, force?: boolean, callback?: () => void): boolean;
     uninitialize(index: number): void;
     uninitializeAll(): void;
+    private onLanguageLoad(languageName, callback);
     private cacheHooks();
 }

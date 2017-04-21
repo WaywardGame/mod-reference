@@ -17,6 +17,7 @@ export declare enum PathType {
     Terrain = 4,
     Doodad = 5,
     Hairstyle = 6,
+    Sleep = 7,
 }
 export interface IResourceContainer {
     spriteTexture: WebGLTexture;

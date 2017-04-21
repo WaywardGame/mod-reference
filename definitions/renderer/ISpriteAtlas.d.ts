@@ -3,16 +3,19 @@ export interface ISpriteInfoList {
     [index: number]: ISpriteInfo;
 }
 export interface ISpriteAtlas {
-    creatures: ISpriteInfoList;
     corpses: ISpriteInfoList;
-    tileEvents: ISpriteInfoList;
-    items: ISpriteInfoList;
-    itemsSmall: ISpriteInfoList;
+    creatures: ISpriteInfoList;
     equips: ISpriteInfoList;
     hairstyles: ISpriteInfoList;
-    shadow: ISpriteInfo;
+    items: ISpriteInfoList;
+    itemsSmall: ISpriteInfoList;
     player: ISpriteInfo;
     raft: ISpriteInfo;
+    shadow: ISpriteInfo;
+    sleeps: ISpriteInfoList;
+    sleepyHead: ISpriteInfo;
     text: ISpriteInfo;
+    tileEvents: ISpriteInfoList;
+    zzz: ISpriteInfo;
 }
 export default ISpriteAtlas;

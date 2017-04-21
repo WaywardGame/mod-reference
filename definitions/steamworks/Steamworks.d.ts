@@ -1,19 +1,7 @@
 import { ModType } from "mod/IModManager";
-import { ISteamId, ISteamworks, IWorkshopItem } from "steamworks/ISteamworks";
+import { IModPath, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 export default class Steamworks implements ISteamworks {
     private installDir;
-    private greenworks;
-    private ipc;
-    private shell;
-    private os;
-    private webFrame;
-    private remote;
-    private path;
-    private electron;
-    private winston;
-    private fileSystem;
-    private ua;
-    private uaReporter;
     private recordedProblems;
     private steamId;
     private betaName;
@@ -34,11 +22,14 @@ export default class Steamworks implements ISteamworks {
     private workshopFileUrl;
     private ignoredDirectories;
     private _serverIdToJoin;
+    private _currentLobbyId;
+    private importingSaveGameMod;
     isElectron(): boolean;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
     getAbsolutePath(p: string): any;
     isLinux(): boolean;
+    isMac(): boolean;
     initialize(): void;
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;
@@ -49,6 +40,9 @@ export default class Steamworks implements ISteamworks {
     getPublishedMods(): IWorkshopItem[];
     setRichPresence(key: string, value: string): boolean;
     clearRichPresence(): void;
+    createLobby(type: LobbyType): void;
+    leaveLobby(): void;
+    joinLobby(lobbyId: string): void;
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     publishMod(modIndex: number, callback: (err?: string, publishedFileId?: string) => void): void;
@@ -61,8 +55,9 @@ export default class Steamworks implements ISteamworks {
     unsubscribe(publishId: string, callback: (err?: string) => void): void;
     sendMessage(name: string, data: string): void;
     toggleDeveloperTools(): void;
-    getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): string | undefined;
+    getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): IModPath | undefined;
     createSaveGameMod(name: string, slot: number, callback: (success: boolean) => void): void;
+    importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
     deleteSaveGameMod(name: string): void;
     debugLog(...args: any[]): void;
     addZoomFactor(change: number): void;
@@ -77,7 +72,6 @@ export default class Steamworks implements ISteamworks {
     multiplayerLog(...args: any[]): void;
     multiplayerLogSkipConsole(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
-    private appendToMultiplayerLog(...args);
     private setupAndInitializeWorkshopMods(callback, retried?);
     private initializeModsFromFolder(folderName, modType, callback);
     private enumerateInstalledWorkshopMods(callback);
@@ -93,10 +87,14 @@ export default class Steamworks implements ISteamworks {
     private safeOpenFolder(folder);
     private onGameOverlayActive(isActive, callback?);
     private onGameJoinRequested(connectionString);
+    private onLobbyCreated(success, lobbyId);
+    private onLobbyEntered(success, lobbyId);
+    private onLobbyChatUpdate(lobbyId, steamIdUserChanged, state);
+    private onLobbyJoinRequested(lobbyId);
     private createFolderIfNotExists(folder);
     private getSyncPath(name);
     private getSharePathForModZip(name);
     private getSharePathForModImage(name);
     private recordEvent(categorySuffix, action);
-    private parseConnectArgument(arg);
+    private parseConnectArgument(args);
 }

@@ -56,6 +56,7 @@ export default class ItemManager implements IItemManager {
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | null): boolean;
+    getOrderedContainerItems(container: IContainer): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemsString(items: IItemArray): string;
     loadReferences(): void;
@@ -65,6 +66,8 @@ export default class ItemManager implements IItemManager {
     checkMilestones(player: IPlayer, item: IItem): void;
     getDefaultDurability(): number;
     generateLookups(): void;
+    updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
+    private updateItemOrderInternal(container, itemOrder);
     private loadReference(container);
     private removeFromContainerInternal(item);
     private updateUiOnItemRemove(player, item, willBeAnywhereInInventory?);

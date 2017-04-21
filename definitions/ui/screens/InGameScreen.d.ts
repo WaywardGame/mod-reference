@@ -1,4 +1,4 @@
-import { DialogId, EquipType, FacingDirection, IBind, IMessagePack, ItemType, SortType } from "Enums";
+import { DialogId, EquipType, FacingDirection, IBind, IMessagePack, ItemType, SortType, StatType } from "Enums";
 import { IDismantleComponent } from "item/IItem";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
@@ -124,6 +124,7 @@ export default class InGameScreen extends BaseScreen {
     getMovementDirection(event: any): FacingDirection;
     onMouseScroll(event: JQueryEventObject): void;
     canUseHotkeys(): boolean;
+    shakeStat(stat: StatType): void;
     refreshStats(): void;
     refreshAttributes(): void;
     updateTextIfChanged(id: TextElementId, element: JQuery, text: string): void;
@@ -209,8 +210,9 @@ export default class InGameScreen extends BaseScreen {
     updateContainerName(containerDialogElement: JQuery): void;
     updateActiveContainer(): void;
     hideContextMenu(): boolean;
-    hideActionsMenu(): boolean;
+    hideActionsMenu(): void;
     toggleActionsMenu(center?: boolean): void;
+    showActionsMenu(center?: boolean, updatePosition?: boolean): void;
     onClearMessages(): void;
     onFilterInput(containerElement: JQuery): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
@@ -223,6 +225,8 @@ export default class InGameScreen extends BaseScreen {
     addButton(elementId: string, buttonName: string, imagePath: string, tooltip: string, keyBind?: number): JQuery;
     refreshButtonTooltip(buttonName: string, tooltip: string, keyBind: number): void;
     removeButton(buttonName: string): void;
+    onUpdateDirection(): void;
+    private updateContextMenu(contextMenu);
     private onOpenMessages();
     private getMessagesHtml();
     private onCloseMessages();
