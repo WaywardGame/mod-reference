@@ -48,7 +48,7 @@ export default class TitleScreen extends BaseScreen {
     unbindElements(): void;
     onShow(showOptions?: any): void;
     onHide(): void;
-    onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | null;
+    onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
     getOpenedMenu(): string;
     isMenuOpen(menu: string): boolean;
     showMainMenuId(mainMenuId: string): void;

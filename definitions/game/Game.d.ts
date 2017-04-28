@@ -108,7 +108,7 @@ export default class Game implements IGame {
     enableFlowFieldDebug(): void;
     resetGameState(skipSave?: boolean): void;
     shouldRender(): number;
-    makeCaveEntrance(player: IPlayer): TerrainType | null;
+    makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
     updateFieldOfViewNextTick(): void;
     updateCraftTableAndWeightNextTick(): void;

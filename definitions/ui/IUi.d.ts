@@ -17,8 +17,8 @@ export interface IUiScreen {
     onMouseUpOrLeave(event: JQueryEventObject): void;
     onMouseMove(event: JQueryEventObject): void;
     onMouseScroll(event: JQueryEventObject): void;
-    onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | null;
-    onKeyUp(event: JQueryEventObject): boolean | null;
+    onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
+    onKeyUp(event: JQueryEventObject): boolean | undefined;
 }
 export interface IDialogInfo {
     id?: string;
@@ -88,14 +88,14 @@ export interface IUi extends IPropSerializable {
     onMouseScroll(event: JQueryEventObject): void;
     onKeyDown(event: JQueryEventObject): void;
     onKeyUp(event: JQueryEventObject): void;
-    setRebindingKey(key: KeyBind | null, element: JQuery | null): void;
-    getRebindingKeyElement(): JQuery | null;
+    setRebindingKey(key: KeyBind | undefined, element: JQuery | undefined): void;
+    getRebindingKeyElement(): JQuery | undefined;
     isBindDown(key: KeyBind): boolean;
     getBindDownTime(key: KeyBind): number | undefined;
     isBindPressed(key: KeyBind, pressedBind: IBind): boolean;
     getBind(key: KeyBind): IBind;
-    getKeyBind(key: KeyBind): number | null;
-    getMouseBind(key: KeyBind): number | null;
+    getKeyBind(key: KeyBind): number | undefined;
+    getMouseBind(key: KeyBind): number | undefined;
     setBind(key: KeyBind, value: number, type: BindType): void;
     clearBind(key: KeyBind): void;
     getStringForKeyBind(key: KeyBind): string;
@@ -169,12 +169,12 @@ export interface IUi extends IPropSerializable {
     runHotKeys(): void;
     pressHotKey(hotKeyNumber: number): boolean;
     onGameEnd(showBlocker: boolean): void;
-    highlight(selector?: string[] | null, onlyFirstElement?: boolean, timeout?: number): void;
+    highlight(selector?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;
     removeHighlights(): void;
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
-    openContainer(container: IContainer, containerName?: string | null): void;
+    openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;
     addItemToContainer(item: IItem, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;

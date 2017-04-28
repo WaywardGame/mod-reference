@@ -15,6 +15,6 @@ export default class InputScreen extends BaseScreen {
     bindElements(): void;
     onShow(options: InputOptions): void;
     onHide(): void;
-    onKeyUp(event: JQueryEventObject): boolean | null;
+    onKeyUp(event: JQueryEventObject): boolean | undefined;
     private onButtonClick(inputOverride?);
 }

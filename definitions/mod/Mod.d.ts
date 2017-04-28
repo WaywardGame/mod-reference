@@ -94,17 +94,17 @@ export declare abstract class Mod extends BaseMod {
      * @param item The item to be dropped
      * @param tile The tile the item will be dropped on
      * @param dropAll True if all items of this type will be dropped
-     * @param dropAllQuality If not null, all items of this quality will be dropped
+     * @param dropAllQuality If not undefined, all items of this quality will be dropped
      * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
      */
-    canDropItem(item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | null): boolean | undefined;
+    canDropItem(item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
     /**
      * Called before a player attacks
      * @param weapon The weapon used to attack
      * @param attackType The attack type
      * @returns False if the player cannot attack, or undefined to use the default logic
      */
-    canPlayerAttack(weapon: IItem | null, attackType: AttackType): boolean | undefined;
+    canPlayerAttack(weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
     /**
      * Called when calculating creatures in the viewport
      * @param creatureId The creature id
@@ -178,7 +178,7 @@ export declare abstract class Mod extends BaseMod {
      * @param containerFrom The container object the item was moved to. This container might be inventory or a container within the inventory.
      * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
-    onContainerItemUpdate(item: IItem, containerFrom: IContainer | null, containerTo: IContainer): void;
+    onContainerItemUpdate(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     /**
      * Called when an item is crafted
      * @param item The item that was crafted
@@ -262,9 +262,9 @@ export declare abstract class Mod extends BaseMod {
      * @param creatureId The creature id
      * @param creature The creature object
      * @param damageInfo The damage info object
-     * @returns Null if nothing should happen (do not damage the creature) or the amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
+     * @returns The amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
      */
-    onCreatureDamage(creatureId: number, creature: ICreature, damageInfo: IDamageInfo): number | null | undefined;
+    onCreatureDamage(creatureId: number, creature: ICreature, damageInfo: IDamageInfo): number | undefined;
     /**
      * Called when a creature dies
      * @param creatureId The creature id

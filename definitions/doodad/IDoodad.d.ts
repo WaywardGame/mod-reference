@@ -1,6 +1,6 @@
 import { DoodadType, DoodadTypeGroup, DoorOrientation, IPointZ, IRGB, ItemType, StatusType, TerrainType } from "Enums";
-import { IObject, IObjectDescription } from "item/IItem";
-export interface IDoodad extends IObject, IPointZ {
+import { IContainer, IObject, IObjectDescription } from "item/IItem";
+export interface IDoodad extends IObject, IPointZ, Partial<IContainer> {
     type: DoodadType;
     spread?: number;
     growInto?: DoodadType;

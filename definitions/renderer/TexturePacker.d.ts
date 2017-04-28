@@ -13,7 +13,7 @@ export default class SpritePacker {
     private loadedSprites;
     constructor(gl: WebGLRenderingContext, width: number, height: number, nullSprite: boolean, padding: number);
     load(callback: () => void): void;
-    addSprite(src: string, callback: (si: ISpriteInfo, imageElement: HTMLImageElement | null) => void): void;
+    addSprite(src: string, callback: (si: ISpriteInfo, imageElement?: HTMLImageElement) => void): void;
     private loadSprite(sprite, callback, retry?);
     private spriteLoaded(callback);
     private checkFinished(callback);

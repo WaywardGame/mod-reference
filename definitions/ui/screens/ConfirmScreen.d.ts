@@ -14,5 +14,5 @@ export default class ConfirmScreen extends BaseScreen {
     bindElements(): void;
     onShow(options: ConfirmOptions): void;
     onHide(): void;
-    onKeyUp(event: JQueryEventObject): boolean | null;
+    onKeyUp(event: JQueryEventObject): boolean | undefined;
 }

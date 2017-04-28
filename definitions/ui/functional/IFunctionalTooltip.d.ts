@@ -9,7 +9,7 @@ export interface ITooltipOptions {
     content: (target: JQuery) => void;
 }
 export interface ITooltip extends ITooltipOptions {
-    visible: HTMLElement | null;
+    visible?: HTMLElement;
     lastEvent: string;
     element: HTMLElement;
     width: number;

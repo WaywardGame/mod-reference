@@ -1,6 +1,6 @@
 import ISpriteInfo from "renderer/ISpriteInfo";
 export interface ISpriteInfoList {
-    [index: number]: ISpriteInfo;
+    [index: number]: ISpriteInfo | undefined;
 }
 export interface ISpriteAtlas {
     corpses: ISpriteInfoList;

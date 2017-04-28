@@ -20,7 +20,7 @@ export interface ISaveDataGlobal {
         [index: string]: any;
     };
     languageManagerSaveData: {
-        language: string | null;
+        language?: string;
     };
     utilitiesEnumsAllocated: {
         [index: string]: Enums.IEnumInfo;

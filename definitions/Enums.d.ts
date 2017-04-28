@@ -886,6 +886,7 @@ export declare enum Delay {
     Collision = 40,
     HotKey = 20,
     RealTimeTick = 40,
+    TurnDirection = 6,
 }
 export declare enum StatType {
     EnemyHealth = 0,
@@ -1104,7 +1105,7 @@ export interface IHighscore {
     talent?: number;
 }
 export interface IMessagePack {
-    message: Message | null;
+    message?: Message;
     type?: MessageType;
     args?: string | number | any[];
     argSkipCasing?: boolean;

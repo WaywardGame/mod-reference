@@ -30,8 +30,8 @@ export default class ModManager implements IModManager {
     callHook(hook: Hook.CanCreatureAttack, creatureId: number, creature: ICreature): boolean | undefined;
     callHook(hook: Hook.CanCreatureMove, creatureId: number, creature: ICreature, tile: ITile, moveType: MoveType): boolean | undefined;
     callHook(hook: Hook.CanCreatureSpawn, type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
-    callHook(hook: Hook.CanDropItem, item: IItem, tile: ITile, dorpAll: boolean, dropAllQuality: ItemQuality | null): boolean | undefined;
-    callHook(hook: Hook.CanPlayerAttack, weapon: IItem | null, attackType: AttackType): boolean | undefined;
+    callHook(hook: Hook.CanDropItem, item: IItem, tile: ITile, dorpAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
+    callHook(hook: Hook.CanPlayerAttack, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
     callHook(hook: Hook.CanSeeCreature, creatureId: number, creature: ICreature, tile: ITile): boolean | undefined;
     callHook(hook: Hook.GetCreatureSpriteBatchLayer, creatureId: number, creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     callHook(hook: Hook.GetPlayerMaxHealth, player: IPlayer): number | undefined;
@@ -41,7 +41,7 @@ export default class ModManager implements IModManager {
     callHook(hook: Hook.OnBuild, item: IItem, tile: ITile, doodad: IDoodad): void;
     callHook(hook: Hook.OnContainerItemAdd, item: IItem, container: IContainer): void;
     callHook(hook: Hook.OnContainerItemRemove, item: IItem, container: IContainer): void;
-    callHook(hook: Hook.OnContainerItemUpdate, item: IItem, containerFrom: IContainer | null, containerTo: IContainer): void;
+    callHook(hook: Hook.OnContainerItemUpdate, item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     callHook(hook: Hook.OnCraft, item: IItem): void;
     callHook(hook: Hook.OnCreateWorld, world: IWorld): void;
     callHook(hook: Hook.OnCreatureDamage, creatureId: number, creature: ICreature, damageInfo: IDamageInfo): number | undefined;

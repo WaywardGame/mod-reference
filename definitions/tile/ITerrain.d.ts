@@ -29,7 +29,7 @@ export interface ITerrainDescription {
     animated?: boolean;
     tillable?: boolean;
 }
-export interface ITile {
+export interface ITile extends Partial<ITileContainer> {
     creatureId?: number;
     doodadId?: number;
     corpseIds?: number[];

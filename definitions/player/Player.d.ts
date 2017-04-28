@@ -125,7 +125,7 @@ export default class Player implements IPlayer {
     setRaft(itemId: number | undefined): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaCheck(): boolean;
-    addMilestone(milestone: MilestoneType, data?: number | null): void;
+    addMilestone(milestone: MilestoneType, data?: number): void;
     damage(amount: number, damageMessage: string, soundDelay?: number): void;
     calculateEquipmentStats(): void;
     canCarve(): IItem | undefined;
@@ -164,7 +164,7 @@ export default class Player implements IPlayer {
      * Burn the player
      * @param skipMessage
      */
-    burn(skipMessage?: boolean): number | null;
+    burn(skipMessage?: boolean): number | undefined;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
     inspect(x: number, y: number, z?: number): void;

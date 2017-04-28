@@ -78,9 +78,9 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     y: number;
     z: number;
     addDelay(delay: Delay, replace?: boolean): void;
-    addMilestone(milestone: MilestoneType, data?: number | null): void;
+    addMilestone(milestone: MilestoneType, data?: number): void;
     attributes(): void;
-    burn(skipMessage?: boolean): number | null;
+    burn(skipMessage?: boolean): number | undefined;
     calculateEquipmentStats(): void;
     calculateStats(): void;
     canCarve(): IItem | undefined;
@@ -182,7 +182,7 @@ export interface IRestData {
     type: RestType;
     startHealth: number;
     totalCycles: number;
-    item?: number;
+    itemId?: number;
     cycle?: number;
     cancelReason?: RestCancelReason;
 }

@@ -12,5 +12,5 @@ export interface SerializedLanguage {
         };
     };
 }
-export declare function deserialize(serialized: SerializedLanguage, into?: Language): Language | undefined;
+export declare function deserialize(serialized: SerializedLanguage, into?: ILanguage): Language | undefined;
 export declare function serialize(language: ILanguage, caseStyle?: CaseStyle): SerializedLanguage;

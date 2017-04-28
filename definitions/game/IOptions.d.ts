@@ -19,6 +19,7 @@ export interface IOptions {
     music: number;
     mute: boolean;
     protectedCraftingItems: boolean;
+    rightClickInspect: boolean;
     rightHand: boolean;
     screenshotMode: boolean;
     skipIntro: boolean;

@@ -34,5 +34,7 @@ export declare enum HintType {
     Interface = 27,
     CreatureTaming = 28,
     Combat = 29,
-    Last = 30,
+    Quickslots = 30,
+    ResourceGathering = 31,
+    Last = 32,
 }

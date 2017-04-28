@@ -34,9 +34,9 @@ export default class ActualItem implements IItem, IContainer, IContainable, IPro
     isDecayed(): boolean;
     changeInto(type: ItemType): void;
     returns(): boolean;
-    spawnOnBreak(): number | null;
-    spawnOnDecay(): number | null;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined): number | null;
+    spawnOnBreak(): number | undefined;
+    spawnOnDecay(): number | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined): number | undefined;
     getLocation(): IPointZ | undefined;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
     dropInWater(player: IPlayer, x?: number, y?: number): void;

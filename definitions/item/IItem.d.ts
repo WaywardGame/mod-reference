@@ -28,7 +28,7 @@ export interface IItemLegendary {
     skill: SkillType;
     value: number;
 }
-export interface IItem extends IObject, IContainable {
+export interface IItem extends IObject, IContainable, Partial<IContainer> {
     readonly id: number;
     readonly type: ItemType;
     weight: number;
@@ -50,9 +50,9 @@ export interface IItem extends IObject, IContainable {
     getEquipSlot(): EquipType | undefined;
     changeInto(itemType: ItemType): void;
     returns(): void;
-    spawnOnBreak(): number | null;
-    spawnOnDecay(): number | null;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined): number | null;
+    spawnOnBreak(): number | undefined;
+    spawnOnDecay(): number | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined): number | undefined;
     getLocation(): IPointZ | undefined;
     dropInWater(player: IPlayer, x?: number, y?: number): void;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
@@ -65,7 +65,7 @@ export interface IItemOld {
     equipped?: EquipType;
 }
 export interface IContainable {
-    containedWithin: IContainer | null;
+    containedWithin?: IContainer;
 }
 export interface IContainer extends IContainable {
     weightCapacity: number;
@@ -152,7 +152,7 @@ export interface IActionDescription {
     description?: string;
 }
 export declare enum ContainerReferenceType {
-    Null = 0,
+    Invalid = 0,
     Inventory = 1,
     Doodad = 2,
     World = 3,

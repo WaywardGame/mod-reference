@@ -14,7 +14,7 @@ export default class OptionsScreen extends BaseScreen {
     setButtonChoiceValue(id: string, firstSelected: boolean): void;
     onClickKeybind(element: JQuery, id: KeyBind): void;
     onClickKeyBindDefault(): void;
-    resetBindState(setDefault?: boolean): KeyBind | null;
+    resetBindState(setDefault?: boolean): KeyBind | undefined;
     updateBind(key: KeyBind, element: JQuery): void;
     onClickCheckbox(element: JQuery, id: string): void;
     onClickButton(element: JQuery, id: string): void;

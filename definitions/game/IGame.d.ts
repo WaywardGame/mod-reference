@@ -24,7 +24,7 @@ export interface IGame extends IPropSerializable {
     slot: number;
     loadedResources: boolean;
     version: string;
-    saveVersion: string | null;
+    saveVersion: string | undefined;
     isLoadingSave: boolean;
     tile: ITileArray;
     tileData: ITileData[][][][];
@@ -49,7 +49,7 @@ export interface IGame extends IPropSerializable {
     spawnCoords: any;
     contaminatedWater: IPointZ[];
     fadeInAmount: number;
-    lastPlayedVersion: string | null;
+    lastPlayedVersion: string | undefined;
     time: TimeManager;
     absoluteTime: number;
     isRealTime: boolean;
@@ -121,7 +121,7 @@ export interface IGame extends IPropSerializable {
     isTileEmpty(x: number, y: number, z: number): boolean;
     isTileFull(x: number, y: number, z: number): boolean;
     isTileFullEx(tile: ITile): boolean;
-    makeCaveEntrance(player: IPlayer): TerrainType | null;
+    makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;

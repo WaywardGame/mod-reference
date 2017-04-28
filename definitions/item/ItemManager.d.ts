@@ -12,8 +12,8 @@ export default class ItemManager implements IItemManager {
     private cachedDecaysIntoWeights;
     private cachedDefaultItemForGroup;
     constructor();
-    getContainerReference(container: IContainer | null): IContainerReference;
-    derefenceContainerReference(containerRef: IContainerReference): object | null;
+    getContainerReference(container: IContainer | undefined): IContainerReference;
+    derefenceContainerReference(containerRef: IContainerReference): object | undefined;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean): void;
     removeContainerItems(container: IContainer): void;
     remove(item: IItem): void;
@@ -27,10 +27,10 @@ export default class ItemManager implements IItemManager {
     computeContainerWeight(container: IContainer): number;
     moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): void;
     moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): void;
-    hasRoomInContainer(extraWeight: number, container: IContainer): boolean;
+    hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number): void;
-    spawn(itemTypes: ItemType[] | null, x: number, y: number, z: number): void;
+    spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     resetMapsInContainer(container: IContainer): void;
     getTileContainer(x: number, y: number, z: number): IContainer;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
@@ -41,21 +41,20 @@ export default class ItemManager implements IItemManager {
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
     craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, itemsToBeSalvaged: IItemArray, baseItem?: IItem): boolean;
     decayItems(): boolean;
-    getPlayerFromInventoryContainer(container: IContainer): IPlayer | undefined;
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     countItemsInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup | IItemTypeGroup, ignoreItem?: IItem): number;
-    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | null;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | null;
+    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | undefined;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean): IItemArray;
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean): IItemArray;
-    getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | null;
+    getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number): IItem | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignore?: number): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     isInInventory(containable: IContainable): boolean;
-    isTileContainer(container: IContainer | null): boolean;
+    isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemsString(items: IItemArray): string;
@@ -74,5 +73,6 @@ export default class ItemManager implements IItemManager {
     private getCraftQualityBonus(quality, required?);
     private computeCraftQualityBonus(itemsToRequire, itemsToConsume);
     private isCraftSuccessful(player, recipe, qualityBonus);
+    private getPlayerFromInventoryContainer(container);
     private getAbsentPlayerFromInventoryContainer(container);
 }

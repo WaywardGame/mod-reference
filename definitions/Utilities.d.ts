@@ -155,11 +155,11 @@ export declare function createUniqueIdentifier(): string;
 export declare class Queue<T> {
     private queue;
     private offset;
-    constructor(initial?: T[] | null);
+    constructor(initial?: T[]);
     getLength(): number;
     isEmpty(): boolean;
     enqueue(value: T): void;
-    dequeue(): T | null;
+    dequeue(): T | undefined;
     isInQueue(item: T, equals?: (item1: T, item2: T) => boolean): boolean;
 }
 export declare function debounce(id: string, callback: () => void, timeout: number): void;
