@@ -36,13 +36,15 @@ export default class WorldRenderer implements IWorldRenderer {
     private fogFramebuffer;
     private fogTexture;
     private fogTextureStorage;
+    private vertexArraySingle;
+    private vertexArrayDouble;
     private itemBatch;
     private corpseBatch;
     private creatureBatch;
     private creaturesInViewport;
     private viewportSpritesDirty;
-    static compileShaders(gl: WebGLRenderingContext): void;
-    constructor(gl: WebGLRenderingContext);
+    static compileShaders(gl: WebGL2RenderingContext): void;
+    constructor(gl: WebGL2RenderingContext);
     updateAll(): void;
     setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
     getPixelSize(): number;

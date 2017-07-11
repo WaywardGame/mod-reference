@@ -1,4 +1,5 @@
-import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType } from "Enums";
+import { ICreature } from "creature/ICreature";
+import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType } from "Enums";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
@@ -46,19 +47,22 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     malignity: number;
     movement: IInputMovement;
     movementAnimation: number;
-    movementCompleted: boolean;
     movementCompleteZ: number | undefined;
     movementFinishTime: number;
     movementProgress: number;
     moveType: MoveType;
     name: string;
     nextMoveDirection: FacingDirection | undefined;
+    nextMoveTime: number;
     nextX: number;
     nextY: number;
     options: IOptions;
     quickSlotInfo: IQuickSlotInfo[];
     raft: number | undefined;
     restData: IRestData | undefined;
+    revealedItems: {
+        [index: number]: boolean;
+    };
     score: number;
     skills: ISkillSet;
     spawnPoint: IPointZ | undefined;
@@ -66,6 +70,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     state: PlayerState;
     stats: IStats;
     status: IPlayerStatus;
+    stopNextMovement: boolean;
     strength: number;
     swimming: boolean;
     tamedCreatures: number[];
@@ -80,23 +85,27 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     addDelay(delay: Delay, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
     attributes(): void;
-    burn(skipMessage?: boolean): number | undefined;
+    burn(skipMessage?: boolean, skipParry?: boolean): number | undefined;
     calculateEquipmentStats(): void;
-    calculateStats(): void;
     canCarve(): IItem | undefined;
+    cancelResting(reason: RestCancelReason): void;
     canJump(): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkAndRemoveBlood(): boolean;
+    checkForGatherFire(): string | undefined;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkReputationMilestones(): void;
+    checkSkillMilestones(): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     checkWeight(): void;
     createFlowFieldManager(): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
     damage(amount: number, damageMessage: string, soundDelay?: number): void;
     damageEquipment(): void;
+    deleteFlowFieldManager(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     getBindDownTime(key: KeyBind): number | undefined;
+    getConsumeBonus(skillUse: SkillType, itemQuality: ItemQuality | undefined): number;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
     getEquipSlotForItem(item: IItem): EquipType | undefined;
@@ -121,11 +130,10 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     resetKeyBindState(): void;
     resetMovementStates(): void;
+    revealItem(itemType: ItemType): void;
     setId(id: number): void;
     setMouseDirection(playerDirection: FacingDirection): void;
     setRaft(itemId: number | undefined): void;
-    startResting(restData: IRestData): void;
-    cancelResting(reason: RestCancelReason): void;
     setTouchDirection(playerDirection: FacingDirection | undefined): void;
     setup(completedMilestones: number): void;
     setZ(z: number): void;
@@ -133,14 +141,17 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaCheck(): boolean;
     staminaReduction(skillType: SkillType): void;
+    startResting(restData: IRestData): void;
     tick(isPassTurn?: boolean): void;
     unequip(item: IItem, internal?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
+    updateCraftTable(updateDismantleItems: boolean): void;
     updateCraftTableAndWeight(): void;
     updateDialogInfo(dialogIndex: string | number): void;
     updateKeyBindState(key: KeyBind, state: number | undefined): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateReputation(reputation: number): void;
+    updateStatsAndAttributes(): void;
 }
 export default IPlayer;
 export interface IPlayerStatus {
@@ -148,14 +159,12 @@ export interface IPlayerStatus {
     burned: boolean;
     poisoned: boolean;
 }
-export interface IHairstyleDescription {
+export interface IHairstyleDescription extends IModdable {
     name: string;
     imagePath?: string;
-    mod?: number;
 }
-export interface IColorDescription {
+export interface IColorDescription extends IModdable {
     color: IRGB;
-    mod?: number;
 }
 export interface IPlayerCustomization {
     hairStyle: Hairstyle;
@@ -208,8 +217,12 @@ export interface IMobCheck {
     x: number;
     y: number;
     z: number;
-    creatureId?: number;
+    creature?: ICreature;
     player?: IPlayer;
     obstacle?: boolean;
     water?: boolean;
 }
+export declare const setupSpawnItems: ItemType[];
+export declare const setupWaterItems: ItemType[];
+export declare const setupToolItems: ItemType[];
+export declare const setupMiscItems: ItemType[];

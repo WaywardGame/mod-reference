@@ -1,13 +1,11 @@
+import { ICrafted } from "game/IGame";
 import IOptions from "game/IOptions";
 import { ModState } from "mod/IModManager";
 import { IMilestoneData } from "player/IMilestone";
-import { Enums } from "Utilities";
+import * as Utilities from "Utilities";
 export interface ISaveDataGlobal {
     gameCrafted: {
-        [index: number]: boolean;
-    };
-    gameNewCrafted: {
-        [index: number]: boolean;
+        [index: number]: ICrafted;
     };
     playerMilestoneData: {
         [index: number]: IMilestoneData | undefined;
@@ -23,7 +21,7 @@ export interface ISaveDataGlobal {
         language?: string;
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Enums.IEnumInfo;
+        [index: string]: Utilities.Enums.IEnumInfo;
     };
 }
 export default ISaveDataGlobal;

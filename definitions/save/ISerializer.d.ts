@@ -36,4 +36,5 @@ export declare enum Types {
     TimeManager = 18,
     Player = 19,
     ArrayV2 = 20,
+    Doodad = 21,
 }

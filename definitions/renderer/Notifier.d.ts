@@ -9,7 +9,7 @@ export default class Notifier implements INotifier {
     private notifications;
     private spriteBatch;
     private nextUpdate;
-    constructor(gl: WebGLRenderingContext, capacity: number);
+    constructor(gl: WebGL2RenderingContext, capacity: number);
     setTexture(texture: WebGLTexture, inverseTextureSize: Vec2): void;
     clear(): void;
     addItem(x: number, y: number, z: number, type: ItemType): void;

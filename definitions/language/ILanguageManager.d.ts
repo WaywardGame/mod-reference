@@ -1,4 +1,6 @@
-import { Dictionary, ILanguage, UiMessageStatic } from "language/ILanguage";
+import { Dictionary, ILanguage, ILanguageExtension, INameDescription, UiMessageStatic } from "language/ILanguage";
+export declare enum LanguageExtensions {
+}
 export interface ILanguageManager {
     add(language: ILanguage): void;
     remove(language: ILanguage): void;
@@ -6,11 +8,17 @@ export interface ILanguageManager {
     getLanguages(): ILanguage[];
     getLanguage(name: string): ILanguage | undefined;
     getLoaded(): ILanguage;
-    getTranslation(dictionary: Dictionary, entryIndex: number): string;
+    getDefaultTranslation(translationId: string): string;
+    getDefaultTranslation(dictionary: Dictionary, entry: number): string;
+    getTranslation(translationId: string): INameDescription;
+    getTranslation(dictionary: Dictionary, entry: number): INameDescription;
     reload(): void;
-    refreshUiTranslation(v: UiMessageStatic | string): void;
+    refreshUiTranslations(v: UiMessageStatic | string): void;
+    refreshUiTranslation(element: JQuery): void;
     load(language: ILanguage): void;
     evalString(str: string): string;
     shouldWarnOnInvalidOrMissingEntry(entryName?: string): boolean;
+    extendLanguage(id: number, languageName: string, extension: ILanguageExtension): void;
+    removeExtension(id: number): void;
 }
 export default ILanguageManager;

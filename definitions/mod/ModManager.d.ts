@@ -74,9 +74,9 @@ export default class ModManager implements IModManager {
     callHook(hook: Hook.PostRender): void;
     callHook(hook: Hook.PreRender): void;
     callHook(hook: Hook.PreRenderWorld, tileScale: number, viewWidth: number, viewHeight: number): void;
-    callHook(hook: Hook.ProcessInput): void;
+    callHook(hook: Hook.ProcessInput, player: IPlayer): boolean | undefined;
     callHook(hook: Hook, ...args: any[]): any;
-    callHookWithDefault(hook: Hook, defaultValue: any, ...args: any[]): any;
+    callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
     load(index: number): void;
     unload(index: number): void;
     save(index: number): void;
@@ -112,6 +112,6 @@ export default class ModManager implements IModManager {
     setState(index: number, state: ModState, force?: boolean, callback?: () => void): boolean;
     uninitialize(index: number): void;
     uninitializeAll(): void;
+    cacheHooks(): void;
     private onLanguageLoad(languageName, callback);
-    private cacheHooks();
 }

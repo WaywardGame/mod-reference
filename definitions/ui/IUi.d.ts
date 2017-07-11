@@ -134,7 +134,7 @@ export interface IUi extends IPropSerializable {
     refreshWorldTooltips(): void;
     messageIdToText(message: Message): string;
     getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
-    displayMessage(player: IPlayer | IPlayer[] | undefined, message: Message, messageType?: MessageType, ...args: any[]): void;
+    displayMessage(player: IPlayer | IPlayer[] | undefined, message: Message | string, messageType?: MessageType, ...args: any[]): void;
     displayMessagePack(player: IPlayer | IPlayer[] | undefined, messagePack: IMessagePack): void;
     getMessageCount(): number;
     removeOldestMessage(): void;
@@ -150,10 +150,10 @@ export interface IUi extends IPropSerializable {
     setFontStyle(): void;
     setOpacity(): void;
     updateKeybind(key: KeyBind, element: JQuery): void;
-    addOptionsSection(elementId: string, sectionName: string): JQuery;
-    removeOptionsSection(sectionName: string): void;
-    addButton(elementId: string, buttonName: string, imagePath: string, tooltip: string, keyBind?: number): JQuery;
-    removeButton(buttonName: string): void;
+    addOptionsSection(translationId: string): JQuery;
+    removeOptionsSection(section: JQuery): void;
+    addButton(translationId: string, imagePath: string, keyBind?: number): JQuery;
+    removeButton(button: JQuery): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
@@ -170,7 +170,6 @@ export interface IUi extends IPropSerializable {
     pressHotKey(hotKeyNumber: number): boolean;
     onGameEnd(showBlocker: boolean): void;
     highlight(selector?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;
-    removeHighlights(): void;
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;

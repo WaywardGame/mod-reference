@@ -2,12 +2,14 @@ import { IDoodad } from "doodad/IDoodad";
 import { ActionType, AttackType, Delay, EquipType, FacingDirection, IMessagePack, IPoint, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
+import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
 import { HintType } from "ui/IHint";
 export interface IAction {
     type: ActionType;
     callback: ActionCallback;
     usableAsGhost?: boolean;
+    ignoreHasDelay?: boolean;
 }
 export interface IActionArgument {
     type?: ActionType;
@@ -21,7 +23,6 @@ export interface IActionArgument {
     item?: IItem;
     itemComponentsConsumed?: IItem[];
     itemComponentsRequired?: IItem[];
-    itemComponentsToBeSalvaged?: IItem[];
     itemQuality?: ItemQuality;
     itemType?: ItemType;
     point?: IPoint;
@@ -41,6 +42,7 @@ export interface IActionArgument {
 export interface IActionResult {
     returnValue?: boolean;
     passTurn?: boolean | TurnType;
+    updateView?: IActionUpdateView | boolean;
     particle?: IActionParticle | IRGB;
     updateRender?: boolean;
     updateCraftTableAndWeight?: boolean;
@@ -49,8 +51,13 @@ export interface IActionResult {
     updateReputation?: number;
     staminaReduction?: SkillType;
     skillGain?: IActionResultSkillGain | SkillType;
+    milestone?: MilestoneType;
     soundEffect?: IActionResultSoundEffect | SfxType;
     messages: ActionMessages;
+    highlight?: string;
+}
+export interface IActionUpdateView {
+    updateFov: boolean;
 }
 export interface IActionResultDelay {
     type: Delay;

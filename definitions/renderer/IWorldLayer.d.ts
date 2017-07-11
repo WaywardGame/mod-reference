@@ -1,10 +1,11 @@
+import DoodadInfo from "doodad/DoodadInfo";
 import { DoodadType, TerrainMask, TerrainType } from "Enums";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean) => void;
-export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadVariation: number, flushImmediate: boolean) => void;
+export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariation: number, flushImmediate: boolean) => void;
 export interface IWorldLayer {
     width: number;
     height: number;
@@ -24,5 +25,6 @@ export interface IWorldLayer {
     setTile(x: number, y: number, terrainType: TerrainType | undefined, terrainMasks?: TerrainMask): void;
     updateAll(): void;
     updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean): void;
+    delete(): void;
 }
 export default IWorldLayer;

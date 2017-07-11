@@ -11,6 +11,9 @@ export interface ITileAtlas {
     doodads: {
         [index: number]: DoodadInfo;
     };
+    mounds: {
+        [index: number]: DoodadInfo;
+    };
     isMountain(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
     isWater(type: TerrainType): boolean;

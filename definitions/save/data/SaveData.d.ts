@@ -1,5 +1,5 @@
 import ISaveData from "save/data/ISaveData";
-import { Enums } from "Utilities";
+import * as Utilities from "Utilities";
 export default class SaveData implements ISaveData {
     gameSlotName: string;
     gameWon: boolean;
@@ -15,6 +15,6 @@ export default class SaveData implements ISaveData {
         };
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Enums.IEnumInfo;
+        [index: string]: Utilities.Enums.IEnumInfo;
     };
 }

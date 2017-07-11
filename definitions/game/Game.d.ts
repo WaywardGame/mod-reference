@@ -2,10 +2,10 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { FacingDirection, IHighscore, IPoint, IPointZ, ISeeds, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
-import { IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
+import { FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
-import { IItem, IItemArray, IObjectDescription } from "item/IItem";
+import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
@@ -15,15 +15,15 @@ import { SaveObject } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 export default class Game implements IGame {
-    interval: number;
-    mapSize: number;
-    mapSizeSq: number;
-    halfMapSize: number;
+    readonly interval: number;
+    readonly mapSize: number;
+    readonly mapSizeSq: number;
     realTimeNextTick: number;
     slot: number;
     loadedResources: boolean;
     version: string;
     saveVersion: string;
+    previousSaveVersion: IVersionInfo;
     isLoadingSave: boolean;
     absoluteTime: number;
     messageTimer: number;
@@ -32,6 +32,7 @@ export default class Game implements IGame {
     paused: boolean;
     autoSaveTimer: number;
     updateRender: boolean;
+    updateFieldOfView: boolean;
     dailyChallenge: boolean;
     fillCount: number;
     fillTile: boolean[][];
@@ -40,10 +41,7 @@ export default class Game implements IGame {
     fadeInAmount: number;
     flowFieldSyncCount: number;
     crafted: {
-        [index: number]: boolean;
-    };
-    newCrafted: {
-        [index: number]: boolean;
+        [index: number]: ICrafted;
     };
     contaminatedWater: IPointZ[];
     corpses: ICorpse[];
@@ -59,13 +57,19 @@ export default class Game implements IGame {
     seeds: ISeeds;
     tile: ITileArray;
     tileContainers: ITileContainer[];
-    tileData: ITileData[][][][];
+    tileData: {
+        [index: number]: {
+            [index: number]: {
+                [index: number]: ITileData[];
+            };
+        };
+    };
     tileEvents: ITileEvent[];
     time: TimeManager;
     lastPlayedVersion: string;
     highscores: IHighscore[];
     playedCount: number;
-    glContext: WebGLRenderingContext | null;
+    glContext: WebGL2RenderingContext | null;
     mapContext: CanvasRenderingContext2D | null;
     spriteTexture: WebGLTexture;
     spriteTextureSizeInversed: Vec2;
@@ -77,7 +81,6 @@ export default class Game implements IGame {
     cartographyTexture: WebGLTexture;
     visible: boolean;
     private loadedWorld;
-    private shouldUpdateFieldOfView;
     private shouldUpdateCraftTableAndWeight;
     private playOptions;
     constructor();
@@ -97,20 +100,20 @@ export default class Game implements IGame {
     gameLoop: (timeStamp: any) => void;
     saveGame(saveType: SaveType, callback?: (slot?: number, bytes?: number, saveObject?: SaveObject) => void): void;
     addZoomLevel(amount: number): void;
-    getFireMessage(decay: number): Message;
-    outputFireMessage(player: IPlayer, decay: number): void;
+    getFireMessage(decay?: number): Message;
+    outputFireMessage(player: IPlayer, decay?: number): void;
     play(saveSlot: number, options?: IPlayOptions): void;
     addPlayer(playerOptions?: IPlayerOptions): IPlayer;
     removePlayer(pid: number): void;
-    postLoadResources(): void;
     setRealTime(enabled: boolean): void;
     synchronizeFlowFields(plys: IPlayer[]): void;
     enableFlowFieldDebug(): void;
     resetGameState(skipSave?: boolean): void;
     shouldRender(): number;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
+    getTileData(x: number, y: number, z: number): ITileData[] | undefined;
+    getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
-    updateFieldOfViewNextTick(): void;
     updateCraftTableAndWeightNextTick(): void;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     getBlackness(): number;
@@ -124,15 +127,16 @@ export default class Game implements IGame {
     getAttack(): number;
     getSkillPercent(skill: SkillType): number;
     getPlayerAverage(calc: (player: IPlayer) => number, round?: boolean): number;
-    changeTile(newTile: any, changeX: number, changeY: number, changeZ: number, stackTiles: boolean): void;
+    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean): void;
     isTileFull(x: number, y: number, z: number): boolean;
     isTileFullEx(tile: ITile): boolean;
+    isOnFire(tile: ITile): FireType;
     isTileEmpty(x: number, y: number, z: number): boolean;
     processWaterContamination(): void;
     getMovementFinishTime(): number;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     tickRealtime(): void;
-    updateGame(): void;
+    updateView(updateFov: boolean): void;
     /**
      * AVOID USING THIS. USE updateCraftTableAndWeightNextTick INSTEAD!
      * For most cases you don't need this
@@ -159,7 +163,7 @@ export default class Game implements IGame {
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     directionToMovement(direction: FacingDirection): IPoint;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
-    updateOption(player: IPlayer | undefined, id: string, value: boolean): void;
+    updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateFlowFieldTile(x: number, y: number, z: number): void;
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     getCompletedMilestoneCount(): number;
@@ -183,8 +187,11 @@ export default class Game implements IGame {
     private setupWorldResources();
     private setZoomLevel();
     private postGenerateWorld(options);
+    private postLoadResources();
+    private checkAfterLoading();
     private playGame(options);
     private upgradeSave(saveVersion);
+    private upgradePlayer(player, saveVersion);
     private upgradeSaveMoveProperty(fromObject, toObject, propertyName, toPropertyName?);
     private upgradeGlobalSave(saveVersion);
 }

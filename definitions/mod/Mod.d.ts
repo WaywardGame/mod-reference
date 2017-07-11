@@ -1,6 +1,6 @@
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RenderFlag, SpriteBatchLayer } from "Enums";
+import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import BaseMod from "mod/BaseMod";
@@ -114,6 +114,12 @@ export declare abstract class Mod extends BaseMod {
      */
     canSeeCreature(creatureId: number, creature: ICreature, tile: ITile): boolean | undefined;
     /**
+     * Called when the next music track is requested
+     * @param currentMusicTrack The current music track
+     * @returns The music track that should be played next or undefined to use the default logic
+     */
+    getNextMusicTrack(currentMusicTrack: Music): Music | undefined;
+    /**
      * Called when rendering creatures in the viewport
      * @param creatureId The creature id
      * @param creature The creature object
@@ -159,7 +165,7 @@ export declare abstract class Mod extends BaseMod {
      * Called when a button on the button bar is clicked
      * @param buttonName The button name
      */
-    onButtonBarClick(buttonName: string): void;
+    onButtonBarClick(button: JQuery): void;
     /**
      * Called when an item is added to a container.
      * @param item The item object
@@ -324,14 +330,24 @@ export declare abstract class Mod extends BaseMod {
      * Called when the player takes damage
      * @param amount The amount of damage taken
      * @param damageMessage The message associated with the damaged
-     * @preturns False to stop the player from taking damage or undefined to use the default logic
+     * @returns False to stop the player from taking damage or undefined to use the default logic
      */
     onPlayerDamage(amount: number, damageMessage: string): boolean | undefined;
     /**
      * Called when the player is killed
-     * @preturns False to stop the player from dieing or undefined to use the default logic
+     * @param player The player object
+     * @returns False to stop the player from dieing or undefined to use the default logic
      */
     onPlayerDeath(player: IPlayer): boolean | undefined;
+    /**
+     * Called when a sound effect is queued
+     * @param type The sound effect type
+     * @param x The x location in the world for the effect
+     * @param y The y location in the world for the effect
+     * @param z The z location in the world for the effect
+     * @returns False to cancel the sound effect, a sound effect to play instead of the given one, or undefined to use the default logic
+     */
+    onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     /**
      * Called when the in game screen is shown
      */
@@ -348,8 +364,9 @@ export declare abstract class Mod extends BaseMod {
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     /**
      * Called when a turn is completing
+     * @param player The player object
      */
-    onTurnComplete(): void;
+    onTurnComplete(player: IPlayer): void;
     /**
      * Called when a turn is starting
      */
@@ -397,8 +414,10 @@ export declare abstract class Mod extends BaseMod {
     preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
     /**
      * Called when input is being processed
+     * @param player The player object
+     * @returns False to prevent input processing or undefined to use the default logic
      */
-    processInput(): void;
+    processInput(player: IPlayer): boolean | undefined;
     /**
      * Called when different object types are rendered
      * @returns A bitwise list of render flags or undefined to use the default logic

@@ -22,9 +22,10 @@ export default class TileLayer {
     private tileDataU32;
     private texTiles;
     private inverseTileDataTextureSize;
+    private vertexArray;
     static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
-    static compileShaders(gl: WebGLRenderingContext): void;
-    constructor(width: number, height: number, gl: WebGLRenderingContext);
+    static compileShaders(gl: WebGL2RenderingContext): void;
+    constructor(width: number, height: number, gl: WebGL2RenderingContext, positionBuffer: WebGLBuffer);
     setTileTLFG(dataIndex: number, tileX: number, tileY: number): void;
     setTileTRFG(dataIndex: number, tileX: number, tileY: number): void;
     setTileBLFG(dataIndex: number, tileX: number, tileY: number): void;
@@ -33,8 +34,8 @@ export default class TileLayer {
     setTileTRBG(dataIndex: number, tileX: number, tileY: number): void;
     setTileBLBG(dataIndex: number, tileX: number, tileY: number): void;
     setTileBRBG(dataIndex: number, tileX: number, tileY: number): void;
-    sendTileToGPU(x: number, y: number, gl: WebGLRenderingContext): void;
-    sendToGPU(gl: WebGLRenderingContext): void;
-    render(gl: WebGLRenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number, fixedDepth?: boolean): void;
+    sendTileToGPU(x: number, y: number, gl: WebGL2RenderingContext): void;
+    sendToGPU(gl: WebGL2RenderingContext): void;
+    render(gl: WebGL2RenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number, fixedDepth?: boolean): void;
     clear(): void;
 }

@@ -12,5 +12,6 @@ export interface SerializedLanguage {
         };
     };
 }
+export declare const dictionaryEnums: any;
 export declare function deserialize(serialized: SerializedLanguage, into?: ILanguage): Language | undefined;
 export declare function serialize(language: ILanguage, caseStyle?: CaseStyle): SerializedLanguage;

@@ -1,4 +1,4 @@
-import { Enums } from "Utilities";
+import * as Utilities from "Utilities";
 export interface ISaveData {
     gameSlotName: string;
     gameWon: boolean;
@@ -14,7 +14,7 @@ export interface ISaveData {
         };
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Enums.IEnumInfo;
+        [index: string]: Utilities.Enums.IEnumInfo;
     };
 }
 export default ISaveData;

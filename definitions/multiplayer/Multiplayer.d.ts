@@ -1,6 +1,6 @@
 import { IPlayerOptions } from "game/IGame";
 import { IMultiplayer, IMultiplayerOptions, MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
-import { Packet, PacketType } from "multiplayer/IPacket";
+import { PacketData, PacketType } from "multiplayer/IPacket";
 import IPlayer from "player/IPlayer";
 export default class Multiplayer implements IMultiplayer {
     private _playerIdentifier;
@@ -16,7 +16,7 @@ export default class Multiplayer implements IMultiplayer {
     private _options;
     private _playerOptions;
     private _incomingPacketQueue;
-    private _incomingPacketProcessorIntervalId;
+    private _packetTickIntervalId;
     private _currentPacketProcessing;
     private _currentSyncPacketsProcessing;
     private _syncCheckStack;
@@ -33,9 +33,9 @@ export default class Multiplayer implements IMultiplayer {
     kick(player: IPlayer): void;
     onPlaying(): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
-    sendPacket(player: IPlayer, packet: Packet): void;
-    syncPacket(packet: Packet, clientSide?: () => any, checkPacketType?: boolean): any;
-    executeSyncedPacket(packetObjectOrType: Packet | PacketType): number | undefined | void;
+    sendPacket(player: IPlayer, packetData: PacketData): void;
+    syncPacket(packetData: PacketData, clientSide?: () => any, checkPacketType?: boolean): any;
+    executeSyncedPacket(packetObjectOrType: PacketData | PacketType): number | undefined | void;
     disconnect(message?: string, callback?: () => void): void;
     updatePlayerId(oldPid: number, newPid: number): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
@@ -45,27 +45,28 @@ export default class Multiplayer implements IMultiplayer {
     private connectMatchmakingServer(channel);
     private disconnectMatchmakingServer();
     private onMatchmakingServerConnected();
+    private sendJoinChannelMessage();
     private clearMatchmakingRetryTimeout();
     private clearJoinServerRetryTimeout();
     private onMatchmakingServerError(event);
     private onMatchmakingServerMessage(event);
     private displayJoinServerRetryDialog();
-    private setupConnection(peerConnection);
+    private setupConnection(connection);
     private onIceConnectionStateChange(connection, event);
+    private onNegotiationNeeded(connection, event);
     private onDescriptionCreated(connection, description);
     private onDataChannelReceived(connection, event);
     private onDataChannelChanged(connection, event);
     private onDataChannelMessage(connection, event);
-    private executeSyncedPacketInternal(packetObjectOrType, excludeConnection?);
-    private packetProcessor();
-    private processPacket(connection, packet);
+    private executeSyncedPacketInternal(packetDataOrType, excludeConnection?);
+    private packetTick();
+    private processIncomingPackets();
+    private processOutgoingPackets();
+    private processPacket(connection, packetData);
     private synchronizationCheck(packet, checkBefore);
-    private getPacketData(packet);
-    private sendPacketInternal(packet, includeConnection?, excludeConnection?, force?);
+    private sendPacketInternal(packetData, includeConnection?, excludeConnection?, force?);
     private _sendData(connection, data, sendNow?);
     private sendMatchmakingMessage(data, channel?);
     private closeConnection(connection);
     private onStateChange();
-    private encodePacket(packet);
-    private decodePacket(buffer);
 }

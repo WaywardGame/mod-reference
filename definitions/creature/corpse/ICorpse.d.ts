@@ -1,4 +1,4 @@
-import { CreatureType, IPointZ, ItemType, SkillType } from "Enums";
+import { CreatureType, IObject, IPointZ, ItemType, SkillType } from "Enums";
 export interface ICorpseDescription {
     name?: string;
     decay?: number;
@@ -14,8 +14,7 @@ export interface ICorpseResourceDrop {
     item: ItemType;
     chance?: number;
 }
-export interface ICorpse extends IPointZ {
-    type: CreatureType;
+export interface ICorpse extends IObject<CreatureType>, IPointZ {
     decay?: number;
     aberrant?: boolean;
 }

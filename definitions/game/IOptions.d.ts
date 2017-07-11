@@ -7,6 +7,7 @@ export interface IOptions {
     currentGame: number;
     developerLogging: boolean;
     dialogOpacity: number;
+    directionTurnDelay: number;
     dropOnGather: boolean;
     dropUnderYourself: boolean;
     effects: number;
@@ -35,4 +36,5 @@ export interface IOptions {
 export default IOptions;
 export declare type IOptionsOld = Partial<IOptions> & {
     keyBinds: IKeyBind;
+    directionTurnDelay: boolean;
 };

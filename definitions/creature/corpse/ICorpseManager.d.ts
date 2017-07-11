@@ -1,7 +1,7 @@
 import { ICorpse } from "creature/corpse/ICorpse";
-import { ItemType } from "Enums";
+import { CreatureType, ItemType } from "Enums";
 export interface ICorpseManager {
-    create(corpse: ICorpse): void;
+    create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean): ICorpse | undefined;
     updateAll(): void;
     getResources(corpse: ICorpse): ItemType[];
     remove(corpse: ICorpse): void;

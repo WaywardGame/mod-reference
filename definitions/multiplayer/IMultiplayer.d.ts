@@ -1,13 +1,13 @@
 import { Difficulty } from "Enums";
 import { IPlayerOptions } from "game/IGame";
-import { Packet, PacketType } from "multiplayer/IPacket";
+import { PacketData, PacketType } from "multiplayer/IPacket";
 import { IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayer {
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
     disconnect(): void;
-    executeSyncedPacket(packetObjectOrType: Packet | PacketType): number | undefined | void;
+    executeSyncedPacket(packetDataOrType: PacketData | PacketType): number | undefined | void;
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
     isConnected(): boolean;
@@ -18,8 +18,8 @@ export interface IMultiplayer {
     kick(player: IPlayer): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
-    sendPacket(player: IPlayer, packet: Packet): void;
-    syncPacket(packet: Packet, clientSide?: () => any, checkPacketType?: boolean): any;
+    sendPacket(player: IPlayer, packetData: PacketData): void;
+    syncPacket(packetData: PacketData, clientSide?: () => any, checkPacketType?: boolean): any;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;
@@ -42,4 +42,5 @@ export declare enum MultiplayerSyncCheck {
     Container = 10,
     ItemOrder = 11,
     LastCreationIds = 12,
+    IsTileEmpty = 13,
 }

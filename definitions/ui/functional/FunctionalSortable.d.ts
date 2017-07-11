@@ -22,4 +22,5 @@ export default class Sortable implements ISortable {
     private _onMouseLeave(event);
     private _getMousePosition(event);
     private _createEvent();
+    private _updatePosition(item, after);
 }

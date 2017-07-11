@@ -1,5 +1,5 @@
 import Vec2 = TSM.vec2;
-import { CaseStyle, IPointZ, ItemImage, ItemType, IVersionInfo, SentenceCaseStyle, Source, TerrainType } from "Enums";
+import { CaseStyle, IPointZ, IVersionInfo, SentenceCaseStyle, Source, TerrainType } from "Enums";
 import { ITile } from "tile/ITerrain";
 import Color from "utilities/Color";
 export { Color };
@@ -44,6 +44,11 @@ export declare module Random {
      */
     function nextBool(): boolean;
     /**
+     * Get the chance for something
+     * Returns a number between 1 and 100 (inclusive)
+     */
+    function nextChance(minChance?: number): number;
+    /**
      * Chooses a random entry in an array and returns it
      */
     function nextChoice(from: any[]): any;
@@ -51,13 +56,14 @@ export declare module Random {
     function popSeed(): number;
     function tickSeed(s: number): number;
     function shuffle(array: number[]): number[];
+    function getElement<T>(array: T[]): T;
 }
 export declare function download(name: string, json: string): void;
 export declare function upload(callback: (result: string) => void, e: Event): void;
 export declare module TileHelpers {
-    const maskGfx = 3;
-    const maskType = 252;
-    const maskTilled = 256;
+    const maskGfx = 31;
+    const maskType = 4064;
+    const maskTilled = 4096;
     function getGfx(tile: ITile): number;
     function getGfxRaw(data: number): number;
     function setGfx(tile: ITile, value: number): void;
@@ -74,15 +80,43 @@ export declare module TileHelpers {
     function isOpenTile(point: IPointZ, tile: ITile): boolean;
 }
 export declare module WebWorkerHelpers {
+    class WebWorker {
+        private worker;
+        private blobUrl;
+        private callback;
+        constructor(workerFunction: (data: any) => void);
+        getWorker(): Worker;
+        setCallback(callback: (evt: any) => void): void;
+        free(): void;
+    }
     function create(workerFunction: (data: any) => void, messageCallbackFunction: (evt: any) => void): Worker;
+    function createReusable(workerFunction: (data: any) => void): WebWorker;
     function enumToString(name: string, values: any, withStrings?: boolean): string;
     function moduleToString(moduleName: string, name: string, moduleToConvert: any, globalVariables?: string[]): string;
 }
-export declare module ItemImageCache {
-    function initialize(): void;
-    function getItemImageUrl(itemType: ItemType, itemImage: ItemImage): string;
-    function queueCreateItemImageOutlines(image: HTMLImageElement, itemType: ItemType): void;
-    function cacheAllItemImageOutlines(): void;
+export declare module WebAssemblyHelpers {
+    enum Module {
+        FlowField = 0,
+        FieldOfView = 1,
+    }
+    interface IWebAssemblyModuleInstance {
+        imports: IWebAssemblyImports;
+        exports: any;
+        instance: any;
+        memoryBuffer: ArrayBuffer;
+    }
+    interface IWebAssemblyImports {
+        env: IWebAssemblyImportsEnvironment;
+    }
+    interface IWebAssemblyImportsEnvironment {
+        memoryBase: number;
+        tableBase: number;
+        memory: any;
+        table: any;
+    }
+    function isAvailable(): boolean;
+    function loadAndCompileModules(): void;
+    function initializeInstance(moduleId: Module, id: number, imports?: any): IWebAssemblyModuleInstance | undefined;
 }
 export declare module Enums {
     enum EnumId {
@@ -97,6 +131,10 @@ export declare module Enums {
         Hairstyle = 8,
         HairColor = 9,
         SkinColor = 10,
+        Dictionary = 11,
+        LanguageExtension = 12,
+        Music = 13,
+        SoundEffect = 14,
     }
     interface IEnumInfo {
         enumId: EnumId;
@@ -123,7 +161,9 @@ export declare module Enums {
     function getRandomIndex(enumObject: any): number;
     function getValues(enumObject: any): number[];
     function forEach(enumObject: any, callback: (name: string, value: number) => boolean | void): void;
-    function toString(e: any, n: number): string;
+    function toString(enumObject: any, n: number): string;
+    function getNext(enumObject: any, n: number): number;
+    function getPrevious(enumObject: any, n: number): number;
 }
 export declare module Strings {
     function formatSentenceCase(text: string, textCase: SentenceCaseStyle): string;
@@ -171,7 +211,7 @@ export declare function getVersionDisplayString(version?: string | IVersionInfo)
 export declare function parseMarkup(markupText: string): string;
 export declare function arrayEquals(array1: any[] | undefined, array2: any[] | undefined): boolean;
 export declare function arrayIncludes(arr: any[], find: any): boolean;
-export declare function findUnusedId(source: Source, things: any[]): number;
+export declare function findUnusedId<T>(source: Source, things: T[]): number;
 export declare function escapeHTML(str: string): string;
 export declare function fixObjectCaseStyle(obj: any, caseStyle: CaseStyle, whitelist?: string[]): any;
 export declare function stripParentDirectoryAccessorsFromPath(path: string): string;

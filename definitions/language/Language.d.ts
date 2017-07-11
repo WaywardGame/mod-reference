@@ -1,6 +1,6 @@
-import { ActionType, CreatureType, DoodadType, DoodadTypeGroup, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
+import { ActionType, CreatureType, DoodadType, DoodadTypeGroup, GrowingStage, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
 import { Dictionary, ILanguage, INameDescriptionArray, UiMessageStatic } from "language/ILanguage";
-import { IActionDictionary, ICreatureDictionary, IDoodadDictionary, IHintDictionary, IItemDictionary, IMessageDictionary, IMilestoneDictionary, IOnEquipDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, IUiDictionary } from "language/ILanguage";
+import { IActionDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, IMessageDictionary, IMilestoneDictionary, IOnEquipDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, IUiDictionary } from "language/ILanguage";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";
@@ -21,6 +21,7 @@ export default class Language implements ILanguage {
     setDictionary(dictionary: Dictionary.Action, newEntries: IActionDictionary): void;
     setDictionary(dictionary: Dictionary.Creature, newEntries: ICreatureDictionary): void;
     setDictionary(dictionary: Dictionary.Doodad, newEntries: IDoodadDictionary): void;
+    setDictionary(dictionary: Dictionary.Growth, newEntries: IGrowthDictionary): void;
     setDictionary(dictionary: Dictionary.Hint, newEntries: IHintDictionary): void;
     setDictionary(dictionary: Dictionary.Item, newEntries: IItemDictionary): void;
     setDictionary(dictionary: Dictionary.Message, newEntries: IMessageDictionary): void;
@@ -34,6 +35,7 @@ export default class Language implements ILanguage {
         [key: number]: any;
     }): void;
     setDictionaryRaw(dictionary: Dictionary, newEntries: INameDescriptionArray): void;
+    removeDictionary(dictionary: Dictionary): void;
     setDictionaries(dictionaries: {
         [key: number]: {
             [key: number]: any;
@@ -44,6 +46,7 @@ export default class Language implements ILanguage {
     setEntry(dictionary: Dictionary.Corpse, entryIndex: CreatureType, prefix: string, name: string): void;
     setEntry(dictionary: Dictionary.Doodad, entryIndex: DoodadType, prefix: string, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Doodad, entryIndex: DoodadTypeGroup, name: string, description: string): void;
+    setEntry(dictionary: Dictionary.Growth, entryIndex: GrowingStage, prefix: string, name: string): void;
     setEntry(dictionary: Dictionary.Hint, entryIndex: HintType, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Item, entryIndex: ItemType, prefix: string, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Item, entryIndex: ItemTypeGroup, name: string, description: string): void;

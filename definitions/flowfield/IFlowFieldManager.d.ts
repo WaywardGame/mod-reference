@@ -4,10 +4,9 @@ import { DebugRendererDelegate } from "IFlowFieldDebugRenderer";
 export interface IFlowFieldManager {
     delegate: DebugRendererDelegate;
     flowFields: {
-        [index: number]: {
-            [index: number]: IFlowField;
-        };
+        [index: number]: IFlowField;
     };
+    delete(): void;
     getHeight(): number;
     getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
     getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;

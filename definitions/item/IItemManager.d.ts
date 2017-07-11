@@ -1,5 +1,5 @@
 import { IDoodad } from "doodad/IDoodad";
-import { IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
+import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
 import { IContainable, IContainer, IContainerReference, IItem, IItemArray, IRecipe } from "IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -12,7 +12,7 @@ export interface IItemManager {
     computeContainerWeight(container: IContainer): number;
     countItemsInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup | IItemTypeGroup, ignoreItem?: IItem): number;
-    craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, itemsToBeSalvaged: IItemArray, baseItem?: IItem): boolean;
+    craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality, fake?: boolean): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     decayItems(): boolean;

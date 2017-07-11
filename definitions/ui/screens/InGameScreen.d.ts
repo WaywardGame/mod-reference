@@ -129,7 +129,7 @@ export default class InGameScreen extends BaseScreen {
     refreshStats(): void;
     refreshAttributes(): void;
     updateTextIfChanged(id: TextElementId, element: JQuery, text: string): void;
-    onButtonBarClick(button: string): void;
+    onButtonBarClick(button: JQuery | string): void;
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
@@ -156,7 +156,7 @@ export default class InGameScreen extends BaseScreen {
     saveItemOrder(containerElement: JQuery): void;
     showItemContextMenu(element: JQuery, isContainer?: boolean): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
-    runContextMenuAction(itemId: number, containerId: number | undefined, action: IContextMenuAction): boolean;
+    runContextMenuAction(itemId: number, containerId: number | undefined, action: IContextMenuAction, skipSound?: boolean): boolean;
     onInventoryItemRightClick(element: JQuery, bypassAll?: boolean): void;
     onContainerItemRightClick(element: JQuery, bypassAll?: boolean): void;
     onCraftingItemClick(element: JQuery): void;
@@ -170,7 +170,7 @@ export default class InGameScreen extends BaseScreen {
     tooltipDisable(): void;
     tooltipHide(): void;
     onTooltipClose(): void;
-    getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean): string;
+    getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: string | undefined): string;
     getTooltipHtmlForTile(tile: ITile): string;
     displayMessagePack(messagePack: IMessagePack): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
@@ -213,22 +213,24 @@ export default class InGameScreen extends BaseScreen {
     hideContextMenu(): boolean;
     hideActionsMenu(): void;
     toggleActionsMenu(center?: boolean): void;
-    showActionsMenu(center?: boolean, updatePosition?: boolean): void;
+    showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
     onClearMessages(): void;
     onFilterInput(containerElement: JQuery): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
+    getContainerId(containerElement: JQuery): string;
     sortItems(containerElement: JQuery, sortType: SortType, messageType?: Message, canReverse?: boolean): void;
     sortItemElements(itemElements: JQuery, containerSortInfo: IContainerSortInfo): void;
     updateInventorySort(): void;
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
-    updateSort(container: JQuery, activeSort: boolean): void;
+    updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;
-    addButton(elementId: string, buttonName: string, imagePath: string, tooltip: string, keyBind?: number): JQuery;
-    refreshButtonTooltip(buttonName: string, tooltip: string, keyBind: number): void;
-    removeButton(buttonName: string): void;
+    addButton(translationId: string, imagePath: string, keyBind?: number): JQuery;
+    refreshButtonTooltip(button: JQuery): void;
+    removeButton(button: JQuery): void;
     onUpdateDirection(): void;
     private updateContextMenu(contextMenu);
     private onOpenMessages();
     private getMessagesHtml();
     private onCloseMessages();
+    private runGatherOrHarvestAction(actionType, action);
 }

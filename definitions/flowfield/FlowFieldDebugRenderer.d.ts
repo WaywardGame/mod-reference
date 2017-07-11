@@ -7,7 +7,7 @@ export default class FlowFieldDebugRenderer implements ITextureDebugRenderer {
     private shaderProgramAlphaDebug;
     private tex;
     private field;
-    constructor(gl: WebGLRenderingContext, ff: IFlowFieldManager);
+    constructor(gl: WebGL2RenderingContext, ff: IFlowFieldManager);
     update(): void;
     renderDebug(): void;
 }

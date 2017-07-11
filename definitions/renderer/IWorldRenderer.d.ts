@@ -1,7 +1,7 @@
 import Vec2 = TSM.vec2;
 import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
-import { Bound3 } from "Utilities";
+import * as Utilities from "Utilities";
 export interface IWorldRenderer {
     positionTextureBuffer: WebGLBuffer;
     positionBuffer: WebGLBuffer;
@@ -29,7 +29,7 @@ export interface IWorldRenderer {
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
     screenToTile(screenX: number, screenY: number): Vec2;
-    getViewportBounds(): Bound3;
+    getViewportBounds(): Utilities.Bound3;
     computeSpritesInViewport(): void;
     batchCreatures(): void;
 }

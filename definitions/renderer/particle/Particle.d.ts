@@ -12,7 +12,8 @@ export default class Particle implements IParticle {
     private colorData;
     private particleSize;
     private lastUsedParticle;
-    constructor(gl: WebGLRenderingContext, maxParticles?: number);
+    private vertexArray;
+    constructor(gl: WebGL2RenderingContext, maxParticles?: number);
     create(tileX: number, tileY: number, tileZ: number, particle: IRGB): void;
     createMultiple(tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number): void;
     clear(): void;

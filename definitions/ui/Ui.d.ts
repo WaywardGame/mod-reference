@@ -12,7 +12,6 @@ export default class Ui implements IUi {
     private bindState;
     private rebindingKey;
     private rebindingKeyElement;
-    private highlightTimeout;
     private elementDocument;
     private elementWindow;
     private elementBody;
@@ -110,7 +109,7 @@ export default class Ui implements IUi {
     refreshWorldTooltips(): void;
     messageIdToText(message: Message): string;
     getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
-    displayMessage(player: IPlayer | IPlayer[] | undefined, message: Message, messageType?: MessageType, ...args: any[]): void;
+    displayMessage(player: IPlayer | IPlayer[] | undefined, message: Message | string, messageType?: MessageType, ...args: any[]): void;
     displayMessagePack(player: IPlayer | IPlayer[] | undefined, messagePack: IMessagePack): void;
     getMessageCount(): number;
     removeOldestMessage(): void;
@@ -126,11 +125,11 @@ export default class Ui implements IUi {
     setFontStyle(): void;
     setOpacity(): void;
     updateKeybind(key: KeyBind, element: JQuery): void;
-    addOptionsSection(elementId: string, sectionName: string): JQuery;
-    removeOptionsSection(sectionName: string): void;
-    addButton(elementId: string, buttonName: string, imagePath: string, tooltip: string, keyBind?: number): JQuery;
-    refreshButtonTooltip(buttonName: string, tooltip: string, keyBind: number): void;
-    removeButton(buttonName: string): void;
+    addOptionsSection(translationId: string): JQuery;
+    removeOptionsSection(options: JQuery): void;
+    addButton(translationId: string, imagePath: string, keyBind?: number): JQuery;
+    refreshButtonTooltip(button: JQuery): void;
+    removeButton(button: JQuery): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
@@ -148,7 +147,6 @@ export default class Ui implements IUi {
     onGameEnd(showBlocker: boolean): void;
     onUpdateDirection(): void;
     highlight(selector?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;
-    removeHighlights(): void;
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;

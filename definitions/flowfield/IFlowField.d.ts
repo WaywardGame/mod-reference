@@ -1,9 +1,9 @@
-import IByteGrid from "renderer/fieldofview/IByteGrid";
 import { ITile } from "tile/ITerrain";
 export interface IFlowField {
-    flowField: IByteGrid;
+    delete(): void;
+    getFieldValue(x: number, y: number): number;
     updateField(tileX: number, tileY: number, offsetX: number, offsetY: number): void;
-    updateTile(gridIndex: number, tile: ITile): void;
     updatePenaltyField(): void;
+    updateTile(gridIndex: number, tile: ITile): void;
 }
 export default IFlowField;

@@ -6,6 +6,6 @@ export default class FieldOfViewDebugRenderer implements ITextureDebugRenderer {
     private viewQuadBuffer;
     private viewQuadBuffer2;
     private shaderProgramAlphaDebug;
-    constructor(gl: WebGLRenderingContext, fov: IFieldOfView);
+    constructor(gl: WebGL2RenderingContext, fov: IFieldOfView);
     renderDebug(): void;
 }

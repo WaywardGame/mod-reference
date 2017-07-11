@@ -1,7 +1,6 @@
-import { CreatureType, DamageType, Defense, FacingDirection, IMessagePack, IPointZ, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, SfxType, StatusType } from "Enums";
+import { CreatureType, DamageType, Defense, FacingDirection, IMessagePack, IModdable, IObject, IPointZ, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, SfxType, StatusType } from "Enums";
 import { IPlayer } from "player/IPlayer";
-export interface ICreature extends IPointZ {
-    readonly type: CreatureType;
+export interface ICreature extends IObject<CreatureType>, IPointZ {
     fromX: number;
     fromY: number;
     direction: FacingDirection;
@@ -18,7 +17,6 @@ export interface ICreature extends IPointZ {
     chickenEggCounter?: number;
     stopNextMovement?: boolean;
     description(): ICreatureDescription | undefined;
-    id(): number | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
     getInspectMessage(player: IPlayer): IMessagePack;
@@ -36,8 +34,8 @@ export interface ICreature extends IPointZ {
     setMoveType(moveType: MoveType): void;
     getMovementProgress(): number;
     getMovementFinishTime(): number;
-    update(creatureId: number): boolean;
-    moveTo(x: number, y: number, z?: number): boolean;
+    update(): boolean;
+    moveTo(x: number, y: number, z: number): boolean;
     canSwapWith(player: IPlayer): boolean;
 }
 export declare enum SpawnGroup {
@@ -71,7 +69,7 @@ export declare enum SpawnableTiles {
     Desert = 8,
     Lava = 9,
 }
-export interface ICreatureDescription {
+export interface ICreatureDescription extends IModdable {
     name?: string;
     minhp: number;
     maxhp: number;
@@ -93,7 +91,6 @@ export interface ICreatureDescription {
     canCauseStatus?: StatusType[];
     lootGroup?: LootGroupType;
     jumpOver?: boolean;
-    mod?: number;
     noCorpse?: boolean;
     respawn?: boolean;
     reputation: number;

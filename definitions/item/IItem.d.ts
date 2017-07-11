@@ -1,4 +1,5 @@
-import { ActionType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IPointZ, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
+import { ICreature } from "creature/ICreature";
+import { ActionType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
 import IPlayer from "player/IPlayer";
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);
@@ -28,9 +29,7 @@ export interface IItemLegendary {
     skill: SkillType;
     value: number;
 }
-export interface IItem extends IObject, IContainable, Partial<IContainer> {
-    readonly id: number;
-    readonly type: ItemType;
+export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
     weight: number;
     equippedPid?: number;
     quickSlot?: number;
@@ -50,9 +49,9 @@ export interface IItem extends IObject, IContainable, Partial<IContainer> {
     getEquipSlot(): EquipType | undefined;
     changeInto(itemType: ItemType): void;
     returns(): void;
-    spawnOnBreak(): number | undefined;
-    spawnOnDecay(): number | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined): number | undefined;
+    spawnOnBreak(): ICreature | undefined;
+    spawnOnDecay(): ICreature | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined): ICreature | undefined;
     getLocation(): IPointZ | undefined;
     dropInWater(player: IPlayer, x?: number, y?: number): void;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
@@ -72,25 +71,7 @@ export interface IContainer extends IContainable {
     containedItems: IItemArray;
     itemOrders?: number[];
 }
-export interface IObject {
-    type: number;
-    decay?: number;
-    minDur?: number;
-    maxDur?: number;
-    quality?: ItemQuality;
-    renamed?: string;
-}
-export interface IObjectDescription {
-    name?: string;
-    description?: string;
-    suffix?: string;
-    prefix?: string;
-    decayMax?: number;
-    skillUse?: SkillType;
-    weightCapacity?: number;
-    imagePath?: string;
-}
-export interface IItemDescription extends IObjectDescription {
+export interface IItemDescription extends IObjectDescription, IModdable {
     durability?: number;
     doodadType?: DoodadType;
     onBurn?: ItemType;
@@ -119,7 +100,6 @@ export interface IItemDescription extends IObjectDescription {
     recipe?: IRecipe;
     disassemble?: boolean;
     requiredForDisassembly?: [ItemType | ItemTypeGroup];
-    mod?: number;
     decaysInto?: ItemType;
     twoHanded?: boolean;
     recipes?: ItemType[];

@@ -22,6 +22,7 @@ export default class ActualCreature implements ICreature, IPropSerializable, IUn
     happiness?: number;
     chickenEggCounter?: number;
     stopNextMovement?: boolean;
+    id: number;
     private _moveType;
     private _shouldSkipNextUpdate;
     private _movementFinishTime;
@@ -29,7 +30,6 @@ export default class ActualCreature implements ICreature, IPropSerializable, IUn
     private _description;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
     description(): ICreatureDescription | undefined;
-    id(): number | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
     getInspectMessage(player: IPlayer): IMessagePack;
@@ -46,8 +46,8 @@ export default class ActualCreature implements ICreature, IPropSerializable, IUn
     getMovementProgress(): number;
     getMovementFinishTime(): number;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
-    update(creatureId: number): boolean;
-    moveTo(x: number, y: number, z?: number): boolean;
+    update(): boolean;
+    moveTo(x: number, y: number, z: number): boolean;
     canSwapWith(player: IPlayer): boolean;
     damage(damageInfo: IDamageInfo): number | undefined;
     getSerializationProperties(_: string): string[];

@@ -20,6 +20,6 @@ export default class OptionsScreen extends BaseScreen {
     onClickButton(element: JQuery, id: string): void;
     onClickButtonChoice(element: JQuery, id: string): void;
     onRangeChange(element: JQuery, id: string, value: number): void;
-    addOptionsSection(elementId: string, sectionName: string): JQuery;
-    removeOptionsSection(sectionName: string): void;
+    addOptionsSection(translationId: string): JQuery;
+    removeOptionsSection(optionsSection: JQuery): void;
 }

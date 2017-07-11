@@ -8,6 +8,7 @@ export default class World implements IWorld {
     layers: IWorldLayer[];
     private loaded;
     constructor(width: number, height: number);
+    delete(): void;
     toLocal(world: number, local: number): number;
     addLayer(level: number): void;
     load(): void;

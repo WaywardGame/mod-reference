@@ -1,11 +1,11 @@
 import { IDoodad } from "doodad/IDoodad";
 import { ActionType, AttackType, EquipType, FacingDirection, IPoint, ItemQuality, ItemType, KeyBind, RestType } from "Enums";
-import { IPlayerOptions } from "game/IGame";
+import { ICrafted, IPlayerOptions } from "game/IGame";
 import { IContainer, IContainerReference, IItem } from "item/IItem";
 import { UiMessage } from "language/ILanguage";
 import { IMultiplayerOptions } from "multiplayer/IMultiplayer";
 import { IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-import { IRandomHistory } from "Utilities";
+import * as Utilities from "Utilities";
 export declare enum PacketType {
     Connect = 0,
     World = 1,
@@ -31,6 +31,7 @@ export declare enum PacketType {
     UpdateItemOrder = 21,
     UpdateQuickSlotInfo = 22,
     UpdateDialogInfo = 23,
+    MultiplePackets = 24,
 }
 export interface IPacketPlayerTarget {
     pid: number;
@@ -41,129 +42,132 @@ export interface IPacketPlayersTarget {
 export interface IPacketSynchronizationCheck {
     type: PacketType;
     packetId?: number;
-    afterRandomHistory?: IRandomHistory[];
+    afterRandomHistory?: Utilities.IRandomHistory[];
     beforeSyncChecks?: ISyncCheck;
     afterSyncChecks?: ISyncCheck;
 }
-export interface IConnectPacket {
+export interface IConnectPacketData {
     type: PacketType.Connect;
     playerOptions: IPlayerOptions;
 }
-export interface IWorldPacket extends IPacketPlayerTarget {
+export interface IWorldPacketData extends IPacketPlayerTarget {
     type: PacketType.World;
     playerCount: number;
     multiplayerOptions: IMultiplayerOptions;
     saveObjectString: string;
     initialFlowFieldPids: number[];
     crafted: {
-        [index: number]: boolean;
-    };
-    newCrafted: {
-        [index: number]: boolean;
+        [index: number]: ICrafted;
     };
 }
-export interface IConnectedPacket {
+export interface IConnectedPacketData {
     type: PacketType.Connected;
 }
-export interface ILoadedPacket {
+export interface ILoadedPacketData {
     type: PacketType.Loaded;
 }
-export interface ITickPacket {
+export interface ITickPacketData {
     type: PacketType.Tick;
 }
-export interface IActionPacket extends IPacketPlayerTarget, IPacketSynchronizationCheck {
+export interface IActionPacketData extends IPacketPlayerTarget, IPacketSynchronizationCheck {
     type: PacketType.Action;
-    action: IActionArgumentPacket;
+    action: IActionArgumentPacketData;
 }
-export interface IReorderItemsPacket {
+export interface IReorderItemsPacketData {
     type: PacketType.ReorderItems;
     container: IPacketObject<IContainer>;
     itemIdOrder: number[];
 }
-export interface IAddPlayerPacket {
+export interface IAddPlayerPacketData {
     type: PacketType.AddPlayer;
     playerOptions: IPlayerOptions;
 }
-export interface IReadyPlayerPacket extends IPacketPlayerTarget {
+export interface IReadyPlayerPacketData extends IPacketPlayerTarget {
     type: PacketType.ReadyPlayer;
 }
-export interface IRemovePlayerPacket extends IPacketPlayerTarget {
+export interface IRemovePlayerPacketData extends IPacketPlayerTarget {
     type: PacketType.RemovePlayer;
 }
-export interface ISynchronizeFlowFieldsPacket extends IPacketPlayersTarget {
+export interface ISynchronizeFlowFieldsPacketData extends IPacketPlayersTarget {
     type: PacketType.SynchronizeFlowFields;
 }
-export interface IShowLoadingScreenPacket {
+export interface IShowLoadingScreenPacketData {
     type: PacketType.ShowLoadingScreen;
 }
-export interface IHideLoadingScreenPacket {
+export interface IHideLoadingScreenPacketData {
     type: PacketType.HideLoadingScreen;
 }
-export interface IUpdateOptionPacket extends IPacketPlayerTarget {
+export interface IUpdateOptionPacketData extends IPacketPlayerTarget {
     type: PacketType.UpdateOption;
     id: string;
-    value: boolean;
+    value: boolean | number;
 }
-export interface IKeyBindStatePacket {
+export interface IKeyBindStatePacketData {
     type: PacketType.KeyBindBindState;
     bind?: KeyBind;
     value?: number;
 }
-export interface IUpdateDirectionPacket {
+export interface IUpdateDirectionPacketData {
     type: PacketType.UpdateDirection;
     mouseDirection?: FacingDirection;
     touchDirection?: FacingDirection;
 }
-export interface IDisplayConfirmDialogPacket {
+export interface IDisplayConfirmDialogPacketData {
     type: PacketType.DisplayConfirmDialog;
     id: UiMessage;
     message: string;
     buttons: UiMessage[];
 }
-export interface IConfirmDialogSelectionPacket {
+export interface IConfirmDialogSelectionPacketData {
     type: PacketType.ConfirmDialogSelection;
     id: UiMessage;
     selection: UiMessage;
 }
-export interface IChatMessagePacket extends IPacketPlayerTarget {
+export interface IChatMessagePacketData extends IPacketPlayerTarget {
     type: PacketType.ChatMessage;
     message: string;
 }
-export interface ISetPlayerZPacket extends IPacketPlayerTarget {
+export interface ISetPlayerZPacketData extends IPacketPlayerTarget {
     type: PacketType.SetPlayerZ;
     z: number;
 }
-export interface IPausePacket {
+export interface IPausePacketData {
     type: PacketType.Pause;
     paused?: boolean;
 }
-export interface IUpdateItemOrderPacket {
+export interface IUpdateItemOrderPacketData {
     type: PacketType.UpdateItemOrder;
     container: IContainerReference;
     itemOrder: number[] | undefined;
 }
-export interface IUpdateQuickSlotInfoPacket {
+export interface IUpdateQuickSlotInfoPacketData {
     type: PacketType.UpdateQuickSlotInfo;
     quickSlot: number;
     quickSlotInfo?: IQuickSlotInfo;
 }
-export interface IUpdateDialogInfoPacket {
+export interface IUpdateDialogInfoPacketData {
     type: PacketType.UpdateDialogInfo;
     index: string | number;
     info: IDialogInfo;
 }
-export declare type Packet = IConnectPacket | IWorldPacket | IConnectedPacket | ILoadedPacket | ITickPacket | IActionPacket | IReorderItemsPacket | IAddPlayerPacket | IReadyPlayerPacket | IRemovePlayerPacket | IShowLoadingScreenPacket | IHideLoadingScreenPacket | ISynchronizeFlowFieldsPacket | IUpdateOptionPacket | IKeyBindStatePacket | IUpdateDirectionPacket | IDisplayConfirmDialogPacket | IConfirmDialogSelectionPacket | IChatMessagePacket | ISetPlayerZPacket | IPausePacket | IUpdateItemOrderPacket | IUpdateQuickSlotInfoPacket | IUpdateDialogInfoPacket;
+export interface IMultiplePacketsPacketData {
+    type: PacketType.MultiplePackets;
+    data: PacketData[];
+}
+export declare type PacketData = IConnectPacketData | IWorldPacketData | IConnectedPacketData | ILoadedPacketData | ITickPacketData | IActionPacketData | IReorderItemsPacketData | IAddPlayerPacketData | IReadyPlayerPacketData | IRemovePlayerPacketData | IShowLoadingScreenPacketData | IHideLoadingScreenPacketData | ISynchronizeFlowFieldsPacketData | IUpdateOptionPacketData | IKeyBindStatePacketData | IUpdateDirectionPacketData | IDisplayConfirmDialogPacketData | IConfirmDialogSelectionPacketData | IChatMessagePacketData | ISetPlayerZPacketData | IPausePacketData | IUpdateItemOrderPacketData | IUpdateQuickSlotInfoPacketData | IUpdateDialogInfoPacketData | IMultiplePacketsPacketData;
 export declare enum PacketObjectType {
     Array = 0,
     Item = 1,
     Doodad = 2,
-    Container = 3,
+    Creature = 3,
+    Player = 4,
+    Container = 5,
 }
 export interface IPacketObject<T> {
     type: PacketObjectType;
     data: T;
 }
-export interface IActionArgumentPacket {
+export interface IActionArgumentPacketData {
     all?: boolean;
     attackType?: AttackType;
     bypass?: boolean;
@@ -175,7 +179,6 @@ export interface IActionArgumentPacket {
     item?: IPacketObject<IItem>;
     itemComponentsConsumed?: IPacketObject<IItem[]>;
     itemComponentsRequired?: IPacketObject<IItem[]>;
-    itemComponentsToBeSalvaged?: IPacketObject<IItem[]>;
     itemQuality?: ItemQuality;
     itemType?: ItemType;
     name?: string;

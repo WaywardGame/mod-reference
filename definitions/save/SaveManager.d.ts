@@ -10,7 +10,7 @@ export default class SaveManager implements ISaveManager {
     isSlotUsed(slot: number, callback: (slot: number, isUsed: boolean) => void): void;
     getSaveCount(callback: (usedCount: number, usedSlots: number[]) => void, callbackPerSlot?: (slot: number, isUsed: boolean) => void): void;
     getFirstFreeSlot(callback: (slot: number | undefined) => void): void;
-    save(slot: number, callback: (slot: number, bytes?: number, saveObject?: SaveObject) => void): void;
+    save(slot: number, callback: (slot: number, bytes: number, saveObject?: SaveObject) => void): void;
     load(slot: number, callback: (slot: number, success: boolean) => void): void;
     loadPartial(slot: number, callback: (slot: number, success: boolean, saveObject: SaveObject) => void): void;
     loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean): void;

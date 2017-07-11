@@ -1,3 +1,4 @@
+import { ICreature } from "creature/ICreature";
 import { CreatureType, EquipType, IPointZ, ItemQuality, ItemType, TatteredMap } from "Enums";
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
 import IPlayer from "player/IPlayer";
@@ -34,9 +35,9 @@ export default class ActualItem implements IItem, IContainer, IContainable, IPro
     isDecayed(): boolean;
     changeInto(type: ItemType): void;
     returns(): boolean;
-    spawnOnBreak(): number | undefined;
-    spawnOnDecay(): number | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined): number | undefined;
+    spawnOnBreak(): ICreature | undefined;
+    spawnOnDecay(): ICreature | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined): ICreature | undefined;
     getLocation(): IPointZ | undefined;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
     dropInWater(player: IPlayer, x?: number, y?: number): void;

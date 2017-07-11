@@ -1,8 +1,12 @@
+import { ITile } from "tile/ITerrain";
 import { ITileEvent, TileEventType } from "tile/ITileEvent";
 import ITileEventManager from "tile/ITileEventManager";
 export default class TileEventManager implements ITileEventManager {
+    private tileEvents;
+    initialize(): void;
     create(type: TileEventType, x: number, y: number, z: number): ITileEvent | undefined;
-    remove(tileEventId: number): void;
+    remove(tileEvent: ITileEvent): void;
+    get(tile: ITile, type: TileEventType): ITileEvent | undefined;
+    canHarvest(tile: ITile): boolean;
     updateAll(): void;
-    private update(tileEvent);
 }

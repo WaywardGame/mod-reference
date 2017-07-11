@@ -1,5 +1,5 @@
 import { IDoodad } from "doodad/IDoodad";
-import { IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
+import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
 import { IContainable, IContainer, IContainerReference, IItem, IItemArray, IRecipe } from "item/IItem";
 import IItemManager from "item/IItemManager";
 import { Message } from "language/Messages";
@@ -29,6 +29,9 @@ export default class ItemManager implements IItemManager {
     moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
+    /**
+     * Drop items in a 3x3 square around the location
+     */
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number): void;
     spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     resetMapsInContainer(container: IContainer): void;
@@ -39,7 +42,7 @@ export default class ItemManager implements IItemManager {
     isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean): string;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
-    craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, itemsToBeSalvaged: IItemArray, baseItem?: IItem): boolean;
+    craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     countItemsInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): number;

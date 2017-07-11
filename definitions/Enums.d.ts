@@ -35,12 +35,14 @@ export declare enum Source {
     Player = 14,
     ResourceLoader = 15,
     SaveManager = 16,
-    Shaders = 17,
-    Steamworks = 18,
-    TileEventManager = 19,
-    Trello = 20,
-    Ui = 21,
-    Utilities = 22,
+    Serializer = 17,
+    Shaders = 18,
+    Steamworks = 19,
+    TileEventManager = 20,
+    Trello = 21,
+    Ui = 22,
+    Utilities = 23,
+    WebAssembly = 24,
 }
 export declare enum AttackType {
     Melee = 0,
@@ -67,7 +69,7 @@ export declare enum MoveType {
     Tree = 8,
     Mountain = 16,
     Fire = 32,
-    BreakWalls = 64,
+    BreakDoodads = 64,
     Flying = 15,
 }
 export declare enum DamageType {
@@ -80,11 +82,11 @@ export declare enum DamageType {
 }
 export declare function fullDamageType(damageType: DamageType): string;
 export declare class Resistances {
-    [index: number]: any;
+    [index: number]: number;
     constructor(...args: any[]);
 }
 export declare class Vulnerabilities {
-    [index: number]: any;
+    [index: number]: number;
     constructor(...args: any[]);
 }
 export declare class Defense {
@@ -212,6 +214,7 @@ export declare enum ActionType {
     Craft = 70,
     Till = 71,
     Rename = 72,
+    Harvest = 73,
 }
 export declare enum ItemType {
     None = 0,
@@ -234,7 +237,7 @@ export declare enum ItemType {
     Fertilizer = 17,
     WaterskinOfSeawater = 18,
     FirePlough = 19,
-    FlowerSeeds = 20,
+    BeggartickSeeds = 20,
     Fossil = 21,
     GoldCoins = 22,
     GoldenChalice = 23,
@@ -242,7 +245,7 @@ export declare enum ItemType {
     GoldenSword = 25,
     GrassSeeds = 26,
     IronOre = 27,
-    Kindling = 28,
+    WoodenDowels = 28,
     LargeRock = 29,
     LeafBedroll = 30,
     LeatherHide = 31,
@@ -250,7 +253,7 @@ export declare enum ItemType {
     Limestone = 33,
     Log = 34,
     MortarAndPestle = 35,
-    WhiteMushrooms = 36,
+    ButtonMushrooms = 36,
     Nopal = 37,
     Peat = 38,
     Sandstone = 39,
@@ -266,11 +269,11 @@ export declare enum ItemType {
     Suture = 49,
     Raft = 50,
     RawMeat = 51,
-    RedBerries = 52,
-    SpottedRedMushroom = 53,
+    Raspberries = 52,
+    FlyAmanita = 53,
     Rope = 54,
-    Sapling = 55,
-    Seaweed = 56,
+    MapleSeeds = 55,
+    Badderlocks = 56,
     SharpGlass = 57,
     SharpRock = 58,
     Skullcap = 59,
@@ -283,10 +286,10 @@ export declare enum ItemType {
     StrippedBark = 66,
     TannedLeather = 67,
     Tannin = 68,
-    ThistleSeeds = 69,
+    MilkThistleSeeds = 69,
     TreeBark = 70,
-    TreeFungus = 71,
-    Vine = 72,
+    HoneyFungus = 71,
+    ClematisVine = 72,
     Twigs = 73,
     Waterskin = 74,
     WoodenPole = 75,
@@ -369,7 +372,7 @@ export declare enum ItemType {
     SpiderMeat = 152,
     IronLockPick = 153,
     RottingVegetation = 154,
-    WildOnion = 155,
+    Chives = 155,
     IronHammer = 156,
     IronSpear = 157,
     IronShovel = 158,
@@ -461,7 +464,7 @@ export declare enum ItemType {
     Sailboat = 244,
     Egg = 245,
     BoiledEgg = 246,
-    GrassBlades = 247,
+    SheafOfHay = 247,
     Niter = 248,
     Saltpeter = 249,
     BlackPowder = 250,
@@ -481,13 +484,13 @@ export declare enum ItemType {
     ClayBrickWall = 264,
     ClayBrickFlooring = 265,
     PineappleSeeds = 266,
-    BerrySeeds = 267,
-    CactiSeeds = 268,
-    VineSeeds = 269,
+    RaspberrySeeds = 267,
+    PricklyPearSeeds = 268,
+    ClematisSeeds = 269,
     PaperSheet = 270,
     PaperMold = 271,
-    FlowerPetals = 272,
-    Thistles = 273,
+    Beggarticks = 272,
+    MilkThistleFlowers = 273,
     DrawnMap = 274,
     TatteredShirt = 275,
     TatteredPants = 276,
@@ -496,11 +499,11 @@ export declare enum ItemType {
     PoisonIvySeeds = 279,
     WroughtIronChest = 280,
     IronChest = 281,
-    TallGrassSeeds = 282,
-    Acorn = 283,
+    SwitchgrassSeeds = 282,
+    Apple = 283,
     SpiderEggs = 284,
     TailFeathers = 285,
-    BigRedBerry = 286,
+    AppleSeeds = 286,
     VenomGland = 287,
     OrnateWoodenChest = 288,
     RollOfRedCarpet = 289,
@@ -539,6 +542,34 @@ export declare enum ItemType {
     WroughtIronHoe = 322,
     IronHoe = 323,
     LavaBeetleHelmet = 324,
+    SpruceCone = 325,
+    SpruceSeeds = 326,
+    SpruceNeedles = 327,
+    CypressCone = 328,
+    CypressSeeds = 329,
+    CypressLeaves = 330,
+    Lettuce = 331,
+    LettuceSeeds = 332,
+    ChiveSeeds = 333,
+    Potato = 334,
+    PotatoSeeds = 335,
+    Carrot = 336,
+    CarrotSeeds = 337,
+    CornEar = 338,
+    CornSeeds = 339,
+    Cucumber = 340,
+    CucumberSeeds = 341,
+    Tomato = 342,
+    TomatoSeeds = 343,
+    Pumpkin = 344,
+    PumpkinSeeds = 345,
+    PricklyPearFruit = 346,
+    SugarCaneStalks = 347,
+    SugarCaneSeeds = 348,
+    BushelOfWheat = 349,
+    Wheat = 350,
+    CookedPotato = 351,
+    CookedCornCob = 352,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -604,7 +635,8 @@ export declare enum ItemTypeGroup {
     Vegetable = 860,
     Tinder = 861,
     Bone = 862,
-    Last = 863,
+    Kindling = 863,
+    Last = 864,
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -619,37 +651,29 @@ export declare enum TerrainType {
     FreshWater = 4,
     ShallowFreshWater = 5,
     Grass = 6,
-    Tree = 7,
-    BareTree = 8,
-    TreeWithVines = 9,
-    TreeWithBerries = 10,
-    TreeWithFungus = 11,
-    PalmTree = 12,
-    BarePalmTree = 13,
-    PalmTreeWithCoconuts = 14,
-    Gravel = 15,
-    Dirt = 16,
-    Sand = 17,
-    Snow = 18,
-    Swamp = 19,
-    Clay = 20,
-    Ash = 21,
-    Rocks = 22,
-    RocksWithIron = 23,
-    RocksWithTalc = 24,
-    RocksWithCoal = 25,
-    RocksWithLimestone = 26,
-    CobblestoneFlooring = 27,
-    Sandstone = 28,
-    SandstoneFlooring = 29,
-    SandstoneWithIron = 30,
-    SandstoneWithNiter = 31,
-    WoodenFlooring = 32,
-    ClayBrickFlooring = 33,
-    CaveEntrance = 34,
-    RedCarpet = 35,
-    Lava = 36,
-    FertileDirt = 37,
+    Gravel = 7,
+    Dirt = 8,
+    Sand = 9,
+    Snow = 10,
+    Swamp = 11,
+    Clay = 12,
+    Ash = 13,
+    Rocks = 14,
+    RocksWithIron = 15,
+    RocksWithTalc = 16,
+    RocksWithCoal = 17,
+    RocksWithLimestone = 18,
+    CobblestoneFlooring = 19,
+    Sandstone = 20,
+    SandstoneFlooring = 21,
+    SandstoneWithIron = 22,
+    SandstoneWithNiter = 23,
+    WoodenFlooring = 24,
+    ClayBrickFlooring = 25,
+    CaveEntrance = 26,
+    RedCarpet = 27,
+    Lava = 28,
+    FertileDirt = 29,
 }
 export declare enum DoodadType {
     WoodenDoor = 0,
@@ -666,71 +690,74 @@ export declare enum DoodadType {
     WoodenChest = 11,
     LockedWoodenChest = 12,
     CreatureIdol = 13,
-    GrowingGrass = 14,
-    Vines = 15,
-    Thistles = 16,
-    GrowingMushroom = 17,
-    WhiteMushrooms = 18,
-    SpottedRedMushroom = 19,
-    TallGrass = 20,
-    Seaweed = 21,
-    WildOnion = 22,
-    PineapplePlant = 23,
-    PileOfRocks = 24,
-    BerryBush = 25,
-    YellowFlowers = 26,
-    Sapling = 27,
-    GrowingPlant = 28,
-    Cotton = 29,
-    Tree = 30,
-    TreeWithVines = 31,
-    TreeWithBerries = 32,
-    TreeWithFungus = 33,
-    BareTree = 34,
-    PalmTreeWithCoconuts = 35,
-    PalmTree = 36,
-    BarePalmTree = 37,
-    Cacti = 38,
-    DeadBush = 39,
-    StoneWaterStill = 40,
-    LitStoneWaterStill = 41,
-    StoneCampfire = 42,
-    LitStoneCampfire = 43,
-    SandstoneKiln = 44,
-    LitSandstoneKiln = 45,
-    StoneFurnace = 46,
-    LitStoneFurnace = 47,
-    TorchStand = 48,
-    LitTorchStand = 49,
-    StoneAnvil = 50,
-    Acid = 51,
-    CaveEntrance = 52,
-    WoodenDoorOpen = 53,
-    WoodenGate = 54,
-    WoodenGateOpen = 55,
-    PoisonIvy = 56,
-    WroughtIronChest = 57,
-    IronChest = 58,
-    OrnateWoodenChest = 59,
-    SkeletalRemains = 60,
-    ClayKiln = 61,
-    LitClayKiln = 62,
-    ClayCampfire = 63,
-    LitClayCampfire = 64,
-    ClayFurnace = 65,
-    LitClayFurnace = 66,
-    ClayWaterStill = 67,
-    LitClayWaterStill = 68,
-    SandstoneCampfire = 69,
-    LitSandstoneCampfire = 70,
-    SandstoneFurnace = 71,
-    LitSandstoneFurnace = 72,
-    SandstoneWaterStill = 73,
-    LitSandstoneWaterStill = 74,
-    StoneKiln = 75,
-    LitStoneKiln = 76,
-    WroughtIronAnvil = 77,
-    IronAnvil = 78,
+    Grass = 14,
+    Clematis = 15,
+    MilkThistles = 16,
+    ButtonMushrooms = 17,
+    FlyAmanita = 18,
+    Switchgrass = 19,
+    Badderlocks = 20,
+    Chives = 21,
+    Pineapple = 22,
+    PileOfRocks = 23,
+    RaspberryBush = 24,
+    Beggarticks = 25,
+    Cotton = 26,
+    PricklyPears = 27,
+    DeadBush = 28,
+    StoneWaterStill = 29,
+    LitStoneWaterStill = 30,
+    StoneCampfire = 31,
+    LitStoneCampfire = 32,
+    SandstoneKiln = 33,
+    LitSandstoneKiln = 34,
+    StoneFurnace = 35,
+    LitStoneFurnace = 36,
+    TorchStand = 37,
+    LitTorchStand = 38,
+    StoneAnvil = 39,
+    Acid = 40,
+    CaveEntrance = 41,
+    WoodenDoorOpen = 42,
+    WoodenGate = 43,
+    WoodenGateOpen = 44,
+    PoisonIvy = 45,
+    WroughtIronChest = 46,
+    IronChest = 47,
+    OrnateWoodenChest = 48,
+    SkeletalRemains = 49,
+    ClayKiln = 50,
+    LitClayKiln = 51,
+    ClayCampfire = 52,
+    LitClayCampfire = 53,
+    ClayFurnace = 54,
+    LitClayFurnace = 55,
+    ClayWaterStill = 56,
+    LitClayWaterStill = 57,
+    SandstoneCampfire = 58,
+    LitSandstoneCampfire = 59,
+    SandstoneFurnace = 60,
+    LitSandstoneFurnace = 61,
+    SandstoneWaterStill = 62,
+    LitSandstoneWaterStill = 63,
+    StoneKiln = 64,
+    LitStoneKiln = 65,
+    WroughtIronAnvil = 66,
+    IronAnvil = 67,
+    MapleTree = 68,
+    AppleTree = 69,
+    SpruceTree = 70,
+    CypressTree = 71,
+    CoconutTree = 72,
+    Lettuce = 73,
+    PotatoPlant = 74,
+    Carrots = 75,
+    CornStalks = 76,
+    CucumberPlant = 77,
+    TomatoPlant = 78,
+    Pumpkin = 79,
+    SugarCaneStalks = 80,
+    Wheat = 81,
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -739,7 +766,18 @@ export declare enum DoodadTypeGroup {
     LitKiln = 403,
     LitWaterStill = 404,
     Anvil = 405,
-    Last = 406,
+    Tree = 406,
+    Fungi = 407,
+    Last = 408,
+}
+export declare enum GrowingStage {
+    Germinating = 0,
+    Seedling = 1,
+    Vegetative = 2,
+    Budding = 3,
+    Flowering = 4,
+    Ripening = 5,
+    Dead = 6,
 }
 export declare enum CreatureType {
     Slime = 0,
@@ -777,6 +815,7 @@ export declare enum CreatureType {
     Sandcat = 32,
     WaterBlood = 33,
     LavaBeetle = 34,
+    Goat = 35,
 }
 export declare enum Hairstyle {
     None = 0,
@@ -787,6 +826,7 @@ export declare enum Hairstyle {
     Straight = 5,
     Dreads = 6,
     Shaved = 7,
+    Long = 8,
 }
 export declare enum HairColor {
     "#e7c978" = 0,
@@ -834,6 +874,18 @@ export declare enum SkillType {
     Trapping = 24,
     Woodworking = 25,
     Taming = 26,
+    Gardening = 27,
+}
+export declare enum Music {
+    ShipWrecked = 0,
+    DarkerWorld = 1,
+    TheFirstSpark = 2,
+    NomadsHeartBeat = 3,
+    TheWildBorn = 4,
+    NightOwl = 5,
+    Savage = 6,
+    Underworld = 7,
+    ShudderSounds = 8,
 }
 export declare enum SfxType {
     Bow = 0,
@@ -886,7 +938,7 @@ export declare enum Delay {
     Collision = 40,
     HotKey = 20,
     RealTimeTick = 40,
-    TurnDirection = 6,
+    TurnDirection = 2,
 }
 export declare enum StatType {
     EnemyHealth = 0,
@@ -907,15 +959,6 @@ export declare enum ItemQuality {
     Exceptional = 2,
     Remarkable = 3,
     Legendary = 4,
-}
-export declare enum ItemImage {
-    Default = 0,
-    Exceptional = 1,
-    Remarkable = 2,
-    Legendary = 3,
-    Damaged = 4,
-    Selected = 5,
-    Highlighted = 6,
 }
 export declare enum RenderFlag {
     None = 0,
@@ -1023,7 +1066,7 @@ export declare enum SortType {
     Quality = 6,
     Category = 7,
     Durability = 8,
-    UnlockedTime = 9,
+    DiscoveredTime = 9,
 }
 export declare enum RestType {
     Resting = 0,
@@ -1032,6 +1075,11 @@ export declare enum RestType {
 export declare enum LoadingType {
     Normal = 0,
     Rest = 1,
+}
+export declare enum CraftStatus {
+    Invalid = 0,
+    Failed = 1,
+    Success = 2,
 }
 export declare enum InputRecordType {
     KeyDown = 0,
@@ -1084,6 +1132,30 @@ export interface IPoint {
 export interface IPointZ extends IPoint {
     z: number;
 }
+export interface IObject<T> {
+    type: T;
+    id: number;
+}
+export interface IObjectOptions {
+    decay?: number;
+    minDur?: number;
+    maxDur?: number;
+    quality?: ItemQuality;
+    renamed?: string;
+}
+export interface IObjectDescription {
+    name?: string;
+    description?: string;
+    suffix?: string;
+    prefix?: string;
+    decayMax?: number;
+    skillUse?: SkillType;
+    weightCapacity?: number;
+    imagePath?: string;
+}
+export interface IModdable {
+    modIndex?: number;
+}
 export interface TatteredMap extends IPointZ {
     reinitialize?: boolean;
 }
@@ -1105,7 +1177,7 @@ export interface IHighscore {
     talent?: number;
 }
 export interface IMessagePack {
-    message?: Message;
+    message?: Message | string;
     type?: MessageType;
     args?: string | number | any[];
     argSkipCasing?: boolean;
@@ -1135,4 +1207,26 @@ export declare enum RestCancelReason {
     Damaged = 1,
     FullStamina = 2,
     NearbyCreatureDamagedDoodad = 3,
+}
+export declare enum FireType {
+    None = 0,
+    Doodad = 1,
+    Fire = 2,
+    Lava = 3,
+}
+export interface IResourceItem {
+    type: ItemType;
+    chance?: number;
+    chanceOutOf?: number;
+}
+export interface IDoodadResource {
+    [index: number]: IResourceItem[];
+}
+export interface ITerrainResource {
+    items: ITerrainResourceItem[];
+    defaultItem?: ItemType;
+}
+export interface ITerrainResourceItem extends IResourceItem {
+    tileChange?: TerrainType;
+    tileChangeChance?: number;
 }

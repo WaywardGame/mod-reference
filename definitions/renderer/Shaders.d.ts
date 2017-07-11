@@ -11,6 +11,6 @@ export declare class CompiledProgram {
     attribs: {
         [index: string]: number;
     };
-    constructor(gl: WebGLRenderingContext, vertexName: string, fragmentName: string);
+    constructor(gl: WebGL2RenderingContext, vertexName: string, fragmentName: string);
     compileProgram(): void;
 }

@@ -14,7 +14,9 @@ export default class WorldLayer implements IWorldLayer {
     onTileUpdate: onTileUpdateDelegate;
     onDoodadUpdate: onDoodadUpdateDelegate;
     private terrainMap;
+    private instance;
     constructor(width: number, height: number, level: number);
+    delete(): void;
     resetExploredMap(): void;
     getTileType(x: number, y: number): TerrainType;
     getTile(x: number, y: number): TerrainData;
@@ -26,6 +28,5 @@ export default class WorldLayer implements IWorldLayer {
     updateAll(): void;
     updateTile(x: number, y: number, tile: ITile, shouldUpdate?: boolean): void;
     private mapIndex(x, y);
-    private updateLightBlockValue(x, y, oldValue);
     private setTileInternal(x, y, tile);
 }

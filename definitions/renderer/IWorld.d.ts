@@ -5,6 +5,7 @@ export interface IWorld extends ISerializable {
     width: number;
     height: number;
     layers: IWorldLayer[];
+    delete(): void;
     toLocal(world: number, local: number): number;
     addLayer(level: number): void;
     load(): void;

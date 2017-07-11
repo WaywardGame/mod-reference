@@ -25,10 +25,12 @@ import ITrello from "trello/ITrello";
 import IUi from "ui/IUi";
 import IWorld from "renderer/IWorld";
 import IWorldRenderer from "renderer/IWorldRenderer";
+import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 
 declare global {
     type Description<T> = { [index: number]: T };
 
+    let absentPlayers: IPlayer[];
     let actionManager: IActionManager;
     let audio: IAudio;
     let corpseManager: ICorpseManager;
@@ -42,7 +44,6 @@ declare global {
     let modManager: IModManager;
     let multiplayer: IMultiplayer;
     let players: IPlayer[];
-    let absentPlayers: IPlayer[];
     let renderer: IWorldRenderer;
     let resourceLoader: IResourceLoader;
     let saveData: ISaveData;
@@ -55,6 +56,19 @@ declare global {
     let trello: ITrello;
     let ui: IUi;
     let world: IWorld;
+
+    let Module: IWaywardCPP;
+
+    interface IWaywardCPP {
+        ByteGrid: IByteGridConstructor;
+        FlowField: any;
+        FieldOfView: any;
+        WorldLayer: any;
+    }
+
+    interface IByteGridConstructor {
+        new (width: number, height: number): IByteGrid;
+    }
 
     interface IMsgPack {
         encode(object: any): Uint8Array;

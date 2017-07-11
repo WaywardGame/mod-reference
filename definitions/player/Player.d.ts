@@ -28,7 +28,6 @@ export default class Player implements IPlayer {
     defenses: number[];
     direction: IPoint;
     facingDirection: FacingDirection;
-    isMoving: boolean;
     hintSeen: boolean[];
     inventory: IContainer;
     lightBonus: number;
@@ -96,6 +95,9 @@ export default class Player implements IPlayer {
         [index: number]: number;
     };
     realTimeTickActionDelay: number;
+    revealedItems: {
+        [index: number]: boolean;
+    };
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
@@ -106,12 +108,15 @@ export default class Player implements IPlayer {
     };
     currentHint: HintType;
     movement: IInputMovement;
+    isMoving: boolean;
     movementProgress: number;
     movementFinishTime: number;
-    movementCompleted: boolean;
     movementAnimation: number;
     movementCompleteZ: number | undefined;
+    nextMoveTime: number;
     nextMoveDirection: FacingDirection | undefined;
+    stopNextMovement: boolean;
+    private milestoneUpdates;
     private mousePlayerDirection;
     private touchPlayerDirection;
     private keyBindState;
@@ -120,10 +125,12 @@ export default class Player implements IPlayer {
     constructor();
     resetMovementStates(): void;
     createFlowFieldManager(): void;
+    deleteFlowFieldManager(): void;
     attributes(): void;
     setId(id: number): void;
     setRaft(itemId: number | undefined): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
+    checkSkillMilestones(): void;
     staminaCheck(): boolean;
     addMilestone(milestone: MilestoneType, data?: number): void;
     damage(amount: number, damageMessage: string, soundDelay?: number): void;
@@ -156,6 +163,8 @@ export default class Player implements IPlayer {
     updateReputation(reputation: number): void;
     checkWeight(): void;
     checkAndRemoveBlood(): boolean;
+    checkForGatherFire(): string | undefined;
+    updateCraftTable(updateDismantleItems: boolean): void;
     updateCraftTableAndWeight(): void;
     checkReputationMilestones(): void;
     getReputation(): number;
@@ -164,7 +173,7 @@ export default class Player implements IPlayer {
      * Burn the player
      * @param skipMessage
      */
-    burn(skipMessage?: boolean): number | undefined;
+    burn(skipMessage?: boolean, skipParry?: boolean): number | undefined;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
     inspect(x: number, y: number, z?: number): void;
@@ -179,21 +188,25 @@ export default class Player implements IPlayer {
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
+    updateStatsAndAttributes(): void;
     passTurn(turnType?: TurnType): void;
     tick(isPassTurn?: boolean): void;
-    calculateStats(): void;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     kill(): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     processInput(): void;
+    getConsumeBonus(skillUse: SkillType, itemQuality: ItemQuality | undefined): number;
+    revealItem(itemType: ItemType): void;
     private processMovement(turnType?);
     private processTimers();
     private swimCheck();
+    private updateMilestones();
     private isOnFire();
     private canTryCarve();
     private restTick();
     private statGain(stat, bypass);
     private resetDefense();
+    private calculateStats();
     private showStatsHint();
 }

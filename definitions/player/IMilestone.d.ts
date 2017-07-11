@@ -26,6 +26,8 @@ export declare enum MilestoneType {
     Friendly = 24,
     Malevolent = 25,
     Benevolent = 26,
+    Boundless = 27,
+    Talented = 28,
 }
 export declare enum MilestoneVisibilityType {
     Visible = 0,

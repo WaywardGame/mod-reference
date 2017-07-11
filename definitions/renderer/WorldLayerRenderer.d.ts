@@ -1,3 +1,4 @@
+import DoodadInfo from "doodad/DoodadInfo";
 import { DoodadType } from "Enums";
 import IWorldRenderer from "renderer/IWorldRenderer";
 import WorldLayer from "renderer/WorldLayer";
@@ -15,9 +16,9 @@ export default class WorldLayerRenderer {
     private terrainOverLayer;
     private doodadLayer;
     private doodadOverLayer;
-    constructor(gl: WebGLRenderingContext, renderer: IWorldRenderer, worldLayer: WorldLayer, width: number, height: number);
+    constructor(gl: WebGL2RenderingContext, renderer: IWorldRenderer, worldLayer: WorldLayer, width: number, height: number, positionBuffer: WebGLBuffer);
     updateAll(): void;
-    setDoodad(x: number, y: number, doodad: DoodadType | undefined, variation: number, flushImmediate?: boolean): void;
+    setDoodad(x: number, y: number, doodad: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, variation: number, flushImmediate?: boolean): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
     private computeTile(x, y, flushImmediate?);
     private updateTileLightBlock(x, y, value);

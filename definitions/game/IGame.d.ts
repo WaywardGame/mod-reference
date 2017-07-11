@@ -2,12 +2,12 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { FacingDirection, IHighscore, IPoint, IPointZ, ISeeds, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import IOptions from "game/IOptions";
 import TimeManager from "game/TimeManager";
-import { IItem, IItemArray, IObjectDescription } from "item/IItem";
+import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
-import { IWorldPacket } from "multiplayer/IPacket";
+import { IWorldPacketData } from "multiplayer/IPacket";
 import { IPlayer, IPlayerCustomization } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -20,14 +20,19 @@ export interface IGame extends IPropSerializable {
     interval: number;
     mapSize: number;
     mapSizeSq: number;
-    halfMapSize: number;
     slot: number;
     loadedResources: boolean;
     version: string;
     saveVersion: string | undefined;
     isLoadingSave: boolean;
     tile: ITileArray;
-    tileData: ITileData[][][][];
+    tileData: {
+        [index: number]: {
+            [index: number]: {
+                [index: number]: ITileData[];
+            };
+        };
+    };
     tileContainers: ITileContainer[];
     items: IItemArray;
     creatures: ICreature[];
@@ -56,11 +61,9 @@ export interface IGame extends IPropSerializable {
     lastCreationIds: {
         [index: number]: number;
     };
+    previousSaveVersion: IVersionInfo;
     crafted: {
-        [index: number]: boolean;
-    };
-    newCrafted: {
-        [index: number]: boolean;
+        [index: number]: ICrafted;
     };
     highscores: IHighscore[];
     seeds: ISeeds;
@@ -78,7 +81,7 @@ export interface IGame extends IPropSerializable {
     addZoomLevel(amount: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
-    changeTile(newTile: any, changeX: number, changeY: number, changeZ: number, stackTiles: boolean): void;
+    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean): void;
     checkForHiddenMob(player: IPlayer, x: number, y: number, z: number): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
@@ -92,7 +95,7 @@ export interface IGame extends IPropSerializable {
     getBlackness(): number;
     getCompletedMilestoneCount(): number;
     getDifficulty(): string;
-    getFireMessage(decay: number): Message;
+    getFireMessage(decay?: number): Message;
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number;
@@ -101,6 +104,7 @@ export interface IGame extends IPropSerializable {
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNearestPlayer(x: number, y: number): IPlayer | undefined;
     getOrCreateTile(x: number, y: number, z: number): ITile;
+    getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean): IPlayer | undefined;
     getPlayerAtTile(tile: ITile, includeGhosts?: boolean): IPlayer | undefined;
     getPlayerByIdentifier(identifier: string): IPlayer | undefined;
@@ -113,11 +117,13 @@ export interface IGame extends IPropSerializable {
     getSkillPercent(skill: SkillType): number;
     getStrength(): number;
     getTile(x: number, y: number, z: number): ITile;
+    getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getTileInFrontOfPlayer(player: IPlayer): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
     getValidPlayerName(name: string | undefined): string;
     getWrappedCoord(x: number): number;
     hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
+    isOnFire(tile: ITile): FireType;
     isTileEmpty(x: number, y: number, z: number): boolean;
     isTileFull(x: number, y: number, z: number): boolean;
     isTileFullEx(tile: ITile): boolean;
@@ -125,11 +131,10 @@ export interface IGame extends IPropSerializable {
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
-    outputFireMessage(player: IPlayer, decay: number): void;
+    outputFireMessage(player: IPlayer, decay?: number): void;
     packGround(x: number, y: number, z: number): void;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     play(saveSlot: number, options?: IPlayOptions): void;
-    postLoadResources(): void;
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
@@ -146,11 +151,10 @@ export interface IGame extends IPropSerializable {
     tickRealtime(): void;
     updateCraftTableAndWeight(): void;
     updateCraftTableAndWeightNextTick(): void;
-    updateFieldOfViewNextTick(): void;
     updateFlowFieldTile(x: number, y: number, z: number): void;
-    updateGame(): void;
-    updateOption(player: IPlayer | undefined, id: string, value: boolean): void;
+    updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateReputation(reputation: number): void;
+    updateView(updateFov: boolean): void;
 }
 export default IGame;
 export declare type IGameOld = Partial<IGame> & {
@@ -164,7 +168,7 @@ export interface IPlayOptions {
     seed?: string | number;
     name?: string;
     customization?: IPlayerCustomization;
-    multiplayer?: IWorldPacket;
+    multiplayer?: IWorldPacketData;
 }
 export interface IPlayerOptions {
     id?: number;
@@ -174,6 +178,10 @@ export interface IPlayerOptions {
     position?: IPointZ;
     customization?: IPlayerCustomization;
     completedMilestones?: number;
+}
+export interface ICrafted {
+    unlockTime: number;
+    newUnlock: boolean;
 }
 export declare const lineOfSightRadius = 20;
 export declare const lineOfSightDetail = 4;

@@ -80,6 +80,7 @@ export interface IModInfo {
     }>;
 }
 export interface IModManager {
+    cacheHooks(): void;
     canLoad(index: number, fromTitleScreen?: boolean, count?: number): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
     getAuthor(index: number): string;
@@ -166,15 +167,15 @@ export interface IModManager {
     callHook(hook: Hook.OnPlayerDamage, amount: number, damageMessage: string): boolean | undefined;
     callHook(hook: Hook.OnShowInGameScreen): void;
     callHook(hook: Hook.OnSpawnCreatureFromGroup, creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
-    callHook(hook: Hook.OnTurnComplete): void;
+    callHook(hook: Hook.OnTurnComplete, player: IPlayer): void;
     callHook(hook: Hook.OnTurnStart): void;
     callHook(hook: Hook.OnUpdateWeight, newWeight: number): number | undefined;
     callHook(hook: Hook.PostGenerateWorld, generateWorld: boolean): void;
     callHook(hook: Hook.PostRender): void;
     callHook(hook: Hook.PreRender): void;
     callHook(hook: Hook.PreRenderWorld, tileScale: number, viewWidth: number, viewHeight: number): void;
-    callHook(hook: Hook.ProcessInput): void;
+    callHook(hook: Hook.ProcessInput, player: IPlayer): boolean | undefined;
     callHook(hook: Hook, ...args: any[]): any;
-    callHookWithDefault(hook: Hook, defaultValue: any, ...args: any[]): any;
+    callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
 }
 export default IModManager;

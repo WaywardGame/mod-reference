@@ -1,6 +1,10 @@
-import { DoodadType, IPointZ, IRGB, ItemQuality, ItemType, SfxType, SkillType, TerrainType } from "Enums";
+import { ICorpse } from "creature/corpse/ICorpse";
+import { ICreature } from "creature/ICreature";
+import { IDoodad } from "doodad/IDoodad";
+import { DoodadType, IModdable, IPointZ, IRGB, ItemQuality, SfxType, SkillType, TerrainType } from "Enums";
 import { IContainer } from "item/IItem";
-export interface ITerrainDescription {
+import { ITileEvent } from "tile/ITileEvent";
+export interface ITerrainDescription extends IModdable {
     name?: string;
     passable?: boolean;
     particles: IRGB;
@@ -22,19 +26,22 @@ export interface ITerrainDescription {
     isMountain?: boolean;
     background?: TerrainType;
     noBackground?: boolean;
-    mod?: number;
     isOre?: boolean;
     suffix?: string;
     prefix?: string;
     animated?: boolean;
     tillable?: boolean;
+    hasMound?: boolean;
 }
 export interface ITile extends Partial<ITileContainer> {
-    creatureId?: number;
-    doodadId?: number;
-    corpseIds?: number[];
-    eventId?: number;
+    creature?: ICreature;
+    doodad?: IDoodad;
+    corpses?: ICorpse[];
+    events?: ITileEvent[];
     data: number;
+}
+export interface ITileOld {
+    event?: ITileEvent[];
 }
 export interface ITileArray {
     [index: number]: ITile;
@@ -48,17 +55,6 @@ export interface ITileData {
     quality?: ItemQuality;
     gfx?: number;
     tilled?: boolean;
-}
-export interface ITerrainResource {
-    items: ITerrainResourceItem[];
-    defaultItem?: ItemType;
-}
-export interface ITerrainResourceItem {
-    type: ItemType;
-    chance: number;
-    chanceOutOf?: number;
-    tileChange?: TerrainType;
-    tileChangeChance?: number;
 }
 export declare enum TileTemplateType {
     House = 0,
