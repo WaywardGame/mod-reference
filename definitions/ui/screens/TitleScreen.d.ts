@@ -6,8 +6,8 @@ export default class TitleScreen extends BaseScreen {
     openedMenus: string[];
     elementAboutContainer: JQuery;
     elementChangelogContainer: JQuery;
-    elementChangelogLoading: JQuery;
     elementChangelogList: JQuery;
+    elementChangelogLoading: JQuery;
     elementChangelogSwitcherTemplate: JQuery;
     elementCharacterContainer: JQuery;
     elementCharacterHairColor: JQuery;
@@ -36,6 +36,9 @@ export default class TitleScreen extends BaseScreen {
     elementModsNone: JQuery;
     elementModTemplate: JQuery;
     elementNewGameContainer: JQuery;
+    elementNewGameOptionsCasualCheckbox: JQuery;
+    elementNewGameOptionsContainer: JQuery;
+    elementNewGameOptionsHardcoreCheckbox: JQuery;
     elementPlayGameContainer: JQuery;
     elementPlayGameSeparater: JQuery;
     elementSavedGameTemplate: JQuery;

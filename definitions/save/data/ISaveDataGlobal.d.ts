@@ -2,6 +2,7 @@ import { ICrafted } from "game/IGame";
 import IOptions from "game/IOptions";
 import { ModState } from "mod/IModManager";
 import { IMilestoneData } from "player/IMilestone";
+import { IDialogInfo } from "ui/IUi";
 import * as Utilities from "Utilities";
 export interface ISaveDataGlobal {
     gameCrafted: {
@@ -22,6 +23,9 @@ export interface ISaveDataGlobal {
     };
     utilitiesEnumsAllocated: {
         [index: string]: Utilities.Enums.IEnumInfo;
+    };
+    savedDialogInfo: {
+        [index: string]: IDialogInfo;
     };
 }
 export default ISaveDataGlobal;

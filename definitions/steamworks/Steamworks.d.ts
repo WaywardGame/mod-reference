@@ -23,6 +23,7 @@ export default class Steamworks implements ISteamworks {
     private ignoredDirectories;
     private _serverIdToJoin;
     private _currentLobbyId;
+    private _multiplayerLogs;
     private importingSaveGameMod;
     isElectron(): boolean;
     isOverlayWorking(): boolean;
@@ -69,8 +70,8 @@ export default class Steamworks implements ISteamworks {
     setupReporting(): void;
     recordProblem(message: string): void;
     setupMultiplayerLog(): void;
+    getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
-    multiplayerLogSkipConsole(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
     private setupAndInitializeWorkshopMods(callback, retried?);
     private initializeModsFromFolder(folderName, modType, callback);

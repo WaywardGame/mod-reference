@@ -17,7 +17,7 @@ export interface ITerrainDescription extends IModdable {
     noGfxSwitch?: boolean;
     noLos?: boolean;
     flammable?: boolean;
-    skill?: SkillType;
+    gatherSkillUse?: SkillType;
     sound?: SfxType;
     strength?: number;
     leftOver?: TerrainType;

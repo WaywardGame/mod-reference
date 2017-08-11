@@ -25,6 +25,7 @@ export default class FieldOfView implements IFieldOfView {
     private framebuffer1;
     private framebuffer2;
     private viewQuadVertexArray;
+    private viewQuadBuffer;
     private seed;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext, radius: number, subdivisions?: number);

@@ -1,5 +1,5 @@
 import { ICreature } from "creature/ICreature";
-import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType } from "Enums";
+import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
@@ -93,11 +93,14 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkAndRemoveBlood(): boolean;
     checkForGatherFire(): string | undefined;
+    checkForStill(): boolean;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkReputationMilestones(): void;
     checkSkillMilestones(): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     checkWeight(): void;
+    getWeightStatus(): WeightStatus;
+    getWeightPenalty(): number;
     createFlowFieldManager(): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
     damage(amount: number, damageMessage: string, soundDelay?: number): void;
@@ -131,6 +134,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     resetKeyBindState(): void;
     resetMovementStates(): void;
     revealItem(itemType: ItemType): void;
+    getMovementFinishTime(): number;
     setId(id: number): void;
     setMouseDirection(playerDirection: FacingDirection): void;
     setRaft(itemId: number | undefined): void;
@@ -148,6 +152,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     updateCraftTable(updateDismantleItems: boolean): void;
     updateCraftTableAndWeight(): void;
     updateDialogInfo(dialogIndex: string | number): void;
+    getDialogInfo(dialogIndex: string | number): IDialogInfo;
     updateKeyBindState(key: KeyBind, state: number | undefined): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateReputation(reputation: number): void;

@@ -108,6 +108,7 @@ export interface IUi extends IPropSerializable {
     shakeStat(stat: StatType): void;
     refreshAttributes(): void;
     loadQuickSlots(): void;
+    isContextMenuOpen(): boolean;
     isOverlayShown(): boolean;
     isConfirmOverlayShown(): boolean;
     isInputOverlayShown(): boolean;

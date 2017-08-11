@@ -5,6 +5,7 @@ import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
 import { HintType } from "ui/IHint";
+import { ICreature } from "../creature/ICreature";
 export interface IAction {
     type: ActionType;
     callback: ActionCallback;
@@ -18,26 +19,27 @@ export interface IActionArgument {
     bypass?: boolean;
     container?: IContainer;
     containerName?: string;
+    creature?: ICreature;
     direction?: FacingDirection;
+    doodad?: IDoodad;
     equipSlot?: EquipType;
     item?: IItem;
     itemComponentsConsumed?: IItem[];
     itemComponentsRequired?: IItem[];
     itemQuality?: ItemQuality;
     itemType?: ItemType;
+    name?: string;
     point?: IPoint;
     preservee?: IItem;
     reinforcee?: IItem;
     repairee?: IItem | IDoodad;
     restType?: RestType;
     silent?: boolean;
+    switchingHands?: boolean;
     targetContainer?: IContainer;
     torch?: IItem;
     transmogrifee?: IItem;
     useActionType?: ActionType;
-    name?: string;
-    doodad?: IDoodad;
-    switchingHands?: boolean;
 }
 export interface IActionResult {
     returnValue?: boolean;

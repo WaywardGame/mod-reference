@@ -22,6 +22,7 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     happiness?: number;
     chickenEggCounter?: number;
     stopNextMovement?: boolean;
+    renamed?: string;
     id: number;
     private _moveType;
     private _shouldSkipNextUpdate;
@@ -44,7 +45,7 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
     getMovementProgress(): number;
-    getMovementFinishTime(): number;
+    getMovementFinishTime(): number | undefined;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;

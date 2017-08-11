@@ -20,8 +20,8 @@ export interface ISteamworks {
     getPublishedItems(callback: (err: string | undefined, items?: IWorkshopItem[]) => void): void;
     openUrl(url: string): void;
     setupMultiplayerLog(): void;
+    getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
-    multiplayerLogSkipConsole(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
     openWorkshop(publishId?: string): void;
     openModsFolder(): void;

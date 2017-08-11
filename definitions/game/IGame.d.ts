@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import IOptions from "game/IOptions";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -51,7 +51,7 @@ export interface IGame extends IPropSerializable {
     fillCount: number;
     fillTile: boolean[][];
     unloading: boolean;
-    spawnCoords: any;
+    spawnCoords: IPointZ;
     contaminatedWater: IPointZ[];
     fadeInAmount: number;
     lastPlayedVersion: string | undefined;
@@ -80,7 +80,7 @@ export interface IGame extends IPropSerializable {
     addPlayer(playerOptions?: IPlayerOptions): IPlayer;
     addZoomLevel(amount: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
-    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
+    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
     changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean): void;
     checkForHiddenMob(player: IPlayer, x: number, y: number, z: number): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
@@ -94,7 +94,7 @@ export interface IGame extends IPropSerializable {
     getBenignity(): number;
     getBlackness(): number;
     getCompletedMilestoneCount(): number;
-    getDifficulty(): string;
+    getDifficulty(): Difficulty;
     getFireMessage(decay?: number): Message;
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
@@ -113,6 +113,7 @@ export interface IGame extends IPropSerializable {
     getPlayers(includeGhosts?: boolean): IPlayer[];
     getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getReputation(): number;
+    getReputationMessage(): string;
     getSerializationProperties(_: string): string[];
     getSkillPercent(skill: SkillType): number;
     getStrength(): number;
@@ -167,6 +168,7 @@ export declare type IGameOld = Partial<IGame> & {
 export interface IPlayOptions {
     seed?: string | number;
     name?: string;
+    difficulty?: Difficulty;
     customization?: IPlayerCustomization;
     multiplayer?: IWorldPacketData;
 }

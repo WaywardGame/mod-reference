@@ -17,10 +17,12 @@ export default class Multiplayer implements IMultiplayer {
     private _playerOptions;
     private _incomingPacketQueue;
     private _packetTickIntervalId;
+    private _outgoingPacketQueue;
     private _currentPacketProcessing;
     private _currentSyncPacketsProcessing;
     private _syncCheckStack;
     private _activeSyncCheck;
+    private _disconnectingFromSyncIssue;
     constructor();
     isConnected(): boolean;
     isReady(): boolean;
@@ -65,7 +67,7 @@ export default class Multiplayer implements IMultiplayer {
     private processPacket(connection, packetData);
     private synchronizationCheck(packet, checkBefore);
     private sendPacketInternal(packetData, includeConnection?, excludeConnection?, force?);
-    private _sendData(connection, data, sendNow?);
+    private _sendData(connection, packet, sendNow?);
     private sendMatchmakingMessage(data, channel?);
     private closeConnection(connection);
     private onStateChange();

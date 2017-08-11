@@ -2,6 +2,7 @@ import { ISortable, ISortableOptions } from "ui/functional/IFunctionalSortable";
 export default class Sortable implements ISortable {
     item?: JQuery;
     placeholder?: JQuery;
+    scrollParent?: JQuery;
     helper?: JQuery;
     initialContainer: JQuery;
     targetContainer?: JQuery;
@@ -18,6 +19,7 @@ export default class Sortable implements ISortable {
     private _updateHelperPosition(x, y);
     private _onMouseDown(event);
     private _onMouseMove(event);
+    private _scroll(event);
     private _onMouseUp(event);
     private _onMouseLeave(event);
     private _getMousePosition(event);

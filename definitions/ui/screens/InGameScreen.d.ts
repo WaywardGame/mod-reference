@@ -1,6 +1,6 @@
 import { DialogId, EquipType, FacingDirection, IBind, IMessagePack, ItemType, SortType, StatType } from "Enums";
-import { IDismantleComponent } from "item/IItem";
 import { IContainer, IItem } from "item/IItem";
+import { IDismantleComponent } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
@@ -58,6 +58,7 @@ export default class InGameScreen extends BaseScreen {
     elementVersion: JQuery;
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
+    contextMenuOpen: boolean;
     private mouseEvent;
     private touchEvent;
     private hasTouchScreen;
@@ -65,7 +66,6 @@ export default class InGameScreen extends BaseScreen {
     private mouseY;
     private contextMenu;
     private contextMenuTarget;
-    private contextMenuOpen;
     private closingContextMenu;
     private contextMenuBlocking;
     private lastContextMenuPosition;
@@ -233,4 +233,5 @@ export default class InGameScreen extends BaseScreen {
     private getMessagesHtml();
     private onCloseMessages();
     private runGatherOrHarvestAction(actionType, action);
+    private runPourAction(actionType, item, action);
 }

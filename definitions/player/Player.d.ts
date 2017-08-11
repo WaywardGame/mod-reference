@@ -1,4 +1,4 @@
-import { Delay, EquipType, FacingDirection, IInputMovement, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WorldZ } from "Enums";
+import { Delay, EquipType, FacingDirection, IInputMovement, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
@@ -162,8 +162,11 @@ export default class Player implements IPlayer {
     staminaReduction(skillType: SkillType): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;
+    getWeightStatus(): WeightStatus;
+    getWeightPenalty(): number;
     checkAndRemoveBlood(): boolean;
     checkForGatherFire(): string | undefined;
+    checkForStill(): boolean;
     updateCraftTable(updateDismantleItems: boolean): void;
     updateCraftTableAndWeight(): void;
     checkReputationMilestones(): void;
@@ -187,6 +190,7 @@ export default class Player implements IPlayer {
     cancelResting(reason: RestCancelReason): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
+    getDialogInfo(dialogIndex: string | number): IDialogInfo;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     updateStatsAndAttributes(): void;
     passTurn(turnType?: TurnType): void;
@@ -198,6 +202,7 @@ export default class Player implements IPlayer {
     processInput(): void;
     getConsumeBonus(skillUse: SkillType, itemQuality: ItemQuality | undefined): number;
     revealItem(itemType: ItemType): void;
+    getMovementFinishTime(): number;
     private processMovement(turnType?);
     private processTimers();
     private swimCheck();

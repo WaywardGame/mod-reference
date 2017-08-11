@@ -6,6 +6,7 @@ import { UiMessage } from "language/ILanguage";
 import { IMultiplayerOptions } from "multiplayer/IMultiplayer";
 import { IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import * as Utilities from "Utilities";
+import { ICreature } from "../creature/ICreature";
 export declare enum PacketType {
     Connect = 0,
     World = 1,
@@ -31,7 +32,8 @@ export declare enum PacketType {
     UpdateItemOrder = 21,
     UpdateQuickSlotInfo = 22,
     UpdateDialogInfo = 23,
-    MultiplePackets = 24,
+    MergedPackets = 24,
+    Logs = 25,
 }
 export interface IPacketPlayerTarget {
     pid: number;
@@ -150,11 +152,15 @@ export interface IUpdateDialogInfoPacketData {
     index: string | number;
     info: IDialogInfo;
 }
-export interface IMultiplePacketsPacketData {
-    type: PacketType.MultiplePackets;
+export interface IMergedPacketsPacketData {
+    type: PacketType.MergedPackets;
     data: PacketData[];
 }
-export declare type PacketData = IConnectPacketData | IWorldPacketData | IConnectedPacketData | ILoadedPacketData | ITickPacketData | IActionPacketData | IReorderItemsPacketData | IAddPlayerPacketData | IReadyPlayerPacketData | IRemovePlayerPacketData | IShowLoadingScreenPacketData | IHideLoadingScreenPacketData | ISynchronizeFlowFieldsPacketData | IUpdateOptionPacketData | IKeyBindStatePacketData | IUpdateDirectionPacketData | IDisplayConfirmDialogPacketData | IConfirmDialogSelectionPacketData | IChatMessagePacketData | ISetPlayerZPacketData | IPausePacketData | IUpdateItemOrderPacketData | IUpdateQuickSlotInfoPacketData | IUpdateDialogInfoPacketData | IMultiplePacketsPacketData;
+export interface ILogsPacketData {
+    type: PacketType.Logs;
+    logs: string;
+}
+export declare type PacketData = IConnectPacketData | IWorldPacketData | IConnectedPacketData | ILoadedPacketData | ITickPacketData | IActionPacketData | IReorderItemsPacketData | IAddPlayerPacketData | IReadyPlayerPacketData | IRemovePlayerPacketData | IShowLoadingScreenPacketData | IHideLoadingScreenPacketData | ISynchronizeFlowFieldsPacketData | IUpdateOptionPacketData | IKeyBindStatePacketData | IUpdateDirectionPacketData | IDisplayConfirmDialogPacketData | IConfirmDialogSelectionPacketData | IChatMessagePacketData | ISetPlayerZPacketData | IPausePacketData | IUpdateItemOrderPacketData | IUpdateQuickSlotInfoPacketData | IUpdateDialogInfoPacketData | IMergedPacketsPacketData | ILogsPacketData;
 export declare enum PacketObjectType {
     Array = 0,
     Item = 1,
@@ -173,6 +179,7 @@ export interface IActionArgumentPacketData {
     bypass?: boolean;
     container?: IPacketObject<IContainer>;
     containerName?: string;
+    creature?: IPacketObject<ICreature>;
     direction?: FacingDirection;
     doodad?: IPacketObject<IDoodad>;
     equipSlot?: EquipType;

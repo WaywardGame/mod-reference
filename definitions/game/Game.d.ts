@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -25,6 +25,7 @@ export default class Game implements IGame {
     saveVersion: string;
     previousSaveVersion: IVersionInfo;
     isLoadingSave: boolean;
+    difficulty: Difficulty;
     absoluteTime: number;
     messageTimer: number;
     saveClear: boolean;
@@ -71,6 +72,7 @@ export default class Game implements IGame {
     playedCount: number;
     glContext: WebGL2RenderingContext | null;
     mapContext: CanvasRenderingContext2D | null;
+    glVersion: number;
     spriteTexture: WebGLTexture;
     spriteTextureSizeInversed: Vec2;
     tileTexture: WebGLTexture;
@@ -120,7 +122,8 @@ export default class Game implements IGame {
     getAmbientLightLevel(z: number): number;
     updateReputation(reputation: number): void;
     getReputation(): number;
-    getDifficulty(): string;
+    getDifficulty(): Difficulty;
+    getReputationMessage(): string;
     getMalignity(): number;
     getBenignity(): number;
     getStrength(): number;
@@ -146,7 +149,7 @@ export default class Game implements IGame {
     getPlayerAtTile(tile: ITile, includeGhosts?: boolean): IPlayer | undefined;
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean): IPlayer | undefined;
     getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
-    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, isClientSide?: boolean): boolean;
+    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
     getNearestPlayer(x: number, y: number): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayerByIdentifier(identifier: string): IPlayer | undefined;

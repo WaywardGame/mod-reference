@@ -570,6 +570,7 @@ export declare enum ItemType {
     Wheat = 350,
     CookedPotato = 351,
     CookedCornCob = 352,
+    BundleOfSwitchgrass = 353,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1193,8 +1194,8 @@ export interface IRGB {
     b: number;
 }
 export declare enum Difficulty {
-    Casual = 0,
-    Hardcore = 1,
+    Hardcore = 0,
+    Casual = 1,
 }
 export declare enum WeightType {
     Normal = 0,
@@ -1229,4 +1230,9 @@ export interface ITerrainResource {
 export interface ITerrainResourceItem extends IResourceItem {
     tileChange?: TerrainType;
     tileChangeChance?: number;
+}
+export declare enum WeightStatus {
+    None = 0,
+    Overweight = 1,
+    Encumbered = 2,
 }

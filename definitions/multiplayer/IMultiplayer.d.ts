@@ -28,19 +28,30 @@ export interface IMultiplayerOptions {
     difficulty: Difficulty;
     pvp: boolean;
 }
+export interface IMultiplayerNetworkOptions {
+    matchmakingServer: string;
+    matchmakingServerPort: number;
+    fakeLatency: number;
+    enableSyncChecks: boolean;
+    enablePacketMerging: boolean;
+    enablePacketIdChecks: boolean;
+    checkSeedHistory: boolean;
+    chunkSize: number;
+}
 export declare enum MultiplayerSyncCheck {
     Stats = 0,
     Creature = 1,
     CanASeeB = 2,
-    Weight = 3,
-    StaminaChanges = 4,
-    InventoryCount = 5,
-    ItemWeight = 6,
-    Ticks = 7,
-    Seed = 8,
-    PlayerPositions = 9,
-    Container = 10,
-    ItemOrder = 11,
-    LastCreationIds = 12,
-    IsTileEmpty = 13,
+    CanASeeBLightSource = 3,
+    Weight = 4,
+    StaminaChanges = 5,
+    InventoryCount = 6,
+    ItemWeight = 7,
+    Ticks = 8,
+    Seed = 9,
+    PlayerPositions = 10,
+    Container = 11,
+    ItemOrder = 12,
+    LastCreationIds = 13,
+    IsTileEmpty = 14,
 }

@@ -1,4 +1,4 @@
-import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, IRGB, ItemType, SentenceCaseStyle, StatusType, TerrainType } from "Enums";
+import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
 import { IContainer } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -86,4 +86,5 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     spreadMax?: number;
     trapDamage?: number;
     waterStill?: boolean;
+    gatherSkillUse?: SkillType;
 }

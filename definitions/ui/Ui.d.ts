@@ -83,6 +83,7 @@ export default class Ui implements IUi {
     shakeStat(stat: StatType): void;
     refreshAttributes(): void;
     loadQuickSlots(): void;
+    isContextMenuOpen(): boolean;
     isOverlayShown(): boolean;
     isConfirmOverlayShown(): boolean;
     isInputOverlayShown(): boolean;

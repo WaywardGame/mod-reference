@@ -16,6 +16,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     happiness?: number;
     chickenEggCounter?: number;
     stopNextMovement?: boolean;
+    renamed?: string;
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
@@ -33,7 +34,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
     getMovementProgress(): number;
-    getMovementFinishTime(): number;
+    getMovementFinishTime(): number | undefined;
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
     canSwapWith(player: IPlayer): boolean;
