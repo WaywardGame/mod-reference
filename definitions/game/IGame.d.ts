@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import IOptions from "game/IOptions";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -134,6 +134,8 @@ export interface IGame extends IPropSerializable {
     onSaveLoaded(slot: number): void;
     outputFireMessage(player: IPlayer, decay?: number): void;
     packGround(x: number, y: number, z: number): void;
+    getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
+    getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     play(saveSlot: number, options?: IPlayOptions): void;
     processWaterContamination(): void;

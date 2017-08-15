@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -171,6 +171,8 @@ export default class Game implements IGame {
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
+    getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
+    getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     private tick();
     private processTimers();
     private processAutoSave();

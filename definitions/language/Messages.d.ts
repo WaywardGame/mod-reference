@@ -218,7 +218,7 @@ export declare enum Message {
     Fire = 204,
     FireAlmostExtinguished = 205,
     FiredIntoObstacle = 206,
-    FireFacingYouIsWarm = 207,
+    FireAroundYouIsWarm = 207,
     FireIsHealthy = 208,
     FireIsRaging = 209,
     FireIsStruggling = 210,

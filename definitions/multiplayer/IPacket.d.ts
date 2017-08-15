@@ -1,3 +1,4 @@
+import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { ActionType, AttackType, EquipType, FacingDirection, IPoint, ItemQuality, ItemType, KeyBind, RestType } from "Enums";
 import { ICrafted, IPlayerOptions } from "game/IGame";
@@ -6,7 +7,6 @@ import { UiMessage } from "language/ILanguage";
 import { IMultiplayerOptions } from "multiplayer/IMultiplayer";
 import { IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import * as Utilities from "Utilities";
-import { ICreature } from "../creature/ICreature";
 export declare enum PacketType {
     Connect = 0,
     World = 1,

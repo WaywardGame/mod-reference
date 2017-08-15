@@ -44,7 +44,7 @@ export default class Ui implements IUi {
     setLoadingMessage(message: UiMessage): void;
     showLoadingScreenAround(func: () => void): void;
     showLoadingScreenAround(message: UiMessage, func: () => void): void;
-    hideLoadingScreen(): void;
+    hideLoadingScreen(immediately?: boolean): void;
     toggleOptions(): void;
     showOptionsScreen(): void;
     hideOptionsScreen(): void;
