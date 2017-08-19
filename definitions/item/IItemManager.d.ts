@@ -1,6 +1,6 @@
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
-import { IContainable, IContainer, IContainerReference, IItem, IItemArray, IRecipe } from "IItem";
+import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecipe } from "IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITileContainer } from "tile/ITerrain";
@@ -16,8 +16,8 @@ export interface IItemManager {
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality, fake?: boolean): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     decayItems(): boolean;
-    derefenceContainerReference(containerRef: IContainerReference): object | undefined;
-    getContainerReference(container: IContainer): IContainerReference;
+    derefenceContainerReference(containerRef: ContainerReference): object | undefined;
+    getContainerReference(container: IContainer): ContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
     getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality | undefined): IItemArray;

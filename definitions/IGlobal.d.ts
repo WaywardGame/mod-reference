@@ -11,7 +11,7 @@ import IGame from "game/IGame";
 import IItemManager from "item/IItemManager";
 import ILanguageManager from "language/ILanguageManager";
 import IModManager from "mod/IModManager";
-import IMultiplayer from "multiplayer/IMultiplayer";
+import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import IPlayer from "player/IPlayer";
 import IResourceLoader from "IResourceLoader";
 import ISaveData from "save/data/ISaveData";
@@ -43,6 +43,7 @@ declare global {
     let localPlayer: IPlayer;
     let modManager: IModManager;
     let multiplayer: IMultiplayer;
+    let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
     let players: IPlayer[];
     let renderer: IWorldRenderer;
     let resourceLoader: IResourceLoader;
@@ -67,7 +68,7 @@ declare global {
     }
 
     interface IByteGridConstructor {
-        new (width: number, height: number): IByteGrid;
+        new(width: number, height: number): IByteGrid;
     }
 
     interface IMsgPack {

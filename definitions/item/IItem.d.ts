@@ -47,7 +47,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     isDecayed(): boolean;
     isEquipped(): boolean;
     getEquipSlot(): EquipType | undefined;
-    changeInto(itemType: ItemType): void;
+    changeInto(itemType: ItemType, disableNotify?: boolean): void;
     returns(): void;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
@@ -139,19 +139,31 @@ export declare enum ContainerReferenceType {
     Tile = 4,
     Item = 5,
 }
-export interface IInventoryContainerReference extends IContainerReference {
+export interface IBaseContainerReference {
+    type: ContainerReferenceType;
+}
+export interface IInventoryContainerReference extends IBaseContainerReference {
+    type: ContainerReferenceType.Inventory;
     pid: number;
     identifier?: string;
 }
-export declare type IWorldContainerReference = IContainerReference;
-export declare type ITileContainerReference = IContainerReference & IPointZ;
-export declare type IDoodadContainerReference = IContainerReference & IPointZ;
-export interface IItemContainerReference extends IContainerReference {
+export interface IInvalidContainerReference extends IBaseContainerReference {
+    type: ContainerReferenceType.Invalid;
+}
+export interface IWorldContainerReference extends IBaseContainerReference {
+    type: ContainerReferenceType.World;
+}
+export interface ITileContainerReference extends IBaseContainerReference, IPointZ {
+    type: ContainerReferenceType.Tile;
+}
+export interface IDoodadContainerReference extends IBaseContainerReference, IPointZ {
+    type: ContainerReferenceType.Doodad;
+}
+export interface IItemContainerReference extends IBaseContainerReference {
+    type: ContainerReferenceType.Item;
     id: number;
 }
-export interface IContainerReference {
-    type: ContainerReferenceType;
-}
+export declare type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference;
 export declare enum CraftResult {
     Fail = 0,
     Success = 1,

@@ -1,4 +1,4 @@
-import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
+import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
 import { IContainer } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -76,6 +76,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     lit?: DoodadType;
     onBurn?: ItemType;
     particles: IRGB;
+    growthParticles?: IDoodadParticles;
     pickUp?: ItemType[];
     pickUpCanHurtHands?: boolean;
     providesFire?: boolean;
@@ -87,4 +88,5 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     trapDamage?: number;
     waterStill?: boolean;
     gatherSkillUse?: SkillType;
+    growthCycle?: boolean;
 }

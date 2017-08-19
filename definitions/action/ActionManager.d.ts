@@ -1,7 +1,7 @@
 import { ExecuteArgument, IAction } from "action/IAction";
 import IActionManager from "action/IActionManager";
 import { ActionType } from "Enums";
-import { IActionArgumentPacketData } from "multiplayer/IPacket";
+import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import IPlayer from "player/IPlayer";
 export default class ActionManager implements IActionManager {
     private registered;
@@ -10,8 +10,6 @@ export default class ActionManager implements IActionManager {
     add(action: IAction): void;
     remove(actionType: ActionType): void;
     execute(player: IPlayer, actionType: ActionType, executeArgument?: ExecuteArgument): boolean | undefined;
-    executePacket(player: IPlayer, actionArgumentPacketData: IActionArgumentPacketData): void;
+    executeMultiplayer(player: IPlayer, actionPacket: ActionPacket): any;
     private executeInternal(player, actionType, actionArgument);
-    private argumentToPacketData(actionArgument);
-    private packetToArgument(packetData);
 }

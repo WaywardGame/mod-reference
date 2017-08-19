@@ -7,7 +7,7 @@ import IOptions from "game/IOptions";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
-import { IWorldPacketData } from "multiplayer/IPacket";
+import { IMultiplayerWorldData } from "multiplayer/IMultiplayer";
 import { IPlayer, IPlayerCustomization } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -172,7 +172,7 @@ export interface IPlayOptions {
     name?: string;
     difficulty?: Difficulty;
     customization?: IPlayerCustomization;
-    multiplayer?: IWorldPacketData;
+    multiplayer?: IMultiplayerWorldData;
 }
 export interface IPlayerOptions {
     id?: number;
@@ -187,5 +187,6 @@ export interface ICrafted {
     unlockTime: number;
     newUnlock: boolean;
 }
-export declare const lineOfSightRadius = 20;
+export declare const lineOfSightRadius = 15;
+export declare const lineOfSightMaxRadius = 20;
 export declare const lineOfSightDetail = 4;

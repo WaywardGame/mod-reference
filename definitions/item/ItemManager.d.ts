@@ -1,6 +1,6 @@
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
-import { IContainable, IContainer, IContainerReference, IItem, IItemArray, IRecipe } from "item/IItem";
+import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecipe } from "item/IItem";
 import IItemManager from "item/IItemManager";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -12,8 +12,8 @@ export default class ItemManager implements IItemManager {
     private cachedDecaysIntoWeights;
     private cachedDefaultItemForGroup;
     constructor();
-    getContainerReference(container: IContainer | undefined): IContainerReference;
-    derefenceContainerReference(containerRef: IContainerReference): object | undefined;
+    getContainerReference(container: IContainer | undefined): ContainerReference;
+    derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean): void;
     removeContainerItems(container: IContainer): void;
     remove(item: IItem): void;

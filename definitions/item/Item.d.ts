@@ -33,7 +33,7 @@ export default class Item implements IItem, IContainer, IContainable, IPropSeria
     isEquipped(): boolean;
     getEquipSlot(): EquipType | undefined;
     isDecayed(): boolean;
-    changeInto(type: ItemType): void;
+    changeInto(type: ItemType, disableNotify?: boolean): void;
     returns(): boolean;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;

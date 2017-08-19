@@ -32,17 +32,18 @@ export declare enum Source {
     Mod = 11,
     Mods = 12,
     Multiplayer = 13,
-    Player = 14,
-    ResourceLoader = 15,
-    SaveManager = 16,
-    Serializer = 17,
-    Shaders = 18,
-    Steamworks = 19,
-    TileEventManager = 20,
-    Trello = 21,
-    Ui = 22,
-    Utilities = 23,
-    WebAssembly = 24,
+    Packet = 14,
+    Player = 15,
+    ResourceLoader = 16,
+    SaveManager = 17,
+    Serializer = 18,
+    Shaders = 19,
+    Steamworks = 20,
+    TileEventManager = 21,
+    Trello = 22,
+    Ui = 23,
+    Utilities = 24,
+    WebAssembly = 25,
 }
 export declare enum AttackType {
     Melee = 0,
@@ -1016,6 +1017,7 @@ export declare enum KeyBind {
     LeftHand = 34,
     RightHand = 35,
     Chat = 36,
+    Thirteen = 37,
 }
 export declare enum BindType {
     Keyboard = 0,
@@ -1223,6 +1225,9 @@ export interface IResourceItem {
 export interface IDoodadResource {
     [index: number]: IResourceItem[];
 }
+export interface IDoodadParticles {
+    [index: number]: IRGB;
+}
 export interface ITerrainResource {
     items: ITerrainResourceItem[];
     defaultItem?: ItemType;
@@ -1235,4 +1240,14 @@ export declare enum WeightStatus {
     None = 0,
     Overweight = 1,
     Encumbered = 2,
+}
+export declare enum ConnectionState {
+    Connecting = 1,
+    Connected = 2,
+    QueuingPackets = 4,
+    CatchingUp = 8,
+    Loaded = 16,
+    Ready = 32,
+    Disconnecting = 64,
+    All = 127,
 }

@@ -1,13 +1,15 @@
-import { Difficulty } from "Enums";
-import { IPlayerOptions } from "game/IGame";
-import { PacketData, PacketType } from "multiplayer/IPacket";
+import { ConnectionState, Difficulty } from "Enums";
+import { ICrafted, IPlayerOptions } from "game/IGame";
+import { IPacket } from "multiplayer/packets/IPacket";
 import { IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayer {
+    addAfterSyncChecks(packet: IPacket): void;
+    addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
     disconnect(): void;
-    executeSyncedPacket(packetDataOrType: PacketData | PacketType): number | undefined | void;
+    getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
     isConnected(): boolean;
@@ -18,8 +20,10 @@ export interface IMultiplayer {
     kick(player: IPlayer): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
-    sendPacket(player: IPlayer, packetData: PacketData): void;
-    syncPacket(packetData: PacketData, clientSide?: () => any, checkPacketType?: boolean): any;
+    sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
+    sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
+    setOptions(options: IMultiplayerOptions): void;
+    syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean): any;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;
@@ -28,15 +32,24 @@ export interface IMultiplayerOptions {
     difficulty: Difficulty;
     pvp: boolean;
 }
-export interface IMultiplayerNetworkOptions {
+export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;
     matchmakingServerPort: number;
     fakeLatency: number;
     enableSyncChecks: boolean;
-    enablePacketMerging: boolean;
-    enablePacketIdChecks: boolean;
+    enablePacketNumberChecks: boolean;
     checkSeedHistory: boolean;
     chunkSize: number;
+}
+export declare enum PacketAcceptType {
+    Serverside = 1,
+    Clientside = 2,
+    All = 3,
+}
+export interface IConnection {
+    state: ConnectionState;
+    pid?: number;
+    playerIdentifier?: string;
 }
 export declare enum MultiplayerSyncCheck {
     Stats = 0,
@@ -54,4 +67,14 @@ export declare enum MultiplayerSyncCheck {
     ItemOrder = 12,
     LastCreationIds = 13,
     IsTileEmpty = 14,
+}
+export interface IMultiplayerWorldData {
+    pid: number;
+    playerCount: number;
+    multiplayerOptions: IMultiplayerOptions;
+    saveObjectString: string;
+    initialFlowFieldPids: number[];
+    crafted: {
+        [index: number]: ICrafted;
+    };
 }

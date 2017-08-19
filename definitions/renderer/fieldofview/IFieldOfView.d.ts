@@ -6,8 +6,8 @@ export interface IFieldOfView {
     blurEnabled: boolean;
     computeOffset: Vec2;
     disabled: boolean;
-    maxRadius: number;
-    radius: number;
+    readonly maxRadius: number;
+    readonly radius: number;
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
@@ -16,6 +16,7 @@ export interface IFieldOfView {
     getBounds(player: IPlayer, radius?: number): Utilities.Bound3;
     getSubdivisions(): number;
     getTextureSize(): number;
+    updateRadius(radius: number, maxRadius: number): void;
     tickSeed(): void;
 }
 export default IFieldOfView;

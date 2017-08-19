@@ -7,12 +7,12 @@ import * as Utilities from "Utilities";
 export default class FieldOfView implements IFieldOfView {
     private gl;
     radius: number;
+    maxRadius: number;
     private subdivisions;
     static hBlurProgram: CompiledProgram;
     static vBlurProgram: CompiledProgram;
     private static shaderProgram;
     private static instance;
-    maxRadius: number;
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
     disabled: boolean;
@@ -28,7 +28,8 @@ export default class FieldOfView implements IFieldOfView {
     private viewQuadBuffer;
     private seed;
     static compileShaders(gl: WebGL2RenderingContext): void;
-    constructor(gl: WebGL2RenderingContext, radius: number, subdivisions?: number);
+    constructor(gl: WebGL2RenderingContext, radius: number, maxRadius: number, subdivisions?: number);
+    updateRadius(radius: number, maxRadius: number): void;
     getTextureSize(): number;
     getSubdivisions(): number;
     tickSeed(): void;
@@ -38,4 +39,5 @@ export default class FieldOfView implements IFieldOfView {
     getBounds(player: IPlayer, radius?: number): Utilities.Bound3;
     private updateExplored();
     private computeLights();
+    private resetGl();
 }
