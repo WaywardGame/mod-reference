@@ -11,6 +11,7 @@ export interface ISteamworks {
     setupMods(callback: () => void): void;
     getSteamId(): ISteamId;
     getScreenName(): string | undefined;
+    getFriends(): ISteamFriend[] | undefined;
     getBetaName(): string;
     getPublishedMods(): IWorkshopItem[];
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
@@ -54,6 +55,12 @@ export interface ISteamId {
     accountId: number;
     screenName: string;
     staticAccountId: string;
+}
+export interface ISteamFriend {
+    name?: string;
+    steamId: string;
+    gameId?: string;
+    lobbyId?: string;
 }
 export interface IWorkshopItem {
     file: string;

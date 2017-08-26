@@ -1,6 +1,7 @@
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, SpriteBatchLayer } from "Enums";
+import { IPlayOptions } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
 import { Message, MessageType } from "language/Messages";
@@ -110,7 +111,7 @@ export interface IModManager {
     isLoadedByName(name: string): boolean;
     isValid(index: number): boolean;
     load(index: number): void;
-    loadAll(callback: () => void): void;
+    loadAll(options: IPlayOptions, callback: (err?: string) => void): void;
     reload(index: number): void;
     removeMod(id: number, uninstall?: boolean): void;
     save(index: number): void;
@@ -163,7 +164,7 @@ export interface IModManager {
     callHook(hook: Hook.OnMouseUpOrLeave, event: JQueryEventObject): boolean | undefined;
     callHook(hook: Hook.OnMove, nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean | undefined;
     callHook(hook: Hook.OnMoveDirectionUpdate, direction: FacingDirection): void;
-    callHook(hook: Hook.OnNoInputReceived): void;
+    callHook(hook: Hook.OnNoInputReceived, player: IPlayer): void;
     callHook(hook: Hook.OnPlayerDamage, amount: number, damageMessage: string): boolean | undefined;
     callHook(hook: Hook.OnShowInGameScreen): void;
     callHook(hook: Hook.OnSpawnCreatureFromGroup, creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;

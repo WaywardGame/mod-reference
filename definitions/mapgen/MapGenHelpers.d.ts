@@ -1,5 +1,4 @@
 import { DoodadType, TerrainType } from "Enums";
-import { TileTemplateType } from "tile/ITerrain";
 import * as Terrain from "tile/ITerrain";
 export declare function hasFinishedLoading(): boolean;
 export declare function setFinishedLoading(): void;
@@ -8,7 +7,7 @@ export declare function spawnHouseItem(x: number, y: number, z: number): void;
 export declare function spawnShoreItem(x: number, y: number, z: number): void;
 export declare function spawnDoodad(tileType: TerrainType, x: number, y: number, z: number, afterMapGen?: boolean): void;
 export declare function spawnTileEvent(x: number, y: number, z: number): void;
-export declare function spawnTemplate(templateType: TileTemplateType, x: number, y: number, z: number): void;
+export declare function spawnTemplate(templateType: Terrain.TileTemplateType, x: number, y: number, z: number): void;
 export declare function setTileUnderDoodad(tile: Terrain.ITile, x: number, y: number, doodadType: DoodadType, addTileData?: boolean): void;
 export declare function setupTiles(tileGenArray: Uint16Array): void;
 export declare function loadDifferences(): void;

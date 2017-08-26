@@ -1,4 +1,5 @@
 import { ICreature } from "creature/ICreature";
+import { IDoodad } from "doodad/IDoodad";
 import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
@@ -43,9 +44,9 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     identifier: string;
     inventory: IContainer;
     isMoving: boolean;
+    isMovingClientside: boolean;
     lightBonus: number;
     malignity: number;
-    movement: IInputMovement;
     movementAnimation: number;
     movementCompleteZ: number | undefined;
     movementFinishTime: number;
@@ -56,6 +57,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     nextMoveTime: number;
     nextX: number;
     nextY: number;
+    noInputReceived: boolean;
     options: IOptions;
     quickSlotInfo: IQuickSlotInfo[];
     raft: number | undefined;
@@ -78,7 +80,6 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     walkSoundCounter: number;
     wasAbsentPlayer: boolean;
     weight: number;
-    weightBonus: number;
     x: number;
     y: number;
     z: number;
@@ -94,6 +95,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     checkAndRemoveBlood(): boolean;
     checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
+    checkForGather(): IDoodad | undefined;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkReputationMilestones(): void;
     checkSkillMilestones(): void;
@@ -231,3 +233,5 @@ export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
+export declare const gameMovement: IInputMovement[];
+export declare const playerWeightBonus = 25;

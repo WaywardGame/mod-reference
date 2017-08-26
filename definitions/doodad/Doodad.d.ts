@@ -31,9 +31,9 @@ export default class Doodad implements IDoodad, IPropSerializable, IUnserialized
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
-    canRename(): boolean;
     canPickup(player: IPlayer): boolean;
     canGather(player: IPlayer): boolean;
+    isGatherable(): boolean;
     canHarvest(player: IPlayer): boolean;
     checkForTrampling(playerOrCreatureId: IPlayer | number): boolean;
     getDurabilityMessage(this: IDoodad): Message;

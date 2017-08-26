@@ -23,6 +23,8 @@ export default abstract class BasePacket {
     protected writeUint16(value: number): void;
     protected readUint32(): number;
     protected writeUint32(value: number): void;
+    protected readFloat64(): number;
+    protected writeFloat64(value: number): void;
     protected readBool(): boolean;
     protected writeBool(value: boolean): void;
     protected readUint8Array(): Uint8Array;

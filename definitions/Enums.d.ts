@@ -825,7 +825,7 @@ export declare enum Hairstyle {
     Bun = 2,
     Ponytail = 3,
     Afro = 4,
-    Straight = 5,
+    Bouncy = 5,
     Dreads = 6,
     Shaved = 7,
     Long = 8,
@@ -1183,7 +1183,6 @@ export interface IMessagePack {
     message?: Message | string;
     type?: MessageType;
     args?: string | number | any[];
-    argSkipCasing?: boolean;
 }
 export interface IInspect {
     type?: InspectType;

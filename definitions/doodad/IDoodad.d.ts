@@ -11,9 +11,9 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, P
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
     canGather(player: IPlayer): boolean;
+    isGatherable(player: IPlayer): boolean;
     canHarvest(player: IPlayer): boolean;
     canPickup(player: IPlayer): boolean;
-    canRename(): boolean;
     causeStatus(player: IPlayer): void;
     checkForTrampling(playerOrCreatureId: IPlayer | number): boolean;
     damage(forceBreak?: boolean): void;
@@ -61,7 +61,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     causesStatus?: StatusType[];
     damage?: number;
     disableDrop?: boolean;
-    disableRename?: boolean;
     gather?: IDoodadResource;
     graphicVariation?: boolean;
     group?: DoodadTypeGroup;

@@ -1,6 +1,7 @@
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, SpriteBatchLayer } from "Enums";
+import { IPlayOptions } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import { Hook } from "mod/IMod";
@@ -16,7 +17,7 @@ export default class ModManager implements IModManager {
     private cachedHookNames;
     private onLanguageLoadCallbacks;
     constructor();
-    loadAll(callback: () => void): void;
+    loadAll(options: IPlayOptions, callback: (err?: string) => void): void;
     unloadAll(reset?: boolean): void;
     setupMods(callback: () => void): void;
     saveAll(): void;

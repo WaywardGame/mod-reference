@@ -3,8 +3,7 @@ import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, Weig
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecipe } from "IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
-import { ITileContainer } from "tile/ITerrain";
-import { ITile } from "tile/ITerrain";
+import { ITile, ITileContainer } from "tile/ITerrain";
 export interface IItemManager {
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean): void;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;

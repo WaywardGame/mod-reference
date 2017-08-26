@@ -324,8 +324,9 @@ export declare abstract class Mod extends BaseMod {
     onMoveDirectionUpdate(direction: FacingDirection): void;
     /**
      * Called when no input is received
+     * @param player The player object
      */
-    onNoInputReceived(): void;
+    onNoInputReceived(player: IPlayer): void;
     /**
      * Called when the player takes damage
      * @param amount The amount of damage taken

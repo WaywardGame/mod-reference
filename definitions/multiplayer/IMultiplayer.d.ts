@@ -23,7 +23,7 @@ export interface IMultiplayer {
     sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
     sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
     setOptions(options: IMultiplayerOptions): void;
-    syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean): any;
+    syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;
@@ -67,14 +67,24 @@ export declare enum MultiplayerSyncCheck {
     ItemOrder = 12,
     LastCreationIds = 13,
     IsTileEmpty = 14,
+    CreatureNearestPlayer = 15,
+    CreatureIsInFlowField = 16,
+    CreatureMoveDirection = 17,
+    FlowFieldValue = 18,
 }
 export interface IMultiplayerWorldData {
     pid: number;
     playerCount: number;
+    mods: IMultiplayerMod[];
     multiplayerOptions: IMultiplayerOptions;
     saveObjectString: string;
     initialFlowFieldPids: number[];
     crafted: {
         [index: number]: ICrafted;
     };
+}
+export interface IMultiplayerMod {
+    name: string;
+    version: string;
+    publishedFileId: string | undefined;
 }

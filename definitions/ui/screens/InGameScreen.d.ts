@@ -1,6 +1,5 @@
 import { DialogId, EquipType, FacingDirection, IBind, IMessagePack, ItemType, SortType, StatType } from "Enums";
-import { IDismantleComponent } from "item/IItem";
-import { IContainer, IItem } from "item/IItem";
+import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";

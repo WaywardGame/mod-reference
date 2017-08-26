@@ -1,6 +1,5 @@
 import { ActionType, CreatureType, DoodadType, DoodadTypeGroup, GrowingStage, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
-import { Dictionary, ILanguage, INameDescriptionArray, UiMessageStatic } from "language/ILanguage";
-import { IActionDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, IMessageDictionary, IMilestoneDictionary, IOnEquipDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, IUiDictionary } from "language/ILanguage";
+import { Dictionary, IActionDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, ILanguage, IMessageDictionary, IMilestoneDictionary, INameDescriptionArray, IOnEquipDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, IUiDictionary, UiMessageStatic } from "language/ILanguage";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";

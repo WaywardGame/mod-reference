@@ -20,16 +20,19 @@ export interface IPacket {
     getId(): number;
     getSynchronizationCheckData(): ISynchronizationCheckData;
     getType(): PacketType;
+    isSyncCheckEnabled(): boolean;
     process(): any;
     processData(dataView: DataView): void;
 }
 export declare enum NetworkPropertyType {
     Bool = 0,
     Uint8 = 1,
-    Uint32NumberArray = 2,
-    String = 3,
-    Container = 4,
-    Generic = 5,
+    Uint16 = 2,
+    Float64 = 3,
+    Uint32NumberArray = 4,
+    String = 5,
+    Container = 6,
+    Generic = 7,
 }
 export interface INetworkedProperty {
     key: string;

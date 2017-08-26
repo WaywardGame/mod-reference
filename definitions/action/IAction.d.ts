@@ -18,7 +18,7 @@ export interface IActionArgument {
     attackType?: AttackType;
     bypass?: boolean;
     container?: IContainer;
-    containerName?: string;
+    containerType?: IItem | IDoodad;
     creature?: ICreature;
     direction?: FacingDirection;
     doodad?: IDoodad;
@@ -40,6 +40,7 @@ export interface IActionArgument {
     torch?: IItem;
     transmogrifee?: IItem;
     useActionType?: ActionType;
+    object?: any;
 }
 export interface IActionResult {
     returnValue?: boolean;

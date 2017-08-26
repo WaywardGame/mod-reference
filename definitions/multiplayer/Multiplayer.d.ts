@@ -20,6 +20,7 @@ export default class Multiplayer implements IMultiplayer {
     private _packetTickIntervalId;
     private _outgoingPacketQueue;
     private _currentPacketProcessing;
+    private _currentSyncPacketsWaiting;
     private _currentSyncPacketsProcessing;
     private _syncCheckStack;
     private _activeSyncCheck;
@@ -34,14 +35,14 @@ export default class Multiplayer implements IMultiplayer {
     setOptions(options: IMultiplayerOptions): void;
     createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
     joinServer(channel: string, playerOptions?: IPlayerOptions): void;
+    disconnect(message?: string, callback?: () => void): void;
     kick(player: IPlayer): void;
     onPlaying(): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     getClients(): IConnection[];
     sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
     sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
-    syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean): any;
-    disconnect(message?: string, callback?: () => void): void;
+    syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
     updatePlayerId(oldPid: number, newPid: number): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;

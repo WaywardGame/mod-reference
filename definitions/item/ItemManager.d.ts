@@ -4,8 +4,7 @@ import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecip
 import IItemManager from "item/IItemManager";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
-import { ITileContainer } from "tile/ITerrain";
-import { ITile } from "tile/ITerrain";
+import { ITile, ITileContainer } from "tile/ITerrain";
 export default class ItemManager implements IItemManager {
     private worldContainer;
     private cachedWeights;

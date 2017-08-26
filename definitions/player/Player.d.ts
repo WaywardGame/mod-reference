@@ -1,49 +1,64 @@
-import { Delay, EquipType, FacingDirection, IInputMovement, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
+import { IDoodad } from "doodad/IDoodad";
+import { Delay, EquipType, FacingDirection, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
-import { IAttackHand, IMobCheck, IPlayer, IPlayerCustomization, IRestData } from "player/IPlayer";
+import { IAttackHand, IMobCheck, IPlayer, IPlayerCustomization, IPlayerStatus, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 export default class Player implements IPlayer {
-    private static gameMovement;
-    id: number;
-    identifier: string;
-    wasAbsentPlayer: boolean;
-    customization: IPlayerCustomization;
-    name: string;
-    options: IOptions;
-    flowFieldManager: IFlowFieldManager;
-    tamedCreatures: number[];
-    moveType: MoveType;
     attack: number;
     attackFromEquip: IAttackHand;
+    benignity: number;
+    containerSortInfo: {
+        [index: string]: IContainerSortInfo;
+    };
+    currentHint: HintType;
+    customization: IPlayerCustomization;
     deathBy: string;
     defense: PlayerDefense;
     defenses: number[];
-    direction: IPoint;
-    facingDirection: FacingDirection;
-    hintSeen: boolean[];
-    inventory: IContainer;
-    lightBonus: number;
-    state: PlayerState;
-    skills: ISkillSet;
-    status: {
-        bleeding: boolean;
-        burned: boolean;
-        poisoned: boolean;
-    };
-    swimming: boolean;
-    restData: IRestData | undefined;
     dehydration: number;
     dexterity: number;
+    dialogContainerInfo: IDialogInfo[];
+    dialogInfo: {
+        [index: string]: IDialogInfo;
+    };
+    direction: IPoint;
+    equipped: {
+        [index: number]: number;
+    };
+    facingDirection: FacingDirection;
+    handToUse: EquipType;
+    hintSeen: boolean[];
+    id: number;
+    identifier: string;
+    inventory: IContainer;
+    isMoving: boolean;
+    lightBonus: number;
+    malignity: number;
+    movementCompleteZ: number | undefined;
+    moveType: MoveType;
+    name: string;
+    noInputReceived: boolean;
+    options: IOptions;
+    quickSlotInfo: IQuickSlotInfo[];
+    raft: number | undefined;
+    realTimeTickActionDelay: number;
+    restData: IRestData | undefined;
+    revealedItems: {
+        [index: number]: boolean;
+    };
+    score: number;
+    skills: ISkillSet;
+    spawnPoint: IPointZ;
     starvation: number;
-    strength: number;
+    state: PlayerState;
     stats: {
         health: {
             value: number;
@@ -70,52 +85,30 @@ export default class Player implements IPlayer {
             regenBase: number;
         };
     };
-    /**
-     * Player strength !== max health
-     */
+    status: IPlayerStatus;
+    stopNextMovement: boolean;
+    strength: number;
+    swimming: boolean;
+    tamedCreatures: number[];
     turns: number;
+    walkSoundCounter: number;
     weight: number;
     x: number;
     y: number;
     z: WorldZ;
+    isMovingClientside: boolean;
+    wasAbsentPlayer: boolean;
+    flowFieldManager: IFlowFieldManager;
     fromX: number;
     fromY: number;
     nextX: number;
     nextY: number;
-    malignity: number;
-    benignity: number;
-    score: number;
-    weightBonus: number;
-    walkSoundCounter: number;
     nextProcessInput: number;
-    raft: number | undefined;
-    handToUse: EquipType;
-    spawnPoint: IPointZ;
-    equipped: {
-        [index: number]: number;
-    };
-    realTimeTickActionDelay: number;
-    revealedItems: {
-        [index: number]: boolean;
-    };
-    dialogInfo: {
-        [index: string]: IDialogInfo;
-    };
-    dialogContainerInfo: IDialogInfo[];
-    quickSlotInfo: IQuickSlotInfo[];
-    containerSortInfo: {
-        [index: string]: IContainerSortInfo;
-    };
-    currentHint: HintType;
-    movement: IInputMovement;
-    isMoving: boolean;
     movementProgress: number;
     movementFinishTime: number;
     movementAnimation: number;
-    movementCompleteZ: number | undefined;
     nextMoveTime: number;
     nextMoveDirection: FacingDirection | undefined;
-    stopNextMovement: boolean;
     private milestoneUpdates;
     private mousePlayerDirection;
     private touchPlayerDirection;
@@ -167,6 +160,7 @@ export default class Player implements IPlayer {
     checkAndRemoveBlood(): boolean;
     checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
+    checkForGather(): IDoodad | undefined;
     updateCraftTable(updateDismantleItems: boolean): void;
     updateCraftTableAndWeight(): void;
     checkReputationMilestones(): void;

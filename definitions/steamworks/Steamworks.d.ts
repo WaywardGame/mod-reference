@@ -1,5 +1,5 @@
 import { ModType } from "mod/IModManager";
-import { IModPath, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+import { IModPath, ISteamFriend, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 export default class Steamworks implements ISteamworks {
     private installDir;
     private recordedProblems;
@@ -36,6 +36,7 @@ export default class Steamworks implements ISteamworks {
     setOverlayWorks(overlayWorks: boolean): void;
     setupMods(callback: () => void): void;
     getSteamId(): ISteamId;
+    getFriends(): ISteamFriend[] | undefined;
     getScreenName(): string | undefined;
     getBetaName(): string;
     getPublishedMods(): IWorkshopItem[];
