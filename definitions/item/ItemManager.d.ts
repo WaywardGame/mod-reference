@@ -13,7 +13,7 @@ export default class ItemManager implements IItemManager {
     constructor();
     getContainerReference(container: IContainer | undefined): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
-    addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean): void;
+    addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): void;
     removeContainerItems(container: IContainer): void;
     remove(item: IItem): void;
     getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality | undefined): IItemArray;
@@ -72,7 +72,7 @@ export default class ItemManager implements IItemManager {
     private updateItemOrderInternal(container, itemOrder);
     private loadReference(container);
     private removeFromContainerInternal(item);
-    private updateUiOnItemRemove(player, item, willBeAnywhereInInventory?);
+    private updateUiOnItemRemove(player, item, willBeAnywhereInInventory?, skipMessage?);
     private getCraftQualityBonus(quality, required?);
     private computeCraftQualityBonus(itemsToRequire, itemsToConsume);
     private isCraftSuccessful(player, recipe, qualityBonus);

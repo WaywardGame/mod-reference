@@ -41,7 +41,7 @@ export default class Item implements IItem, IContainer, IContainable, IPropSeria
     getLocation(): IPointZ | undefined;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
     dropInWater(player: IPlayer, x?: number, y?: number): void;
-    placeOnTile(x: number, y: number, z: number, force: boolean): boolean;
+    placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;

@@ -149,7 +149,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     staminaReduction(skillType: SkillType): void;
     startResting(restData: IRestData): void;
     tick(isPassTurn?: boolean): void;
-    unequip(item: IItem, internal?: boolean, switchingHands?: boolean): void;
+    unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
     updateCraftTable(updateDismantleItems: boolean): void;
     updateCraftTableAndWeight(): void;

@@ -2,6 +2,7 @@ import { IContainer, IItem, IItemArray, IRecipe } from "item/IItem";
 import IPlayer from "player/IPlayer";
 export default class ItemRecipeRequirementChecker {
     private player;
+    private recipe;
     private trackItems;
     itemBaseComponent: IItem;
     itemComponentsRequired: IItemArray;

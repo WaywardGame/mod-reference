@@ -5,7 +5,7 @@ import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITile, ITileContainer } from "tile/ITerrain";
 export interface IItemManager {
-    addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean): void;
+    addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): void;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
     checkMilestones(player: IPlayer, item: IItem): void;
     computeContainerWeight(container: IContainer): number;
