@@ -1,7 +1,6 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
-import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
@@ -35,7 +34,6 @@ export interface IPlayer extends IPropSerializable, IPointZ {
         [index: number]: number;
     };
     facingDirection: FacingDirection;
-    flowFieldManager: IFlowFieldManager;
     fromX: number;
     fromY: number;
     handToUse: EquipType;
@@ -48,6 +46,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     lightBonus: number;
     malignity: number;
     movementAnimation: number;
+    movementComplete: boolean;
     movementCompleteZ: number | undefined;
     movementFinishTime: number;
     movementProgress: number;
@@ -83,6 +82,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     x: number;
     y: number;
     z: number;
+    weightBonus: number;
     addDelay(delay: Delay, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
     attributes(): void;
@@ -91,11 +91,12 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     canCarve(): IItem | undefined;
     cancelResting(reason: RestCancelReason): void;
     canJump(): boolean;
+    canRelease(creature: ICreature): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkAndRemoveBlood(): boolean;
+    checkForGather(): IDoodad | undefined;
     checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
-    checkForGather(): IDoodad | undefined;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkReputationMilestones(): void;
     checkSkillMilestones(): void;
@@ -103,11 +104,9 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
     getWeightPenalty(): number;
-    createFlowFieldManager(): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
     damage(amount: number, damageMessage: string, soundDelay?: number): void;
     damageEquipment(): void;
-    deleteFlowFieldManager(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     getBindDownTime(key: KeyBind): number | undefined;
     getConsumeBonus(skillUse: SkillType, itemQuality: ItemQuality | undefined): number;
@@ -234,4 +233,3 @@ export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
 export declare const gameMovement: IInputMovement[];
-export declare const playerWeightBonus = 25;

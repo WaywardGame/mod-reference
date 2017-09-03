@@ -1,6 +1,6 @@
+import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Delay, EquipType, FacingDirection, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
-import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
@@ -42,6 +42,7 @@ export default class Player implements IPlayer {
     isMoving: boolean;
     lightBonus: number;
     malignity: number;
+    movementComplete: boolean;
     movementCompleteZ: number | undefined;
     moveType: MoveType;
     name: string;
@@ -96,9 +97,9 @@ export default class Player implements IPlayer {
     x: number;
     y: number;
     z: WorldZ;
+    weightBonus: number;
     isMovingClientside: boolean;
     wasAbsentPlayer: boolean;
-    flowFieldManager: IFlowFieldManager;
     fromX: number;
     fromY: number;
     nextX: number;
@@ -117,8 +118,6 @@ export default class Player implements IPlayer {
     private lastKeyBindSyncedState;
     constructor();
     resetMovementStates(): void;
-    createFlowFieldManager(): void;
-    deleteFlowFieldManager(): void;
     attributes(): void;
     setId(id: number): void;
     setRaft(itemId: number | undefined): void;
@@ -129,6 +128,7 @@ export default class Player implements IPlayer {
     damage(amount: number, damageMessage: string, soundDelay?: number): void;
     calculateEquipmentStats(): void;
     canCarve(): IItem | undefined;
+    canRelease(creature: ICreature): boolean;
     canJump(): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     getHandToUse(): EquipType | undefined;

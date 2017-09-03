@@ -86,6 +86,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     torch?: any;
     weight?: number;
     reducedWeight?: number;
+    minimumWeight?: number;
     lit?: ItemType;
     damageModifier?: number;
     isTorch?: boolean;

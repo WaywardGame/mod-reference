@@ -130,7 +130,7 @@ export default class Game implements IGame {
     getAttack(): number;
     getSkillPercent(skill: SkillType): number;
     getPlayerAverage(calc: (player: IPlayer) => number, round?: boolean): number;
-    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean): void;
+    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean): void;
     isTileFull(x: number, y: number, z: number): boolean;
     isTileFullEx(tile: ITile): boolean;
     isOnFire(tile: ITile): FireType;

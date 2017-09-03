@@ -26,6 +26,7 @@ import IUi from "ui/IUi";
 import IWorld from "renderer/IWorld";
 import IWorldRenderer from "renderer/IWorldRenderer";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
+import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 
 declare global {
     type Description<T> = { [index: number]: T };
@@ -37,6 +38,7 @@ declare global {
     let creatureManager: ICreatureManager;
     let doodadManager: IDoodadManager;
     let fieldOfView: IFieldOfView;
+    let flowFieldManager: IFlowFieldManager;
     let game: IGame;
     let itemManager: IItemManager;
     let languageManager: ILanguageManager;

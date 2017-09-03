@@ -1,5 +1,6 @@
+import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
-import { IDoodad } from "doodad/IDoodad";
+import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
@@ -58,27 +59,27 @@ export declare abstract class Mod extends BaseMod {
     getAmbientLightLevel(ambientLight: number, z: number): number | undefined;
     /**
      * Called before consuming an item
+     * @param player The player object
      * @param itemType The item type
      * @param actionType The action type
      * @returns True if the player can consume the item (default logic isn't called, should use your own code for consumption), false if the player cannot consume the item, or undefined to use the default logic
      */
-    canConsumeItem(itemType: ItemType, actionType: ActionType): boolean | undefined;
+    canConsumeItem(player: IPlayer, itemType: ItemType, actionType: ActionType): boolean | undefined;
     /**
      * Called before a creature attacks
-     * @param creatureId The creature id
      * @param creature The creature object
+     * @param enemy The enemy (player or creature)
      * @returns False if the creature cannot attack, or undefined to use the default logic
      */
-    canCreatureAttack(creatureId: number, creature: ICreature): boolean | undefined;
+    canCreatureAttack(creature: ICreature, enemy: IPlayer | ICreature): boolean | undefined;
     /**
      * Called when a creature tries to move
-     * @param creatureId The creature id
      * @param creature The creature object
      * @param tile The tile the creature is trying to move to
      * @param moveType The creatures move type
      * @returns True if the creature can move, false if the creature cannot move, or undefined to use the default logic
      */
-    canCreatureMove(creatureId: number, creature: ICreature, tile: ITile, moveType: MoveType): boolean | undefined;
+    canCreatureMove(creature: ICreature, tile: ITile, moveType: MoveType): boolean | undefined;
     /**
      * Called when a creature is about to be spawned
      * @param type The type of creature
@@ -90,29 +91,47 @@ export declare abstract class Mod extends BaseMod {
      */
     canCreatureSpawn(type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
     /**
+     * Called when a doodad is about to be spawned
+     * @param type The type of doodad
+     * @param x The x coordinate where the doodad will be spawned
+     * @param y The y coordinate where the doodad will be spawned
+     * @param z The z coordinate where the doodad will be spawned
+     * @param options The doodad spawn options
+     * @returns False if the dooodad cannot spawn, or undefined to use the default logic
+     */
+    canDoodadSpawn(type: CreatureType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
+    /**
      * Called when an item is being dropped
+     * @param player The player object
      * @param item The item to be dropped
      * @param tile The tile the item will be dropped on
      * @param dropAll True if all items of this type will be dropped
      * @param dropAllQuality If not undefined, all items of this quality will be dropped
      * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
      */
-    canDropItem(item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
+    canDropItem(player: IPlayer, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
+    /**
+     * Called when an doodad is being picked up
+     * @param player The player object
+     * @param doodad The doodad object
+     * @returns False if the doodad cannot be picked up, or undefined to use the default logic
+     */
+    canPickupDoodad(player: IPlayer, doodad: IDoodad): boolean | undefined;
     /**
      * Called before a player attacks
+     * @param player The player object
      * @param weapon The weapon used to attack
      * @param attackType The attack type
      * @returns False if the player cannot attack, or undefined to use the default logic
      */
-    canPlayerAttack(weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
+    canPlayerAttack(player: IPlayer, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
     /**
      * Called when calculating creatures in the viewport
-     * @param creatureId The creature id
      * @param creature The creature object
      * @param tile The tile the creature is on
      * @returns False if the player should not see the creature or undefined to use the default logic
      */
-    canSeeCreature(creatureId: number, creature: ICreature, tile: ITile): boolean | undefined;
+    canSeeCreature(creature: ICreature, tile: ITile): boolean | undefined;
     /**
      * Called when the next music track is requested
      * @param currentMusicTrack The current music track
@@ -121,12 +140,11 @@ export declare abstract class Mod extends BaseMod {
     getNextMusicTrack(currentMusicTrack: Music): Music | undefined;
     /**
      * Called when rendering creatures in the viewport
-     * @param creatureId The creature id
      * @param creature The creature object
      * @param batchLayer The batch layer the creature will render in
      * @returns The batch layer the creature should render in or undefined to use the default logic
      */
-    getCreatureSpriteBatchLayer(creatureId: number, creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
+    getCreatureSpriteBatchLayer(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     /**
      * Called when getting the players maximum health
      * @param player The player object
@@ -156,14 +174,15 @@ export declare abstract class Mod extends BaseMod {
     isTileInspectable(tile: ITile): boolean | undefined;
     /**
      * Called when something is built on a tile
+     * @param player The player object
      * @param item The item used to build the object
      * @param tile The tile something was built on
      * @param doodad The doodad that was created on the tile
      */
-    onBuild(item: IItem, tile: ITile, doodad: IDoodad): void;
+    onBuild(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
     /**
      * Called when a button on the button bar is clicked
-     * @param buttonName The button name
+     * @param button The button element
      */
     onButtonBarClick(button: JQuery): void;
     /**
@@ -187,9 +206,10 @@ export declare abstract class Mod extends BaseMod {
     onContainerItemUpdate(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     /**
      * Called when an item is crafted
+     * @param player The player object
      * @param item The item that was crafted
      */
-    onCraft(item: IItem): void;
+    onCraft(player: IPlayer, item: IItem): void;
     /**
      * Called right after the world is created, but before the renderer
      * @param world The world object
@@ -204,6 +224,11 @@ export declare abstract class Mod extends BaseMod {
      */
     onDisplayMessage(message: Message, messageType?: MessageType, ...args: any[]): boolean | undefined;
     /**
+     * Called when a doodad spawns
+     * @param doodad The doodad object
+     */
+    onDoodadSpawn(doodad: IDoodad): void;
+    /**
      * Called when the game is ending
      * @param playerState The ending player state
      */
@@ -215,35 +240,48 @@ export declare abstract class Mod extends BaseMod {
      */
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     /**
+     * Called when the game tick starts
+     */
+    onGameTickStart(): void;
+    /**
+     * Called when the game tick ends
+     */
+    onGameTickEnd(): void;
+    /**
      * Called when a tile is being inspected
+     * @param player The player object
      * @param tile The tile being inspected
      * @returns The inspects to be shown or undefined to use the default logic
      */
-    onInspectTile(tile: ITile): IInspect[] | undefined;
+    onInspectTile(player: IPlayer, tile: ITile): IInspect[] | undefined;
     /**
      * Called when an item is added to the players inventory
+     * @param player The player object
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    onInventoryItemAdd(item: IItem, container: IContainer): void;
+    onInventoryItemAdd(player: IPlayer, item: IItem, container: IContainer): void;
     /**
      * Called when an item is removed from the players inventory
+     * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to.
      */
-    onInventoryItemRemove(item: IItem, container: IContainer): void;
+    onInventoryItemRemove(player: IPlayer, item: IItem, container: IContainer): void;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
+     * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
-    onInventoryItemUpdate(item: IItem, container: IContainer): void;
+    onInventoryItemUpdate(player: IPlayer, item: IItem, container: IContainer): void;
     /**
      * Called when the player equips an item to a slot
+     * @param player The player object
      * @param item The item being equipped
      * @param slot The slot
      */
-    onItemEquip(item: IItem, slot: EquipType): void;
+    onItemEquip(player: IPlayer, item: IItem, slot: EquipType): void;
     /**
      * Called when a keybind is pressed
      * @param keyBind The keybind
@@ -264,40 +302,37 @@ export declare abstract class Mod extends BaseMod {
     onKeyUp(event: JQueryEventObject): boolean | undefined;
     /**
      * Called when a creature is damaged
-     *
-     * @param creatureId The creature id
+     * @param player The player object
      * @param creature The creature object
      * @param damageInfo The damage info object
      * @returns The amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
      */
-    onCreatureDamage(creatureId: number, creature: ICreature, damageInfo: IDamageInfo): number | undefined;
+    onCreatureDamage(creature: ICreature, damageInfo: IDamageInfo): number | undefined;
     /**
      * Called when a creature dies
-     * @param creatureId The creature id
      * @param creature The creature object
      */
-    onCreatureDeath(creatureId: number, creature: ICreature): void;
+    onCreatureDeath(creature: ICreature): void;
     /**
      * Called when a creature spawns
-     * @param creatureId The creature id
      * @param creature The creature object
      * @param aberrant True if the creature is an aberrant
      */
-    onCreatureSpawn(creatureId: number, creature: ICreature): void;
+    onCreatureSpawn(creature: ICreature): void;
     /**
-     * Called when a mouse button is pressed
+     * Called when a mouse button is pressed downed
      * @param event The mouse event object
      * @returns False to cancel the mouse event or undefined to use the default logic
      */
     onMouseDown(event: JQueryEventObject): boolean | undefined;
     /**
-     * Called when a mouse button is pressed
+     * Called when the mouse is moved
      * @param event The mouse event object
      * @returns False to cancel the mouse event or undefined to use the default logic
      */
     onMouseMove(event: JQueryEventObject): boolean | undefined;
     /**
-     * Called when a mouse button is pressed
+     * Called when the mouse scroll wheel is moved
      * @param event The mouse event object
      * @returns False to cancel the mouse event or undefined to use the default logic
      */
@@ -310,36 +345,60 @@ export declare abstract class Mod extends BaseMod {
     onMouseUpOrLeave(event: JQueryEventObject): boolean | undefined;
     /**
      * Called when the player is moving
+     * @param player The player object
      * @param nextX The x position the player is moving to
      * @param nextY The y position the player is moving to
      * @param tile The tile the player is moving to
      * @param direction The direction the player is facing
      * @returns False to cancel the move or undefined to use the default logic
      */
-    onMove(nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean | undefined;
+    onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean | undefined;
+    /**
+     * Called when the player completes a movement
+     * @param player The player object
+     */
+    onMoveComplete(player: IPlayer): void;
     /**
      * Called when the player faces a different direction
+     * @param player The player object
      * @param direction The direction the player is now facing
      */
-    onMoveDirectionUpdate(direction: FacingDirection): void;
+    onMoveDirectionUpdate(player: IPlayer, direction: FacingDirection): void;
     /**
      * Called when no input is received
      * @param player The player object
      */
     onNoInputReceived(player: IPlayer): void;
     /**
+     * Called when an doodad is picked up
+     * @param player The player object
+     * @param doodad The doodad object
+     */
+    onPickupDoodad(player: IPlayer, doodad: IDoodad): void;
+    /**
      * Called when the player takes damage
+     * @param player The player object
      * @param amount The amount of damage taken
      * @param damageMessage The message associated with the damaged
      * @returns False to stop the player from taking damage or undefined to use the default logic
      */
-    onPlayerDamage(amount: number, damageMessage: string): boolean | undefined;
+    onPlayerDamage(player: IPlayer, amount: number, damageMessage: string): boolean | undefined;
     /**
      * Called when the player is killed
      * @param player The player object
      * @returns False to stop the player from dieing or undefined to use the default logic
      */
     onPlayerDeath(player: IPlayer): boolean | undefined;
+    /**
+     * Called when the player tick ends
+     * @param player The player object
+     */
+    onPlayerTickEnd(player: IPlayer): void;
+    /**
+     * Called when the player tick starts
+     * @param player The player object
+     */
+    onPlayerTickStart(player: IPlayer): void;
     /**
      * Called when a sound effect is queued
      * @param type The sound effect type
@@ -364,20 +423,31 @@ export declare abstract class Mod extends BaseMod {
      */
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     /**
-     * Called when a turn is completing
+     * Called when a turn is ending
      * @param player The player object
      */
-    onTurnComplete(player: IPlayer): void;
+    onTurnEnd(player: IPlayer): void;
     /**
      * Called when a turn is starting
+     * @param player The player object
      */
-    onTurnStart(): void;
+    onTurnStart(player: IPlayer): void;
     /**
      * Called when the players weight is being updated
+     * @param player The player object
      * @param newWeight The new weight of the player
      * @returns A number to set the player weight to or undefined to use the default logic
      */
-    onUpdateWeight(newWeight: number): number | undefined;
+    onUpdateWeight(player: IPlayer, newWeight: number): number | undefined;
+    /**
+     * Called after an action has been executed
+     * This is called before the action result is used
+     * @param player The player object
+     * @param actionType The action type
+     * @param actionArgument The action argument
+     * @param actionResult The action result
+     */
+    postExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
     /**
      * Called after the world is generating
      * @param generateNewWorld True if a new world is being generated
@@ -398,6 +468,15 @@ export declare abstract class Mod extends BaseMod {
      * @param viewHeight The height of the view port
      */
     postRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
+    /**
+     * Called before an action is executed
+     * This is called before the action result is used
+     * @param player The player object
+     * @param actionType The action type
+     * @param actionArgument The action argument
+     * @returns False to cancel the action or undefined to use the default logic
+     */
+    preExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument): boolean | undefined;
     /**
      * Called before rendering everything
      */

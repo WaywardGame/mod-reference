@@ -1,5 +1,5 @@
 import { IDoodad } from "doodad/IDoodad";
-import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, WeightType } from "Enums";
+import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, SentenceCaseStyle, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecipe } from "IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -28,7 +28,7 @@ export interface IItemManager {
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean): IItemArray;
     getItemsString(items: IItemArray): string;
-    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean): string;
+    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
     getOrderedContainerItems(container: IContainer): IItem[];
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;

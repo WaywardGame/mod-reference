@@ -24,7 +24,7 @@ export declare enum Source {
     CorpseManager = 3,
     CreatureManager = 4,
     DoodadManager = 5,
-    FlowField = 6,
+    FlowFieldManager = 6,
     Game = 7,
     ItemManager = 8,
     Languages = 9,

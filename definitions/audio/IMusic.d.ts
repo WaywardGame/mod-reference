@@ -1,6 +1,5 @@
 import { IModdable } from "Enums";
-export interface IMusicDescription extends IModdable {
-}
+export declare type IMusicDescription = IModdable;
 export interface ISoundEffectDescription extends IModdable {
     variations?: number;
 }

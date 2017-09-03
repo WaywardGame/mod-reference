@@ -20,8 +20,8 @@ export interface IDoodadAdaptor {
 }
 export declare function setDefaultBackground(tileInfo: TerrainTileInfo): void;
 export declare class Default implements ITileAdaptor {
-    protected getTerrainBeneathTile(x: number, y: number): TerrainType;
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
+    protected getTerrainBeneathTile(x: number, y: number): TerrainType;
 }
 export declare class Till implements ITileAdaptor {
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
