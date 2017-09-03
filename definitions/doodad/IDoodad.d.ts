@@ -1,5 +1,5 @@
 import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
-import { IContainer } from "item/IItem";
+import { IContainer, IItemLegendary } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, Partial<IContainer> {
@@ -31,6 +31,7 @@ export interface IDoodadOptions extends IObjectOptions {
     torch?: IDoodadTorchType;
     treasure?: boolean;
     weight?: number;
+    legendary?: IItemLegendary;
 }
 export interface IDoodadTorchType {
     type: ItemType;
