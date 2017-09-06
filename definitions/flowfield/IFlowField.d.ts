@@ -1,6 +1,7 @@
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 export interface IFlowField {
+    getZ(): number;
     delete(): void;
     getFieldValue(x: number, y: number): number;
     getHashCodes(): string[];

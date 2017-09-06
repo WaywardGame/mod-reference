@@ -153,7 +153,7 @@ export declare module Enums {
     function isModdable(enumObject: any): boolean;
     function restore(): void;
     function reset(): void;
-    function allocate(modIndex: number, id: Enums.EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): IEnumInfo | undefined;
+    function allocate(modIndex: number, id: EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): IEnumInfo | undefined;
     function unallocate(enumInfo: IEnumInfo): void;
     function unallocateMod(modIndex: number): void;
     function getKeys(enumObject: any): string[];

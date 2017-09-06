@@ -429,7 +429,7 @@ export interface ISelector {
     selector: string | string[];
     html?: boolean;
     attribute?: string;
-    func?: (translation: string) => string;
+    func?(translation: string): string;
 }
 export interface ISelectorArray {
     [index: number]: ISelector;

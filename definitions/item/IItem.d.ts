@@ -48,7 +48,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     isEquipped(): boolean;
     getEquipSlot(): EquipType | undefined;
     changeInto(itemType: ItemType, disableNotify?: boolean): void;
-    returns(): void;
+    returns(): boolean;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined): ICreature | undefined;
@@ -78,8 +78,6 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     onUse?: {
         [index: number]: any;
     };
-    onEquip?: (item: IItem) => void;
-    onUnequip?: (item: IItem) => void;
     onEquipEffect?: any[];
     damageType?: DamageType;
     group?: ItemTypeGroup[];
@@ -115,6 +113,8 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     spawnOnBreak?: CreatureType;
     showOverHair?: boolean;
     hasSleepImage?: boolean;
+    onEquip?(item: IItem): void;
+    onUnequip?(item: IItem): void;
 }
 export interface IDismantleDescription {
     items: Array<[ItemType, number]>;

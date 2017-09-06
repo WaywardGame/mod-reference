@@ -8,7 +8,7 @@ export default class FlowFieldManager implements IFlowFieldManager {
     private size;
     delegate: DebugRendererDelegate;
     flowFields: {
-        [index: number]: IFlowField;
+        [index: string]: IFlowField;
     };
     private plys;
     constructor(size: number);
@@ -18,14 +18,13 @@ export default class FlowFieldManager implements IFlowFieldManager {
     getHeight(): number;
     isCreatureInFlowField(creature: ICreature): boolean;
     isPlayerInFlowField(player: IPlayer): boolean;
-    getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
-    getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
+    getMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
+    getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
-    getHashCodes(): string[];
     setPlayers(plys: IPlayer[]): void;
     update(): void;
     reset(): void;
-    private getDirection(moveType, worldX, worldY, toward);
-    private getFlowField(moveType);
+    private getDirection(moveType, x, y, z, toward);
+    private getFlowField(moveType, z);
     private getFlowFields();
 }

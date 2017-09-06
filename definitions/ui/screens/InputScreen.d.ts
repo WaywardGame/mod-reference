@@ -4,7 +4,7 @@ export interface InputOptions {
     buttonText: string;
     inputText: string;
     placeholder: string;
-    callback?: (input: string | undefined) => void;
+    callback?(input: string | undefined): void;
 }
 export default class InputScreen extends BaseScreen {
     options: InputOptions;

@@ -254,7 +254,7 @@ export declare enum ItemType {
     Leaves = 32,
     Limestone = 33,
     Log = 34,
-    MortarAndPestle = 35,
+    StoneMortarAndPestle = 35,
     ButtonMushrooms = 36,
     Nopal = 37,
     Peat = 38,
@@ -574,6 +574,12 @@ export declare enum ItemType {
     CookedCornCob = 352,
     BundleOfSwitchgrass = 353,
     Cloak = 354,
+    WoodenMortarAndPestle = 355,
+    SandstoneMortarAndPestle = 356,
+    WroughtIronMortarAndPestle = 357,
+    IronMortarAndPestle = 358,
+    RawClayMortarAndPestle = 359,
+    ClayMortarAndPestle = 360,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -640,7 +646,8 @@ export declare enum ItemTypeGroup {
     Tinder = 861,
     Bone = 862,
     Kindling = 863,
-    Last = 864,
+    MortarAndPestle = 864,
+    Last = 865,
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -770,10 +777,7 @@ export declare enum DoodadTypeGroup {
     LitKiln = 403,
     LitWaterStill = 404,
     Anvil = 405,
-    Tree = 406,
-    Fungi = 407,
-    Wall = 408,
-    Last = 409,
+    Last = 406,
 }
 export declare enum GrowingStage {
     Germinating = 0,

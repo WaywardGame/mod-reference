@@ -33,9 +33,9 @@ export interface IDialogInfo {
     maxHeight?: number;
     maxWidth?: number;
     canResizeHeight?: boolean;
-    onOpen?: () => void;
-    onClose?: () => void;
-    onResizeStop?: () => void;
+    onOpen?(): void;
+    onClose?(): void;
+    onResizeStop?(): void;
     resizable?: boolean;
 }
 export interface IQuickSlotInfo {

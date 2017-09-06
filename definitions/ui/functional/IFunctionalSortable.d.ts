@@ -15,12 +15,12 @@ export interface ISortableOptions {
         left: number;
     };
     onlyReceive?: boolean;
-    onStart: (sortableEvent: ISortableEvent) => void;
-    onOver: (sortableEvent: ISortableEvent) => void;
-    onChange: (sortableEvent: ISortableEvent) => void;
-    onOut: (sortableEvent: ISortableEvent) => void;
-    onReceive: (sortableEvent: ISortableEvent) => void;
-    onStop: (sortableeEvent: ISortableEvent) => void;
+    onStart(sortableEvent: ISortableEvent): void;
+    onOver(sortableEvent: ISortableEvent): void;
+    onChange(sortableEvent: ISortableEvent): void;
+    onOut(sortableEvent: ISortableEvent): void;
+    onReceive(sortableEvent: ISortableEvent): void;
+    onStop(sortableeEvent: ISortableEvent): void;
 }
 export interface ISortableItem {
     element: JQuery;
@@ -31,9 +31,9 @@ export interface ISortableItem {
 }
 export interface ISortable {
     helper?: JQuery;
-    start: (event: JQueryEventObject) => void;
-    stop: () => void;
-    cancel: () => void;
-    refreshItems: () => void;
-    runAction: (action: string) => (JQuery | boolean | undefined);
+    start(event: JQueryEventObject): void;
+    stop(): void;
+    cancel(): void;
+    refreshItems(): void;
+    runAction(action: string): (JQuery | boolean | undefined);
 }

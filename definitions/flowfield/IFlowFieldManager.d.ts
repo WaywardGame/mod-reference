@@ -9,7 +9,6 @@ export interface IFlowFieldManager {
         [index: number]: IFlowField;
     };
     delete(): void;
-    getHashCodes(): string[];
     getHeight(): number;
     getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
     getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
@@ -23,4 +22,4 @@ export interface IFlowFieldManager {
     updateTile(tileX: number, tileY: number, tileZ: number): void;
 }
 export default IFlowFieldManager;
-export declare const blockedPenalty = 51;
+export declare const blockedPenalty = 11;

@@ -3,7 +3,7 @@ import BaseScreen from "ui/screens/BaseScreen";
 export interface ConfirmOptions {
     message: string;
     buttons: UiMessage[];
-    callback?: (id: number | undefined) => void;
+    callback?(id: number | undefined): void;
 }
 export default class ConfirmScreen extends BaseScreen {
     options: ConfirmOptions;

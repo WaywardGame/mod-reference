@@ -66,6 +66,7 @@ export default class WorldRenderer implements IWorldRenderer {
     };
     computeSpritesInViewport(): void;
     batchCreatures(): void;
+    private isFlyingOffset(tile);
     private batchShadow(fromX, fromY, toX, toY, t, anim);
     private batchPlayers(batchLayer);
     private batchPlayer(player, batchLayer);
