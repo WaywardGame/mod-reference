@@ -1,0 +1,33 @@
+import ILanguageManager from "ILanguageManager";
+import { Dictionary, ILanguage, ILanguageExtension, INameDescription, UiMessageStatic } from "language/ILanguage";
+export default class LanguageManager implements ILanguageManager {
+    private languages;
+    private loaded;
+    private uiTranslationsToSelector;
+    constructor();
+    add(language: ILanguage): void;
+    remove(language: ILanguage): void;
+    extendLanguage(id: number, languageName: string, extension: ILanguageExtension): void;
+    removeExtension(id: number): void;
+    getDefault(): ILanguage;
+    addTranslateSelector(id: UiMessageStatic, selector: string | string[], attribute?: string, html?: boolean, func?: (translation: string) => string): void;
+    addTranslateSelectors(...translateSelectors: Array<([UiMessageStatic, string | string[]] | [UiMessageStatic, string | string[], string] | [UiMessageStatic, string | string[], string, boolean] | [UiMessageStatic, string | string[], string, boolean, (translation: string) => string])>): void;
+    getLanguages(): ILanguage[];
+    getLanguage(name: string): ILanguage | undefined;
+    getLoaded(): ILanguage;
+    getDictionary(dictionaryName: string): Dictionary;
+    getEntry(dictionaryName: string, entryName: string): number;
+    parseTranslationId(translationId: string): [number, number, keyof INameDescription] | undefined;
+    getDefaultTranslation(translationId: string): string;
+    getDefaultTranslation(dictionary: Dictionary, entry: number): string;
+    getTranslation(translationId: string): INameDescription;
+    getTranslation(dictionary: Dictionary, entry: number): INameDescription;
+    reload(): void;
+    refreshUiTranslations(v: UiMessageStatic | string): void;
+    refreshUiTranslation(element: JQuery): void;
+    evalString(str: string): string;
+    serialize(language: ILanguage): any;
+    load(language: ILanguage): void;
+    shouldWarnOnInvalidOrMissingEntry(str?: string): boolean;
+    private setup();
+}
