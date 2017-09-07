@@ -1,7 +1,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer } from "Enums";
+import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import BaseMod from "mod/BaseMod";
@@ -158,6 +158,18 @@ export declare abstract class Mod extends BaseMod {
      * @returns The batch layer the player should render in or undefined to use the default logic
      */
     getPlayerSpriteBatchLayer(player: IPlayer, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
+    /**
+     * Called when getting the players weight movement penalty
+     * @param player The player object
+     * @returns The weight movement penalty for the player or undefined to use the default logic
+     */
+    getPlayerWeightMovementPenalty(player: IPlayer): number | undefined;
+    /**
+     * Called when getting the players weight status
+     * @param player The player object
+     * @returns The weight status of the player or undefined to use the default logic
+     */
+    getPlayerWeightStatus(player: IPlayer): WeightStatus | undefined;
     /**
      * Called when checking if a player is swimming
      * @param player The player object

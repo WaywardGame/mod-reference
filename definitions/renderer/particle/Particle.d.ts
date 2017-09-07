@@ -17,7 +17,7 @@ export default class Particle implements IParticle {
     create(tileX: number, tileY: number, tileZ: number, particle: IRGB): void;
     createMultiple(tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number): void;
     clear(): void;
-    simulate(dt: number): boolean;
+    simulate(): void;
     render(x: any, y: any): void;
     private findUnusedParticle();
     private spawn(tileX, tileY, r, g, b, count);

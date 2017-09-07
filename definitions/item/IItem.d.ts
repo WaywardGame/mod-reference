@@ -59,6 +59,8 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;
+    getStokeFireValue(): number | undefined;
+    getOnUseBonus(): number;
 }
 export interface IItemOld {
     equipped?: EquipType;

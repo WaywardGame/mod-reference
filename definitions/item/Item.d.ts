@@ -45,6 +45,8 @@ export default class Item implements IItem, IContainer, IContainable, IPropSeria
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;
+    getStokeFireValue(): number | undefined;
+    getOnUseBonus(): number;
     getSerializationProperties(_: string): string[];
     onUnserialized(): void;
     private getOwner();

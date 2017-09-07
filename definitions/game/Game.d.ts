@@ -84,6 +84,7 @@ export default class Game implements IGame {
     tileTexture: WebGLTexture;
     tileTextureSizeInversed: Vec2;
     visible: boolean;
+    private simulateInterval;
     private loadedWorld;
     private playOptions;
     constructor();
@@ -184,6 +185,7 @@ export default class Game implements IGame {
     private prePlay(isLoadingSave, options);
     private playPostSeed(options);
     private render(delta);
+    private simulate();
     private getPotentialRecipesInContainer(container, typesChecked, potentialRecipes);
     private removeAndFixPids(playerArray, pid);
     private createWorld();

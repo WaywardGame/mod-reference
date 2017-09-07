@@ -104,13 +104,13 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
-    getWeightPenalty(): number;
+    getWeightMovementPenalty(): number;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
     damage(amount: number, damageMessage: string, soundDelay?: number): void;
     damageEquipment(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     getBindDownTime(key: KeyBind): number | undefined;
-    getConsumeBonus(skillUse: SkillType, itemQuality: ItemQuality | undefined): number;
+    getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
     getEquipSlotForItem(item: IItem): EquipType | undefined;

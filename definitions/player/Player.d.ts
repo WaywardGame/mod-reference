@@ -157,7 +157,7 @@ export default class Player implements IPlayer {
     updateReputation(reputation: number): void;
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
-    getWeightPenalty(): number;
+    getWeightMovementPenalty(): number;
     checkAndRemoveBlood(): boolean;
     checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
@@ -195,7 +195,7 @@ export default class Player implements IPlayer {
     kill(): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     processInput(): void;
-    getConsumeBonus(skillUse: SkillType, itemQuality: ItemQuality | undefined): number;
+    getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
     private processMovement(turnType?);
