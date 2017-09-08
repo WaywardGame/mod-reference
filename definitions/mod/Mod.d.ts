@@ -398,7 +398,7 @@ export declare abstract class Mod extends BaseMod {
     /**
      * Called when the player is killed
      * @param player The player object
-     * @returns False to stop the player from dieing or undefined to use the default logic
+     * @returns False to stop the player from dying or undefined to use the default logic
      */
     onPlayerDeath(player: IPlayer): boolean | undefined;
     /**

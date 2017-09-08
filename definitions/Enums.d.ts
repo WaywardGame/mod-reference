@@ -580,6 +580,7 @@ export declare enum ItemType {
     IronMortarAndPestle = 358,
     RawClayMortarAndPestle = 359,
     ClayMortarAndPestle = 360,
+    CopperOre = 361,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -685,6 +686,8 @@ export declare enum TerrainType {
     RedCarpet = 27,
     Lava = 28,
     FertileDirt = 29,
+    RocksWithCopper = 30,
+    SandstoneWithCopper = 31,
 }
 export declare enum DoodadType {
     WoodenDoor = 0,
