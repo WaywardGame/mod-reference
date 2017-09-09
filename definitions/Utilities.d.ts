@@ -77,7 +77,14 @@ export declare module TileHelpers {
     function setTilled(tile: ITile, value: boolean): void;
     function setTilledRaw(data: number, value: number): number;
     function findOpenTile(start: IPointZ, checkTileCallback?: (point: IPointZ, tile: ITile) => boolean): IPointZ | undefined;
+    /**
+     * Check is a tile is open
+     */
     function isOpenTile(point: IPointZ, tile: ITile): boolean;
+    /**
+     * Check if a tile is a suitable spawn point
+     */
+    function isSuitableSpawnPointTile(point: IPointZ, tile: ITile): boolean;
 }
 export declare module WebWorkerHelpers {
     class WebWorker {
@@ -175,7 +182,7 @@ export declare module Math2 {
     function clamp255(value: number): number;
     function clamp01(value: number): number;
     function clamp(value: number, min: number, max: number): number;
-    function roundNumber(num: any, dec: any): number;
+    function roundNumber(num: number, dec: number): number;
     function lerp(from: number, to: number, t: number): number;
     function easeInQuad(time: number, start: number, change: number, duration: number): number;
     function easeInCubic(time: number, start: number, change: number, duration: number): number;

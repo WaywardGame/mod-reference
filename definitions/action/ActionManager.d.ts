@@ -12,4 +12,5 @@ export default class ActionManager implements IActionManager {
     execute(player: IPlayer, actionType: ActionType, executeArgument?: ExecuteArgument): boolean | undefined;
     executeMultiplayer(player: IPlayer, actionPacket: ActionPacket): any;
     private executeInternal(player, actionType, actionArgument);
+    private cloneActionArgument(actionArgument);
 }
