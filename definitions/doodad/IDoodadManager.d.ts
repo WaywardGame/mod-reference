@@ -7,6 +7,6 @@ export interface IDoodadManager {
     isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): boolean;
     remove(doodad: IDoodad): void;
     updateAll(): void;
-    verifyItemWeights(): void;
+    verifyAndFixItemWeights(): void;
 }
 export default IDoodadManager;
