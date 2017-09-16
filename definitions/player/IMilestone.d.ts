@@ -28,6 +28,8 @@ export declare enum MilestoneType {
     Benevolent = 26,
     Boundless = 27,
     Talented = 28,
+    Weathered = 29,
+    Seasoned = 30,
 }
 export declare enum MilestoneVisibilityType {
     Visible = 0,

@@ -212,6 +212,7 @@ export declare class Queue<T> {
 export declare function debounce(id: string, callback: () => void, timeout: number): void;
 export declare function windowKeysToObject(keys: string[]): any;
 export declare function windowKeysToParentObject(keys: string[]): any;
+export declare function objectDeepClone<T>(obj: T): T;
 export declare function getVersionInfo(version: string): IVersionInfo;
 export declare function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
 export declare function getVersionDisplayString(version?: string | IVersionInfo): string;

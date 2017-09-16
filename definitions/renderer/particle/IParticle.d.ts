@@ -10,4 +10,5 @@ export declare enum ParticleType {
     Fire = 0,
     Water = 1,
     Blood = 2,
+    Milk = 3,
 }

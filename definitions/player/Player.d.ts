@@ -198,10 +198,10 @@ export default class Player implements IPlayer {
     getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
+    updateMilestones(): void;
     private processMovement(turnType?);
     private processTimers();
     private swimCheck();
-    private updateMilestones();
     private isOnFire();
     private canTryCarve();
     private restTick();

@@ -15,10 +15,14 @@ export declare abstract class Mod extends BaseMod {
      */
     onInitialize(saveDataGlobal: any): void;
     /**
-     * Called when the mod is uninitialized (when it's disabled via the Mod Manager)
+     * Called before the mod is uninitialized (when it's disabled via the Mod Manager)
      * @returns An object containing the data you want to save (saved globally, not per slot)
      */
     onUninitialize(): any;
+    /**
+     * Called after the mod is uninitialized
+     */
+    onUninitialized(): any;
     /**
      * Called when the mod is loaded.
      * This will be called after a player starts a game (ran before resources & the world are setup)

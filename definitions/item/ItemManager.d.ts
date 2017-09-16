@@ -68,7 +68,7 @@ export default class ItemManager implements IItemManager {
     getDefaultDurability(): number;
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
-    getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number): ItemQuality | undefined;
+    getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     private updateItemOrderInternal(container, itemOrder);
     private loadReference(container);
     private removeFromContainerInternal(item);

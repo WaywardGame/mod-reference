@@ -58,6 +58,6 @@ export interface IItemManager {
     saveTileReferences(tileContainers: ITileContainer[]): void;
     spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
-    getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number): ItemQuality | undefined;
+    getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
 }
 export default IItemManager;

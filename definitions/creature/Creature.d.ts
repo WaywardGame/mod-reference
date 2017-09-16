@@ -7,6 +7,7 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     ai: AiType;
     anim: number;
     chickenEggCounter?: number;
+    goatMilkCounter?: number;
     direction: FacingDirection;
     enemy?: number;
     enemyAttempts?: number;

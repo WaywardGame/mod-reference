@@ -121,6 +121,7 @@ export declare enum LootGroupType {
     SeaTreasure = 3,
     CaveChest = 4,
     FireElemental = 5,
+    VeryHigh = 6,
 }
 export declare enum EquipType {
     None = 0,
@@ -217,6 +218,7 @@ export declare enum ActionType {
     Till = 71,
     Rename = 72,
     Harvest = 73,
+    Milk = 74,
 }
 export declare enum ItemType {
     None = 0,
@@ -581,6 +583,33 @@ export declare enum ItemType {
     RawClayMortarAndPestle = 359,
     ClayMortarAndPestle = 360,
     CopperOre = 361,
+    CopperIngot = 362,
+    CopperPickaxe = 363,
+    CopperDoubleAxe = 364,
+    CopperShovel = 365,
+    CopperSpear = 366,
+    CopperHammer = 367,
+    CopperLockPick = 368,
+    CopperShield = 369,
+    CopperGauntlets = 370,
+    CopperGreaves = 371,
+    CopperGorget = 372,
+    CopperHelmet = 373,
+    CopperBoots = 374,
+    CopperBreastPlate = 375,
+    CopperSword = 376,
+    CopperTongs = 377,
+    CopperArrow = 378,
+    CopperBullet = 379,
+    CopperArrowhead = 380,
+    CopperChest = 381,
+    CopperAnvil = 382,
+    CopperAxe = 383,
+    CopperHoe = 384,
+    CopperMortarAndPestle = 385,
+    WaterskinOfGoatMilk = 386,
+    ClayJugOfGoatMilk = 387,
+    GlassBottleOfGoatMilk = 388,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -593,7 +622,7 @@ export declare enum ItemTypeGroup {
     Meat = 807,
     Food = 808,
     Insect = 809,
-    Water = 810,
+    Liquid = 810,
     Treasure = 811,
     Rock = 812,
     Compost = 813,
@@ -648,7 +677,8 @@ export declare enum ItemTypeGroup {
     Bone = 862,
     Kindling = 863,
     MortarAndPestle = 864,
-    Last = 865,
+    Milk = 865,
+    Last = 866,
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -772,6 +802,8 @@ export declare enum DoodadType {
     Pumpkin = 79,
     SugarCaneStalks = 80,
     Wheat = 81,
+    CopperChest = 82,
+    CopperAnvil = 83,
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -957,7 +989,7 @@ export declare enum StatType {
     EnemyHealth = 0,
     Stat = 1,
     Stamina = 2,
-    Hunger = 3,
+    Metabolism = 3,
     Health = 4,
     Thirst = 5,
 }

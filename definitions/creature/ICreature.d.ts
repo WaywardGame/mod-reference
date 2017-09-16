@@ -15,6 +15,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     enemyAttempts?: number;
     happiness?: number;
     chickenEggCounter?: number;
+    goatMilkCounter?: number;
     stopNextMovement?: boolean;
     renamed?: string;
     description(): ICreatureDescription | undefined;

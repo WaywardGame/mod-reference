@@ -159,6 +159,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
+    updateMilestones(): void;
 }
 export default IPlayer;
 export interface IPlayerStatus {
@@ -239,4 +240,5 @@ export interface IPlayerTravelData {
     dehydration: number;
     originalHealth: number;
     itemId: number | undefined;
+    state: PlayerState;
 }
