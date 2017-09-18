@@ -610,6 +610,7 @@ export declare enum ItemType {
     WaterskinOfGoatMilk = 386,
     ClayJugOfGoatMilk = 387,
     GlassBottleOfGoatMilk = 388,
+    Obsidian = 389,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -718,6 +719,8 @@ export declare enum TerrainType {
     FertileDirt = 29,
     RocksWithCopper = 30,
     SandstoneWithCopper = 31,
+    CoolingLava = 32,
+    Obsidian = 33,
 }
 export declare enum DoodadType {
     WoodenDoor = 0,

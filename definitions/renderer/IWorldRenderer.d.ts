@@ -10,6 +10,7 @@ export interface IWorldRenderer {
     dirtAdaptor: TileAdaptor.Dirt;
     tillAdaptor: TileAdaptor.Till;
     waterAdaptor: TileAdaptor.Water;
+    lavaAdaptor: TileAdaptor.Lava;
     fenceAdaptor: TileAdaptor.Fence;
     mountainAdaptor: TileAdaptor.Mountain;
     wallAdaptor: TileAdaptor.Wall;

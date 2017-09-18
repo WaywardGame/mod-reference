@@ -35,6 +35,9 @@ export declare function getWaterType(terrainType: TerrainType): number;
 export declare class Water extends Default {
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
 }
+export declare class Lava extends Default {
+    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
+}
 export declare class Dirt implements ITileAdaptor {
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
 }

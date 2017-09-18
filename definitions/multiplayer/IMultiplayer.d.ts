@@ -8,7 +8,7 @@ export interface IMultiplayer {
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
-    disconnect(): void;
+    disconnect(message?: string): void;
     getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
@@ -31,6 +31,7 @@ export interface IMultiplayerOptions {
     lobbyType: LobbyType;
     difficulty: Difficulty;
     pvp: boolean;
+    maxPlayers: number | undefined;
 }
 export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;

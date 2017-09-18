@@ -110,7 +110,7 @@ export interface IModManager {
     saveAll(): void;
     setLastUpdated(index: number, lastUpdated: string): void;
     setPublishId(index: number, publishedFileId: string): void;
-    setState(index: number, state: ModState, force?: boolean, callback?: () => void): boolean;
+    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): boolean;
     setSteamIdOwner(index: number, steamIdOwner: string): void;
     setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
     setupMods(callback: () => void): void;
