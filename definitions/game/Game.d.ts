@@ -175,6 +175,7 @@ export default class Game implements IGame {
     packGround(x: number, y: number, z: number): void;
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
+    doLavaEvents(x: number, y: number, z: number): void;
     private tick();
     private processTimers();
     private processAutoSave();

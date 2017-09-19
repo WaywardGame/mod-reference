@@ -1296,3 +1296,7 @@ export declare enum ConnectionState {
     Disconnecting = 64,
     All = 127,
 }
+export interface RequirementInfo extends IPoint, IPointZ {
+    requirementsMet: boolean;
+    isLava?: boolean;
+}

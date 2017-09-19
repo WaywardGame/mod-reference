@@ -1,5 +1,5 @@
 import { IDoodad } from "doodad/IDoodad";
-import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, SentenceCaseStyle, WeightType } from "Enums";
+import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, SentenceCaseStyle, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecipe } from "item/IItem";
 import IItemManager from "item/IItemManager";
 import { Message } from "language/Messages";
@@ -36,7 +36,7 @@ export default class ItemManager implements IItemManager {
     resetMapsInContainer(container: IContainer): void;
     getTileContainer(x: number, y: number, z: number): IContainer;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
-    hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean): boolean;
+    hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean): RequirementInfo;
     isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): boolean;
     isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;

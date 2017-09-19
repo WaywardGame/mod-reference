@@ -159,6 +159,7 @@ export interface IGame extends IPropSerializable {
     updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateReputation(reputation: number): void;
     updateView(updateFov: boolean): void;
+    doLavaEvents(x: number, y: number, z: number): void;
 }
 export default IGame;
 export declare type IGameOld = Partial<IGame> & {

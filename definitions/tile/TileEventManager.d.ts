@@ -9,4 +9,5 @@ export default class TileEventManager implements ITileEventManager {
     get(tile: ITile, type: TileEventType): ITileEvent | undefined;
     canHarvest(tile: ITile): boolean;
     updateAll(): void;
+    fireOverflow(x: number, y: number, z: number): void;
 }

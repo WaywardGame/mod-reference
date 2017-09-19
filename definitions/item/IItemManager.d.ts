@@ -1,5 +1,5 @@
 import { IDoodad } from "doodad/IDoodad";
-import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, SentenceCaseStyle, WeightType } from "Enums";
+import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, SentenceCaseStyle, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecipe } from "IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -34,7 +34,7 @@ export interface IItemManager {
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
-    hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean): boolean;
+    hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     isContainer(obj: IItem | IDoodad | IContainer | ITile): obj is IContainer;
