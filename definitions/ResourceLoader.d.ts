@@ -6,7 +6,7 @@ export default class ResourceLoader implements IResourceLoader {
     private loadingInterval;
     private waitingSlots;
     private callback;
-    private maxConcurrent;
+    private readonly maxConcurrent;
     private spritePacker;
     private tilePacker;
     private subTileSize;

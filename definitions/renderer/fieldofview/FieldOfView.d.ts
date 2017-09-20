@@ -29,6 +29,7 @@ export default class FieldOfView implements IFieldOfView {
     private seed;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext, radius: number, maxRadius: number, subdivisions?: number);
+    resetGl(gl: WebGL2RenderingContext): void;
     updateRadius(radius: number, maxRadius: number): void;
     getTextureSize(): number;
     getSubdivisions(): number;
@@ -39,5 +40,4 @@ export default class FieldOfView implements IFieldOfView {
     getBounds(player: IPlayer, radius?: number): Utilities.Bound3;
     private updateExplored();
     private computeLights();
-    private resetGl();
 }

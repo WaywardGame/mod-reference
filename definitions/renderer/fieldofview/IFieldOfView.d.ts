@@ -16,7 +16,8 @@ export interface IFieldOfView {
     getBounds(player: IPlayer, radius?: number): Utilities.Bound3;
     getSubdivisions(): number;
     getTextureSize(): number;
-    updateRadius(radius: number, maxRadius: number): void;
+    resetGl(gl: WebGL2RenderingContext): void;
     tickSeed(): void;
+    updateRadius(radius: number, maxRadius: number): void;
 }
 export default IFieldOfView;

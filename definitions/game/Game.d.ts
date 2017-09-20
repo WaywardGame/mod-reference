@@ -86,8 +86,11 @@ export default class Game implements IGame {
     visible: boolean;
     private simulateInterval;
     private loadedWorld;
+    private renderingEnabled;
     private playOptions;
     constructor();
+    setupGl(restoring: boolean): void;
+    resetGl(): void;
     setGlContextSize(width: number, height: number): void;
     resizeRenderer(): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
@@ -193,7 +196,6 @@ export default class Game implements IGame {
     private createWorldRenderer();
     private loadResources();
     private initializeGameState(isTravelling?);
-    private setupWorldResources();
     private setZoomLevel();
     private postGenerateWorld(options);
     private postLoadResources();
