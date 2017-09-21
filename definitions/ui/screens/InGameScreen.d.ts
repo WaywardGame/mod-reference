@@ -214,6 +214,7 @@ export default class InGameScreen extends BaseScreen {
     toggleActionsMenu(center?: boolean): void;
     showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
     onClearMessages(): void;
+    onCopySelectedText(): void;
     onFilterInput(containerElement: JQuery): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
     getContainerId(containerElement: JQuery): string;

@@ -55,7 +55,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     getLocation(): IPointZ | undefined;
     dropInWater(player: IPlayer, x?: number, y?: number): void;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
-    placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): void;
+    placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;
