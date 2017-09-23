@@ -1,4 +1,4 @@
-import { ActionType, CreatureType, DoodadType, DoodadTypeGroup, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
+import { ActionType, BookType, CreatureType, DoodadType, DoodadTypeGroup, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";
@@ -292,21 +292,22 @@ export declare enum UiMessageStatic {
 }
 export declare enum Dictionary {
     Action = 0,
-    Corpse = 1,
-    Creature = 2,
-    Doodad = 3,
-    Growth = 4,
-    Hint = 5,
-    Item = 6,
-    KeyBind = 7,
-    Message = 8,
-    Milestone = 9,
-    OnEquip = 10,
-    Skill = 11,
-    Terrain = 12,
-    TileEvent = 13,
-    Ui = 14,
-    UiStatic = 15,
+    Book = 1,
+    Corpse = 2,
+    Creature = 3,
+    Doodad = 4,
+    Growth = 5,
+    Hint = 6,
+    Item = 7,
+    KeyBind = 8,
+    Message = 9,
+    Milestone = 10,
+    OnEquip = 11,
+    Skill = 12,
+    Terrain = 13,
+    TileEvent = 14,
+    Ui = 15,
+    UiStatic = 16,
 }
 export declare enum GrowthStageTranslation {
     Germinating = 0,
@@ -378,6 +379,9 @@ export interface ITileEventDictionary {
 export interface IUiDictionary {
     [index: number]: string;
 }
+export interface IBookDictionary {
+    [index: number]: [string, string];
+}
 export interface ILanguage {
     getName(): string;
     shouldUseAlternateFontStyle(): boolean;
@@ -386,6 +390,7 @@ export interface ILanguage {
     addPluralRule(from: string, to: string): void;
     getDictionary(dictionary: Dictionary): INameDescriptionArray;
     setDictionary(dictionary: Dictionary.Action, newEntries: IActionDictionary): void;
+    setDictionary(dictionary: Dictionary.Book, newEntries: IBookDictionary): void;
     setDictionary(dictionary: Dictionary.Corpse, newEntries: ICorpseDictionary): void;
     setDictionary(dictionary: Dictionary.Creature, newEntries: ICreatureDictionary): void;
     setDictionary(dictionary: Dictionary.Doodad, newEntries: IDoodadDictionary): void;
@@ -409,8 +414,9 @@ export interface ILanguage {
         };
     }): void;
     setEntry(dictionary: Dictionary.Action, entryIndex: ActionType, name: string, description: string): void;
-    setEntry(dictionary: Dictionary.Creature, entryIndex: CreatureType, prefix: string, name: string, description: string): void;
+    setEntry(dictionary: Dictionary.Book, entryIndex: BookType, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Corpse, entryIndex: CreatureType, prefix: string, name: string): void;
+    setEntry(dictionary: Dictionary.Creature, entryIndex: CreatureType, prefix: string, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Doodad, entryIndex: DoodadType, prefix: string, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Doodad, entryIndex: DoodadTypeGroup, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Hint, entryIndex: HintType, name: string, description: string): void;

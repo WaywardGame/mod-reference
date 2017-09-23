@@ -166,7 +166,7 @@ export declare enum ActionType {
     Sling = 19,
     Repair = 20,
     Decode = 21,
-    Read = 22,
+    Learn = 22,
     Reinforce = 23,
     Gather = 24,
     StokeFire = 25,
@@ -219,6 +219,7 @@ export declare enum ActionType {
     Rename = 72,
     Harvest = 73,
     Milk = 74,
+    Read = 75,
 }
 export declare enum ItemType {
     None = 0,
@@ -611,6 +612,10 @@ export declare enum ItemType {
     ClayJugOfGoatMilk = 387,
     GlassBottleOfGoatMilk = 388,
     Obsidian = 389,
+    OrnateBlueBook = 390,
+    Journal = 391,
+    MossCoveredBook = 392,
+    GildedRedBook = 393,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -679,7 +684,8 @@ export declare enum ItemTypeGroup {
     Kindling = 863,
     MortarAndPestle = 864,
     Milk = 865,
-    Last = 866,
+    Book = 866,
+    Last = 867,
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -825,6 +831,12 @@ export declare enum GrowingStage {
     Flowering = 4,
     Ripening = 5,
     Dead = 6,
+}
+export declare enum BookType {
+    RandomEvent = 0,
+    IslandPresence = 1,
+    Treasure = 2,
+    Deities = 3,
 }
 export declare enum CreatureType {
     Slime = 0,
@@ -1103,7 +1115,8 @@ export declare enum DialogId {
     Milestones = 5,
     Map = 6,
     Container = 7,
-    Custom = 8,
+    Book = 8,
+    Custom = 9,
 }
 export declare enum SortType {
     Name = 0,

@@ -1,5 +1,5 @@
 import { ICreature } from "creature/ICreature";
-import { ActionType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
+import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
 import IPlayer from "player/IPlayer";
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);
@@ -35,6 +35,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     quickSlot?: number;
     tatteredMap?: TatteredMap;
     legendary?: IItemLegendary;
+    book?: BookType;
     disassembly?: IItemArray;
     order?: number;
     description(): IItemDescription | undefined;

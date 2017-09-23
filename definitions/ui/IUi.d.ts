@@ -147,6 +147,7 @@ export interface IUi extends IPropSerializable {
     updateItem(item: IItem): void;
     hideActionsMenu(): void;
     openMapDialog(): void;
+    openBookDialog(title: string, content: string): void;
     closeMapDialog(): void;
     setFontStyle(): void;
     setOpacity(): void;

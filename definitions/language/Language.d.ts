@@ -1,5 +1,5 @@
-import { ActionType, CreatureType, DoodadType, DoodadTypeGroup, GrowingStage, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
-import { Dictionary, IActionDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, ILanguage, IMessageDictionary, IMilestoneDictionary, INameDescriptionArray, IOnEquipDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, IUiDictionary, UiMessageStatic } from "language/ILanguage";
+import { ActionType, BookType, CreatureType, DoodadType, DoodadTypeGroup, GrowingStage, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
+import { Dictionary, IActionDictionary, IBookDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, ILanguage, IMessageDictionary, IMilestoneDictionary, INameDescriptionArray, IOnEquipDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, IUiDictionary, UiMessageStatic } from "language/ILanguage";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";
@@ -30,6 +30,7 @@ export default class Language implements ILanguage {
     setDictionary(dictionary: Dictionary.Terrain, newEntries: ITerrainDictionary): void;
     setDictionary(dictionary: Dictionary.TileEvent, newEntries: ITileEventDictionary): void;
     setDictionary(dictionary: Dictionary.Ui, newEntries: IUiDictionary): void;
+    setDictionary(dictionary: Dictionary.Book, newEntries: IBookDictionary): void;
     setDictionary(dictionary: Dictionary, newEntries: {
         [key: number]: any;
     }): void;
@@ -56,6 +57,7 @@ export default class Language implements ILanguage {
     setEntry(dictionary: Dictionary.Terrain, entryIndex: TerrainType, prefix: string, name: string): void;
     setEntry(dictionary: Dictionary.TileEvent, entryIndex: TileEventType, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Ui, entryIndex: UiMessageStatic, name: string): void;
+    setEntry(dictionary: Dictionary.Book, entryIndex: BookType, name: string, description: string): void;
     setEntry(dictionary: Dictionary, entryIndex: number, ...entry: string[]): void;
     private formatEntry(dictionary, entry);
 }

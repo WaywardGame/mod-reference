@@ -123,6 +123,7 @@ export default class Ui implements IUi {
     hideActionsMenu(): void;
     openMapDialog(): void;
     closeMapDialog(): void;
+    openBookDialog(title: string, content: string): void;
     setFontStyle(): void;
     setOpacity(): void;
     updateKeybind(key: KeyBind, element: JQuery): void;

@@ -53,6 +53,8 @@ export default class InGameScreen extends BaseScreen {
     elementDialogMessagesContainer: JQuery;
     elementDialogMessagesChatInput: JQuery;
     elementDialogMap: JQuery;
+    elementDialogBook: JQuery;
+    elementDialogBookContainer: JQuery;
     elementContainers: JQuery;
     elementVersion: JQuery;
     elementContainerDialogs: JQuery[];
@@ -135,6 +137,7 @@ export default class InGameScreen extends BaseScreen {
     closeDialog(dialog: JQuery): boolean;
     openMapDialog(): void;
     closeMapDialog(): void;
+    openBookDialog(title: string, content: string): void;
     closeAllDialogs(): boolean;
     autoOpenDialog(index: string | number, element: JQuery): boolean;
     openDialogs(): void;

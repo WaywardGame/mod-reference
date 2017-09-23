@@ -1,5 +1,5 @@
 import { ICreature } from "creature/ICreature";
-import { CreatureType, EquipType, IPointZ, ItemQuality, ItemType, TatteredMap } from "Enums";
+import { BookType, CreatureType, EquipType, IPointZ, ItemQuality, ItemType, TatteredMap } from "Enums";
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
 import IPlayer from "player/IPlayer";
 import { IPropSerializable, IUnserializedCallback } from "save/ISerializer";
@@ -9,6 +9,7 @@ export default class Item implements IItem, IContainer, IContainable, IPropSeria
     equippedPid: EquipType;
     quickSlot: number;
     tatteredMap: TatteredMap;
+    book: BookType;
     legendary: IItemLegendary;
     disassembly: IItemArray;
     order: number;
