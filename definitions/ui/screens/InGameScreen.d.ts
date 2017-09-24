@@ -1,5 +1,5 @@
 import { DialogId, EquipType, FacingDirection, IBind, IMessagePack, ItemType, SortType, StatType } from "Enums";
-import { IContainer, IDismantleComponent, IItem } from "item/IItem";
+import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
@@ -173,6 +173,7 @@ export default class InGameScreen extends BaseScreen {
     tooltipHide(): void;
     onTooltipClose(): void;
     getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: string | undefined): string;
+    additionalRequirements(itemType: ItemType, recipe: IRecipe): string;
     getTooltipHtmlForTile(tile: ITile): string;
     displayMessagePack(messagePack: IMessagePack): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;

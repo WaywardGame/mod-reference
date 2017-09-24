@@ -837,6 +837,8 @@ export declare enum BookType {
     IslandPresence = 1,
     Treasure = 2,
     Deities = 3,
+    PastCivilizations = 4,
+    SandCasting = 5,
 }
 export declare enum CreatureType {
     Slime = 0,
