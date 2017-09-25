@@ -35,11 +35,11 @@ export default class Steamworks implements ISteamworks {
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;
     setupMods(callback: () => void): void;
-    getSteamId(): ISteamId;
+    getSteamId(): ISteamId | undefined;
     getFriends(): ISteamFriend[] | undefined;
     getScreenName(): string | undefined;
     getBetaName(): string;
-    getPublishedMods(): IWorkshopItem[];
+    getPublishedMods(): IWorkshopItem[] | undefined;
     setRichPresence(key: string, value: string): boolean;
     clearRichPresence(): void;
     createLobby(type: LobbyType): void;

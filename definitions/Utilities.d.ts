@@ -163,6 +163,7 @@ export declare module Enums {
     function allocate(modIndex: number, id: EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): IEnumInfo | undefined;
     function unallocate(enumInfo: IEnumInfo): void;
     function unallocateMod(modIndex: number): void;
+    function findKey(enumObject: any, keyToFind: string): number | undefined;
     function getKeys(enumObject: any): string[];
     function getLength(enumObject: any): number;
     function getRandomIndex(enumObject: any): number;

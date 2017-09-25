@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Command, Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import IOptions from "game/IOptions";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -55,7 +55,6 @@ export interface IGame extends IPropSerializable {
     spawnCoords: IPointZ;
     contaminatedWater: IPointZ[];
     fadeInAmount: number;
-    lastPlayedVersion: string | undefined;
     time: TimeManager;
     absoluteTime: number;
     isRealTime: boolean;
@@ -66,9 +65,7 @@ export interface IGame extends IPropSerializable {
     crafted: {
         [index: number]: ICrafted;
     };
-    highscores: IHighscore[];
     seeds: ISeeds;
-    playedCount: number;
     visible: boolean;
     spriteTexture: WebGLTexture;
     spriteTextureSizeInversed: Vec2;
@@ -89,9 +86,9 @@ export interface IGame extends IPropSerializable {
     directionToMovement(direction: FacingDirection): IPoint;
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     enableFlowFieldDebug(): void;
+    executeCommand(command: Command, args?: string): void;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
     getAmbientLightLevel(z: number): number;
-    getTactics(): number;
     getBenignity(): number;
     getBlackness(): number;
     getCompletedMilestoneCount(): number;
@@ -100,6 +97,7 @@ export interface IGame extends IPropSerializable {
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number;
+    getTactics(): number;
     getMovementFinishTime(): number;
     getName(object: IItem | ICreature | IDoodad | IPlayer | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
@@ -168,6 +166,9 @@ export declare type IGameOld = Partial<IGame> & {
     monsters: ICreature[];
     tamedCreatures: number[];
     options: IOptions;
+    lastPlayedVersion: string | undefined;
+    highscores: IHighscore[];
+    playedCount: number;
 };
 export interface IPlayOptions {
     seed?: string | number;

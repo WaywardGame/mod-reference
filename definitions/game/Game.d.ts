@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Command, Difficulty, FacingDirection, FireType, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -69,9 +69,6 @@ export default class Game implements IGame {
     };
     tileEvents: ITileEvent[];
     time: TimeManager;
-    lastPlayedVersion: string;
-    highscores: IHighscore[];
-    playedCount: number;
     cartographyTexture: WebGLTexture;
     debugRenderer: ITextureDebugRenderer;
     glContext: WebGL2RenderingContext | null;
@@ -151,6 +148,7 @@ export default class Game implements IGame {
      */
     updateCraftTableAndWeight(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
+    executeCommand(command: Command, args?: string): void;
     getPlayerAtTile(tile: ITile, includeGhosts?: boolean): IPlayer | undefined;
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean): IPlayer | undefined;
     getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];

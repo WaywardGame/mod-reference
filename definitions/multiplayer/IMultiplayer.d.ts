@@ -9,6 +9,8 @@ export interface IMultiplayer {
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
     disconnect(message?: string): void;
+    getBannedPlayers(): string[];
+    setBanned(identifier: string, ban: boolean): boolean;
     getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;

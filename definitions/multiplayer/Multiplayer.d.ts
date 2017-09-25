@@ -33,6 +33,8 @@ export default class Multiplayer implements IMultiplayer {
     isProcessingPacket(): boolean;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
+    getBannedPlayers(): string[];
+    setBanned(identifier: string, ban: boolean): boolean;
     createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
     joinServer(channel: string, playerOptions?: IPlayerOptions): void;
     disconnect(message?: string, callback?: () => void): void;

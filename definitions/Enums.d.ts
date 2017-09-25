@@ -225,7 +225,7 @@ export declare enum ItemType {
     None = 0,
     Amber = 1,
     AnimalSkull = 2,
-    Arrow = 3,
+    StoneArrow = 3,
     StoneArrowhead = 4,
     PileOfAsh = 5,
     BarkLeggings = 6,
@@ -616,6 +616,7 @@ export declare enum ItemType {
     Journal = 391,
     MossCoveredBook = 392,
     GildedRedBook = 393,
+    ArrowShaft = 394,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -973,6 +974,15 @@ export declare enum SfxType {
     Click = 20,
     Damaged = 21,
     Chat = 22,
+}
+export declare enum Command {
+    Commands = 0,
+    Players = 1,
+    Ping = 2,
+    Kick = 3,
+    Banned = 4,
+    Ban = 5,
+    Unban = 6,
 }
 export declare const equipTypeToMessage: Message[];
 export declare const recipeLevelToMessage: Message[];

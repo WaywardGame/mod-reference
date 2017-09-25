@@ -9,11 +9,11 @@ export interface ISteamworks {
     initialize(): void;
     setOverlayWorks(ipg: boolean): void;
     setupMods(callback: () => void): void;
-    getSteamId(): ISteamId;
+    getSteamId(): ISteamId | undefined;
     getScreenName(): string | undefined;
     getFriends(): ISteamFriend[] | undefined;
     getBetaName(): string;
-    getPublishedMods(): IWorkshopItem[];
+    getPublishedMods(): IWorkshopItem[] | undefined;
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     publishMod(modIndex: number, callback: (err: string | undefined, publishedFileId?: string) => void): void;

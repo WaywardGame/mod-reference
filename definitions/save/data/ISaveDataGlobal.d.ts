@@ -1,3 +1,4 @@
+import { IHighscore } from "Enums";
 import { ICrafted } from "game/IGame";
 import IOptions from "game/IOptions";
 import { ModState } from "mod/IModManager";
@@ -8,6 +9,9 @@ export interface ISaveDataGlobal {
     gameCrafted: {
         [index: number]: ICrafted;
     };
+    gameLastPlayedVersion: string;
+    gameHighscores: IHighscore[];
+    gamePlayedCount: number;
     playerMilestoneData: {
         [index: number]: IMilestoneData | undefined;
     };
@@ -27,5 +31,6 @@ export interface ISaveDataGlobal {
     savedDialogInfo: {
         [index: string]: IDialogInfo;
     };
+    multiplayerBannedPlayers: string[];
 }
 export default ISaveDataGlobal;

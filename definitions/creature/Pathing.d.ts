@@ -5,4 +5,4 @@ export interface IPathfindingResult {
     end: IPathfindingNode;
     path: IPathfindingNode[];
 }
-export declare function findPath(canMoveCheck: (x: number, y: number) => boolean, result: IPathfindingResult): boolean;
+export declare function findPath(canMoveCheck: (x: number, y: number) => boolean, result: IPathfindingResult, maxNodesChecked?: number): boolean;
