@@ -48,17 +48,20 @@ export interface ISteamworks {
     createLobby(type: LobbyType): void;
     leaveLobby(): void;
     joinLobby(lobbyId: string): void;
+    getLobbyMembers(): ISteamFriend[] | undefined;
     importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
 }
 export default ISteamworks;
 export interface ISteamId {
     accountId: number;
     screenName: string;
+    steamId: string;
     staticAccountId: string;
 }
 export interface ISteamFriend {
     name?: string;
     steamId: string;
+    staticAccountId: string;
     gameId?: string;
     lobbyId?: string;
 }

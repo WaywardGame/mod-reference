@@ -45,6 +45,7 @@ export default class Steamworks implements ISteamworks {
     createLobby(type: LobbyType): void;
     leaveLobby(): void;
     joinLobby(lobbyId: string): void;
+    getLobbyMembers(): ISteamFriend[] | undefined;
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     publishMod(modIndex: number, callback: (err?: string, publishedFileId?: string) => void): void;

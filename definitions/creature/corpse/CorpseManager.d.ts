@@ -7,4 +7,5 @@ export default class CorpseManager implements ICorpseManager {
     getResources(corpse: ICorpse): ItemType[];
     remove(corpse: ICorpse): void;
     createBlood(x: number, y: number, z: number): void;
+    getCorpsesString(corpses: ICorpse[]): string;
 }
