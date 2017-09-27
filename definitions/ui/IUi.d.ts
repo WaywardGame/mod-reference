@@ -18,7 +18,7 @@ export interface IUiScreen {
     onMouseMove(event: JQueryEventObject): void;
     onMouseScroll(event: JQueryEventObject): void;
     onKeyDown(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
-    onKeyUp(event: JQueryEventObject): boolean | undefined;
+    onKeyUp(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
 }
 export interface IDialogInfo {
     id?: string;

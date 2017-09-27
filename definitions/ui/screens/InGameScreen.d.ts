@@ -95,7 +95,7 @@ export default class InGameScreen extends BaseScreen {
     unbindElements(): void;
     bindSortable(element: JQuery): void;
     onKeyDown(_: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
-    onKeyUp(event: JQueryEventObject): boolean | undefined;
+    onKeyUp(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
     runBind(bind: IBind): boolean | undefined;
     pressHotKey(hotKeyNumber: number): boolean;
     useQuickSlot(slot: number): boolean;

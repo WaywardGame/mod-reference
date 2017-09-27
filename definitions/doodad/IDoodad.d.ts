@@ -12,6 +12,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, P
     blocksMove(): boolean;
     canGather(player: IPlayer): boolean;
     isGatherable(player: IPlayer): boolean;
+    isEmbers(): boolean;
     canHarvest(player: IPlayer): boolean;
     canPickup(player: IPlayer): boolean;
     causeStatus(player: IPlayer): void;
