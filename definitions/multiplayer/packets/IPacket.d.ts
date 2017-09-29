@@ -26,13 +26,14 @@ export interface IPacket {
 }
 export declare enum NetworkPropertyType {
     Bool = 0,
-    Uint8 = 1,
-    Uint16 = 2,
-    Float64 = 3,
-    Uint32NumberArray = 4,
-    String = 5,
-    Container = 6,
-    Generic = 7,
+    Int8 = 1,
+    Uint8 = 2,
+    Uint16 = 3,
+    Float64 = 4,
+    Uint32NumberArray = 5,
+    String = 6,
+    Container = 7,
+    Generic = 8,
 }
 export interface INetworkedProperty {
     key: string;

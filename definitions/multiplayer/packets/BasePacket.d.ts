@@ -17,6 +17,8 @@ export default abstract class BasePacket {
     constructor(connection?: IConnection);
     getId(): number;
     abstract getType(): PacketType;
+    protected readInt8(): number;
+    protected writeInt8(value: number): void;
     protected readUint8(): number;
     protected writeUint8(value: number): void;
     protected readUint16(): number;
