@@ -1,4 +1,4 @@
-import { DialogId, EquipType, FacingDirection, IBind, IMessagePack, ItemType, SortType, StatType } from "Enums";
+import { ActionType, DialogId, EquipType, FacingDirection, IBind, IMessagePack, ItemType, SortType, StatType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -99,6 +99,7 @@ export default class InGameScreen extends BaseScreen {
     runBind(bind: IBind): boolean | undefined;
     pressHotKey(hotKeyNumber: number): boolean;
     useQuickSlot(slot: number): boolean;
+    runQuickslot(item: IItem, actionType: ActionType): void;
     onChatEnter(chatElement: JQuery): void;
     displayChatMessage(player: IPlayer, message: string): void;
     isSorting(): boolean;
@@ -159,6 +160,7 @@ export default class InGameScreen extends BaseScreen {
     showItemContextMenu(element: JQuery, isContainer?: boolean): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
     runContextMenuAction(itemId: number, containerId: number | undefined, action: IContextMenuAction, skipSound?: boolean): boolean;
+    private runAction(itemId, containerId, action, skipSound?);
     onInventoryItemRightClick(element: JQuery, bypassAll?: boolean): void;
     onContainerItemRightClick(element: JQuery, bypassAll?: boolean): void;
     onCraftingItemClick(element: JQuery): void;
