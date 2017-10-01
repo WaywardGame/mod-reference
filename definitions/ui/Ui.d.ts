@@ -96,6 +96,7 @@ export default class Ui implements IUi {
     isOptionsOverlayEnabled(): boolean;
     showTitleScreen(): void;
     refreshSlots(): void;
+    hideConfirmDialog(): void;
     displayConfirmDialog(message: string | UiMessage, buttons: UiMessage[], callback?: (selection: UiMessage) => void, force?: boolean): void;
     displayInputDialog(message: UiMessage, buttonText: UiMessage, inputText: string, placeholder: string, callback?: (input: string) => void): void;
     displayHint(player: IPlayer | undefined, hintType: HintType, force?: boolean): boolean;

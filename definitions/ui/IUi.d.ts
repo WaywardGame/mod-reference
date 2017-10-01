@@ -74,6 +74,7 @@ export interface IUi extends IPropSerializable {
     toggleOptions(): void;
     showOptionsScreen(): void;
     hideOptionsScreen(): void;
+    hideConfirmDialog(): void;
     onWindowResize(): void;
     resetHelpHeight(): void;
     updateWindowMode(): void;

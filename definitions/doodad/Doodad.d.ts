@@ -40,7 +40,7 @@ export default class Doodad implements IDoodad, IPropSerializable, IUnserialized
     getDurabilityMessage(this: IDoodad): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
     getInspect(): IInspect[];
-    damage(forceBreak?: boolean, isTrample?: boolean): void;
+    damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
