@@ -36,5 +36,6 @@ export declare enum HintType {
     Combat = 29,
     Quickslots = 30,
     ResourceGathering = 31,
-    Last = 32,
+    Multiplayer = 32,
+    Last = 33,
 }

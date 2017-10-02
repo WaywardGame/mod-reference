@@ -121,6 +121,7 @@ export default class Ui implements IUi {
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];
     updateItem(item: IItem): void;
+    hideContextMenu(): void;
     hideActionsMenu(): void;
     openMapDialog(): void;
     closeMapDialog(): void;

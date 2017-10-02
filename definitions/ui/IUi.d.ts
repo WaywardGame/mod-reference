@@ -146,6 +146,7 @@ export interface IUi extends IPropSerializable {
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];
     updateItem(item: IItem): void;
+    hideContextMenu(): void;
     hideActionsMenu(): void;
     openMapDialog(): void;
     openBookDialog(title: string, content: string): void;

@@ -28,6 +28,7 @@ export interface IOptions {
     warnOnDangerousActions: boolean;
     warnWhenBreakingItems: boolean;
     warnWhenBreakingItemsOnCraft: boolean;
+    alwaysShowMoreInformation: boolean;
     windowMode: boolean;
     worldTooltips: boolean;
     zoomFactor: number;
