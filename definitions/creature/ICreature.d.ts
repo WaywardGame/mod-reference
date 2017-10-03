@@ -21,7 +21,8 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectMessage(player: IPlayer): IMessagePack;
+    getInspectHealthMessage(player: IPlayer): IMessagePack;
+    getInspectResistVulnerabilityMessage(player: IPlayer): IMessagePack | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     damage(damageInfo: IDamageInfo): number | undefined;
     isTamed(): boolean;

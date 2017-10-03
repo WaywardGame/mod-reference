@@ -34,7 +34,8 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectMessage(player: IPlayer): IMessagePack;
+    getInspectHealthMessage(player: IPlayer): IMessagePack;
+    getInspectResistVulnerabilityMessage(player: IPlayer): IMessagePack | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     isTamed(): boolean;
     tame(player: IPlayer): boolean;
