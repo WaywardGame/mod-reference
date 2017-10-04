@@ -407,13 +407,12 @@ export declare abstract class Mod extends BaseMod {
     onPlayerDeath(player: IPlayer): boolean | undefined;
     /**
      * Called when a player joins the server
-     * Note: This hook is not called for the player who joined the server (player will never === localPlayer)
      * @param player The player object
      */
     onPlayerJoin(player: IPlayer): void;
     /**
      * Called when a player leaves the server
-     * Note: This hook is not called for the player who joined the server (player will never === localPlayer)
+     * Note: This hook is not called for the player who left the server (player will never be localPlayer)
      * @param player The player object
      */
     onPlayerLeave(player: IPlayer): void;

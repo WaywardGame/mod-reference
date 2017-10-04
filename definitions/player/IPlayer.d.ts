@@ -41,6 +41,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     id: number;
     identifier: string;
     inventory: IContainer;
+    isConnecting: boolean;
     isMoving: boolean;
     isMovingClientside: boolean;
     lightBonus: number;

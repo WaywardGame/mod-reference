@@ -63,7 +63,7 @@ export default class Multiplayer implements IMultiplayer {
     private displayJoinServerRetryDialog();
     private setupConnection(connection);
     private onIceConnectionStateChange(connection, event);
-    private onNegotiationNeeded(connection, event);
+    private onNegotiationNeeded(connection, event?);
     private onDescriptionCreated(connection, description);
     private onDataChannelReceived(connection, event);
     private onDataChannelChanged(connection, event);

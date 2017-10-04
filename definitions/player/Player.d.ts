@@ -39,6 +39,7 @@ export default class Player implements IPlayer {
     id: number;
     identifier: string;
     inventory: IContainer;
+    isConnecting: boolean;
     isMoving: boolean;
     lightBonus: number;
     malignity: number;
@@ -209,4 +210,5 @@ export default class Player implements IPlayer {
     private resetDefense();
     private calculateStats();
     private showStatsHint();
+    private staminaSyncCheck();
 }

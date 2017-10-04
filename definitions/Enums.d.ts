@@ -1317,10 +1317,9 @@ export declare enum ConnectionState {
     Connected = 2,
     QueuingPackets = 4,
     CatchingUp = 8,
-    Loaded = 16,
-    Ready = 32,
-    Disconnecting = 64,
-    All = 127,
+    Ready = 16,
+    Disconnecting = 32,
+    All = 63,
 }
 export interface RequirementInfo extends IPoint, IPointZ {
     requirementsMet: boolean;

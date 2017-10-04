@@ -104,12 +104,12 @@ export interface IGame extends IPropSerializable {
     getNearestPlayer(x: number, y: number): IPlayer | undefined;
     getOrCreateTile(x: number, y: number, z: number): ITile;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
-    getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean): IPlayer | undefined;
-    getPlayerAtTile(tile: ITile, includeGhosts?: boolean): IPlayer | undefined;
+    getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer | undefined;
+    getPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer | undefined;
     getPlayerByIdentifier(identifier: string): IPlayer | undefined;
     getPlayerByName(name: string): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
-    getPlayers(includeGhosts?: boolean): IPlayer[];
+    getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getReputation(): number;
     getReputationMessage(): string;
