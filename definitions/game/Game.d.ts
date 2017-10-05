@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Command, Difficulty, FacingDirection, FireType, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Command, Difficulty, FacingDirection, FireType, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType, IMessagePack } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -177,6 +177,7 @@ export default class Game implements IGame {
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
+    getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
     private tick();
     private processTimers(realPlayers);
     private processAutoSave();

@@ -1,6 +1,6 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
+import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus, IMessagePack } from "Enums";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
@@ -125,6 +125,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     hurtHands(message: Message, damageMessage: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
+    getInspectHealthMessage(player: IPlayer): IMessagePack;
     isBindDown(key: KeyBind): boolean;
     isGhost(): boolean;
     isLocalPlayer(): boolean;

@@ -1,6 +1,6 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Delay, EquipType, FacingDirection, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
+import { Delay, EquipType, FacingDirection, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ, IMessagePack } from "Enums";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
@@ -92,6 +92,7 @@ export default class Player implements IPlayer {
     strength: number;
     swimming: boolean;
     tamedCreatures: number[];
+    travelData: IPlayerTravelData;
     turns: number;
     walkSoundCounter: number;
     weight: number;
@@ -99,7 +100,6 @@ export default class Player implements IPlayer {
     y: number;
     z: WorldZ;
     weightBonus: number;
-    travelData: IPlayerTravelData;
     isMovingClientside: boolean;
     wasAbsentPlayer: boolean;
     fromX: number;
@@ -177,6 +177,7 @@ export default class Player implements IPlayer {
     addDelay(delay: Delay, replace?: boolean): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
+    getInspectHealthMessage(player: IPlayer): IMessagePack;
     setZ(z: number): void;
     isLocalPlayer(): boolean;
     isGhost(): boolean;
@@ -210,5 +211,6 @@ export default class Player implements IPlayer {
     private resetDefense();
     private calculateStats();
     private showStatsHint();
+    private healthSyncCheck();
     private staminaSyncCheck();
 }

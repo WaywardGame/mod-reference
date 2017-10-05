@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Command, Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Command, Difficulty, FacingDirection, FireType, IHighscore, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType, IMessagePack } from "Enums";
 import IOptions from "game/IOptions";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -158,6 +158,7 @@ export interface IGame extends IPropSerializable {
     updateReputation(reputation: number): void;
     updateView(updateFov: boolean): void;
     doLavaEvents(x: number, y: number, z: number): void;
+    getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
 }
 export default IGame;
 export declare type IGameOld = Partial<IGame> & {
