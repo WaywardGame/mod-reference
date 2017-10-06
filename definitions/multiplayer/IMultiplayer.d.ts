@@ -10,7 +10,6 @@ export interface IMultiplayer {
     createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
     disconnect(message?: string): void;
     getBannedPlayers(): string[];
-    setBanned(identifier: string, ban: boolean): boolean;
     getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
@@ -24,7 +23,9 @@ export interface IMultiplayer {
     onPlaying(): void;
     sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
     sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
+    setBanned(identifier: string, ban: boolean): boolean;
     setOptions(options: IMultiplayerOptions): void;
+    suppressSyncChecks(suppress: boolean): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
     updatePlayerId(oldPid: number, newPid: number): void;
 }

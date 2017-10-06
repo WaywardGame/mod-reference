@@ -14,6 +14,7 @@ export default class World implements IWorld {
     load(): void;
     isLoaded(): boolean;
     updateAll(): void;
+    setupExploredMap(): void;
     resetExploredMap(): void;
     updateTile(x: number, y: number, z: number, tile: ITile): void;
     serializeObject(serializer: ISerializer): void;

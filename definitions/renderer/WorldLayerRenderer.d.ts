@@ -6,8 +6,8 @@ export default class WorldLayerRenderer {
     private gl;
     protected renderer: IWorldRenderer;
     private worldLayer;
-    private width;
-    private height;
+    width: number;
+    height: number;
     texLightBlock: WebGLTexture;
     texLightLevel: WebGLTexture;
     texExplored: WebGLTexture;

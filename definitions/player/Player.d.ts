@@ -1,6 +1,6 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Delay, EquipType, FacingDirection, IInspect, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ, IMessagePack } from "Enums";
+import { Delay, EquipType, FacingDirection, IInspect, IMessagePack, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
 import IOptions from "game/IOptions";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
@@ -8,6 +8,7 @@ import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayer, IPlayerCustomization, IPlayerStatus, IPlayerTravelData, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
+import { IExploreMap } from "renderer/IExploreMap";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
@@ -33,6 +34,7 @@ export default class Player implements IPlayer {
     equipped: {
         [index: number]: number;
     };
+    exploredMapEncodedData: number[][];
     facingDirection: FacingDirection;
     handToUse: EquipType;
     hintSeen: boolean[];
@@ -92,14 +94,15 @@ export default class Player implements IPlayer {
     strength: number;
     swimming: boolean;
     tamedCreatures: number[];
-    travelData: IPlayerTravelData;
+    travelData: IPlayerTravelData | undefined;
     turns: number;
     walkSoundCounter: number;
     weight: number;
     x: number;
     y: number;
     z: WorldZ;
-    weightBonus: number;
+    exploredMap: IExploreMap[] | undefined;
+    exploredMapNotSaved: IExploreMap[] | undefined;
     isMovingClientside: boolean;
     wasAbsentPlayer: boolean;
     fromX: number;
@@ -152,6 +155,8 @@ export default class Player implements IPlayer {
     getMaxHealth(): number;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
     setup(completedMilestones: number): void;
+    preSerializeObject(): void;
+    restoreExploredMap(): void;
     getSerializationProperties(_: string): string[];
     shakeStat(statType: StatType): void;
     staminaReduction(skillType: SkillType): void;

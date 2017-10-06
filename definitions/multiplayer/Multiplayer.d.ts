@@ -24,6 +24,7 @@ export default class Multiplayer implements IMultiplayer {
     private _currentSyncPacketsProcessing;
     private _syncCheckStack;
     private _activeSyncCheck;
+    private _syncChecksSuppressed;
     private _disconnectingFromSyncIssue;
     constructor();
     isConnected(): boolean;
@@ -46,6 +47,7 @@ export default class Multiplayer implements IMultiplayer {
     sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
     updatePlayerId(oldPid: number, newPid: number): void;
+    suppressSyncChecks(suppress: boolean): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addAfterSyncChecks(packet: IPacket): void;

@@ -11,6 +11,7 @@ export interface IWorld extends ISerializable {
     load(): void;
     isLoaded(): boolean;
     updateAll(): void;
+    setupExploredMap(): void;
     resetExploredMap(): void;
     updateTile(x: number, y: number, z: number, tile: ITile): void;
 }
