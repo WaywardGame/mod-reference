@@ -1,6 +1,6 @@
 import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
-import { ICreature } from "creature/ICreature";
+import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Command, Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
@@ -148,6 +148,7 @@ export default class Game implements IGame {
      */
     updateCraftTableAndWeight(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
+    damage(target: IPlayer | ICreature, damageInfo: IDamageInfo): number | undefined;
     executeCommand(command: Command, args?: string): void;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer | undefined;

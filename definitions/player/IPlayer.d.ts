@@ -1,4 +1,4 @@
-import { ICreature } from "creature/ICreature";
+import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IMessagePack, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
 import IOptions from "game/IOptions";
@@ -108,7 +108,8 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     checkWeight(): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
-    damage(amount: number, damageMessage: string, soundDelay?: number): void;
+    damage(damageInfo: IDamageInfo): number | undefined;
+    damage(amount: number, damageMessage: string, soundDelay?: number): number | undefined;
     damageEquipment(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     getBindDownTime(key: KeyBind): number | undefined;

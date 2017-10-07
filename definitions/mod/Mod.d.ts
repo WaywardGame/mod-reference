@@ -318,7 +318,6 @@ export declare abstract class Mod extends BaseMod {
     onKeyUp(event: JQueryEventObject): boolean | undefined;
     /**
      * Called when a creature is damaged
-     * @param player The player object
      * @param creature The creature object
      * @param damageInfo The damage info object
      * @returns The amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
@@ -392,13 +391,12 @@ export declare abstract class Mod extends BaseMod {
      */
     onPickupDoodad(player: IPlayer, doodad: IDoodad): void;
     /**
-     * Called when the player takes damage
+     * Called when a player is damaged
      * @param player The player object
-     * @param amount The amount of damage taken
-     * @param damageMessage The message associated with the damaged
-     * @returns False to stop the player from taking damage or undefined to use the default logic
+     * @param damageInfo The damage info object
+     * @returns The amount of damage the player should take (the player will take this damage) or undefined to use the default logic
      */
-    onPlayerDamage(player: IPlayer, amount: number, damageMessage: string): boolean | undefined;
+    onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     /**
      * Called when the player is killed
      * @param player The player object

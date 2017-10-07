@@ -1,4 +1,5 @@
 import { IPlayerOptions } from "game/IGame";
+import { UiMessage } from "language/ILanguage";
 import { IConnection, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
 import { IPacket } from "multiplayer/packets/IPacket";
 import IPlayer from "player/IPlayer";
@@ -39,7 +40,8 @@ export default class Multiplayer implements IMultiplayer {
     createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
     joinServer(channel: string, playerOptions?: IPlayerOptions): void;
     disconnect(message?: string, callback?: () => void): void;
-    kick(player: IPlayer): void;
+    disconnectAndResetGameState(uiMessage: UiMessage): void;
+    kick(player: IPlayer, uiMessage: UiMessage): void;
     onPlaying(): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     getClients(): IConnection[];
@@ -53,7 +55,6 @@ export default class Multiplayer implements IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     private addDefaultSyncChecks();
     private getPacketSyncChecks();
-    private disconnectAndResetGameState(uiMessage);
     private connectMatchmakingServer(channel);
     private disconnectMatchmakingServer();
     private onMatchmakingServerConnected();

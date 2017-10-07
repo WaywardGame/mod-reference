@@ -1,4 +1,5 @@
 import { CreatureType, DamageType, Defense, FacingDirection, IMessagePack, IModdable, IObject, IPointZ, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, SfxType, StatusType } from "Enums";
+import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
 export interface ICreature extends IObject<CreatureType>, IPointZ {
     fromX: number;
@@ -30,6 +31,8 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     release(): boolean;
     pet(): boolean;
     skipNextUpdate(): void;
+    onUnserialized(): void;
+    offer(items: IItem[]): IItem | undefined;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
@@ -116,4 +119,7 @@ export interface IDamageInfo {
     weaponName?: string;
     creature?: ICreature;
     skipMilestones?: boolean;
+    legacy?: boolean;
+    damageMessage?: string;
+    soundDelay?: number;
 }

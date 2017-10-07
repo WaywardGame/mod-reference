@@ -1,5 +1,6 @@
 import { ConnectionState, Difficulty } from "Enums";
 import { ICrafted, IPlayerOptions } from "game/IGame";
+import { UiMessage } from "language/ILanguage";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
@@ -9,6 +10,7 @@ export interface IMultiplayer {
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
     disconnect(message?: string): void;
+    disconnectAndResetGameState(uiMessage: UiMessage): void;
     getBannedPlayers(): string[];
     getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
@@ -18,7 +20,7 @@ export interface IMultiplayer {
     isReady(): boolean;
     isServer(): boolean;
     joinServer(serverId: string, playerOptions?: IPlayerOptions): void;
-    kick(player: IPlayer): void;
+    kick(player: IPlayer, uiMessage: UiMessage): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
     sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;

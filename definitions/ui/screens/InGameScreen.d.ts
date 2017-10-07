@@ -160,7 +160,6 @@ export default class InGameScreen extends BaseScreen {
     showItemContextMenu(element: JQuery, isContainer?: boolean): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
     runContextMenuAction(itemId: number, containerId: number | undefined, action: IContextMenuAction, skipSound?: boolean): boolean;
-    private runAction(itemId, containerId, action, skipSound?);
     onInventoryItemRightClick(element: JQuery, bypassAll?: boolean): void;
     onContainerItemRightClick(element: JQuery, bypassAll?: boolean): void;
     onCraftingItemClick(element: JQuery): void;
@@ -234,6 +233,7 @@ export default class InGameScreen extends BaseScreen {
     refreshButtonTooltip(button: JQuery): void;
     removeButton(button: JQuery): void;
     onUpdateDirection(): void;
+    private runAction(itemId, containerId, action, skipSound?);
     private updateContextMenu(contextMenu);
     private onOpenMessages();
     private getMessagesHtml();

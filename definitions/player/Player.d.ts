@@ -1,4 +1,4 @@
-import { ICreature } from "creature/ICreature";
+import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Delay, EquipType, FacingDirection, IInspect, IMessagePack, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
 import IOptions from "game/IOptions";
@@ -130,7 +130,7 @@ export default class Player implements IPlayer {
     checkSkillMilestones(): void;
     staminaCheck(): boolean;
     addMilestone(milestone: MilestoneType, data?: number): void;
-    damage(amount: number, damageMessage: string, soundDelay?: number): void;
+    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: string, soundDelay?: number): number | undefined;
     calculateEquipmentStats(): void;
     canCarve(): IItem | undefined;
     canRelease(creature: ICreature): boolean;

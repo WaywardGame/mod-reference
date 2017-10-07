@@ -1009,7 +1009,6 @@ export declare enum Delay {
     Movement = 11,
     ShortPause = 13,
     Collision = 40,
-    HotKey = 20,
     RealTimeTick = 40,
     TurnDirection = 2,
 }

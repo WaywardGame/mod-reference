@@ -1,5 +1,6 @@
 import { AiType, ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature";
 import { CreatureType, FacingDirection, IMessagePack, ItemType, MoveType, SfxType } from "Enums";
+import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
 import { IPropSerializable, IUnserializedCallback } from "save/ISerializer";
 export default class Creature implements ICreature, IPropSerializable, IUnserializedCallback {
@@ -55,6 +56,7 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     damage(damageInfo: IDamageInfo): number | undefined;
     getSerializationProperties(_: string): string[];
     onUnserialized(): void;
+    offer(items: IItem[]): IItem | undefined;
     private findPath(result);
     private checkCreatureMove(tileX, tileY, tileZ, moveType, isFinalMove?, ignorePlayer?);
     private findPlayersWithinRadius(x, y, z, radius);
