@@ -31,7 +31,7 @@ export default class ItemManager implements IItemManager {
     /**
      * Drop items in a 3x3 square around the location
      */
-    placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number): void;
+    placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
     spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     resetMapsInContainer(container: IContainer): void;
     getTileContainer(x: number, y: number, z: number): IContainer;

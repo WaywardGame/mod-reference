@@ -50,7 +50,7 @@ export interface IItemManager {
     moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): void;
     moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): void;
     moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): void;
-    placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number): void;
+    placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     remove(item: IItem): void;
     removeContainerItems(container: IContainer): void;

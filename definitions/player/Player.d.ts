@@ -133,7 +133,7 @@ export default class Player implements IPlayer {
     damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: string, soundDelay?: number): number | undefined;
     calculateEquipmentStats(): void;
     canCarve(): IItem | undefined;
-    canRelease(creature: ICreature): boolean;
+    hasTamedCreature(creature: ICreature): boolean;
     canJump(): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     getHandToUse(): EquipType | undefined;

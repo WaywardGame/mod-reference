@@ -102,7 +102,7 @@ export interface IGame extends IPropSerializable {
     getMovementFinishTime(): number;
     getName(object: IItem | ICreature | IDoodad | IPlayer | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
-    getNearestPlayer(x: number, y: number): IPlayer | undefined;
+    getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
     getOrCreateTile(x: number, y: number, z: number): ITile;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer | undefined;

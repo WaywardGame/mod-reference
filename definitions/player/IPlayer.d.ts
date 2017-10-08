@@ -96,7 +96,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     canCarve(): IItem | undefined;
     cancelResting(reason: RestCancelReason): void;
     canJump(): boolean;
-    canRelease(creature: ICreature): boolean;
+    hasTamedCreature(creature: ICreature): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkAndRemoveBlood(): boolean;
     checkForGather(): IDoodad | undefined;

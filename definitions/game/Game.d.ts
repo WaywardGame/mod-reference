@@ -155,7 +155,7 @@ export default class Game implements IGame {
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer | undefined;
     getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
-    getNearestPlayer(x: number, y: number): IPlayer | undefined;
+    getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayerByIdentifier(identifier: string): IPlayer | undefined;
     getPlayerByName(name: string, ignoreCase?: boolean): IPlayer | undefined;

@@ -75,14 +75,15 @@ export declare enum MultiplayerSyncCheck {
     ItemWeight = 14,
     LastCreationIds = 15,
     PenaltyFieldHashCode = 16,
-    PlayerPositions = 17,
-    Players = 18,
-    Seed = 19,
-    StaminaChanges = 20,
-    Stats = 21,
-    Temp = 22,
-    Ticks = 23,
-    Weight = 24,
+    PlaceOnTile = 17,
+    PlayerPositions = 18,
+    Players = 19,
+    Seed = 20,
+    StaminaChanges = 21,
+    Stats = 22,
+    Temp = 23,
+    Ticks = 24,
+    Weight = 25,
 }
 export interface IMultiplayerWorldData {
     pid: number;
