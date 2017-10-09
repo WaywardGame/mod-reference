@@ -104,8 +104,8 @@ export default class Game implements IGame {
     gameLoop: (timeStamp: any) => void;
     saveGame(saveType: SaveType, callback?: (slot?: number, bytes?: number, saveObject?: SaveObject) => void): void;
     addZoomLevel(amount: number): void;
-    getFireMessage(decay?: number): Message;
-    outputFireMessage(player: IPlayer, decay?: number): void;
+    getFireMessage(decay?: number, isOpenFire?: boolean): Message;
+    outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     play(saveSlot: number, options?: IPlayOptions): void;
     addPlayer(playerOptions?: IPlayerOptions): IPlayer;
     removePlayer(pid: number): void;

@@ -94,7 +94,7 @@ export interface IGame extends IPropSerializable {
     getBlackness(): number;
     getCompletedMilestoneCount(): number;
     getDifficulty(): Difficulty;
-    getFireMessage(decay?: number): Message;
+    getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number;
@@ -132,7 +132,7 @@ export interface IGame extends IPropSerializable {
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
-    outputFireMessage(player: IPlayer, decay?: number): void;
+    outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     packGround(x: number, y: number, z: number): void;
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;

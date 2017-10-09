@@ -96,7 +96,6 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     canCarve(): IItem | undefined;
     cancelResting(reason: RestCancelReason): void;
     canJump(): boolean;
-    hasTamedCreature(creature: ICreature): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkAndRemoveBlood(): boolean;
     checkForGather(): IDoodad | undefined;
@@ -108,8 +107,8 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     checkWeight(): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
-    damage(damageInfo: IDamageInfo): number | undefined;
     damage(amount: number, damageMessage: string, soundDelay?: number): number | undefined;
+    damage(damageInfo: IDamageInfo): number | undefined;
     damageEquipment(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     getBindDownTime(key: KeyBind): number | undefined;
@@ -123,12 +122,14 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     getMaxHealth(): number;
     getMouseDirection(): FacingDirection;
     getMovementFinishTime(): number;
+    getName(html?: boolean): string;
     getReputation(): number;
     getSerializationProperties(_: string): string[];
     getTouchDirection(): FacingDirection | undefined;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
     hasDelay(): boolean;
+    hasTamedCreature(creature: ICreature): boolean;
     hurtHands(message: Message, damageMessage: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];

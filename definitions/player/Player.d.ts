@@ -187,6 +187,7 @@ export default class Player implements IPlayer {
     isLocalPlayer(): boolean;
     isGhost(): boolean;
     isResting(): boolean;
+    getName(html?: boolean): string;
     isRestingCancelled(): boolean;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): void;

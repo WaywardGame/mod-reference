@@ -80,7 +80,6 @@ export declare enum DamageType {
     Piercing = 4,
     Fire = 8,
     True = 16,
-    Last = 32,
 }
 export declare function fullDamageType(damageType: DamageType): string;
 export declare class Resistances {
@@ -1280,12 +1279,14 @@ export declare enum RestCancelReason {
     Damaged = 1,
     FullStamina = 2,
     NearbyCreatureDamagedDoodad = 3,
+    CreatureDamaged = 4,
 }
 export declare enum FireType {
     None = 0,
     Doodad = 1,
     Fire = 2,
     Lava = 3,
+    CoolingLava = 4,
 }
 export interface IResourceItem {
     type: ItemType;
