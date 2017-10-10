@@ -177,9 +177,10 @@ export default class Player implements IPlayer {
      * Burn the player
      * @param skipMessage
      */
-    burn(skipMessage?: boolean, skipParry?: boolean): number | undefined;
+    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
+    setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     getInspectHealthMessage(player: IPlayer): IMessagePack;

@@ -91,7 +91,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     addDelay(delay: Delay, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
     attributes(): void;
-    burn(skipMessage?: boolean, skipParry?: boolean): number | undefined;
+    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     calculateEquipmentStats(): void;
     canCarve(): IItem | undefined;
     cancelResting(reason: RestCancelReason): void;
@@ -149,6 +149,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     setId(id: number): void;
     setMouseDirection(playerDirection: FacingDirection): void;
     setRaft(itemId: number | undefined): void;
+    setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setTouchDirection(playerDirection: FacingDirection | undefined): void;
     setup(completedMilestones: number): void;
     setZ(z: number): void;

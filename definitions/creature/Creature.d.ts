@@ -11,6 +11,7 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     goatMilkCounter?: number;
     direction: FacingDirection;
     enemy?: number;
+    enemyIsPlayer?: boolean;
     enemyAttempts?: number;
     fromX: number;
     fromY: number;
@@ -31,6 +32,7 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     private _movementFinishTime;
     private _inFov;
     private _description;
+    private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
@@ -53,6 +55,7 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
     canSwapWith(player: IPlayer): boolean;
+    getOwner(): IPlayer | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     getSerializationProperties(_: string): string[];
     onUnserialized(): void;

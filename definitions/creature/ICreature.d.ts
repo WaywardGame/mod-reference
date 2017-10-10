@@ -13,6 +13,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     aberrant?: boolean;
     respawned?: boolean;
     enemy?: number;
+    enemyIsPlayer?: boolean;
     enemyAttempts?: number;
     happiness?: number;
     chickenEggCounter?: number;
@@ -43,6 +44,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
     canSwapWith(player: IPlayer): boolean;
+    getOwner(): IPlayer | undefined;
 }
 export declare enum SpawnGroup {
     Any = 0,
