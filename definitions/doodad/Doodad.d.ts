@@ -13,6 +13,7 @@ export default class Doodad implements IDoodad, IPropSerializable, IUnserialized
     itemOrders?: number[];
     maxDur?: number;
     minDur?: number;
+    ownerIdentifier?: string;
     quality?: ItemQuality;
     renamed?: string;
     spread?: number;

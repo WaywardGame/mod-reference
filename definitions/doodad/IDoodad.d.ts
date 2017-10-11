@@ -34,6 +34,7 @@ export interface IDoodadOptions extends IObjectOptions {
     weight?: number;
     legendary?: IItemLegendary;
     disassembly?: IItemArray;
+    ownerIdentifier?: string;
 }
 export interface IDoodadTorchType {
     type: ItemType;
