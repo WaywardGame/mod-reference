@@ -168,9 +168,10 @@ export default class Game implements IGame {
     getSerializationProperties(_: string): string[];
     getName(object: IItem | ICreature | IDoodad | IPlayer | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
+    movementToDirection(x: number, y: number): FacingDirection;
     directionToMovement(direction: FacingDirection): IPoint;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
-    updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
+    updateOption(player: IPlayer, id: string, value: boolean | number): void;
     updateFlowFieldTile(x: number, y: number, z: number): void;
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     getCompletedMilestoneCount(): number;

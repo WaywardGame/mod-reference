@@ -88,6 +88,7 @@ export interface IModConfig {
     dependencies?: string[];
     compatibleMinorVersions: number[];
     multiplayerCompatible?: boolean;
+    multiplayerClientside?: boolean;
     hooks?: string[];
     languages?: string[];
     stylesheets?: string[];

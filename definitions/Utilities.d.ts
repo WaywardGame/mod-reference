@@ -76,7 +76,7 @@ export declare module TileHelpers {
     function isTilledRaw(data: number): boolean;
     function setTilled(tile: ITile, value: boolean): void;
     function setTilledRaw(data: number, value: number): number;
-    function findOpenTile(start: IPointZ, checkTileCallback?: (point: IPointZ, tile: ITile) => boolean): IPointZ | undefined;
+    function findMatchingTile(start: IPointZ, isMatchingTile?: (point: IPointZ, tile: ITile) => boolean): IPointZ | undefined;
     /**
      * Check is a tile is open
      */

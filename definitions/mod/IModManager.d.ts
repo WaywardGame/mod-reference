@@ -25,6 +25,7 @@ export declare enum CanLoadState {
     ReqiredModNotLoaded = 7,
     LocalModPrecedence = 8,
     IncompatibleVersion = 9,
+    DisabledInMultiplayer = 10,
 }
 export declare enum ModType {
     Internal = 0,

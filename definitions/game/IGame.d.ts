@@ -83,10 +83,11 @@ export interface IGame extends IPropSerializable {
     checkForHiddenMob(player: IPlayer, x: number, y: number, z: number): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
+    damage(target: IPlayer | ICreature, damageInfo: IDamageInfo): number | undefined;
     directionToMovement(direction: FacingDirection): IPoint;
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
+    doLavaEvents(x: number, y: number, z: number): void;
     enableFlowFieldDebug(): void;
-    damage(target: IPlayer | ICreature, damageInfo: IDamageInfo): number | undefined;
     executeCommand(command: Command, args?: string): void;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
     getAmbientLightLevel(z: number): number;
@@ -96,9 +97,10 @@ export interface IGame extends IPropSerializable {
     getDifficulty(): Difficulty;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     getHeight(z0: number, z1: number, d: number): number;
+    getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number;
-    getTactics(): number;
+    getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     getMovementFinishTime(): number;
     getName(object: IItem | ICreature | IDoodad | IPlayer | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
@@ -112,11 +114,13 @@ export interface IGame extends IPropSerializable {
     getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
+    getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getReputation(): number;
     getReputationMessage(): string;
     getSerializationProperties(_: string): string[];
     getSkillPercent(skill: SkillType): number;
     getStrength(): number;
+    getTactics(): number;
     getTile(x: number, y: number, z: number): ITile;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getTileInFrontOfPlayer(player: IPlayer): ITile;
@@ -130,12 +134,11 @@ export interface IGame extends IPropSerializable {
     isTileFullEx(tile: ITile): boolean;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
+    movementToDirection(x: number, y: number): FacingDirection;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
     outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     packGround(x: number, y: number, z: number): void;
-    getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
-    getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     play(saveSlot: number, options?: IPlayOptions): void;
     processWaterContamination(): void;
@@ -155,11 +158,9 @@ export interface IGame extends IPropSerializable {
     updateCraftTableAndWeight(): void;
     updateCraftTableAndWeightNextTick(): void;
     updateFlowFieldTile(x: number, y: number, z: number): void;
-    updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
+    updateOption(player: IPlayer, id: string, value: boolean | number): void;
     updateReputation(reputation: number): void;
     updateView(updateFov: boolean): void;
-    doLavaEvents(x: number, y: number, z: number): void;
-    getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
 }
 export default IGame;
 export declare type IGameOld = Partial<IGame> & {
