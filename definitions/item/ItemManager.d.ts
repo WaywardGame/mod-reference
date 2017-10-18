@@ -1,6 +1,6 @@
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, SentenceCaseStyle, WeightType } from "Enums";
-import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecipe } from "item/IItem";
+import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
 import IItemManager from "item/IItemManager";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -16,7 +16,8 @@ export default class ItemManager implements IItemManager {
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): void;
     removeContainerItems(container: IContainer): void;
     remove(item: IItem): void;
-    getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality | undefined): IItemArray;
+    getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;
+    getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup | IItemTypeGroup>;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality): IItem;

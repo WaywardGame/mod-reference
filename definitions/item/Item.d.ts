@@ -50,5 +50,7 @@ export default class Item implements IItem, IContainer, IContainable, IPropSeria
     getOnUseBonus(): number;
     getSerializationProperties(_: string): string[];
     onUnserialized(): void;
+    private checkIfItemsMatch(item1, item2);
+    private checkIfItemArraysMatch(arr1, arr2);
     private getOwner();
 }

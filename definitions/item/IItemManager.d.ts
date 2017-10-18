@@ -1,6 +1,6 @@
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, SentenceCaseStyle, WeightType } from "Enums";
-import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IRecipe } from "IItem";
+import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITile, ITileContainer } from "tile/ITerrain";
@@ -19,7 +19,8 @@ export interface IItemManager {
     getContainerReference(container: IContainer): ContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
-    getDisassemblyComponents(recipe: IRecipe, quality: ItemQuality | undefined): IItemArray;
+    getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;
+    getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup | IItemTypeGroup>;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
     generateLookups(): void;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number, excludeProtectedItems?: boolean): IItem | undefined;
