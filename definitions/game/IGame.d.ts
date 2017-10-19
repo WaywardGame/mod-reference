@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Command, Difficulty, FacingDirection, FireType, IHighscore, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { Difficulty, FacingDirection, FireType, IHighscore, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import IOptions from "game/IOptions";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -88,7 +88,6 @@ export interface IGame extends IPropSerializable {
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     doLavaEvents(x: number, y: number, z: number): void;
     enableFlowFieldDebug(): void;
-    executeCommand(command: Command, args?: string): void;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
     getAmbientLightLevel(z: number): number;
     getBenignity(): number;

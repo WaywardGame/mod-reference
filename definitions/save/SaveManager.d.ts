@@ -13,11 +13,11 @@ export default class SaveManager implements ISaveManager {
     save(slot: number, callback: (slot: number, bytes: number, saveObject?: SaveObject) => void): void;
     load(slot: number, callback: (slot: number, success: boolean) => void): void;
     loadPartial(slot: number, callback: (slot: number, success: boolean, saveObject: SaveObject) => void): void;
-    loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean): void;
+    loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
     loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string | undefined): any;
     savePartialData(slot: number, object: any, key: string, saveObjectKey: string, callback: (slot: number, bytes: number) => void): void;
     savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any, callback: (slot: number, bytes: number) => void): void;
-    exportSave(slot: number, callback: (slot: number, success: boolean, json: string) => void): void;
+    exportSave(slot: number, callback: (slot: number, success: boolean, json: string, saveObject: SaveObject) => void): void;
     importSave(slot: number, data: string, callback: (slot: number | undefined, bytes: number | undefined) => void): void;
     deleteSlot(slot: number, callback: (slot: number, success: boolean) => void): void;
     deleteAll(callback: () => void): void;

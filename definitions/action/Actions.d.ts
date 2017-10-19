@@ -1,5 +1,7 @@
-export default function initialize(): void;
-export interface IAction {
+import { IAction } from "action/IAction";
+import { IGenericManager } from "game/IGenericManager";
+export default function setup(actionManager: IGenericManager<IAction>): void;
+export interface IActionDescription {
     showDestroyConfirmination?: boolean;
 }
-export declare const actionDescriptions: IAction[];
+export declare const actionDescriptions: IActionDescription[];

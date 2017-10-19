@@ -3,7 +3,7 @@ export interface ISaveManager {
     decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
     deleteAll(callback: () => void): void;
     deleteSlot(slot: number, callback: (slot: number, success: boolean) => void): void;
-    exportSave(slot: number, callback: (slot: number, success: boolean, json: string) => void): void;
+    exportSave(slot: number, callback: (slot: number, success: boolean, json: string, saveObject: SaveObject) => void): void;
     getFirstFreeSlot(callback: (slot: number | undefined) => void): void;
     getSaveCount(callback: (usedCount: number, usedSlots: number[]) => void, callbackPerSlot?: (slot: number, isUsed: boolean) => void): void;
     getSaveSlots(callback: (slot: number, isUsed: boolean) => void): void;
@@ -13,7 +13,7 @@ export interface ISaveManager {
     isSlotUsed(slot: number, callback: (slot: number, isUsed: boolean) => void): void;
     load(slot: number, callback: (slot: number, success: boolean) => void): void;
     loadPartial(slot: number, callback: (slot: number, success: boolean, saveObject: SaveObject) => void): void;
-    loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean): void;
+    loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
     loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string | undefined): any;
     save(slot: number, callback: (slot: number, bytes: number, saveObject?: SaveObject) => void): void;
     savePartialData(slot: number, object: any, key: string, saveObjectKey: string, callback: (slot: number, bytes: number) => void): void;

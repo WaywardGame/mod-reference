@@ -1,7 +1,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Command, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import BaseMod from "mod/BaseMod";
@@ -502,6 +502,14 @@ export declare abstract class Mod extends BaseMod {
      * @returns False to cancel the action or undefined to use the default logic
      */
     preExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument): boolean | undefined;
+    /**
+     * Called before a command is executed
+     * @param player The player object
+     * @param command The command
+     * @param args The arguments
+     * @returns False to cancel the command or undefined to use the default logic
+     */
+    preExecuteCommand(player: IPlayer, command: Command, args: string): boolean | undefined;
     /**
      * Called before rendering everything
      */

@@ -1,5 +1,6 @@
 import IActionManager from "action/IActionManager";
 import IAudio from "audio/IAudio";
+import { ICommandManager } from "command/ICommandManager";
 import ICorpseManager from "creature/corpse/ICorpseManager";
 import ICreatureManager from "creature/ICreatureManager";
 import IDoodadManager from "doodad/IDoodadManager";
@@ -40,6 +41,7 @@ declare global {
 	let absentPlayers: IPlayer[];
 	let actionManager: IActionManager;
 	let audio: IAudio;
+	let commandManager: ICommandManager;
 	let corpseManager: ICorpseManager;
 	let creatureManager: ICreatureManager;
 	let doodadManager: IDoodadManager;

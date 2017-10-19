@@ -3,6 +3,7 @@ export interface ISaveData {
     gameSlotName: string;
     gameWon: boolean;
     gameBaseSeed: number | string;
+    gameThumbnail: string;
     saveManagerSaveTime: number;
     modManagerSaveData: {
         [index: string]: any;

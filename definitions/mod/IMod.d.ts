@@ -71,11 +71,12 @@ export declare enum Hook {
     PostRenderPostProcess = 69,
     PostRenderWorld = 70,
     PreExecuteAction = 71,
-    PreRender = 72,
-    PreRenderPostProcess = 73,
-    PreRenderWorld = 74,
-    ProcessInput = 75,
-    ShouldRender = 76,
+    PreExecuteCommand = 72,
+    PreRender = 73,
+    PreRenderPostProcess = 74,
+    PreRenderWorld = 75,
+    ProcessInput = 76,
+    ShouldRender = 77,
 }
 export declare const globalHooks: Hook[];
 export interface IModConfig {

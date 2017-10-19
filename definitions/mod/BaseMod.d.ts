@@ -1,4 +1,5 @@
 import { ActionCallback } from "action/IAction";
+import { CommandCallback } from "command/ICommand";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import { ItemType, ITerrainResourceItem } from "Enums";
@@ -25,6 +26,7 @@ export declare abstract class BaseMod {
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     getDialog(title: string): JQuery;
     addActionType(description: IActionDescription, callback: ActionCallback): number;
+    addCommand(command: string, callback: CommandCallback): number;
     addSkillType(description: ISkillDescription): number;
     addMusic(name: string): number;
     addSoundEffect(name: string, variations?: number): number;

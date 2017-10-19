@@ -142,6 +142,7 @@ export declare module Enums {
         LanguageExtension = 12,
         Music = 13,
         SoundEffect = 14,
+        Command = 15,
     }
     interface IEnumInfo {
         enumId: EnumId;
