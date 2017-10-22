@@ -4,6 +4,7 @@ import { IItemArray } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { IPropSerializable, IUnserializedCallback } from "save/ISerializer";
+import { ITile } from "tile/ITerrain";
 export default class Doodad implements IDoodad, IPropSerializable, IUnserializedCallback {
     id: number;
     containedItems: IItemArray;
@@ -29,6 +30,8 @@ export default class Doodad implements IDoodad, IPropSerializable, IUnserialized
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
+    isValid(): boolean;
+    getTile(): ITile;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;

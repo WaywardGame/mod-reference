@@ -39,6 +39,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     disassembly?: IItemArray;
     order?: number;
     description(): IItemDescription | undefined;
+    isValid(): boolean;
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;

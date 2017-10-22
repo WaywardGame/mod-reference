@@ -12,6 +12,7 @@ declare var quickLoad: number | undefined;
 declare var overlayWorks: boolean | undefined;
 
 interface IRequire {
+	undef(path: string): void;
 	(moduleName: string): any | undefined;
 	(moduleNames: string[], onLoad: (...args: any[]) => void, onError: (err: any) => void): void;
 }

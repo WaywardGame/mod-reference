@@ -1,5 +1,5 @@
 import Vec2 = TSM.vec2;
-import { CaseStyle, IPointZ, IVersionInfo, SentenceCaseStyle, Source, TerrainType } from "Enums";
+import { CaseStyle, IPoint, IPointZ, IVersionInfo, SentenceCaseStyle, Source, TerrainType } from "Enums";
 import { ITile } from "tile/ITerrain";
 import Color from "utilities/Color";
 export { Color };
@@ -76,7 +76,7 @@ export declare module TileHelpers {
     function isTilledRaw(data: number): boolean;
     function setTilled(tile: ITile, value: boolean): void;
     function setTilledRaw(data: number, value: number): number;
-    function findMatchingTile(start: IPointZ, isMatchingTile?: (point: IPointZ, tile: ITile) => boolean): IPointZ | undefined;
+    function findMatchingTile(start: IPointZ, isMatchingTile?: (point: IPointZ, tile: ITile) => boolean, maxTilesChecked?: number, canVisitTile?: (point: IPointZ, tile: ITile) => boolean): IPointZ | undefined;
     /**
      * Check is a tile is open
      */
@@ -226,3 +226,4 @@ export declare function escapeHTML(str: string): string;
 export declare function fixObjectCaseStyle(obj: any, caseStyle: CaseStyle, whitelist?: string[]): any;
 export declare function stripParentDirectoryAccessorsFromPath(path: string): string;
 export declare function encodeURIComponentPath(p: string): string;
+export declare function distanceBetween(a: IPoint, b: IPoint): number;

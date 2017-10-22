@@ -25,6 +25,7 @@ export default class Item implements IItem, IContainer, IContainable, IPropSeria
     private _description;
     constructor(itemType?: ItemType | undefined, quality?: ItemQuality);
     description(): IItemDescription | undefined;
+    isValid(): boolean;
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;

@@ -23,8 +23,8 @@ export interface IItemManager {
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup | IItemTypeGroup>;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
     generateLookups(): void;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number, excludeProtectedItems?: boolean): IItem | undefined;
-    getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: number, excludeProtectedItems?: boolean): IItem | undefined;
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
+    getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
@@ -42,7 +42,6 @@ export interface IItemManager {
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
     isInInventory(containable: IContainable): boolean;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
-    isItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignore?: number): boolean;
     isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): boolean;
     isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
     isTileContainer(container: IContainer | undefined): boolean;

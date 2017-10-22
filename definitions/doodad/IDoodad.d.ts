@@ -2,12 +2,15 @@ import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadPart
 import { IContainer, IItemArray, IItemLegendary } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
+import { ITile } from "tile/ITerrain";
 export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, Partial<IContainer> {
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
+    isValid(): boolean;
+    getTile(): ITile;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
     canGather(player: IPlayer): boolean;

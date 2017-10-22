@@ -1,3 +1,3 @@
 import { ITerrainResource } from "Enums";
-export declare const resource: (ITerrainResource | undefined)[];
+export declare const resource: SafeDescription<ITerrainResource>;
 export default resource;
