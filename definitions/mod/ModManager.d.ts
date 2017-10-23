@@ -25,7 +25,8 @@ export default class ModManager implements IModManager {
     load(index: number): void;
     unload(index: number): void;
     save(index: number): void;
-    reload(index: number): void;
+    reloadByName(name: string): boolean;
+    reload(index: number): boolean;
     isValid(index: number): boolean;
     isEnabled(index: number): boolean;
     isLoaded(index: number): boolean;

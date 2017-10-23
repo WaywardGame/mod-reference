@@ -13,10 +13,10 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, P
     getTile(): ITile;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
-    canGather(player: IPlayer): boolean;
-    isGatherable(player: IPlayer): boolean;
+    isReadyToGather(): boolean;
+    isGatherable(): boolean;
     isEmbers(): boolean;
-    canHarvest(player: IPlayer): boolean;
+    canHarvest(): boolean;
     canPickup(player: IPlayer): boolean;
     causeStatus(player: IPlayer): void;
     checkForTrampling(playerOrCreatureId: IPlayer | number): boolean;

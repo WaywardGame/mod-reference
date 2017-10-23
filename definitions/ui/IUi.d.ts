@@ -71,6 +71,7 @@ export interface IUi extends IPropSerializable {
     showLoadingScreenAround(func: () => void): void;
     showLoadingScreenAround(message: UiMessage, func: () => void): void;
     hideLoadingScreen(immediately?: boolean): void;
+    changeEquipmentOption(id: string): void;
     toggleOptions(): void;
     showOptionsScreen(): void;
     hideOptionsScreen(): void;

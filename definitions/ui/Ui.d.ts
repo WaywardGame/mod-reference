@@ -154,6 +154,7 @@ export default class Ui implements IUi {
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
+    changeEquipmentOption(id: string): void;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;

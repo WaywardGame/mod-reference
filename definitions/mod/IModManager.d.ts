@@ -105,7 +105,8 @@ export interface IModManager {
     isValid(index: number): boolean;
     load(index: number): void;
     loadAll(options: IPlayOptions, callback: (err?: string) => void): void;
-    reload(index: number): void;
+    reload(index: number): boolean;
+    reloadByName(name: string): boolean;
     removeMod(id: number, uninstall?: boolean): void;
     save(index: number): void;
     saveAll(): void;

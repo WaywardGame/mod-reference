@@ -89,7 +89,7 @@ export default class InGameScreen extends BaseScreen {
     private lastStats;
     selector(): string;
     bindElements(): void;
-    changeEquipmentOption(element: JQuery, id: string): void;
+    changeEquipmentOption(id: string): void;
     toggleCraftingTab(which: "crafting" | "dismantle", canClose?: boolean): void;
     toggleCraftingTabElements(which: "crafting" | "dismantle"): void;
     unbindElements(): void;
