@@ -174,7 +174,7 @@ export default class Game implements IGame {
     movementToDirection(x: number, y: number): FacingDirection;
     directionToMovement(direction: FacingDirection): IPoint;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
-    updateOption(player: IPlayer, id: string, value: boolean | number): void;
+    updateOption(id: string, value: boolean | number, player?: IPlayer): void;
     updateFlowFieldTile(x: number, y: number, z: number): void;
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     getCompletedMilestoneCount(): number;
@@ -183,6 +183,7 @@ export default class Game implements IGame {
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
     getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
+    private updateOptionInternal(id, value, player?);
     private tick();
     private processTimers(realPlayers);
     private processAutoSave();

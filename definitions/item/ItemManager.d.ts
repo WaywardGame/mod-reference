@@ -11,7 +11,7 @@ export default class ItemManager implements IItemManager {
     private cachedDecaysIntoWeights;
     private cachedDefaultItemForGroup;
     constructor();
-    getContainerReference(container: IContainer | undefined): ContainerReference;
+    getContainerReference(container: IContainer | undefined, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): void;
     removeContainerItems(container: IContainer): void;
