@@ -53,7 +53,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     returns(): boolean;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined): ICreature | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
     getLocation(): IPointZ | undefined;
     dropInWater(player: IPlayer, x?: number, y?: number): void;
     dropInLava(player: IPlayer, x?: number, y?: number): void;

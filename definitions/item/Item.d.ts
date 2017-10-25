@@ -39,7 +39,7 @@ export default class Item implements IItem, IContainer, IContainable, IPropSeria
     returns(): boolean;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined): ICreature | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
     getLocation(): IPointZ | undefined;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
     dropInWater(player: IPlayer, x?: number, y?: number): void;

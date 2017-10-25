@@ -208,6 +208,7 @@ export default class Player implements IPlayer {
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
     updateMilestones(): void;
+    private slitherSuckerDamage();
     private processMovement(turnType?);
     private processTimers();
     private swimCheck();

@@ -619,6 +619,8 @@ export declare enum ItemType {
     MossCoveredBook = 392,
     GildedRedBook = 393,
     ArrowShaft = 394,
+    SlitherSucker = 395,
+    AberrantSlitherSucker = 396,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -880,6 +882,7 @@ export declare enum CreatureType {
     WaterBlood = 33,
     LavaBeetle = 34,
     Goat = 35,
+    SlitherSucker = 36,
 }
 export declare enum Hairstyle {
     None = 0,
