@@ -55,7 +55,7 @@ export declare module Random {
     function pushSeed(newSeed?: number): void;
     function popSeed(): number;
     function tickSeed(s: number): number;
-    function shuffle(array: number[] | number[][]): number[] | number[][];
+    function shuffle<T>(array: T[]): T[];
     function getElement<T>(array: T[]): T;
 }
 export declare function download(name: string, json: string): void;

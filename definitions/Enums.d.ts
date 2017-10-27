@@ -1307,6 +1307,7 @@ export interface IDoodadParticles {
 export interface ITerrainResource {
     items: ITerrainResourceItem[];
     defaultItem?: ItemType;
+    disableWaterRouting?: boolean;
 }
 export interface ITerrainResourceItem extends IResourceItem {
     tileChange?: TerrainType;
