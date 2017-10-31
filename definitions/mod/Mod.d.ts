@@ -448,6 +448,14 @@ export declare abstract class Mod extends BaseMod {
      */
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     /**
+     * Called when a tile is updated (tile type changed, doodad created on it, etc)
+     * @param tile The tile that was updated
+     * @param x The x position to spawn the creature
+     * @param y The y position to spawn the creature
+     * @param z The z position to spawn the creature
+     */
+    onTileUpdate(tile: ITile, x: number, y: number, z: number): void;
+    /**
      * Called when a turn is ending
      * @param player The player object
      */
