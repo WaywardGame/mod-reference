@@ -38,6 +38,8 @@ declare global {
 		[index: number]: T | undefined;
 	}
 
+	type SafeArray<T> = Array<T | undefined>;
+
 	let absentPlayers: IPlayer[];
 	let actionManager: IActionManager;
 	let audio: IAudio;

@@ -43,12 +43,12 @@ export default class Game implements IGame {
     updateFieldOfView: boolean;
     updateRender: boolean;
     contaminatedWater: IPointZ[];
-    corpses: ICorpse[];
-    creatures: ICreature[];
+    corpses: SafeArray<ICorpse>;
+    creatures: SafeArray<ICreature>;
     creatureSpawnTimer: number;
     dailyChallenge: boolean;
     difficulty: Difficulty;
-    doodads: IDoodad[];
+    doodads: SafeArray<IDoodad>;
     flowFieldSyncCount: number;
     isRealTime: boolean;
     items: IItemArray;
@@ -67,7 +67,7 @@ export default class Game implements IGame {
             };
         };
     };
-    tileEvents: ITileEvent[];
+    tileEvents: SafeArray<ITileEvent>;
     time: TimeManager;
     cartographyTexture: WebGLTexture;
     debugRenderer: ITextureDebugRenderer;
