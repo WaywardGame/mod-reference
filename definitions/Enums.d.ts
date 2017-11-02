@@ -1310,6 +1310,7 @@ export interface ITerrainResource {
     disableWaterRouting?: boolean;
 }
 export interface ITerrainResourceItem extends IResourceItem {
+    chance: number;
     tileChange?: TerrainType;
     tileChangeChance?: number;
 }

@@ -38,7 +38,7 @@ export default class ItemManager implements IItemManager {
     getTileContainer(x: number, y: number, z: number): IContainer;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean): RequirementInfo;
-    isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): boolean;
+    isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
     isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;

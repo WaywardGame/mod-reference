@@ -42,7 +42,7 @@ export interface IItemManager {
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
     isInInventory(containable: IContainable): boolean;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
-    isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): boolean;
+    isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
     isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
     loadReferences(): void;
