@@ -1,3 +1,3 @@
 import { ITerrainDescription } from "ITerrain";
-export declare const terrainDescriptions: SafeDescription<ITerrainDescription>;
+export declare const terrainDescriptions: SaferDescription<ITerrainDescription>;
 export default terrainDescriptions;

@@ -34,11 +34,11 @@ declare global {
 		[index: number]: T;
 	}
 
-	interface SafeDescription<T> {
+	interface SaferDescription<T> {
 		[index: number]: T | undefined;
 	}
 
-	type SafeArray<T> = Array<T | undefined>;
+	type SaferArray<T> = Array<T | undefined>;
 
 	let absentPlayers: IPlayer[];
 	let actionManager: IActionManager;

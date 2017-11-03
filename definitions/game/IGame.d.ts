@@ -36,10 +36,10 @@ export interface IGame extends IPropSerializable {
     };
     tileContainers: ITileContainer[];
     items: IItemArray;
-    creatures: SafeArray<ICreature>;
-    doodads: SafeArray<IDoodad>;
-    tileEvents: SafeArray<ITileEvent>;
-    corpses: SafeArray<ICorpse>;
+    creatures: SaferArray<ICreature>;
+    doodads: SaferArray<IDoodad>;
+    tileEvents: SaferArray<ITileEvent>;
+    corpses: SaferArray<ICorpse>;
     creatureSpawnTimer: number;
     messageTimer: number;
     saveClear: boolean;

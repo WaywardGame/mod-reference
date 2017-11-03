@@ -6,6 +6,7 @@ import { IPlayer } from "player/IPlayer";
 export declare abstract class Packet extends IndexedPacket implements IPacket {
     protected synchronizationCheckData: ISynchronizationCheckData;
     private _arrayBuffer;
+    getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     isSyncCheckEnabled(): boolean;
     getSynchronizationCheckData(): ISynchronizationCheckData;
