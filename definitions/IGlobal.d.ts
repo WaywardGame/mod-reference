@@ -78,10 +78,28 @@ declare global {
 		FlowField: any;
 		FieldOfView: any;
 		WorldLayer: any;
+		Navigation: INavigationConstructor;
 	}
 
 	interface IByteGridConstructor {
 		new(width: number, height: number): IByteGrid;
+	}
+
+	interface INavigation {
+		getNode(x: number, y: number): INavigationNode;
+		findPath(start: INavigationNode, end: INavigationNode): INavigationNode[] | undefined;
+	}
+
+	interface INavigationNode {
+		x: number;
+		y: number;
+		disabled: boolean;
+		connectTo(node: INavigationNode, direction: number): void;
+		getConnection(direction: number): INavigationNode | undefined;
+	}
+
+	interface INavigationConstructor {
+		new(autoConnect: boolean): INavigation;
 	}
 
 	interface IMsgPack {
