@@ -11,6 +11,16 @@ export interface ITileAdaptation {
     TRBG: Vec2;
     BLBG: Vec2;
     BRBG: Vec2;
+    overLayerFGTall?: true;
+    TLFO: Vec2;
+    TRFO: Vec2;
+    BLFO: Vec2;
+    BRFO: Vec2;
+    overLayerBGTall?: true;
+    TLBO: Vec2;
+    TRBO: Vec2;
+    BLBO: Vec2;
+    BRBO: Vec2;
 }
 export interface ITileAdaptor {
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
