@@ -93,7 +93,6 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     attributes(): void;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     calculateEquipmentStats(): void;
-    canCarve(): IItem | undefined;
     cancelResting(reason: RestCancelReason): void;
     canJump(): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
@@ -113,6 +112,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     getBindDownTime(key: KeyBind): number | undefined;
     getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
+    getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
@@ -125,6 +125,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     getName(html?: boolean): string;
     getReputation(): number;
     getSerializationProperties(_: string): string[];
+    getTile(): ITile;
     getTouchDirection(): FacingDirection | undefined;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
@@ -134,6 +135,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     isBindDown(key: KeyBind): boolean;
+    isFacingCarvableTile(): boolean;
     isGhost(): boolean;
     isLocalPlayer(): boolean;
     isResting(): boolean;

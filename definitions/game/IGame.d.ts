@@ -122,6 +122,7 @@ export interface IGame extends IPropSerializable {
     getTactics(): number;
     getTile(x: number, y: number, z: number): ITile;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
+    getTileFromPoint(point: IPointZ): ITile;
     getTileInFrontOfPlayer(player: IPlayer): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
     getValidPlayerName(name: string | undefined): string;
@@ -160,6 +161,7 @@ export interface IGame extends IPropSerializable {
     updateOption(id: string, value: boolean | number, player?: IPlayer): void;
     updateReputation(reputation: number): void;
     updateView(updateFov: boolean): void;
+    wrapCoordinate(cordinate: number, reference: number): number;
 }
 export default IGame;
 export declare type IGameOld = Partial<IGame> & {

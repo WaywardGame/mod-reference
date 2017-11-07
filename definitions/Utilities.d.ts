@@ -47,7 +47,7 @@ export declare module Random {
      * Get the chance for something
      * Returns a number between 1 and 100 (inclusive)
      */
-    function nextChance(minChance?: number): number;
+    function nextChance(minChance?: number, chanceOutOf?: number): number;
     /**
      * Chooses a random entry in an array and returns it
      */

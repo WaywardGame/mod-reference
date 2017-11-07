@@ -1,6 +1,7 @@
 import { CreatureType, DamageType, Defense, FacingDirection, IMessagePack, IModdable, IObject, IPointZ, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, SfxType, StatusType } from "Enums";
 import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
+import { ITile } from "tile/ITerrain";
 export interface ICreature extends IObject<CreatureType>, IPointZ {
     fromX: number;
     fromY: number;
@@ -21,6 +22,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     stopNextMovement?: boolean;
     renamed?: string;
     description(): ICreatureDescription | undefined;
+    getTile(): ITile;
     isHidden(): boolean;
     isDefender(): boolean;
     getInspectHealthMessage(player: IPlayer): IMessagePack;

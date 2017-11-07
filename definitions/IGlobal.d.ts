@@ -88,12 +88,14 @@ declare global {
 	interface INavigation {
 		getNode(x: number, y: number): INavigationNode;
 		findPath(start: INavigationNode, end: INavigationNode): INavigationNode[] | undefined;
+		delete(): void;
 	}
 
 	interface INavigationNode {
 		x: number;
 		y: number;
 		disabled: boolean;
+		penalty: number;
 		connectTo(node: INavigationNode, direction: number): void;
 		getConnection(direction: number): INavigationNode | undefined;
 	}

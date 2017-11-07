@@ -3,6 +3,7 @@ import { CreatureType, FacingDirection, IMessagePack, ItemType, MoveType, SfxTyp
 import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
 import { IPropSerializable, IUnserializedCallback } from "save/ISerializer";
+import { ITile } from "tile/ITerrain";
 export default class Creature implements ICreature, IPropSerializable, IUnserializedCallback {
     aberrant?: boolean;
     ai: AiType;
@@ -35,6 +36,7 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
     description(): ICreatureDescription | undefined;
+    getTile(): ITile;
     isHidden(): boolean;
     isDefender(): boolean;
     getInspectHealthMessage(player: IPlayer): IMessagePack;

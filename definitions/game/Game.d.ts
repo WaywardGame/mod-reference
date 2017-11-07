@@ -99,6 +99,7 @@ export default class Game implements IGame {
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     getWrappedCoord(x: number): number;
     getTileInFrontOfPlayer(player: IPlayer): ITile;
+    getTileFromPoint(point: IPointZ): ITile;
     getTile(x: number, y: number, z: number): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
@@ -183,6 +184,7 @@ export default class Game implements IGame {
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
     getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
+    wrapCoordinate(cordinate: number, reference: number): number;
     private updateOptionInternal(id, value, player?);
     private tick();
     private processTimers(realPlayers);

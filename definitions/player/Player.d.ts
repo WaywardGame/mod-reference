@@ -132,7 +132,9 @@ export default class Player implements IPlayer {
     addMilestone(milestone: MilestoneType, data?: number): void;
     damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: string, soundDelay?: number): number | undefined;
     calculateEquipmentStats(): void;
-    canCarve(): IItem | undefined;
+    getTile(): ITile;
+    getDefaultCarveTool(): IItem | undefined;
+    isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
     canJump(): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
@@ -213,7 +215,6 @@ export default class Player implements IPlayer {
     private processTimers();
     private swimCheck();
     private isOnFire();
-    private canTryCarve();
     private restTick();
     private statGain(stat, bypass);
     private resetDefense();
