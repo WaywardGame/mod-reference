@@ -79,6 +79,7 @@ declare global {
 		FieldOfView: any;
 		WorldLayer: any;
 		Navigation: INavigationConstructor;
+		KDTree: IKDTreeConstructor;
 	}
 
 	interface IByteGridConstructor {
@@ -104,6 +105,17 @@ declare global {
 		new(autoConnect: boolean): INavigation;
 	}
 
+	interface IKDTree {
+		insertPoint(x: number, y: number): void;
+		deletePoint(x: number, y: number): void;
+		nearestPoint(x: number, y: number): { x: number; y: number };
+		delete(): void;
+	}
+	
+	interface IKDTreeConstructor {
+		new(): IKDTree;
+	}
+	
 	interface IMsgPack {
 		encode(object: any): Uint8Array;
 		decode(array: Uint8Array): any;
