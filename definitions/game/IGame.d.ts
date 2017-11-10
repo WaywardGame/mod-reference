@@ -158,7 +158,7 @@ export interface IGame extends IPropSerializable {
     updateCraftTableAndWeight(): void;
     updateCraftTableAndWeightNextTick(): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
-    updateOption(id: string, value: boolean | number, player?: IPlayer): void;
+    updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateReputation(reputation: number): void;
     updateView(updateFov: boolean): void;
     wrapCoordinate(cordinate: number, reference: number): number;

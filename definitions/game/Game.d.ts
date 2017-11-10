@@ -175,7 +175,7 @@ export default class Game implements IGame {
     movementToDirection(x: number, y: number): FacingDirection;
     directionToMovement(direction: FacingDirection): IPoint;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
-    updateOption(id: string, value: boolean | number, player?: IPlayer): void;
+    updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     getCompletedMilestoneCount(): number;
