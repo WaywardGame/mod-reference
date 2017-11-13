@@ -10,7 +10,6 @@ export default class Steamworks implements ISteamworks {
     private initializingMods;
     private logsPath;
     private logFilePath;
-    private multiplayerLogFilePath;
     private modsPath;
     private workshopPath;
     private workshopModsPath;
