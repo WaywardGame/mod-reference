@@ -10,8 +10,15 @@ import { HintType } from "ui/IHint";
 export interface IAction extends IGenericRegistration {
     type: ActionType;
     callback: ActionCallback;
+    validateArguments?: IActionArgumentValidator;
     usableAsGhost?: boolean;
     ignoreHasDelay?: boolean;
+}
+export declare type IActionArgumentValidatorBase = {
+    [P in keyof IActionArgument]?: boolean;
+};
+export interface IActionArgumentValidator extends IActionArgumentValidatorBase {
+    allowNearbyItem?: boolean;
 }
 export interface IActionArgument {
     type?: ActionType;

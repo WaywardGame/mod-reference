@@ -1,7 +1,7 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { DoodadType, IModdable, IPointZ, IRGB, ItemQuality, SfxType, SkillType, TerrainType } from "Enums";
+import { DoodadType, GrowingStage, IModdable, IPointZ, IRGB, ItemQuality, SfxType, SkillType, TerrainType } from "Enums";
 import { IContainer } from "item/IItem";
 import { ITileEvent } from "tile/ITileEvent";
 export interface ITerrainDescription extends IModdable {
@@ -71,8 +71,12 @@ export interface ITemplate {
     };
     terrain: string[];
     doodadTypes?: {
-        [id: string]: DoodadType;
+        [id: string]: DoodadType | ITemplateDoodad;
     };
     doodad?: string[];
     degrade: number;
+}
+export interface ITemplateDoodad {
+    type: DoodadType;
+    growingStages: GrowingStage[];
 }

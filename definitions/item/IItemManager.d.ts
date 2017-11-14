@@ -38,6 +38,7 @@ export interface IItemManager {
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
+    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable): boolean;
     isContainer(obj: IItem | IDoodad | IContainer | ITile): obj is IContainer;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
     isInInventory(containable: IContainable): boolean;
