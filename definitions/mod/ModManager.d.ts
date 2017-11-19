@@ -10,7 +10,7 @@ export default class ModManager implements IModManager {
     private cachedHookNames;
     private onLanguageLoadCallbacks;
     constructor();
-    loadAll(options: IPlayOptions, callback: (err?: string) => void): void;
+    loadAll(options: Partial<IPlayOptions>, callback: (err?: string) => void): void;
     unloadAll(reset?: boolean): void;
     setupMods(callback: () => void): void;
     saveAll(): void;
@@ -20,6 +20,8 @@ export default class ModManager implements IModManager {
     getMods(): IModInfo[];
     getLoadedMods(): IModInfo[];
     getLoadedModByName(name: string): IModInfo | undefined;
+    getModFromIndex(i: number): IModInfo;
+    getEnabledMods(): number[];
     callHook(hook: Hook, ...args: any[]): any;
     callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
     load(index: number): void;
@@ -34,7 +36,9 @@ export default class ModManager implements IModManager {
     getName(index: number): string;
     getDescription(index: number): string;
     getVersion(index: number): string;
-    getLastUpdatedDate(index: number): string | undefined;
+    getLastUpdatedDate(index: number): number | undefined;
+    getInstallDate(index: number): number | undefined;
+    getCreatedDate(index: number): number | undefined;
     getAuthor(index: number): string;
     getType(index: number): ModType;
     getRequiredMods(index: number): string[];
@@ -52,7 +56,9 @@ export default class ModManager implements IModManager {
     isLoadedByName(name: string): boolean;
     setPublishId(index: number, publishedFileId: string): void;
     setSteamIdOwner(index: number, steamIdOwner: string): void;
-    setLastUpdated(index: number, lastUpdated: string): void;
+    setLastUpdated(index: number, lastUpdated: number): void;
+    setInstallDate(index: number, installDate: number): void;
+    setCreatedDate(index: number, createdDate: number): void;
     getState(index: number): ModState;
     isInitializing(index: number): ModState;
     setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): boolean;

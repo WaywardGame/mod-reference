@@ -1,13 +1,13 @@
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IMessagePack, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
-import IOptions from "game/IOptions";
+import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInputMovement, IInspect, IMessagePack, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IExploreMap } from "renderer/IExploreMap";
+import { IOptions } from "save/data/ISaveDataGlobal";
 import { IPropSerializable } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
@@ -110,7 +110,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     damage(damageInfo: IDamageInfo): number | undefined;
     damageEquipment(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
-    getBindDownTime(key: KeyBind): number | undefined;
+    getBindDownTime(key: Bindable): number | undefined;
     getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
@@ -134,7 +134,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     hurtHands(message: Message, damageMessage: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
-    isBindDown(key: KeyBind): boolean;
+    isBindDown(key: Bindable): boolean;
     isFacingCarvableTile(): boolean;
     isGhost(): boolean;
     isLocalPlayer(): boolean;
@@ -166,7 +166,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     updateCraftTable(updateDismantleItems: boolean): void;
     updateCraftTableAndWeight(): void;
     updateDialogInfo(dialogIndex: string | number): void;
-    updateKeyBindState(key: KeyBind, state: number | undefined): void;
+    updateKeyBindState(key: Bindable, state: number | undefined): void;
     updateMilestones(): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateReputation(reputation: number): void;
@@ -186,9 +186,9 @@ export interface IColorDescription extends IModdable {
     color: IRGB;
 }
 export interface IPlayerCustomization {
-    hairStyle: Hairstyle;
-    hairColor: HairColor;
-    skinColor: SkinColor;
+    hairStyle: keyof typeof HairStyle;
+    hairColor: keyof typeof HairColor;
+    skinColor: keyof typeof SkinColor;
 }
 export interface IAttackHand {
     leftHand: number;
@@ -231,6 +231,11 @@ export declare type IPlayerOld = Partial<IPlayer> & {
     healthTimer: number;
     malignityPlus: number;
     malignityNegative: number;
+    customization: {
+        hairStyle: HairStyle;
+        hairColor: HairColor;
+        skinColor: SkinColor;
+    };
 };
 export interface IMobCheck {
     x: number;
@@ -252,5 +257,12 @@ export interface IPlayerTravelData {
     originalHealth: number;
     itemId: number | undefined;
     state: PlayerState;
+}
+export declare enum PlayerName {
+    Anne = 0,
+    Gregory = 1,
+    Drathicus = 2,
+    Maxamax = 3,
+    Yuudori = 4,
 }
 export declare const weightBonus = 25;

@@ -46,6 +46,7 @@ export declare enum Source {
     Ui = 25,
     Utilities = 26,
     WebAssembly = 27,
+    NewUi = 28,
 }
 export declare enum AttackType {
     Melee = 0,
@@ -883,7 +884,7 @@ export declare enum CreatureType {
     Goat = 35,
     SlitherSucker = 36,
 }
-export declare enum Hairstyle {
+export declare enum HairStyle {
     None = 0,
     Spike = 1,
     Bun = 2,
@@ -978,6 +979,8 @@ export declare enum SfxType {
     Click = 20,
     Damaged = 21,
     Chat = 22,
+    UiSelect = 23,
+    UiActivate = 24,
 }
 export declare enum Command {
     Commands = 0,
@@ -1052,57 +1055,6 @@ export declare const itemQualitySortOrder: {
     [index: number]: number;
 };
 export declare const onEquipTypes: IOnEquipType;
-export declare enum KeyBind {
-    Up = 0,
-    Down = 1,
-    Left = 2,
-    Right = 3,
-    Idle = 4,
-    One = 5,
-    Two = 6,
-    Three = 7,
-    Four = 8,
-    Five = 9,
-    Six = 10,
-    Seven = 11,
-    Eight = 12,
-    Nine = 13,
-    Escape = 14,
-    Inventory = 15,
-    Help = 16,
-    Skills = 17,
-    Messages = 18,
-    Options = 19,
-    Alt = 20,
-    Shift = 21,
-    Equipment = 22,
-    Crafting = 23,
-    Dismantle = 24,
-    Actions = 25,
-    Milestones = 26,
-    Enter = 27,
-    Ten = 28,
-    Eleven = 29,
-    Twelve = 30,
-    PrimaryMouse = 31,
-    SecondaryMouse = 32,
-    Touch = 33,
-    LeftHand = 34,
-    RightHand = 35,
-    Chat = 36,
-    Thirteen = 37,
-}
-export declare enum BindType {
-    Keyboard = 0,
-    Mouse = 1,
-    Other = 2,
-}
-export declare const keybindOrder: KeyBind[];
-export declare const defaultBinds: IBindArray;
-export declare const playerKeyBinds: KeyBind[];
-export declare function addDefaultBind(key: KeyBind, value: number, type?: BindType, bindable?: boolean): void;
-export declare function removeDefaultKeybind(key: KeyBind): void;
-export declare const hotKeyNumbers: KeyBind[];
 export declare enum TurnType {
     CheckUnderPlayer = 0,
     DontEnterCaves = 1,
@@ -1131,7 +1083,8 @@ export declare enum DialogId {
     Map = 6,
     Container = 7,
     Book = 8,
-    Custom = 9,
+    Options = 9,
+    Custom = 10,
 }
 export declare enum SortType {
     Name = 0,
@@ -1180,19 +1133,6 @@ export declare enum SentenceCaseStyle {
 export interface IOnEquipType {
     [index: number]: {};
 }
-export interface IBindArray {
-    [index: number]: IBind;
-}
-export interface IModBindArray {
-    [index: string]: IBind;
-}
-export interface IBind {
-    value: number;
-    type: BindType;
-}
-export interface IKeyBind {
-    [index: number]: number;
-}
 export interface IVersionInfo {
     str: string;
     stage: "beta" | "release";
@@ -1237,21 +1177,12 @@ export interface TatteredMap extends IPointZ {
     reinitialize?: boolean;
 }
 export interface IInputMovement extends IPoint {
-    keyBind: KeyBind;
+    keyBind: Bindable;
     direction: FacingDirection;
 }
 export interface ISeeds {
     base: number | string;
     saved: number;
-}
-export interface IHighscore {
-    name: string;
-    message: string;
-    turns: number;
-    score: number;
-    dailyChallenge: boolean;
-    date: number;
-    talent?: number;
 }
 export interface IMessagePack {
     message?: Message | string;
@@ -1271,6 +1202,7 @@ export interface IRGB {
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
+    DailyChallenge = 2,
 }
 export declare enum WeightType {
     Normal = 0,
@@ -1331,3 +1263,96 @@ export interface RequirementInfo extends IPoint, IPointZ {
     requirementsMet: boolean;
     isLava?: boolean;
 }
+export interface IBindArray {
+    [index: number]: IBind;
+}
+export interface IModBindArray {
+    [index: string]: IBind;
+}
+export interface IBind {
+    value: number;
+    type: BindableType;
+}
+export interface IKeyBind {
+    [index: number]: number;
+}
+export declare enum BindableType {
+    Game = 0,
+    Dialog = 1,
+    Menu = 2,
+    Developer = 3,
+    Mod = 4,
+}
+export declare enum Bindable {
+    GameMoveDirection = 0,
+    GameMoveUp = 1,
+    GameMoveLeft = 2,
+    GameMoveDown = 3,
+    GameMoveRight = 4,
+    GameFaceDirection = 5,
+    GameFaceUp = 6,
+    GameFaceLeft = 7,
+    GameFaceDown = 8,
+    GameFaceRight = 9,
+    GameIdle = 10,
+    GameHandToggleLeft = 11,
+    GameHandToggleRight = 12,
+    GameQuickSlot1 = 13,
+    GameQuickSlot2 = 14,
+    GameQuickSlot3 = 15,
+    GameQuickSlot4 = 16,
+    GameQuickSlot5 = 17,
+    GameQuickSlot6 = 18,
+    GameQuickSlot7 = 19,
+    GameQuickSlot8 = 20,
+    GameQuickSlot9 = 21,
+    GameQuickSlotClear = 22,
+    GameContextMenu1 = 23,
+    GameContextMenu2 = 24,
+    GameContextMenu3 = 25,
+    GameContextMenu4 = 26,
+    GameContextMenu5 = 27,
+    GameContextMenu6 = 28,
+    GameContextMenu7 = 29,
+    GameContextMenu8 = 30,
+    GameContextMenu9 = 31,
+    GameContextMenu10 = 32,
+    GameContextMenu11 = 33,
+    GameContextMenu12 = 34,
+    GameContextMenu13 = 35,
+    GameZoomIn = 36,
+    GameZoomOut = 37,
+    GameActions = 38,
+    GameItemMove = 39,
+    GameItemQuickMove = 40,
+    GameItemQuickMoveAll = 41,
+    GameItemMenu = 42,
+    GameItemDrop = 43,
+    GameItemDropAll = 44,
+    GameItemEquipToggle = 45,
+    GameInspect = 46,
+    GameMoreInformation = 47,
+    GameScreenshotMode = 48,
+    DialogInventory = 49,
+    DialogHelp = 50,
+    DialogSkills = 51,
+    DialogMessages = 52,
+    DialogMessagesChatFocus = 53,
+    DialogOptions = 54,
+    DialogEquipment = 55,
+    DialogCrafting = 56,
+    DialogDismantle = 57,
+    DialogMilestones = 58,
+    MenuCancel = 59,
+    MenuEnter = 60,
+    MenuNext = 61,
+    MenuPrevious = 62,
+    MenuUp = 63,
+    MenuDown = 64,
+    MenuLeft = 65,
+    MenuRight = 66,
+    DeveloperToggleDeveloperMode = 67,
+    DeveloperReloadGame = 68,
+    DeveloperToggleDeveloperTools = 69,
+}
+export declare const playerKeyBinds: Bindable[];

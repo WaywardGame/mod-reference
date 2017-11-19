@@ -1,8 +1,8 @@
 import { IPlayerOptions } from "game/IGame";
-import { UiMessage } from "language/ILanguage";
 import { IConnection, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
 import { IPacket } from "multiplayer/packets/IPacket";
 import IPlayer from "player/IPlayer";
+import { TextOrTranslationData } from "../newui/INewUi";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export default class Multiplayer implements IMultiplayer {
     private _playerIdentifier;
@@ -39,9 +39,9 @@ export default class Multiplayer implements IMultiplayer {
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
     joinServer(channel: string, playerOptions?: IPlayerOptions): void;
-    disconnect(message?: string, callback?: () => void): void;
-    disconnectAndResetGameState(uiMessage: UiMessage): void;
-    kick(player: IPlayer, uiMessage: UiMessage): void;
+    disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
+    disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
+    kick(player: IPlayer, reason: TextOrTranslationData): void;
     onPlaying(): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     getClients(): IConnection[];

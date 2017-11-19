@@ -1,8 +1,12 @@
 import Vec2 = TSM.vec2;
 import { CaseStyle, IPoint, IPointZ, IVersionInfo, SentenceCaseStyle, Source, TerrainType } from "Enums";
 import { ITile } from "tile/ITerrain";
+import * as Arrays from "utilities/Arrays";
 import Color from "utilities/Color";
-export { Color };
+import Emitter from "utilities/Emitter";
+export { Color, Emitter, Arrays };
+export { sleep } from "utilities/Async";
+export { download, upload } from "utilities/Files";
 export declare module Console {
     function trace(source: Source, ...args: any[]): void;
     function log(source: Source, ...args: any[]): void;
@@ -58,8 +62,6 @@ export declare module Random {
     function shuffle<T>(array: T[]): T[];
     function getElement<T>(array: T[]): T;
 }
-export declare function download(name: string, json: string): void;
-export declare function upload(callback: (result: string) => void, e: Event): void;
 export declare module TileHelpers {
     const maskGfx = 31;
     const maskType = 4064;
@@ -128,14 +130,14 @@ export declare module WebAssemblyHelpers {
 export declare module Enums {
     enum EnumId {
         CreatureType = 0,
-        KeyBind = 1,
+        Bindable = 1,
         ActionType = 2,
         ItemType = 3,
         TerrainType = 4,
         DoodadType = 5,
         Message = 6,
         SkillType = 7,
-        Hairstyle = 8,
+        HairStyle = 8,
         HairColor = 9,
         SkinColor = 10,
         Dictionary = 11,
@@ -169,7 +171,7 @@ export declare module Enums {
     function getLength(enumObject: any): number;
     function getRandomIndex(enumObject: any): number;
     function getValues(enumObject: any): number[];
-    function forEach(enumObject: any, callback: (name: string, value: number) => boolean | void): void;
+    function forEach<Enum extends number>(enumObject: any, callback: (name: string, value: Enum) => boolean | void): void;
     function toString(enumObject: any, n: number): string;
     function getNext(enumObject: any, n: number): number;
     function getPrevious(enumObject: any, n: number): number;

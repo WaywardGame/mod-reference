@@ -1,7 +1,6 @@
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Delay, EquipType, FacingDirection, IInspect, IMessagePack, IPoint, IPointZ, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
-import IOptions from "game/IOptions";
+import { Bindable, Delay, EquipType, FacingDirection, IInspect, IMessagePack, IPoint, IPointZ, ItemQuality, ItemType, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
@@ -9,6 +8,7 @@ import { IAttackHand, IMobCheck, IPlayer, IPlayerCustomization, IPlayerStatus, I
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IExploreMap } from "renderer/IExploreMap";
+import { IOptions } from "save/data/ISaveDataGlobal";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
@@ -145,14 +145,14 @@ export default class Player implements IPlayer {
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    isBindDown(key: KeyBind): boolean;
-    getBindDownTime(key: KeyBind): number | undefined;
+    isBindDown(key: Bindable): boolean;
+    getBindDownTime(key: Bindable): number | undefined;
     getMouseDirection(): FacingDirection;
     setMouseDirection(playerDirection: FacingDirection): void;
     getTouchDirection(): FacingDirection | undefined;
     setTouchDirection(playerDirection: FacingDirection | undefined): void;
     resetKeyBindState(): void;
-    updateKeyBindState(key: KeyBind, state: number | undefined): void;
+    updateKeyBindState(key: Bindable, state: number | undefined): void;
     damageEquipment(): void;
     getMaxHealth(): number;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;

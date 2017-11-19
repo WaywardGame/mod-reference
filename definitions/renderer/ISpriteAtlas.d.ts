@@ -5,15 +5,15 @@ export interface ISpriteInfoList {
 export interface ISpriteAtlas {
     corpses: ISpriteInfoList;
     creatures: ISpriteInfoList;
-    equips: ISpriteInfoList;
-    hairstyles: ISpriteInfoList;
+    itemsEquipped: ISpriteInfoList;
+    playerHairstyles: ISpriteInfoList;
     items: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;
-    player: ISpriteInfo;
+    playerBody: ISpriteInfo;
     raft: ISpriteInfo;
     shadow: ISpriteInfo;
     sleeps: ISpriteInfoList;
-    sleepyHead: ISpriteInfo;
+    playerSleeping: ISpriteInfo;
     text: ISpriteInfo;
     tileEvents: ISpriteInfoList;
     zzz: ISpriteInfo;

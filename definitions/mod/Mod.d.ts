@@ -1,10 +1,11 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Command, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, KeyBind, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Command, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import BaseMod from "mod/BaseMod";
+import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer from "player/IPlayer";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
@@ -299,24 +300,6 @@ export declare abstract class Mod extends BaseMod {
      */
     onItemEquip(player: IPlayer, item: IItem, slot: EquipType): void;
     /**
-     * Called when a keybind is pressed
-     * @param keyBind The keybind
-     * @returns False to cancel the keybind press or undefined to use the default logic
-     */
-    onKeyBindPress(keyBind: KeyBind): boolean | undefined;
-    /**
-     * Called when a key is pressed down
-     * @param event The event object
-     * @returns False to cancel the event or undefined to use the default logic
-     */
-    onKeyDown(event: JQueryEventObject): boolean | undefined;
-    /**
-     * Called when a key is let go
-     * @param event The event object
-     * @returns False to cancel the event or undefined to use the default logic
-     */
-    onKeyUp(event: JQueryEventObject): boolean | undefined;
-    /**
      * Called when a creature is damaged
      * @param creature The creature object
      * @param damageInfo The damage info object
@@ -335,11 +318,10 @@ export declare abstract class Mod extends BaseMod {
      */
     onCreatureSpawn(creature: ICreature): void;
     /**
-     * Called when a mouse button is pressed downed
-     * @param event The mouse event object
-     * @returns False to cancel the mouse event or undefined to use the default logic
+     * Called when in-game, on the bind catcher loop (once per frame)
+     * @param api The bind catcher api, allowing you to check whether binds are pressed
      */
-    onMouseDown(event: JQueryEventObject): boolean | undefined;
+    onBindLoop(api: BindCatcherApi): void;
     /**
      * Called when the mouse is moved
      * @param event The mouse event object

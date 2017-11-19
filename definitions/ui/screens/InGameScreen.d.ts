@@ -1,4 +1,4 @@
-import { ActionType, DialogId, EquipType, FacingDirection, IBind, IMessagePack, ItemType, SortType, StatType } from "Enums";
+import { ActionType, Bindable, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType, StatType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -13,6 +13,7 @@ export declare enum TextElementId {
     Reputation = 3,
 }
 export default class InGameScreen extends BaseScreen {
+    bindCatcherId: number;
     elementVisibleInGame: JQuery;
     elementBlocker: JQuery;
     elementBlockerMouse: JQuery;
@@ -55,6 +56,7 @@ export default class InGameScreen extends BaseScreen {
     elementDialogMap: JQuery;
     elementDialogBook: JQuery;
     elementDialogBookContainer: JQuery;
+    elementDialogOptions: JQuery;
     elementContainers: JQuery;
     elementVersion: JQuery;
     elementContainerDialogs: JQuery[];
@@ -62,7 +64,6 @@ export default class InGameScreen extends BaseScreen {
     contextMenuOpen: boolean;
     private mouseEvent;
     private touchEvent;
-    private hasTouchScreen;
     private mouseX;
     private mouseY;
     private contextMenu;
@@ -90,20 +91,18 @@ export default class InGameScreen extends BaseScreen {
     selector(): string;
     bindElements(): void;
     changeEquipmentOption(id: string): void;
+    changeOption(id: string): void;
     toggleCraftingTab(which: "crafting" | "dismantle", canClose?: boolean): void;
     toggleCraftingTabElements(which: "crafting" | "dismantle"): void;
     unbindElements(): void;
     bindSortable(element: JQuery): void;
-    onKeyDown(_: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
-    onKeyUp(event: JQueryEventObject, keyCode: number, blockable: boolean): boolean | undefined;
-    runBind(bind: IBind): boolean | undefined;
     pressHotKey(hotKeyNumber: number): boolean;
     useQuickSlot(slot: number): boolean;
     runQuickslot(item: IItem, actionType: ActionType): void;
     onChatEnter(chatElement: JQuery): void;
     displayChatMessage(player: IPlayer, message: string): void;
     isSorting(): boolean;
-    runSortableAction(action: string): void;
+    runSortableAction(action: string, ...data: any[]): void;
     cancelSorting(): void;
     setupContextMenu(): any;
     onShow(): void;
@@ -113,19 +112,12 @@ export default class InGameScreen extends BaseScreen {
     onGameEnd(showBlocker: boolean): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
     setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
-    onMouseDown(event: JQueryEventObject): void;
-    onMouseUpOrLeave(event: JQueryEventObject): void;
-    onOtherClick(event: JQueryEventObject): void;
     onMouseMove(event: JQueryEventObject): void;
-    onBlockerMouseMove(event: JQueryEventObject): void;
-    completeBlockerMouseMovement(): void;
-    isMouseMovementBlockerVisible(): boolean;
     highlightItemElementByItemId(itemId: number, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementBySelector(selector: string, highlight: boolean, force?: boolean, skipCount?: boolean): void;
-    getMovementDirection(event: any): FacingDirection;
-    onMouseScroll(event: JQueryEventObject): void;
+    getMovementDirection(mouseX: number, mouseY: number): FacingDirection;
     canUseHotkeys(): boolean;
     shakeStat(stat: StatType): void;
     refreshStats(): void;
@@ -160,13 +152,9 @@ export default class InGameScreen extends BaseScreen {
     showItemContextMenu(element: JQuery, isContainer?: boolean): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
     runContextMenuAction(itemId: number, containerId: number | undefined, action: IContextMenuAction, skipSound?: boolean): boolean;
-    onInventoryItemRightClick(element: JQuery, bypassAll?: boolean): void;
-    onContainerItemRightClick(element: JQuery, bypassAll?: boolean): void;
     onCraftingItemClick(element: JQuery): void;
     onDismantleItemClick(element: JQuery): void;
     onDismantleHover(element: JQuery, hover: boolean): void;
-    onQuickSlotItemRightClick(element: JQuery): void;
-    onEquipmentItemRightClick(element: JQuery): void;
     getTooltipHtml(element: JQuery): string | undefined;
     tooltipEnable(): void;
     tooltipRefresh(): void;
@@ -229,7 +217,7 @@ export default class InGameScreen extends BaseScreen {
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;
-    addButton(translationId: string, imagePath: string, keyBind?: number): JQuery;
+    addButton(translationId: string, imagePath: string, bindable?: Bindable): JQuery;
     refreshButtonTooltip(button: JQuery): void;
     removeButton(button: JQuery): void;
     onUpdateDirection(): void;

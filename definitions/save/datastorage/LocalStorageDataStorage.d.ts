@@ -3,9 +3,10 @@ export default class LocalStorageDataStorage implements IDataStorage {
     isEnabled(): boolean;
     isReady(): boolean;
     transferSaves(): void;
-    isSlotUsed(slot: number, callback: (slot: number, isUsed: boolean) => void, interval?: number): boolean;
-    saveToSlot(slot: number, saveObject: SaveObject, callback: (slot: number, bytes: number) => void): void;
-    loadFromSlot(slot: number, saveObject: SaveObject, callback: (slot: number, success: boolean) => void): void;
-    deleteSlot(slot: number, callback: (slot: number, success: boolean) => void): void;
-    deleteAll(callback: () => void): void;
+    isSlotUsed(slot: number, interval?: number): Promise<boolean>;
+    saveToSlot(slot: number, saveObject: SaveObject): Promise<number>;
+    loadFromSlot(slot: number, saveObject: SaveObject): Promise<void>;
+    deleteSlot(slot: number): Promise<boolean>;
+    deleteAllSlots(): Promise<boolean>;
+    deleteAllData(): Promise<void>;
 }

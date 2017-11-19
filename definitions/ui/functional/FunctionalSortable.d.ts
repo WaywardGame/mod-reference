@@ -14,7 +14,7 @@ export default class Sortable implements ISortable {
     stop(): void;
     cancel(): void;
     refreshItems(): void;
-    runAction(action: string): JQuery | boolean | undefined;
+    runAction(action: string, ...data: any[]): JQuery | boolean | undefined;
     private _refreshItemPositions();
     private _updateHelperPosition(x, y);
     private _onMouseDown(event);

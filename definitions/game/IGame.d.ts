@@ -2,20 +2,21 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Difficulty, FacingDirection, FireType, IHighscore, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
-import IOptions from "game/IOptions";
+import { Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
-import { IMultiplayerWorldData } from "multiplayer/IMultiplayer";
-import { IPlayer, IPlayerCustomization } from "player/IPlayer";
+import { IMultiplayerOptions, IMultiplayerWorldData } from "multiplayer/IMultiplayer";
+import { IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
+import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { SaveObject } from "save/ISaveManager";
 import { IPropSerializable } from "save/ISerializer";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
+import { ICharacter } from "../newui/util/Character";
 export interface IGame extends IPropSerializable {
     interval: number;
     mapSize: number;
@@ -48,7 +49,6 @@ export interface IGame extends IPropSerializable {
     savedHighscore: boolean;
     autoSaveTimer: number;
     updateRender: boolean;
-    dailyChallenge: boolean;
     fillCount: number;
     fillTile: boolean[][];
     unloading: boolean;
@@ -75,6 +75,7 @@ export interface IGame extends IPropSerializable {
     debugRenderer: ITextureDebugRenderer;
     notifier: INotifier;
     cartographyTexture: WebGLTexture;
+    readonly isDailyChallenge: boolean;
     addPlayer(playerOptions?: IPlayerOptions): IPlayer;
     addZoomLevel(amount: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
@@ -140,13 +141,15 @@ export interface IGame extends IPropSerializable {
     outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     packGround(x: number, y: number, z: number): void;
     passTurn(player: IPlayer, turnType?: TurnType): void;
-    play(saveSlot: number, options?: IPlayOptions): void;
+    play(options: Partial<IPlayOptions> & {
+        slot: number;
+    }): void;
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
     resetGameState(skipSave?: boolean): void;
     resizeRenderer(): void;
-    saveGame(saveType: SaveType, callback?: (slot?: number, bytes?: number, saveObject?: SaveObject) => void): void;
+    saveGame(saveType: SaveType): Promise<[number | undefined, number | undefined, SaveObject | undefined]>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, chatMessage?: boolean): void;
     setRealTime(enabled: boolean): void;
@@ -171,15 +174,19 @@ export declare type IGameOld = Partial<IGame> & {
     tamedCreatures: number[];
     options: IOptions;
     lastPlayedVersion: string | undefined;
-    highscores: IHighscore[];
+    highscores: IHighscoreOld[];
     playedCount: number;
+    dailyChallenge: boolean;
 };
 export interface IPlayOptions {
-    seed?: string | number;
-    name?: string;
-    difficulty?: Difficulty;
-    customization?: IPlayerCustomization;
-    multiplayer?: IMultiplayerWorldData;
+    slot: number;
+    name: string;
+    seed: string;
+    difficulty: Difficulty;
+    character: ICharacter;
+    multiplayer: IMultiplayerOptions | false;
+    realTime: boolean;
+    multiplayerWorld?: IMultiplayerWorldData;
 }
 export interface IPlayerOptions {
     id?: number;
@@ -187,7 +194,7 @@ export interface IPlayerOptions {
     name?: string;
     options?: IOptions;
     position?: IPointZ;
-    customization?: IPlayerCustomization;
+    character?: ICharacter;
     completedMilestones?: number;
 }
 export interface ICrafted {
@@ -197,3 +204,6 @@ export interface ICrafted {
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;
 export declare const lineOfSightDetail = 4;
+export declare const interval = 16.6666;
+export declare const maximumDirectionTurnDelay: number;
+export declare const defaultDirectionTurnDelay: number;

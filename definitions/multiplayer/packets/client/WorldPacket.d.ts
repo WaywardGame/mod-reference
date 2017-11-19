@@ -4,6 +4,6 @@ import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class WorldPacket extends ClientPacket {
     data: IMultiplayerWorldData;
     getAllowedStates(): ConnectionState;
-    process(): void;
+    process(): Promise<void>;
     protected getInitialBufferSize(): number;
 }

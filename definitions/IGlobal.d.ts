@@ -12,6 +12,7 @@ import IItemManager from "item/IItemManager";
 import ILanguageManager from "language/ILanguageManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
+import NewUi from "newui/NewUi";
 import IPlayer from "player/IPlayer";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
@@ -24,7 +25,6 @@ import ISaveDataGlobal from "save/data/ISaveDataGlobal";
 import ISaveManager from "save/ISaveManager";
 import ISteamworks from "steamworks/ISteamworks";
 import ITileEventManager from "tile/ITileEventManager";
-import ITrello from "trello/ITrello";
 import { ISortable, ISortableOptions } from "ui/functional/IFunctionalSortable";
 import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
 import IUi from "ui/IUi";
@@ -66,9 +66,9 @@ declare global {
 	let steamworks: ISteamworks;
 	let tileAtlas: ITileAtlas;
 	let tileEventManager: ITileEventManager;
-	let trello: ITrello;
 	let ui: IUi;
 	let world: IWorld;
+	let newui: NewUi;
 
 	// tslint:disable-next-line:variable-name
 	let Module: IWaywardCPP;

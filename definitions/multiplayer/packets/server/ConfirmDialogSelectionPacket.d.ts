@@ -1,7 +1,7 @@
-import { UiMessage } from "language/ILanguage";
+import { InterruptChoice, UiTranslation } from "language/ILanguage";
 import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
 export default class ConfirmDialogSelectionPacket extends PlayerTargetedServerPacket {
-    id: UiMessage;
-    selection: UiMessage;
+    id: UiTranslation;
+    selection: InterruptChoice;
     process(): void;
 }

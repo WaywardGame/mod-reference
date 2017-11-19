@@ -6,6 +6,7 @@ export interface IResourceLoader {
     getPath(pathType: PathType, index: number, extra?: number): string;
     takeLoadingSlot(callback: () => void): void;
     getImageOverride(src: string): Partial<IImageOverrideDescription>;
+    updateImageOverrides(): void;
     releaseLoadingSlot(): void;
 }
 export default IResourceLoader;

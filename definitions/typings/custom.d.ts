@@ -35,7 +35,7 @@ interface JQuery {
 }
 
 declare var requirejs: IRequire;
-declare var requireelectron: IRequire;
+declare var requireElectron: IRequire | undefined;
 
 interface Window {
 	define: any;

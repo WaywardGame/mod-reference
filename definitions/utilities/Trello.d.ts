@@ -3,7 +3,6 @@ export interface ITrello {
     getChangelog(versionInfo: IVersionInfo): Promise<IChangelog | undefined>;
     getVersions(maxVersion?: IVersionInfo): Promise<IVersionInfo[]>;
 }
-export default ITrello;
 export interface ITrelloBoard {
     id: string;
     name: string;
@@ -36,6 +35,7 @@ export interface IChangelog {
     sections: {
         [index: number]: ITrelloCard[] | undefined;
     };
+    changeCount: number;
 }
 export declare enum ChangelogSection {
     New = 0,
@@ -47,3 +47,13 @@ export declare enum ChangelogSection {
     Technical = 6,
     Misc = 7,
 }
+export default class Trello implements ITrello {
+    getChangelog(versionInfo: IVersionInfo): Promise<IChangelog | undefined>;
+    getVersions(maxVersion?: IVersionInfo, board?: ITrelloBoard): Promise<IVersionInfo[]>;
+    private getCards(list);
+    private getBoard(boardId, checkClosed?);
+    private getListVersionInfo(list);
+    private findChangelogList(versionInfo, board?);
+    private parseChangelog(changelogData);
+}
+export declare const trello: Trello;

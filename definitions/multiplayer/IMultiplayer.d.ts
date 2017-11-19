@@ -1,16 +1,16 @@
 import { ConnectionState, Difficulty } from "Enums";
 import { ICrafted, IPlayerOptions } from "game/IGame";
-import { UiMessage } from "language/ILanguage";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
+import { TextOrTranslationData } from "../newui/INewUi";
 export interface IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
-    disconnect(message?: string): void;
-    disconnectAndResetGameState(uiMessage: UiMessage): void;
+    disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
+    disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     getBannedPlayers(): string[];
     getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
@@ -20,7 +20,7 @@ export interface IMultiplayer {
     isReady(): boolean;
     isServer(): boolean;
     joinServer(serverId: string, playerOptions?: IPlayerOptions): void;
-    kick(player: IPlayer, uiMessage: UiMessage): void;
+    kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
     sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
@@ -33,6 +33,7 @@ export interface IMultiplayer {
 }
 export default IMultiplayer;
 export interface IMultiplayerOptions {
+    lobbyId?: string;
     lobbyType: LobbyType;
     difficulty: Difficulty;
     pvp: boolean;
