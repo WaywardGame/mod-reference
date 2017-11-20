@@ -27,7 +27,6 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     setAttribute(name: string, value: string): this;
     getAttribute(name: string): string | null;
     removeAttribute(name: string): this;
-    reflow(): this;
     repaint(): void;
     isVisible(): boolean;
     show(...args: any[]): Promise<void>;

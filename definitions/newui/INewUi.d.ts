@@ -135,7 +135,6 @@ export interface IUiElement<T = {}> {
     cancel(event: string | number | Array<string | number>, callback: (...args: any[]) => any): void;
     addClass(...classes: string[]): this;
     removeClass(...classes: string[]): this;
-    reflow(): this;
     isVisible(): boolean;
     show(...args: any[]): Promise<void>;
     hide(...args: any[]): Promise<void>;

@@ -225,6 +225,7 @@ export declare function arrayEquals(array1: any[] | undefined, array2: any[] | u
 export declare function arrayIncludes(arr: any[], find: any): boolean;
 export declare function findUnusedId<T>(source: Source, things: T[]): number;
 export declare function escapeHTML(str: string): string;
+export declare function stripHTML(str: string): string;
 export declare function fixObjectCaseStyle(obj: any, caseStyle: CaseStyle, whitelist?: string[]): any;
 export declare function stripParentDirectoryAccessorsFromPath(path: string): string;
 export declare function encodeURIComponentPath(p: string): string;

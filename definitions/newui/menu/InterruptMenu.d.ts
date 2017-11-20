@@ -31,6 +31,7 @@ export default class InterruptMenu extends Menu {
     private input;
     private choiceRow;
     private loadingElement;
+    private settingOptionsQueue;
     readonly type: InterruptType;
     constructor(uiApi: UiApi);
     setOptions(options: InterruptOptions): Promise<void>;

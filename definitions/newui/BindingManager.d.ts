@@ -23,6 +23,8 @@ export interface BindCatcherApi {
     wasReleased(key: string): boolean;
     /** wasReleased is only updated if wasPressed is also checked */
     wasReleased(bind: Bindable): boolean;
+    removePressState(key: string): void;
+    removePressState(bind: Bindable): void;
     isDown(key: string): boolean;
     isDown(bind: Bindable): boolean;
     timeDown(key: string): number;
@@ -48,10 +50,11 @@ export declare class BindingManager {
     getBindTranslation(bind: IBinding | IBinding[]): string;
     getBindTranslation(bindable: Bindable, separate: true): string[];
     getBindTranslation(bind: IBinding | IBinding[], separate: true): string[];
-    registerBindCatcher(element: HTMLElement): number;
+    registerBindCatcher(element: HTMLElement, shouldFocus?: boolean): number;
     deregisterBindCatcher(id: number): void;
     setDefaultBindCatcher(id: number): void;
     getPressTime(bindOrKey: Bindable | string, id?: number): number;
+    removePressState(bindOrKey: Bindable | string, id?: number): void;
     checkModifiers(modifiers: KeyModifier[], exclude: string, id?: number): boolean;
     isPressed(bindOrKey: Bindable | string, id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;

@@ -17,6 +17,7 @@ export declare enum ButtonEvent {
     Activate = "Activate",
 }
 export default class Button<T = {}> extends UiText<T> {
+    playSound: boolean;
     private buttons;
     private _options;
     private _disabled;
