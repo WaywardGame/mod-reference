@@ -1177,7 +1177,7 @@ export interface TatteredMap extends IPointZ {
     reinitialize?: boolean;
 }
 export interface IInputMovement extends IPoint {
-    keyBind: Bindable;
+    moveBind: Bindable;
     direction: FacingDirection;
 }
 export interface ISeeds {

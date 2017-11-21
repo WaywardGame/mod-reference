@@ -258,11 +258,4 @@ export interface IPlayerTravelData {
     itemId: number | undefined;
     state: PlayerState;
 }
-export declare enum PlayerName {
-    Anne = 0,
-    Gregory = 1,
-    Drathicus = 2,
-    Maxamax = 3,
-    Yuudori = 4,
-}
 export declare const weightBonus = 25;

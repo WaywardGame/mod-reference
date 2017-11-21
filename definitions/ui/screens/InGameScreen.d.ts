@@ -80,6 +80,7 @@ export default class InGameScreen extends BaseScreen {
     private sortableElementTargetContainer;
     private sortingCancelled;
     private onSortableAction;
+    private onChatKeyPress;
     private craftableItemTypes;
     private nonCraftableItemTypes;
     private messages;
@@ -123,7 +124,7 @@ export default class InGameScreen extends BaseScreen {
     refreshStats(): void;
     refreshAttributes(): void;
     updateTextIfChanged(id: TextElementId, element: JQuery, text: string): void;
-    onButtonBarClick(button: JQuery | string): void;
+    onButtonBarClick(button: JQuery | string): Promise<void>;
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;

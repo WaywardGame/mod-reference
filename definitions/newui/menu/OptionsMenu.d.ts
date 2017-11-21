@@ -22,7 +22,9 @@ export default class OptionsMenu extends Menu {
     private bindCatcher;
     private modOptions;
     private refreshables;
+    private initialized;
     constructor(uiApi: UiApi);
+    init(): Promise<void>;
     remove(removeFromParent?: boolean): Promise<void>;
     addTabSection(tab: MenuTabOptions, heading: TextOptions, content?: Array<UiElement | undefined>): ITabSection;
     private registerRefresh(element);

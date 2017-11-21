@@ -1,10 +1,9 @@
-import IDataStorage from "save/datastorage/IDataStorage";
 import { SaveObject } from "save/ISaveManager";
-export default class LocalStorageDataStorage implements IDataStorage {
+export default interface IDataStorage {
     isEnabled(): boolean;
     isReady(): boolean;
     isSlotUsed(slot: number, interval?: number): boolean;
-    saveToSlot(slot: number, saveObject: SaveObject): number;
+    saveToSlot(slot: number, saveObject: SaveObject, fakeSave?: boolean): number;
     loadFromSlot(slot: number, saveObject: SaveObject): void;
     deleteSlot(slot: number): boolean;
     deleteAllSlots(): boolean;

@@ -7,6 +7,7 @@ import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import { IMultiplayerOptions, IMultiplayerWorldData } from "multiplayer/IMultiplayer";
+import { ICharacter } from "newui/util/Character";
 import { IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -16,8 +17,8 @@ import { SaveObject } from "save/ISaveManager";
 import { IPropSerializable } from "save/ISerializer";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
-import { ICharacter } from "../newui/util/Character";
-export interface IGame extends IPropSerializable {
+import Emitter from "utilities/Emitter";
+export interface IGame extends IPropSerializable, Emitter {
     interval: number;
     mapSize: number;
     mapSizeSq: number;
@@ -167,6 +168,9 @@ export interface IGame extends IPropSerializable {
     wrapCoordinate(cordinate: number, reference: number): number;
 }
 export default IGame;
+export declare enum GameEvent {
+    GlobalSlotLoaded = 0,
+}
 export declare type IGameOld = Partial<IGame> & {
     dayNight: number;
     dayNightSwitch: 0 | 1;

@@ -19,11 +19,9 @@ export interface ISaveManager {
     loadPartial(slot: number): Promise<SaveObject>;
     loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
     loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string | undefined): any;
-    save(slot: number): Promise<[number, SaveObject]>;
+    save(slot: number, unloading?: boolean): Promise<[number, SaveObject]>;
     savePartialData(slot: number, object: any, key: string, saveObjectKey: string): Promise<number>;
     savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any): Promise<number>;
-    transferSaves(): void;
-    useLocalStorage(): void;
 }
 export default ISaveManager;
 export declare enum SaveSort {
@@ -50,15 +48,4 @@ export interface ISerializeProperty {
     key: string;
     property: string[];
     skipCompression?: boolean;
-}
-export interface IDataStorage {
-    isEnabled(): boolean;
-    isReady(): boolean;
-    transferSaves(): void;
-    isSlotUsed(slot: number, interval?: number): Promise<boolean>;
-    saveToSlot(slot: number, saveObject: SaveObject, fakeSave?: boolean): Promise<number>;
-    loadFromSlot(slot: number, saveObject: SaveObject): Promise<void>;
-    deleteSlot(slot: number): Promise<boolean>;
-    deleteAllSlots(): Promise<boolean>;
-    deleteAllData(): Promise<void>;
 }

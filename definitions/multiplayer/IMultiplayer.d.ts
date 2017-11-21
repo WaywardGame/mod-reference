@@ -1,4 +1,4 @@
-import { ConnectionState, Difficulty } from "Enums";
+import { ConnectionState } from "Enums";
 import { ICrafted, IPlayerOptions } from "game/IGame";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { IPlayer } from "player/IPlayer";
@@ -8,7 +8,7 @@ export interface IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
-    createServer(serverId: string | undefined, options?: IMultiplayerOptions): void;
+    createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     getBannedPlayers(): string[];
@@ -19,7 +19,7 @@ export interface IMultiplayer {
     isProcessingPacket(): boolean;
     isReady(): boolean;
     isServer(): boolean;
-    joinServer(serverId: string, playerOptions?: IPlayerOptions): void;
+    joinServer(channel: string, playerOptions?: IPlayerOptions): void;
     kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
@@ -35,7 +35,6 @@ export default IMultiplayer;
 export interface IMultiplayerOptions {
     lobbyId?: string;
     lobbyType: LobbyType;
-    difficulty: Difficulty;
     pvp: boolean;
     maxPlayers: number | undefined;
 }

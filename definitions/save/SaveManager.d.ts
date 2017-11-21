@@ -4,7 +4,6 @@ export default class SaveManager implements ISaveManager {
     private dataStorage;
     private multiplayerSlotData;
     isEnabled(): boolean;
-    useLocalStorage(): void;
     initialize(): Promise<void>;
     /**
      * Returns an array where the index is the slot number, and the value is whether or not the slot is filled
@@ -37,7 +36,7 @@ export default class SaveManager implements ISaveManager {
     /**
      * Returns an tuple [bytes: number, saveObject: SaveObject]
      */
-    save(slot: number): Promise<[number, SaveObject]>;
+    save(slot: number, unloading?: boolean): Promise<[number, SaveObject]>;
     /**
      * Returns whether or not it succeeded
      */
@@ -61,7 +60,6 @@ export default class SaveManager implements ISaveManager {
     deleteSlot(slot: number): Promise<boolean | undefined>;
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteAllData(): Promise<void>;
-    transferSaves(): void;
     compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
     private getPropertiesToSerialize(slot);
@@ -71,5 +69,5 @@ export default class SaveManager implements ISaveManager {
     /**
      * Returns the number of bytes the save takes up
      */
-    private saveObjectToSlot(slot, saveObject);
+    private saveObjectToSlot(slot, saveObject, unloading?);
 }

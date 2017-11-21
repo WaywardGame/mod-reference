@@ -14,7 +14,8 @@ import { IParticle } from "renderer/particle/IParticle";
 import { SaveObject } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
-export default class Game implements IGame {
+import * as Utilities from "Utilities";
+export default class Game extends Utilities.Emitter implements IGame {
     readonly interval: number;
     readonly mapSize: number;
     readonly mapSizeSq: number;
@@ -194,7 +195,7 @@ export default class Game implements IGame {
     private processMessages();
     private prePlay(isLoadingSave, options);
     private playPostSeed(options);
-    private render(delta);
+    private render();
     private simulate();
     private getPotentialRecipesInContainer(container, typesChecked, potentialRecipes);
     private removeAndFixPids(playerArray, pid);
