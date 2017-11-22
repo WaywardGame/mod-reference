@@ -9,9 +9,9 @@ import "ui/functional/FunctionalTooltip";
 import { HintType } from "ui/IHint";
 import { IDialogInfo, IUi } from "ui/IUi";
 import InGameScreen from "ui/screens/InGameScreen";
-export default class Ui implements IUi {
+import * as Utilities from "Utilities";
+export default class Ui extends Utilities.Emitter implements IUi {
     screenInGame: InGameScreen;
-    private bindState;
     private elementDocument;
     private elementWindow;
     private elementBody;

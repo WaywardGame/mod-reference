@@ -126,6 +126,8 @@ export declare enum UiElementEvent {
 }
 export declare enum UiApiEvent {
     Resize = 0,
+    Interrupt = 1,
+    InterruptClose = 2,
 }
 export interface IUiElement<T = {}> {
     jsonData: DOMStringMap & T;

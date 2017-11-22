@@ -14,6 +14,9 @@ export declare enum TextElementId {
 }
 export default class InGameScreen extends BaseScreen {
     bindCatcherId: number;
+    overlayBindCatcherId: number;
+    shouldResetMovement: boolean;
+    shouldCancelSorting: boolean;
     elementVisibleInGame: JQuery;
     elementBlocker: JQuery;
     elementBlockerMouse: JQuery;
@@ -229,4 +232,6 @@ export default class InGameScreen extends BaseScreen {
     private onCloseMessages();
     private runGatherOrHarvestAction(actionType, action);
     private runPourAction(actionType, item, action);
+    private onInterrupt;
+    private onInterruptClosed;
 }

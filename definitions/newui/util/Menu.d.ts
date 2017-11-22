@@ -17,6 +17,7 @@ export declare enum MenuEvent {
 }
 export default class Menu<T = {}> extends UiElement<T> implements IMenu {
     protected contentWrapper: UiElement<any>;
+    protected canCancel: boolean;
     private selection;
     private elementTabs;
     private sectionElements;

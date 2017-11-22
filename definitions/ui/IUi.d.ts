@@ -6,6 +6,7 @@ import { MenuId } from "newui/INewUi";
 import { IPlayer } from "player/IPlayer";
 import { IPropSerializable } from "save/ISerializer";
 import { HintType } from "ui/IHint";
+import { Emitter } from "Utilities";
 export interface IUiScreen {
     bindCatcher?: number;
     selector(): string;
@@ -49,7 +50,7 @@ export interface IContextMenuAction {
     keybind?: number;
     data?: any;
 }
-export interface IUi extends IPropSerializable {
+export interface IUi extends IPropSerializable, Emitter {
     screenInGame: IUiScreen;
     initialize(): void;
     initializeGameState(): void;
@@ -142,3 +143,7 @@ export interface IUi extends IPropSerializable {
     onUpdateDirection(): void;
 }
 export default IUi;
+export declare enum UiEvent {
+    HelpShow = 0,
+    HelpHide = 1,
+}
