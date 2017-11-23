@@ -129,6 +129,7 @@ export default class Ui extends Emitter implements UiApi {
      * Returns the maximum scale the screen size will allow (multiplier)
      */
     getMaximumScale(): number;
+    isScreenVisible(screenId: ScreenId): boolean;
     private _hideScreen(screenId);
     /**
      * Sets the ui scale to the size configured in the options, capped by the maximum the screen size allows
