@@ -177,7 +177,6 @@ export default class Player implements IPlayer {
     hurtHands(message: Message, damageMessage: Message): void;
     /**
      * Burn the player
-     * @param skipMessage
      */
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     hasDelay(): boolean;

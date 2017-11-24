@@ -24,6 +24,7 @@ export interface ILanguageManager {
     getTranslation(dictionary: Dictionary, entry: number, translationType: TranslationType.all): ITranslation;
     getTranslation(dictionary: Dictionary, entry: number, translationType: TranslationType): string;
     getTranslationString(translationId: string): string;
+    getTranslationString(dictionary: Dictionary.BindPress, entry: string): string;
     getTranslationString(dictionary: Dictionary, entry: number): string;
     getTranslationString(dictionary: Dictionary, entry: number, translationType: TranslationType.all): string;
     getTranslationString(dictionary: Dictionary, entry: number, translationType: TranslationType): string;

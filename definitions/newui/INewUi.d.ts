@@ -146,7 +146,7 @@ export interface IUiElement<T = {}> {
     append(elements: Array<HTMLElement | IUiElement>): this;
     remove(removeFromParent?: boolean): Promise<void>;
     removeChild(child: IUiElement, removeChild?: boolean): void;
-    findDescendants(selector: string): NodeListOf<HTMLElement>;
+    findDescendants(selector: string): NodeListOf<Element>;
     contains(what: string | HTMLElement | IUiElement): boolean;
     showTooltip(): void;
 }

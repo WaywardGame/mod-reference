@@ -71,7 +71,6 @@ export default class InGameScreen extends BaseScreen {
     private mouseY;
     private contextMenu;
     private contextMenuTarget;
-    private closingContextMenu;
     private contextMenuBlocking;
     private lastContextMenuPosition;
     private actionsMenuOpen;

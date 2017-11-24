@@ -42,7 +42,7 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
      * @param filter A predicate that filters the children not to dump
      */
     dump(filter?: (element: UiElement) => boolean): Promise<void>;
-    findDescendants(selector: string): NodeListOf<HTMLElement>;
+    findDescendants(selector: string): NodeListOf<Element>;
     showTooltip(): Promise<void>;
     getBox(): ClientRect;
     getOffset(): {

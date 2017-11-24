@@ -1,6 +1,4 @@
 import { ITileEvent } from "tile/ITileEvent";
-export default class FungusTileEvent {
-    static create(tileEvent: ITileEvent): void;
-    static remove(tileEvent: ITileEvent): void;
-    static update(tileEvent: ITileEvent): void;
-}
+export declare function create(tileEvent: ITileEvent): void;
+export declare function remove(tileEvent: ITileEvent): void;
+export declare function update(tileEvent: ITileEvent): void;

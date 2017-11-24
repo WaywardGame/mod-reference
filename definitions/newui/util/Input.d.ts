@@ -22,5 +22,9 @@ export default class Input<T = {}> extends UiElement<T & InputData> {
     setOptions(options: InputOptions): void;
     focus(): void;
     blur(): void;
-    clear(): void;
+    /**
+     * Reset the text of the input to the default, or to the clearTo option if that was provided
+     * @param useDefault Whether to use the default over clearTo
+     */
+    clear(useDefault?: boolean): void;
 }

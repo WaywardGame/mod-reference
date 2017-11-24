@@ -150,7 +150,7 @@ export interface IGame extends IPropSerializable, Emitter {
     removePlayer(pid: number): void;
     resetGameState(skipSave?: boolean): void;
     resizeRenderer(): void;
-    saveGame(saveType: SaveType): Promise<[number | undefined, number | undefined, SaveObject | undefined]>;
+    saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, chatMessage?: boolean): void;
     setRealTime(enabled: boolean): void;
@@ -204,6 +204,11 @@ export interface IPlayerOptions {
 export interface ICrafted {
     unlockTime: number;
     newUnlock: boolean;
+}
+export interface ISaveInfo {
+    slot: number;
+    bytes?: number;
+    saveObject?: SaveObject;
 }
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;

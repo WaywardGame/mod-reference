@@ -1,5 +1,5 @@
 import { ActionType, BookType, CreatureType, DoodadType, DoodadTypeGroup, GrowingStage, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
-import { Dictionary, IActionDictionary, IBookDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, ILanguage, IMessageDictionary, IMilestoneDictionary, IOnEquipDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, ITranslationArray, IUiDictionary, UiTranslation } from "language/ILanguage";
+import { Dictionary, IActionDictionary, IBookDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, ILanguage, IMessageDictionary, IMilestoneDictionary, IOnEquipDictionary, IPressNameDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, ITranslationArray, IUiDictionary, UiTranslation } from "language/ILanguage";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";
@@ -31,8 +31,9 @@ export default class Language implements ILanguage {
     setDictionary(dictionary: Dictionary.TileEvent, newEntries: ITileEventDictionary): void;
     setDictionary(dictionary: Dictionary.UiChoice, newEntries: IUiDictionary): void;
     setDictionary(dictionary: Dictionary.Book, newEntries: IBookDictionary): void;
+    setDictionary(dictionary: Dictionary.BindPress, newEntries: IPressNameDictionary): void;
     setDictionary(dictionary: Dictionary, newEntries: {
-        [key: number]: any;
+        [key: string]: any;
     }): void;
     setDictionaryRaw(dictionary: Dictionary, newEntries: ITranslationArray): void;
     removeDictionary(dictionary: Dictionary): void;
@@ -58,6 +59,7 @@ export default class Language implements ILanguage {
     setEntry(dictionary: Dictionary.TileEvent, entryIndex: TileEventType, name: string, description: string): void;
     setEntry(dictionary: Dictionary.UiChoice, entryIndex: UiTranslation, name: string): void;
     setEntry(dictionary: Dictionary.Book, entryIndex: BookType, name: string, description: string): void;
+    setEntry(dictionary: Dictionary.BindPress, entryName: string, name: string): void;
     setEntry(dictionary: Dictionary, entryIndex: number, ...entry: string[]): void;
     private formatEntry(dictionary, entry);
 }

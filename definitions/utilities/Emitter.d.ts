@@ -6,9 +6,9 @@ export declare enum EmitterEvent {
 }
 export default class Emitter {
     private subscribers;
-    on(events: string | number | Array<string | number>, cb: (emitter: Emitter, ...data: any[]) => any): this;
-    once(event: string | number, cb: (emitter: Emitter, ...data: any[]) => any): this;
+    on(events: string | number | Array<string | number>, cb: (emitter: this, ...data: any[]) => any): this;
+    once(event: string | number, cb: (emitter: this, ...data: any[]) => any): this;
     trigger(event: string | number, ...data: any[]): Promise<any[]>;
-    cancel(events: string | number | Array<string | number>, cb?: (emitter: Emitter, ...data: any[]) => any): void;
+    cancel(events: string | number | Array<string | number>, cb?: (emitter: this, ...data: any[]) => any): void;
     cancelAll(): void;
 }

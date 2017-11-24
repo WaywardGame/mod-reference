@@ -1,8 +1,7 @@
-import { InterruptChoice, UiTranslation } from "language/ILanguage";
+import { UiTranslation } from "language/ILanguage";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class DisplayConfirmDialogPacket extends ClientPacket {
-    id: UiTranslation;
-    message: string;
-    buttons: InterruptChoice[];
+    title: UiTranslation;
+    description: UiTranslation;
     process(): Promise<void>;
 }

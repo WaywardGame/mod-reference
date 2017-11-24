@@ -1,6 +1,5 @@
 import { ISaveManager, SaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 export default class SaveManager implements ISaveManager {
-    private loadedGlobalSlot;
     private dataStorage;
     private multiplayerSlotData;
     isEnabled(): boolean;
