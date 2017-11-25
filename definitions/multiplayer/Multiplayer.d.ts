@@ -1,8 +1,8 @@
 import { IPlayerOptions } from "game/IGame";
 import { IConnection, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
 import { IPacket } from "multiplayer/packets/IPacket";
+import { TextOrTranslationData } from "newui/INewUi";
 import IPlayer from "player/IPlayer";
-import { TextOrTranslationData } from "../newui/INewUi";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export default class Multiplayer implements IMultiplayer {
     private _playerIdentifier;
@@ -76,6 +76,7 @@ export default class Multiplayer implements IMultiplayer {
     private processOutgoingPackets();
     private processPacket(connection, packet);
     private synchronizationCheck(packet, checkBefore);
+    private desync(packet, checkData, checkBefore);
     private sendPacketInternal(packet, includeConnection?, excludeConnection?, force?);
     private _sendData(connection, packet, sendNow?);
     private sendMatchmakingMessage(data, channel?);

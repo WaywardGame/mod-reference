@@ -110,7 +110,7 @@ export interface IModManager {
     isLoadedByName(name: string): boolean;
     isValid(index: number): boolean;
     load(index: number): void;
-    loadAll(options: Partial<IPlayOptions>, callback: (err?: string) => void): void;
+    loadAll(options: Partial<IPlayOptions>, callback: (err: string | undefined, mods: string[]) => void): void;
     reload(index: number): boolean;
     reloadByName(name: string): boolean;
     removeMod(id: number, uninstall?: boolean): void;

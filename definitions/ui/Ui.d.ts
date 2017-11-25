@@ -77,7 +77,6 @@ export default class Ui extends Utilities.Emitter implements IUi {
     closeMapDialog(): void;
     openBookDialog(title: string, content: string): void;
     setFontStyle(): void;
-    setOpacity(): void;
     addButton(translationId: string, imagePath: string, keyBind?: number): JQuery;
     refreshButtonTooltip(button: JQuery): void;
     removeButton(button: JQuery): void;

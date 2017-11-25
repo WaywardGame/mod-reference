@@ -126,6 +126,10 @@ export default class Ui extends Emitter implements UiApi {
      */
     setScale(scale: number, save?: boolean): void;
     /**
+     * @param save Whether or not to save the new scale into options. Defaults to true.
+     */
+    setDialogOpacity(opacity?: number, save?: boolean): void;
+    /**
      * Returns the maximum scale the screen size will allow (multiplier)
      */
     getMaximumScale(): number;

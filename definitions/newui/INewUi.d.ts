@@ -114,6 +114,7 @@ export interface UiApi {
     playSelectSound(): void;
     setScale(scale: number): void;
     getMaximumScale(): number;
+    setDialogOpacity(opacity: number): void;
     on(event: UiApiEvent, callback: (...args: any[]) => any): void;
 }
 export declare enum UiElementEvent {
@@ -184,3 +185,5 @@ export declare type TextOrTranslationData = string | UiTranslation | Translation
 export interface LoadMenuArgs {
     _wentBack: boolean;
 }
+export declare const minimumDialogOpacity = 0;
+export declare const defaultDialogOpacity = 50;
