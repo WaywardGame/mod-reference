@@ -87,6 +87,8 @@ export interface UiApi {
     getScreen(screenId: ScreenId): IUiScreen | undefined;
     showScreen(screenId: ScreenId, transition?: boolean): Promise<void>;
     hideScreen(): Promise<void>;
+    hideScreen(screenId: ScreenId): Promise<void>;
+    hideScreen(screen: IUiScreen): Promise<void>;
     isScreenVisible(screenId: ScreenId): boolean;
     showTooltip(tooltipSource: IUiElement): Promise<void>;
     showTooltip(tooltipOptions: TooltipOptionsVague, source?: IUiElement): Promise<void>;

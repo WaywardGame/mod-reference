@@ -1,5 +1,5 @@
 import { UiTranslation } from "language/ILanguage";
-import { IMenu, MenuId, SelectDirection, TextOrTranslationData, UiApi, UiElementOptions } from "newui/INewUi";
+import { IMenu, IUiScreen, MenuId, SelectDirection, TextOrTranslationData, UiApi, UiElementOptions } from "newui/INewUi";
 import { BlockRow } from "newui/util/BlockRow";
 import Button, { ButtonEffect, ButtonOptions } from "newui/util/Button";
 import UiText, { Heading, Paragraph, TextOptions } from "newui/util/Text";
@@ -14,8 +14,10 @@ export declare enum MenuEvent {
     Load = "Load",
     Tab = "Tab",
     GoBackFrom = "GoBackFrom",
+    CancelBind = "CancelBind",
 }
 export default class Menu<T = {}> extends UiElement<T> implements IMenu {
+    screenHost: IUiScreen;
     protected contentWrapper: UiElement<any>;
     protected canCancel: boolean;
     private selection;

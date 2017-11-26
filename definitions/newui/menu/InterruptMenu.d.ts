@@ -32,10 +32,12 @@ export default class InterruptMenu extends Menu {
     private choiceRow;
     private loadingElement;
     private settingOptionsQueue;
+    private isResolved;
     readonly type: InterruptType;
     constructor(uiApi: UiApi);
     setOptions(options: InterruptOptions): Promise<void>;
     setText(title?: TextOrTranslationData, description?: TextOrTranslationData): void;
+    cancelInterrupt(): Promise<void>;
     choose(choice: InterruptChoice | string): Promise<void>;
     waitFor(): Promise<InterruptChoice | string | boolean | undefined>;
 }

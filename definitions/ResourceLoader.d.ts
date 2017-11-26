@@ -17,7 +17,7 @@ export default class ResourceLoader implements IResourceLoader {
     takeLoadingSlot(callback: () => void): void;
     releaseLoadingSlot(): void;
     getPath(pathType: PathType, index: number, extra?: number): string;
-    getImageOverride(src: string): Partial<IImageOverrideDescription>;
+    getImageOverride(src: string): Partial<IImageOverrideDescription> | undefined;
     updateImageOverrides(): void;
     private loadResourcesInternal(container);
     private loadCharacter();

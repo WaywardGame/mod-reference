@@ -1,4 +1,4 @@
-import { Difficulty, IBindArray, IKeyBind, IModBindArray } from "Enums";
+import { Difficulty, DropLocation, IBindArray, IKeyBind, IModBindArray } from "Enums";
 import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModManager";
 import { IBindings } from "newui/BindingManager";
@@ -56,7 +56,7 @@ export interface IOptions {
     dialogOpacity: number;
     directionTurnDelay: number;
     dropOnGather: boolean;
-    dropUnderYourself: boolean;
+    dropLocation: DropLocation;
     fontStyle: boolean;
     fullscreen: boolean;
     keepSortActive: boolean;
@@ -94,6 +94,7 @@ export declare type IOptionsOld = Partial<IOptions> & {
     hints: boolean;
     skipIntro: boolean;
     worldTooltips: boolean;
+    dropUnderYourself: boolean;
 };
 export interface IHighscore {
     name: string;

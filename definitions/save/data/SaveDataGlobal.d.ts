@@ -1,4 +1,4 @@
-import { IBindArray, IModBindArray } from "Enums";
+import { DropLocation, IBindArray, IModBindArray } from "Enums";
 import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModManager";
 import { IBindings } from "newui/BindingManager";
@@ -27,7 +27,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         dialogOpacity: number;
         directionTurnDelay: number;
         dropOnGather: boolean;
-        dropUnderYourself: boolean;
+        dropLocation: DropLocation;
         fontStyle: boolean;
         fullscreen: boolean;
         keepSortActive: boolean;

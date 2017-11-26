@@ -1,5 +1,5 @@
 import { InterruptChoice, UiTranslation } from "language/ILanguage";
-import { InterruptInputOptions, IUiElement, MenuId, ScreenId, TextOrTranslationData, TooltipOptionsVague, TranslationData, UiApi } from "newui/INewUi";
+import { InterruptInputOptions, IUiElement, IUiScreen, MenuId, ScreenId, TextOrTranslationData, TooltipOptionsVague, TranslationData, UiApi } from "newui/INewUi";
 import { InterruptOptions } from "newui/menu/InterruptMenu";
 import Menu from "newui/util/Menu";
 import UiElement from "newui/util/UiElement";
@@ -61,7 +61,7 @@ export default class Ui extends Emitter implements UiApi {
     /**
      * Hides the current screen
      */
-    hideScreen(): Promise<void>;
+    hideScreen(screen?: ScreenId | IUiScreen): Promise<void>;
     /**
      * Shows a tooltip
      * @param tooltip The options with which to construct the tooltip

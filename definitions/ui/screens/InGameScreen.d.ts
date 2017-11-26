@@ -105,7 +105,8 @@ export default class InGameScreen extends BaseScreen {
     onChatEnter(chatElement: JQuery): void;
     displayChatMessage(player: IPlayer, message: string): void;
     isSorting(): boolean;
-    runSortableAction(action: string, ...data: any[]): void;
+    runSortableAction(sortable: JQuery, action: string, ...data: any[]): void;
+    runGlobalSortableAction(action: string, ...data: any[]): void;
     cancelSorting(): void;
     setupContextMenu(): any;
     onShow(): void;

@@ -36,7 +36,7 @@ export default class UiScreen<T = {}> extends UiElement<UiScreenData & T> implem
     /**
      * Hides the current menu and resets the menu chain
      */
-    hideMenu(): Promise<void>;
+    hideMenu(menuId?: MenuId): Promise<void>;
     /**
      * Returns to the previous menu
      */

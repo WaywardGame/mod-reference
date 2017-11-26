@@ -61,9 +61,9 @@ export default class Multiplayer implements IMultiplayer {
     private sendJoinChannelMessage();
     private clearMatchmakingRetryTimeout();
     private clearJoinServerRetryTimeout();
-    private onMatchmakingServerError(event);
+    private onMatchmakingServerError(event, channel);
     private onMatchmakingServerMessage(event);
-    private displayJoinServerRetryDialog();
+    private displayJoinServerRetryDialog(channelToJoin);
     private setupConnection(connection);
     private onIceConnectionStateChange(connection, event);
     private onNegotiationNeeded(connection, event?);

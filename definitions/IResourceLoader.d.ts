@@ -5,7 +5,7 @@ export interface IResourceLoader {
     loadResources(container: IResourceContainer, callback: () => void): void;
     getPath(pathType: PathType, index: number, extra?: number): string;
     takeLoadingSlot(callback: () => void): void;
-    getImageOverride(src: string): Partial<IImageOverrideDescription>;
+    getImageOverride(src: string): Partial<IImageOverrideDescription> | undefined;
     updateImageOverrides(): void;
     releaseLoadingSlot(): void;
 }
