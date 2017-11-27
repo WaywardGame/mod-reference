@@ -110,7 +110,6 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     damage(damageInfo: IDamageInfo): number | undefined;
     damageEquipment(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
-    getBindDownTime(key: Bindable): number | undefined;
     getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
@@ -120,13 +119,12 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     getHandToUse(): EquipType | undefined;
     getInspectHealthMessage(player: IPlayer): IMessagePack;
     getMaxHealth(): number;
-    getMouseDirection(): FacingDirection;
     getMovementFinishTime(): number;
+    getMovementIntent(): Bindable | undefined;
     getName(html?: boolean): string;
     getReputation(): number;
     getSerializationProperties(_: string): string[];
     getTile(): ITile;
-    getTouchDirection(): FacingDirection | undefined;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
     hasDelay(): boolean;
@@ -134,7 +132,6 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     hurtHands(message: Message, damageMessage: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
-    isBindDown(key: Bindable): boolean;
     isFacingCarvableTile(): boolean;
     isGhost(): boolean;
     isLocalPlayer(): boolean;
@@ -144,15 +141,12 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     processInput(): void;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
-    resetKeyBindState(): void;
     resetMovementStates(): void;
     restoreExploredMap(): void;
     revealItem(itemType: ItemType): void;
     setId(id: number): void;
-    setMouseDirection(playerDirection: FacingDirection): void;
     setRaft(itemId: number | undefined): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
-    setTouchDirection(playerDirection: FacingDirection | undefined): void;
     setup(completedMilestones: number): void;
     setZ(z: number): void;
     shakeStat(statType: StatType): void;
@@ -166,8 +160,8 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     updateCraftTable(updateDismantleItems: boolean): void;
     updateCraftTableAndWeight(): void;
     updateDialogInfo(dialogIndex: string | number): void;
-    updateKeyBindState(key: Bindable, state: number | undefined): void;
     updateMilestones(): void;
+    updateMovementIntent(bind: Bindable | undefined): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
@@ -251,6 +245,10 @@ export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
 export declare const gameMovement: IInputMovement[];
+export interface IMovementIntent {
+    bind: Bindable;
+    direction?: FacingDirection;
+}
 export interface IPlayerTravelData {
     starvation: number;
     dehydration: number;

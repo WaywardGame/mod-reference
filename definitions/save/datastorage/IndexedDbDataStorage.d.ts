@@ -5,7 +5,6 @@ export default class IndexedDbDataStorage implements IAsyncDataStorage {
     private databaseName;
     private objectStoreNameSaves;
     private ready;
-    private criticalError;
     private dataStorageLocalStorage;
     constructor();
     isEnabled(): boolean;
@@ -16,6 +15,7 @@ export default class IndexedDbDataStorage implements IAsyncDataStorage {
     deleteSlot(slot: number): Promise<boolean>;
     deleteAllSlots(): Promise<boolean>;
     deleteAllData(): Promise<any>;
+    private openIndexedDb();
     private transferSaves();
     private transferFromLocalStorageToIndexedDb(slot);
     private waitForDatabase();

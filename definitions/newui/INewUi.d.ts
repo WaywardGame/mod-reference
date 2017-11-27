@@ -166,8 +166,8 @@ export declare enum SelectDirection {
     Right = 2,
 }
 export interface IMenu extends IUiElement {
-    selectNext(): void;
-    selectPrevious(): void;
+    selectNext(sound?: boolean): void;
+    selectPrevious(sound?: boolean): void;
     select(element: HTMLElement): void;
     getSelection(): HTMLElement;
 }

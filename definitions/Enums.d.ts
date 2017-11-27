@@ -1355,7 +1355,6 @@ export declare enum Bindable {
     DeveloperReloadGame = 68,
     DeveloperToggleDeveloperTools = 69,
 }
-export declare const playerKeyBinds: Bindable[];
 export declare enum DropLocation {
     Facing = 0,
     Feet = 1,

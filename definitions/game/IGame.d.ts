@@ -13,7 +13,7 @@ import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
-import { SaveObject } from "save/ISaveManager";
+import { ISaveInfo } from "save/ISaveManager";
 import { IPropSerializable } from "save/ISerializer";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
@@ -77,7 +77,7 @@ export interface IGame extends IPropSerializable, Emitter {
     notifier: INotifier;
     cartographyTexture: WebGLTexture;
     readonly isDailyChallenge: boolean;
-    addPlayer(playerOptions?: IPlayerOptions): IPlayer;
+    addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     addZoomLevel(amount: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
@@ -188,27 +188,22 @@ export interface IPlayOptions {
     seed: string;
     difficulty: Difficulty;
     character: ICharacter;
-    multiplayer: IMultiplayerOptions | false;
+    multiplayer: IMultiplayerOptions | undefined;
+    multiplayerLobbyToJoin: string | undefined;
     realTime: boolean;
     multiplayerWorld?: IMultiplayerWorldData;
 }
 export interface IPlayerOptions {
     id?: number;
     identifier?: string;
-    name?: string;
     options?: IOptions;
     position?: IPointZ;
-    character?: ICharacter;
+    character: ICharacter;
     completedMilestones?: number;
 }
 export interface ICrafted {
     unlockTime: number;
     newUnlock: boolean;
-}
-export interface ISaveInfo {
-    slot: number;
-    bytes?: number;
-    saveObject?: SaveObject;
 }
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;

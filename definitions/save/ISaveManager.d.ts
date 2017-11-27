@@ -19,11 +19,16 @@ export interface ISaveManager {
     loadPartial(slot: number): Promise<SaveObject>;
     loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
     loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string | undefined): any;
-    save(slot: number, unloading?: boolean): Promise<[number, SaveObject]>;
+    save(slot: number, unloading?: boolean): Promise<ISaveInfo>;
     savePartialData(slot: number, object: any, key: string, saveObjectKey: string): Promise<number>;
     savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any): Promise<number>;
 }
 export default ISaveManager;
+export interface ISaveInfo {
+    slot: number;
+    bytes?: number;
+    saveObject?: SaveObject;
+}
 export declare enum SaveSort {
     SaveTime = 0,
     Name = 1,

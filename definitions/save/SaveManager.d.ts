@@ -1,5 +1,6 @@
-import { ISaveManager, SaveObject, SaveSort, SortDirection } from "save/ISaveManager";
+import { ISaveInfo, ISaveManager, SaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 export default class SaveManager implements ISaveManager {
+    private loadedGlobalSlot;
     private dataStorage;
     private multiplayerSlotData;
     isEnabled(): boolean;
@@ -35,7 +36,7 @@ export default class SaveManager implements ISaveManager {
     /**
      * Returns an tuple [bytes: number, saveObject: SaveObject]
      */
-    save(slot: number, unloading?: boolean): Promise<[number, SaveObject]>;
+    save(slot: number, unloading?: boolean): Promise<ISaveInfo>;
     /**
      * Returns whether or not it succeeded
      */
@@ -65,6 +66,7 @@ export default class SaveManager implements ISaveManager {
     private compressString(str, exporting?);
     private decompressString(str, importing?);
     private createSaveObject(slot);
+    private saveSlot(slot, unloading?);
     /**
      * Returns the number of bytes the save takes up
      */

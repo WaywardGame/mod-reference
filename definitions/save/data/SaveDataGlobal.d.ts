@@ -33,7 +33,6 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         keepSortActive: boolean;
         leftHand: boolean;
         modBinds: IModBindArray;
-        mouseMovement: boolean;
         muteEffects: boolean;
         muteMusic: boolean;
         protectedCraftingItems: boolean;
@@ -55,7 +54,6 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         alwaysShowMoreInformation: boolean;
         windowMode: boolean;
         zoomLevel: number;
-        zoomOnScroll: boolean;
         openNotesAutomatically: boolean;
     };
     playerMilestoneData: {

@@ -36,9 +36,9 @@ export default class Menu<T = {}> extends UiElement<T> implements IMenu {
     constructor(uiApi: UiApi, options: MenuOptions);
     select(element: HTMLElement): void;
     getSelection(): HTMLElement;
-    selectNext(): void;
-    selectPrevious(): void;
-    changeSelection(n: number, force?: boolean): void;
+    selectNext(sound?: boolean): void;
+    selectPrevious(sound?: boolean): void;
+    changeSelection(n: number, force?: boolean, sound?: boolean): void;
     selectUp(): void;
     selectDown(): void;
     selectLeft(): void;

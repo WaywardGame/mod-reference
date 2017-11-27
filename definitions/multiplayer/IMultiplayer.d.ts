@@ -1,6 +1,7 @@
 import { ConnectionState } from "Enums";
-import { ICrafted, IPlayerOptions } from "game/IGame";
+import { ICrafted } from "game/IGame";
 import { IPacket } from "multiplayer/packets/IPacket";
+import { ICharacter } from "newui/util/Character";
 import { IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
 import { TextOrTranslationData } from "../newui/INewUi";
@@ -12,6 +13,7 @@ export interface IMultiplayer {
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     getBannedPlayers(): string[];
+    getChannel(): string | undefined;
     getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
@@ -19,7 +21,7 @@ export interface IMultiplayer {
     isProcessingPacket(): boolean;
     isReady(): boolean;
     isServer(): boolean;
-    joinServer(channel: string, playerOptions?: IPlayerOptions): void;
+    joinServer(channel: string, character?: ICharacter): void;
     kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
@@ -33,7 +35,6 @@ export interface IMultiplayer {
 }
 export default IMultiplayer;
 export interface IMultiplayerOptions {
-    lobbyId?: string;
     lobbyType: LobbyType;
     pvp: boolean;
     maxPlayers: number | undefined;

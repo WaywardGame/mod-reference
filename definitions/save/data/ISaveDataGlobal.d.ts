@@ -62,7 +62,6 @@ export interface IOptions {
     keepSortActive: boolean;
     leftHand: boolean;
     modBinds: IModBindArray;
-    mouseMovement: boolean;
     muteEffects: boolean;
     muteMusic: boolean;
     protectedCraftingItems: boolean;
@@ -84,7 +83,6 @@ export interface IOptions {
     alwaysShowMoreInformation: boolean;
     windowMode: boolean;
     zoomLevel: number;
-    zoomOnScroll: boolean;
     openNotesAutomatically: boolean;
 }
 export declare type IOptionsOld = Partial<IOptions> & {

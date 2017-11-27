@@ -232,6 +232,7 @@ export default class InGameScreen extends BaseScreen {
     private onCloseMessages();
     private runGatherOrHarvestAction(actionType, action);
     private runPourAction(actionType, item, action);
+    private isOverlayVisible();
     private onInterrupt;
     private onInterruptClosed;
 }

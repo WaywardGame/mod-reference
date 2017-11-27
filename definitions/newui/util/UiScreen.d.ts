@@ -27,6 +27,7 @@ export default class UiScreen<T = {}> extends UiElement<UiScreenData & T> implem
     readonly hasMenu: boolean;
     readonly bindingManagerId: number;
     constructor(uiApi: UiApi, options: ScreenOptions);
+    show(menuId?: MenuId, ...args: any[]): Promise<void>;
     getMenu(): Menu;
     getMenu(menuId: MenuId): Menu;
     getMenu(menuId?: MenuId): Menu;

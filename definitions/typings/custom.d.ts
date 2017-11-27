@@ -34,6 +34,7 @@ interface JQuery {
 	getEquipSlot(): number;
 }
 
+declare var require: IRequire;
 declare var requirejs: IRequire;
 declare var requireElectron: IRequire | undefined;
 

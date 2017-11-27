@@ -1,7 +1,7 @@
-import { IPlayerOptions } from "game/IGame";
 import { IConnection, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TextOrTranslationData } from "newui/INewUi";
+import { ICharacter } from "newui/util/Character";
 import IPlayer from "player/IPlayer";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export default class Multiplayer implements IMultiplayer {
@@ -16,7 +16,7 @@ export default class Multiplayer implements IMultiplayer {
     private _isServer;
     private _channel;
     private _options;
-    private _playerOptions;
+    private _character;
     private _incomingPacketQueue;
     private _packetTickIntervalId;
     private _outgoingPacketQueue;
@@ -33,12 +33,13 @@ export default class Multiplayer implements IMultiplayer {
     isServer(): boolean;
     isClient(): boolean;
     isProcessingPacket(): boolean;
+    getChannel(): string | undefined;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
-    joinServer(channel: string, playerOptions?: IPlayerOptions): void;
+    joinServer(channel: string, character?: ICharacter): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     kick(player: IPlayer, reason: TextOrTranslationData): void;

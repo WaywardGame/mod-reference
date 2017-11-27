@@ -5,6 +5,7 @@ export interface CharacterCreationArgs {
     customization: IPlayerCustomization;
 }
 export default class CharacterCreationMenu extends Menu {
+    private startButton;
     private inputName;
     private elementCharacterPreview;
     private swatchesHair;
