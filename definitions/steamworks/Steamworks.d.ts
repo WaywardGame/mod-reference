@@ -42,6 +42,7 @@ export default class Steamworks implements ISteamworks {
     setRichPresence(key: string, value: string): boolean;
     clearRichPresence(): void;
     createLobby(type: LobbyType): void;
+    setLobbyType(type: LobbyType): void;
     leaveLobby(): void;
     joinLobby(lobbyId: string): void;
     getLobbyMembers(): ISteamFriend[] | undefined;

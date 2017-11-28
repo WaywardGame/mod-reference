@@ -63,6 +63,7 @@ export interface IGame extends IPropSerializable, Emitter {
         [index: number]: number;
     };
     previousSaveVersion: IVersionInfo;
+    realTimeTickSpeed: number;
     crafted: {
         [index: number]: ICrafted;
     };
@@ -191,6 +192,7 @@ export interface IPlayOptions {
     multiplayer: IMultiplayerOptions | undefined;
     multiplayerLobbyToJoin: string | undefined;
     realTime: boolean;
+    realTimeTickSpeed: number;
     multiplayerWorld?: IMultiplayerWorldData;
 }
 export interface IPlayerOptions {

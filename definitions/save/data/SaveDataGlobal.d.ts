@@ -36,6 +36,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         muteEffects: boolean;
         muteMusic: boolean;
         protectedCraftingItems: boolean;
+        realTimeTickSpeed: number;
         rightClickInspect: boolean;
         rightHand: boolean;
         screenshotMode: boolean;

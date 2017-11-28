@@ -36,6 +36,7 @@ export default class Multiplayer implements IMultiplayer {
     getChannel(): string | undefined;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
+    updateOptions(updates: Partial<IMultiplayerOptions>): void;
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
@@ -83,4 +84,5 @@ export default class Multiplayer implements IMultiplayer {
     private sendMatchmakingMessage(data, channel?);
     private closeConnection(connection);
     private onStateChange();
+    private getDefaultOptions();
 }

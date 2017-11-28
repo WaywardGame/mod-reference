@@ -26,6 +26,7 @@ export declare enum MenuId {
     Interrupt = 13,
     GameEnd = 14,
     Pause = 15,
+    Multiplayer = 16,
 }
 export declare enum TooltipLocation {
     AboveLeft = 0,

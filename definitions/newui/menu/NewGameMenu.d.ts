@@ -13,7 +13,15 @@ export default class NewGameMenu extends Menu {
     private turnMode;
     private choiceTurnsManual;
     private choiceTurnsRealTime;
+    private lobbyType;
+    private choiceLobbyFriends;
+    private choiceLobbyPublic;
+    private choiceLobbyPrivate;
     private inputPVP;
+    private maxPlayersRow;
+    private maxPlayersInput;
+    private tickSpeedRow;
+    private tickSpeedInput;
     constructor(uiApi: UiApi);
     refresh(): Promise<void>;
     create(): Promise<void>;

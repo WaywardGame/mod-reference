@@ -29,15 +29,18 @@ export interface IMultiplayer {
     sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
     setBanned(identifier: string, ban: boolean): boolean;
     setOptions(options: IMultiplayerOptions): void;
+    updateOptions(updates: Partial<IMultiplayerOptions>): void;
     suppressSyncChecks(suppress: boolean): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;
+export declare const maxPlayers = 32;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
     pvp: boolean;
-    maxPlayers: number | undefined;
+    maxPlayers: number;
+    realTimeTickSpeed: number;
 }
 export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;

@@ -65,6 +65,7 @@ export interface IOptions {
     muteEffects: boolean;
     muteMusic: boolean;
     protectedCraftingItems: boolean;
+    realTimeTickSpeed: number;
     rightClickInspect: boolean;
     rightHand: boolean;
     screenshotMode: boolean;

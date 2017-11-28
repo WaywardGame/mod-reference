@@ -12,6 +12,7 @@ export default class LoadGameMenu extends Menu {
     private create();
     private addSlot(slot);
     private deleteSlot(slot);
+    private refreshSlotText();
     private sortSlots(sort?, sortDirection?);
 }
 export interface SaveSlotData {

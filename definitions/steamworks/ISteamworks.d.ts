@@ -43,6 +43,7 @@ export interface ISteamworks {
     clearRichPresence(): void;
     onUnload(): void;
     createLobby(type: LobbyType): void;
+    setLobbyType(type: LobbyType): void;
     leaveLobby(): void;
     joinLobby(lobbyId: string): void;
     getLobbyMembers(): ISteamFriend[] | undefined;

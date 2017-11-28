@@ -51,6 +51,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     doodads: SaferArray<IDoodad>;
     flowFieldSyncCount: number;
     isRealTime: boolean;
+    realTimeTickSpeed: number;
     items: IItemArray;
     lastCreationIds: {
         [index: number]: number;
