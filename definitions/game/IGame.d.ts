@@ -52,7 +52,6 @@ export interface IGame extends IPropSerializable, Emitter {
     updateRender: boolean;
     fillCount: number;
     fillTile: boolean[][];
-    unloading: boolean;
     spawnCoords: IPointZ;
     contaminatedWater: IPointZ[];
     fadeInAmount: number;
@@ -161,7 +160,6 @@ export interface IGame extends IPropSerializable, Emitter {
     synchronizeFlowFields(plys: IPlayer[]): void;
     tickRealtime(): void;
     updateCraftTableAndWeight(): void;
-    updateCraftTableAndWeightNextTick(): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateReputation(reputation: number): void;

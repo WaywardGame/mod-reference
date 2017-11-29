@@ -40,7 +40,6 @@ export default class Game extends Utilities.Emitter implements IGame {
     saveClear: boolean;
     spawnCoords: IPointZ;
     tile: ITileArray;
-    unloading: boolean;
     updateFieldOfView: boolean;
     updateRender: boolean;
     contaminatedWater: IPointZ[];

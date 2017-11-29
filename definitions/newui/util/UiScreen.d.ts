@@ -45,6 +45,12 @@ export default class UiScreen<T = {}> extends UiElement<UiScreenData & T> implem
         [key: string]: any;
     }, transition?: boolean): Promise<void>;
     /**
+     * Returns to the first menu in the menuChain
+     */
+    backToFirstMenu(args?: {
+        [key: string]: any;
+    }, transition?: boolean): Promise<void>;
+    /**
      * Shows a tooltip
      * @param tooltip The options with which to construct the tooltip
      * @param source

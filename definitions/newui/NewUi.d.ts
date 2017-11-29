@@ -40,6 +40,12 @@ export default class Ui extends Emitter implements UiApi {
         [key: string]: any;
     }, transition?: boolean): Promise<void>;
     /**
+     * Returns to the first menu in the menuChain
+     */
+    backToFirstMenu(args?: {
+        [key: string]: any;
+    }, transition?: boolean): Promise<void>;
+    /**
      * Returns the visible screen, or undefined if no screen is visible.
      */
     getScreen(): UiScreen | undefined;
