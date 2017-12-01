@@ -22,6 +22,7 @@ export interface IPacket {
     getSynchronizationCheckData(): ISynchronizationCheckData;
     getType(): PacketType;
     isSyncCheckEnabled(): boolean;
+    isAllowedWhenPaused(): boolean;
     process(): any;
     processData(dataView: DataView): void;
 }

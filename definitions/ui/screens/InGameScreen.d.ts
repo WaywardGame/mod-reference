@@ -83,6 +83,7 @@ export default class InGameScreen extends BaseScreen {
     private sortingCancelled;
     private onSortableAction;
     private onChatKeyPress;
+    private canUseQuickslot;
     private craftableItemTypes;
     private nonCraftableItemTypes;
     private messages;

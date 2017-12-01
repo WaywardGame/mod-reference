@@ -57,7 +57,6 @@ export interface IGame extends IPropSerializable, Emitter {
     fadeInAmount: number;
     time: TimeManager;
     absoluteTime: number;
-    isRealTime: boolean;
     lastCreationIds: {
         [index: number]: number;
     };
@@ -148,12 +147,12 @@ export interface IGame extends IPropSerializable, Emitter {
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
-    resetGameState(skipSave?: boolean): void;
+    resetGameState(skipSave?: boolean): Promise<void>;
     resizeRenderer(): void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
-    setPaused(paused: boolean, chatMessage?: boolean): void;
-    setRealTime(enabled: boolean): void;
+    setPaused(paused: boolean, showChatMessage?: boolean): void;
+    isRealTimeMode(): boolean;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
     setupSave(_: number): void;
     shouldRender(): number;

@@ -87,11 +87,14 @@ export default class Steamworks implements ISteamworks {
     private extractArchive(id, destination, callback);
     private safeOpenFolder(folder);
     private onGameOverlayActive(isActive, callback?);
-    private onGameJoinRequested(connectionString);
     private onLobbyCreated(success, lobbyId);
     private onLobbyEntered(success, lobbyId);
     private onLobbyChatUpdate(lobbyId, steamIdUserChanged, state);
+    /**
+     * Called when the user tries to join a lobby from their friends list or from an invite. The game client should attempt to connect to specified lobby when this is received. If the game isn't running yet then the game will be automatically launched with the command line parameter +connect_lobby <64-bit lobby Steam ID> instead.
+     */
     private onLobbyJoinRequested(lobbyId);
+    private showCharacterSelectionForLobby(lobbyId);
     private createFolderIfNotExists(folder);
     private getSyncPath(name);
     private getSharePathForModZip(name);

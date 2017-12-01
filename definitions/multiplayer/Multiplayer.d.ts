@@ -18,6 +18,7 @@ export default class Multiplayer implements IMultiplayer {
     private _options;
     private _character;
     private _incomingPacketQueue;
+    private _incomingPacketProcessingPaused;
     private _packetTickIntervalId;
     private _outgoingPacketQueue;
     private _currentPacketProcessing;
@@ -42,7 +43,7 @@ export default class Multiplayer implements IMultiplayer {
     createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
     joinServer(channel: string, character?: ICharacter): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
-    disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
+    disconnectAndResetGameState(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     kick(player: IPlayer, reason: TextOrTranslationData): void;
     onPlaying(): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
@@ -50,6 +51,8 @@ export default class Multiplayer implements IMultiplayer {
     sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
     sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
+    resetSyncPacketsWaiting(): void;
+    pausePacketProcessing(pause: boolean): void;
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
@@ -63,7 +66,7 @@ export default class Multiplayer implements IMultiplayer {
     private sendJoinChannelMessage();
     private clearMatchmakingRetryTimeout();
     private clearJoinServerRetryTimeout();
-    private onMatchmakingServerError(event, channel);
+    private onMatchmakingServerCloseOrError(event, channel);
     private onMatchmakingServerMessage(event);
     private displayJoinServerRetryDialog(channel);
     private setupConnection(connection);

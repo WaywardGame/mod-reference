@@ -101,7 +101,7 @@ export default class Ui extends Emitter implements UiApi {
     interruptWithMenu(menuId: MenuId, args?: {
         [key: string]: any;
     }): Promise<void>;
-    showLoadingInterrupt(title: TextOrTranslationData, description?: TextOrTranslationData, canCancel?: boolean): Promise<void>;
+    showLoadingInterrupt(title: TextOrTranslationData, description?: TextOrTranslationData, canCancel?: boolean, specialType?: string): Promise<void>;
     hideLoadingInterrupt(): Promise<void>;
     /**
      * @param elements The elements to refresh translations inside

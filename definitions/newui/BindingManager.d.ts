@@ -46,6 +46,7 @@ export declare class BindingManager {
     setBinding(bindable: Bindable, binding: IBinding | IBinding[]): void;
     deleteBinding(bindable: Bindable): void;
     resetBinding(bindable: Bindable): void;
+    doBindsIntersect(bindableA: Bindable, bindableB: Bindable): boolean;
     getBindTranslation(bindable: Bindable): string;
     getBindTranslation(bind: IBinding | IBinding[]): string;
     getBindTranslation(bindable: Bindable, separate: true): string[];

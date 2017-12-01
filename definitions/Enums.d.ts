@@ -990,6 +990,7 @@ export declare enum Command {
     Banned = 4,
     Ban = 5,
     Unban = 6,
+    Pause = 7,
 }
 export declare const equipTypeToMessage: Message[];
 export declare const recipeLevelToMessage: Message[];

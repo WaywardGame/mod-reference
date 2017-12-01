@@ -6,5 +6,6 @@ import ServerPacket from "multiplayer/packets/ServerPacket";
  */
 export default class ConnectedPacket extends ServerPacket {
     getAllowedStates(): ConnectionState;
+    isAllowedWhenPaused(): boolean;
     process(): void;
 }

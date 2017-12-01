@@ -9,6 +9,7 @@ export declare abstract class Packet extends IndexedPacket implements IPacket {
     getDebugInfo(): string;
     getAllowedStates(): ConnectionState;
     isSyncCheckEnabled(): boolean;
+    isAllowedWhenPaused(): boolean;
     getSynchronizationCheckData(): ISynchronizationCheckData;
     getArrayBuffer(id?: number): ArrayBuffer;
     processData(dataView: DataView): void;

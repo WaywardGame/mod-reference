@@ -20,6 +20,7 @@ export interface InterruptOptions {
         [key: string]: any;
     };
     canCancel?: boolean;
+    specialType?: string;
 }
 export declare enum InterruptMenuEvent {
     Resolve = "Resolve",

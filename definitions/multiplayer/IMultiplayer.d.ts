@@ -32,6 +32,8 @@ export interface IMultiplayer {
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     suppressSyncChecks(suppress: boolean): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
+    resetSyncPacketsWaiting(): void;
+    pausePacketProcessing(pause: boolean): void;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;

@@ -104,7 +104,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     getTileUnsafe(x: number, y: number, z: number): ITile;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
     getOrCreateTile(x: number, y: number, z: number): ITile;
-    setPaused(paused: boolean, chatMessage?: boolean): void;
+    setPaused(paused: boolean, showChatMessage?: boolean): void;
     gameLoop: (timeStamp: any) => void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     updateThumbnail(): Promise<void>;
@@ -114,7 +114,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     play(options: Partial<IPlayOptions>): void;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     removePlayer(pid: number): void;
-    setRealTime(enabled: boolean): void;
+    isRealTimeMode(): boolean;
     synchronizeFlowFields(plys: IPlayer[]): void;
     enableFlowFieldDebug(): void;
     resetGameState(skipSave?: boolean): Promise<void>;
