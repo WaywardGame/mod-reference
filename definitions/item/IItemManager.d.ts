@@ -30,7 +30,7 @@ export interface IItemManager {
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsString(items: IItemArray): string;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
-    getOrderedContainerItems(container: IContainer): IItem[];
+    getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;

@@ -1,19 +1,20 @@
-import { IDoodad, IDoodadDescription, IDoodadOptions, IDoodadTorchType } from "doodad/IDoodad";
-import { DoodadType, GrowingStage, IInspect, ItemQuality, SentenceCaseStyle } from "Enums";
+import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions, IDoodadTorchType } from "doodad/IDoodad";
+import { DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, SentenceCaseStyle } from "Enums";
 import { IItemArray } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
-import { IPropSerializable, IUnserializedCallback } from "save/ISerializer";
+import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-export default class Doodad implements IDoodad, IPropSerializable, IUnserializedCallback {
-    id: number;
+export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback {
     containedItems: IItemArray;
     decay?: number;
     gatherReady?: boolean;
     gfx?: number;
+    id: number;
     itemOrders?: number[];
     maxDur?: number;
     minDur?: number;
+    orientation?: DoorOrientation;
     ownerIdentifier?: string;
     quality?: ItemQuality;
     renamed?: string;
@@ -51,6 +52,5 @@ export default class Doodad implements IDoodad, IPropSerializable, IUnserialized
     update(): void;
     causeStatus(player: IPlayer): void;
     setOffTrap(player?: IPlayer, withMessage?: boolean): void;
-    getSerializationProperties(_: string): string[];
     onUnserialized(): void;
 }

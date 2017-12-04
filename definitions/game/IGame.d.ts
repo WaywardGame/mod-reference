@@ -14,11 +14,10 @@ import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { ISaveInfo } from "save/ISaveManager";
-import { IPropSerializable } from "save/ISerializer";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
-export interface IGame extends IPropSerializable, Emitter {
+export interface IGame extends Emitter {
     interval: number;
     mapSize: number;
     mapSizeSq: number;
@@ -117,7 +116,6 @@ export interface IGame extends IPropSerializable, Emitter {
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getReputation(): number;
     getReputationMessage(): string;
-    getSerializationProperties(_: string): string[];
     getSkillPercent(skill: SkillType): number;
     getStrength(): number;
     getTactics(): number;
@@ -158,7 +156,7 @@ export interface IGame extends IPropSerializable, Emitter {
     shouldRender(): number;
     synchronizeFlowFields(plys: IPlayer[]): void;
     tickRealtime(): void;
-    updateCraftTableAndWeight(): void;
+    updateTablesAndWeight(): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateReputation(reputation: number): void;

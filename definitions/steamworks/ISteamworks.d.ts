@@ -18,7 +18,6 @@ export interface ISteamworks {
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     publishMod(modIndex: number): Promise<string>;
     createArchive(id: string, source: string, callback: (err?: string) => void): void;
-    getPublishedItems(callback: (err: string | undefined, items?: IWorkshopItem[]) => void): void;
     openUrl(url: string): void;
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;
@@ -27,7 +26,7 @@ export interface ISteamworks {
     openWorkshop(publishId?: string): Promise<void>;
     openModsFolder(): void;
     openLogsFolder(): void;
-    unsubscribe(publishId: string, callback: (err?: string) => void): void;
+    unsubscribe(publishId: string): Promise<void>;
     sendMessage(name: string, ...data: any[]): boolean;
     onMessage(name: string, listener: (event: any, ...data: any[]) => any): boolean;
     toggleDeveloperTools(): void;

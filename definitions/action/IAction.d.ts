@@ -56,7 +56,7 @@ export interface IActionResult {
     updateView?: IActionUpdateView | boolean;
     particle?: IActionParticle | IRGB;
     updateRender?: boolean;
-    updateCraftTableAndWeight?: boolean;
+    updateTablesAndWeight?: boolean;
     delay?: IActionResultDelay | Delay;
     hint?: HintType;
     updateReputation?: number;

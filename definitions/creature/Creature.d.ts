@@ -2,22 +2,23 @@ import { AiType, ICreature, ICreatureDescription, IDamageInfo } from "creature/I
 import { CreatureType, FacingDirection, IMessagePack, ItemType, MoveType, SfxType } from "Enums";
 import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
-import { IPropSerializable, IUnserializedCallback } from "save/ISerializer";
+import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-export default class Creature implements ICreature, IPropSerializable, IUnserializedCallback {
+export default class Creature implements ICreature, IUnserializedCallback {
     aberrant?: boolean;
     ai: AiType;
     anim: number;
     chickenEggCounter?: number;
-    goatMilkCounter?: number;
     direction: FacingDirection;
     enemy?: number;
-    enemyIsPlayer?: boolean;
     enemyAttempts?: number;
+    enemyIsPlayer?: boolean;
     fromX: number;
     fromY: number;
+    goatMilkCounter?: number;
     happiness?: number;
     hp: number;
+    id: number;
     loot?: ItemType[];
     maxhp: number;
     moveType: MoveType | undefined;
@@ -29,10 +30,9 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     x: number;
     y: number;
     z: number;
-    id: number;
-    private _movementFinishTime;
-    private _inFov;
     private _description;
+    private _inFov;
+    private _movementFinishTime;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
     description(): ICreatureDescription | undefined;
@@ -59,7 +59,6 @@ export default class Creature implements ICreature, IPropSerializable, IUnserial
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
-    getSerializationProperties(_: string): string[];
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
     private findPath(result);

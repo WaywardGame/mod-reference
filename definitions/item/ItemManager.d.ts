@@ -58,7 +58,7 @@ export default class ItemManager implements IItemManager {
     isContainableInAdjacentContainer(player: IPlayer, containable: IContainable): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
-    getOrderedContainerItems(container: IContainer): IItem[];
+    getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemsString(items: IItemArray): string;
     loadReferences(): void;

@@ -32,7 +32,7 @@ export interface IItemLegendary {
 export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
     weight: number;
     equippedPid?: number;
-    quickSlot?: number;
+    readonly quickSlot?: number;
     tatteredMap?: TatteredMap;
     legendary?: IItemLegendary;
     book?: BookType;
@@ -40,15 +40,17 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     order?: number;
     description(): IItemDescription | undefined;
     isValid(): boolean;
+    shouldBeProtected(): boolean;
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;
     verifyAndFixItem(): void;
-    damage(modifier?: number): void;
+    damage(source: string, modifier?: number): void;
     isDamaged(): boolean;
     isDecayed(): boolean;
     isEquipped(): boolean;
     getEquipSlot(): EquipType | undefined;
+    setQuickSlot(player: IPlayer, quickSlot: number | undefined): void;
     changeInto(itemType: ItemType, disableNotify?: boolean): void;
     returns(): boolean;
     spawnOnBreak(): ICreature | undefined;

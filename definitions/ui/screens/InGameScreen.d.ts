@@ -65,7 +65,6 @@ export default class InGameScreen extends BaseScreen {
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
     contextMenuOpen: boolean;
-    private mouseEvent;
     private touchEvent;
     private mouseX;
     private mouseY;
@@ -154,7 +153,7 @@ export default class InGameScreen extends BaseScreen {
     getInventoryItemsInOrder(): any[];
     loadQuickSlots(): void;
     saveItemOrder(containerElement: JQuery): void;
-    showItemContextMenu(element: JQuery, isContainer?: boolean): void;
+    showItemContextMenu(element: JQuery): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
     runContextMenuAction(itemId: number, containerId: number | undefined, action: IContextMenuAction, skipSound?: boolean): boolean;
     onCraftingItemClick(element: JQuery): void;
@@ -192,7 +191,6 @@ export default class InGameScreen extends BaseScreen {
     updateSkillsDialog(): void;
     updateMilestonesDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
-    generateDismantleItems(): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     createCraftItemElements(sortType: SortType): void;
     updateItem(item: IItem): void;

@@ -8,11 +8,10 @@ import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IOptions } from "save/data/ISaveDataGlobal";
-import { IPropSerializable } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-export interface IPlayer extends IPropSerializable, IPointZ {
+export interface IPlayer extends IPointZ {
     attack: number;
     attackFromEquip: IAttackHand;
     benignity: number;
@@ -123,12 +122,12 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     getMovementIntent(): Bindable | undefined;
     getName(html?: boolean): string;
     getReputation(): number;
-    getSerializationProperties(_: string): string[];
     getTile(): ITile;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
     hasDelay(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
+    healthSyncCheck(): void;
     hurtHands(message: Message, damageMessage: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
@@ -157,14 +156,16 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     tick(isPassTurn?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    updateCraftTable(updateDismantleItems: boolean): void;
-    updateCraftTableAndWeight(): void;
+    updateCraftTable(): void;
     updateDialogInfo(dialogIndex: string | number): void;
+    updateDismantleTable(): void;
     updateMilestones(): void;
     updateMovementIntent(bind: Bindable | undefined): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
+    updateTables(): void;
+    updateTablesAndWeight(): void;
 }
 export default IPlayer;
 export interface IPlayerStatus {

@@ -21,8 +21,6 @@ export default class Game extends Utilities.Emitter implements IGame {
     readonly mapSizeSq: number;
     slot: number;
     loadedResources: boolean;
-    version: string;
-    mapGenVersion: string;
     previousSaveVersion: IVersionInfo;
     absoluteTime: number;
     autoSaveTimer: number;
@@ -50,15 +48,16 @@ export default class Game extends Utilities.Emitter implements IGame {
     doodads: SaferArray<IDoodad>;
     flowFieldSyncCount: number;
     isRealTime: boolean;
-    realTimeTickSpeed: number;
     items: IItemArray;
     lastCreationIds: {
         [index: number]: number;
     };
+    mapGenVersion: string;
+    realTimeTickSpeed: number;
     savedHighscore: boolean;
     saveVersion: string;
     seeds: ISeeds;
-    shouldUpdateCraftTableAndWeight: boolean;
+    shouldUpdateTablesAndWeight: boolean;
     tileContainers: ITileContainer[];
     tileData: {
         [index: number]: {
@@ -69,6 +68,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     };
     tileEvents: SaferArray<ITileEvent>;
     time: TimeManager;
+    version: string;
     cartographyTexture: WebGLTexture;
     debugRenderer: ITextureDebugRenderer;
     glContext: WebGL2RenderingContext | null;
@@ -123,7 +123,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
-    updateCraftTableAndWeightNextTick(): void;
+    updateTablesAndWeightNextTick(): void;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     getBlackness(): number;
     getAmbientLightLevel(z: number): number;
@@ -148,10 +148,10 @@ export default class Game extends Utilities.Emitter implements IGame {
     tickRealtime(): void;
     updateView(updateFov: boolean): void;
     /**
-     * AVOID USING THIS. USE updateCraftTableAndWeightNextTick INSTEAD!
+     * AVOID USING THIS. USE updateTablesAndWeightNextTick INSTEAD!
      * For most cases you don't need this
      */
-    updateCraftTableAndWeight(): void;
+    updateTablesAndWeight(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     damage(target: IPlayer | ICreature, damageInfo: IDamageInfo): number | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
@@ -169,7 +169,6 @@ export default class Game extends Utilities.Emitter implements IGame {
     setupSave(_: number): void;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
-    getSerializationProperties(_: string): string[];
     getName(object: IItem | ICreature | IDoodad | IPlayer | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     movementToDirection(x: number, y: number): FacingDirection;

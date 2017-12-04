@@ -9,10 +9,11 @@ import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IOptions } from "save/data/ISaveDataGlobal";
+import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-export default class Player implements IPlayer {
+export default class Player implements IPlayer, IPreSerializeCallback {
     attack: number;
     attackFromEquip: IAttackHand;
     benignity: number;
@@ -115,8 +116,8 @@ export default class Player implements IPlayer {
     movementAnimation: number;
     nextMoveTime: number;
     nextMoveDirection: FacingDirection | undefined;
-    private milestoneUpdates;
-    private movementIntent;
+    private _milestoneUpdates;
+    private _movementIntent;
     constructor();
     resetMovementStates(): void;
     attributes(): void;
@@ -149,7 +150,6 @@ export default class Player implements IPlayer {
     setup(completedMilestones: number): void;
     preSerializeObject(): void;
     restoreExploredMap(): void;
-    getSerializationProperties(_: string): string[];
     shakeStat(statType: StatType): void;
     staminaReduction(skillType: SkillType): void;
     updateReputation(reputation: number): void;
@@ -160,8 +160,10 @@ export default class Player implements IPlayer {
     checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
     checkForGather(): IDoodad | undefined;
-    updateCraftTable(updateDismantleItems: boolean): void;
-    updateCraftTableAndWeight(): void;
+    updateTables(): void;
+    updateCraftTable(): void;
+    updateDismantleTable(): void;
+    updateTablesAndWeight(): void;
     checkReputationMilestones(): void;
     getReputation(): number;
     hurtHands(message: Message, damageMessage: Message): void;
@@ -199,6 +201,7 @@ export default class Player implements IPlayer {
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
     updateMilestones(): void;
+    healthSyncCheck(): void;
     private slitherSuckerDamage();
     private processMovement(turnType?);
     private processTimers();
@@ -209,6 +212,5 @@ export default class Player implements IPlayer {
     private resetDefense();
     private calculateStats();
     private showStatsHint();
-    private healthSyncCheck();
     private staminaSyncCheck();
 }

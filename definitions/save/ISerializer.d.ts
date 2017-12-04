@@ -1,12 +1,14 @@
-export declare let serializeAllProperties: string[];
 export interface ISerializer {
     readProperty(object: any, key: any): void;
     writeProperty(object: any, key: any): void;
 }
 export default ISerializer;
 export interface ISerializable {
-    serializeObject(serializer: ISerializer, version: string): void;
-    deserializeObject(serializer: ISerializer, version: string): void;
+    serializeObject(serializer: ISerializer): void;
+    deserializeObject(serializer: ISerializer): void;
+}
+export interface IPreSerializeCallback {
+    preSerializeObject(): void;
 }
 export interface IUnserializedCallback {
     onUnserialized(): void;
@@ -38,3 +40,4 @@ export declare enum Types {
     ArrayV2 = 20,
     Doodad = 21,
 }
+export declare function SaveProperty(): PropertyDecorator;
