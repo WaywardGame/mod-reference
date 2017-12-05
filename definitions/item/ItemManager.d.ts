@@ -45,6 +45,7 @@ export default class ItemManager implements IItemManager {
     craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
+    getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     countItemsInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup | IItemTypeGroup, ignoreItem?: IItem): number;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem, excludeProtectedItems?: boolean): IItem | undefined;
