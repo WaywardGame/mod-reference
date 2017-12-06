@@ -13,20 +13,21 @@ export declare enum MenuId {
     None = 0,
     About = 1,
     Changelog = 2,
-    CharacterSelection = 3,
-    CharacterCreation = 4,
+    CharacterCreation = 3,
+    CharacterSelection = 4,
     Friends = 5,
-    Highscores = 6,
-    LoadGame = 7,
-    Main = 8,
-    Mods = 9,
-    NewGame = 10,
-    News = 11,
-    Options = 12,
-    Interrupt = 13,
-    GameEnd = 14,
-    Pause = 15,
-    Multiplayer = 16,
+    GameEnd = 6,
+    Highscores = 7,
+    Interrupt = 8,
+    JoinServer = 9,
+    LoadGame = 10,
+    Main = 11,
+    Mods = 12,
+    Multiplayer = 13,
+    NewGame = 14,
+    News = 15,
+    Options = 16,
+    Pause = 17,
 }
 export declare enum TooltipLocation {
     AboveLeft = 0,
@@ -53,7 +54,7 @@ export interface UiElementOptions {
     attributes?: {
         [key: string]: string | number;
     };
-    tooltip?: TooltipOptionsVague;
+    tooltip?: TooltipOptionsVague | boolean;
     selectable?: SelectableLayer;
 }
 export declare enum SelectableLayer {

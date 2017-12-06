@@ -28,7 +28,7 @@ export default class OptionsMenu extends Menu {
     remove(removeFromParent?: boolean): Promise<void>;
     addTabSection(tab: MenuTabOptions, heading: TextOptions, content?: Array<UiElement | undefined>): ITabSection;
     private registerRefresh(element);
-    private refresh();
+    private refresh(init?);
 }
 export declare class ModOptions extends Paragraph {
     constructor(uiApi: UiApi);

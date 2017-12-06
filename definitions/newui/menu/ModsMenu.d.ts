@@ -12,11 +12,14 @@ export declare enum ModSort {
 export default class ModsMenu extends Menu {
     private sections;
     constructor(uiApi: UiApi);
-    refreshMods(): void;
+    refreshMods(): Promise<void>;
     getModRow(index: number): ModRow | undefined;
     private sortMods(modType, sort, direction);
     private setAllModStates(enabled);
     private addModSection(tab, disabledSorts?, beforeContent?, afterContent?);
+}
+export declare enum ModRowEvent {
+    ShouldRefreshMenu = 0,
 }
 export interface ModRowData {
     modInfo: IModInfo;

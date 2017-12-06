@@ -134,10 +134,6 @@ export interface IGroupDescription {
     suffix?: string;
     prefix?: string;
 }
-export interface IActionDescription {
-    name?: string;
-    description?: string;
-}
 export declare enum ContainerReferenceType {
     Invalid = 0,
     Inventory = 1,

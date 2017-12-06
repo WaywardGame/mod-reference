@@ -6,7 +6,7 @@ import { Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
-import { IMultiplayerOptions, IMultiplayerWorldData } from "multiplayer/IMultiplayer";
+import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import { ICharacter } from "newui/util/Character";
 import { IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
@@ -185,7 +185,7 @@ export interface IPlayOptions {
     difficulty: Difficulty;
     character: ICharacter;
     multiplayer: IMultiplayerOptions | undefined;
-    multiplayerLobbyToJoin: string | undefined;
+    multiplayerServerToJoin: ServerInfo | undefined;
     realTime: boolean;
     realTimeTickSpeed: number;
     multiplayerWorld?: IMultiplayerWorldData;

@@ -24,6 +24,8 @@ export default class Menu<T = {}> extends UiElement<T> implements IMenu {
     private elementTabs;
     private sectionElements;
     private tabs;
+    private _canShowTooltip;
+    readonly canShowTooltip: boolean;
     private bindLoop;
     private selectables;
     private _title;

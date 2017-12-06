@@ -1,6 +1,7 @@
 import { ModType } from "mod/IModManager";
 import { IModPath, ISteamFriend, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
-export default class Steamworks implements ISteamworks {
+import Emitter from "utilities/Emitter";
+export default class Steamworks extends Emitter implements ISteamworks {
     private installDir;
     private recordedProblems;
     private steamId;

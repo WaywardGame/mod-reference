@@ -1,5 +1,6 @@
 import { ModType } from "mod/IModManager";
-export interface ISteamworks {
+import Emitter from "utilities/Emitter";
+export interface ISteamworks extends Emitter {
     isElectron(): boolean;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
@@ -85,4 +86,7 @@ export declare enum LobbyType {
     FriendsOnly = 1,
     Public = 2,
     Invisible = 3,
+}
+export declare enum SteamworksEvent {
+    OverlayHidden = 0,
 }

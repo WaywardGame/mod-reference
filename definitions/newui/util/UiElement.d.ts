@@ -1,4 +1,4 @@
-import { IUiElement, SelectableLayer, UiApi, UiElementOptions } from "newui/INewUi";
+import { IUiElement, SelectableLayer, TooltipOptionsVague, UiApi, UiElementOptions } from "newui/INewUi";
 import { Emitter } from "Utilities";
 export default class UiElement<T = {}> extends Emitter implements IUiElement {
     protected uiApi: UiApi;
@@ -7,7 +7,7 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     private _element;
     private scrollingChild?;
     private _data;
-    private tooltipOptions;
+    private tooltipOptions?;
     readonly element: HTMLElement;
     readonly jsonData: DOMStringMap & T;
     readonly data: DOMStringMap;
@@ -44,6 +44,7 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     dump(filter?: (element: UiElement) => boolean): Promise<void>;
     findDescendants(selector: string): NodeListOf<Element>;
     showTooltip(): Promise<void>;
+    setTooltip(tooltipOptions?: TooltipOptionsVague): void;
     getBox(): ClientRect;
     getOffset(): {
         top: number;

@@ -19,9 +19,7 @@ export default class NewGameMenu extends Menu {
     private choiceLobbyPrivate;
     private inputPVP;
     private maxPlayersRow;
-    private maxPlayersInput;
     private tickSpeedRow;
-    private tickSpeedInput;
     constructor(uiApi: UiApi);
     refresh(): Promise<void>;
     create(): Promise<void>;

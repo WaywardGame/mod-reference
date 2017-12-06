@@ -1,5 +1,6 @@
+import { IActionDescription } from "action/IAction";
 import { IItemTypeGroup, ItemType, ItemTypeGroup } from "Enums";
-import { IActionDescription, IGroupDescription, IItemDescription, IRecipeComponent } from "IItem";
+import { IGroupDescription, IItemDescription, IRecipeComponent } from "IItem";
 export declare const itemDescriptions: SaferDescription<IItemDescription>;
 export default itemDescriptions;
 export declare const itemGroups: Description<IGroupDescription>;

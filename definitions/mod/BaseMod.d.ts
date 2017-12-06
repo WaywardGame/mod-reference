@@ -1,9 +1,9 @@
-import { ActionCallback } from "action/IAction";
+import { ActionCallback, IActionDescription } from "action/IAction";
 import { CommandCallback } from "command/ICommand";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import { ItemType, ITerrainResourceItem } from "Enums";
-import { IActionDescription, IItemDescription } from "item/IItem";
+import { IItemDescription } from "item/IItem";
 import { ILanguageExtension } from "language/ILanguage";
 import { IBinding } from "newui/BindingManager";
 import { UiApi } from "newui/INewUi";

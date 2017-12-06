@@ -21,7 +21,7 @@ export interface IMultiplayer {
     isProcessingPacket(): boolean;
     isReady(): boolean;
     isServer(): boolean;
-    joinServer(channel: string, character?: ICharacter): void;
+    joinServer(info: ServerInfo, character?: ICharacter): void;
     kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
@@ -52,6 +52,10 @@ export interface IMultiplayerNetworkingOptions {
     enablePacketNumberChecks: boolean;
     checkSeedHistory: boolean;
     chunkSize: number;
+}
+export declare type ServerInfo = string | IMatchmakingServerInfo;
+export interface IMatchmakingServerInfo {
+    matchmakingServer: string;
 }
 export declare enum PacketAcceptType {
     Serverside = 1,

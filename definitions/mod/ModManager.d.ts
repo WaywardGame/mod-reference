@@ -47,7 +47,7 @@ export default class ModManager implements IModManager {
     getPublishFileId(index: number): string | undefined;
     getSteamIdOwner(index: number): string | undefined;
     getProvided(index: number): IModProvides;
-    canLoad(index: number, fromTitleScreen?: boolean, count?: number): CanLoadState;
+    canLoad(index: number, fromModsMenu?: boolean, count?: number): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
     getIndexFromName(name: string): number | undefined;
     getIndexFromPublishId(publishFileId: string): number[];

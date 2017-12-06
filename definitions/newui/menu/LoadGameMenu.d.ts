@@ -34,4 +34,6 @@ export declare class SaveSlot extends InputButton<SaveSlotData> {
     constructor(uiApi: UiApi, slot: number);
     private rename(newName);
     private load();
+    private exportToWorkshop();
+    private exportToFile();
 }

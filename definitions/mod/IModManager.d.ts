@@ -77,7 +77,7 @@ export interface IModInfo {
 }
 export interface IModManager {
     cacheHooks(): void;
-    canLoad(index: number, fromTitleScreen?: boolean, count?: number): CanLoadState;
+    canLoad(index: number, fromModsMenu?: boolean): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
     getAuthor(index: number): string;
     getDescription(index: number): string;

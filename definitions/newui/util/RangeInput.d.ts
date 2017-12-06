@@ -23,6 +23,6 @@ export declare class RangeInput<T = {}> extends UiElement<T> implements Refresha
     clamp(): void;
     setMax(max: number, clamp?: boolean): void;
     setMin(min: number, clamp?: boolean): void;
-    update(triggerChange?: boolean): void;
+    update(eventTrigger?: RangeInputEvent): void;
     refresh(): void;
 }

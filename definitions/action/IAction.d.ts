@@ -7,12 +7,18 @@ import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
 import { HintType } from "ui/IHint";
-export interface IAction extends IGenericRegistration {
-    type: ActionType;
-    callback: ActionCallback;
+export interface IActionBase {
     validateArguments?: IActionArgumentValidator;
     usableAsGhost?: boolean;
     ignoreHasDelay?: boolean;
+}
+export interface IActionDescription extends IActionBase {
+    name?: string;
+    description?: string;
+}
+export interface IAction extends IActionBase, IGenericRegistration {
+    type: ActionType;
+    callback: ActionCallback;
 }
 export declare type IActionArgumentValidatorBase = {
     [P in keyof IActionArgument]?: boolean;

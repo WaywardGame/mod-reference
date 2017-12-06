@@ -1,4 +1,4 @@
-import { IConnection, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck } from "multiplayer/IMultiplayer";
+import { IConnection, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, ServerInfo } from "multiplayer/IMultiplayer";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TextOrTranslationData } from "newui/INewUi";
 import { ICharacter } from "newui/util/Character";
@@ -41,7 +41,7 @@ export default class Multiplayer implements IMultiplayer {
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
-    joinServer(channel: string, character?: ICharacter): void;
+    joinServer(serverInfo: ServerInfo, character?: ICharacter): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     kick(player: IPlayer, reason: TextOrTranslationData): void;
@@ -60,15 +60,15 @@ export default class Multiplayer implements IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     private addDefaultSyncChecks();
     private getPacketSyncChecks();
-    private connectMatchmakingServer(channel);
+    private connectMatchmakingServer(serverInfo);
     private disconnectMatchmakingServer();
     private onMatchmakingServerConnected();
     private sendJoinChannelMessage();
     private clearMatchmakingRetryTimeout();
     private clearJoinServerRetryTimeout();
-    private onMatchmakingServerCloseOrError(event, channel);
+    private onMatchmakingServerCloseOrError(event, serverInfo);
     private onMatchmakingServerMessage(event);
-    private displayJoinServerRetryDialog(channel);
+    private displayJoinServerRetryDialog(serverInfo);
     private setupConnection(connection);
     private onIceConnectionStateChange(connection, event);
     private onNegotiationNeeded(connection, event?);
