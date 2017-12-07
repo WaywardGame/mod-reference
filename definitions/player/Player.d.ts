@@ -180,6 +180,7 @@ export default class Player implements IPlayer, IPreSerializeCallback {
     setZ(z: number): void;
     isLocalPlayer(): boolean;
     isGhost(): boolean;
+    isServer(): boolean;
     isResting(): boolean;
     getName(html?: boolean): string;
     isRestingCancelled(): boolean;

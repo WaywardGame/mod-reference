@@ -7,6 +7,9 @@ export interface ISteamworks extends Emitter {
     getAbsolutePath(p: string): any;
     isLinux(): boolean;
     isMac(): boolean;
+    isDedicatedServer(): boolean;
+    getDedicatedServerPort(): number;
+    getMatchmakingServer(): IMatchmakingServer | undefined;
     initialize(): void;
     setOverlayWorks(ipg: boolean): void;
     setupMods(callback: () => void): void;
@@ -42,10 +45,13 @@ export interface ISteamworks extends Emitter {
     setRichPresence(key: string, value: string): boolean;
     clearRichPresence(): void;
     onUnload(): void;
+    isInLobby(): boolean;
     createLobby(type: LobbyType): void;
     setLobbyType(type: LobbyType): void;
     leaveLobby(): void;
     joinLobby(lobbyId: string): void;
+    getLobbyData(name: string): string | undefined;
+    setLobbyData(name: string, data: string): boolean;
     getLobbyMembers(): ISteamFriend[] | undefined;
     importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
 }

@@ -1002,6 +1002,7 @@ export declare enum PlayerState {
     Won = 2,
     Traveling = 3,
     Ghost = 4,
+    Server = 5,
 }
 export declare enum ObjectContext {
     None = 0,

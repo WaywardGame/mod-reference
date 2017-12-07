@@ -1,4 +1,4 @@
-import { IConnection, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, ServerInfo } from "multiplayer/IMultiplayer";
+import { IConnection, IMatchmakingInfo, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, ServerInfo } from "multiplayer/IMultiplayer";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TextOrTranslationData } from "newui/INewUi";
 import { ICharacter } from "newui/util/Character";
@@ -8,13 +8,13 @@ export default class Multiplayer implements IMultiplayer {
     private _playerIdentifier;
     private _matchmakingIdentifier;
     private _server;
-    private _serverChannel;
+    private _serverMatchmakingInfo;
     private _clients;
     private _joinServerTimeoutId;
     private _matchmakingServer;
     private _matchmakingRetryTimeoutId;
     private _isServer;
-    private _channel;
+    private _matchmakingInfo;
     private _options;
     private _character;
     private _incomingPacketQueue;
@@ -34,13 +34,13 @@ export default class Multiplayer implements IMultiplayer {
     isServer(): boolean;
     isClient(): boolean;
     isProcessingPacket(): boolean;
-    getChannel(): string | undefined;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
+    getMatchmakingInfo(): IMatchmakingInfo | undefined;
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
-    createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
+    createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     joinServer(serverInfo: ServerInfo, character?: ICharacter): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
@@ -60,15 +60,17 @@ export default class Multiplayer implements IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     private addDefaultSyncChecks();
     private getPacketSyncChecks();
-    private connectMatchmakingServer(serverInfo);
+    private startMatchmakingServer();
+    private stopMatchmakingServer();
+    private connectMatchmakingServer(matchmakingInfo);
     private disconnectMatchmakingServer();
     private onMatchmakingServerConnected();
     private sendJoinChannelMessage();
     private clearMatchmakingRetryTimeout();
     private clearJoinServerRetryTimeout();
-    private onMatchmakingServerCloseOrError(event, serverInfo);
+    private onMatchmakingServerCloseOrError(event, matchmakingInfo);
     private onMatchmakingServerMessage(event);
-    private displayJoinServerRetryDialog(serverInfo);
+    private displayJoinServerRetryDialog(matchmakingInfo);
     private setupConnection(connection);
     private onIceConnectionStateChange(connection, event);
     private onNegotiationNeeded(connection, event?);
@@ -88,4 +90,6 @@ export default class Multiplayer implements IMultiplayer {
     private closeConnection(connection);
     private onStateChange();
     private getDefaultOptions();
+    private convertToMatchmakingInfo(serverInfo);
+    private getDedicatedServerMatchmakingInfo(matchmakingServer);
 }

@@ -9,11 +9,11 @@ export interface IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
-    createServer(channel: string | undefined, options?: IMultiplayerOptions): void;
+    createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     getBannedPlayers(): string[];
-    getChannel(): string | undefined;
+    getMatchmakingInfo(): IMatchmakingInfo | undefined;
     getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
@@ -53,9 +53,11 @@ export interface IMultiplayerNetworkingOptions {
     checkSeedHistory: boolean;
     chunkSize: number;
 }
-export declare type ServerInfo = string | IMatchmakingServerInfo;
-export interface IMatchmakingServerInfo {
+export declare type ServerInfo = string | Partial<IMatchmakingInfo>;
+export interface IMatchmakingInfo {
+    channel: string;
     matchmakingServer: string;
+    isDedicatedServer: boolean;
 }
 export declare enum PacketAcceptType {
     Serverside = 1,

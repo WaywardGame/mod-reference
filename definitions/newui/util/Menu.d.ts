@@ -15,6 +15,7 @@ export declare enum MenuEvent {
     Tab = "Tab",
     GoBackFrom = "GoBackFrom",
     CancelBind = "CancelBind",
+    EnterBind = "EnterBind",
 }
 export default class Menu<T = {}> extends UiElement<T> implements IMenu {
     screenHost: IUiScreen;
@@ -46,7 +47,7 @@ export default class Menu<T = {}> extends UiElement<T> implements IMenu {
     selectLeft(): void;
     selectRight(): void;
     selectDirection(direction: SelectDirection, range?: number, canEscapeLayer?: boolean, smartDifferenceVal?: number): void;
-    selectEnter(): void;
+    selectEnter(): boolean;
     addTabs(...tabs: MenuTabOptions[]): Tab<{}>[];
     dumpTabs(): Promise<void>;
     addButton(options: ButtonOptions): Button<{}>;

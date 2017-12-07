@@ -34,6 +34,11 @@ interface JQuery {
 	getEquipSlot(): number;
 }
 
+interface IMatchmakingServer {
+	start(port?: number): string;
+	stop(): void;
+}
+
 declare var require: IRequire;
 declare var requirejs: IRequire;
 declare var requireElectron: IRequire | undefined;

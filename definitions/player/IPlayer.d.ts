@@ -133,6 +133,7 @@ export interface IPlayer extends IPointZ {
     inspectTile(tile: ITile): IInspect[];
     isFacingCarvableTile(): boolean;
     isGhost(): boolean;
+    isServer(): boolean;
     isLocalPlayer(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;

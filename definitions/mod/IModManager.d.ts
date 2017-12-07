@@ -21,7 +21,7 @@ export declare enum CanLoadState {
     DependencyIssue = 3,
     ModRequiresItself = 4,
     MissingRequiredMod = 5,
-    CannnotLoadRequiredMod = 6,
+    CannotLoadRequiredMod = 6,
     ReqiredModNotLoaded = 7,
     LocalModPrecedence = 8,
     IncompatibleVersion = 9,

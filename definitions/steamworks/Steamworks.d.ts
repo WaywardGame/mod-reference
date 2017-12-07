@@ -22,6 +22,8 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private workshopFileUrl;
     private ignoredDirectories;
     private _serverIdToJoin;
+    private _dedicatedServer;
+    private _dedicatedServerPort;
     private _currentLobbyId;
     private _multiplayerLogs;
     private importingSaveGameMod;
@@ -31,6 +33,9 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getAbsolutePath(p: string): any;
     isLinux(): boolean;
     isMac(): boolean;
+    isDedicatedServer(): boolean;
+    getDedicatedServerPort(): number;
+    getMatchmakingServer(): IMatchmakingServer | undefined;
     initialize(): void;
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;
@@ -42,10 +47,13 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getPublishedMods(): IWorkshopItem[] | undefined;
     setRichPresence(key: string, value: string): boolean;
     clearRichPresence(): void;
+    isInLobby(): boolean;
     createLobby(type: LobbyType): void;
     setLobbyType(type: LobbyType): void;
     leaveLobby(): void;
     joinLobby(lobbyId: string): void;
+    getLobbyData(name: string): string | undefined;
+    setLobbyData(name: string, data: string): boolean;
     getLobbyMembers(): ISteamFriend[] | undefined;
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;

@@ -60,7 +60,6 @@ export interface IUi extends IPropSerializable, Emitter {
     getHeight(): number;
     removeStyle(id: string): void;
     appendStyle(id: string, styleContent: string): void;
-    setRangeValue(id: string, value: number): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
     switchToScreen(screenId: ScreenId, menuId?: MenuId, ...args: any[]): void;

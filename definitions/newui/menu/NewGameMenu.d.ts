@@ -23,4 +23,5 @@ export default class NewGameMenu extends Menu {
     constructor(uiApi: UiApi);
     refresh(): Promise<void>;
     create(): Promise<void>;
+    private getPlayOptions();
 }
