@@ -1,6 +1,6 @@
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/util/Menu";
-export default class JoinServerMenu extends Menu {
-    private inputServerIPAddress;
+export default class JoinDedicatedServerMenu extends Menu {
+    private inputServerIdentifier;
     constructor(uiApi: UiApi);
 }

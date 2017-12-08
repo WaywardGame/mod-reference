@@ -19,7 +19,7 @@ export declare enum MenuId {
     GameEnd = 6,
     Highscores = 7,
     Interrupt = 8,
-    JoinServer = 9,
+    JoinDedicatedServer = 9,
     LoadGame = 10,
     Main = 11,
     Mods = 12,
@@ -68,6 +68,7 @@ export interface TooltipOptionsVague extends UiElementOptions {
     location: TooltipLocation;
     heading?: TextOrTranslationData;
     text?: TextOrTranslationData;
+    maxWidth?: number;
     create?(...args: any[]): Promise<void>;
 }
 export declare type InterruptInputOptions = InputOptions & InterruptOptionsCanCancel;
@@ -92,6 +93,7 @@ export interface UiApi {
     hideScreen(screenId: ScreenId): Promise<void>;
     hideScreen(screen: IUiScreen): Promise<void>;
     isScreenVisible(screenId: ScreenId): boolean;
+    removeScreen(screenId: ScreenId): Promise<void>;
     showTooltip(tooltipSource: IUiElement): Promise<void>;
     showTooltip(tooltipOptions: TooltipOptionsVague, source?: IUiElement): Promise<void>;
     showTooltip(tooltipOptions: TooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;

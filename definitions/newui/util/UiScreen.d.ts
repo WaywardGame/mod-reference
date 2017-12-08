@@ -3,15 +3,12 @@ import { InterruptOptions } from "newui/menu/InterruptMenu";
 import Menu from "newui/util/Menu";
 import Tooltip from "newui/util/Tooltip";
 import UiElement from "newui/util/UiElement";
-export interface UiScreenData {
-    screenId: string;
-}
 export interface ScreenOptions extends UiElementOptions {
     screenId: ScreenId;
     retain?: boolean;
     isSubscreen?: boolean;
 }
-export default class UiScreen<T = {}> extends UiElement<UiScreenData & T> implements IUiScreen {
+export default class UiScreen<T = {}> extends UiElement<T> implements IUiScreen {
     readonly retain: boolean;
     readonly isSubscreen: boolean;
     protected menus: {

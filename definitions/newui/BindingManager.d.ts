@@ -27,6 +27,7 @@ export interface BindCatcherApi {
     removePressState(bind: Bindable): void;
     isDown(key: string): boolean;
     isDown(bind: Bindable): boolean;
+    isAnythingDown(): boolean;
     timeDown(key: string): number;
     timeDown(bind: Bindable): number;
     isMouseWithin(element: Element): boolean;
@@ -58,6 +59,7 @@ export declare class BindingManager {
     removePressState(bindOrKey: Bindable | string, id?: number): void;
     checkModifiers(modifiers: KeyModifier[], exclude: string, id?: number): boolean;
     isPressed(bindOrKey: Bindable | string, id?: number): boolean;
+    isAnythingPressed(id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;
     beginLoop(id: number, cb: (api: BindCatcherApi) => any): void;
     endLoop(id: number): void;
