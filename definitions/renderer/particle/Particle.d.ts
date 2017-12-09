@@ -13,7 +13,7 @@ export default class Particle implements IParticle {
     private particleSize;
     private lastUsedParticle;
     private vertexArray;
-    constructor(gl: WebGL2RenderingContext | undefined, maxParticles?: number);
+    constructor(gl: WebGL2RenderingContext, maxParticles?: number);
     create(tileX: number, tileY: number, tileZ: number, particle: IRGB): void;
     createMultiple(tileX: number, tileY: number, tileZ: number, particle: IRGB, count: number, intensity?: number, ignoreFieldOfView?: boolean): void;
     clear(): void;

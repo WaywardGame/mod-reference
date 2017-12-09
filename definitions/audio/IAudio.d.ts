@@ -1,8 +1,5 @@
 import { Music, SfxType } from "Enums";
 export interface IAudio {
-    fadingIn: boolean;
-    fadingOut: boolean;
-    musicSpeed: number;
     fadeIn(): void;
     fadeOut(): void;
     playMusic(): void;

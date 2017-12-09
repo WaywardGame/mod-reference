@@ -3,9 +3,7 @@ import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import * as Utilities from "Utilities";
 export interface IWorldRenderer {
-    positionTextureBuffer: WebGLBuffer;
     positionBuffer: WebGLBuffer;
-    ditherTexture: WebGLTexture;
     layers: WorldLayerRenderer[];
     dirtAdaptor: TileAdaptor.Dirt;
     tillAdaptor: TileAdaptor.Till;

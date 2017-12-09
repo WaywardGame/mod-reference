@@ -2,7 +2,6 @@ import Vec2 = TSM.vec2;
 import { ItemType, StatType } from "Enums";
 import INotifier from "renderer/INotifier";
 export default class Notifier implements INotifier {
-    private gl;
     private capacity;
     private mostRecent;
     private mostRecentLife;
@@ -10,7 +9,7 @@ export default class Notifier implements INotifier {
     private notifications;
     private spriteBatch;
     private nextUpdate;
-    constructor(gl: WebGL2RenderingContext | undefined, capacity: number);
+    constructor(gl: WebGL2RenderingContext, capacity: number);
     setTexture(texture: WebGLTexture, inverseTextureSize: Vec2): void;
     clear(): void;
     addItem(x: number, y: number, z: number, type: ItemType): void;

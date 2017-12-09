@@ -23,6 +23,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private ignoredDirectories;
     private _serverIdToJoin;
     private _dedicatedServer;
+    private _dedicatedServerName;
     private _dedicatedServerPort;
     private _currentLobbyId;
     private _multiplayerLogs;
@@ -30,10 +31,11 @@ export default class Steamworks extends Emitter implements ISteamworks {
     isElectron(): boolean;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
-    getAbsolutePath(p: string): any;
+    getAbsolutePath(...p: string[]): any;
     isLinux(): boolean;
     isMac(): boolean;
     isDedicatedServer(): boolean;
+    getDedicatedServerName(): string;
     getDedicatedServerPort(): number;
     getMatchmakingServer(): IMatchmakingServer | undefined;
     initialize(): void;
@@ -111,4 +113,5 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private getSharePathForModImage(name);
     private recordEvent(categorySuffix, action);
     private parseConnectArgument(args);
+    private parseServerNameArgument(args);
 }
