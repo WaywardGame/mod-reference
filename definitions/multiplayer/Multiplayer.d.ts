@@ -38,6 +38,7 @@ export default class Multiplayer implements IMultiplayer {
     setOptions(options: IMultiplayerOptions): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     getMatchmakingInfo(): IMatchmakingInfo | undefined;
+    getDedicatedServerMatchmakingInfo(matchmakingServer: string): IMatchmakingInfo;
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
@@ -91,5 +92,4 @@ export default class Multiplayer implements IMultiplayer {
     private onStateChange();
     private getDefaultOptions();
     private convertToMatchmakingInfo(serverInfo);
-    private getDedicatedServerMatchmakingInfo(matchmakingServer);
 }

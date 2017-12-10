@@ -14,6 +14,7 @@ export interface IMultiplayer {
     disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     getBannedPlayers(): string[];
     getMatchmakingInfo(): IMatchmakingInfo | undefined;
+    getDedicatedServerMatchmakingInfo(matchmakingServer: string): IMatchmakingInfo;
     getClients(): IConnection[];
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
@@ -53,7 +54,7 @@ export interface IMultiplayerNetworkingOptions {
     checkSeedHistory: boolean;
     chunkSize: number;
 }
-export declare type ServerInfo = string | Partial<IMatchmakingInfo>;
+export declare type ServerInfo = string | IMatchmakingInfo;
 export interface IMatchmakingInfo {
     channel: string;
     matchmakingServer: string;
@@ -71,34 +72,35 @@ export interface IConnection {
 }
 export declare enum MultiplayerSyncCheck {
     CanASeeB = 0,
-    CanASeeBLightSource = 1,
-    Container = 2,
-    Creature = 3,
-    CreatureIsInFlowField = 4,
-    CreatureMoveDirection = 5,
-    CreatureMoveTypesInFov = 6,
-    CreatureNearestPlayer = 7,
-    Dismantle = 8,
-    FlowFieldHashCode = 9,
-    FlowFieldValue = 10,
-    HealthChange = 11,
-    InventoryCount = 12,
-    IsTileEmpty = 13,
-    Item = 14,
-    ItemCraft = 15,
-    ItemDamage = 16,
-    ItemOrder = 17,
-    LastCreationIds = 18,
-    PenaltyFieldHashCode = 19,
-    PlaceOnTile = 20,
-    PlayerPositions = 21,
-    Players = 22,
+    Container = 1,
+    Creature = 2,
+    CreatureIsInFlowField = 3,
+    CreatureMoveDirection = 4,
+    CreatureMoveTypesInFov = 5,
+    CreatureNearestPlayer = 6,
+    Dismantle = 7,
+    FlowFieldHashCode = 8,
+    FlowFieldValue = 9,
+    HealthChange = 10,
+    InventoryCount = 11,
+    IsTileEmpty = 12,
+    Item = 13,
+    ItemCraft = 14,
+    ItemDamage = 15,
+    ItemOrder = 16,
+    LastCreationIds = 17,
+    PenaltyFieldHashCode = 18,
+    PlaceOnTile = 19,
+    PlayerPositions = 20,
+    Players = 21,
+    Random = 22,
     Seed = 23,
     StaminaChanges = 24,
     Stats = 25,
     Temp = 26,
-    Ticks = 27,
-    Weight = 28,
+    Tick = 27,
+    Ticks = 28,
+    Weight = 29,
 }
 export interface IMultiplayerWorldData {
     pid: number;

@@ -6,6 +6,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private recordedProblems;
     private steamId;
     private betaName;
+    private buildTime;
     private overlayWorks;
     private platform;
     private initializingMods;
@@ -46,6 +47,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getFriends(): ISteamFriend[] | undefined;
     getScreenName(): string | undefined;
     getBetaName(): string;
+    getBuildTime(): number | undefined;
     getPublishedMods(): IWorkshopItem[] | undefined;
     setRichPresence(key: string, value: string): boolean;
     clearRichPresence(): void;
