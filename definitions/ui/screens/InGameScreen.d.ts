@@ -83,6 +83,7 @@ export default class InGameScreen extends BaseScreen {
     private onSortableAction;
     private onChatKeyPress;
     private canUseQuickslot;
+    private delayState;
     private craftableItemTypes;
     private nonCraftableItemTypes;
     private messages;
@@ -109,6 +110,7 @@ export default class InGameScreen extends BaseScreen {
     runGlobalSortableAction(action: string, ...data: any[]): void;
     cancelSorting(): void;
     setupContextMenu(): any;
+    hasDelay(): boolean;
     onShow(): void;
     onHide(): void;
     initializeGameState(): void;
@@ -131,6 +133,7 @@ export default class InGameScreen extends BaseScreen {
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
+    onOpenDialog(): void;
     closeDialog(dialog: JQuery): boolean;
     openMapDialog(): void;
     closeMapDialog(): void;

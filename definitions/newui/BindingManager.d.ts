@@ -25,6 +25,7 @@ export interface BindCatcherApi {
     wasReleased(bind: Bindable): boolean;
     removePressState(key: string): void;
     removePressState(bind: Bindable): void;
+    removeAllPressStates(): void;
     isDown(key: string): boolean;
     isDown(bind: Bindable): boolean;
     isAnythingDown(): boolean;
@@ -57,6 +58,7 @@ export declare class BindingManager {
     setDefaultBindCatcher(id: number): void;
     getPressTime(bindOrKey: Bindable | string, id?: number): number;
     removePressState(bindOrKey: Bindable | string, id?: number): void;
+    removeAllPressStates(id?: number): void;
     checkModifiers(modifiers: KeyModifier[], exclude: string, id?: number): boolean;
     isPressed(bindOrKey: Bindable | string, id?: number): boolean;
     isAnythingPressed(id?: number): boolean;

@@ -61,7 +61,7 @@ export default class Multiplayer implements IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     private addDefaultSyncChecks();
     private getPacketSyncChecks();
-    private startMatchmakingServer();
+    private startMatchmakingServer(port);
     private stopMatchmakingServer();
     private connectMatchmakingServer(matchmakingInfo);
     private disconnectMatchmakingServer();

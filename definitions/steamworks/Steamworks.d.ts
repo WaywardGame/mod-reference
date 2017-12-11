@@ -1,5 +1,5 @@
 import { ModType } from "mod/IModManager";
-import { IModPath, ISteamFriend, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 import Emitter from "utilities/Emitter";
 export default class Steamworks extends Emitter implements ISteamworks {
     private installDir;
@@ -11,6 +11,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private platform;
     private initializingMods;
     private logsPath;
+    private backupPath;
     private logFilePath;
     private modsPath;
     private workshopPath;
@@ -23,9 +24,8 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private workshopFileUrl;
     private ignoredDirectories;
     private _serverIdToJoin;
-    private _dedicatedServer;
-    private _dedicatedServerName;
-    private _dedicatedServerPort;
+    private _dedicatedServerInfo;
+    private _nextBackupTime;
     private _currentLobbyId;
     private _multiplayerLogs;
     private importingSaveGameMod;
@@ -36,8 +36,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     isLinux(): boolean;
     isMac(): boolean;
     isDedicatedServer(): boolean;
-    getDedicatedServerName(): string;
-    getDedicatedServerPort(): number;
+    getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;
     initialize(): void;
     onUnload(): void;
@@ -81,6 +80,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     onReady(): void;
     setupReporting(): void;
     recordProblem(message: string): void;
+    processBackups(): boolean;
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
@@ -114,6 +114,6 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private getSharePathForModZip(name);
     private getSharePathForModImage(name);
     private recordEvent(categorySuffix, action);
-    private parseConnectArgument(args);
-    private parseServerNameArgument(args);
+    private parseCommandLineArgument(name, args);
+    private getFilesInFolder(folderPath);
 }

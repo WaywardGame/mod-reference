@@ -11,7 +11,7 @@ export interface ISteamworks extends Emitter {
     getAbsolutePath(p: string): any;
     getBetaName(): string;
     getBuildTime(): number | undefined;
-    getDedicatedServerPort(): number;
+    getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getFriends(): ISteamFriend[] | undefined;
     getLobbyData(name: string): string | undefined;
     getLobbyMembers(): ISteamFriend[] | undefined;
@@ -22,6 +22,7 @@ export interface ISteamworks extends Emitter {
     getPublishedMods(): IWorkshopItem[] | undefined;
     getScreenName(): string | undefined;
     getSteamId(): ISteamId | undefined;
+    processBackups(): boolean;
     hasServerToJoin(): boolean;
     importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
     initialize(): void;
@@ -96,4 +97,11 @@ export declare enum LobbyType {
 }
 export declare enum SteamworksEvent {
     OverlayHidden = 0,
+}
+export interface IDedicatedServerInfo {
+    name: string;
+    port: number;
+    backup: boolean;
+    backupInterval: number;
+    maxBackups: number;
 }
