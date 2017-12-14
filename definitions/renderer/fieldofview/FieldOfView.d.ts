@@ -34,7 +34,7 @@ export default class FieldOfView implements IFieldOfView {
     getTextureSize(): number;
     getSubdivisions(): number;
     tickSeed(): void;
-    compute(force?: boolean): boolean;
+    compute(force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
     getBounds(player: IPlayer, radius?: number): Utilities.Bound3;

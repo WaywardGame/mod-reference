@@ -13,6 +13,8 @@ export interface InputData {
 export declare enum InputEvent {
     Change = "Change",
     Done = "Done",
+    Enter = "Enter",
+    Escape = "Escape",
 }
 export default class Input<T = {}> extends UiElement<T & InputData> {
     default: TextOrTranslationData;

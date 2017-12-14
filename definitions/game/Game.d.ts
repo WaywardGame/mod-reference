@@ -161,7 +161,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
     getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
-    getPlayerByIdentifier(identifier: string): IPlayer | undefined;
+    getPlayerByIdentifier(identifier: string, includeAbsent?: boolean): IPlayer | undefined;
     getPlayerByName(name: string, ignoreCase?: boolean): IPlayer | undefined;
     getValidPlayerName(name: string | undefined): string;
     getHeight(z0: number, z1: number, d: number): number;

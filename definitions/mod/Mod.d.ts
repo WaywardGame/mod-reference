@@ -131,6 +131,12 @@ export declare abstract class Mod extends BaseMod {
      */
     canPlayerAttack(player: IPlayer, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
     /**
+     * Called every frame where the mouse is not hovering over an item
+     * @param api The bind catcher api
+     * @returns False if the player can't move, undefined otherwise
+     */
+    canClientMove(api: BindCatcherApi): false | undefined;
+    /**
      * Called when calculating creatures in the viewport
      * @param creature The creature object
      * @param tile The tile the creature is on
@@ -320,8 +326,9 @@ export declare abstract class Mod extends BaseMod {
     /**
      * Called when in-game, on the bind catcher loop (once per frame)
      * @param api The bind catcher api, allowing you to check whether binds are pressed
+     * @returns True if a bind was pressed, undefined otherwise
      */
-    onBindLoop(api: BindCatcherApi): void;
+    onBindLoop(bindPressed: true | undefined, api: BindCatcherApi): true | undefined;
     /**
      * Called when the mouse is moved
      * @param event The mouse event object

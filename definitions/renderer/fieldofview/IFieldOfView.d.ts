@@ -11,7 +11,7 @@ export interface IFieldOfView {
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
-    compute(force?: boolean): boolean;
+    compute(force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     getBounds(player: IPlayer, radius?: number): Utilities.Bound3;
     getSubdivisions(): number;

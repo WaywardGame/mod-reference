@@ -1,6 +1,7 @@
 import { ActionType, Bindable, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType, StatType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/Messages";
+import { BindCatcherApi } from "newui/BindingManager";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
@@ -111,6 +112,7 @@ export default class InGameScreen extends BaseScreen {
     cancelSorting(): void;
     setupContextMenu(): any;
     hasDelay(): boolean;
+    canMove(api: BindCatcherApi): boolean;
     onShow(): void;
     onHide(): void;
     initializeGameState(): void;

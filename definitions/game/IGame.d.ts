@@ -108,7 +108,7 @@ export interface IGame extends Emitter {
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     getPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer | undefined;
     getPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer | undefined;
-    getPlayerByIdentifier(identifier: string): IPlayer | undefined;
+    getPlayerByIdentifier(identifier: string, includeAbsent?: boolean): IPlayer | undefined;
     getPlayerByName(name: string): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
