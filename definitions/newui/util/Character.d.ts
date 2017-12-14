@@ -1,4 +1,4 @@
-import { IPlayerCustomization } from "../../player/IPlayer";
+import { IPlayerCustomization } from "player/IPlayer";
 export interface ICharacter {
     name: string;
     customization: IPlayerCustomization;

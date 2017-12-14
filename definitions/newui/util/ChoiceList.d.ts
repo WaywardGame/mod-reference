@@ -1,7 +1,7 @@
+import { UiApi, UiElementOptions } from "newui/INewUi";
+import { BlockRow } from "newui/util/BlockRow";
+import { CheckButton, CheckButtonOptions } from "newui/util/CheckButton";
 import { Refreshable } from "newui/util/Refreshable";
-import { UiApi, UiElementOptions } from "../INewUi";
-import { BlockRow } from "./BlockRow";
-import { CheckButton, CheckButtonOptions } from "./CheckButton";
 export declare enum ChoiceListEvent {
     Choose = "Selection",
 }

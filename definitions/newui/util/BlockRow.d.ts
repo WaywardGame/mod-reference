@@ -1,5 +1,5 @@
-import { UiApi, UiElementOptions } from "../INewUi";
-import UiElement from "./UiElement";
+import { UiApi, UiElementOptions } from "newui/INewUi";
+import UiElement from "newui/util/UiElement";
 export interface BlockRowData {
     childCount: number;
 }

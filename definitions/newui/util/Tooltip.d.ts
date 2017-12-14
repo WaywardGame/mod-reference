@@ -1,6 +1,6 @@
-import { TooltipLocation, TooltipOptionsVague, UiApi } from "../INewUi";
-import UiText, { Paragraph, TextOptions } from "./Text";
-import UiElement from "./UiElement";
+import { TooltipLocation, TooltipOptionsVague, UiApi } from "newui/INewUi";
+import UiText, { Paragraph, TextOptions } from "newui/util/Text";
+import UiElement from "newui/util/UiElement";
 export interface TooltipOptions extends TooltipOptionsVague {
     create?(tooltip: Tooltip): Promise<void>;
 }

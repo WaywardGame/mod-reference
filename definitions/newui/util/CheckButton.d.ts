@@ -1,6 +1,6 @@
-import { TextOrTranslationData, UiApi } from "../INewUi";
-import Button, { ButtonOptions } from "./Button";
-import { Refreshable } from "./Refreshable";
+import { TextOrTranslationData, UiApi } from "newui/INewUi";
+import Button, { ButtonOptions } from "newui/util/Button";
+import { Refreshable } from "newui/util/Refreshable";
 export interface CheckButtonOptions extends ButtonOptions {
     effect?: never;
     checked?: boolean;

@@ -1,10 +1,10 @@
 import { ConnectionState } from "Enums";
 import { ICrafted } from "game/IGame";
 import { IPacket } from "multiplayer/packets/IPacket";
+import { TextOrTranslationData } from "newui/INewUi";
 import { ICharacter } from "newui/util/Character";
 import { IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
-import { TextOrTranslationData } from "../newui/INewUi";
 export interface IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;

@@ -1,6 +1,6 @@
-import { UiApi, UiElementOptions } from "../INewUi";
-import { Refreshable } from "./Refreshable";
-import UiElement from "./UiElement";
+import { UiApi, UiElementOptions } from "newui/INewUi";
+import { Refreshable } from "newui/util/Refreshable";
+import UiElement from "newui/util/UiElement";
 export interface RangeInputOptions extends UiElementOptions {
     min?: number;
     max?: number;
