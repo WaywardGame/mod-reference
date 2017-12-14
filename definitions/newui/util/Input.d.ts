@@ -29,4 +29,5 @@ export default class Input<T = {}> extends UiElement<T & InputData> {
      * @param useDefault Whether to use the default over clearTo
      */
     clear(useDefault?: boolean): void;
+    private change(value?);
 }
