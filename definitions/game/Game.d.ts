@@ -114,6 +114,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     play(options: Partial<IPlayOptions>): void;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     removePlayer(pid: number): void;
+    deletePlayer(plys: IPlayer[], identifier: string): void;
     isRealTimeMode(): boolean;
     synchronizeFlowFields(plys: IPlayer[]): void;
     enableFlowFieldDebug(): void;

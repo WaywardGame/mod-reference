@@ -16,7 +16,7 @@ export interface IItemManager {
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     decayItems(): boolean;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
-    getContainerReference(container: IContainer): ContainerReference;
+    getContainerReference(container: IContainer, parentObject?: any): ContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
     getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;

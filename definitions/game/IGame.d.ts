@@ -145,6 +145,7 @@ export interface IGame extends Emitter {
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
+    deletePlayer(plys: IPlayer[], identifier: string): void;
     resetGameState(skipSave?: boolean): Promise<void>;
     resizeRenderer(): void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;

@@ -14,6 +14,7 @@ import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 export default class Player implements IPlayer, IPreSerializeCallback {
+    absentLastUsedTime: number;
     attack: number;
     attackFromEquip: IAttackHand;
     benignity: number;

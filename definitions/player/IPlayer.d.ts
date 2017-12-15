@@ -12,6 +12,7 @@ import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 export interface IPlayer extends IPointZ {
+    absentLastUsedTime: number;
     attack: number;
     attackFromEquip: IAttackHand;
     benignity: number;
