@@ -17,6 +17,8 @@ export default abstract class BasePacket {
     constructor(connection?: IConnection);
     getId(): number;
     abstract getType(): PacketType;
+    protected readInt8(): number;
+    protected writeInt8(value: number): void;
     protected readUint8(): number;
     protected writeUint8(value: number): void;
     protected readUint16(): number;
@@ -39,17 +41,17 @@ export default abstract class BasePacket {
     protected writePoint(value: IPoint): void;
     protected readContainer(): IContainer;
     protected writeContainer(value: IContainer): void;
-    protected readCreature(): ICreature;
+    protected readCreature(): ICreature | undefined;
     protected writeCreature(value: ICreature): void;
-    protected readDoodad(): IDoodad;
+    protected readDoodad(): IDoodad | undefined;
     protected writeDoodad(value: IDoodad): void;
     protected readItem(): IItem;
     protected writeItem(value: IItem): void;
-    protected readItemOrDoodad(): IItem | IDoodad;
+    protected readItemOrDoodad(): IItem | IDoodad | undefined;
     protected writeItemOrDoodad(value: IItem | IDoodad): void;
     protected readItems(): IItem[];
     protected writeItems(value: IItem[]): void;
     protected readObject(): any;
     protected writeObject(value: any): void;
-    private ensureSize();
+    private ensureSize(byteIncrease);
 }

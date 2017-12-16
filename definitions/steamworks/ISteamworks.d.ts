@@ -1,64 +1,73 @@
 import { ModType } from "mod/IModManager";
-export interface ISteamworks {
-    isElectron(): boolean;
-    isOverlayWorking(): boolean;
-    isGreenworksEnabled(): boolean;
+import Emitter from "utilities/Emitter";
+export interface ISteamworks extends Emitter {
+    clearRichPresence(): void;
+    createArchive(id: string, source: string, callback: (err?: string) => void): void;
+    createLobby(type: LobbyType): void;
+    createSaveGameMod(name: string, slot: number): Promise<boolean>;
+    debugLog(...args: any[]): void;
+    deleteSaveGameMod(name: string): void;
+    fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     getAbsolutePath(p: string): any;
+    getBetaName(): string;
+    getBuildTime(): number | undefined;
+    getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
+    getFriends(): ISteamFriend[] | undefined;
+    getLobbyData(name: string): string | undefined;
+    getLobbyMembers(): ISteamFriend[] | undefined;
+    getMatchmakingServer(): IMatchmakingServer | undefined;
+    getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): IModPath | undefined;
+    getMultiplayerLogs(): string;
+    getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
+    getPublishedMods(): IWorkshopItem[] | undefined;
+    getScreenName(): string | undefined;
+    getSteamId(): ISteamId | undefined;
+    processBackups(): boolean;
+    hasServerToJoin(): boolean;
+    importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
+    initialize(): void;
+    isDedicatedServer(): boolean;
+    isElectron(): boolean;
+    isGreenworksEnabled(): boolean;
+    isInLobby(): boolean;
     isLinux(): boolean;
     isMac(): boolean;
-    initialize(): void;
-    setOverlayWorks(ipg: boolean): void;
-    setupMods(callback: () => void): void;
-    getSteamId(): ISteamId;
-    getScreenName(): string | undefined;
-    getFriends(): ISteamFriend[] | undefined;
-    getBetaName(): string;
-    getPublishedMods(): IWorkshopItem[];
-    getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
-    fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
-    publishMod(modIndex: number, callback: (err: string | undefined, publishedFileId?: string) => void): void;
-    createArchive(id: string, source: string, callback: (err?: string) => void): void;
-    getPublishedItems(callback: (err: string | undefined, items?: IWorkshopItem[]) => void): void;
-    openUrl(url: string): void;
-    setupMultiplayerLog(): void;
-    getMultiplayerLogs(): string;
+    isOverlayWorking(): boolean;
+    joinLobby(lobbyId: string): void;
+    leaveLobby(): void;
     multiplayerLog(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
-    openWorkshop(publishId?: string): void;
-    openModsFolder(): void;
-    openLogsFolder(): void;
-    unsubscribe(publishId: string, callback: (err?: string) => void): void;
-    sendMessage(name: string, data: string): void;
-    toggleDeveloperTools(): void;
-    getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): IModPath | undefined;
-    createSaveGameMod(name: string, slot: number, callback: (success: boolean) => void): void;
-    deleteSaveGameMod(name: string): void;
-    debugLog(...args: any[]): void;
-    addZoomFactor(change: number): void;
-    setDefaultZoomFactor(): void;
-    updateZoomFactor(): void;
-    onUpdateZoomFactor(): void;
-    hasServerToJoin(): boolean;
+    onMessage(name: string, listener: (event: any, ...data: any[]) => any): boolean;
     onReady(): void;
-    setupReporting(): void;
-    recordProblem(message: string): void;
-    setRichPresence(key: string, value: string): boolean;
-    clearRichPresence(): void;
     onUnload(): void;
-    createLobby(type: LobbyType): void;
-    leaveLobby(): void;
-    joinLobby(lobbyId: string): void;
-    importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
+    openLogsFolder(): void;
+    openModsFolder(): void;
+    openUrl(url: string): void;
+    openWorkshop(publishId?: string): Promise<void>;
+    publishMod(modIndex: number): Promise<string>;
+    recordProblem(message: string): void;
+    sendMessage(name: string, ...data: any[]): boolean;
+    setLobbyData(name: string, data: string): boolean;
+    setLobbyType(type: LobbyType): void;
+    setOverlayWorks(ipg: boolean): void;
+    setRichPresence(key: string, value: string): boolean;
+    setupMods(callback: () => void): void;
+    setupMultiplayerLog(): void;
+    setupReporting(): void;
+    toggleDeveloperTools(): void;
+    unsubscribe(publishId: string): Promise<void>;
 }
 export default ISteamworks;
 export interface ISteamId {
     accountId: number;
     screenName: string;
+    steamId: string;
     staticAccountId: string;
 }
 export interface ISteamFriend {
     name?: string;
     steamId: string;
+    staticAccountId: string;
     gameId?: string;
     lobbyId?: string;
 }
@@ -68,6 +77,7 @@ export interface IWorkshopItem {
     isUpdated: boolean;
     timeCreated: number;
     timeUpdated: number;
+    timeAddedToUserList: number;
     title: string;
     description: string;
     banned: boolean;
@@ -84,4 +94,14 @@ export declare enum LobbyType {
     FriendsOnly = 1,
     Public = 2,
     Invisible = 3,
+}
+export declare enum SteamworksEvent {
+    OverlayHidden = 0,
+}
+export interface IDedicatedServerInfo {
+    name: string;
+    port: number;
+    backup: boolean;
+    backupInterval: number;
+    maxBackups: number;
 }

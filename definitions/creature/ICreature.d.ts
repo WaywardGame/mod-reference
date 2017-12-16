@@ -1,5 +1,7 @@
 import { CreatureType, DamageType, Defense, FacingDirection, IMessagePack, IModdable, IObject, IPointZ, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, SfxType, StatusType } from "Enums";
+import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
+import { ITile } from "tile/ITerrain";
 export interface ICreature extends IObject<CreatureType>, IPointZ {
     fromX: number;
     fromY: number;
@@ -12,15 +14,19 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     aberrant?: boolean;
     respawned?: boolean;
     enemy?: number;
+    enemyIsPlayer?: boolean;
     enemyAttempts?: number;
     happiness?: number;
     chickenEggCounter?: number;
+    goatMilkCounter?: number;
     stopNextMovement?: boolean;
     renamed?: string;
     description(): ICreatureDescription | undefined;
+    getTile(): ITile;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectMessage(player: IPlayer): IMessagePack;
+    getInspectHealthMessage(player: IPlayer): IMessagePack;
+    getInspectResistVulnerabilityMessage(player: IPlayer): IMessagePack | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     damage(damageInfo: IDamageInfo): number | undefined;
     isTamed(): boolean;
@@ -28,6 +34,8 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     release(): boolean;
     pet(): boolean;
     skipNextUpdate(): void;
+    onUnserialized(): void;
+    offer(items: IItem[]): IItem | undefined;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
@@ -38,6 +46,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
     canSwapWith(player: IPlayer): boolean;
+    getOwner(): IPlayer | undefined;
 }
 export declare enum SpawnGroup {
     Any = 0,
@@ -114,4 +123,7 @@ export interface IDamageInfo {
     weaponName?: string;
     creature?: ICreature;
     skipMilestones?: boolean;
+    legacy?: boolean;
+    damageMessage?: string;
+    soundDelay?: number;
 }

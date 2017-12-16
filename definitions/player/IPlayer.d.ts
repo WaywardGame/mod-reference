@@ -1,18 +1,18 @@
-import { ICreature } from "creature/ICreature";
+import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Delay, EquipType, FacingDirection, HairColor, Hairstyle, IInputMovement, IInspect, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, KeyBind, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
-import IFlowFieldManager from "flowfield/IFlowFieldManager";
-import IOptions from "game/IOptions";
+import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInputMovement, IInspect, IMessagePack, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
-import { IPropSerializable } from "save/ISerializer";
+import { IExploreMap } from "renderer/IExploreMap";
+import { IOptions } from "save/data/ISaveDataGlobal";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-export interface IPlayer extends IPropSerializable, IPointZ {
+export interface IPlayer extends IPointZ {
+    absentLastUsedTime: number;
     attack: number;
     attackFromEquip: IAttackHand;
     benignity: number;
@@ -34,8 +34,8 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     equipped: {
         [index: number]: number;
     };
+    exploredMapEncodedData: number[][];
     facingDirection: FacingDirection;
-    flowFieldManager: IFlowFieldManager;
     fromX: number;
     fromY: number;
     handToUse: EquipType;
@@ -43,11 +43,13 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     id: number;
     identifier: string;
     inventory: IContainer;
+    isConnecting: boolean;
     isMoving: boolean;
     isMovingClientside: boolean;
     lightBonus: number;
     malignity: number;
     movementAnimation: number;
+    movementComplete: boolean;
     movementCompleteZ: number | undefined;
     movementFinishTime: number;
     movementProgress: number;
@@ -76,6 +78,7 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     strength: number;
     swimming: boolean;
     tamedCreatures: number[];
+    travelData: IPlayerTravelData | undefined;
     turns: number;
     walkSoundCounter: number;
     wasAbsentPlayer: boolean;
@@ -83,49 +86,55 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     x: number;
     y: number;
     z: number;
+    exploredMap: IExploreMap[] | undefined;
+    exploredMapNotSaved: IExploreMap[] | undefined;
     addDelay(delay: Delay, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
     attributes(): void;
-    burn(skipMessage?: boolean, skipParry?: boolean): number | undefined;
+    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     calculateEquipmentStats(): void;
-    canCarve(): IItem | undefined;
     cancelResting(reason: RestCancelReason): void;
     canJump(): boolean;
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkAndRemoveBlood(): boolean;
+    checkForGather(): IDoodad | undefined;
     checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
-    checkForGather(): IDoodad | undefined;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkReputationMilestones(): void;
     checkSkillMilestones(): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     checkWeight(): void;
-    getWeightStatus(): WeightStatus;
-    getWeightPenalty(): number;
-    createFlowFieldManager(): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
-    damage(amount: number, damageMessage: string, soundDelay?: number): void;
+    damage(amount: number, damageMessage: string, soundDelay?: number): number | undefined;
+    damage(damageInfo: IDamageInfo): number | undefined;
     damageEquipment(): void;
-    deleteFlowFieldManager(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
-    getBindDownTime(key: KeyBind): number | undefined;
-    getConsumeBonus(skillUse: SkillType, itemQuality: ItemQuality | undefined): number;
+    getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
+    getDefaultCarveTool(): IItem | undefined;
+    getDialogInfo(dialogIndex: string | number): IDialogInfo;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
     getEquipSlotForItem(item: IItem): EquipType | undefined;
     getHandToUse(): EquipType | undefined;
+    getInspectHealthMessage(player: IPlayer): IMessagePack;
     getMaxHealth(): number;
-    getMouseDirection(): FacingDirection;
+    getMovementFinishTime(): number;
+    getMovementIntent(): Bindable | undefined;
+    getName(html?: boolean): string;
     getReputation(): number;
-    getSerializationProperties(_: string): string[];
-    getTouchDirection(): FacingDirection | undefined;
+    getTile(): ITile;
+    getWeightMovementPenalty(): number;
+    getWeightStatus(): WeightStatus;
     hasDelay(): boolean;
+    hasTamedCreature(creature: ICreature): boolean;
+    healthSyncCheck(): void;
     hurtHands(message: Message, damageMessage: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
-    isBindDown(key: KeyBind): boolean;
+    isFacingCarvableTile(): boolean;
     isGhost(): boolean;
+    isServer(): boolean;
     isLocalPlayer(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;
@@ -133,14 +142,12 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     processInput(): void;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
-    resetKeyBindState(): void;
     resetMovementStates(): void;
+    restoreExploredMap(): void;
     revealItem(itemType: ItemType): void;
-    getMovementFinishTime(): number;
     setId(id: number): void;
-    setMouseDirection(playerDirection: FacingDirection): void;
     setRaft(itemId: number | undefined): void;
-    setTouchDirection(playerDirection: FacingDirection | undefined): void;
+    setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setup(completedMilestones: number): void;
     setZ(z: number): void;
     shakeStat(statType: StatType): void;
@@ -151,14 +158,16 @@ export interface IPlayer extends IPropSerializable, IPointZ {
     tick(isPassTurn?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    updateCraftTable(updateDismantleItems: boolean): void;
-    updateCraftTableAndWeight(): void;
+    updateCraftTable(): void;
     updateDialogInfo(dialogIndex: string | number): void;
-    getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    updateKeyBindState(key: KeyBind, state: number | undefined): void;
+    updateDismantleTable(): void;
+    updateMilestones(): void;
+    updateMovementIntent(bind: Bindable | undefined): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
+    updateTables(): void;
+    updateTablesAndWeight(): void;
 }
 export default IPlayer;
 export interface IPlayerStatus {
@@ -174,9 +183,9 @@ export interface IColorDescription extends IModdable {
     color: IRGB;
 }
 export interface IPlayerCustomization {
-    hairStyle: Hairstyle;
-    hairColor: HairColor;
-    skinColor: SkinColor;
+    hairStyle: keyof typeof HairStyle;
+    hairColor: keyof typeof HairColor;
+    skinColor: keyof typeof SkinColor;
 }
 export interface IAttackHand {
     leftHand: number;
@@ -219,6 +228,11 @@ export declare type IPlayerOld = Partial<IPlayer> & {
     healthTimer: number;
     malignityPlus: number;
     malignityNegative: number;
+    customization: {
+        hairStyle: HairStyle;
+        hairColor: HairColor;
+        skinColor: SkinColor;
+    };
 };
 export interface IMobCheck {
     x: number;
@@ -234,4 +248,15 @@ export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
 export declare const gameMovement: IInputMovement[];
-export declare const playerWeightBonus = 25;
+export interface IMovementIntent {
+    bind: Bindable;
+    direction?: FacingDirection;
+}
+export interface IPlayerTravelData {
+    starvation: number;
+    dehydration: number;
+    originalHealth: number;
+    itemId: number | undefined;
+    state: PlayerState;
+}
+export declare const weightBonus = 25;

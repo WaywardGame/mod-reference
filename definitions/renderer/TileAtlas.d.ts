@@ -62,6 +62,7 @@ export default class TileAtlas implements ITileAtlas {
     };
     isMountain(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
+    isLava(type: TerrainType): boolean;
     isWater(type: TerrainType): boolean;
     isFloor(type: TerrainType): boolean;
 }

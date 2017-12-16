@@ -2,5 +2,6 @@ import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedShared
 export default class ChatMessagePacket extends PlayerTargetedSharedPacket {
     message: string;
     isSyncCheckEnabled(): boolean;
+    isAllowedWhenPaused(): boolean;
     process(): void;
 }

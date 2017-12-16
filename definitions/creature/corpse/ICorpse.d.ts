@@ -9,6 +9,7 @@ export interface ICorpseDescription {
     prefix?: string;
     blood?: boolean;
     lightSource?: boolean;
+    animated?: boolean;
 }
 export interface ICorpseResourceDrop {
     item: ItemType;

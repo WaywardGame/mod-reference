@@ -1,34 +1,30 @@
+import { ICreature } from "creature/ICreature";
 import { FacingDirection, MoveType } from "Enums";
 import { IFlowField } from "flowfield/IFlowField";
 import { DebugRendererDelegate } from "flowfield/IFlowFieldDebugRenderer";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
-import IPlayer from "player/IPlayer";
+import { IPlayer } from "player/IPlayer";
 export default class FlowFieldManager implements IFlowFieldManager {
+    private size;
     delegate: DebugRendererDelegate;
     flowFields: {
-        [index: number]: IFlowField;
+        [index: string]: IFlowField;
     };
-    private player;
-    private size;
-    private tileX;
-    private tileY;
-    private offsetX;
-    private offsetY;
-    constructor(player: IPlayer, radius: number);
+    private plys;
+    constructor(size: number);
     delete(): void;
     setDelegate(delegate: DebugRendererDelegate): void;
     getWidth(): number;
     getHeight(): number;
-    isInFlowField(worldX: number, worldY: number, worldZ: number): boolean;
-    getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
-    getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
+    isCreatureInFlowField(creature: ICreature): boolean;
+    isPlayerInFlowField(player: IPlayer): boolean;
+    getMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
+    getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
+    setPlayers(plys: IPlayer[]): void;
     update(): void;
-    updateCenter(): boolean;
-    private setCenter(worldX, worldY, worldZ);
-    private fullUpdate();
-    private updateTileInternal(gridIndex, tile);
-    private getDirection(moveType, worldX, worldY, toward);
-    private getFlowField(moveType);
+    reset(): void;
+    private getDirection(moveType, x, y, z, toward);
+    private getFlowField(moveType, z);
     private getFlowFields();
 }

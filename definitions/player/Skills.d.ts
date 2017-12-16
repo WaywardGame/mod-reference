@@ -13,4 +13,4 @@ export interface ISkillDescription {
 }
 export declare function skillSet(): ISkillSet;
 export declare function skillChance(level: number): number;
-export declare const skillDescriptions: Description<ISkillDescription>;
+export declare const skillDescriptions: SaferDescription<ISkillDescription>;

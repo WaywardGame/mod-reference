@@ -6,5 +6,6 @@ export interface ICorpseManager {
     getResources(corpse: ICorpse): ItemType[];
     remove(corpse: ICorpse): void;
     createBlood(x: number, y: number, z: number): void;
+    getCorpsesString(corpse: ICorpse[]): string;
 }
 export default ICorpseManager;

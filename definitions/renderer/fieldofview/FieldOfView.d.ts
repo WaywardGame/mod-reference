@@ -29,15 +29,15 @@ export default class FieldOfView implements IFieldOfView {
     private seed;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext, radius: number, maxRadius: number, subdivisions?: number);
+    resetGl(gl: WebGL2RenderingContext): void;
     updateRadius(radius: number, maxRadius: number): void;
     getTextureSize(): number;
     getSubdivisions(): number;
     tickSeed(): void;
-    compute(force?: boolean): boolean;
+    compute(force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
     getBounds(player: IPlayer, radius?: number): Utilities.Bound3;
     private updateExplored();
     private computeLights();
-    private resetGl();
 }

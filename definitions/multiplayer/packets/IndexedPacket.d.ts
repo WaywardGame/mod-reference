@@ -7,6 +7,8 @@ export default abstract class IndexedPacket extends BasePacket {
     private _index;
     private _nextIndex;
     protected resetIndexes(): void;
+    protected readIndexedInt8(): number | undefined;
+    protected writeIndexedInt8(value?: number): void;
     protected readIndexedUint8(): number | undefined;
     protected writeIndexedUint8(value?: number): void;
     protected readIndexedUint16(): number | undefined;

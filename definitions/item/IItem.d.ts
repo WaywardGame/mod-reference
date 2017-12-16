@@ -1,5 +1,5 @@
 import { ICreature } from "creature/ICreature";
-import { ActionType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
+import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
 import IPlayer from "player/IPlayer";
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);
@@ -32,33 +32,39 @@ export interface IItemLegendary {
 export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
     weight: number;
     equippedPid?: number;
-    quickSlot?: number;
+    readonly quickSlot?: number;
     tatteredMap?: TatteredMap;
     legendary?: IItemLegendary;
+    book?: BookType;
     disassembly?: IItemArray;
     order?: number;
     description(): IItemDescription | undefined;
+    isValid(): boolean;
+    shouldBeProtected(): boolean;
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;
     verifyAndFixItem(): void;
-    damage(modifier?: number): void;
+    damage(source: string, modifier?: number): void;
     isDamaged(): boolean;
     isDecayed(): boolean;
     isEquipped(): boolean;
     getEquipSlot(): EquipType | undefined;
+    setQuickSlot(player: IPlayer, quickSlot: number | undefined): void;
     changeInto(itemType: ItemType, disableNotify?: boolean): void;
-    returns(): void;
+    returns(): boolean;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined): ICreature | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
     getLocation(): IPointZ | undefined;
     dropInWater(player: IPlayer, x?: number, y?: number): void;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
-    placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): void;
+    placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;
+    getStokeFireValue(): number | undefined;
+    getOnUseBonus(): number;
 }
 export interface IItemOld {
     equipped?: EquipType;
@@ -78,14 +84,13 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     onUse?: {
         [index: number]: any;
     };
-    onEquip?: (item: IItem) => void;
-    onUnequip?: (item: IItem) => void;
     onEquipEffect?: any[];
     damageType?: DamageType;
     group?: ItemTypeGroup[];
     torch?: any;
     weight?: number;
     reducedWeight?: number;
+    minimumWeight?: number;
     lit?: ItemType;
     damageModifier?: number;
     isTorch?: boolean;
@@ -114,6 +119,8 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     spawnOnBreak?: CreatureType;
     showOverHair?: boolean;
     hasSleepImage?: boolean;
+    onEquip?(item: IItem): void;
+    onUnequip?(item: IItem): void;
 }
 export interface IDismantleDescription {
     items: Array<[ItemType, number]>;
@@ -126,10 +133,6 @@ export interface IGroupDescription {
     types: ItemType[];
     suffix?: string;
     prefix?: string;
-}
-export interface IActionDescription {
-    name?: string;
-    description?: string;
 }
 export declare enum ContainerReferenceType {
     Invalid = 0,

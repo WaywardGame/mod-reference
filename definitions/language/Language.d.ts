@@ -1,5 +1,5 @@
-import { ActionType, CreatureType, DoodadType, DoodadTypeGroup, GrowingStage, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
-import { Dictionary, IActionDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, ILanguage, IMessageDictionary, IMilestoneDictionary, INameDescriptionArray, IOnEquipDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, IUiDictionary, UiMessageStatic } from "language/ILanguage";
+import { ActionType, BookType, CreatureType, DoodadType, DoodadTypeGroup, GrowingStage, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
+import { Dictionary, IActionDictionary, IBookDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, ILanguage, IMessageDictionary, IMilestoneDictionary, IOnEquipDictionary, IPressNameDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, ITranslationArray, IUiDictionary, UiTranslation } from "language/ILanguage";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";
@@ -16,7 +16,7 @@ export default class Language implements ILanguage {
     pluralize(str: string): string;
     addPluralRule(from: string, to: string): void;
     onPrefix: (prefix: string) => string;
-    getDictionary(dictionary: Dictionary): INameDescriptionArray;
+    getDictionary(dictionary: Dictionary): ITranslationArray;
     setDictionary(dictionary: Dictionary.Action, newEntries: IActionDictionary): void;
     setDictionary(dictionary: Dictionary.Creature, newEntries: ICreatureDictionary): void;
     setDictionary(dictionary: Dictionary.Doodad, newEntries: IDoodadDictionary): void;
@@ -29,11 +29,13 @@ export default class Language implements ILanguage {
     setDictionary(dictionary: Dictionary.Skill, newEntries: ISkillDictionary): void;
     setDictionary(dictionary: Dictionary.Terrain, newEntries: ITerrainDictionary): void;
     setDictionary(dictionary: Dictionary.TileEvent, newEntries: ITileEventDictionary): void;
-    setDictionary(dictionary: Dictionary.Ui, newEntries: IUiDictionary): void;
+    setDictionary(dictionary: Dictionary.UiChoice, newEntries: IUiDictionary): void;
+    setDictionary(dictionary: Dictionary.Book, newEntries: IBookDictionary): void;
+    setDictionary(dictionary: Dictionary.BindPress, newEntries: IPressNameDictionary): void;
     setDictionary(dictionary: Dictionary, newEntries: {
-        [key: number]: any;
+        [key: string]: any;
     }): void;
-    setDictionaryRaw(dictionary: Dictionary, newEntries: INameDescriptionArray): void;
+    setDictionaryRaw(dictionary: Dictionary, newEntries: ITranslationArray): void;
     removeDictionary(dictionary: Dictionary): void;
     setDictionaries(dictionaries: {
         [key: number]: {
@@ -55,7 +57,9 @@ export default class Language implements ILanguage {
     setEntry(dictionary: Dictionary.Skill, entryIndex: SkillType, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Terrain, entryIndex: TerrainType, prefix: string, name: string): void;
     setEntry(dictionary: Dictionary.TileEvent, entryIndex: TileEventType, name: string, description: string): void;
-    setEntry(dictionary: Dictionary.Ui, entryIndex: UiMessageStatic, name: string): void;
+    setEntry(dictionary: Dictionary.UiChoice, entryIndex: UiTranslation, name: string): void;
+    setEntry(dictionary: Dictionary.Book, entryIndex: BookType, name: string, description: string): void;
+    setEntry(dictionary: Dictionary.BindPress, entryName: string, name: string): void;
     setEntry(dictionary: Dictionary, entryIndex: number, ...entry: string[]): void;
     private formatEntry(dictionary, entry);
 }

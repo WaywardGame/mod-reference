@@ -7,6 +7,6 @@ export default class DoodadManager implements IDoodadManager {
     remove(doodad: IDoodad): void;
     updateAll(): void;
     getGardenFertilityMessage(spread: number): Message;
-    isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): boolean;
-    verifyItemWeights(): void;
+    isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): doodadType is DoodadTypeGroup;
+    verifyAndFixItemWeights(): void;
 }

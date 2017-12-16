@@ -14,6 +14,10 @@ export default class CreatureManager implements ICreatureManager {
     updateFov(): number;
     updateAll(): void;
     getMoveTypesInFov(): IMoveTypeZ[];
+    /**
+     * getMovePenalty
+     * @return Blocked penalty - Do no return 0!
+     */
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
     checkSpawnReputation(creatureDescription: ICreatureDescription, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean): CreatureType[];

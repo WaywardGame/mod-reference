@@ -20,30 +20,34 @@ export declare enum WorldZ {
 export declare enum Source {
     ActionManager = 0,
     Audio = 1,
-    Chat = 2,
-    CorpseManager = 3,
-    CreatureManager = 4,
-    DoodadManager = 5,
-    FlowField = 6,
-    Game = 7,
-    ItemManager = 8,
-    Languages = 9,
-    MapGen = 10,
-    Mod = 11,
-    Mods = 12,
-    Multiplayer = 13,
-    Packet = 14,
-    Player = 15,
-    ResourceLoader = 16,
-    SaveManager = 17,
-    Serializer = 18,
-    Shaders = 19,
-    Steamworks = 20,
-    TileEventManager = 21,
-    Trello = 22,
-    Ui = 23,
-    Utilities = 24,
-    WebAssembly = 25,
+    BaseMod = 2,
+    BindingManager = 3,
+    Chat = 4,
+    CommandManager = 5,
+    CorpseManager = 6,
+    CreatureManager = 7,
+    DoodadManager = 8,
+    FlowFieldManager = 9,
+    Game = 10,
+    ItemManager = 11,
+    Languages = 12,
+    MapGen = 13,
+    Mod = 14,
+    Mods = 15,
+    Multiplayer = 16,
+    NewUi = 17,
+    Packet = 18,
+    Player = 19,
+    ResourceLoader = 20,
+    SaveManager = 21,
+    Serializer = 22,
+    Shaders = 23,
+    Steamworks = 24,
+    TileEventManager = 25,
+    Trello = 26,
+    Ui = 27,
+    Utilities = 28,
+    WebAssembly = 29,
 }
 export declare enum AttackType {
     Melee = 0,
@@ -61,6 +65,7 @@ export declare enum InspectType {
     Items = 4,
     Quality = 5,
     Player = 6,
+    Corpse = 7,
 }
 export declare enum MoveType {
     None = 0,
@@ -79,7 +84,6 @@ export declare enum DamageType {
     Piercing = 4,
     Fire = 8,
     True = 16,
-    Last = 32,
 }
 export declare function fullDamageType(damageType: DamageType): string;
 export declare class Resistances {
@@ -120,6 +124,8 @@ export declare enum LootGroupType {
     Treasure = 2,
     SeaTreasure = 3,
     CaveChest = 4,
+    FireElemental = 5,
+    VeryHigh = 6,
 }
 export declare enum EquipType {
     None = 0,
@@ -164,7 +170,7 @@ export declare enum ActionType {
     Sling = 19,
     Repair = 20,
     Decode = 21,
-    Read = 22,
+    Learn = 22,
     Reinforce = 23,
     Gather = 24,
     StokeFire = 25,
@@ -196,32 +202,33 @@ export declare enum ActionType {
     OpenDoor = 51,
     CloseDoor = 52,
     AddFuel = 53,
-    Drink = 54,
-    Grasp = 55,
-    PickupItem = 56,
-    PickupAllItems = 57,
-    Offer = 58,
-    Drop = 59,
-    Jump = 60,
-    Move = 61,
-    MoveTo = 62,
-    UpdateDirection = 63,
-    Idle = 64,
-    DrinkInFront = 65,
-    UseItem = 66,
-    Equip = 67,
-    Unequip = 68,
-    MoveItem = 69,
-    Craft = 70,
-    Till = 71,
-    Rename = 72,
-    Harvest = 73,
+    Grasp = 54,
+    PickupItem = 55,
+    PickupAllItems = 56,
+    Offer = 57,
+    Drop = 58,
+    Jump = 59,
+    Move = 60,
+    MoveTo = 61,
+    UpdateDirection = 62,
+    Idle = 63,
+    DrinkInFront = 64,
+    UseItem = 65,
+    Equip = 66,
+    Unequip = 67,
+    MoveItem = 68,
+    Craft = 69,
+    Till = 70,
+    Rename = 71,
+    Harvest = 72,
+    Milk = 73,
+    Read = 74,
 }
 export declare enum ItemType {
     None = 0,
     Amber = 1,
     AnimalSkull = 2,
-    Arrow = 3,
+    StoneArrow = 3,
     StoneArrowhead = 4,
     PileOfAsh = 5,
     BarkLeggings = 6,
@@ -253,7 +260,7 @@ export declare enum ItemType {
     Leaves = 32,
     Limestone = 33,
     Log = 34,
-    MortarAndPestle = 35,
+    StoneMortarAndPestle = 35,
     ButtonMushrooms = 36,
     Nopal = 37,
     Peat = 38,
@@ -572,6 +579,49 @@ export declare enum ItemType {
     CookedPotato = 351,
     CookedCornCob = 352,
     BundleOfSwitchgrass = 353,
+    Cloak = 354,
+    WoodenMortarAndPestle = 355,
+    SandstoneMortarAndPestle = 356,
+    WroughtIronMortarAndPestle = 357,
+    IronMortarAndPestle = 358,
+    RawClayMortarAndPestle = 359,
+    ClayMortarAndPestle = 360,
+    CopperOre = 361,
+    CopperIngot = 362,
+    CopperPickaxe = 363,
+    CopperDoubleAxe = 364,
+    CopperShovel = 365,
+    CopperSpear = 366,
+    CopperHammer = 367,
+    CopperLockPick = 368,
+    CopperShield = 369,
+    CopperGauntlets = 370,
+    CopperGreaves = 371,
+    CopperGorget = 372,
+    CopperHelmet = 373,
+    CopperBoots = 374,
+    CopperBreastPlate = 375,
+    CopperSword = 376,
+    CopperTongs = 377,
+    CopperArrow = 378,
+    CopperBullet = 379,
+    CopperArrowhead = 380,
+    CopperChest = 381,
+    CopperAnvil = 382,
+    CopperAxe = 383,
+    CopperHoe = 384,
+    CopperMortarAndPestle = 385,
+    WaterskinOfGoatMilk = 386,
+    ClayJugOfGoatMilk = 387,
+    GlassBottleOfGoatMilk = 388,
+    Obsidian = 389,
+    OrnateBlueBook = 390,
+    Journal = 391,
+    MossCoveredBook = 392,
+    GildedRedBook = 393,
+    ArrowShaft = 394,
+    SlitherSucker = 395,
+    AberrantSlitherSucker = 396,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -584,7 +634,7 @@ export declare enum ItemTypeGroup {
     Meat = 807,
     Food = 808,
     Insect = 809,
-    Water = 810,
+    Liquid = 810,
     Treasure = 811,
     Rock = 812,
     Compost = 813,
@@ -638,7 +688,10 @@ export declare enum ItemTypeGroup {
     Tinder = 861,
     Bone = 862,
     Kindling = 863,
-    Last = 864,
+    MortarAndPestle = 864,
+    Milk = 865,
+    Book = 866,
+    Last = 867,
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -676,6 +729,10 @@ export declare enum TerrainType {
     RedCarpet = 27,
     Lava = 28,
     FertileDirt = 29,
+    RocksWithCopper = 30,
+    SandstoneWithCopper = 31,
+    CoolingLava = 32,
+    Obsidian = 33,
 }
 export declare enum DoodadType {
     WoodenDoor = 0,
@@ -760,6 +817,8 @@ export declare enum DoodadType {
     Pumpkin = 79,
     SugarCaneStalks = 80,
     Wheat = 81,
+    CopperChest = 82,
+    CopperAnvil = 83,
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -768,9 +827,7 @@ export declare enum DoodadTypeGroup {
     LitKiln = 403,
     LitWaterStill = 404,
     Anvil = 405,
-    Tree = 406,
-    Fungi = 407,
-    Last = 408,
+    Last = 406,
 }
 export declare enum GrowingStage {
     Germinating = 0,
@@ -780,6 +837,14 @@ export declare enum GrowingStage {
     Flowering = 4,
     Ripening = 5,
     Dead = 6,
+}
+export declare enum BookType {
+    RandomEvent = 0,
+    IslandPresence = 1,
+    Treasure = 2,
+    Deities = 3,
+    PastCivilizations = 4,
+    SandCasting = 5,
 }
 export declare enum CreatureType {
     Slime = 0,
@@ -818,8 +883,9 @@ export declare enum CreatureType {
     WaterBlood = 33,
     LavaBeetle = 34,
     Goat = 35,
+    SlitherSucker = 36,
 }
-export declare enum Hairstyle {
+export declare enum HairStyle {
     None = 0,
     Spike = 1,
     Bun = 2,
@@ -829,6 +895,7 @@ export declare enum Hairstyle {
     Dreads = 6,
     Shaved = 7,
     Long = 8,
+    Mohawk = 9,
 }
 export declare enum HairColor {
     "#e7c978" = 0,
@@ -913,6 +980,18 @@ export declare enum SfxType {
     Click = 20,
     Damaged = 21,
     Chat = 22,
+    UiSelect = 23,
+    UiActivate = 24,
+}
+export declare enum Command {
+    Commands = 0,
+    Players = 1,
+    Ping = 2,
+    Kick = 3,
+    Banned = 4,
+    Ban = 5,
+    Unban = 6,
+    Pause = 7,
 }
 export declare const equipTypeToMessage: Message[];
 export declare const recipeLevelToMessage: Message[];
@@ -923,6 +1002,7 @@ export declare enum PlayerState {
     Won = 2,
     Traveling = 3,
     Ghost = 4,
+    Server = 5,
 }
 export declare enum ObjectContext {
     None = 0,
@@ -938,15 +1018,18 @@ export declare enum Delay {
     Movement = 11,
     ShortPause = 13,
     Collision = 40,
-    HotKey = 20,
-    RealTimeTick = 40,
     TurnDirection = 2,
+}
+export declare enum RealTimeSpeed {
+    Min = 10,
+    Default = 40.2001608,
+    Max = 80,
 }
 export declare enum StatType {
     EnemyHealth = 0,
     Stat = 1,
     Stamina = 2,
-    Hunger = 3,
+    Metabolism = 3,
     Health = 4,
     Thirst = 5,
 }
@@ -979,57 +1062,6 @@ export declare const itemQualitySortOrder: {
     [index: number]: number;
 };
 export declare const onEquipTypes: IOnEquipType;
-export declare enum KeyBind {
-    Up = 0,
-    Down = 1,
-    Left = 2,
-    Right = 3,
-    Idle = 4,
-    One = 5,
-    Two = 6,
-    Three = 7,
-    Four = 8,
-    Five = 9,
-    Six = 10,
-    Seven = 11,
-    Eight = 12,
-    Nine = 13,
-    Escape = 14,
-    Inventory = 15,
-    Help = 16,
-    Skills = 17,
-    Messages = 18,
-    Options = 19,
-    Alt = 20,
-    Shift = 21,
-    Equipment = 22,
-    Crafting = 23,
-    Dismantle = 24,
-    Actions = 25,
-    Milestones = 26,
-    Enter = 27,
-    Ten = 28,
-    Eleven = 29,
-    Twelve = 30,
-    PrimaryMouse = 31,
-    SecondaryMouse = 32,
-    Touch = 33,
-    LeftHand = 34,
-    RightHand = 35,
-    Chat = 36,
-    Thirteen = 37,
-}
-export declare enum BindType {
-    Keyboard = 0,
-    Mouse = 1,
-    Other = 2,
-}
-export declare const keybindOrder: KeyBind[];
-export declare const defaultBinds: IBindArray;
-export declare const playerKeyBinds: KeyBind[];
-export declare function addDefaultBind(key: KeyBind, value: number, type?: BindType, bindable?: boolean): void;
-export declare function removeDefaultKeybind(key: KeyBind): void;
-export declare const hotKeyNumbers: KeyBind[];
 export declare enum TurnType {
     CheckUnderPlayer = 0,
     DontEnterCaves = 1,
@@ -1057,7 +1089,9 @@ export declare enum DialogId {
     Milestones = 5,
     Map = 6,
     Container = 7,
-    Custom = 8,
+    Book = 8,
+    Options = 9,
+    Custom = 10,
 }
 export declare enum SortType {
     Name = 0,
@@ -1106,19 +1140,6 @@ export declare enum SentenceCaseStyle {
 export interface IOnEquipType {
     [index: number]: {};
 }
-export interface IBindArray {
-    [index: number]: IBind;
-}
-export interface IModBindArray {
-    [index: string]: IBind;
-}
-export interface IBind {
-    value: number;
-    type: BindType;
-}
-export interface IKeyBind {
-    [index: number]: number;
-}
 export interface IVersionInfo {
     str: string;
     stage: "beta" | "release";
@@ -1163,21 +1184,12 @@ export interface TatteredMap extends IPointZ {
     reinitialize?: boolean;
 }
 export interface IInputMovement extends IPoint {
-    keyBind: KeyBind;
+    moveBind: Bindable;
     direction: FacingDirection;
 }
 export interface ISeeds {
     base: number | string;
     saved: number;
-}
-export interface IHighscore {
-    name: string;
-    message: string;
-    turns: number;
-    score: number;
-    dailyChallenge: boolean;
-    date: number;
-    talent?: number;
 }
 export interface IMessagePack {
     message?: Message | string;
@@ -1197,6 +1209,7 @@ export interface IRGB {
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
+    DailyChallenge = 2,
 }
 export declare enum WeightType {
     Normal = 0,
@@ -1209,12 +1222,14 @@ export declare enum RestCancelReason {
     Damaged = 1,
     FullStamina = 2,
     NearbyCreatureDamagedDoodad = 3,
+    CreatureDamaged = 4,
 }
 export declare enum FireType {
     None = 0,
     Doodad = 1,
     Fire = 2,
     Lava = 3,
+    CoolingLava = 4,
 }
 export interface IResourceItem {
     type: ItemType;
@@ -1230,8 +1245,10 @@ export interface IDoodadParticles {
 export interface ITerrainResource {
     items: ITerrainResourceItem[];
     defaultItem?: ItemType;
+    disableWaterRouting?: boolean;
 }
 export interface ITerrainResourceItem extends IResourceItem {
+    chance: number;
     tileChange?: TerrainType;
     tileChangeChance?: number;
 }
@@ -1245,8 +1262,120 @@ export declare enum ConnectionState {
     Connected = 2,
     QueuingPackets = 4,
     CatchingUp = 8,
-    Loaded = 16,
-    Ready = 32,
-    Disconnecting = 64,
-    All = 127,
+    Ready = 16,
+    Disconnecting = 32,
+    All = 63,
+}
+export interface RequirementInfo extends IPoint, IPointZ {
+    requirementsMet: boolean;
+    isLava?: boolean;
+}
+export interface IBindArray {
+    [index: number]: IBind;
+}
+export interface IModBindArray {
+    [index: string]: IBind;
+}
+export interface IBind {
+    value: number;
+    type: BindableType;
+}
+export interface IKeyBind {
+    [index: number]: number;
+}
+export declare enum BindableType {
+    Game = 0,
+    Dialog = 1,
+    Menu = 2,
+    Developer = 3,
+    Mod = 4,
+}
+export declare enum Bindable {
+    GameMoveDirection = 0,
+    GameMoveUp = 1,
+    GameMoveLeft = 2,
+    GameMoveDown = 3,
+    GameMoveRight = 4,
+    GameFaceDirection = 5,
+    GameFaceUp = 6,
+    GameFaceLeft = 7,
+    GameFaceDown = 8,
+    GameFaceRight = 9,
+    GameIdle = 10,
+    GameHandToggleLeft = 11,
+    GameHandToggleRight = 12,
+    GameQuickSlot1 = 13,
+    GameQuickSlot2 = 14,
+    GameQuickSlot3 = 15,
+    GameQuickSlot4 = 16,
+    GameQuickSlot5 = 17,
+    GameQuickSlot6 = 18,
+    GameQuickSlot7 = 19,
+    GameQuickSlot8 = 20,
+    GameQuickSlot9 = 21,
+    GameQuickSlotToggle1 = 22,
+    GameQuickSlotToggle2 = 23,
+    GameQuickSlotToggle3 = 24,
+    GameQuickSlotToggle4 = 25,
+    GameQuickSlotToggle5 = 26,
+    GameQuickSlotToggle6 = 27,
+    GameQuickSlotToggle7 = 28,
+    GameQuickSlotToggle8 = 29,
+    GameQuickSlotToggle9 = 30,
+    GameQuickSlotClear = 31,
+    GameContextMenu1 = 32,
+    GameContextMenu2 = 33,
+    GameContextMenu3 = 34,
+    GameContextMenu4 = 35,
+    GameContextMenu5 = 36,
+    GameContextMenu6 = 37,
+    GameContextMenu7 = 38,
+    GameContextMenu8 = 39,
+    GameContextMenu9 = 40,
+    GameContextMenu10 = 41,
+    GameContextMenu11 = 42,
+    GameContextMenu12 = 43,
+    GameContextMenu13 = 44,
+    GameZoomIn = 45,
+    GameZoomOut = 46,
+    GameActions = 47,
+    GameItemMove = 48,
+    GameItemQuickMove = 49,
+    GameItemQuickMoveAll = 50,
+    GameItemMenu = 51,
+    GameItemDrop = 52,
+    GameItemDropAll = 53,
+    GameItemEquipToggle = 54,
+    GameInspect = 55,
+    GameMoreInformation = 56,
+    GameScreenshotMode = 57,
+    GamePause = 58,
+    GameFullscreen = 59,
+    DialogCloseAll = 60,
+    DialogInventory = 61,
+    DialogHelp = 62,
+    DialogSkills = 63,
+    DialogMessages = 64,
+    DialogMessagesChatFocus = 65,
+    DialogOptions = 66,
+    DialogEquipment = 67,
+    DialogCrafting = 68,
+    DialogDismantle = 69,
+    DialogMilestones = 70,
+    MenuCancel = 71,
+    MenuEnter = 72,
+    MenuNext = 73,
+    MenuPrevious = 74,
+    MenuUp = 75,
+    MenuDown = 76,
+    MenuLeft = 77,
+    MenuRight = 78,
+    DeveloperToggleDeveloperMode = 79,
+    DeveloperReloadGame = 80,
+    DeveloperToggleDeveloperTools = 81,
+}
+export declare enum DropLocation {
+    Facing = 0,
+    Feet = 1,
+    FeetWhenFacingBlocked = 2,
 }

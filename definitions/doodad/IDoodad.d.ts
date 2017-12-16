@@ -1,22 +1,26 @@
 import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
-import { IContainer } from "item/IItem";
+import { IContainer, IItemArray, IItemLegendary } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
+import { ITile } from "tile/ITerrain";
 export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, Partial<IContainer> {
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
+    isValid(): boolean;
+    getTile(): ITile;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
-    canGather(player: IPlayer): boolean;
-    isGatherable(player: IPlayer): boolean;
-    canHarvest(player: IPlayer): boolean;
+    isReadyToGather(): boolean;
+    isGatherable(): boolean;
+    isEmbers(): boolean;
+    canHarvest(): boolean;
     canPickup(player: IPlayer): boolean;
     causeStatus(player: IPlayer): void;
     checkForTrampling(playerOrCreatureId: IPlayer | number): boolean;
-    damage(forceBreak?: boolean): void;
+    damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean): void;
     getDefaultDurability(): void;
     getDurabilityMessage(): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
@@ -31,6 +35,9 @@ export interface IDoodadOptions extends IObjectOptions {
     torch?: IDoodadTorchType;
     treasure?: boolean;
     weight?: number;
+    legendary?: IItemLegendary;
+    disassembly?: IItemArray;
+    ownerIdentifier?: string;
 }
 export interface IDoodadTorchType {
     type: ItemType;
@@ -88,4 +95,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     waterStill?: boolean;
     gatherSkillUse?: SkillType;
     growthCycle?: boolean;
+    isTree?: boolean;
+    isWall?: boolean;
+    isFungi?: boolean;
 }

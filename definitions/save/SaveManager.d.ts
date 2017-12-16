@@ -1,32 +1,74 @@
-import { ISaveManager, SaveObject } from "save/ISaveManager";
+import { ISaveInfo, ISaveManager, SaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 export default class SaveManager implements ISaveManager {
     private loadedGlobalSlot;
     private dataStorage;
     private multiplayerSlotData;
     isEnabled(): boolean;
-    useLocalStorage(): void;
-    initialize(): void;
-    getSaveSlots(callback: (slot: number, isUsed: boolean) => void): void;
-    isSlotUsed(slot: number, callback: (slot: number, isUsed: boolean) => void): void;
-    getSaveCount(callback: (usedCount: number, usedSlots: number[]) => void, callbackPerSlot?: (slot: number, isUsed: boolean) => void): void;
-    getFirstFreeSlot(callback: (slot: number | undefined) => void): void;
-    save(slot: number, callback: (slot: number, bytes: number, saveObject?: SaveObject) => void): void;
-    load(slot: number, callback: (slot: number, success: boolean) => void): void;
-    loadPartial(slot: number, callback: (slot: number, success: boolean, saveObject: SaveObject) => void): void;
-    loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean): void;
+    initialize(): Promise<void>;
+    /**
+     * Returns an array where the index is the slot number, and the value is whether or not the slot is filled
+     */
+    getSlots(): Promise<boolean[]>;
+    /**
+     * Returns the indices of the used slots
+     */
+    getUsedSlots(): Promise<number[]>;
+    /**
+     * Returns whether or not the slot is used
+     */
+    isSlotUsed(slot: number): Promise<boolean>;
+    /**
+     * Returns the number of filled slots
+     */
+    getSaveCount(): Promise<number>;
+    /**
+     * Returns the index of the first free slot
+     */
+    getFirstFreeSlot(): Promise<number>;
+    /**
+     * Gets the used slots, ordered by one of a few properties of the saveData in that slot
+     */
+    getUsedSlotsSorted(sortBy: SaveSort, direction?: SortDirection): Promise<number[]>;
+    /**
+     * Gets the most recently saved slot
+     */
+    getMostRecentSlot(): Promise<number>;
+    /**
+     * Returns an tuple [bytes: number, saveObject: SaveObject]
+     */
+    save(slot: number, unloading?: boolean): Promise<ISaveInfo>;
+    /**
+     * Returns whether or not it succeeded
+     */
+    load(slot: number): Promise<boolean>;
+    loadPartial(slot: number): Promise<SaveObject>;
+    loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
     loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string | undefined): any;
-    savePartialData(slot: number, object: any, key: string, saveObjectKey: string, callback: (slot: number, bytes: number) => void): void;
-    savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any, callback: (slot: number, bytes: number) => void): void;
-    exportSave(slot: number, callback: (slot: number, success: boolean, json: string) => void): void;
-    importSave(slot: number, data: string, callback: (slot: number | undefined, bytes: number | undefined) => void): void;
-    deleteSlot(slot: number, callback: (slot: number, success: boolean) => void): void;
-    deleteAll(callback: () => void): void;
-    transferSaves(): void;
+    /**
+     * Returns the number of bytes the save takes up
+     */
+    savePartialData(slot: number, object: any, key: string, saveObjectKey: string): Promise<number>;
+    /**
+     *  Returns the number of bytes the save takes up
+     */
+    savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any): Promise<number>;
+    exportSave(slot: number): Promise<SaveObject>;
+    /**
+     * Returns the number of bytes the save takes up, or undefined, if an error occurs
+     */
+    importSave(slot: number, saveObject: SaveObject | string): Promise<number | undefined>;
+    deleteSlot(slot: number): Promise<boolean | undefined>;
+    deleteAllSlots(): Promise<boolean | undefined>;
+    deleteAllData(): Promise<void>;
     compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
     private getPropertiesToSerialize(slot);
     private compressString(str, exporting?);
     private decompressString(str, importing?);
     private createSaveObject(slot);
-    private saveObjectToSlot(slot, saveObject, callback);
+    private saveSlot(slot, unloading?);
+    /**
+     * Returns the number of bytes the save takes up
+     */
+    private saveObjectToSlot(slot, saveObject, unloading?);
 }

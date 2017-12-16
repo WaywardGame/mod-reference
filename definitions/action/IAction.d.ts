@@ -1,16 +1,30 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { ActionType, AttackType, Delay, EquipType, FacingDirection, IMessagePack, IPoint, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
+import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
 import { HintType } from "ui/IHint";
-export interface IAction {
-    type: ActionType;
-    callback: ActionCallback;
+export interface IActionBase {
+    validateArguments?: IActionArgumentValidator;
     usableAsGhost?: boolean;
     ignoreHasDelay?: boolean;
+}
+export interface IActionDescription extends IActionBase {
+    name?: string;
+    description?: string;
+}
+export interface IAction extends IActionBase, IGenericRegistration {
+    type: ActionType;
+    callback: ActionCallback;
+}
+export declare type IActionArgumentValidatorBase = {
+    [P in keyof IActionArgument]?: boolean;
+};
+export interface IActionArgumentValidator extends IActionArgumentValidatorBase {
+    allowNearbyItem?: boolean;
 }
 export interface IActionArgument {
     type?: ActionType;
@@ -48,7 +62,7 @@ export interface IActionResult {
     updateView?: IActionUpdateView | boolean;
     particle?: IActionParticle | IRGB;
     updateRender?: boolean;
-    updateCraftTableAndWeight?: boolean;
+    updateTablesAndWeight?: boolean;
     delay?: IActionResultDelay | Delay;
     hint?: HintType;
     updateReputation?: number;

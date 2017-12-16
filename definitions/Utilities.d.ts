@@ -1,8 +1,12 @@
 import Vec2 = TSM.vec2;
-import { CaseStyle, IPointZ, IVersionInfo, SentenceCaseStyle, Source, TerrainType } from "Enums";
+import { CaseStyle, IPoint, IPointZ, IVersionInfo, SentenceCaseStyle, Source, TerrainType } from "Enums";
 import { ITile } from "tile/ITerrain";
+import * as Arrays from "utilities/Arrays";
 import Color from "utilities/Color";
-export { Color };
+import Emitter from "utilities/Emitter";
+export { Color, Emitter, Arrays };
+export { sleep } from "utilities/Async";
+export { download, upload } from "utilities/Files";
 export declare module Console {
     function trace(source: Source, ...args: any[]): void;
     function log(source: Source, ...args: any[]): void;
@@ -47,7 +51,7 @@ export declare module Random {
      * Get the chance for something
      * Returns a number between 1 and 100 (inclusive)
      */
-    function nextChance(minChance?: number): number;
+    function nextChance(minChance?: number, chanceOutOf?: number): number;
     /**
      * Chooses a random entry in an array and returns it
      */
@@ -55,11 +59,9 @@ export declare module Random {
     function pushSeed(newSeed?: number): void;
     function popSeed(): number;
     function tickSeed(s: number): number;
-    function shuffle(array: number[]): number[];
+    function shuffle<T>(array: T[]): T[];
     function getElement<T>(array: T[]): T;
 }
-export declare function download(name: string, json: string): void;
-export declare function upload(callback: (result: string) => void, e: Event): void;
 export declare module TileHelpers {
     const maskGfx = 31;
     const maskType = 4064;
@@ -76,8 +78,15 @@ export declare module TileHelpers {
     function isTilledRaw(data: number): boolean;
     function setTilled(tile: ITile, value: boolean): void;
     function setTilledRaw(data: number, value: number): number;
-    function findOpenTile(start: IPointZ, checkTileCallback?: (point: IPointZ, tile: ITile) => boolean): IPointZ | undefined;
+    function findMatchingTile(start: IPointZ, isMatchingTile?: (point: IPointZ, tile: ITile) => boolean, maxTilesChecked?: number, canVisitTile?: (point: IPointZ, tile: ITile) => boolean): IPointZ | undefined;
+    /**
+     * Check is a tile is open
+     */
     function isOpenTile(point: IPointZ, tile: ITile): boolean;
+    /**
+     * Check if a tile is a suitable spawn point
+     */
+    function isSuitableSpawnPointTile(point: IPointZ, tile: ITile): boolean;
 }
 export declare module WebWorkerHelpers {
     class WebWorker {
@@ -121,20 +130,21 @@ export declare module WebAssemblyHelpers {
 export declare module Enums {
     enum EnumId {
         CreatureType = 0,
-        KeyBind = 1,
+        Bindable = 1,
         ActionType = 2,
         ItemType = 3,
         TerrainType = 4,
         DoodadType = 5,
         Message = 6,
         SkillType = 7,
-        Hairstyle = 8,
+        HairStyle = 8,
         HairColor = 9,
         SkinColor = 10,
         Dictionary = 11,
         LanguageExtension = 12,
         Music = 13,
         SoundEffect = 14,
+        Command = 15,
     }
     interface IEnumInfo {
         enumId: EnumId;
@@ -153,14 +163,15 @@ export declare module Enums {
     function isModdable(enumObject: any): boolean;
     function restore(): void;
     function reset(): void;
-    function allocate(modIndex: number, id: Enums.EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): IEnumInfo | undefined;
+    function allocate(modIndex: number, id: EnumId, name: string, objectValue?: ((enumNumber: number) => any) | any, onAllocate?: ((enumNumber: number) => void), onUnallocate?: ((enumNumber: number) => void)): IEnumInfo | undefined;
     function unallocate(enumInfo: IEnumInfo): void;
     function unallocateMod(modIndex: number): void;
+    function findKey(enumObject: any, keyToFind: string): number | undefined;
     function getKeys(enumObject: any): string[];
     function getLength(enumObject: any): number;
     function getRandomIndex(enumObject: any): number;
     function getValues(enumObject: any): number[];
-    function forEach(enumObject: any, callback: (name: string, value: number) => boolean | void): void;
+    function forEach<Enum extends number>(enumObject: any, callback: (name: string, value: Enum) => boolean | void): void;
     function toString(enumObject: any, n: number): string;
     function getNext(enumObject: any, n: number): number;
     function getPrevious(enumObject: any, n: number): number;
@@ -175,7 +186,7 @@ export declare module Math2 {
     function clamp255(value: number): number;
     function clamp01(value: number): number;
     function clamp(value: number, min: number, max: number): number;
-    function roundNumber(num: any, dec: any): number;
+    function roundNumber(num: number, dec: number): number;
     function lerp(from: number, to: number, t: number): number;
     function easeInQuad(time: number, start: number, change: number, duration: number): number;
     function easeInCubic(time: number, start: number, change: number, duration: number): number;
@@ -205,6 +216,7 @@ export declare class Queue<T> {
 export declare function debounce(id: string, callback: () => void, timeout: number): void;
 export declare function windowKeysToObject(keys: string[]): any;
 export declare function windowKeysToParentObject(keys: string[]): any;
+export declare function objectDeepClone<T>(obj: T): T;
 export declare function getVersionInfo(version: string): IVersionInfo;
 export declare function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
 export declare function getVersionDisplayString(version?: string | IVersionInfo): string;
@@ -213,6 +225,8 @@ export declare function arrayEquals(array1: any[] | undefined, array2: any[] | u
 export declare function arrayIncludes(arr: any[], find: any): boolean;
 export declare function findUnusedId<T>(source: Source, things: T[]): number;
 export declare function escapeHTML(str: string): string;
+export declare function stripHTML(str: string): string;
 export declare function fixObjectCaseStyle(obj: any, caseStyle: CaseStyle, whitelist?: string[]): any;
 export declare function stripParentDirectoryAccessorsFromPath(path: string): string;
 export declare function encodeURIComponentPath(p: string): string;
+export declare function distanceBetween(a: IPoint, b: IPoint): number;

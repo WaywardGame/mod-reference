@@ -3,10 +3,10 @@ export interface ITooltipOptions {
     disabled?: boolean;
     trackMouse?: boolean;
     position?: ITooltipPosition;
-    onOpen?: (target: JQuery) => void;
-    onClose?: (target: JQuery) => void;
-    onPosition?: (target: JQuery) => ITooltipPosition;
-    content: (target: JQuery) => void;
+    onOpen?(target: JQuery): void;
+    onClose?(target: JQuery): void;
+    onPosition?(target: JQuery): ITooltipPosition;
+    content(target: JQuery): void;
 }
 export interface ITooltip extends ITooltipOptions {
     visible?: HTMLElement;
@@ -14,8 +14,8 @@ export interface ITooltip extends ITooltipOptions {
     element: HTMLElement;
     width: number;
     height: number;
-    show: (event: MouseEvent) => void;
-    updateTooltipPosition: (left: number, top: number, mouseX: number, mouseY: number) => void;
+    show(event: MouseEvent): void;
+    updateTooltipPosition(left: number, top: number, mouseX: number, mouseY: number): void;
 }
 export interface ITooltipPosition {
     startAtRight?: boolean;

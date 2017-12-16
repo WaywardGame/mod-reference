@@ -7,6 +7,7 @@ export declare module Color {
     function blend(...colors: IRGB[]): IRGB;
     function blend(color1: IRGB, color2: IRGB, percentage: number): IRGB;
     function getCSS(color: IRGB): string;
+    function getSVGColorMatrix(color: IRGB): string;
     function equals(color1: IRGB, color2: IRGB): boolean;
 }
 export default Color;

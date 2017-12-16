@@ -14,6 +14,7 @@ export default class SpriteBatch {
     private begun;
     private vertexArray;
     constructor(gl: WebGL2RenderingContext, maxSprites: number);
+    static resetGl(): void;
     clear(): void;
     begin(): void;
     add(tileX: number, tileY: number, spriteSize: number, sourceX: number, sourceY: number, sourceSize: number, offsetX?: number, offsetY?: number, red?: number, green?: number, blue?: number, alpha?: number): void;

@@ -16,7 +16,7 @@ export default class ItemRecipeRequirementChecker {
     requirementsMet(): boolean;
     /**
      * Looks inside the container and its subcontainers.
-     * @param container
+     * @param container The container
      * @returns true if the recipe's requirements are satisfied by items in the container.
      */
     process(container: IContainer): boolean;
