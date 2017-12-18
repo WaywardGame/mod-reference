@@ -9,4 +9,5 @@ export default class ChangelogMenu extends Menu {
     private refresh();
     private showVersion(version?, loadingInterrupt?);
     private appendChangelog(title, cards?);
+    private sortCards(a, b);
 }
