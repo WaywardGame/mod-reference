@@ -102,7 +102,7 @@ declare global {
 	}
 
 	interface INavigationConstructor {
-		new(useJumpPointSearch: boolean, autoConnect: boolean): INavigation;
+		new(autoConnect: boolean): INavigation;
 	}
 
 	interface IKDTree {
