@@ -49,7 +49,7 @@ export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;
     matchmakingServerPort: number;
     fakeLatency: number;
-    enableSyncChecks: boolean;
+    enableSyncChecks: boolean | MultiplayerSyncCheck[];
     enablePacketNumberChecks: boolean;
     checkSeedHistory: boolean;
     chunkSize: number;
