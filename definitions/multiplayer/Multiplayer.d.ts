@@ -56,6 +56,7 @@ export default class Multiplayer implements IMultiplayer {
     pausePacketProcessing(pause: boolean): void;
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
+    isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addAfterSyncChecks(packet: IPacket): void;
