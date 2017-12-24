@@ -186,6 +186,7 @@ export default class InGameScreen extends BaseScreen {
     addItemToFreeQuickSlot(itemId: number): void;
     clearQuickSlot(quickSlot: number, internal?: boolean): void;
     removeItemFromQuickSlot(itemId?: number, skipSync?: boolean): void;
+    setItemQuickslot(item: IItem, quickSlot: number | undefined): void;
     updateQuickSlotItem(quickSlot: number): boolean;
     onUpdateQuickSlotsOrEquips(): void;
     onSortableItemReceive(sortableEvent: ISortableEvent): void;

@@ -24,6 +24,7 @@ export default class Multiplayer implements IMultiplayer {
     private _currentPacketProcessing;
     private _currentSyncPacketsWaiting;
     private _currentSyncPacketsProcessing;
+    private _queuedSyncPackets;
     private _syncCheckStack;
     private _activeSyncCheck;
     private _syncChecksSuppressed;
@@ -34,6 +35,7 @@ export default class Multiplayer implements IMultiplayer {
     isServer(): boolean;
     isClient(): boolean;
     isProcessingPacket(): boolean;
+    getDefaultOptions(): IMultiplayerOptions;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
@@ -52,10 +54,12 @@ export default class Multiplayer implements IMultiplayer {
     sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
     sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
+    queueSyncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): void;
     resetSyncPacketsWaiting(): void;
     pausePacketProcessing(pause: boolean): void;
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
+    syncGameState(): void;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;
@@ -91,6 +95,5 @@ export default class Multiplayer implements IMultiplayer {
     private sendMatchmakingMessage(data, channel?);
     private closeConnection(connection);
     private onStateChange();
-    private getDefaultOptions();
     private convertToMatchmakingInfo(serverInfo);
 }

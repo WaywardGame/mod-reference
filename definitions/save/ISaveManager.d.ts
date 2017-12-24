@@ -6,11 +6,12 @@ export interface ISaveManager {
     deleteSlot(slot: number): Promise<boolean | undefined>;
     exportSave(slot: number): Promise<SaveObject>;
     getFirstFreeSlot(): Promise<number>;
+    getGameStateAsJson(): string;
+    getMostRecentSlot(): Promise<number>;
     getSaveCount(): Promise<number>;
     getSlots(): Promise<boolean[]>;
     getUsedSlots(): Promise<number[]>;
     getUsedSlotsSorted(sortBy: SaveSort, direction?: SortDirection): Promise<number[]>;
-    getMostRecentSlot(): Promise<number>;
     importSave(slot: number, data: SaveObject | string): Promise<number | undefined>;
     initialize(): void;
     isEnabled(): boolean;

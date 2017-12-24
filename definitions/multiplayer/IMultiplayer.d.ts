@@ -13,9 +13,10 @@ export interface IMultiplayer {
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     getBannedPlayers(): string[];
-    getMatchmakingInfo(): IMatchmakingInfo | undefined;
-    getDedicatedServerMatchmakingInfo(matchmakingServer: string): IMatchmakingInfo;
     getClients(): IConnection[];
+    getDedicatedServerMatchmakingInfo(matchmakingServer: string): IMatchmakingInfo;
+    getDefaultOptions(): IMultiplayerOptions;
+    getMatchmakingInfo(): IMatchmakingInfo | undefined;
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
     isConnected(): boolean;
@@ -26,15 +27,17 @@ export interface IMultiplayer {
     kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): void;
+    pausePacketProcessing(pause: boolean): void;
+    queueSyncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): void;
+    resetSyncPacketsWaiting(): void;
     sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
     sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
     setBanned(identifier: string, ban: boolean): boolean;
     setOptions(options: IMultiplayerOptions): void;
-    updateOptions(updates: Partial<IMultiplayerOptions>): void;
     suppressSyncChecks(suppress: boolean): void;
+    syncGameState(): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
-    resetSyncPacketsWaiting(): void;
-    pausePacketProcessing(pause: boolean): void;
+    updateOptions(updates: Partial<IMultiplayerOptions>): void;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;
@@ -44,12 +47,13 @@ export interface IMultiplayerOptions {
     pvp: boolean;
     maxPlayers: number;
     realTimeTickSpeed: number;
+    syncChecks: boolean | MultiplayerSyncCheck[];
 }
 export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;
     matchmakingServerPort: number;
     fakeLatency: number;
-    enableSyncChecks: boolean | MultiplayerSyncCheck[];
+    syncChecks: boolean | MultiplayerSyncCheck[];
     enablePacketNumberChecks: boolean;
     checkSeedHistory: boolean;
     chunkSize: number;

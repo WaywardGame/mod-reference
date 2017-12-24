@@ -89,6 +89,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     private playOptions;
     readonly isDailyChallenge: boolean;
     constructor();
+    initialize(): void;
     setupGl(restoring: boolean): void;
     resetGl(): void;
     setGlContextSize(width: number, height: number): void;

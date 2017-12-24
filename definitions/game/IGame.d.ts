@@ -84,6 +84,7 @@ export interface IGame extends Emitter {
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
     damage(target: IPlayer | ICreature, damageInfo: IDamageInfo): number | undefined;
+    deletePlayer(plys: IPlayer[], identifier: string): void;
     directionToMovement(direction: FacingDirection): IPoint;
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     doLavaEvents(x: number, y: number, z: number): void;
@@ -127,7 +128,9 @@ export interface IGame extends Emitter {
     getValidPlayerName(name: string | undefined): string;
     getWrappedCoord(x: number): number;
     hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
+    initialize(): void;
     isOnFire(tile: ITile): FireType;
+    isRealTimeMode(): boolean;
     isTileEmpty(x: number, y: number, z: number): boolean;
     isTileFull(x: number, y: number, z: number): boolean;
     isTileFullEx(tile: ITile): boolean;
@@ -145,22 +148,20 @@ export interface IGame extends Emitter {
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
-    deletePlayer(plys: IPlayer[], identifier: string): void;
     resetGameState(skipSave?: boolean): Promise<void>;
     resizeRenderer(): void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
-    isRealTimeMode(): boolean;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
     setupSave(_: number): void;
     shouldRender(): number;
     synchronizeFlowFields(plys: IPlayer[]): void;
     tickRealtime(): void;
-    updateTablesAndWeight(): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateReputation(reputation: number): void;
+    updateTablesAndWeight(): void;
     updateView(updateFov: boolean): void;
     wrapCoordinate(cordinate: number, reference: number): number;
 }
@@ -182,7 +183,7 @@ export declare type IGameOld = Partial<IGame> & {
 export interface IPlayOptions {
     slot: number;
     name: string;
-    seed: string;
+    seed: string | number;
     difficulty: Difficulty;
     character: ICharacter;
     multiplayer: IMultiplayerOptions | undefined;

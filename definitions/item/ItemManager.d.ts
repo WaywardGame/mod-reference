@@ -4,7 +4,7 @@ import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemD
 import IItemManager from "item/IItemManager";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
-import { ITile, ITileContainer } from "tile/ITerrain";
+import { ITile } from "tile/ITerrain";
 export default class ItemManager implements IItemManager {
     private worldContainer;
     private cachedWeights;
@@ -63,7 +63,7 @@ export default class ItemManager implements IItemManager {
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemsString(items: IItemArray): string;
     loadReferences(): void;
-    saveTileReferences(tileContainers: ITileContainer[]): void;
+    saveTileReferences(): void;
     loadTileReferences(): void;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup, weightType?: WeightType): ItemType;
     checkMilestones(player: IPlayer, item: IItem): void;
