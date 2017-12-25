@@ -114,6 +114,5 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private getSharePathForModZip(name);
     private getSharePathForModImage(name);
     private recordEvent(categorySuffix, action);
-    private parseCommandLineArgument(name, args);
     private getFilesInFolder(folderPath);
 }

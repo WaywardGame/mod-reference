@@ -7,7 +7,8 @@ export default class Serializer implements ISerializer {
     private object;
     private objectKey;
     private version;
-    constructor(object: any, objectKey: any, version: string);
+    private skipOnUnserialized;
+    constructor(object: any, objectKey: any, version: string, skipOnUnserialized?: boolean);
     saveToString(): string;
     loadToObject(data: string): void;
     readProperty(object: any, key: any): void;

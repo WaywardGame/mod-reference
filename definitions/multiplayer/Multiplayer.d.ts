@@ -1,4 +1,4 @@
-import { IConnection, IMatchmakingInfo, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, ServerInfo } from "multiplayer/IMultiplayer";
+import { IConnection, IMatchmakingInfo, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TextOrTranslationData } from "newui/INewUi";
 import { ICharacter } from "newui/util/Character";
@@ -24,6 +24,7 @@ export default class Multiplayer implements IMultiplayer {
     private _currentPacketProcessing;
     private _currentSyncPacketsWaiting;
     private _currentSyncPacketsProcessing;
+    private _queuedSyncPackets;
     private _syncCheckStack;
     private _activeSyncCheck;
     private _syncChecksSuppressed;
@@ -34,6 +35,7 @@ export default class Multiplayer implements IMultiplayer {
     isServer(): boolean;
     isClient(): boolean;
     isProcessingPacket(): boolean;
+    getDefaultOptions(): IMultiplayerOptions;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
@@ -49,13 +51,15 @@ export default class Multiplayer implements IMultiplayer {
     onPlaying(): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     getClients(): IConnection[];
-    sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
-    sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
+    sendPacket(packet: IPacket, exclude?: PacketTarget): void;
+    sendPacketTo(to: PacketTarget, packet: IPacket, force?: boolean): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
+    queueSyncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): void;
     resetSyncPacketsWaiting(): void;
     pausePacketProcessing(pause: boolean): void;
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
+    syncGameState(): void;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;
@@ -91,6 +95,5 @@ export default class Multiplayer implements IMultiplayer {
     private sendMatchmakingMessage(data, channel?);
     private closeConnection(connection);
     private onStateChange();
-    private getDefaultOptions();
     private convertToMatchmakingInfo(serverInfo);
 }

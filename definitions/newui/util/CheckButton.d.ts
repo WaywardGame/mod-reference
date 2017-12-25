@@ -12,6 +12,7 @@ export declare enum CheckButtonEvent {
     Change = "Change",
 }
 export declare class CheckButton<T = {}> extends Button<T> implements Refreshable {
+    private heading;
     private _checked;
     private _refresh;
     checked: boolean;
@@ -19,4 +20,6 @@ export declare class CheckButton<T = {}> extends Button<T> implements Refreshabl
     setChecked(checked: boolean, triggerEvent?: boolean): Promise<boolean>;
     toggleChecked(): void;
     refresh(): void;
+    getText(): string | undefined;
+    setText(text: TextOrTranslationData, refreshTranslationData?: boolean): void;
 }

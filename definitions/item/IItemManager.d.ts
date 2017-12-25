@@ -3,7 +3,7 @@ import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, Requ
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
-import { ITile, ITileContainer } from "tile/ITerrain";
+import { ITile } from "tile/ITerrain";
 export interface IItemManager {
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): void;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
@@ -56,7 +56,7 @@ export interface IItemManager {
     remove(item: IItem): void;
     removeContainerItems(container: IContainer): void;
     resetMapsInContainer(container: IContainer): void;
-    saveTileReferences(tileContainers: ITileContainer[]): void;
+    saveTileReferences(): void;
     spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;

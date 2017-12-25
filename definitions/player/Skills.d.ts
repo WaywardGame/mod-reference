@@ -4,7 +4,9 @@ export declare class SkillLevel {
     bonus: number;
     core: number;
 }
-export declare type ISkillSet = SkillLevel[];
+export interface ISkillSet {
+    [index: number]: SkillLevel;
+}
 export interface ISkillDescription {
     name?: string;
     description?: string;
