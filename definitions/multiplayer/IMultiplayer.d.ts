@@ -30,8 +30,8 @@ export interface IMultiplayer {
     pausePacketProcessing(pause: boolean): void;
     queueSyncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): void;
     resetSyncPacketsWaiting(): void;
-    sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
-    sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
+    sendPacket(packet: IPacket, exclude?: PacketTarget): void;
+    sendPacketTo(to: PacketTarget, packet: IPacket, force?: boolean): void;
     setBanned(identifier: string, ban: boolean): boolean;
     setOptions(options: IMultiplayerOptions): void;
     suppressSyncChecks(suppress: boolean): void;
@@ -42,6 +42,7 @@ export interface IMultiplayer {
 }
 export default IMultiplayer;
 export declare const maxPlayers = 32;
+export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
     pvp: boolean;

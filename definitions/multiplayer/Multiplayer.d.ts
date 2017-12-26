@@ -1,4 +1,4 @@
-import { IConnection, IMatchmakingInfo, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, ServerInfo } from "multiplayer/IMultiplayer";
+import { IConnection, IMatchmakingInfo, IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TextOrTranslationData } from "newui/INewUi";
 import { ICharacter } from "newui/util/Character";
@@ -51,8 +51,8 @@ export default class Multiplayer implements IMultiplayer {
     onPlaying(): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     getClients(): IConnection[];
-    sendPacket(packet: IPacket, exclude?: IPlayer | IConnection): void;
-    sendPacketTo(to: IPlayer | IConnection, packet: IPacket, force?: boolean): void;
+    sendPacket(packet: IPacket, exclude?: PacketTarget): void;
+    sendPacketTo(to: PacketTarget, packet: IPacket, force?: boolean): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
     queueSyncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): void;
     resetSyncPacketsWaiting(): void;
