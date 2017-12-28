@@ -69,6 +69,7 @@ export interface IOptions {
     rightClickInspect: boolean;
     rightHand: boolean;
     screenshotMode: boolean;
+    shouldLoadLastSave: boolean;
     skipSplash: boolean;
     tooltipsCreatures: boolean;
     tooltipsDoodads: boolean;

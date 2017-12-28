@@ -98,4 +98,8 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isTree?: boolean;
     isWall?: boolean;
     isFungi?: boolean;
+    isDoor?: boolean;
+    isClosedDoor?: boolean;
+    isGate?: boolean;
+    isFence?: boolean;
 }

@@ -1372,7 +1372,8 @@ export declare enum Bindable {
     MenuRight = 78,
     DeveloperToggleDeveloperMode = 79,
     DeveloperReloadGame = 80,
-    DeveloperToggleDeveloperTools = 81,
+    DeveloperReloadAndContinueGame = 81,
+    DeveloperToggleDeveloperTools = 82,
 }
 export declare enum DropLocation {
     Facing = 0,
