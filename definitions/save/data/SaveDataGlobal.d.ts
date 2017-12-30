@@ -40,6 +40,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         rightClickInspect: boolean;
         rightHand: boolean;
         screenshotMode: boolean;
+        shouldLoadLastSave: boolean;
         skipSplash: boolean;
         tooltipsCreatures: boolean;
         tooltipsDoodads: boolean;

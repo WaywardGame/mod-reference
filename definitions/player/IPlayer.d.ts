@@ -83,6 +83,7 @@ export interface IPlayer extends IPointZ {
     walkSoundCounter: number;
     wasAbsentPlayer: boolean;
     weight: number;
+    weightBonus: number;
     x: number;
     y: number;
     z: number;

@@ -119,6 +119,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     spawnOnBreak?: CreatureType;
     showOverHair?: boolean;
     hasSleepImage?: boolean;
+    flammable?: boolean;
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }

@@ -110,7 +110,7 @@ export default class Ui extends Emitter implements UiApi {
     /**
      * Returns the current translation of the given textOrTranslationData
      */
-    getText(textOrTranslationData: string | UiTranslation | TranslationData): string;
+    getText(textOrTranslationData: string | UiTranslation | TranslationData, shouldTrim?: boolean): string;
     /**
      * Plays the "click" sound effect, used for most interface interactions
      */

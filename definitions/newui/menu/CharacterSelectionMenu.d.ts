@@ -1,11 +1,12 @@
 import { UiApi } from "newui/INewUi";
-import { CharacterSort } from "newui/util/Character";
 import Menu from "newui/util/Menu";
-import { SortDirection } from "save/ISaveManager";
 export default class CharacterSelectionMenu extends Menu {
+    private sortRow;
+    private headingNoCharacters;
     private gameOptions;
     private characterRows;
     constructor(uiApi: UiApi);
+    create(): Promise<void>;
     refresh(): Promise<void>;
-    sortCharacters(sort: CharacterSort, direction: SortDirection): void;
+    sortCharacters(): void;
 }

@@ -96,4 +96,5 @@ export default class Multiplayer implements IMultiplayer {
     private closeConnection(connection);
     private onStateChange();
     private convertToMatchmakingInfo(serverInfo);
+    private _parseIceCandidate(text);
 }

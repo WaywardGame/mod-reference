@@ -104,4 +104,5 @@ export interface IDedicatedServerInfo {
     backup: boolean;
     backupInterval: number;
     maxBackups: number;
+    load: string | undefined;
 }
