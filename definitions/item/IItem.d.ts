@@ -87,7 +87,6 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     onEquipEffect?: any[];
     damageType?: DamageType;
     group?: ItemTypeGroup[];
-    torch?: any;
     weight?: number;
     reducedWeight?: number;
     minimumWeight?: number;

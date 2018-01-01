@@ -320,33 +320,15 @@ export declare abstract class Mod extends BaseMod {
     /**
      * Called when a creature spawns
      * @param creature The creature object
-     * @param aberrant True if the creature is an aberrant
      */
     onCreatureSpawn(creature: ICreature): void;
     /**
-     * Called when in-game, on the bind catcher loop (once per frame)
+     * Called when in-game, on the bind catcher loop (once per frame). When overriding this method, make sure you return bindPressed.
+     * @param bindPressed Whether a bind has been pressed. Use this as a final check before processing a bind, and set it to true when a bind was pressed.
      * @param api The bind catcher api, allowing you to check whether binds are pressed
      * @returns True if a bind was pressed, undefined otherwise
      */
     onBindLoop(bindPressed: true | undefined, api: BindCatcherApi): true | undefined;
-    /**
-     * Called when the mouse is moved
-     * @param event The mouse event object
-     * @returns False to cancel the mouse event or undefined to use the default logic
-     */
-    onMouseMove(event: JQueryEventObject): boolean | undefined;
-    /**
-     * Called when the mouse scroll wheel is moved
-     * @param event The mouse event object
-     * @returns False to cancel the mouse event or undefined to use the default logic
-     */
-    onMouseScroll(event: JQueryEventObject): boolean | undefined;
-    /**
-     * Called when a mouse button is let go or if the mouse leaves the screen
-     * @param event The mouse event object
-     * @returns False to cancel the event or undefined to use the default logic
-     */
-    onMouseUpOrLeave(event: JQueryEventObject): boolean | undefined;
     /**
      * Called when the player is moving
      * @param player The player object

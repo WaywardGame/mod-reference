@@ -32,16 +32,11 @@ export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: boolean;
     gfx?: number;
     spread?: number;
-    torch?: IDoodadTorchType;
     treasure?: boolean;
     weight?: number;
     legendary?: IItemLegendary;
     disassembly?: IItemArray;
     ownerIdentifier?: string;
-}
-export interface IDoodadTorchType {
-    type: ItemType;
-    decay?: number;
 }
 export declare type IDoodadOld = Partial<IDoodad> & {
     growInto?: DoodadType;
@@ -102,4 +97,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isClosedDoor?: boolean;
     isGate?: boolean;
     isFence?: boolean;
+    isUnlitTorch?: boolean;
+    isLitTorch?: boolean;
 }

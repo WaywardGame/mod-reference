@@ -114,7 +114,7 @@ export interface UiApi {
     showLoadingInterrupt(title: TextOrTranslationData, description?: TextOrTranslationData, canCancel?: boolean): Promise<void>;
     hideLoadingInterrupt(): Promise<void>;
     refreshTranslations(element: HTMLElement | IUiElement): void;
-    getText(textOrTranslationData: TextOrTranslationData): string;
+    getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: false): string;
     toggleFullscreen(fullscreen?: boolean): void;
     playActivateSound(): void;
     playSelectSound(): void;
@@ -186,6 +186,7 @@ export interface TranslationData {
     entry: number;
     args?: any[] | (() => any[]);
     properties?: string[];
+    shouldTrim?: false;
 }
 export declare type TextOrTranslationData = string | UiTranslation | TranslationData;
 export interface LoadMenuArgs {

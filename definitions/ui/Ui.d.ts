@@ -53,7 +53,6 @@ export default class Ui extends Utilities.Emitter implements IUi {
     displayChatMessage(player: IPlayer, message: string): void;
     getCurrentHint(): HintType;
     setCurrentHint(hintType: HintType): void;
-    updateMultiplayerElements(isConnected: boolean): void;
     toggleHelp(): void;
     hideHelpScreen(): void;
     tooltipRefresh(): void;

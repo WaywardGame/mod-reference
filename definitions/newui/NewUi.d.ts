@@ -1,5 +1,5 @@
-import { InterruptChoice, UiTranslation } from "language/ILanguage";
-import { InterruptInputOptions, IUiElement, IUiScreen, MenuId, ScreenId, TextOrTranslationData, TooltipOptionsVague, TranslationData, UiApi } from "newui/INewUi";
+import { InterruptChoice } from "language/ILanguage";
+import { InterruptInputOptions, IUiElement, IUiScreen, MenuId, ScreenId, TextOrTranslationData, TooltipOptionsVague, UiApi } from "newui/INewUi";
 import { InterruptOptions } from "newui/menu/InterruptMenu";
 import Menu from "newui/util/Menu";
 import UiElement from "newui/util/UiElement";
@@ -110,7 +110,7 @@ export default class Ui extends Emitter implements UiApi {
     /**
      * Returns the current translation of the given textOrTranslationData
      */
-    getText(textOrTranslationData: string | UiTranslation | TranslationData): string;
+    getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: boolean): string;
     /**
      * Plays the "click" sound effect, used for most interface interactions
      */
@@ -151,4 +151,5 @@ export default class Ui extends Emitter implements UiApi {
      */
     private initScreen(screenId);
     private interrupt(options);
+    private getFakeTranslation(textOrTranslationData);
 }

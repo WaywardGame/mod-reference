@@ -100,6 +100,7 @@ export default class Player implements IPlayer, IPreSerializeCallback {
     turns: number;
     walkSoundCounter: number;
     weight: number;
+    weightBonus: number;
     x: number;
     y: number;
     z: WorldZ;

@@ -85,7 +85,6 @@ export interface IUi extends IPropSerializable, Emitter {
     displayChatMessage(player: IPlayer, message: string): void;
     getCurrentHint(): HintType;
     setCurrentHint(hintType: HintType): void;
-    updateMultiplayerElements(isConnected: boolean): void;
     toggleHelp(): void;
     hideHelpScreen(): void;
     tooltipRefresh(): void;

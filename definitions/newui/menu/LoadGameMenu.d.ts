@@ -19,7 +19,12 @@ export interface SaveSlotData {
     slot: number;
     score: number;
     won: boolean;
-    modsUnloadable: any;
+    modsUnloadable: {
+        [index: string]: {
+            name: string;
+            unloadable: boolean;
+        };
+    };
     saveTime: number;
     createdTime: number;
     turns: number;

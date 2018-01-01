@@ -1,4 +1,4 @@
-import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions, IDoodadTorchType } from "doodad/IDoodad";
+import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import { DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, SentenceCaseStyle } from "Enums";
 import { IItemArray } from "item/IItem";
 import { Message } from "language/Messages";
@@ -19,7 +19,6 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     quality?: ItemQuality;
     renamed?: string;
     spread?: number;
-    torch?: IDoodadTorchType;
     treasure?: boolean;
     type: DoodadType;
     weight?: number;

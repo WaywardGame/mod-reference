@@ -85,7 +85,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
-    private setupAndInitializeWorkshopMods(retried?);
+    private setupAndInitializeWorkshopMods(initialModState, retried?);
     private initializeModsFromFolder(folderName, modType, callback);
     private enumerateInstalledWorkshopMods();
     private refreshSetupMods();

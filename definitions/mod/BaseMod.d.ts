@@ -41,6 +41,11 @@ export declare abstract class BaseMod {
     addDictionary(name: string, dictionaryEnum: any): number;
     extendLanguage(language: string, extension: ILanguageExtension): void;
     addMessage(name: string, message: string): number;
+    /**
+     * Adds a bindable and the default binding for it
+     * @param name The name of the binding (when translated, the name will be `Mod<mod name><name>`)
+     * @param binding The default binding or bindings of this bindable
+     */
     addBindable(name: string, binding: IBinding | IBinding[]): number;
     itemNameToObjectType(name: string): ItemType | undefined;
     getItemByType(itemType: ItemType): IItemDescription | undefined;

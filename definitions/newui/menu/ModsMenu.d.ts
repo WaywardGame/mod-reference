@@ -30,7 +30,7 @@ export declare class ModRow extends CheckButton<ModRowData> {
     private buttonOptions;
     private buttonView;
     private buttonPublish;
-    constructor(uiApi: UiApi, modInfo: IModInfo);
+    constructor(uiApi: UiApi, modIndex: number, modInfo: IModInfo);
     updateButtons(): void;
     onChecked(checked: boolean, prompts?: boolean): Promise<boolean>;
     private canPublish();

@@ -1,5 +1,6 @@
-import { ConnectionState } from "Enums";
 import { ICrafted } from "game/IGame";
+import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
+import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TextOrTranslationData } from "newui/INewUi";
 import { ICharacter } from "newui/util/Character";
@@ -9,6 +10,7 @@ export interface IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
+    closeConnection(connection: IConnection): void;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
@@ -16,7 +18,7 @@ export interface IMultiplayer {
     getClients(): IConnection[];
     getDedicatedServerMatchmakingInfo(matchmakingServer: string): IMatchmakingInfo;
     getDefaultOptions(): IMultiplayerOptions;
-    getMatchmakingInfo(): IMatchmakingInfo | undefined;
+    getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
     isConnected(): boolean;
@@ -42,6 +44,7 @@ export interface IMultiplayer {
 }
 export default IMultiplayer;
 export declare const maxPlayers = 32;
+export declare const defaultServerPort = 38740;
 export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
@@ -60,20 +63,10 @@ export interface IMultiplayerNetworkingOptions {
     chunkSize: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
-export interface IMatchmakingInfo {
-    channel: string;
-    matchmakingServer: string;
-    isDedicatedServer: boolean;
-}
 export declare enum PacketAcceptType {
     Serverside = 1,
     Clientside = 2,
     All = 3,
-}
-export interface IConnection {
-    state: ConnectionState;
-    pid?: number;
-    playerIdentifier?: string;
 }
 export declare enum MultiplayerSyncCheck {
     CanASeeB = 0,

@@ -35,8 +35,16 @@ interface JQuery {
 }
 
 interface IMatchmakingServer {
-	start(port?: number): string;
+	start(port?: number, serverClientMode?: boolean): string;
 	stop(): void;
+	getConnections(): { [index: string]: IMatchmakingServerConnection };
+	addOnConnectCallback(callback: (id: string, connection: any) => void): void;
+	addOnDisconnectCallback(id: string, callback: () => void): void;
+	addOnMessageCallback(id: string, callback: (data: ArrayBuffer) => void): void;
+}
+
+interface IMatchmakingServerConnection {
+	send(data: ArrayBuffer): void;
 }
 
 declare var require: IRequire;

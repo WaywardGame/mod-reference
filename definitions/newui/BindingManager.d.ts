@@ -5,8 +5,14 @@ export declare enum KeyModifier {
     Control = 2,
 }
 export interface IBinding {
+    /**
+     * See https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code#Try_it_out, use `key` only if `code` is an empty string
+     */
     key?: string;
     mouseButton?: number | "Up" | "Down";
+    /**
+     * Does not currently function
+     */
     gamepadButton?: number;
     modifiers?: KeyModifier[];
 }
