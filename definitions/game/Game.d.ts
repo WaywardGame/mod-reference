@@ -91,7 +91,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     constructor();
     initialize(): void;
     setupGl(restoring: boolean): void;
-    resetGl(): void;
+    resetWebGL(): void;
     setGlContextSize(width: number, height: number): void;
     resizeRenderer(): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;

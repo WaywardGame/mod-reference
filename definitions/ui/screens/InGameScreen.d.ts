@@ -116,7 +116,6 @@ export default class InGameScreen extends BaseScreen {
     onShow(): void;
     onHide(): void;
     initializeGameState(): void;
-    updateMultiplayerElements(isConnected: boolean): void;
     onGameEnd(showBlocker: boolean): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
     setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;

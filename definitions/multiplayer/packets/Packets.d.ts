@@ -1,4 +1,4 @@
-import { IConnection } from "multiplayer/IMultiplayer";
+import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 export interface IPacketClass {
     new (connection?: IConnection): IPacket;

@@ -2,7 +2,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { IPoint } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { IConnection } from "multiplayer/IMultiplayer";
+import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
 export default abstract class BasePacket {
     protected static id: number;
