@@ -2,7 +2,6 @@ import { ConnectionState } from "Enums";
 import { MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
 import { IPacket } from "multiplayer/packets/IPacket";
 export interface IConnection {
-    state: ConnectionState;
     playerIdentifier: string;
     matchmakingIdentifier: string;
     pid?: number;
@@ -12,6 +11,9 @@ export interface IConnection {
     bufferPacketId?: number;
     lastPacketNumberSent?: number;
     lastPacketNumberReceived?: number;
+    addTimeout(milliseconds: number, callback: () => void): void;
+    getState(): ConnectionState;
+    setState(state: ConnectionState): void;
     isConnected(): boolean;
     close(): void;
     send(data: ArrayBuffer): void;

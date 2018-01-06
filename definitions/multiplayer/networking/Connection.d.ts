@@ -1,9 +1,8 @@
 import { ConnectionState } from "Enums";
-import { MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
+import { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 export declare abstract class Connection implements IConnection {
-    state: ConnectionState;
     playerIdentifier: string;
     matchmakingIdentifier: string;
     pid?: number;
@@ -13,9 +12,15 @@ export declare abstract class Connection implements IConnection {
     bufferPacketId?: number;
     lastPacketNumberSent?: number;
     lastPacketNumberReceived?: number;
-    constructor();
+    protected _matchmakingInfo: IMatchmakingInfo | undefined;
+    private _state;
+    private _timeoutId;
+    constructor(matchmakingInfo: IMatchmakingInfo | undefined);
+    addTimeout(milliseconds: number, callback: () => void): void;
+    getState(): ConnectionState;
+    setState(state: ConnectionState): void;
+    close(): void;
     abstract isConnected(): boolean;
-    abstract close(): void;
     abstract send(data: ArrayBuffer): void;
     abstract processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
 }

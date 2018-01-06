@@ -149,6 +149,7 @@ export interface IGame extends Emitter {
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
     resetGameState(skipSave?: boolean): Promise<void>;
+    resetWebGL(): void;
     resizeRenderer(): void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;

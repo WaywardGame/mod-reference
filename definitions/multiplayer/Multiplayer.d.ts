@@ -49,6 +49,7 @@ export default class Multiplayer implements IMultiplayer {
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     joinServer(serverInfo: ServerInfo, character?: ICharacter): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
+    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): Promise<void>;
     disconnectAndResetGameState(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     kick(player: IPlayer, reason: TextOrTranslationData): void;
     onPlaying(): void;
@@ -78,7 +79,7 @@ export default class Multiplayer implements IMultiplayer {
     private connectDedicatedMatchmakingServer(matchmakingInfo);
     private disconnectDedicatedMatchmakingServer();
     private onMatchmakingMessage(matchmaking, message);
-    private displayJoinServerRetryDialog(matchmakingInfo);
+    private _onConnected(matchmakingInfo);
     private onConnectionData(connection, data);
     private packetTick();
     private processIncomingPackets();

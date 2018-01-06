@@ -14,11 +14,12 @@ export interface IMultiplayer {
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
     disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
+    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): void;
     getBannedPlayers(): string[];
     getClients(): IConnection[];
-    getDedicatedServerMatchmakingInfo(matchmakingServer: string): IMatchmakingInfo;
-    getDefaultOptions(): IMultiplayerOptions;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
+    getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
+    getDefaultOptions(): IMultiplayerOptions;
     getOptions(): IMultiplayerOptions;
     isClient(): boolean;
     isConnected(): boolean;

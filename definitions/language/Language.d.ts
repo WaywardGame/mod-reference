@@ -29,7 +29,7 @@ export default class Language implements ILanguage {
     setDictionary(dictionary: Dictionary.Skill, newEntries: ISkillDictionary): void;
     setDictionary(dictionary: Dictionary.Terrain, newEntries: ITerrainDictionary): void;
     setDictionary(dictionary: Dictionary.TileEvent, newEntries: ITileEventDictionary): void;
-    setDictionary(dictionary: Dictionary.UiChoice, newEntries: IUiDictionary): void;
+    setDictionary(dictionary: Dictionary.InterruptChoice, newEntries: IUiDictionary): void;
     setDictionary(dictionary: Dictionary.Book, newEntries: IBookDictionary): void;
     setDictionary(dictionary: Dictionary.BindPress, newEntries: IPressNameDictionary): void;
     setDictionary(dictionary: Dictionary, newEntries: {
@@ -57,7 +57,7 @@ export default class Language implements ILanguage {
     setEntry(dictionary: Dictionary.Skill, entryIndex: SkillType, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Terrain, entryIndex: TerrainType, prefix: string, name: string): void;
     setEntry(dictionary: Dictionary.TileEvent, entryIndex: TileEventType, name: string, description: string): void;
-    setEntry(dictionary: Dictionary.UiChoice, entryIndex: UiTranslation, name: string): void;
+    setEntry(dictionary: Dictionary.InterruptChoice, entryIndex: UiTranslation, name: string): void;
     setEntry(dictionary: Dictionary.Book, entryIndex: BookType, name: string, description: string): void;
     setEntry(dictionary: Dictionary.BindPress, entryName: string, name: string): void;
     setEntry(dictionary: Dictionary, entryIndex: number, ...entry: string[]): void;
