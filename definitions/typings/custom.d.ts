@@ -8,8 +8,8 @@ declare var gameVersionMinor: number;
 declare var gameVersionPatch: number;
 
 declare var isEdge: boolean;
-declare var quickLoad: number | undefined;
 declare var overlayWorks: boolean | undefined;
+declare var webGlVersion: number;
 
 interface IRequire {
 	s: any;
