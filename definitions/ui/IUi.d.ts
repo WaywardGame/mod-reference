@@ -125,6 +125,7 @@ export interface IUi extends IPropSerializable, Emitter {
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
+    closeAllContainers(): void;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;

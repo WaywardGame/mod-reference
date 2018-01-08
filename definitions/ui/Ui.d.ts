@@ -96,6 +96,7 @@ export default class Ui extends Utilities.Emitter implements IUi {
     getSerializationProperties(_: string): string[];
     onMove(): void;
     changeEquipmentOption(id: string): void;
+    closeAllContainers(): void;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;
