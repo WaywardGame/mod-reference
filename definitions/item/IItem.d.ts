@@ -38,6 +38,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     book?: BookType;
     disassembly?: IItemArray;
     order?: number;
+    ownerIdentifier?: string;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;

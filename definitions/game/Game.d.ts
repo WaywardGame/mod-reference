@@ -99,7 +99,6 @@ export default class Game extends Utilities.Emitter implements IGame {
     checkForHiddenMob(player: IPlayer, x: number, y: number, z: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     getWrappedCoord(x: number): number;
-    getTileInFrontOfPlayer(player: IPlayer): ITile;
     getTileFromPoint(point: IPointZ): ITile;
     getTile(x: number, y: number, z: number): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;

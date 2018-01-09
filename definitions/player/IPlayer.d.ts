@@ -117,6 +117,8 @@ export interface IPlayer extends IPointZ {
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
     getEquipSlotForItem(item: IItem): EquipType | undefined;
+    getFacingPoint(): IPointZ;
+    getFacingTile(): ITile;
     getHandToUse(): EquipType | undefined;
     getInspectHealthMessage(player: IPlayer): IMessagePack;
     getMaxHealth(): number;
@@ -125,6 +127,7 @@ export interface IPlayer extends IPointZ {
     getName(html?: boolean): string;
     getReputation(): number;
     getTile(): ITile;
+    getPoint(): IPointZ;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
     hasDelay(): boolean;

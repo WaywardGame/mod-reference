@@ -123,7 +123,6 @@ export interface IGame extends Emitter {
     getTile(x: number, y: number, z: number): ITile;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getTileFromPoint(point: IPointZ): ITile;
-    getTileInFrontOfPlayer(player: IPlayer): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
     getValidPlayerName(name: string | undefined): string;
     getWrappedCoord(x: number): number;

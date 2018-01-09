@@ -16,6 +16,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     maxDur: number;
     minDur: number;
     order: number;
+    ownerIdentifier?: string;
     quality: ItemQuality;
     quickSlot: number | undefined;
     renamed: string;
