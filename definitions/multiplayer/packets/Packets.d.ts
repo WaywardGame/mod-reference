@@ -6,3 +6,5 @@ export interface IPacketClass {
 }
 export declare const registeredPackets: IPacketClass[];
 export declare function initialize(): void;
+export declare function registerPacket(packet: IPacketClass): void;
+export declare function unregisterPacket(packet: IPacketClass): void;
