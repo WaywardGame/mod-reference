@@ -34,7 +34,7 @@ export default class SaveManager implements ISaveManager {
      */
     getMostRecentSlot(): Promise<number>;
     /**
-     * Returns an tuple [bytes: number, saveObject: SaveObject]
+     * Returns a tuple [bytes: number, saveObject: SaveObject]
      */
     save(slot: number, unloading?: boolean): Promise<ISaveInfo>;
     /**
