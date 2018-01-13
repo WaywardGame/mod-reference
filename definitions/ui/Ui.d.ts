@@ -87,7 +87,7 @@ export default class Ui extends Utilities.Emitter implements IUi {
     refreshQuickSlots(): void;
     removeItemFromQuickSlot(itemId: number): void;
     removeItemFromEquipSlot(equip: EquipType): void;
-    isManageModsVisible(): boolean;
+    shouldRefreshMods(): boolean;
     setObjectUrl(objectUrl: string): void;
     onGameEnd(showBlocker: boolean): void;
     onUpdateDirection(): void;

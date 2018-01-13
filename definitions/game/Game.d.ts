@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { DamageType, Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -106,12 +106,17 @@ export default class Game extends Utilities.Emitter implements IGame {
     getOrCreateTile(x: number, y: number, z: number): ITile;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
     gameLoop: (timeStamp: any) => void;
-    saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
+    saveGame(saveType: SaveType, skipAudio?: boolean): Promise<ISaveInfo | undefined>;
     updateThumbnail(): Promise<void>;
     addZoomLevel(amount: number): void;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
-    play(options: Partial<IPlayOptions>): void;
+    requestPlay(options: Partial<IPlayOptions> & {
+        slot: number;
+    }): Promise<void>;
+    play(options: Partial<IPlayOptions> & {
+        slot: number;
+    }): Promise<void>;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     removePlayer(pid: number): void;
     deletePlayer(plys: IPlayer[], identifier: string): void;
@@ -185,6 +190,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     doLavaEvents(x: number, y: number, z: number): void;
     getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
     wrapCoordinate(cordinate: number, reference: number): number;
+    getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     private updateOptionInternal(id, value, player?);
     private tick();
     private processTimers(realPlayers);

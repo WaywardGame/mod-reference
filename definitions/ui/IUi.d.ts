@@ -118,7 +118,7 @@ export interface IUi extends IPropSerializable, Emitter {
     refreshQuickSlots(): void;
     removeItemFromQuickSlot(itemId: number): void;
     removeItemFromEquipSlot(equip: EquipType): void;
-    isManageModsVisible(): boolean;
+    shouldRefreshMods(): boolean;
     setObjectUrl(objectUrl: string): void;
     onGameEnd(showBlocker: boolean): void;
     highlight(selector?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;

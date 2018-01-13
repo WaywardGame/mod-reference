@@ -2,7 +2,7 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { DamageType, Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
@@ -94,6 +94,7 @@ export interface IGame extends Emitter {
     getBenignity(): number;
     getBlackness(): number;
     getCompletedMilestoneCount(): number;
+    getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     getDifficulty(): Difficulty;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     getHeight(z0: number, z1: number, d: number): number;
@@ -144,13 +145,16 @@ export interface IGame extends Emitter {
     play(options: Partial<IPlayOptions> & {
         slot: number;
     }): void;
+    requestPlay(options: Partial<IPlayOptions> & {
+        slot: number;
+    }): void;
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
     resetGameState(skipSave?: boolean): Promise<void>;
     resetWebGL(): void;
     resizeRenderer(): void;
-    saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
+    saveGame(saveType: SaveType, skipAudio?: boolean): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
