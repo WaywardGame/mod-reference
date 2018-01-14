@@ -29,9 +29,9 @@ export interface BindCatcherApi {
     wasReleased(key: string): boolean;
     /** wasReleased is only updated if wasPressed is also checked */
     wasReleased(bind: Bindable): boolean;
-    removePressState(key: string): void;
-    removePressState(bind: Bindable): void;
-    removeAllPressStates(): void;
+    removePressState(key: string, removeInternal?: boolean): void;
+    removePressState(bind: Bindable, removeInternal?: boolean): void;
+    removeAllPressStates(removeInternal?: boolean): void;
     isDown(key: string): boolean;
     isDown(bind: Bindable): boolean;
     isAnythingDown(): boolean;

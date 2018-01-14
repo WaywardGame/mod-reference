@@ -1206,6 +1206,7 @@ export interface IMessagePack {
 export interface IInspect {
     type?: InspectType;
     onlyShowInTooltip?: boolean;
+    onlyShowInMessages?: boolean;
     messagePack: IMessagePack;
 }
 export interface IRGB {

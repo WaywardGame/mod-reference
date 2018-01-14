@@ -69,7 +69,6 @@ export interface IUi extends IPropSerializable, Emitter {
     onWindowResize(): void;
     resetHelpHeight(): void;
     isInGameScreenShown(): boolean;
-    isTitleScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
     shakeStat(stat: StatType): void;
@@ -118,13 +117,14 @@ export interface IUi extends IPropSerializable, Emitter {
     refreshQuickSlots(): void;
     removeItemFromQuickSlot(itemId: number): void;
     removeItemFromEquipSlot(equip: EquipType): void;
-    isManageModsVisible(): boolean;
+    shouldRefreshMods(): boolean;
     setObjectUrl(objectUrl: string): void;
     onGameEnd(showBlocker: boolean): void;
     highlight(selector?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
+    closeAllContainers(): void;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;

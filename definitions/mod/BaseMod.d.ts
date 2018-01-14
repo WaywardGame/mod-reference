@@ -5,6 +5,7 @@ import { IDoodadDescription } from "doodad/IDoodad";
 import { ItemType, ITerrainResourceItem } from "Enums";
 import { IItemDescription } from "item/IItem";
 import { ILanguageExtension } from "language/ILanguage";
+import * as Packets from "multiplayer/packets/Packets";
 import { IBinding } from "newui/BindingManager";
 import { UiApi } from "newui/INewUi";
 import { ModOptions } from "newui/menu/OptionsMenu";
@@ -16,6 +17,7 @@ export declare abstract class BaseMod {
     private index;
     private buttons;
     private allocatedEnums;
+    private registeredPackets;
     constructor(index: number);
     getIndex(): number;
     getName(): string;
@@ -41,6 +43,7 @@ export declare abstract class BaseMod {
     addDictionary(name: string, dictionaryEnum: any): number;
     extendLanguage(language: string, extension: ILanguageExtension): void;
     addMessage(name: string, message: string): number;
+    registerPacket(packet: Packets.IPacketClass): void;
     /**
      * Adds a bindable and the default binding for it
      * @param name The name of the binding (when translated, the name will be `Mod<mod name><name>`)
@@ -53,7 +56,7 @@ export declare abstract class BaseMod {
     /**
      * This is called internally after unloading a mod
      */
-    unallocateEnums(): void;
+    unallocate(): void;
     private allocateEnum(id, name, objectValue?, onAllocate?, onUnallocate?);
 }
 export default BaseMod;

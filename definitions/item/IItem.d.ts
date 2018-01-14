@@ -38,6 +38,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     book?: BookType;
     disassembly?: IItemArray;
     order?: number;
+    ownerIdentifier?: string;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;
@@ -119,6 +120,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     showOverHair?: boolean;
     hasSleepImage?: boolean;
     flammable?: boolean;
+    plural?: string;
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }

@@ -6,7 +6,6 @@ export declare class WebSocketConnection extends Connection {
     private onConnected;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined, matchmakingIdentifier: string, getMatchmaking: () => IMatchmaking | undefined, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined);
     isConnected(): boolean;
-    close(): void;
     send(data: ArrayBuffer): void;
     processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
 }

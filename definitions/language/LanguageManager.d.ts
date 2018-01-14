@@ -39,5 +39,6 @@ export default class LanguageManager implements ILanguageManager {
     serialize(language: ILanguage): any;
     load(language: ILanguage): void;
     shouldWarnOnInvalidOrMissingEntry(str?: string): boolean;
+    serializeLanguageToFile(): void;
     private setup();
 }

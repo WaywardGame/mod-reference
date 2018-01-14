@@ -49,7 +49,7 @@ export default class Language implements ILanguage {
     setEntry(dictionary: Dictionary.Doodad, entryIndex: DoodadTypeGroup, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Growth, entryIndex: GrowingStage, prefix: string, name: string): void;
     setEntry(dictionary: Dictionary.Hint, entryIndex: HintType, name: string, description: string): void;
-    setEntry(dictionary: Dictionary.Item, entryIndex: ItemType, prefix: string, name: string, description: string): void;
+    setEntry(dictionary: Dictionary.Item, entryIndex: ItemType, prefix: string, name: string, description: string, plural: string): void;
     setEntry(dictionary: Dictionary.Item, entryIndex: ItemTypeGroup, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Message, entryIndex: Message, prefix: string, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Milestone, entryIndex: MilestoneType, name: string, description: string): void;

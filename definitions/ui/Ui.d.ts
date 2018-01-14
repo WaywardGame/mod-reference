@@ -17,7 +17,6 @@ export default class Ui extends Utilities.Emitter implements IUi {
     private elementBody;
     private elementScrollableContainers;
     private screen;
-    private screenId;
     private screenHelp;
     private objectUrl;
     constructor();
@@ -38,7 +37,6 @@ export default class Ui extends Utilities.Emitter implements IUi {
     onWindowResize(): void;
     resetHelpHeight(): void;
     isInGameScreenShown(): boolean;
-    isTitleScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
     shakeStat(stat: StatType): void;
@@ -87,7 +85,7 @@ export default class Ui extends Utilities.Emitter implements IUi {
     refreshQuickSlots(): void;
     removeItemFromQuickSlot(itemId: number): void;
     removeItemFromEquipSlot(equip: EquipType): void;
-    isManageModsVisible(): boolean;
+    shouldRefreshMods(): boolean;
     setObjectUrl(objectUrl: string): void;
     onGameEnd(showBlocker: boolean): void;
     onUpdateDirection(): void;
@@ -96,6 +94,7 @@ export default class Ui extends Utilities.Emitter implements IUi {
     getSerializationProperties(_: string): string[];
     onMove(): void;
     changeEquipmentOption(id: string): void;
+    closeAllContainers(): void;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;

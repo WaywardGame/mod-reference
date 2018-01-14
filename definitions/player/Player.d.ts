@@ -132,6 +132,9 @@ export default class Player implements IPlayer, IPreSerializeCallback {
     damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: string, soundDelay?: number): number | undefined;
     calculateEquipmentStats(): void;
     getTile(): ITile;
+    getPoint(): IPointZ;
+    getFacingPoint(): IPointZ;
+    getFacingTile(): ITile;
     getDefaultCarveTool(): IItem | undefined;
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: ICreature): boolean;

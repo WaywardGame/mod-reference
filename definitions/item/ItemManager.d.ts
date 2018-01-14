@@ -61,7 +61,7 @@ export default class ItemManager implements IItemManager {
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
-    getItemsString(items: IItemArray): string;
+    getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
     loadReferences(): void;
     saveTileReferences(): void;
     loadTileReferences(): void;

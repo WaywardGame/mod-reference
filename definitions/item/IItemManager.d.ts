@@ -28,7 +28,7 @@ export interface IItemManager {
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
-    getItemsString(items: IItemArray): string;
+    getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;

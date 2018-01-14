@@ -199,7 +199,6 @@ export declare class Bound3 {
     z: number;
     constructor(min: Vec2, max: Vec2, z: number);
 }
-export declare function loadImage(src: any, callback: any): void;
 export declare function copyPointZ(pointZ: IPointZ | undefined): IPointZ | undefined;
 export declare function getTileVariation(x: number, y: number): number;
 export declare function createUniqueIdentifier(): string;

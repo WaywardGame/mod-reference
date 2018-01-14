@@ -19,7 +19,7 @@ export default class ItemRecipeRequirementChecker {
      * @param container The container
      * @returns true if the recipe's requirements are satisfied by items in the container.
      */
-    process(container: IContainer): boolean;
+    process(container: IContainer, allowProtectedCraftingItems?: boolean): boolean;
     isDiscovered(): boolean;
     private processItem(item);
 }

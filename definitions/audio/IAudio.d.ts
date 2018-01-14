@@ -1,7 +1,7 @@
 import { Music, SfxType } from "Enums";
 export interface IAudio {
-    fadeIn(): void;
-    fadeOut(): void;
+    fadeIn(): Promise<void>;
+    fadeOut(): Promise<void>;
     playMusic(): void;
     playMusicTrack(musicTrack: Music): void;
     playNextMusicTrack(): void;

@@ -21,6 +21,7 @@ export interface IMultiplayer {
     getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
     getDefaultOptions(): IMultiplayerOptions;
     getOptions(): IMultiplayerOptions;
+    getPlayerIdentifier(): string;
     isClient(): boolean;
     isConnected(): boolean;
     isProcessingPacket(): boolean;

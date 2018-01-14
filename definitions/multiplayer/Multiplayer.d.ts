@@ -38,6 +38,7 @@ export default class Multiplayer implements IMultiplayer {
     isServer(): boolean;
     isClient(): boolean;
     isProcessingPacket(): boolean;
+    getPlayerIdentifier(): string;
     getDefaultOptions(): IMultiplayerOptions;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
