@@ -18,6 +18,7 @@ export default class InGameScreen extends BaseScreen {
     overlayBindCatcherId: number;
     shouldResetMovement: boolean;
     shouldCancelSorting: boolean;
+    isQuickmoving: boolean;
     elementVisibleInGame: JQuery;
     elementBlocker: JQuery;
     elementBlockerMouse: JQuery;

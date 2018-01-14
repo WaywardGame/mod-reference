@@ -17,7 +17,6 @@ export default class Ui extends Utilities.Emitter implements IUi {
     private elementBody;
     private elementScrollableContainers;
     private screen;
-    private screenId;
     private screenHelp;
     private objectUrl;
     constructor();
@@ -38,7 +37,6 @@ export default class Ui extends Utilities.Emitter implements IUi {
     onWindowResize(): void;
     resetHelpHeight(): void;
     isInGameScreenShown(): boolean;
-    isTitleScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
     shakeStat(stat: StatType): void;

@@ -69,7 +69,6 @@ export interface IUi extends IPropSerializable, Emitter {
     onWindowResize(): void;
     resetHelpHeight(): void;
     isInGameScreenShown(): boolean;
-    isTitleScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
     shakeStat(stat: StatType): void;
