@@ -153,6 +153,7 @@ export interface IPlayer extends IPointZ {
     setRaft(itemId: number | undefined): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setup(completedMilestones: number): void;
+    setPosition(point: IPointZ): void;
     setZ(z: number): void;
     shakeStat(statType: StatType): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;

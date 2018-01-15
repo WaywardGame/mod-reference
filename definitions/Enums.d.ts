@@ -68,7 +68,8 @@ export declare enum InspectType {
     Items = 4,
     Quality = 5,
     Player = 6,
-    Corpse = 7,
+    Corpses = 7,
+    TileEvents = 8,
 }
 export declare enum MoveType {
     None = 0,
