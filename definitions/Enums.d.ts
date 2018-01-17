@@ -225,7 +225,7 @@ export declare enum ActionType {
     Till = 70,
     Rename = 71,
     Harvest = 72,
-    Milk = 73,
+    GatherMilk = 73,
     Read = 74,
 }
 export declare enum ItemType {
