@@ -73,7 +73,10 @@ export default class Steamworks extends Emitter implements ISteamworks {
     toggleDeveloperTools(): void;
     getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): IModPath | undefined;
     createSaveGameMod(name: string, slot: number): Promise<boolean>;
-    importFromSaveGameMod(modIndex: number, json: string): Promise<boolean>;
+    /**
+     * Do not remove callback. It's required for compatibility with pre 2.4 saves
+     */
+    importFromSaveGameMod(modIndex: number, json: string, callback?: (success: boolean) => void): Promise<boolean>;
     deleteSaveGameMod(name: string): void;
     debugLog(...args: any[]): void;
     hasServerToJoin(): boolean;

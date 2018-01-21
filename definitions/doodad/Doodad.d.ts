@@ -44,7 +44,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     getDurabilityMessage(this: IDoodad): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
     getInspect(): IInspect[];
-    damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean): void;
+    damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;

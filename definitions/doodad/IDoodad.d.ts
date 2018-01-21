@@ -20,7 +20,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, P
     canPickup(player: IPlayer): boolean;
     causeStatus(player: IPlayer): void;
     checkForTrampling(playerOrCreatureId: IPlayer | number): boolean;
-    damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean): void;
+    damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): void;
     getDurabilityMessage(): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;

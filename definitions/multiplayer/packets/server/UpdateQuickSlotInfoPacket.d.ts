@@ -4,5 +4,6 @@ export default class UpdateQuickSlotInfoPacket extends PlayerTargetedServerPacke
     quickSlot: number;
     quickSlotInfo: IQuickSlotInfo | undefined;
     isSyncCheckEnabled(): boolean;
+    isAllowedWhenPaused(): boolean;
     process(): void;
 }

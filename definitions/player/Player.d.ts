@@ -182,6 +182,7 @@ export default class Player implements IPlayer, IPreSerializeCallback {
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     getInspectHealthMessage(player: IPlayer): IMessagePack;
+    setPosition(point: IPointZ): void;
     setZ(z: number): void;
     isLocalPlayer(): boolean;
     isGhost(): boolean;
