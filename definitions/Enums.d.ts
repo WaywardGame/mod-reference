@@ -1299,6 +1299,9 @@ export declare enum BindableType {
     Developer = 3,
     Mod = 4,
 }
+/**
+ * Note: If you rename a Bindable and don't make a save conversion for it, the old binding will be lost.
+ */
 export declare enum Bindable {
     GameMoveDirection = 0,
     GameMoveUp = 1,

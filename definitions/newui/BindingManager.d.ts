@@ -17,7 +17,7 @@ export interface IBinding {
     modifiers?: KeyModifier[];
 }
 export interface IBindings {
-    [key: number]: IBinding | IBinding[];
+    [key: string]: IBinding | IBinding[];
 }
 export interface BindCatcherApi {
     time: number;
