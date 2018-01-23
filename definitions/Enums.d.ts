@@ -1023,7 +1023,7 @@ export declare enum ObjectContext {
 export declare enum Delay {
     None = 0,
     LongPause = 25,
-    Movement = 11,
+    Movement = 10,
     ShortPause = 13,
     Collision = 40,
     TurnDirection = 2,
