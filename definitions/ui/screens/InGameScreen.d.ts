@@ -163,13 +163,12 @@ export default class InGameScreen extends BaseScreen {
     runContextMenuAction(itemId: number, containerId: number | undefined, action: IContextMenuAction, skipSound?: boolean): boolean;
     onCraftingItemClick(element: JQuery): void;
     onDismantleItemClick(element: JQuery): void;
-    onDismantleHover(element: JQuery, hover: boolean): void;
     getTooltipHtml(element: JQuery): string | undefined;
     tooltipEnable(): void;
     tooltipRefresh(): void;
     tooltipDisable(): void;
     tooltipHide(): void;
-    onTooltipClose(): void;
+    unSelectElements(): void;
     getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: string | undefined): string;
     additionalRequirements(itemType: ItemType, recipe: IRecipe): string;
     getTooltipHtmlForTile(tile: ITile): string;
