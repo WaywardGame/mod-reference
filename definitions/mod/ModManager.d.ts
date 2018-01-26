@@ -62,7 +62,7 @@ export default class ModManager implements IModManager {
     setCreatedDate(index: number, createdDate: number): void;
     getState(index: number): ModState;
     isInitializing(index: number): ModState;
-    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): boolean;
+    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void, unloaded?: boolean): boolean;
     uninitialize(index: number): void;
     uninitializeAll(): void;
     cacheHooks(): void;
