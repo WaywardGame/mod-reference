@@ -3,7 +3,7 @@ import { UiApi } from "newui/INewUi";
 import UiElement from "newui/util/UiElement";
 import { IPlayerCustomization } from "player/IPlayer";
 export declare class SVG extends UiElement {
-    private filters;
+    private readonly filters;
     constructor(uiApi: UiApi);
     createFilter(id: string): this;
     setFilterColor(id: string, color: IRGB): void;
@@ -14,15 +14,15 @@ export interface CharacterPreviewFilters {
 }
 export declare type CharacterPreviewRotation = 0 | 1 | 2 | 3;
 export default class CharacterPreview extends UiElement {
-    private elementPreviewBody;
-    private elementPreviewShirt;
-    private elementPreviewPants;
-    private elementPreviewHairShadow;
-    private elementPreviewHair;
-    private elementPreviewHairAccessory;
-    private customization;
-    private filters;
-    private svg;
+    private readonly elementPreviewBody;
+    private readonly elementPreviewShirt;
+    private readonly elementPreviewPants;
+    private readonly elementPreviewHairShadow;
+    private readonly elementPreviewHair;
+    private readonly elementPreviewHairAccessory;
+    private readonly customization;
+    private readonly filters;
+    private readonly svg;
     private _loaded;
     readonly loaded: boolean;
     constructor(uiApi: UiApi, customization: IPlayerCustomization, filters?: CharacterPreviewFilters);

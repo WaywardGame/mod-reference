@@ -15,9 +15,9 @@ export default class SortRow<Sort extends number, Data = {}> extends LabelledRow
     private _sort;
     private _sortDirection;
     private _disabledSorts;
-    private sortEnum;
-    private dropdown;
-    private getOption;
+    private readonly sortEnum;
+    private readonly dropdown;
+    private readonly getOption;
     readonly sort: Sort;
     readonly sortDirection: SortDirection;
     disabledSorts: Sort[];

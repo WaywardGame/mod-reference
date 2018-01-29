@@ -41,8 +41,8 @@ export interface BindCatcherApi {
     isMouseWithin(element: Element, mustBeTarget: boolean): boolean;
 }
 export declare class BindingManager {
-    private static defaultBinds;
-    private bindCatchers;
+    private static readonly defaultBinds;
+    private readonly bindCatchers;
     private defaultBindCatcher;
     constructor();
     registerBindable(index: number, defaultBinding: IBinding | IBinding[]): void;

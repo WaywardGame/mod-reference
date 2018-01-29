@@ -16,7 +16,7 @@ export declare class RangeInput<T = {}> extends UiElement<T> implements Refresha
     element: HTMLInputElement;
     private min;
     private max;
-    private _refresh;
+    private readonly _refresh;
     private _value;
     value: number;
     constructor(uiApi: UiApi, options?: RangeInputOptions);

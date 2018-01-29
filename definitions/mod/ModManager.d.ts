@@ -2,13 +2,13 @@ import { IPlayOptions } from "game/IGame";
 import { Hook } from "mod/IMod";
 import { CanLoadState, ICanLoadInfo, IModInfo, IModManager, IModProvides, ModState, ModType } from "mod/IModManager";
 export default class ModManager implements IModManager {
-    private mods;
+    private readonly mods;
     private modsToSetup;
-    private internalMods;
-    private internalModsElectron;
+    private readonly internalMods;
+    private readonly internalModsElectron;
     private cachedHooks;
-    private cachedHookNames;
-    private onLanguageLoadCallbacks;
+    private readonly cachedHookNames;
+    private readonly onLanguageLoadCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>, callback: (err: string | undefined, mods: string[]) => void): void;
     unloadAll(reset?: boolean): void;

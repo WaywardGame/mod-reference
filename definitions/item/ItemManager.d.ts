@@ -6,7 +6,7 @@ import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 export default class ItemManager implements IItemManager {
-    private worldContainer;
+    private readonly worldContainer;
     private cachedWeights;
     private cachedDecaysIntoWeights;
     private cachedDefaultItemForGroup;

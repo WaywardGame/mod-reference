@@ -1,9 +1,9 @@
 export declare function loadShaders(callback: () => void): void;
 export declare function compileShaders(): void;
 export declare class CompiledProgram {
-    private gl;
-    private vertexName;
-    private fragmentName;
+    private readonly gl;
+    private readonly vertexName;
+    private readonly fragmentName;
     program: WebGLProgram;
     uniforms: {
         [index: string]: number;

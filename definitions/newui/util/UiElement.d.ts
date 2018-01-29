@@ -4,9 +4,9 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     protected uiApi: UiApi;
     protected children: UiElement[];
     protected parent: UiElement;
-    private _element;
+    private readonly _element;
     private scrollingChild?;
-    private _data;
+    private readonly _data;
     private tooltipOptions?;
     readonly element: HTMLElement;
     readonly jsonData: DOMStringMap & T;

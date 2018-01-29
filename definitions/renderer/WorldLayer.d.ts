@@ -13,8 +13,8 @@ export default class WorldLayer implements IWorldLayer {
     exploredMap: IExploreMap;
     onTileUpdate: onTileUpdateDelegate;
     onDoodadUpdate: onDoodadUpdateDelegate;
-    private terrainMap;
-    private instance;
+    private readonly terrainMap;
+    private readonly instance;
     constructor(width: number, height: number, level: number);
     delete(): void;
     resetExploredMap(): void;

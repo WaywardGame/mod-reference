@@ -2,10 +2,10 @@ import IAsyncDataStorage from "save/datastorage/IAsyncDataStorage";
 import { SaveObject } from "save/ISaveManager";
 export default class IndexedDbDataStorage implements IAsyncDataStorage {
     private database;
-    private databaseName;
-    private objectStoreNameSaves;
+    private readonly databaseName;
+    private readonly objectStoreNameSaves;
     private ready;
-    private dataStorageLocalStorage;
+    private readonly dataStorageLocalStorage;
     constructor();
     isEnabled(): boolean;
     isReady(): boolean;

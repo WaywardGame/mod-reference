@@ -9,7 +9,7 @@ export default class PauseMenu extends Menu {
     protected optionsRow: BlockRow;
     protected paragraph: Paragraph;
     protected heading: Heading;
-    private storageElement;
+    private readonly storageElement;
     constructor(uiApi: UiApi);
     refresh(): Promise<void>;
 }

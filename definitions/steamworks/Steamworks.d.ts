@@ -3,7 +3,7 @@ import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworks, IW
 import Emitter from "utilities/Emitter";
 export default class Steamworks extends Emitter implements ISteamworks {
     private installDir;
-    private recordedProblems;
+    private readonly recordedProblems;
     private steamId;
     private betaName;
     private buildTime;
@@ -18,11 +18,11 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private workshopModsPath;
     private workshopSyncPath;
     private workshopSharePath;
-    private loadedMods;
+    private readonly loadedMods;
     private publishedMods;
-    private workshopUrl;
-    private workshopFileUrl;
-    private ignoredDirectories;
+    private readonly workshopUrl;
+    private readonly workshopFileUrl;
+    private readonly ignoredDirectories;
     private _serverIdToJoin;
     private _dedicatedServerInfo;
     private _nextBackupTime;

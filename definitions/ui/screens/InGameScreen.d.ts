@@ -67,7 +67,7 @@ export default class InGameScreen extends BaseScreen {
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
     contextMenuOpen: boolean;
-    private touchEvent;
+    private readonly touchEvent;
     private mouseX;
     private mouseY;
     private contextMenu;
@@ -237,6 +237,6 @@ export default class InGameScreen extends BaseScreen {
     private runGatherOrHarvestAction(actionType, action);
     private runPourAction(actionType, item, action);
     private isOverlayVisible();
-    private onInterrupt;
-    private onInterruptClosed;
+    private readonly onInterrupt;
+    private readonly onInterruptClosed;
 }

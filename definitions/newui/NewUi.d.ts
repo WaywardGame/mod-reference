@@ -6,9 +6,9 @@ import UiElement from "newui/util/UiElement";
 import UiScreen from "newui/util/UiScreen";
 import { Emitter } from "Utilities";
 export default class Ui extends Emitter implements UiApi {
-    private screens;
+    private readonly screens;
     private _visibleScreen;
-    private screenChain;
+    private readonly screenChain;
     private scale;
     constructor();
     /**

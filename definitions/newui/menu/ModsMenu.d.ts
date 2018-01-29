@@ -10,7 +10,7 @@ export declare enum ModSort {
     LastUpdated = 4,
 }
 export default class ModsMenu extends Menu {
-    private sections;
+    private readonly sections;
     constructor(uiApi: UiApi);
     refreshMods(): Promise<void>;
     getModRow(index: number): ModRow | undefined;
@@ -27,9 +27,9 @@ export interface ModRowData {
 export declare class ModRow extends CheckButton<ModRowData> {
     readonly info: IModInfo;
     readonly index: number;
-    private buttonOptions;
-    private buttonView;
-    private buttonPublish;
+    private readonly buttonOptions;
+    private readonly buttonView;
+    private readonly buttonPublish;
     constructor(uiApi: UiApi, modIndex: number, modInfo: IModInfo);
     updateButtons(): void;
     onChecked(checked: boolean, prompts?: boolean): Promise<boolean>;

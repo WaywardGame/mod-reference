@@ -12,9 +12,9 @@ import InGameScreen from "ui/screens/InGameScreen";
 import * as Utilities from "Utilities";
 export default class Ui extends Utilities.Emitter implements IUi {
     screenInGame: InGameScreen;
-    private elementDocument;
-    private elementWindow;
-    private elementBody;
+    private readonly elementDocument;
+    private readonly elementWindow;
+    private readonly elementBody;
     private elementScrollableContainers;
     private screen;
     private screenHelp;

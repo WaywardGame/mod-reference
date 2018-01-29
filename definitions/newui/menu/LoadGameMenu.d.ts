@@ -2,7 +2,7 @@ import { UiApi } from "newui/INewUi";
 import InputButton from "newui/util/InputButton";
 import Menu from "newui/util/Menu";
 export default class LoadGameMenu extends Menu {
-    private slots;
+    private readonly slots;
     private slotsWrapper;
     private sort;
     private sortDirection;

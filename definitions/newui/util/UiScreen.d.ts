@@ -18,8 +18,8 @@ export default class UiScreen<T = {}> extends UiElement<T> implements IUiScreen 
     protected menuChain: number[];
     protected lastTooltipSource?: UiElement;
     protected tooltip: Tooltip;
-    private tooltipMousemoveListener;
-    private bindId;
+    private readonly tooltipMousemoveListener;
+    private readonly bindId;
     readonly visibleMenu: MenuId;
     readonly hasMenu: boolean;
     readonly bindingManagerId: number;

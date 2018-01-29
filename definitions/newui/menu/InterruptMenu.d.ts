@@ -27,12 +27,12 @@ export declare enum InterruptMenuEvent {
 }
 export default class InterruptMenu extends Menu {
     private _type;
-    private interruptTitle;
-    private interruptDescription;
-    private input;
-    private choiceRow;
-    private loadingElement;
-    private settingOptionsQueue;
+    private readonly interruptTitle;
+    private readonly interruptDescription;
+    private readonly input;
+    private readonly choiceRow;
+    private readonly loadingElement;
+    private readonly settingOptionsQueue;
     private isResolved;
     readonly type: InterruptType;
     constructor(uiApi: UiApi);
