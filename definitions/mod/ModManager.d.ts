@@ -50,7 +50,7 @@ export default class ModManager implements IModManager {
     getProvided(index: number): IModProvides;
     canLoad(index: number, fromModsMenu?: boolean, count?: number): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
-    getIndexFromName(name: string): number | undefined;
+    getIndexFromName(name: string): number[];
     getIndexFromPublishId(publishFileId: string): number[];
     getIndexFromPath(path: string): number | undefined;
     isEnabledByName(name: string): boolean;
