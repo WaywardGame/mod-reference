@@ -1167,13 +1167,13 @@ export interface IPointZ extends IPoint {
 export interface IObject<T> {
     type: T;
     id: number;
+    renamed?: string;
 }
 export interface IObjectOptions {
     decay?: number;
     minDur?: number;
     maxDur?: number;
     quality?: ItemQuality;
-    renamed?: string;
 }
 export interface IObjectDescription {
     name?: string;

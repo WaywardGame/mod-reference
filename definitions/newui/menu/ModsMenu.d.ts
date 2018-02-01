@@ -12,6 +12,7 @@ export declare enum ModSort {
 export default class ModsMenu extends Menu {
     private readonly sections;
     constructor(uiApi: UiApi);
+    create(): Promise<void>;
     refreshMods(): Promise<void>;
     getModRow(index: number): ModRow | undefined;
     private sortMods(modType, sort, direction);

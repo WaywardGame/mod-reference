@@ -103,7 +103,7 @@ export interface IGame extends Emitter {
     getMalignity(): number;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     getMovementFinishTime(): number;
-    getName(object: IItem | ICreature | IDoodad | IPlayer | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
+    getName(object: IItem | ICreature | IDoodad | IPlayer | ICorpse | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
     getOrCreateTile(x: number, y: number, z: number): ITile;

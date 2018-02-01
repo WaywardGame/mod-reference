@@ -24,13 +24,13 @@ export default class Dropdown<IdType = string | number, T = {}> extends UiElemen
     private readonly bindLoop;
     readonly selection: IdType;
     constructor(uiApi: UiApi, options?: DropdownOptions<IdType>);
-    addOption(optionId: IdType, options: TextOptions): this;
-    addOptions(options: AddOptionsOptions<IdType>): this;
+    addOption(optionId: IdType, options: TextOptions): Promise<void>;
+    addOptions(options: AddOptionsOptions<IdType>): Promise<void>;
     dumpOptions(): Promise<void>;
     showDropdown(): void;
     hideDropdown(): void;
-    select(optionId: IdType | undefined): void;
-    selectDefault(): void;
-    refresh(): void;
+    select(optionId: IdType | undefined): Promise<void>;
+    selectDefault(): Promise<void>;
+    refresh(): Promise<void>;
     private filter(filterBy?);
 }
