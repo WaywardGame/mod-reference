@@ -1027,6 +1027,7 @@ export declare enum Delay {
     ShortPause = 13,
     Collision = 40,
     TurnDirection = 2,
+    ItemPickUp = 4,
 }
 export declare enum RealTimeSpeed {
     Min = 10,
