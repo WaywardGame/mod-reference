@@ -38,6 +38,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     isEquipped(): boolean;
     getEquipSlot(): EquipType | undefined;
     setQuickSlot(player: IPlayer, quickSlot: number | undefined): void;
+    clearQuickSlot(): void;
     isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean): void;
     returns(): boolean;

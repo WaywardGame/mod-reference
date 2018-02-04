@@ -4,10 +4,10 @@ export default class Serializer implements ISerializer {
     private buffer;
     private dataView;
     private byteOffset;
-    private object;
-    private objectKey;
-    private version;
-    private skipOnUnserialized;
+    private readonly object;
+    private readonly objectKey;
+    private readonly version;
+    private readonly skipOnUnserialized;
     constructor(object: any, objectKey: any, version: string, skipOnUnserialized?: boolean);
     saveToString(): string;
     loadToObject(data: string): void;

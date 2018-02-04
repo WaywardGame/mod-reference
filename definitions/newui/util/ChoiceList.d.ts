@@ -10,7 +10,7 @@ export interface ChoiceListOptions extends UiElementOptions {
 }
 export default class ChoiceList extends BlockRow implements Refreshable {
     private _selection;
-    private options;
+    private readonly options;
     readonly choice: Choice;
     constructor(uiApi: UiApi, options?: ChoiceListOptions);
     setChoices(choices: Choice[]): Promise<void>;

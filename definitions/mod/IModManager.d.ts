@@ -84,7 +84,7 @@ export interface IModManager {
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
     getFolderName(index: number): string;
     getIdentifier(index: number): string;
-    getIndexFromName(name: string): number | undefined;
+    getIndexFromName(name: string): number[];
     getIndexFromPath(path: string): number | undefined;
     getIndexFromPublishId(publishFileId: string): number[];
     getLastUpdatedDate(index: number): number | undefined;

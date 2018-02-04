@@ -9,20 +9,20 @@ import Vec2 = TSM.vec2;
  * If Blue and Alpha are both 0, the subtile background is not rendered.
  */
 export default class TileLayer {
-    private width;
-    private height;
+    private readonly width;
+    private readonly height;
     private static texTileSprites;
     private static inverseTileSpriteTextureSize;
     private static tileShaderProgram;
-    private singleTileData;
-    private singleTileDataU8;
-    private singleTileDataU32;
-    private tileData;
-    private tileDataU8;
-    private tileDataU32;
-    private texTiles;
-    private inverseTileDataTextureSize;
-    private vertexArray;
+    private readonly singleTileData;
+    private readonly singleTileDataU8;
+    private readonly singleTileDataU32;
+    private readonly tileData;
+    private readonly tileDataU8;
+    private readonly tileDataU32;
+    private readonly texTiles;
+    private readonly inverseTileDataTextureSize;
+    private readonly vertexArray;
     static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(width: number, height: number, gl: WebGL2RenderingContext, positionBuffer: WebGLBuffer);

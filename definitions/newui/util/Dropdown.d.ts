@@ -16,21 +16,22 @@ export declare enum DropdownEvent {
 export default class Dropdown<IdType = string | number, T = {}> extends UiElement<T> implements Refreshable {
     protected optionsWrapper: UiElement;
     private _selection;
-    private inputButton;
+    private readonly inputButton;
     private defaultOption?;
-    private _refresh;
-    private options;
+    private readonly _refresh;
+    private readonly options;
     private open;
-    private bindLoop;
+    private readonly bindLoop;
+    private isFirstSelection;
     readonly selection: IdType;
     constructor(uiApi: UiApi, options?: DropdownOptions<IdType>);
-    addOption(optionId: IdType, options: TextOptions): this;
-    addOptions(options: AddOptionsOptions<IdType>): this;
+    addOption(optionId: IdType, options: TextOptions): Promise<void>;
+    addOptions(options: AddOptionsOptions<IdType>): Promise<void>;
     dumpOptions(): Promise<void>;
     showDropdown(): void;
     hideDropdown(): void;
-    select(optionId: IdType | undefined): void;
-    selectDefault(): void;
-    refresh(): void;
+    select(optionId: IdType | undefined): Promise<void>;
+    selectDefault(): Promise<void>;
+    refresh(): Promise<void>;
     private filter(filterBy?);
 }

@@ -6,7 +6,7 @@ export default class Sortable implements ISortable {
     helper?: JQuery;
     initialContainer: JQuery;
     targetContainer?: JQuery;
-    private _options;
+    private readonly _options;
     private items;
     private initialEvent?;
     constructor(element: JQuery, options: ISortableOptions);

@@ -52,6 +52,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     isEquipped(): boolean;
     getEquipSlot(): EquipType | undefined;
     setQuickSlot(player: IPlayer, quickSlot: number | undefined): void;
+    clearQuickSlot(): void;
     changeInto(itemType: ItemType, disableNotify?: boolean): void;
     returns(): boolean;
     spawnOnBreak(): ICreature | undefined;

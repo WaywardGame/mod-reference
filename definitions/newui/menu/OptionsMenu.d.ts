@@ -13,15 +13,15 @@ export declare enum OptionsTab {
     Developer = 7,
 }
 export default class OptionsMenu extends Menu {
-    private static modOptions;
+    private static readonly modOptions;
     static registerModOptions(modIndex: number, creationHandler: (uiApi: UiApi, uiElement: ModOptions) => any): void;
     static deleteModOptions(modIndex: number): void;
     static modHasOptions(modIndex: number): boolean;
-    private bindSections;
+    private readonly bindSections;
     private controlsSection;
     private bindCatcher;
     private modOptions;
-    private refreshables;
+    private readonly refreshables;
     private initialized;
     constructor(uiApi: UiApi);
     init(): Promise<void>;

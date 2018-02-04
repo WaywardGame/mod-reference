@@ -14,8 +14,8 @@ import { ISkillDescription } from "player/Skills";
 import { ITerrainDescription } from "tile/ITerrain";
 import { IDialogInfo } from "ui/IUi";
 export declare abstract class BaseMod {
-    private index;
-    private buttons;
+    private readonly index;
+    private readonly buttons;
     private allocatedEnums;
     private registeredPackets;
     constructor(index: number);

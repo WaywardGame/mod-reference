@@ -1,14 +1,14 @@
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/util/Menu";
 export default class MultiplayerMenu extends Menu {
-    private openServer;
-    private lobbyType;
-    private choiceLobbyFriends;
-    private choiceLobbyPublic;
-    private choiceLobbyPrivate;
-    private pvp;
-    private maxPlayers;
-    private tickSpeed;
+    private readonly openServer;
+    private readonly lobbyType;
+    private readonly choiceLobbyFriends;
+    private readonly choiceLobbyPublic;
+    private readonly choiceLobbyPrivate;
+    private readonly pvp;
+    private readonly maxPlayers;
+    private readonly tickSpeed;
     constructor(uiApi: UiApi);
     private refresh();
 }

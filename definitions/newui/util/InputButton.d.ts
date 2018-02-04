@@ -9,7 +9,7 @@ export declare enum InputButtonEvent {
     Done = "Done",
 }
 export default class InputButton<T = {}> extends Button<T> {
-    private inputElement;
+    private readonly inputElement;
     private _editMode;
     editMode: boolean;
     constructor(uiApi: UiApi, options?: InputButtonOptions);

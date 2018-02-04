@@ -1023,10 +1023,11 @@ export declare enum ObjectContext {
 export declare enum Delay {
     None = 0,
     LongPause = 25,
-    Movement = 11,
+    Movement = 10,
     ShortPause = 13,
     Collision = 40,
     TurnDirection = 2,
+    ItemPickUp = 4,
 }
 export declare enum RealTimeSpeed {
     Min = 10,
@@ -1167,13 +1168,13 @@ export interface IPointZ extends IPoint {
 export interface IObject<T> {
     type: T;
     id: number;
+    renamed?: string;
 }
 export interface IObjectOptions {
     decay?: number;
     minDur?: number;
     maxDur?: number;
     quality?: ItemQuality;
-    renamed?: string;
 }
 export interface IObjectDescription {
     name?: string;
@@ -1299,6 +1300,9 @@ export declare enum BindableType {
     Developer = 3,
     Mod = 4,
 }
+/**
+ * Note: If you rename a Bindable and don't make a save conversion for it, the old binding will be lost.
+ */
 export declare enum Bindable {
     GameMoveDirection = 0,
     GameMoveUp = 1,
@@ -1377,23 +1381,24 @@ export declare enum Bindable {
     DialogSkills = 74,
     DialogMessages = 75,
     DialogMessagesChatFocus = 76,
-    DialogOptions = 77,
-    DialogEquipment = 78,
-    DialogCrafting = 79,
-    DialogDismantle = 80,
-    DialogMilestones = 81,
-    MenuCancel = 82,
-    MenuEnter = 83,
-    MenuNext = 84,
-    MenuPrevious = 85,
-    MenuUp = 86,
-    MenuDown = 87,
-    MenuLeft = 88,
-    MenuRight = 89,
-    DeveloperToggleDeveloperMode = 90,
-    DeveloperReloadGame = 91,
-    DeveloperReloadAndContinueGame = 92,
-    DeveloperToggleDeveloperTools = 93,
+    DialogMessagesChatUnfocus = 77,
+    DialogOptions = 78,
+    DialogEquipment = 79,
+    DialogCrafting = 80,
+    DialogDismantle = 81,
+    DialogMilestones = 82,
+    MenuCancel = 83,
+    MenuEnter = 84,
+    MenuNext = 85,
+    MenuPrevious = 86,
+    MenuUp = 87,
+    MenuDown = 88,
+    MenuLeft = 89,
+    MenuRight = 90,
+    DeveloperToggleDeveloperMode = 91,
+    DeveloperReloadGame = 92,
+    DeveloperReloadAndContinueGame = 93,
+    DeveloperToggleDeveloperTools = 94,
 }
 export declare enum DropLocation {
     Facing = 0,

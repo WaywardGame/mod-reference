@@ -7,10 +7,10 @@ import { ICharacter } from "newui/util/Character";
 import IPlayer from "player/IPlayer";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export default class Multiplayer implements IMultiplayer {
-    private _playerIdentifier;
+    private readonly _playerIdentifier;
     private _isServer;
     private _server;
-    private _clients;
+    private readonly _clients;
     private _joinServerTimeoutId;
     private _connectedMatchmakingInfo;
     private _globalMatchmaking;

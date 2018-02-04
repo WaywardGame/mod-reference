@@ -14,8 +14,8 @@ export default class HighscoresMenu extends Menu {
     private filter(filter);
 }
 export declare class HighscoreRow extends Block {
-    private headingPlace;
-    private _highscore;
+    private readonly headingPlace;
+    private readonly _highscore;
     readonly highscore: IHighscore;
     place: number;
     constructor(uiApi: UiApi, highscore: IHighscore);

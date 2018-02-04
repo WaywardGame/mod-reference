@@ -177,7 +177,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     setupSave(_: number): void;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
-    getName(object: IItem | ICreature | IDoodad | IPlayer | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
+    getName(object: IItem | ICreature | IDoodad | IPlayer | ICorpse | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     movementToDirection(x: number, y: number): FacingDirection;
     directionToMovement(direction: FacingDirection): IPoint;

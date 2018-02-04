@@ -1,9 +1,9 @@
 import { IMatchmaking, IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
 export declare class Matchmaking implements IMatchmaking {
-    private info;
-    private onConnected;
-    private onCloseOrError;
-    private onMessage;
+    private readonly info;
+    private readonly onConnected;
+    private readonly onCloseOrError;
+    private readonly onMessage;
     private webSocket?;
     constructor(info: IMatchmakingInfo, onConnected: (matchmaking: IMatchmaking) => void, onCloseOrError: (matchmaking: IMatchmaking) => void, onMessage: (matchmaking: IMatchmaking, message: ArrayBuffer | MatchmakingMessageData) => void);
     getIdentifier(): string;

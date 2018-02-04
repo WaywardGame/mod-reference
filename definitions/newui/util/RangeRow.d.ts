@@ -15,7 +15,7 @@ export declare class RangeRow extends BlockRow implements Refreshable {
     protected heading: Heading;
     protected defaultButton: Button;
     protected rangeInputValueDisplay: RangeInputValueDisplay;
-    private displayValue?;
+    private readonly displayValue?;
     readonly value: number;
     constructor(uiApi: UiApi, options: RangeRowOptions);
     refresh(): void;

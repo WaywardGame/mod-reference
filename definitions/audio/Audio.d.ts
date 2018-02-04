@@ -8,15 +8,15 @@ export declare enum Fading {
 export default class WAudio implements IAudio {
     musicSpeed: number;
     fading: Fading;
-    private music;
-    private sfx;
-    private soundQueue;
-    private recentlyPlayedSounds;
+    private readonly music;
+    private readonly sfx;
+    private readonly soundQueue;
+    private readonly recentlyPlayedSounds;
     private soundDelay;
     private musicTrack;
-    private fileFormat;
-    private audioContext;
-    private gainNode;
+    private readonly fileFormat;
+    private readonly audioContext;
+    private readonly gainNode;
     constructor();
     setupMusic(track: HTMLAudioElement): void;
     playMusic(): void;

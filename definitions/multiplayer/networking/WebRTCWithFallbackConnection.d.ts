@@ -2,10 +2,10 @@ import { ConnectionState } from "Enums";
 import { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
 import { Connection } from "multiplayer/networking/Connection";
 export declare class WebRTCWithFallbackConnection extends Connection {
-    private onConnected;
+    private readonly onConnected;
     private _webRTCTimeoutId;
     private _hostIpAddress;
-    private _webRTCConnection;
+    private readonly _webRTCConnection;
     constructor(matchmakingInfo: IMatchmakingInfo, matchmakingIdentifier: string, config: RTCConfiguration, sendMatchmakingMessage: (message: MatchmakingMessageData) => void, onData: (data: ArrayBuffer) => void, onConnected?: ((matchmakingInfo: IMatchmakingInfo) => void) | undefined);
     getState(): ConnectionState;
     setState(state: ConnectionState): void;

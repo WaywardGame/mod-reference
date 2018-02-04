@@ -5,7 +5,7 @@ import { DebugRendererDelegate } from "flowfield/IFlowFieldDebugRenderer";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import { IPlayer } from "player/IPlayer";
 export default class FlowFieldManager implements IFlowFieldManager {
-    private size;
+    private readonly size;
     delegate: DebugRendererDelegate;
     flowFields: {
         [index: string]: IFlowField;

@@ -5,10 +5,10 @@ import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";
 import { HintType } from "ui/IHint";
 export default class Language implements ILanguage {
-    private name;
-    private alternateFontStyle;
-    private _shouldPluralize;
-    private dictionaries;
+    private readonly name;
+    private readonly alternateFontStyle;
+    private readonly _shouldPluralize;
+    private readonly dictionaries;
     constructor(name: string, alternateFontStyle?: boolean, shouldPluralize?: boolean);
     getName(): string;
     shouldUseAlternateFontStyle(): boolean;

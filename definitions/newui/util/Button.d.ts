@@ -19,7 +19,7 @@ export declare enum ButtonEvent {
 export default class Button<T = {}> extends UiText<T> {
     playSound: boolean;
     private buttons;
-    private _options;
+    private readonly _options;
     private _disabled;
     disabled: boolean;
     constructor(uiApi: UiApi, options?: ButtonOptions, bindEvent?: boolean);

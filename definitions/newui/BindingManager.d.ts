@@ -17,7 +17,7 @@ export interface IBinding {
     modifiers?: KeyModifier[];
 }
 export interface IBindings {
-    [key: number]: IBinding | IBinding[];
+    [key: string]: IBinding | IBinding[];
 }
 export interface BindCatcherApi {
     time: number;
@@ -41,8 +41,8 @@ export interface BindCatcherApi {
     isMouseWithin(element: Element, mustBeTarget: boolean): boolean;
 }
 export declare class BindingManager {
-    private static defaultBinds;
-    private bindCatchers;
+    private static readonly defaultBinds;
+    private readonly bindCatchers;
     private defaultBindCatcher;
     constructor();
     registerBindable(index: number, defaultBinding: IBinding | IBinding[]): void;

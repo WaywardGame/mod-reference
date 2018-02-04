@@ -11,4 +11,5 @@ export default class Emitter {
     trigger(event: string | number, ...data: any[]): Promise<any[]>;
     cancel(events: string | number | Array<string | number>, cb?: (emitter: this, ...data: any[]) => any): void;
     cancelAll(): void;
+    waitUntil(event: string | number): Promise<{}>;
 }

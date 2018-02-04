@@ -13,7 +13,7 @@ export default class CharacterCreationMenu extends Menu {
     private hairstyleList;
     private rotation;
     private gameOptions;
-    private customization;
+    private readonly customization;
     private defaultName;
     constructor(uiApi: UiApi);
     randomize(update?: boolean): void;

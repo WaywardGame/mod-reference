@@ -171,7 +171,8 @@ export declare module Enums {
     function getLength(enumObject: any): number;
     function getRandomIndex(enumObject: any): number;
     function getValues(enumObject: any): number[];
-    function forEach<Enum extends number>(enumObject: any, callback: (name: string, value: Enum) => boolean | void): void;
+    function forEach<Enum extends number>(enumObject: any, callback: (name: string, value: Enum) => boolean | void | Promise<boolean | void>): void;
+    function forEachAsync<Enum extends number>(enumObject: any, callback: (name: string, value: Enum) => boolean | void | Promise<boolean | void>): Promise<void>;
     function toString(enumObject: any, n: number): string;
     function getNext(enumObject: any, n: number): number;
     function getPrevious(enumObject: any, n: number): number;

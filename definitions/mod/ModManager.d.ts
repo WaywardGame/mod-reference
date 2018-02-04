@@ -2,13 +2,13 @@ import { IPlayOptions } from "game/IGame";
 import { Hook } from "mod/IMod";
 import { CanLoadState, ICanLoadInfo, IModInfo, IModManager, IModProvides, ModState, ModType } from "mod/IModManager";
 export default class ModManager implements IModManager {
-    private mods;
+    private readonly mods;
     private modsToSetup;
-    private internalMods;
-    private internalModsElectron;
+    private readonly internalMods;
+    private readonly internalModsElectron;
     private cachedHooks;
-    private cachedHookNames;
-    private onLanguageLoadCallbacks;
+    private readonly cachedHookNames;
+    private readonly onLanguageLoadCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>, callback: (err: string | undefined, mods: string[]) => void): void;
     unloadAll(reset?: boolean): void;
@@ -50,7 +50,7 @@ export default class ModManager implements IModManager {
     getProvided(index: number): IModProvides;
     canLoad(index: number, fromModsMenu?: boolean, count?: number): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
-    getIndexFromName(name: string): number | undefined;
+    getIndexFromName(name: string): number[];
     getIndexFromPublishId(publishFileId: string): number[];
     getIndexFromPath(path: string): number | undefined;
     isEnabledByName(name: string): boolean;
@@ -62,7 +62,7 @@ export default class ModManager implements IModManager {
     setCreatedDate(index: number, createdDate: number): void;
     getState(index: number): ModState;
     isInitializing(index: number): ModState;
-    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): boolean;
+    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void, unloaded?: boolean): boolean;
     uninitialize(index: number): void;
     uninitializeAll(): void;
     cacheHooks(): void;

@@ -1,7 +1,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Command, CreatureType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import BaseMod from "mod/BaseMod";
@@ -104,7 +104,7 @@ export declare abstract class Mod extends BaseMod {
      * @param options The doodad spawn options
      * @returns False if the dooodad cannot spawn, or undefined to use the default logic
      */
-    canDoodadSpawn(type: CreatureType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
+    canDoodadSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
     /**
      * Called when an item is being dropped
      * @param player The player object

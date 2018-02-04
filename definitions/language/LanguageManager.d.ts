@@ -1,9 +1,9 @@
 import { Dictionary, ILanguage, ILanguageExtension, ITranslation, UiTranslation } from "language/ILanguage";
 import ILanguageManager, { TranslationType } from "language/ILanguageManager";
 export default class LanguageManager implements ILanguageManager {
-    private languages;
+    private readonly languages;
     private loaded;
-    private uiTranslationsToSelector;
+    private readonly uiTranslationsToSelector;
     constructor();
     add(language: ILanguage): void;
     remove(language: ILanguage): void;

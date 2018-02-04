@@ -8,7 +8,7 @@ export interface TooltipData {
     tooltipLocation: keyof typeof TooltipLocation;
 }
 export default class Tooltip<T = {}> extends UiElement<TooltipData & T> {
-    private source;
+    private readonly source;
     location: TooltipLocation;
     constructor(uiApi: UiApi, source: UiElement, tooltipOptions: TooltipOptions);
     addText(options: TextOptions): UiText<{}>;

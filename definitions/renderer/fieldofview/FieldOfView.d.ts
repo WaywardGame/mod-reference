@@ -8,11 +8,11 @@ export default class FieldOfView implements IFieldOfView {
     private gl;
     radius: number;
     maxRadius: number;
-    private subdivisions;
+    private readonly subdivisions;
     static hBlurProgram: CompiledProgram;
     static vBlurProgram: CompiledProgram;
     private static shaderProgram;
-    private static instance;
+    private static readonly instance;
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
     disabled: boolean;

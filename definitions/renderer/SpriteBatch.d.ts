@@ -1,18 +1,18 @@
 import Vec2 = TSM.vec2;
 export default class SpriteBatch {
     private static shaderProgram;
-    private static spriteLength;
+    private static readonly spriteLength;
     capacity: number;
     texSprites: WebGLTexture;
     inverseSpriteTextureSize: Vec2;
     private count;
-    private buffer;
-    private colorBuffer;
-    private array;
-    private colorArray;
-    private gl;
+    private readonly buffer;
+    private readonly colorBuffer;
+    private readonly array;
+    private readonly colorArray;
+    private readonly gl;
     private begun;
-    private vertexArray;
+    private readonly vertexArray;
     constructor(gl: WebGL2RenderingContext, maxSprites: number);
     static resetGl(): void;
     clear(): void;
