@@ -22,6 +22,7 @@ export default class Dropdown<IdType = string | number, T = {}> extends UiElemen
     private readonly options;
     private open;
     private readonly bindLoop;
+    private isFirstSelection;
     readonly selection: IdType;
     constructor(uiApi: UiApi, options?: DropdownOptions<IdType>);
     addOption(optionId: IdType, options: TextOptions): Promise<void>;
