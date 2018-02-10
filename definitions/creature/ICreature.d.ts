@@ -109,7 +109,7 @@ export interface ICreatureDescription extends IModdable {
     waterAnimations?: boolean;
     description?: string;
     tamingDifficulty?: number;
-    acceptedItems?: [ItemType | ItemTypeGroup];
+    acceptedItems?: Array<ItemType | ItemTypeGroup>;
     lightSource?: boolean;
 }
 export interface ICreatureLoot {

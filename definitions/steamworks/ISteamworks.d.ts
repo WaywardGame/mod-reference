@@ -96,7 +96,8 @@ export declare enum LobbyType {
     Invisible = 3,
 }
 export declare enum SteamworksEvent {
-    OverlayHidden = 0,
+    OverlayShown = 0,
+    OverlayHidden = 1,
 }
 export interface IDedicatedServerInfo {
     name: string;

@@ -105,7 +105,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     ranged?: IRanged;
     recipe?: IRecipe;
     disassemble?: boolean;
-    requiredForDisassembly?: [ItemType | ItemTypeGroup];
+    requiredForDisassembly?: Array<ItemType | ItemTypeGroup>;
     decaysInto?: ItemType;
     twoHanded?: boolean;
     recipes?: ItemType[];

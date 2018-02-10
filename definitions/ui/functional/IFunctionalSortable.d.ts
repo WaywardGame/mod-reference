@@ -35,5 +35,5 @@ export interface ISortable {
     stop(): void;
     cancel(): void;
     refreshItems(): void;
-    runAction(action: string): (JQuery | boolean | undefined);
+    runAction(action: string, ...data: any[]): (JQuery | boolean | undefined);
 }
