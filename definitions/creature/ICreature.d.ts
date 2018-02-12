@@ -111,6 +111,7 @@ export interface ICreatureDescription extends IModdable {
     tamingDifficulty?: number;
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
     lightSource?: boolean;
+    noStumble?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;
