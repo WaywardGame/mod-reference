@@ -56,4 +56,4 @@ export default class Trello implements ITrello {
     private findChangelogList(versionInfo, board?);
     private parseChangelog(changelogData);
 }
-export declare const trello: Trello;
+export declare const trello: default;

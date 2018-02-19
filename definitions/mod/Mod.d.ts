@@ -41,23 +41,29 @@ export declare abstract class Mod extends BaseMod {
      */
     onSave(): any;
     /**
-     *  Get the ambient color while in caves
+     * Get the ambient color
+     * @param colors The current ambient colors
+     * @returns the ambient color channels (3 numbers) or undefined to use the default color
+     */
+    getAmbientColor(colors: number[]): number[] | undefined;
+    /**
+     * Get the ambient color while in caves
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
     getAmbientColorCave(): number[] | undefined;
     /**
-     *  Get the ambient color while its day time
+     * Get the ambient color while its day time
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
     getAmbientColorDay(): number[] | undefined;
     /**
-     *  Get the ambient color while its night time
+     * Get the ambient color while its night time
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
     getAmbientColorNight(): number[] | undefined;
     /**
      * Get the ambient light level
-     * @param ambientLight The current ambient light level	 *
+     * @param ambientLight The current ambient light level
      * @param z The world z index
      * @returns the ambient light level or undefined to use the default light level
      */
@@ -157,6 +163,12 @@ export declare abstract class Mod extends BaseMod {
      */
     getCreatureSpriteBatchLayer(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     /**
+     * Called when getting the field of view radius for a player
+     * @param player The player object
+     * @returns The field of view radius for the player or undefined to use the default logic
+     */
+    getPlayerFieldOfViewRadius(player: IPlayer): number | undefined;
+    /**
      * Called when getting the players maximum health
      * @param player The player object
      * @returns The maximum health of the player or undefined to use the default logic
@@ -181,6 +193,14 @@ export declare abstract class Mod extends BaseMod {
      * @returns The weight status of the player or undefined to use the default logic
      */
     getPlayerWeightStatus(player: IPlayer): WeightStatus | undefined;
+    /**
+     * Called when retrieving the light level of a tile
+     * @param tile The tile that was updated
+     * @param x The x position of the tile
+     * @param y The y position of the tile
+     * @param z The z position of the tile
+     */
+    getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
     /**
      * Called when checking if a player is swimming
      * @param player The player object

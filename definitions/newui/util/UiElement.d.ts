@@ -45,13 +45,13 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     findDescendants(selector: string): NodeListOf<Element>;
     showTooltip(): Promise<void>;
     setTooltip(tooltipOptions?: TooltipOptionsVague): void;
-    getBox(): ClientRect;
+    getBox(): ClientRect | DOMRect;
     getOffset(): {
         top: number;
         left: number;
     };
-    getNthChild(nth?: number): UiElement<{}>;
-    getChildren(): UiElement<{}>[];
+    getNthChild(nth?: number): default<{}>;
+    getChildren(): default<{}>[];
     scrollTo(child: UiElement, ms?: number): void;
     getStyle(styleName: string): string;
     then(cb: (this: this, button: this) => any, ...args: any[]): this;

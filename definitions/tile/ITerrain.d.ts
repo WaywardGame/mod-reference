@@ -33,6 +33,8 @@ export interface ITerrainDescription extends IModdable {
     tillable?: boolean;
     hasMound?: boolean;
     deepWater?: boolean;
+    reduceRest?: boolean;
+    noResting?: boolean;
 }
 export interface ITile extends Partial<ITileContainer> {
     creature?: ICreature;

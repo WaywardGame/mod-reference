@@ -1031,7 +1031,7 @@ export declare enum Delay {
 }
 export declare enum RealTimeSpeed {
     Min = 10,
-    Default = 40.2001608,
+    Default = 50,
     Max = 80,
 }
 export declare enum StatType {
