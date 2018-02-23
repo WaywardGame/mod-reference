@@ -14,7 +14,6 @@ export declare enum TextElementId {
     Reputation = 3,
 }
 export default class InGameScreen extends BaseScreen {
-    bindCatcherId: number;
     overlayBindCatcherId: number;
     shouldResetMovement: boolean;
     shouldCancelSorting: boolean;
@@ -86,6 +85,7 @@ export default class InGameScreen extends BaseScreen {
     private onChatKeyPress;
     private canUseQuickslot;
     private delayState;
+    private isCurrentlySorting;
     private craftableItemTypes;
     private nonCraftableItemTypes;
     private messages;
@@ -239,4 +239,8 @@ export default class InGameScreen extends BaseScreen {
     private isOverlayVisible();
     private readonly onInterrupt;
     private readonly onInterruptClosed;
+    private readonly onBindLoop;
+    private getHoveredItem(api);
+    private quickSlotBindPressed(api, quickSlot, bindable);
+    private quickSlotToggleBindPressed(api, itemElement, quickSlot, bindable, wasPressed);
 }

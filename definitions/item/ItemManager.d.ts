@@ -78,6 +78,7 @@ export default class ItemManager implements IItemManager {
     private getCraftQualityBonus(quality, required?);
     private computeCraftQualityBonus(itemsToRequire, itemsToConsume);
     private isCraftSuccessful(player, recipe, qualityBonus);
+    private getNPCFromInventoryContainer(container);
     private getPlayerFromInventoryContainer(container);
     private getAbsentPlayerFromInventoryContainer(container);
 }

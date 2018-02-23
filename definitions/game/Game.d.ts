@@ -2,11 +2,13 @@ import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DamageType, Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
+import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -53,6 +55,7 @@ export default class Game extends Utilities.Emitter implements IGame {
         [index: number]: number;
     };
     mapGenVersion: string;
+    npcs: SaferArray<INPC>;
     realTimeTickSpeed: number;
     savedHighscore: boolean;
     saveVersion: string;
@@ -159,7 +162,7 @@ export default class Game extends Utilities.Emitter implements IGame {
      */
     updateTablesAndWeight(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
-    damage(target: IPlayer | ICreature, damageInfo: IDamageInfo): number | undefined;
+    damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo): number | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     isPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
     isPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
@@ -177,7 +180,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     setupSave(_: number): void;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
-    getName(object: IItem | ICreature | IDoodad | IPlayer | ICorpse | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
+    getName(object: IItem | ICreature | IDoodad | IPlayer | IBaseHumanEntity | ICorpse | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     movementToDirection(x: number, y: number): FacingDirection;
     directionToMovement(direction: FacingDirection): IPoint;

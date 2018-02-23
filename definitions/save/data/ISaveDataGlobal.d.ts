@@ -74,6 +74,7 @@ export interface IOptions {
     tooltipsCreatures: boolean;
     tooltipsDoodads: boolean;
     tooltipsItems: boolean;
+    tooltipsNPCs: boolean;
     tooltipsTerrain: boolean;
     uiScale: number;
     visionMode: boolean;

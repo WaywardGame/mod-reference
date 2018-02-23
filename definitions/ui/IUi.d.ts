@@ -1,7 +1,6 @@
 import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, SortType, StatType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
-import { BindCatcherApi } from "newui/BindingManager";
 import { MenuId } from "newui/INewUi";
 import { IPlayer } from "player/IPlayer";
 import { IPropSerializable } from "save/ISerializer";
@@ -16,7 +15,6 @@ export interface IUiScreen {
     hide(): void;
     onGameEnd(showBlocker: boolean): void;
     isVisible(): void;
-    onBindLoop?(api: BindCatcherApi): void;
 }
 export interface IDialogInfo {
     id?: string;
@@ -74,7 +72,6 @@ export interface IUi extends IPropSerializable, Emitter {
     shakeStat(stat: StatType): void;
     refreshAttributes(): void;
     loadQuickSlots(): void;
-    onBindLoop(api: BindCatcherApi): void;
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
     isHelpOverlayShown(): boolean;

@@ -39,5 +39,6 @@ export declare enum Types {
     Player = 19,
     ArrayV2 = 20,
     Doodad = 21,
+    NPC = 22,
 }
 export declare function SaveProperty(): PropertyDecorator;

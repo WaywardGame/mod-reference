@@ -3,6 +3,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { DoodadType, GrowingStage, IModdable, IPointZ, IRGB, ItemQuality, SfxType, SkillType, TerrainType } from "Enums";
 import { IContainer } from "item/IItem";
+import { INPC } from "npc/INPC";
 import { ITileEvent } from "tile/ITileEvent";
 export interface ITerrainDescription extends IModdable {
     name?: string;
@@ -37,11 +38,12 @@ export interface ITerrainDescription extends IModdable {
     noResting?: boolean;
 }
 export interface ITile extends Partial<ITileContainer> {
-    creature?: ICreature;
-    doodad?: IDoodad;
     corpses?: ICorpse[];
-    events?: ITileEvent[];
+    creature?: ICreature;
     data: number;
+    doodad?: IDoodad;
+    events?: ITileEvent[];
+    npc?: INPC;
 }
 export interface ITileOld {
     event?: ITileEvent[];

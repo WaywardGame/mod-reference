@@ -45,6 +45,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         tooltipsCreatures: boolean;
         tooltipsDoodads: boolean;
         tooltipsItems: boolean;
+        tooltipsNPCs: boolean;
         tooltipsTerrain: boolean;
         uiScale: number;
         visionMode: boolean;

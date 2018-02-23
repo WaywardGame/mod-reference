@@ -32,25 +32,26 @@ export declare enum Source {
     ItemManager = 11,
     Languages = 12,
     MapGen = 13,
-    Mod = 14,
-    Mods = 15,
-    Multiplayer = 16,
-    Matchmaking = 17,
+    Matchmaking = 14,
+    Mod = 15,
+    Mods = 16,
+    Multiplayer = 17,
     NewUi = 18,
-    Packet = 19,
-    Player = 20,
-    ResourceLoader = 21,
-    SaveManager = 22,
-    Serializer = 23,
-    Shaders = 24,
-    Steamworks = 25,
-    TileEventManager = 26,
-    Trello = 27,
-    Ui = 28,
-    Utilities = 29,
-    WebAssembly = 30,
-    WebRTCConnection = 31,
-    WebSocketConnection = 32,
+    NPCManager = 19,
+    Packet = 20,
+    Player = 21,
+    ResourceLoader = 22,
+    SaveManager = 23,
+    Serializer = 24,
+    Shaders = 25,
+    Steamworks = 26,
+    TileEventManager = 27,
+    Trello = 28,
+    Ui = 29,
+    Utilities = 30,
+    WebAssembly = 31,
+    WebRTCConnection = 32,
+    WebSocketConnection = 33,
 }
 export declare enum AttackType {
     Melee = 0,
@@ -70,6 +71,7 @@ export declare enum InspectType {
     Player = 6,
     Corpses = 7,
     TileEvents = 8,
+    NPC = 9,
 }
 export declare enum MoveType {
     None = 0,
@@ -228,6 +230,7 @@ export declare enum ActionType {
     GatherMilk = 73,
     Read = 74,
     CloseContainer = 75,
+    SmotherFire = 76,
 }
 export declare enum ItemType {
     None = 0,
@@ -627,6 +630,13 @@ export declare enum ItemType {
     ArrowShaft = 394,
     SlitherSucker = 395,
     AberrantSlitherSucker = 396,
+    StrawHat = 397,
+    MeanstoneBoots = 398,
+    MeanstoneBreastplate = 399,
+    MeanstoneGloves = 400,
+    MeanstoneGorget = 401,
+    MeanstoneGreaves = 402,
+    MeanstoneHelmet = 403,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -893,6 +903,10 @@ export declare enum CreatureType {
     LavaBeetle = 34,
     Goat = 35,
     SlitherSucker = 36,
+}
+export declare enum NPCType {
+    Merchant = 0,
+    DeathKnight = 1,
 }
 export declare enum HairStyle {
     None = 0,

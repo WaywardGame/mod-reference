@@ -17,7 +17,7 @@ export interface ISyncCheck {
 export interface IPacket {
     getAllowedStates(): ConnectionState;
     getArrayBuffer(id?: number): ArrayBuffer;
-    getId(): number;
+    getRegistrarId(): number;
     getDebugInfo(): string;
     getSynchronizationCheckData(): ISynchronizationCheckData;
     getType(): PacketType;

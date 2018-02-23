@@ -1,4 +1,5 @@
 import { Bindable, BindableType } from "Enums";
+import Emitter from "utilities/Emitter";
 export declare enum KeyModifier {
     Shift = 0,
     Alt = 1,
@@ -40,7 +41,10 @@ export interface BindCatcherApi {
     isMouseWithin(element: Element): boolean;
     isMouseWithin(element: Element, mustBeTarget: boolean): boolean;
 }
-export declare class BindingManager {
+export declare enum BindingManagerEvent {
+    Loop = 0,
+}
+export declare class BindingManager extends Emitter {
     private static readonly defaultBinds;
     private readonly bindCatchers;
     private defaultBindCatcher;
@@ -69,7 +73,6 @@ export declare class BindingManager {
     isPressed(bindOrKey: Bindable | string, id?: number): boolean;
     isAnythingPressed(id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;
-    beginLoop(id: number, cb: (api: BindCatcherApi) => any): void;
-    endLoop(id: number): void;
+    private startLoop();
 }
 export declare const bindingManager: BindingManager;

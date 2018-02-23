@@ -1,3 +1,16 @@
+/*
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ * 
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ * 
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ * 
+ * 
+ */
+
 import IActionManager from "action/IActionManager";
 import IAudio from "audio/IAudio";
 import { ICommandManager } from "command/ICommandManager";
@@ -13,6 +26,7 @@ import ILanguageManager from "language/ILanguageManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import NewUi from "newui/NewUi";
+import INPCManager from "npc/INPCManager";
 import IPlayer from "player/IPlayer";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
@@ -53,6 +67,7 @@ declare global {
 	let itemManager: IItemManager;
 	let languageManager: ILanguageManager;
 	let localPlayer: IPlayer;
+	let npcManager: INPCManager;
 	let modManager: IModManager;
 	let multiplayer: IMultiplayer;
 	let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;

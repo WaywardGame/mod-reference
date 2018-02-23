@@ -1,11 +1,10 @@
-import { CreatureType, DamageType, Defense, FacingDirection, IMessagePack, IModdable, IObject, IPointZ, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, SfxType, StatusType } from "Enums";
+import { IBaseEntity } from "entity/IBaseEntity";
+import { EntityType } from "entity/IEntity";
+import { CreatureType, DamageType, Defense, IMessagePack, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
 import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
-import { ITile } from "tile/ITerrain";
-export interface ICreature extends IObject<CreatureType>, IPointZ {
-    fromX: number;
-    fromY: number;
-    direction: FacingDirection;
+export interface ICreature extends IBaseEntity, IObject<CreatureType> {
+    entityType: EntityType.Creature;
     ai: AiType;
     anim: number;
     hp: number;
@@ -19,10 +18,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     happiness?: number;
     chickenEggCounter?: number;
     goatMilkCounter?: number;
-    stopNextMovement?: boolean;
-    renamed?: string;
     description(): ICreatureDescription | undefined;
-    getTile(): ITile;
     isHidden(): boolean;
     isDefender(): boolean;
     getInspectHealthMessage(player: IPlayer): IMessagePack;
@@ -36,12 +32,7 @@ export interface ICreature extends IObject<CreatureType>, IPointZ {
     skipNextUpdate(): void;
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
-    queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
-    isInFov(): boolean;
-    setInFov(inFov: boolean): void;
-    getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
-    getMovementProgress(): number;
     getMovementFinishTime(): number | undefined;
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;

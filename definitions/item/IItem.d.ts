@@ -139,17 +139,18 @@ export interface IGroupDescription {
 }
 export declare enum ContainerReferenceType {
     Invalid = 0,
-    Inventory = 1,
+    PlayerInventory = 1,
     Doodad = 2,
     World = 3,
     Tile = 4,
     Item = 5,
+    NPCInventory = 6,
 }
 export interface IBaseContainerReference {
     type: ContainerReferenceType;
 }
-export interface IInventoryContainerReference extends IBaseContainerReference {
-    type: ContainerReferenceType.Inventory;
+export interface IPlayerInventoryContainerReference extends IBaseContainerReference {
+    type: ContainerReferenceType.PlayerInventory;
     pid: number;
     identifier?: string;
 }
@@ -169,7 +170,11 @@ export interface IItemContainerReference extends IBaseContainerReference {
     type: ContainerReferenceType.Item;
     id: number;
 }
-export declare type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference;
+export interface INPCInventoryContainerReference extends IBaseContainerReference {
+    type: ContainerReferenceType.NPCInventory;
+    id: number;
+}
+export declare type ContainerReference = IInvalidContainerReference | IWorldContainerReference | IPlayerInventoryContainerReference | ITileContainerReference | IDoodadContainerReference | IItemContainerReference | INPCInventoryContainerReference;
 export declare enum CraftResult {
     Fail = 0,
     Success = 1,

@@ -42,7 +42,7 @@ export default class WorldRenderer implements IWorldRenderer {
     private readonly itemBatch;
     private readonly corpseBatch;
     private readonly creatureBatch;
-    private readonly creaturesInViewport;
+    private readonly entitiesInViewport;
     private viewportSpritesDirty;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext);
@@ -70,7 +70,7 @@ export default class WorldRenderer implements IWorldRenderer {
     private isFlyingOffset(tile);
     private batchShadow(fromX, fromY, toX, toY, t, anim);
     private batchPlayers(batchLayer);
-    private batchPlayer(player, batchLayer);
+    private batchHuman(human, batchLayer);
     private spriteBatchForLayer(layer);
     private shouldOffsetFlying(tile);
     private computeSpritesInViewportInternal();

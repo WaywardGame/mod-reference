@@ -1,7 +1,6 @@
 import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, StatType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
-import { BindCatcherApi } from "newui/BindingManager";
 import { MenuId } from "newui/INewUi";
 import { IPlayer } from "player/IPlayer";
 import "ui/functional/FunctionalSortable";
@@ -21,7 +20,6 @@ export default class Ui extends Utilities.Emitter implements IUi {
     private objectUrl;
     constructor();
     initialize(): void;
-    onBindLoop(api: BindCatcherApi): void;
     initializeGameState(): void;
     setupButtons(): void;
     getBody(): JQuery;

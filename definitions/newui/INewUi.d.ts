@@ -158,7 +158,6 @@ export interface IUiElement<T = {}> {
     showTooltip(): void;
 }
 export interface IUiScreen extends IUiElement {
-    readonly bindingManagerId: number;
     getMenu(): IMenu | undefined;
     getMenu(menuId: MenuId): IMenu | undefined;
     getMenu(menuId?: MenuId): IMenu | undefined;

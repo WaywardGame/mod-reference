@@ -35,7 +35,6 @@ export default class Menu<T = {}> extends UiElement<T> implements IMenu {
     description: TextOrTranslationData | undefined;
     private _isSubmenu;
     isSubmenu: boolean;
-    readonly bindingManagerId: number;
     constructor(uiApi: UiApi, options: MenuOptions);
     scrollToTop(): void;
     select(element: HTMLElement): void;
