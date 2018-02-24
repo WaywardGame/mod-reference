@@ -19,6 +19,7 @@ export default class InGameScreen extends BaseScreen {
     shouldCancelSorting: boolean;
     isQuickmoving: boolean;
     elementVisibleInGame: JQuery;
+    elementCanvas: JQuery;
     elementBlocker: JQuery;
     elementBlockerMouse: JQuery;
     elementStats: JQuery;
