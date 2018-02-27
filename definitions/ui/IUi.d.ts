@@ -13,7 +13,7 @@ export interface IUiScreen {
     unbindElements(): void;
     show(data?: any): void;
     hide(): void;
-    onGameEnd(showBlocker: boolean): void;
+    onGameEnd(showDeath: boolean): void;
     isVisible(): void;
 }
 export interface IDialogInfo {
@@ -116,7 +116,7 @@ export interface IUi extends IPropSerializable, Emitter {
     removeItemFromEquipSlot(equip: EquipType): void;
     shouldRefreshMods(): boolean;
     setObjectUrl(objectUrl: string): void;
-    onGameEnd(showBlocker: boolean): void;
+    onGameEnd(showDeath: boolean): void;
     highlight(selector?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];

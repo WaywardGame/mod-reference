@@ -24,6 +24,6 @@ export default class Button<T = {}> extends UiText<T> {
     disabled: boolean;
     constructor(uiApi: UiApi, options?: ButtonOptions, bindEvent?: boolean);
     activate(playSound?: boolean): Promise<void>;
-    addButton(buttonOptions: ButtonOptions): default<{}>;
+    addButton(buttonOptions: ButtonOptions): Button<{}>;
     toggleDisabled(disabled?: boolean): void;
 }

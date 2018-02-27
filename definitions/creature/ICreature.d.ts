@@ -1,5 +1,5 @@
 import { IBaseEntity } from "entity/IBaseEntity";
-import { EntityType } from "entity/IEntity";
+import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, DamageType, Defense, IMessagePack, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
 import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
@@ -46,17 +46,6 @@ export declare enum SpawnGroup {
     WaterCave = 3,
     Cave = 4,
     Night = 5,
-}
-export declare enum AiType {
-    Neutral = 0,
-    Hostile = 1,
-    Scared = 2,
-    Random = 4,
-    Hidden = 8,
-    Fearless = 16,
-    Tamed = 32,
-    Follower = 64,
-    Defender = 128,
 }
 export declare enum SpawnableTiles {
     None = 0,

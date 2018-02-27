@@ -1,6 +1,6 @@
-import { AiType, ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature";
+import { ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature";
 import BaseEntity from "entity/BaseEntity";
-import { EntityType } from "entity/IEntity";
+import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, IMessagePack, ItemType, MoveType, SfxType } from "Enums";
 import { IItem } from "item/IItem";
 import { IPlayer } from "player/IPlayer";
@@ -49,6 +49,6 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     private findPlayersWithinRadius(x, y, z, radius);
     private processAttack(description, moveType, enemy);
     private processMovement(description, moveType, enemy, nearestPlayer);
-    private processRandomAiChanges();
+    private processAiChanges(nearestPlayer);
     private processSpecialAbilities(enemy);
 }

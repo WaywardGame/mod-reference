@@ -1,3 +1,4 @@
+import { AiType } from "entity/IEntity";
 import { EquipType, ItemType } from "Enums";
 import { IItem } from "item/IItem";
 import BaseNPC from "npc/BaseNPC";
@@ -9,4 +10,5 @@ export default class MerchantNPC extends BaseNPC implements INPC {
     protected getName(): string;
     protected getCustomization(): IPlayerCustomization;
     protected getEquipment(equipType: EquipType): IItem | ItemType | undefined;
+    protected getAiType(): AiType;
 }

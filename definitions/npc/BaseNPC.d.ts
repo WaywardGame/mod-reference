@@ -1,5 +1,5 @@
 import BaseHumanEntity from "entity/BaseHumanEntity";
-import { EntityType } from "entity/IEntity";
+import { AiType, EntityType } from "entity/IEntity";
 import { EquipType, ItemType } from "Enums";
 import { IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
@@ -17,4 +17,7 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     protected abstract getName(): string;
     protected abstract getCustomization(): IPlayerCustomization;
     protected abstract getEquipment(equipType: EquipType): IItem | ItemType | undefined;
+    protected abstract getAiType(): AiType;
+    protected move(): boolean;
+    private checkMove(tileX, tileY, tileZ);
 }

@@ -1,7 +1,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, Music, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import BaseMod from "mod/BaseMod";
@@ -199,6 +199,7 @@ export declare abstract class Mod extends BaseMod {
      * @param x The x position of the tile
      * @param y The y position of the tile
      * @param z The z position of the tile
+     * @returns The light level of the tile or undefined to use the default logic
      */
     getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
     /**
@@ -273,9 +274,8 @@ export declare abstract class Mod extends BaseMod {
     onDoodadSpawn(doodad: IDoodad): void;
     /**
      * Called when the game is ending
-     * @param playerState The ending player state
      */
-    onGameEnd(playerState: PlayerState): void;
+    onGameEnd(): void;
     /**
      * Called when the game is starting
      * @param isLoadingSave True if a save game was loaded

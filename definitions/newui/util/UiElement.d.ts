@@ -50,8 +50,8 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
         top: number;
         left: number;
     };
-    getNthChild(nth?: number): default<{}>;
-    getChildren(): default<{}>[];
+    getNthChild(nth?: number): UiElement<{}>;
+    getChildren(): UiElement<{}>[];
     scrollTo(child: UiElement, ms?: number): void;
     getStyle(styleName: string): string;
     then(cb: (this: this, button: this) => any, ...args: any[]): this;

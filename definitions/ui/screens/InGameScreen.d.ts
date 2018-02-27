@@ -20,8 +20,6 @@ export default class InGameScreen extends BaseScreen {
     isQuickmoving: boolean;
     elementVisibleInGame: JQuery;
     elementCanvas: JQuery;
-    elementBlocker: JQuery;
-    elementBlockerMouse: JQuery;
     elementStats: JQuery;
     elementStatHealth: JQuery;
     elementStatStamina: JQuery;
@@ -118,7 +116,7 @@ export default class InGameScreen extends BaseScreen {
     onShow(): void;
     onHide(): void;
     initializeGameState(): void;
-    onGameEnd(showBlocker: boolean): void;
+    onGameEnd(showDeath: boolean): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
     setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
     onMouseMove(event: JQueryEventObject): void;

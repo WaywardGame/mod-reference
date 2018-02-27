@@ -11,3 +11,15 @@ export declare enum EntityType {
     Creature = 1,
     NPC = 2,
 }
+export declare enum AiType {
+    Neutral = 0,
+    Hostile = 1,
+    Scared = 2,
+    Random = 4,
+    Hidden = 8,
+    Fearless = 16,
+    Tamed = 32,
+    Follower = 64,
+    Defender = 128,
+    Fleeing = 256,
+}

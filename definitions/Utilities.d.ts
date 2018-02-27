@@ -229,5 +229,6 @@ export declare function stripHTML(str: string): string;
 export declare function fixObjectCaseStyle(obj: any, caseStyle: CaseStyle, whitelist?: string[]): any;
 export declare function stripParentDirectoryAccessorsFromPath(path: string): string;
 export declare function encodeURIComponentPath(p: string): string;
+export declare function isDistanceBetweenLessThan(value: number, a: IPoint, b: IPoint): boolean;
 export declare function distanceBetween(a: IPoint, b: IPoint): number;
 export declare function parseCommandLineArgument(name: string, args: string): string | undefined;
