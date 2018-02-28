@@ -10,5 +10,6 @@ export default class MerchantNPC extends BaseNPC implements INPC {
     protected getName(): string;
     protected getCustomization(): IPlayerCustomization;
     protected getEquipment(equipType: EquipType): IItem | ItemType | undefined;
+    protected getInventory(): Array<IItem | ItemType>;
     protected getAiType(): AiType;
 }

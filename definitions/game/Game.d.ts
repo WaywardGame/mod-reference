@@ -198,6 +198,7 @@ export default class Game extends Utilities.Emitter implements IGame {
     getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     private updateOptionInternal(id, value, player?);
     private tick();
+    private updateEntityFov();
     private processTimers(realPlayers);
     private processAutoSave();
     private tickDayNightCycle(realPlayers);

@@ -631,12 +631,12 @@ export declare enum ItemType {
     SlitherSucker = 395,
     AberrantSlitherSucker = 396,
     StrawHat = 397,
-    MeanstoneBoots = 398,
-    MeanstoneBreastplate = 399,
-    MeanstoneGloves = 400,
-    MeanstoneGorget = 401,
-    MeanstoneGreaves = 402,
-    MeanstoneHelmet = 403,
+    BlackplateBoots = 398,
+    BlackplateBreastplate = 399,
+    BlackplateGauntlets = 400,
+    BlackplateGorget = 401,
+    BlackplateGreaves = 402,
+    BlackplateHelmet = 403,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

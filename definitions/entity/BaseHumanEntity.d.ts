@@ -21,6 +21,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     status: IPlayerStatus;
     strength: number;
     swimming: boolean;
+    constructor();
     isResting(): boolean;
     isRestingCancelled(): boolean;
     startResting(restData: IRestData): void;

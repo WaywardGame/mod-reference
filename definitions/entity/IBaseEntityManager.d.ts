@@ -1,9 +1,10 @@
 import { Entity } from "entity/IEntity";
 import { MoveType } from "Enums";
+import { Bound3 } from "Utilities";
 export interface IBaseEntityManager<T extends Entity> {
     getEntities(): SaferArray<T>;
     remove(entity: T): void;
-    updateFov(): number;
+    updateFov(bounds: Bound3[]): number;
     getMoveTypesInFov(): IMoveTypeZ[];
 }
 export default IBaseEntityManager;

@@ -5,6 +5,7 @@ import { EntityType } from "entity/IEntity";
 import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInputMovement, IInspect, IMessagePack, IModdable, IPointZ, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { Message } from "language/Messages";
+import { INPC } from "npc/INPC";
 import { MilestoneType } from "player/IMilestone";
 import { ISkillSet } from "player/Skills";
 import { IExploreMap } from "renderer/IExploreMap";
@@ -209,6 +210,7 @@ export interface IMobCheck {
     z: number;
     creature?: ICreature;
     player?: IPlayer;
+    npc?: INPC;
     obstacle?: boolean;
     water?: boolean;
 }

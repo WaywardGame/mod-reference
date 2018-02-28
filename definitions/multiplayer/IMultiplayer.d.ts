@@ -71,12 +71,12 @@ export declare enum PacketAcceptType {
     All = 3,
 }
 export declare enum MultiplayerSyncCheck {
-    CanASeeB = 0,
-    Container = 1,
-    Creature = 2,
-    CreatureIsInFlowField = 3,
-    CreatureMoveDirection = 4,
-    CreatureMoveTypesInFov = 5,
+    BaseEntityManager = 0,
+    CanASeeB = 1,
+    Container = 2,
+    Creature = 3,
+    CreatureIsInFlowField = 4,
+    CreatureMoveDirection = 5,
     CreatureNearestPlayer = 6,
     Dismantle = 7,
     FlowFieldHashCode = 8,

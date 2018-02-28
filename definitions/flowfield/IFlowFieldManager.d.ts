@@ -1,5 +1,4 @@
-import { ICreature } from "creature/ICreature";
-import { FacingDirection, MoveType } from "Enums";
+import { FacingDirection, IPointZ, MoveType } from "Enums";
 import IFlowField from "IFlowField";
 import { DebugRendererDelegate } from "IFlowFieldDebugRenderer";
 import { IPlayer } from "player/IPlayer";
@@ -13,7 +12,7 @@ export interface IFlowFieldManager {
     getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
     getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
     getWidth(): number;
-    isCreatureInFlowField(creature: ICreature): boolean;
+    isInFlowField(point: IPointZ): boolean;
     isPlayerInFlowField(player: IPlayer): boolean;
     reset(): void;
     setDelegate(delegate: DebugRendererDelegate): void;
