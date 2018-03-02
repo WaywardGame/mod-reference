@@ -1,5 +1,5 @@
 import { IUiElement, SelectableLayer, TooltipOptionsVague, UiApi, UiElementOptions } from "newui/INewUi";
-import { Emitter } from "Utilities";
+import Emitter from "utilities/Emitter";
 export default class UiElement<T = {}> extends Emitter implements IUiElement {
     protected uiApi: UiApi;
     protected children: UiElement[];
@@ -34,7 +34,7 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     toggle(visible?: boolean, ...args: any[]): Promise<void>;
     contains(what: string | HTMLElement | IUiElement): boolean;
     appendTo(where: string | HTMLElement | IUiElement): this;
-    append(elements: Array<HTMLElement | IUiElement | undefined>): this;
+    append(elements: IterableOf<HTMLElement | IUiElement | undefined>): this;
     remove(removeFromParent?: boolean): Promise<void>;
     removeChild(child: IUiElement, removeChild?: boolean): Promise<void>;
     /**

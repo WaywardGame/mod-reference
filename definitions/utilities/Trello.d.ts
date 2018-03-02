@@ -1,4 +1,4 @@
-import { IVersionInfo } from "Enums";
+import { IVersionInfo } from "utilities/Version";
 export interface ITrello {
     getChangelog(versionInfo: IVersionInfo): Promise<IChangelog | undefined>;
     getVersions(maxVersion?: IVersionInfo): Promise<IVersionInfo[]>;

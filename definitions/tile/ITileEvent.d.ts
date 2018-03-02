@@ -1,4 +1,5 @@
-import { IObject, IObjectDescription, IPointZ, IResourceItem, IRGB } from "Enums";
+import { IObject, IObjectDescription, IResourceItem, IRGB } from "Enums";
+import { IPointZ } from "utilities/math/IPoint";
 export interface ITileEventDescription extends IObjectDescription {
     spreadMax: number;
     decayMax?: number;

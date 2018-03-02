@@ -2,7 +2,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInputMovement, IInspect, IMessagePack, IModdable, IPointZ, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
+import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInputMovement, IInspect, IMessagePack, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { INPC } from "npc/INPC";
@@ -13,6 +13,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
+import { IPointZ } from "utilities/math/IPoint";
 export interface IPlayer extends IBaseHumanEntity {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
@@ -121,7 +122,6 @@ export interface IPlayer extends IBaseHumanEntity {
     setup(completedMilestones: number): void;
     setPosition(point: IPointZ): void;
     setZ(z: number): void;
-    shakeStat(statType: StatType): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaCheck(): boolean;
     staminaReduction(skillType: SkillType): void;
@@ -161,18 +161,6 @@ export interface IAttackHand {
     leftHand: number;
     rightHand: number;
 }
-export interface IStats {
-    health: IStat;
-    stamina: IStat;
-    hunger: IStat;
-    thirst: IStat;
-}
-export interface IStat {
-    value: number;
-    timer: number;
-    regen: number;
-    regenBase: number;
-}
 export interface IRestData {
     type: RestType;
     startHealth: number;
@@ -203,7 +191,20 @@ export declare type IPlayerOld = Partial<IPlayer> & {
         hairColor: HairColor;
         skinColor: SkinColor;
     };
+    stats: IStatsOld;
 };
+export interface IStatsOld {
+    health: IStatOld;
+    stamina: IStatOld;
+    hunger: IStatOld;
+    thirst: IStatOld;
+}
+export interface IStatOld {
+    value: number;
+    timer: number;
+    regen: number;
+    regenBase: number;
+}
 export interface IMobCheck {
     x: number;
     y: number;

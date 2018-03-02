@@ -1,8 +1,8 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { IPoint } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import BasePacket from "multiplayer/packets/BasePacket";
+import { IPoint } from "utilities/math/IPoint";
 export default abstract class IndexedPacket extends BasePacket {
     private _index;
     private _nextIndex;

@@ -4,7 +4,7 @@ import { InterruptOptions } from "newui/menu/InterruptMenu";
 import Menu from "newui/util/Menu";
 import UiElement from "newui/util/UiElement";
 import UiScreen from "newui/util/UiScreen";
-import { Emitter } from "Utilities";
+import Emitter from "utilities/Emitter";
 export default class Ui extends Emitter implements UiApi {
     private readonly screens;
     private _visibleScreen;

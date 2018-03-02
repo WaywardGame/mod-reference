@@ -1,5 +1,5 @@
 import { ConnectionState } from "Enums";
-import * as Utilities from "Utilities";
+import { IRandomHistory } from "utilities/Random";
 export declare enum PacketType {
     Client = 0,
     Server = 1,
@@ -7,7 +7,7 @@ export declare enum PacketType {
 }
 export interface ISynchronizationCheckData {
     packetNumber?: number;
-    afterRandomHistory?: Utilities.IRandomHistory[];
+    afterRandomHistory?: IRandomHistory[];
     beforeSyncChecks?: ISyncCheck;
     afterSyncChecks?: ISyncCheck;
 }

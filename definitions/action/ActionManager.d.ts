@@ -1,10 +1,11 @@
 import { ExecuteArgument, IAction } from "action/IAction";
 import IActionManager from "action/IActionManager";
-import { ActionType, Source } from "Enums";
+import { ActionType } from "Enums";
 import GenericManager from "game/GenericManager";
 import { IGenericManager } from "game/IGenericManager";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import IPlayer from "player/IPlayer";
+import { Source } from "utilities/Log";
 export default class ActionManager extends GenericManager<IAction> implements IActionManager {
     private executing;
     setup(instance: IGenericManager<IAction>): void;

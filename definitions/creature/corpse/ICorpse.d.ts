@@ -1,4 +1,5 @@
-import { CreatureType, IObject, IPointZ, ItemType, SkillType } from "Enums";
+import { CreatureType, IObject, ItemType, SkillType } from "Enums";
+import { IPointZ } from "utilities/math/IPoint";
 export interface ICorpseDescription {
     name?: string;
     decay?: number;

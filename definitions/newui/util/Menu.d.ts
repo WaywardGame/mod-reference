@@ -1,5 +1,5 @@
 import { UiTranslation } from "language/ILanguage";
-import { IMenu, IUiScreen, MenuId, SelectDirection, TextOrTranslationData, UiApi, UiElementOptions } from "newui/INewUi";
+import { IMenu, IUiElement, IUiScreen, MenuId, SelectDirection, TextOrTranslationData, UiApi, UiElementOptions } from "newui/INewUi";
 import { BlockRow } from "newui/util/BlockRow";
 import Button, { ButtonEffect, ButtonOptions } from "newui/util/Button";
 import UiText, { Heading, Paragraph, TextOptions } from "newui/util/Text";
@@ -57,9 +57,9 @@ export default class Menu<T = {}> extends UiElement<T> implements IMenu {
     addHeading<HeadingT = {}>(options: TextOptions): Heading<HeadingT>;
     addParagraph(...textOptionsArr: Array<UiText | TextOptions>): Paragraph<{}>;
     dump(): Promise<void>;
-    append(what: Array<HTMLElement | UiElement>): this;
-    addSection(heading: TextOptions, content: Array<UiElement | undefined>): MenuSection;
-    addTabSection(tabOptions: MenuTabOptions, heading: TextOptions, content?: Array<UiElement | undefined>): ITabSection;
+    append(what: IterableOf<HTMLElement | IUiElement | undefined>): this;
+    addSection(heading: TextOptions, content: IterableOf<UiElement | undefined>): MenuSection;
+    addTabSection(tabOptions: MenuTabOptions, heading: TextOptions, content?: IterableOf<UiElement | undefined>): ITabSection;
     toggleTab(tabId: string | number, disabled?: boolean): void;
     load(...args: any[]): Promise<void>;
     protected updateBottomPadding(): void;
@@ -76,7 +76,7 @@ export interface TabOptions extends ButtonOptions {
     effect?: TabEffect | (() => any);
 }
 export interface MenuTabOptions extends TabOptions {
-    subTabs?: TabOptions[];
+    subTabs?: IterableOf<TabOptions>;
 }
 export declare class Tab<T = {}> extends Button<T> {
     subTabs: {
@@ -86,5 +86,5 @@ export declare class Tab<T = {}> extends Button<T> {
 }
 export declare class MenuSection extends UiElement {
     readonly content: UiElement;
-    constructor(uiApi: UiApi, heading: TextOptions, content: Array<UiElement | undefined>);
+    constructor(uiApi: UiApi, heading: TextOptions, content: IterableOf<UiElement | undefined>);
 }

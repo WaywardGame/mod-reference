@@ -1,5 +1,5 @@
 import ISaveData from "save/data/ISaveData";
-import * as Utilities from "Utilities";
+import { IEnumInfo } from "utilities/enum/IEnum";
 export declare const saveDataVersionUnknown = "Unknown";
 export default class SaveData implements ISaveData {
     gameSlotName: string;
@@ -20,6 +20,6 @@ export default class SaveData implements ISaveData {
         };
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Utilities.Enums.IEnumInfo;
+        [index: string]: IEnumInfo;
     };
 }

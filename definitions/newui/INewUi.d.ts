@@ -150,7 +150,7 @@ export interface IUiElement<T = {}> {
     hide(...args: any[]): Promise<void>;
     toggle(visible: boolean, ...args: any[]): Promise<void>;
     appendTo(element: string | HTMLElement | IUiElement): this;
-    append(elements: Array<HTMLElement | IUiElement>): this;
+    append(elements: IterableOf<HTMLElement | IUiElement | undefined>): this;
     remove(removeFromParent?: boolean): Promise<void>;
     removeChild(child: IUiElement, removeChild?: boolean): void;
     findDescendants(selector: string): NodeListOf<Element>;

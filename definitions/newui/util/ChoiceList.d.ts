@@ -13,7 +13,7 @@ export default class ChoiceList extends BlockRow implements Refreshable {
     private readonly options;
     readonly choice: Choice;
     constructor(uiApi: UiApi, options?: ChoiceListOptions);
-    setChoices(choices: Choice[]): Promise<void>;
+    setChoices(choices: IterableOf<Choice>): Promise<void>;
     refresh(): void;
     choose(chosen?: Choice): void;
     findChoice(filter: (choice: Choice) => boolean): Choice | undefined;

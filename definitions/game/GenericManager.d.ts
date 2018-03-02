@@ -1,5 +1,5 @@
-import { Source } from "Enums";
 import { IGenericManager, IGenericRegistration } from "game/IGenericManager";
+import { Source } from "utilities/Log";
 export default abstract class GenericManager<T extends IGenericRegistration> implements IGenericManager<T> {
     private readonly registered;
     constructor();

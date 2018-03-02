@@ -6,7 +6,7 @@ export interface DropdownOptions<IdType = string | number> extends Partial<UiEle
     defaultOption?: IdType;
     refresh?(): IdType | undefined;
 }
-export declare type AddOptionsOptions<IdType> = Array<{
+export declare type AddOptionsOptions<IdType> = IterableOf<{
     id: IdType;
     options: TextOptions;
 }>;

@@ -6,7 +6,7 @@ import { ICharacter } from "newui/util/Character";
 import { IMilestoneData } from "player/IMilestone";
 import ISaveDataGlobal, { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
 import { IDialogInfo } from "ui/IUi";
-import * as Utilities from "Utilities";
+import { IEnumInfo } from "utilities/enum/IEnum";
 export default class SaveDataGlobal implements ISaveDataGlobal {
     static defaultOptions: IOptions;
     gameCrafted: {
@@ -72,7 +72,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         language?: string;
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Utilities.Enums.IEnumInfo;
+        [index: string]: IEnumInfo;
     };
     savedDialogInfo: {
         [index: string]: IDialogInfo;

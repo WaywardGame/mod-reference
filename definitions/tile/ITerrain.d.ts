@@ -1,10 +1,11 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { DoodadType, GrowingStage, IModdable, IPointZ, IRGB, ItemQuality, SfxType, SkillType, TerrainType } from "Enums";
+import { DoodadType, GrowingStage, IModdable, IRGB, ItemQuality, SfxType, SkillType, TerrainType } from "Enums";
 import { IContainer } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { ITileEvent } from "tile/ITileEvent";
+import { IPointZ } from "utilities/math/IPoint";
 export interface ITerrainDescription extends IModdable {
     name?: string;
     passable?: boolean;

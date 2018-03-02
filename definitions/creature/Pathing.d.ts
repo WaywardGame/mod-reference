@@ -1,5 +1,5 @@
-import { IPoint, IPointZ } from "Enums";
 import { ITile } from "tile/ITerrain";
+import { IPoint, IPointZ } from "utilities/math/IPoint";
 export declare type IPathfindingNode = IPoint;
 export interface IPathfindingResult {
     start: IPathfindingNode;

@@ -1,6 +1,7 @@
 import { ICreature } from "creature/ICreature";
-import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
+import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
 import IPlayer from "player/IPlayer";
+import { IPointZ } from "utilities/math/IPoint";
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);
     components: IRecipeComponent[];

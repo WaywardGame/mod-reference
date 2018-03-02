@@ -1,4 +1,4 @@
-import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, StatType } from "Enums";
+import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import { MenuId } from "newui/INewUi";
@@ -8,8 +8,8 @@ import "ui/functional/FunctionalTooltip";
 import { HintType } from "ui/IHint";
 import { IDialogInfo, IUi } from "ui/IUi";
 import InGameScreen from "ui/screens/InGameScreen";
-import * as Utilities from "Utilities";
-export default class Ui extends Utilities.Emitter implements IUi {
+import Emitter from "utilities/Emitter";
+export default class Ui extends Emitter implements IUi {
     screenInGame: InGameScreen;
     private readonly elementDocument;
     private readonly elementWindow;
@@ -37,7 +37,6 @@ export default class Ui extends Utilities.Emitter implements IUi {
     isInGameScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
-    shakeStat(stat: StatType): void;
     refreshAttributes(): void;
     loadQuickSlots(): void;
     isContextMenuOpen(): boolean;

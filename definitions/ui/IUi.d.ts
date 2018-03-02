@@ -1,11 +1,11 @@
-import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, SortType, StatType } from "Enums";
+import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import { MenuId } from "newui/INewUi";
 import { IPlayer } from "player/IPlayer";
 import { IPropSerializable } from "save/ISerializer";
 import { HintType } from "ui/IHint";
-import { Emitter } from "Utilities";
+import Emitter from "utilities/Emitter";
 export interface IUiScreen {
     bindCatcher?: number;
     selector(): string;
@@ -69,7 +69,6 @@ export interface IUi extends IPropSerializable, Emitter {
     isInGameScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
-    shakeStat(stat: StatType): void;
     refreshAttributes(): void;
     loadQuickSlots(): void;
     isContextMenuOpen(): boolean;

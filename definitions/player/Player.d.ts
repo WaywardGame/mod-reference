@@ -2,7 +2,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Bindable, Delay, EquipType, FacingDirection, IInspect, IMessagePack, IPointZ, ItemType, PlayerState, SkillType, StatType, TurnType, WeightStatus } from "Enums";
+import { Bindable, Delay, EquipType, FacingDirection, IInspect, IMessagePack, ItemType, PlayerState, SkillType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
@@ -14,6 +14,7 @@ import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
+import { IPointZ } from "utilities/math/IPoint";
 export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
@@ -95,7 +96,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     setup(completedMilestones: number): void;
     preSerializeObject(): void;
     restoreExploredMap(): void;
-    shakeStat(statType: StatType): void;
     staminaReduction(skillType: SkillType): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;

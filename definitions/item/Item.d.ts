@@ -1,8 +1,9 @@
 import { ICreature } from "creature/ICreature";
-import { BookType, CreatureType, EquipType, IPointZ, ItemQuality, ItemType, TatteredMap } from "Enums";
+import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap } from "Enums";
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
 import IPlayer from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
+import { IPointZ } from "utilities/math/IPoint";
 export default class Item implements IItem, IContainer, IContainable, IUnserializedCallback {
     book: BookType;
     containedItems: IItemArray;

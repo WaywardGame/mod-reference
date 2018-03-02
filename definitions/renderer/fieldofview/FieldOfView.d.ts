@@ -3,7 +3,7 @@ import { IPlayer } from "player/IPlayer";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { CompiledProgram } from "renderer/Shaders";
-import * as Utilities from "Utilities";
+import { Bound3 } from "utilities/math/Bound3";
 export default class FieldOfView implements IFieldOfView {
     private gl;
     radius: number;
@@ -37,7 +37,7 @@ export default class FieldOfView implements IFieldOfView {
     compute(force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
-    getBounds(player: IPlayer, radius?: number): Utilities.Bound3;
+    getBounds(player: IPlayer, radius?: number): Bound3;
     private updateExplored();
     private computeLights();
 }

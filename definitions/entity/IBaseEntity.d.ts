@@ -1,5 +1,6 @@
-import { FacingDirection, FireType, IPoint, IPointZ, MoveType, SfxType } from "Enums";
+import { FacingDirection, FireType, MoveType, SfxType } from "Enums";
 import { ITile } from "tile/ITerrain";
+import { IPoint, IPointZ } from "utilities/math/IPoint";
 export interface IBaseEntity extends IPointZ {
     id: number;
     renamed?: string;

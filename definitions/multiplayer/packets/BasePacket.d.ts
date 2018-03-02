@@ -1,9 +1,9 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { IPoint } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
+import { IPoint } from "utilities/math/IPoint";
 export default abstract class BasePacket {
     protected static registrarId: number;
     "constructor": typeof BasePacket;

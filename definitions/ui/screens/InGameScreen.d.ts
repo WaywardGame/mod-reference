@@ -1,4 +1,4 @@
-import { ActionType, Bindable, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType, StatType } from "Enums";
+import { ActionType, Bindable, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/Messages";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -126,7 +126,6 @@ export default class InGameScreen extends BaseScreen {
     highlightItemElementBySelector(selector: string, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     getMovementDirection(mouseX: number, mouseY: number): FacingDirection;
     canUseHotkeys(): boolean;
-    shakeStat(stat: StatType): void;
     refreshStats(): void;
     refreshAttributes(): void;
     updateTextIfChanged(id: TextElementId, element: JQuery, text: string): void;

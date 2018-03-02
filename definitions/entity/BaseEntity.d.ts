@@ -1,7 +1,9 @@
 import { IBaseEntity } from "entity/IBaseEntity";
-import { FacingDirection, FireType, IPoint, IPointZ, MoveType, SfxType } from "Enums";
+import { FacingDirection, FireType, MoveType, SfxType } from "Enums";
 import { ITile } from "tile/ITerrain";
-export default abstract class BaseEntity implements IBaseEntity {
+import Emitter from "utilities/Emitter";
+import { IPoint, IPointZ } from "utilities/math/IPoint";
+export default abstract class BaseEntity extends Emitter implements IBaseEntity {
     id: number;
     renamed?: string;
     z: number;

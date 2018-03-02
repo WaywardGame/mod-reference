@@ -1,9 +1,10 @@
+import "utilities/IterableIterator";
 import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DamageType, Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, IPoint, IPointZ, ISeeds, ItemQuality, ItemType, IVersionInfo, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { DamageType, Difficulty, FacingDirection, FireType, IMessagePack, IObjectDescription, ISeeds, ItemQuality, ItemType, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -16,8 +17,10 @@ import { IParticle } from "renderer/particle/IParticle";
 import { ISaveInfo } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
-import * as Utilities from "Utilities";
-export default class Game extends Utilities.Emitter implements IGame {
+import Emitter from "utilities/Emitter";
+import { IPoint, IPointZ } from "utilities/math/IPoint";
+import { IVersionInfo } from "utilities/Version";
+export default class Game extends Emitter implements IGame {
     readonly interval: number;
     readonly mapSize: number;
     readonly mapSizeSq: number;

@@ -1,6 +1,6 @@
 import { Entity } from "entity/IEntity";
 import { MoveType } from "Enums";
-import { Bound3 } from "Utilities";
+import { Bound3 } from "utilities/math/Bound3";
 export interface IBaseEntityManager<T extends Entity> {
     getEntities(): SaferArray<T>;
     remove(entity: T): void;

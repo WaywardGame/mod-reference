@@ -1,11 +1,12 @@
 import { IDamageInfo } from "creature/ICreature";
 import BaseEntity from "entity/BaseEntity";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
+import IBaseHumanEntity, { IStat, IStats, Stat } from "entity/IBaseHumanEntity";
 import { EquipType, ItemQuality, ItemType, RestCancelReason } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { IPlayerCustomization, IPlayerStatus, IRestData, IStats } from "player/IPlayer";
+import { IPlayerCustomization, IPlayerStatus, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
+    static generateDefaultStats(): IStats;
     customization: IPlayerCustomization;
     defense: PlayerDefense;
     dehydration: number;
@@ -22,6 +23,10 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     strength: number;
     swimming: boolean;
     constructor();
+    getStat(stat: Stat): IStat;
+    reduceStat(stat: Stat | IStat, amount: number): void;
+    increaseStat(stat: Stat | IStat, amount: number): void;
+    setStat(stat: Stat | IStat, amount: number): void;
     isResting(): boolean;
     isRestingCancelled(): boolean;
     startResting(restData: IRestData): void;

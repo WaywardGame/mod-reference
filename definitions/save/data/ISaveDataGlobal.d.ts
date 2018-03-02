@@ -5,7 +5,7 @@ import { IBindings } from "newui/BindingManager";
 import { ICharacter } from "newui/util/Character";
 import { IMilestoneData } from "player/IMilestone";
 import { IDialogInfo } from "ui/IUi";
-import * as Utilities from "Utilities";
+import { IEnumInfo } from "utilities/enum/IEnum";
 export interface ISaveDataGlobal {
     gameCrafted: {
         [index: number]: ICrafted;
@@ -27,7 +27,7 @@ export interface ISaveDataGlobal {
         language?: string;
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Utilities.Enums.IEnumInfo;
+        [index: string]: IEnumInfo;
     };
     savedDialogInfo: {
         [index: string]: IDialogInfo;
