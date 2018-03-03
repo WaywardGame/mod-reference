@@ -106,7 +106,7 @@ export default class Ui extends Emitter implements UiApi {
     /**
      * @param elements The elements to refresh translations inside
      */
-    refreshTranslations(...elements: Array<HTMLElement | UiElement>): void;
+    refreshTranslations(...elements: Array<HTMLElement | IUiElement>): void;
     /**
      * Returns the current translation of the given textOrTranslationData
      */

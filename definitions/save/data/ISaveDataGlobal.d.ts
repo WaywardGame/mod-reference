@@ -46,19 +46,21 @@ export interface ISaveDataGlobal {
 export default ISaveDataGlobal;
 export interface IOptions {
     alternateContextMenu: boolean;
+    alwaysShowMoreInformation: boolean;
     autoGather: boolean;
     autoPickup: boolean;
-    binds: IBindArray;
     bindings: IBindings;
+    binds: IBindArray;
     currentGame: number;
     developerMode: boolean;
     developerModeContextMenu: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
-    dropOnGather: boolean;
     dropLocation: DropLocation;
+    dropOnGather: boolean;
     fontStyle: boolean;
     fullscreen: boolean;
+    hideEquippedHeadgear: boolean;
     keepSortActive: boolean;
     leftHand: boolean;
     modBinds: IModBindArray;
@@ -83,7 +85,6 @@ export interface IOptions {
     warnOnDangerousActions: boolean;
     warnWhenBreakingItems: boolean;
     warnWhenBreakingItemsOnCraft: boolean;
-    alwaysShowMoreInformation: boolean;
     windowMode: boolean;
     zoomLevel: number;
     openNotesAutomatically: boolean;

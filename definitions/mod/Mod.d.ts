@@ -9,6 +9,7 @@ import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer from "player/IPlayer";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
+import EnumCursor from "utilities/enum/EnumCursor";
 export declare abstract class Mod extends BaseMod {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -150,11 +151,11 @@ export declare abstract class Mod extends BaseMod {
      */
     canSeeCreature(creature: ICreature, tile: ITile): boolean | undefined;
     /**
-     * Called when the next music track is requested
-     * @param currentMusicTrack The current music track
-     * @returns The music track that should be played next or undefined to use the default logic
+     * Called when creating a new music handler.
+     * @param currentMusicHandler The current music handler
+     * @returns Either a custom music handler, or `undefined` to use the existing one
      */
-    getNextMusicTrack(currentMusicTrack: Music): Music | undefined;
+    getMusicHandler(currentMusicHandler: EnumCursor<Music>): EnumCursor<Music> | undefined;
     /**
      * Called when rendering creatures in the viewport
      * @param creature The creature object

@@ -2,6 +2,7 @@ import { UiApi } from "newui/INewUi";
 import Menu from "newui/util/Menu";
 export default class MultiplayerMenu extends Menu {
     private readonly openServer;
+    private readonly pause;
     private readonly lobbyType;
     private readonly choiceLobbyFriends;
     private readonly choiceLobbyPublic;

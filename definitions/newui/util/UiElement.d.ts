@@ -14,7 +14,7 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     readonly childCount: number;
     readonly scrollHeight: number;
     readonly style: CSSStyleDeclaration;
-    static findDescendants(inElement: UiElement | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
+    static findDescendants(inElement: IUiElement | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     selectable: SelectableLayer | false;
     constructor(uiApi: UiApi, options?: UiElementOptions);
     setContents(html: string, escape?: boolean): this;

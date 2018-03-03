@@ -36,10 +36,6 @@ export declare enum Source {
 }
 declare module Log {
     function trace(source: Source, ...args: any[]): void;
-    /**
-     * Prefer Log.info()
-     */
-    function log(source: Source, ...args: any[]): void;
     function info(source: Source, ...args: any[]): void;
     function debug(source: Source, ...args: any[]): void;
     function warn(source: Source, ...args: any[]): void;

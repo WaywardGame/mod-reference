@@ -602,6 +602,7 @@ export declare enum ItemType {
     BlackplateGorget = 401,
     BlackplateGreaves = 402,
     BlackplateHelmet = 403,
+    DeathKnightAxe = 404,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
