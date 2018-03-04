@@ -1,4 +1,3 @@
-import "utilities/IterableIterator";
 import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";

@@ -7,6 +7,7 @@ export declare module WebWorkerHelpers {
         getWorker(): Worker;
         setCallback(callback: (evt: any) => void): void;
         free(): void;
+        private getModuleString(name);
     }
     function create(workerFunction: (data: any) => void, messageCallbackFunction: (evt: any) => void): Worker;
     function createReusable(workerFunction: (data: any) => void): WebWorker;

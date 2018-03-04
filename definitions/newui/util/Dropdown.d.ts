@@ -2,36 +2,50 @@ import { UiApi, UiElementOptions } from "newui/INewUi";
 import { Refreshable } from "newui/util/Refreshable";
 import { TextOptions } from "newui/util/Text";
 import UiElement from "newui/util/UiElement";
-export interface DropdownOptions<IdType = string | number> extends Partial<UiElementOptions> {
-    defaultOption?: IdType;
-    refresh?(): IdType | undefined;
+export interface IDropdownOptions<OptionId = string | number> extends Partial<UiElementOptions> {
+    defaultOption?: OptionId | (() => OptionId);
+    options?: GeneratorOf<IDropdownOption<OptionId>>;
+    refresh?(): OptionId | undefined;
 }
-export declare type AddOptionsOptions<IdType> = IterableOf<{
-    id: IdType;
+export interface IDropdownOption<OptionId> {
+    id: OptionId;
     options: TextOptions;
-}>;
+}
 export declare enum DropdownEvent {
     Selection = "Selection",
 }
-export default class Dropdown<IdType = string | number, T = {}> extends UiElement<T> implements Refreshable {
+export default class Dropdown<OptionId = string | number, T = {}> extends UiElement<T> implements Refreshable {
     protected optionsWrapper: UiElement;
-    private _selection;
     private readonly inputButton;
+    private options;
     private defaultOption?;
-    private readonly _refresh;
-    private readonly options;
+    private optionsSource?;
+    private optionsRefreshable;
     private open;
-    private readonly bindLoop;
     private isFirstSelection;
-    readonly selection: IdType;
-    constructor(uiApi: UiApi, options?: DropdownOptions<IdType>);
-    addOption(optionId: IdType, options: TextOptions): Promise<void>;
-    addOptions(options: AddOptionsOptions<IdType>): Promise<void>;
+    private _selection;
+    readonly selection: OptionId;
+    private _bindLoop;
+    constructor(uiApi: UiApi, options?: IDropdownOptions<OptionId>);
+    /**
+     * Adds an option permanently to the dropdown. When options are added this way, the dropdown list is not refreshable.
+     * @param optionId The ID of the option, a string or number.
+     * @param options The option display information.
+     */
+    addOption(optionId: OptionId, options: TextOptions): Promise<void>;
+    /**
+     * Sets the options to an iterable. The iterable is saved to allow the options to be refreshed.
+     * Any existing options are retained. If called multiple times, the options are no longer refreshable.
+     * @param options An iterable of dropdown options.
+     */
+    setOptions(options: GeneratorOf<IDropdownOption<OptionId>>): Promise<void>;
     dumpOptions(): Promise<void>;
     showDropdown(): void;
     hideDropdown(): void;
-    select(optionId: IdType | undefined): Promise<void>;
+    select(optionId: OptionId | undefined): Promise<void>;
     selectDefault(): Promise<void>;
     refresh(): Promise<void>;
+    private addOptionInternal(optionId, options);
     private filter(filterBy?);
+    private onBindLoop(_, api);
 }
