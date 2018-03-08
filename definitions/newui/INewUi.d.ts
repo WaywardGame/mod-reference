@@ -3,10 +3,10 @@ import { InterruptOptions } from "newui/menu/InterruptMenu";
 import { InputOptions } from "newui/util/Input";
 export declare enum ScreenId {
     None = 0,
-    Splash = 1,
-    Menu = 2,
-    Game = 3,
-    Interrupt = 4,
+    Game = 1,
+    Interrupt = 2,
+    Menu = 3,
+    Splash = 4,
 }
 export declare enum MenuId {
     Back = -1,

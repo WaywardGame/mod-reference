@@ -3,6 +3,7 @@ import { IDoodad } from "doodad/IDoodad";
 import { IContainer, IItem } from "item/IItem";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
+import { INPC } from "npc/INPC";
 import { IPoint } from "utilities/math/IPoint";
 export default abstract class BasePacket {
     protected static registrarId: number;
@@ -45,6 +46,8 @@ export default abstract class BasePacket {
     protected writeCreature(value: ICreature): void;
     protected readDoodad(): IDoodad | undefined;
     protected writeDoodad(value: IDoodad): void;
+    protected readNPC(): INPC | undefined;
+    protected writeNPC(value: INPC): void;
     protected readItem(): IItem;
     protected writeItem(value: IItem): void;
     protected readItemOrDoodad(): IItem | IDoodad | undefined;

@@ -1,6 +1,6 @@
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { AiType, EntityType } from "entity/IEntity";
-import { DamageType, EquipType, ItemType } from "Enums";
+import { ActionType, DamageType, EquipType, ItemType } from "Enums";
 import { IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { IPlayerCustomization } from "player/IPlayer";
@@ -8,6 +8,8 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     protected static registrarId: number;
     entityType: EntityType.NPC;
     "constructor": typeof BaseNPC;
+    ai: AiType;
+    seen: boolean;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(id?: number, x?: number, y?: number, z?: number);
@@ -15,6 +17,11 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     update(): void;
     moveTo(x: number, y: number, z: number): boolean;
     kill(): void;
+    isHostile(): boolean;
+    /**
+     * The actions available to use with this npc
+     */
+    getActions(): ActionType[] | undefined;
     /**
      * The name of the npc - called when created
      */
@@ -35,7 +42,7 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     /**
      * The ai type
      */
-    protected abstract getAiType(): AiType | undefined;
+    protected abstract getAiType(): AiType;
     /**
      * Called when the npc is attacking a player
      */

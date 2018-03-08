@@ -2,6 +2,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { IContainer, IItem } from "item/IItem";
 import BasePacket from "multiplayer/packets/BasePacket";
+import { INPC } from "npc/INPC";
 import { IPoint } from "utilities/math/IPoint";
 export default abstract class IndexedPacket extends BasePacket {
     private _index;
@@ -35,6 +36,8 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedCreature(value?: ICreature): void;
     protected readIndexedDoodad(): IDoodad | undefined;
     protected writeIndexedDoodad(value?: IDoodad): void;
+    protected readIndexedNPC(): INPC | undefined;
+    protected writeIndexedNPC(value?: INPC): void;
     protected readIndexedItem(): IItem | undefined;
     protected writeIndexedItem(value?: IItem): void;
     protected readIndexedItemOrDoodad(): IItem | IDoodad | undefined;

@@ -4,6 +4,7 @@ import { ActionType, AttackType, Delay, EquipType, FacingDirection, IMessagePack
 import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
 import { Message } from "language/Messages";
+import { INPC } from "npc/INPC";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
 import { HintType } from "ui/IHint";
@@ -44,6 +45,7 @@ export interface IActionArgument {
     itemQuality?: ItemQuality;
     itemType?: ItemType;
     name?: string;
+    npc?: INPC;
     point?: IPoint;
     preservee?: IItem;
     reinforcee?: IItem;

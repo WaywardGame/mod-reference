@@ -196,6 +196,7 @@ export declare enum ActionType {
     Read = 74,
     CloseContainer = 75,
     SmotherFire = 76,
+    Trade = 77,
 }
 export declare enum ItemType {
     None = 0,
@@ -830,6 +831,8 @@ export declare enum BookType {
     Deities = 3,
     PastCivilizations = 4,
     SandCasting = 5,
+    WanderingMerchants = 6,
+    TrappersJournal = 7,
 }
 export declare enum CreatureType {
     Slime = 0,
@@ -888,21 +891,25 @@ export declare enum HairStyle {
 }
 export declare enum HairColor {
     "#e7c978" = 0,
-    "#b84627" = 1,
-    "#87501e" = 2,
-    "#422116" = 3,
-    "#28222a" = 4,
-    "#bfb0a8" = 5,
-    "#ffffff" = 6,
+    "#b5804e" = 1,
+    "#b84627" = 2,
+    "#7f3721" = 3,
+    "#7e4b1c" = 4,
+    "#422116" = 5,
+    "#28222a" = 6,
+    "#bfb0a8" = 7,
+    "#ffffff" = 8,
 }
 export declare enum SkinColor {
-    "#fdd8d4" = 0,
-    "#cab286" = 1,
+    "#fddcd4" = 0,
+    "#d6be93" = 1,
     "#f0ceab" = 2,
     "#c7a077" = 3,
-    "#89623a" = 4,
-    "#613429" = 5,
-    "#392321" = 6,
+    "#d89a72" = 4,
+    "#89623a" = 5,
+    "#88563b" = 6,
+    "#613429" = 7,
+    "#361e1c" = 8,
 }
 export declare enum SkillType {
     Chemistry = 0,
