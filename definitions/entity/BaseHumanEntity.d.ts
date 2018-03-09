@@ -1,32 +1,22 @@
 import { IDamageInfo } from "creature/ICreature";
 import BaseEntity from "entity/BaseEntity";
-import IBaseHumanEntity, { IStat, IStats, Stat } from "entity/IBaseHumanEntity";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EquipType, ItemQuality, ItemType, RestCancelReason } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { IPlayerCustomization, IPlayerStatus, IRestData } from "player/IPlayer";
+import { IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
-    static generateDefaultStats(): IStats;
     customization: IPlayerCustomization;
     defense: PlayerDefense;
-    dehydration: number;
-    dexterity: number;
     equipped: {
         [index: number]: number;
     };
     inventory: IContainer;
     raft: number | undefined;
     restData: IRestData | undefined;
-    starvation: number;
-    stats: IStats;
-    status: IPlayerStatus;
-    strength: number;
     swimming: boolean;
     constructor();
-    getStat(stat: Stat): IStat;
-    reduceStat(stat: Stat | IStat, amount: number): void;
-    increaseStat(stat: Stat | IStat, amount: number): void;
-    setStat(stat: Stat | IStat, amount: number): void;
+    resetStatTimers(): void;
     isResting(): boolean;
     isRestingCancelled(): boolean;
     startResting(restData: IRestData): void;

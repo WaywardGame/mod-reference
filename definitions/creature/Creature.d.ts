@@ -9,21 +9,20 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     entityType: EntityType.Creature;
     aberrant?: boolean;
     ai: AiType;
-    chickenEggCounter?: number;
     enemy?: number;
     enemyAttempts?: number;
     enemyIsPlayer?: boolean;
-    goatMilkCounter?: number;
-    happiness?: number;
-    hp: number;
     loot?: ItemType[];
-    maxhp: number;
     respawned?: boolean;
     shouldSkipNextUpdate: boolean;
     type: CreatureType;
     private _description;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
+    /**
+     * Initializes the creature's stats. Used in the constructor & save conversion.
+     */
+    initializeStats(hp: number, maxhp?: number): void;
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;

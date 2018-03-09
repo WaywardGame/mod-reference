@@ -18,10 +18,12 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     moveTo(x: number, y: number, z: number): boolean;
     kill(): void;
     isHostile(): boolean;
+    isWaiting(): boolean;
     /**
      * The actions available to use with this npc
      */
     getActions(): ActionType[] | undefined;
+    addAiType(ai: AiType): void;
     /**
      * The name of the npc - called when created
      */
@@ -55,4 +57,6 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     protected move(): boolean;
     private checkMove(tileX, tileY, tileZ);
     private updateDirection(x, y);
+    private initializeStats();
+    private checkForBurn();
 }

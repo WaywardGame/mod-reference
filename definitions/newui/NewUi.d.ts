@@ -65,7 +65,9 @@ export default class Ui extends Emitter implements UiApi {
      */
     showScreen(screenId: ScreenId, transition?: boolean, replaceCurrent?: boolean, ...args: any[]): Promise<void>;
     /**
-     * Hides the current screen
+     * Hides the given screen, or the current screen if none is passed.
+     *
+     * Don't call this with no arguments unless you know 100% for sure that it will only ever hide the correct screen.
      */
     hideScreen(screen?: ScreenId | IUiScreen): Promise<void>;
     /**

@@ -22,4 +22,5 @@ export default class SortRow<Sort extends number, Data = {}> extends LabelledRow
     constructor(uiApi: UiApi, options: SortRowOptions<Sort>);
     setDisabledSorts(val: Sort[], refresh?: boolean): this;
     refresh(): Promise<void>;
+    triggerSort(): Promise<void>;
 }

@@ -1,4 +1,4 @@
-import { IBaseEntity } from "entity/IBaseEntity";
+import IBaseEntity from "entity/IBaseEntity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, DamageType, Defense, IMessagePack, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
 import { IItem } from "item/IItem";
@@ -7,17 +7,12 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType> {
     entityType: EntityType.Creature;
     ai: AiType;
     anim: number;
-    hp: number;
-    maxhp: number;
     loot?: ItemType[];
     aberrant?: boolean;
     respawned?: boolean;
     enemy?: number;
     enemyIsPlayer?: boolean;
     enemyAttempts?: number;
-    happiness?: number;
-    chickenEggCounter?: number;
-    goatMilkCounter?: number;
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
@@ -38,6 +33,14 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType> {
     moveTo(x: number, y: number, z: number): boolean;
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
+    initializeStats(hp: number, maxhp?: number): void;
+}
+export interface ICreatureOld extends ICreature {
+    hp: number;
+    maxhp: number;
+    happiness?: number;
+    chickenEggCounter?: number;
+    goatMilkCounter?: number;
 }
 export declare enum SpawnGroup {
     Any = 0,

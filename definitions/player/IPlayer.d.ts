@@ -101,6 +101,7 @@ export interface IPlayer extends IBaseHumanEntity {
     getReputation(): number;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
+    getStrength(): number;
     hasDelay(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
     healthSyncCheck(): void;
@@ -136,15 +137,11 @@ export interface IPlayer extends IBaseHumanEntity {
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
+    updateStatuses(): void;
     updateTables(): void;
     updateTablesAndWeight(): void;
 }
 export default IPlayer;
-export interface IPlayerStatus {
-    bleeding: boolean;
-    burned: boolean;
-    poisoned: boolean;
-}
 export interface IHairstyleDescription extends IModdable {
     name: string;
     imagePath?: string;
@@ -192,6 +189,10 @@ export declare type IPlayerOld = Partial<IPlayer> & {
         skinColor: SkinColor;
     };
     stats: IStatsOld;
+    strength: number;
+    dexterity: number;
+    starvation: number;
+    dehydration: number;
 };
 export interface IStatsOld {
     health: IStatOld;

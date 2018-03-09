@@ -6,7 +6,7 @@ import { Bindable, Delay, EquipType, FacingDirection, IInspect, IMessagePack, It
 import { IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
-import { IAttackHand, IMobCheck, IPlayer, IPlayerTravelData } from "player/IPlayer";
+import { IAttackHand, IMobCheck, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
 import { ISkillSet } from "player/Skills";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IOptions } from "save/data/ISaveDataGlobal";
@@ -73,6 +73,11 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     private _milestoneUpdates;
     private _movementIntent;
     constructor();
+    startResting(restData: IRestData): void;
+    /**
+     * Updates caused by status effects such as bleeding, poison, and burns.
+     */
+    updateStatuses(): void;
     resetMovementStates(): void;
     attributes(): void;
     setId(id: number): void;
@@ -92,7 +97,17 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     unequipAll(): void;
     getMovementIntent(): Bindable | undefined;
     updateMovementIntent(bind: Bindable | undefined): void;
+    /**
+     * Returns the max health of the player.
+     *
+     * Returns the result of `Hook.GetPlayerMaxHealth`, or the `max` in `Stat.Health`,
+     * if the result of the hook is `undefined`.
+     */
     getMaxHealth(): number;
+    /**
+     * Returns the strength of the player. Internally, this is saved as the maximum health.
+     */
+    getStrength(): number;
     setup(completedMilestones: number): void;
     preSerializeObject(): void;
     restoreExploredMap(): void;
@@ -146,7 +161,22 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     healthSyncCheck(): void;
     private slitherSuckerDamage();
     private processMovement(turnType?);
-    private processTimers();
+    /**
+     * Event handler for when resting begins, weight changes, or strength changes.
+     */
+    private onStaminaUseChanged();
+    /**
+     * Event handler for when a status effect is applied or removed.
+     */
+    private onStatusEffectChanged();
+    /**
+     * Event handler for `EntityEvent.StatChanged`. Handles special functionality when stats are increased:
+     * 1. When resting & stamina is full, resting will be cancelled.
+     * 2. Health is sync-checked.
+     * 3. When hunger > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
+     * 4. When thirst > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
+     */
+    private onStatChange(_, stat, oldValue, reason);
     private swimCheck();
     private restTick();
     private statGain(stat, bypass);
