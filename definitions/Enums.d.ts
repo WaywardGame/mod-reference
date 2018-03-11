@@ -940,6 +940,7 @@ export declare enum SkillType {
     Woodworking = 25,
     Taming = 26,
     Gardening = 27,
+    Bartering = 28,
 }
 export declare enum Music {
     ShipWrecked = 0,

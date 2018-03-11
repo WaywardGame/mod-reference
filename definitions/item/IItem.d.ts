@@ -124,6 +124,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     flammable?: boolean;
     plural?: string;
     hideHelmet?: boolean;
+    credits?: number;
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }
