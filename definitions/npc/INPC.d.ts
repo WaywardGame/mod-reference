@@ -3,6 +3,7 @@ import { AiType, EntityType } from "entity/IEntity";
 import { ActionType } from "Enums";
 export interface INPC extends IBaseHumanEntity {
     entityType: EntityType.NPC;
+    getNameHtml(): string;
     getActions(): ActionType[] | undefined;
     addAiType(ai: AiType): void;
     update(): void;

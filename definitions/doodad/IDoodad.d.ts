@@ -60,7 +60,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     canGrow?: boolean;
     canGrowInCaves?: boolean;
     canStoke?: boolean;
-    canTrample?: boolean;
+    canTrampleWhenMature?: boolean;
     causesStatus?: StatusType[];
     damage?: number;
     disableDrop?: boolean;

@@ -152,6 +152,7 @@ export default class InGameScreen extends BaseScreen {
     onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: IItem, container: IContainer): void;
+    refreshContainerName(container: IContainer): void;
     refreshQuickSlots(): void;
     getInventoryItemsInOrder(): any[];
     loadQuickSlots(): void;

@@ -94,6 +94,7 @@ export default class Ui extends Emitter implements IUi {
     closeAllContainers(): void;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;
+    refreshContainerName(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;
     addItemToContainer(item: IItem, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;

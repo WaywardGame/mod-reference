@@ -66,6 +66,10 @@ export declare enum Stat {
      * Used for tamed animals
      */
     Happiness = 5,
+    /**
+     * Used for merchant
+     */
+    Credits = 6,
 }
 export declare const STAT_COLOR: {
     readonly Health: string;
@@ -74,6 +78,7 @@ export declare const STAT_COLOR: {
     readonly Thirst: string;
     readonly Produce: string;
     readonly Happiness: string;
+    readonly Credits: string;
 };
 export interface IStats {
     [key: string]: IStat;
@@ -97,7 +102,7 @@ export declare class StatFactory {
      * Initializes the `IStat` constructed by this factory on the given entity.
      */
     initializeOn(entity: IBaseEntity): void;
-    get(): IStatBase;
+    get(): IStat;
 }
 export declare module StatFactory {
     /**
@@ -111,17 +116,17 @@ export declare module StatFactory {
     function getStats(...stats: Array<StatFactory | undefined>): IStats;
 }
 export interface IStatBase {
-    type: Stat;
-    value: number;
-    max?: number;
+    readonly type: Stat;
+    readonly value: number;
+    readonly max: number | undefined;
     /**
      * The number of turns remaining until the stat changes.
      */
-    changeTimer?: number;
+    changeTimer: number | undefined;
     /**
      * The value `changeTimer` will be reset to when it reaches `0`.
      */
-    nextChangeTimer?: number;
+    readonly nextChangeTimer: number | undefined;
     /**
      * The amount the value should change by when the `changeTimer` reaches `0`.
      * When not provided, defaults to `1`.

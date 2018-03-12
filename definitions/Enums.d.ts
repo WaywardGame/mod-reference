@@ -604,6 +604,14 @@ export declare enum ItemType {
     BlackplateGreaves = 402,
     BlackplateHelmet = 403,
     DeathKnightAxe = 404,
+    Macuahuitl = 405,
+    ObsidianArrow = 406,
+    ObsidianArrowhead = 407,
+    ObsidianAxe = 408,
+    ObsidianKnife = 409,
+    ObsidianShovel = 410,
+    ObsidianSpear = 411,
+    TumbleweedSeeds = 412,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -745,7 +753,7 @@ export declare enum DoodadType {
     Beggarticks = 25,
     Cotton = 26,
     PricklyPears = 27,
-    DeadBush = 28,
+    Tumbleweed = 28,
     StoneWaterStill = 29,
     LitStoneWaterStill = 30,
     StoneCampfire = 31,
@@ -891,7 +899,7 @@ export declare enum HairStyle {
 }
 export declare enum HairColor {
     "#e7c978" = 0,
-    "#b5804e" = 1,
+    "#b9793d" = 1,
     "#b84627" = 2,
     "#7f3721" = 3,
     "#7e4b1c" = 4,

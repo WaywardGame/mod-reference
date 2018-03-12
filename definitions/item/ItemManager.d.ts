@@ -3,6 +3,7 @@ import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, Requ
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
 import IItemManager from "item/IItemManager";
 import { Message } from "language/Messages";
+import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 export default class ItemManager implements IItemManager {
@@ -13,7 +14,7 @@ export default class ItemManager implements IItemManager {
     constructor();
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
-    addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): void;
+    addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): boolean;
     removeContainerItems(container: IContainer): void;
     remove(item: IItem): void;
     getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;
@@ -26,7 +27,7 @@ export default class ItemManager implements IItemManager {
     moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): void;
     computeContainerWeight(container: IContainer): number;
     moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): void;
-    moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
     /**
@@ -71,6 +72,7 @@ export default class ItemManager implements IItemManager {
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
+    getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     private updateItemOrderInternal(container, itemOrder);
     private loadReference(container);
     private removeFromContainerInternal(item);
@@ -78,7 +80,6 @@ export default class ItemManager implements IItemManager {
     private getCraftQualityBonus(quality, required?);
     private computeCraftQualityBonus(itemsToRequire, itemsToConsume);
     private isCraftSuccessful(player, recipe, qualityBonus);
-    private getNPCFromInventoryContainer(container);
     private getPlayerFromInventoryContainer(container);
     private getAbsentPlayerFromInventoryContainer(container);
 }

@@ -37,6 +37,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     damage(source: string, modifier?: number): void;
     isDamaged(): boolean;
     isEquipped(): boolean;
+    isInTradeContainer(): boolean;
     getEquipSlot(): EquipType | undefined;
     setQuickSlot(player: IPlayer, quickSlot: number | undefined): void;
     clearQuickSlot(): void;
@@ -55,6 +56,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
+    getCredits(): number | undefined;
     onUnserialized(): void;
     private checkIfItemsMatch(item1, item2);
     private checkIfItemArraysMatch(arr1, arr2);

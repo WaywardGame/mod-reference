@@ -51,6 +51,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     isDamaged(): boolean;
     isDecayed(): boolean;
     isEquipped(): boolean;
+    isInTradeContainer(): boolean;
     getEquipSlot(): EquipType | undefined;
     setQuickSlot(player: IPlayer, quickSlot: number | undefined): void;
     clearQuickSlot(): void;
@@ -68,6 +69,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
+    getCredits(): number | undefined;
 }
 export interface IItemOld {
     equipped?: EquipType;
@@ -79,6 +81,7 @@ export interface IContainer extends IContainable {
     weightCapacity: number;
     containedItems: IItemArray;
     itemOrders?: number[];
+    containerType?: ContainerType;
 }
 export interface IItemDescription extends IObjectDescription, IModdable {
     durability?: number;
@@ -182,4 +185,8 @@ export declare enum CraftResult {
     Fail = 0,
     Success = 1,
     CritSuccess = 2,
+}
+export declare enum ContainerType {
+    Default = 0,
+    Trade = 1,
 }

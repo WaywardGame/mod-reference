@@ -19,6 +19,7 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     kill(): void;
     isHostile(): boolean;
     isWaiting(): boolean;
+    getNameHtml(): string;
     /**
      * The actions available to use with this npc
      */

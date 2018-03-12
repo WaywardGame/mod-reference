@@ -122,6 +122,7 @@ export interface IUi extends IPropSerializable, Emitter {
     onMove(): void;
     closeAllContainers(): void;
     openContainer(container: IContainer, containerName?: string): void;
+    refreshContainerName(container: IContainer): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;
     addItemToContainer(item: IItem, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
