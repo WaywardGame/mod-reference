@@ -144,6 +144,7 @@ export default class Game extends Emitter implements IGame {
     getReputationMessage(): string;
     getMalignity(): number;
     getBenignity(): number;
+    getMaxHealth(): number;
     getStrength(): number;
     getTactics(): number;
     getSkillPercent(skill: SkillType): number;

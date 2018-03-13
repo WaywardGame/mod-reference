@@ -14,7 +14,7 @@ declare module Objects {
         [key: string]: V;
     }): IterableIterator<V>;
     /**
-     * Returns an iterator for the entries of an object, given in a tuple of [key, value].
+     * Returns an iterator for the entries of an object, given in a tuple of `[key, value]`.
      * Does not check if the entries are prototypal!
      */
     function entries<V = any>(object: {
@@ -31,11 +31,17 @@ declare module Objects {
         [key: string]: V;
     }): IterableIterator<V>;
     /**
-     * Returns an iterator for the entries of an object, given in a tuple of [key, value].
+     * Returns an iterator for the entries of an object, given in a tuple of `[key, value]`.
      */
     function ownEntries<V = any>(object: {
         [key: string]: V;
     }): IterableIterator<[string, V]>;
+    /**
+     * Creates an object from an iterable of entries, given in a tuple of `[key, value]`.
+     */
+    function create<K extends string, V>(entriesIterable: IterableOf<[K, V]>): {
+        [key in K]: V;
+    };
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function objectDeepClone<T>(obj: T): T;

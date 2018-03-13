@@ -116,6 +116,7 @@ export interface UiApi {
     refreshTranslations(element: HTMLElement | IUiElement): void;
     getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: false): string;
     toggleFullscreen(fullscreen?: boolean): void;
+    storeElements(...elements: Array<HTMLElement | IUiElement>): void;
     playActivateSound(): void;
     playSelectSound(): void;
     setScale(scale: number): void;
@@ -149,6 +150,12 @@ export interface IUiElement<T = {}> {
     show(...args: any[]): Promise<void>;
     hide(...args: any[]): Promise<void>;
     toggle(visible: boolean, ...args: any[]): Promise<void>;
+    /**
+     * Moves this element to a hidden element, in order to retain any information the element had.
+     * This allows the element to be re-appended later without re-adding event handlers, CSS, or
+     * any other data.
+     */
+    store(): void;
     appendTo(element: string | HTMLElement | IUiElement): this;
     append(elements: IterableOf<HTMLElement | IUiElement | undefined>): this;
     remove(removeFromParent?: boolean): Promise<void>;

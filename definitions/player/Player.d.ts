@@ -57,8 +57,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     travelData: IPlayerTravelData | undefined;
     turns: number;
     walkSoundCounter: number;
-    weight: number;
-    weightBonus: number;
     exploredMap: IExploreMap[] | undefined;
     exploredMapNotSaved: IExploreMap[] | undefined;
     isMovingClientside: boolean;
@@ -98,14 +96,19 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     getMovementIntent(): Bindable | undefined;
     updateMovementIntent(bind: Bindable | undefined): void;
     /**
-     * Returns the max health of the player.
+     * Gets the max health of the player.
      *
      * Returns the result of `Hook.GetPlayerMaxHealth`, or the `max` in `Stat.Health`,
      * if the result of the hook is `undefined`.
      */
     getMaxHealth(): number;
     /**
-     * Returns the strength of the player. Internally, this is saved as the maximum health.
+     * Gets the strength of the player.
+     *
+     * Returns the result of `Hook.GetPlayerStrength`, or the `max` in `Stat.Health`,
+     * if the result of the hook is `undefined`.
+     *
+     * Used internally for `Stat.Weight.max`
      */
     getStrength(): number;
     setup(completedMilestones: number): void;
@@ -159,6 +162,14 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     getMovementFinishTime(): number;
     updateMilestones(): void;
     healthSyncCheck(): void;
+    /**
+     * This needs to be called whenever the player's strength requires an update.
+     *
+     * Example usage includes:
+     * 1. When max health changes. Max health is used in calculating the strength.
+     * 2. If a mod is using the `GetPlayerStrength` hook and the calculation needs to be refreshed.
+     */
+    updateStrength(): void;
     private slitherSuckerDamage();
     private processMovement(turnType?);
     /**

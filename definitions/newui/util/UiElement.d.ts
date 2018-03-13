@@ -36,6 +36,7 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     appendTo(where: string | HTMLElement | IUiElement): this;
     append(elements: IterableOf<HTMLElement | IUiElement | undefined>): this;
     remove(removeFromParent?: boolean): Promise<void>;
+    store(): void;
     removeChild(child: IUiElement, removeChild?: boolean): Promise<void>;
     /**
      * Remove all children

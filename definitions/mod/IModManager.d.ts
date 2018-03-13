@@ -129,7 +129,7 @@ export interface IModManager {
     unload(index: number): void;
     unloadAll(reset?: boolean): void;
     callHook(hook: Hook, ...args: any[]): any;
-    callHookReduce(hook: Hook, ...args: any[]): any;
+    callHookReduce<T>(hook: Hook, initial: T, ...args: any[]): T;
     callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
 }
 export default IModManager;

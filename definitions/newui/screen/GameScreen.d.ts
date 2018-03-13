@@ -15,4 +15,27 @@ export default class GameScreen extends UiScreen<GameScreenData> {
     private readonly quadrantMap;
     constructor(uiApi: UiApi);
     create(): void;
+    /**
+     * Adds a quadrant element to the screen.
+     *
+     * The quadrant is decided following these steps:
+     * 1. Starts with the `preferredQuadrant` of the element.
+     * 2. If the quadrant is `Quadrant.None`, or the quadrant is already used,
+     * use instead the result of `getUnusedQuadrant()`
+     */
+    private addQuadrantElement(element);
+    /**
+     * Event handler for `QuadrantElementEvent.ChangeQuadrant`
+     *
+     * The element that is changing quadrants switches places with the element already in that quadrant.
+     *
+     * If the element is changing to `Quadrant.None`, it is removed from the `quadrantMap`. If the element
+     * was in `Quadrant.None` and is switching places with another element, that element is removed
+     * from the `quadrantMap`.
+     */
+    private onQuadrantElementChange(quadrantElement, quadrant, oldQuadrant);
+    /**
+     * Returns the first unused `Quadrant`, or `Quadrant.None` if there are none.
+     */
+    private getUnusedQuadrant();
 }

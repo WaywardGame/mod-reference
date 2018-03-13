@@ -9,6 +9,7 @@ export default class Ui extends Emitter implements UiApi {
     private readonly screens;
     private _visibleScreen;
     private readonly screenChain;
+    private storageElement;
     private scale;
     constructor();
     /**
@@ -113,6 +114,7 @@ export default class Ui extends Emitter implements UiApi {
      * Returns the current translation of the given textOrTranslationData
      */
     getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: boolean): string;
+    storeElements(...elements: Array<HTMLElement | IUiElement>): void;
     /**
      * Plays the "click" sound effect, used for most interface interactions
      */

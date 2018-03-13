@@ -170,11 +170,18 @@ export declare abstract class Mod extends BaseMod {
      */
     getPlayerFieldOfViewRadius(player: IPlayer): number | undefined;
     /**
-     * Called when getting the players maximum health
+     * Called when getting the player's maximum health
      * @param player The player object
      * @returns The maximum health of the player or undefined to use the default logic
      */
     getPlayerMaxHealth(player: IPlayer): number | undefined;
+    /**
+     * Called when getting the player's strength
+     * @param strength The current strength of the player
+     * @param player The player object
+     * @returns The new strength of the player
+     */
+    getPlayerStrength(strength: number, player: IPlayer): number;
     /**
      * Called when rendering the player in the viewport
      * @param player The player object

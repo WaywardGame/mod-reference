@@ -1,7 +1,9 @@
+import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/Stats";
 import { FacingDirection, FireType, MoveType, SfxType, StatusType } from "Enums";
 import { ITile } from "tile/ITerrain";
+import Emitter from "utilities/Emitter";
 import { IPoint, IPointZ } from "utilities/math/IPoint";
-export default interface IBaseEntity extends IPointZ {
+export default interface IBaseEntity extends IPointZ, Emitter {
     id: number;
     renamed?: string;
     fromX: number;
@@ -13,17 +15,6 @@ export default interface IBaseEntity extends IPointZ {
     facingDirection: FacingDirection;
     stats: IStats;
     status: IStatus;
-    initStat(factory: StatFactory): void;
-    hasStat(stat: Stat): boolean;
-    removeStat(stat: Stat): void;
-    getStat<StatType extends IStatBase | undefined = IStat | undefined>(stat: Stat): StatType;
-    setStat(stat: Stat | IStat, amount: number): boolean;
-    setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
-    setStatMax(stat: Stat | IStat, amount: number): void;
-    reduceStat(stat: Stat | IStat, amount: number): boolean;
-    increaseStat(stat: Stat | IStat, amount: number): boolean;
-    hasStatus(status: StatusType): boolean;
-    setStatus(status: StatusType, to: boolean): void;
     getFacingPoint(): IPointZ;
     getFacingTile(): ITile;
     getMovementFinishTime(): number | undefined;
@@ -38,10 +29,102 @@ export default interface IBaseEntity extends IPointZ {
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
-    on(event: EntityEvent.StatChanged, handler: (_: this, stat: IStat, oldValue: number, reason: StatChangeReason) => any): void;
-    on(event: EntityEvent.StatTimerChanged, handler: (_: this, stat: IStat, oldValue: number) => any): void;
-    on(event: EntityEvent.StatMaxChanged, handler: (_: this, stat: IStat, oldValue: number) => any): void;
-    on(event: EntityEvent.StatusChange, handler: (_: this, status: StatusType, hasStatus: boolean) => any): void;
+    /**
+     * Initializes the given stat from the given `StatFactory` instance.
+     * @param factory The factory to initialize the stat from.
+     *
+     * This method will replace existing stats.
+     */
+    initStat(factory: IStatFactory): void;
+    /**
+     * Returns whether the given stat exists on this entity.
+     */
+    hasStat(stat: Stat): boolean;
+    /**
+     * Removes the given stat from this entity.
+     */
+    removeStat(stat: Stat): void;
+    /**
+     * Returns the stat object of a given `Stat`. The return type is a vague `IStat`, but can be
+     * passed a type which extends `IStatBase` for automatic narrowing.
+     * @param stat The `Stat` to get
+     */
+    getStat<StatType extends IStatBase | undefined = IStat | undefined>(stat: Stat): StatType;
+    /**
+     * Sets the given `Stat`'s value to the given amount. Triggers `EntityEvent.StatChange`
+     * @param stat The `Stat` to set.
+     * @param amount The amount to set the value to.
+     * @param reason Why this stat is changing.
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
+    setStat(stat: Stat | IStat, amount: number): boolean;
+    /**
+     * Reduces the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
+     * @param stat The `Stat` to reduce.
+     * @param amount The amount to reduce by.
+     *
+     * An alias for `increaseStat`, negating the given amount.
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
+    reduceStat(stat: Stat | IStat, amount: number): boolean;
+    /**
+     * Increases the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
+     * @param stat The `Stat` to increase.
+     * @param amount The amount to increase by.
+     *
+     * An alias for `setStat(stat, stat.value + amount)`
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
+    increaseStat(stat: Stat | IStat, amount: number): boolean;
+    /**
+     * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
+     * @param stat The `Stat` to set.
+     * @param amount The amount to set the value to.
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
+    setStatMax(stat: Stat | IStat, amount: number): void;
+    /**
+     * Sets how frequently the stat should change. Triggers `EntityEvent.StatTimerChange`
+     * @param stat The `Stat` that should change.
+     * @param timer How many turns should pass between changes.
+     *
+     * If the stat already has a timer going, the difference of the new and old timers
+     * is subtracted from the time remaining.
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
+    setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
+    /**
+     * Passes the "turn" for stats, decrements their `changeTimer`s. If a stat's timer reaches `0`,
+     * the stat value is changed by `changeAmount` and the `changeTimer` is reset to `nextChangeTimer`
+     */
+    updateStats(): void;
+    /**
+     * Returns whether the entity has the given `StatusType`
+     * @param status The status to check
+     */
+    hasStatus(status: StatusType): boolean;
+    /**
+     * Sets whether the entity has the given `StatusType`
+     * @param status The status to change
+     * @param to Whether the entity will have the status
+     *
+     * Triggers `EntityEvent.StatusChange`
+     */
+    setStatus(status: StatusType, to: boolean): void;
+    on(event: EntityEvent.StatChanged, handler: (_: this, stat: IStat, oldValue: number, reason: StatChangeReason) => any): this;
+    on(event: EntityEvent.StatTimerChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
+    on(event: EntityEvent.StatMaxChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
+    on(event: EntityEvent.StatusChange, handler: (_: this, status: StatusType, hasStatus: boolean) => any): this;
 }
 export declare enum EntityEvent {
     StatChanged = 0,
@@ -53,95 +136,6 @@ export declare enum StatChangeReason {
     Normal = 0,
     ChangeTimer = 1,
 }
-export declare enum Stat {
-    Health = 0,
-    Stamina = 1,
-    Hunger = 2,
-    Thirst = 3,
-    /**
-     * Used for chicken eggs and goat milk
-     */
-    Produce = 4,
-    /**
-     * Used for tamed animals
-     */
-    Happiness = 5,
-    /**
-     * Used for merchant
-     */
-    Credits = 6,
-}
-export declare const STAT_COLOR: {
-    readonly Health: string;
-    readonly Stamina: string;
-    readonly Hunger: string;
-    readonly Thirst: string;
-    readonly Produce: string;
-    readonly Happiness: string;
-    readonly Credits: string;
-};
-export interface IStats {
-    [key: string]: IStat;
-}
-export declare class StatFactory {
-    private result;
-    constructor(type: Stat, value?: number);
-    /**
-     * Sets the max value this stat can be
-     */
-    setMax(max: number): this;
-    /**
-     * Sets the stat to change over time.
-     * @param timer The number of turns that should pass before the stat should change.
-     * @param amt The amount the stat should change, whenever the timer completes.
-     *
-     * Stat timers are managed by their parent Entity. Currently, only players support `changeTimer`
-     */
-    setChangeTimer(timer: number, amt?: number): this;
-    /**
-     * Initializes the `IStat` constructed by this factory on the given entity.
-     */
-    initializeOn(entity: IBaseEntity): void;
-    get(): IStat;
-}
-export declare module StatFactory {
-    /**
-     * Stats are stored by their names, not their ordinal. Therefore, to access a stat, you must first
-     * get the name of the stat. `entity.stats[Stat[<your stat here>]]`. This is unweildy especially
-     * for `IStats` construction. This function is provided to alleviate that.
-     * @param stats A list of `StatFactory` instances to construct the `IStats` instance from.
-     *
-     * When passing multiple `StatFactory`s of the same `Stat`, the latter will replace the former.
-     */
-    function getStats(...stats: Array<StatFactory | undefined>): IStats;
-}
-export interface IStatBase {
-    readonly type: Stat;
-    readonly value: number;
-    readonly max: number | undefined;
-    /**
-     * The number of turns remaining until the stat changes.
-     */
-    changeTimer: number | undefined;
-    /**
-     * The value `changeTimer` will be reset to when it reaches `0`.
-     */
-    readonly nextChangeTimer: number | undefined;
-    /**
-     * The amount the value should change by when the `changeTimer` reaches `0`.
-     * When not provided, defaults to `1`.
-     */
-    changeAmount?: number;
-}
-export interface IStatMax extends IStatBase {
-    max: number;
-}
-export interface IStatChanging extends IStatBase {
-    changeAmount: number;
-    changeTimer: number;
-    nextChangeTimer: number;
-}
-export declare type IStat = IStatBase | IStatMax | IStatChanging;
-export declare type IStatus = {
+export declare type IStatus = Writable<{
     [key in keyof typeof StatusType]: boolean;
-};
+}, keyof typeof StatusType>;

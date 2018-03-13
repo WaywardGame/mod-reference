@@ -72,7 +72,7 @@ export declare enum Message {
     CannotDropHere = 58,
     CannotEquipThatThere = 59,
     CannotFishFor = 60,
-    CannotGatherHere = 61,
+    CannotHere = 61,
     CannotInWater = 62,
     CannotLeave = 63,
     CannotPickupWhenFull = 64,

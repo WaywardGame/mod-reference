@@ -43,7 +43,7 @@ declare module Enums {
     /**
      * Iterate over the names of the entries in an enum.
      */
-    function keys(enumObject: any): IterableIterator<string>;
+    function keys<K extends string>(enumObject: any): IterableIterator<K>;
     /**
      * Iterate over the values in an enum.
      */

@@ -5,7 +5,7 @@ export interface ITileEventManager {
     create(type: TileEventType, x: number, y: number, z: number): ITileEvent | undefined;
     remove(tileEvent: ITileEvent): void;
     get(tile: ITile, type: TileEventType): ITileEvent | undefined;
-    canHarvest(tile: ITile): boolean;
+    canGather(tile: ITile): ITileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): void;
 }

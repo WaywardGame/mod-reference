@@ -107,6 +107,7 @@ export interface IGame extends Emitter {
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
+    getMaxHealth(): number;
     getMovementFinishTime(): number;
     getName(object: IItem | ICreature | IDoodad | IPlayer | IBaseHumanEntity | ICorpse | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;

@@ -28,6 +28,15 @@ declare global  {
          * @see `utilities/Collectors` for premade collectors
          */
         collect<X>(collector: (val: IterableIterator<T>) => X): X;
+        /**
+         * Returns the first value in this iterator, or undefined if there are no values.
+         */
+        first(): T | undefined;
+        /**
+         * Returns the first value in this iterator.
+         * @param orElse Returns this if there are no values.
+         */
+        first(orElse: T): T;
     }
     interface Array<T> {
         /**
@@ -35,6 +44,18 @@ declare global  {
          * This method will be removed when it becomes native in Chromium 66+
          */
         values(): IterableIterator<T>;
+    }
+    interface Map<K, V> {
+        /**
+         * Sets multiple entries in this map from an iterable of entries
+         */
+        setAll(entriesIterable: IterableOf<[K, V]>): void;
+    }
+    interface MapConstructor {
+        /**
+         * Creates a map from an iterable of entries
+         */
+        create<K, V>(entriesIterable: IterableOf<[K, V]>): Map<K, V>;
     }
 }
 /**

@@ -1,12 +1,18 @@
 import StaticElement from "newui/game/util/StaticElement";
 import { UiApi, UiElementOptions } from "newui/INewUi";
 export declare enum Quadrant {
-    TopLeft = 0,
-    TopRight = 1,
-    BottomLeft = 2,
-    BottomRight = 3,
+    None = 0,
+    TopLeft = 1,
+    TopRight = 2,
+    BottomLeft = 3,
+    BottomRight = 4,
 }
 export declare enum QuadrantElementEvent {
+    /**
+     * Emitted with the following arguments:
+     * @param quadrant The new quadrant of this element
+     * @param oldQuadrant The old quadrant of this element
+     */
     ChangeQuadrant = "ChangeQuadrant",
 }
 /**
@@ -21,11 +27,13 @@ export declare enum QuadrantElementEvent {
  * Changing the quadrant will not affect other elements: this is the responsisibility of the parent.
  */
 export default abstract class QuadrantElement extends StaticElement {
-    preferredQuadrant?: Quadrant;
+    readonly preferredQuadrant: Quadrant;
     constructor(uiApi: UiApi, options?: UiElementOptions);
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event
      * with the parameters being the new quadrant and the old quadrant.
+     *
+     * Does not emit the event if the quadrant is not changing.
      */
     setQuadrant(quadrant: Quadrant): Promise<void>;
 }

@@ -5,7 +5,6 @@ export default class MainMenu extends Menu {
     private friendsButton;
     private loadGameButton;
     private newGameButton;
-    private storageElement;
     private playRow1;
     private playRow2;
     constructor(uiApi: UiApi);

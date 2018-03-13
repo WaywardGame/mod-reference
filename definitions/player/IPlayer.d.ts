@@ -67,8 +67,6 @@ export interface IPlayer extends IBaseHumanEntity {
     turns: number;
     walkSoundCounter: number;
     wasAbsentPlayer: boolean;
-    weight: number;
-    weightBonus: number;
     x: number;
     y: number;
     z: number;
@@ -138,6 +136,7 @@ export interface IPlayer extends IBaseHumanEntity {
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
     updateStatuses(): void;
+    updateStrength(): void;
     updateTables(): void;
     updateTablesAndWeight(): void;
 }
@@ -193,6 +192,7 @@ export declare type IPlayerOld = Partial<IPlayer> & {
     dexterity: number;
     starvation: number;
     dehydration: number;
+    weight: number;
 };
 export interface IStatsOld {
     health: IStatOld;
