@@ -40,5 +40,6 @@ export declare enum Types {
     ArrayV2 = 20,
     Doodad = 21,
     NPC = 22,
+    Map = 23,
 }
 export declare function SaveProperty(): PropertyDecorator;

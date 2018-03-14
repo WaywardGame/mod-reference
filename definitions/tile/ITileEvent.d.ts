@@ -12,6 +12,9 @@ export interface ITileEvent extends IObject<TileEventType>, IPointZ {
     spread?: number;
     decay?: number;
     gfx?: number;
+    fromX: number;
+    fromY: number;
+    movementFinishTime?: number;
 }
 export declare enum TileEventType {
     None = 0,

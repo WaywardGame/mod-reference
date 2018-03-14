@@ -128,8 +128,8 @@ export interface IModManager {
     uninitializeAll(): void;
     unload(index: number): void;
     unloadAll(reset?: boolean): void;
-    callHook(hook: Hook, ...args: any[]): any;
-    callHookReduce<T>(hook: Hook, initial: T, ...args: any[]): T;
-    callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
+    callHook<T = any>(hook: Hook, ...args: any[]): T;
+    callHookReduce<T = any>(hook: Hook, initial: T, ...args: any[]): T;
+    callHookWithDefault<T = any>(hook: Hook, defaultValue: T, ...args: any[]): T;
 }
 export default IModManager;

@@ -1,4 +1,4 @@
-import IBaseEntity, { IStatus, StatChangeReason } from "entity/IBaseEntity";
+import IBaseEntity, { IProperties, IStatus, Property, StatChangeReason } from "entity/IBaseEntity";
 import StatFactory from "entity/StatFactory";
 import { IStat, IStatBase, IStats, Stat } from "entity/Stats";
 import { FacingDirection, FireType, MoveType, SfxType, StatusType } from "Enums";
@@ -20,6 +20,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     facingDirection: FacingDirection;
     stats: IStats;
     status: IStatus;
+    properties: IProperties | undefined;
     protected _movementFinishTime: number | undefined;
     private _inFov;
     constructor();
@@ -49,4 +50,8 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
+    hasProperty(property: Property): boolean;
+    addProperty(property: Property, value: any): void;
+    getProperty<T>(property: Property): T | undefined;
+    removeProperty(property: Property): boolean;
 }

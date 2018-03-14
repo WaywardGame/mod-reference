@@ -4,6 +4,8 @@ export interface ITileEventManager {
     initialize(): void;
     create(type: TileEventType, x: number, y: number, z: number): ITileEvent | undefined;
     remove(tileEvent: ITileEvent): void;
+    moveTo(tileEvent: ITileEvent, x: number, y: number, z: number): void;
+    getMovementProgress(tileEvent: ITileEvent): number;
     get(tile: ITile, type: TileEventType): ITileEvent | undefined;
     canGather(tile: ITile): ITileEvent | undefined;
     updateAll(): void;

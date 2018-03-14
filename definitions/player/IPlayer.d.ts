@@ -17,7 +17,6 @@ import { IPointZ } from "utilities/math/IPoint";
 export interface IPlayer extends IBaseHumanEntity {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
-    attack: number;
     attackFromEquip: IAttackHand;
     benignity: number;
     containerSortInfo: {
@@ -193,6 +192,7 @@ export declare type IPlayerOld = Partial<IPlayer> & {
     starvation: number;
     dehydration: number;
     weight: number;
+    attack: number;
 };
 export interface IStatsOld {
     health: IStatOld;

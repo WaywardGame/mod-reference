@@ -121,6 +121,10 @@ export default interface IBaseEntity extends IPointZ, Emitter {
      * Triggers `EntityEvent.StatusChange`
      */
     setStatus(status: StatusType, to: boolean): void;
+    hasProperty(property: Property): boolean;
+    addProperty(property: Property, value: any): void;
+    getProperty<T>(property: Property): T | undefined;
+    removeProperty(property: Property): boolean;
     on(event: EntityEvent.StatChanged, handler: (_: this, stat: IStat, oldValue: number, reason: StatChangeReason) => any): this;
     on(event: EntityEvent.StatTimerChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
     on(event: EntityEvent.StatMaxChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
@@ -139,3 +143,7 @@ export declare enum StatChangeReason {
 export declare type IStatus = Writable<{
     [key in keyof typeof StatusType]: boolean;
 }, keyof typeof StatusType>;
+export declare enum Property {
+    Credits = 0,
+}
+export declare type IProperties = Map<Property, any>;

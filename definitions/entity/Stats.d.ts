@@ -4,18 +4,15 @@ export declare enum Stat {
     Hunger = 2,
     Thirst = 3,
     Weight = 4,
+    Attack = 5,
     /**
      * Used for chicken eggs and goat milk
      */
-    Produce = 5,
+    Produce = 6,
     /**
      * Used for tamed animals
      */
-    Happiness = 6,
-    /**
-     * Used for merchant
-     */
-    Credits = 7,
+    Happiness = 7,
 }
 export declare type IStats = {
     [key in keyof typeof Stat]: IStat;

@@ -18,7 +18,6 @@ import { IPointZ } from "utilities/math/IPoint";
 export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
-    attack: number;
     attackFromEquip: IAttackHand;
     benignity: number;
     containerSortInfo: {
