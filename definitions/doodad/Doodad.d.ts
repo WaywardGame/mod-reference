@@ -1,4 +1,5 @@
 import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, SentenceCaseStyle } from "Enums";
 import { IItemArray } from "item/IItem";
 import { Message } from "language/Messages";
@@ -40,7 +41,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     isGatherable(): boolean;
     isEmbers(): boolean;
     canHarvest(): boolean;
-    checkForTrampling(playerOrCreatureId: IPlayer | number): boolean;
+    checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     getDurabilityMessage(this: IDoodad): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
     getInspect(): IInspect[];
@@ -49,7 +50,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
     update(): void;
-    causeStatus(player: IPlayer): void;
-    setOffTrap(player?: IPlayer, withMessage?: boolean): void;
+    causeStatus(human: IBaseHumanEntity): void;
+    setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     onUnserialized(): void;
 }

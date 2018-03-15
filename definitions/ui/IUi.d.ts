@@ -1,3 +1,4 @@
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
@@ -76,7 +77,7 @@ export interface IUi extends IPropSerializable, Emitter {
     isHelpOverlayShown(): boolean;
     isHelpOverlayEnabled(): boolean;
     isOptionsOverlayEnabled(): boolean;
-    displayHint(player: IPlayer | undefined, hintType: HintType, force?: boolean): boolean;
+    displayHint(human: IBaseHumanEntity | undefined, hintType: HintType, force?: boolean): boolean;
     displayChatMessage(player: IPlayer, message: string): void;
     getCurrentHint(): HintType;
     setCurrentHint(hintType: HintType): void;
@@ -86,8 +87,8 @@ export interface IUi extends IPropSerializable, Emitter {
     refreshWorldTooltips(): void;
     messageIdToText(message: Message): string;
     getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
-    displayMessage(player: IPlayer | IPlayer[] | undefined, message: Message | string, messageType?: MessageType, ...args: any[]): void;
-    displayMessagePack(player: IPlayer | IPlayer[] | undefined, messagePack: IMessagePack): void;
+    displayMessage(human: IBaseHumanEntity | IBaseHumanEntity[] | undefined, message: Message | string, messageType?: MessageType, ...args: any[]): void;
+    displayMessagePack(human: IBaseHumanEntity | IBaseHumanEntity[] | undefined, messagePack: IMessagePack): void;
     getMessageCount(): number;
     removeOldestMessage(): void;
     updateMilestonesDialog(): void;

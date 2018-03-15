@@ -1,6 +1,6 @@
 import IBaseEntity, { IProperties, IStatus, Property, StatChangeReason } from "entity/IBaseEntity";
+import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import StatFactory from "entity/StatFactory";
-import { IStat, IStatBase, IStats, Stat } from "entity/Stats";
 import { FacingDirection, FireType, MoveType, SfxType, StatusType } from "Enums";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";

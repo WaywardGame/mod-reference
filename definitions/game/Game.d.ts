@@ -101,7 +101,7 @@ export default class Game extends Emitter implements IGame {
     resizeRenderer(): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
-    checkForHiddenMob(player: IPlayer, x: number, y: number, z: number): void;
+    checkForHiddenMob(human: IBaseHumanEntity, x: number, y: number, z: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     getWrappedCoord(x: number): number;
     getTileFromPoint(point: IPointZ): ITile;

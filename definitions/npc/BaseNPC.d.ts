@@ -1,6 +1,6 @@
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { AiType, EntityType } from "entity/IEntity";
-import { ActionType, DamageType, EquipType, ItemType } from "Enums";
+import { ActionType, EquipType, ItemType } from "Enums";
 import { IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { IPlayerCustomization } from "player/IPlayer";
@@ -19,7 +19,6 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     kill(): void;
     isHostile(): boolean;
     isWaiting(): boolean;
-    getNameHtml(): string;
     /**
      * The actions available to use with this npc
      */
@@ -28,36 +27,30 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     /**
      * The name of the npc - called when created
      */
-    protected abstract getName(): string;
+    protected abstract getDefaultName(): string;
     /**
      * The customizations of the npc - called when created
      */
-    protected abstract getCustomization(): IPlayerCustomization;
+    protected abstract getDefaultCustomization(): IPlayerCustomization;
     /**
      * The equip the npc spawns with - called for every equip type when the npc is created
      */
-    protected abstract getEquipment(equipType: EquipType): IItem | ItemType | undefined;
+    protected abstract getDefaultEquipment(equipType: EquipType): IItem | ItemType | undefined;
     /**
      * Items the npc should spawn with - called when created
      * This is in addition to the equipment
      */
-    protected abstract getInventory(): Array<IItem | ItemType>;
+    protected abstract getDefaultInventory(): Array<IItem | ItemType>;
     /**
      * The ai type
      */
-    protected abstract getAiType(): AiType;
+    protected abstract getDefaultAiType(): AiType;
     /**
-     * Called when the npc is attacking a player
+     * Initialize stats
      */
-    protected getAttackDamage(): number;
-    /**
-     * Called when the npc is attacking a player
-     */
-    protected getAttackDamageType(): DamageType;
+    protected initializeStats(): void;
     protected attack(): boolean;
     protected move(): boolean;
     private checkMove(tileX, tileY, tileZ);
     private updateDirection(x, y);
-    private initializeStats();
-    private checkForBurn();
 }

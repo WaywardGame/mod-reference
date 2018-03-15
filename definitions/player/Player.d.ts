@@ -2,14 +2,12 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Bindable, Delay, EquipType, FacingDirection, IInspect, IMessagePack, ItemType, PlayerState, SkillType, TurnType, WeightStatus } from "Enums";
+import { Bindable, Delay, EquipType, FacingDirection, IInspect, IMessagePack, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { MilestoneType } from "player/IMilestone";
-import { IAttackHand, IMobCheck, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
-import { ISkillSet } from "player/Skills";
+import { IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
 import { IExploreMap } from "renderer/IExploreMap";
-import { IOptions } from "save/data/ISaveDataGlobal";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
@@ -18,40 +16,29 @@ import { IPointZ } from "utilities/math/IPoint";
 export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
-    attackFromEquip: IAttackHand;
-    benignity: number;
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
     };
     currentHint: HintType;
-    deathBy: string;
-    defenses: number[];
     dialogContainerInfo: IDialogInfo[];
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
     exploredMapEncodedData: number[][];
-    handToUse: EquipType;
     hintSeen: boolean[];
     identifier: string;
     isConnecting: boolean;
     isMoving: boolean;
-    lightBonus: number;
-    malignity: number;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     name: string;
     noInputReceived: boolean;
-    options: IOptions;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
     revealedItems: {
         [index: number]: boolean;
     };
-    score: number;
-    skills: ISkillSet;
     spawnPoint: IPointZ;
-    state: PlayerState;
     tamedCreatures: number[];
     travelData: IPlayerTravelData | undefined;
     turns: number;
@@ -76,7 +63,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      */
     updateStatuses(): void;
     resetMovementStates(): void;
-    attributes(): void;
     setId(id: number): void;
     setRaft(itemId: number | undefined): void;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
@@ -113,7 +99,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     setup(completedMilestones: number): void;
     preSerializeObject(): void;
     restoreExploredMap(): void;
-    staminaReduction(skillType: SkillType): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
@@ -129,10 +114,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     checkReputationMilestones(): void;
     getReputation(): number;
     hurtHands(message: Message, damageMessage: Message): void;
-    /**
-     * Burn the player
-     */
-    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
@@ -148,8 +129,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
-    updateStatsAndAttributes(): void;
     passTurn(turnType?: TurnType): void;
     tick(isPassTurn?: boolean): void;
     kill(): void;
@@ -169,6 +148,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      * 2. If a mod is using the `GetPlayerStrength` hook and the calculation needs to be refreshed.
      */
     updateStrength(): void;
+    protected calculateStats(): void;
     private slitherSuckerDamage();
     private processMovement(turnType?);
     /**
@@ -189,9 +169,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     private onStatChange(_, stat, oldValue, reason);
     private swimCheck();
     private restTick();
-    private statGain(stat, bypass);
-    private resetDefense();
-    private calculateStats();
     private showStatsHint();
     private staminaSyncCheck();
 }

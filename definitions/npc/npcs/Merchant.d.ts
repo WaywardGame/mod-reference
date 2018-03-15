@@ -7,10 +7,10 @@ import { IPlayerCustomization } from "player/IPlayer";
 export default class MerchantNPC extends BaseNPC implements INPC {
     constructor(id?: number, x?: number, y?: number, z?: number);
     getActions(): ActionType[] | undefined;
-    update(): void;
-    protected getName(): string;
-    protected getCustomization(): IPlayerCustomization;
-    protected getEquipment(equipType: EquipType): IItem | ItemType | undefined;
-    protected getInventory(): Array<IItem | ItemType>;
-    protected getAiType(): AiType;
+    protected getDefaultName(): string;
+    protected getDefaultCustomization(): IPlayerCustomization;
+    protected getDefaultEquipment(equipType: EquipType): IItem | ItemType | undefined;
+    protected getDefaultInventory(): Array<IItem | ItemType>;
+    protected getDefaultAiType(): AiType;
+    protected initializeStats(): void;
 }

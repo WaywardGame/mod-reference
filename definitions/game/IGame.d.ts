@@ -85,7 +85,7 @@ export interface IGame extends Emitter {
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
     changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean): void;
-    checkForHiddenMob(player: IPlayer, x: number, y: number, z: number): void;
+    checkForHiddenMob(human: IBaseHumanEntity, x: number, y: number, z: number): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
     damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo): number | undefined;

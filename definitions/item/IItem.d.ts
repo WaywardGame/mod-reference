@@ -1,4 +1,5 @@
 import { ICreature } from "creature/ICreature";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
 import IPlayer from "player/IPlayer";
 import { IPointZ } from "utilities/math/IPoint";
@@ -61,15 +62,15 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
     getLocation(): IPointZ | undefined;
-    dropInWater(player: IPlayer, x?: number, y?: number): void;
-    dropInLava(player: IPlayer, x?: number, y?: number): void;
+    dropInWater(human: IBaseHumanEntity, x?: number, y?: number): void;
+    dropInLava(human: IBaseHumanEntity, x?: number, y?: number): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
-    getCredits(): number | undefined;
+    getWorth(): number | undefined;
 }
 export interface IItemOld {
     equipped?: EquipType;
@@ -127,7 +128,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     flammable?: boolean;
     plural?: string;
     hideHelmet?: boolean;
-    credits?: number;
+    worth?: number;
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }

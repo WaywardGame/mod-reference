@@ -1,5 +1,6 @@
-import { ExecuteArgument, IAction } from "action/IAction";
+import { ExecuteArgument, IAction, IActionResult } from "action/IAction";
 import IActionManager from "action/IActionManager";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType } from "Enums";
 import GenericManager from "game/GenericManager";
 import { IGenericManager } from "game/IGenericManager";
@@ -9,8 +10,9 @@ import { Source } from "utilities/Log";
 export default class ActionManager extends GenericManager<IAction> implements IActionManager {
     private executing;
     setup(instance: IGenericManager<IAction>): void;
-    execute(player: IPlayer, actionType: ActionType, executeArgument?: ExecuteArgument): boolean | undefined;
+    execute(player: IPlayer | IBaseHumanEntity, actionType: ActionType, executeArgument?: ExecuteArgument): boolean | undefined;
     executeMultiplayer(player: IPlayer, actionPacket: ActionPacket, skipCanExecuteCheck?: boolean): any;
+    processResult(human: IBaseHumanEntity, result: IActionResult): boolean | undefined;
     protected getSource(): Source;
     protected getEnumObject(): any;
     private canExecuteAction(player, action, actionArgument);

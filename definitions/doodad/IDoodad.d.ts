@@ -1,3 +1,4 @@
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
 import { IContainer, IItemArray, IItemLegendary } from "item/IItem";
 import { Message } from "language/Messages";
@@ -19,14 +20,14 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, P
     isEmbers(): boolean;
     canHarvest(): boolean;
     canPickup(player: IPlayer): boolean;
-    causeStatus(player: IPlayer): void;
-    checkForTrampling(playerOrCreatureId: IPlayer | number): boolean;
+    causeStatus(human: IBaseHumanEntity): void;
+    checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): void;
     getDurabilityMessage(): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
     getInspect(): IInspect[];
-    setOffTrap(player?: IPlayer, withMessage?: boolean): void;
+    setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     update(): void;
 }
 export interface IDoodadOptions extends IObjectOptions {

@@ -1,5 +1,5 @@
 import IBaseEntity from "entity/IBaseEntity";
-import { IStat, IStatFactory, IStats, Stat } from "entity/Stats";
+import { IStat, IStatFactory, IStats, Stat } from "entity/IStats";
 declare class StatFactory implements IStatFactory {
     private result;
     /**
@@ -10,7 +10,7 @@ declare class StatFactory implements IStatFactory {
     /**
      * Sets the max value this stat can be
      */
-    setMax(max: number): this;
+    setMax(max: number, canExceed?: true): this;
     /**
      * Sets the stat to change over time.
      * @param timer The number of turns that should pass before the stat should change.

@@ -1,4 +1,5 @@
 import IBaseEntity from "entity/IBaseEntity";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, DamageType, Defense, IMessagePack, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
 import { IItem } from "item/IItem";
@@ -101,7 +102,7 @@ export interface ICreatureLoot {
     chance?: number;
 }
 export interface IDamageInfo {
-    player?: IPlayer;
+    human?: IBaseHumanEntity;
     amount: number;
     type: DamageType;
     weaponName?: string;

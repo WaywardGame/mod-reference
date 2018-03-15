@@ -1,5 +1,10 @@
 declare global  {
     type IterableOf<T> = T[] | IterableIterator<T>;
+    type SplitIterablesOf<T, K extends string> = {
+        [key in K]: IterableIterator<T>;
+    } & {
+        [IterableIterator.ALL]: IterableIterator<T>;
+    };
     type GeneratorOf<T> = () => IterableOf<T>;
     interface IterableIterator<T> {
         /**
@@ -37,6 +42,11 @@ declare global  {
          * @param orElse Returns this if there are no values.
          */
         first(orElse: T): T;
+        /**
+         * Returns an object of iterators mapped by a splitter function.
+         * @param splitter Takes a value from the iterator and returns which resulting iterator it should be part of.
+         */
+        split<K extends string>(splitter: (val: T) => K): SplitIterablesOf<T, K>;
     }
     interface Array<T> {
         /**
@@ -64,4 +74,8 @@ declare global  {
  * dumb, unless we provide something to use when importing this module. As a result, it's
  * only useful to import this module once. Currently, it is done in the module `Game`.
  */
-export default function IterableIterator(): void;
+declare function IterableIterator(): void;
+declare module IterableIterator {
+    const ALL: unique symbol;
+}
+export default IterableIterator;

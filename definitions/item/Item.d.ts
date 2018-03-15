@@ -1,4 +1,5 @@
 import { ICreature } from "creature/ICreature";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap } from "Enums";
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
 import IPlayer from "player/IPlayer";
@@ -49,14 +50,14 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
     getLocation(): IPointZ | undefined;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
-    dropInWater(player: IPlayer, x?: number, y?: number): void;
+    dropInWater(human: IBaseHumanEntity, x?: number, y?: number): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
-    getCredits(): number | undefined;
+    getWorth(): number | undefined;
     onUnserialized(): void;
     private checkIfItemsMatch(item1, item2);
     private checkIfItemArraysMatch(arr1, arr2);

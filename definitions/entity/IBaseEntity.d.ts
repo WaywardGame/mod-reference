@@ -1,4 +1,4 @@
-import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/Stats";
+import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
 import { FacingDirection, FireType, MoveType, SfxType, StatusType } from "Enums";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
@@ -144,6 +144,6 @@ export declare type IStatus = Writable<{
     [key in keyof typeof StatusType]: boolean;
 }, keyof typeof StatusType>;
 export declare enum Property {
-    Credits = 0,
+    Credit = 0,
 }
 export declare type IProperties = Map<Property, any>;

@@ -6,10 +6,7 @@ import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInp
 import { IItem } from "item/IItem";
 import { Message } from "language/Messages";
 import { INPC } from "npc/INPC";
-import { MilestoneType } from "player/IMilestone";
-import { ISkillSet } from "player/Skills";
 import { IExploreMap } from "renderer/IExploreMap";
-import { IOptions } from "save/data/ISaveDataGlobal";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
@@ -17,32 +14,23 @@ import { IPointZ } from "utilities/math/IPoint";
 export interface IPlayer extends IBaseHumanEntity {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
-    attackFromEquip: IAttackHand;
-    benignity: number;
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
     };
     currentHint: HintType;
-    deathBy: string;
-    defenses: number[];
     dialogContainerInfo: IDialogInfo[];
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
-    equipped: {
-        [index: number]: number;
-    };
     exploredMapEncodedData: number[][];
     fromX: number;
     fromY: number;
-    handToUse: EquipType;
     hintSeen: boolean[];
     identifier: string;
     isConnecting: boolean;
     isMoving: boolean;
     isMovingClientside: boolean;
     lightBonus: number;
-    malignity: number;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     movementProgress: number;
@@ -52,15 +40,11 @@ export interface IPlayer extends IBaseHumanEntity {
     nextX: number;
     nextY: number;
     noInputReceived: boolean;
-    options: IOptions;
     quickSlotInfo: IQuickSlotInfo[];
     revealedItems: {
         [index: number]: boolean;
     };
-    score: number;
-    skills: ISkillSet;
     spawnPoint: IPointZ | undefined;
-    state: PlayerState;
     tamedCreatures: number[];
     travelData: IPlayerTravelData | undefined;
     turns: number;
@@ -73,28 +57,21 @@ export interface IPlayer extends IBaseHumanEntity {
     exploredMap: IExploreMap[] | undefined;
     exploredMapNotSaved: IExploreMap[] | undefined;
     addDelay(delay: Delay, replace?: boolean): void;
-    addMilestone(milestone: MilestoneType, data?: number): void;
-    attributes(): void;
-    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     calculateEquipmentStats(): void;
     canJump(): boolean;
     checkAndRemoveBlood(): boolean;
     checkForGather(): IDoodad | undefined;
     checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
-    checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkReputationMilestones(): void;
     checkSkillMilestones(): void;
-    checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     checkWeight(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    getHandToUse(): EquipType | undefined;
     getInspectHealthMessage(player: IPlayer): IMessagePack;
     getMovementIntent(): Bindable | undefined;
-    getName(html?: boolean): string;
     getReputation(): number;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
@@ -106,7 +83,6 @@ export interface IPlayer extends IBaseHumanEntity {
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     isFacingCarvableTile(): boolean;
-    isGhost(): boolean;
     isServer(): boolean;
     isLocalPlayer(): boolean;
     passTurn(turnType?: TurnType): void;
@@ -120,9 +96,7 @@ export interface IPlayer extends IBaseHumanEntity {
     setup(completedMilestones: number): void;
     setPosition(point: IPointZ): void;
     setZ(z: number): void;
-    skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaCheck(): boolean;
-    staminaReduction(skillType: SkillType): void;
     tick(isPassTurn?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
@@ -132,8 +106,6 @@ export interface IPlayer extends IBaseHumanEntity {
     updateMilestones(): void;
     updateMovementIntent(bind: Bindable | undefined): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
-    updateReputation(reputation: number): void;
-    updateStatsAndAttributes(): void;
     updateStatuses(): void;
     updateStrength(): void;
     updateTables(): void;
@@ -193,6 +165,8 @@ export declare type IPlayerOld = Partial<IPlayer> & {
     dehydration: number;
     weight: number;
     attack: number;
+    benignity: number;
+    malignity: number;
 };
 export interface IStatsOld {
     health: IStatOld;
