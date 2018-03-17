@@ -8,8 +8,10 @@ export default class LoadGameMenu extends Menu {
     private sortDirection;
     private slotsRemainingHeading;
     private newGameButton;
+    private importButton;
     constructor(uiApi: UiApi);
     private create();
+    private updateNewGameButton();
     private addSlot(slot);
     private deleteSlot(slot);
     private refreshSlotText();
