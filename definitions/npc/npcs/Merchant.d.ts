@@ -6,6 +6,7 @@ import { INPC } from "npc/INPC";
 import { IPlayerCustomization } from "player/IPlayer";
 export default class MerchantNPC extends BaseNPC implements INPC {
     constructor(id?: number, x?: number, y?: number, z?: number);
+    update(): void;
     getActions(): ActionType[] | undefined;
     protected getDefaultName(): string;
     protected getDefaultCustomization(): IPlayerCustomization;
