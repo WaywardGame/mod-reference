@@ -1,7 +1,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, Music, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import BaseMod from "mod/BaseMod";
@@ -9,7 +9,32 @@ import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer from "player/IPlayer";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
-import EnumCursor from "utilities/enum/EnumCursor";
+/**
+ * A decorator for registering a hook method on a mod.
+ * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
+ *
+ * Example Usage:
+ * ```ts
+ * @HookMethod(HookPriority.High)
+ * public onGameStart(isLoadingSave: boolean) {
+ * 	console.log("hello world!");
+ * }
+ * ```
+ */
+export declare function HookMethod(priority: number): (mod: Mod, property: string) => void;
+/**
+ * A decorator for registering a hook method on a mod.
+ * Uses `HookPriority.Normal`
+ *
+ * Example Usage:
+ * ```ts
+ * @HookMethod
+ * public onGameStart(isLoadingSave: boolean) {
+ * 	console.log("hello world!");
+ * }
+ * ```
+ */
+export declare function HookMethod(mod: Mod, property: string): void;
 export declare abstract class Mod extends BaseMod {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -150,12 +175,6 @@ export declare abstract class Mod extends BaseMod {
      * @returns False if the player should not see the creature or undefined to use the default logic
      */
     canSeeCreature(creature: ICreature, tile: ITile): boolean | undefined;
-    /**
-     * Called when creating a new music handler.
-     * @param currentMusicHandler The current music handler
-     * @returns Either a custom music handler, or `undefined` to use the existing one
-     */
-    getMusicHandler(currentMusicHandler: EnumCursor<Music>): EnumCursor<Music> | undefined;
     /**
      * Called when rendering creatures in the viewport
      * @param creature The creature object

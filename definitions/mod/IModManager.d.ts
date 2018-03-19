@@ -1,15 +1,7 @@
 import { IPlayOptions } from "game/IGame";
-import { ILanguage } from "language/ILanguage";
-import { Hook, IModConfig } from "mod/IMod";
-import Mod from "mod/Mod";
-export declare enum ModState {
-    Disabled = 0,
-    Enabled = 1,
-    Loaded = 2,
-    Error = 3,
-    ChangingState = 4,
-    Temporary = 5,
-}
+import HookCallFactory from "mod/HookCallFactory";
+import { Hook } from "mod/IMod";
+import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
 export interface ICanLoadInfo {
     name: string;
     loadable: boolean;
@@ -26,54 +18,6 @@ export declare enum CanLoadState {
     LocalModPrecedence = 8,
     IncompatibleVersion = 9,
     DisabledInMultiplayer = 10,
-}
-export declare enum ModType {
-    Internal = 0,
-    Local = 1,
-    Workshop = 2,
-}
-export interface IModProvides {
-    scripts: boolean;
-    languages: number;
-    stylesheets: number;
-    imageOverrides: boolean;
-    customizations: boolean;
-}
-export interface IImageOverrideDescription {
-    replace: string;
-    imagePath?: string;
-    animated?: boolean;
-}
-export declare type IImageOverrides = Array<string | IImageOverrideDescription>;
-export interface ICustomizations {
-    hairColors: string[];
-    skinColors: string[];
-    hairStyles: Array<string | {
-        name: string;
-        path: string;
-    }>;
-}
-export interface IModInfo {
-    config: IModConfig;
-    state: ModState;
-    path: string;
-    folderName: string;
-    type: ModType;
-    provides: IModProvides;
-    instance?: Mod;
-    initialized?: boolean;
-    publishedFileId?: string;
-    steamIDOwner?: string;
-    lastUpdated?: number;
-    installDate?: number;
-    createdDate?: number;
-    imageOverrides?: IImageOverrides;
-    customizations?: ICustomizations;
-    stylesheets?: string[];
-    languages?: Array<{
-        path: string;
-        instance?: ILanguage;
-    }>;
 }
 export interface IModManager {
     cacheHooks(): void;
@@ -128,8 +72,27 @@ export interface IModManager {
     uninitializeAll(): void;
     unload(index: number): void;
     unloadAll(reset?: boolean): void;
+    /**
+     * @deprecated
+     * @see `getHook(hookName).call(...args)`
+     */
     callHook<T = any>(hook: Hook, ...args: any[]): T;
-    callHookReduce<T = any>(hook: Hook, initial: T, ...args: any[]): T;
+    /**
+     * @deprecated
+     * @see `getHook(hookName, defaultValue).call(...args)`
+     */
     callHookWithDefault<T = any>(hook: Hook, defaultValue: T, ...args: any[]): T;
+    /**
+     * Returns a `HookCallFactory` for the given hook name.
+     * @param hook A hook name.
+     * @see `Mod` or `Hook` for a list of valid hook names.
+     */
+    getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
+    /**
+     * Returns an iterable iterator of the mods with a given hook.
+     * @param hook A hook name.
+     * @see `Mod` or `Hook` for a list of valid hook names.
+     */
+    getModsWithHook(hook: Hook): IterableIterator<number>;
 }
 export default IModManager;

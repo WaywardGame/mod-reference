@@ -4,14 +4,14 @@ declare module Enums {
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
      * @param entry The entry in the enum. Usually its index.
      */
-    function isModded<Enum extends number>(enumObject: any, entry: Enum): boolean;
+    function isModded<Enum extends number | string = number>(enumObject: any, entry: Enum): boolean;
     /**
      * Returns an enum entry by its name, case-insensitive.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
      * @param name The name of the enum entry. Case-insensitive.
      * @returns The enum entry, if found; otherwise `undefined`.
      */
-    function findByName<Enum extends number>(enumObject: any, name: string): Enum | undefined;
+    function findByName<Enum extends number | string = number>(enumObject: any, name: string): Enum | undefined;
     /**
      * Returns an enum entry by its index. The order is not guaranteed.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
@@ -20,7 +20,7 @@ declare module Enums {
      *
      * This is used internally for getting random enum entries. @see `Enums.getRandom()`
      */
-    function getNth<Enum extends number>(enumObject: any, n: number): Enum | undefined;
+    function getNth<Enum extends number | string = number>(enumObject: any, n: number): Enum | undefined;
     /**
      * Returns the number of entries in this enum.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
@@ -39,7 +39,7 @@ declare module Enums {
      *
      * Uses seeded random. Using this method on non-game methods may cause seed desyncs.
      */
-    function getRandom<Enum extends number>(enumObject: any): Enum;
+    function getRandom<Enum extends number | string = number>(enumObject: any): Enum;
     /**
      * Iterate over the names of the entries in an enum.
      */
@@ -47,11 +47,11 @@ declare module Enums {
     /**
      * Iterate over the values in an enum.
      */
-    function values<Enum extends number>(enumObject: any): IterableIterator<Enum>;
+    function values<Enum extends number | string = number>(enumObject: any): IterableIterator<Enum>;
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */
-    function entries<Enum extends number>(enumObject: any): IterableIterator<[string, Enum]>;
+    function entries<Enum extends number | string = number>(enumObject: any): IterableIterator<[string, Enum]>;
     function toString(enumObject: any, n: number): string;
 }
 export default Enums;

@@ -1,5 +1,5 @@
 import { IResourceContainer, IResourceLoader, PathType } from "IResourceLoader";
-import { IImageOverrideDescription } from "mod/IModManager";
+import { IImageOverrideDescription } from "mod/IModInfo";
 export default class ResourceLoader implements IResourceLoader {
     private concurrent;
     private loadingCount;

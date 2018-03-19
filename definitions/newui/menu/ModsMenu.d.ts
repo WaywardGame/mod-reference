@@ -1,4 +1,4 @@
-import { IModInfo } from "mod/IModManager";
+import { IModInfo } from "mod/IModInfo";
 import { UiApi } from "newui/INewUi";
 import { CheckButton } from "newui/util/CheckButton";
 import Menu from "newui/util/Menu";

@@ -612,6 +612,17 @@ export declare enum ItemType {
     ObsidianShovel = 410,
     ObsidianSpear = 411,
     TumbleweedSeeds = 412,
+    CoconutHusk = 413,
+    PeeledCoconut = 414,
+    CoconutMeat = 415,
+    CoconutContainerOfCoconutWater = 416,
+    CoconutContainer = 417,
+    CoconutContainerOfSeawater = 418,
+    CoconutContainerOfDesalinatedWater = 419,
+    CoconutContainerOfMedicinalWater = 420,
+    CoconutContainerOfPurifiedFreshWater = 421,
+    CoconutContainerOfUnpurifiedFreshWater = 422,
+    CoconutContainerOfGoatMilk = 423,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -681,7 +692,8 @@ export declare enum ItemTypeGroup {
     MortarAndPestle = 864,
     Milk = 865,
     Book = 866,
-    Last = 867,
+    CoconutContainerOfPotableWater = 867,
+    Last = 868,
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;

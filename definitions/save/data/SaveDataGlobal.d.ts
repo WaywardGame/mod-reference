@@ -1,6 +1,6 @@
 import { DropLocation, IBindArray, IModBindArray } from "Enums";
 import { ICrafted } from "game/IGame";
-import { ModState } from "mod/IModManager";
+import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
 import { ICharacter } from "newui/util/Character";
 import { IMilestoneData } from "player/IMilestone";

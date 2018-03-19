@@ -6,7 +6,7 @@ declare module Objects {
     /**
      * Returns an iterator for an object's keys. Does not check if the key is prototypal!
      */
-    function keys(object: any): IterableIterator<string>;
+    function keys<K extends string>(object: any): IterableIterator<K>;
     /**
      * Returns an iterator for an object's values. Does not check if the values are prototypal!
      */

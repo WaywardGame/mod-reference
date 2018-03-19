@@ -1,4 +1,4 @@
-import { ModType } from "mod/IModManager";
+import { ModType } from "mod/IModInfo";
 import Emitter from "utilities/Emitter";
 export interface ISteamworks extends Emitter {
     clearRichPresence(): void;

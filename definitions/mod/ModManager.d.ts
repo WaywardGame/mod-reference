@@ -1,13 +1,14 @@
 import { IPlayOptions } from "game/IGame";
-import { Hook } from "mod/IMod";
-import { CanLoadState, ICanLoadInfo, IModInfo, IModManager, IModProvides, ModState, ModType } from "mod/IModManager";
+import HookCallFactory from "mod/HookCallFactory";
+import { Hook, IModConfig } from "mod/IMod";
+import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
+import { CanLoadState, ICanLoadInfo, IModManager } from "mod/IModManager";
 export default class ModManager implements IModManager {
     private readonly mods;
     private modsToSetup;
     private readonly internalMods;
     private readonly internalModsElectron;
     private cachedHooks;
-    private readonly cachedHookNames;
     private readonly onLanguageLoadCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>, callback: (err: string | undefined, mods: string[]) => void): void;
@@ -22,9 +23,27 @@ export default class ModManager implements IModManager {
     getLoadedModByName(name: string): IModInfo | undefined;
     getModFromIndex(i: number): IModInfo;
     getEnabledMods(): number[];
+    /**
+     * Returns a `HookCallFactory` for the given hook name.
+     * @param hook A hook name. See `Mod` or `Hook`.
+     * @param defaultValue The default value to return
+     */
+    getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
+    /**
+     * Returns an iterator of mod indices representing each mod with the given hook, sorted by hook priority.
+     * @param hook A hook name. See `Mod` or `Hook`.
+     */
+    getModsWithHook(hook: Hook): IterableIterator<number>;
+    /**
+     * @deprecated
+     * @see `getHook(hookName).call(...args)`
+     */
     callHook(hook: Hook, ...args: any[]): any;
+    /**
+     * @deprecated
+     * @see `getHook(hookName, defaultValue).call(...args)`
+     */
     callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
-    callHookReduce(hook: Hook, initial: any, ...args: any[]): any;
     load(index: number): void;
     unload(index: number): void;
     save(index: number): void;
@@ -34,6 +53,7 @@ export default class ModManager implements IModManager {
     isEnabled(index: number): boolean;
     isLoaded(index: number): boolean;
     getIdentifier(index: number): string;
+    getConfig(mod: number | IModInfo): IModConfig | undefined;
     getName(index: number): string;
     getDescription(index: number): string;
     getVersion(index: number): string;
@@ -65,6 +85,25 @@ export default class ModManager implements IModManager {
     setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void, unloaded?: boolean): boolean;
     uninitialize(index: number): void;
     uninitializeAll(): void;
+    /**
+     * Caches the hooks used by each mod, sorted by priority.
+     *
+     * 1. For every valid mod, cache the hooks for that mod using `cacheHooksForMod`
+     * 2. For all cached hooks, sort the cached list of priorities that all the cached hook methods use.
+     */
     cacheHooks(): void;
+    /**
+     * Cache the hooks for a given mod.
+     *
+     * 1. If the mod doesn't have an instance, return.
+     * 2. Filter all the registered hooks on the mod by whether they're actually hook methods. Log errors for
+     *    any invalid methods.
+     * 3. Filter by check if the mod is loaded or enabled and the hook is global.
+     *   - This is to verify that this hook should be cached right now. Global hooks are always cached if the mod
+     * 	   is enabled, while non-global hooks are only cached if the mod is loaded (which is only if you're in-game)
+     * 4. Cache each hook by priority.
+     * 5. Log registered hooks, formatted as `hookName[priority]`
+     */
+    private cacheHooksForMod(index);
     private onLanguageLoad(languageName, callback);
 }
