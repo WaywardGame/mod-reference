@@ -2,7 +2,7 @@ import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
 import { Hook, IModConfig } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
-import { CanLoadState, ICanLoadInfo, IModManager } from "mod/IModManager";
+import { CanLoadState, ICachedHook, ICanLoadInfo, IModManager } from "mod/IModManager";
 export default class ModManager implements IModManager {
     private readonly mods;
     private modsToSetup;
@@ -23,17 +23,9 @@ export default class ModManager implements IModManager {
     getLoadedModByName(name: string): IModInfo | undefined;
     getModFromIndex(i: number): IModInfo;
     getEnabledMods(): number[];
-    /**
-     * Returns a `HookCallFactory` for the given hook name.
-     * @param hook A hook name. See `Mod` or `Hook`.
-     * @param defaultValue The default value to return
-     */
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
-    /**
-     * Returns an iterator of mod indices representing each mod with the given hook, sorted by hook priority.
-     * @param hook A hook name. See `Mod` or `Hook`.
-     */
     getModsWithHook(hook: Hook): IterableIterator<number>;
+    getCachedHook(hook: Hook): ICachedHook | undefined;
     /**
      * @deprecated
      * @see `getHook(hookName).call(...args)`

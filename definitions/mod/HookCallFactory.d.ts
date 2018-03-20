@@ -74,11 +74,20 @@ export default class HookCallFactory<H extends Hook, R = any> {
      */
     setDefault(defaultValue: R): this;
     /**
+     * Sets this hook call to use fast mode. In fast mode, results will not be validated, and the only
+     * supported `reduceStrategy` is `ReduceStrategy.First`
+     */
+    setFastCall(): this;
+    /**
      * This is the internal method for `HookCallFactory.call`. The separation of this method
      * and the `call` field is to allow the `call` field to have the method type of the hook
      * that will be called.
      */
     private _call(...args);
+    /**
+     * A faster version of call that does not validate results & only works with `ReduceStrategy.First`
+     */
+    private _callFast(...args);
     /**
      * Takes the iterator for hook results and turns it into a single result, based on the `reduceStrategy`.
      *

@@ -92,6 +92,7 @@ export default class Game extends Emitter implements IGame {
     private loadedWorld;
     private renderingEnabled;
     private playOptions;
+    private ambientLightLevelCache;
     readonly isDailyChallenge: boolean;
     constructor();
     initialize(): void;
@@ -138,6 +139,7 @@ export default class Game extends Emitter implements IGame {
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     getBlackness(): number;
     getAmbientLightLevel(z: number): number;
+    updateAmbientLightLevel(z: number): void;
     updateReputation(reputation: number): void;
     getReputation(): number;
     getDifficulty(): Difficulty;

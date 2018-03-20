@@ -19,6 +19,19 @@ export declare enum CanLoadState {
     IncompatibleVersion = 9,
     DisabledInMultiplayer = 10,
 }
+/**
+ * A list of all mods that cache a hook indexed by hook priority.
+ */
+export interface ICachedHook {
+    [index: number]: number[];
+    priorities: number[];
+}
+/**
+ * A list of all cached hooks indexed by `Hook`
+ */
+export declare type ICachedHooks = {
+    [hook in Hook]?: ICachedHook;
+};
 export interface IModManager {
     cacheHooks(): void;
     canLoad(index: number, fromModsMenu?: boolean): CanLoadState;
@@ -85,6 +98,7 @@ export interface IModManager {
     /**
      * Returns a `HookCallFactory` for the given hook name.
      * @param hook A hook name.
+     * @param defaultValue The default value to return
      * @see `Mod` or `Hook` for a list of valid hook names.
      */
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
@@ -94,5 +108,11 @@ export interface IModManager {
      * @see `Mod` or `Hook` for a list of valid hook names.
      */
     getModsWithHook(hook: Hook): IterableIterator<number>;
+    /**
+     * Returns the internal list of mods with a hook and their priorities.
+     * @param hook A hook name.
+     * @see `Mod` or `Hook` for a list of valid hook names.
+     */
+    getCachedHook(hook: Hook): ICachedHook | undefined;
 }
 export default IModManager;
