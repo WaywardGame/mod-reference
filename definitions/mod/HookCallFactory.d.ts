@@ -21,7 +21,7 @@ export declare enum ReduceStrategy {
 export declare type IReduceStrategy<R> = ReduceStrategy | ((newValue: R, lastValue?: R) => R);
 export default class HookCallFactory<H extends Hook, R = any> {
     call: Mod[H];
-    private hook;
+    private readonly hook;
     private resultPredicate?;
     private mods;
     private baseErrorMessage;

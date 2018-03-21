@@ -7,6 +7,7 @@ import { IPlayerCustomization } from "player/IPlayer";
 export default class DeathKnightNPC extends BaseNPC implements INPC {
     constructor(id?: number, x?: number, y?: number, z?: number);
     protected getDefaultName(): string;
+    protected initializeStats(): void;
     protected getDefaultCustomization(): IPlayerCustomization;
     protected getDefaultEquipment(equipType: EquipType): IItem | ItemType | undefined;
     protected getDefaultAiType(): AiType;

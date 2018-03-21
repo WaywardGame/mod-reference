@@ -1,10 +1,10 @@
-import QuadrantElement, { Quadrant } from "newui/game/util/QuadrantElement";
+import QuadrantElement, { Quadrant } from "newui/game/element/QuadrantElement";
 import { UiApi } from "newui/INewUi";
 import { IPlayer } from "player/IPlayer";
 export default class Stats extends QuadrantElement {
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
-    private player;
+    private readonly player;
     private statbars;
     private attributes;
     private autoStats;

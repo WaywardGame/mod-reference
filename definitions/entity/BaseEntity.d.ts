@@ -33,6 +33,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     increaseStat(stat: Stat | IStat, amount: number): boolean;
     setStatMax(stat: Stat | IStat, amount: number): void;
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
+    setStatAndMax(stat: Stat | IStat, max: number, current: number): void;
     updateStats(): void;
     hasStatus(status: StatusType): boolean;
     setStatus(status: StatusType, to: boolean): void;
@@ -47,7 +48,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
     isOnFire(): FireType;
-    canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     hasProperty(property: Property): boolean;

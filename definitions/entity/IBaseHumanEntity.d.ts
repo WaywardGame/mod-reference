@@ -30,7 +30,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     addMilestone(milestone: MilestoneType, data?: number): void;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     cancelResting(reason: RestCancelReason): void;
-    canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
@@ -43,6 +43,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     getHandToUse(): EquipType | undefined;
     getMaxHealth(): number;
     getName(html?: boolean): string;
+    getDamageModifier(): number;
     isGhost(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;

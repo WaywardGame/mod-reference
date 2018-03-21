@@ -2,8 +2,8 @@ import { IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, Multi
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
+import { ICharacter } from "newui/element/Character";
 import { TextOrTranslationData } from "newui/INewUi";
-import { ICharacter } from "newui/util/Character";
 import IPlayer from "player/IPlayer";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export default class Multiplayer implements IMultiplayer {

@@ -1,6 +1,6 @@
+import Button, { ButtonOptions } from "newui/element/Button";
+import { Refreshable } from "newui/element/Refreshable";
 import { TextOrTranslationData, UiApi } from "newui/INewUi";
-import Button, { ButtonOptions } from "newui/util/Button";
-import { Refreshable } from "newui/util/Refreshable";
 export interface CheckButtonOptions extends ButtonOptions {
     effect?: never;
     checked?: boolean;

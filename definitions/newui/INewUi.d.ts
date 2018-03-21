@@ -1,6 +1,6 @@
 import { Dictionary, InterruptChoice, UiTranslation } from "language/ILanguage";
+import { InputOptions } from "newui/element/Input";
 import { InterruptOptions } from "newui/menu/InterruptMenu";
-import { InputOptions } from "newui/util/Input";
 export declare enum ScreenId {
     None = 0,
     Game = 1,

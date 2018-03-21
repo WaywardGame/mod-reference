@@ -1,5 +1,5 @@
+import UiScreen from "newui/element/UiScreen";
 import { UiApi } from "newui/INewUi";
-import UiScreen from "newui/util/UiScreen";
 export interface ExtendsScreen {
     new (uiApi: UiApi): UiScreen;
 }

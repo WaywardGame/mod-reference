@@ -1,7 +1,7 @@
+import { Refreshable } from "newui/element/Refreshable";
+import { TextOptions } from "newui/element/Text";
+import UiElement from "newui/element/UiElement";
 import { UiApi, UiElementOptions } from "newui/INewUi";
-import { Refreshable } from "newui/util/Refreshable";
-import { TextOptions } from "newui/util/Text";
-import UiElement from "newui/util/UiElement";
 export interface IDropdownOptions<OptionId = string | number> extends Partial<UiElementOptions> {
     defaultOption?: OptionId | (() => OptionId);
     options?: GeneratorOf<IDropdownOption<OptionId>>;

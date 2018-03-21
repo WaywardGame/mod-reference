@@ -1,8 +1,8 @@
+import Menu from "newui/element/Menu";
+import Tooltip from "newui/element/Tooltip";
+import UiElement from "newui/element/UiElement";
 import { IUiElement, IUiScreen, MenuId, ScreenId, TooltipOptionsVague, UiApi, UiElementOptions } from "newui/INewUi";
 import { InterruptOptions } from "newui/menu/InterruptMenu";
-import Menu from "newui/util/Menu";
-import Tooltip from "newui/util/Tooltip";
-import UiElement from "newui/util/UiElement";
 export interface ScreenOptions extends UiElementOptions {
     screenId: ScreenId;
     retain?: boolean;

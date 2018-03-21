@@ -45,7 +45,6 @@ export interface ISteamworks extends Emitter {
     openUrl(url: string): void;
     openWorkshop(publishId?: string): Promise<void>;
     publishMod(modIndex: number): Promise<string>;
-    recordProblem(message: string): void;
     sendMessage(name: string, ...data: any[]): boolean;
     setLobbyData(name: string, data: string): boolean;
     setLobbyType(type: LobbyType): void;
@@ -53,7 +52,6 @@ export interface ISteamworks extends Emitter {
     setRichPresence(key: string, value: string): boolean;
     setupMods(callback: () => void): void;
     setupMultiplayerLog(): void;
-    setupReporting(): void;
     toggleDeveloperTools(): void;
     unsubscribe(publishId: string): Promise<void>;
 }

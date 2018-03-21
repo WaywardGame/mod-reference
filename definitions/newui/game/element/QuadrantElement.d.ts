@@ -1,4 +1,4 @@
-import StaticElement from "newui/game/util/StaticElement";
+import StaticElement from "newui/game/element/StaticElement";
 import { UiApi, UiElementOptions } from "newui/INewUi";
 export declare enum Quadrant {
     None = 0,

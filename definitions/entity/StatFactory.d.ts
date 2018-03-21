@@ -1,7 +1,7 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, IStatFactory, IStats, Stat } from "entity/IStats";
 declare class StatFactory implements IStatFactory {
-    private result;
+    private readonly result;
     /**
      * @param type The `Stat` this factory is building
      * @param value The starting value of this stat. Defaults to `0`

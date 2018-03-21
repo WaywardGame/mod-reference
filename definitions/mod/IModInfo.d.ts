@@ -1,6 +1,7 @@
 import { ILanguage } from "language/ILanguage";
 import { IModConfig } from "mod/IMod";
 import Mod from "mod/Mod";
+import Log from "utilities/Log";
 export interface IModInfo {
     config: IModConfig;
     state: ModState;
@@ -22,6 +23,7 @@ export interface IModInfo {
         path: string;
         instance?: ILanguage;
     }>;
+    log: Log;
 }
 export declare enum TypeFlag {
     Undefined = 1,

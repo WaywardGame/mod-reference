@@ -1,9 +1,9 @@
 import { UiTranslation } from "language/ILanguage";
+import { BlockRow } from "newui/element/BlockRow";
+import Button, { ButtonEffect, ButtonOptions } from "newui/element/Button";
+import UiText, { Heading, Paragraph, TextOptions } from "newui/element/Text";
+import UiElement from "newui/element/UiElement";
 import { IMenu, IUiElement, IUiScreen, MenuId, SelectDirection, TextOrTranslationData, UiApi, UiElementOptions } from "newui/INewUi";
-import { BlockRow } from "newui/util/BlockRow";
-import Button, { ButtonEffect, ButtonOptions } from "newui/util/Button";
-import UiText, { Heading, Paragraph, TextOptions } from "newui/util/Text";
-import UiElement from "newui/util/UiElement";
 export interface MenuOptions extends UiElementOptions {
     menuId: MenuId;
     title?: string | UiTranslation;

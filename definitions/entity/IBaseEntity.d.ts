@@ -26,7 +26,7 @@ export default interface IBaseEntity extends IPointZ, Emitter {
     isInFov(): boolean;
     setInFov(inFov: boolean): void;
     isOnFire(): FireType;
-    canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     /**

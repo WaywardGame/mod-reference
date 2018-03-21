@@ -1,9 +1,9 @@
+import UiScreen from "newui/element/UiScreen";
 import MenuBar from "newui/game/static/MenuBar";
 import Messages from "newui/game/static/Messages";
 import Quickslots from "newui/game/static/Quickslots";
 import Stats from "newui/game/static/Stats";
 import { UiApi } from "newui/INewUi";
-import UiScreen from "newui/util/UiScreen";
 export interface GameScreenData {
     backgroundImage: string;
 }

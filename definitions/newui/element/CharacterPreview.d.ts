@@ -1,6 +1,6 @@
 import { IRGB } from "Enums";
+import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
-import UiElement from "newui/util/UiElement";
 import { IPlayerCustomization } from "player/IPlayer";
 export declare class SVG extends UiElement {
     private readonly filters;

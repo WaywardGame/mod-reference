@@ -1,5 +1,5 @@
+import Menu from "newui/element/Menu";
 import { UiApi } from "newui/INewUi";
-import Menu from "newui/util/Menu";
 export default class NewGameMenu extends Menu {
     private slot;
     private inputName;

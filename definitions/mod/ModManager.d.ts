@@ -3,6 +3,7 @@ import HookCallFactory from "mod/HookCallFactory";
 import { Hook, IModConfig } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
 import { CanLoadState, ICachedHook, ICanLoadInfo, IModManager } from "mod/IModManager";
+import Log from "utilities/Log";
 export default class ModManager implements IModManager {
     private readonly mods;
     private modsToSetup;
@@ -47,6 +48,7 @@ export default class ModManager implements IModManager {
     getIdentifier(index: number): string;
     getConfig(mod: number | IModInfo): IModConfig | undefined;
     getName(index: number): string;
+    getLog(index: number): Log;
     getDescription(index: number): string;
     getVersion(index: number): string;
     getLastUpdatedDate(index: number): number | undefined;

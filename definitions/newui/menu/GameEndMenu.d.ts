@@ -1,6 +1,6 @@
 import { PlayerState } from "Enums";
+import Menu from "newui/element/Menu";
 import { UiApi } from "newui/INewUi";
-import Menu from "newui/util/Menu";
 import { IHighscore } from "save/data/ISaveDataGlobal";
 export interface GameEndMenuOptions {
     state: PlayerState;

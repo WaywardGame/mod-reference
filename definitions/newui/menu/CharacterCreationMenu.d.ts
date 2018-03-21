@@ -1,5 +1,5 @@
+import Menu from "newui/element/Menu";
 import { UiApi } from "newui/INewUi";
-import Menu from "newui/util/Menu";
 import { IPlayerCustomization } from "player/IPlayer";
 export interface CharacterCreationArgs {
     customization: IPlayerCustomization;

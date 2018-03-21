@@ -1,6 +1,6 @@
 import { InterruptChoice } from "language/ILanguage";
+import Menu from "newui/element/Menu";
 import { InterruptInputOptions, MenuId, TextOrTranslationData, UiApi } from "newui/INewUi";
-import Menu from "newui/util/Menu";
 export declare enum InterruptType {
     Info = 0,
     Confirm = 1,

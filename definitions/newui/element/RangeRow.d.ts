@@ -1,10 +1,10 @@
+import { BlockRow } from "newui/element/BlockRow";
+import Button from "newui/element/Button";
+import { RangeInput, RangeInputOptions } from "newui/element/RangeInput";
+import { RangeInputValueDisplay } from "newui/element/RangeInputValueDisplay";
+import { Refreshable } from "newui/element/Refreshable";
+import { Heading } from "newui/element/Text";
 import { TextOrTranslationData, UiApi } from "newui/INewUi";
-import { BlockRow } from "newui/util/BlockRow";
-import Button from "newui/util/Button";
-import { RangeInput, RangeInputOptions } from "newui/util/RangeInput";
-import { RangeInputValueDisplay } from "newui/util/RangeInputValueDisplay";
-import { Refreshable } from "newui/util/Refreshable";
-import { Heading } from "newui/util/Text";
 export interface RangeRowOptions extends RangeInputOptions {
     heading: TextOrTranslationData;
     displayValue?: boolean | ((value: number) => string);

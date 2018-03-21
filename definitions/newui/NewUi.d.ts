@@ -1,9 +1,9 @@
 import { InterruptChoice } from "language/ILanguage";
+import Menu from "newui/element/Menu";
+import UiElement from "newui/element/UiElement";
+import UiScreen from "newui/element/UiScreen";
 import { InterruptInputOptions, IUiElement, IUiScreen, MenuId, ScreenId, TextOrTranslationData, TooltipOptionsVague, UiApi } from "newui/INewUi";
 import { InterruptOptions } from "newui/menu/InterruptMenu";
-import Menu from "newui/util/Menu";
-import UiElement from "newui/util/UiElement";
-import UiScreen from "newui/util/UiScreen";
 import Emitter from "utilities/Emitter";
 export default class Ui extends Emitter implements UiApi {
     private readonly screens;

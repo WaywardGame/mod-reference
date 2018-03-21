@@ -14,6 +14,7 @@ import { IHairstyleDescription } from "player/IPlayer";
 import { ISkillDescription } from "player/Skills";
 import { ITerrainDescription } from "tile/ITerrain";
 import { IDialogInfo } from "ui/IUi";
+import Log from "utilities/Log";
 export declare abstract class BaseMod {
     private readonly index;
     private readonly buttons;
@@ -120,6 +121,7 @@ export declare abstract class BaseMod {
      * Returns the name of this mod. Uses the constructor name as a fallback.
      */
     getName(): string;
+    getLog(): Log;
     getPath(): string;
     loadFile(file: string, callback: (fileText: string, success: boolean) => void): boolean;
     createOptionsSection(creationHandler: (uiApi: UiApi, uiElement: ModOptions) => any): void;
@@ -140,7 +142,7 @@ export declare abstract class BaseMod {
     addTerrainResource(terrainType: number, terrainResource: ITerrainResourceItem[], defaultItem?: ItemType): void;
     addDoodad(description: IDoodadDescription): number;
     addDictionary(name: string, dictionaryEnum: any): number;
-    extendLanguage(language: string, extension: ILanguageExtension): void;
+    extendLanguage(language: string, extension: ILanguageExtension): number;
     addMessage(name: string, message: string): number;
     registerPacket(packet: Packets.IPacketClass): void;
     /**

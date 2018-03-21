@@ -2,6 +2,7 @@ import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
+import Log from "utilities/Log";
 export interface ICanLoadInfo {
     name: string;
     loadable: boolean;
@@ -52,6 +53,7 @@ export interface IModManager {
     getEnabledMods(): number[];
     getModFromIndex(i: number): IModInfo;
     getMods(): IModInfo[];
+    getLog(index: number): Log;
     getName(index: number): string;
     getPath(index: number): string;
     getProvided(index: number): IModProvides;

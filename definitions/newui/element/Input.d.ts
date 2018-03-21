@@ -1,5 +1,5 @@
+import UiElement from "newui/element/UiElement";
 import { TextOrTranslationData, TranslationData, UiApi, UiElementOptions } from "newui/INewUi";
-import UiElement from "newui/util/UiElement";
 export interface InputOptions {
     placeholder?: TextOrTranslationData;
     default?: TextOrTranslationData;

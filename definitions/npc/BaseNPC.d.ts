@@ -19,6 +19,7 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     kill(): void;
     isHostile(): boolean;
     isWaiting(): boolean;
+    getDamageModifier(): number;
     /**
      * The actions available to use with this npc
      */
@@ -28,6 +29,10 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
      * The name of the npc - called when created
      */
     protected abstract getDefaultName(): string;
+    /**
+     * Initialize stats
+     */
+    protected abstract initializeStats(): void;
     /**
      * The customizations of the npc - called when created
      */
@@ -45,12 +50,9 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
      * The ai type
      */
     protected abstract getDefaultAiType(): AiType;
-    /**
-     * Initialize stats
-     */
-    protected initializeStats(): void;
     protected attack(): boolean;
     protected move(): boolean;
+    protected autoScaleStats(): void;
     private checkMove(tileX, tileY, tileZ);
     private updateDirection(x, y);
 }

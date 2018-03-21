@@ -3,7 +3,6 @@ import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworks, IW
 import Emitter from "utilities/Emitter";
 export default class Steamworks extends Emitter implements ISteamworks {
     private installDir;
-    private readonly recordedProblems;
     private steamId;
     private betaName;
     private buildTime;
@@ -81,8 +80,6 @@ export default class Steamworks extends Emitter implements ISteamworks {
     debugLog(...args: any[]): void;
     hasServerToJoin(): boolean;
     onReady(): void;
-    setupReporting(): void;
-    recordProblem(message: string): void;
     processBackups(): boolean;
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;
@@ -116,6 +113,5 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private getSyncPath(name);
     private getSharePathForModZip(name);
     private getSharePathForModImage(name);
-    private recordEvent(categorySuffix, action);
     private getFilesInFolder(folderPath);
 }
