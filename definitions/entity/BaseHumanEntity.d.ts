@@ -10,7 +10,6 @@ import { ISkillSet } from "player/Skills";
 import { IOptions } from "save/data/ISaveDataGlobal";
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
     attackFromEquip: IAttackHand;
-    benignity: number;
     customization: IPlayerCustomization;
     deathBy: string;
     defense: PlayerDefense;
@@ -21,7 +20,6 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     handToUse: EquipType;
     inventory: IContainer;
     lightBonus: number;
-    malignity: number;
     options: IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;

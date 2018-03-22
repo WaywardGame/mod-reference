@@ -9,7 +9,6 @@ import { ISkillSet } from "player/Skills";
 import { IOptions } from "save/data/ISaveDataGlobal";
 export default interface IBaseHumanEntity extends IBaseEntity {
     attackFromEquip: IAttackHand;
-    benignity: number;
     customization: IPlayerCustomization;
     deathBy: string;
     defense: PlayerDefense;
@@ -19,7 +18,6 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     };
     handToUse: EquipType;
     inventory: IContainer;
-    malignity: number;
     options: IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;

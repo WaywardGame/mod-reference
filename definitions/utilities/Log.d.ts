@@ -43,14 +43,40 @@ declare class Log {
     info: (...args: any[]) => void;
     private readonly sources;
     constructor(...sources: Array<Source | string>);
+    /**
+     * Re-binds the Log methods. Called automatically when the winston instance is set.
+     */
     refresh(): void;
 }
 declare module Log {
+    /**
+     * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
+     */
     function setWinston(w: any, path: string): void;
+    /**
+     * Returns a method that can be used to `Log.info` with the given sources.
+     * @param sources A list of sources to log to.
+     */
     function info(...sources: Array<Source | string>): (...args: any[]) => void;
+    /**
+     * Returns a method that can be used to `Log.warn` with the given sources.
+     * @param sources A list of sources to log to.
+     */
     function warn(...sources: Array<Source | string>): (...args: any[]) => void;
+    /**
+     * Returns a method that can be used to `Log.error` with the given sources.
+     * @param sources A list of sources to log to.
+     */
     function error(...sources: Array<Source | string>): (...args: any[]) => void;
+    /**
+     * Returns a method that can be used to `Log.trace` with the given sources.
+     * @param sources A list of sources to log to.
+     */
     function trace(...sources: Array<Source | string>): (...args: any[]) => void;
+    /**
+     * Returns a method that can be used to `Log.debug` with the given sources.
+     * @param sources A list of sources to log to.
+     */
     function debug(...sources: Array<Source | string>): (...args: any[]) => void;
 }
 export default Log;
