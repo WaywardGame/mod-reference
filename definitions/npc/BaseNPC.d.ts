@@ -50,6 +50,10 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
      * The ai type
      */
     protected abstract getDefaultAiType(): AiType;
+    /**
+     * The reputation change when the npc dies
+     */
+    protected getReputationChangeOnDeath(): number;
     protected attack(): boolean;
     protected move(): boolean;
     protected autoScaleStats(): void;

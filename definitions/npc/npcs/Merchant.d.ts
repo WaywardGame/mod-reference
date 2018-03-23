@@ -8,6 +8,7 @@ export default class MerchantNPC extends BaseNPC implements INPC {
     constructor(id?: number, x?: number, y?: number, z?: number);
     update(): void;
     getActions(): ActionType[] | undefined;
+    protected getReputationChangeOnDeath(): number;
     protected getDefaultName(): string;
     protected initializeStats(): void;
     protected getDefaultCustomization(): IPlayerCustomization;

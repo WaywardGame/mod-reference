@@ -17,7 +17,7 @@ export default class ModManager implements IModManager {
     setupMods(callback: () => void): void;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
-    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
+    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): Promise<void>;
     removeMod(id: number, uninstall?: boolean): void;
     getMods(): IModInfo[];
     getLoadedMods(): IModInfo[];

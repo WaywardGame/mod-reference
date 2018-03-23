@@ -1,7 +1,7 @@
 import { CaseStyle } from "Enums";
 import { ILanguage } from "language/ILanguage";
 import Language from "language/Language";
-export interface SerializedLanguage {
+export interface ISerializedLanguage {
     name?: string;
     extends?: string;
     alternateFontStyle?: boolean;
@@ -13,5 +13,5 @@ export interface SerializedLanguage {
     };
 }
 export declare const dictionaryEnums: any;
-export declare function deserialize(serialized: SerializedLanguage, into?: ILanguage): Language | undefined;
-export declare function serialize(language: ILanguage, caseStyle?: CaseStyle): SerializedLanguage;
+export declare function deserialize(serialized: ISerializedLanguage, into?: ILanguage): Language | undefined;
+export declare function serialize(language: ILanguage, caseStyle?: CaseStyle): ISerializedLanguage;
