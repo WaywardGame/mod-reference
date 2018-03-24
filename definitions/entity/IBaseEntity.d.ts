@@ -145,5 +145,6 @@ export declare type IStatus = Writable<{
 }, keyof typeof StatusType>;
 export declare enum Property {
     Credit = 0,
+    Talked = 1,
 }
 export declare type IProperties = Map<Property, any>;

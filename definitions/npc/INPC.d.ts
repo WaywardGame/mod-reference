@@ -9,4 +9,5 @@ export interface INPC extends IBaseHumanEntity {
     moveTo(x: number, y: number, z: number): boolean;
     isHostile(): boolean;
     isWaiting(): boolean;
+    makeHostile(): void;
 }

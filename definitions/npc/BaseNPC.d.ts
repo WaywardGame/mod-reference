@@ -20,6 +20,7 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     isHostile(): boolean;
     isWaiting(): boolean;
     getDamageModifier(): number;
+    makeHostile(): void;
     /**
      * The actions available to use with this npc
      */

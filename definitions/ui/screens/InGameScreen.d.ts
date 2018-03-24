@@ -168,7 +168,7 @@ export default class InGameScreen extends BaseScreen {
     tooltipDisable(): void;
     tooltipHide(): void;
     unSelectElements(): void;
-    getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: string | undefined): string;
+    getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: string | undefined, isNPC: boolean): string;
     additionalRequirements(itemType: ItemType, recipe: IRecipe): string;
     getTooltipHtmlForTile(tile: ITile): string;
     displayMessagePack(messagePack: IMessagePack): void;
