@@ -1,6 +1,7 @@
+import DoodadInfo from "doodad/DoodadInfo";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
-import { IContainer, IItemArray, IItemLegendary } from "item/IItem";
+import { IContainer, IItem, IItemArray, IItemLegendary } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
@@ -20,6 +21,8 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, P
     isEmbers(): boolean;
     canHarvest(): boolean;
     canPickup(player: IPlayer): boolean;
+    getPickupTypes(): ItemType[] | undefined;
+    getDoodadInfo(): DoodadInfo | undefined;
     causeStatus(human: IBaseHumanEntity): void;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
@@ -39,6 +42,7 @@ export interface IDoodadOptions extends IObjectOptions {
     legendary?: IItemLegendary;
     disassembly?: IItemArray;
     ownerIdentifier?: string;
+    item?: IItem;
 }
 export declare type IDoodadOld = Partial<IDoodad> & {
     growInto?: DoodadType;

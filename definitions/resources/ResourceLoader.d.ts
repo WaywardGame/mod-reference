@@ -1,5 +1,5 @@
-import { IResourceContainer, IResourceLoader, PathType } from "IResourceLoader";
 import { IImageOverrideDescription } from "mod/IModInfo";
+import { IResourceContainer, IResourceLoader } from "resources/IResourceLoader";
 export default class ResourceLoader implements IResourceLoader {
     private concurrent;
     private loadingCount;
@@ -9,14 +9,12 @@ export default class ResourceLoader implements IResourceLoader {
     private readonly maxConcurrent;
     private spritePacker;
     private tilePacker;
-    private subTileSize;
     private imageOverrides;
     initialize(gl: WebGL2RenderingContext): void;
     loadResources(container: IResourceContainer, callback: () => void): void;
     continueLoading(): void;
     takeLoadingSlot(callback: () => void): void;
     releaseLoadingSlot(): void;
-    getPath(pathType: PathType, index: number, extra?: number): string;
     getImageOverride(src: string): Partial<IImageOverrideDescription> | undefined;
     updateImageOverrides(): void;
     private loadResourcesInternal(container);
@@ -33,6 +31,8 @@ export default class ResourceLoader implements IResourceLoader {
     private loadTerrain(terrainType);
     private loadDoodads();
     private loadDoodad(doodadType);
+    private loadDoodadItems();
+    private loadDoodadItem(itemType);
     private loadTileEvents();
     private loadTileEvent(tileEventType);
     private loadHairstyles();

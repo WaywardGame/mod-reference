@@ -4,7 +4,11 @@ export interface IRegistrarItem {
 }
 export default class Registrar<T extends IRegistrarItem> {
     private readonly registrations;
-    get(id: number): T;
+    private baseItem;
+    get(id: number): T | undefined;
+    isBase(item: T): boolean;
+    usesBase(id: number): boolean;
+    registerBase(item: T): void;
     register(item: T, id?: number): void;
     unregister(item: T): void;
 }

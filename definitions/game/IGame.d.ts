@@ -125,7 +125,6 @@ export interface IGame extends Emitter {
     getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getReputation(): number;
-    getReputationMessage(): string;
     getSkillPercent(skill: SkillType): number;
     getStrength(): number;
     getTactics(): number;

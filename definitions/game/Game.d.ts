@@ -144,7 +144,6 @@ export default class Game extends Emitter implements IGame {
     updateReputation(reputation: number): void;
     getReputation(): number;
     getDifficulty(): Difficulty;
-    getReputationMessage(): string;
     getMalignity(): number;
     getBenignity(): number;
     getMaxHealth(): number;

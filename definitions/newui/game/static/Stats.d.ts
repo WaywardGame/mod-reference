@@ -5,9 +5,6 @@ export default class Stats extends QuadrantElement {
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
     private readonly player;
-    private statbars;
-    private attributes;
-    private autoStats;
     constructor(uiApi: UiApi, player: IPlayer);
     private refresh();
     /**

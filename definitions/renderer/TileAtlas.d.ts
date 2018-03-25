@@ -57,6 +57,9 @@ export default class TileAtlas implements ITileAtlas {
     doodads: {
         [index: number]: DoodadInfo;
     };
+    doodadItems: {
+        [index: number]: DoodadInfo;
+    };
     mounds: {
         [index: number]: DoodadInfo;
     };

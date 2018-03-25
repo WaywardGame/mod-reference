@@ -8,6 +8,7 @@ import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IOptions } from "save/data/ISaveDataGlobal";
+export declare const REPUTATION_MAX = 64000;
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;

@@ -197,6 +197,7 @@ export declare enum ActionType {
     CloseContainer = 75,
     SmotherFire = 76,
     Trade = 77,
+    PlaceDown = 78,
 }
 export declare enum ItemType {
     None = 0,
@@ -825,6 +826,7 @@ export declare enum DoodadType {
     LitBarkTorchStand = 85,
     AnimalFatTorchStand = 86,
     LitAnimalFatTorchStand = 87,
+    Item = 88,
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,

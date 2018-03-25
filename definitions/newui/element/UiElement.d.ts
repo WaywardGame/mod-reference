@@ -7,7 +7,7 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     private readonly _element;
     private scrollingChild?;
     private readonly _data;
-    private tooltipOptions?;
+    private _tooltipOptions?;
     readonly element: HTMLElement;
     readonly jsonData: DOMStringMap & T;
     readonly data: DOMStringMap;
@@ -56,4 +56,5 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
     scrollTo(child: UiElement, ms?: number): void;
     getStyle(styleName: string): string;
     then(cb: (this: this, button: this) => any, ...args: any[]): this;
+    private initializeTooltip();
 }

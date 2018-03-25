@@ -1,12 +1,15 @@
+import DoodadInfo from "doodad/DoodadInfo";
 import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, SentenceCaseStyle } from "Enums";
+import { DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, ItemType, SentenceCaseStyle } from "Enums";
 import { IItemArray } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback {
+    protected static registrarId: number;
+    "constructor": typeof Doodad;
     containedItems: IItemArray;
     decay?: number;
     gatherReady?: boolean;
@@ -28,7 +31,10 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     y: number;
     z: number;
     private _description;
+    static getRegistrarId(): number;
+    static setRegistrarId(id: number): void;
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
+    getRegistrarId(): number;
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
@@ -37,9 +43,11 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
     canPickup(player: IPlayer): boolean;
+    getPickupTypes(): ItemType[] | undefined;
     isReadyToGather(): boolean;
     isGatherable(): boolean;
     isEmbers(): boolean;
+    getDoodadInfo(): DoodadInfo | undefined;
     canHarvest(): boolean;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     getDurabilityMessage(this: IDoodad): Message;

@@ -69,7 +69,7 @@ export interface TooltipOptionsVague extends UiElementOptions {
     heading?: TextOrTranslationData;
     text?: TextOrTranslationData;
     maxWidth?: number;
-    create?(...args: any[]): Promise<void>;
+    create?(tooltip: IUiElement): Promise<void>;
 }
 export declare type InterruptInputOptions = InputOptions & InterruptOptionsCanCancel;
 export interface InterruptOptionsCanCancel {
@@ -187,13 +187,16 @@ export declare enum UiScreenEvent {
     GoBackMenu = "GoBackMenu",
     BindLoop = "BindLoop",
 }
-export interface TranslationData {
+export interface BaseTranslationData {
     dictionary: Dictionary;
     entry: number;
     args?: any[] | (() => any[]);
     properties?: string[];
     shouldTrim?: false;
 }
+export declare type TranslationData = BaseTranslationData | (Partial<BaseTranslationData> & {
+    entry: UiTranslation;
+});
 export declare type TextOrTranslationData = string | UiTranslation | TranslationData;
 export interface LoadMenuArgs {
     _wentBack: boolean;
