@@ -1,5 +1,6 @@
 import { ICreature } from "creature/ICreature";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
+import { EntityType } from "entity/IEntity";
 import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap } from "Enums";
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
 import IPlayer from "player/IPlayer";
@@ -11,7 +12,8 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     containedWithin: IContainer;
     decay: number;
     disassembly: IItemArray;
-    equippedPid: EquipType;
+    equippedId?: number;
+    equippedType?: EntityType;
     id: number;
     itemOrders?: number[];
     legendary: IItemLegendary;
@@ -37,8 +39,8 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     verifyAndFixItem(): void;
     damage(source: string, modifier?: number): void;
     isDamaged(): boolean;
-    isEquipped(): boolean;
     isInTradeContainer(): boolean;
+    isEquipped(): boolean;
     getEquipSlot(): EquipType | undefined;
     setQuickSlot(player: IPlayer, quickSlot: number | undefined): void;
     clearQuickSlot(): void;

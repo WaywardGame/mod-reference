@@ -10,5 +10,5 @@ export default class Registrar<T extends IRegistrarItem> {
     usesBase(id: number): boolean;
     registerBase(item: T): void;
     register(item: T, id?: number): void;
-    unregister(item: T): void;
+    unregister(item: T): boolean;
 }

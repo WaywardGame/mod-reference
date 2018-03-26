@@ -122,7 +122,7 @@ export interface IGame extends Emitter {
     getPlayerByName(name: string): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
-    getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
+    getPlayersThatSeePosition(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getReputation(): number;
     getSkillPercent(skill: SkillType): number;

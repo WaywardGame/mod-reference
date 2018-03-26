@@ -174,7 +174,7 @@ export default class Game extends Emitter implements IGame {
     isPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
     getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
-    getPlayersThatSeeTile(tileX: number, tileY: number, tileZ: number): IPlayer[];
+    getPlayersThatSeePosition(x: number, y: number, z: number): IPlayer[];
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
     getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;

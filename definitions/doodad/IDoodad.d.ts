@@ -1,6 +1,6 @@
 import DoodadInfo from "doodad/DoodadInfo";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
+import { ActionType, DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
 import { IContainer, IItem, IItemArray, IItemLegendary } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -22,6 +22,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, P
     canHarvest(): boolean;
     canPickup(player: IPlayer): boolean;
     getPickupTypes(): ItemType[] | undefined;
+    getActions(): ActionType[] | undefined;
     getDoodadInfo(): DoodadInfo | undefined;
     causeStatus(human: IBaseHumanEntity): void;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;

@@ -133,6 +133,7 @@ export interface IRestData {
     startHealth: number;
     totalCycles: number;
     itemId?: number;
+    doodadId?: number;
     cycle?: number;
     cancelReason?: RestCancelReason;
 }

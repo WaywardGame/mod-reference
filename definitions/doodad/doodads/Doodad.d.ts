@@ -1,7 +1,7 @@
 import DoodadInfo from "doodad/DoodadInfo";
 import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, ItemType, SentenceCaseStyle } from "Enums";
+import { ActionType, DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, ItemType, SentenceCaseStyle } from "Enums";
 import { IItemArray } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
@@ -44,6 +44,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
     canPickup(player: IPlayer): boolean;
     getPickupTypes(): ItemType[] | undefined;
+    getActions(): ActionType[] | undefined;
     isReadyToGather(): boolean;
     isGatherable(): boolean;
     isEmbers(): boolean;
