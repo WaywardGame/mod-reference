@@ -16,7 +16,7 @@ export declare enum InputEvent {
     Enter = "Enter",
     Escape = "Escape",
 }
-export default class Input<T = {}> extends UiElement<T & InputData> {
+export default class Input<T = any> extends UiElement<T & InputData> {
     default: TextOrTranslationData;
     text: string;
     private options;

@@ -11,7 +11,7 @@ export interface CheckButtonOptions extends ButtonOptions {
 export declare enum CheckButtonEvent {
     Change = "Change",
 }
-export declare class CheckButton<T = {}> extends Button<T> implements Refreshable {
+export declare class CheckButton<T = any> extends Button<T> implements Refreshable {
     private readonly heading;
     private _checked;
     private readonly _refresh;

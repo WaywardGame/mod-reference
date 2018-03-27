@@ -39,6 +39,7 @@ export default class InGameScreen extends BaseScreen {
     elementMessagesOverlay: JQuery;
     elementMessagesChatInput: JQuery;
     elementActions: JQuery;
+    elementChatButton: JQuery;
     elementDialogs: JQuery;
     elementDialogInventory: JQuery;
     elementDialogInventoryContainer: JQuery;

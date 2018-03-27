@@ -14,7 +14,7 @@ export interface IDropdownOption<OptionId> {
 export declare enum DropdownEvent {
     Selection = "Selection",
 }
-export default class Dropdown<OptionId = string | number, T = {}> extends UiElement<T> implements Refreshable {
+export default class Dropdown<OptionId = string | number, T = any> extends UiElement<T> implements Refreshable {
     protected optionsWrapper: UiElement;
     private readonly inputButton;
     private options;

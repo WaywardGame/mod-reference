@@ -1,6 +1,7 @@
 import { Dictionary, InterruptChoice, UiTranslation } from "language/ILanguage";
 import { InputOptions } from "newui/element/Input";
 import { InterruptOptions } from "newui/menu/InterruptMenu";
+import Emitter from "utilities/Emitter";
 export declare enum ScreenId {
     None = 0,
     Game = 1,
@@ -132,18 +133,16 @@ export declare enum UiElementEvent {
     AddChild = 4,
     RemoveChild = 5,
     Change = 6,
+    Tooltip = 7,
 }
 export declare enum UiApiEvent {
     Resize = 0,
     Interrupt = 1,
     InterruptClose = 2,
 }
-export interface IUiElement<T = {}> {
+export interface IUiElement<T = any> extends Emitter {
     jsonData: DOMStringMap & T;
     data: DOMStringMap;
-    trigger(event: UiElementEvent, ...args: any[]): Promise<any[]>;
-    on(event: string | number | Array<string | number>, callback: (...args: any[]) => any): void;
-    cancel(event: string | number | Array<string | number>, callback: (...args: any[]) => any): void;
     addClass(...classes: string[]): this;
     removeClass(...classes: string[]): this;
     isVisible(): boolean;

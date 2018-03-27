@@ -1,6 +1,6 @@
 import { IUiElement, SelectableLayer, TooltipOptionsVague, UiApi, UiElementOptions } from "newui/INewUi";
 import Emitter from "utilities/Emitter";
-export default class UiElement<T = {}> extends Emitter implements IUiElement {
+export default class UiElement<T = any> extends Emitter implements IUiElement<T> {
     protected uiApi: UiApi;
     protected children: UiElement[];
     protected parent: UiElement;
@@ -51,8 +51,8 @@ export default class UiElement<T = {}> extends Emitter implements IUiElement {
         top: number;
         left: number;
     };
-    getNthChild(nth?: number): UiElement<{}>;
-    getChildren(): UiElement<{}>[];
+    getNthChild(nth?: number): UiElement<any>;
+    getChildren(): UiElement<any>[];
     scrollTo(child: UiElement, ms?: number): void;
     getStyle(styleName: string): string;
     then(cb: (this: this, button: this) => any, ...args: any[]): this;

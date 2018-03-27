@@ -10,6 +10,6 @@ export interface IVersionInfo {
 declare module Version {
     function getVersionInfo(version: string): IVersionInfo;
     function isSameVersion(version: IVersionInfo, compareVersion: IVersionInfo): boolean;
-    function getVersionDisplayString(version?: string | IVersionInfo): string;
+    function getVersionDisplayString(version?: string | IVersionInfo): any;
 }
 export default Version;

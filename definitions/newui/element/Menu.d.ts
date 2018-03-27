@@ -17,7 +17,7 @@ export declare enum MenuEvent {
     CancelBind = "CancelBind",
     EnterBind = "EnterBind",
 }
-export default class Menu<T = {}> extends UiElement<T> implements IMenu {
+export default class Menu<T = any> extends UiElement<T> implements IMenu {
     screenHost: IUiScreen;
     protected contentWrapper: UiElement<any>;
     protected canCancel: boolean | undefined;
@@ -48,14 +48,14 @@ export default class Menu<T = {}> extends UiElement<T> implements IMenu {
     selectRight(): void;
     selectDirection(direction: SelectDirection, range?: number, canEscapeLayer?: boolean, smartDifferenceVal?: number): void;
     selectEnter(): boolean;
-    addTabs(...tabs: MenuTabOptions[]): Tab<{}>[];
+    addTabs(...tabs: MenuTabOptions[]): Tab<any>[];
     dumpTabs(): Promise<void>;
-    addButton(options: ButtonOptions): Button<{}>;
-    addButtonRow(...buttons: ButtonOptions[]): BlockRow<{}>;
-    addSpacer(): UiElement<{}>;
-    addText(options: TextOptions): UiText<{}>;
-    addHeading<HeadingT = {}>(options: TextOptions): Heading<HeadingT>;
-    addParagraph(...textOptionsArr: Array<UiText | TextOptions>): Paragraph<{}>;
+    addButton(options: ButtonOptions): Button<any>;
+    addButtonRow(...buttons: ButtonOptions[]): BlockRow<any>;
+    addSpacer(): UiElement<any>;
+    addText(options: TextOptions): UiText<any>;
+    addHeading<HeadingT = any>(options: TextOptions): Heading<HeadingT>;
+    addParagraph(...textOptionsArr: Array<UiText | TextOptions>): Paragraph<any>;
     dump(): Promise<void>;
     append(what: IterableOf<HTMLElement | IUiElement | undefined>): this;
     addSection(heading: TextOptions, content: IterableOf<UiElement | undefined>): MenuSection;
@@ -78,7 +78,7 @@ export interface TabOptions extends ButtonOptions {
 export interface MenuTabOptions extends TabOptions {
     subTabs?: IterableOf<TabOptions>;
 }
-export declare class Tab<T = {}> extends Button<T> {
+export declare class Tab<T = any> extends Button<T> {
     subTabs: {
         [key: string]: Tab;
     };

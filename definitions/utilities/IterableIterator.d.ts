@@ -80,6 +80,12 @@ declare global  {
          */
         split<K extends string>(splitter: (val: T) => K): SplitIterablesOf<T, K>;
     }
+    interface RegExp {
+        /**
+         * Returns an iterator for the matches of this string.
+         */
+        matches(string: string): IterableIterator<RegExpExecArray>;
+    }
     interface Array<T> {
         /**
          * Returns an iterator for the values of this array.

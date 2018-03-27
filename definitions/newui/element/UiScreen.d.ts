@@ -8,7 +8,7 @@ export interface ScreenOptions extends UiElementOptions {
     retain?: boolean;
     isSubscreen?: boolean;
 }
-export default class UiScreen<T = {}> extends UiElement<T> implements IUiScreen {
+export default class UiScreen<T = any> extends UiElement<T> implements IUiScreen {
     readonly retain: boolean;
     readonly isSubscreen: boolean;
     protected menus: {

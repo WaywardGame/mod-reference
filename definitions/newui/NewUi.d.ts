@@ -155,5 +155,4 @@ export default class Ui extends Emitter implements UiApi {
      */
     private initScreen(screenId);
     private interrupt(options);
-    private getFakeTranslation(textOrTranslationData);
 }

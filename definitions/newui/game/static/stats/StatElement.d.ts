@@ -2,7 +2,7 @@ import IBaseEntity from "entity/IBaseEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
 import UiElement from "newui/element/UiElement";
 import { UiApi, UiElementOptions } from "newui/INewUi";
-export declare abstract class StatElement extends UiElement {
+export declare abstract class StatElement extends UiElement<any> {
     private readonly entity;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat, options?: UiElementOptions);
     /**
@@ -38,11 +38,15 @@ export declare abstract class StatElement extends UiElement {
      * Should be used for both `value` & `max` changing.
      */
     protected onStatChange(_?: any, stat?: IStat, oldValue?: number): void;
+    /**
+     * Event handler for when the stat tooltip is shown.
+     */
+    private onTooltip(_, tooltip);
 }
 export declare class Statbar extends StatElement {
     private readonly bar;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
-    getDisplayElement(): UiElement<{}>;
+    getDisplayElement(): UiElement<any>;
     getGenericStatValue(stat: IStatMax): string;
     /**
      * Overrides the superclass method of the same name. Calls the superclass method, then updates the CSS
@@ -53,7 +57,7 @@ export declare class Statbar extends StatElement {
 export declare class StatAttribute extends StatElement {
     private readonly attribute;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
-    getDisplayElement(): UiElement<{}>;
+    getDisplayElement(): UiElement<any>;
 }
 export declare class Statbars extends UiElement {
     private readonly statbars;
