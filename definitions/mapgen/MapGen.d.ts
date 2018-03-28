@@ -1,1 +1,1 @@
-export declare function generateWorld(generateNewWorld: boolean, callback: () => void): void;
+export declare function generateWorld(generateNewWorld: boolean): Promise<{}>;

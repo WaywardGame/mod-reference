@@ -7,17 +7,17 @@ export declare enum Fading {
     Out = 2,
 }
 export default class WAudio implements IAudio {
-    musicSpeed: number;
-    fading: Fading;
-    private readonly musicElements;
-    private readonly sfx;
-    private readonly soundQueue;
-    private readonly recentlyPlayedSounds;
-    private soundDelay;
-    private musicHandler;
-    private readonly fileFormat;
-    private readonly audioContext;
-    private readonly gainNode;
+    private readonly _musicInfo;
+    private readonly _sfxInfo;
+    private readonly _soundQueue;
+    private readonly _recentlyPlayedSounds;
+    private readonly _fileFormat;
+    private readonly _audioContext;
+    private readonly _musicGainNode;
+    private readonly _effectsGainNode;
+    private _musicSpeed;
+    private _soundDelay;
+    private _musicHandler;
     constructor();
     /**
      * Returns the current music handler, an instance of `EnumCursor<Music>`
@@ -36,16 +36,13 @@ export default class WAudio implements IAudio {
      */
     playMusic(): void;
     updateMusicSpeed(speed: number): void;
-    fadeOut(): Promise<void>;
-    fadeIn(): Promise<void>;
     updateVolume(): void;
     updatePosition(): void;
     queueEffect(type: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
     processEffects(): void;
-    private onChangeMusic(music);
-    private playMusicTrack(track);
-    private stopMusic();
-    private isComparableSound(soundEffect, x, y, z, type, delay, speed, now, noPosition);
-    private playEffect(soundEffect, variation?);
-    private play(mediaElement);
+    private _stopMusic();
+    private _playMusic(music);
+    private _playEffect(soundEffect, variation?);
+    private _isComparableSound(soundEffect, x, y, z, type, delay, speed, now, noPosition);
+    private _getAudioBuffer(resourcePath);
 }

@@ -1,7 +1,7 @@
 import { ActionType, Bindable, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/Messages";
-import { BindCatcherApi } from "newui/BindingManager";
+import { BindCatcherApi, IBinding } from "newui/BindingManager";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
@@ -82,7 +82,9 @@ export default class InGameScreen extends BaseScreen {
     private sortableElementTargetContainer;
     private sortingCancelled;
     private onSortableAction;
-    private onChatKeyPress;
+    private onChatKeyDown;
+    private onChatKeyUp;
+    private chatKeys;
     private canUseQuickslot;
     private delayState;
     private isCurrentlySorting;
@@ -116,6 +118,7 @@ export default class InGameScreen extends BaseScreen {
     canMove(api: BindCatcherApi): boolean;
     onShow(): void;
     onHide(): void;
+    getChatBindState(chatBinds: IBinding[], eventCode: string): boolean;
     initializeGameState(): void;
     onGameEnd(showDeath: boolean): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;

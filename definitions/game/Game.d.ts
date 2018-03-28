@@ -25,7 +25,6 @@ export default class Game extends Emitter implements IGame {
     readonly mapSize: number;
     readonly mapSizeSq: number;
     slot: number;
-    loadedResources: boolean;
     previousSaveVersion: IVersionInfo;
     absoluteTime: number;
     autoSaveTimer: number;
@@ -90,7 +89,6 @@ export default class Game extends Emitter implements IGame {
     private gameCanvas;
     private thumbnailResolve?;
     private simulateInterval?;
-    private loadedWorld;
     private renderingEnabled;
     private playOptions;
     private readonly ambientLightLevelCache;
@@ -113,7 +111,7 @@ export default class Game extends Emitter implements IGame {
     getOrCreateTile(x: number, y: number, z: number): ITile;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
     gameLoop: (timeStamp: any) => void;
-    saveGame(saveType: SaveType, skipAudio?: boolean): Promise<ISaveInfo | undefined>;
+    saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     updateThumbnail(): Promise<void>;
     addZoomLevel(amount: number): void;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
@@ -222,9 +220,6 @@ export default class Game extends Emitter implements IGame {
     private loadResources();
     private initializeGameState(isTravelling?);
     private setZoomLevel();
-    private postGenerateWorld(options);
-    private postLoadResources();
-    private checkAfterLoading();
     private playGame(options);
     private upgradeSave(saveVersion);
     private upgradePlayer(player, saveVersion);

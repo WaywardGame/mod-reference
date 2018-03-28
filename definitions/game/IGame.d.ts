@@ -26,7 +26,6 @@ export interface IGame extends Emitter {
     mapSize: number;
     mapSizeSq: number;
     slot: number;
-    loadedResources: boolean;
     version: string;
     npcs: SaferArray<INPC>;
     mapGenVersion: string;
@@ -151,17 +150,17 @@ export interface IGame extends Emitter {
     passTurn(player: IPlayer, turnType?: TurnType): void;
     play(options: Partial<IPlayOptions> & {
         slot: number;
-    }): void;
+    }): Promise<void>;
     requestPlay(options: Partial<IPlayOptions> & {
         slot: number;
-    }): void;
+    }): Promise<void>;
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
     resetGameState(skipSave?: boolean): Promise<void>;
     resetWebGL(): void;
     resizeRenderer(): void;
-    saveGame(saveType: SaveType, skipAudio?: boolean): Promise<ISaveInfo | undefined>;
+    saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;

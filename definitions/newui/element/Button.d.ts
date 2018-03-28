@@ -21,6 +21,7 @@ export default class Button<T = any> extends UiText<T> {
     private buttons;
     private readonly _options;
     private _disabled;
+    private _activated;
     disabled: boolean;
     constructor(uiApi: UiApi, options?: ButtonOptions, bindEvent?: boolean);
     activate(playSound?: boolean): Promise<void>;

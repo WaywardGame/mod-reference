@@ -12,7 +12,7 @@ export default class ModManager implements IModManager {
     private cachedHooks;
     private readonly onLanguageLoadCallbacks;
     constructor();
-    loadAll(options: Partial<IPlayOptions>, callback: (err: string | undefined, mods: string[]) => void): void;
+    loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
     unloadAll(reset?: boolean): void;
     setupMods(callback: () => void): void;
     saveAll(): void;
