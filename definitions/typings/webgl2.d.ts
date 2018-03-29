@@ -10,49 +10,48 @@ interface WebGLQuery extends WebGLObject {
 
 declare var WebGLQuery: {
     prototype: WebGLQuery;
-    new (): WebGLQuery;
-}
+    new(): WebGLQuery;
+};
 
 interface WebGLSampler extends WebGLObject {
 }
 
 declare var WebGLSampler: {
     prototype: WebGLSampler;
-    new (): WebGLSampler;
-}
+    new(): WebGLSampler;
+};
 
 interface WebGLSync extends WebGLObject {
 }
 
 declare var WebGLSync: {
     prototype: WebGLSync;
-    new (): WebGLSync;
-}
+    new(): WebGLSync;
+};
 
 interface WebGLTransformFeedback extends WebGLObject {
 }
 
 declare var WebGLTransformFeedback: {
     prototype: WebGLTransformFeedback;
-    new (): WebGLTransformFeedback;
-}
+    new(): WebGLTransformFeedback;
+};
 
 interface WebGLVertexArrayObject extends WebGLObject {
 }
 
 declare var WebGLVertexArrayObject: {
     prototype: WebGLVertexArrayObject;
-    new (): WebGLVertexArrayObject;
-}
+    new(): WebGLVertexArrayObject;
+};
 
 interface WebGLTimerQueryEXT extends WebGLQuery {
 }
 
 declare var WebGLTimerQueryEXT: {
     prototype: WebGLTimerQueryEXT;
-    new (): WebGLTimerQueryEXT;
-}
-
+    new(): WebGLTimerQueryEXT;
+};
 
 interface EXT_disjoint_timer_query {
     createQueryEXT(): WebGLTimerQueryEXT | null;
@@ -75,7 +74,7 @@ interface EXT_disjoint_timer_query {
 
 declare var EXT_disjoint_timer_query: {
     prototype: EXT_disjoint_timer_query;
-    new (): EXT_disjoint_timer_query;
+    new(): EXT_disjoint_timer_query;
 
     readonly QUERY_COUNTER_BITS_EXT: number;
     readonly CURRENT_QUERY_EXT: number;
@@ -84,8 +83,7 @@ declare var EXT_disjoint_timer_query: {
     readonly TIME_ELAPSED_EXT: number;
     readonly TIMESTAMP_EXT: number;
     readonly GPU_DISJOINT_EXT: number;
-}
-
+};
 
 interface WebGL2RenderingContext extends WebGLRenderingContext {
     getIndexedParameter(target: number, index: number): WebGLBuffer | number | null;
@@ -95,8 +93,8 @@ interface WebGL2RenderingContext extends WebGLRenderingContext {
     framebufferTextureLayer(target: number, attachment: number, texture: WebGLTexture, level: number, layer: number): void;
     invalidateFramebuffer(target: number, attachments: number[]): void;
     invalidateSubFramebuffer(target: number, attachments: number[], x: number, y: number, width: number, height: number): void;
-    bufferData(target: number, srcDataOrSize: number | ArrayBufferView | ArrayBuffer, usage: number, srcOffset?: number, length?: number): void;
-    bufferSubData(target: number, dstByteOffset: number, srcData: ArrayBufferView | ArrayBuffer | any, srcOffset?: number, length?: number): void;
+    // bufferData(target: number, srcDataOrSize: number | ArrayBufferView | ArrayBuffer, usage: number, srcOffset?: number, length?: number): void;
+    // bufferSubData(target: number, dstByteOffset: number, srcData: ArrayBufferView | ArrayBuffer | any, srcOffset?: number, length?: number): void;
     readBuffer(src: number): void;
     // readPixels(x: number, y: number, width: number, height: number, format: number, type: number, offset?: number): void;
     // readPixels(x: number, y: number, width: number, height: number, format: number, type: number, dstData: ArrayBufferView | ArrayBuffer, dstOffset?: number): void;
@@ -119,14 +117,14 @@ interface WebGL2RenderingContext extends WebGLRenderingContext {
     texSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, type: number, pixels?: ImageData | ImageBitmap | HTMLImageElement | HTMLCanvasElement | HTMLVideoElement): void;
     texSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, type: number, offset: number): void;
     copyTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, x: number, y: number, width: number, height: number): void;
-    compressedTexImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, imageSize: number, offset: number): void;
-    compressedTexImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, srcData: ArrayBufferView, srcOffset?: number, srcLengthOverride?: number): void;
-    compressedTexImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, offset: number): void;
-    compressedTexImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, srcData: ArrayBufferView, srcOffset?: number, srcLengthOverride?: number): void;
-    compressedTexSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, imageSize: number, offset: number): void;
-    compressedTexSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, srcData: ArrayBufferView, srcOffset?: number, srcLengthOverride?: number): void;
-    compressedTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, offset: number): void;
-    compressedTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, srcData: ArrayBufferView, srcOffset?: number, srcLengthOverride?: number): void;
+    // compressedTexImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, imageSize: number, offset: number): void;
+    // compressedTexImage2D(target: number, level: number, internalformat: number, width: number, height: number, border: number, srcData: ArrayBufferView, srcOffset?: number, srcLengthOverride?: number): void;
+    // compressedTexImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, offset: number): void;
+    // compressedTexImage3D(target: number, level: number, internalformat: number, width: number, height: number, depth: number, border: number, srcData: ArrayBufferView, srcOffset?: number, srcLengthOverride?: number): void;
+    // compressedTexSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, imageSize: number, offset: number): void;
+    // compressedTexSubImage2D(target: number, level: number, xoffset: number, yoffset: number, width: number, height: number, format: number, srcData: ArrayBufferView, srcOffset?: number, srcLengthOverride?: number): void;
+    // compressedTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, offset: number): void;
+    // compressedTexSubImage3D(target: number, level: number, xoffset: number, yoffset: number, zoffset: number, width: number, height: number, depth: number, format: number, srcData: ArrayBufferView, srcOffset?: number, srcLengthOverride?: number): void;
     getFragDataLocation(program: WebGLProgram | null, name: string): number;
     uniform1ui(location: WebGLUniformLocation | null, x: number): void;
     uniform2ui(location: WebGLUniformLocation | null, x: number, y: number): void;
@@ -515,10 +513,9 @@ interface WebGL2RenderingContext extends WebGLRenderingContext {
     readonly MAX_CLIENT_WAIT_TIMEOUT_WEBGL: number;
 }
 
-
 declare var WebGL2RenderingContext: {
     prototype: WebGL2RenderingContext;
-    new (): WebGL2RenderingContext;
+    new(): WebGL2RenderingContext;
 
     // Getting GL parameter information
     readonly READ_BUFFER: number;
@@ -823,7 +820,7 @@ declare var WebGL2RenderingContext: {
     readonly INVALID_INDEX: number;
     readonly TIMEOUT_IGNORED: number;
     readonly MAX_CLIENT_WAIT_TIMEOUT_WEBGL: number;
-}
+};
 
 interface HTMLCanvasElement {
     getContext(contextId: "webgl2" | "experimental-webgl2", contextAttributes?: WebGLContextAttributes): WebGL2RenderingContext | null;

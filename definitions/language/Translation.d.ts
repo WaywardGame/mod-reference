@@ -11,8 +11,8 @@ export interface ILanguageEntryProvider {
 export default class Translation<R extends string | ISplit[] = string> {
     static provider: ILanguageEntryProvider;
     static ui: any;
-    private translationData;
-    private baseTranslation;
+    private readonly translationData;
+    private readonly baseTranslation;
     private colorsAllowed;
     /**
      * Creates from a dictionary and entry

@@ -1,7 +1,7 @@
 export default class Promise2<T = void> {
     private _promise?;
-    private _resolvers;
-    private _rejectors;
+    private readonly _resolvers;
+    private readonly _rejectors;
     constructor();
     readonly hasCompleted: boolean;
     complete(value?: T | PromiseLike<T>): void;
