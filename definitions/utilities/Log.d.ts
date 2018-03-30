@@ -41,8 +41,9 @@ declare class Log {
     trace: (...args: any[]) => void;
     debug: (...args: any[]) => void;
     info: (...args: any[]) => void;
-    private readonly sources;
+    private sources;
     constructor(...sources: Array<Source | string>);
+    setSources(...sources: Array<Source | string>): void;
     /**
      * Re-binds the Log methods. Called automatically when the winston instance is set.
      */
@@ -79,4 +80,8 @@ declare module Log {
      */
     function debug(...sources: Array<Source | string>): (...args: any[]) => void;
 }
+export declare class NullLog extends Log {
+    refresh(): void;
+}
+export declare let nullLog: NullLog;
 export default Log;
