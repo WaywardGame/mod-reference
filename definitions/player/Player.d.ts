@@ -135,7 +135,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     processInput(): void;
-    getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
+    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
     updateMilestones(): void;

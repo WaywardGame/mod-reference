@@ -47,6 +47,7 @@ export declare enum MoveType {
     Mountain = 16,
     Fire = 32,
     BreakDoodads = 64,
+    WetLand = 128,
     Flying = 15,
 }
 export declare enum DamageType {
@@ -894,6 +895,7 @@ export declare enum CreatureType {
     LavaBeetle = 34,
     Goat = 35,
     SlitherSucker = 36,
+    Mudskipper = 37,
 }
 export declare enum NPCType {
     Merchant = 0,

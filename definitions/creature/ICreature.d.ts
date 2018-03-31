@@ -62,6 +62,7 @@ export declare enum SpawnableTiles {
     Ghost = 7,
     Desert = 8,
     Lava = 9,
+    Wet = 10,
 }
 export interface ICreatureDescription extends IModdable {
     name?: string;
@@ -96,6 +97,7 @@ export interface ICreatureDescription extends IModdable {
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
     lightSource?: boolean;
     noStumble?: boolean;
+    particlesOnMove?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;

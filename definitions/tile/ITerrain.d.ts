@@ -37,6 +37,7 @@ export interface ITerrainDescription extends IModdable {
     deepWater?: boolean;
     reduceRest?: boolean;
     noResting?: boolean;
+    wet?: boolean;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: ICorpse[];
