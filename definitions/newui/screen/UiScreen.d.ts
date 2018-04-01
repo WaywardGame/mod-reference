@@ -2,7 +2,8 @@ import Menu from "newui/element/Menu";
 import Tooltip from "newui/element/Tooltip";
 import UiElement from "newui/element/UiElement";
 import { IUiElement, IUiScreen, MenuId, ScreenId, TooltipOptionsVague, UiApi, UiElementOptions } from "newui/INewUi";
-import { InterruptOptions } from "newui/menu/InterruptMenu";
+import { InterruptOptions } from "newui/screen/screens/menu/menus/InterruptMenu";
+import Log from "utilities/Log";
 export interface ScreenOptions extends UiElementOptions {
     screenId: ScreenId;
     retain?: boolean;
@@ -18,6 +19,7 @@ export default class UiScreen<T = any> extends UiElement<T> implements IUiScreen
     protected menuChain: number[];
     protected lastTooltipSource?: UiElement;
     protected tooltip: Tooltip;
+    protected log: Log;
     private readonly tooltipMousemoveListener;
     readonly visibleMenu: MenuId;
     readonly hasMenu: boolean;

@@ -1,6 +1,6 @@
 import { Dictionary, InterruptChoice, UiTranslation } from "language/ILanguage";
 import { InputOptions } from "newui/element/Input";
-import { InterruptOptions } from "newui/menu/InterruptMenu";
+import { InterruptOptions } from "newui/screen/screens/menu/menus/InterruptMenu";
 import Emitter from "utilities/Emitter";
 export declare enum ScreenId {
     None = 0,
@@ -76,9 +76,8 @@ export declare type InterruptInputOptions = InputOptions & InterruptOptionsCanCa
 export interface InterruptOptionsCanCancel {
     canCancel?: boolean;
 }
-export interface UiApi {
+export interface UiApi extends Emitter {
     visibleMenu: MenuId | undefined;
-    visibleScreen: ScreenId | undefined;
     getMenu(): IMenu | undefined;
     getMenu(menuId: MenuId): IMenu | undefined;
     getMenu(menuId?: MenuId): IMenu | undefined;
@@ -87,14 +86,41 @@ export interface UiApi {
     }, loadingInterrupt?: InterruptOptions): Promise<void>;
     hideMenu(): Promise<void>;
     backOneMenu(): Promise<void>;
-    getScreen(): IUiScreen | undefined;
-    getScreen(screenId: ScreenId): IUiScreen | undefined;
-    showScreen(screenId: ScreenId, transition?: boolean): Promise<void>;
-    hideScreen(): Promise<void>;
-    hideScreen(screenId: ScreenId): Promise<void>;
-    hideScreen(screen: IUiScreen): Promise<void>;
+    /**
+     * Generator for all existing screens.
+     */
+    screens(): IterableIterator<IUiScreen>;
+    /**
+     * @param screenId The ID of the screen to return. If this screen is not initialized, returns undefined.
+     */
+    getScreen<S extends IUiScreen = IUiScreen>(screenId: ScreenId): S | undefined;
+    /**
+     * Returns the visible screen
+     */
+    getVisibleScreen<S extends IUiScreen = IUiScreen>(): S | undefined;
+    /**
+     * Returns if the given screen is visible
+     */
     isScreenVisible(screenId: ScreenId): boolean;
-    removeScreen(screenId: ScreenId): Promise<void>;
+    /**
+     * Shows a screen
+     * @param screenId The id of the screen to show
+     * @param transition Whether or not to transition the screen in
+     * @param replaceCurrent Defaults to true. If the current screen is not replaced, the new screen will render above the old.
+     */
+    showScreen(screenId: ScreenId, transition?: boolean, replaceCurrent?: boolean, ...args: any[]): Promise<void>;
+    /**
+     * Hides the given screen.
+     */
+    hideScreen(screen: ScreenId | IUiScreen): Promise<void>;
+    /**
+     * Removes the given screen.
+     */
+    removeScreen(screen: ScreenId | IUiScreen): Promise<void>;
+    /**
+     * Initializes a screen by its ID.
+     */
+    initScreen<S extends IUiScreen = IUiScreen>(screen: ScreenId): S;
     showTooltip(tooltipSource: IUiElement): Promise<void>;
     showTooltip(tooltipOptions: TooltipOptionsVague, source?: IUiElement): Promise<void>;
     showTooltip(tooltipOptions: TooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
@@ -102,6 +128,8 @@ export interface UiApi {
     hideTooltip(source: IUiElement): Promise<void>;
     dumpTooltip(): Promise<void>;
     dumpTooltip(source: IUiElement): Promise<void>;
+    interrupt(title: TextOrTranslationData, description?: TextOrTranslationData): IInterruptFactory;
+    interrupt(): IInterruptMenuFactory;
     interruptWithChoice(title: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
     interruptWithChoice(title: TextOrTranslationData, description: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
     interruptWithConfirmation(title: TextOrTranslationData): Promise<boolean>;
@@ -123,7 +151,18 @@ export interface UiApi {
     setScale(scale: number): void;
     getMaximumScale(): number;
     setDialogOpacity(opacity: number): void;
-    on(event: UiApiEvent, callback: (...args: any[]) => any): void;
+}
+export interface IInterruptFactory extends IInterruptMenuFactory {
+    withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
+    withConfirmation(): Promise<boolean>;
+    withInfo(): Promise<void>;
+    withInput(options?: InterruptInputOptions): Promise<string>;
+    withLoading(canCancel?: boolean, specialType?: string): Promise<void>;
+}
+export interface IInterruptMenuFactory {
+    withMenu(menuId: MenuId, args?: {
+        [key: string]: any;
+    }): Promise<void>;
 }
 export declare enum UiElementEvent {
     Show = 0,
@@ -161,12 +200,40 @@ export interface IUiElement<T = any> extends Emitter {
     removeChild(child: IUiElement, removeChild?: boolean): void;
     findDescendants(selector: string): NodeListOf<Element>;
     contains(what: string | HTMLElement | IUiElement): boolean;
-    showTooltip(): void;
+    showTooltip(): Promise<void>;
 }
 export interface IUiScreen extends IUiElement {
+    retain?: boolean;
     getMenu(): IMenu | undefined;
     getMenu(menuId: MenuId): IMenu | undefined;
     getMenu(menuId?: MenuId): IMenu | undefined;
+    /**
+     * Shows a tooltip
+     * @param tooltip The options with which to construct the tooltip
+     * @param source
+     * 	The source element that the tooltip is for.
+     * 	If there currently exists a tooltip for this element, it shows the old instead of creating a new tooltip.
+     */
+    showTooltip(tooltip: TooltipOptionsVague, source?: IUiElement): Promise<void>;
+    /**
+     * Shows a tooltip
+     * @param elementWithTooltip
+     * 	The element the tooltip is for, that contains the options with which to construct the tooltip.
+     */
+    showTooltip(elementWithTooltip: IUiElement): Promise<void>;
+    showTooltip(): Promise<void>;
+    showTooltip(tooltipElementOrOptions: TooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
+    /**
+     * Hides the current tooltip
+     * @param source The element the tooltip must be for to hide it
+     * @returns Whether a tooltip was hidden.
+     */
+    hideTooltip(source?: IUiElement): Promise<boolean>;
+    /**
+     * Removes the current tooltip
+     * @param source The element the tooltip must be for to remove it
+     */
+    dumpTooltip(source?: IUiElement): Promise<boolean>;
 }
 export declare enum SelectDirection {
     Up = -1,

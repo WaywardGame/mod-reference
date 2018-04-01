@@ -47,7 +47,7 @@ export interface ISteamworks extends Emitter {
     publishMod(modIndex: number): Promise<string>;
     sendMessage(name: string, ...data: any[]): boolean;
     setLobbyData(name: string, data: string): boolean;
-    setLobbyType(type: LobbyType): void;
+    setLobbyType(type: LobbyType): boolean;
     setOverlayWorks(ipg: boolean): void;
     setRichPresence(key: string, value: string): boolean;
     setupMods(callback: () => void): void;

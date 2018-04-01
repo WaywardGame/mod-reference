@@ -1,6 +1,6 @@
-import UiScreen from "newui/element/UiScreen";
 import { MenuId, UiApi } from "newui/INewUi";
-import { Background, IMenuScreen } from "newui/screen/IMenuScreen";
+import { Background, IMenuScreen } from "newui/screen/screens/IMenuScreen";
+import UiScreen from "newui/screen/UiScreen";
 export interface MenuScreenData {
     backgroundImage: string;
 }

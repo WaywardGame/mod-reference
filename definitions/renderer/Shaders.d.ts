@@ -1,4 +1,4 @@
-export declare function loadShaders(callback: () => void): void;
+export declare function loadShaders(): Promise<void>;
 export declare function compileShaders(): void;
 export declare class CompiledProgram {
     private readonly gl;

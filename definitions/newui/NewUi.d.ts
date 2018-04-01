@@ -1,26 +1,27 @@
 import { InterruptChoice } from "language/ILanguage";
 import Menu from "newui/element/Menu";
 import UiElement from "newui/element/UiElement";
-import UiScreen from "newui/element/UiScreen";
-import { InterruptInputOptions, IUiElement, IUiScreen, MenuId, ScreenId, TextOrTranslationData, TooltipOptionsVague, UiApi } from "newui/INewUi";
-import { InterruptOptions } from "newui/menu/InterruptMenu";
+import { IInterruptMenuFactory, InterruptInputOptions, IUiElement, IUiScreen, MenuId, ScreenId, TextOrTranslationData, TooltipOptionsVague, UiApi } from "newui/INewUi";
+import { InterruptOptions } from "newui/screen/screens/menu/menus/InterruptMenu";
+import UiScreen from "newui/screen/UiScreen";
+import InterruptFactory from "newui/util/InterruptFactory";
 import Emitter from "utilities/Emitter";
 export default class Ui extends Emitter implements UiApi {
-    private readonly screens;
-    private _visibleScreen;
-    private readonly screenChain;
     private storageElement;
+    private readonly screenManager;
+    private readonly tooltipManager;
     private scale;
     constructor();
     /**
-     * @param menuId The ID of the menu to return. If this menu is not initialized, returns undefined.
+     * Returns a menu instance, or `undefined` if the menu is not initialized.
+     * @param menuId The ID of the menu to return.
      */
     getMenu(): Menu | undefined;
     getMenu(menuId: MenuId): Menu | undefined;
     /**
      * Returns the visible menu (top of the chain)
      */
-    readonly visibleMenu: MenuId;
+    readonly visibleMenu: MenuId | undefined;
     /**
      * Shows a menu
      * @param menuId The id of the menu to show
@@ -46,18 +47,19 @@ export default class Ui extends Emitter implements UiApi {
     backToFirstMenu(args?: {
         [key: string]: any;
     }, transition?: boolean): Promise<void>;
-    /**
-     * Returns the visible screen, or undefined if no screen is visible.
-     */
-    getScreen(): UiScreen | undefined;
+    screens(): IterableIterator<UiScreen>;
     /**
      * @param screenId The ID of the screen to return. If this screen is not initialized, returns undefined.
      */
-    getScreen(screenId: ScreenId): UiScreen | undefined;
+    getScreen<S extends IUiScreen = UiScreen>(screenId: ScreenId): S | undefined;
     /**
-     * The ID of the visible screen
+     * Returns the visible screen
      */
-    readonly visibleScreen: ScreenId | undefined;
+    getVisibleScreen<S extends IUiScreen = UiScreen>(): S | undefined;
+    /**
+     * Returns if the given screen is visible
+     */
+    isScreenVisible(screenId: ScreenId): boolean;
     /**
      * Shows a screen
      * @param screenId The id of the screen to show
@@ -66,11 +68,14 @@ export default class Ui extends Emitter implements UiApi {
      */
     showScreen(screenId: ScreenId, transition?: boolean, replaceCurrent?: boolean, ...args: any[]): Promise<void>;
     /**
-     * Hides the given screen, or the current screen if none is passed.
-     *
-     * Don't call this with no arguments unless you know 100% for sure that it will only ever hide the correct screen.
+     * Hides the given screen.
      */
-    hideScreen(screen?: ScreenId | IUiScreen): Promise<void>;
+    hideScreen(screen: ScreenId | UiScreen): Promise<void>;
+    /**
+     * Removes the given screen.
+     */
+    removeScreen(screen: ScreenId | UiScreen): Promise<void>;
+    initScreen<S extends IUiScreen = UiScreen>(screen: ScreenId): S;
     /**
      * Shows a tooltip
      * @param tooltip The options with which to construct the tooltip
@@ -95,15 +100,47 @@ export default class Ui extends Emitter implements UiApi {
      * @param source The element the tooltip must be for to remove it
      */
     dumpTooltip(source?: IUiElement): Promise<void>;
+    /**
+     * Returns a new interrupt factory with the given translation data.
+     */
+    interrupt(title: TextOrTranslationData, description?: TextOrTranslationData): InterruptFactory;
+    /**
+     * Returns an interrupt factory that can only be used to create menus.
+     */
+    interrupt(): IInterruptMenuFactory;
+    /**
+     * @deprecated
+     */
     interruptWithChoice(title: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
+    /**
+     * @deprecated
+     */
     interruptWithChoice(title: TextOrTranslationData, description: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
+    /**
+     * @deprecated
+     */
     interruptWithConfirmation(title: TextOrTranslationData, description?: TextOrTranslationData): Promise<boolean>;
+    /**
+     * @deprecated
+     */
     interruptWithInfo(title: TextOrTranslationData, description?: TextOrTranslationData): Promise<void>;
+    /**
+     * @deprecated
+     */
     interruptWithInput(title: TextOrTranslationData, options?: InterruptInputOptions): Promise<string>;
+    /**
+     * @deprecated
+     */
     interruptWithInput(title: TextOrTranslationData, description: TextOrTranslationData, options?: InterruptInputOptions): Promise<string>;
+    /**
+     * @deprecated
+     */
     interruptWithMenu(menuId: MenuId, args?: {
         [key: string]: any;
     }): Promise<void>;
+    /**
+     * @deprecated
+     */
     showLoadingInterrupt(title: TextOrTranslationData, description?: TextOrTranslationData, canCancel?: boolean, specialType?: string): Promise<void>;
     hideLoadingInterrupt(): Promise<void>;
     /**
@@ -143,16 +180,8 @@ export default class Ui extends Emitter implements UiApi {
      * Returns the maximum scale the screen size will allow (multiplier)
      */
     getMaximumScale(): number;
-    isScreenVisible(screenId: ScreenId): boolean;
-    removeScreen(screenId: ScreenId): Promise<void>;
-    private _hideScreen(screenId);
     /**
      * Sets the ui scale to the size configured in the options, capped by the maximum the screen size allows
      */
     private updateScale();
-    /**
-     * Initializes a screen by its ID
-     */
-    private initScreen(screenId);
-    private interrupt(options);
 }

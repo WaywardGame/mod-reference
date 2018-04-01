@@ -12,6 +12,7 @@ import { IPoint } from "utilities/math/IPoint";
 export interface IActionBase {
     validateArguments?: IActionArgumentValidator;
     usableAsGhost?: boolean;
+    usableWhenPaused?: boolean;
     ignoreHasDelay?: boolean;
 }
 export interface IActionDescription extends IActionBase {

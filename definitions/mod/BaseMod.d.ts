@@ -9,7 +9,7 @@ import { Hook, HookPriority } from "mod/IMod";
 import * as Packets from "multiplayer/packets/Packets";
 import { IBinding } from "newui/BindingManager";
 import { UiApi } from "newui/INewUi";
-import { ModOptions } from "newui/menu/OptionsMenu";
+import { ModOptions } from "newui/screen/screens/menu/menus/OptionsMenu";
 import { IHairstyleDescription } from "player/IPlayer";
 import { ISkillDescription } from "player/Skills";
 import { ITerrainDescription } from "tile/ITerrain";

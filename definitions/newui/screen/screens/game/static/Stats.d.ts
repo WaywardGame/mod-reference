@@ -1,5 +1,5 @@
-import QuadrantElement, { Quadrant } from "newui/game/element/QuadrantElement";
 import { UiApi } from "newui/INewUi";
+import QuadrantElement, { Quadrant } from "newui/screen/screens/game/element/QuadrantElement";
 import { IPlayer } from "player/IPlayer";
 export default class Stats extends QuadrantElement {
     static preferredQuadrant: Quadrant;

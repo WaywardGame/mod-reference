@@ -1,4 +1,5 @@
-import { Dictionary } from "language/ILanguage";
+import { Dictionary, UiTranslation } from "language/ILanguage";
+import { MessageType } from "language/Messages";
 import { ISplit } from "utilities/string/Interpolate";
 export interface ITranslationData {
     dictionary: Dictionary;
@@ -8,18 +9,33 @@ export interface ITranslationData {
 export interface ILanguageEntryProvider {
     get(dictionary: Dictionary, entry: number): string | undefined;
 }
+export declare type TranslationString = Translation & string;
 export default class Translation<R extends string | ISplit[] = string> {
     static provider: ILanguageEntryProvider;
-    static ui: any;
+    static ui: (entry: string | UiTranslation) => TranslationString;
+    static message: (entry: string | MessageType) => TranslationString;
     private readonly translationData;
     private readonly baseTranslation;
     private colorsAllowed;
     /**
      * Creates from a dictionary and entry
      */
-    constructor(dictionary: Dictionary, entry: number);
+    constructor(dictionary: Dictionary, entry: number | string);
     /**
-     * Creates from a translation id
+     * Creates from a translation id. Entry matching is done by changing the case-style of the inputted
+     * translation id, so if you provide an all lower-case string it will not work!
+     *
+     * Examples that do work:
+     *
+     * - `Ui.MenuMainButtonContinueGame`
+     * - `ui.menu-main-button-continue-game`
+     * - `Ui.Menu-Main-Button-Continue-Game`
+     *
+     * Examples that don't work:
+     *
+     * - `UI.MENU-MAIN-BUTTON-CONTINUE-GAME`
+     * - `Ui.menumainbuttoncontinuegame`
+     * - `UI.MENUMAINBUTTONCONTINUEGAME`
      */
     constructor(translationId: string);
     /**
@@ -33,8 +49,18 @@ export default class Translation<R extends string | ISplit[] = string> {
     setColorsAllowed(): Translation<ISplit[]>;
     setNoTrim(): this;
     has(): boolean;
+    /**
+     * Returns this translation with arguments interpolated
+     */
     get(...args: any[]): R;
-    private getFakeTranslation(translationData);
+    /**
+     * Returns the translation ID
+     */
+    getId(translationData: ITranslationData): string;
+    /**
+     * Returns the translated string with no arguments.
+     */
+    toString(): R;
     private parseTranslationId(translationId);
     private getDictionaryId(dictionaryName);
     private getEntryId(dictionaryName, entryName);

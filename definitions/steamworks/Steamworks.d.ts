@@ -51,7 +51,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     clearRichPresence(): void;
     isInLobby(): boolean;
     createLobby(type: LobbyType): void;
-    setLobbyType(type: LobbyType): void;
+    setLobbyType(type: LobbyType): boolean;
     leaveLobby(): void;
     joinLobby(lobbyId: string): void;
     getLobbyData(name: string): string | undefined;
