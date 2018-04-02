@@ -1,7 +1,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import BaseMod from "mod/BaseMod";
@@ -194,6 +194,12 @@ export declare abstract class Mod extends BaseMod {
      * @returns The maximum health of the player or undefined to use the default logic
      */
     getPlayerMaxHealth(player: IPlayer): number | undefined;
+    /**
+     * Called when getting the players movement intent
+     * @param player The player object
+     * @returns The movement intent of the player or undefined to use the default logic
+     */
+    getPlayerMovementIntent(player: IPlayer): Bindable | undefined;
     /**
      * Called when getting the player's strength
      * @param strength The current strength of the player

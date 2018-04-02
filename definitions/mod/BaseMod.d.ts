@@ -56,8 +56,9 @@ export declare abstract class BaseMod {
         getCreatureSpriteBatchLayer?: number | undefined;
         getPlayerFieldOfViewRadius?: number | undefined;
         getPlayerMaxHealth?: number | undefined;
-        getPlayerStrength?: number | undefined;
+        getPlayerMovementIntent?: number | undefined;
         getPlayerSpriteBatchLayer?: number | undefined;
+        getPlayerStrength?: number | undefined;
         getPlayerWeightMovementPenalty?: number | undefined;
         getPlayerWeightStatus?: number | undefined;
         getTileLightLevel?: number | undefined;
