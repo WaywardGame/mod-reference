@@ -21,8 +21,8 @@ export interface ITerrainDescription extends IModdable {
     flammable?: boolean;
     gatherSkillUse?: SkillType;
     sound?: SfxType;
-    strength?: number;
     leftOver?: TerrainType;
+    baseTerrain?: TerrainType;
     terrainType?: TerrainType;
     doodad?: DoodadType;
     isMountain?: boolean;
@@ -56,13 +56,15 @@ export interface ITileArray {
 export declare type ITileContainer = IContainer & IPointZ;
 export interface ITileData {
     type: TerrainType;
-    strength?: number;
     minDur?: number;
     maxDur?: number;
     quality?: ItemQuality;
     gfx?: number;
     tilled?: boolean;
 }
+export declare type ITileDataOld = Partial<ITileData> & {
+    strength?: number;
+};
 export declare enum TileTemplateType {
     House = 0,
     Pond = 1,

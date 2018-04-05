@@ -133,7 +133,6 @@ export interface IGame extends Emitter {
     getTileUnsafe(x: number, y: number, z: number): ITile;
     getValidPlayerName(name: string | undefined): string;
     getWrappedCoord(x: number): number;
-    hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
     initialize(): void;
     isOnFire(tile: ITile): FireType;
     isRealTimeMode(): boolean;

@@ -133,7 +133,6 @@ export default class Game extends Emitter implements IGame {
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
-    hurtTerrain(player: IPlayer | undefined, x: number, y: number, z: number, tile: ITile): boolean;
     updateTablesAndWeightNextTick(): void;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     getBlackness(): number;
