@@ -8,7 +8,7 @@ import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
-import { ICharacter } from "newui/element/Character";
+import { ICharacter } from "newui/screen/screens/menu/element/Character";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";

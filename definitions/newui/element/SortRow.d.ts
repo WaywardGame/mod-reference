@@ -1,7 +1,8 @@
 import { IDropdownOption } from "newui/element/Dropdown";
+import { UiElementOptions } from "newui/element/IUiElement";
 import { LabelledRow } from "newui/element/LabelledRow";
 import { Refreshable } from "newui/element/Refreshable";
-import { UiApi, UiElementOptions } from "newui/INewUi";
+import { UiApi } from "newui/INewUi";
 import { SortDirection } from "save/ISaveManager";
 export interface SortRowOptions<Sort> extends UiElementOptions {
     sortEnum: any;

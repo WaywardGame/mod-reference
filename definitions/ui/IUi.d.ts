@@ -2,7 +2,7 @@ import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
-import { MenuId } from "newui/INewUi";
+import { MenuId } from "newui/screen/screens/menu/element/IMenu";
 import { IPlayer } from "player/IPlayer";
 import { IPropSerializable } from "save/ISerializer";
 import { HintType } from "ui/IHint";

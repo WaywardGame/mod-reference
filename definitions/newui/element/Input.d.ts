@@ -1,12 +1,7 @@
+import { InputOptions } from "newui/element/IInput";
+import { TextOrTranslationData, TranslationData, UiElementOptions } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
-import { TextOrTranslationData, TranslationData, UiApi, UiElementOptions } from "newui/INewUi";
-export interface InputOptions {
-    placeholder?: TextOrTranslationData;
-    default?: TextOrTranslationData;
-    maxLength?: number;
-    canBeEmpty?: boolean;
-    clearTo?: TextOrTranslationData;
-}
+import { UiApi } from "newui/INewUi";
 export interface InputData {
     translationData: TranslationData;
 }

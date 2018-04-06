@@ -4,7 +4,7 @@ import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message, MessageType } from "language/Messages";
-import { MenuId } from "newui/INewUi";
+import { MenuId } from "newui/screen/screens/menu/element/IMenu";
 import { IPlayer } from "player/IPlayer";
 import { HintType } from "ui/IHint";
 import { IDialogInfo, IUi } from "ui/IUi";

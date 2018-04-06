@@ -1,4 +1,5 @@
-import { IUiScreen, ScreenId, UiApi } from "newui/INewUi";
+import { UiApi } from "newui/INewUi";
+import { IUiScreen, ScreenId } from "newui/screen/IUiScreen";
 import UiScreen from "newui/screen/UiScreen";
 export default class ScreenManager {
     private readonly _screens;

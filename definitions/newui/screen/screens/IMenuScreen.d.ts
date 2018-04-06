@@ -1,4 +1,4 @@
-import { IUiScreen } from "newui/INewUi";
+import { IUiScreen } from "newui/screen/IUiScreen";
 export declare enum Background {
     Default = 0,
     Win = 1,

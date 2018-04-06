@@ -1,9 +1,10 @@
 import { Bindable } from "Enums";
 import { IBinding } from "newui/BindingManager";
 import Button from "newui/element/Button";
+import { TextOrTranslationData } from "newui/element/IUiElement";
 import { Refreshable } from "newui/element/Refreshable";
 import UiElement from "newui/element/UiElement";
-import { TextOrTranslationData, UiApi } from "newui/INewUi";
+import { UiApi } from "newui/INewUi";
 export declare class BindCatcher extends UiElement {
     private readonly bindText;
     private resolve;

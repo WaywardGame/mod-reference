@@ -1,5 +1,5 @@
-import Menu from "newui/element/Menu";
 import { UiApi } from "newui/INewUi";
+import Menu from "newui/screen/screens/menu/element/Menu";
 export default class MultiplayerMenu extends Menu {
     private readonly openServer;
     private readonly pause;

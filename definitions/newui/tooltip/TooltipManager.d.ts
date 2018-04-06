@@ -1,5 +1,6 @@
+import { IUiElement, TooltipOptionsVague } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
-import { IUiElement, TooltipOptionsVague, UiApi } from "newui/INewUi";
+import { UiApi } from "newui/INewUi";
 export default class TooltipManager {
     private readonly uiApi;
     constructor(uiApi: UiApi);

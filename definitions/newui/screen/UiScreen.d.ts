@@ -1,52 +1,22 @@
-import Menu from "newui/element/Menu";
+import { IUiElement, TooltipOptionsVague, UiElementOptions } from "newui/element/IUiElement";
 import Tooltip from "newui/element/Tooltip";
 import UiElement from "newui/element/UiElement";
-import { IUiElement, IUiScreen, MenuId, ScreenId, TooltipOptionsVague, UiApi, UiElementOptions } from "newui/INewUi";
-import { InterruptOptions } from "newui/screen/screens/menu/menus/InterruptMenu";
+import { UiApi } from "newui/INewUi";
+import { IUiScreen, ScreenId } from "newui/screen/IUiScreen";
 import Log from "utilities/Log";
 export interface ScreenOptions extends UiElementOptions {
     screenId: ScreenId;
     retain?: boolean;
     isSubscreen?: boolean;
 }
-export default class UiScreen<T = any> extends UiElement<T> implements IUiScreen {
+export default abstract class UiScreen<T = any> extends UiElement<T> implements IUiScreen {
     readonly retain: boolean;
     readonly isSubscreen: boolean;
-    protected menus: {
-        [key: number]: Menu;
-    };
-    protected _visibleMenu: MenuId;
-    protected menuChain: number[];
     protected lastTooltipSource?: UiElement;
     protected tooltip: Tooltip;
     protected log: Log;
     private readonly tooltipMousemoveListener;
-    readonly visibleMenu: MenuId;
-    readonly hasMenu: boolean;
     constructor(uiApi: UiApi, options: ScreenOptions);
-    show(menuId?: MenuId, ...args: any[]): Promise<void>;
-    getMenu(): Menu;
-    getMenu(menuId: MenuId): Menu;
-    getMenu(menuId?: MenuId): Menu;
-    showMenu(menuId: MenuId, args?: {
-        [key: string]: any;
-    }, transition?: boolean, loadingInterrupt?: InterruptOptions): Promise<void>;
-    /**
-     * Hides the current menu and resets the menu chain
-     */
-    hideMenu(menuId?: MenuId): Promise<void>;
-    /**
-     * Returns to the previous menu
-     */
-    backOneMenu(args?: {
-        [key: string]: any;
-    }, transition?: boolean): Promise<void>;
-    /**
-     * Returns to the first menu in the menuChain
-     */
-    backToFirstMenu(args?: {
-        [key: string]: any;
-    }, transition?: boolean): Promise<void>;
     /**
      * Shows a tooltip
      * @param tooltip The options with which to construct the tooltip
@@ -73,9 +43,4 @@ export default class UiScreen<T = any> extends UiElement<T> implements IUiScreen
      * @param source The element the tooltip must be for to remove it
      */
     dumpTooltip(source?: IUiElement): Promise<boolean>;
-    /**
-     * Initializes a menu by its ID
-     */
-    protected initMenu(menuId: MenuId): Menu;
-    private _showMenu(menu, args, loadingInterrupt?);
 }

@@ -27,8 +27,10 @@ declare module ResourcePath {
     function getModPath(path: string, descriptions: IResourceData["descriptions"], index: number): string;
     /**
      * Returns a resource's name.
+     *
+     * Warning: Does not validate that `index` is in `enumObject`.
      */
-    function getResourceName(e: any, index: number): any;
+    function getResourceName(enumObject: any, index: number): any;
     /**
      * Returns the resource type of the given `PathType`.
      */

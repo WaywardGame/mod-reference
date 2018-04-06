@@ -83,7 +83,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isWaterSource?: boolean;
     lit?: DoodadType;
     onBurn?: ItemType;
-    particles: IRGB;
+    particles?: IRGB;
     growthParticles?: IDoodadParticles;
     pickUp?: ItemType[];
     pickUpCanHurtHands?: boolean;

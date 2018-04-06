@@ -1,6 +1,7 @@
 import { UiTranslation } from "language/ILanguage";
+import { TranslationData, UiElementOptions } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
-import { TranslationData, UiApi, UiElementOptions } from "newui/INewUi";
+import { UiApi } from "newui/INewUi";
 import { ISplit } from "utilities/string/Interpolate";
 export interface TextOptions extends UiElementOptions {
     text?: string | UiTranslation | TranslationData;

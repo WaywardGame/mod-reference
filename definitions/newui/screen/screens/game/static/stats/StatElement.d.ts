@@ -1,7 +1,8 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
+import { UiElementOptions } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
-import { UiApi, UiElementOptions } from "newui/INewUi";
+import { UiApi } from "newui/INewUi";
 export declare abstract class StatElement extends UiElement {
     private readonly entity;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat, options?: UiElementOptions);

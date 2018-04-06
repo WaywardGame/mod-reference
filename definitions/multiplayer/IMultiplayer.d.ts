@@ -2,8 +2,8 @@ import { ICrafted } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-import { ICharacter } from "newui/element/Character";
-import { TextOrTranslationData } from "newui/INewUi";
+import { TextOrTranslationData } from "newui/element/IUiElement";
+import { ICharacter } from "newui/screen/screens/menu/element/Character";
 import { IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayer {

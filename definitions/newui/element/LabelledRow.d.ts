@@ -1,5 +1,6 @@
 import { BlockRow } from "newui/element/BlockRow";
-import { TextOrTranslationData, UiApi, UiElementOptions } from "newui/INewUi";
+import { TextOrTranslationData, UiElementOptions } from "newui/element/IUiElement";
+import { UiApi } from "newui/INewUi";
 export interface LabelledRowOptions extends UiElementOptions {
     label?: TextOrTranslationData;
 }

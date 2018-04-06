@@ -1,8 +1,8 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, StatDisplayType } from "entity/IStats";
 import { IModdable } from "Enums";
+import { TooltipOptionsVague } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
-import { TooltipOptionsVague } from "newui/INewUi";
 export interface IStatDisplayDescription extends IModdable {
     imagePath?: string | ((entity: IBaseEntity, stat?: IStat) => string);
     /**

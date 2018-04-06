@@ -2,7 +2,7 @@ import { Difficulty, DropLocation, IBindArray, IKeyBind, IModBindArray } from "E
 import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
-import { ICharacter } from "newui/element/Character";
+import { ICharacter } from "newui/screen/screens/menu/element/Character";
 import { IMilestoneData } from "player/IMilestone";
 import { IDialogInfo } from "ui/IUi";
 import { IEnumInfo } from "utilities/enum/IEnum";

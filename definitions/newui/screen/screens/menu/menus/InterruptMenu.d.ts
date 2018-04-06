@@ -1,27 +1,8 @@
 import { InterruptChoice } from "language/ILanguage";
-import Menu from "newui/element/Menu";
-import { InterruptInputOptions, MenuId, TextOrTranslationData, UiApi } from "newui/INewUi";
-export declare enum InterruptType {
-    Info = 0,
-    Confirm = 1,
-    Choice = 2,
-    Input = 3,
-    Loading = 4,
-    Menu = 5,
-}
-export interface InterruptOptions {
-    type?: InterruptType;
-    title?: TextOrTranslationData;
-    description?: TextOrTranslationData;
-    input?: InterruptInputOptions;
-    choices?: InterruptChoice[];
-    menuId?: MenuId;
-    args?: {
-        [key: string]: any;
-    };
-    canCancel?: boolean;
-    specialType?: string;
-}
+import { TextOrTranslationData } from "newui/element/IUiElement";
+import { UiApi } from "newui/INewUi";
+import Menu from "newui/screen/screens/menu/element/Menu";
+import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";
 export declare enum InterruptMenuEvent {
     Resolve = "Resolve",
 }

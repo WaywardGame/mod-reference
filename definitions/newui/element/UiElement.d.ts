@@ -1,4 +1,5 @@
-import { IUiElement, SelectableLayer, TooltipOptionsVague, UiApi, UiElementOptions } from "newui/INewUi";
+import { IUiElement, SelectableLayer, TooltipOptionsVague, UiElementOptions } from "newui/element/IUiElement";
+import { UiApi } from "newui/INewUi";
 import Emitter from "utilities/Emitter";
 export default class UiElement<T = any> extends Emitter implements IUiElement<T> {
     protected uiApi: UiApi;

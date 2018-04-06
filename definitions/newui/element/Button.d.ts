@@ -1,6 +1,7 @@
 import UiText, { TextOptions } from "newui/element/Text";
-import { MenuId, UiApi } from "newui/INewUi";
-import { InterruptOptions } from "newui/screen/screens/menu/menus/InterruptMenu";
+import { UiApi } from "newui/INewUi";
+import { MenuId } from "newui/screen/screens/menu/element/IMenu";
+import { InterruptOptions } from "newui/util/IInterrupt";
 export interface ButtonEffect {
     switchMenu?: MenuId;
     loadingInterrupt?: InterruptOptions;

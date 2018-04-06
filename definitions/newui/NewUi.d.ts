@@ -1,52 +1,19 @@
 import { InterruptChoice } from "language/ILanguage";
-import Menu from "newui/element/Menu";
+import { IUiElement, TextOrTranslationData, TooltipOptionsVague } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
-import { IInterruptMenuFactory, InterruptInputOptions, IUiElement, IUiScreen, MenuId, ScreenId, TextOrTranslationData, TooltipOptionsVague, UiApi } from "newui/INewUi";
-import { InterruptOptions } from "newui/screen/screens/menu/menus/InterruptMenu";
+import { IInterruptMenuFactory, UiApi } from "newui/INewUi";
+import { IUiScreen, ScreenId } from "newui/screen/IUiScreen";
+import { MenuId } from "newui/screen/screens/menu/element/IMenu";
 import UiScreen from "newui/screen/UiScreen";
+import { InterruptInputOptions } from "newui/util/IInterrupt";
 import InterruptFactory from "newui/util/InterruptFactory";
 import Emitter from "utilities/Emitter";
-export default class Ui extends Emitter implements UiApi {
+export default class Ui extends Emitter implements UiApi<UiScreen> {
     private storageElement;
     private readonly screenManager;
     private readonly tooltipManager;
     private scale;
     constructor();
-    /**
-     * Returns a menu instance, or `undefined` if the menu is not initialized.
-     * @param menuId The ID of the menu to return.
-     */
-    getMenu(): Menu | undefined;
-    getMenu(menuId: MenuId): Menu | undefined;
-    /**
-     * Returns the visible menu (top of the chain)
-     */
-    readonly visibleMenu: MenuId | undefined;
-    /**
-     * Shows a menu
-     * @param menuId The id of the menu to show
-     * @param transition Whether or not to transition the menu in
-     * @param args Any arguments to provide the menu before it shows
-     */
-    showMenu(menuId: MenuId, transition?: boolean, args?: {
-        [key: string]: any;
-    }, loadingInterrupt?: InterruptOptions): Promise<void>;
-    /**
-     * Hides the current menu and resets the menu chain
-     */
-    hideMenu(): Promise<void>;
-    /**
-     * Returns to the previous menu
-     */
-    backOneMenu(args?: {
-        [key: string]: any;
-    }, transition?: boolean): Promise<void>;
-    /**
-     * Returns to the first menu in the menuChain
-     */
-    backToFirstMenu(args?: {
-        [key: string]: any;
-    }, transition?: boolean): Promise<void>;
     screens(): IterableIterator<UiScreen>;
     /**
      * @param screenId The ID of the screen to return. If this screen is not initialized, returns undefined.
@@ -108,39 +75,15 @@ export default class Ui extends Emitter implements UiApi {
      * Returns an interrupt factory that can only be used to create menus.
      */
     interrupt(): IInterruptMenuFactory;
-    /**
-     * @deprecated
-     */
     interruptWithChoice(title: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
-    /**
-     * @deprecated
-     */
     interruptWithChoice(title: TextOrTranslationData, description: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
-    /**
-     * @deprecated
-     */
     interruptWithConfirmation(title: TextOrTranslationData, description?: TextOrTranslationData): Promise<boolean>;
-    /**
-     * @deprecated
-     */
     interruptWithInfo(title: TextOrTranslationData, description?: TextOrTranslationData): Promise<void>;
-    /**
-     * @deprecated
-     */
     interruptWithInput(title: TextOrTranslationData, options?: InterruptInputOptions): Promise<string>;
-    /**
-     * @deprecated
-     */
     interruptWithInput(title: TextOrTranslationData, description: TextOrTranslationData, options?: InterruptInputOptions): Promise<string>;
-    /**
-     * @deprecated
-     */
     interruptWithMenu(menuId: MenuId, args?: {
         [key: string]: any;
     }): Promise<void>;
-    /**
-     * @deprecated
-     */
     showLoadingInterrupt(title: TextOrTranslationData, description?: TextOrTranslationData, canCancel?: boolean, specialType?: string): Promise<void>;
     hideLoadingInterrupt(): Promise<void>;
     /**

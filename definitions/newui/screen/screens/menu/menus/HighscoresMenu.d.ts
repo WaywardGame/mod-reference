@@ -1,6 +1,6 @@
-import Menu from "newui/element/Menu";
 import { Block } from "newui/element/Text";
 import { UiApi } from "newui/INewUi";
+import Menu from "newui/screen/screens/menu/element/Menu";
 import { IHighscore } from "save/data/ISaveDataGlobal";
 export default class HighscoresMenu extends Menu {
     private filterRow;
