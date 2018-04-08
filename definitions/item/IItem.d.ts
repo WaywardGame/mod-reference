@@ -1,4 +1,5 @@
 import { ICreature } from "creature/ICreature";
+import { IDoodadDescription } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
@@ -89,6 +90,7 @@ export interface IContainer extends IContainable {
 }
 export interface IItemDescription extends IObjectDescription, IModdable {
     durability?: number;
+    doodad?: IDoodadDescription;
     doodadType?: DoodadType;
     onBurn?: ItemType;
     onUse?: {
