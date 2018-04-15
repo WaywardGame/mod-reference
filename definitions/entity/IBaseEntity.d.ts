@@ -121,6 +121,10 @@ export default interface IBaseEntity extends IPointZ, Emitter {
      * Triggers `EntityEvent.StatusChange`
      */
     setStatus(status: StatusType, to: boolean): void;
+    /**
+     * Generator for status effects on the entity.
+     */
+    statuses(): IterableIterator<StatusType>;
     hasProperty(property: Property): boolean;
     addProperty(property: Property, value: any): void;
     getProperty<T>(property: Property): T | undefined;

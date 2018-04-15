@@ -3,6 +3,7 @@ import { StatusType } from "Enums";
 import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
 export default class StatusEffects extends UiElement {
+    private readonly entity;
     private readonly effectIcons;
     constructor(uiApi: UiApi, entity: IBaseEntity);
     /**

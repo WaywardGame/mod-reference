@@ -71,6 +71,14 @@ export default class WorldRenderer implements IWorldRenderer {
     private batchShadow(fromX, fromY, toX, toY, t, anim);
     private batchPlayers(batchLayer);
     private batchHuman(human, batchLayer);
+    /**
+     * Renders the status effects currently on the human.
+     */
+    private renderStatusEffects(renderLayer, batch, human, animOffset, posX, posY, playerSize, offsetX, offsetY, alpha);
+    /**
+     * Renders a status effect image.
+     */
+    private renderStatusEffect(batch, human, animOffset, posX, posY, playerSize, offsetX, offsetY, alpha, defaultSprite, spriteOrSpriteLine);
     private spriteBatchForLayer(layer);
     private shouldOffsetFlying(tile);
     private computeSpritesInViewportInternal();

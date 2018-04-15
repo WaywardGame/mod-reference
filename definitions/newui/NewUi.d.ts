@@ -1,5 +1,5 @@
 import { InterruptChoice } from "language/ILanguage";
-import { IUiElement, TextOrTranslationData, TooltipOptionsVague } from "newui/element/IUiElement";
+import { ITooltipOptionsVague, IUiElement, TextOrTranslationData } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
 import { IInterruptMenuFactory, UiApi } from "newui/INewUi";
 import { IUiScreen, ScreenId } from "newui/screen/IUiScreen";
@@ -50,7 +50,7 @@ export default class Ui extends Emitter implements UiApi<UiScreen> {
      * 	The source element that the tooltip is for.
      * 	If there currently exists a tooltip for this element, it shows the old instead of creating a new tooltip.
      */
-    showTooltip(tooltip: TooltipOptionsVague, source?: UiElement): Promise<void>;
+    showTooltip(tooltip: ITooltipOptionsVague, source?: UiElement): Promise<void>;
     /**
      * Shows a tooltip
      * @param elementWithTooltip

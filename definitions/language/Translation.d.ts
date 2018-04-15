@@ -10,6 +10,7 @@ export interface ILanguageEntryProvider {
     get(dictionary: Dictionary, entry: number): string | undefined;
 }
 export declare type TranslationString = Translation & string;
+export declare type SplitTranslationString = Translation<ISplit[]> & ISplit[];
 export default class Translation<R extends string | ISplit[] = string> {
     static provider: ILanguageEntryProvider;
     static ui: (entry: string | UiTranslation) => TranslationString;
@@ -46,7 +47,7 @@ export default class Translation<R extends string | ISplit[] = string> {
      * Vague constructor
      */
     constructor(dictionary: number | string | ITranslationData, entry?: number | string);
-    setColorsAllowed(): Translation<ISplit[]>;
+    setColorsAllowed(): Translation<ISplit[]> & ISplit[];
     setNoTrim(): this;
     has(): boolean;
     /**

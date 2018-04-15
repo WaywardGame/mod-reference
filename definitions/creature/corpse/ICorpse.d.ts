@@ -19,4 +19,5 @@ export interface ICorpseResourceDrop {
 export interface ICorpse extends IObject<CreatureType>, IPointZ {
     decay?: number;
     aberrant?: boolean;
+    step?: number;
 }

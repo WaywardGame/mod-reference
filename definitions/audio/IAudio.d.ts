@@ -5,6 +5,7 @@ export interface IAudio {
     getMusicHandler(): EnumCursor<Music>;
     setMusicHandler(handler: EnumCursor<Music>): void;
     playMusic(): void;
+    stopMusic(): void;
     processEffects(): void;
     queueEffect(soundEffect: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
     updateMusicSpeed(speed: number): void;

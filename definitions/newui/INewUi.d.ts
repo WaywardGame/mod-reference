@@ -1,5 +1,5 @@
 import { InterruptChoice } from "language/ILanguage";
-import { IUiElement, TextOrTranslationData, TooltipOptionsVague } from "newui/element/IUiElement";
+import { ITooltipOptionsVague, IUiElement, TextOrTranslationData } from "newui/element/IUiElement";
 import { IUiScreen, ScreenId } from "newui/screen/IUiScreen";
 import { MenuId } from "newui/screen/screens/menu/element/IMenu";
 import { InterruptInputOptions } from "newui/util/IInterrupt";
@@ -41,8 +41,8 @@ export interface UiApi<U extends IUiScreen = IUiScreen> extends Emitter {
      */
     initScreen<S extends IUiScreen = U>(screen: ScreenId): S;
     showTooltip(tooltipSource: IUiElement): Promise<void>;
-    showTooltip(tooltipOptions: TooltipOptionsVague, source?: IUiElement): Promise<void>;
-    showTooltip(tooltipOptions: TooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
+    showTooltip(tooltipOptions: ITooltipOptionsVague, source?: IUiElement): Promise<void>;
+    showTooltip(tooltipOptions: ITooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
     hideTooltip(): Promise<void>;
     hideTooltip(source: IUiElement): Promise<void>;
     dumpTooltip(): Promise<void>;

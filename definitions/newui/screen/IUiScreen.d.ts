@@ -1,4 +1,4 @@
-import { IUiElement, TooltipOptionsVague } from "newui/element/IUiElement";
+import { ITooltipOptionsVague, IUiElement } from "newui/element/IUiElement";
 import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
 export declare enum ScreenId {
     None = 0,
@@ -30,7 +30,7 @@ export interface IUiScreen extends IUiElement {
      * 	The source element that the tooltip is for.
      * 	If there currently exists a tooltip for this element, it shows the old instead of creating a new tooltip.
      */
-    showTooltip(tooltip: TooltipOptionsVague, source?: IUiElement): Promise<void>;
+    showTooltip(tooltip: ITooltipOptionsVague, source?: IUiElement): Promise<void>;
     /**
      * Shows a tooltip
      * @param elementWithTooltip
@@ -38,7 +38,7 @@ export interface IUiScreen extends IUiElement {
      */
     showTooltip(elementWithTooltip: IUiElement): Promise<void>;
     showTooltip(): Promise<void>;
-    showTooltip(tooltipElementOrOptions: TooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
+    showTooltip(tooltipElementOrOptions: ITooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
     /**
      * Hides the current tooltip
      * @param source The element the tooltip must be for to hide it

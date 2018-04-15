@@ -77,7 +77,7 @@ export default class ModManager implements IModManager {
     getState(index: number): ModState;
     isInitializing(index: number): ModState;
     setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void, unloaded?: boolean): boolean;
-    uninitialize(index: number): void;
+    uninitialize(index: number): boolean;
     uninitializeAll(): void;
     /**
      * Caches the hooks used by each mod, sorted by priority.

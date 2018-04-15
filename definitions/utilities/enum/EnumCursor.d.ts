@@ -5,10 +5,14 @@ export declare enum EnumCursorEvent {
      */
     Change = 0,
 }
+export declare enum EnumCursorDefaultGenerator {
+    Random = "Random",
+}
 declare class EnumCursor<T extends number> extends Emitter {
     protected enumObject: any;
     protected values: T[];
     protected cursor: number;
+    protected default: number | (() => number);
     private _filter;
     /**
      * @param enumObject The full enumeration.
@@ -27,19 +31,32 @@ declare class EnumCursor<T extends number> extends Emitter {
      */
     filter(filter: (name: string, value: T) => boolean): this;
     /**
+     * Returns the entry at the cursor position.
+     */
+    get(): T;
+    /**
      * Sets the cursor position.
      */
     moveTo(n: number): this;
     /**
-     * Returns the entry at the cursor position.
+     * Sets the cursor position to the position of this enum entry in the filtered list.
+     * @returns The entry at the new cursor position.
      */
-    get(): T;
+    moveToEnumEntry(entry: T): T;
     /**
      * If the given amount is positive, moves forward that many entries.
      * If the given amount is negative, moves backward that many entries.
      * @returns The entry at the new cursor position.
      */
     move(amt: number): T;
+    /**
+     * Moves the cursor to a random entry, then returns that entry.
+     */
+    moveToRandom(): T;
+    /**
+     * Moves to the default cursor position.
+     */
+    moveToDefault(): T;
     /**
      * Moves the cursor forward one entry, and returns the new entry.
      */
@@ -49,8 +66,26 @@ declare class EnumCursor<T extends number> extends Emitter {
      */
     previous(): T;
     /**
-     * Moves the cursor to a random entry, then returns that entry.
+     * Sets the default cursor position.
      */
-    moveToRandom(): T;
+    setDefault(n: number): this;
+    /**
+     * Sets a handler for retrieving the default cursor position.
+     */
+    setDefault(generator: () => number): this;
+    /**
+     * Sets a handler for retrieving the default cursor position to a pre-implemented method by
+     * `EnumCursorDefaultGenerator` entry.
+     */
+    setDefault(defaultGenerator: EnumCursorDefaultGenerator): this;
+    /**
+     * Sets the default cursor position to the position of the given entry in this cursor.
+     */
+    setDefaultToEntry(entry: T): this;
+    /**
+     * Retrieves a random cursor position
+     */
+    getRandomPosition(): number;
+    private getDefaultGenerator(type);
 }
 export default EnumCursor;

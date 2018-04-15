@@ -11,10 +11,11 @@ export default class WAudio implements IAudio {
     private readonly _sfxInfo;
     private readonly _soundQueue;
     private readonly _recentlyPlayedSounds;
-    private readonly _fileFormat;
-    private readonly _audioContext;
-    private readonly _musicGainNode;
-    private readonly _effectsGainNode;
+    private _fileFormat;
+    private _onInitializedPromise;
+    private _audioContext;
+    private _musicGainNode;
+    private _effectsGainNode;
     private _musicSpeed;
     private _soundDelay;
     private _musicHandler;
@@ -26,17 +27,18 @@ export default class WAudio implements IAudio {
     /**
      * Sets the music handler to the provided instance of `EnumCursor<Music>`. Causes any playing music to stop.
      */
-    setMusicHandler(musicHandler: EnumCursor<Music>): void;
+    setMusicHandler(musicHandler: EnumCursor<Music>): Promise<void>;
     /**
      * Resets the music handler to its original state.
      */
-    resetMusicHandler(): void;
+    resetMusicHandler(): Promise<void>;
     /**
      * Sets the current track to the first in the current music handler.
      */
-    playMusic(): void;
-    updateMusicSpeed(speed: number): void;
-    updateVolume(): void;
+    playMusic(): Promise<void>;
+    stopMusic(): void;
+    updateMusicSpeed(speed: number): Promise<void>;
+    updateVolume(): Promise<void>;
     updatePosition(): void;
     queueEffect(type: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
     processEffects(): void;
@@ -45,4 +47,6 @@ export default class WAudio implements IAudio {
     private _playEffect(soundEffect, variation?);
     private _isComparableSound(soundEffect, x, y, z, type, delay, speed, now, noPosition);
     private _getAudioBuffer(resourcePath);
+    private initializeAudio(safe?);
+    private waitForAudioContext();
 }

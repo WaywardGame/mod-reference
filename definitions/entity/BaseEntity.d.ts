@@ -37,6 +37,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     updateStats(): void;
     hasStatus(status: StatusType): boolean;
     setStatus(status: StatusType, to: boolean): void;
+    statuses(): IterableIterator<StatusType>;
     getTile(): ITile;
     getPoint(): IPointZ;
     getFacingPoint(): IPointZ;

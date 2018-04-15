@@ -1,12 +1,12 @@
 import { BlockRow } from "newui/element/BlockRow";
 import { CheckButton, CheckButtonOptions } from "newui/element/CheckButton";
-import { UiElementOptions } from "newui/element/IUiElement";
+import { IUiElementOptions } from "newui/element/IUiElement";
 import { Refreshable } from "newui/element/Refreshable";
 import { UiApi } from "newui/INewUi";
 export declare enum ChoiceListEvent {
     Choose = "Selection",
 }
-export interface ChoiceListOptions<ChoiceType extends Choice = Choice> extends UiElementOptions {
+export interface ChoiceListOptions<ChoiceType extends Choice = Choice> extends IUiElementOptions {
     refresh?(): ChoiceType;
 }
 export default class ChoiceList<ChoiceType extends Choice = Choice> extends BlockRow implements Refreshable {

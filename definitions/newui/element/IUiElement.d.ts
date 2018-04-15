@@ -1,5 +1,6 @@
 import { Dictionary, UiTranslation } from "language/ILanguage";
 import Emitter from "utilities/Emitter";
+import { ISplit } from "utilities/string/Interpolate";
 export declare enum UiElementEvent {
     Show = 0,
     Hide = 1,
@@ -33,7 +34,7 @@ export interface IUiElement<T = any> extends Emitter {
     contains(what: string | HTMLElement | IUiElement): boolean;
     showTooltip(): Promise<void>;
 }
-export interface UiElementOptions {
+export interface IUiElementOptions {
     visible?: boolean;
     elementType?: string;
     namespace?: Namespace;
@@ -42,7 +43,7 @@ export interface UiElementOptions {
     attributes?: {
         [key: string]: string | number;
     };
-    tooltip?: TooltipOptionsVague | boolean;
+    tooltip?: ITooltipOptionsVague | boolean;
     selectable?: SelectableLayer;
 }
 export declare enum Namespace {
@@ -67,22 +68,23 @@ export declare enum TooltipLocation {
     BeneathRight = 9,
     Mouse = 10,
 }
-export interface TooltipOptionsVague extends UiElementOptions {
+export declare type TooltipTextData = TextOrTranslationData | ISplit[];
+export interface ITooltipOptionsVague extends IUiElementOptions {
     tooltip?: never;
     location: TooltipLocation;
     heading?: TextOrTranslationData;
-    text?: TextOrTranslationData;
+    text?: TooltipTextData | (() => TooltipTextData);
     maxWidth?: number;
     create?(tooltip: IUiElement): Promise<void>;
 }
-export interface BaseTranslationData {
+export interface IBaseTranslationData {
     dictionary: Dictionary;
     entry: number;
     args?: any[] | (() => any[]);
     properties?: string[];
     shouldTrim?: false;
 }
-export declare type TranslationData = BaseTranslationData | (Partial<BaseTranslationData> & {
+export declare type TranslationData = IBaseTranslationData | (Partial<IBaseTranslationData> & {
     entry: UiTranslation;
 });
 export declare type TextOrTranslationData = string | UiTranslation | TranslationData;

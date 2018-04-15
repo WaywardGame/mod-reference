@@ -83,7 +83,7 @@ export interface IModManager {
     setSteamIdOwner(index: number, steamIdOwner: string): void;
     setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
     setupMods(callback: () => void): void;
-    uninitialize(index: number): void;
+    uninitialize(index: number): boolean;
     uninitializeAll(): void;
     unload(index: number): void;
     unloadAll(reset?: boolean): void;

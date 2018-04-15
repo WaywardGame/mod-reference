@@ -1,4 +1,4 @@
-import { IUiElement, TooltipOptionsVague } from "newui/element/IUiElement";
+import { ITooltipOptionsVague, IUiElement } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
 export default class TooltipManager {
@@ -11,7 +11,7 @@ export default class TooltipManager {
      * 	The source element that the tooltip is for.
      * 	If there currently exists a tooltip for this element, it shows the old instead of creating a new tooltip.
      */
-    showTooltip(tooltip: TooltipOptionsVague, source?: UiElement): Promise<void>;
+    showTooltip(tooltip: ITooltipOptionsVague, source?: UiElement): Promise<void>;
     /**
      * Shows a tooltip
      * @param elementWithTooltip

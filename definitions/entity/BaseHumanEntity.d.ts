@@ -70,4 +70,5 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     protected unequip(item: IItem): void;
     protected resetDefense(): void;
     protected calculateEquipmentStats(): void;
+    protected swimCheck(): void;
 }

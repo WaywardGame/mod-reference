@@ -1,7 +1,7 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, StatDisplayType } from "entity/IStats";
 import { IModdable } from "Enums";
-import { TooltipOptionsVague } from "newui/element/IUiElement";
+import { ITooltipOptionsVague } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
 export interface IStatDisplayDescription extends IModdable {
     imagePath?: string | ((entity: IBaseEntity, stat?: IStat) => string);
@@ -22,7 +22,7 @@ export interface IStatDisplayDescription extends IModdable {
     /**
      * Gets the tooltip data for this stat.
      */
-    tooltip?: Partial<TooltipOptionsVague> | ((entity: IBaseEntity, stat?: IStat) => Partial<TooltipOptionsVague>);
+    tooltip?: Partial<ITooltipOptionsVague> | ((entity: IBaseEntity, stat?: IStat) => Partial<ITooltipOptionsVague>);
     /**
      * Handlers for when the stat changes. Called when the stat changes & when the stat max changes.
      */

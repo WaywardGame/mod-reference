@@ -625,6 +625,8 @@ export declare enum ItemType {
     CoconutContainerOfPurifiedFreshWater = 421,
     CoconutContainerOfUnpurifiedFreshWater = 422,
     CoconutContainerOfGoatMilk = 423,
+    OldEducationalScroll = 424,
+    StrippedLeather = 425,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -1244,7 +1246,7 @@ export interface IResourceItem {
     chanceOutOf?: number;
 }
 export interface IDoodadResource {
-    [index: number]: IResourceItem[];
+    [index: number]: IResourceItem[] | undefined;
 }
 export interface IDoodadParticles {
     [index: number]: IRGB;

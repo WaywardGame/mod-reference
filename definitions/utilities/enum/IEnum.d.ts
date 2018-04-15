@@ -20,6 +20,9 @@ export declare enum EnumId {
     Music = 13,
     SoundEffect = 14,
     Command = 15,
+    Stat = 16,
+    StatusEffect = 17,
+    MenuBarButton = 18,
 }
 export interface IEnumInfo {
     enumId: EnumId;

@@ -37,5 +37,7 @@ export default class ResourceLoader implements IResourceLoader {
     private loadTileEvent(tileEventType);
     private loadHairstyles();
     private loadHairstyle(hairstyle);
+    private loadStatuses();
+    private loadStatus(status);
     private loadOthers();
 }

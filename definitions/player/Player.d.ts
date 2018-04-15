@@ -149,6 +149,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      */
     updateStrength(): void;
     protected calculateStats(): void;
+    protected swimCheck(): void;
     private slitherSuckerDamage();
     private processMovement(turnType?);
     /**
@@ -167,7 +168,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      * 4. When thirst > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      */
     private onStatChange(_, stat, oldValue, reason);
-    private swimCheck();
     private restTick();
     private showStatsHint();
     private staminaSyncCheck();

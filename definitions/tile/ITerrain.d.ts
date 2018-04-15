@@ -61,6 +61,7 @@ export interface ITileData {
     quality?: ItemQuality;
     gfx?: number;
     tilled?: boolean;
+    step?: number;
 }
 export declare type ITileDataOld = Partial<ITileData> & {
     strength?: number;

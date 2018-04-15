@@ -12,28 +12,34 @@ export interface IRandomGenerator {
 export declare class Random<G extends IRandomGenerator> {
     generator: G;
     constructor(generator: G);
-    nextFloat(max?: number): number;
+    float(max?: number): number;
     /**
      * Generates a random integer between 0 (inclusive) and max (exclusive)
      */
-    nextInt(max: number): number;
+    int(max: number): number;
     /**
      * Generates a random integer between min and max (inclusive)
      */
-    nextIntInRange(min: number, max: number): number;
+    intInRange(min: number, max: number): number;
     /**
      * Generates a random boolean
      */
-    nextBool(): boolean;
+    bool(): boolean;
     /**
-     * Get the chance for something
+     * Get a percentage for something
      * Returns a number between 1 and 100 (inclusive)
      */
-    nextChance(minChance?: number, chanceOutOf?: number): number;
+    percent(minChance?: number, chanceOutOf?: number, ceil?: boolean): number;
+    /**
+     * Returns whether a chance passes, given a decimal number.
+     *
+     * Example: `chance(0.1)` is a `1/10` chance, `chance(0.8)` is a `4/5` chance
+     */
+    chance(decimal: number): boolean;
     /**
      * Chooses a random entry in an array and returns it
      */
-    nextChoice(from: any[]): any;
+    choice(from: any[]): any;
     shuffle<T>(array: T[]): T[];
     getElement<T>(array: T[]): T;
 }

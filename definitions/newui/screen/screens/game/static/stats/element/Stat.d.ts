@@ -1,11 +1,11 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
-import { UiElementOptions } from "newui/element/IUiElement";
+import { IUiElementOptions } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
 export declare abstract class StatElement extends UiElement {
     private readonly entity;
-    constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat, options?: UiElementOptions);
+    constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat, options?: IUiElementOptions);
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
      */
@@ -61,10 +61,12 @@ export declare class StatAttribute extends StatElement {
     getDisplayElement(): UiElement<any>;
 }
 export declare class Statbars extends UiElement {
-    private readonly statbars;
+    private readonly _statbars;
+    readonly statbars: Map<Stat, Statbar>;
     constructor(uiApi: UiApi, entity: IBaseEntity, iterableOfStats: IterableIterator<Stat>);
 }
 export declare class StatAttributes extends UiElement {
-    private readonly attributes;
+    private readonly _attributes;
+    readonly attributes: Map<Stat, StatAttribute>;
     constructor(uiApi: UiApi, entity: IBaseEntity, iterableOfStats: IterableIterator<Stat>);
 }

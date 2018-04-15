@@ -18,5 +18,4 @@ export default class ActionManager extends GenericManager<IAction> implements IA
     private canExecuteAction(player, action, actionArgument);
     private executeInternal(player, action, actionArgument);
     private hasValidArguments(player, actionValidator, actionArgument);
-    private cloneActionArgument(actionArgument);
 }

@@ -1,8 +1,8 @@
-import { UiElementOptions } from "newui/element/IUiElement";
+import { IUiElementOptions } from "newui/element/IUiElement";
 import { Refreshable } from "newui/element/Refreshable";
 import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
-export interface RangeInputOptions extends UiElementOptions {
+export interface RangeInputOptions extends IUiElementOptions {
     min?: number;
     max?: number;
     step?: number;

@@ -1,13 +1,13 @@
 import { UiTranslation } from "language/ILanguage";
 import { BlockRow } from "newui/element/BlockRow";
 import Button, { ButtonEffect, ButtonOptions } from "newui/element/Button";
-import { IUiElement, TextOrTranslationData, UiElementOptions } from "newui/element/IUiElement";
+import { IUiElement, IUiElementOptions, TextOrTranslationData } from "newui/element/IUiElement";
 import UiText, { Heading, Paragraph, TextOptions } from "newui/element/Text";
 import UiElement from "newui/element/UiElement";
 import { SelectDirection, UiApi } from "newui/INewUi";
 import { IUiScreen } from "newui/screen/IUiScreen";
 import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
-export interface MenuOptions extends UiElementOptions {
+export interface MenuOptions extends IUiElementOptions {
     menuId: MenuId;
     title?: string | UiTranslation;
     description?: string | UiTranslation;

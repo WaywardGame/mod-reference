@@ -1,4 +1,4 @@
-import { ActionType, Bindable, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType } from "Enums";
+import { ActionType, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/Messages";
 import { BindCatcherApi, IBinding } from "newui/BindingManager";
@@ -34,7 +34,6 @@ export default class InGameScreen extends BaseScreen {
     elementAttributeReputation: JQuery;
     elementReputationMalignity: JQuery;
     elementReputationBenignity: JQuery;
-    elementButtons: JQuery;
     elementQuickSlotsContainer: JQuery;
     elementMessagesOverlay: JQuery;
     elementMessagesChatInput: JQuery;
@@ -133,7 +132,6 @@ export default class InGameScreen extends BaseScreen {
     refreshStats(): void;
     refreshAttributes(): void;
     updateTextIfChanged(id: TextElementId, element: JQuery, text: string): void;
-    onButtonBarClick(button: JQuery | string): Promise<void>;
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
@@ -228,9 +226,6 @@ export default class InGameScreen extends BaseScreen {
     onUpdateContainer(containerElement: JQuery, activeSort: boolean): void;
     updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;
-    addButton(translationId: string, imagePath: string, bindable?: Bindable): JQuery;
-    refreshButtonTooltip(button: JQuery): void;
-    removeButton(button: JQuery): void;
     onUpdateDirection(): void;
     private runAction(itemId, containerId, action, skipSound?);
     private updateContextMenu(contextMenu);

@@ -1,4 +1,4 @@
-import { IUiElement, SelectableLayer, TooltipOptionsVague, UiElementOptions } from "newui/element/IUiElement";
+import { ITooltipOptionsVague, IUiElement, IUiElementOptions, SelectableLayer } from "newui/element/IUiElement";
 import { UiApi } from "newui/INewUi";
 import Emitter from "utilities/Emitter";
 export default class UiElement<T = any> extends Emitter implements IUiElement<T> {
@@ -17,7 +17,7 @@ export default class UiElement<T = any> extends Emitter implements IUiElement<T>
     readonly style: CSSStyleDeclaration;
     static findDescendants(inElement: IUiElement | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     selectable: SelectableLayer | false;
-    constructor(uiApi: UiApi, options?: UiElementOptions);
+    constructor(uiApi: UiApi, options?: IUiElementOptions);
     setContents(html: string, escape?: boolean): this;
     addClass(...classes: string[]): this;
     removeClass(...classes: string[]): this;
@@ -46,7 +46,7 @@ export default class UiElement<T = any> extends Emitter implements IUiElement<T>
     dump(filter?: (element: UiElement) => boolean): Promise<void>;
     findDescendants(selector: string): NodeListOf<Element>;
     showTooltip(): Promise<void>;
-    setTooltip(tooltipOptions?: TooltipOptionsVague): void;
+    setTooltip(tooltipOptions?: ITooltipOptionsVague): void;
     getBox(): ClientRect | DOMRect;
     getOffset(): {
         top: number;

@@ -217,7 +217,7 @@ export default class Game extends Emitter implements IGame {
     private createWorld();
     private createWorldRenderer();
     private loadResources();
-    private initializeGameState(isTravelling?);
+    private initializeGameState(isTraveling?);
     private setZoomLevel();
     private playGame(options);
     private upgradeSave(saveVersion);

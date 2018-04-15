@@ -17,14 +17,16 @@ export declare enum PathType {
     Equip = 4,
     Hairstyle = 5,
     Item = 6,
-    Mound = 7,
-    Music = 8,
-    Sleep = 9,
-    SoundEffect = 10,
-    Terrain = 11,
-    TileEvent = 12,
-    StatIcon = 13,
+    MenuBarButtonIcon = 7,
+    Mound = 8,
+    Music = 9,
+    Sleep = 10,
+    SoundEffect = 11,
+    StatIcon = 12,
+    StatusEffect = 13,
     StatusEffectIcon = 14,
+    Terrain = 15,
+    TileEvent = 16,
 }
 export interface IResourceContainer {
     spriteTexture: WebGLTexture;

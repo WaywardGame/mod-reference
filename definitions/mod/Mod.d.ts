@@ -352,6 +352,14 @@ export declare abstract class Mod extends BaseMod {
      */
     onInventoryItemUpdate(player: IPlayer, item: IItem, container: IContainer): void;
     /**
+     * Called when an item is damaged
+     * @param player The player object
+     * @param item The item being damaged
+     * @param modifier The damage modifier
+     * @returns The amount of damage the item shouldd take or undefined to use the default logic
+     */
+    onItemDamage(item: IItem, modifier?: number): number | undefined;
+    /**
      * Called when the player equips an item to a slot
      * @param player The player object
      * @param item The item being equipped

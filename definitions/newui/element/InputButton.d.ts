@@ -1,9 +1,9 @@
 import Button, { ButtonOptions } from "newui/element/Button";
 import { InputOptions } from "newui/element/IInput";
-import { UiElementOptions } from "newui/element/IUiElement";
+import { IUiElementOptions } from "newui/element/IUiElement";
 import { UiApi } from "newui/INewUi";
 export interface InputButtonOptions extends ButtonOptions {
-    input: InputOptions & UiElementOptions;
+    input: InputOptions & IUiElementOptions;
 }
 export declare enum InputButtonEvent {
     Change = "Change",

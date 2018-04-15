@@ -44,6 +44,7 @@ export interface IDoodadOptions extends IObjectOptions {
     disassembly?: IItemArray;
     ownerIdentifier?: string;
     item?: IItem;
+    step?: number;
 }
 export declare type IDoodadOld = Partial<IDoodad> & {
     growInto?: DoodadType;

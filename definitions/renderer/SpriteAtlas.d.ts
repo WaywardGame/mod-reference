@@ -13,6 +13,7 @@ export default class SpriteAtlas implements ISpriteAtlas {
     raft: ISpriteInfo;
     shadow: ISpriteInfo;
     sleeps: ISpriteInfoList;
+    statusEffects: ISpriteInfoList;
     text: ISpriteInfo;
     tileEvents: ISpriteInfoList;
     zzz: ISpriteInfo;
