@@ -1,5 +1,5 @@
 import { MoveType } from "Enums";
-import IFlowField from "IFlowField";
+import IFlowField from "flowfield/IFlowField";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 export default class FlowField implements IFlowField {

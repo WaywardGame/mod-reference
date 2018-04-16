@@ -1,5 +1,5 @@
 import { DoodadType, DoodadTypeGroup } from "Enums";
-import { IDoodad, IDoodadOptions } from "IDoodad";
+import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { Message } from "language/Messages";
 export interface IDoodadManager {
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;

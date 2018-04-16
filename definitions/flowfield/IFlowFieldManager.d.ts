@@ -1,6 +1,6 @@
 import { FacingDirection, MoveType } from "Enums";
-import IFlowField from "IFlowField";
-import { DebugRendererDelegate } from "IFlowFieldDebugRenderer";
+import IFlowField from "flowfield/IFlowField";
+import { DebugRendererDelegate } from "flowfield/IFlowFieldDebugRenderer";
 import { IPlayer } from "player/IPlayer";
 import { IPointZ } from "utilities/math/IPoint";
 export interface IFlowFieldManager {
