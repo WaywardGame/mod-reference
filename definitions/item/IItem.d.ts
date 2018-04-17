@@ -2,7 +2,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, RecipeLevel, SkillType, TatteredMap } from "Enums";
+import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, StatType, TatteredMap } from "Enums";
 import IPlayer from "player/IPlayer";
 import { IPointZ } from "utilities/math/IPoint";
 export interface IRecipe {
@@ -30,8 +30,10 @@ export interface IRanged {
 }
 export declare type IItemArray = IItem[];
 export interface IItemLegendary {
-    skill: SkillType;
+    type: LegendaryType;
     value: number;
+    skill?: SkillType;
+    stat?: StatType;
 }
 export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
     weight: number;
@@ -78,6 +80,11 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
 export interface IItemOld {
     equipped?: EquipType;
     equippedPid?: number;
+}
+export interface IItemLegendaryOld {
+    legendary?: {
+        skill: SkillType;
+    };
 }
 export interface IContainable {
     containedWithin?: IContainer;

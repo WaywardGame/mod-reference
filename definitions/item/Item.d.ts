@@ -56,6 +56,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
+    setLegendary(): void;
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;

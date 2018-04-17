@@ -57,6 +57,10 @@ export interface IStatBase {
      * When not provided, defaults to `1`.
      */
     changeAmount?: number;
+    /**
+     * A bonus value added to be added to `max` and `value`.
+     */
+    bonus?: number;
 }
 export interface IStatMax extends IStatBase {
     readonly max: number;
@@ -66,7 +70,10 @@ export interface IStatChanging extends IStatBase {
     changeTimer: number;
     readonly nextChangeTimer: number;
 }
-export declare type IStat = IStatBase | IStatMax | IStatChanging;
+export interface IStatBonus extends IStatBase {
+    bonus: number;
+}
+export declare type IStat = IStatBase | IStatMax | IStatChanging | IStatBonus;
 export declare enum StatDisplayType {
     /**
      * Do not display this stat

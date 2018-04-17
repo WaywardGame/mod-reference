@@ -1069,6 +1069,20 @@ export declare enum ItemQuality {
     Remarkable = 3,
     Legendary = 4,
 }
+export declare enum LegendaryType {
+    Damage = 0,
+    Defense = 1,
+    Illumination = 2,
+    WeightCapacity = 3,
+    ItemWeight = 4,
+    Stat = 5,
+    Skill = 6,
+    Benignity = 7,
+    Malignity = 8,
+    Range = 9,
+    UseBenefits = 10,
+    Worth = 11,
+}
 export declare enum RenderFlag {
     None = 0,
     Corpse = 1,

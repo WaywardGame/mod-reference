@@ -51,6 +51,10 @@ export default interface IBaseEntity extends IPointZ, Emitter {
      */
     getStat<StatType extends IStatBase | undefined = IStat | undefined>(stat: Stat): StatType;
     /**
+     * Returns the value of the given stat, or `undefined` if the stat does not exist.
+     */
+    getStatValue(stat: Stat): number | undefined;
+    /**
      * Sets the given `Stat`'s value to the given amount. Triggers `EntityEvent.StatChange`
      * @param stat The `Stat` to set.
      * @param amount The amount to set the value to.
@@ -83,6 +87,14 @@ export default interface IBaseEntity extends IPointZ, Emitter {
      */
     increaseStat(stat: Stat | IStat, amount: number): boolean;
     /**
+     * Change the bonus for a stat.
+     * @param stat The `Stat` to set the bonus of.
+     * @param bonus The amount to increase/decrease the stat.
+     *
+     * Triggers `EntityEvent.StatBonusChanged`, then `EntityEvent.StatChanged`
+     */
+    setStatBonus(stat: Stat | IStat, bonus: number): void;
+    /**
      * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
      * @param stat The `Stat` to set.
      * @param amount The amount to set the value to.
@@ -91,6 +103,10 @@ export default interface IBaseEntity extends IPointZ, Emitter {
      * it will likely error!
      */
     setStatMax(stat: Stat | IStat, amount: number): void;
+    /**
+     * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`.
+     */
+    getStatMax(stat: Stat): number | undefined;
     /**
      * Sets how frequently the stat should change. Triggers `EntityEvent.StatTimerChange`
      * @param stat The `Stat` that should change.
@@ -138,11 +154,13 @@ export declare enum EntityEvent {
     StatChanged = 0,
     StatTimerChanged = 1,
     StatMaxChanged = 2,
-    StatusChange = 3,
+    StatBonusChanged = 3,
+    StatusChange = 4,
 }
 export declare enum StatChangeReason {
     Normal = 0,
     ChangeTimer = 1,
+    BonusChanged = 2,
 }
 export declare type IStatus = Writable<{
     [key in keyof typeof StatusType]: boolean;
