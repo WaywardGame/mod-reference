@@ -60,7 +60,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
-    getWorth(): number | undefined;
+    getWorth(legendaryWorth?: boolean): number | undefined;
     onUnserialized(): void;
     private checkIfItemsMatch(item1, item2);
     private checkIfItemArraysMatch(arr1, arr2);

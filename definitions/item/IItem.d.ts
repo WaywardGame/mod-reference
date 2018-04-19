@@ -75,7 +75,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
-    getWorth(): number | undefined;
+    getWorth(legendaryWorth?: boolean): number | undefined;
 }
 export interface IItemOld {
     equipped?: EquipType;
