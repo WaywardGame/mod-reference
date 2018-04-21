@@ -34,6 +34,7 @@ export interface IItemManager {
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
+    getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;

@@ -54,6 +54,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     updateStatsAndAttributes(): void;
     staminaReduction(skillType: SkillType): void;
     updateReputation(reputation: number): void;
+    setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     /**

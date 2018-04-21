@@ -91,7 +91,6 @@ export interface IPlayer extends IBaseHumanEntity {
     restoreExploredMap(): void;
     revealItem(itemType: ItemType): void;
     setId(id: number): void;
-    setRaft(itemId: number | undefined): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setup(completedMilestones: number): void;
     setPosition(point: IPointZ): void;

@@ -64,7 +64,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     updateStatuses(): void;
     resetMovementStates(): void;
     setId(id: number): void;
-    setRaft(itemId: number | undefined): void;
+    setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
     staminaCheck(): boolean;

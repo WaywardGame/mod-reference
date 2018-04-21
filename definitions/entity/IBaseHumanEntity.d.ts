@@ -37,16 +37,17 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     damage(amount: number, damageMessage: string, soundDelay?: number): number | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damageRandomEquipment(): void;
+    getDamageModifier(): number;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
     getEquipSlotForItem(item: IItem): EquipType | undefined;
     getHandToUse(): EquipType | undefined;
     getMaxHealth(): number;
     getName(html?: boolean): string;
-    getDamageModifier(): number;
     isGhost(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;
+    setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaReduction(skillType: SkillType): void;
     startResting(restData: IRestData): void;
