@@ -62,13 +62,13 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
      */
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
+    equip(item: IItem, slot: EquipType): void;
+    unequip(item: IItem): void;
     /**
      * Improve one of the core player stats
      */
     protected statGain(stat: StatType, bypass: boolean): void;
     protected calculateStats(): void;
-    protected equip(item: IItem, slot: EquipType): void;
-    protected unequip(item: IItem): void;
     protected resetDefense(): void;
     protected calculateEquipmentStats(): void;
     protected swimCheck(): void;

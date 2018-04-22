@@ -37,6 +37,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     damage(amount: number, damageMessage: string, soundDelay?: number): number | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damageRandomEquipment(): void;
+    equip(item: IItem, slot: EquipType): void;
     getDamageModifier(): number;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
@@ -51,6 +52,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaReduction(skillType: SkillType): void;
     startResting(restData: IRestData): void;
+    unequip(item: IItem): void;
     update(): void;
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;

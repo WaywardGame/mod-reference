@@ -74,6 +74,7 @@ export interface ITooltipOptionsVague extends IUiElementOptions {
     location: TooltipLocation;
     heading?: TextOrTranslationData;
     text?: TooltipTextData | (() => TooltipTextData);
+    cache?: false;
     maxWidth?: number;
     create?(tooltip: IUiElement): Promise<void>;
 }

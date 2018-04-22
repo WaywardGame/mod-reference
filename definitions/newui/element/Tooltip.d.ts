@@ -11,6 +11,7 @@ export interface TooltipData {
 export default class Tooltip<T = any> extends UiElement<TooltipData & T> {
     private readonly source;
     location: TooltipLocation;
+    cache: boolean;
     constructor(uiApi: UiApi, source: UiElement, tooltipOptions: ITooltipOptions);
     addText(options: TextOptions | SplitTextOptions): UiText<any> | SplitText<any>;
     addHeading(options: TextOptions): UiText<any>;

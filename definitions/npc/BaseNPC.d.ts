@@ -6,7 +6,7 @@ import { INPC } from "npc/INPC";
 import { IPlayerCustomization } from "player/IPlayer";
 export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     protected static registrarId: number;
-    entityType: EntityType.NPC;
+    readonly entityType: EntityType.NPC;
     "constructor": typeof BaseNPC;
     ai: AiType;
     seen: boolean;

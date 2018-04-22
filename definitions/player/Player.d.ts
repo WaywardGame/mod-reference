@@ -14,7 +14,7 @@ import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IPointZ } from "utilities/math/IPoint";
 export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
-    entityType: EntityType.Player;
+    readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
