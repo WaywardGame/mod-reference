@@ -42,6 +42,7 @@ export default class WorldRenderer implements IWorldRenderer {
     private readonly itemBatch;
     private readonly corpseBatch;
     private readonly creatureBatch;
+    private readonly creatureFlyingBatch;
     private readonly entitiesInViewport;
     private viewportSpritesDirty;
     static compileShaders(gl: WebGL2RenderingContext): void;

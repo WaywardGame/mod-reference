@@ -11,6 +11,7 @@ export declare enum SpriteBatchLayer {
     Corpse = 0,
     Item = 1,
     Creature = 2,
+    CreatureFlying = 3,
 }
 export declare enum WorldZ {
     Min = 0,
