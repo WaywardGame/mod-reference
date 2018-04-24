@@ -317,7 +317,7 @@ export declare enum ItemType {
     IronTongs = 112,
     Talc = 113,
     TalcumPowder = 114,
-    SandCastFlask = 115,
+    WoodenSandCastFlask = 115,
     Lens = 116,
     PlantRoots = 117,
     LockPick = 118,
@@ -628,6 +628,9 @@ export declare enum ItemType {
     CoconutContainerOfGoatMilk = 423,
     OldEducationalScroll = 424,
     StrippedLeather = 425,
+    ClaySandCastFlask = 426,
+    SandstoneSandCastFlask = 427,
+    StoneSandCastFlask = 428,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -698,7 +701,8 @@ export declare enum ItemTypeGroup {
     Milk = 865,
     Book = 866,
     CoconutContainerOfPotableWater = 867,
-    Last = 868,
+    SandCastFlask = 868,
+    Last = 869,
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -1071,7 +1075,7 @@ export declare enum ItemQuality {
     Legendary = 4,
 }
 export declare enum LegendaryType {
-    Damage = 0,
+    Attack = 0,
     Defense = 1,
     Illumination = 2,
     WeightCapacity = 3,
