@@ -10,6 +10,7 @@ export interface IItemManager {
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
     checkMilestones(player: IPlayer, item: IItem): void;
     computeContainerWeight(container: IContainer): number;
+    getLegendaryWeightCapacity(container: IContainer): number;
     countItemsInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup | IItemTypeGroup, ignoreItem?: IItem): number;
     craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
@@ -18,7 +19,7 @@ export interface IItemManager {
     decayItems(): boolean;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     generateLookups(): void;
-    getContainerReference(container: IContainer, parentObject?: any): ContainerReference;
+    getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
     getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;

@@ -26,6 +26,7 @@ export default class ItemManager implements IItemManager {
     isContainer(obj: IItem | IDoodad | IContainer | ITile | IPlayer): obj is IContainer;
     moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): void;
     computeContainerWeight(container: IContainer): number;
+    getLegendaryWeightCapacity(container: IContainer): number;
     moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): void;
     moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
