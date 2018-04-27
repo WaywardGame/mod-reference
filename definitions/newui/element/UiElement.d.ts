@@ -1,49 +1,41 @@
 import { ITooltipOptionsVague, IUiElement, IUiElementOptions, SelectableLayer } from "newui/element/IUiElement";
 import { UiApi } from "newui/INewUi";
+import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
-export default class UiElement<T = any> extends Emitter implements IUiElement<T> {
+export default class UiElement extends Emitter implements IUiElement {
     protected uiApi: UiApi;
-    protected children: UiElement[];
-    protected parent: UiElement;
-    private readonly _element;
-    private scrollingChild?;
-    private readonly _data;
-    private _tooltipOptions?;
+    static findDescendants(inElement: IUiElement | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
+    static getSelectableLayer(element: IUiElement | HTMLElement): number | false;
+    static append(elementToMove: string | IUiElement | HTMLElement, placeToAppendTo: string | IUiElement | HTMLElement): Promise<void>;
+    private static removeFromParent(elementToRemove);
+    static remove(elementToRemove: string | IUiElement | HTMLElement): Promise<void>;
+    readonly classes: ClassListManipulator<this>;
+    readonly attributes: AttributeManipulator<this>;
     readonly element: HTMLElement;
-    readonly jsonData: DOMStringMap & T;
     readonly data: DOMStringMap;
     readonly childCount: number;
     readonly scrollHeight: number;
     readonly style: CSSStyleDeclaration;
-    static findDescendants(inElement: IUiElement | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
+    protected children: UiElement[];
+    protected parent: UiElement;
+    private readonly internalElement;
+    private scrollingChild?;
+    private readonly _data;
+    private _tooltipOptions?;
     selectable: SelectableLayer | false;
     constructor(uiApi: UiApi, options?: IUiElementOptions);
-    setContents(html: string, escape?: boolean): this;
-    addClass(...classes: string[]): this;
-    removeClass(...classes: string[]): this;
-    toggleClass(...classes: string[]): this;
-    toggleClass(on: boolean, ...classes: string[]): this;
-    hasClass(...classes: string[]): boolean;
-    setAttribute(name: string): this;
-    setAttribute(name: string, value: string): this;
-    getAttribute(name: string): string | null;
-    removeAttribute(name: string): this;
-    repaint(): void;
+    jsonData<T>(): DOMStringMap & T;
     isVisible(): boolean;
     show(...args: any[]): Promise<void>;
     hide(...args: any[]): Promise<void>;
     toggle(visible?: boolean, ...args: any[]): Promise<void>;
-    contains(what: string | HTMLElement | IUiElement): boolean;
     appendTo(where: string | HTMLElement | IUiElement): this;
-    append(elements: IterableOf<HTMLElement | IUiElement | undefined>): this;
-    remove(removeFromParent?: boolean): Promise<void>;
-    store(): void;
-    removeChild(child: IUiElement, removeChild?: boolean): Promise<void>;
-    /**
-     * Remove all children
-     * @param filter A predicate that filters the children not to dump
-     */
+    append(...elements: Array<HTMLElement | IUiElement | undefined | IterableOf<HTMLElement | IUiElement | undefined>>): this;
+    remove(): Promise<void>;
+    contains(what: string | HTMLElement | IUiElement): boolean;
     dump(filter?: (element: UiElement) => boolean): Promise<void>;
+    setContents(html: string, escape?: boolean): this;
+    store(): void;
     findDescendants(selector: string): NodeListOf<Element>;
     showTooltip(): Promise<void>;
     setTooltip(tooltipOptions?: ITooltipOptionsVague): void;
@@ -52,10 +44,12 @@ export default class UiElement<T = any> extends Emitter implements IUiElement<T>
         top: number;
         left: number;
     };
-    getNthChild(nth?: number): UiElement<any>;
-    getChildren(): UiElement<any>[];
+    getNthChild(nth?: number): UiElement;
+    getChildren(): UiElement[];
     scrollTo(child: UiElement, ms?: number): void;
     getStyle(styleName: string): string;
-    then(cb: (this: this, button: this) => any, ...args: any[]): this;
+    schedule(cb: (this: this, button: this) => any, ...args: any[]): this;
+    schedule(ms: number, cb: (this: this, button: this) => any, ...args: any[]): this;
+    repaint(): void;
     private initializeTooltip();
 }

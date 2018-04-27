@@ -9,7 +9,7 @@ export interface ScreenOptions extends IUiElementOptions {
     retain?: boolean;
     isSubscreen?: boolean;
 }
-export default abstract class UiScreen<T = any> extends UiElement<T> implements IUiScreen {
+export default abstract class UiScreen extends UiElement implements IUiScreen {
     readonly retain: boolean;
     readonly isSubscreen: boolean;
     protected lastTooltipSource?: UiElement;

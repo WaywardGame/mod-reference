@@ -9,7 +9,7 @@ export declare enum InputButtonEvent {
     Change = "Change",
     Done = "Done",
 }
-export default class InputButton<T = any> extends Button<T> {
+export default class InputButton extends Button {
     private readonly inputElement;
     private _editMode;
     editMode: boolean;

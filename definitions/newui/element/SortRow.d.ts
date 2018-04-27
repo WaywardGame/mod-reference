@@ -13,7 +13,7 @@ export interface SortRowOptions<Sort> extends IUiElementOptions {
 export declare enum SortRowEvent {
     Sort = "Sort",
 }
-export default class SortRow<Sort extends number, Data = {}> extends LabelledRow<Data> implements Refreshable {
+export default class SortRow<Sort extends number> extends LabelledRow implements Refreshable {
     private _sort;
     private _sortDirection;
     private disabledSorts;

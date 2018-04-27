@@ -4,10 +4,7 @@ import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
 import UiScreen from "newui/screen/UiScreen";
-export interface GameScreenData {
-    backgroundImage: string;
-}
-export default class GameScreen extends UiScreen<GameScreenData> {
+export default class GameScreen extends UiScreen {
     menuBar: MenuBar;
     stats: Stats;
     quickslots: Quickslots;

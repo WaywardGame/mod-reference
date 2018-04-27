@@ -9,24 +9,24 @@ export interface TextOptions extends IUiElementOptions {
 export interface TextData {
     translationData: UiTranslation | TranslationData;
 }
-export default class UiText<T = any> extends UiElement<T & TextData> {
+export default class UiText extends UiElement {
     constructor(uiApi: UiApi, options?: TextOptions);
     getText(): string | undefined;
     setText(text: string | UiTranslation | TranslationData, refreshTranslations?: boolean): void;
     removeText(): void;
 }
-export declare class Paragraph<T = any> extends UiText<T> {
+export declare class Paragraph extends UiText {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
-export declare class Block<T = any> extends Paragraph<T> {
+export declare class Block extends Paragraph {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
-export declare class Heading<T = any> extends UiText<T> {
+export declare class Heading extends UiText {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
 export interface SplitTextOptions extends IUiElementOptions {
     splits: ISplit[];
 }
-export declare class SplitText<T = any> extends UiElement<T> {
+export declare class SplitText extends UiElement {
     constructor(uiApi: UiApi, options: SplitTextOptions);
 }

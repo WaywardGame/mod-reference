@@ -1,17 +1,14 @@
 import { InputOptions } from "newui/element/IInput";
-import { IUiElementOptions, TextOrTranslationData, TranslationData } from "newui/element/IUiElement";
+import { IUiElementOptions, TextOrTranslationData } from "newui/element/IUiElement";
 import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
-export interface InputData {
-    translationData: TranslationData;
-}
 export declare enum InputEvent {
     Change = "Change",
     Done = "Done",
     Enter = "Enter",
     Escape = "Escape",
 }
-export default class Input<T = any> extends UiElement<T & InputData> {
+export default class Input extends UiElement {
     default: TextOrTranslationData;
     text: string;
     private options;

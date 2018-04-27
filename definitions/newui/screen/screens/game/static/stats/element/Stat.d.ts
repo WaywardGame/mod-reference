@@ -47,7 +47,7 @@ export declare abstract class StatElement extends UiElement {
 export declare class Statbar extends StatElement {
     private readonly bar;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
-    getDisplayElement(): UiElement<any>;
+    getDisplayElement(): UiElement;
     getGenericStatValue(stat: IStatMax): string;
     /**
      * Overrides the superclass method of the same name. Calls the superclass method, then updates the CSS
@@ -58,7 +58,7 @@ export declare class Statbar extends StatElement {
 export declare class StatAttribute extends StatElement {
     private readonly attribute;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
-    getDisplayElement(): UiElement<any>;
+    getDisplayElement(): UiElement;
 }
 export declare class Statbars extends UiElement {
     private readonly _statbars;
@@ -66,7 +66,7 @@ export declare class Statbars extends UiElement {
     constructor(uiApi: UiApi, entity: IBaseEntity, iterableOfStats: IterableIterator<Stat>);
 }
 export declare class StatAttributes extends UiElement {
-    private readonly _attributes;
-    readonly attributes: Map<Stat, StatAttribute>;
+    private readonly _stats;
+    readonly stats: Map<Stat, StatAttribute>;
     constructor(uiApi: UiApi, entity: IBaseEntity, iterableOfStats: IterableIterator<Stat>);
 }

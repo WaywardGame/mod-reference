@@ -25,7 +25,7 @@ export declare enum ModRowEvent {
 export interface ModRowData {
     modInfo: IModInfo;
 }
-export declare class ModRow extends CheckButton<ModRowData> {
+export declare class ModRow extends CheckButton {
     readonly info: IModInfo;
     readonly index: number;
     private readonly buttonOptions;

@@ -37,7 +37,7 @@ export declare enum SaveSlotEvent {
     Rename = "Rename",
     Delete = "Delete",
 }
-export declare class SaveSlot extends InputButton<SaveSlotData> {
+export declare class SaveSlot extends InputButton {
     constructor(uiApi: UiApi, slot: number);
     private rename(newName);
     private load();

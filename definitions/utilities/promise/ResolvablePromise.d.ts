@@ -1,6 +1,6 @@
 export declare type IResolve<T> = (value?: T | PromiseLike<T> | undefined) => void;
 export declare type IReject = (reason?: any) => void;
-export default class Promise2<T = void> extends Promise<T> {
+export default class ResolvablePromise<T = void> extends Promise<T> {
     readonly resolve: IResolve<T>;
     readonly reject: IReject;
     private _isResolved;

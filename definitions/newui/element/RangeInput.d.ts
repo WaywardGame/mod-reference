@@ -13,7 +13,7 @@ export declare enum RangeInputEvent {
     Change = "Change",
     Finish = "Finish",
 }
-export declare class RangeInput<T = any> extends UiElement<T> implements Refreshable {
+export declare class RangeInput extends UiElement implements Refreshable {
     element: HTMLInputElement;
     private min;
     private max;

@@ -26,7 +26,7 @@ declare class EnumCursor<T extends number> extends Emitter {
     refresh(): this;
     /**
      * Filters the valid enum entries. This causes the internal list of enum entries to be refreshed.
-     * If the cursor has been set previously, it will likely be moved to a differnet entry.
+     * If the cursor has been set previously, it will likely be moved to a different entry.
      * @param filter A function that takes a name and enum value and returns whether the entry should be included.
      */
     filter(filter: (name: string, value: T) => boolean): this;

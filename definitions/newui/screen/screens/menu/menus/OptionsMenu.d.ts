@@ -25,7 +25,7 @@ export default class OptionsMenu extends Menu {
     private initialized;
     constructor(uiApi: UiApi);
     init(): Promise<void>;
-    remove(removeFromParent?: boolean): Promise<void>;
+    remove(): Promise<void>;
     addTabSection(tab: MenuTabOptions, heading: TextOptions, content?: IterableOf<UiElement | undefined>): ITabSection;
     private registerRefresh(element);
     private refresh(init?);

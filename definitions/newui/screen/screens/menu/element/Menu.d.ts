@@ -20,7 +20,7 @@ export declare enum MenuEvent {
     CancelBind = "CancelBind",
     EnterBind = "EnterBind",
 }
-export default class Menu<T = any> extends UiElement<T> implements IMenu {
+export default class Menu extends UiElement implements IMenu {
     screenHost: IUiScreen;
     protected contentWrapper: UiElement;
     protected canCancel: boolean | undefined;
@@ -51,16 +51,16 @@ export default class Menu<T = any> extends UiElement<T> implements IMenu {
     selectRight(): void;
     selectDirection(direction: SelectDirection, range?: number, canEscapeLayer?: boolean, smartDifferenceVal?: number): void;
     selectEnter(): boolean;
-    addTabs(...tabs: MenuTabOptions[]): Tab<any>[];
+    addTabs(...tabs: MenuTabOptions[]): Tab[];
     dumpTabs(): Promise<void>;
-    addButton(options: ButtonOptions): Button<any>;
-    addButtonRow(...buttons: ButtonOptions[]): BlockRow<any>;
-    addSpacer(): UiElement<any>;
-    addText(options: TextOptions): UiText<any>;
-    addHeading<HeadingT = any>(options: TextOptions): Heading<HeadingT>;
-    addParagraph(...textOptionsArr: Array<UiText | TextOptions>): Paragraph<any>;
+    addButton(options: ButtonOptions): Button;
+    addButtonRow(...buttons: ButtonOptions[]): BlockRow;
+    addSpacer(): UiElement;
+    addText(options: TextOptions): UiText;
+    addHeading(options: TextOptions): Heading;
+    addParagraph(...textOptionsArr: Array<UiText | TextOptions>): Paragraph;
     dump(): Promise<void>;
-    append(what: IterableOf<HTMLElement | IUiElement | undefined>): this;
+    append(...elements: Array<HTMLElement | IUiElement | undefined | IterableOf<HTMLElement | IUiElement | undefined>>): this;
     addSection(heading: TextOptions, content: IterableOf<UiElement | undefined>): MenuSection;
     addTabSection(tabOptions: MenuTabOptions, heading: TextOptions, content?: IterableOf<UiElement | undefined>): ITabSection;
     toggleTab(tabId: string | number, disabled?: boolean): void;
@@ -81,7 +81,7 @@ export interface TabOptions extends ButtonOptions {
 export interface MenuTabOptions extends TabOptions {
     subTabs?: IterableOf<TabOptions>;
 }
-export declare class Tab<T = any> extends Button<T> {
+export declare class Tab extends Button {
     subTabs: {
         [key: string]: Tab;
     };

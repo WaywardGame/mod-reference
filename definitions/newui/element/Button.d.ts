@@ -17,7 +17,7 @@ export interface ButtonOptions extends TextOptions {
 export declare enum ButtonEvent {
     Activate = "Activate",
 }
-export default class Button<T = any> extends UiText<T> {
+export default class Button extends UiText {
     playSound: boolean;
     private buttons;
     private readonly _options;
@@ -26,6 +26,6 @@ export default class Button<T = any> extends UiText<T> {
     disabled: boolean;
     constructor(uiApi: UiApi, options?: ButtonOptions, bindEvent?: boolean);
     activate(playSound?: boolean): Promise<void>;
-    addButton(buttonOptions: ButtonOptions): Button<any>;
+    addButton(buttonOptions: ButtonOptions): Button;
     toggleDisabled(disabled?: boolean): void;
 }

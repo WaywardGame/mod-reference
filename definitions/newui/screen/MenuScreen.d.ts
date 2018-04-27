@@ -2,7 +2,7 @@ import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
 import Menu from "newui/screen/screens/menu/element/Menu";
 import UiScreen from "newui/screen/UiScreen";
 import { InterruptOptions } from "newui/util/IInterrupt";
-export default abstract class MenuScreen<T = any> extends UiScreen<T> {
+export default abstract class MenuScreen extends UiScreen {
     protected menus: {
         [key: number]: Menu;
     };
@@ -15,7 +15,7 @@ export default abstract class MenuScreen<T = any> extends UiScreen<T> {
     readonly hasMenu: boolean;
     show(menuId?: MenuId, ...args: any[]): Promise<void>;
     hide(...args: any[]): Promise<void>;
-    getMenu(menuId: MenuId): Menu<any>;
+    getMenu(menuId: MenuId): Menu;
     getVisibleMenu<M extends IMenu>(): M | undefined;
     showMenu(menuId: MenuId, args?: {
         [key: string]: any;

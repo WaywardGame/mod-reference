@@ -8,14 +8,14 @@ export interface ITooltipOptions extends ITooltipOptionsVague {
 export interface TooltipData {
     tooltipLocation: keyof typeof TooltipLocation;
 }
-export default class Tooltip<T = any> extends UiElement<TooltipData & T> {
+export default class Tooltip extends UiElement {
     private readonly source;
     location: TooltipLocation;
     cache: boolean;
     constructor(uiApi: UiApi, source: UiElement, tooltipOptions: ITooltipOptions);
-    addText(options: TextOptions | SplitTextOptions): UiText<any> | SplitText<any>;
-    addHeading(options: TextOptions): UiText<any>;
-    addParagraph(...textOptionsArr: Array<TextOptions | SplitTextOptions>): Paragraph<any>;
+    addText(options: TextOptions | SplitTextOptions): UiText | SplitText;
+    addHeading(options: TextOptions): UiText;
+    addParagraph(...textOptionsArr: Array<TextOptions | SplitTextOptions>): Paragraph;
     update(): void;
     updatePosition(position?: {
         x: number;
