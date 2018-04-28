@@ -139,6 +139,7 @@ export interface IGame extends Emitter {
     isPositionEmpty(x: number, y: number, z: number): boolean;
     isPositionFull(x: number, y: number, z: number): boolean;
     isTileFull(tile: ITile): boolean;
+    makeLavaPassage(player: IPlayer): TerrainType | undefined;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
     movementToDirection(x: number, y: number): FacingDirection;

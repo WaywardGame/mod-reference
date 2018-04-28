@@ -130,6 +130,7 @@ export default class Game extends Emitter implements IGame {
     enableFlowFieldDebug(): void;
     resetGameState(skipSave?: boolean): Promise<void>;
     shouldRender(): number;
+    makeLavaPassage(player: IPlayer): TerrainType | undefined;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
