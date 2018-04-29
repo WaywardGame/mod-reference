@@ -92,7 +92,8 @@ export default class PromiseChain<T extends object, R extends any[] = any[]> ext
      * You can also call this field directly like it's the basic `then` of a promise, to apply handlers
      * for resolving or rejecting.
      */
-    then: T & IThen<R>;
+    // @ts-ignore
+	then: T & IThen<R>;
     /**
      * Returns the base/target instance after all promises have been completed.
      */
