@@ -63,7 +63,7 @@ export default interface IBaseEntity extends IPointZ, Emitter {
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
      */
-    setStat(stat: Stat | IStat, amount: number): boolean;
+    setStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason): boolean;
     /**
      * Reduces the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
      * @param stat The `Stat` to reduce.
@@ -85,7 +85,7 @@ export default interface IBaseEntity extends IPointZ, Emitter {
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
      */
-    increaseStat(stat: Stat | IStat, amount: number): boolean;
+    increaseStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason): boolean;
     /**
      * Change the bonus for a stat.
      * @param stat The `Stat` to set the bonus of.
@@ -161,6 +161,7 @@ export declare enum StatChangeReason {
     Normal = 0,
     ChangeTimer = 1,
     BonusChanged = 2,
+    Healed = 3,
 }
 export declare type IStatus = Writable<{
     [key in keyof typeof StatusType]: boolean;

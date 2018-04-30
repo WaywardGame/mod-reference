@@ -47,6 +47,7 @@ export declare enum Hook {
     OnInventoryItemUpdate = "onInventoryItemUpdate",
     OnItemDamage = "onItemDamage",
     OnItemEquip = "onItemEquip",
+    OnItemQuickslot = "onItemQuickslot",
     OnMove = "onMove",
     OnMoveComplete = "onMoveComplete",
     OnMoveDirectionUpdate = "onMoveDirectionUpdate",

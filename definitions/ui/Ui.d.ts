@@ -78,6 +78,7 @@ export default class Ui extends Emitter implements IUi {
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
     setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
     refreshQuickSlots(): void;
+    getUsedQuickSlots(): number[];
     removeItemFromQuickSlot(itemId: number): void;
     removeItemFromEquipSlot(equip: EquipType): void;
     shouldRefreshMods(): boolean;

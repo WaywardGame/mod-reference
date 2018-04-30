@@ -367,6 +367,13 @@ export declare abstract class Mod extends BaseMod {
      */
     onItemEquip(player: IPlayer, item: IItem, slot: EquipType): void;
     /**
+     * Called when the player quicsklots and item
+     * @param item The item being quickslotted
+     * @param player The player object
+     * @param quickSlot The quickslot number
+     */
+    onItemQuickslot(item: IItem, player: IPlayer, quickSlot: number | undefined): void;
+    /**
      * Called when a creature is damaged
      * @param creature The creature object
      * @param damageInfo The damage info object

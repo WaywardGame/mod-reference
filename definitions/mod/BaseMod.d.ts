@@ -88,6 +88,7 @@ export declare abstract class BaseMod {
         onInventoryItemUpdate?: number | undefined;
         onItemDamage?: number | undefined;
         onItemEquip?: number | undefined;
+        onItemQuickslot?: number | undefined;
         onMove?: number | undefined;
         onMoveComplete?: number | undefined;
         onMoveDirectionUpdate?: number | undefined;

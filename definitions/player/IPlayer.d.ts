@@ -79,7 +79,7 @@ export interface IPlayer extends IBaseHumanEntity {
     hasDelay(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
     healthSyncCheck(): void;
-    hurtHands(message: Message, damageMessage: Message): void;
+    hurtHands(message: Message, damageMessage: Message, handMessage?: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     isFacingCarvableTile(): boolean;

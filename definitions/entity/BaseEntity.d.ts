@@ -34,7 +34,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     getStatValue(stat: Stat | IStat): number;
     setStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason): boolean;
     reduceStat(stat: Stat | IStat, amount: number): boolean;
-    increaseStat(stat: Stat | IStat, amount: number): boolean;
+    increaseStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason): boolean;
     setStatBonus(stat: Stat | IStat, bonus: number): void;
     getStatMax(stat: Stat | IStat): number | undefined;
     setStatMax(stat: Stat | IStat, amount: number): void;

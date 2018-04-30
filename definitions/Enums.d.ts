@@ -169,7 +169,7 @@ export declare enum ActionType {
     Pet = 45,
     Tame = 46,
     Release = 47,
-    HealCreature = 48,
+    HealOther = 48,
     RubClockwise = 49,
     RubCounterclockwise = 50,
     OpenDoor = 51,
@@ -352,7 +352,7 @@ export declare enum ItemType {
     GreenSand = 147,
     OldInstructionalScroll = 148,
     SlimeGelatin = 149,
-    Glue = 150,
+    SlimeGlue = 150,
     CookedSpiderMeat = 151,
     SpiderMeat = 152,
     IronLockPick = 153,
@@ -631,6 +631,7 @@ export declare enum ItemType {
     ClaySandCastFlask = 426,
     SandstoneSandCastFlask = 427,
     StoneSandCastFlask = 428,
+    AnimalGlue = 429,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -702,7 +703,8 @@ export declare enum ItemTypeGroup {
     Book = 866,
     CoconutContainerOfPotableWater = 867,
     SandCastFlask = 868,
-    Last = 869,
+    Glue = 869,
+    Last = 870,
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
