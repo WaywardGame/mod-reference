@@ -1,9 +1,9 @@
-import { IUiElementOptions } from "newui/element/IUiElement";
+import Component from "newui/element/Component";
+import { IComponentOptions } from "newui/element/IComponent";
 import { Refreshable } from "newui/element/Refreshable";
 import { TextOptions } from "newui/element/Text";
-import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
-export interface IDropdownOptions<OptionId = string | number> extends Partial<IUiElementOptions> {
+export interface IDropdownOptions<OptionId = string | number> extends Partial<IComponentOptions> {
     defaultOption?: OptionId | (() => OptionId);
     options?: GeneratorOf<IDropdownOption<OptionId>>;
     refresh?(): OptionId | undefined;
@@ -15,8 +15,8 @@ export interface IDropdownOption<OptionId> {
 export declare enum DropdownEvent {
     Selection = "Selection",
 }
-export default class Dropdown<OptionId = string | number> extends UiElement implements Refreshable {
-    protected optionsWrapper: UiElement;
+export default class Dropdown<OptionId = string | number> extends Component implements Refreshable {
+    protected optionsWrapper: Component;
     private readonly inputButton;
     private options;
     private defaultOption?;

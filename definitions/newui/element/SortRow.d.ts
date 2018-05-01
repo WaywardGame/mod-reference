@@ -1,10 +1,10 @@
 import { IDropdownOption } from "newui/element/Dropdown";
-import { IUiElementOptions } from "newui/element/IUiElement";
+import { IComponentOptions } from "newui/element/IComponent";
 import { LabelledRow } from "newui/element/LabelledRow";
 import { Refreshable } from "newui/element/Refreshable";
 import { UiApi } from "newui/INewUi";
 import { SortDirection } from "save/ISaveManager";
-export interface SortRowOptions<Sort> extends IUiElementOptions {
+export interface SortRowOptions<Sort> extends IComponentOptions {
     sortEnum: any;
     defaultSort: Sort;
     disabledSorts?: Sort[];

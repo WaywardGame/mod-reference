@@ -1,6 +1,6 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, IStatBase } from "entity/IStats";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
 import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/IStatDisplayDescription";
 declare const statDisplayDescriptions: Description<IStatDisplayDescription>;
 export interface IStatInfo extends Partial<IStatBase> {
@@ -13,15 +13,15 @@ export interface IStatInfo extends Partial<IStatBase> {
  * @param predicate A function that takes an `IStatInfo` object and returns whether it "matches".
  * @param handler A function that takes whether the info matches, the `statElement`, the entity, and the `IStatInfo` object and "handles" it.
  */
-export declare function when(predicate: (info: IStatInfo) => boolean, handler: (matched: boolean, statElement: UiElement, entity: IBaseEntity, info: IStatInfo) => any): (statElement: UiElement, entity: IBaseEntity, stat: IStat, oldValue?: number | undefined) => void;
+export declare function when(predicate: (info: IStatInfo) => boolean, handler: (matched: boolean, statElement: Component, entity: IBaseEntity, info: IStatInfo) => any): (statElement: Component, entity: IBaseEntity, stat: IStat, oldValue?: number | undefined) => void;
 /**
  * Returns a `when()` handler that will toggle classes on a `statElement` based on whether the `predicate` matched.
  */
-export declare function toggleClasses(...classes: string[]): (matched: boolean, statElement: UiElement) => void;
+export declare function toggleClasses(...classes: string[]): (matched: boolean, statElement: Component) => void;
 /**
  * Shakes the stat element if `shouldShake` is true, otherwise removes the `shake` class.
  *
  * When adding the `shake` class, removes it after 250 ms.
  */
-export declare function shake(shouldShake: boolean, statElement: UiElement): Promise<void>;
+export declare function shake(shouldShake: boolean, statElement: Component): Promise<void>;
 export default statDisplayDescriptions;

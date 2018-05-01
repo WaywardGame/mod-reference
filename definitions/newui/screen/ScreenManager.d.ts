@@ -1,6 +1,6 @@
 import { UiApi } from "newui/INewUi";
-import { IUiScreen, ScreenId } from "newui/screen/IUiScreen";
-import UiScreen from "newui/screen/UiScreen";
+import { IScreen, ScreenId } from "newui/screen/IScreen";
+import Screen from "newui/screen/Screen";
 export default class ScreenManager {
     private readonly _screens;
     private readonly screenChain;
@@ -10,15 +10,15 @@ export default class ScreenManager {
     /**
      * Generator for all initialized screens.
      */
-    screens(): IterableIterator<IUiScreen>;
+    screens(): IterableIterator<IScreen>;
     /**
      * @param screenId The ID of the screen to return. If this screen is not initialized, returns undefined.
      */
-    getScreen<S extends IUiScreen = UiScreen>(screenId: ScreenId): S | undefined;
+    getScreen<S extends IScreen = Screen>(screenId: ScreenId): S | undefined;
     /**
      * The ID of the visible screen
      */
-    getVisibleScreen<S extends IUiScreen = IUiScreen>(): S | undefined;
+    getVisibleScreen<S extends IScreen = IScreen>(): S | undefined;
     /**
      * Returns if the given screen id is the currently visible screen.
      */
@@ -33,15 +33,15 @@ export default class ScreenManager {
     /**
      * Hides the given screen, or the current screen if none is passed.
      */
-    hideScreen(screen: ScreenId | UiScreen): Promise<void>;
+    hideScreen(screen: ScreenId | Screen): Promise<void>;
     /**
      * Removes a screen, or does nothing if the given screen is not initialized.
      */
-    removeScreen(screen: ScreenId | UiScreen): Promise<void>;
+    removeScreen(screen: ScreenId | Screen): Promise<void>;
     /**
      * Initializes a screen by its ID. If the screen's class is not in the screen map, this method will throw an error!
      */
-    initScreen<S extends IUiScreen = IUiScreen>(screenId: ScreenId): S;
+    initScreen<S extends IScreen = IScreen>(screenId: ScreenId): S;
     /**
      * Runs the given callback if the screen exists.
      */

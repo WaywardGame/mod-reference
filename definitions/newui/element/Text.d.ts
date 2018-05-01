@@ -1,15 +1,15 @@
 import { UiTranslation } from "language/ILanguage";
-import { IUiElementOptions, TranslationData } from "newui/element/IUiElement";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
+import { IComponentOptions, TranslationData } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
 import { ISplit } from "utilities/string/Interpolate";
-export interface TextOptions extends IUiElementOptions {
+export interface TextOptions extends IComponentOptions {
     text?: string | UiTranslation | TranslationData;
 }
 export interface TextData {
     translationData: UiTranslation | TranslationData;
 }
-export default class UiText extends UiElement {
+export default class UiText extends Component {
     constructor(uiApi: UiApi, options?: TextOptions);
     getText(): string | undefined;
     setText(text: string | UiTranslation | TranslationData, refreshTranslations?: boolean): void;
@@ -24,9 +24,9 @@ export declare class Block extends Paragraph {
 export declare class Heading extends UiText {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
-export interface SplitTextOptions extends IUiElementOptions {
+export interface SplitTextOptions extends IComponentOptions {
     splits: ISplit[];
 }
-export declare class SplitText extends UiElement {
+export declare class SplitText extends Component {
     constructor(uiApi: UiApi, options: SplitTextOptions);
 }

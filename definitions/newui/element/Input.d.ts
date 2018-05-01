@@ -1,6 +1,6 @@
+import Component from "newui/element/Component";
+import { IComponentOptions, TextOrTranslationData } from "newui/element/IComponent";
 import { InputOptions } from "newui/element/IInput";
-import { IUiElementOptions, TextOrTranslationData } from "newui/element/IUiElement";
-import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
 export declare enum InputEvent {
     Change = "Change",
@@ -8,11 +8,11 @@ export declare enum InputEvent {
     Enter = "Enter",
     Escape = "Escape",
 }
-export default class Input extends UiElement {
+export default class Input extends Component {
     default: TextOrTranslationData;
     text: string;
     private options;
-    constructor(uiApi: UiApi, options?: InputOptions & IUiElementOptions);
+    constructor(uiApi: UiApi, options?: InputOptions & IComponentOptions);
     setOptions(options: InputOptions): void;
     focus(): void;
     blur(): void;

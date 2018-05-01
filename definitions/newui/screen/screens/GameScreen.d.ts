@@ -1,10 +1,12 @@
+import { Bindable } from "Enums";
+import { BindCatcherApi } from "newui/BindingManager";
 import { UiApi } from "newui/INewUi";
+import Screen from "newui/screen/Screen";
 import MenuBar from "newui/screen/screens/game/static/MenuBar";
 import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
-import UiScreen from "newui/screen/UiScreen";
-export default class GameScreen extends UiScreen {
+export default class GameScreen extends Screen {
     menuBar: MenuBar;
     stats: Stats;
     quickslots: Quickslots;
@@ -12,6 +14,7 @@ export default class GameScreen extends UiScreen {
     private readonly quadrantMap;
     constructor(uiApi: UiApi);
     create(): void;
+    protected bindLoop(api: BindCatcherApi): Promise<boolean | Bindable>;
     /**
      * Adds a quadrant element to the screen.
      *

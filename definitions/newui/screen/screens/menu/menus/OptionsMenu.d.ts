@@ -1,5 +1,5 @@
+import Component from "newui/element/Component";
 import { Paragraph, TextOptions } from "newui/element/Text";
-import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
 import Menu, { ITabSection, MenuTabOptions } from "newui/screen/screens/menu/element/Menu";
 export declare enum OptionsTab {
@@ -26,7 +26,7 @@ export default class OptionsMenu extends Menu {
     constructor(uiApi: UiApi);
     init(): Promise<void>;
     remove(): Promise<void>;
-    addTabSection(tab: MenuTabOptions, heading: TextOptions, content?: IterableOf<UiElement | undefined>): ITabSection;
+    addTabSection(tab: MenuTabOptions, heading: TextOptions, content?: IterableOf<Component | undefined>): ITabSection;
     private registerRefresh(element);
     private refresh(init?);
 }

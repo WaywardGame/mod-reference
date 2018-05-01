@@ -1,11 +1,11 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
-import { IUiElementOptions } from "newui/element/IUiElement";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
+import { IComponentOptions } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
-export declare abstract class StatElement extends UiElement {
+export declare abstract class StatElement extends Component {
     private readonly entity;
-    constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat, options?: IUiElementOptions);
+    constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat, options?: IComponentOptions);
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
      */
@@ -28,7 +28,7 @@ export declare abstract class StatElement extends UiElement {
      * Returns the display priority for this stat.
      */
     getDisplayOrder(): number;
-    abstract getDisplayElement(): UiElement;
+    abstract getDisplayElement(): Component;
     /**
      * Returns the generic string representation of this stat.
      */
@@ -47,7 +47,7 @@ export declare abstract class StatElement extends UiElement {
 export declare class Statbar extends StatElement {
     private readonly bar;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
-    getDisplayElement(): UiElement;
+    getDisplayElement(): Component;
     getGenericStatValue(stat: IStatMax): string;
     /**
      * Overrides the superclass method of the same name. Calls the superclass method, then updates the CSS
@@ -58,14 +58,14 @@ export declare class Statbar extends StatElement {
 export declare class StatAttribute extends StatElement {
     private readonly attribute;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
-    getDisplayElement(): UiElement;
+    getDisplayElement(): Component;
 }
-export declare class Statbars extends UiElement {
+export declare class Statbars extends Component {
     private readonly _statbars;
     readonly statbars: Map<Stat, Statbar>;
     constructor(uiApi: UiApi, entity: IBaseEntity, iterableOfStats: IterableIterator<Stat>);
 }
-export declare class StatAttributes extends UiElement {
+export declare class StatAttributes extends Component {
     private readonly _stats;
     readonly stats: Map<Stat, StatAttribute>;
     constructor(uiApi: UiApi, entity: IBaseEntity, iterableOfStats: IterableIterator<Stat>);

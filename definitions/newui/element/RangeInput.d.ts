@@ -1,8 +1,8 @@
-import { IUiElementOptions } from "newui/element/IUiElement";
+import Component from "newui/element/Component";
+import { IComponentOptions } from "newui/element/IComponent";
 import { Refreshable } from "newui/element/Refreshable";
-import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
-export interface RangeInputOptions extends IUiElementOptions {
+export interface RangeInputOptions extends IComponentOptions {
     min?: number;
     max?: number;
     step?: number;
@@ -13,7 +13,7 @@ export declare enum RangeInputEvent {
     Change = "Change",
     Finish = "Finish",
 }
-export declare class RangeInput extends UiElement implements Refreshable {
+export declare class RangeInput extends Component implements Refreshable {
     element: HTMLInputElement;
     private min;
     private max;

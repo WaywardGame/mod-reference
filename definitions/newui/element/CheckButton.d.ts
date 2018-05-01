@@ -1,5 +1,5 @@
 import Button, { ButtonOptions } from "newui/element/Button";
-import { TextOrTranslationData } from "newui/element/IUiElement";
+import { TextOrTranslationData } from "newui/element/IComponent";
 import { Refreshable } from "newui/element/Refreshable";
 import { UiApi } from "newui/INewUi";
 export interface CheckButtonOptions extends ButtonOptions {

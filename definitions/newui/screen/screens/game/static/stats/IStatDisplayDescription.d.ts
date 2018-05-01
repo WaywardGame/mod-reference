@@ -1,8 +1,8 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, StatDisplayType } from "entity/IStats";
 import { IModdable } from "Enums";
-import { ITooltipOptionsVague } from "newui/element/IUiElement";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
+import { ITooltipOptionsVague } from "newui/element/IComponent";
 export interface IStatDisplayDescription extends IModdable {
     imagePath?: string | ((entity: IBaseEntity, stat?: IStat) => string);
     /**
@@ -26,7 +26,7 @@ export interface IStatDisplayDescription extends IModdable {
     /**
      * Handlers for when the stat changes. Called when the stat changes & when the stat max changes.
      */
-    onChange?: Array<(statElement: UiElement, entity: IBaseEntity, stat: IStat, oldValue?: number) => void>;
+    onChange?: Array<(statElement: Component, entity: IBaseEntity, stat: IStat, oldValue?: number) => void>;
     /**
      * Requires `StatDisplayType.Attribute`.
      *

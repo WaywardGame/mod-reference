@@ -1,4 +1,4 @@
-import { IUiElement } from "newui/element/IUiElement";
+import { IComponent } from "newui/element/IComponent";
 export declare enum MenuId {
     BACK = -1,
     NONE = 0,
@@ -20,7 +20,7 @@ export declare enum MenuId {
     Options = 16,
     Pause = 17,
 }
-export interface IMenu extends IUiElement {
+export interface IMenu extends IComponent {
     selectNext(sound?: boolean): void;
     selectPrevious(sound?: boolean): void;
     select(element: HTMLElement): void;

@@ -1,5 +1,5 @@
-import { ITooltipOptionsVague, IUiElement } from "newui/element/IUiElement";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
+import { IComponent, ITooltipOptionsVague } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
 export default class TooltipManager {
     private readonly uiApi;
@@ -11,21 +11,21 @@ export default class TooltipManager {
      * 	The source element that the tooltip is for.
      * 	If there currently exists a tooltip for this element, it shows the old instead of creating a new tooltip.
      */
-    showTooltip(tooltip: ITooltipOptionsVague, source?: UiElement): Promise<void>;
+    showTooltip(tooltip: ITooltipOptionsVague, source?: Component): Promise<void>;
     /**
      * Shows a tooltip
      * @param elementWithTooltip
      * 	The element the tooltip is for, that contains the options with which to construct the tooltip.
      */
-    showTooltip(elementWithTooltip: UiElement): Promise<void>;
+    showTooltip(elementWithTooltip: Component): Promise<void>;
     /**
      * Hides the current tooltip
      * @param source The element the tooltip must be for to hide it
      */
-    hideTooltip(source?: IUiElement): Promise<void>;
+    hideTooltip(source?: IComponent): Promise<void>;
     /**
      * Removes the current tooltip
      * @param source The element the tooltip must be for to remove it
      */
-    dumpTooltip(source?: IUiElement): Promise<void>;
+    dumpTooltip(source?: IComponent): Promise<void>;
 }

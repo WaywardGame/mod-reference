@@ -1,4 +1,4 @@
-import { ITooltipOptionsVague, IUiElement } from "newui/element/IUiElement";
+import { IComponent, ITooltipOptionsVague } from "newui/element/IComponent";
 import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
 export declare enum ScreenId {
     None = 0,
@@ -7,7 +7,7 @@ export declare enum ScreenId {
     MainMenu = 3,
     Splash = 4,
 }
-export declare enum UiScreenEvent {
+export declare enum ScreenEvent {
     ShowMenu = "ShowMenu",
     HideMenu = "HideMenu",
     GoBackMenu = "GoBackMenu",
@@ -21,7 +21,7 @@ export declare enum UiScreenEvent {
      */
     CanShowTooltip = "AttemptShowTooltip",
 }
-export interface IUiScreen extends IUiElement {
+export interface IScreen extends IComponent {
     retain?: boolean;
     /**
      * Shows a tooltip
@@ -30,28 +30,28 @@ export interface IUiScreen extends IUiElement {
      * 	The source element that the tooltip is for.
      * 	If there currently exists a tooltip for this element, it shows the old instead of creating a new tooltip.
      */
-    showTooltip(tooltip: ITooltipOptionsVague, source?: IUiElement): Promise<void>;
+    showTooltip(tooltip: ITooltipOptionsVague, source?: IComponent): Promise<void>;
     /**
      * Shows a tooltip
      * @param elementWithTooltip
      * 	The element the tooltip is for, that contains the options with which to construct the tooltip.
      */
-    showTooltip(elementWithTooltip: IUiElement): Promise<void>;
+    showTooltip(elementWithTooltip: IComponent): Promise<void>;
     showTooltip(): Promise<void>;
-    showTooltip(tooltipElementOrOptions: ITooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
+    showTooltip(tooltipElementOrOptions: ITooltipOptionsVague | IComponent, source?: IComponent): Promise<void>;
     /**
      * Hides the current tooltip
      * @param source The element the tooltip must be for to hide it
      * @returns Whether a tooltip was hidden.
      */
-    hideTooltip(source?: IUiElement): Promise<boolean>;
+    hideTooltip(source?: IComponent): Promise<boolean>;
     /**
      * Removes the current tooltip
      * @param source The element the tooltip must be for to remove it
      */
-    dumpTooltip(source?: IUiElement): Promise<boolean>;
+    dumpTooltip(source?: IComponent): Promise<boolean>;
 }
-export interface IMenuScreen extends IUiScreen {
+export interface IMenuScreen extends IScreen {
     /**
      * Returns a menu instance, or `undefined` if the menu is not initialized.
      * @param menuId The ID of the menu to return.

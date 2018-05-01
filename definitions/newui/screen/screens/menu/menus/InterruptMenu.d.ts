@@ -1,5 +1,5 @@
 import { InterruptChoice } from "language/ILanguage";
-import { TextOrTranslationData } from "newui/element/IUiElement";
+import { TextOrTranslationData } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/element/Menu";
 import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";

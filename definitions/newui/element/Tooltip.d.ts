@@ -1,6 +1,6 @@
-import { ITooltipOptionsVague, TooltipLocation } from "newui/element/IUiElement";
+import Component from "newui/element/Component";
+import { ITooltipOptionsVague, TooltipLocation } from "newui/element/IComponent";
 import UiText, { Paragraph, SplitText, SplitTextOptions, TextOptions } from "newui/element/Text";
-import UiElement from "newui/element/UiElement";
 import { UiApi } from "newui/INewUi";
 export interface ITooltipOptions extends ITooltipOptionsVague {
     create?(tooltip: Tooltip): Promise<void>;
@@ -8,11 +8,11 @@ export interface ITooltipOptions extends ITooltipOptionsVague {
 export interface TooltipData {
     tooltipLocation: keyof typeof TooltipLocation;
 }
-export default class Tooltip extends UiElement {
+export default class Tooltip extends Component {
     private readonly source;
     location: TooltipLocation;
     cache: boolean;
-    constructor(uiApi: UiApi, source: UiElement, tooltipOptions: ITooltipOptions);
+    constructor(uiApi: UiApi, source: Component, tooltipOptions: ITooltipOptions);
     addText(options: TextOptions | SplitTextOptions): UiText | SplitText;
     addHeading(options: TextOptions): UiText;
     addParagraph(...textOptionsArr: Array<TextOptions | SplitTextOptions>): Paragraph;

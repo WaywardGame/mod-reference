@@ -1,8 +1,8 @@
+import Screen from "newui/screen/Screen";
 import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
 import Menu from "newui/screen/screens/menu/element/Menu";
-import UiScreen from "newui/screen/UiScreen";
 import { InterruptOptions } from "newui/util/IInterrupt";
-export default abstract class MenuScreen extends UiScreen {
+export default abstract class MenuScreen extends Screen {
     protected menus: {
         [key: number]: Menu;
     };

@@ -1,4 +1,4 @@
-import { ActionType, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType } from "Enums";
+import { ActionType, Bindable, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/Messages";
 import { BindCatcherApi, IBinding } from "newui/BindingManager";
@@ -227,6 +227,7 @@ export default class InGameScreen extends BaseScreen {
     updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;
     onUpdateDirection(): void;
+    onBindLoop(api: BindCatcherApi, bindPressed?: boolean | Bindable): boolean | Bindable;
     private runAction(itemId, containerId, action, skipSound?);
     private updateContextMenu(contextMenu);
     private onOpenMessages();
@@ -237,7 +238,6 @@ export default class InGameScreen extends BaseScreen {
     private isOverlayVisible();
     private readonly onInterrupt;
     private readonly onInterruptClosed;
-    private readonly onBindLoop;
     private getHoveredItem(api);
     private quickSlotBindPressed(api, quickSlot, bindable);
     private quickSlotToggleBindPressed(api, itemElement, quickSlot, bindable, wasPressed);

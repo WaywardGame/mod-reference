@@ -1,6 +1,6 @@
-import { IUiElementOptions } from "newui/element/IUiElement";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
+import { IComponentOptions } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
-export default class StaticElement extends UiElement {
-    constructor(uiApi: UiApi, options?: IUiElementOptions);
+export default class StaticElement extends Component {
+    constructor(uiApi: UiApi, options?: IComponentOptions);
 }

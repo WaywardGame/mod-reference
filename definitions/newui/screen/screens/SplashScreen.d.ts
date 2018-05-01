@@ -1,6 +1,6 @@
 import { UiApi } from "newui/INewUi";
-import UiScreen from "newui/screen/UiScreen";
-export default class SplashScreen extends UiScreen {
+import Screen from "newui/screen/Screen";
+export default class SplashScreen extends Screen {
     constructor(uiApi: UiApi);
     private create();
     private showNext();

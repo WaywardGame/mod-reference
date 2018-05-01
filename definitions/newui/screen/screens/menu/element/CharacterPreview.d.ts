@@ -1,8 +1,8 @@
 import { IRGB } from "Enums";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
 import { UiApi } from "newui/INewUi";
 import { IPlayerCustomization } from "player/IPlayer";
-export declare class SVG extends UiElement {
+export declare class SVG extends Component {
     private readonly filters;
     constructor(uiApi: UiApi);
     createFilter(id: string): this;
@@ -13,7 +13,7 @@ export interface CharacterPreviewFilters {
     hair: string;
 }
 export declare type CharacterPreviewRotation = 0 | 1 | 2 | 3;
-export default class CharacterPreview extends UiElement {
+export default class CharacterPreview extends Component {
     private readonly elementPreviewBody;
     private readonly elementPreviewShirt;
     private readonly elementPreviewPants;

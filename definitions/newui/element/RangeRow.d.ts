@@ -1,6 +1,6 @@
 import { BlockRow } from "newui/element/BlockRow";
 import Button from "newui/element/Button";
-import { TextOrTranslationData } from "newui/element/IUiElement";
+import { TextOrTranslationData } from "newui/element/IComponent";
 import { RangeInput, RangeInputOptions } from "newui/element/RangeInput";
 import { RangeInputValueDisplay } from "newui/element/RangeInputValueDisplay";
 import { Refreshable } from "newui/element/Refreshable";

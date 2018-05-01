@@ -1,10 +1,10 @@
 import { InterruptChoice } from "language/ILanguage";
-import { ITooltipOptionsVague, IUiElement, TextOrTranslationData } from "newui/element/IUiElement";
-import { IUiScreen, ScreenId } from "newui/screen/IUiScreen";
+import { IComponent, ITooltipOptionsVague, TextOrTranslationData } from "newui/element/IComponent";
+import { IScreen, ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/element/IMenu";
 import { InterruptInputOptions } from "newui/util/IInterrupt";
 import Emitter from "utilities/Emitter";
-export interface UiApi<U extends IUiScreen = IUiScreen> extends Emitter {
+export interface UiApi<U extends IScreen = IScreen> extends Emitter {
     /**
      * Generator for all existing screens.
      */
@@ -12,11 +12,11 @@ export interface UiApi<U extends IUiScreen = IUiScreen> extends Emitter {
     /**
      * @param screenId The ID of the screen to return. If this screen is not initialized, returns undefined.
      */
-    getScreen<S extends IUiScreen = U>(screenId: ScreenId): S | undefined;
+    getScreen<S extends IScreen = U>(screenId: ScreenId): S | undefined;
     /**
      * Returns the visible screen
      */
-    getVisibleScreen<S extends IUiScreen = U>(): S | undefined;
+    getVisibleScreen<S extends IScreen = U>(): S | undefined;
     /**
      * Returns if the given screen is visible
      */
@@ -39,14 +39,14 @@ export interface UiApi<U extends IUiScreen = IUiScreen> extends Emitter {
     /**
      * Initializes a screen by its ID.
      */
-    initScreen<S extends IUiScreen = U>(screen: ScreenId): S;
-    showTooltip(tooltipSource: IUiElement): Promise<void>;
-    showTooltip(tooltipOptions: ITooltipOptionsVague, source?: IUiElement): Promise<void>;
-    showTooltip(tooltipOptions: ITooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
+    initScreen<S extends IScreen = U>(screen: ScreenId): S;
+    showTooltip(tooltipSource: IComponent): Promise<void>;
+    showTooltip(tooltipOptions: ITooltipOptionsVague, source?: IComponent): Promise<void>;
+    showTooltip(tooltipOptions: ITooltipOptionsVague | IComponent, source?: IComponent): Promise<void>;
     hideTooltip(): Promise<void>;
-    hideTooltip(source: IUiElement): Promise<void>;
+    hideTooltip(source: IComponent): Promise<void>;
     dumpTooltip(): Promise<void>;
-    dumpTooltip(source: IUiElement): Promise<void>;
+    dumpTooltip(source: IComponent): Promise<void>;
     /**
      * Returns a new interrupt factory with the given translation data.
      */
@@ -97,10 +97,10 @@ export interface UiApi<U extends IUiScreen = IUiScreen> extends Emitter {
      * @deprecated
      */
     showLoadingInterrupt(title: TextOrTranslationData, description?: TextOrTranslationData, canCancel?: boolean): Promise<void>;
-    refreshTranslations(element: HTMLElement | IUiElement): void;
+    refreshTranslations(element: HTMLElement | IComponent): void;
     getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: false): string;
     toggleFullscreen(fullscreen?: boolean): void;
-    storeElements(...elements: Array<HTMLElement | IUiElement>): void;
+    storeElements(...elements: Array<HTMLElement | IComponent>): void;
     playActivateSound(): void;
     playSelectSound(): void;
     setScale(scale: number): void;

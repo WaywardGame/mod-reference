@@ -1,13 +1,13 @@
 import { UiTranslation } from "language/ILanguage";
 import { BlockRow } from "newui/element/BlockRow";
 import Button, { ButtonEffect, ButtonOptions } from "newui/element/Button";
-import { IUiElement, IUiElementOptions, TextOrTranslationData } from "newui/element/IUiElement";
+import Component from "newui/element/Component";
+import { IComponent, IComponentOptions, TextOrTranslationData } from "newui/element/IComponent";
 import UiText, { Heading, Paragraph, TextOptions } from "newui/element/Text";
-import UiElement from "newui/element/UiElement";
 import { SelectDirection, UiApi } from "newui/INewUi";
-import { IUiScreen } from "newui/screen/IUiScreen";
+import { IScreen } from "newui/screen/IScreen";
 import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
-export interface MenuOptions extends IUiElementOptions {
+export interface MenuOptions extends IComponentOptions {
     menuId: MenuId;
     title?: string | UiTranslation;
     description?: string | UiTranslation;
@@ -20,9 +20,9 @@ export declare enum MenuEvent {
     CancelBind = "CancelBind",
     EnterBind = "EnterBind",
 }
-export default class Menu extends UiElement implements IMenu {
-    screenHost: IUiScreen;
-    protected contentWrapper: UiElement;
+export default class Menu extends Component implements IMenu {
+    screenHost: IScreen;
+    protected contentWrapper: Component;
     protected canCancel: boolean | undefined;
     private selection;
     private elementTabs;
@@ -55,14 +55,14 @@ export default class Menu extends UiElement implements IMenu {
     dumpTabs(): Promise<void>;
     addButton(options: ButtonOptions): Button;
     addButtonRow(...buttons: ButtonOptions[]): BlockRow;
-    addSpacer(): UiElement;
+    addSpacer(): Component;
     addText(options: TextOptions): UiText;
     addHeading(options: TextOptions): Heading;
     addParagraph(...textOptionsArr: Array<UiText | TextOptions>): Paragraph;
     dump(): Promise<void>;
-    append(...elements: Array<HTMLElement | IUiElement | undefined | IterableOf<HTMLElement | IUiElement | undefined>>): this;
-    addSection(heading: TextOptions, content: IterableOf<UiElement | undefined>): MenuSection;
-    addTabSection(tabOptions: MenuTabOptions, heading: TextOptions, content?: IterableOf<UiElement | undefined>): ITabSection;
+    append(...elements: Array<HTMLElement | IComponent | undefined | IterableOf<HTMLElement | IComponent | undefined>>): this;
+    addSection(heading: TextOptions, content: IterableOf<Component | undefined>): MenuSection;
+    addTabSection(tabOptions: MenuTabOptions, heading: TextOptions, content?: IterableOf<Component | undefined>): ITabSection;
     toggleTab(tabId: string | number, disabled?: boolean): void;
     load(...args: any[]): Promise<void>;
     protected updateBottomPadding(): void;
@@ -72,7 +72,7 @@ export interface ITabSection {
     section: MenuSection;
 }
 export interface TabEffect extends ButtonEffect {
-    scrollTo?: UiElement | (() => UiElement);
+    scrollTo?: Component | (() => Component);
 }
 export interface TabOptions extends ButtonOptions {
     tabId: string | number;
@@ -87,7 +87,7 @@ export declare class Tab extends Button {
     };
     constructor(uiApi: UiApi, options: TabOptions);
 }
-export declare class MenuSection extends UiElement {
-    readonly content: UiElement;
-    constructor(uiApi: UiApi, heading: TextOptions, content: IterableOf<UiElement | undefined>);
+export declare class MenuSection extends Component {
+    readonly content: Component;
+    constructor(uiApi: UiApi, heading: TextOptions, content: IterableOf<Component | undefined>);
 }

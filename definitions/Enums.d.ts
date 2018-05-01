@@ -1416,10 +1416,11 @@ export declare enum Bindable {
     MenuDown = 89,
     MenuLeft = 90,
     MenuRight = 91,
-    DeveloperToggleDeveloperMode = 92,
-    DeveloperReloadGame = 93,
-    DeveloperReloadAndContinueGame = 94,
-    DeveloperToggleDeveloperTools = 95,
+    MenuContextMenu = 92,
+    DeveloperToggleDeveloperMode = 93,
+    DeveloperReloadGame = 94,
+    DeveloperReloadAndContinueGame = 95,
+    DeveloperToggleDeveloperTools = 96,
 }
 export declare enum DropLocation {
     Facing = 0,

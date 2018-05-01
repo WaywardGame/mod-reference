@@ -1,28 +1,28 @@
 import { InterruptChoice } from "language/ILanguage";
-import { ITooltipOptionsVague, IUiElement, TextOrTranslationData } from "newui/element/IUiElement";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
+import { IComponent, ITooltipOptionsVague, TextOrTranslationData } from "newui/element/IComponent";
 import { IInterruptMenuFactory, UiApi } from "newui/INewUi";
-import { IUiScreen, ScreenId } from "newui/screen/IUiScreen";
+import { IScreen, ScreenId } from "newui/screen/IScreen";
+import Screen from "newui/screen/Screen";
 import { MenuId } from "newui/screen/screens/menu/element/IMenu";
-import UiScreen from "newui/screen/UiScreen";
 import { InterruptInputOptions } from "newui/util/IInterrupt";
 import InterruptFactory from "newui/util/InterruptFactory";
 import Emitter from "utilities/Emitter";
-export default class Ui extends Emitter implements UiApi<UiScreen> {
+export default class Ui extends Emitter implements UiApi<Screen> {
     private storageElement;
     private readonly screenManager;
     private readonly tooltipManager;
     private scale;
     constructor();
-    screens(): IterableIterator<UiScreen>;
+    screens(): IterableIterator<Screen>;
     /**
      * @param screenId The ID of the screen to return. If this screen is not initialized, returns undefined.
      */
-    getScreen<S extends IUiScreen = UiScreen>(screenId: ScreenId): S | undefined;
+    getScreen<S extends IScreen = Screen>(screenId: ScreenId): S | undefined;
     /**
      * Returns the visible screen
      */
-    getVisibleScreen<S extends IUiScreen = UiScreen>(): S | undefined;
+    getVisibleScreen<S extends IScreen = Screen>(): S | undefined;
     /**
      * Returns if the given screen is visible
      */
@@ -37,12 +37,12 @@ export default class Ui extends Emitter implements UiApi<UiScreen> {
     /**
      * Hides the given screen.
      */
-    hideScreen(screen: ScreenId | UiScreen): Promise<void>;
+    hideScreen(screen: ScreenId | Screen): Promise<void>;
     /**
      * Removes the given screen.
      */
-    removeScreen(screen: ScreenId | UiScreen): Promise<void>;
-    initScreen<S extends IUiScreen = UiScreen>(screen: ScreenId): S;
+    removeScreen(screen: ScreenId | Screen): Promise<void>;
+    initScreen<S extends IScreen = Screen>(screen: ScreenId): S;
     /**
      * Shows a tooltip
      * @param tooltip The options with which to construct the tooltip
@@ -50,23 +50,23 @@ export default class Ui extends Emitter implements UiApi<UiScreen> {
      * 	The source element that the tooltip is for.
      * 	If there currently exists a tooltip for this element, it shows the old instead of creating a new tooltip.
      */
-    showTooltip(tooltip: ITooltipOptionsVague, source?: UiElement): Promise<void>;
+    showTooltip(tooltip: ITooltipOptionsVague, source?: Component): Promise<void>;
     /**
      * Shows a tooltip
      * @param elementWithTooltip
      * 	The element the tooltip is for, that contains the options with which to construct the tooltip.
      */
-    showTooltip(elementWithTooltip: UiElement): Promise<void>;
+    showTooltip(elementWithTooltip: Component): Promise<void>;
     /**
      * Hides the current tooltip
      * @param source The element the tooltip must be for to hide it
      */
-    hideTooltip(source?: IUiElement): Promise<void>;
+    hideTooltip(source?: IComponent): Promise<void>;
     /**
      * Removes the current tooltip
      * @param source The element the tooltip must be for to remove it
      */
-    dumpTooltip(source?: IUiElement): Promise<void>;
+    dumpTooltip(source?: IComponent): Promise<void>;
     /**
      * Returns a new interrupt factory with the given translation data.
      */
@@ -89,12 +89,12 @@ export default class Ui extends Emitter implements UiApi<UiScreen> {
     /**
      * @param elements The elements to refresh translations inside
      */
-    refreshTranslations(...elements: Array<HTMLElement | IUiElement>): void;
+    refreshTranslations(...elements: Array<HTMLElement | IComponent>): void;
     /**
      * Returns the current translation of the given textOrTranslationData
      */
     getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: boolean): string;
-    storeElements(...elements: Array<HTMLElement | IUiElement>): void;
+    storeElements(...elements: Array<HTMLElement | IComponent>): void;
     /**
      * Plays the "click" sound effect, used for most interface interactions
      */

@@ -1,8 +1,8 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { StatusType } from "Enums";
-import UiElement from "newui/element/UiElement";
+import Component from "newui/element/Component";
 import { UiApi } from "newui/INewUi";
-export default class StatusEffects extends UiElement {
+export default class StatusEffects extends Component {
     private readonly entity;
     private readonly effectIcons;
     constructor(uiApi: UiApi, entity: IBaseEntity);

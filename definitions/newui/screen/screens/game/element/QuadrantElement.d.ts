@@ -1,4 +1,4 @@
-import { IUiElementOptions } from "newui/element/IUiElement";
+import { IComponentOptions } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
 import StaticElement from "newui/screen/screens/game/element/StaticElement";
 /**
@@ -36,7 +36,7 @@ export declare enum QuadrantElementEvent {
  */
 export default abstract class QuadrantElement extends StaticElement {
     readonly preferredQuadrant: Quadrant;
-    constructor(uiApi: UiApi, options?: IUiElementOptions);
+    constructor(uiApi: UiApi, options?: IComponentOptions);
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event
      * with the parameters being the new quadrant and the old quadrant.

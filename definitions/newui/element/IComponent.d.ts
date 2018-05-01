@@ -2,7 +2,7 @@ import { Dictionary, UiTranslation } from "language/ILanguage";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
 import { ISplit } from "utilities/string/Interpolate";
-export declare enum UiElementEvent {
+export declare enum ComponentEvent {
     Show = 0,
     Hide = 1,
     Append = 2,
@@ -12,7 +12,7 @@ export declare enum UiElementEvent {
     Change = 6,
     Tooltip = 7,
 }
-export interface IUiElement extends Emitter {
+export interface IComponent extends Emitter {
     /**
      * The element that this `UiElement` instance wraps.
      */
@@ -69,12 +69,12 @@ export interface IUiElement extends Emitter {
      *
      * The element is only added to a UiElement wrapper if given that wrapper and not its internal element.
      */
-    appendTo(element: string | HTMLElement | IUiElement): this;
+    appendTo(element: string | HTMLElement | IComponent): this;
     /**
      * Append every element of a list of elements.
      * @param elements A varargs list of elements or iterables of elements. `undefined` is skipped
      */
-    append(...elements: Array<HTMLElement | IUiElement | undefined | IterableOf<HTMLElement | IUiElement | undefined>>): this;
+    append(...elements: Array<HTMLElement | IComponent | undefined | IterableOf<HTMLElement | IComponent | undefined>>): this;
     /**
      * Remove this element.
      *
@@ -85,7 +85,7 @@ export interface IUiElement extends Emitter {
     /**
      * Returns whether this UiElement contains the given element.
      */
-    contains(what: string | HTMLElement | IUiElement): boolean;
+    contains(what: string | HTMLElement | IComponent): boolean;
     /**
      * Remove all children
      */
@@ -94,7 +94,7 @@ export interface IUiElement extends Emitter {
      * Remove all children that are not filtered out with the given filter function
      * @param filter A function that will return true if the child should be kept
      */
-    dump(filter: (element: IUiElement) => boolean): Promise<void>;
+    dump(filter: (element: IComponent) => boolean): Promise<void>;
     /**
      * Sets the contents of this element using `innerHTML`.
      * @param html The content, an HTML string. Script tags will not be executed, as per the normal functionality of `innerHTML`
@@ -122,6 +122,14 @@ export interface IUiElement extends Emitter {
      */
     setTooltip(tooltipOptions?: ITooltipOptionsVague): void;
     /**
+     * Remove the context menu from this element
+     */
+    setContextMenu(): void;
+    /**
+     * Set the context menu for this element
+     */
+    setContextMenu(generator: () => IComponent): void;
+    /**
      * An alias for `element.getBoundingClientRect()`
      */
     getBox(): ClientRect | DOMRect;
@@ -135,17 +143,17 @@ export interface IUiElement extends Emitter {
     /**
      * Returns the `nth` child, defaulting to the first child
      */
-    getNthChild(nth?: number): IUiElement;
+    getNthChild(nth?: number): IComponent;
     /**
      * Returns a new array of the children
      */
-    getChildren(): IUiElement[];
+    getChildren(): IComponent[];
     /**
      * Scrolls this element so the given child is at the top of the viewport.
      * @param child The child to scroll to
      * @param ms The time to take, defaulting to 1000 (1 second)
      */
-    scrollTo(child: IUiElement, ms?: number): void;
+    scrollTo(child: IComponent, ms?: number): void;
     /**
      * Returns the computed style property value of the given style name.
      *
@@ -171,7 +179,10 @@ export interface IUiElement extends Emitter {
      */
     repaint(): void;
 }
-export interface IUiElementOptions {
+export interface IContextMenu<OptionType extends number | string = number | string> extends IComponent {
+    setPosition(x: number, y: number): this;
+}
+export interface IComponentOptions {
     visible?: boolean;
     elementType?: string;
     namespace?: Namespace;
@@ -192,6 +203,17 @@ export declare enum SelectableLayer {
     Tertiary = 2,
     Quaternary = 3,
 }
+export interface IBaseTranslationData {
+    dictionary: Dictionary;
+    entry: number;
+    args?: any[] | (() => any[]);
+    properties?: string[];
+    shouldTrim?: false;
+}
+export declare type TranslationData = IBaseTranslationData | (Partial<IBaseTranslationData> & {
+    entry: UiTranslation;
+});
+export declare type TextOrTranslationData = string | UiTranslation | TranslationData;
 export declare enum TooltipLocation {
     AboveLeft = 0,
     AboveRight = 1,
@@ -205,24 +227,16 @@ export declare enum TooltipLocation {
     BeneathRight = 9,
     Mouse = 10,
 }
-export declare type TooltipTextData = TextOrTranslationData | ISplit[];
-export interface ITooltipOptionsVague extends IUiElementOptions {
+/**
+ * ...yea
+ */
+export declare type TextOrTranslationDataOrSplitsOrGenerator = TypeOrGenerator<TextOrTranslationData | ISplit[]>;
+export interface ITooltipOptionsVague extends IComponentOptions {
     tooltip?: never;
     location: TooltipLocation;
     heading?: TextOrTranslationData;
-    text?: TooltipTextData | (() => TooltipTextData);
+    text?: TextOrTranslationDataOrSplitsOrGenerator;
     cache?: false;
     maxWidth?: number;
-    create?(tooltip: IUiElement): Promise<void>;
+    create?(tooltip: IComponent): Promise<void>;
 }
-export interface IBaseTranslationData {
-    dictionary: Dictionary;
-    entry: number;
-    args?: any[] | (() => any[]);
-    properties?: string[];
-    shouldTrim?: false;
-}
-export declare type TranslationData = IBaseTranslationData | (Partial<IBaseTranslationData> & {
-    entry: UiTranslation;
-});
-export declare type TextOrTranslationData = string | UiTranslation | TranslationData;

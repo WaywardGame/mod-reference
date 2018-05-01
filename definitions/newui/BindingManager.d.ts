@@ -1,4 +1,5 @@
 import { Bindable, BindableType } from "Enums";
+import { IComponent } from "newui/element/IComponent";
 import Emitter from "utilities/Emitter";
 export declare enum KeyModifier {
     Shift = 0,
@@ -38,8 +39,8 @@ export interface BindCatcherApi {
     isAnythingDown(): boolean;
     timeDown(key: string): number;
     timeDown(bind: Bindable): number;
-    isMouseWithin(element: Element): boolean;
-    isMouseWithin(element: Element, mustBeTarget: boolean): boolean;
+    isMouseWithin(element: Element | IComponent): boolean;
+    isMouseWithin(element: Element | IComponent, mustBeTarget: boolean): boolean;
 }
 export declare enum BindingManagerEvent {
     Loop = 0,
