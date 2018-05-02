@@ -1,6 +1,6 @@
-import { CreatureType, IObject, ItemType, SkillType } from "Enums";
+import { CreatureType, IModdable, IObject, ItemType, SkillType } from "Enums";
 import { IPointZ } from "utilities/math/IPoint";
-export interface ICorpseDescription {
+export interface ICorpseDescription extends IModdable {
     name?: string;
     decay?: number;
     resource?: ICorpseResourceDrop[];

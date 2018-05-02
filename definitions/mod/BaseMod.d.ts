@@ -1,5 +1,6 @@
 import { ActionCallback, IActionDescription } from "action/IAction";
 import { CommandCallback } from "command/ICommand";
+import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import { IStatusEffectDescription } from "entity/StatusEffects";
@@ -114,6 +115,7 @@ export declare abstract class BaseMod {
         postRenderWorld?: number | undefined;
         preExecuteAction?: number | undefined;
         preExecuteCommand?: number | undefined;
+        preLoadWorldDifferences?: number | undefined;
         preRender?: number | undefined;
         preRenderPostProcess?: number | undefined;
         preRenderWorld?: number | undefined;
@@ -138,7 +140,7 @@ export declare abstract class BaseMod {
     addSoundEffect(name: string, variations?: number): number;
     addHairstyle(description: IHairstyleDescription): number;
     addItem(description: IItemDescription): number;
-    addCreature(description: ICreatureDescription): number;
+    addCreature(description: ICreatureDescription, corpseDescription?: ICorpseDescription): number;
     addTerrain(description: ITerrainDescription, terrainType?: number): number;
     addTerrainResource(terrainType: number, terrainResource: ITerrainResourceItem[], defaultItem?: ItemType): void;
     addDoodad(description: IDoodadDescription): number;

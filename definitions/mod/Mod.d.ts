@@ -367,7 +367,7 @@ export declare abstract class Mod extends BaseMod {
      */
     onItemEquip(player: IPlayer, item: IItem, slot: EquipType): void;
     /**
-     * Called when the player quicsklots and item
+     * Called when the player quickslots an item
      * @param item The item being quickslotted
      * @param player The player object
      * @param quickSlot The quickslot number
@@ -549,6 +549,12 @@ export declare abstract class Mod extends BaseMod {
      * @returns False to cancel the action or undefined to use the default logic
      */
     preExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument): boolean | undefined;
+    /**
+     * Called before loading world differences
+     * Loading differences involving setting up corpses, creatures, doodads, and related things onto the world
+     * @param generateNewWorld True if a new world is being generated
+     */
+    preLoadWorldDifferences(generateNewWorld: boolean): void;
     /**
      * Called before a command is executed
      * @param player The player object

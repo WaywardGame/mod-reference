@@ -73,6 +73,7 @@ export declare enum Hook {
     PostRenderWorld = "postRenderWorld",
     PreExecuteAction = "preExecuteAction",
     PreExecuteCommand = "preExecuteCommand",
+    PreLoadWorldDifferences = "preLoadWorldDifferences",
     PreRender = "preRender",
     PreRenderPostProcess = "preRenderPostProcess",
     PreRenderWorld = "preRenderWorld",

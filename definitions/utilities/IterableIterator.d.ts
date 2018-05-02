@@ -35,10 +35,16 @@ declare global  {
          */
         collect<X>(collector: (val: IterableIterator<T>) => X): X;
         /**
-         * Loops the values of this iterable and calls the given function with each value.
-         * @param user A function that takes a value and returns whether iteration should continue.
+         * Returns an iterable of type X, generated with the given collector function.
+         * @param collector A function that takes the iterable, and returns type X
+         * @see `utilities/Collectors` for premade collectors
          */
-        forEach(user: (val: T) => boolean | void): void;
+        collect<X>(collector: (val: IterableIterator<T>) => X, iterable: true): IterableIterator<X>;
+        /**
+         * Loops the values of this iterable and calls the given function with each value.
+         * @param user A function that takes a value. If the function returns `false`, iteration will not continue.
+         */
+        forEach(user: (val: T) => any): void;
         /**
          * Returns the first value in this iterator, or undefined if there are no values.
          */
@@ -79,6 +85,10 @@ declare global  {
          * @param splitter Takes a value from the iterator and returns which resulting iterator it should be part of.
          */
         split<K extends string>(splitter: (val: T) => K): SplitIterablesOf<T, K>;
+        /**
+         * Returns an iterator where any lower level iterables are splatted into the top layer
+         */
+        flat<N>(): IterableIterator<N>;
     }
     interface RegExp {
         /**

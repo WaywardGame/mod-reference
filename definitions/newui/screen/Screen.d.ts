@@ -1,7 +1,7 @@
 import { Bindable } from "Enums";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/element/Component";
-import { IComponent, IComponentOptions, ITooltipOptionsVague } from "newui/element/IComponent";
+import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague } from "newui/element/IComponent";
 import Tooltip from "newui/element/Tooltip";
 import { UiApi } from "newui/INewUi";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
@@ -18,6 +18,7 @@ export default abstract class Screen extends Component implements IScreen {
     protected tooltip: Tooltip;
     protected log: Log;
     private readonly tooltipMousemoveListener;
+    private contextMenu;
     constructor(uiApi: UiApi, options: ScreenOptions);
     /**
      * Shows a tooltip
@@ -45,5 +46,13 @@ export default abstract class Screen extends Component implements IScreen {
      * @param source The element the tooltip must be for to remove it
      */
     dumpTooltip(source?: IComponent): Promise<boolean>;
+    /**
+     * Remove the context menu from this element
+     */
+    setContextMenu(): void;
+    /**
+     * Set the context menu for this element
+     */
+    setContextMenu(generator: () => IContextMenu): void;
     protected bindLoop(api: BindCatcherApi): Promise<boolean | Bindable>;
 }

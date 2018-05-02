@@ -54,8 +54,8 @@ declare global {
 
 	type SaferArray<T> = Array<T | undefined>;
 
-	type VarArgsOfTOrIterable<T> = Array<T | IterableOf<T>>;
-	type TypeOrGenerator<T> = T | (() => T);
+	type ArrayOfTOrIterablesOfT<T> = Array<T | IterableOf<T>>;
+	type GeneratorOrT<T> = T | (() => T);
 
 	let absentPlayers: IPlayer[];
 	let actionManager: IActionManager;

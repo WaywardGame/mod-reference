@@ -44,4 +44,5 @@ export default abstract class QuadrantElement extends StaticElement {
      * Does not emit the event if the quadrant is not changing.
      */
     setQuadrant(quadrant: Quadrant, trigger?: boolean): Promise<void>;
+    private getContextMenuDescription();
 }

@@ -178,6 +178,11 @@ export interface IComponent extends Emitter {
      * Triggers a repaint on this element.
      */
     repaint(): void;
+    /**
+     * Passes this component to a collector function, then returns the result of that function
+     * @param collector A function that takes a component and returns T
+     */
+    collect<T>(collector: (component: IComponent) => T): T;
 }
 export interface IContextMenu<OptionType extends number | string = number | string> extends IComponent {
     setPosition(x: number, y: number): this;
@@ -230,7 +235,7 @@ export declare enum TooltipLocation {
 /**
  * ...yea
  */
-export declare type TextOrTranslationDataOrSplitsOrGenerator = TypeOrGenerator<TextOrTranslationData | ISplit[]>;
+export declare type TextOrTranslationDataOrSplitsOrGenerator = GeneratorOrT<TextOrTranslationData | ISplit[]>;
 export interface ITooltipOptionsVague extends IComponentOptions {
     tooltip?: never;
     location: TooltipLocation;

@@ -1,4 +1,4 @@
-import { IComponent, ITooltipOptionsVague } from "newui/element/IComponent";
+import { IComponent, IContextMenu, ITooltipOptionsVague } from "newui/element/IComponent";
 import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
 export declare enum ScreenId {
     None = 0,
@@ -50,6 +50,18 @@ export interface IScreen extends IComponent {
      * @param source The element the tooltip must be for to remove it
      */
     dumpTooltip(source?: IComponent): Promise<boolean>;
+    /**
+     * Remove the context menu from this element
+     */
+    setContextMenu(): void;
+    /**
+     * Set the context menu for this element
+     */
+    setContextMenu(generator: () => IComponent): void;
+    /**
+     * Remove any current context menu and set the visible context menu for this screen to the given context menu
+     */
+    setContextMenu(contextMenu: IContextMenu): void;
 }
 export interface IMenuScreen extends IScreen {
     /**

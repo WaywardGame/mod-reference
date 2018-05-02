@@ -31,7 +31,7 @@ export default class Component extends Emitter implements IComponent {
     hide(...args: any[]): Promise<void>;
     toggle(visible?: boolean, ...args: any[]): Promise<void>;
     appendTo(where: string | HTMLElement | IComponent): this;
-    append(...elements: VarArgsOfTOrIterable<HTMLElement | IComponent | undefined>): this;
+    append(...elements: ArrayOfTOrIterablesOfT<HTMLElement | IComponent | undefined>): this;
     remove(): Promise<void>;
     contains(what: string | HTMLElement | IComponent): boolean;
     dump(filter?: (element: Component) => boolean): Promise<void>;
@@ -60,6 +60,7 @@ export default class Component extends Emitter implements IComponent {
     schedule(cb: (this: this, button: this) => any, ...args: any[]): this;
     schedule(ms: number, cb: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
+    collect<T>(collector: (component: IComponent) => T): T;
     private initializeTooltip();
     private onBindLoopForContextMenu(_, api);
 }
