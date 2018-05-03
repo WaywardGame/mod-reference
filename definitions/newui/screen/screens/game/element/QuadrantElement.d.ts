@@ -1,4 +1,5 @@
-import { IComponentOptions } from "newui/element/IComponent";
+import { IOptionDescription } from "newui/element/ContextMenu";
+import { IComponentOptions, TextOrTranslationData } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
 import StaticElement from "newui/screen/screens/game/element/StaticElement";
 /**
@@ -6,14 +7,12 @@ import StaticElement from "newui/screen/screens/game/element/StaticElement";
  */
 export declare enum Quadrant {
     None = 0,
-    Left = 1,
-    TopLeft = 2,
-    Top = 3,
-    TopRight = 4,
-    Right = 5,
-    BottomRight = 6,
-    Bottom = 7,
-    BottomLeft = 8,
+    TopLeft = 1,
+    Top = 2,
+    TopRight = 3,
+    BottomRight = 4,
+    Bottom = 5,
+    BottomLeft = 6,
 }
 export declare enum QuadrantElementEvent {
     /**
@@ -22,6 +21,12 @@ export declare enum QuadrantElementEvent {
      * @param oldQuadrant The old quadrant of this element
      */
     ChangeQuadrant = "ChangeQuadrant",
+    /**
+     * Emitted synchronously with no arguments.
+     * @returns A `IterableOf<QuadrantElement>` containing sibling quadrant elements. The list
+     * may contain this quadrant element.
+     */
+    GetQuadrantElementList = "GetQuadrantElementList",
 }
 /**
  * An element that displays in one quadrant of the screen.
@@ -44,5 +49,8 @@ export default abstract class QuadrantElement extends StaticElement {
      * Does not emit the event if the quadrant is not changing.
      */
     setQuadrant(quadrant: Quadrant, trigger?: boolean): Promise<void>;
-    private getContextMenuDescription();
+    protected abstract getID(): string;
+    protected abstract getName(): TextOrTranslationData;
+    protected getContextMenuDescription(): Description<IOptionDescription>;
+    private getContextMenu();
 }

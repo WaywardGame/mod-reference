@@ -18,7 +18,7 @@ export default abstract class Screen extends Component implements IScreen {
     protected tooltip: Tooltip;
     protected log: Log;
     private readonly tooltipMousemoveListener;
-    private contextMenu;
+    private contextMenu?;
     constructor(uiApi: UiApi, options: ScreenOptions);
     /**
      * Shows a tooltip

@@ -1,10 +1,16 @@
 import Button from "newui/element/Button";
 import Component from "newui/element/Component";
-import { IComponent, IContextMenu, TextOrTranslationData } from "newui/element/IComponent";
+import { IContextMenu, TextOrTranslationData, TextOrTranslationDataOrSplitsOrGenerator } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
-export interface IOptionDescription<T extends IComponent = IComponent> {
+export declare type IOptionDescription = {
     text: TextOrTranslationData;
-    submenu?(uiApi: UiApi, host: T): IContextMenu;
+} & ({
+    submenu(uiApi: UiApi): IContextMenu;
+} | {
+    onActivate(): any;
+});
+export declare enum ContextMenuEvent {
+    Chosen = "Chosen",
 }
 export default class ContextMenu<OptionType extends number | string = number | string> extends Component implements IContextMenu<OptionType> {
     private readonly descriptions;
@@ -13,8 +19,13 @@ export default class ContextMenu<OptionType extends number | string = number | s
     addAllDescribedOptions(): this;
     addOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     disableOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
+    removeOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     setPosition(x: number, y: number): this;
 }
 export declare class ContextMenuOption extends Button {
+    private submenu?;
     constructor(uiApi: UiApi, description: IOptionDescription);
+    setText(text: TextOrTranslationDataOrSplitsOrGenerator): void;
+    protected showSubmenu(generator: (uiApi: UiApi) => IContextMenu): void;
+    protected hideSubmenu(): void;
 }

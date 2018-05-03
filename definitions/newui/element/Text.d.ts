@@ -9,19 +9,20 @@ export interface TextOptions extends IComponentOptions {
 export interface TextData {
     translationData: UiTranslation | TranslationData;
 }
-export default class UiText extends Component {
+export default class Text extends Component {
+    static createText(uiApi: UiApi, options: TextOptions | SplitTextOptions): Text | SplitText;
     constructor(uiApi: UiApi, options?: TextOptions);
     getText(): string | undefined;
     setText(text: string | UiTranslation | TranslationData, refreshTranslations?: boolean): void;
     removeText(): void;
 }
-export declare class Paragraph extends UiText {
+export declare class Paragraph extends Text {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
 export declare class Block extends Paragraph {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
-export declare class Heading extends UiText {
+export declare class Heading extends Text {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
 export interface SplitTextOptions extends IComponentOptions {

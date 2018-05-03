@@ -1,3 +1,4 @@
+import { UiTranslation } from "language/ILanguage";
 import { UiApi } from "newui/INewUi";
 import QuadrantElement, { Quadrant } from "newui/screen/screens/game/element/QuadrantElement";
 import { IPlayer } from "player/IPlayer";
@@ -6,6 +7,8 @@ export default class Stats extends QuadrantElement {
     readonly preferredQuadrant: Quadrant;
     private readonly player;
     constructor(uiApi: UiApi, player: IPlayer);
+    protected getID(): string;
+    protected getName(): UiTranslation;
     private refresh();
     /**
      * Returns an object containing iterables for all stats that exist on the player and have a description,

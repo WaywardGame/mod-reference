@@ -3,7 +3,7 @@ import { TextOrTranslationData } from "newui/element/IComponent";
 import { Refreshable } from "newui/element/Refreshable";
 import { UiApi } from "newui/INewUi";
 export interface CheckButtonOptions extends ButtonOptions {
-    effect?: never;
+    onActivate?: never;
     checked?: boolean;
     description?: TextOrTranslationData;
     refresh?(): boolean;

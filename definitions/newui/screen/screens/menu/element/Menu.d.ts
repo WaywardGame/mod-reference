@@ -1,9 +1,9 @@
 import { UiTranslation } from "language/ILanguage";
 import { BlockRow } from "newui/element/BlockRow";
-import Button, { ButtonEffect, ButtonOptions } from "newui/element/Button";
+import Button, { ButtonEffect, ButtonOptions, DefaultButtonOptions } from "newui/element/Button";
 import Component from "newui/element/Component";
 import { IComponent, IComponentOptions, TextOrTranslationData } from "newui/element/IComponent";
-import UiText, { Heading, Paragraph, TextOptions } from "newui/element/Text";
+import Text, { Heading, Paragraph, TextOptions } from "newui/element/Text";
 import { SelectDirection, UiApi } from "newui/INewUi";
 import { IScreen } from "newui/screen/IScreen";
 import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
@@ -53,12 +53,12 @@ export default class Menu extends Component implements IMenu {
     selectEnter(): boolean;
     addTabs(...tabs: MenuTabOptions[]): Tab[];
     dumpTabs(): Promise<void>;
-    addButton(options: ButtonOptions): Button;
-    addButtonRow(...buttons: ButtonOptions[]): BlockRow;
+    addButton(options: DefaultButtonOptions): Button;
+    addButtonRow(...buttons: DefaultButtonOptions[]): BlockRow;
     addSpacer(): Component;
-    addText(options: TextOptions): UiText;
+    addText(options: TextOptions): Text;
     addHeading(options: TextOptions): Heading;
-    addParagraph(...textOptionsArr: Array<UiText | TextOptions>): Paragraph;
+    addParagraph(...textOptionsArr: Array<Text | TextOptions>): Paragraph;
     dump(): Promise<void>;
     append(...elements: Array<HTMLElement | IComponent | undefined | IterableOf<HTMLElement | IComponent | undefined>>): this;
     addSection(heading: TextOptions, content: IterableOf<Component | undefined>): MenuSection;
@@ -76,7 +76,7 @@ export interface TabEffect extends ButtonEffect {
 }
 export interface TabOptions extends ButtonOptions {
     tabId: string | number;
-    effect?: TabEffect | (() => any);
+    onActivate?: TabEffect | (() => any);
 }
 export interface MenuTabOptions extends TabOptions {
     subTabs?: IterableOf<TabOptions>;
