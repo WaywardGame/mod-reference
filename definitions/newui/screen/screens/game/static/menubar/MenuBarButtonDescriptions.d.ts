@@ -17,7 +17,12 @@ export interface IMenuBarButtonDescription {
     imageWidth?: number;
     imageHeight?: number;
     tooltip?: Partial<ITooltipOptions>;
+    group?: string | number;
     onActivate(): any;
+}
+export declare enum MenuBarButtonGroup {
+    Meta = 0,
+    World = 1,
 }
 declare const menuBarButtonDescriptions: Description<IMenuBarButtonDescription>;
 export default menuBarButtonDescriptions;

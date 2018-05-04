@@ -2,8 +2,8 @@ import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
 import { FacingDirection, FireType, MoveType, SfxType, StatusType } from "Enums";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
-import { IPoint, IPointZ } from "utilities/math/IPoint";
-export default interface IBaseEntity extends IPointZ, Emitter {
+import { IVector2, IVector3 } from "utilities/math/IVector";
+export default interface IBaseEntity extends IVector3, Emitter {
     id: number;
     renamed?: string;
     fromX: number;
@@ -11,15 +11,15 @@ export default interface IBaseEntity extends IPointZ, Emitter {
     moveType: MoveType | undefined;
     anim: number;
     stopNextMovement: boolean;
-    direction: IPoint;
+    direction: IVector2;
     facingDirection: FacingDirection;
     stats: IStats;
     status: IStatus;
-    getFacingPoint(): IPointZ;
+    getFacingPoint(): IVector3;
     getFacingTile(): ITile;
     getMovementFinishTime(): number | undefined;
     getMovementProgress(): number;
-    getPoint(): IPointZ;
+    getPoint(): IVector3;
     getTile(): ITile;
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;

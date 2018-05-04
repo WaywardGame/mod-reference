@@ -1,5 +1,5 @@
-import Vec2 = TSM.vec2;
 import { IImageOverrideDescription } from "mod/IModInfo";
+import Vec2 from "utilities/math/Vector2";
 export interface IResourceLoader {
     initialize(gl: WebGL2RenderingContext): void;
     loadResources(container: IResourceContainer, callback: () => void): void;

@@ -1,7 +1,7 @@
-import Vec2 = TSM.vec2;
 import { DoodadType, TerrainType } from "Enums";
 import IWorldLayer from "renderer/IWorldLayer";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
+import Vec2 from "utilities/math/Vector2";
 export interface ITileAdaptation {
     TLFG: Vec2;
     TRFG: Vec2;

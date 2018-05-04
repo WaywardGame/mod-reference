@@ -1,6 +1,6 @@
-import Vec2 = TSM.vec2;
 import { ItemType, StatType } from "Enums";
 import INotifier from "renderer/INotifier";
+import Vec2 from "utilities/math/Vector2";
 export default class Notifier implements INotifier {
     private readonly capacity;
     private mostRecent;

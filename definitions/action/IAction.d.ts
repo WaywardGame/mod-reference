@@ -8,7 +8,7 @@ import { INPC } from "npc/INPC";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
 import { HintType } from "ui/IHint";
-import { IPoint } from "utilities/math/IPoint";
+import { IVector2 } from "utilities/math/IVector";
 export interface IActionBase {
     validateArguments?: IActionArgumentValidator;
     usableAsGhost?: boolean;
@@ -47,7 +47,7 @@ export interface IActionArgument {
     itemType?: ItemType;
     name?: string;
     npc?: INPC;
-    point?: IPoint;
+    point?: IVector2;
     preservee?: IItem;
     reinforcee?: IItem;
     repairee?: IItem | IDoodad;

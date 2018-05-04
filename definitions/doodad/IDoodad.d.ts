@@ -5,8 +5,8 @@ import { IContainer, IItem, IItemArray, IItemLegendary } from "item/IItem";
 import { Message } from "language/Messages";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
-import { IPointZ } from "utilities/math/IPoint";
-export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, Partial<IContainer> {
+import { IVector3 } from "utilities/math/IVector";
+export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer> {
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
     canGrow(): boolean;
@@ -20,6 +20,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, P
     isGatherable(): boolean;
     isEmbers(): boolean;
     canHarvest(): boolean;
+    getResourcesMessage(): Message | undefined;
     canPickup(player: IPlayer): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;

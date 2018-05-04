@@ -4,7 +4,7 @@ import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, StatType, TatteredMap } from "Enums";
 import IPlayer from "player/IPlayer";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);
     components: IRecipeComponent[];
@@ -66,7 +66,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
-    getLocation(): IPointZ | undefined;
+    getLocation(): IVector3 | undefined;
     dropInWater(human: IBaseHumanEntity, x?: number, y?: number): void;
     dropInLava(human: IBaseHumanEntity, x?: number, y?: number): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
@@ -179,10 +179,10 @@ export interface IInvalidContainerReference extends IBaseContainerReference {
 export interface IWorldContainerReference extends IBaseContainerReference {
     type: ContainerReferenceType.World;
 }
-export interface ITileContainerReference extends IBaseContainerReference, IPointZ {
+export interface ITileContainerReference extends IBaseContainerReference, IVector3 {
     type: ContainerReferenceType.Tile;
 }
-export interface IDoodadContainerReference extends IBaseContainerReference, IPointZ {
+export interface IDoodadContainerReference extends IBaseContainerReference, IVector3 {
     type: ContainerReferenceType.Doodad;
 }
 export interface IItemContainerReference extends IBaseContainerReference {

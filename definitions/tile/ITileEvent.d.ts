@@ -1,5 +1,5 @@
 import { IObject, IObjectDescription, IResourceItem, IRGB } from "Enums";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export interface ITileEventDescription extends IObjectDescription {
     spreadMax?: number;
     decayMax?: number;
@@ -8,7 +8,7 @@ export interface ITileEventDescription extends IObjectDescription {
     particles?: IRGB;
     graphicVariation?: boolean;
 }
-export interface ITileEvent extends IObject<TileEventType>, IPointZ {
+export interface ITileEvent extends IObject<TileEventType>, IVector3 {
     spread?: number;
     decay?: number;
     gfx?: number;

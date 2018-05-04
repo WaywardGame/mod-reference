@@ -3,7 +3,7 @@ import { IFlowField } from "flowfield/IFlowField";
 import { DebugRendererDelegate } from "flowfield/IFlowFieldDebugRenderer";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import { IPlayer } from "player/IPlayer";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export default class FlowFieldManager implements IFlowFieldManager {
     private readonly size;
     delegate: DebugRendererDelegate;
@@ -16,7 +16,7 @@ export default class FlowFieldManager implements IFlowFieldManager {
     setDelegate(delegate: DebugRendererDelegate): void;
     getWidth(): number;
     getHeight(): number;
-    isInFlowField(point: IPointZ): boolean;
+    isInFlowField(point: IVector3): boolean;
     isPlayerInFlowField(player: IPlayer): boolean;
     getMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
     getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;

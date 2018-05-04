@@ -2,7 +2,7 @@ import { FacingDirection, MoveType } from "Enums";
 import IFlowField from "flowfield/IFlowField";
 import { DebugRendererDelegate } from "flowfield/IFlowFieldDebugRenderer";
 import { IPlayer } from "player/IPlayer";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export interface IFlowFieldManager {
     delegate: DebugRendererDelegate;
     flowFields: {
@@ -13,7 +13,7 @@ export interface IFlowFieldManager {
     getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
     getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
     getWidth(): number;
-    isInFlowField(point: IPointZ): boolean;
+    isInFlowField(point: IVector3): boolean;
     isPlayerInFlowField(player: IPlayer): boolean;
     reset(): void;
     setDelegate(delegate: DebugRendererDelegate): void;

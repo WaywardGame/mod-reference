@@ -5,7 +5,7 @@ import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap }
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
 import IPlayer from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export default class Item implements IItem, IContainer, IContainable, IUnserializedCallback {
     book: BookType;
     containedItems: IItemArray;
@@ -50,7 +50,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
-    getLocation(): IPointZ | undefined;
+    getLocation(): IVector3 | undefined;
     dropInLava(player: IPlayer, x?: number, y?: number): void;
     dropInWater(human: IBaseHumanEntity, x?: number, y?: number): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;

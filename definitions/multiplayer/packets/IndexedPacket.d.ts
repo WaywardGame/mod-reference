@@ -3,7 +3,7 @@ import { IDoodad } from "doodad/IDoodad";
 import { IContainer, IItem } from "item/IItem";
 import BasePacket from "multiplayer/packets/BasePacket";
 import { INPC } from "npc/INPC";
-import { IPoint } from "utilities/math/IPoint";
+import { IVector2 } from "utilities/math/IVector";
 export default abstract class IndexedPacket extends BasePacket {
     private _index;
     private _nextIndex;
@@ -28,8 +28,8 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedString(value?: string): void;
     protected readIndexedStringArray(): string[] | undefined;
     protected writeIndexedStringArray(value?: string[]): void;
-    protected readIndexedPoint(): IPoint | undefined;
-    protected writeIndexedPoint(value?: IPoint): void;
+    protected readIndexedPoint(): IVector2 | undefined;
+    protected writeIndexedPoint(value?: IVector2): void;
     protected readIndexedContainer(): IContainer | undefined;
     protected writeIndexedContainer(value?: IContainer): void;
     protected readIndexedCreature(): ICreature | undefined;

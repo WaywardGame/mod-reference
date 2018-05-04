@@ -1,4 +1,4 @@
-import Vec2 = TSM.vec2;
+import Vec2 from "utilities/math/Vector2";
 export declare class TerrainTileInfo {
     q1TopLeft: Vec2;
     q1TopRight: Vec2;

@@ -1,4 +1,4 @@
-import Vec2 = TSM.vec2;
+import Vec2 from "utilities/math/Vector2";
 export interface ISpriteInfo {
     texCoord: Vec2;
     texSize: number;

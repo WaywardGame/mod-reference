@@ -5,7 +5,7 @@ import { DoodadType, GrowingStage, IModdable, IRGB, ItemQuality, SfxType, SkillT
 import { IContainer } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { ITileEvent } from "tile/ITileEvent";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export interface ITerrainDescription extends IModdable {
     name?: string;
     passable?: boolean;
@@ -53,7 +53,7 @@ export interface ITileOld {
 export interface ITileArray {
     [index: number]: ITile;
 }
-export declare type ITileContainer = IContainer & IPointZ;
+export declare type ITileContainer = IContainer & IVector3;
 export interface ITileData {
     type: TerrainType;
     minDur?: number;

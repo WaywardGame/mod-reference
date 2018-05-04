@@ -10,7 +10,7 @@ import { IExploreMap } from "renderer/IExploreMap";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export interface IPlayer extends IBaseHumanEntity {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
@@ -44,7 +44,7 @@ export interface IPlayer extends IBaseHumanEntity {
     revealedItems: {
         [index: number]: boolean;
     };
-    spawnPoint: IPointZ | undefined;
+    spawnPoint: IVector3 | undefined;
     tamedCreatures: number[];
     travelData: IPlayerTravelData | undefined;
     turns: number;
@@ -93,7 +93,7 @@ export interface IPlayer extends IBaseHumanEntity {
     setId(id: number): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setup(completedMilestones: number): void;
-    setPosition(point: IPointZ): void;
+    setPosition(point: IVector3): void;
     setZ(z: number): void;
     staminaCheck(): boolean;
     tick(isPassTurn?: boolean): void;

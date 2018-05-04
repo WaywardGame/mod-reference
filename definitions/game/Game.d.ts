@@ -1,4 +1,3 @@
-import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
@@ -18,7 +17,8 @@ import { ISaveInfo } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
-import { IPoint, IPointZ } from "utilities/math/IPoint";
+import { IVector2, IVector3 } from "utilities/math/IVector";
+import Vec2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
 export default class Game extends Emitter implements IGame {
     readonly interval: number;
@@ -40,11 +40,11 @@ export default class Game extends Emitter implements IGame {
     playing: boolean;
     realTimeNextTick: number;
     saveClear: boolean;
-    spawnCoords: IPointZ;
+    spawnCoords: IVector3;
     tile: ITileArray;
     updateFieldOfView: boolean;
     updateRender: boolean;
-    contaminatedWater: IPointZ[];
+    contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;
     creatures: SaferArray<ICreature>;
     creatureSpawnTimer: number;
@@ -104,7 +104,7 @@ export default class Game extends Emitter implements IGame {
     checkForHiddenMob(human: IBaseHumanEntity, x: number, y: number, z: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     getWrappedCoord(x: number): number;
-    getTileFromPoint(point: IPointZ): ITile;
+    getTileFromPoint(point: IVector3): ITile;
     getTile(x: number, y: number, z: number): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
@@ -187,7 +187,7 @@ export default class Game extends Emitter implements IGame {
     getName(object: IItem | ICreature | IDoodad | IPlayer | IBaseHumanEntity | ICorpse | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     movementToDirection(x: number, y: number): FacingDirection;
-    directionToMovement(direction: FacingDirection): IPoint;
+    directionToMovement(direction: FacingDirection): IVector2;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
     updateOption(player: IPlayer | undefined, id: string, value: boolean | number): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;

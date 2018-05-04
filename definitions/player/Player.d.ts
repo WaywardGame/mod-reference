@@ -12,7 +12,7 @@ import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
     readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
@@ -38,7 +38,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     revealedItems: {
         [index: number]: boolean;
     };
-    spawnPoint: IPointZ;
+    spawnPoint: IVector3;
     tamedCreatures: number[];
     travelData: IPlayerTravelData | undefined;
     turns: number;
@@ -120,7 +120,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     getInspectHealthMessage(player: IPlayer): IMessagePack;
-    setPosition(point: IPointZ): void;
+    setPosition(point: IVector3): void;
     setZ(z: number): void;
     isLocalPlayer(): boolean;
     isGhost(): boolean;

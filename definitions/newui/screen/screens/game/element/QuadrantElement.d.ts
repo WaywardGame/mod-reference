@@ -49,8 +49,17 @@ export default abstract class QuadrantElement extends StaticElement {
      * Does not emit the event if the quadrant is not changing.
      */
     setQuadrant(quadrant: Quadrant, trigger?: boolean): Promise<void>;
+    /**
+     * The ID is used for `Switch With` context menu options
+     */
     protected abstract getID(): string;
+    /**
+     * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
+     */
     protected abstract getName(): TextOrTranslationData;
     protected getContextMenuDescription(): Description<IOptionDescription>;
+    /**
+     * Returns a new context menu using this element's context menu descriptions
+     */
     private getContextMenu();
 }

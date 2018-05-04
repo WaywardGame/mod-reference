@@ -1,5 +1,5 @@
 import { Message, MessageType } from "language/Messages";
-import { IPoint, IPointZ } from "utilities/math/IPoint";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export declare enum TerrainMask {
     None = 0,
     Type = 536870911,
@@ -1209,10 +1209,10 @@ export interface IObjectDescription {
 export interface IModdable {
     modIndex?: number;
 }
-export interface TatteredMap extends IPointZ {
+export interface TatteredMap extends IVector3 {
     reinitialize?: boolean;
 }
-export interface IInputMovement extends IPoint {
+export interface IInputMovement extends IVector2 {
     moveBind: Bindable;
     direction: FacingDirection;
 }
@@ -1296,7 +1296,7 @@ export declare enum ConnectionState {
     Disconnecting = 32,
     All = 63,
 }
-export interface RequirementInfo extends IPoint, IPointZ {
+export interface RequirementInfo extends IVector2, IVector3 {
     requirementsMet: boolean;
     isLava?: boolean;
 }

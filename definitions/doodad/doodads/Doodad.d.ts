@@ -51,6 +51,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     isEmbers(): boolean;
     getDoodadInfo(): DoodadInfo | undefined;
     canHarvest(): boolean;
+    getResourcesMessage(): Message | undefined;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     getDurabilityMessage(this: IDoodad): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;

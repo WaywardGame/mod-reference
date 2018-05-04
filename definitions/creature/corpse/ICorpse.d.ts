@@ -1,5 +1,5 @@
 import { CreatureType, IModdable, IObject, ItemType, SkillType } from "Enums";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 export interface ICorpseDescription extends IModdable {
     name?: string;
     decay?: number;
@@ -16,7 +16,7 @@ export interface ICorpseResourceDrop {
     item: ItemType;
     chance?: number;
 }
-export interface ICorpse extends IObject<CreatureType>, IPointZ {
+export interface ICorpse extends IObject<CreatureType>, IVector3 {
     decay?: number;
     aberrant?: boolean;
     step?: number;

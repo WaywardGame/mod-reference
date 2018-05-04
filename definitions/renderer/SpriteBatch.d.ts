@@ -1,4 +1,4 @@
-import Vec2 = TSM.vec2;
+import Vec2 from "utilities/math/Vector2";
 export default class SpriteBatch {
     private static shaderProgram;
     private static readonly spriteLength;

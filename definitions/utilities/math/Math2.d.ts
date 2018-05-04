@@ -1,17 +1,22 @@
-import { Bound3 } from "utilities/math/Bound3";
-import { IPoint, IPointZ } from "utilities/math/IPoint";
 declare module Math2 {
-    function copyPointZ(pointZ: IPointZ | undefined): IPointZ | undefined;
-    function clamp255(value: number): number;
-    function clamp01(value: number): number;
-    function clamp(value: number, min: number, max: number): number;
+    /**
+     * Clamps the given number in the given range
+     */
+    function clamp(min: number, max: number, value: number): number;
+    /**
+     * Clamps the given number in the range 0-1
+     */
+    const clamp1: (_2: number) => number;
+    /**
+     * Clamps the given number in the range 0-255
+     */
+    const clamp255: (_2: number) => number;
     function roundNumber(num: number, dec: number): number;
+    /**
+     * Return a number between `from` and `to`, using the decimal `t`
+     *
+     * Example: `lerp(1, 2, .5): 1.5`
+     */
     function lerp(from: number, to: number, t: number): number;
-    function easeInQuad(time: number, start: number, change: number, duration: number): number;
-    function easeInCubic(time: number, start: number, change: number, duration: number): number;
-    function isInBound2Wrapped(bound: Bound3, x: number, y: number): boolean;
-    function isInBound3Wrapped(bound: Bound3, x: number, y: number, z: number): boolean;
-    function isDistanceBetweenLessThan(value: number, a: IPoint, b: IPoint): boolean;
-    function distanceBetween(a: IPoint, b: IPoint): number;
 }
 export default Math2;

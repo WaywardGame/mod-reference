@@ -4,7 +4,7 @@ import { IContainer, IItem } from "item/IItem";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
 import { INPC } from "npc/INPC";
-import { IPoint } from "utilities/math/IPoint";
+import { IVector2 } from "utilities/math/IVector";
 export default abstract class BasePacket {
     protected static registrarId: number;
     "constructor": typeof BasePacket;
@@ -38,8 +38,8 @@ export default abstract class BasePacket {
     protected writeString(value: string): void;
     protected readStringArray(): string[];
     protected writeStringArray(value: string[]): void;
-    protected readPoint(): IPoint;
-    protected writePoint(value: IPoint): void;
+    protected readPoint(): IVector2;
+    protected writePoint(value: IVector2): void;
     protected readContainer(): IContainer;
     protected writeContainer(value: IContainer): void;
     protected readCreature(): ICreature | undefined;

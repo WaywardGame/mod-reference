@@ -1,5 +1,5 @@
-import Vec2 = TSM.vec2;
 import { ItemType, StatType } from "Enums";
+import Vec2 from "utilities/math/Vector2";
 export interface INotifier {
     addItem(x: number, y: number, z: number, type: ItemType): void;
     addStat(x: number, y: number, z: number, type: StatType, value: number): void;

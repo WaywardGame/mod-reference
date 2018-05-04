@@ -4,7 +4,7 @@ import StatFactory from "entity/StatFactory";
 import { FacingDirection, FireType, MoveType, SfxType, StatusType } from "Enums";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
-import { IPoint, IPointZ } from "utilities/math/IPoint";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class BaseEntity extends Emitter implements IBaseEntity {
     id: number;
     renamed?: string;
@@ -16,7 +16,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     moveType: MoveType | undefined;
     anim: number;
     stopNextMovement: boolean;
-    direction: IPoint;
+    direction: IVector2;
     facingDirection: FacingDirection;
     stats: IStats;
     status: IStatus;
@@ -45,8 +45,8 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     setStatus(status: StatusType, to: boolean): void;
     statuses(): IterableIterator<StatusType>;
     getTile(): ITile;
-    getPoint(): IPointZ;
-    getFacingPoint(): IPointZ;
+    getPoint(): IVector3;
+    getFacingPoint(): IVector3;
     getFacingTile(): ITile;
     getMovementProgress(): number;
     getMovementFinishTime(): number | undefined;

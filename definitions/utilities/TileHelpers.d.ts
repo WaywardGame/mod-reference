@@ -1,6 +1,6 @@
 import { TerrainType } from "Enums";
 import { ITile } from "tile/ITerrain";
-import { IPointZ } from "utilities/math/IPoint";
+import { IVector3 } from "utilities/math/IVector";
 declare module TileHelpers {
     const maskGfx = 31;
     const maskType = 4064;
@@ -18,16 +18,16 @@ declare module TileHelpers {
     function setTilled(tile: ITile, value: boolean): void;
     function setTilledRaw(data: number, value: number): number;
     function getTileVariation(x: number, y: number): number;
-    function findMatchingTile(start: IPointZ, isMatchingTile?: (point: IPointZ, tile: ITile) => boolean, maxTilesChecked?: number, canVisitTile?: (point: IPointZ, tile: ITile) => boolean): IPointZ | undefined;
+    function findMatchingTile(start: IVector3, isMatchingTile?: (point: IVector3, tile: ITile) => boolean, maxTilesChecked?: number, canVisitTile?: (point: IVector3, tile: ITile) => boolean): IVector3 | undefined;
     /**
      * Check is a tile is open
      */
-    function isOpenTile(point: IPointZ, tile: ITile): boolean;
+    function isOpenTile(point: IVector3, tile: ITile): boolean;
     /**
      * Check if a tile is a suitable spawn point
      */
-    function isSuitableSpawnPointTile(point: IPointZ, tile: ITile): boolean;
-    function getAdjacentTiles(point: IPointZ): ITile[];
-    function getSuitableSpawnPoint(): IPointZ;
+    function isSuitableSpawnPointTile(point: IVector3, tile: ITile): boolean;
+    function getAdjacentTiles(point: IVector3): ITile[];
+    function getSuitableSpawnPoint(): IVector3;
 }
 export default TileHelpers;

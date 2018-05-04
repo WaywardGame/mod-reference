@@ -1,4 +1,3 @@
-import Vec2 = TSM.vec2;
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
@@ -19,7 +18,8 @@ import { ISaveInfo } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
-import { IPoint, IPointZ } from "utilities/math/IPoint";
+import { IVector2, IVector3 } from "utilities/math/IVector";
+import Vec2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
 export interface IGame extends Emitter {
     interval: number;
@@ -55,8 +55,8 @@ export interface IGame extends Emitter {
     updateRender: boolean;
     fillCount: number;
     fillTile: boolean[][];
-    spawnCoords: IPointZ;
-    contaminatedWater: IPointZ[];
+    spawnCoords: IVector3;
+    contaminatedWater: IVector3[];
     fadeInAmount: number;
     time: TimeManager;
     absoluteTime: number;
@@ -89,7 +89,7 @@ export interface IGame extends Emitter {
     consumeWaterTile(x: number, y: number, z: number): void;
     damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo): number | undefined;
     deletePlayer(plys: IPlayer[], identifier: string): void;
-    directionToMovement(direction: FacingDirection): IPoint;
+    directionToMovement(direction: FacingDirection): IVector2;
     displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     doLavaEvents(x: number, y: number, z: number): void;
     enableFlowFieldDebug(): void;
@@ -129,7 +129,7 @@ export interface IGame extends Emitter {
     getTactics(): number;
     getTile(x: number, y: number, z: number): ITile;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
-    getTileFromPoint(point: IPointZ): ITile;
+    getTileFromPoint(point: IVector3): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
     getValidPlayerName(name: string | undefined): string;
     getWrappedCoord(x: number): number;
@@ -206,7 +206,7 @@ export interface IPlayerOptions {
     id?: number;
     identifier?: string;
     options?: IOptions;
-    position?: IPointZ;
+    position?: IVector3;
     character: ICharacter;
     completedMilestones?: number;
 }

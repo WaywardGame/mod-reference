@@ -1,7 +1,7 @@
-import Vec2 = TSM.vec2;
 import IWorldRenderer from "renderer/IWorldRenderer";
 import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
+import Vec2 from "utilities/math/Vector2";
 export default class WorldRenderer implements IWorldRenderer {
     private readonly gl;
     private static textureShaderProgram;

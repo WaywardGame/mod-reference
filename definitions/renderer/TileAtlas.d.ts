@@ -1,8 +1,8 @@
-import Vec2 = TSM.vec2;
 import DoodadInfo from "doodad/DoodadInfo";
 import { TerrainType } from "Enums";
 import ITileAtlas from "renderer/ITileAtlas";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
+import Vec2 from "utilities/math/Vector2";
 export declare enum TileType {
     Q2TopRightQ1TopLeft = 0,
     Q2TopLeft = 1,
