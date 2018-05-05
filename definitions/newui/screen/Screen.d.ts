@@ -54,5 +54,6 @@ export default abstract class Screen extends Component implements IScreen {
      * Set the context menu for this element
      */
     setContextMenu(generator: () => IContextMenu): void;
+    removeContextMenu(contextMenu?: IContextMenu): void;
     protected bindLoop(api: BindCatcherApi): Promise<boolean | Bindable>;
 }

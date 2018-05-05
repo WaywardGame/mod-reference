@@ -103,6 +103,7 @@ export interface UiApi<U extends IScreen = IScreen> extends Emitter {
     storeElements(...elements: Array<HTMLElement | IComponent>): void;
     playActivateSound(): void;
     playSelectSound(): void;
+    getScale(): number;
     setScale(scale: number): void;
     getMaximumScale(): number;
     setDialogOpacity(opacity: number): void;

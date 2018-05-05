@@ -185,7 +185,7 @@ export interface IComponent extends Emitter {
     collect<T>(collector: (component: IComponent) => T): T;
 }
 export interface IContextMenu<OptionType extends number | string = number | string> extends IComponent {
-    setPosition(x: number, y: number): this;
+    setPosition(x: number, y: number, right?: boolean): this;
 }
 export interface IComponentOptions {
     visible?: boolean;

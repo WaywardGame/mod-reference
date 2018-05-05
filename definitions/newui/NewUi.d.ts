@@ -111,18 +111,19 @@ export default class Ui extends Emitter implements UiApi<Screen> {
      * @param fullscreen Whether or not fullscreen is enabled
      */
     toggleFullscreen(fullscreen?: boolean): void;
+    getScale(): number;
     /**
      * @param save Whether or not to save the new scale into options. Defaults to true.
      */
     setScale(scale: number, save?: boolean): void;
     /**
-     * @param save Whether or not to save the new scale into options. Defaults to true.
-     */
-    setDialogOpacity(opacity?: number, save?: boolean): void;
-    /**
      * Returns the maximum scale the screen size will allow (multiplier)
      */
     getMaximumScale(): number;
+    /**
+     * @param save Whether or not to save the new scale into options. Defaults to true.
+     */
+    setDialogOpacity(opacity?: number, save?: boolean): void;
     /**
      * Sets the ui scale to the size configured in the options, capped by the maximum the screen size allows
      */
