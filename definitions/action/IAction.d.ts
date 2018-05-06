@@ -1,9 +1,9 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { ActionType, AttackType, Delay, EquipType, FacingDirection, IMessagePack, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
+import { ActionType, AttackType, Delay, EquipType, FacingDirection, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
-import { Message } from "language/Messages";
+import { IMessagePack, Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
@@ -75,7 +75,6 @@ export interface IActionResult {
     milestone?: MilestoneType;
     soundEffect?: IActionResultSoundEffect | SfxType;
     messages: ActionMessages;
-    highlight?: string;
 }
 export interface IActionUpdateView {
     updateFov: boolean;

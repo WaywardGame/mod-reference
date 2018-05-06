@@ -1,7 +1,7 @@
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, SortType } from "Enums";
+import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { Message, MessageType } from "language/Messages";
+import { IMessagePack, Message, MessageType } from "language/IMessages";
 import { MenuId } from "newui/screen/screens/menu/element/IMenu";
 import { IPlayer } from "player/IPlayer";
 import { IPropSerializable } from "save/ISerializer";
@@ -70,7 +70,6 @@ export interface IUi extends IPropSerializable, Emitter {
     isInGameScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
-    refreshAttributes(): void;
     loadQuickSlots(): void;
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
@@ -116,7 +115,19 @@ export interface IUi extends IPropSerializable, Emitter {
     shouldRefreshMods(): boolean;
     setObjectUrl(objectUrl: string): void;
     onGameEnd(showDeath: boolean): void;
-    highlight(selector?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;
+    /**
+     * Highlight any number of elements, replacing any other previous "unique highlight" elements, if they
+     * are still flashing
+     * @param iterations How many times the element should flash
+     * @param selectors A list of selectors and elements that should be highlighted
+     */
+    highlightUnique(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
+    /**
+     * Highlight any number of elements
+     * @param iterations How many times the element should flash
+     * @param selectors A list of selectors and elements that should be highlighted
+     */
+    highlight(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;

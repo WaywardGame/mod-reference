@@ -1,6 +1,6 @@
 import { ActionType, BookType, CreatureType, DoodadType, DoodadTypeGroup, GrowingStage, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
 import { Dictionary, IActionDictionary, IBookDictionary, ICreatureDictionary, IDoodadDictionary, IGrowthDictionary, IHintDictionary, IItemDictionary, ILanguage, IMessageDictionary, IMilestoneDictionary, IOnEquipDictionary, IPressNameDictionary, ISkillDictionary, ITerrainDictionary, ITileEventDictionary, ITranslationArray, IUiDictionary, UiTranslation } from "language/ILanguage";
-import { Message } from "language/Messages";
+import { Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";
 import { HintType } from "ui/IHint";

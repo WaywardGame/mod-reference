@@ -2,7 +2,7 @@ import DoodadInfo from "doodad/DoodadInfo";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
 import { IContainer, IItem, IItemArray, IItemLegendary } from "item/IItem";
-import { Message } from "language/Messages";
+import { Message } from "language/IMessages";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";

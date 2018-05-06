@@ -1,5 +1,5 @@
 import { ActionType, BookType, CreatureType, DoodadType, DoodadTypeGroup, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
-import { Message } from "language/Messages";
+import { Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
 import { TileEventType } from "tile/ITileEvent";
 import { HintType } from "ui/IHint";

@@ -1,4 +1,4 @@
-import IBaseEntity from "entity/IBaseEntity";
+import IBaseEntity, { IStatChangeInfo } from "entity/IBaseEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
 import Component from "newui/element/Component";
 import { IComponentOptions } from "newui/element/IComponent";
@@ -38,7 +38,7 @@ export declare abstract class StatElement extends Component {
      *
      * Should be used for both `value` & `max` changing.
      */
-    protected onStatChange(_?: any, stat?: IStat, oldValue?: number): void;
+    protected onStatChange(_?: any, stat?: IStat, oldValue?: number, info?: IStatChangeInfo): void;
     /**
      * Event handler for when the stat tooltip is shown.
      */

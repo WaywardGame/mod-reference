@@ -1,5 +1,5 @@
 import { Dictionary, UiTranslation } from "language/ILanguage";
-import { MessageType } from "language/Messages";
+import { Message } from "language/IMessages";
 import { ISplit } from "utilities/string/Interpolate";
 export interface ITranslationData {
     dictionary: Dictionary;
@@ -14,7 +14,7 @@ export declare type SplitTranslationString = Translation<ISplit[]> & ISplit[];
 export default class Translation<R extends string | ISplit[] = string> {
     static provider: ILanguageEntryProvider;
     static ui: (entry: string | UiTranslation) => TranslationString;
-    static message: (entry: string | MessageType) => TranslationString;
+    static message: (entry: string | Message) => TranslationString;
     private readonly translationData;
     private readonly baseTranslation;
     private colorsAllowed;

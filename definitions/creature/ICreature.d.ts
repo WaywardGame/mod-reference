@@ -1,8 +1,9 @@
 import IBaseEntity from "entity/IBaseEntity";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { AiType, EntityType } from "entity/IEntity";
-import { CreatureType, DamageType, Defense, IMessagePack, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
+import { CreatureType, DamageType, Defense, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
 import { IItem } from "item/IItem";
+import { IMessagePack } from "language/IMessages";
 import { IPlayer } from "player/IPlayer";
 export interface ICreature extends IBaseEntity, IObject<CreatureType> {
     entityType: EntityType.Creature;

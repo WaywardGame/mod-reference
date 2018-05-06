@@ -2,9 +2,9 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Bindable, Delay, EquipType, FacingDirection, IInspect, IMessagePack, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
+import { Bindable, Delay, EquipType, FacingDirection, IInspect, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
-import { Message } from "language/Messages";
+import { IMessagePack, Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
 import { IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
 import { IExploreMap } from "renderer/IExploreMap";
@@ -167,7 +167,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      * 3. When hunger > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      * 4. When thirst > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      */
-    private onStatChange(_, stat, oldValue, reason);
+    private onStatChange(_, stat, oldValue, info);
     private restTick();
     private showStatsHint();
     private staminaSyncCheck();

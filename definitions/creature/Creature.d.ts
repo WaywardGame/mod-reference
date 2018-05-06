@@ -1,8 +1,9 @@
 import { ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature";
 import BaseEntity from "entity/BaseEntity";
 import { AiType, EntityType } from "entity/IEntity";
-import { CreatureType, IMessagePack, ItemType, MoveType, SfxType } from "Enums";
+import { CreatureType, ItemType, MoveType, SfxType } from "Enums";
 import { IItem } from "item/IItem";
+import { IMessagePack } from "language/IMessages";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 export default class Creature extends BaseEntity implements ICreature, IUnserializedCallback {

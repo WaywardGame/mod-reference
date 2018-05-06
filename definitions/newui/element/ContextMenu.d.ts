@@ -17,13 +17,14 @@ export default class ContextMenu<OptionType extends number | string = number | s
     private submenuOption;
     private readonly descriptions;
     private readonly options;
-    constructor(uiApi: UiApi, descriptions: Description<IOptionDescription>);
+    constructor(uiApi: UiApi, ...descriptions: Array<[OptionType, IOptionDescription]>);
     addAllDescribedOptions(): this;
     addOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     disableOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     removeOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     setPosition(x: number, y: number, right?: boolean): this;
     remove(): Promise<void>;
+    private getDescription(id);
 }
 export declare class ContextMenuOption extends Button {
     private submenu?;

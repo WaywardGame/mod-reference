@@ -1,6 +1,6 @@
-import { ActionType, Bindable, DialogId, EquipType, FacingDirection, IMessagePack, ItemType, SortType } from "Enums";
+import { ActionType, Bindable, DialogId, EquipType, FacingDirection, ItemType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
-import { Message } from "language/Messages";
+import { IMessagePack, Message } from "language/IMessages";
 import { BindCatcherApi, IBinding } from "newui/BindingManager";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
@@ -93,7 +93,6 @@ export default class InGameScreen extends BaseScreen {
     private messageOverlayCount;
     private messageLoadIndex;
     private worldTooltip;
-    private lastText;
     private lastStats;
     selector(): string;
     bindElements(): void;
@@ -130,8 +129,6 @@ export default class InGameScreen extends BaseScreen {
     getMovementDirection(mouseX: number, mouseY: number): FacingDirection;
     canUseHotkeys(): boolean;
     refreshStats(): void;
-    refreshAttributes(): void;
-    updateTextIfChanged(id: TextElementId, element: JQuery, text: string): void;
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;

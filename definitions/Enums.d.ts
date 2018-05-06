@@ -1,4 +1,4 @@
-import { Message, MessageType } from "language/Messages";
+import { IMessagePack } from "language/IMessages";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export declare enum TerrainMask {
     None = 0,
@@ -58,7 +58,6 @@ export declare enum DamageType {
     Fire = 8,
     True = 16,
 }
-export declare function fullDamageType(damageType: DamageType): string;
 export declare class Resistances {
     [index: number]: number;
     constructor(...args: any[]);
@@ -1023,9 +1022,6 @@ export declare enum Command {
     Unban = 6,
     Pause = 7,
 }
-export declare const equipTypeToMessage: Message[];
-export declare const recipeLevelToMessage: Message[];
-export declare const damageTypeToMessage: Message[];
 export declare enum PlayerState {
     None = 0,
     Dead = 1,
@@ -1219,11 +1215,6 @@ export interface IInputMovement extends IVector2 {
 export interface ISeeds {
     base: number | string;
     saved: number;
-}
-export interface IMessagePack {
-    message?: Message | string;
-    type?: MessageType;
-    args?: string | number | any[];
 }
 export interface IInspect {
     type?: InspectType;

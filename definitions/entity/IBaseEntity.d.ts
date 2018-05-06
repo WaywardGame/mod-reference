@@ -63,29 +63,31 @@ export default interface IBaseEntity extends IVector3, Emitter {
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
      */
-    setStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason): boolean;
+    setStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason | IStatChangeInfo): boolean;
     /**
      * Reduces the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
      * @param stat The `Stat` to reduce.
      * @param amount The amount to reduce by.
+     * @param reason Why this stat is changing.
      *
      * An alias for `increaseStat`, negating the given amount.
      *
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
      */
-    reduceStat(stat: Stat | IStat, amount: number): boolean;
+    reduceStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason | IStatChangeInfo): boolean;
     /**
      * Increases the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
      * @param stat The `Stat` to increase.
      * @param amount The amount to increase by.
+     * @param reason Why this stat is changing.
      *
-     * An alias for `setStat(stat, stat.value + amount)`
+     * An alias for `setStat(stat, stat.value + amount, reason)`
      *
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
      */
-    increaseStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason): boolean;
+    increaseStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason | IStatChangeInfo): boolean;
     /**
      * Change the bonus for a stat.
      * @param stat The `Stat` to set the bonus of.
@@ -93,7 +95,7 @@ export default interface IBaseEntity extends IVector3, Emitter {
      *
      * Triggers `EntityEvent.StatBonusChanged`, then `EntityEvent.StatChanged`
      */
-    setStatBonus(stat: Stat | IStat, bonus: number): void;
+    setStatBonus(stat: Stat | IStat, bonus: number, info?: IStatChangeInfo): void;
     /**
      * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
      * @param stat The `Stat` to set.
@@ -145,12 +147,19 @@ export default interface IBaseEntity extends IVector3, Emitter {
     addProperty(property: Property, value: any): void;
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
-    on(event: EntityEvent.StatChanged, handler: (_: this, stat: IStat, oldValue: number, reason: StatChangeReason) => any): this;
+    on(event: EntityEvent.StatChanged, handler: (_: this, stat: IStat, oldValue: number, info: IStatChangeInfo) => any): this;
     on(event: EntityEvent.StatTimerChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
     on(event: EntityEvent.StatMaxChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
     on(event: EntityEvent.StatusChange, handler: (_: this, status: StatusType, hasStatus: boolean) => any): this;
 }
 export declare enum EntityEvent {
+    /**
+     * Called when a stat changes, for any reason
+     * @param emitter The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
+     */
     StatChanged = 0,
     StatTimerChanged = 1,
     StatMaxChanged = 2,
@@ -161,7 +170,33 @@ export declare enum StatChangeReason {
     Normal = 0,
     ChangeTimer = 1,
     BonusChanged = 2,
-    Healed = 3,
+}
+export interface IStatChangeInfo<T = any> {
+    /**
+     * Uses `StatChangeReason.Normal` when not provided
+     */
+    reason?: StatChangeReason;
+    /**
+     * Whether this change is "important" (for example, used when actions affect stats)
+     */
+    important?: boolean;
+    /**
+     * Any other data
+     */
+    extra?: T;
+}
+export declare module IStatChangeInfo {
+    /**
+     * Creates a stat change info object
+     * @param important Marked as "important" if true
+     */
+    function get<T = any>(important: boolean): IStatChangeInfo<T>;
+    /**
+     * Creates a stat change info object
+     * @param reasonOrInfo A `StatChangeReason`, or an already created `IStatChangeInfo` object.
+     * @param important Whether this change should be marked as important
+     */
+    function get<T = any>(reasonOrInfo: StatChangeReason | IStatChangeInfo, important?: boolean): IStatChangeInfo<T>;
 }
 export declare type IStatus = Writable<{
     [key in keyof typeof StatusType]: boolean;

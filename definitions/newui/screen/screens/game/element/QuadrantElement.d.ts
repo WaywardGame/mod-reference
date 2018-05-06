@@ -57,7 +57,7 @@ export default abstract class QuadrantElement extends StaticElement {
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     protected abstract getName(): TextOrTranslationData;
-    protected getContextMenuDescription(): Description<IOptionDescription>;
+    protected getContextMenuDescription(): Array<[number, IOptionDescription]>;
     /**
      * Returns a new context menu using this element's context menu descriptions
      */

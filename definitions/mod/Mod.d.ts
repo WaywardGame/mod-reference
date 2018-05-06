@@ -3,7 +3,7 @@ import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { Message, MessageType } from "language/Messages";
+import { Message, MessageType } from "language/IMessages";
 import BaseMod from "mod/BaseMod";
 import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer from "player/IPlayer";

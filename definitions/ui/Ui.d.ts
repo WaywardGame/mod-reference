@@ -1,9 +1,9 @@
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle } from "Enums";
+import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { Message, MessageType } from "language/Messages";
+import { IMessagePack, Message, MessageType } from "language/IMessages";
 import { MenuId } from "newui/screen/screens/menu/element/IMenu";
 import { IPlayer } from "player/IPlayer";
 import { HintType } from "ui/IHint";
@@ -38,7 +38,6 @@ export default class Ui extends Emitter implements IUi {
     isInGameScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
-    refreshAttributes(): void;
     loadQuickSlots(): void;
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
@@ -85,7 +84,8 @@ export default class Ui extends Emitter implements IUi {
     setObjectUrl(objectUrl: string): void;
     onGameEnd(): void;
     onUpdateDirection(): void;
-    highlight(selectors?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;
+    highlightUnique(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
+    highlight(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
     toggleUIDisplay(): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;

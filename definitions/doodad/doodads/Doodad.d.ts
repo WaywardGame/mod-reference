@@ -3,7 +3,7 @@ import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, ItemType, SentenceCaseStyle } from "Enums";
 import { IItemArray } from "item/IItem";
-import { Message } from "language/Messages";
+import { Message } from "language/IMessages";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
