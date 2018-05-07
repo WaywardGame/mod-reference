@@ -16,11 +16,16 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getTile(): ITile;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
-    isReadyToGather(): boolean;
+    /**
+     * Can the doodad be gathered from in its current form?
+     */
+    canGather(): boolean;
+    /**
+     * Can the doodad be gathered from at all?
+     */
     isGatherable(): boolean;
     isEmbers(): boolean;
     canHarvest(): boolean;
-    getResourcesMessage(): Message | undefined;
     canPickup(player: IPlayer): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;

@@ -32,9 +32,9 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     } : undefined);
     getStatInternal(stat: Stat): IStatBase;
     getStatValue(stat: Stat | IStat): number;
-    setStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason | IStatChangeInfo): boolean;
-    reduceStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason | IStatChangeInfo): boolean;
-    increaseStat(stat: Stat | IStat, amount: number, reason?: StatChangeReason | IStatChangeInfo): boolean;
+    setStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    reduceStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    increaseStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     setStatBonus(stat: Stat | IStat, bonus: number, info?: IStatChangeInfo): void;
     getStatMax(stat: Stat | IStat): number | undefined;
     setStatMax(stat: Stat | IStat, amount: number): void;

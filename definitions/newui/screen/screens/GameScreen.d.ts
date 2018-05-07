@@ -1,4 +1,5 @@
 import { Bindable } from "Enums";
+import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import { UiApi } from "newui/INewUi";
 import Screen from "newui/screen/Screen";
@@ -6,7 +7,7 @@ import MenuBar from "newui/screen/screens/game/static/MenuBar";
 import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
-export default class GameScreen extends Screen {
+export default class GameScreen extends Screen implements IHookHost {
     menuBar: MenuBar;
     stats: Stats;
     quickslots: Quickslots;
@@ -14,6 +15,7 @@ export default class GameScreen extends Screen {
     private readonly quadrantMap;
     constructor(uiApi: UiApi);
     create(): void;
+    onGameStart(): void;
     protected bindLoop(api: BindCatcherApi): Promise<boolean | Bindable>;
     /**
      * Adds a quadrant element to the screen.

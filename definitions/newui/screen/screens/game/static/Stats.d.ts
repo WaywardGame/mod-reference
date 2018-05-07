@@ -5,8 +5,9 @@ import { IPlayer } from "player/IPlayer";
 export default class Stats extends QuadrantElement {
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
-    private readonly player;
+    private player;
     constructor(uiApi: UiApi, player: IPlayer);
+    setPlayer(player: IPlayer): void;
     protected getID(): string;
     protected getName(): UiTranslation;
     private refresh();

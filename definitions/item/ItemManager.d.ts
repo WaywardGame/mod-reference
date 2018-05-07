@@ -6,6 +6,7 @@ import { Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
+import { IVector3 } from "utilities/math/IVector";
 export default class ItemManager implements IItemManager {
     private readonly worldContainer;
     private cachedWeights;
@@ -59,6 +60,7 @@ export default class ItemManager implements IItemManager {
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): IItem | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
+    getAdjacentContainers(point: IVector3): IContainer[];
     isContainableInAdjacentContainer(player: IPlayer, containable: IContainable): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;

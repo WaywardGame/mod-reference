@@ -1,5 +1,5 @@
 import HookCallFactory from "mod/HookCallFactory";
-import { Hook } from "mod/IMod";
+import { Hook } from "mod/IHookManager";
 declare const descriptions: {
     [K in Hook]: HookCallFactory<K>;
 };

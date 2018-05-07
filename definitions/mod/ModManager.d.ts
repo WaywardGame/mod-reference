@@ -1,15 +1,15 @@
 import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
-import { Hook, IModConfig } from "mod/IMod";
+import { Hook } from "mod/IHookManager";
+import { IModConfig } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
-import { CanLoadState, ICachedHook, ICanLoadInfo, IModManager } from "mod/IModManager";
+import { CanLoadState, ICanLoadInfo, IModManager } from "mod/IModManager";
 import Log from "utilities/Log";
 export default class ModManager implements IModManager {
     private readonly mods;
     private modsToSetup;
     private readonly internalMods;
     private readonly internalModsElectron;
-    private cachedHooks;
     private readonly onLanguageLoadCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
@@ -25,8 +25,6 @@ export default class ModManager implements IModManager {
     getModFromIndex(i: number): IModInfo;
     getEnabledMods(): number[];
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
-    getModsWithHook(hook: Hook): IterableIterator<number>;
-    getCachedHook(hook: Hook): ICachedHook | undefined;
     /**
      * @deprecated
      * @see `getHook(hookName).call(...args)`
@@ -79,25 +77,5 @@ export default class ModManager implements IModManager {
     setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void, unloaded?: boolean): boolean;
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
-    /**
-     * Caches the hooks used by each mod, sorted by priority.
-     *
-     * 1. For every valid mod, cache the hooks for that mod using `cacheHooksForMod`
-     * 2. For all cached hooks, sort the cached list of priorities that all the cached hook methods use.
-     */
-    cacheHooks(): void;
-    /**
-     * Cache the hooks for a given mod.
-     *
-     * 1. If the mod doesn't have an instance, return.
-     * 2. Filter all the registered hooks on the mod by whether they're actually hook methods. Log errors for
-     *    any invalid methods.
-     * 3. Filter by check if the mod is loaded or enabled and the hook is global.
-     *   - This is to verify that this hook should be cached right now. Global hooks are always cached if the mod
-     * 	   is enabled, while non-global hooks are only cached if the mod is loaded (which is only if you're in-game)
-     * 4. Cache each hook by priority.
-     * 5. Log registered hooks, formatted as `hookName[priority]`
-     */
-    private cacheHooksForMod(index);
     private onLanguageLoad(languageName, callback);
 }

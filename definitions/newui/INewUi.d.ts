@@ -135,4 +135,4 @@ export interface LoadMenuArgs {
     _wentBack: boolean;
 }
 export declare const minimumDialogOpacity = 0;
-export declare const defaultDialogOpacity = 50;
+export declare const defaultDialogOpacity = 80;

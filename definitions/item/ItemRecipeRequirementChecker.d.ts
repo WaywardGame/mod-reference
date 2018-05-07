@@ -14,12 +14,18 @@ export default class ItemRecipeRequirementChecker {
     constructor(player: IPlayer, recipe: IRecipe, trackItems: boolean);
     amountNeededForComponent(componentIndex: number): number;
     requirementsMet(): boolean;
+    isDiscovered(): boolean;
+    /**
+     * Looks inside the players inventory and around adjacent opened doodads
+     * @param player The player
+     * @returns true if the recipe's requirements are satisfied
+     */
+    process(player: IPlayer, allowProtectedCraftingItems?: boolean): boolean;
     /**
      * Looks inside the container and its subcontainers.
      * @param container The container
      * @returns true if the recipe's requirements are satisfied by items in the container.
      */
-    process(container: IContainer, allowProtectedCraftingItems?: boolean): boolean;
-    isDiscovered(): boolean;
+    processContainer(container: IContainer, allowProtectedCraftingItems?: boolean): boolean;
     private processItem(item);
 }

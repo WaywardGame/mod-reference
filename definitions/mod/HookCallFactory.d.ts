@@ -1,4 +1,4 @@
-import { Hook } from "mod/IMod";
+import { Hook } from "mod/IHookManager";
 import Mod from "mod/Mod";
 export declare enum ReduceStrategy {
     /**
@@ -23,7 +23,6 @@ export default class HookCallFactory<H extends Hook, R = any> {
     call: Mod[H];
     private readonly hook;
     private resultPredicate?;
-    private mods;
     private baseErrorMessage;
     private defaultValue;
     private reduceStrategy;
@@ -128,5 +127,5 @@ export default class HookCallFactory<H extends Hook, R = any> {
     /**
      * Calls the hook on the given mod, with the given arguments.
      */
-    private callHookOnMod(modIndex);
+    private callHookOnHost(host);
 }

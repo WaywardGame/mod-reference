@@ -46,12 +46,11 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     canPickup(player: IPlayer): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
-    isReadyToGather(): boolean;
+    canGather(): boolean;
     isGatherable(): boolean;
     isEmbers(): boolean;
     getDoodadInfo(): DoodadInfo | undefined;
     canHarvest(): boolean;
-    getResourcesMessage(): Message | undefined;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     getDurabilityMessage(this: IDoodad): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;

@@ -5,12 +5,12 @@ import { Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
+import { IVector3 } from "utilities/math/IVector";
 export interface IItemManager {
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
     checkMilestones(player: IPlayer, item: IItem): void;
     computeContainerWeight(container: IContainer): number;
-    getLegendaryWeightCapacity(container: IContainer): number;
     countItemsInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup | IItemTypeGroup, ignoreItem?: IItem): number;
     craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
@@ -19,6 +19,7 @@ export interface IItemManager {
     decayItems(): boolean;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     generateLookups(): void;
+    getAdjacentContainers(point: IVector3): IContainer[];
     getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
@@ -32,10 +33,11 @@ export interface IItemManager {
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
+    getLegendaryWeightCapacity(container: IContainer): number;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
+    getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
-    getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;

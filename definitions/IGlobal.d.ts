@@ -22,6 +22,7 @@ import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
 import IItemManager from "item/IItemManager";
 import ILanguageManager from "language/ILanguageManager";
+import IHookManager from "mod/IHookManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import NewUi from "newui/NewUi";
@@ -67,6 +68,7 @@ declare global {
 	let fieldOfView: IFieldOfView;
 	let flowFieldManager: IFlowFieldManager;
 	let game: IGame;
+	let hookManager: IHookManager;
 	let itemManager: IItemManager;
 	let languageManager: ILanguageManager;
 	let localPlayer: IPlayer;

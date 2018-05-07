@@ -47,7 +47,7 @@ export default ISaveDataGlobal;
 export interface IOptions {
     alternateContextMenu: boolean;
     alwaysShowMoreInformation: boolean;
-    autoGather: boolean;
+    autoGatherHarvest: boolean;
     autoPickup: boolean;
     bindings: IBindings;
     binds: IBindArray;
@@ -57,7 +57,7 @@ export interface IOptions {
     dialogOpacity: number;
     directionTurnDelay: number;
     dropLocation: DropLocation;
-    dropOnGather: boolean;
+    dropOnGatherHarvest: boolean;
     fontStyle: boolean;
     fullscreen: boolean;
     hideEquippedHeadgear: boolean;

@@ -1,6 +1,6 @@
 import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
-import { Hook } from "mod/IMod";
+import { Hook } from "mod/IHookManager";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
 import Log from "utilities/Log";
 export interface ICanLoadInfo {
@@ -20,21 +20,7 @@ export declare enum CanLoadState {
     IncompatibleVersion = 9,
     DisabledInMultiplayer = 10,
 }
-/**
- * A list of all mods that cache a hook indexed by hook priority.
- */
-export interface ICachedHook {
-    [index: number]: number[];
-    priorities: number[];
-}
-/**
- * A list of all cached hooks indexed by `Hook`
- */
-export declare type ICachedHooks = {
-    [hook in Hook]?: ICachedHook;
-};
 export interface IModManager {
-    cacheHooks(): void;
     canLoad(index: number, fromModsMenu?: boolean): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
     getAuthor(index: number): string;
@@ -104,17 +90,5 @@ export interface IModManager {
      * @see `Mod` or `Hook` for a list of valid hook names.
      */
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
-    /**
-     * Returns an iterable iterator of the mods with a given hook.
-     * @param hook A hook name.
-     * @see `Mod` or `Hook` for a list of valid hook names.
-     */
-    getModsWithHook(hook: Hook): IterableIterator<number>;
-    /**
-     * Returns the internal list of mods with a hook and their priorities.
-     * @param hook A hook name.
-     * @see `Mod` or `Hook` for a list of valid hook names.
-     */
-    getCachedHook(hook: Hook): ICachedHook | undefined;
 }
 export default IModManager;
