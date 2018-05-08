@@ -1,12 +1,13 @@
 import { IHookHost } from "mod/IHookHost";
-import IHookManager, { Hook, ICachedHook } from "mod/IHookManager";
+import IHookManager, { Hook, ICachedHook, IEmitterHostRegistrationChain } from "mod/IHookManager";
 import IModManager from "mod/IModManager";
+import Emitter from "utilities/Emitter";
 export default class HookManager implements IHookManager {
     private readonly hookHosts;
     private readonly modManager;
     private cachedHooks;
     constructor(modManager: IModManager);
-    register(host: IHookHost): void;
+    register<H extends IHookHost>(host: H): H extends Emitter ? IEmitterHostRegistrationChain : void;
     deregister(host: IHookHost, cacheHooks?: boolean): void;
     getHostsWithHook(hook: Hook): IterableIterator<IHookHost>;
     getCachedHook(hook: Hook): ICachedHook | undefined;

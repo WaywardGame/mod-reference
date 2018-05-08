@@ -1,8 +1,8 @@
 import { UiTranslation } from "language/ILanguage";
 import { UiApi } from "newui/INewUi";
-import QuadrantElement, { Quadrant } from "newui/screen/screens/game/element/QuadrantElement";
+import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/element/QuadrantComponent";
 import { IPlayer } from "player/IPlayer";
-export default class Stats extends QuadrantElement {
+export default class Stats extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
     private player;

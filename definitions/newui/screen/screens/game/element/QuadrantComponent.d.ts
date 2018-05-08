@@ -14,7 +14,7 @@ export declare enum Quadrant {
     Bottom = 5,
     BottomLeft = 6,
 }
-export declare enum QuadrantElementEvent {
+export declare enum QuadrantComponentEvent {
     /**
      * Emitted with the following arguments:
      * @param quadrant The new quadrant of this element
@@ -39,7 +39,7 @@ export declare enum QuadrantElementEvent {
  *
  * Changing the quadrant will not affect other elements: this is the responsisibility of the parent.
  */
-export default abstract class QuadrantElement extends StaticElement {
+export default abstract class QuadrantComponent extends StaticElement {
     readonly preferredQuadrant: Quadrant;
     constructor(uiApi: UiApi, options?: IComponentOptions);
     /**

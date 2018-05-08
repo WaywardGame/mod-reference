@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IHookHost } from "mod/IHookHost";
+import Emitter from "utilities/Emitter";
 export declare enum Hook {
     CanClientMove = "canClientMove",
     CanConsumeItem = "canConsumeItem",
@@ -112,8 +113,11 @@ export interface ICachedHook {
 export declare type ICachedHooks = {
     [hook in Hook]?: ICachedHook;
 };
+export interface IEmitterHostRegistrationChain {
+    until(deregistrationEvent: string | number): void;
+}
 export default interface IHookManager {
-    register(host: IHookHost): void;
+    register<H extends IHookHost>(host: H): H extends Emitter ? IEmitterHostRegistrationChain : void;
     deregister(host: IHookHost): void;
     getHostsWithHook(hook: Hook): IterableIterator<IHookHost>;
     /**

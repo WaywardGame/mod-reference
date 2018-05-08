@@ -1,6 +1,6 @@
 import { UiTranslation } from "language/ILanguage";
-import QuadrantElement, { Quadrant } from "newui/screen/screens/game/element/QuadrantElement";
-export default class Quickslots extends QuadrantElement {
+import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/element/QuadrantComponent";
+export default class Quickslots extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
     protected getID(): string;

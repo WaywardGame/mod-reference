@@ -134,5 +134,6 @@ export declare enum SelectDirection {
 export interface LoadMenuArgs {
     _wentBack: boolean;
 }
-export declare const minimumDialogOpacity = 0;
-export declare const defaultDialogOpacity = 80;
+export declare const DIALOG_OPACITY_MIN = 0;
+export declare const DIALOG_OPACITY_DEFAULT = 80;
+export declare const NEWUI_HOOK_PRIORITY = -99999999999;
