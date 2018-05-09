@@ -1,7 +1,7 @@
 import { Dictionary, UiTranslation } from "language/ILanguage";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
-import { ISplit } from "utilities/string/Interpolate";
+import { IStringSection } from "utilities/string/Interpolator";
 export declare enum ComponentEvent {
     Show = 0,
     Hide = 1,
@@ -235,7 +235,7 @@ export declare enum TooltipLocation {
 /**
  * ...yea
  */
-export declare type TextOrTranslationDataOrSplitsOrGenerator = GeneratorOrT<TextOrTranslationData | ISplit[]>;
+export declare type TextOrTranslationDataOrSplitsOrGenerator = GeneratorOrT<TextOrTranslationData | IStringSection[]>;
 export interface ITooltipOptionsVague extends IComponentOptions {
     tooltip?: never;
     location: TooltipLocation;

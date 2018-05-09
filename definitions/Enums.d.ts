@@ -202,7 +202,7 @@ export declare enum ActionType {
 }
 export declare enum ItemType {
     None = 0,
-    Amber = 1,
+    Copal = 1,
     AnimalSkull = 2,
     StoneArrow = 3,
     StoneArrowhead = 4,
@@ -394,7 +394,7 @@ export declare enum ItemType {
     MessageInABottle = 190,
     CarbonPowder = 191,
     PileOfCompost = 192,
-    MeltedAmber = 193,
+    MeltedCopal = 193,
     WoodenShavings = 194,
     Deadfall = 195,
     Snare = 196,
@@ -631,6 +631,7 @@ export declare enum ItemType {
     SandstoneSandCastFlask = 427,
     StoneSandCastFlask = 428,
     AnimalGlue = 429,
+    CopalResin = 430,
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

@@ -2,7 +2,7 @@ import { UiTranslation } from "language/ILanguage";
 import Component from "newui/element/Component";
 import { IComponentOptions, TranslationData } from "newui/element/IComponent";
 import { UiApi } from "newui/INewUi";
-import { ISplit } from "utilities/string/Interpolate";
+import { IStringSection } from "utilities/string/Interpolator";
 export interface TextOptions extends IComponentOptions {
     text?: string | UiTranslation | TranslationData;
 }
@@ -26,7 +26,7 @@ export declare class Heading extends Text {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
 export interface SplitTextOptions extends IComponentOptions {
-    splits: ISplit[];
+    splits: IStringSection[];
 }
 export declare class SplitText extends Component {
     constructor(uiApi: UiApi, options: SplitTextOptions);

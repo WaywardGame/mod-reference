@@ -1,6 +1,6 @@
 import { Dictionary, UiTranslation } from "language/ILanguage";
 import { Message } from "language/IMessages";
-import { ISplit } from "utilities/string/Interpolate";
+import { IStringSection } from "utilities/string/Interpolator";
 export interface ITranslationData {
     dictionary: Dictionary;
     entry: number;
@@ -10,8 +10,8 @@ export interface ILanguageEntryProvider {
     get(dictionary: Dictionary, entry: number): string | undefined;
 }
 export declare type TranslationString = Translation & string;
-export declare type SplitTranslationString = Translation<ISplit[]> & ISplit[];
-export default class Translation<R extends string | ISplit[] = string> {
+export declare type SplitTranslationString = Translation<IStringSection[]> & IStringSection[];
+export default class Translation<R extends string | IStringSection[] = string> {
     static provider: ILanguageEntryProvider;
     static ui: (entry: string | UiTranslation) => TranslationString;
     static message: (entry: string | Message) => TranslationString;
@@ -47,7 +47,7 @@ export default class Translation<R extends string | ISplit[] = string> {
      * Vague constructor
      */
     constructor(dictionary: number | string | ITranslationData, entry?: number | string);
-    setColorsAllowed(): Translation<ISplit[]> & ISplit[];
+    setColorsAllowed(): Translation<IStringSection[]> & IStringSection[];
     setNoTrim(): this;
     has(): boolean;
     /**
