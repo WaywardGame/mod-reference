@@ -13,6 +13,14 @@ export default class Interpolator {
     constructor(...segments: ISegment[]);
     interpolate(str: string, ...args: any[]): IStringSection[];
 }
+/**
+ * Prints values from the arguments passed to the interpolator. If the keys don't map to a provided argument,
+ * an empty string is returned.
+ *
+ * - `"{0}" => args[0]`
+ * - `"{test}" => args[0]["test"]`
+ * - `"{3.test.4.wow}" => args[3]["test"][4]["wow"]`
+ */
 export declare const argumentSegment: ISegment;
 export declare const escapedSegment: ISegment;
 export declare function interpolate(str: string, ...args: any[]): string;

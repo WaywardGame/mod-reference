@@ -457,7 +457,7 @@ export declare enum Message {
     PlantedInGround = 441,
     PlantGatheringWillDestroy = 442,
     PlantHasPlentyOfResources = 443,
-    PlantHasRescouresToGather = 444,
+    PlantHasResourcesToGather = 444,
     PlantHasResourcesRemaining = 445,
     PlantHasResourcesToHarvest = 446,
     PlantHighlyFertile = 447,

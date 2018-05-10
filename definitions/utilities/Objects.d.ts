@@ -45,5 +45,6 @@ declare module Objects {
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function objectDeepClone<T>(obj: T): T;
+    function followDirections<T>(target: any, directions: string[]): T | undefined;
 }
 export default Objects;
