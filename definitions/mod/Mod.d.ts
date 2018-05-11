@@ -74,7 +74,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onContainerItemUpdate(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     onCraft(player: IPlayer, item: IItem): void;
     onCreateWorld(world: IWorld): void;
-    onDisplayMessage(message: Message, messageType?: MessageType, ...args: any[]): boolean | undefined;
+    onDisplayMessage(message: string | Message, messageType?: MessageType, ...args: any[]): boolean | undefined;
     onDoodadSpawn(doodad: IDoodad): void;
     onGameEnd(): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;

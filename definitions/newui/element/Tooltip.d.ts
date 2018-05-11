@@ -1,5 +1,5 @@
 import Component from "newui/element/Component";
-import { ITooltipOptionsVague, TooltipLocation } from "newui/element/IComponent";
+import { ITooltipOptionsVague, TextOrTranslationDataOrSplitsOrGenerator, TooltipLocation } from "newui/element/IComponent";
 import Text, { Paragraph, SplitText, SplitTextOptions, TextOptions } from "newui/element/Text";
 import { UiApi } from "newui/INewUi";
 export interface ITooltipOptions extends ITooltipOptionsVague {
@@ -13,7 +13,7 @@ export default class Tooltip extends Component {
     location: TooltipLocation;
     cache: boolean;
     constructor(uiApi: UiApi, source: Component, tooltipOptions: ITooltipOptions);
-    addText(options: TextOptions | SplitTextOptions): Text | SplitText;
+    addText(text: TextOrTranslationDataOrSplitsOrGenerator): Text | SplitText;
     addHeading(options: TextOptions): Text;
     addParagraph(...textOptionsArr: Array<TextOptions | SplitTextOptions>): Paragraph;
     update(): void;

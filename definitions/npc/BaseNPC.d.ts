@@ -9,7 +9,7 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     readonly entityType: EntityType.NPC;
     "constructor": typeof BaseNPC;
     ai: AiType;
-    seen: boolean;
+    seen: number;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(id?: number, x?: number, y?: number, z?: number);
