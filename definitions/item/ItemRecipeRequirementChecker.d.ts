@@ -4,11 +4,10 @@ export default class ItemRecipeRequirementChecker {
     private readonly player;
     private readonly recipe;
     private readonly trackItems;
-    itemBaseComponent: IItem;
+    itemBaseComponent: IItem | undefined;
     itemComponentsRequired: IItemArray;
     itemComponentsConsumed: IItemArray;
     numComponentsNeeded: number;
-    totalComponentsNeeded: number;
     private baseComponent;
     private components;
     constructor(player: IPlayer, recipe?: IRecipe | undefined, trackItems?: boolean | undefined);
