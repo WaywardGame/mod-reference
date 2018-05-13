@@ -117,7 +117,7 @@ export interface IEmitterHostRegistrationChain {
     until(deregistrationEvent: string | number): void;
 }
 export default interface IHookManager {
-    register<H extends IHookHost>(host: H): H extends Emitter ? IEmitterHostRegistrationChain : void;
+    register<H extends IHookHost>(host: H, name?: string): H extends Emitter ? IEmitterHostRegistrationChain : void;
     deregister(host: IHookHost): void;
     getHostsWithHook(hook: Hook): IterableIterator<IHookHost>;
     /**

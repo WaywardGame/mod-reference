@@ -1,3 +1,4 @@
+import { IPlayOptions } from "game/IGame";
 import { ModType } from "mod/IModInfo";
 import Emitter from "utilities/Emitter";
 export interface ISteamworks extends Emitter {
@@ -104,4 +105,6 @@ export interface IDedicatedServerInfo {
     backupInterval: number;
     maxBackups: number;
     load: string | undefined;
+    console: boolean;
+    newGameOptions?: IPlayOptions;
 }

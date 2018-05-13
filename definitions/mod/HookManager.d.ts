@@ -7,7 +7,7 @@ export default class HookManager implements IHookManager {
     private readonly modManager;
     private cachedHooks;
     constructor(modManager: IModManager);
-    register<H extends IHookHost>(host: H): H extends Emitter ? IEmitterHostRegistrationChain : void;
+    register<H extends IHookHost>(host: H, name?: string): H extends Emitter ? IEmitterHostRegistrationChain : void;
     deregister(host: IHookHost, cacheHooks?: boolean): void;
     getHostsWithHook(hook: Hook): IterableIterator<IHookHost>;
     getCachedHook(hook: Hook): ICachedHook | undefined;
@@ -17,7 +17,7 @@ export default class HookManager implements IHookManager {
      */
     private sortHooks();
     /**
-     * Cache the hooks for a given mod.
+     * Cache the hooks for a given host.
      *
      * 1. If the mod doesn't have an instance, return.
      * 2. Filter all the registered hooks on the mod by whether they're actually hook methods. Log errors for

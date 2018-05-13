@@ -148,12 +148,10 @@ export interface IGame extends Emitter {
     outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     packGround(x: number, y: number, z: number): void;
     passTurn(player: IPlayer, turnType?: TurnType): void;
-    play(options: Partial<IPlayOptions> & {
-        slot: number;
-    }): Promise<void>;
+    play(options: Partial<IPlayOptions>): Promise<boolean>;
     requestPlay(options: Partial<IPlayOptions> & {
         slot: number;
-    }): Promise<void>;
+    }): Promise<boolean>;
     processWaterContamination(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
     removePlayer(pid: number): void;
@@ -191,9 +189,9 @@ export declare type IGameOld = Partial<IGame> & {
     dailyChallenge: boolean;
 };
 export interface IPlayOptions {
-    slot: number;
+    slot: number | undefined;
     name: string;
-    seed: string | number;
+    seed: string | number | undefined;
     difficulty: Difficulty;
     character: ICharacter;
     multiplayer: IMultiplayerOptions | undefined;

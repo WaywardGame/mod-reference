@@ -24,7 +24,7 @@ export default class SaveManager implements ISaveManager {
     /**
      * Returns the index of the first free slot
      */
-    getFirstFreeSlot(): Promise<number>;
+    getFirstFreeSlot(): Promise<number | undefined>;
     /**
      * Gets the used slots, ordered by one of a few properties of the saveData in that slot
      */

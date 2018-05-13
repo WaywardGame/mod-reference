@@ -196,7 +196,7 @@ export default class InGameScreen extends BaseScreen {
     updateMilestonesDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
-    createCraftItemElements(sortType: SortType): void;
+    createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
     updateItem(item: IItem): void;
     onMove(): void;
     refreshWorldTooltips(): void;
@@ -239,4 +239,5 @@ export default class InGameScreen extends BaseScreen {
     private getHoveredItem(api);
     private quickSlotBindPressed(api, quickSlot, bindable);
     private quickSlotToggleBindPressed(api, itemElement, quickSlot, bindable, wasPressed);
+    private determineSort(containerSortInfo, itemIdA, itemTypeA, itemIdB, itemTypeB);
 }

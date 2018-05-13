@@ -5,7 +5,7 @@ export interface ISaveManager {
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteSlot(slot: number): Promise<boolean | undefined>;
     exportSave(slot: number): Promise<SaveObject>;
-    getFirstFreeSlot(): Promise<number>;
+    getFirstFreeSlot(): Promise<number | undefined>;
     getGameStateAsJson(): string;
     getMostRecentSlot(): Promise<number>;
     getSaveCount(): Promise<number>;

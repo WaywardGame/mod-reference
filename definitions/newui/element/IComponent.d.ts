@@ -235,12 +235,12 @@ export declare enum TooltipLocation {
 /**
  * ...yea
  */
-export declare type TextOrTranslationDataOrSplitsOrGenerator = GeneratorOrT<TextOrTranslationData | IStringSection[]>;
+export declare type TextOrTranslationDataOrSectionsOrGenerator = GeneratorOrT<TextOrTranslationData | IStringSection[]>;
 export interface ITooltipOptionsVague extends IComponentOptions {
     tooltip?: never;
     location: TooltipLocation;
     heading?: TextOrTranslationData;
-    text?: TextOrTranslationDataOrSplitsOrGenerator;
+    text?: TextOrTranslationDataOrSectionsOrGenerator;
     cache?: false;
     maxWidth?: number;
     create?(tooltip: IComponent): Promise<void>;

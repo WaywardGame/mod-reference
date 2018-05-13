@@ -10,7 +10,7 @@ export interface TextData {
     translationData: UiTranslation | TranslationData;
 }
 export default class Text extends Component {
-    static createText(uiApi: UiApi, options: TextOptions | SplitTextOptions): Text | SplitText;
+    static createText(uiApi: UiApi, options: TextOptions | SectionTextOptions): Text | SectionText;
     constructor(uiApi: UiApi, options?: TextOptions);
     getText(): string | undefined;
     setText(text: string | UiTranslation | TranslationData, refreshTranslations?: boolean): void;
@@ -25,9 +25,9 @@ export declare class Block extends Paragraph {
 export declare class Heading extends Text {
     constructor(uiApi: UiApi, options?: TextOptions);
 }
-export interface SplitTextOptions extends IComponentOptions {
-    splits: IStringSection[];
+export interface SectionTextOptions extends IComponentOptions {
+    sections: IStringSection[];
 }
-export declare class SplitText extends Component {
-    constructor(uiApi: UiApi, options: SplitTextOptions);
+export declare class SectionText extends Component {
+    constructor(uiApi: UiApi, options: SectionTextOptions);
 }

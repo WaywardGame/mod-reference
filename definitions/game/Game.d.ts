@@ -118,10 +118,8 @@ export default class Game extends Emitter implements IGame {
     outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     requestPlay(options: Partial<IPlayOptions> & {
         slot: number;
-    }): Promise<void>;
-    play(options: Partial<IPlayOptions> & {
-        slot: number;
-    }): Promise<void>;
+    }): Promise<boolean>;
+    play(options: Partial<IPlayOptions>): Promise<boolean>;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     removePlayer(pid: number): void;
     deletePlayer(plys: IPlayer[], identifier: string): void;
