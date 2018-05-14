@@ -12,6 +12,7 @@ export default class GameScreen extends Screen implements IHookHost {
     stats: Stats;
     quickslots: Quickslots;
     messages: Messages;
+    private quadrantContainer;
     private readonly quadrantMap;
     constructor(uiApi: UiApi);
     create(): void;

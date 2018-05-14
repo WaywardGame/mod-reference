@@ -29,5 +29,5 @@ export interface SectionTextOptions extends IComponentOptions {
     sections: IStringSection[];
 }
 export declare class SectionText extends Component {
-    constructor(uiApi: UiApi, options: SectionTextOptions);
+    constructor(uiApi: UiApi, ...sections: ArrayOfTOrIterablesOfT<IStringSection>);
 }

@@ -132,3 +132,4 @@ declare module IterableIterator {
     const ALL: unique symbol;
 }
 export default IterableIterator;
+export declare function Pipe<T = any>(...what: T[]): IterableIterator<T>;

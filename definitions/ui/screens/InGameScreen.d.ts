@@ -1,4 +1,4 @@
-import { ActionType, Bindable, DialogId, EquipType, FacingDirection, ItemType, SortType } from "Enums";
+import { ActionType, Bindable, DialogId, EquipType, FacingDirection, ItemType, SkillType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { BindCatcherApi, IBinding } from "newui/BindingManager";
@@ -192,6 +192,7 @@ export default class InGameScreen extends BaseScreen {
     getItemIdInEquipSlot(equip: EquipType): number | undefined;
     setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
     removeItemFromEquipSlot(equip: EquipType): void;
+    sortSkills(skills: SkillType[]): SkillType[];
     updateSkillsDialog(): void;
     updateMilestonesDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
