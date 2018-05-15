@@ -103,7 +103,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onPlayerTickEnd(player: IPlayer): void;
     onPlayerTickStart(player: IPlayer): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
-    onShowInGameScreen(): void;
+    onGameScreenVisible(): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     onTileUpdate(tile: ITile, x: number, y: number, z: number): void;
     onTurnEnd(player: IPlayer): void;

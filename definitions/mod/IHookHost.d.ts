@@ -449,9 +449,9 @@ export interface IHookHost {
      */
     onQueueSoundEffect?(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     /**
-     * Called when the in game screen is shown
+     * Called when the game screen becomes visible. Messages sent before this point will not be displayed.
      */
-    onShowInGameScreen?(): void;
+    onGameScreenVisible?(): void;
     /**
      * Called when a creature is spawned from a creature group
      * @param creatureGroup The creature group

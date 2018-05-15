@@ -9,7 +9,7 @@ export interface ISteamworks extends Emitter {
     debugLog(...args: any[]): void;
     deleteSaveGameMod(name: string): void;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
-    getAbsolutePath(p: string): any;
+    getAbsolutePath(p: string): string;
     getBetaName(): string;
     getBuildTime(): number | undefined;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
@@ -31,8 +31,6 @@ export interface ISteamworks extends Emitter {
     isElectron(): boolean;
     isGreenworksEnabled(): boolean;
     isInLobby(): boolean;
-    isLinux(): boolean;
-    isMac(): boolean;
     isOverlayWorking(): boolean;
     joinLobby(lobbyId: string): void;
     leaveLobby(): void;

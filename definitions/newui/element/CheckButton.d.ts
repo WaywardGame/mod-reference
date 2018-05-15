@@ -22,5 +22,5 @@ export declare class CheckButton extends Button implements Refreshable {
     toggleChecked(): void;
     refresh(): void;
     getText(): string | undefined;
-    setText(text: TextOrTranslationData, refreshTranslationData?: boolean): void;
+    setText(text: TextOrTranslationData, refreshTranslationData?: boolean): this;
 }

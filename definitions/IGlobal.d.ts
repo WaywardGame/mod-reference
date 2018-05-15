@@ -154,4 +154,52 @@ declare global {
 		import(template: JQuery | HTMLTemplateElement): JQuery;
 	}
 
+	interface IFileSystem {
+		copy(source: string, destination: string, opt: (file: string) => boolean, cb: (err: string | null | undefined) => void): any;
+		emptyDir(destination: string, cb: (err: string | null | undefined) => void): any;
+		lstat(path: string, cb: (err: string | null | undefined, stats: IFileStat) => void): any;
+		lstatSync(path: string): IFileStat | undefined;
+		mkdirSync(path: string): any;
+		pathExistsSync(path: string): boolean;
+		readdir(path: string, cb: (err: string | null | undefined, files: string[]) => void): any;
+		readdirSync(path: string): string[];
+		readFileSync(path: string, opt?: any): string;
+		remove(path: string, cb: (err: string | null | undefined) => void): any;
+		rmdirSync(path: string): any;
+		unlinkSync(path: string): any;
+		writeFileSync(path: string, data: string, opt?: any): any;
+	}
+
+	interface IFile extends IFileStat {
+		name: string;
+		path: string;
+	}
+
+	interface IFileStat {
+		atime: Date;
+		mtime: Date;
+		ctime: Date;
+		isFile(): boolean;
+		isDirectory(): boolean;
+	}
+
+	interface IElectronApi {
+		greenworks: any | Error;
+		ipc: any;
+		shell: any;
+		os: any;
+		webFrame: any;
+		remote: any;
+		path: any;
+		winston: any;
+		fileSystem: IFileSystem;
+		matchmakingServer: IMatchmakingServer | undefined;
+	}
+
+	interface IElectron {
+		api: IElectronApi;
+		installPath: string;
+		asarPath: string;
+	}
+	let electron: IElectron | undefined | never;
 }

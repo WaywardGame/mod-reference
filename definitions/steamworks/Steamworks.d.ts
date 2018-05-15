@@ -2,12 +2,10 @@ import { ModType } from "mod/IModInfo";
 import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 import Emitter from "utilities/Emitter";
 export default class Steamworks extends Emitter implements ISteamworks {
-    private installDir;
     private steamId;
     private betaName;
     private buildTime;
     private overlayWorks;
-    private platform;
     private initializingMods;
     private logsPath;
     private backupPath;
@@ -31,9 +29,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     isElectron(): boolean;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
-    getAbsolutePath(...p: string[]): any;
-    isLinux(): boolean;
-    isMac(): boolean;
+    getAbsolutePath(...p: string[]): string;
     isDedicatedServer(): boolean;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;

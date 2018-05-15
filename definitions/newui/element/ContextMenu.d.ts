@@ -29,7 +29,7 @@ export default class ContextMenu<OptionType extends number | string = number | s
 export declare class ContextMenuOption extends Button {
     private submenu?;
     constructor(uiApi: UiApi, description: IOptionDescription);
-    setText(text: TextOrTranslationDataOrSectionsOrGenerator): void;
+    setText(text: TextOrTranslationDataOrSectionsOrGenerator): this;
     hideSubmenu(): void;
     protected showSubmenu(generator: (uiApi: UiApi) => IContextMenu): void;
 }

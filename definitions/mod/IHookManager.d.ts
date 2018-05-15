@@ -72,7 +72,7 @@ export declare enum Hook {
     OnPlayerTickEnd = "onPlayerTickEnd",
     OnPlayerTickStart = "onPlayerTickStart",
     OnQueueSoundEffect = "onQueueSoundEffect",
-    OnShowInGameScreen = "onShowInGameScreen",
+    OnGameScreenVisible = "onGameScreenVisible",
     OnSpawnCreatureFromGroup = "onSpawnCreatureFromGroup",
     OnTileUpdate = "onTileUpdate",
     OnTurnEnd = "onTurnEnd",

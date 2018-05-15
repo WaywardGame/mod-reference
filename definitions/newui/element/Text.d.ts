@@ -13,8 +13,8 @@ export default class Text extends Component {
     static createText(uiApi: UiApi, options: TextOptions | SectionTextOptions): Text | SectionText;
     constructor(uiApi: UiApi, options?: TextOptions);
     getText(): string | undefined;
-    setText(text: string | UiTranslation | TranslationData, refreshTranslations?: boolean): void;
-    removeText(): void;
+    setText(text: string | UiTranslation | TranslationData, refreshTranslations?: boolean): this;
+    removeText(): this;
 }
 export declare class Paragraph extends Text {
     constructor(uiApi: UiApi, options?: TextOptions);
