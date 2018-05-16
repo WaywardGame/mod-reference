@@ -1,6 +1,6 @@
-import Component from "newui/element/Component";
-import { ITooltipOptionsVague, TextOrTranslationDataOrSectionsOrGenerator, TooltipLocation } from "newui/element/IComponent";
-import Text, { Paragraph, SectionText, SectionTextOptions, TextOptions } from "newui/element/Text";
+import Component from "newui/component/Component";
+import { ITooltipOptionsVague, TextOrTranslationDataOrSectionsOrGenerator, TooltipLocation } from "newui/component/IComponent";
+import Text, { Paragraph, SectionText, SectionTextOptions, TextOptions } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
 export interface ITooltipOptions extends ITooltipOptionsVague {
     create?(tooltip: Tooltip): Promise<void>;

@@ -1,5 +1,5 @@
 import { Bindable } from "Enums";
-import { ITooltipOptions } from "newui/element/Tooltip";
+import { ITooltipOptions } from "newui/component/Tooltip";
 export declare enum MenuBarButtonType {
     Menu = 0,
     Save = 1,

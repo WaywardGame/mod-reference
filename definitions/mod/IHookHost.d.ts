@@ -2,13 +2,14 @@ import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { MessageSource } from "game/IMessageManager";
 import { IContainer, IItem } from "item/IItem";
-import { Message, MessageType } from "language/IMessages";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer from "player/IPlayer";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
+import { IStringSection } from "utilities/string/Interpolator";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -269,13 +270,11 @@ export interface IHookHost {
      */
     onCreateWorld?(world: IWorld): void;
     /**
-     * Called when a message is about to be displayed to the player
+     * Called when a message is displayed to the player
+     * @param source An array of sources of the message
      * @param message The message
-     * @param messageType The message type
-     * @param args The message arguments
-     * @returns False to not display the message or undefined to use the default logic
      */
-    onDisplayMessage?(message: Message, messageType?: MessageType, ...args: any[]): boolean | undefined;
+    onDisplayMessage?(source: MessageSource[], message: IStringSection[]): void;
     /**
      * Called when a doodad spawns
      * @param doodad The doodad object
@@ -565,4 +564,12 @@ export interface IHookHost {
      * @returns A bitwise list of render flags or undefined to use the default logic
      */
     shouldRender?(): RenderFlag | undefined;
+    /**
+     * Called when a message is about to be displayed
+     * @param source An array of sources of the messagesource: MessageSource[],
+     * @param message The raw message that will be displayed
+     * @param messageId The `Message`, or `-1` if the message being displayed isn't a `Message`
+     * @returns False to not display the message or undefined to use the default logic
+     */
+    shouldDisplayMessage?(source: MessageSource[], message: IStringSection[], messageId: number): boolean | undefined;
 }

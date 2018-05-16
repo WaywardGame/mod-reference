@@ -1,4 +1,4 @@
-import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague, SelectableLayer } from "newui/element/IComponent";
+import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague, SelectableLayer } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";

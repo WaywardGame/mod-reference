@@ -1,7 +1,7 @@
 import { InterruptChoice } from "language/ILanguage";
-import { IComponent, ITooltipOptionsVague, TextOrTranslationData } from "newui/element/IComponent";
+import { IComponent, ITooltipOptionsVague, TextOrTranslationData } from "newui/component/IComponent";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
-import { MenuId } from "newui/screen/screens/menu/element/IMenu";
+import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import { InterruptInputOptions } from "newui/util/IInterrupt";
 import Emitter from "utilities/Emitter";
 export interface UiApi<U extends IScreen = IScreen> extends Emitter {

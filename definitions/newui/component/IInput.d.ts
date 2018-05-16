@@ -1,4 +1,4 @@
-import { TextOrTranslationData } from "newui/element/IComponent";
+import { TextOrTranslationData } from "newui/component/IComponent";
 export interface InputOptions {
     placeholder?: TextOrTranslationData;
     default?: TextOrTranslationData;

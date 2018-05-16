@@ -4,6 +4,7 @@ import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DamageType, Difficulty, FacingDirection, FireType, IObjectDescription, ISeeds, ItemQuality, ItemType, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
+import MessageManager from "game/MessageManager";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { IMessagePack, Message, MessageType } from "language/IMessages";
@@ -57,6 +58,7 @@ export default class Game extends Emitter implements IGame {
         [index: number]: number;
     };
     mapGenVersion: string;
+    messages: MessageManager;
     npcs: SaferArray<INPC>;
     realTimeTickSpeed: number;
     savedHighscore: IHighscore | undefined;

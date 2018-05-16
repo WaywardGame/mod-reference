@@ -1,6 +1,6 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { StatusType } from "Enums";
-import Component from "newui/element/Component";
+import Component from "newui/component/Component";
 import { UiApi } from "newui/INewUi";
 export default class StatusEffects extends Component {
     private readonly entity;

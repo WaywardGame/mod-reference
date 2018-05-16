@@ -1,5 +1,5 @@
 import { Bindable, BindableType } from "Enums";
-import { IComponent } from "newui/element/IComponent";
+import { IComponent } from "newui/component/IComponent";
 import Emitter from "utilities/Emitter";
 export declare enum KeyModifier {
     Shift = 0,

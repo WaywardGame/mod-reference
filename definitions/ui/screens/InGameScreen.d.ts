@@ -2,7 +2,6 @@ import { ActionType, Bindable, DialogId, EquipType, FacingDirection, ItemType, S
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { BindCatcherApi, IBinding } from "newui/BindingManager";
-import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
@@ -106,7 +105,6 @@ export default class InGameScreen extends BaseScreen {
     useQuickSlot(slot: number): boolean;
     runQuickslot(item: IItem, actionType: ActionType): void;
     onChatEnter(chatElement: JQuery): void;
-    displayChatMessage(player: IPlayer, message: string): void;
     isSorting(): boolean;
     runSortableAction(sortable: JQuery, action: string, ...data: any[]): void;
     runGlobalSortableAction(action: string, ...data: any[]): void;

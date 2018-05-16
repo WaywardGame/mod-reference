@@ -1,6 +1,6 @@
 import IBaseEntity from "entity/IBaseEntity";
 import { IStat, IStatBase } from "entity/IStats";
-import Component from "newui/element/Component";
+import Component from "newui/component/Component";
 import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/IStatDisplayDescription";
 declare const statDisplayDescriptions: Description<IStatDisplayDescription>;
 export interface IStatInfo extends Partial<IStatBase> {

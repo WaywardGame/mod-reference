@@ -1,6 +1,6 @@
-import Button, { ButtonOptions } from "newui/element/Button";
-import { IComponentOptions } from "newui/element/IComponent";
-import { InputOptions } from "newui/element/IInput";
+import Button, { ButtonOptions } from "newui/component/Button";
+import { IComponentOptions } from "newui/component/IComponent";
+import { InputOptions } from "newui/component/IInput";
 import { UiApi } from "newui/INewUi";
 export interface InputButtonOptions extends ButtonOptions {
     input: InputOptions & IComponentOptions;

@@ -2,7 +2,7 @@ import { DropLocation, IBindArray, IModBindArray } from "Enums";
 import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
-import { ICharacter } from "newui/screen/screens/menu/element/Character";
+import { ICharacter } from "newui/screen/screens/menu/component/Character";
 import { IMilestoneData } from "player/IMilestone";
 import ISaveDataGlobal, { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
 import { IDialogInfo } from "ui/IUi";

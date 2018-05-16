@@ -1,5 +1,5 @@
-import { IComponent, IContextMenu, ITooltipOptionsVague } from "newui/element/IComponent";
-import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
+import { IComponent, IContextMenu, ITooltipOptionsVague } from "newui/component/IComponent";
+import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 export declare enum ScreenId {
     None = 0,
     Game = 1,

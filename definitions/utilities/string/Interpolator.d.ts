@@ -12,7 +12,7 @@ export default class Interpolator {
     private readonly segments;
     constructor(...segments: ISegment[]);
     interpolate(str: string, ...args: any[]): IStringSection[];
-    private combineLikeSections(sections);
+    static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }
 /**
  * Prints values from the arguments passed to the interpolator. If the keys don't map to a provided argument,

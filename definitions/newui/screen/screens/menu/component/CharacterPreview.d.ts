@@ -1,5 +1,5 @@
 import { IRGB } from "Enums";
-import Component from "newui/element/Component";
+import Component from "newui/component/Component";
 import { UiApi } from "newui/INewUi";
 import { IPlayerCustomization } from "player/IPlayer";
 export declare class SVG extends Component {

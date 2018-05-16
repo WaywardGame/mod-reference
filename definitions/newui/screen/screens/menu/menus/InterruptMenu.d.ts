@@ -1,7 +1,7 @@
 import { InterruptChoice } from "language/ILanguage";
-import { TextOrTranslationData } from "newui/element/IComponent";
+import { TextOrTranslationData } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
-import Menu from "newui/screen/screens/menu/element/Menu";
+import Menu from "newui/screen/screens/menu/component/Menu";
 import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";
 export declare enum InterruptMenuEvent {
     Resolve = "Resolve",

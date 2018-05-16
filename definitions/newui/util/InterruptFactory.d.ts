@@ -1,7 +1,7 @@
 import { InterruptChoice } from "language/ILanguage";
-import { TextOrTranslationData } from "newui/element/IComponent";
+import { TextOrTranslationData } from "newui/component/IComponent";
 import { IInterruptFactory, UiApi } from "newui/INewUi";
-import { MenuId } from "newui/screen/screens/menu/element/IMenu";
+import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import { InterruptInputOptions } from "newui/util/IInterrupt";
 export default class InterruptFactory implements IInterruptFactory {
     private readonly uiApi;

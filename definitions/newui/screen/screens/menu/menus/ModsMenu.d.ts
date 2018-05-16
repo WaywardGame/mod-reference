@@ -1,7 +1,7 @@
 import { IModInfo } from "mod/IModInfo";
-import { CheckButton } from "newui/element/CheckButton";
+import { CheckButton } from "newui/component/CheckButton";
 import { UiApi } from "newui/INewUi";
-import Menu from "newui/screen/screens/menu/element/Menu";
+import Menu from "newui/screen/screens/menu/component/Menu";
 export declare enum ModSort {
     Name = 0,
     CreatedDate = 1,

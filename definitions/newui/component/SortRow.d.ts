@@ -1,7 +1,7 @@
-import { IDropdownOption } from "newui/element/Dropdown";
-import { IComponentOptions } from "newui/element/IComponent";
-import { LabelledRow } from "newui/element/LabelledRow";
-import { Refreshable } from "newui/element/Refreshable";
+import { IDropdownOption } from "newui/component/Dropdown";
+import { IComponentOptions } from "newui/component/IComponent";
+import { LabelledRow } from "newui/component/LabelledRow";
+import { Refreshable } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 import { SortDirection } from "save/ISaveManager";
 export interface SortRowOptions<Sort> extends IComponentOptions {

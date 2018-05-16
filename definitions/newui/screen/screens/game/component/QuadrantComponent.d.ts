@@ -1,7 +1,7 @@
-import { IOptionDescription } from "newui/element/ContextMenu";
-import { IComponentOptions, TextOrTranslationData } from "newui/element/IComponent";
+import { IOptionDescription } from "newui/component/ContextMenu";
+import { IComponentOptions, TextOrTranslationData } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
-import StaticElement from "newui/screen/screens/game/element/StaticElement";
+import StaticComponent from "newui/screen/screens/game/component/StaticComponent";
 /**
  * Since when do quadrants refer to 8 sections, this ain't no octagon
  */
@@ -39,7 +39,7 @@ export declare enum QuadrantComponentEvent {
  *
  * Changing the quadrant will not affect other elements: this is the responsisibility of the parent.
  */
-export default abstract class QuadrantComponent extends StaticElement {
+export default abstract class QuadrantComponent extends StaticComponent {
     readonly preferredQuadrant: Quadrant;
     constructor(uiApi: UiApi, options?: IComponentOptions);
     /**

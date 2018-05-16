@@ -1,12 +1,12 @@
 import { UiTranslation } from "language/ILanguage";
-import { BlockRow } from "newui/element/BlockRow";
-import Button, { ButtonEffect, ButtonOptions, DefaultButtonOptions } from "newui/element/Button";
-import Component from "newui/element/Component";
-import { IComponent, IComponentOptions, TextOrTranslationData } from "newui/element/IComponent";
-import Text, { Heading, Paragraph, TextOptions } from "newui/element/Text";
+import { BlockRow } from "newui/component/BlockRow";
+import Button, { ButtonEffect, ButtonOptions, DefaultButtonOptions } from "newui/component/Button";
+import Component from "newui/component/Component";
+import { IComponent, IComponentOptions, TextOrTranslationData } from "newui/component/IComponent";
+import Text, { Heading, Paragraph, TextOptions } from "newui/component/Text";
 import { SelectDirection, UiApi } from "newui/INewUi";
 import { IScreen } from "newui/screen/IScreen";
-import { IMenu, MenuId } from "newui/screen/screens/menu/element/IMenu";
+import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 export interface MenuOptions extends IComponentOptions {
     menuId: MenuId;
     title?: string | UiTranslation;

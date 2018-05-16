@@ -1,4 +1,4 @@
-import { ICharacter } from "newui/screen/screens/menu/element/Character";
+import { ICharacter } from "newui/screen/screens/menu/component/Character";
 import { IColorDescription, IHairstyleDescription, IPlayerCustomization } from "player/IPlayer";
 export declare const hairstyleDescriptions: Description<IHairstyleDescription>;
 export declare const hairColorDescriptions: Description<IColorDescription>;

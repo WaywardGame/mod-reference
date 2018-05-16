@@ -1,7 +1,7 @@
-import Component from "newui/element/Component";
-import { IComponentOptions } from "newui/element/IComponent";
-import { Refreshable } from "newui/element/Refreshable";
-import { TextOptions } from "newui/element/Text";
+import Component from "newui/component/Component";
+import { IComponentOptions } from "newui/component/IComponent";
+import { Refreshable } from "newui/component/Refreshable";
+import { TextOptions } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
 export interface IDropdownOptions<OptionId = string | number> extends Partial<IComponentOptions> {
     defaultOption?: OptionId | (() => OptionId);

@@ -1,5 +1,5 @@
 import { UiApi } from "newui/INewUi";
-import Menu from "newui/screen/screens/menu/element/Menu";
+import Menu from "newui/screen/screens/menu/component/Menu";
 export default class MainMenu extends Menu {
     private continueGameButton;
     private friendsButton;

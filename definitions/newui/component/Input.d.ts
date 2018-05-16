@@ -1,6 +1,6 @@
-import Component from "newui/element/Component";
-import { IComponentOptions, TextOrTranslationData } from "newui/element/IComponent";
-import { InputOptions } from "newui/element/IInput";
+import Component from "newui/component/Component";
+import { IComponentOptions, TextOrTranslationData } from "newui/component/IComponent";
+import { InputOptions } from "newui/component/IInput";
 import { UiApi } from "newui/INewUi";
 export declare enum InputEvent {
     Change = "Change",

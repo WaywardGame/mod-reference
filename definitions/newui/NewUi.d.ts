@@ -1,10 +1,10 @@
 import { InterruptChoice } from "language/ILanguage";
-import Component from "newui/element/Component";
-import { IComponent, ITooltipOptionsVague, TextOrTranslationData } from "newui/element/IComponent";
+import Component from "newui/component/Component";
+import { IComponent, ITooltipOptionsVague, TextOrTranslationData } from "newui/component/IComponent";
 import { IInterruptMenuFactory, UiApi } from "newui/INewUi";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
 import Screen from "newui/screen/Screen";
-import { MenuId } from "newui/screen/screens/menu/element/IMenu";
+import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import { InterruptInputOptions } from "newui/util/IInterrupt";
 import InterruptFactory from "newui/util/InterruptFactory";
 import Emitter from "utilities/Emitter";

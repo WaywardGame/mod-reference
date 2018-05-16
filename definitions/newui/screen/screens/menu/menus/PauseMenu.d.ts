@@ -1,8 +1,8 @@
-import { BlockRow } from "newui/element/BlockRow";
-import Button from "newui/element/Button";
-import { Heading, Paragraph } from "newui/element/Text";
+import { BlockRow } from "newui/component/BlockRow";
+import Button from "newui/component/Button";
+import { Heading, Paragraph } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
-import Menu from "newui/screen/screens/menu/element/Menu";
+import Menu from "newui/screen/screens/menu/component/Menu";
 export default class PauseMenu extends Menu {
     protected multiplayerButton: Button;
     protected optionsButton: Button;

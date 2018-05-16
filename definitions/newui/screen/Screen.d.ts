@@ -1,8 +1,8 @@
 import { Bindable } from "Enums";
 import { BindCatcherApi } from "newui/BindingManager";
-import Component from "newui/element/Component";
-import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague } from "newui/element/IComponent";
-import Tooltip from "newui/element/Tooltip";
+import Component from "newui/component/Component";
+import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague } from "newui/component/IComponent";
+import Tooltip from "newui/component/Tooltip";
 import { UiApi } from "newui/INewUi";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
 import Log from "utilities/Log";

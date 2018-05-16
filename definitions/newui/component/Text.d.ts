@@ -1,6 +1,6 @@
 import { UiTranslation } from "language/ILanguage";
-import Component from "newui/element/Component";
-import { IComponentOptions, TranslationData } from "newui/element/IComponent";
+import Component from "newui/component/Component";
+import { IComponentOptions, TranslationData } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface TextOptions extends IComponentOptions {

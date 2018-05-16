@@ -1,5 +1,5 @@
-import Component from "newui/element/Component";
-import { IComponentOptions } from "newui/element/IComponent";
+import Component from "newui/component/Component";
+import { IComponentOptions } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 export interface BlockRowData {
     childCount: number;

@@ -91,6 +91,7 @@ export declare enum Hook {
     PreRenderWorld = "preRenderWorld",
     ProcessInput = "processInput",
     ShouldRender = "shouldRender",
+    ShouldDisplayMessage = "shouldDisplayMessage",
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {

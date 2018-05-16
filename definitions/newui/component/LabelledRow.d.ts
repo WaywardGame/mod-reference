@@ -1,5 +1,5 @@
-import { BlockRow } from "newui/element/BlockRow";
-import { IComponentOptions, TextOrTranslationData } from "newui/element/IComponent";
+import { BlockRow } from "newui/component/BlockRow";
+import { IComponentOptions, TextOrTranslationData } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 export interface LabelledRowOptions extends IComponentOptions {
     label?: TextOrTranslationData;

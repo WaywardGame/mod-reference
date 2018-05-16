@@ -2,8 +2,7 @@ import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { IMessagePack, Message, MessageType } from "language/IMessages";
-import { MenuId } from "newui/screen/screens/menu/element/IMenu";
-import { IPlayer } from "player/IPlayer";
+import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import { IPropSerializable } from "save/ISerializer";
 import { HintType } from "ui/IHint";
 import Emitter from "utilities/Emitter";
@@ -77,7 +76,6 @@ export interface IUi extends IPropSerializable, Emitter {
     isHelpOverlayEnabled(): boolean;
     isOptionsOverlayEnabled(): boolean;
     displayHint(human: IBaseHumanEntity | undefined, hintType: HintType, force?: boolean): boolean;
-    displayChatMessage(player: IPlayer, message: string): void;
     getCurrentHint(): HintType;
     setCurrentHint(hintType: HintType): void;
     toggleHelp(): void;

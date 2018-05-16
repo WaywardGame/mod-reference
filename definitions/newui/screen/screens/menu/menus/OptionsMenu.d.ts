@@ -1,7 +1,7 @@
-import Component from "newui/element/Component";
-import { Paragraph, TextOptions } from "newui/element/Text";
+import Component from "newui/component/Component";
+import { Paragraph, TextOptions } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
-import Menu, { ITabSection, MenuTabOptions } from "newui/screen/screens/menu/element/Menu";
+import Menu, { ITabSection, MenuTabOptions } from "newui/screen/screens/menu/component/Menu";
 export declare enum OptionsTab {
     General = 0,
     Audio = 1,

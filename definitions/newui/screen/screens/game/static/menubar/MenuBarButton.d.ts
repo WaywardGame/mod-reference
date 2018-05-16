@@ -1,4 +1,4 @@
-import Button from "newui/element/Button";
+import Button from "newui/component/Button";
 import { UiApi } from "newui/INewUi";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 export default class MenuBarButton extends Button {

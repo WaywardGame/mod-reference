@@ -1,5 +1,5 @@
-import Component from "newui/element/Component";
-import { IComponent, ITooltipOptionsVague } from "newui/element/IComponent";
+import Component from "newui/component/Component";
+import { IComponent, ITooltipOptionsVague } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 export default class TooltipManager {
     private readonly uiApi;

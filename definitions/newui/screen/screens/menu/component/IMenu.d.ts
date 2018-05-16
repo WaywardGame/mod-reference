@@ -1,4 +1,4 @@
-import { IComponent } from "newui/element/IComponent";
+import { IComponent } from "newui/component/IComponent";
 export declare enum MenuId {
     BACK = -1,
     NONE = 0,

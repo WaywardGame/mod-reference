@@ -1,6 +1,6 @@
-import InputButton from "newui/element/InputButton";
+import InputButton from "newui/component/InputButton";
 import { UiApi } from "newui/INewUi";
-import Menu from "newui/screen/screens/menu/element/Menu";
+import Menu from "newui/screen/screens/menu/component/Menu";
 export default class LoadGameMenu extends Menu {
     private readonly slots;
     private slotsWrapper;

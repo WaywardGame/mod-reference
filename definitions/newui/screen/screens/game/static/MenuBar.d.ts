@@ -1,6 +1,6 @@
 import { UiTranslation } from "language/ILanguage";
 import { UiApi } from "newui/INewUi";
-import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/element/QuadrantComponent";
+import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import MenuBarButton from "newui/screen/screens/game/static/menubar/MenuBarButton";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 export default class MenuBar extends QuadrantComponent {

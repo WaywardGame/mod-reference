@@ -1,6 +1,6 @@
-import Component from "newui/element/Component";
-import { IComponentOptions } from "newui/element/IComponent";
-import { Refreshable } from "newui/element/Refreshable";
+import Component from "newui/component/Component";
+import { IComponentOptions } from "newui/component/IComponent";
+import { Refreshable } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 export interface RangeInputOptions extends IComponentOptions {
     min?: number;

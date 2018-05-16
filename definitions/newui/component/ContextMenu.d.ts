@@ -1,6 +1,6 @@
-import Button from "newui/element/Button";
-import Component from "newui/element/Component";
-import { IContextMenu, TextOrTranslationData, TextOrTranslationDataOrSectionsOrGenerator } from "newui/element/IComponent";
+import Button from "newui/component/Button";
+import Component from "newui/component/Component";
+import { IContextMenu, TextOrTranslationData, TextOrTranslationDataOrSectionsOrGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 export declare type IOptionDescription = {
     text: TextOrTranslationData;
