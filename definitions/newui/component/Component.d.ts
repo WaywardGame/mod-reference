@@ -1,4 +1,4 @@
-import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague, SelectableLayer } from "newui/component/IComponent";
+import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
@@ -24,6 +24,7 @@ export default class Component extends Emitter implements IComponent {
     private _tooltipOptions?;
     private contextMenuGenerator?;
     selectable: SelectableLayer | false;
+    constructor(uiApi: UiApi, elementType?: string, namespace?: Namespace);
     constructor(uiApi: UiApi, options?: IComponentOptions);
     jsonData<T>(): DOMStringMap & T;
     isVisible(): boolean;

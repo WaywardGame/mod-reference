@@ -9,7 +9,8 @@ export interface ISteamworks extends Emitter {
     debugLog(...args: any[]): void;
     deleteSaveGameMod(name: string): void;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
-    getAbsolutePath(p: string): string;
+    getAbsolutePath(...p: string[]): string;
+    getAsarPath(...p: string[]): string;
     getBetaName(): string;
     getBuildTime(): number | undefined;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;

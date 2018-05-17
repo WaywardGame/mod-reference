@@ -21,6 +21,11 @@ export default class ItemRecipeRequirementChecker {
     process(allowProtectedCraftingItems?: boolean): boolean;
     setRecipe(recipe: IRecipe): void;
     /**
+     * Looks around adjacent containers
+     * @returns true if the recipe's requirements are satisfied
+     */
+    processAdjacent(allowProtectedCraftingItems?: boolean): boolean;
+    /**
      * Looks inside the container and its subcontainers.
      * @param container The container
      * @returns true if the recipe's requirements are satisfied by items in the container.

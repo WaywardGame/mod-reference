@@ -30,6 +30,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
     getAbsolutePath(...p: string[]): string;
+    getAsarPath(...p: string[]): string;
     isDedicatedServer(): boolean;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;

@@ -3,11 +3,13 @@ import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import { UiApi } from "newui/INewUi";
 import Screen from "newui/screen/Screen";
+import Dialog from "newui/screen/screens/game/component/Dialog";
 import MenuBar from "newui/screen/screens/game/static/MenuBar";
 import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
 export default class GameScreen extends Screen implements IHookHost {
+    dialogs: Dialog[];
     menuBar: MenuBar;
     stats: Stats;
     quickslots: Quickslots;
@@ -17,6 +19,7 @@ export default class GameScreen extends Screen implements IHookHost {
     constructor(uiApi: UiApi);
     create(): void;
     onGameStart(): void;
+    addDialog(dialog: Dialog): void;
     protected bindLoop(api: BindCatcherApi): Promise<boolean | Bindable>;
     /**
      * Adds a quadrant element to the screen.

@@ -16,7 +16,7 @@ declare global  {
          * Returns an iterable that will loop only over the entries that match the given filter
          * @param filter A function that returns true if the value should be included and false if it shouldn't
          */
-        filter(filter: (val: T) => boolean): IterableIterator<T>;
+        filter<X = T>(filter: (val: T) => boolean): IterableIterator<X>;
         /**
          * Returns an iterable that will first loop over the entries in itself, then the entries in the given iterables
          * @param iterables The other iterables to loop over
@@ -102,6 +102,19 @@ declare global  {
          * This method will be removed when it becomes native in Chromium 66+
          */
         values(): IterableIterator<T>;
+        /**
+         * Returns the first element in the array.
+         *
+         * Make a TS issue if you want to remove this helper. `[0]` doesn't want to stay indented.
+         */
+        first(): T;
+        /**
+         * Returns the last element in the array.
+         *
+         * Make a TS issue if you want to remove this helper. Same thing as `.first()` but also this
+         * is nicer than `[this.length - 1]`
+         */
+        last(): T;
     }
     interface Map<K, V> {
         /**

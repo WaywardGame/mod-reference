@@ -84,7 +84,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isAnimated?: boolean;
     isFlammable?: boolean;
     isLocked?: boolean;
-    isRepairable?: boolean;
+    repairItem?: ItemType;
     isTall?: boolean;
     isTrap?: boolean;
     isWaterSource?: boolean;
