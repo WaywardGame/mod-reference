@@ -52,12 +52,12 @@ export default abstract class QuadrantComponent extends StaticComponent {
     /**
      * The ID is used for `Switch With` context menu options
      */
-    protected abstract getID(): string;
+    abstract getID(): string | number;
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     protected abstract getName(): TextOrTranslationData;
-    protected getContextMenuDescription(): Array<[number, IOptionDescription]>;
+    protected getContextMenuDescription(): Array<[number | string, IOptionDescription]>;
     /**
      * Returns a new context menu using this element's context menu descriptions
      */

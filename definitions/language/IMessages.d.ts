@@ -3,6 +3,9 @@ export interface IMessagePack {
     type?: MessageType;
     args?: string | number | any[];
 }
+export declare module IMessagePack {
+    function getArgs(messagePack: IMessagePack): any[];
+}
 export declare enum MessageType {
     None = 0,
     Bad = 1,

@@ -1,6 +1,7 @@
 import { UiTranslation } from "language/ILanguage";
 import { UiApi } from "newui/INewUi";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import MenuBarButton from "newui/screen/screens/game/static/menubar/MenuBarButton";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 export default class MenuBar extends QuadrantComponent {
@@ -14,7 +15,7 @@ export default class MenuBar extends QuadrantComponent {
      * Removes any existing groups of menubar buttons, then initializes new ones from the `MenuBarButtonType` enum.
      */
     refresh(): void;
-    protected getID(): string;
+    getID(): QuadrantComponentId;
     protected getName(): UiTranslation;
     /**
      * Creates a new menu bar button of the given type, and adds it to a group component. If the group

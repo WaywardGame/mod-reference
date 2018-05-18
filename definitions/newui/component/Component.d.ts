@@ -3,7 +3,7 @@ import { UiApi } from "newui/INewUi";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
 export default class Component extends Emitter implements IComponent {
-    protected uiApi: UiApi;
+    protected api: UiApi;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement): Promise<void>;
@@ -48,7 +48,7 @@ export default class Component extends Emitter implements IComponent {
     /**
      * Set the context menu for this element
      */
-    setContextMenu(generator: () => IContextMenu): void;
+    setContextMenu(generator: () => IContextMenu | undefined): void;
     getBox(): ClientRect | DOMRect;
     getOffset(): {
         top: number;

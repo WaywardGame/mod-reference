@@ -1,7 +1,7 @@
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { IMessagePack, Message, MessageType } from "language/IMessages";
+import { IMessagePack, Message } from "language/IMessages";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import { IPropSerializable } from "save/ISerializer";
 import { HintType } from "ui/IHint";
@@ -84,10 +84,6 @@ export interface IUi extends IPropSerializable, Emitter {
     refreshWorldTooltips(): void;
     messageIdToText(message: Message): string;
     getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
-    displayMessage(human: IBaseHumanEntity | IBaseHumanEntity[] | undefined, message: Message | string, messageType?: MessageType, ...args: any[]): void;
-    displayMessagePack(human: IBaseHumanEntity | IBaseHumanEntity[] | undefined, messagePack: IMessagePack): void;
-    getMessageCount(): number;
-    removeOldestMessage(): void;
     updateMilestonesDialog(): void;
     updateSkillsDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;

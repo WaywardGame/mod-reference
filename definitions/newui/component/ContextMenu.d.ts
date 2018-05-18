@@ -11,10 +11,10 @@ export declare type IOptionDescription = {
 });
 export declare enum ContextMenuEvent {
     Chosen = "Chosen",
-    ShowSubmenu = "ShowSubmenu",
+    BecomeActive = "ShowSubmenu",
 }
 export default class ContextMenu<OptionType extends number | string = number | string> extends Component implements IContextMenu<OptionType> {
-    private submenuOption;
+    private activeOption;
     private readonly descriptions;
     private readonly options;
     constructor(uiApi: UiApi, ...descriptions: Array<[OptionType, IOptionDescription]>);
@@ -28,8 +28,12 @@ export default class ContextMenu<OptionType extends number | string = number | s
 }
 export declare class ContextMenuOption extends Button {
     private submenu?;
+    private readonly submenuDescription?;
+    private isActive;
     constructor(uiApi: UiApi, description: IOptionDescription);
     setText(text: TextOrTranslationDataOrSectionsOrGenerator): this;
     hideSubmenu(): void;
+    onSelected(): void;
+    onUnselected(): void;
     protected showSubmenu(generator: (uiApi: UiApi) => IContextMenu): void;
 }

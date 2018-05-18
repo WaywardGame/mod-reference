@@ -3,7 +3,7 @@ import "ui/functional/FunctionalTooltip";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { IMessagePack, Message, MessageType } from "language/IMessages";
+import { IMessagePack, Message } from "language/IMessages";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import { HintType } from "ui/IHint";
 import { IDialogInfo, IUi } from "ui/IUi";
@@ -52,16 +52,6 @@ export default class Ui extends Emitter implements IUi {
     refreshWorldTooltips(): void;
     messageIdToText(message: Message): string;
     getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
-    /**
-     * @deprecated
-     */
-    displayMessage(human: IBaseHumanEntity | IBaseHumanEntity[] | undefined, message: Message | string, messageType?: MessageType, ...args: any[]): void;
-    /**
-     * @deprecated
-     */
-    displayMessagePack(human: IBaseHumanEntity | IBaseHumanEntity[] | undefined, messagePack: IMessagePack): void;
-    getMessageCount(): number;
-    removeOldestMessage(): void;
     updateMilestonesDialog(): void;
     updateSkillsDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;

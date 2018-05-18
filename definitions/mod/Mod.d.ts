@@ -1,7 +1,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { MessageSource } from "game/IMessageManager";
 import { IContainer, IItem } from "item/IItem";
 import BaseMod from "mod/BaseMod";
@@ -78,14 +78,14 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onDisplayMessage(source: MessageSource[], message: IStringSection[]): void;
     shouldDisplayMessage(source: MessageSource[], message: IStringSection[], messageId: number): boolean | undefined;
     onDoodadSpawn(doodad: IDoodad): void;
-    onGameEnd(): void;
+    onGameEnd(state: PlayerState): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onGameTickStart(): void;
     onGameTickEnd(): void;
     onInspectTile(player: IPlayer, tile: ITile): IInspect[] | undefined;
-    onInventoryItemAdd(player: IPlayer, item: IItem, container: IContainer): void;
-    onInventoryItemRemove(player: IPlayer, item: IItem, container: IContainer): void;
-    onInventoryItemUpdate(player: IPlayer, item: IItem, container: IContainer): void;
+    onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemRemove(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemUpdate(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     onItemDamage(item: IItem, modifier?: number): number | undefined;
     onItemEquip(player: IPlayer, item: IItem, slot: EquipType): void;
     onItemQuickslot(item: IItem, player: IPlayer, quickSlot: number | undefined): void;

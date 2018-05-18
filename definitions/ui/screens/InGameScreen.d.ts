@@ -1,7 +1,7 @@
 import { ActionType, Bindable, DialogId, EquipType, FacingDirection, ItemType, SkillType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
-import { IMessagePack, Message } from "language/IMessages";
-import { BindCatcherApi, IBinding } from "newui/BindingManager";
+import { Message } from "language/IMessages";
+import { BindCatcherApi } from "newui/BindingManager";
 import { ITile } from "tile/ITerrain";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
@@ -34,10 +34,7 @@ export default class InGameScreen extends BaseScreen {
     elementReputationMalignity: JQuery;
     elementReputationBenignity: JQuery;
     elementQuickSlotsContainer: JQuery;
-    elementMessagesOverlay: JQuery;
-    elementMessagesChatInput: JQuery;
     elementActions: JQuery;
-    elementChatButton: JQuery;
     elementDialogs: JQuery;
     elementDialogInventory: JQuery;
     elementDialogInventoryContainer: JQuery;
@@ -52,9 +49,6 @@ export default class InGameScreen extends BaseScreen {
     elementDialogSkillsContainer: JQuery;
     elementDialogMilestones: JQuery;
     elementDialogMilestonesContainer: JQuery;
-    elementDialogMessages: JQuery;
-    elementDialogMessagesContainer: JQuery;
-    elementDialogMessagesChatInput: JQuery;
     elementDialogMap: JQuery;
     elementDialogBook: JQuery;
     elementDialogBookContainer: JQuery;
@@ -80,17 +74,11 @@ export default class InGameScreen extends BaseScreen {
     private sortableElementTargetContainer;
     private sortingCancelled;
     private onSortableAction;
-    private onChatKeyDown;
-    private onChatKeyUp;
-    private chatKeys;
     private canUseQuickslot;
     private delayState;
     private isCurrentlySorting;
     private craftableItemTypes;
     private nonCraftableItemTypes;
-    private messages;
-    private messageOverlayCount;
-    private messageLoadIndex;
     private worldTooltip;
     private lastStats;
     selector(): string;
@@ -104,7 +92,6 @@ export default class InGameScreen extends BaseScreen {
     pressHotKey(hotKeyNumber: number): boolean;
     useQuickSlot(slot: number): boolean;
     runQuickslot(item: IItem, actionType: ActionType): void;
-    onChatEnter(chatElement: JQuery): void;
     isSorting(): boolean;
     runSortableAction(sortable: JQuery, action: string, ...data: any[]): void;
     runGlobalSortableAction(action: string, ...data: any[]): void;
@@ -114,7 +101,6 @@ export default class InGameScreen extends BaseScreen {
     canMove(api: BindCatcherApi): boolean;
     onShow(): void;
     onHide(): void;
-    getChatBindState(chatBinds: IBinding[], eventCode: string): boolean;
     initializeGameState(): void;
     onGameEnd(showDeath: boolean): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
@@ -169,10 +155,7 @@ export default class InGameScreen extends BaseScreen {
     getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: string | undefined, isNPC: boolean): string;
     additionalRequirements(itemType: ItemType, recipe: IRecipe): string;
     getTooltipHtmlForTile(tile: ITile): string;
-    displayMessagePack(messagePack: IMessagePack): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
-    getMessageCount(): number;
-    removeOldestMessage(): void;
     getUsedQuickSlots(): number[];
     getFreeQuickSlots(): number[];
     getQuickSlotItemElement(quickSlot: number): JQuery;
@@ -212,7 +195,6 @@ export default class InGameScreen extends BaseScreen {
     hideActionsMenu(): void;
     toggleActionsMenu(center?: boolean): void;
     showActionsMenu(center?: boolean, updatePosition?: boolean, skipSound?: boolean): void;
-    onClearMessages(): void;
     onCopySelectedText(): void;
     onFilterInput(containerElement: JQuery): void;
     showSortContextMenu(element: JQuery, container: JQuery, messageType: Message): void;
@@ -227,9 +209,6 @@ export default class InGameScreen extends BaseScreen {
     onBindLoop(api: BindCatcherApi, bindPressed?: boolean | Bindable): boolean | Bindable;
     private runAction(itemId, containerId, action, skipSound?);
     private updateContextMenu(contextMenu);
-    private onOpenMessages();
-    private getMessagesHtml();
-    private onCloseMessages();
     private runGatherOrHarvestAction(actionType, action);
     private runPourAction(actionType, item, action);
     private isOverlayVisible();

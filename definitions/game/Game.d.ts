@@ -122,6 +122,7 @@ export default class Game extends Emitter implements IGame {
         slot: number;
     }): Promise<boolean>;
     play(options: Partial<IPlayOptions>): Promise<boolean>;
+    setLocalPlayer(player: IPlayer): void;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     removePlayer(pid: number): void;
     deletePlayer(plys: IPlayer[], identifier: string): void;
@@ -208,7 +209,6 @@ export default class Game extends Emitter implements IGame {
     private tickDayNightCycle(realPlayers);
     private runRandomEvents(player);
     private upgradeToClasses<T>(arr, c, onUpdate?);
-    private processMessages();
     private prePlay(isLoadingSave, options);
     private playPostSeed(options);
     private render();

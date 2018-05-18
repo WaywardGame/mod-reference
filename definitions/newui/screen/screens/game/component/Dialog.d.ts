@@ -1,11 +1,7 @@
 import Component from "newui/component/Component";
+import { TextOrTranslationData } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
-export declare enum Edge {
-    Top = 0,
-    Right = 1,
-    Bottom = 2,
-    Left = 3,
-}
+import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 /**
  * The positions of each edge of the dialog. Stored as percentages.
  */
@@ -21,8 +17,12 @@ export declare enum DialogEvent {
      * @returns A `IterableOf<Dialog>` containing sibling dialogs. The list may contain this dialog.
      */
     GetDialogList = "GetDialogList",
+    /**
+     * Emitted when the close button is pressed in the dialog, or when the `close` method is called.
+     */
+    Close = "Close",
 }
-export default class Dialog extends Component {
+export default abstract class Dialog extends Component {
     protected body: Component;
     protected header: Component;
     protected footer: Component;
@@ -34,15 +34,45 @@ export default class Dialog extends Component {
      * The last edge positions of the dialog. Used when a handle is being moved.
      */
     private lastEdges;
+    /**
+     * The description of how the dialog should be sized. (min, default, and max sizes and the position)
+     */
+    private description;
     constructor(uiApi: UiApi);
+    /**
+     * Closes the dialog.
+     *
+     * Also the event handler for when the close button is pressed in the dialog's header.
+     */
+    close(): void;
+    /**
+     * Sets the dialog position.
+     */
+    setSizeAndPosition(description: IDialogDescription): void;
     /**
      * Set the position of an edge.
      */
     setEdgePosition(edge: Edge, position: number): void;
     /**
+     * The ID is used for `Switch With` context menu options
+     */
+    abstract getID(): DialogId;
+    /**
+     * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
+     */
+    protected abstract getName(): TextOrTranslationData;
+    /**
+     * Event handler for when this dialog is appended
+     */
+    private onAppend();
+    /**
      * Event handler for when a dialog handle starts to be moved.
      */
     private onHandleMoveStart();
+    /**
+     * Caches the current edge positions so any resizing/movement knows where it's moving from
+     */
+    private cacheLastEdges();
     /**
      * Event handler for when a dialog handle finishes being moved.
      */
@@ -75,6 +105,11 @@ export default class Dialog extends Component {
      * movement, or the nearest snap position.
      */
     private getNewEdgePositionOrSnap(edge, move);
+    /**
+     * Takes an edge and the generated edge position, and clamps the new edge position so that the
+     * width and height of the dialog are within the described sizes.
+     */
+    private clampAxisLength(edge, newEdgePosition);
     /**
      * Returns the snap position for a given `Edge`, based on where it's moving to.
      */

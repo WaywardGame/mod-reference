@@ -47,4 +47,5 @@ declare module Objects {
     function objectDeepClone<T>(obj: T): T;
     function followDirections<T>(target: any, directions: string[]): T | undefined;
 }
+export declare function Bound<T extends (...args: any[]) => any>(target: object, propertyKey: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
 export default Objects;

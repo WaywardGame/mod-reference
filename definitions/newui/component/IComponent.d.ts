@@ -7,10 +7,11 @@ export declare enum ComponentEvent {
     Hide = 1,
     Append = 2,
     Remove = 3,
-    AddChild = 4,
-    RemoveChild = 5,
-    Change = 6,
-    Tooltip = 7,
+    RemoveForAppend = 4,
+    AddChild = 5,
+    RemoveChild = 6,
+    Change = 7,
+    Tooltip = 8,
 }
 export interface IComponent extends Emitter {
     /**

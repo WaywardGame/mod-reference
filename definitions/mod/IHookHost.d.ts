@@ -1,7 +1,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { MessageSource } from "game/IMessageManager";
 import { IContainer, IItem } from "item/IItem";
 import { Hook } from "mod/IHookManager";
@@ -283,7 +283,7 @@ export interface IHookHost {
     /**
      * Called when the game is ending
      */
-    onGameEnd?(): void;
+    onGameEnd?(state: PlayerState): void;
     /**
      * Called when the game is starting
      * @param isLoadingSave True if a save game was loaded
@@ -311,21 +311,21 @@ export interface IHookHost {
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    onInventoryItemAdd?(player: IPlayer, item: IItem, container: IContainer): void;
+    onInventoryItemAdd?(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     /**
      * Called when an item is removed from the players inventory
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to.
      */
-    onInventoryItemRemove?(player: IPlayer, item: IItem, container: IContainer): void;
+    onInventoryItemRemove?(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
-    onInventoryItemUpdate?(player: IPlayer, item: IItem, container: IContainer): void;
+    onInventoryItemUpdate?(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     /**
      * Called when an item is damaged
      * @param player The player object

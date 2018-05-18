@@ -3,6 +3,7 @@ import IBaseEntity from "entity/IBaseEntity";
 import { EntityType } from "entity/IEntity";
 import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
+import { Message, MessageType } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
@@ -27,6 +28,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     skills: ISkillSet;
     state: PlayerState;
     swimming: boolean;
+    canSendMessage: boolean;
     addMilestone(milestone: MilestoneType, data?: number): void;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     cancelResting(reason: RestCancelReason): void;
@@ -48,6 +50,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     isGhost(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;
+    sendMessage(message: Message | string, type?: MessageType, ...args: any[]): boolean;
     setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaReduction(skillType: SkillType): void;
