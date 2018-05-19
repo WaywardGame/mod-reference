@@ -7,19 +7,24 @@ export declare enum InputEvent {
     Done = "Done",
     Enter = "Enter",
     Escape = "Escape",
+    Focus = "Focus",
+    Blur = "Blur",
 }
 export default class Input extends Component {
     default: TextOrTranslationData;
     text: string;
     private options;
+    private keydownEnter;
+    private keydownEscape;
     constructor(uiApi: UiApi, options?: InputOptions & IComponentOptions);
     setOptions(options: InputOptions): void;
     focus(): void;
-    blur(): void;
+    blur(event?: Event): void;
     /**
      * Reset the text of the input to the default, or to the clearTo option if that was provided
      * @param useDefault Whether to use the default over clearTo
      */
     clear(useDefault?: boolean): void;
-    private change(value?);
+    private keydown(event);
+    private change(eventOrText);
 }

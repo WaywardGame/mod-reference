@@ -1,3 +1,6 @@
+import { Bindable } from "Enums";
+import { IHookHost } from "mod/IHookHost";
+import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
 import { IComponentOptions } from "newui/component/IComponent";
 import { Refreshable } from "newui/component/Refreshable";
@@ -15,7 +18,7 @@ export interface IDropdownOption<OptionId> {
 export declare enum DropdownEvent {
     Selection = "Selection",
 }
-export default class Dropdown<OptionId = string | number> extends Component implements Refreshable {
+export default class Dropdown<OptionId = string | number> extends Component implements Refreshable, IHookHost {
     protected optionsWrapper: Component;
     private readonly inputButton;
     private options;
@@ -26,8 +29,8 @@ export default class Dropdown<OptionId = string | number> extends Component impl
     private isFirstSelection;
     private _selection;
     readonly selection: OptionId;
-    private _bindLoop;
     constructor(uiApi: UiApi, options?: IDropdownOptions<OptionId>);
+    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Adds an option permanently to the dropdown. When options are added this way, the dropdown list is not refreshable.
      * @param optionId The ID of the option, a string or number.
@@ -48,5 +51,4 @@ export default class Dropdown<OptionId = string | number> extends Component impl
     refresh(): Promise<void>;
     private addOptionInternal(optionId, options);
     private filter(filterBy?);
-    private onBindLoop(_, api);
 }

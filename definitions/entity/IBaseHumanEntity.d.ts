@@ -46,7 +46,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     getEquipSlotForItem(item: IItem): EquipType | undefined;
     getHandToUse(): EquipType | undefined;
     getMaxHealth(): number;
-    getName(html?: boolean): string;
+    getName(): string;
     isGhost(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;

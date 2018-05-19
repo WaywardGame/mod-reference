@@ -42,7 +42,7 @@ export interface IHookHost {
     [SYMBOL_HOOKS]?: {
         [hook in Hook]?: number;
     };
-    [HOST_NAME]?: string;
+    [HOST_NAME]?: string[];
     /**
      * Get the ambient color
      * @param colors The current ambient colors
@@ -366,12 +366,34 @@ export interface IHookHost {
      */
     onCreatureSpawn?(creature: ICreature): void;
     /**
-     * Called when in-game, on the bind catcher loop (once per frame). When overriding this method, make sure you return bindPressed.
+     * Called when in-game, on the bind catcher loop (once per frame).
      * @param bindPressed Whether a bind has been pressed. Use this as a final check before processing a bind, and set it to true when a bind was pressed.
      * @param api The bind catcher api, allowing you to check whether binds are pressed
-     * @returns True if a bind was pressed, undefined otherwise
+     * @returns Whether a bind was pressed.
+     *
+     * To use this hook, we recommend writing your method similarly to the following:
+     *
+     * ```ts
+     * onBindLoop(bindPressed: Bindable | boolean | undefined, api: BindCatcherApi) {
+     * 	if (api.wasPressed(<the bind you want to check> && !bindPressed)) {
+     * 		// do things with that info
+     * 		bindPressed = <the bind you just checked>;
+     * 	}
+     *
+     * 	return bindPressed;
+     * }
+     * ```
+     *
+     * The reason we call `wasPressed` even if a bind has already been pressed is that the `wasPressed`
+     * method is not greedy, and does not check all possible binds every single frame. This being the
+     * case, any binds that you need to know if they become pressed in a frame need to be checked
+     * *every frame*. By putting the `wasPressed` before the `!bindPressed` check, you check the bind
+     * every frame regardless of whether another bind has been pressed. (And the `wasPressed` call
+     * won't be short-circuited out)
+     *
+     * At the end you return the updated status of whether a bind has been pressed.
      */
-    onBindLoop?(bindPressed: true | undefined, api: BindCatcherApi): true | undefined;
+    onBindLoop?(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Called when the player is moving
      * @param player The player object

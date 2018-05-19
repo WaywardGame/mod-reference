@@ -11,7 +11,6 @@ export declare enum ScreenEvent {
     ShowMenu = "ShowMenu",
     HideMenu = "HideMenu",
     GoBackMenu = "GoBackMenu",
-    BindLoop = "BindLoop",
     /**
      * Triggered when a tooltip is to be shown on this screen.
      *

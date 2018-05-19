@@ -28,7 +28,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     closeDialog(id: DialogId): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
-    protected bindLoop(api: BindCatcherApi): Promise<boolean | Bindable>;
+    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Adds a quadrant element to the screen.
      *

@@ -119,7 +119,14 @@ export interface IEmitterHostRegistrationChain {
 }
 export default interface IHookManager {
     register<H extends IHookHost>(host: H, name?: string): H extends Emitter ? IEmitterHostRegistrationChain : void;
+    /**
+     * Deregisters the given `IHookHost` if it is registered.
+     */
     deregister(host: IHookHost): void;
+    /**
+     * Deregisters the given `IHookHost` if it is registered under the given name.
+     */
+    deregister(host: IHookHost, name?: string): void;
     getHostsWithHook(hook: Hook): IterableIterator<IHookHost>;
     /**
      * Returns the internal list of mods with a hook and their priorities.

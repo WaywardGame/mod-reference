@@ -1,4 +1,7 @@
+import { Bindable } from "Enums";
 import { UiTranslation } from "language/ILanguage";
+import { IHookHost } from "mod/IHookHost";
+import { BindCatcherApi } from "newui/BindingManager";
 import { BlockRow } from "newui/component/BlockRow";
 import Button, { ButtonEffect, ButtonOptions, DefaultButtonOptions } from "newui/component/Button";
 import Component from "newui/component/Component";
@@ -20,7 +23,7 @@ export declare enum MenuEvent {
     CancelBind = "CancelBind",
     EnterBind = "EnterBind",
 }
-export default class Menu extends Component implements IMenu {
+export default class Menu extends Component implements IMenu, IHookHost {
     screenHost: IScreen;
     protected contentWrapper: Component;
     protected canCancel: boolean | undefined;
@@ -30,7 +33,6 @@ export default class Menu extends Component implements IMenu {
     private tabs;
     private _canShowTooltip;
     readonly canShowTooltip: boolean;
-    private bindLoop;
     private readonly selectables;
     private readonly _title;
     title: TextOrTranslationData;
@@ -39,6 +41,7 @@ export default class Menu extends Component implements IMenu {
     private _isSubmenu;
     isSubmenu: boolean;
     constructor(uiApi: UiApi, options: MenuOptions);
+    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     scrollToTop(): void;
     select(element: HTMLElement): void;
     getSelection(): HTMLElement;
@@ -66,6 +69,8 @@ export default class Menu extends Component implements IMenu {
     toggleTab(tabId: string | number, disabled?: boolean): void;
     load(...args: any[]): Promise<void>;
     protected updateBottomPadding(): void;
+    private onShow();
+    private onHide();
 }
 export interface ITabSection {
     tab: Tab;

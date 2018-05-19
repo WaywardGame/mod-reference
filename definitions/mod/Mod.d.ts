@@ -92,7 +92,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDamage(creature: ICreature, damageInfo: IDamageInfo): number | undefined;
     onCreatureDeath(creature: ICreature): void;
     onCreatureSpawn(creature: ICreature): void;
-    onBindLoop(bindPressed: true | undefined, api: BindCatcherApi): true | undefined;
+    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean | undefined;
     onMoveComplete(player: IPlayer): void;
     onMoveDirectionUpdate(player: IPlayer, direction: FacingDirection): void;

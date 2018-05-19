@@ -35,11 +35,11 @@ export default class ModManager implements IModManager {
      * @see `getHook(hookName, defaultValue).call(...args)`
      */
     callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
-    load(index: number): void;
-    unload(index: number): void;
+    load(index: number, cacheHooks?: boolean): void;
+    unload(index: number, cacheHooks?: boolean): void;
     save(index: number): void;
-    reloadByName(name: string): boolean;
-    reload(index: number): boolean;
+    reloadByName(name: string, cacheHooks?: boolean): boolean;
+    reload(index: number, cacheHooks?: boolean): boolean;
     isValid(index: number): boolean;
     isEnabled(index: number): boolean;
     isLoaded(index: number): boolean;

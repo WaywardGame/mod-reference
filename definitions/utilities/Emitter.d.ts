@@ -23,15 +23,15 @@ export default class Emitter {
     /**
      * Removes all event handlers for the given event(s).
      */
-    cancel(events: string | number | Array<string | number>): void;
+    cancel(events: string | number | Array<string | number>): this;
     /**
      * Removes the given event handler for the given event(s).
      */
-    cancel(events: string | number | Array<string | number>, cb: (emitter: this, ...data: any[]) => any): void;
+    cancel(events: string | number | Array<string | number>, cb: (emitter: this, ...data: any[]) => any): this;
     /**
      * Removes all event handlers.
      */
-    cancelAll(): void;
+    cancelAll(): this;
     /**
      * Returns a promise that will resolve when the event is triggered.
      */

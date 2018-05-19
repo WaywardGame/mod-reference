@@ -54,6 +54,14 @@ export default abstract class Dialog extends Component {
      */
     setEdgePosition(edge: Edge, position: number): void;
     /**
+     * Mark that this dialog is "active"
+     */
+    markActive(): void;
+    /**
+     * Mark that this dialog is not "active"
+     */
+    markInactive(): void;
+    /**
      * The ID is used for `Switch With` context menu options
      */
     abstract getID(): DialogId;

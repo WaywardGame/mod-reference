@@ -8,7 +8,7 @@ export default class HookManager implements IHookManager {
     private cachedHooks;
     constructor(modManager: IModManager);
     register<H extends IHookHost>(host: H, name?: string): H extends Emitter ? IEmitterHostRegistrationChain : void;
-    deregister(host: IHookHost, cacheHooks?: boolean): void;
+    deregister(host: IHookHost, name?: string, cacheHooks?: boolean): void;
     getHostsWithHook(hook: Hook): IterableIterator<IHookHost>;
     getCachedHook(hook: Hook): ICachedHook | undefined;
     cacheHooks(): void;

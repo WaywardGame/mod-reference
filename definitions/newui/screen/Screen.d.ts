@@ -1,4 +1,5 @@
 import { Bindable } from "Enums";
+import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
 import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague } from "newui/component/IComponent";
@@ -11,13 +12,12 @@ export interface ScreenOptions extends IComponentOptions {
     retain?: boolean;
     isSubscreen?: boolean;
 }
-export default abstract class Screen extends Component implements IScreen {
+export default abstract class Screen extends Component implements IScreen, IHookHost {
     readonly retain: boolean;
     readonly isSubscreen: boolean;
     protected lastTooltipSource?: Component;
     protected tooltip: Tooltip;
     protected log: Log;
-    private readonly tooltipMousemoveListener;
     private contextMenu?;
     constructor(uiApi: UiApi, options: ScreenOptions);
     /**
@@ -55,5 +55,9 @@ export default abstract class Screen extends Component implements IScreen {
      */
     setContextMenu(generator: () => IContextMenu): void;
     removeContextMenu(contextMenu?: IContextMenu): void;
-    protected bindLoop(api: BindCatcherApi): Promise<boolean | Bindable>;
+    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    private onShow();
+    private onClick();
+    private onMouseMove(event);
+    private onScreenResize();
 }

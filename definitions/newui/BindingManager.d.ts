@@ -42,9 +42,6 @@ export interface BindCatcherApi {
     isMouseWithin(element: Element | IComponent): boolean;
     isMouseWithin(element: Element | IComponent, mustBeTarget: boolean): boolean;
 }
-export declare enum BindingManagerEvent {
-    Loop = 0,
-}
 export declare class BindingManager extends Emitter {
     private static readonly defaultBinds;
     private readonly bindCatchers;

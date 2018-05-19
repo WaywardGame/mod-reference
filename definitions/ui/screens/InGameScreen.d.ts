@@ -206,7 +206,7 @@ export default class InGameScreen extends BaseScreen {
     updateSort(containerElement: JQuery, activeSort: boolean): void;
     isContainerDialogOver(x: number, y: number): boolean;
     onUpdateDirection(): void;
-    onBindLoop(api: BindCatcherApi, bindPressed?: boolean | Bindable): boolean | Bindable;
+    onBindLoop(api: BindCatcherApi, bindPressed: Bindable | boolean): boolean | Bindable;
     private runAction(itemId, containerId, action, skipSound?);
     private updateContextMenu(contextMenu);
     private runGatherOrHarvestAction(actionType, action);

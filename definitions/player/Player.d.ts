@@ -125,7 +125,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     isLocalPlayer(): boolean;
     isGhost(): boolean;
     isServer(): boolean;
-    getName(html?: boolean): string;
+    getName(): string;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
