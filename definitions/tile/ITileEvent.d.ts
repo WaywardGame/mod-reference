@@ -7,6 +7,7 @@ export interface ITileEventDescription extends IObjectDescription {
     items?: IResourceItem[];
     particles?: IRGB;
     graphicVariation?: boolean;
+    isFlammable?: boolean;
 }
 export interface ITileEvent extends IObject<TileEventType>, IVector3 {
     spread?: number;

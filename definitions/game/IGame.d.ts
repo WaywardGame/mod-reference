@@ -101,6 +101,7 @@ export interface IGame extends Emitter {
     getBlackness(): number;
     getCompletedMilestoneCount(): number;
     getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
+    isFlammable(x: number, y: number, z: number): boolean;
     getDifficulty(): Difficulty;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     getHeight(z0: number, z1: number, d: number): number;

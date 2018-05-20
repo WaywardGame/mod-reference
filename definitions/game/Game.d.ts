@@ -201,6 +201,7 @@ export default class Game extends Emitter implements IGame {
     getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
     wrapCoordinate(cordinate: number, reference: number): number;
     getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
+    isFlammable(x: number, y: number, z: number): boolean;
     private updateOptionInternal(id, value, player?);
     private tick();
     private updateEntityFov();
