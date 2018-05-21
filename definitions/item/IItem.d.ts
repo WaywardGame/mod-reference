@@ -76,6 +76,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
     getWorth(legendaryWorth?: boolean): number | undefined;
+    canBurnPlayer(): boolean;
 }
 export interface IItemOld {
     equipped?: EquipType;

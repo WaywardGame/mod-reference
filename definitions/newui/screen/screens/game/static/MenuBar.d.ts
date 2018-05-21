@@ -1,16 +1,16 @@
 import { UiTranslation } from "language/ILanguage";
-import { UiApi } from "newui/INewUi";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import MenuBarButton from "newui/screen/screens/game/static/menubar/MenuBarButton";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 export default class MenuBar extends QuadrantComponent {
+    private readonly gsapi;
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
     private _buttons;
     readonly buttons: Map<MenuBarButtonType, MenuBarButton>;
     private readonly groups;
-    constructor(uiApi: UiApi);
+    constructor(gsapi: IGameScreenApi);
     /**
      * Removes any existing groups of menubar buttons, then initializes new ones from the `MenuBarButtonType` enum.
      */

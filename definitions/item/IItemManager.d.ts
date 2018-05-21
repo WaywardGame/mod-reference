@@ -6,6 +6,7 @@ import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
+import { IStringSection } from "utilities/string/Interpolator";
 export interface IItemManager {
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
@@ -32,6 +33,8 @@ export interface IItemManager {
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
+    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: true): string;
+    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: false): IStringSection[];
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
     getLegendaryWeightCapacity(container: IContainer): number;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;

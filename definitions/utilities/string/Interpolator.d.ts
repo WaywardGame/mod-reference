@@ -3,7 +3,7 @@ export interface ISegmentApi {
 }
 export interface ISegment {
     regex: RegExp;
-    handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | IStringSection[];
+    handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | IterableOf<IStringSection>;
 }
 export interface IStringSection {
     content: string;

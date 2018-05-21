@@ -1,5 +1,6 @@
 import { Bindable } from "Enums";
 import { ITooltipOptions } from "newui/component/Tooltip";
+import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export declare enum MenuBarButtonType {
     Menu = 0,
     Save = 1,
@@ -33,8 +34,9 @@ export interface IMenuBarButtonDescription {
     bindable?: Bindable;
     /**
      * What should happen when this button is clicked.
+     * @returns `false` if the activation was cancelled, `true` or `undefined` otherwise.
      */
-    onActivate(): any;
+    onActivate(api: IGameScreenApi): boolean | undefined | void | Promise<void>;
 }
 export declare enum MenuBarButtonGroup {
     Meta = 0,

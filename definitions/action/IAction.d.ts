@@ -43,6 +43,7 @@ export interface IActionArgument {
     item?: IItem;
     itemComponentsConsumed?: IItem[];
     itemComponentsRequired?: IItem[];
+    itemComponentsCanBurn?: boolean;
     itemQuality?: ItemQuality;
     itemType?: ItemType;
     name?: string;

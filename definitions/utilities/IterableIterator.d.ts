@@ -89,6 +89,15 @@ declare global  {
          * Returns an iterator where any lower level iterables are splatted into the top layer
          */
         flat<N>(): IterableIterator<N>;
+        /**
+         * Returns an iterator returning only the values between `startIndex` and `endIndex`.
+         * @param startIndex Inclusive
+         * @param endIndex Exclusive, defaults to `Infinity` (entire iterator)
+         *
+         * Note: When passed negative indices, it works, but it's slower as it has to loop through
+         * the entire iterable first.
+         */
+        slice(startIndex: number, endIndex?: number): IterableIterator<T>;
     }
     interface RegExp {
         /**
@@ -146,3 +155,4 @@ declare module IterableIterator {
 }
 export default IterableIterator;
 export declare function Pipe<T = any>(...what: T[]): IterableIterator<T>;
+export declare function isIterable(obj: any): obj is IterableOf<any>;

@@ -70,6 +70,7 @@ export declare class BindingManager extends Emitter {
     checkModifiers(modifiers: KeyModifier[], exclude: string, id?: number): boolean;
     isPressed(bindOrKey: Bindable | string, id?: number): boolean;
     isAnythingPressed(id?: number): boolean;
+    isMouseWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;
     private startLoop();
 }

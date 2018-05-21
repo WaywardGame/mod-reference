@@ -7,6 +7,7 @@ export default class ItemRecipeRequirementChecker {
     itemBaseComponent: IItem | undefined;
     itemComponentsRequired: IItemArray;
     itemComponentsConsumed: IItemArray;
+    itemComponentsCanBurn: boolean;
     numComponentsNeeded: number;
     private baseComponent;
     private components;

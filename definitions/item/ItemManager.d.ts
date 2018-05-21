@@ -7,6 +7,7 @@ import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
+import { IStringSection } from "utilities/string/Interpolator";
 export default class ItemManager implements IItemManager {
     private readonly worldContainer;
     private cachedWeights;
@@ -67,6 +68,8 @@ export default class ItemManager implements IItemManager {
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
+    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: true): string;
+    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: false): IStringSection[];
     loadReferences(): void;
     saveTileReferences(): void;
     loadTileReferences(): void;

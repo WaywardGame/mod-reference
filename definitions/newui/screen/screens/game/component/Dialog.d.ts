@@ -1,7 +1,7 @@
 import Component from "newui/component/Component";
 import { TextOrTranslationData } from "newui/component/IComponent";
-import { UiApi } from "newui/INewUi";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
+import IGameScreenApi, { IDialog } from "newui/screen/screens/game/IGameScreenApi";
 /**
  * The positions of each edge of the dialog. Stored as percentages.
  */
@@ -22,7 +22,8 @@ export declare enum DialogEvent {
      */
     Close = "Close",
 }
-export default abstract class Dialog extends Component {
+export default abstract class Dialog extends Component implements IDialog {
+    protected readonly gsapi: IGameScreenApi;
     protected body: Component;
     protected header: Component;
     protected footer: Component;
@@ -38,7 +39,7 @@ export default abstract class Dialog extends Component {
      * The description of how the dialog should be sized. (min, default, and max sizes and the position)
      */
     private description;
-    constructor(uiApi: UiApi);
+    constructor(gsapi: IGameScreenApi);
     /**
      * Closes the dialog.
      *
@@ -68,7 +69,7 @@ export default abstract class Dialog extends Component {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    protected abstract getName(): TextOrTranslationData;
+    abstract getName(): TextOrTranslationData;
     /**
      * Event handler for when this dialog is appended
      */

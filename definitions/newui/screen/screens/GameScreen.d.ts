@@ -26,6 +26,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onGameStart(): void;
     openDialog<D = Dialog>(id: DialogId): D;
     closeDialog(id: DialogId): void;
+    toggleDialog(id: DialogId): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
@@ -52,4 +53,5 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
      * Returns the first unused `Quadrant`, or `Quadrant.None` if there are none.
      */
     private getUnusedQuadrant();
+    private onDialogClose(dialog);
 }
