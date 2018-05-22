@@ -9,11 +9,12 @@ export declare enum Edge {
     Bottom = 2,
     Left = 3,
 }
+export declare type IEdges = [[Edge.Left | Edge.Right, number], [Edge.Top | Edge.Bottom, number]];
 export interface IDialogDescription {
     minSize: IVector2;
     size: IVector2;
     maxSize: IVector2;
-    edges: [[Edge.Left | Edge.Right, number], [Edge.Top | Edge.Bottom, number]];
+    edges: IEdges;
 }
 declare const _default: {
     Messages: IDialogDescription;

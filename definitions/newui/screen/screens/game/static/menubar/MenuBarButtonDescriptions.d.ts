@@ -4,7 +4,7 @@ import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export declare enum MenuBarButtonType {
     Menu = 0,
     Save = 1,
-    Help = 2,
+    Notes = 2,
     Milestones = 3,
     Messages = 4,
     QuickSettings = 5,

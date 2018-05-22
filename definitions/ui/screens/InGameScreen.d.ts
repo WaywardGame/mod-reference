@@ -100,6 +100,7 @@ export default class InGameScreen extends BaseScreen {
     hasDelay(): boolean;
     canMove(api: BindCatcherApi): boolean;
     onShow(): void;
+    makeTopDialog(dialog: JQuery): void;
     onHide(): void;
     initializeGameState(): void;
     onGameEnd(showDeath: boolean): void;

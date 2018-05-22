@@ -5,7 +5,7 @@ import IGameScreenApi, { IDialog } from "newui/screen/screens/game/IGameScreenAp
 /**
  * The positions of each edge of the dialog. Stored as percentages.
  */
-export interface IEdges {
+export interface IDialogEdges {
     [Edge.Top]: number;
     [Edge.Right]: number;
     [Edge.Bottom]: number;
@@ -24,13 +24,15 @@ export declare enum DialogEvent {
 }
 export default abstract class Dialog extends Component implements IDialog {
     protected readonly gsapi: IGameScreenApi;
+    private static topOrder;
+    static makeTopDialog(element: HTMLElement): void;
     protected body: Component;
     protected header: Component;
     protected footer: Component;
     /**
      * The positions of each edge of the dialog. Stored as percentages.
      */
-    protected edges: IEdges;
+    protected edges: IDialogEdges;
     /**
      * The last edge positions of the dialog. Used when a handle is being moved.
      */
@@ -144,5 +146,16 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * Returns this dialog's positions of the two edges on the given axis.
      */
-    private getEdges(axis);
+    private getEdgePositionsOfAxis(axis);
+    /**
+     * Returns a `IVector2` containing the distance between the two sides.
+     */
+    private getSize();
+    /**
+     * Returns the two edges of the dialog closest to the edges of the viewport, and their positions.
+     */
+    private getEdges();
+    private getScale(axis);
+    private focus();
+    private onViewportResize();
 }

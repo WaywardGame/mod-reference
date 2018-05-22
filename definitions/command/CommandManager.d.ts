@@ -7,7 +7,7 @@ import IPlayer from "player/IPlayer";
 import { Source } from "utilities/Log";
 export default class CommandManager extends GenericManager<ICommand> implements ICommandManager {
     setup(instance: IGenericManager<ICommand>): void;
-    execute(player: IPlayer, cmd: Command, args: string): void;
+    execute(player: IPlayer, cmd: Command, args?: string): void;
     protected getSource(): Source;
     protected getEnumObject(): any;
 }
