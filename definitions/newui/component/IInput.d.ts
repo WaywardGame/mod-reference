@@ -5,4 +5,8 @@ export interface InputOptions {
     maxLength?: number;
     canBeEmpty?: boolean;
     clearTo?: TextOrTranslationData;
+    /**
+     * Defaults to true
+     */
+    shouldBlurWhenEnterPressedAndEmpty?: boolean;
 }

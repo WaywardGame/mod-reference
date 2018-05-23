@@ -20,5 +20,8 @@ export interface ISaveData {
     utilitiesEnumsAllocated: {
         [index: string]: IEnumInfo;
     };
+    newui: {
+        [index: string]: any;
+    };
 }
 export default ISaveData;

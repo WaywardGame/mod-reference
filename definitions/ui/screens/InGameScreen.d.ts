@@ -127,13 +127,11 @@ export default class InGameScreen extends BaseScreen {
     openDialogs(): void;
     clampDialogs(): void;
     getItemClass(item?: IItem, itemType?: ItemType): string;
-    createItemElementByItemType(itemType: ItemType, item?: IItem): JQuery;
-    createItemStringByItemType(itemType: ItemType, extraClass?: string): string;
-    createItemElementByItem(item: IItem): JQuery | undefined;
+    createItemString(itemType: ItemType, item?: IItem, extraClass?: string): string;
     syncItemElements(itemId: number, selector?: JQuery): void;
     syncDamagedDecayed(item: IItem, element: JQuery): void;
     addItemToContainer(item: IItem, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
-    insertItemElementToContainer(itemElement: JQuery, containerElement: JQuery): void;
+    insertItemStringToContainer(itemElement: string | JQuery, containerElement: JQuery): void;
     onAddItemsToContainer(containerElement: JQuery, containerDialogElement: JQuery | undefined, isInventoryContainer: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
     removeItemFromContainer(item: IItem, container: IContainer): void;
@@ -162,7 +160,7 @@ export default class InGameScreen extends BaseScreen {
     getQuickSlotItemElement(quickSlot: number): JQuery;
     getItemIdInQuickSlot(quickSlot: number): number | undefined;
     setQuickSlot(quickSlot: number, itemId?: number, internal?: boolean): boolean;
-    setQuickSlotByItemType(quickSlot: number, itemType: ItemType, disabled: boolean): JQuery;
+    setQuickSlotByItemType(quickSlot: number, itemType: ItemType, disabled: boolean, item?: IItem | undefined): void;
     addItemToFreeQuickSlot(itemId: number): void;
     clearQuickSlot(quickSlot: number, internal?: boolean): void;
     removeItemFromQuickSlot(itemId?: number, skipSync?: boolean): void;

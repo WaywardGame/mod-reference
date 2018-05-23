@@ -16,6 +16,7 @@ import { ModOptions } from "newui/screen/screens/menu/menus/OptionsMenu";
 import { IHairstyleDescription } from "player/IPlayer";
 import { ISkillDescription } from "player/Skills";
 import { ITerrainDescription } from "tile/ITerrain";
+import { ITileEventDescription } from "tile/ITileEvent";
 import { IDialogInfo } from "ui/IUi";
 import Log from "utilities/Log";
 export declare abstract class BaseMod {
@@ -45,6 +46,7 @@ export declare abstract class BaseMod {
     addTerrain(description: ITerrainDescription, terrainType?: number): number;
     addTerrainResource(terrainType: number, terrainResource: ITerrainResourceItem[], defaultItem?: ItemType): void;
     addDoodad(description: IDoodadDescription): number;
+    addTileEvent(description: ITileEventDescription): number;
     addDictionary(name: string, dictionaryEnum: any): number;
     extendLanguage(language: string, extension: ILanguageExtension): number;
     addMessage(name: string, message: string): number;

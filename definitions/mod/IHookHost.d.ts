@@ -37,12 +37,12 @@ export declare function HookMethod(priority: number): (hook: IHookHost, property
  */
 export declare function HookMethod(host: IHookHost, property: string): void;
 export declare const SYMBOL_HOOKS: unique symbol;
-export declare const HOST_NAME: unique symbol;
+export declare const SYMBOL_HOST_NAME: unique symbol;
 export interface IHookHost {
     [SYMBOL_HOOKS]?: {
         [hook in Hook]?: number;
     };
-    [HOST_NAME]?: string[];
+    [SYMBOL_HOST_NAME]?: string[];
     /**
      * Get the ambient color
      * @param colors The current ambient colors

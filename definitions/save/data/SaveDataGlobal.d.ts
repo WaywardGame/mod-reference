@@ -1,7 +1,5 @@
-import { DropLocation, IBindArray, IModBindArray } from "Enums";
 import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModInfo";
-import { IBindings } from "newui/BindingManager";
 import { ICharacter } from "newui/screen/screens/menu/component/Character";
 import { IMilestoneData } from "player/IMilestone";
 import ISaveDataGlobal, { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
@@ -15,51 +13,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
     gameLastPlayedVersion: string;
     gameHighscores: IHighscore[];
     gamePlayedCount: number;
-    options: {
-        alternateContextMenu: boolean;
-        alwaysShowMoreInformation: boolean;
-        autoGatherHarvest: boolean;
-        autoPickup: boolean;
-        bindings: IBindings;
-        binds: IBindArray;
-        currentGame: number;
-        developerMode: boolean;
-        developerModeContextMenu: boolean;
-        dialogOpacity: number;
-        directionTurnDelay: number;
-        dropLocation: DropLocation;
-        dropOnGatherHarvest: boolean;
-        fontStyle: boolean;
-        fullscreen: boolean;
-        hideEquippedHeadgear: boolean;
-        keepSortActive: boolean;
-        leftHand: boolean;
-        modBinds: IModBindArray;
-        muteEffects: boolean;
-        muteMusic: boolean;
-        protectedCraftingItems: boolean;
-        realTimeTickSpeed: number;
-        rightClickInspect: boolean;
-        rightHand: boolean;
-        screenshotMode: boolean;
-        shouldLoadLastSave: boolean;
-        skipSplash: boolean;
-        tooltipsCreatures: boolean;
-        tooltipsDoodads: boolean;
-        tooltipsItems: boolean;
-        tooltipsNPCs: boolean;
-        tooltipsTerrain: boolean;
-        uiScale: number;
-        visionMode: boolean;
-        volumeEffects: number;
-        volumeMusic: number;
-        warnOnDangerousActions: boolean;
-        warnWhenBreakingItems: boolean;
-        warnWhenBreakingItemsOnCraft: boolean;
-        windowMode: boolean;
-        zoomLevel: number;
-        openNotesAutomatically: boolean;
-    };
+    options: any;
     playerMilestoneData: {
         [index: number]: IMilestoneData | undefined;
     };
@@ -80,6 +34,9 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
     };
     multiplayerBannedPlayers: string[];
     characters: ICharacter[];
+    newui: {
+        [index: string]: any;
+    };
     /**
      * Resets all options to default
      */

@@ -21,14 +21,16 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     messages: Messages;
     private quadrantContainer;
     private readonly quadrantMap;
+    private readonly dataHosts;
     constructor(uiApi: UiApi);
     create(): void;
-    onGameStart(): void;
     openDialog<D = Dialog>(id: DialogId): D;
     closeDialog(id: DialogId): void;
     toggleDialog(id: DialogId): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
+    registerDataHost(id: string | number, host: any): void;
+    onGameStart(): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Adds a quadrant element to the screen.

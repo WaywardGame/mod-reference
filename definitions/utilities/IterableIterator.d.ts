@@ -98,6 +98,14 @@ declare global  {
          * the entire iterable first.
          */
         slice(startIndex: number, endIndex?: number): IterableIterator<T>;
+        /**
+         * Returns whether at least one entry in this iterable satisfies the predicate.
+         */
+        anyMatch(predicate: (val: T) => boolean): boolean;
+        /**
+         * Returns whether all entries in this iterable satisfy the predicate.
+         */
+        allMatch(predicate: (val: T) => boolean): boolean;
     }
     interface RegExp {
         /**

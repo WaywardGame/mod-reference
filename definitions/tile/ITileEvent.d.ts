@@ -1,6 +1,6 @@
-import { IObject, IObjectDescription, IResourceItem, IRGB } from "Enums";
+import { IModdable, IObject, IObjectDescription, IResourceItem, IRGB } from "Enums";
 import { IVector3 } from "utilities/math/IVector";
-export interface ITileEventDescription extends IObjectDescription {
+export interface ITileEventDescription extends IObjectDescription, IModdable {
     spreadMax?: number;
     decayMax?: number;
     animated?: boolean;
@@ -8,6 +8,7 @@ export interface ITileEventDescription extends IObjectDescription {
     particles?: IRGB;
     graphicVariation?: boolean;
     isFlammable?: boolean;
+    info?: ITileEventInfo;
 }
 export interface ITileEvent extends IObject<TileEventType>, IVector3 {
     spread?: number;

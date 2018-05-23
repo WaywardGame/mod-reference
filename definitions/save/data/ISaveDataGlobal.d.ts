@@ -1,4 +1,4 @@
-import { Difficulty, DropLocation, IBindArray, IKeyBind, IModBindArray } from "Enums";
+import { Difficulty, DropLocation, IKeyBind } from "Enums";
 import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
@@ -34,6 +34,9 @@ export interface ISaveDataGlobal {
     };
     multiplayerBannedPlayers: string[];
     characters: ICharacter[];
+    newui: {
+        [index: string]: any;
+    };
     /**
      * Resets all options to default
      */
@@ -50,7 +53,6 @@ export interface IOptions {
     autoGatherHarvest: boolean;
     autoPickup: boolean;
     bindings: IBindings;
-    binds: IBindArray;
     currentGame: number;
     developerMode: boolean;
     developerModeContextMenu: boolean;
@@ -63,9 +65,9 @@ export interface IOptions {
     hideEquippedHeadgear: boolean;
     keepSortActive: boolean;
     leftHand: boolean;
-    modBinds: IModBindArray;
     muteEffects: boolean;
     muteMusic: boolean;
+    openNotesAutomatically: boolean;
     protectedCraftingItems: boolean;
     realTimeTickSpeed: number;
     rightClickInspect: boolean;
@@ -87,7 +89,6 @@ export interface IOptions {
     warnWhenBreakingItemsOnCraft: boolean;
     windowMode: boolean;
     zoomLevel: number;
-    openNotesAutomatically: boolean;
 }
 export declare type IOptionsOld = Partial<IOptions> & {
     keyBinds: IKeyBind;

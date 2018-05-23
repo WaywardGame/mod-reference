@@ -9,6 +9,15 @@ export declare enum QuadrantComponentId {
     Quickslots = 2,
     MenuBar = 3,
 }
+/**
+ * A decorator for marking a field to be saved globally.
+ */
+export declare function Save(globally: true): (target: object, property: string) => void;
+/**
+ * A decorator for marking a field to be saved locally (per-world)
+ */
+export declare function Save(target: object, property: string): void;
+export declare function savedProperties<T = any>(target: T): IterableIterator<[string, boolean]>;
 export default interface IGameScreenApi {
     readonly uiApi: UiApi;
     openDialog<D extends IDialog = IDialog>(id: DialogId): D;
@@ -16,6 +25,7 @@ export default interface IGameScreenApi {
     toggleDialog(id: DialogId): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
+    registerDataHost(id: string | number, dataHost: object): void;
 }
 export interface IDialog {
     /**
