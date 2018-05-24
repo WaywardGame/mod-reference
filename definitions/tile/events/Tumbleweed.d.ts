@@ -1,4 +1,19 @@
+import { ItemType, SkillType } from "Enums";
 import { ITileEvent } from "tile/ITileEvent";
-export declare function create(tileEvent: ITileEvent): void;
-export declare function remove(tileEvent: ITileEvent): void;
-export declare function update(tileEvent: ITileEvent): void;
+declare const _default: {
+    items: ({
+        type: ItemType.Twigs;
+    } | {
+        type: ItemType.TumbleweedSeeds;
+    })[];
+    skillUse: SkillType.Botany;
+    particles: {
+        r: number;
+        g: number;
+        b: number;
+    };
+    graphicVariation: true;
+    isFlammable: true;
+    update(tileEvent: ITileEvent): void;
+};
+export default _default;
