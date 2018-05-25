@@ -132,6 +132,7 @@ declare global  {
          * is nicer than `[this.length - 1]`
          */
         last(): T;
+        toggle(value: T, includes?: boolean): number;
     }
     interface Map<K, V> {
         /**

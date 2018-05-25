@@ -26,13 +26,13 @@ export default abstract class Dialog extends Component implements IDialog {
     protected readonly gsapi: IGameScreenApi;
     private static topOrder;
     static makeTopDialog(element: HTMLElement): void;
-    protected body: Component;
-    protected header: Component;
-    protected footer: Component;
     /**
      * The positions of each edge of the dialog. Stored as percentages.
      */
-    protected edges: IDialogEdges;
+    edges: IDialogEdges;
+    protected body: Component;
+    protected header: Component;
+    protected footer: Component;
     /**
      * The last edge positions of the dialog. Used when a handle is being moved.
      */
@@ -157,5 +157,10 @@ export default abstract class Dialog extends Component implements IDialog {
     private getEdges();
     private getScale(axis);
     private focus();
-    private onViewportResize();
+    /**
+     * Resets the position, causing it to be clamped to the viewport, using its current position
+     *
+     * Also the event handler for when the viewport resizes
+     */
+    private resetPosition();
 }

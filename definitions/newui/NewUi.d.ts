@@ -12,6 +12,7 @@ export default class Ui extends Emitter implements UiApi<Screen> {
     private storageElement;
     private readonly screenManager;
     private readonly tooltipManager;
+    private readonly dataHosts;
     private scale;
     constructor();
     screens(): IterableIterator<Screen>;
@@ -95,6 +96,10 @@ export default class Ui extends Emitter implements UiApi<Screen> {
      */
     getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: boolean): string;
     storeElements(...elements: Array<HTMLElement | IComponent>): void;
+    /**
+     * Registers an object as a "data host", which allows its fields to be saved to `saveData` or `saveDataGlobal`
+     */
+    registerDataHost(id: string | number, host: any): void;
     /**
      * Plays the "click" sound effect, used for most interface interactions
      */

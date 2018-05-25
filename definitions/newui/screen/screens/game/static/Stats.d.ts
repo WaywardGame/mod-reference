@@ -1,13 +1,12 @@
 import { UiTranslation } from "language/ILanguage";
-import { UiApi } from "newui/INewUi";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { IPlayer } from "player/IPlayer";
 export default class Stats extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
     private player;
-    constructor(api: UiApi, player: IPlayer);
+    constructor(gsapi: IGameScreenApi, player: IPlayer);
     setPlayer(player: IPlayer): void;
     getID(): QuadrantComponentId;
     protected getName(): UiTranslation;

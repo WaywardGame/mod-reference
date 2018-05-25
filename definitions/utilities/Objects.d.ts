@@ -6,7 +6,7 @@ declare module Objects {
     /**
      * Returns an iterator for an object's keys. Does not check if the key is prototypal!
      */
-    function keys<K extends string>(object: any): IterableIterator<K>;
+    function keys<T, K extends keyof T>(object: T): IterableIterator<K>;
     /**
      * Returns an iterator for an object's values. Does not check if the values are prototypal!
      */
@@ -17,9 +17,9 @@ declare module Objects {
      * Returns an iterator for the entries of an object, given in a tuple of `[key, value]`.
      * Does not check if the entries are prototypal!
      */
-    function entries<V = any>(object: {
+    function entries<T extends {
         [key: string]: V;
-    }): IterableIterator<[string, V]>;
+    }, K extends keyof T, V = any>(object: T): IterableIterator<[K, V]>;
     /**
      * Returns an iterator for an object's keys.
      */

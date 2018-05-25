@@ -5,31 +5,37 @@ import Component from "newui/component/Component";
 import { UiApi } from "newui/INewUi";
 import Screen from "newui/screen/Screen";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
+import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import MenuBar from "newui/screen/screens/game/static/MenuBar";
 import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
+export declare type IDialogStates = {
+    [key in DialogId]: boolean;
+};
 export default class GameScreen extends Screen implements IHookHost, IGameScreenApi {
     readonly uiApi: UiApi;
     dialogs: Map<DialogId, Dialog>;
+    visibleDialogs: IDialogStates;
+    quadrantComponentQuadrants: {
+        [key: string]: Quadrant;
+    };
     menuBar: MenuBar;
     stats: Stats;
     quickslots: Quickslots;
     messages: Messages;
     private quadrantContainer;
     private readonly quadrantMap;
-    private readonly dataHosts;
     constructor(uiApi: UiApi);
     create(): void;
     openDialog<D = Dialog>(id: DialogId): D;
     closeDialog(id: DialogId): void;
-    toggleDialog(id: DialogId): void;
+    toggleDialog(id: DialogId, force?: boolean): void;
+    toggleDialogs(states: IDialogStates): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
-    registerDataHost(id: string | number, host: any): void;
     onGameStart(): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**

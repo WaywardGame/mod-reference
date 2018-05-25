@@ -11,7 +11,6 @@ import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component
 import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { IStringSection } from "utilities/string/Interpolator";
 export default class Messages extends QuadrantComponent implements IHookHost {
-    private readonly gsapi;
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
     readonly sendButton: Button;

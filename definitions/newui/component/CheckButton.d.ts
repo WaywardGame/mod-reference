@@ -15,12 +15,13 @@ export declare enum CheckButtonEvent {
 export declare class CheckButton extends Button implements Refreshable {
     private readonly heading;
     private _checked;
-    private readonly _refresh;
+    private _refresh;
     checked: boolean;
     constructor(uiApi: UiApi, options?: CheckButtonOptions);
     setChecked(checked: boolean, triggerEvent?: boolean): Promise<boolean>;
     toggleChecked(): void;
-    refresh(): void;
+    refresh(): this;
+    refresh(refreshMethod: () => boolean): this;
     getText(): string | undefined;
     setText(text: TextOrTranslationData, refreshTranslationData?: boolean): this;
 }

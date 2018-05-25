@@ -50,6 +50,16 @@ declare class Log {
      */
     refresh(): void;
 }
+export interface ISourceFilter {
+    /**
+     * Any misc (string) source that does not match the filter will not appear in the console.
+     */
+    miscSourceFilter: RegExp;
+    /**
+     * Any source that is not present in this array will not appear in the console.
+     */
+    sources: Source[];
+}
 declare module Log {
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.

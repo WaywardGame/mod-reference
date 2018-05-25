@@ -4,7 +4,6 @@ import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/I
 import MenuBarButton from "newui/screen/screens/game/static/menubar/MenuBarButton";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 export default class MenuBar extends QuadrantComponent {
-    private readonly gsapi;
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
     private _buttons;

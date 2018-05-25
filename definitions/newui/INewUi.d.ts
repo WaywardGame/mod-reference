@@ -101,6 +101,7 @@ export interface UiApi<U extends IScreen = IScreen> extends Emitter {
     getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: false): string;
     toggleFullscreen(fullscreen?: boolean): void;
     storeElements(...elements: Array<HTMLElement | IComponent>): void;
+    registerDataHost(id: string | number, dataHost: object): void;
     playActivateSound(): void;
     playSelectSound(): void;
     getScale(): number;
@@ -108,6 +109,26 @@ export interface UiApi<U extends IScreen = IScreen> extends Emitter {
     getMaximumScale(): number;
     setDialogOpacity(opacity: number): void;
 }
+export declare enum SaveLocation {
+    /**
+     * Used to mark a field to be saved locally (per save)
+     */
+    Local = 0,
+    /**
+     * Used to mark a field to be saved globally (across saves)
+     */
+    Global = 1,
+    /**
+     * Used to mark a field to be saved both locally and globally. Local data will override global data, if it exists.
+     */
+    Both = 2,
+}
+/**
+ * Used to mark a field to be saved to either `saveData` or `saveDataGlobal`. Used in conjunction with
+ * `IGameScreenApi.registerDataHost(<id>, <the instance that contains fields marked with this decorator>)`
+ */
+export declare function Save(saveLocation: SaveLocation): any;
+export declare function savedProperties<T = any>(target: T): IterableIterator<[string, SaveLocation]>;
 export interface IInterruptFactory extends IInterruptMenuFactory {
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;

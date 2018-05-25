@@ -6,6 +6,7 @@ import { ICharacter } from "newui/screen/screens/menu/component/Character";
 import { IMilestoneData } from "player/IMilestone";
 import { IDialogInfo } from "ui/IUi";
 import { IEnumInfo } from "utilities/enum/IEnum";
+import { ISourceFilter } from "utilities/Log";
 export interface ISaveDataGlobal {
     gameCrafted: {
         [index: number]: ICrafted;
@@ -53,6 +54,7 @@ export interface IOptions {
     autoGatherHarvest: boolean;
     autoPickup: boolean;
     bindings: IBindings;
+    consoleLogSourceFilter: ISourceFilter;
     currentGame: number;
     developerMode: boolean;
     developerModeContextMenu: boolean;
