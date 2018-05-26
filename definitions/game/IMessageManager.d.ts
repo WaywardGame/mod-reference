@@ -1,4 +1,5 @@
 export declare enum MessageSource {
-    Misc = 0,
+    All = 0,
     Chat = 1,
+    Game = 2,
 }

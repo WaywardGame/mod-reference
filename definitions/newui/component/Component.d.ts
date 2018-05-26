@@ -8,7 +8,7 @@ export default class Component extends Emitter implements IComponent {
     protected api: UiApi;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
-    static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement): Promise<void>;
+    static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, prepend?: boolean): Promise<void>;
     private static removeFromParent(elementToRemove);
     static remove(elementToRemove: string | IComponent | HTMLElement): Promise<void>;
     readonly classes: ClassListManipulator<this>;
@@ -40,6 +40,7 @@ export default class Component extends Emitter implements IComponent {
     hide(...args: any[]): Promise<void>;
     toggle(visible?: boolean, ...args: any[]): Promise<void>;
     appendTo(where: string | HTMLElement | IComponent): this;
+    prependTo(where: string | HTMLElement | IComponent): this;
     append(...elements: ArrayOfTOrIterablesOfT<HTMLElement | IComponent | undefined>): this;
     remove(): Promise<void>;
     contains(what: string | HTMLElement | IComponent): boolean;

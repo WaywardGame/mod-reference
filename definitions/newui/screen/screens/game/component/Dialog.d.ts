@@ -1,3 +1,5 @@
+import { Bindable } from "Enums";
+import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
 import { TextOrTranslationData } from "newui/component/IComponent";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
@@ -42,6 +44,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private description;
     constructor(gsapi: IGameScreenApi);
+    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Closes the dialog.
      *

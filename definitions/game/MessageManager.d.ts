@@ -1,10 +1,21 @@
 import { MessageSource } from "game/IMessageManager";
 import { Message, MessageType } from "language/IMessages";
 import { IStringSection } from "utilities/string/Interpolator";
+export interface IMessage {
+    id: number;
+    source: MessageSource[];
+    message: IStringSection[];
+}
 export default class MessageManager {
     private _source;
     private _type;
     private readonly history;
+    private lastMessageId;
+    getMessageHistory(): IterableIterator<IMessage>;
+    /**
+     * Clears the entire message history.
+     */
+    clear(): void;
     /**
      * Sets the source of the next message.
      */

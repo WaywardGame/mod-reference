@@ -34,4 +34,5 @@ export default class Button extends Text {
     activate(playSound?: boolean): Promise<void>;
     addButton(buttonOptions: DefaultButtonOptions): Button;
     toggleDisabled(disabled?: boolean): void;
+    private _onActivate(event?);
 }

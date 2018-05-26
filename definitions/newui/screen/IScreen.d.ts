@@ -61,6 +61,10 @@ export interface IScreen extends IComponent {
      * Remove any current context menu and set the visible context menu for this screen to the given context menu
      */
     setContextMenu(contextMenu: IContextMenu): void;
+    /**
+     * Hides the currently visible context menu.
+     */
+    hideContextMenu(): void;
 }
 export interface IMenuScreen extends IScreen {
     /**

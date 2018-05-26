@@ -2,14 +2,13 @@ import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
-import { MessageSource } from "game/IMessageManager";
+import { IMessage } from "game/MessageManager";
 import { IContainer, IItem } from "item/IItem";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer from "player/IPlayer";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
-import { IStringSection } from "utilities/string/Interpolator";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -274,7 +273,7 @@ export interface IHookHost {
      * @param source An array of sources of the message
      * @param message The message
      */
-    onDisplayMessage?(source: MessageSource[], message: IStringSection[]): void;
+    onDisplayMessage?(message: IMessage): void;
     /**
      * Called when a doodad spawns
      * @param doodad The doodad object
@@ -593,5 +592,5 @@ export interface IHookHost {
      * @param messageId The `Message`, or `-1` if the message being displayed isn't a `Message`
      * @returns False to not display the message or undefined to use the default logic
      */
-    shouldDisplayMessage?(source: MessageSource[], message: IStringSection[], messageId: number): boolean | undefined;
+    shouldDisplayMessage?(message: IMessage, messageId: number): boolean | undefined;
 }

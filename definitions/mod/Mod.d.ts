@@ -2,7 +2,7 @@ import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
-import { MessageSource } from "game/IMessageManager";
+import { IMessage } from "game/MessageManager";
 import { IContainer, IItem } from "item/IItem";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
@@ -10,7 +10,6 @@ import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer from "player/IPlayer";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
-import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -75,8 +74,8 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onContainerItemUpdate(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     onCraft(player: IPlayer, item: IItem): void;
     onCreateWorld(world: IWorld): void;
-    onDisplayMessage(source: MessageSource[], message: IStringSection[]): void;
-    shouldDisplayMessage(source: MessageSource[], message: IStringSection[], messageId: number): boolean | undefined;
+    onDisplayMessage(message: IMessage): void;
+    shouldDisplayMessage(message: IMessage, messageId: number): boolean | undefined;
     onDoodadSpawn(doodad: IDoodad): void;
     onGameEnd(state: PlayerState): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
