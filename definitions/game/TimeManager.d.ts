@@ -9,12 +9,12 @@ export declare enum TimeFormat {
     TwentyFourHour = 1,
 }
 export declare enum PartOfDay {
-    Nighttime = 0,
-    Dawn = 1,
-    Sunrise = 2,
-    Daytime = 3,
-    Sunset = 4,
-    Dusk = 5,
+    Nighttime = "Nighttime",
+    Dawn = "Dawn",
+    Sunrise = "Sunrise",
+    Daytime = "Daytime",
+    Sunset = "Sunset",
+    Dusk = "Dusk",
 }
 export declare enum DayQuarter {
     Day1 = 0,
@@ -47,6 +47,10 @@ export default class TimeManager implements ITimeManager {
      * The total number of ticks passed.
      */
     readonly ticks: number;
+    /**
+     * Returns which day it is. Starts at 1.
+     */
+    readonly day: number;
     /**
      * Increments `ticks`.
      */

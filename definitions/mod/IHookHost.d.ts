@@ -3,6 +3,7 @@ import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMessage } from "game/MessageManager";
+import { INote } from "game/NoteManager";
 import { IContainer, IItem } from "item/IItem";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -507,6 +508,17 @@ export interface IHookHost {
      * @returns A number to set the player weight to or undefined to use the default logic
      */
     onUpdateWeight?(player: IPlayer, newWeight: number): number | undefined;
+    /**
+     * Called when the player will write a note.
+     * @param note The note that will be written.
+     * @returns `false` if the note should be cancelled, or `undefined` to use the default logic
+     */
+    onWriteNote?(note: INote): false | undefined;
+    /**
+     * Called when the player has written a note.
+     * @param id The id of the note that was written.
+     */
+    onWrittenNote?(id: number): void;
     /**
      * Called after an action has been executed
      * This is called after the action result is used

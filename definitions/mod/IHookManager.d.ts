@@ -78,6 +78,8 @@ export declare enum Hook {
     OnTurnEnd = "onTurnEnd",
     OnTurnStart = "onTurnStart",
     OnUpdateWeight = "onUpdateWeight",
+    OnWriteNote = "onWriteNote",
+    OnWrittenNote = "onWrittenNote",
     PostExecuteAction = "postExecuteAction",
     PostGenerateWorld = "postGenerateWorld",
     PostRender = "postRender",

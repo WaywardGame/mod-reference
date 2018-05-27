@@ -1,10 +1,11 @@
 import { Bindable } from "Enums";
+import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
-export default class Component extends Emitter implements IComponent {
+export default class Component extends Emitter implements IComponent, IHookHost {
     protected api: UiApi;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;

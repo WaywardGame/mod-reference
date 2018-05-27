@@ -1,4 +1,4 @@
-import { Dictionary, UiTranslation } from "language/ILanguage";
+import { Dictionary, ITranslationObject, UiTranslation } from "language/ILanguage";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -211,7 +211,7 @@ export declare enum SelectableLayer {
 }
 export interface IBaseTranslationData {
     dictionary: Dictionary;
-    entry: number;
+    entry: number | [number, keyof ITranslationObject];
     args?: any[] | (() => any[]);
     properties?: string[];
     shouldTrim?: false;

@@ -4,6 +4,7 @@ import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DamageType, Difficulty, FacingDirection, FireType, IObjectDescription, ISeeds, ItemQuality, ItemType, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
 import MessageManager from "game/MessageManager";
+import NoteManager from "game/NoteManager";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { IMessagePack, Message, MessageType } from "language/IMessages";
@@ -48,6 +49,7 @@ export interface IGame extends Emitter {
     corpses: SaferArray<ICorpse>;
     creatureSpawnTimer: number;
     messages: MessageManager;
+    notes: NoteManager;
     messageTimer: number;
     saveClear: boolean;
     playing: boolean;

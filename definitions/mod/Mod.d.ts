@@ -3,6 +3,7 @@ import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMessage } from "game/MessageManager";
+import { INote } from "game/NoteManager";
 import { IContainer, IItem } from "item/IItem";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
@@ -110,6 +111,8 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onTurnEnd(player: IPlayer): void;
     onTurnStart(player: IPlayer): void;
     onUpdateWeight(player: IPlayer, newWeight: number): number | undefined;
+    onWriteNote(note: INote): false | undefined;
+    onWrittenNote(id: number): void;
     postExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
     postGenerateWorld(generateNewWorld: boolean): void;
     postRender(): void;

@@ -18,5 +18,6 @@ declare module Math2 {
      * Example: `lerp(1, 2, .5): 1.5`
      */
     function lerp(from: number, to: number, t: number): number;
+    function mod(n1: number, n2: number): number;
 }
 export default Math2;

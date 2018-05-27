@@ -30,4 +30,5 @@ export interface SectionTextOptions extends IComponentOptions {
 }
 export declare class SectionText extends Component {
     constructor(uiApi: UiApi, ...sections: ArrayOfTOrIterablesOfT<IStringSection>);
+    setText(...sections: ArrayOfTOrIterablesOfT<IStringSection>): Promise<void>;
 }
