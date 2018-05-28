@@ -35,6 +35,8 @@ export default abstract class Dialog extends Component implements IDialog {
     protected body: Component;
     protected header: Component;
     protected footer: Component;
+    private readonly panels;
+    private visiblePanel;
     /**
      * The last edge positions of the dialog. Used when a handle is being moved.
      */
@@ -51,6 +53,10 @@ export default abstract class Dialog extends Component implements IDialog {
      * Also the event handler for when the close button is pressed in the dialog's header.
      */
     close(): void;
+    addPanel(id: string | number): Component;
+    showPanel(id: string | number): void;
+    getPanel(id: string | number): Component | undefined;
+    isPanelVisible(id: string | number): boolean;
     /**
      * Sets the dialog position.
      */

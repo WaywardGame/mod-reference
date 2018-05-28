@@ -21,7 +21,7 @@ export interface IComponent extends Emitter {
     /**
      * The `dataset` of the internal element.
      */
-    data: DOMStringMap;
+    dataset: DOMStringMap;
     /**
      * The `scrollHeight` of the internal element.
      */

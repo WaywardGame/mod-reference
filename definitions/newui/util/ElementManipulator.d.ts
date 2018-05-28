@@ -21,3 +21,14 @@ export declare class AttributeManipulator<E extends IElementWrapper = IElementWr
     has(...attributes: string[]): boolean;
     private getAttributeIterator(...attributes);
 }
+export declare class DataManipulator<E extends IElementWrapper = IElementWrapper> {
+    private readonly element;
+    constructor(element: E);
+    set(name: string, value: string): E;
+    set(data: IterableOf<[string, string | undefined]>): E;
+    get(name: string): string;
+    get(name: string, ...keys: string[]): IterableIterator<[string, string | undefined]>;
+    remove(...keys: string[]): E;
+    has(...keys: string[]): boolean;
+    private getDataIterator(...keys);
+}

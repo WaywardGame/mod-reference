@@ -3,7 +3,7 @@ import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
-import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
+import { AttributeManipulator, ClassListManipulator, DataManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
 export default class Component extends Emitter implements IComponent, IHookHost {
     protected api: UiApi;
@@ -14,8 +14,9 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     static remove(elementToRemove: string | IComponent | HTMLElement): Promise<void>;
     readonly classes: ClassListManipulator<this>;
     readonly attributes: AttributeManipulator<this>;
+    readonly data: DataManipulator<this>;
     readonly element: HTMLElement;
-    readonly data: DOMStringMap;
+    readonly dataset: DOMStringMap;
     readonly childCount: number;
     readonly scrollHeight: number;
     readonly style: CSSStyleDeclaration;

@@ -163,5 +163,13 @@ declare module IterableIterator {
     const ALL: unique symbol;
 }
 export default IterableIterator;
-export declare function Pipe<T = any>(...what: T[]): IterableIterator<T>;
+export declare function pipe<T = any>(...what: T[]): IterableIterator<T>;
+/**
+ * A generator for numbers from `0` through `end` (exclusive)
+ */
+export declare function range(end: number): IterableIterator<number>;
+/**
+ * A generator for numbers from `start` (inclusive) through `end` (exclusive)
+ */
+export declare function range(start: number, end: number): IterableIterator<number>;
 export declare function isIterable(obj: any): obj is IterableOf<any>;

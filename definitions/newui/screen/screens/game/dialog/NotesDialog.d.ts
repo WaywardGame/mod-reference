@@ -7,6 +7,7 @@ export default class NotesDialog extends Dialog {
     private readonly time;
     private readonly title;
     private readonly noteId;
+    private readonly noteLinks;
     private current;
     constructor(api: IGameScreenApi);
     onWrittenNote(noteId: number): void;
@@ -17,4 +18,6 @@ export default class NotesDialog extends Dialog {
     private previousNote();
     private nextNote();
     private onShow();
+    private onNoteNumberActivate();
+    private onShowNotesPanel(panel);
 }
