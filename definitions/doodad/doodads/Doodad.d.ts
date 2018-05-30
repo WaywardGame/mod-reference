@@ -1,7 +1,7 @@
 import DoodadInfo from "doodad/DoodadInfo";
 import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, DoodadType, DoorOrientation, GrowingStage, IInspect, ItemQuality, ItemType, SentenceCaseStyle } from "Enums";
+import { ActionType, DoodadType, DoorOrientation, EquipType, GrowingStage, IInspect, ItemQuality, ItemType, SentenceCaseStyle } from "Enums";
 import { IItemArray } from "item/IItem";
 import { Message } from "language/IMessages";
 import { IPlayer } from "player/IPlayer";
@@ -60,7 +60,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
     update(): void;
-    causeStatus(human: IBaseHumanEntity): void;
+    causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     onUnserialized(): void;
 }

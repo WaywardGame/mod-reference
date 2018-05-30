@@ -947,7 +947,7 @@ export declare enum SkinColor {
 export declare enum SkillType {
     Chemistry = 0,
     Anatomy = 1,
-    Archery = 2,
+    Marksmanship = 2,
     Blacksmithing = 3,
     Botany = 4,
     Camping = 5,
