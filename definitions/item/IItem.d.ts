@@ -132,6 +132,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     dismantle?: IDismantleDescription;
     doodadContainer?: DoodadType;
     repairable?: boolean;
+    repairAndDisassemblyRequiresFire?: boolean;
     suffix?: string;
     prefix?: string;
     spawnOnDecay?: CreatureType;

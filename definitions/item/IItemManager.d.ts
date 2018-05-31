@@ -45,7 +45,7 @@ export interface IItemManager {
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
-    hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean): RequirementInfo;
+    hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     isContainableInAdjacentContainer(player: IPlayer, containable: IContainable): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
