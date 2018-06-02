@@ -1,5 +1,5 @@
 import { InterruptChoice } from "language/ILanguage";
-import { TextOrTranslationData } from "newui/component/IComponent";
+import { TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";
@@ -16,9 +16,9 @@ export default class InterruptMenu extends Menu {
     private readonly settingOptionsQueue;
     private isResolved;
     readonly type: InterruptType;
-    constructor(uiApi: UiApi);
+    constructor(api: UiApi);
     setOptions(options: InterruptOptions): Promise<void>;
-    setText(title?: TextOrTranslationData, description?: TextOrTranslationData): void;
+    setText(title?: TranslationGenerator, description?: TranslationGenerator): void;
     cancelInterrupt(): Promise<void>;
     choose(choice: InterruptChoice | string): Promise<void>;
     waitFor(): Promise<InterruptChoice | string | boolean | undefined>;

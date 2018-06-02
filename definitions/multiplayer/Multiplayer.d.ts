@@ -1,8 +1,9 @@
+import { UiTranslation } from "language/ILanguage";
 import { IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-import { TextOrTranslationData } from "newui/component/IComponent";
+import { TranslationGenerator } from "newui/component/IComponent";
 import { ICharacter } from "newui/screen/screens/menu/component/Character";
 import IPlayer from "player/IPlayer";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
@@ -49,10 +50,10 @@ export default class Multiplayer implements IMultiplayer {
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     joinServer(serverInfo: ServerInfo, character?: ICharacter): void;
-    disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
+    disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): Promise<void>;
-    disconnectAndResetGameState(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
-    kick(player: IPlayer, reason: TextOrTranslationData): void;
+    disconnectAndResetGameState(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
+    kick(player: IPlayer, reason: UiTranslation): void;
     onPlaying(): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     getClients(): IConnection[];

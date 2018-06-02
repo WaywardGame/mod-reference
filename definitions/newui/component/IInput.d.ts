@@ -1,12 +1,8 @@
-import { TextOrTranslationData } from "newui/component/IComponent";
-export interface InputOptions {
-    placeholder?: TextOrTranslationData;
-    default?: TextOrTranslationData;
-    maxLength?: number;
-    canBeEmpty?: boolean;
-    clearTo?: TextOrTranslationData;
-    /**
-     * Defaults to true
-     */
-    shouldBlurWhenEnterPressedAndEmpty?: boolean;
+export interface IInput {
+    setMaxLength(maxLength?: number): this;
+    setCanBeEmpty(canBeEmpty?: boolean): this;
+    setDefault(generator: () => string): this;
+    setClearTo(clearTo?: () => string): this;
+    setPlaceholder(generator: () => string): this;
+    setShouldBlurWhenEnterPressedAndEmpty(shouldBlurWhenEnterPressedAndEmpty?: boolean): this;
 }

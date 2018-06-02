@@ -1,24 +1,23 @@
 import Component from "newui/component/Component";
-import { ITooltipOptionsVague, TextOrTranslationDataOrSectionsOrGenerator, TooltipLocation } from "newui/component/IComponent";
-import Text, { Paragraph, SectionText, SectionTextOptions, TextOptions } from "newui/component/Text";
+import { ITooltip, TooltipLocation } from "newui/component/IComponent";
+import Text, { Paragraph } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
-export interface ITooltipOptions extends ITooltipOptionsVague {
-    create?(tooltip: Tooltip): Promise<void>;
-}
-export interface TooltipData {
-    tooltipLocation: keyof typeof TooltipLocation;
-}
-export default class Tooltip extends Component {
+export default class Tooltip extends Component implements ITooltip {
     private readonly source;
-    location: TooltipLocation;
+    readonly location: TooltipLocation;
     cache: boolean;
-    constructor(uiApi: UiApi, source: Component, tooltipOptions: ITooltipOptions);
-    addText(text: TextOrTranslationDataOrSectionsOrGenerator): Text | SectionText;
-    addHeading(options: TextOptions): Text;
-    addParagraph(...textOptionsArr: Array<TextOptions | SectionTextOptions>): Paragraph;
-    update(): void;
+    constructor(api: UiApi, source: Component);
+    setLocation(location: TooltipLocation): this;
+    setMaxWidth(maxWidth: number): this;
+    setNoCache(): this;
+    addText(initializer: (text: Text) => any): this;
+    addHeading(initializer: (text: Text) => any): this;
+    addParagraph(initializer: (text: Paragraph) => any): this;
     updatePosition(position?: {
         x: number;
         y: number;
-    }): void;
+    }): this;
+    private onShow();
+    private onHide();
+    private onMouseMove(event);
 }

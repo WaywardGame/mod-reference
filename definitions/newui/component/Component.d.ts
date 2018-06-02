@@ -1,7 +1,7 @@
 import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
-import { IComponent, IComponentOptions, IContextMenu, ITooltipOptionsVague, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { IComponent, IContextMenu, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import { AttributeManipulator, ClassListManipulator, DataManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
@@ -9,49 +9,60 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     protected api: UiApi;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
-    static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, prepend?: boolean): Promise<void>;
+    static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, prepend?: boolean): void;
     private static removeFromParent(elementToRemove);
-    static remove(elementToRemove: string | IComponent | HTMLElement): Promise<void>;
+    static remove(elementToRemove: string | IComponent | HTMLElement): void;
+    readonly element: HTMLElement;
     readonly classes: ClassListManipulator<this>;
     readonly attributes: AttributeManipulator<this>;
     readonly data: DataManipulator<this>;
-    readonly element: HTMLElement;
     readonly dataset: DOMStringMap;
     readonly childCount: number;
     readonly scrollHeight: number;
     readonly style: CSSStyleDeclaration;
     protected children: Component[];
     protected parent: Component;
-    private readonly internalElement;
+    private _element;
     private scrollingChild?;
-    private readonly _data;
-    private _tooltipOptions?;
+    private _data;
     private contextMenuGenerator?;
     private addEventListener;
-    selectable: SelectableLayer | false;
+    private tooltipInitializer;
+    readonly selectable: SelectableLayer | false;
     protected readonly listen: {
         <K extends "waiting" | "error" | "abort" | "progress" | "ended" | "change" | "input" | "select" | "activate" | "beforeactivate" | "beforedeactivate" | "blur" | "canplay" | "canplaythrough" | "click" | "contextmenu" | "dblclick" | "deactivate" | "drag" | "dragend" | "dragenter" | "dragleave" | "dragover" | "dragstart" | "drop" | "durationchange" | "emptied" | "focus" | "invalid" | "keydown" | "keypress" | "keyup" | "load" | "loadeddata" | "loadedmetadata" | "loadstart" | "mousedown" | "mousemove" | "mouseout" | "mouseover" | "mouseup" | "mousewheel" | "MSContentZoom" | "MSGestureChange" | "MSGestureDoubleTap" | "MSGestureEnd" | "MSGestureHold" | "MSGestureStart" | "MSGestureTap" | "MSInertiaStart" | "MSManipulationStateChanged" | "MSPointerCancel" | "MSPointerDown" | "MSPointerEnter" | "MSPointerLeave" | "MSPointerMove" | "MSPointerOut" | "MSPointerOver" | "MSPointerUp" | "pause" | "play" | "playing" | "ratechange" | "reset" | "scroll" | "seeked" | "seeking" | "selectstart" | "stalled" | "submit" | "suspend" | "timeupdate" | "touchcancel" | "touchend" | "touchmove" | "touchstart" | "volumechange" | "webkitfullscreenchange" | "webkitfullscreenerror" | "pointercancel" | "pointerdown" | "pointerenter" | "pointerleave" | "pointermove" | "pointerout" | "pointerover" | "pointerup" | "wheel" | "ariarequest" | "command" | "gotpointercapture" | "lostpointercapture" | "MSGotPointerCapture" | "MSLostPointerCapture" | "beforecopy" | "beforecut" | "beforepaste" | "copy" | "cuechange" | "cut" | "mouseenter" | "mouseleave" | "paste">(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions | undefined): void;
         (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void;
     };
-    constructor(uiApi: UiApi, elementType?: string, namespace?: Namespace);
-    constructor(uiApi: UiApi, options?: IComponentOptions);
+    constructor(api: UiApi, elementType?: string, namespace?: Namespace);
+    /**
+     * Warning: This method will replace the internal element backing this component.
+     *
+     * Only call this directly after constructing the element.
+     */
+    setElementType(elementType?: string, namespace?: Namespace): this;
+    setId(id: string): this;
     jsonData<T>(): DOMStringMap & T;
+    setSelectable(val: SelectableLayer | false): this;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     isVisible(): boolean;
-    show(...args: any[]): Promise<void>;
-    hide(...args: any[]): Promise<void>;
-    toggle(visible?: boolean, ...args: any[]): Promise<void>;
+    show(): this;
+    hide(): this;
+    toggle(visible?: boolean): this;
     appendTo(where: string | HTMLElement | IComponent): this;
     prependTo(where: string | HTMLElement | IComponent): this;
-    append(...elements: ArrayOfTOrIterablesOfT<HTMLElement | IComponent | undefined>): this;
-    remove(): Promise<void>;
+    append(...elements: ArrayOfTOrIterablesOfT<HTMLElement | IComponent | undefined | false>): this;
+    remove(): void;
     contains(what: string | HTMLElement | IComponent): boolean;
-    dump(filter?: (element: Component) => boolean): Promise<void>;
+    dump(filter?: (element: Component) => boolean): this;
+    /**
+     * Dumps all child components & elements without triggering any events.
+     */
+    dumpFast(): this;
     setContents(html: string, escape?: boolean): this;
     store(): void;
     findDescendants(selector: string): NodeListOf<Element>;
-    showTooltip(): Promise<void>;
-    setTooltip(tooltipOptions?: ITooltipOptionsVague): void;
+    setTooltip(initializer: (tooltip: ITooltip) => any): this;
+    removeTooltip(): void;
     /**
      * Remove the context menu from this element
      */
@@ -69,9 +80,9 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     getChildren(): Component[];
     scrollTo(child: Component, ms?: number): void;
     getStyle(styleName: string): string;
-    schedule(cb: (this: this, button: this) => any, ...args: any[]): this;
-    schedule(ms: number, cb: (this: this, button: this) => any, ...args: any[]): this;
+    schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;
+    schedule(ms: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
-    collect<T>(collector: (component: IComponent) => T): T;
-    private initializeTooltip();
+    private onMouseEnterForTooltip();
+    private onMouseLeaveForTooltip();
 }

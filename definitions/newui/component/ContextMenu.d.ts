@@ -1,9 +1,9 @@
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
-import { IContextMenu, TextOrTranslationData, TextOrTranslationDataOrSectionsOrGenerator } from "newui/component/IComponent";
+import { IContextMenu, TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 export declare type IOptionDescription = {
-    text: TextOrTranslationData;
+    translation: TranslationGenerator;
 } & ({
     submenu(uiApi: UiApi): IContextMenu;
 } | {
@@ -23,7 +23,8 @@ export default class ContextMenu<OptionType extends number | string = number | s
     disableOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     removeOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     setPosition(x: number, y: number, right?: boolean): this;
-    remove(): Promise<void>;
+    remove(): void;
+    hideAndRemove(): Promise<void>;
     private getDescription(id);
 }
 export declare class ContextMenuOption extends Button {
@@ -31,8 +32,8 @@ export declare class ContextMenuOption extends Button {
     private readonly submenuDescription?;
     private isActive;
     constructor(uiApi: UiApi, description: IOptionDescription);
-    setText(text: TextOrTranslationDataOrSectionsOrGenerator): this;
     hideSubmenu(): void;
+    hideAndRemove(): Promise<void>;
     onSelected(): void;
     onUnselected(): void;
     protected showSubmenu(generator: (uiApi: UiApi) => IContextMenu): void;

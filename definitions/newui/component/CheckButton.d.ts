@@ -1,27 +1,21 @@
-import Button, { ButtonOptions } from "newui/component/Button";
-import { TextOrTranslationData } from "newui/component/IComponent";
-import { Refreshable } from "newui/component/Refreshable";
+import Button from "newui/component/Button";
+import { TranslationGenerator } from "newui/component/IComponent";
+import { IRefreshableValue } from "newui/component/Refreshable";
+import { Paragraph } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
-export interface CheckButtonOptions extends ButtonOptions {
-    onActivate?: never;
-    checked?: boolean;
-    description?: TextOrTranslationData;
-    refresh?(): boolean;
-    onChange?(checkButton: CheckButton, checked: boolean): Promise<boolean | void> | void;
-}
 export declare enum CheckButtonEvent {
     Change = "Change",
 }
-export declare class CheckButton extends Button implements Refreshable {
-    private readonly heading;
+export declare class CheckButton extends Button implements IRefreshableValue<boolean> {
+    protected description: Paragraph;
+    private refreshMethod;
     private _checked;
-    private _refresh;
-    checked: boolean;
-    constructor(uiApi: UiApi, options?: CheckButtonOptions);
-    setChecked(checked: boolean, triggerEvent?: boolean): Promise<boolean>;
+    readonly checked: boolean;
+    constructor(uiApi: UiApi);
+    setChecked(checked: boolean, triggerEvent?: boolean): boolean;
     toggleChecked(): void;
     refresh(): this;
-    refresh(refreshMethod: () => boolean): this;
-    getText(): string | undefined;
-    setText(text: TextOrTranslationData, refreshTranslationData?: boolean): this;
+    setRefreshMethod(refreshMethod: () => boolean): this;
+    setText(text: TranslationGenerator): this;
+    addDescription(initializer: (paragraph: Paragraph) => any): this;
 }

@@ -5,22 +5,28 @@ import Interpolator, { IStringSection } from "utilities/string/Interpolator";
 export interface ITranslationData {
     dictionary: Dictionary;
     entry: number | [number, TranslationType];
-    shouldTrim?: boolean;
 }
 export interface ILanguageEntryProvider {
     get(dictionary: Dictionary, entry: number | [number, TranslationType]): string | undefined;
 }
-export declare type TranslationString = Translation & string;
-export declare type SplitTranslationString = Translation<IStringSection[]> & IStringSection[];
-export default class Translation<R extends string | IStringSection[] = string> {
+export default class Translation {
     static readonly defaultInterpolator: Interpolator;
     static convertMakeStringToInterpolation(makeString: string): string;
+    static formatList(entries: IterableOf<string | IStringSection[]>): IStringSection[];
+    static getString(entries: IterableOf<string | IStringSection>): string;
+    /**
+     * DO NOT USE THIS METHOD
+     *
+     * Unless the text is PRE-GENERATED and there is NO WAY TO TRANSLATE IT.
+     *
+     * Example uses include text the user inputs, and text from other sites (steam/trello)
+     */
+    static createTranslationGenerator(pregeneratedText: string | IStringSection[]): () => IStringSection[];
     static provider: ILanguageEntryProvider;
-    static ui: (entry: string | UiTranslation) => TranslationString;
-    static message: (entry: string | Message) => TranslationString;
+    static ui: (entry: string | UiTranslation) => Translation;
+    static message: (entry: string | Message) => Translation;
     private readonly translationData;
     private baseTranslation;
-    private keepData;
     private usingOldSystem;
     /**
      * Creates from a dictionary and entry
@@ -52,21 +58,19 @@ export default class Translation<R extends string | IStringSection[] = string> {
      */
     constructor(dictionary: number | string | ITranslationData, entry?: number | string | [number, TranslationType]);
     setUsingOldSystem(): this;
-    setKeepData(): Translation<IStringSection[]> & IStringSection[];
-    setNoTrim(): this;
     has(): boolean;
     /**
-     * Returns this translation with arguments interpolated
+     * Returns this translation as a list of string sections
      */
-    get(...args: any[]): R;
+    get(...args: any[]): IStringSection[];
+    /**
+     * Returns the translation as a string
+     */
+    getString(...args: any[]): string;
     /**
      * Returns the translation ID
      */
     getId(translationData: ITranslationData): string;
-    /**
-     * Returns the translated string with no arguments.
-     */
-    toString(): R;
     private parseTranslationId(translationId);
     private getDictionaryId(dictionaryName);
     private getEntryId(dictionaryName, entryName);

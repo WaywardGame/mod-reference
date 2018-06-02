@@ -1,22 +1,23 @@
 import { InterruptChoice } from "language/ILanguage";
-import { IComponent, ITooltipOptionsVague, TextOrTranslationData } from "newui/component/IComponent";
+import { IComponent, ITooltip, TranslationGenerator } from "newui/component/IComponent";
+import { IInput } from "newui/component/IInput";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
-import { InterruptInputOptions } from "newui/util/IInterrupt";
 import Emitter from "utilities/Emitter";
-export interface UiApi<U extends IScreen = IScreen> extends Emitter {
+export interface UiApi extends Emitter {
+    tooltips: ITooltipManager;
     /**
      * Generator for all existing screens.
      */
-    screens(): IterableIterator<U>;
+    screens(): IterableIterator<IScreen>;
     /**
      * @param screenId The ID of the screen to return. If this screen is not initialized, returns undefined.
      */
-    getScreen<S extends IScreen = U>(screenId: ScreenId): S | undefined;
+    getScreen<S extends IScreen = IScreen>(screenId: ScreenId): S | undefined;
     /**
      * Returns the visible screen
      */
-    getVisibleScreen<S extends IScreen = U>(): S | undefined;
+    getVisibleScreen<S extends IScreen = IScreen>(): S | undefined;
     /**
      * Returns if the given screen is visible
      */
@@ -24,33 +25,16 @@ export interface UiApi<U extends IScreen = IScreen> extends Emitter {
     /**
      * Shows a screen
      * @param screenId The id of the screen to show
-     * @param transition Whether or not to transition the screen in
-     * @param replaceCurrent Defaults to true. If the current screen is not replaced, the new screen will render above the old.
      */
-    showScreen(screenId: ScreenId, transition?: boolean, replaceCurrent?: boolean, ...args: any[]): Promise<void>;
+    showScreen(screenId: ScreenId): void;
     /**
      * Hides the given screen.
      */
-    hideScreen(screen: ScreenId | U): Promise<void>;
-    /**
-     * Removes the given screen.
-     */
-    removeScreen(screen: ScreenId | U): Promise<void>;
-    /**
-     * Initializes a screen by its ID.
-     */
-    initScreen<S extends IScreen = U>(screen: ScreenId): S;
-    showTooltip(tooltipSource: IComponent): Promise<void>;
-    showTooltip(tooltipOptions: ITooltipOptionsVague, source?: IComponent): Promise<void>;
-    showTooltip(tooltipOptions: ITooltipOptionsVague | IComponent, source?: IComponent): Promise<void>;
-    hideTooltip(): Promise<void>;
-    hideTooltip(source: IComponent): Promise<void>;
-    dumpTooltip(): Promise<void>;
-    dumpTooltip(source: IComponent): Promise<void>;
+    hideScreen(screen: ScreenId | IScreen): void;
     /**
      * Returns a new interrupt factory with the given translation data.
      */
-    interrupt(title: TextOrTranslationData, description?: TextOrTranslationData): IInterruptFactory;
+    interrupt(title: TranslationGenerator, description?: TranslationGenerator): IInterruptFactory;
     /**
      * Returns an interrupt factory that can only be used to create menus.
      */
@@ -62,31 +46,15 @@ export interface UiApi<U extends IScreen = IScreen> extends Emitter {
     /**
      * @deprecated
      */
-    interruptWithChoice(title: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
+    interruptWithConfirmation(title: TranslationGenerator): Promise<boolean>;
     /**
      * @deprecated
      */
-    interruptWithChoice(title: TextOrTranslationData, description: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
+    interruptWithConfirmation(title: TranslationGenerator, description: TranslationGenerator): Promise<boolean>;
     /**
      * @deprecated
      */
-    interruptWithConfirmation(title: TextOrTranslationData): Promise<boolean>;
-    /**
-     * @deprecated
-     */
-    interruptWithConfirmation(title: TextOrTranslationData, description: TextOrTranslationData): Promise<boolean>;
-    /**
-     * @deprecated
-     */
-    interruptWithInfo(title: TextOrTranslationData, description?: TextOrTranslationData): Promise<void>;
-    /**
-     * @deprecated
-     */
-    interruptWithInput(title: TextOrTranslationData, options?: InterruptInputOptions): Promise<string>;
-    /**
-     * @deprecated
-     */
-    interruptWithInput(title: TextOrTranslationData, description: TextOrTranslationData, options?: InterruptInputOptions): Promise<string>;
+    interruptWithInfo(title: TranslationGenerator, description?: TranslationGenerator): Promise<void>;
     /**
      * @deprecated
      */
@@ -96,9 +64,8 @@ export interface UiApi<U extends IScreen = IScreen> extends Emitter {
     /**
      * @deprecated
      */
-    showLoadingInterrupt(title: TextOrTranslationData, description?: TextOrTranslationData, canCancel?: boolean): Promise<void>;
+    showLoadingInterrupt(title: TranslationGenerator, description?: TranslationGenerator, canCancel?: boolean): Promise<void>;
     refreshTranslations(element: HTMLElement | IComponent): void;
-    getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: false): string;
     toggleFullscreen(fullscreen?: boolean): void;
     storeElements(...elements: Array<HTMLElement | IComponent>): void;
     registerDataHost(id: string | number, dataHost: object): void;
@@ -108,6 +75,10 @@ export interface UiApi<U extends IScreen = IScreen> extends Emitter {
     setScale(scale: number): void;
     getMaximumScale(): number;
     setDialogOpacity(opacity: number): void;
+}
+export interface ITooltipManager {
+    show(host: IComponent): ITooltip;
+    hide(host: IComponent): void;
 }
 export declare enum SaveLocation {
     /**
@@ -130,10 +101,11 @@ export declare enum SaveLocation {
 export declare function Save(saveLocation: SaveLocation): any;
 export declare function savedProperties<T = any>(target: T): IterableIterator<[string, SaveLocation]>;
 export interface IInterruptFactory extends IInterruptMenuFactory {
+    withDescription(description: TranslationGenerator): this;
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;
     withInfo(): Promise<void>;
-    withInput(options?: InterruptInputOptions): Promise<string>;
+    withInput(inputInitializer?: (input: IInput) => any): Promise<string>;
     withLoading(canCancel?: boolean, specialType?: string): Promise<void>;
 }
 export interface IInterruptMenuFactory {

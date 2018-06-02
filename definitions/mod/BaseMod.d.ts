@@ -12,7 +12,7 @@ import { IBinding } from "newui/BindingManager";
 import { UiApi } from "newui/INewUi";
 import { IMenuBarButtonDescription } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/IStatDisplayDescription";
-import { ModOptions } from "newui/screen/screens/menu/menus/OptionsMenu";
+import { ModOptions } from "newui/screen/screens/menu/menus/options/TabMods";
 import { IHairstyleDescription } from "player/IPlayer";
 import { ISkillDescription } from "player/Skills";
 import { ITerrainDescription } from "tile/ITerrain";

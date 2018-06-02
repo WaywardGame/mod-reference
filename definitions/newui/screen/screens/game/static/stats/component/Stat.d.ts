@@ -1,11 +1,12 @@
 import IBaseEntity, { IStatChangeInfo } from "entity/IBaseEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
 import Component from "newui/component/Component";
-import { IComponentOptions } from "newui/component/IComponent";
+import Text from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
+import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatElement extends Component {
     private readonly entity;
-    constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat, options?: IComponentOptions);
+    constructor(api: UiApi, entity: IBaseEntity, stat: Stat);
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
      */
@@ -15,7 +16,7 @@ export declare abstract class StatElement extends Component {
      *
      * If `statDescription.getFormatted` is defined, uses this method. Else, generates based on if the stat has a `max`
      */
-    getStatValue(): string;
+    getStatValue(): IStringSection[];
     /**
      * Returns the color of this stat.
      */
@@ -28,11 +29,11 @@ export declare abstract class StatElement extends Component {
      * Returns the display priority for this stat.
      */
     getDisplayOrder(): number;
-    abstract getDisplayElement(): Component;
+    abstract getDisplayElement(): Text;
     /**
      * Returns the generic string representation of this stat.
      */
-    protected getGenericStatValue(stat: IStat): string;
+    protected getGenericStatValue(stat: IStat): IStringSection[];
     /**
      * Event handler for when a stat changes. Updates the text, color, icon, and tooltip of this `StatElement`.
      *
@@ -47,8 +48,8 @@ export declare abstract class StatElement extends Component {
 export declare class Statbar extends StatElement {
     private readonly bar;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
-    getDisplayElement(): Component;
-    getGenericStatValue(stat: IStatMax): string;
+    getDisplayElement(): Text;
+    getGenericStatValue(stat: IStatMax): IStringSection[];
     /**
      * Overrides the superclass method of the same name. Calls the superclass method, then updates the CSS
      * property `--stat-percent`, to update the statbar's fill width.
@@ -58,7 +59,7 @@ export declare class Statbar extends StatElement {
 export declare class StatAttribute extends StatElement {
     private readonly attribute;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
-    getDisplayElement(): Component;
+    getDisplayElement(): Text;
 }
 export declare class Statbars extends Component {
     private readonly _statbars;

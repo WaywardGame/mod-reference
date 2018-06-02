@@ -1,7 +1,7 @@
 import { IOptionDescription } from "newui/component/ContextMenu";
-import { TextOrTranslationData } from "newui/component/IComponent";
 import StaticComponent from "newui/screen/screens/game/component/StaticComponent";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
+import { IStringSection } from "utilities/string/Interpolator";
 /**
  * Since when do quadrants refer to 8 sections, this ain't no octagon
  */
@@ -57,7 +57,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    protected abstract getName(): TextOrTranslationData;
+    protected abstract getName(): IStringSection[];
     protected getContextMenuDescription(): Array<[number | string, IOptionDescription]>;
     /**
      * Returns a new context menu using this element's context menu descriptions

@@ -3,6 +3,7 @@ import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle, SortType } 
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
+import Menu from "newui/screen/screens/menu/component/Menu";
 import { IPropSerializable } from "save/ISerializer";
 import { HintType } from "ui/IHint";
 import Emitter from "utilities/Emitter";
@@ -60,7 +61,7 @@ export interface IUi extends IPropSerializable, Emitter {
     appendStyle(id: string, styleContent: string): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
-    switchToScreen(screenId: ScreenId, menuId?: MenuId, ...args: any[]): void;
+    switchToScreen<M extends Menu = Menu>(screenId: ScreenId, menuId?: MenuId, menuInitializer?: (menu: M) => any): void;
     changeEquipmentOption(id: string): void;
     toggleOptions(): void;
     showOptionsScreen(): Promise<void>;

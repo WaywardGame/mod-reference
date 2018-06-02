@@ -25,7 +25,7 @@ export default class CharacterPreview extends Component {
     private readonly svg;
     private _loaded;
     readonly loaded: boolean;
-    constructor(uiApi: UiApi, customization: IPlayerCustomization, filters?: CharacterPreviewFilters);
+    constructor(api: UiApi, customization: IPlayerCustomization, filters?: CharacterPreviewFilters);
     getFilters(): CharacterPreviewFilters;
     update(): this;
     rotate(direction: CharacterPreviewRotation): void;

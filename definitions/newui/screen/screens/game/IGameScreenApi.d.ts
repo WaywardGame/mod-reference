@@ -1,5 +1,5 @@
 import Component from "newui/component/Component";
-import { TextOrTranslationData } from "newui/component/IComponent";
+import { TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
@@ -25,5 +25,5 @@ export interface IDialog {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    getName(): TextOrTranslationData;
+    getName(): TranslationGenerator;
 }

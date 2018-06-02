@@ -1,17 +1,20 @@
 import { InterruptChoice } from "language/ILanguage";
-import { TextOrTranslationData } from "newui/component/IComponent";
+import { TranslationGenerator } from "newui/component/IComponent";
+import { IInput } from "newui/component/IInput";
 import { IInterruptFactory, UiApi } from "newui/INewUi";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
-import { InterruptInputOptions } from "newui/util/IInterrupt";
 export default class InterruptFactory implements IInterruptFactory {
-    private readonly uiApi;
+    private readonly api;
     private readonly title;
-    private readonly description;
-    constructor(uiApi: UiApi, title: TextOrTranslationData, description?: TextOrTranslationData);
+    private description;
+    private canCancel;
+    constructor(api: UiApi, title?: TranslationGenerator, description?: TranslationGenerator);
+    setCanCancel(canCancel?: boolean): this;
+    withDescription(description: TranslationGenerator): this;
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;
     withInfo(): Promise<void>;
-    withInput(options?: InterruptInputOptions): Promise<string>;
+    withInput(input?: (input: IInput) => any): Promise<string>;
     withMenu(menuId: MenuId, args?: {
         [key: string]: any;
     }): Promise<void>;

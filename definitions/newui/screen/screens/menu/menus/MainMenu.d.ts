@@ -10,5 +10,5 @@ export default class MainMenu extends Menu {
     constructor(uiApi: UiApi);
     refresh(): Promise<void>;
     private create();
-    private createDedicatedServer();
+    private checkAndShowGameInterrupts();
 }

@@ -24,4 +24,4 @@ export default class Interpolator {
  */
 export declare const argumentSegment: ISegment;
 export declare const escapedSegment: ISegment;
-export declare function interpolate(str: string, ...args: any[]): string;
+export declare function interpolate(str: string, ...args: any[]): IStringSection[];

@@ -1,4 +1,4 @@
-import { IComponent, IContextMenu, ITooltipOptionsVague } from "newui/component/IComponent";
+import { IComponent, IContextMenu } from "newui/component/IComponent";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 export declare enum ScreenId {
     None = 0,
@@ -21,34 +21,7 @@ export declare enum ScreenEvent {
     CanShowTooltip = "AttemptShowTooltip",
 }
 export interface IScreen extends IComponent {
-    retain?: boolean;
-    /**
-     * Shows a tooltip
-     * @param tooltip The options with which to construct the tooltip
-     * @param source
-     * 	The source element that the tooltip is for.
-     * 	If there currently exists a tooltip for this element, it shows the old instead of creating a new tooltip.
-     */
-    showTooltip(tooltip: ITooltipOptionsVague, source?: IComponent): Promise<void>;
-    /**
-     * Shows a tooltip
-     * @param elementWithTooltip
-     * 	The element the tooltip is for, that contains the options with which to construct the tooltip.
-     */
-    showTooltip(elementWithTooltip: IComponent): Promise<void>;
-    showTooltip(): Promise<void>;
-    showTooltip(tooltipElementOrOptions: ITooltipOptionsVague | IComponent, source?: IComponent): Promise<void>;
-    /**
-     * Hides the current tooltip
-     * @param source The element the tooltip must be for to hide it
-     * @returns Whether a tooltip was hidden.
-     */
-    hideTooltip(source?: IComponent): Promise<boolean>;
-    /**
-     * Removes the current tooltip
-     * @param source The element the tooltip must be for to remove it
-     */
-    dumpTooltip(source?: IComponent): Promise<boolean>;
+    isOverlayScreen?: boolean;
     /**
      * Remove the context menu from this element
      */

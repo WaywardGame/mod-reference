@@ -5,6 +5,7 @@ import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle } from "Enum
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
+import Menu from "newui/screen/screens/menu/component/Menu";
 import { HintType } from "ui/IHint";
 import { IDialogInfo, IUi } from "ui/IUi";
 import InGameScreen from "ui/screens/InGameScreen";
@@ -28,7 +29,7 @@ export default class Ui extends Emitter implements IUi {
     appendStyle(id: string, styleContent: string): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
-    switchToScreen(screenId: ScreenId, menuId?: MenuId, ...args: any[]): void;
+    switchToScreen<M extends Menu = Menu>(screenId: ScreenId, menuId?: MenuId, menuInitializer?: (menu: M) => any): void;
     toggleOptions(): void;
     showOptionsScreen(): Promise<void>;
     onWindowResize(): void;

@@ -1,24 +1,23 @@
 import { BlockRow } from "newui/component/BlockRow";
-import { CheckButton, CheckButtonOptions } from "newui/component/CheckButton";
-import { IComponentOptions } from "newui/component/IComponent";
-import { Refreshable } from "newui/component/Refreshable";
+import { CheckButton } from "newui/component/CheckButton";
+import { IRefreshableValue } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 export declare enum ChoiceListEvent {
     Choose = "Selection",
 }
-export interface ChoiceListOptions<ChoiceType extends Choice = Choice> extends IComponentOptions {
-    refresh?(): ChoiceType;
-}
-export default class ChoiceList<ChoiceType extends Choice = Choice> extends BlockRow implements Refreshable {
+export default class ChoiceList<C extends Choice = Choice> extends BlockRow implements IRefreshableValue<C> {
+    private refreshMethod;
     private _selection;
-    private readonly options;
-    readonly choice: ChoiceType;
-    constructor(uiApi: UiApi, options?: ChoiceListOptions<ChoiceType>);
-    setChoices(choices: IterableOf<ChoiceType>): Promise<void>;
-    refresh(): void;
-    choose(chosen?: ChoiceType): void;
-    findChoice(filter: (choice: ChoiceType) => boolean): ChoiceType | undefined;
+    readonly choice: C;
+    constructor(uiApi: UiApi);
+    setChoices(...choices: ArrayOfTOrIterablesOfT<C>): this;
+    refresh(): this;
+    setRefreshMethod(refreshMethod: (choiceList: this) => C): this;
+    choose(chosen?: C): void;
+    findChoice(filter: (choice: C) => boolean): C | undefined;
+    private onChoiceChange(checkChoice, isChecked);
 }
-export declare class Choice extends CheckButton {
-    constructor(uiApi: UiApi, options?: CheckButtonOptions);
+export declare class Choice<I extends string | number | undefined = string | number | undefined> extends CheckButton {
+    readonly id: I;
+    constructor(uiApi: UiApi, id: I);
 }

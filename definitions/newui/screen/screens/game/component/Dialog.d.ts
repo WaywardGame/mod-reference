@@ -1,7 +1,7 @@
 import { Bindable } from "Enums";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
-import { TextOrTranslationData } from "newui/component/IComponent";
+import { TranslationGenerator } from "newui/component/IComponent";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi, { IDialog } from "newui/screen/screens/game/IGameScreenApi";
 /**
@@ -54,7 +54,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     close(): void;
     addPanel(id: string | number): Component;
-    showPanel(id: string | number): void;
+    showPanel(id: string | number): Component | undefined;
     getPanel(id: string | number): Component | undefined;
     isPanelVisible(id: string | number): boolean;
     /**
@@ -80,7 +80,7 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    abstract getName(): TextOrTranslationData;
+    abstract getName(): TranslationGenerator;
     /**
      * Event handler for when this dialog is appended
      */

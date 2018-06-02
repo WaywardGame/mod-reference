@@ -1,4 +1,5 @@
 import { Dictionary, ITranslationObject, UiTranslation } from "language/ILanguage";
+import Translation from "language/Translation";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -10,7 +11,7 @@ export declare enum ComponentEvent {
     RemoveForAppend = 4,
     AddChild = 5,
     RemoveChild = 6,
-    Change = 7,
+    InputChange = 7,
     Tooltip = 8,
 }
 export interface IComponent extends Emitter {
@@ -41,6 +42,10 @@ export interface IComponent extends Emitter {
     classes: ClassListManipulator<this>;
     attributes: AttributeManipulator<this>;
     /**
+     * Sets the ID of this component's element.
+     */
+    setId(id: string): this;
+    /**
      * Return a proxy for the data on this element that uses `JSON.stringify` and `JSON.parse` to set
      * and retrieve data.
      */
@@ -51,20 +56,17 @@ export interface IComponent extends Emitter {
     isVisible(): boolean;
     /**
      * Shows the element.
-     * @param args Miscellaneous arguments. Passed to `UiElementEvent.Show`
      */
-    show(...args: any[]): Promise<void>;
+    show(): this;
     /**
      * Hides the element. If a tooltip is shown for this element, hides that as well.
-     * @param args Miscellaneous arguments. Passed to `UiElementEvent.Hide`
      */
-    hide(...args: any[]): Promise<void>;
+    hide(): this;
     /**
      * Toggles the visibility of this element. Internally uses `show` and `hide`.
      * @param visible The new visiblity of this element.
-     * @param args Miscellaneous arguments. Passed to the `show` or `hide` call.
      */
-    toggle(visible: boolean, ...args: any[]): Promise<void>;
+    toggle(visible: boolean): this;
     /**
      * Append this element to another element, by selector, element, or UiElement.
      *
@@ -82,7 +84,7 @@ export interface IComponent extends Emitter {
      * This will remove all child UiElements, remove itself from its parent UiElement, and then remove
      * itself from the DOM.
      */
-    remove(): Promise<void>;
+    remove(): void;
     /**
      * Returns whether this UiElement contains the given element.
      */
@@ -90,12 +92,12 @@ export interface IComponent extends Emitter {
     /**
      * Remove all children
      */
-    dump(): Promise<void>;
+    dump(): this;
     /**
      * Remove all children that are not filtered out with the given filter function
      * @param filter A function that will return true if the child should be kept
      */
-    dump(filter: (element: IComponent) => boolean): Promise<void>;
+    dump(filter: (element: IComponent) => boolean): this;
     /**
      * Sets the contents of this element using `innerHTML`.
      * @param html The content, an HTML string. Script tags will not be executed, as per the normal functionality of `innerHTML`
@@ -113,15 +115,10 @@ export interface IComponent extends Emitter {
      */
     findDescendants(selector: string): NodeListOf<Element>;
     /**
-     * Shows the tooltip for this element using its tooltip options. Does nothing if there are no
-     * tooltip options for this element.
-     */
-    showTooltip(): Promise<void>;
-    /**
      * Sets the tooltip options for this element. Setting the tooltip to undefined, or not
      * providing the argument removes the tooltip options.
      */
-    setTooltip(tooltipOptions?: ITooltipOptionsVague): void;
+    setTooltip(initializer: (tooltip: ITooltip) => any): this;
     /**
      * Remove the context menu from this element
      */
@@ -166,7 +163,7 @@ export interface IComponent extends Emitter {
      * @param cb The callback to run.
      * @param args The arguments with which to call the callback.
      */
-    schedule(cb: (this: this, button: this, ...args: any[]) => any, ...args: any[]): this;
+    schedule(cb?: (this: this, button: this, ...args: any[]) => any, ...args: any[]): this;
     /**
      * Runs the given callback with the given arguments, after the specified amount of time.
      * `this` and the first argument are this element.
@@ -174,31 +171,15 @@ export interface IComponent extends Emitter {
      * @param cb The callback to run.
      * @param args The arguments with which to call the callback.
      */
-    schedule(ms: number, cb: (this: this, button: this, ...args: any[]) => any, ...args: any[]): this;
+    schedule(ms: number, cb?: (this: this, button: this, ...args: any[]) => any, ...args: any[]): this;
     /**
      * Triggers a repaint on this element.
      */
     repaint(): void;
-    /**
-     * Passes this component to a collector function, then returns the result of that function
-     * @param collector A function that takes a component and returns T
-     */
-    collect<T>(collector: (component: IComponent) => T): T;
 }
 export interface IContextMenu<OptionType extends number | string = number | string> extends IComponent {
     setPosition(x: number, y: number, right?: boolean): this;
-}
-export interface IComponentOptions {
-    visible?: boolean;
-    elementType?: string;
-    namespace?: Namespace;
-    id?: string;
-    classes?: string[];
-    attributes?: {
-        [key: string]: string | number;
-    };
-    tooltip?: ITooltipOptionsVague | boolean;
-    selectable?: SelectableLayer;
+    hideAndRemove(): Promise<void>;
 }
 export declare enum Namespace {
     SVG = "http://www.w3.org/2000/svg",
@@ -233,16 +214,15 @@ export declare enum TooltipLocation {
     BeneathRight = 9,
     Mouse = 10,
 }
-/**
- * ...yea
- */
-export declare type TextOrTranslationDataOrSectionsOrGenerator = GeneratorOrT<TextOrTranslationData | IStringSection[]>;
-export interface ITooltipOptionsVague extends IComponentOptions {
-    tooltip?: never;
-    location: TooltipLocation;
-    heading?: TextOrTranslationData;
-    text?: TextOrTranslationDataOrSectionsOrGenerator;
-    cache?: false;
-    maxWidth?: number;
-    create?(tooltip: IComponent): Promise<void>;
+export interface ITooltip extends IComponent {
+    setLocation(location: TooltipLocation): this;
+    setMaxWidth(maxWidth: number): this;
+    setNoCache(): this;
+    addText(initializer: (text: IText) => any): this;
+    addHeading(initializer: (text: IText) => any): this;
+    addParagraph(initializer: (text: IText) => any): this;
 }
+export interface IText extends IComponent {
+    setText(translation: TranslationGenerator): this;
+}
+export declare type TranslationGenerator = Translation | UiTranslation | (() => IStringSection[] | Translation | UiTranslation | undefined);

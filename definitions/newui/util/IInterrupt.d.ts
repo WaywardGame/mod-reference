@@ -1,6 +1,6 @@
 import { InterruptChoice } from "language/ILanguage";
-import { TextOrTranslationData } from "newui/component/IComponent";
-import { InputOptions } from "newui/component/IInput";
+import { TranslationGenerator } from "newui/component/IComponent";
+import { IInput } from "newui/component/IInput";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 export declare enum InterruptType {
     Info = 0,
@@ -12,9 +12,8 @@ export declare enum InterruptType {
 }
 export interface InterruptOptions {
     type?: InterruptType;
-    title?: TextOrTranslationData;
-    description?: TextOrTranslationData;
-    input?: InterruptInputOptions;
+    title?: TranslationGenerator;
+    description?: TranslationGenerator;
     choices?: InterruptChoice[];
     menuId?: MenuId;
     args?: {
@@ -22,8 +21,5 @@ export interface InterruptOptions {
     };
     canCancel?: boolean;
     specialType?: string;
-}
-export declare type InterruptInputOptions = InputOptions & InterruptOptionsCanCancel;
-export interface InterruptOptionsCanCancel {
-    canCancel?: boolean;
+    input?(input: IInput): any;
 }

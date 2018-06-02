@@ -10,5 +10,8 @@ export default class PauseMenu extends Menu {
     protected paragraph: Paragraph;
     protected heading: Heading;
     constructor(uiApi: UiApi);
-    refresh(): Promise<void>;
+    refresh(): void;
+    private getHeadingText();
+    private getParagraphText();
+    private onQuitButtonClick();
 }

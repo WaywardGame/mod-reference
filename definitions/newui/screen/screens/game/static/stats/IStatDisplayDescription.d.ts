@@ -2,7 +2,8 @@ import IBaseEntity from "entity/IBaseEntity";
 import { IStat, StatDisplayType } from "entity/IStats";
 import { IModdable } from "Enums";
 import Component from "newui/component/Component";
-import { ITooltipOptionsVague } from "newui/component/IComponent";
+import { ITooltip } from "newui/component/IComponent";
+import { IStringSection } from "utilities/string/Interpolator";
 export interface IStatDisplayDescription extends IModdable {
     imagePath?: string | ((entity: IBaseEntity, stat?: IStat) => string);
     /**
@@ -20,10 +21,6 @@ export interface IStatDisplayDescription extends IModdable {
      */
     displayOrder?: number;
     /**
-     * Gets the tooltip data for this stat.
-     */
-    tooltip?: Partial<ITooltipOptionsVague> | ((entity: IBaseEntity, stat?: IStat) => Partial<ITooltipOptionsVague>);
-    /**
      * Handlers for when the stat changes. Called when the stat changes & when the stat max changes.
      */
     onChange?: Array<(statElement: Component, entity: IBaseEntity, stat: IStat, oldValue?: number) => void>;
@@ -32,5 +29,9 @@ export interface IStatDisplayDescription extends IModdable {
      *
      * For overriding the normal formatted output of a stat.
      */
-    getFormatted?(entity: IBaseEntity, stat?: IStat): string;
+    getFormatted?(entity: IBaseEntity, stat?: IStat): IStringSection[];
+    /**
+     * A function that will initialize a tooltip for this stat element
+     */
+    tooltip?(tooltip: ITooltip, entity: IBaseEntity, stat?: IStat): any;
 }

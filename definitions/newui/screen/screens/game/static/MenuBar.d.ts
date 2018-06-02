@@ -1,8 +1,8 @@
-import { UiTranslation } from "language/ILanguage";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import MenuBarButton from "newui/screen/screens/game/static/menubar/MenuBarButton";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
+import { IStringSection } from "utilities/string/Interpolator";
 export default class MenuBar extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
@@ -15,7 +15,7 @@ export default class MenuBar extends QuadrantComponent {
      */
     refresh(): void;
     getID(): QuadrantComponentId;
-    protected getName(): UiTranslation;
+    protected getName(): IStringSection[];
     /**
      * Creates a new menu bar button of the given type, and adds it to a group component. If the group
      * component that the button's description requests does not exist, it's created.

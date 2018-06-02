@@ -1,12 +1,12 @@
 import { Bindable } from "Enums";
 import { MessageSource } from "game/IMessageManager";
 import { IMessage } from "game/MessageManager";
-import { UiTranslation } from "language/ILanguage";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IOptionDescription } from "newui/component/ContextMenu";
+import { TranslationGenerator } from "newui/component/IComponent";
 import Input from "newui/component/Input";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
@@ -29,9 +29,9 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     private selectedFilter;
     constructor(gsapi: IGameScreenApi);
     getID(): QuadrantComponentId;
-    getName(): UiTranslation;
+    getName(): IStringSection[];
     scrollToNewest(): void;
-    sendPinnedMessage(message: IStringSection[], onActivate: () => any): void;
+    sendPinnedMessage(message: TranslationGenerator, onActivate: () => any): void;
     onDisplayMessage(message: IMessage, addBackwards?: boolean): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onWrittenNote(id: number): void;
@@ -63,10 +63,6 @@ export default class Messages extends QuadrantComponent implements IHookHost {
      * Changes the message filter
      */
     private changeFilter(filterName);
-    /**
-     * Resets the text of the filter button
-     */
-    private resetFilterText();
     private onPinnedMessageActivate(pinnedMessage);
     private showNote(note);
 }

@@ -1,4 +1,4 @@
-import { Block } from "newui/component/Text";
+import { Block } from "newui/component/Block";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { IHighscore } from "save/data/ISaveDataGlobal";
@@ -18,5 +18,5 @@ export declare class HighscoreRow extends Block {
     private readonly _highscore;
     readonly highscore: IHighscore;
     place: number;
-    constructor(uiApi: UiApi, highscore: IHighscore);
+    constructor(api: UiApi, highscore: IHighscore);
 }

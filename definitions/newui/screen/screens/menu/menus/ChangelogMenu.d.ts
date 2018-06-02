@@ -6,6 +6,7 @@ export default class ChangelogMenu extends Menu {
     private readonly changesContainer;
     private lastVersion;
     constructor(uiApi: UiApi);
+    show(): this;
     private refresh();
     private showVersion(version?, loadingInterrupt?);
     private appendChangelog(title, cards?);

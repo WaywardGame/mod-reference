@@ -21,8 +21,9 @@ export default class NewGameMenu extends Menu {
     private maxPlayersRow;
     private tickSpeedRow;
     private buttonNext;
-    constructor(uiApi: UiApi);
-    refresh(): Promise<void>;
-    create(): Promise<void>;
+    constructor(api: UiApi);
+    create(): void;
+    private refresh();
+    private getStartClickHandler();
     private getPlayOptions();
 }

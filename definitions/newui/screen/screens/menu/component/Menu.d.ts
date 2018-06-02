@@ -1,47 +1,32 @@
 import { Bindable } from "Enums";
-import { UiTranslation } from "language/ILanguage";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
-import { BlockRow } from "newui/component/BlockRow";
-import Button, { ButtonEffect, ButtonOptions, DefaultButtonOptions } from "newui/component/Button";
+import Button from "newui/component/Button";
 import Component from "newui/component/Component";
-import { IComponent, IComponentOptions, TextOrTranslationData } from "newui/component/IComponent";
-import Text, { Heading, Paragraph, TextOptions } from "newui/component/Text";
+import Text, { Heading } from "newui/component/Text";
 import { SelectDirection, UiApi } from "newui/INewUi";
-import { IScreen } from "newui/screen/IScreen";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
-export interface MenuOptions extends IComponentOptions {
-    menuId: MenuId;
-    title?: string | UiTranslation;
-    description?: string | UiTranslation;
-    tabs?: TabOptions[];
-}
 export declare enum MenuEvent {
-    Load = "Load",
     Tab = "Tab",
     GoBackFrom = "GoBackFrom",
     CancelBind = "CancelBind",
     EnterBind = "EnterBind",
 }
-export default class Menu extends Component implements IMenu, IHookHost {
-    screenHost: IScreen;
-    protected contentWrapper: Component;
+export default class Menu<I extends string | number | undefined = string | number | undefined> extends Component implements IMenu, IHookHost {
+    menuId: MenuId;
+    protected readonly title: Heading;
+    protected readonly description: Text;
+    protected readonly content: Component;
+    protected tabContainer: Component;
     protected canCancel: boolean | undefined;
     private selection;
-    private elementTabs;
-    private readonly sectionElements;
-    private tabs;
-    private _canShowTooltip;
-    readonly canShowTooltip: boolean;
     private readonly selectables;
-    private readonly _title;
-    title: TextOrTranslationData;
-    private readonly _description;
-    description: TextOrTranslationData | undefined;
-    private _isSubmenu;
+    private readonly tabs;
     isSubmenu: boolean;
-    constructor(uiApi: UiApi, options: MenuOptions);
+    constructor(uiApi: UiApi, menuId: MenuId);
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    setTitle(initializer: (title: Heading) => any): void;
+    setDescription(initializer: (title: Text) => any): void;
     scrollToTop(): void;
     select(element: HTMLElement): void;
     getSelection(): HTMLElement;
@@ -54,45 +39,28 @@ export default class Menu extends Component implements IMenu, IHookHost {
     selectRight(): void;
     selectDirection(direction: SelectDirection, range?: number, canEscapeLayer?: boolean, smartDifferenceVal?: number): void;
     selectEnter(): boolean;
-    addTabs(...tabs: MenuTabOptions[]): Tab[];
-    dumpTabs(): Promise<void>;
-    addButton(options: DefaultButtonOptions): Button;
-    addButtonRow(...buttons: DefaultButtonOptions[]): BlockRow;
-    addSpacer(): Component;
-    addText(options: TextOptions): Text;
-    addHeading(options: TextOptions): Heading;
-    addParagraph(...textOptionsArr: Array<Text | TextOptions>): Paragraph;
-    dump(): Promise<void>;
-    append(...elements: Array<HTMLElement | IComponent | undefined | IterableOf<HTMLElement | IComponent | undefined>>): this;
-    addSection(heading: TextOptions, content: IterableOf<Component | undefined>): MenuSection;
-    addTabSection(tabOptions: MenuTabOptions, heading: TextOptions, content?: IterableOf<Component | undefined>): ITabSection;
-    toggleTab(tabId: string | number, disabled?: boolean): void;
-    load(...args: any[]): Promise<void>;
-    protected updateBottomPadding(): void;
-    private onShow();
-    private onHide();
+    scrollToTabSection(tabId: string | number): this;
+    addTabs(...tabs: ArrayOfTOrIterablesOfT<Tab>): void;
+    /**
+     * When called in `show` or after `ComponentEvent.Show`, returns whether the menu was "went back to"
+     * from a descendant menu.
+     */
+    protected wentBackTo(): boolean;
+    private onShowMenu();
 }
-export interface ITabSection {
-    tab: Tab;
-    section: MenuSection;
-}
-export interface TabEffect extends ButtonEffect {
-    scrollTo?: Component | (() => Component);
-}
-export interface TabOptions extends ButtonOptions {
-    tabId: string | number;
-    onActivate?: TabEffect | (() => any);
-}
-export interface MenuTabOptions extends TabOptions {
-    subTabs?: IterableOf<TabOptions>;
-}
-export declare class Tab extends Button {
-    subTabs: {
-        [key: string]: Tab;
-    };
-    constructor(uiApi: UiApi, options: TabOptions);
+export declare class Tab<I extends string | number | undefined = string | number | undefined> extends Button {
+    readonly id: I;
+    subtabs: Tab[];
+    section: MenuSection | undefined;
+    constructor(uiApi: UiApi, id: I);
+    setSection(section: MenuSection): this;
+    setSubTabs(...tabs: ArrayOfTOrIterablesOfT<Tab>): void;
 }
 export declare class MenuSection extends Component {
+    readonly heading: Heading;
     readonly content: Component;
-    constructor(uiApi: UiApi, heading: TextOptions, content: IterableOf<Component | undefined>);
+    constructor(uiApi: UiApi);
+    setTitle(initializer: (title: Heading) => any): this;
+    addContent(...content: ArrayOfTOrIterablesOfT<Component | undefined>): this;
+    dumpContent(): this;
 }

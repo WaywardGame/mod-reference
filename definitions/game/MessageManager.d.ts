@@ -1,5 +1,6 @@
 import { MessageSource } from "game/IMessageManager";
 import { Message, MessageType } from "language/IMessages";
+import IPlayer from "player/IPlayer";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessage {
     id: number;
@@ -33,7 +34,7 @@ export default class MessageManager {
      */
     send(message: string | IStringSection[] | Message, ...args: any[]): this;
     /**
-     * Sends a chat message from the local player
+     * Sends a chat message from the player
      */
-    sendChatMessage(message: string): this;
+    sendChatMessage(player: IPlayer, message: string): this;
 }

@@ -1,54 +1,35 @@
 import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
+import Button from "newui/component/Button";
 import Component from "newui/component/Component";
-import { IComponentOptions } from "newui/component/IComponent";
-import { Refreshable } from "newui/component/Refreshable";
-import { TextOptions } from "newui/component/Text";
+import { IRefreshableValue } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
-export interface IDropdownOptions<OptionId = string | number> extends Partial<IComponentOptions> {
-    defaultOption?: OptionId | (() => OptionId);
-    options?: GeneratorOf<IDropdownOption<OptionId>>;
-    refresh?(): OptionId | undefined;
-}
-export interface IDropdownOption<OptionId> {
-    id: OptionId;
-    options: TextOptions;
-}
 export declare enum DropdownEvent {
     Selection = "Selection",
 }
-export default class Dropdown<OptionId = string | number> extends Component implements Refreshable, IHookHost {
+export declare type IDropdownOption<OptionId = string | number> = [OptionId, (option: Button) => any];
+export interface IDropdownData<OptionId = string | number> {
+    defaultOption: OptionId;
+    options: IterableOf<IDropdownOption<OptionId>>;
+}
+export default class Dropdown<OptionId = string | number> extends Component implements IRefreshableValue<IDropdownData<OptionId>>, IHookHost {
     protected optionsWrapper: Component;
     private readonly inputButton;
     private options;
+    private refreshMethod;
     private defaultOption?;
-    private optionsSource?;
-    private optionsRefreshable;
     private open;
     private isFirstSelection;
     private _selection;
     readonly selection: OptionId;
-    constructor(uiApi: UiApi, options?: IDropdownOptions<OptionId>);
+    constructor(uiApi: UiApi);
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    /**
-     * Adds an option permanently to the dropdown. When options are added this way, the dropdown list is not refreshable.
-     * @param optionId The ID of the option, a string or number.
-     * @param options The option display information.
-     */
-    addOption(optionId: OptionId, options: TextOptions): Promise<void>;
-    /**
-     * Sets the options to an iterable. The iterable is saved to allow the options to be refreshed.
-     * Any existing options are retained. If called multiple times, the options are no longer refreshable.
-     * @param options An iterable of dropdown options.
-     */
-    setOptions(options: GeneratorOf<IDropdownOption<OptionId>>): Promise<void>;
-    dumpOptions(): Promise<void>;
     showDropdown(): void;
     hideDropdown(): void;
-    select(optionId: OptionId | undefined): Promise<void>;
-    selectDefault(): Promise<void>;
-    refresh(): Promise<void>;
-    private addOptionInternal(optionId, options);
+    select(optionId: OptionId | undefined): void;
+    selectDefault(): void;
+    setRefreshMethod(refresh: () => IDropdownData<OptionId>): this;
+    refresh(): this;
     private filter(filterBy?);
 }
