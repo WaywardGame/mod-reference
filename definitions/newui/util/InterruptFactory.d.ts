@@ -8,6 +8,7 @@ export default class InterruptFactory implements IInterruptFactory {
     private readonly title;
     private description;
     private canCancel;
+    private executed;
     constructor(api: UiApi, title?: TranslationGenerator, description?: TranslationGenerator);
     setCanCancel(canCancel?: boolean): this;
     withDescription(description: TranslationGenerator): this;
@@ -20,4 +21,5 @@ export default class InterruptFactory implements IInterruptFactory {
     }): Promise<void>;
     withLoading(canCancel?: boolean, specialType?: string): Promise<void>;
     private execute<R>(options);
+    private warnIfNeverShown();
 }
