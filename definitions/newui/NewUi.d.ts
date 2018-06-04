@@ -5,13 +5,14 @@ import Screen from "newui/screen/Screen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import TooltipManager from "newui/tooltip/TooltipManager";
 import InterruptFactory from "newui/util/InterruptFactory";
+import ScaleManager from "newui/util/ScaleManager";
 import Emitter from "utilities/Emitter";
 export default class Ui extends Emitter implements UiApi {
     readonly tooltips: TooltipManager;
+    readonly scale: ScaleManager;
     private storageElement;
     private readonly screenManager;
     private readonly dataHosts;
-    private scale;
     constructor();
     screens(): IterableIterator<Screen>;
     getScreen<S extends IScreen = Screen>(screenId: ScreenId): S | undefined;
@@ -59,21 +60,8 @@ export default class Ui extends Emitter implements UiApi {
      * @param fullscreen Whether or not fullscreen is enabled
      */
     toggleFullscreen(fullscreen?: boolean): void;
-    getScale(): number;
-    /**
-     * @param save Whether or not to save the new scale into options. Defaults to true.
-     */
-    setScale(scale: number, save?: boolean): void;
-    /**
-     * Returns the maximum scale the screen size will allow (multiplier)
-     */
-    getMaximumScale(): number;
     /**
      * @param save Whether or not to save the new scale into options. Defaults to true.
      */
     setDialogOpacity(opacity?: number, save?: boolean): void;
-    /**
-     * Sets the ui scale to the size configured in the options, capped by the maximum the screen size allows
-     */
-    private updateScale();
 }

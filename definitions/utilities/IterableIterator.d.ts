@@ -44,7 +44,12 @@ declare global  {
          * Loops the values of this iterable and calls the given function with each value.
          * @param user A function that takes a value. If the function returns `false`, iteration will not continue.
          */
-        forEach(user: (val: T) => any): void;
+        forEach(user: (val: T) => any, continueGenerate?: false): void;
+        /**
+         * Loops the values of this iterable and calls the given function with each value.
+         * @param user A function that takes a value. If the function returns `false`, iteration will not continue.
+         */
+        forEach(user: (val: T) => any, continueGenerate: true): IterableIterator<T>;
         /**
          * Returns the first value in this iterator, or undefined if there are no values.
          */
@@ -180,3 +185,4 @@ export declare function range(end: number): IterableIterator<number>;
  */
 export declare function range(start: number, end: number): IterableIterator<number>;
 export declare function isIterable(obj: any): obj is IterableOf<any>;
+export declare function pushTo<T>(arr: T[]): (...wat: any[]) => any;

@@ -4,8 +4,7 @@ import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { ICharacter } from "newui/screen/screens/menu/component/Character";
-import IPlayer from "player/IPlayer";
+import IPlayer, { ICharacter } from "player/IPlayer";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export default class Multiplayer implements IMultiplayer {
     private readonly _playerIdentifier;

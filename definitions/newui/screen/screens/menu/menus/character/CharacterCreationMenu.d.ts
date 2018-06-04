@@ -16,8 +16,9 @@ export default class CharacterCreationMenu extends Menu {
     private rotation;
     private readonly customization;
     private defaultName;
-    constructor(uiApi: UiApi);
-    setGameOptions(gameOptions: IPlayOptions): this;
+    constructor(api: UiApi);
+    setGameOptions(gameOptions: Partial<IPlayOptions>): this;
+    private randomizeName();
     private randomize();
     private onShow();
     private create();

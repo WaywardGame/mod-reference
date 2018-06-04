@@ -14,6 +14,11 @@ export declare enum ComponentEvent {
     InputChange = 7,
     Tooltip = 8,
 }
+export declare type AppendStrategy = "append" | "prepend" | {
+    after: IComponent;
+} | {
+    before: IComponent;
+};
 export interface IComponent extends Emitter {
     /**
      * The element that this `UiElement` instance wraps.
@@ -72,7 +77,7 @@ export interface IComponent extends Emitter {
      *
      * The element is only added to a UiElement wrapper if given that wrapper and not its internal element.
      */
-    appendTo(element: string | HTMLElement | IComponent): this;
+    appendTo(element: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
     /**
      * Append every element of a list of elements.
      * @param elements A varargs list of elements or iterables of elements. `undefined` is skipped
@@ -118,7 +123,7 @@ export interface IComponent extends Emitter {
      * Sets the tooltip options for this element. Setting the tooltip to undefined, or not
      * providing the argument removes the tooltip options.
      */
-    setTooltip(initializer: (tooltip: ITooltip) => any): this;
+    setTooltip(initializer: (tooltip: ITooltip) => ITooltip): this;
     /**
      * Remove the context menu from this element
      */

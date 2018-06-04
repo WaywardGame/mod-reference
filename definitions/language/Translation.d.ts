@@ -21,7 +21,7 @@ export default class Translation {
      *
      * Example uses include text the user inputs, and text from other sites (steam/trello)
      */
-    static createTranslationGenerator(pregeneratedText: string | IStringSection[]): () => IStringSection[];
+    static generator(pregeneratedText: string | IStringSection[]): () => IStringSection[];
     static provider: ILanguageEntryProvider;
     static ui: (entry: string | UiTranslation) => Translation;
     static message: (entry: string | Message) => Translation;

@@ -3,8 +3,7 @@ import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TextOrTranslationData, TranslationGenerator } from "newui/component/IComponent";
-import { ICharacter } from "newui/screen/screens/menu/component/Character";
-import { IPlayer } from "player/IPlayer";
+import { ICharacter, IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;

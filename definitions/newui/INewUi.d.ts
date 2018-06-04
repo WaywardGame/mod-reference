@@ -6,6 +6,7 @@ import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Emitter from "utilities/Emitter";
 export interface UiApi extends Emitter {
     tooltips: ITooltipManager;
+    scale: IScaleManager;
     /**
      * Generator for all existing screens.
      */
@@ -71,14 +72,37 @@ export interface UiApi extends Emitter {
     registerDataHost(id: string | number, dataHost: object): void;
     playActivateSound(): void;
     playSelectSound(): void;
-    getScale(): number;
-    setScale(scale: number): void;
-    getMaximumScale(): number;
     setDialogOpacity(opacity: number): void;
+}
+export interface IScaleManager {
+    /**
+     * Returns the minimum scale we allow (0.5, multiplier)
+     */
+    getMinimum(): number;
+    /**
+     * Returns the maximum scale the screen size will allow (multiplier)
+     */
+    getMaximum(): number;
+    /**
+     * Returns the current UI scale (after being clamped by min & max).
+     */
+    getCurrent(): number;
+    /**
+     * Returns the currently "requested" UI scale.
+     */
+    getRequested(): number;
+    /**
+     * Requests a new UI scale, a multiplier of the default size.
+     */
+    request(scale: number): void;
+    /**
+     * Updates the UI scale based on the current viewport.
+     */
+    update(): void;
 }
 export interface ITooltipManager {
     show(host: IComponent): ITooltip;
-    hide(host: IComponent): void;
+    hide(host?: IComponent): void;
 }
 export declare enum SaveLocation {
     /**
@@ -107,6 +131,7 @@ export interface IInterruptFactory extends IInterruptMenuFactory {
     withInfo(): Promise<void>;
     withInput(inputInitializer?: (input: IInput) => any): Promise<string>;
     withLoading(canCancel?: boolean, specialType?: string): Promise<void>;
+    withLoading(until: Promise<any> | (() => Promise<any>), canCancel?: boolean, specialType?: string): Promise<void>;
 }
 export interface IInterruptMenuFactory {
     withMenu(menuId: MenuId, args?: {

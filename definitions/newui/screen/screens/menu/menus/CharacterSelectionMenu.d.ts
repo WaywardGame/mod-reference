@@ -6,9 +6,11 @@ export default class CharacterSelectionMenu extends Menu {
     private sortRow;
     private headingNoCharacters;
     private characterRows;
+    private characterCreationMenu;
     constructor(uiApi: UiApi);
     create(): void;
     refresh(): void;
     private onShow();
     private sortCharacters();
+    private getCharacterCreationMenu();
 }

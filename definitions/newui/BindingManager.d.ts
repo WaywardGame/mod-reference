@@ -64,6 +64,8 @@ export declare class BindingManager extends Emitter {
     getBindTranslation(bind: IBinding | IBinding[], separate: true): string[];
     registerBindCatcher(element: HTMLElement, shouldFocus?: boolean): number;
     deregisterBindCatcher(id: number): void;
+    disableBindsUntil(until: number | Promise<any>, id?: number): void;
+    areBindsDisabled(id?: number): boolean;
     setDefaultBindCatcher(id: number): void;
     getPressTime(bindOrKey: Bindable | string, id?: number): number;
     removePressState(bindOrKey: Bindable | string, id?: number): void;

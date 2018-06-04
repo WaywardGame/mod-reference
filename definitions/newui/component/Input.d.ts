@@ -1,4 +1,5 @@
 import Component from "newui/component/Component";
+import { TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IRefreshable } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
@@ -24,7 +25,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     setCanBeEmpty(canBeEmpty?: boolean): this;
     setDefault(generator: () => string): this;
     setClearTo(clearTo?: () => string): this;
-    setPlaceholder(generator: () => string): this;
+    setPlaceholder(generator: TranslationGenerator): this;
     setShouldBlurWhenEnterPressedAndEmpty(shouldBlurWhenEnterPressedAndEmpty?: boolean): this;
     refresh(): this;
     /**

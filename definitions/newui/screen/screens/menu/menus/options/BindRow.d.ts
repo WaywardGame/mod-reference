@@ -9,8 +9,11 @@ export declare class BindRow extends Button implements IRefreshable {
     private readonly currentBinds;
     private readonly bind;
     private readonly bindCatcher;
-    constructor(uiApi: UiApi, bindable: Bindable, bindCatcher: BindCatcher);
+    private readonly modName;
+    constructor(api: UiApi, bindable: Bindable, bindCatcher: BindCatcher);
     refresh(): this;
+    private getBindableName();
+    private getBindTranslations();
     private getBind(message);
     private onActivate();
 }

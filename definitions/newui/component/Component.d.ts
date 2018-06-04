@@ -1,7 +1,7 @@
 import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
-import { IComponent, IContextMenu, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { AppendStrategy, IComponent, IContextMenu, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import { AttributeManipulator, ClassListManipulator, DataManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
@@ -9,7 +9,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     protected api: UiApi;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
-    static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, prepend?: boolean): void;
+    static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
     private static removeFromParent(elementToRemove);
     static remove(elementToRemove: string | IComponent | HTMLElement): void;
     readonly element: HTMLElement;
@@ -48,8 +48,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     show(): this;
     hide(): this;
     toggle(visible?: boolean): this;
-    appendTo(where: string | HTMLElement | IComponent): this;
-    prependTo(where: string | HTMLElement | IComponent): this;
+    appendTo(where: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
     append(...elements: ArrayOfTOrIterablesOfT<HTMLElement | IComponent | undefined | false>): this;
     remove(): void;
     contains(what: string | HTMLElement | IComponent): boolean;
@@ -61,7 +60,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setContents(html: string, escape?: boolean): this;
     store(): void;
     findDescendants(selector: string): NodeListOf<Element>;
-    setTooltip(initializer: (tooltip: ITooltip) => any): this;
+    setTooltip(initializer: (tooltip: ITooltip) => ITooltip): this;
     removeTooltip(): void;
     /**
      * Remove the context menu from this element

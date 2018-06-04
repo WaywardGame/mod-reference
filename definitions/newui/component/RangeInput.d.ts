@@ -8,6 +8,7 @@ export declare enum RangeInputEvent {
 export declare class RangeInput extends Component implements IRefreshableValue<number> {
     element: HTMLInputElement;
     private refreshMethod;
+    private clampOnRefresh;
     private _value;
     value: number;
     readonly min: number;
@@ -21,4 +22,5 @@ export declare class RangeInput extends Component implements IRefreshableValue<n
     update(eventTrigger?: RangeInputEvent): void;
     refresh(): this;
     setRefreshMethod(refresh: () => number): this;
+    noClampOnRefresh(): this;
 }

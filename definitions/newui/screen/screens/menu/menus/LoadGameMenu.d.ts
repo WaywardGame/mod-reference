@@ -9,7 +9,8 @@ export default class LoadGameMenu extends Menu {
     private newGameButton;
     private importButton;
     constructor(uiApi: UiApi);
-    private create();
+    protected onBeforeShow(): Promise<void> | undefined;
+    private refresh();
     private onImport(component, inputEvent);
     private updateNewGameButton();
     private addSlot(slot);

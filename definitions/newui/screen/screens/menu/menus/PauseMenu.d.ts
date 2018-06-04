@@ -9,9 +9,11 @@ export default class PauseMenu extends Menu {
     protected optionsRow: BlockRow;
     protected paragraph: Paragraph;
     protected heading: Heading;
+    private multiplayerMenu;
     constructor(uiApi: UiApi);
-    refresh(): void;
+    private onShow();
     private getHeadingText();
     private getParagraphText();
     private onQuitButtonClick();
+    private getMultiplayerMenu();
 }

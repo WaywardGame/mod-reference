@@ -123,6 +123,10 @@ export interface IPlayerCustomization {
     hairColor: keyof typeof HairColor;
     skinColor: keyof typeof SkinColor;
 }
+export interface ICharacter {
+    name: string;
+    customization: IPlayerCustomization;
+}
 export interface IAttackHand {
     leftHand: number;
     rightHand: number;

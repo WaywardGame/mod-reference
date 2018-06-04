@@ -1,4 +1,5 @@
 export declare module EnumProperty {
+    const NAME: unique symbol;
     const OFFICIAL_MAX: unique symbol;
     const MOD_START: unique symbol;
     const LENGTH: unique symbol;

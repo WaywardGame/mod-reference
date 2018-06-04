@@ -4,15 +4,16 @@ import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export declare enum MenuBarButtonType {
     Menu = 0,
     Save = 1,
-    Notes = 2,
-    Milestones = 3,
-    Messages = 4,
-    QuickSettings = 5,
-    Actions = 6,
-    Inventory = 7,
-    Crafting = 8,
-    Equipment = 9,
-    Skills = 10,
+    Help = 2,
+    QuickSettings = 3,
+    Milestones = 4,
+    Notes = 5,
+    Messages = 6,
+    Actions = 7,
+    Inventory = 8,
+    Crafting = 9,
+    Equipment = 10,
+    Skills = 11,
 }
 export interface IMenuBarButtonDescription {
     imagePath?: string;
@@ -34,7 +35,7 @@ export interface IMenuBarButtonDescription {
      * @returns `false` if the activation was cancelled, `true` or `undefined` otherwise.
      */
     onActivate(api: IGameScreenApi): boolean | undefined | void | Promise<void>;
-    tooltip?(tooltip: ITooltip): any;
+    tooltip?(tooltip: ITooltip): ITooltip;
 }
 export declare enum MenuBarButtonGroup {
     Meta = 0,

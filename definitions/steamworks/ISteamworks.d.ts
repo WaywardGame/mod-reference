@@ -33,6 +33,7 @@ export interface ISteamworks extends Emitter {
     isGreenworksEnabled(): boolean;
     isInLobby(): boolean;
     isOverlayWorking(): boolean;
+    isTestMode(): boolean;
     joinLobby(lobbyId: string): void;
     leaveLobby(): void;
     multiplayerLog(...args: any[]): void;

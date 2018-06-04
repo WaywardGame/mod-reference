@@ -2,7 +2,7 @@ import { Difficulty, DropLocation, IKeyBind } from "Enums";
 import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
-import { ICharacter } from "newui/screen/screens/menu/component/Character";
+import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import { IMilestoneData } from "player/IMilestone";
 import { IDialogInfo } from "ui/IUi";
 import { IEnumInfo } from "utilities/enum/IEnum";
@@ -34,7 +34,7 @@ export interface ISaveDataGlobal {
         [index: string]: IDialogInfo;
     };
     multiplayerBannedPlayers: string[];
-    characters: ICharacter[];
+    characters: ISavedCharacter[];
     newui: {
         [index: string]: any;
     };

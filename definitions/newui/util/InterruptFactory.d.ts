@@ -20,6 +20,7 @@ export default class InterruptFactory implements IInterruptFactory {
         [key: string]: any;
     }): Promise<void>;
     withLoading(canCancel?: boolean, specialType?: string): Promise<void>;
+    withLoading(until: Promise<any> | (() => Promise<any>), canCancel?: boolean, specialType?: string): Promise<void>;
     private execute<R>(options);
     private warnIfNeverShown();
 }

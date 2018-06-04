@@ -1,6 +1,8 @@
+import { IModInfo } from "mod/IModInfo";
 import { EnumId, IEnumInfo } from "utilities/enum/IEnum";
 declare module EnumManager {
     function isModdable(enumObject: any): boolean;
+    function getMod(enumObject: any, enumName: string): IModInfo | undefined;
     function initialize(): void;
     function initializeGameState(): void;
     function restore(): void;

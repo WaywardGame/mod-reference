@@ -54,7 +54,7 @@ export interface ISourceFilter {
     /**
      * Any misc (string) source that does not match the filter will not appear in the console.
      */
-    miscSourceFilter: RegExp;
+    miscSourceFilter: string;
     /**
      * Any source that is not present in this array will not appear in the console.
      */

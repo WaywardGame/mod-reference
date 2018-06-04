@@ -13,4 +13,5 @@ export default class TabVideo extends Tab implements IRefreshable {
     private onDitherFOW(_, ditherFOW);
     private onInterfaceScaleChangeFinish(_, val);
     private onViewportResize();
+    private getUiScaleTooltip(tooltip);
 }

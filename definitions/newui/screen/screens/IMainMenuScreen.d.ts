@@ -4,6 +4,6 @@ export declare enum Background {
     Win = 1,
     Death = 2,
 }
-export interface IMenuScreen extends IScreen {
+export interface IMainMenuScreen extends IScreen {
     background: Background;
 }

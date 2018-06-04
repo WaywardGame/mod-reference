@@ -7,12 +7,12 @@ export default abstract class MenuScreen extends Screen {
     protected menus: {
         [key: number]: Menu;
     };
-    protected menuChain: number[];
+    protected menuChain: Menu[];
     constructor(api: UiApi, screenId: ScreenId);
     /**
      * Returns the visible menu (top of the chain)
      */
-    readonly visibleMenu: Menu<string | number | undefined>;
+    readonly visibleMenu: Menu;
     showMenu<M extends Menu = Menu>(menu: MenuId | M, menuInitializer?: (menu: M) => any): this;
     backOneMenu(): this;
     backToFirstMenu(): this;

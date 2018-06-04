@@ -3,7 +3,7 @@ import { IScreen, ScreenId } from "newui/screen/IScreen";
 import Screen from "newui/screen/Screen";
 export default class ScreenManager {
     private readonly _screens;
-    private readonly uiApi;
+    private readonly api;
     private visibleScreen;
     private overlayScreen;
     constructor(uiApi: UiApi);

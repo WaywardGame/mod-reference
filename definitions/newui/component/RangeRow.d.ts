@@ -11,8 +11,8 @@ export declare class RangeRow extends BlockRow implements IRefreshable {
     protected rangeInputValueDisplay: RangeInputValueDisplay | undefined;
     readonly value: number;
     constructor(api: UiApi);
-    editRange(rangeInputInitializer: (rangeInput: RangeInput) => any): this;
-    setLabel(label: (label: Heading) => any): this;
+    editRange(rangeInputInitializer: (rangeInput: RangeInput) => RangeInput): this;
+    setLabel(label: (label: Heading) => Heading): this;
     setDisplayValue(display: boolean | ((val: number) => IStringSection[])): this;
     addDefaultButton(defaultValue?: () => number): this;
     refresh(): this;

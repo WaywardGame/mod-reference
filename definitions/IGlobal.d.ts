@@ -200,6 +200,7 @@ declare global {
 		api: IElectronApi;
 		installPath: string;
 		asarPath: string;
+		isTestMode: boolean;
 	}
 	let electron: IElectron | undefined | never;
 }
