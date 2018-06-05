@@ -47,6 +47,7 @@ export declare abstract class StatElement extends Component {
 }
 export declare class Statbar extends StatElement {
     private readonly bar;
+    private readonly text;
     constructor(uiApi: UiApi, entity: IBaseEntity, stat: Stat);
     getDisplayElement(): Text;
     getGenericStatValue(stat: IStatMax): IStringSection[];

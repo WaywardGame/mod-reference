@@ -6,7 +6,6 @@ export default class BaseScreen implements IUiScreen {
     selector(): string;
     bindElements(): void;
     unbindElements(): void;
-    onGameEnd(showDeath: boolean): void;
     isVisible(): boolean;
     show(data?: any): void;
     doShow(): void;

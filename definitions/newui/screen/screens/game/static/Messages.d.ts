@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { Bindable } from "Enums";
 import { MessageSource } from "game/IMessageManager";
 import { IMessage } from "game/MessageManager";
@@ -27,14 +37,15 @@ export default class Messages extends QuadrantComponent implements IHookHost {
         [key: string]: MessageSource[];
     };
     private selectedFilter;
+    private readonly pinnedNotes;
     constructor(gsapi: IGameScreenApi);
     getID(): QuadrantComponentId;
     getName(): IStringSection[];
     scrollToNewest(): void;
-    sendPinnedMessage(message: TranslationGenerator, onActivate: () => any): void;
+    sendPinnedMessage(message: TranslationGenerator, onActivate: () => any): Button;
     onDisplayMessage(message: IMessage, addBackwards?: boolean): void;
-    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onWrittenNote(id: number): void;
+    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Event handler for when the text in the chat box should be sent as a message.
      */
@@ -65,4 +76,6 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     private changeFilter(filterName);
     private onPinnedMessageActivate(pinnedMessage);
     private showNote(note);
+    private onShowDialog(api, dialog);
+    private onShowNote(notesDialog, noteId);
 }

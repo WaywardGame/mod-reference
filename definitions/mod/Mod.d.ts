@@ -5,6 +5,7 @@ import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, Eq
 import { IMessage } from "game/MessageManager";
 import { INote } from "game/NoteManager";
 import { IContainer, IItem } from "item/IItem";
+import { ILanguage } from "language/ILanguage";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -93,6 +94,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDeath(creature: ICreature): void;
     onCreatureSpawn(creature: ICreature): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    onLanguageLoad(language: ILanguage): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean | undefined;
     onMoveComplete(player: IPlayer): void;
     onMoveDirectionUpdate(player: IPlayer, direction: FacingDirection): void;

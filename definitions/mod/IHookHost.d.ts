@@ -5,6 +5,7 @@ import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, Eq
 import { IMessage } from "game/MessageManager";
 import { INote } from "game/NoteManager";
 import { IContainer, IItem } from "item/IItem";
+import { ILanguage } from "language/ILanguage";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer from "player/IPlayer";
@@ -38,6 +39,9 @@ export declare function HookMethod(priority: number): (hook: IHookHost, property
 export declare function HookMethod(host: IHookHost, property: string): void;
 export declare const SYMBOL_HOOKS: unique symbol;
 export declare const SYMBOL_HOST_NAME: unique symbol;
+export declare module IHookHost {
+    function createHost(obj: IHookHost): IHookHost;
+}
 export interface IHookHost {
     [SYMBOL_HOOKS]?: {
         [hook in Hook]?: number;
@@ -271,8 +275,7 @@ export interface IHookHost {
     onCreateWorld?(world: IWorld): void;
     /**
      * Called when a message is displayed to the player
-     * @param source An array of sources of the message
-     * @param message The message
+     * @param message The message data
      */
     onDisplayMessage?(message: IMessage): void;
     /**
@@ -282,6 +285,7 @@ export interface IHookHost {
     onDoodadSpawn?(doodad: IDoodad): void;
     /**
      * Called when the game is ending
+     * @param state The state of the player (why the game is ending)
      */
     onGameEnd?(state: PlayerState): void;
     /**
@@ -394,6 +398,11 @@ export interface IHookHost {
      * At the end you return the updated status of whether a bind has been pressed.
      */
     onBindLoop?(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    /**
+     * Called when a language is loaded
+     * @param language The language that loaded
+     */
+    onLanguageLoad?(language: ILanguage): void;
     /**
      * Called when the player is moving
      * @param player The player object
@@ -599,8 +608,7 @@ export interface IHookHost {
     shouldRender?(): RenderFlag | undefined;
     /**
      * Called when a message is about to be displayed
-     * @param source An array of sources of the messagesource: MessageSource[],
-     * @param message The raw message that will be displayed
+     * @param message The message that will be displayed
      * @param messageId The `Message`, or `-1` if the message being displayed isn't a `Message`
      * @returns False to not display the message or undefined to use the default logic
      */

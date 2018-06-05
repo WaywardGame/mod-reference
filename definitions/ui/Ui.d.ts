@@ -1,9 +1,10 @@
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle } from "Enums";
+import { DialogId, EquipType, ItemType, SentenceCaseStyle } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
+import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { HintType } from "ui/IHint";
@@ -16,12 +17,10 @@ export default class Ui extends Emitter implements IUi {
     private readonly elementWindow;
     private readonly elementBody;
     private elementScrollableContainers;
-    private screen;
     private objectUrl;
     constructor();
     initialize(): void;
     initializeGameState(): void;
-    setupButtons(): void;
     getBody(): JQuery;
     getWidth(): number;
     getHeight(): number;
@@ -29,6 +28,7 @@ export default class Ui extends Emitter implements IUi {
     appendStyle(id: string, styleContent: string): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
+    hideInGameScreen(): void;
     switchToScreen<M extends Menu = Menu>(screenId: ScreenId, menuId?: MenuId, menuInitializer?: (menu: M) => any): void;
     toggleOptions(): void;
     showOptionsScreen(): Promise<void>;

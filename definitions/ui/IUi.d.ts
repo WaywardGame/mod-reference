@@ -1,7 +1,8 @@
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DialogId, EquipType, ItemType, ScreenId, SentenceCaseStyle, SortType } from "Enums";
+import { DialogId, EquipType, ItemType, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
+import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { IPropSerializable } from "save/ISerializer";
@@ -14,7 +15,6 @@ export interface IUiScreen {
     unbindElements(): void;
     show(data?: any): void;
     hide(): void;
-    onGameEnd(showDeath: boolean): void;
     isVisible(): void;
 }
 export interface IDialogInfo {
@@ -53,10 +53,10 @@ export interface IUi extends IPropSerializable, Emitter {
     screenInGame: IUiScreen;
     initialize(): void;
     initializeGameState(): void;
-    setupButtons(): void;
     getBody(): JQuery;
     getWidth(): number;
     getHeight(): number;
+    hideInGameScreen(): void;
     removeStyle(id: string): void;
     appendStyle(id: string, styleContent: string): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;

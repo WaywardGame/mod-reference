@@ -1110,18 +1110,6 @@ export declare enum TurnType {
     ForcePickUp = 2,
 }
 export declare const keyCodes: string[];
-export declare enum ScreenId {
-    None = 0,
-    Cover = 1,
-    Title = 2,
-    Game = 3,
-}
-export declare enum TitleScreenId {
-    Default = 0,
-    EndGame = 1,
-    JoinGame = 2,
-    Options = 3,
-}
 export declare enum DialogId {
     Inventory = 0,
     Crafting = 1,

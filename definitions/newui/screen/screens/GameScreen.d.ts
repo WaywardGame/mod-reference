@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -28,7 +38,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     messages: Messages;
     private quadrantContainer;
     private readonly quadrantMap;
-    constructor(uiApi: UiApi);
+    constructor(api: UiApi);
     create(): void;
     openDialog<D = Dialog>(id: DialogId): D;
     closeDialog(id: DialogId): void;

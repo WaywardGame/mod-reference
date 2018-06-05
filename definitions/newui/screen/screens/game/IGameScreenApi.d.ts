@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
@@ -9,6 +19,10 @@ export declare enum QuadrantComponentId {
     Quickslots = 2,
     MenuBar = 3,
 }
+export declare enum GameScreenEvent {
+    ShowDialog = 0,
+    HideDialog = 1,
+}
 export default interface IGameScreenApi {
     readonly uiApi: UiApi;
     openDialog<D extends IDialog = IDialog>(id: DialogId): D;
@@ -16,14 +30,10 @@ export default interface IGameScreenApi {
     toggleDialog(id: DialogId): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
+    on(event: GameScreenEvent.ShowDialog, handler: (api: IGameScreenApi, dialog: IDialog) => any): void;
+    on(event: GameScreenEvent.HideDialog, handler: (api: IGameScreenApi, id: DialogId) => any): void;
 }
 export interface IDialog {
-    /**
-     * The ID is used for `Switch With` context menu options
-     */
     getID(): DialogId;
-    /**
-     * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
-     */
     getName(): TranslationGenerator;
 }
