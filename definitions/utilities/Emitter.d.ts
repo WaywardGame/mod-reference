@@ -36,4 +36,14 @@ export default class Emitter {
      * Returns a promise that will resolve when the event is triggered.
      */
     waitUntil(event: string | number): Promise<any[]>;
+    /**
+     * Until the given event happens, allows you to bind an event to another emitter.
+     */
+    until(event: string | number): IEmitterUntil<this>;
+}
+export interface IEmitterUntil<T> {
+    /**
+     * Binds the given events on the given emitter. Removed when the `until` event occurs. Returns the original emitter.
+     */
+    bind<E2 extends Emitter>(emitter: E2, events: string | number | Array<string | number>, cb: (emitter: E2, ...data: any[]) => any): T;
 }

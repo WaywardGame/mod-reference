@@ -11,7 +11,7 @@ export default class MainMenu extends Menu {
     private changelogMenu;
     private newsMenu;
     constructor(api: UiApi);
-    refresh(): Promise<void>;
+    protected onBeforeShow(): Promise<void>;
     private create();
     private checkAndShowGameInterrupts();
     private getAboutMenu();

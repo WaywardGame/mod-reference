@@ -10,10 +10,10 @@ export declare enum ModSort {
 }
 export default class ModsMenu extends Menu {
     private readonly sections;
-    constructor(uiApi: UiApi);
-    create(): void;
-    refreshMods(): void;
+    constructor(api: UiApi);
     getModRow(index: number): ModRow | undefined;
+    private create();
+    private refreshMods();
     private sortMods(modType, sort, direction);
     private setAllModStates(enabled);
     private addModSection(tab, disabledSorts?, beforeContent?, afterContent?);
