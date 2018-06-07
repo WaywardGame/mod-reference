@@ -50,7 +50,7 @@ export declare enum SpawnGroup {
     Water = 2,
     WaterCave = 3,
     Cave = 4,
-    Night = 5,
+    Night = 5
 }
 export declare enum SpawnableTiles {
     None = 0,
@@ -63,7 +63,7 @@ export declare enum SpawnableTiles {
     Ghost = 7,
     Desert = 8,
     Lava = 9,
-    Wet = 10,
+    Wet = 10
 }
 export interface ICreatureDescription extends IModdable {
     name?: string;

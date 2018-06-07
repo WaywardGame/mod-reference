@@ -3,10 +3,10 @@ export declare enum EnumCursorEvent {
     /**
      * Triggered when the cursor position is changed, for any reason
      */
-    Change = 0,
+    Change = 0
 }
 export declare enum EnumCursorDefaultGenerator {
-    Random = "Random",
+    Random = "Random"
 }
 declare class EnumCursor<T extends number> extends Emitter {
     protected enumObject: any;
@@ -86,6 +86,6 @@ declare class EnumCursor<T extends number> extends Emitter {
      * Retrieves a random cursor position
      */
     getRandomPosition(): number;
-    private getDefaultGenerator(type);
+    private getDefaultGenerator;
 }
 export default EnumCursor;

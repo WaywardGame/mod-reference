@@ -12,7 +12,7 @@ export declare enum Quadrant {
     TopRight = 3,
     BottomRight = 4,
     Bottom = 5,
-    BottomLeft = 6,
+    BottomLeft = 6
 }
 export declare enum QuadrantComponentEvent {
     /**
@@ -26,7 +26,7 @@ export declare enum QuadrantComponentEvent {
      * @returns A `IterableOf<QuadrantElement>` containing sibling quadrant elements. The list
      * may contain this quadrant element.
      */
-    GetQuadrantElementList = "GetQuadrantElementList",
+    GetQuadrantElementList = "GetQuadrantElementList"
 }
 /**
  * An element that displays in one quadrant of the screen.
@@ -62,5 +62,5 @@ export default abstract class QuadrantComponent extends StaticComponent {
     /**
      * Returns a new context menu using this element's context menu descriptions
      */
-    private getContextMenu();
+    private getContextMenu;
 }

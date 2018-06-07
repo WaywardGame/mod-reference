@@ -9,5 +9,5 @@ export default class ItemDoodad extends Doodad implements IDoodad {
     getDoodadInfo(): DoodadInfo | undefined;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
-    private _itemDescription();
+    private _itemDescription;
 }

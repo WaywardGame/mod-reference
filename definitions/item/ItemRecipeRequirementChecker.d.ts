@@ -2,8 +2,8 @@ import { IContainer, IItem, IItemArray, IRecipe } from "item/IItem";
 import IPlayer from "player/IPlayer";
 export default class ItemRecipeRequirementChecker {
     private readonly player;
-    private readonly recipe;
-    private readonly trackItems;
+    private readonly recipe?;
+    private readonly trackItems?;
     itemBaseComponent: IItem | undefined;
     itemComponentsRequired: IItemArray;
     itemComponentsConsumed: IItemArray;
@@ -32,5 +32,5 @@ export default class ItemRecipeRequirementChecker {
      * @returns true if the recipe's requirements are satisfied by items in the container.
      */
     processContainer(container: IContainer, allowProtectedCraftingItems?: boolean): boolean;
-    private processItem(item);
+    private processItem;
 }

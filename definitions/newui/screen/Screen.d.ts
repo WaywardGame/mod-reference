@@ -22,7 +22,7 @@ export default abstract class Screen extends Component implements IScreen, IHook
     setContextMenu(generator: () => IContextMenu): void;
     hideContextMenu(contextMenu?: IContextMenu): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    private onShow();
-    private onClick();
-    private onDocumentClick();
+    private onShow;
+    private onClick;
+    private onDocumentClick;
 }

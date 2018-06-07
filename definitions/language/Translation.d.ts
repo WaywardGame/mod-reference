@@ -81,7 +81,7 @@ export default class Translation {
      * Returns the translation ID
      */
     getId(translationData: ITranslationData): string;
-    private parseTranslationId(translationId);
-    private getDictionaryId(dictionaryName);
-    private getEntryId(dictionaryName, entryName);
+    private parseTranslationId;
+    private getDictionaryId;
+    private getEntryId;
 }

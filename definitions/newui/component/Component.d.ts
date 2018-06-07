@@ -10,9 +10,10 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
-    private static removeFromParent(elementToRemove);
+    private static removeFromParent;
     static remove(elementToRemove: string | IComponent | HTMLElement): void;
     readonly element: HTMLElement;
+    readonly parent: Component;
     readonly classes: ClassListManipulator<this>;
     readonly attributes: AttributeManipulator<this>;
     readonly data: DataManipulator<this>;
@@ -21,8 +22,8 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     readonly scrollHeight: number;
     readonly style: CSSStyleDeclaration;
     protected children: Component[];
-    protected parent: Component;
     private _element;
+    private _parent;
     private scrollingChild?;
     private _data;
     private contextMenuGenerator?;
@@ -50,7 +51,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     toggle(visible?: boolean): this;
     appendTo(where: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
     append(...elements: ArrayOfTOrIterablesOfT<HTMLElement | IComponent | undefined | false>): this;
-    remove(): void;
+    remove(): this;
     contains(what: string | HTMLElement | IComponent): boolean;
     dump(filter?: (element: Component) => boolean): this;
     /**
@@ -82,6 +83,6 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;
     schedule(ms: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
-    private onMouseEnterForTooltip();
-    private onMouseLeaveForTooltip();
+    private onMouseEnterForTooltip;
+    private onMouseLeaveForTooltip;
 }

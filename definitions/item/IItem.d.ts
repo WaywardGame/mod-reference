@@ -165,7 +165,7 @@ export declare enum ContainerReferenceType {
     World = 3,
     Tile = 4,
     Item = 5,
-    NPCInventory = 6,
+    NPCInventory = 6
 }
 export interface IBaseContainerReference {
     type: ContainerReferenceType;
@@ -199,9 +199,9 @@ export declare type ContainerReference = IInvalidContainerReference | IWorldCont
 export declare enum CraftResult {
     Fail = 0,
     Success = 1,
-    CritSuccess = 2,
+    CritSuccess = 2
 }
 export declare enum ContainerType {
     Default = 0,
-    Trade = 1,
+    Trade = 1
 }

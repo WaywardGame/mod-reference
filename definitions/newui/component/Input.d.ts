@@ -9,7 +9,7 @@ export declare enum InputEvent {
     Enter = "Enter",
     Escape = "Escape",
     Focus = "Focus",
-    Blur = "Blur",
+    Blur = "Blur"
 }
 export default class Input extends Component implements IRefreshable, IInput {
     default: (() => string) | undefined;
@@ -35,6 +35,6 @@ export default class Input extends Component implements IRefreshable, IInput {
     clear(useDefault?: boolean): void;
     focus(): void;
     blur(event?: Event): void;
-    private keydown(event);
-    private change(eventOrText);
+    private keydown;
+    private change;
 }

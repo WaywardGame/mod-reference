@@ -34,7 +34,7 @@ export declare enum Source {
     Utilities = 32,
     WebAssembly = 33,
     WebRTCConnection = 34,
-    WebSocketConnection = 35,
+    WebSocketConnection = 35
 }
 declare class Log {
     warn: (...args: any[]) => void;

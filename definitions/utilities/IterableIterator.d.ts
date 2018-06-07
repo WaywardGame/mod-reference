@@ -1,4 +1,4 @@
-declare global  {
+declare global {
     type IterableOf<T> = T[] | IterableIterator<T>;
     type SplitIterablesOf<T, K extends string> = {
         [key in K]: IterableIterator<T>;
@@ -16,7 +16,7 @@ declare global  {
          * Returns an iterable that will loop only over the entries that match the given filter
          * @param filter A function that returns true if the value should be included and false if it shouldn't
          */
-        filter<X = T>(filter: (val: T) => boolean): IterableIterator<X>;
+        filter<X = T>(filter: (val: T) => boolean | number | undefined | null): IterableIterator<X>;
         /**
          * Returns an iterable that will first loop over the entries in itself, then the entries in the given iterables
          * @param iterables The other iterables to loop over
@@ -60,6 +60,10 @@ declare global  {
          */
         first(orElse?: T): T;
         /**
+         * Runs the callback on the first value in this iterator.
+         */
+        first(user: (val: T) => any): void;
+        /**
          * Returns the last value in this iterator, or undefined if there are no values.
          *
          * Note: Will loop through every entry in this iterator.
@@ -72,6 +76,12 @@ declare global  {
          * Note: Will loop through every entry in this iterator.
          */
         last(orElse?: T): T;
+        /**
+         * Runs the callback on the last value in this iterator.
+         *
+         * Note: Will loop through every entry in this iterator.
+         */
+        last(user: (val: T) => any): void;
         /**
          * Returns a random value in this iterator, or undefined if there are no values.
          *
@@ -176,6 +186,7 @@ declare module IterableIterator {
 }
 export default IterableIterator;
 export declare function pipe<T = any>(...what: T[]): IterableIterator<T>;
+export declare function pipeArray<T = any>(what?: T[]): IterableIterator<T>;
 /**
  * A generator for numbers from `0` through `end` (exclusive)
  */

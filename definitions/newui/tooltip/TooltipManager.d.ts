@@ -8,6 +8,6 @@ export default class TooltipManager implements ITooltipManager {
     constructor(api: UiApi);
     show(host: IComponent): Tooltip;
     hide(host?: IComponent | undefined, forceRemove?: boolean): void;
-    private hideLoop();
-    private onScreenResize();
+    private hideLoop;
+    private onScreenResize;
 }

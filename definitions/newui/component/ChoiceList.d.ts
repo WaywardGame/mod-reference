@@ -3,7 +3,7 @@ import { CheckButton } from "newui/component/CheckButton";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 export declare enum ChoiceListEvent {
-    Choose = "Selection",
+    Choose = "Selection"
 }
 export default class ChoiceList<C extends Choice = Choice> extends BlockRow implements IRefreshableValue<C> {
     private refreshMethod;
@@ -15,7 +15,7 @@ export default class ChoiceList<C extends Choice = Choice> extends BlockRow impl
     setRefreshMethod(refreshMethod: (choiceList: this) => C): this;
     choose(chosen?: C): void;
     findChoice(filter: (choice: C) => boolean): C | undefined;
-    private onChoiceChange(checkChoice, isChecked);
+    private onChoiceChange;
 }
 export declare class Choice<I extends string | number | undefined = string | number | undefined> extends CheckButton {
     readonly id: I;

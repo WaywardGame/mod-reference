@@ -5,11 +5,11 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private readonly refreshables;
     constructor(api: UiApi);
     refresh(): this;
-    private addRefreshable(refreshable);
-    private toggleLogSource(source, _, enabled);
-    private toggleDeveloperTools();
-    private openLogsFolder();
-    private toggleContextMenu(_, enabled);
-    private toggleDeveloperMode(_, enabled);
-    private reloadGame();
+    private addRefreshable;
+    private toggleLogSource;
+    private toggleDeveloperTools;
+    private openLogsFolder;
+    private toggleContextMenu;
+    private toggleDeveloperMode;
+    private reloadGame;
 }

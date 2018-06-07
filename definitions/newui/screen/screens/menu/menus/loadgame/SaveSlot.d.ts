@@ -18,7 +18,7 @@ export interface SaveSlotData {
 }
 export declare enum SaveSlotEvent {
     Rename = "Rename",
-    Delete = "Delete",
+    Delete = "Delete"
 }
 export declare class SaveSlot extends InputButton {
     readonly slotData: DOMStringMap & SaveSlotData;
@@ -26,37 +26,37 @@ export declare class SaveSlot extends InputButton {
     /**
      * Loads the data for this save slot.
      */
-    private load();
+    private load;
     /**
      * The tooltip generator for this component.
      */
-    private getTooltip(tooltip);
+    private getTooltip;
     /**
      * Event handler for when this button is activated.
      */
-    private onActivate();
+    private onActivate;
     /**
      * Renames the save. Event handler for when this InputButton leaves edit mode.
      */
-    private rename(_, newName);
+    private rename;
     /**
      * Deletes the save. Event handler for the delete sub-button.
      */
-    private delete();
+    private delete;
     /**
      * Exports the save. Event handler for the export sub-button.
      */
-    private export();
+    private export;
     /**
      * Exports this save to the Steam Workshop by making a temporary mod.
      */
-    private exportToWorkshop();
+    private exportToWorkshop;
     /**
      * Logs and interrupts when there's a mod publishing error.
      */
-    private onPublishError(err);
+    private onPublishError;
     /**
      * Exports this save to a JSON file.
      */
-    private exportToFile();
+    private exportToFile;
 }

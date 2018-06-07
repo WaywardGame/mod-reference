@@ -16,5 +16,5 @@ export declare class RangeRow extends BlockRow implements IRefreshable {
     setDisplayValue(display: boolean | ((val: number) => IStringSection[])): this;
     addDefaultButton(defaultValue?: () => number): this;
     refresh(): this;
-    private updateDisplay(val);
+    private updateDisplay;
 }

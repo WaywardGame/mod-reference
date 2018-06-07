@@ -12,9 +12,9 @@ export default class MainMenu extends Menu {
     private newsMenu;
     constructor(api: UiApi);
     protected onBeforeShow(): Promise<void>;
-    private create();
-    private checkAndShowGameInterrupts();
-    private getAboutMenu();
-    private getChangelogMenu();
-    private getNewsMenu();
+    private create;
+    private checkAndShowGameInterrupts;
+    private getAboutMenu;
+    private getChangelogMenu;
+    private getNewsMenu;
 }

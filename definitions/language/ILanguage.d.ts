@@ -15,7 +15,7 @@ export declare enum InterruptChoice {
     Rename = 5,
     Retry = 6,
     SteamWorkshop = 7,
-    Yes = 8,
+    Yes = 8
 }
 /**
  * Ui messages that are on elements that don't change
@@ -720,11 +720,11 @@ export declare enum UiTranslation {
     WindowTitleMap = 696,
     WindowTitleMilestones = 697,
     WindowTitleOptions = 698,
-    WindowTitleSkills = 699,
+    WindowTitleSkills = 699
 }
 export declare enum PlayerTranslation {
     FirstName = 0,
-    LastName = 1,
+    LastName = 1
 }
 export declare enum Dictionary {
     Action = 0,
@@ -745,7 +745,7 @@ export declare enum Dictionary {
     Skill = 15,
     Terrain = 16,
     TileEvent = 17,
-    Ui = 18,
+    Ui = 18
 }
 export declare enum GrowthStageTranslation {
     Germinating = 0,
@@ -761,7 +761,7 @@ export declare enum GrowthStageTranslation {
     FungusYoung = 10,
     FungusFruiting = 11,
     FungusFull = 12,
-    FungusDead = 13,
+    FungusDead = 13
 }
 export interface IStringArray {
     [index: number]: string;

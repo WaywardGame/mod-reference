@@ -21,6 +21,6 @@ export declare enum PassStrategy {
     First = 0,
     Last = 1,
     Random = 2,
-    Splat = 3,
+    Splat = 3
 }
 export default Collectors;

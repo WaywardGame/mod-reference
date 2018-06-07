@@ -12,7 +12,7 @@ export declare enum ComponentEvent {
     AddChild = 5,
     RemoveChild = 6,
     InputChange = 7,
-    Tooltip = 8,
+    Tooltip = 8
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;
@@ -187,13 +187,13 @@ export interface IContextMenu<OptionType extends number | string = number | stri
     hideAndRemove(): Promise<void>;
 }
 export declare enum Namespace {
-    SVG = "http://www.w3.org/2000/svg",
+    SVG = "http://www.w3.org/2000/svg"
 }
 export declare enum SelectableLayer {
     Primary = 0,
     Secondary = 1,
     Tertiary = 2,
-    Quaternary = 3,
+    Quaternary = 3
 }
 export interface IBaseTranslationData {
     dictionary: Dictionary;
@@ -217,7 +217,7 @@ export declare enum TooltipLocation {
     BottomRight = 7,
     BeneathLeft = 8,
     BeneathRight = 9,
-    Mouse = 10,
+    Mouse = 10
 }
 export interface ITooltip extends IComponent {
     setLocation(location: TooltipLocation): this;

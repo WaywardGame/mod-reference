@@ -116,7 +116,7 @@ export declare enum SaveLocation {
     /**
      * Used to mark a field to be saved both locally and globally. Local data will override global data, if it exists.
      */
-    Both = 2,
+    Both = 2
 }
 /**
  * Used to mark a field to be saved to either `saveData` or `saveDataGlobal`. Used in conjunction with
@@ -141,13 +141,13 @@ export interface IInterruptMenuFactory {
 export declare enum UiApiEvent {
     Resize = 0,
     Interrupt = 1,
-    InterruptClose = 2,
+    InterruptClose = 2
 }
 export declare enum SelectDirection {
     Up = -1,
     Down = 1,
     Left = -2,
-    Right = 2,
+    Right = 2
 }
 export interface LoadMenuArgs {
     _wentBack: boolean;

@@ -123,14 +123,14 @@ export default class PromiseChain<T extends object, R extends any[] = any[]> ext
     /**
      * Schedules an "and" method to be called after `this.canStartParallelCalls`
      */
-    private scheduleAnd(fn, thisArg, args);
+    private scheduleAnd;
     /**
      * Creates a proxy for the given function, where when it is called, it schedules the actual method
      * to be called after the previous `PromiseChain` is complete (see `canStartParallelCalls`).
      *
      * The proxy function returns this `PromiseChain` instance.
      */
-    private getAndProxyFunction<F>(fn);
+    private getAndProxyFunction;
     /**
      * Creates a proxy for the given function, where when it is called, it is added as a callback for
      * when all previous promises are resolved. It returns a new `PromiseChain` instance wrapping the
@@ -138,5 +138,5 @@ export default class PromiseChain<T extends object, R extends any[] = any[]> ext
      *
      * When all previous promises are resolved, the new `PromiseChain` begins executing its promises.
      */
-    private getThenProxyFunction<F>(fn);
+    private getThenProxyFunction;
 }

@@ -23,7 +23,7 @@ export declare enum MatchmakingMessageDataType {
     SessionDescription = 2,
     HostIpAddress = 3,
     Connected = 4,
-    UnableToJoinGame = 5,
+    UnableToJoinGame = 5
 }
 export interface IMatchmakingMessageData {
     type: MatchmakingMessageDataType;

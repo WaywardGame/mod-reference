@@ -7,11 +7,11 @@ export default class TabVideo extends Tab implements IRefreshable {
     private readonly inputUiScale;
     constructor(api: UiApi);
     refresh(): this;
-    private addRefreshable(refreshable);
-    private onFullscreen(_, fullscreen);
-    private onPixelFont(_, pixelFont);
-    private onDitherFOW(_, ditherFOW);
-    private onInterfaceScaleChangeFinish(_, val);
-    private onViewportResize();
-    private getUiScaleTooltip(tooltip);
+    private addRefreshable;
+    private onFullscreen;
+    private onPixelFont;
+    private onDitherFOW;
+    private onInterfaceScaleChangeFinish;
+    private onViewportResize;
+    private getUiScaleTooltip;
 }

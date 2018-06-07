@@ -67,7 +67,7 @@ export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {
     Serverside = 1,
     Clientside = 2,
-    All = 3,
+    All = 3
 }
 export declare enum MultiplayerSyncCheck {
     BaseEntityManager = 0,
@@ -99,7 +99,7 @@ export declare enum MultiplayerSyncCheck {
     Temp = 26,
     Tick = 27,
     Ticks = 28,
-    Weight = 29,
+    Weight = 29
 }
 export interface IMultiplayerWorldData {
     pid: number;

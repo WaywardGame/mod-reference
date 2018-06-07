@@ -6,7 +6,7 @@ export declare enum TimeFormat {
     /**
      * EX: 15:00
      */
-    TwentyFourHour = 1,
+    TwentyFourHour = 1
 }
 export declare enum PartOfDay {
     Nighttime = "Nighttime",
@@ -14,7 +14,7 @@ export declare enum PartOfDay {
     Sunrise = "Sunrise",
     Daytime = "Daytime",
     Sunset = "Sunset",
-    Dusk = "Dusk",
+    Dusk = "Dusk"
 }
 export declare enum DayQuarter {
     Day1 = 0,
@@ -24,7 +24,7 @@ export declare enum DayQuarter {
     Night1 = 4,
     Night2 = 5,
     Night3 = 6,
-    Night4 = 7,
+    Night4 = 7
 }
 export interface ITimeManager {
     /**
@@ -154,5 +154,5 @@ export default class TimeManager implements ITimeManager {
      * This method "realigns" a time from this version to one offset by the start of the day.
      * Formula: `0` -> `0 + dayStart / dayLength + transitionPercent / 4`
      */
-    private realignTime(time);
+    private realignTime;
 }

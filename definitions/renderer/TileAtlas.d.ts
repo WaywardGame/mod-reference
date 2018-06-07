@@ -43,7 +43,7 @@ export declare enum TileType {
     Q3TopLeft = 36,
     Q3BottomRight = 37,
     Q4TopRight = 38,
-    Q4BottomLeft = 39,
+    Q4BottomLeft = 39
 }
 export declare function rotateTileType90Deg(tileType: TileType, times: number): TileType;
 export declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation?: number): Vec2;

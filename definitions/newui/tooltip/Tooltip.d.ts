@@ -17,7 +17,7 @@ export default class Tooltip extends Component implements ITooltip {
         x: number;
         y: number;
     }): this;
-    private onShow();
-    private onHide();
-    private onMouseMove(event);
+    private onShow;
+    private onHide;
+    private onMouseMove;
 }

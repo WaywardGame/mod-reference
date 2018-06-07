@@ -38,5 +38,5 @@ export declare enum HintType {
     Multiplayer = 31,
     Gardening = 32,
     WanderingMerchants = 33,
-    Last = 34,
+    Last = 34
 }

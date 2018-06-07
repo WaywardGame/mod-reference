@@ -16,7 +16,7 @@ export declare enum ReduceStrategy {
     /**
      * Returns a random valid hook result. (Calls the hook on all mods, then returns a random result from all valid results)
      */
-    Random = 3,
+    Random = 3
 }
 export declare type IReduceStrategy<R> = ReduceStrategy | ((newValue: R, lastValue?: R) => R);
 export default class HookCallFactory<H extends Hook, R = any> {
@@ -82,11 +82,11 @@ export default class HookCallFactory<H extends Hook, R = any> {
      * and the `call` field is to allow the `call` field to have the method type of the hook
      * that will be called.
      */
-    private _call(...args);
+    private _call;
     /**
      * A faster version of call that does not validate results & only works with `ReduceStrategy.First`
      */
-    private _callFast(...args);
+    private _callFast;
     /**
      * Takes the iterator for hook results and turns it into a single result, based on the `reduceStrategy`.
      *
@@ -101,7 +101,7 @@ export default class HookCallFactory<H extends Hook, R = any> {
      * 5. If it's `ReduceStrategy.Random`:
      *   - A random result in the iterator is returned.
      */
-    private collect(iterator);
+    private collect;
     /**
      * Filters the result of a hook, and returns whether it should be used.
      * This method relies on the value of `resultPredicate`.
@@ -118,14 +118,14 @@ export default class HookCallFactory<H extends Hook, R = any> {
      *   - Checking whether the result matches the given flags is handled by the method `validateResultByType`
      *   - If the result doesn't match, an error will be logged.
      */
-    private filterHookResult(result);
+    private filterHookResult;
     /**
      * Returns whether a value matches the `TypeFlag`s in the `resultPredicate`.
      * This method does not first verify that `resultPredicate` is a number.
      */
-    private validateResultByType(result);
+    private validateResultByType;
     /**
      * Calls the hook on the given mod, with the given arguments.
      */
-    private callHookOnHost(host);
+    private callHookOnHost;
 }

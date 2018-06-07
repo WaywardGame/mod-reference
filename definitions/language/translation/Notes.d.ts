@@ -12,5 +12,8 @@ import { Note } from "game/NoteManager";
 declare const _default: {
     [Note.Nightfall]: string[];
     [Note.Reputation]: string[];
+    [Note.Caving]: string[];
+    [Note.Inedible]: string[];
+    [Note.Corpse]: string[];
 };
 export default _default;

@@ -20,5 +20,5 @@ export default abstract class MenuScreen extends Screen {
      * Gets the menu by the given ID, initializing it if it does not already exist.
      */
     getMenu<M extends Menu = Menu>(menuId: MenuId): M;
-    private onHide();
+    private onHide;
 }

@@ -8,6 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IAction } from "action/IAction";
-export declare const action: IAction;
-export default action;
+import { ITile } from "tile/ITerrain";
+export default function writeCorpseNote(tile: ITile): void;

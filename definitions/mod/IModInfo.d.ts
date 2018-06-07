@@ -33,7 +33,7 @@ export declare enum TypeFlag {
     String = 16,
     Object = 32,
     Array = 64,
-    Function = 128,
+    Function = 128
 }
 export declare enum ModState {
     Disabled = 0,
@@ -41,12 +41,12 @@ export declare enum ModState {
     Loaded = 2,
     Error = 3,
     ChangingState = 4,
-    Temporary = 5,
+    Temporary = 5
 }
 export declare enum ModType {
     Internal = 0,
     Local = 1,
-    Workshop = 2,
+    Workshop = 2
 }
 export interface IModProvides {
     scripts: boolean;

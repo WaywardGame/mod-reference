@@ -160,16 +160,16 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     updateStrength(): void;
     protected calculateStats(): void;
     protected swimCheck(): void;
-    private slitherSuckerDamage();
-    private processMovement(turnType?);
+    private slitherSuckerDamage;
+    private processMovement;
     /**
      * Event handler for when resting begins, weight changes, or strength changes.
      */
-    private onStaminaUseChanged();
+    private onStaminaUseChanged;
     /**
      * Event handler for when a status effect is applied or removed.
      */
-    private onStatusEffectChanged();
+    private onStatusEffectChanged;
     /**
      * Event handler for `EntityEvent.StatChanged`. Handles special functionality when stats are increased:
      * 1. When resting & stamina is full, resting will be cancelled.
@@ -177,8 +177,8 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      * 3. When hunger > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      * 4. When thirst > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      */
-    private onStatChange(_, stat, oldValue, info);
-    private restTick();
-    private showStatsHint();
-    private staminaSyncCheck();
+    private onStatChange;
+    private restTick;
+    private showStatsHint;
+    private staminaSyncCheck;
 }

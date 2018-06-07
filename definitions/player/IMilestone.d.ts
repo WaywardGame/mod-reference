@@ -31,16 +31,16 @@ export declare enum MilestoneType {
     Weathered = 29,
     Seasoned = 30,
     Pacifier = 31,
-    Merchant = 32,
+    Merchant = 32
 }
 export declare enum MilestoneVisibilityType {
     Visible = 0,
     Invisibile = 1,
-    Hidden = 2,
+    Hidden = 2
 }
 export declare enum MilestoneDataType {
     Counter = 0,
-    Check = 1,
+    Check = 1
 }
 export interface IMilestone {
     name?: string;

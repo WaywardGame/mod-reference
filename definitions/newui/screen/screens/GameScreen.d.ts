@@ -56,7 +56,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
      * 2. If the quadrant is `Quadrant.None`, or the quadrant is already used,
      * use instead the result of `getUnusedQuadrant()`
      */
-    private addQuadrantElement(element);
+    private addQuadrantElement;
     /**
      * Event handler for `QuadrantElementEvent.ChangeQuadrant`
      *
@@ -66,10 +66,10 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
      * was in `Quadrant.None` and is switching places with another element, that element is removed
      * from the `quadrantMap`.
      */
-    private onQuadrantElementChange(quadrantElement, quadrant, oldQuadrant);
+    private onQuadrantElementChange;
     /**
      * Returns the first unused `Quadrant`, or `Quadrant.None` if there are none.
      */
-    private getUnusedQuadrant();
-    private onDialogClose(dialog);
+    private getUnusedQuadrant;
+    private onDialogClose;
 }

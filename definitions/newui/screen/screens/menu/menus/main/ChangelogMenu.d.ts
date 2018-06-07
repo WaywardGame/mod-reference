@@ -17,9 +17,9 @@ export default class ChangelogMenu extends Menu {
     private lastVersion;
     constructor(api: UiApi);
     protected onBeforeShow(): Promise<void>;
-    private refresh();
-    private showVersion(version?, loadingInterrupt?);
-    private appendChangelog(title, cards?);
-    private getChangelogText(html?);
-    private sortCards(a, b);
+    private refresh;
+    private showVersion;
+    private appendChangelog;
+    private getChangelogText;
+    private sortCards;
 }

@@ -77,5 +77,5 @@ export default class ModManager implements IModManager {
     setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void, unloaded?: boolean): boolean;
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
-    private onLanguageLoad(languageName, callback);
+    private onLanguageLoad;
 }

@@ -63,7 +63,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     getWorth(legendaryWorth?: boolean): number | undefined;
     canBurnPlayer(): boolean;
     onUnserialized(): void;
-    private checkIfItemsMatch(item1, item2);
-    private checkIfItemArraysMatch(arr1, arr2);
-    private getOwner();
+    private checkIfItemsMatch;
+    private checkIfItemArraysMatch;
+    private getOwner;
 }

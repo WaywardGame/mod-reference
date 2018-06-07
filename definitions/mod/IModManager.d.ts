@@ -18,7 +18,7 @@ export declare enum CanLoadState {
     ReqiredModNotLoaded = 7,
     LocalModPrecedence = 8,
     IncompatibleVersion = 9,
-    DisabledInMultiplayer = 10,
+    DisabledInMultiplayer = 10
 }
 export interface IModManager {
     canLoad(index: number, fromModsMenu?: boolean): CanLoadState;

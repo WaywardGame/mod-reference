@@ -9,7 +9,7 @@ export interface IEntity extends IBaseEntity {
 export declare enum EntityType {
     Player = 0,
     Creature = 1,
-    NPC = 2,
+    NPC = 2
 }
 export declare enum AiType {
     Neutral = 0,
@@ -22,5 +22,5 @@ export declare enum AiType {
     Follower = 64,
     Defender = 128,
     Fleeing = 256,
-    Waiting = 512,
+    Waiting = 512
 }

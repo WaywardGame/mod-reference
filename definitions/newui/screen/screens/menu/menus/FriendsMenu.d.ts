@@ -7,5 +7,5 @@ export default class FriendsMenu extends Menu {
     private readonly friendContainer;
     private readonly errorHeading;
     constructor(api: UiApi);
-    private refresh();
+    private refresh;
 }

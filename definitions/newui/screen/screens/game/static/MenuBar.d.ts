@@ -22,5 +22,5 @@ export default class MenuBar extends QuadrantComponent {
      *
      * Note: Does not check if the button type has already been added.
      */
-    private addButton(buttonType);
+    private addButton;
 }

@@ -68,19 +68,19 @@ export default class WorldRenderer implements IWorldRenderer {
     };
     computeSpritesInViewport(): void;
     batchCreatures(): void;
-    private isFlyingOffset(tile);
-    private batchShadow(fromX, fromY, toX, toY, t, anim);
-    private batchPlayers(batchLayer);
-    private batchHuman(human, batchLayer);
+    private isFlyingOffset;
+    private batchShadow;
+    private batchPlayers;
+    private batchHuman;
     /**
      * Renders the status effects currently on the human.
      */
-    private renderStatusEffects(renderLayer, batch, human, animOffset, posX, posY, playerSize, offsetX, offsetY, alpha);
+    private renderStatusEffects;
     /**
      * Renders a status effect image.
      */
-    private renderStatusEffect(batch, human, animOffset, posX, posY, playerSize, offsetX, offsetY, alpha, defaultSprite, spriteOrSpriteLine);
-    private spriteBatchForLayer(layer);
-    private shouldOffsetFlying(tile);
-    private computeSpritesInViewportInternal();
+    private renderStatusEffect;
+    private spriteBatchForLayer;
+    private shouldOffsetFlying;
+    private computeSpritesInViewportInternal;
 }

@@ -94,7 +94,7 @@ export declare enum Hook {
     PreRenderWorld = "preRenderWorld",
     ProcessInput = "processInput",
     ShouldRender = "shouldRender",
-    ShouldDisplayMessage = "shouldDisplayMessage",
+    ShouldDisplayMessage = "shouldDisplayMessage"
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {
@@ -102,7 +102,7 @@ export declare enum HookPriority {
     Low = -1000,
     Normal = 0,
     High = 1000,
-    Highest = 2000,
+    Highest = 2000
 }
 /**
  * A list of all mods that cache a hook indexed by hook priority.

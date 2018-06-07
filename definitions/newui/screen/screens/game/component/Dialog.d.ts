@@ -22,7 +22,7 @@ export declare enum DialogEvent {
     /**
      * Emitted when the close button is pressed in the dialog, or when the `close` method is called.
      */
-    Close = "Close",
+    Close = "Close"
 }
 export default abstract class Dialog extends Component implements IDialog {
     protected readonly gsapi: IGameScreenApi;
@@ -84,61 +84,61 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * Event handler for when this dialog is appended
      */
-    private onAppend();
+    private onAppend;
     /**
      * Event handler for when a dialog handle starts to be moved.
      */
-    private onHandleMoveStart();
+    private onHandleMoveStart;
     /**
      * Caches the current edge positions so any resizing/movement knows where it's moving from
      */
-    private cacheLastEdges();
+    private cacheLastEdges;
     /**
      * Event handler for when a dialog handle finishes being moved.
      */
-    private onHandleMoveEnd();
+    private onHandleMoveEnd;
     /**
      * Event handler for when a dialog handle moves.
      * @param handle The handle that moved.
      * @param move The amount that the handle has moved since the movement started.
      */
-    private onHandleMove(handle, move);
+    private onHandleMove;
     /**
      * Event handler for when the header is moved.
      * @param move The amount that the header has moved since the movement started.
      */
-    private onHeaderMove(_, move);
+    private onHeaderMove;
     /**
      * Returns the new `Edge` position for the given `Axis`.
      * If an `Edge` on this `Axis` (after the movement) is near enough to snap, returns that
      * `Edge` and the snap position. Otherwise, returns the top/left `Edge` (depending on `Axis`)
      * and the new position after the given movement.
      */
-    private getNewEdgePositionForAxis(axis, move);
+    private getNewEdgePositionForAxis;
     /**
      * Returns the closest snap position for both edges on the given axis, and which edge
      * the snap position is for.
      */
-    private getSnapPositionForAxis(axis, move);
+    private getSnapPositionForAxis;
     /**
      * Returns the new edge position of the given `Edge`; either the current position plus the given
      * movement, or the nearest snap position.
      */
-    private getNewEdgePositionOrSnap(edge, move);
+    private getNewEdgePositionOrSnap;
     /**
      * Takes an edge and the generated edge position, and clamps the new edge position so that the
      * width and height of the dialog are within the described sizes.
      */
-    private clampAxisLength(edge, newEdgePosition);
+    private clampAxisLength;
     /**
      * Returns the snap position for a given `Edge`, based on where it's moving to.
      */
-    private getSnapPositionForEdge(edge, move);
+    private getSnapPositionForEdge;
     /**
      * Returns the closest snap position for the given edge position, on the given `Axis`,
      * or `undefined` if there is no snap position within the given snap distance.
      */
-    private getClosestSnapPosition(edgePosition, axis);
+    private getClosestSnapPosition;
     /**
      * Gets the snap positions for an axis, which include the positions of the edges of other
      * dialogs and the edges of the screen.
@@ -147,29 +147,29 @@ export default abstract class Dialog extends Component implements IDialog {
      * - `Axis.X` would return the position of `Edge.Left` and `Edge.Right` of each dialog,
      * and `0` and `100`.
      */
-    private getSnapPositions(axis);
+    private getSnapPositions;
     /**
      * Returns the new position of the given `Edge`, after moving the given amount.
      */
-    private getNewEdgePosition(edge, move);
+    private getNewEdgePosition;
     /**
      * Returns this dialog's positions of the two edges on the given axis.
      */
-    private getEdgePositionsOfAxis(axis);
+    private getEdgePositionsOfAxis;
     /**
      * Returns a `IVector2` containing the distance between the two sides.
      */
-    private getSize();
+    private getSize;
     /**
      * Returns the two edges of the dialog closest to the edges of the viewport, and their positions.
      */
-    private getEdges();
-    private getScale(axis);
-    private focus();
+    private getEdges;
+    private getScale;
+    private focus;
     /**
      * Resets the position, causing it to be clamped to the viewport, using its current position
      *
      * Also the event handler for when the viewport resizes
      */
-    private resetPosition();
+    private resetPosition;
 }

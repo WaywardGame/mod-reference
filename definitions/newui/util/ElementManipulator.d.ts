@@ -37,7 +37,7 @@ export declare class AttributeManipulator<E extends IElementWrapper = IElementWr
     get(name: string, ...attributes: string[]): IterableIterator<[string, string | null]>;
     remove(...attributes: string[]): E;
     has(...attributes: string[]): boolean;
-    private getAttributeIterator(...attributes);
+    private getAttributeIterator;
 }
 export declare class DataManipulator<E extends IElementWrapper = IElementWrapper> {
     private readonly element;
@@ -48,5 +48,5 @@ export declare class DataManipulator<E extends IElementWrapper = IElementWrapper
     get(name: string, ...keys: string[]): IterableIterator<[string, string | undefined]>;
     remove(...keys: string[]): E;
     has(...keys: string[]): boolean;
-    private getDataIterator(...keys);
+    private getDataIterator;
 }

@@ -13,7 +13,7 @@ import { UiApi } from "newui/INewUi";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 export declare enum CharacterEvent {
     Delete = "Delete",
-    Customize = "Customize",
+    Customize = "Customize"
 }
 export default class CharacterButton extends Button {
     private readonly preview;

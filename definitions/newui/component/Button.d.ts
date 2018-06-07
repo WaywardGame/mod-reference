@@ -3,7 +3,7 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import Text from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
 export declare enum ButtonEvent {
-    Activate = "Activate",
+    Activate = "Activate"
 }
 export default class Button extends Component {
     playSound: boolean;
@@ -19,5 +19,5 @@ export default class Button extends Component {
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
     refreshText(): this;
-    private _onActivate(event?);
+    private _onActivate;
 }

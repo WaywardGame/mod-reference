@@ -2,7 +2,7 @@ export declare enum EmitterEvent {
     AddHandler = 0,
     CancelHandler = 1,
     CancelAll = 2,
-    TriggerEvent = 3,
+    TriggerEvent = 3
 }
 export default class Emitter {
     private subscribers;

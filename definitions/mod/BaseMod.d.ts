@@ -84,7 +84,7 @@ export declare abstract class BaseMod {
      * This is called internally after unloading a mod
      */
     unallocate(): void;
-    private allocateEnum(id, name, objectValue?, onAllocate?, onUnallocate?);
+    private allocateEnum;
 }
 export default BaseMod;
 export interface IButton {

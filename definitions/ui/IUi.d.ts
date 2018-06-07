@@ -138,5 +138,5 @@ export interface IUi extends IPropSerializable, Emitter {
 export default IUi;
 export declare enum UiEvent {
     HelpShow = 0,
-    HelpHide = 1,
+    HelpHide = 1
 }

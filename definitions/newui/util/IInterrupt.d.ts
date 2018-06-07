@@ -8,7 +8,7 @@ export declare enum InterruptType {
     Choice = 2,
     Input = 3,
     Loading = 4,
-    Menu = 5,
+    Menu = 5
 }
 export interface InterruptOptions {
     type?: InterruptType;

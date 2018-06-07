@@ -36,13 +36,13 @@ export default class ScreenManager {
     /**
      * Returns the ID of a screen
      */
-    private getScreenId(screen);
+    private getScreenId;
     /**
      * Hides a screen, then removes it after 1 second.
      */
-    private hideAndRemoveScreen(screenId);
+    private hideAndRemoveScreen;
     /**
      * Removes a screen, or does nothing if the given screen is not initialized.
      */
-    private remove(screen);
+    private remove;
 }

@@ -45,15 +45,15 @@ export declare enum ChangelogSection {
     Modding = 4,
     Mod = 5,
     Technical = 6,
-    Misc = 7,
+    Misc = 7
 }
 export default class Trello implements ITrello {
     getChangelog(versionInfo: IVersionInfo): Promise<IChangelog | undefined>;
     getVersions(maxVersion?: IVersionInfo, board?: ITrelloBoard): Promise<IVersionInfo[]>;
-    private getCards(list);
-    private getBoard(boardId, checkClosed?);
-    private getListVersionInfo(list);
-    private findChangelogList(versionInfo, board?);
-    private parseChangelog(changelogData);
+    private getCards;
+    private getBoard;
+    private getListVersionInfo;
+    private findChangelogList;
+    private parseChangelog;
 }
 export declare const trello: Trello;

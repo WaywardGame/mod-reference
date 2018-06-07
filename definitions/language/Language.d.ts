@@ -61,5 +61,5 @@ export default class Language implements ILanguage {
     setEntry(dictionary: Dictionary.Book, entryIndex: BookType, name: string, description: string): void;
     setEntry(dictionary: Dictionary.BindPress, entryName: string, name: string): void;
     setEntry(dictionary: Dictionary, entryIndex: number, ...entry: string[]): void;
-    private formatEntry(dictionary, entry);
+    private formatEntry;
 }

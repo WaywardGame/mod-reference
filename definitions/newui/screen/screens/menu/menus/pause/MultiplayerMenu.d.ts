@@ -11,5 +11,5 @@ export default class MultiplayerMenu extends Menu {
     private readonly maxPlayers;
     private readonly tickSpeed;
     constructor(uiApi: UiApi);
-    private refresh();
+    private refresh;
 }

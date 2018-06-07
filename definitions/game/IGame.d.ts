@@ -179,7 +179,7 @@ export interface IGame extends Emitter {
 }
 export default IGame;
 export declare enum GameEvent {
-    GlobalSlotLoaded = 0,
+    GlobalSlotLoaded = 0
 }
 export declare type IGameOld = Partial<IGame> & {
     dayNight: number;

@@ -73,7 +73,7 @@ export declare enum TileTemplateType {
     Desert = 3,
     Beach = 4,
     Boat = 5,
-    Lava = 6,
+    Lava = 6
 }
 export interface ITemplate {
     terrainTypes: {

@@ -9,7 +9,7 @@ export interface SortRowData<Sort> {
     initializeOption(button: Button, sort: [string, Sort]): any;
 }
 export declare enum SortRowEvent {
-    Sort = "Sort",
+    Sort = "Sort"
 }
 export default class SortRow<Sort extends number> extends LabelledRow implements IRefreshableValue<SortRowData<Sort>> {
     private _sort;

@@ -164,12 +164,12 @@ export declare enum EntityEvent {
     StatTimerChanged = 1,
     StatMaxChanged = 2,
     StatBonusChanged = 3,
-    StatusChange = 4,
+    StatusChange = 4
 }
 export declare enum StatChangeReason {
     Normal = 0,
     ChangeTimer = 1,
-    BonusChanged = 2,
+    BonusChanged = 2
 }
 export interface IStatChangeInfo<T = any> {
     /**
@@ -203,6 +203,6 @@ export declare type IStatus = Writable<{
 }, keyof typeof StatusType>;
 export declare enum Property {
     Credit = 0,
-    Talked = 1,
+    Talked = 1
 }
 export declare type IProperties = Map<Property, any>;

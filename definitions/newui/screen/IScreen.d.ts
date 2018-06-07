@@ -4,7 +4,7 @@ export declare enum ScreenId {
     Game = 1,
     Interrupt = 2,
     MainMenu = 3,
-    Splash = 4,
+    Splash = 4
 }
 export declare enum ScreenEvent {
     ShowMenu = "ShowMenu",
@@ -17,7 +17,7 @@ export declare enum ScreenEvent {
      * @param source `UiElement | undefined`
      * @returns Whether or not the tooltip should be shown. If any event handlers return `false`, the tooltip will not be shown.
      */
-    CanShowTooltip = "AttemptShowTooltip",
+    CanShowTooltip = "AttemptShowTooltip"
 }
 export interface IScreen extends IComponent {
     isOverlayScreen?: boolean;

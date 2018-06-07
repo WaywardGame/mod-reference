@@ -13,6 +13,6 @@ export default class GameEndMenu extends Menu {
     private gameEndData;
     constructor(uiApi: UiApi);
     setGameEndData(gameEndData: GameEndData): this;
-    private onShow();
-    private setMainMenuBackgroundToGameEndBackground();
+    private onShow;
+    private setMainMenuBackgroundToGameEndBackground;
 }

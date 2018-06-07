@@ -19,5 +19,5 @@ export default class CreatureManager extends BaseEntityManager<ICreature> implem
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
     checkSpawnReputation(creatureDescription: ICreatureDescription, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean): CreatureType[];
-    private getReputationAberrantBonus();
+    private getReputationAberrantBonus;
 }

@@ -5,7 +5,7 @@ import { CharacterPreviewFilters, CharacterPreviewRotation } from "newui/screen/
 import { IPlayerCustomization } from "player/IPlayer";
 export declare class HairstyleList extends ChoiceList {
     private readonly baseCustomization;
-    private readonly filters;
+    private readonly filters?;
     constructor(api: UiApi, baseCustomization: IPlayerCustomization, filters?: CharacterPreviewFilters | undefined);
     select(selection: HairStyle, thro?: boolean): void;
     refreshChoices(): void;

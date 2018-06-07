@@ -3,7 +3,7 @@ import { IRandomHistory } from "utilities/Random";
 export declare enum PacketType {
     Client = 0,
     Server = 1,
-    Shared = 2,
+    Shared = 2
 }
 export interface ISynchronizationCheckData {
     packetNumber?: number;
@@ -36,7 +36,7 @@ export declare enum NetworkPropertyType {
     String = 6,
     Container = 7,
     Generic = 8,
-    Item = 9,
+    Item = 9
 }
 export interface INetworkedProperty {
     key: string;

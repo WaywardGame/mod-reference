@@ -56,5 +56,5 @@ export default abstract class BasePacket {
     protected writeItems(value: IItem[]): void;
     protected readObject(): any;
     protected writeObject(value: any): void;
-    private ensureSize(byteIncrease);
+    private ensureSize;
 }

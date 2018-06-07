@@ -30,7 +30,7 @@ export declare enum Stat {
     /**
      * Used for tamed animals
      */
-    Happiness = 11,
+    Happiness = 11
 }
 export declare type IStats = {
     [key in keyof typeof Stat]: IStat;
@@ -90,7 +90,7 @@ export declare enum StatDisplayType {
     /**
      * Display as a statbar
      */
-    Statbar = 3,
+    Statbar = 3
 }
 export interface IStatFactory {
     get(): IStat;

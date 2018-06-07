@@ -5,5 +5,5 @@ export default class TabGameplay extends Tab implements IRefreshable {
     private readonly refreshables;
     constructor(api: UiApi);
     refresh(): this;
-    private addRefreshable(refreshable);
+    private addRefreshable;
 }

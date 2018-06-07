@@ -16,7 +16,7 @@ export declare enum NotesDialogEvent {
     /**
      * @param noteId The note that was shown
      */
-    ShowNote = 0,
+    ShowNote = 0
 }
 export default class NotesDialog extends Dialog {
     private readonly noteBody;
@@ -27,13 +27,13 @@ export default class NotesDialog extends Dialog {
     private note;
     private current;
     constructor(api: IGameScreenApi);
-    onWrittenNote(noteId: number): void;
+    onWrittenNote(): void;
     getID(): DialogId;
     getName(): UiTranslation;
     showNote(noteId: number): void;
-    private previousNote();
-    private nextNote();
-    private onShow();
-    private onNoteNumberActivate();
-    private onShowNotesPanel(panel);
+    private previousNote;
+    private nextNote;
+    private onShow;
+    private onNoteNumberActivate;
+    private refreshNotesPanel;
 }

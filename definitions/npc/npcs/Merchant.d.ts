@@ -15,5 +15,5 @@ export default class MerchantNPC extends BaseNPC implements INPC {
     protected getDefaultEquipment(equipType: EquipType): IItem | ItemType | undefined;
     protected getDefaultInventory(): Array<IItem | ItemType>;
     protected getDefaultAiType(): AiType;
-    private onStatChange(_, stat, value, info);
+    private onStatChange;
 }

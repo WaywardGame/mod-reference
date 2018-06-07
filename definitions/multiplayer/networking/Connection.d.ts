@@ -23,5 +23,5 @@ export declare abstract class Connection implements IConnection {
     abstract isConnected(): boolean;
     abstract send(data: ArrayBuffer): void;
     abstract processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
-    private _clearTimeout();
+    private _clearTimeout;
 }

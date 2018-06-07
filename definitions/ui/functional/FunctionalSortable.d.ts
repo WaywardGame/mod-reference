@@ -15,13 +15,13 @@ export default class Sortable implements ISortable {
     cancel(): void;
     refreshItems(): void;
     runAction(action: string, ...data: any[]): JQuery | boolean | undefined;
-    private _refreshItemPositions();
-    private _updateHelperPosition(x, y);
-    private _onMouseDown(event);
-    private _onMouseMove(event);
-    private _scroll(event);
-    private _onMouseUp(event);
-    private _getMousePosition(event);
-    private _createEvent();
-    private _updatePosition(item, after);
+    private _refreshItemPositions;
+    private _updateHelperPosition;
+    private _onMouseDown;
+    private _onMouseMove;
+    private _scroll;
+    private _onMouseUp;
+    private _getMousePosition;
+    private _createEvent;
+    private _updatePosition;
 }

@@ -5,7 +5,7 @@ export interface BlockRowData {
 }
 export declare enum ColumnType {
     Auto = "auto",
-    Fill = "1fr",
+    Fill = "1fr"
 }
 export declare class BlockRow extends Component {
     constructor(api: UiApi, elementType?: string);

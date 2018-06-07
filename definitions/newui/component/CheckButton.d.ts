@@ -4,7 +4,7 @@ import { IRefreshableValue } from "newui/component/Refreshable";
 import { Paragraph } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
 export declare enum CheckButtonEvent {
-    Change = "Change",
+    Change = "Change"
 }
 export declare class CheckButton extends Button implements IRefreshableValue<boolean> {
     protected description: Paragraph;

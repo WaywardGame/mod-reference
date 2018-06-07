@@ -5,7 +5,7 @@ import { IVector2 } from "utilities/math/IVector";
 export declare enum KeyModifier {
     Shift = 0,
     Alt = 1,
-    Control = 2,
+    Control = 2
 }
 export interface IBinding {
     /**
@@ -76,6 +76,6 @@ export declare class BindingManager extends Emitter {
     getMouse(id?: number): IVector2;
     isMouseWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;
-    private startLoop();
+    private startLoop;
 }
 export declare const bindingManager: BindingManager;

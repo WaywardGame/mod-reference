@@ -10,14 +10,14 @@ export default class Stats extends QuadrantComponent {
     setPlayer(player: IPlayer): void;
     getID(): QuadrantComponentId;
     protected getName(): IStringSection[];
-    private refresh();
+    private refresh;
     /**
      * Returns an object containing iterables for all stats that exist on the player and have a description,
      * separated by how a given stat should be displayed
      */
-    private getStatsIterables();
+    private getStatsIterables;
     /**
      * Returns how the stat on an entity should be displayed.
      */
-    private getStatDisplayType(entity, stat);
+    private getStatDisplayType;
 }

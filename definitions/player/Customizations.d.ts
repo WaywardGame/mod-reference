@@ -6,6 +6,6 @@ export declare function generateRandomCustomization(): IPlayerCustomization;
 export declare function generateRandomCharacter(): ICharacter;
 export declare enum ColorType {
     Hair = "hairColor",
-    Skin = "skinColor",
+    Skin = "skinColor"
 }
 export declare function getColorDescription(type: ColorType, color: string): IColorDescription;

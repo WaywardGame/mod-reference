@@ -1,7 +1,7 @@
 declare module WebAssemblyHelpers {
     enum Module {
         FlowField = 0,
-        FieldOfView = 1,
+        FieldOfView = 1
     }
     interface IWebAssemblyModuleInstance {
         imports: IWebAssemblyImports;

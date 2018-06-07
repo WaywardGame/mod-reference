@@ -38,6 +38,6 @@ export default class FieldOfView implements IFieldOfView {
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
     getBounds(player: IPlayer, radius?: number): IBound3;
-    private updateExplored();
-    private computeLights();
+    private updateExplored;
+    private computeLights;
 }

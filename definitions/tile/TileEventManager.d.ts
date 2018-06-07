@@ -10,6 +10,6 @@ export default class TileEventManager implements ITileEventManager {
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): void;
     getMovementProgress(tileEvent: ITileEvent): number;
-    private _addToTile(tileEvent, x, y, z, tile);
-    private _removeFromTile(tileEvent, x, y, z, updateTile);
+    private _addToTile;
+    private _removeFromTile;
 }

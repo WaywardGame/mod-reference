@@ -57,25 +57,25 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     /**
      * Returns the basic context menu of messages, no matter what location it is in
      */
-    private getMessagesContextMenu();
+    private getMessagesContextMenu;
     /**
      * Runs a command that the user sent instead of sending it as a message.
      */
-    private runCommand(message);
+    private runCommand;
     /**
      * Returns `true` if the message should not be displayed.
      */
-    private isMessageFiltered(sources);
+    private isMessageFiltered;
     /**
      * Event handler for when the filter button is clicked
      */
-    private openFilterMenu();
+    private openFilterMenu;
     /**
      * Changes the message filter
      */
-    private changeFilter(filterName);
-    private onPinnedMessageActivate(pinnedMessage);
-    private showNote(note);
-    private onShowDialog(api, dialog);
-    private onShowNote(notesDialog, noteId);
+    private changeFilter;
+    private onPinnedMessageActivate;
+    private showNote;
+    private onShowDialog;
+    private onShowNote;
 }

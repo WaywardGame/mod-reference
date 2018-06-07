@@ -6,10 +6,10 @@ export default class TabAudio extends Tab implements IRefreshable {
     private readonly inputVolumeEffects;
     constructor(api: UiApi);
     refresh(): this;
-    private onMuteEffects(_, checked);
-    private onEffectVolumeChange(_, val);
-    private onEffectVolumeChangeFinish(_, val);
-    private onMuteMusic(_, checked);
-    private onMusicVolumeChange(_, val);
-    private nextTrack();
+    private onMuteEffects;
+    private onEffectVolumeChange;
+    private onEffectVolumeChangeFinish;
+    private onMuteMusic;
+    private onMusicVolumeChange;
+    private nextTrack;
 }

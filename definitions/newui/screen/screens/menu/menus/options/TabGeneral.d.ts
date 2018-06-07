@@ -6,7 +6,7 @@ export default class TabGeneral extends Tab implements IRefreshable {
     private readonly language;
     constructor(api: UiApi);
     refresh(): this;
-    private toggleSkipSplash(_, skipIntro);
-    private onLanguageSelect(_, selection, isFirstSelection);
-    private getLanguageDropdownData();
+    private toggleSkipSplash;
+    private onLanguageSelect;
+    private getLanguageDropdownData;
 }

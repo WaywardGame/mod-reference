@@ -39,7 +39,7 @@ export declare class Till implements ITileAdaptor {
 export declare class Mountain extends Default {
     private mountainTopFlag;
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-    private getTileType(tileMask);
+    private getTileType;
 }
 export declare function getWaterType(terrainType: TerrainType): number;
 export declare class Water extends Default {

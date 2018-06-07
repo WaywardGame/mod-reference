@@ -11,7 +11,7 @@ export declare enum MenuEvent {
     Tab = "Tab",
     GoBackFrom = "GoBackFrom",
     CancelBind = "CancelBind",
-    EnterBind = "EnterBind",
+    EnterBind = "EnterBind"
 }
 export default class Menu extends Component implements IMenu, IHookHost {
     menuId: MenuId | string;
@@ -39,10 +39,10 @@ export default class Menu extends Component implements IMenu, IHookHost {
      */
     protected wentBackTo(): boolean;
     protected onBeforeShow(): Promise<void> | void;
-    private onShowMenu();
+    private onShowMenu;
 }
 export declare enum TabEvent {
-    EditSubtabs = "EditSubtabs",
+    EditSubtabs = "EditSubtabs"
 }
 export declare class Tab<I extends string | number | undefined = string | number | undefined> extends Button {
     readonly id: I;

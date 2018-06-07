@@ -13,7 +13,7 @@ export declare enum MessageType {
     Miss = 3,
     Attack = 4,
     Stat = 5,
-    Skill = 6,
+    Skill = 6
 }
 export declare enum Message {
     None = 0,
@@ -701,5 +701,5 @@ export declare enum Message {
     YouThrew = 682,
     YouTilled = 683,
     YouUnequip = 684,
-    YouUsed = 685,
+    YouUsed = 685
 }

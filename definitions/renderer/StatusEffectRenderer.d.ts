@@ -7,14 +7,14 @@ export declare type SpriteLineOrRenderLayerImpl = number | IRenderLayerImplement
 export declare enum StatusEffectRenderLayer {
     Body = 1,
     Hair = 2,
-    Clothes = 4,
+    Clothes = 4
 }
 export declare enum RenderPriority {
     Lowest = -1000,
     Low = -100,
     Normal = 0,
     High = 100,
-    Highest = 1000,
+    Highest = 1000
 }
 export default class StatusEffectRenderer {
     readonly priority: number;

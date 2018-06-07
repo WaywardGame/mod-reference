@@ -63,13 +63,13 @@ export default class SaveManager implements ISaveManager {
     compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
     getGameStateAsJson(): string;
-    private getPropertiesToSerialize(slot);
-    private compressString(str, exporting?);
-    private decompressString(str, importing?);
-    private createSaveObject(slot);
-    private saveSlot(slot, unloading?);
+    private getPropertiesToSerialize;
+    private compressString;
+    private decompressString;
+    private createSaveObject;
+    private saveSlot;
     /**
      * Returns the number of bytes the save takes up
      */
-    private saveObjectToSlot(slot, saveObject, unloading?);
+    private saveObjectToSlot;
 }

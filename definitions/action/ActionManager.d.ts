@@ -15,7 +15,7 @@ export default class ActionManager extends GenericManager<IAction> implements IA
     processResult(human: IBaseHumanEntity, result: IActionResult): boolean | undefined;
     protected getSource(): Source;
     protected getEnumObject(): any;
-    private canExecuteAction(player, action, actionArgument);
-    private executeInternal(player, action, actionArgument);
-    private hasValidArguments(player, actionValidator, actionArgument);
+    private canExecuteAction;
+    private executeInternal;
+    private hasValidArguments;
 }

@@ -14,7 +14,7 @@ export declare enum MenuId {
     Mods = 10,
     NewGame = 11,
     Options = 12,
-    Pause = 13,
+    Pause = 13
 }
 export interface IMenu extends IComponent {
     canCancel: boolean | undefined;

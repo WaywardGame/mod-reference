@@ -4,7 +4,7 @@ import EnumCursor from "utilities/enum/EnumCursor";
 export declare enum Fading {
     None = 0,
     In = 1,
-    Out = 2,
+    Out = 2
 }
 export default class WAudio implements IAudio {
     private readonly _musicInfo;
@@ -42,11 +42,11 @@ export default class WAudio implements IAudio {
     updatePosition(): Promise<void>;
     queueEffect(type: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
     processEffects(): void;
-    private _stopMusic();
-    private _playMusic(music);
-    private _playEffect(soundEffect, variation?);
-    private _isComparableSound(soundEffect, x, y, z, type, delay, speed, now, noPosition);
-    private _getAudioBuffer(resourcePath);
-    private initializeAudio(safe?);
-    private waitForAudioContext();
+    private _stopMusic;
+    private _playMusic;
+    private _playEffect;
+    private _isComparableSound;
+    private _getAudioBuffer;
+    private initializeAudio;
+    private waitForAudioContext;
 }

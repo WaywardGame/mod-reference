@@ -14,7 +14,7 @@ export default class NewsMenu extends Menu {
     private readonly newsContainer;
     constructor(api: UiApi);
     protected onBeforeShow(): Promise<void>;
-    private refreshNews();
-    private getNews();
-    private parseArticle(article);
+    private refreshNews;
+    private getNews;
+    private parseArticle;
 }

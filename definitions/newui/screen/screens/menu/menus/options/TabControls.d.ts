@@ -7,6 +7,6 @@ export default class TabControls extends Tab implements IRefreshable {
     private readonly bindSections;
     constructor(api: UiApi);
     refresh(): this;
-    private filterBindRows(input, val);
-    private getSelector(val);
+    private filterBindRows;
+    private getSelector;
 }

@@ -14,3 +14,15 @@ export interface IColorSection extends IStringSection {
 }
 export declare const colorSegment: ISegment;
 export declare const bindSegment: ISegment;
+export declare enum TextDecoration {
+    Underline = 1,
+    Bold = 2,
+    Italicized = 4
+}
+export interface IDecoratedSection extends IStringSection {
+    decoration: TextDecoration;
+}
+export declare function getDecorations(section: IStringSection): IterableIterator<[number, number]>;
+export declare const italicizedSegment: ISegment;
+export declare const boldSegment: ISegment;
+export declare const underlineSegment: ISegment;

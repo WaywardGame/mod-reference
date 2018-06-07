@@ -45,5 +45,5 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
      * Resets all milestone progress
      */
     resetMilestones(): void;
-    private static cloneDefaultOptions();
+    private static cloneDefaultOptions;
 }

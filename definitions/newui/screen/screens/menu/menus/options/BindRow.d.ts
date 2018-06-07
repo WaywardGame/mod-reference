@@ -12,10 +12,10 @@ export declare class BindRow extends Button implements IRefreshable {
     private readonly modName;
     constructor(api: UiApi, bindable: Bindable, bindCatcher: BindCatcher);
     refresh(): this;
-    private getBindableName();
-    private getBindTranslations();
-    private getBind(message);
-    private onActivate();
+    private getBindableName;
+    private getBindTranslations;
+    private getBind;
+    private onActivate;
 }
 export declare class BindCatcher extends Component {
     private readonly bindText;
@@ -23,5 +23,5 @@ export declare class BindCatcher extends Component {
     constructor(api: UiApi);
     getBind(): Promise<IBinding>;
     setText(text: TranslationGenerator): void;
-    private onInput(evt);
+    private onInput;
 }

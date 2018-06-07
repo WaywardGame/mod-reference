@@ -9,5 +9,5 @@ export default abstract class GenericManager<T extends IGenericRegistration> imp
     remove(type: number): void;
     protected abstract getSource(): Source;
     protected abstract getEnumObject(): any;
-    private check();
+    private check;
 }

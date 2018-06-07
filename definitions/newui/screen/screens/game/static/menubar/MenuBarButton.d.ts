@@ -13,5 +13,5 @@ export default class MenuBarButton extends Button {
      */
     getStatIcon(): string;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    private getTooltip(describedInitializer, tooltip);
+    private getTooltip;
 }

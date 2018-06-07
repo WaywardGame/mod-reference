@@ -6,15 +6,15 @@ export declare enum ModSort {
     CreatedDate = 1,
     InstallDate = 2,
     Author = 3,
-    LastUpdated = 4,
+    LastUpdated = 4
 }
 export default class ModsMenu extends Menu {
     private readonly sections;
     constructor(api: UiApi);
     getModRow(index: number): ModRow | undefined;
-    private create();
-    private refreshMods();
-    private sortMods(modType, sort, direction);
-    private setAllModStates(enabled);
-    private addModSection(tab, disabledSorts?, beforeContent?, afterContent?);
+    private create;
+    private refreshMods;
+    private sortMods;
+    private setAllModStates;
+    private addModSection;
 }

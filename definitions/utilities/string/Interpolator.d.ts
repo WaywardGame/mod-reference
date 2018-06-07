@@ -12,6 +12,8 @@ export interface ISegmentApi {
     interpolate(str: string, ...args: any[]): IStringSection[];
 }
 export interface ISegment {
+    startChar?: string;
+    endChar?: string;
     regex: RegExp;
     handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | IterableOf<IStringSection>;
 }
@@ -23,6 +25,7 @@ declare class Interpolator {
     readonly segments: ISegment[];
     constructor(...segments: ISegment[]);
     interpolate(str: string, ...args: any[]): IStringSection[];
+    private handleChar;
     static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }
 declare module Interpolator {

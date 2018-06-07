@@ -18,10 +18,10 @@ export default class CharacterCreationMenu extends Menu {
     private defaultName;
     constructor(api: UiApi);
     setGameOptions(gameOptions: Partial<IPlayOptions>): this;
-    private randomizeName();
-    private randomize();
-    private onShow();
-    private create();
-    private createEditorButton(button, elementType?);
-    private rotate(direction);
+    private randomizeName;
+    private randomize;
+    private onShow;
+    private create;
+    private createEditorButton;
+    private rotate;
 }

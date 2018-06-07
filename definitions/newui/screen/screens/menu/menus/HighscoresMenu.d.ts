@@ -8,10 +8,10 @@ export default class HighscoresMenu extends Menu {
     private highscores;
     private highscoresWrapper;
     constructor(uiApi: UiApi);
-    private create();
-    private refresh();
-    private sort(sort, direction);
-    private filter(filter);
+    private create;
+    private refresh;
+    private sort;
+    private filter;
 }
 export declare class HighscoreRow extends Block {
     private readonly headingPlace;

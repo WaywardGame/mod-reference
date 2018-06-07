@@ -20,7 +20,7 @@ export default class WorldLayerRenderer {
     updateAll(): void;
     setDoodad(x: number, y: number, doodad: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, variation: number, hasGraphicVariation: boolean, flushImmediate?: boolean): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean): void;
-    private computeTile(x, y, flushImmediate?);
-    private updateTileLightBlock(x, y, value);
-    private flush();
+    private computeTile;
+    private updateTileLightBlock;
+    private flush;
 }

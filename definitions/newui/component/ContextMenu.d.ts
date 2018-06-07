@@ -11,7 +11,7 @@ export declare type IOptionDescription = {
 });
 export declare enum ContextMenuEvent {
     Chosen = "Chosen",
-    BecomeActive = "ShowSubmenu",
+    BecomeActive = "ShowSubmenu"
 }
 export default class ContextMenu<OptionType extends number | string = number | string> extends Component implements IContextMenu<OptionType> {
     private activeOption;
@@ -23,9 +23,9 @@ export default class ContextMenu<OptionType extends number | string = number | s
     disableOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     removeOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     setPosition(x: number, y: number, right?: boolean): this;
-    remove(): void;
+    remove(): this;
     hideAndRemove(): Promise<void>;
-    private getDescription(id);
+    private getDescription;
 }
 export declare class ContextMenuOption extends Button {
     private submenu?;

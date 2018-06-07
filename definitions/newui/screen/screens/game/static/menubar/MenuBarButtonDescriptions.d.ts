@@ -1,4 +1,5 @@
 import { Bindable } from "Enums";
+import Button from "newui/component/Button";
 import { ITooltip } from "newui/component/IComponent";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export declare enum MenuBarButtonType {
@@ -13,7 +14,7 @@ export declare enum MenuBarButtonType {
     Inventory = 8,
     Crafting = 9,
     Equipment = 10,
-    Skills = 11,
+    Skills = 11
 }
 export interface IMenuBarButtonDescription {
     imagePath?: string;
@@ -36,10 +37,11 @@ export interface IMenuBarButtonDescription {
      */
     onActivate(api: IGameScreenApi): boolean | undefined | void | Promise<void>;
     tooltip?(tooltip: ITooltip): ITooltip;
+    onCreate?(button: Button): void;
 }
 export declare enum MenuBarButtonGroup {
     Meta = 0,
-    World = 1,
+    World = 1
 }
 declare const menuBarButtonDescriptions: Description<IMenuBarButtonDescription>;
 export default menuBarButtonDescriptions;

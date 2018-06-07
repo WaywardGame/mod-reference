@@ -23,7 +23,7 @@ export default class NewGameMenu extends Menu {
     private buttonNext;
     constructor(api: UiApi);
     create(): void;
-    private refresh();
-    private getStartClickHandler();
-    private getPlayOptions();
+    private refresh;
+    private getStartClickHandler;
+    private getPlayOptions;
 }

@@ -4,7 +4,7 @@ import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";
 export declare enum InterruptMenuEvent {
-    Resolve = "Resolve",
+    Resolve = "Resolve"
 }
 export default class InterruptMenu extends Menu {
     private _type;

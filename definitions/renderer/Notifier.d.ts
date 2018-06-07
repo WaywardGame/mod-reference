@@ -16,6 +16,6 @@ export default class Notifier implements INotifier {
     addStat(x: number, y: number, z: number, type: StatType, value: number): void;
     update(): void;
     render(x: number, y: number, tileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
-    private addNote(x, y, type);
-    private renderNote(note);
+    private addNote;
+    private renderNote;
 }

@@ -46,6 +46,6 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedItems(value?: IItem[]): void;
     protected readIndexedObject(): any;
     protected writeIndexedObject(value?: any): void;
-    private writeIndex(value);
-    private readIndex();
+    private writeIndex;
+    private readIndex;
 }

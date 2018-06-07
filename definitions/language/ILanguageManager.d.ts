@@ -4,7 +4,7 @@ export declare enum TranslationType {
     name = "name",
     description = "description",
     prefix = "prefix",
-    suffix = "suffix",
+    suffix = "suffix"
 }
 export declare enum LanguageExtensions {
 }

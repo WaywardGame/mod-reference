@@ -12,12 +12,12 @@ export default class SelectionHandler implements ISelectionHandler {
     selectNext(sound?: boolean): void;
     selectPrevious(sound?: boolean): void;
     handleBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    private getSelectables();
-    private changeSelection(n, force?, sound?);
-    private selectUp();
-    private selectDown();
-    private selectLeft();
-    private selectRight();
-    private selectDirection(direction, range?, canEscapeLayer?, smartDifferenceVal?);
-    private selectEnter();
+    private getSelectables;
+    private changeSelection;
+    private selectUp;
+    private selectDown;
+    private selectLeft;
+    private selectRight;
+    private selectDirection;
+    private selectEnter;
 }

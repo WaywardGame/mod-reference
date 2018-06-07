@@ -3,7 +3,7 @@ import { IRefreshableValue } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 export declare enum RangeInputEvent {
     Change = "Change",
-    Finish = "Finish",
+    Finish = "Finish"
 }
 export declare class RangeInput extends Component implements IRefreshableValue<number> {
     element: HTMLInputElement;

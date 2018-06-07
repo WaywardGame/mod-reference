@@ -6,7 +6,7 @@ import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 export declare enum DropdownEvent {
-    Selection = "Selection",
+    Selection = "Selection"
 }
 export declare type IDropdownOption<OptionId = string | number> = [OptionId, (option: Button) => any];
 export interface IDropdownData<OptionId = string | number> {
@@ -31,5 +31,5 @@ export default class Dropdown<OptionId = string | number> extends Component impl
     selectDefault(): void;
     setRefreshMethod(refresh: () => IDropdownData<OptionId>): this;
     refresh(): this;
-    private filter(filterBy?);
+    private filter;
 }

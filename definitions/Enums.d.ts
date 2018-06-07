@@ -5,19 +5,19 @@ export declare enum TerrainMask {
     Type = 536870911,
     Tilled = 536870912,
     Wall = 1073741824,
-    Fence = 2147483648,
+    Fence = 2147483648
 }
 export declare enum SpriteBatchLayer {
     Corpse = 0,
     Item = 1,
     Creature = 2,
-    CreatureFlying = 3,
+    CreatureFlying = 3
 }
 export declare enum WorldZ {
     Min = 0,
     Cave = 0,
     Overworld = 1,
-    Max = 1,
+    Max = 1
 }
 export declare enum AttackType {
     Melee = 0,
@@ -25,7 +25,7 @@ export declare enum AttackType {
     Shoot = 2,
     Sling = 3,
     Fire = 4,
-    ThrowItem = 5,
+    ThrowItem = 5
 }
 export declare enum InspectType {
     None = 0,
@@ -37,7 +37,7 @@ export declare enum InspectType {
     Player = 6,
     Corpses = 7,
     TileEvents = 8,
-    NPC = 9,
+    NPC = 9
 }
 export declare enum MoveType {
     None = 0,
@@ -49,14 +49,14 @@ export declare enum MoveType {
     Fire = 32,
     BreakDoodads = 64,
     WetLand = 128,
-    Flying = 15,
+    Flying = 15
 }
 export declare enum DamageType {
     Blunt = 1,
     Slashing = 2,
     Piercing = 4,
     Fire = 8,
-    True = 16,
+    True = 16
 }
 export declare class Resistances {
     [index: number]: number;
@@ -74,21 +74,21 @@ export declare class Defense {
 }
 export declare enum DoorOrientation {
     Default = 0,
-    Vertical = 1,
+    Vertical = 1
 }
 export declare enum FacingDirection {
     None = -1,
     East = 0,
     North = 1,
     West = 2,
-    South = 3,
+    South = 3
 }
 export declare enum SaveType {
     InGame = 0,
     Quit = 1,
     BackToMainMenu = 2,
     Multiplayer = 3,
-    DailyChallenge = 4,
+    DailyChallenge = 4
 }
 export declare enum LootGroupType {
     Low = 0,
@@ -97,7 +97,7 @@ export declare enum LootGroupType {
     SeaTreasure = 3,
     CaveChest = 4,
     FireElemental = 5,
-    VeryHigh = 6,
+    VeryHigh = 6
 }
 export declare enum EquipType {
     None = 0,
@@ -111,13 +111,13 @@ export declare enum EquipType {
     Hands = 8,
     Back = 9,
     LeftHand = 10,
-    RightHand = 11,
+    RightHand = 11
 }
 export declare enum RecipeLevel {
     Advanced = 0,
     Simple = 1,
     Intermediate = 2,
-    Expert = 3,
+    Expert = 3
 }
 export declare enum ActionType {
     Disassemble = 0,
@@ -198,7 +198,7 @@ export declare enum ActionType {
     CloseContainer = 75,
     SmotherFire = 76,
     Trade = 77,
-    PlaceDown = 78,
+    PlaceDown = 78
 }
 export declare enum ItemType {
     None = 0,
@@ -632,7 +632,7 @@ export declare enum ItemType {
     StoneSandCastFlask = 428,
     AnimalGlue = 429,
     CopalResin = 430,
-    BoneMeal = 431,
+    BoneMeal = 431
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -704,7 +704,7 @@ export declare enum ItemTypeGroup {
     CoconutContainerOfPotableWater = 866,
     SandCastFlask = 867,
     Glue = 868,
-    Last = 869,
+    Last = 869
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -745,7 +745,7 @@ export declare enum TerrainType {
     RocksWithCopper = 30,
     SandstoneWithCopper = 31,
     CoolingLava = 32,
-    Obsidian = 33,
+    Obsidian = 33
 }
 export declare enum DoodadType {
     WoodenDoor = 0,
@@ -836,7 +836,7 @@ export declare enum DoodadType {
     LitBarkTorchStand = 85,
     AnimalFatTorchStand = 86,
     LitAnimalFatTorchStand = 87,
-    Item = 88,
+    Item = 88
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -845,7 +845,7 @@ export declare enum DoodadTypeGroup {
     LitKiln = 403,
     LitWaterStill = 404,
     Anvil = 405,
-    Last = 406,
+    Last = 406
 }
 export declare enum GrowingStage {
     Germinating = 0,
@@ -854,7 +854,7 @@ export declare enum GrowingStage {
     Budding = 3,
     Flowering = 4,
     Ripening = 5,
-    Dead = 6,
+    Dead = 6
 }
 export declare enum BookType {
     RandomEvent = 0,
@@ -864,7 +864,7 @@ export declare enum BookType {
     PastCivilizations = 4,
     SandCasting = 5,
     WanderingMerchants = 6,
-    TrappersJournal = 7,
+    TrappersJournal = 7
 }
 export declare enum CreatureType {
     Slime = 0,
@@ -904,11 +904,11 @@ export declare enum CreatureType {
     LavaBeetle = 34,
     Goat = 35,
     SlitherSucker = 36,
-    Mudskipper = 37,
+    Mudskipper = 37
 }
 export declare enum NPCType {
     Merchant = 0,
-    DeathKnight = 1,
+    DeathKnight = 1
 }
 export declare enum HairStyle {
     None = 0,
@@ -920,7 +920,7 @@ export declare enum HairStyle {
     Dreads = 6,
     Shaved = 7,
     Long = 8,
-    Mohawk = 9,
+    Mohawk = 9
 }
 export declare enum HairColor {
     "#e7c978" = 0,
@@ -931,7 +931,7 @@ export declare enum HairColor {
     "#422116" = 5,
     "#28222a" = 6,
     "#bfb0a8" = 7,
-    "#ffffff" = 8,
+    "#ffffff" = 8
 }
 export declare enum SkinColor {
     "#fddcd4" = 0,
@@ -942,7 +942,7 @@ export declare enum SkinColor {
     "#89623a" = 5,
     "#88563b" = 6,
     "#613429" = 7,
-    "#361e1c" = 8,
+    "#361e1c" = 8
 }
 export declare enum SkillType {
     Chemistry = 0,
@@ -973,7 +973,7 @@ export declare enum SkillType {
     Woodworking = 25,
     Taming = 26,
     Gardening = 27,
-    Bartering = 28,
+    Bartering = 28
 }
 export declare enum Music {
     ShipWrecked = 0,
@@ -984,7 +984,7 @@ export declare enum Music {
     NightOwl = 5,
     Savage = 6,
     Underworld = 7,
-    ShudderSounds = 8,
+    ShudderSounds = 8
 }
 export declare enum SfxType {
     Bow = 0,
@@ -1011,7 +1011,7 @@ export declare enum SfxType {
     Damaged = 21,
     Chat = 22,
     UiSelect = 23,
-    UiActivate = 24,
+    UiActivate = 24
 }
 export declare enum Command {
     Commands = 0,
@@ -1021,7 +1021,7 @@ export declare enum Command {
     Banned = 4,
     Ban = 5,
     Unban = 6,
-    Pause = 7,
+    Pause = 7
 }
 export declare enum PlayerState {
     None = 0,
@@ -1029,7 +1029,7 @@ export declare enum PlayerState {
     Won = 2,
     Traveling = 3,
     Ghost = 4,
-    Server = 5,
+    Server = 5
 }
 export declare enum ObjectContext {
     None = 0,
@@ -1037,7 +1037,7 @@ export declare enum ObjectContext {
     TileItem = 2,
     Doodad = 3,
     TileEvent = 4,
-    Corpse = 5,
+    Corpse = 5
 }
 export declare enum Delay {
     None = 0,
@@ -1046,12 +1046,12 @@ export declare enum Delay {
     ShortPause = 13,
     Collision = 40,
     TurnDirection = 2,
-    ItemPickUp = 4,
+    ItemPickUp = 4
 }
 export declare enum RealTimeSpeed {
     Min = 10,
     Default = 50,
-    Max = 80,
+    Max = 80
 }
 export declare enum StatType {
     EnemyHealth = 0,
@@ -1059,19 +1059,19 @@ export declare enum StatType {
     Stamina = 2,
     Metabolism = 3,
     Health = 4,
-    Thirst = 5,
+    Thirst = 5
 }
 export declare enum StatusType {
     Bleeding = 0,
     Poisoned = 1,
-    Burned = 2,
+    Burned = 2
 }
 export declare enum ItemQuality {
     None = 0,
     Random = 1,
     Exceptional = 2,
     Remarkable = 3,
-    Legendary = 4,
+    Legendary = 4
 }
 export declare enum LegendaryType {
     Attack = 0,
@@ -1085,7 +1085,7 @@ export declare enum LegendaryType {
     Malignity = 8,
     Range = 9,
     UseBenefits = 10,
-    Worth = 11,
+    Worth = 11
 }
 export declare enum RenderFlag {
     None = 0,
@@ -1094,11 +1094,11 @@ export declare enum RenderFlag {
     Player = 4,
     Creature = 8,
     Terrain = 16,
-    All = 65535,
+    All = 65535
 }
 export declare enum OnEquipType {
     LightSource = 0,
-    Telescopy = 1,
+    Telescopy = 1
 }
 export declare const itemQualitySortOrder: {
     [index: number]: number;
@@ -1107,7 +1107,7 @@ export declare const onEquipTypes: IOnEquipType;
 export declare enum TurnType {
     CheckUnderPlayer = 0,
     DontEnterCaves = 1,
-    ForcePickUp = 2,
+    ForcePickUp = 2
 }
 export declare const keyCodes: string[];
 export declare enum DialogId {
@@ -1120,7 +1120,7 @@ export declare enum DialogId {
     Container = 6,
     Book = 7,
     Options = 8,
-    Custom = 9,
+    Custom = 9
 }
 export declare enum SortType {
     Name = 0,
@@ -1132,20 +1132,20 @@ export declare enum SortType {
     Quality = 6,
     Category = 7,
     Durability = 8,
-    DiscoveredTime = 9,
+    DiscoveredTime = 9
 }
 export declare enum RestType {
     Resting = 0,
-    Sleeping = 1,
+    Sleeping = 1
 }
 export declare enum LoadingType {
     Normal = 0,
-    Rest = 1,
+    Rest = 1
 }
 export declare enum CraftStatus {
     Invalid = 0,
     Failed = 1,
-    Success = 2,
+    Success = 2
 }
 export declare enum InputRecordType {
     KeyDown = 0,
@@ -1153,18 +1153,18 @@ export declare enum InputRecordType {
     MouseDown = 2,
     MouseUpOrLeave = 3,
     MouseMove = 4,
-    MouseScroll = 5,
+    MouseScroll = 5
 }
 export declare enum CaseStyle {
     PascalCase = 0,
     CamelCase = 1,
     SnakeCase = 2,
-    KebabCase = 3,
+    KebabCase = 3
 }
 export declare enum SentenceCaseStyle {
     None = 0,
     Title = 1,
-    Sentence = 2,
+    Sentence = 2
 }
 export interface IOnEquipType {
     [index: number]: {};
@@ -1218,27 +1218,27 @@ export interface IRGB {
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
-    DailyChallenge = 2,
+    DailyChallenge = 2
 }
 export declare enum WeightType {
     Normal = 0,
     Static = 1,
     Min = 2,
-    Max = 3,
+    Max = 3
 }
 export declare enum RestCancelReason {
     CreatureNearby = 0,
     Damaged = 1,
     FullStamina = 2,
     NearbyCreatureDamagedDoodad = 3,
-    CreatureDamaged = 4,
+    CreatureDamaged = 4
 }
 export declare enum FireType {
     None = 0,
     Doodad = 1,
     Fire = 2,
     Lava = 3,
-    CoolingLava = 4,
+    CoolingLava = 4
 }
 export interface IResourceItem {
     type: ItemType;
@@ -1264,7 +1264,7 @@ export interface ITerrainResourceItem extends IResourceItem {
 export declare enum WeightStatus {
     None = 0,
     Overweight = 1,
-    Encumbered = 2,
+    Encumbered = 2
 }
 export declare enum ConnectionState {
     Connecting = 1,
@@ -1273,7 +1273,7 @@ export declare enum ConnectionState {
     CatchingUp = 8,
     Ready = 16,
     Disconnecting = 32,
-    All = 63,
+    All = 63
 }
 export interface RequirementInfo extends IVector2, IVector3 {
     requirementsMet: boolean;
@@ -1287,7 +1287,7 @@ export declare enum BindableType {
     Dialog = 1,
     Menu = 2,
     Developer = 3,
-    Mod = 4,
+    Mod = 4
 }
 /**
  * Note: If you rename a Bindable and don't make a save conversion for it, the old binding will be lost.
@@ -1323,79 +1323,80 @@ export declare enum Bindable {
     GameZoomIn = 24,
     GameZoomOut = 25,
     GamePause = 26,
-    GameFullscreen = 27,
-    GameScreenshotMode = 28,
-    GameQuickSlotClear = 29,
-    GameQuickSlot1 = 30,
-    GameQuickSlot2 = 31,
-    GameQuickSlot3 = 32,
-    GameQuickSlot4 = 33,
-    GameQuickSlot5 = 34,
-    GameQuickSlot6 = 35,
-    GameQuickSlot7 = 36,
-    GameQuickSlot8 = 37,
-    GameQuickSlot9 = 38,
-    GameQuickSlotToggle1 = 39,
-    GameQuickSlotToggle2 = 40,
-    GameQuickSlotToggle3 = 41,
-    GameQuickSlotToggle4 = 42,
-    GameQuickSlotToggle5 = 43,
-    GameQuickSlotToggle6 = 44,
-    GameQuickSlotToggle7 = 45,
-    GameQuickSlotToggle8 = 46,
-    GameQuickSlotToggle9 = 47,
-    GameContextMenu1 = 48,
-    GameContextMenu2 = 49,
-    GameContextMenu3 = 50,
-    GameContextMenu4 = 51,
-    GameContextMenu5 = 52,
-    GameContextMenu6 = 53,
-    GameContextMenu7 = 54,
-    GameContextMenu8 = 55,
-    GameContextMenu9 = 56,
-    GameContextMenu10 = 57,
-    GameContextMenu11 = 58,
-    GameContextMenu12 = 59,
-    GameContextMenu13 = 60,
-    GameContextMenu14 = 61,
-    GameContextMenu15 = 62,
-    GameContextMenu16 = 63,
-    GameContextMenu17 = 64,
-    GameContextMenu18 = 65,
-    GameContextMenu19 = 66,
-    GameContextMenu20 = 67,
-    GameContextMenu21 = 68,
-    GameContextMenu22 = 69,
-    GameContextMenu23 = 70,
-    GameContextMenu24 = 71,
-    DialogCloseAll = 72,
-    DialogOptions = 73,
-    DialogHelp = 74,
-    DialogMilestones = 75,
-    DialogNotes = 76,
-    DialogMessages = 77,
-    DialogMessagesChatFocus = 78,
-    DialogInventory = 79,
-    DialogCrafting = 80,
-    DialogDismantle = 81,
-    DialogEquipment = 82,
-    DialogSkills = 83,
-    MenuEnter = 84,
-    MenuNext = 85,
-    MenuPrevious = 86,
-    MenuUp = 87,
-    MenuDown = 88,
-    MenuLeft = 89,
-    MenuRight = 90,
-    MenuCancel = 91,
-    MenuContextMenu = 92,
-    DeveloperToggleDeveloperMode = 93,
-    DeveloperToggleDeveloperTools = 94,
-    DeveloperReloadGame = 95,
-    DeveloperReloadAndContinueGame = 96,
+    GameSave = 27,
+    GameFullscreen = 28,
+    GameScreenshotMode = 29,
+    GameQuickSlotClear = 30,
+    GameQuickSlot1 = 31,
+    GameQuickSlot2 = 32,
+    GameQuickSlot3 = 33,
+    GameQuickSlot4 = 34,
+    GameQuickSlot5 = 35,
+    GameQuickSlot6 = 36,
+    GameQuickSlot7 = 37,
+    GameQuickSlot8 = 38,
+    GameQuickSlot9 = 39,
+    GameQuickSlotToggle1 = 40,
+    GameQuickSlotToggle2 = 41,
+    GameQuickSlotToggle3 = 42,
+    GameQuickSlotToggle4 = 43,
+    GameQuickSlotToggle5 = 44,
+    GameQuickSlotToggle6 = 45,
+    GameQuickSlotToggle7 = 46,
+    GameQuickSlotToggle8 = 47,
+    GameQuickSlotToggle9 = 48,
+    GameContextMenu1 = 49,
+    GameContextMenu2 = 50,
+    GameContextMenu3 = 51,
+    GameContextMenu4 = 52,
+    GameContextMenu5 = 53,
+    GameContextMenu6 = 54,
+    GameContextMenu7 = 55,
+    GameContextMenu8 = 56,
+    GameContextMenu9 = 57,
+    GameContextMenu10 = 58,
+    GameContextMenu11 = 59,
+    GameContextMenu12 = 60,
+    GameContextMenu13 = 61,
+    GameContextMenu14 = 62,
+    GameContextMenu15 = 63,
+    GameContextMenu16 = 64,
+    GameContextMenu17 = 65,
+    GameContextMenu18 = 66,
+    GameContextMenu19 = 67,
+    GameContextMenu20 = 68,
+    GameContextMenu21 = 69,
+    GameContextMenu22 = 70,
+    GameContextMenu23 = 71,
+    GameContextMenu24 = 72,
+    DialogCloseAll = 73,
+    DialogOptions = 74,
+    DialogHelp = 75,
+    DialogMilestones = 76,
+    DialogNotes = 77,
+    DialogMessages = 78,
+    DialogMessagesChatFocus = 79,
+    DialogInventory = 80,
+    DialogCrafting = 81,
+    DialogDismantle = 82,
+    DialogEquipment = 83,
+    DialogSkills = 84,
+    MenuEnter = 85,
+    MenuNext = 86,
+    MenuPrevious = 87,
+    MenuUp = 88,
+    MenuDown = 89,
+    MenuLeft = 90,
+    MenuRight = 91,
+    MenuCancel = 92,
+    MenuContextMenu = 93,
+    DeveloperToggleDeveloperMode = 94,
+    DeveloperToggleDeveloperTools = 95,
+    DeveloperReloadGame = 96,
+    DeveloperReloadAndContinueGame = 97
 }
 export declare enum DropLocation {
     Facing = 0,
     Feet = 1,
-    FeetWhenFacingBlocked = 2,
+    FeetWhenFacingBlocked = 2
 }

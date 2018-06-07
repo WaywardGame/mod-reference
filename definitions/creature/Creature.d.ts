@@ -44,11 +44,11 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     damage(damageInfo: IDamageInfo): number | undefined;
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
-    private findPath(result);
-    private checkCreatureMove(tileX, tileY, tileZ, moveType, isFinalMove?, ignorePlayer?);
-    private findPlayersWithinRadius(x, y, z, radius);
-    private processAttack(description, moveType, enemy);
-    private processMovement(description, moveType, enemy, nearestPlayer);
-    private processAiChanges(nearestPlayer);
-    private processSpecialAbilities(enemy);
+    private findPath;
+    private checkCreatureMove;
+    private findPlayersWithinRadius;
+    private processAttack;
+    private processMovement;
+    private processAiChanges;
+    private processSpecialAbilities;
 }

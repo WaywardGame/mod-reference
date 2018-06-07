@@ -1,14 +1,14 @@
 import { PartOfDay } from "game/TimeManager";
 export declare enum Note {
-    Combat = 0,
-    Food = 1,
-    Nightfall = 2,
-    Reputation = 3,
-    Taming = 4,
+    Nightfall = 0,
+    Reputation = 1,
+    Caving = 2,
+    Inedible = 3,
+    Corpse = 4
 }
 export declare type Time = PartOfDay | number;
 export interface INote {
-    id: Note;
+    id: keyof typeof Note;
     time: {
         day: number;
         time: Time;
@@ -19,6 +19,6 @@ export default class NoteManager {
     private readonly _notes;
     readonly notes: INote[];
     getNote(id: number): INote | undefined;
-    write(note: Note, ...args: any[]): void;
-    private getTime();
+    write(note: Note, ...args: any[]): this;
+    private getTime;
 }

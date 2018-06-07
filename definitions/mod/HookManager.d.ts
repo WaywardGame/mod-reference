@@ -15,7 +15,7 @@ export default class HookManager implements IHookManager {
     /**
      * Sort cached hooks by priority
      */
-    private sortHooks();
+    private sortHooks;
     /**
      * Cache the hooks for a given host.
      *
@@ -28,5 +28,5 @@ export default class HookManager implements IHookManager {
      * 4. Cache each hook by priority.
      * 5. Log registered hooks, formatted as `hookName[priority]`
      */
-    private cacheHooksForHost(host, hostLog?, canCacheHook?);
+    private cacheHooksForHost;
 }

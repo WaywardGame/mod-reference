@@ -43,7 +43,7 @@ export declare abstract class StatElement extends Component {
     /**
      * Event handler for when the stat tooltip is shown.
      */
-    private onTooltip(_, tooltip);
+    private onTooltip;
 }
 export declare class Statbar extends StatElement {
     private readonly bar;

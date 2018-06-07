@@ -75,6 +75,7 @@ declare const _default: {
     [Bindable.GameMoveRight]: string;
     [Bindable.GameMoveUp]: string;
     [Bindable.GamePause]: string;
+    [Bindable.GameSave]: string;
     [Bindable.GameQuickSlot1]: string;
     [Bindable.GameQuickSlot2]: string;
     [Bindable.GameQuickSlot3]: string;

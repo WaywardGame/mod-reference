@@ -8,6 +8,6 @@ export default class MessagesDialog extends Dialog {
     getID(): DialogId;
     getName(): UiTranslation;
     close(): void;
-    private onFocus();
-    private onBlur();
+    private onFocus;
+    private onBlur;
 }

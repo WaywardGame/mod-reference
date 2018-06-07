@@ -24,7 +24,7 @@ export default class FlowFieldManager implements IFlowFieldManager {
     setPlayers(plys: IPlayer[]): void;
     update(): void;
     reset(): void;
-    private getDirection(moveType, x, y, z, toward);
-    private getFlowField(moveType, z);
-    private getFlowFields();
+    private getDirection;
+    private getFlowField;
+    private getFlowFields;
 }

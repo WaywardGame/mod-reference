@@ -10,7 +10,7 @@ export declare enum TextElementId {
     Weight = 0,
     Attack = 1,
     Defense = 2,
-    Reputation = 3,
+    Reputation = 3
 }
 export default class InGameScreen extends BaseScreen {
     overlayBindCatcherId: number;
@@ -207,15 +207,15 @@ export default class InGameScreen extends BaseScreen {
     isContainerDialogOver(x: number, y: number): boolean;
     onUpdateDirection(): void;
     onBindLoop(api: BindCatcherApi, bindPressed: Bindable | boolean): boolean | Bindable;
-    private runAction(itemId, containerId, action, skipSound?);
-    private updateContextMenu(contextMenu);
-    private runGatherOrHarvestAction(actionType, action);
-    private runPourAction(actionType, item, action);
-    private isOverlayVisible();
+    private runAction;
+    private updateContextMenu;
+    private runGatherOrHarvestAction;
+    private runPourAction;
+    private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;
-    private getHoveredItem(api);
-    private quickSlotBindPressed(api, quickSlot, bindable);
-    private quickSlotToggleBindPressed(api, itemElement, quickSlot, bindable, wasPressed);
-    private determineSort(containerSortInfo, itemIdA, itemTypeA, itemIdB, itemTypeB);
+    private getHoveredItem;
+    private quickSlotBindPressed;
+    private quickSlotToggleBindPressed;
+    private determineSort;
 }

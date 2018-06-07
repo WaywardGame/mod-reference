@@ -58,6 +58,6 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     protected attack(): boolean;
     protected move(): boolean;
     protected autoScaleStats(): void;
-    private checkMove(moveType, tileX, tileY, tileZ);
-    private updateDirection(x, y);
+    private checkMove;
+    private updateDirection;
 }

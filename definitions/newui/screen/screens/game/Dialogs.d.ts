@@ -1,13 +1,13 @@
 import { IVector2 } from "utilities/math/IVector";
 export declare enum DialogId {
     Messages = "Messages",
-    Notes = "Notes",
+    Notes = "Notes"
 }
 export declare enum Edge {
     Top = 0,
     Right = 1,
     Bottom = 2,
-    Left = 3,
+    Left = 3
 }
 export declare type IEdges = [[Edge.Left | Edge.Right, number], [Edge.Top | Edge.Bottom, number]];
 export interface IDialogDescription {

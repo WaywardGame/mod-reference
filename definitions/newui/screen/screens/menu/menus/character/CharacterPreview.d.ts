@@ -29,6 +29,6 @@ export default class CharacterPreview extends Component {
     getFilters(): CharacterPreviewFilters;
     update(): this;
     rotate(direction: CharacterPreviewRotation): void;
-    private updateCharacterPreviewFilter(colorType, repaint?);
-    private addPreviewLayer(layer);
+    private updateCharacterPreviewFilter;
+    private addPreviewLayer;
 }

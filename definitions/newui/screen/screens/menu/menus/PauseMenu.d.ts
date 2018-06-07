@@ -11,9 +11,9 @@ export default class PauseMenu extends Menu {
     protected heading: Heading;
     private multiplayerMenu;
     constructor(uiApi: UiApi);
-    private onShow();
-    private getHeadingText();
-    private getParagraphText();
-    private onQuitButtonClick();
-    private getMultiplayerMenu();
+    private onShow;
+    private getHeadingText;
+    private getParagraphText;
+    private onQuitButtonClick;
+    private getMultiplayerMenu;
 }

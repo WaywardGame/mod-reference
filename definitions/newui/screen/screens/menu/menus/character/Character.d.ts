@@ -6,5 +6,5 @@ export interface ISavedCharacter extends ICharacter {
 export declare enum CharacterSort {
     LastUse = 0,
     Name = 1,
-    UseCount = 2,
+    UseCount = 2
 }

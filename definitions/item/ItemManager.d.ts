@@ -80,13 +80,13 @@ export default class ItemManager implements IItemManager {
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
-    private updateItemOrderInternal(container, itemOrder);
-    private loadReference(container);
-    private removeFromContainerInternal(item);
-    private updateUiOnItemRemove(human, item, willBeAnywhereInInventory?, skipMessage?);
-    private getCraftQualityBonus(quality, required?);
-    private computeCraftQualityBonus(itemsToRequire, itemsToConsume);
-    private isCraftSuccessful(player, recipe, qualityBonus);
-    private getPlayerFromInventoryContainer(container);
-    private getAbsentPlayerFromInventoryContainer(container);
+    private updateItemOrderInternal;
+    private loadReference;
+    private removeFromContainerInternal;
+    private updateUiOnItemRemove;
+    private getCraftQualityBonus;
+    private computeCraftQualityBonus;
+    private isCraftSuccessful;
+    private getPlayerFromInventoryContainer;
+    private getAbsentPlayerFromInventoryContainer;
 }
