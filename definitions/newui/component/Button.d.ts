@@ -10,10 +10,11 @@ export default class Button extends Component {
     protected readonly text: Text;
     private buttons;
     private _disabled;
+    private _activated;
     readonly disabled: boolean;
     constructor(api: UiApi, elementType?: string);
     setDisabled(val: boolean): this;
-    activate(playSound?: boolean): void;
+    activate(playSound?: boolean): Promise<void>;
     addButton(callback: (button: Button) => any): this;
     setText(text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;

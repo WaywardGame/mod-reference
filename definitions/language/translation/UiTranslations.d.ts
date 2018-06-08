@@ -144,6 +144,8 @@ declare const _default: {
     [Ui.GameInterruptDangerousStepDescription]: string;
     [Ui.GameInterruptSaveFailure]: string;
     [Ui.GameInterruptSaveFailureDescription]: string;
+    [Ui.GameInterruptLoadFailure]: string;
+    [Ui.GameInterruptLoadFailureDescription]: string;
     [Ui.GameInterruptDesalinationNoNeed]: string;
     [Ui.GameInterruptDesalinationNoNeedDescription]: string;
     [Ui.GameInterruptConfirmationActionOnFire]: string;
@@ -455,7 +457,6 @@ declare const _default: {
     [Ui.MenuOptionsInterruptLoadingDescription]: string;
     [Ui.MenuOptionsButtonDitherFogOfWar]: string;
     [Ui.MenuOptionsButtonFullscreen]: string;
-    [Ui.MenuOptionsButtonOpenNotesAutomatically]: string;
     [Ui.MenuOptionsButtonScreenshotMode]: string;
     [Ui.MenuOptionsButtonPixelFont]: string;
     [Ui.MenuOptionsButtonDeveloperMode]: string;

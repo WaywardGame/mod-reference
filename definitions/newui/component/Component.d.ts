@@ -1,7 +1,7 @@
 import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
-import { AppendStrategy, IComponent, IContextMenu, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import { AttributeManipulator, ClassListManipulator, DataManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
@@ -27,13 +27,17 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     private scrollingChild?;
     private _data;
     private contextMenuGenerator?;
-    private addEventListener;
     private tooltipInitializer;
+    private highlight;
     readonly selectable: SelectableLayer | false;
-    protected readonly listen: {
+    /**
+     * Alias of `.element.addEventListener`
+     */
+    readonly listen: {
         <K extends "waiting" | "error" | "abort" | "progress" | "ended" | "change" | "input" | "select" | "activate" | "beforeactivate" | "beforedeactivate" | "blur" | "canplay" | "canplaythrough" | "click" | "contextmenu" | "dblclick" | "deactivate" | "drag" | "dragend" | "dragenter" | "dragleave" | "dragover" | "dragstart" | "drop" | "durationchange" | "emptied" | "focus" | "invalid" | "keydown" | "keypress" | "keyup" | "load" | "loadeddata" | "loadedmetadata" | "loadstart" | "mousedown" | "mousemove" | "mouseout" | "mouseover" | "mouseup" | "mousewheel" | "MSContentZoom" | "MSGestureChange" | "MSGestureDoubleTap" | "MSGestureEnd" | "MSGestureHold" | "MSGestureStart" | "MSGestureTap" | "MSInertiaStart" | "MSManipulationStateChanged" | "MSPointerCancel" | "MSPointerDown" | "MSPointerEnter" | "MSPointerLeave" | "MSPointerMove" | "MSPointerOut" | "MSPointerOver" | "MSPointerUp" | "pause" | "play" | "playing" | "ratechange" | "reset" | "scroll" | "seeked" | "seeking" | "selectstart" | "stalled" | "submit" | "suspend" | "timeupdate" | "touchcancel" | "touchend" | "touchmove" | "touchstart" | "volumechange" | "webkitfullscreenchange" | "webkitfullscreenerror" | "pointercancel" | "pointerdown" | "pointerenter" | "pointerleave" | "pointermove" | "pointerout" | "pointerover" | "pointerup" | "wheel" | "ariarequest" | "command" | "gotpointercapture" | "lostpointercapture" | "MSGotPointerCapture" | "MSLostPointerCapture" | "beforecopy" | "beforecut" | "beforepaste" | "copy" | "cuechange" | "cut" | "mouseenter" | "mouseleave" | "paste">(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions | undefined): void;
         (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void;
     };
+    private addEventListener;
     constructor(api: UiApi, elementType?: string, namespace?: Namespace);
     /**
      * Warning: This method will replace the internal element backing this component.
@@ -71,6 +75,8 @@ export default class Component extends Emitter implements IComponent, IHookHost 
      * Set the context menu for this element
      */
     setContextMenu(generator: () => IContextMenu | undefined): void;
+    setHighlight(highlight: IHighlight): this;
+    removeHighlight(): void;
     getBox(): ClientRect | DOMRect;
     getOffset(): {
         top: number;
@@ -85,4 +91,6 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     repaint(): void;
     private onMouseEnterForTooltip;
     private onMouseLeaveForTooltip;
+    private onMouseEnterForHighlights;
+    private onMouseLeaveForHighlights;
 }

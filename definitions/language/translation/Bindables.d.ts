@@ -18,12 +18,12 @@ declare const _default: {
     [Bindable.DialogCrafting]: string;
     [Bindable.DialogDismantle]: string;
     [Bindable.DialogEquipment]: string;
+    [Bindable.DialogHelp]: string;
     [Bindable.DialogInventory]: string;
     [Bindable.DialogMessages]: string;
     [Bindable.DialogMessagesChatFocus]: string;
     [Bindable.DialogMilestones]: string;
     [Bindable.DialogNotes]: string;
-    [Bindable.DialogHelp]: string;
     [Bindable.DialogOptions]: string;
     [Bindable.DialogSkills]: string;
     [Bindable.GameActions]: string;
@@ -75,7 +75,6 @@ declare const _default: {
     [Bindable.GameMoveRight]: string;
     [Bindable.GameMoveUp]: string;
     [Bindable.GamePause]: string;
-    [Bindable.GameSave]: string;
     [Bindable.GameQuickSlot1]: string;
     [Bindable.GameQuickSlot2]: string;
     [Bindable.GameQuickSlot3]: string;
@@ -95,13 +94,14 @@ declare const _default: {
     [Bindable.GameQuickSlotToggle7]: string;
     [Bindable.GameQuickSlotToggle8]: string;
     [Bindable.GameQuickSlotToggle9]: string;
+    [Bindable.GameSave]: string;
     [Bindable.GameScreenshotMode]: string;
     [Bindable.GameZoomIn]: string;
     [Bindable.GameZoomOut]: string;
     [Bindable.MenuCancel]: string;
+    [Bindable.MenuContextMenu]: string;
     [Bindable.MenuDown]: string;
     [Bindable.MenuEnter]: string;
-    [Bindable.MenuContextMenu]: string;
     [Bindable.MenuLeft]: string;
     [Bindable.MenuNext]: string;
     [Bindable.MenuPrevious]: string;

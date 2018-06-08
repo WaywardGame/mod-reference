@@ -1,5 +1,5 @@
 import { InterruptChoice } from "language/ILanguage";
-import { IComponent, ITooltip, TranslationGenerator } from "newui/component/IComponent";
+import { HighlightSelector, IComponent, IHighlight, ITooltip, TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
@@ -7,6 +7,7 @@ import Emitter from "utilities/Emitter";
 export interface UiApi extends Emitter {
     tooltips: ITooltipManager;
     scale: IScaleManager;
+    highlights: IHighlightManager;
     /**
      * Generator for all existing screens.
      */
@@ -137,6 +138,11 @@ export interface IInterruptMenuFactory {
     withMenu(menuId: MenuId, args?: {
         [key: string]: any;
     }): Promise<void>;
+}
+export interface IHighlightManager {
+    start(host: any, highlight: IHighlight): void;
+    end(host: any): void;
+    register(component: IComponent, selector: HighlightSelector, until?: string | number): void;
 }
 export declare enum UiApiEvent {
     Resize = 0,

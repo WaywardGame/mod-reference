@@ -46,6 +46,7 @@ export interface IComponent extends Emitter {
     selectable: false | SelectableLayer;
     classes: ClassListManipulator<this>;
     attributes: AttributeManipulator<this>;
+    listen: Element["addEventListener"];
     /**
      * Sets the ID of this component's element.
      */
@@ -231,3 +232,12 @@ export interface IText extends IComponent {
     setText(translation: TranslationGenerator): this;
 }
 export declare type TranslationGenerator = Translation | UiTranslation | (() => IStringSection[] | Translation | UiTranslation | undefined);
+export declare type HighlightSelector = [HighlightType, string | number];
+export interface IHighlight {
+    selectors: HighlightSelector[];
+    iterations?: number;
+}
+export declare enum HighlightType {
+    Stat = 0,
+    MenuBarButton = 1
+}

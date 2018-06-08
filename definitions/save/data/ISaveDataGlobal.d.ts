@@ -69,7 +69,6 @@ export interface IOptions {
     leftHand: boolean;
     muteEffects: boolean;
     muteMusic: boolean;
-    openNotesAutomatically: boolean;
     protectedCraftingItems: boolean;
     realTimeTickSpeed: number;
     rightClickInspect: boolean;
@@ -100,6 +99,7 @@ export declare type IOptionsOld = Partial<IOptions> & {
     skipIntro: boolean;
     worldTooltips: boolean;
     dropUnderYourself: boolean;
+    openNotesAutomatically: boolean;
 };
 export interface IHighscore {
     name: string;

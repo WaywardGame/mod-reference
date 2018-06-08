@@ -281,6 +281,7 @@ declare const _default: {
     [Message.IsAtPercentHealth]: string;
     [Message.IsBarelyHurt]: string;
     [Message.IsInjured]: string;
+    [Message.IsInTheWayOfPickingUp]: string;
     [Message.IsSeverelyDamaged]: string;
     [Message.IsUninjured]: string;
     [Message.ItContains]: string;

@@ -4,12 +4,14 @@ import { IScreen, ScreenId } from "newui/screen/IScreen";
 import Screen from "newui/screen/Screen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import TooltipManager from "newui/tooltip/TooltipManager";
+import HighlightManager from "newui/util/HighlightManager";
 import InterruptFactory from "newui/util/InterruptFactory";
 import ScaleManager from "newui/util/ScaleManager";
 import Emitter from "utilities/Emitter";
 export default class Ui extends Emitter implements UiApi {
     readonly tooltips: TooltipManager;
     readonly scale: ScaleManager;
+    readonly highlights: HighlightManager;
     private storageElement;
     private readonly screenManager;
     private readonly dataHosts;

@@ -6,6 +6,8 @@ declare global {
         [IterableIterator.ALL]: IterableIterator<T>;
     };
     type GeneratorOf<T> = () => IterableOf<T>;
+    type GeneratorOrT<T> = T | (() => T);
+    type ArrayOfTOrIterablesOfT<T> = Array<T | IterableOf<T>>;
     interface IterableIterator<T> {
         /**
          * Returns an iterable of type X, using the given map function
