@@ -6,6 +6,7 @@ export default class Vector2 implements IVector2 {
     static cross(vector: IVector2, vector2: IVector2): Vector3;
     static cross<D extends IVector3>(vector: IVector2, vector2: IVector2, dest: D): D;
     static dot(vector: IVector2, vector2: IVector2): number;
+    static isDistanceWithin(vector: IVector2, vector2: IVector2, distance: number): boolean;
     static distance(vector: IVector2, vector2: IVector2): number;
     static squaredDistance(vector: IVector2, vector2: IVector2): number;
     static direction(vector: IVector2, vector2: IVector2): Vector2;
@@ -44,4 +45,5 @@ export default class Vector2 implements IVector2 {
     scale<D extends IVector2>(value: number, dest: D): D;
     normalize(): this;
     normalize<D extends IVector2>(dest: D): D;
+    toRadians(): number;
 }

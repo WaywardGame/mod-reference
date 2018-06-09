@@ -9,7 +9,7 @@ import { ILanguage } from "language/ILanguage";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
-import IPlayer from "player/IPlayer";
+import IPlayer, { MovementIntent } from "player/IPlayer";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 export declare abstract class Mod extends BaseMod implements IHookHost {
@@ -61,7 +61,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     getCreatureSpriteBatchLayer(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     getPlayerFieldOfViewRadius(player: IPlayer): number | undefined;
     getPlayerMaxHealth(player: IPlayer): number | undefined;
-    getPlayerMovementIntent(player: IPlayer): Bindable | undefined;
+    getPlayerMovementIntent(player: IPlayer): MovementIntent | undefined;
     getPlayerStrength(strength: number, player: IPlayer): number;
     getPlayerSpriteBatchLayer(player: IPlayer, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     getPlayerWeightMovementPenalty(player: IPlayer): number | undefined;

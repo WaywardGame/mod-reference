@@ -1,3 +1,5 @@
+export declare const π: number;
+export declare const τ: number;
 declare module Math2 {
     /**
      * Clamps the given number in the given range

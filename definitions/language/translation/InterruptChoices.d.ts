@@ -19,5 +19,7 @@ declare const _default: {
     [Choice.Retry]: string;
     [Choice.SteamWorkshop]: string;
     [Choice.Yes]: string;
+    [Choice.ContinueAnyway]: string;
+    [Choice.OpenSaveFolderAndQuit]: string;
 };
 export default _default;

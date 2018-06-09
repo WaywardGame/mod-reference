@@ -8,7 +8,7 @@ import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
-import IPlayer from "player/IPlayer";
+import IPlayer, { MovementIntent } from "player/IPlayer";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 /**
@@ -180,7 +180,7 @@ export interface IHookHost {
      * @param player The player object
      * @returns The movement intent of the player or undefined to use the default logic
      */
-    getPlayerMovementIntent?(player: IPlayer): Bindable | undefined;
+    getPlayerMovementIntent?(player: IPlayer): MovementIntent | undefined;
     /**
      * Called when getting the player's strength
      * @param strength The current strength of the player

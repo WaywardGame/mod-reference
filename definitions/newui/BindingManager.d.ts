@@ -26,6 +26,7 @@ export interface BindCatcherApi {
     time: number;
     mouseX: number;
     mouseY: number;
+    mousePosition: IVector2;
     wasPressed(key: string): boolean;
     wasPressed(bind: Bindable): boolean;
     /** wasReleased is only updated if wasPressed is also checked */

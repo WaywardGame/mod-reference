@@ -377,6 +377,8 @@ declare const _default: {
     [Ui.MenuModsInterruptConfirmDisableDependentsDescription]: string;
     [Ui.MenuModsInterruptConfirmUninstallMod]: string;
     [Ui.MenuModsInterruptConfirmUninstallModDescription]: string;
+    [Ui.MenuModsInterruptUnloadableSaveGameMod]: string;
+    [Ui.MenuModsInterruptUnloadableSaveGameModDescription]: string;
     [Ui.MenuModsSortAuthor]: string;
     [Ui.MenuModsSortCreatedDate]: string;
     [Ui.MenuModsSortInstallDate]: string;

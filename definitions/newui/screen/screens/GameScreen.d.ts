@@ -18,10 +18,12 @@ import Dialog from "newui/screen/screens/game/component/Dialog";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
+import MovementHandler from "newui/screen/screens/game/MovementHandler";
 import MenuBar from "newui/screen/screens/game/static/MenuBar";
 import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
+import Player from "player/Player";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };
@@ -36,6 +38,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     stats: Stats;
     quickslots: Quickslots;
     messages: Messages;
+    movementHandler: MovementHandler;
     private quadrantContainer;
     private readonly quadrantMap;
     constructor(api: UiApi);
@@ -48,6 +51,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     getQuadrantContainer(): Component;
     onGameStart(): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    onMove(player: Player): boolean;
     /**
      * Adds a quadrant element to the screen.
      *

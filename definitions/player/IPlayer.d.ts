@@ -2,7 +2,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInputMovement, IInspect, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
+import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInspect, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
@@ -10,7 +10,7 @@ import { IExploreMap } from "renderer/IExploreMap";
 import { ITile } from "tile/ITerrain";
 import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-import { IVector3 } from "utilities/math/IVector";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayer extends IBaseHumanEntity {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
@@ -67,11 +67,12 @@ export interface IPlayer extends IBaseHumanEntity {
     checkSkillMilestones(): void;
     checkWeight(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
+    faceDirection(direction: Direction): void;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     getInspectHealthMessage(player: IPlayer): IMessagePack;
-    getMovementIntent(): Bindable | undefined;
+    getMovementIntent(): MovementIntent;
     getReputation(): number;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
@@ -103,7 +104,7 @@ export interface IPlayer extends IBaseHumanEntity {
     updateDialogInfo(dialogIndex: string | number): void;
     updateDismantleTable(): void;
     updateMilestones(): void;
-    updateMovementIntent(bind: Bindable | undefined): void;
+    updateMovementIntent(intent: MovementIntent): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateStatuses(): void;
     updateStrength(): void;
@@ -198,11 +199,25 @@ export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
-export declare const gameMovement: IInputMovement[];
 export interface IMovementIntent {
     bind: Bindable;
     direction?: FacingDirection;
 }
+export declare enum Direction {
+    Left = "left",
+    Right = "right",
+    Up = "up",
+    Down = "down"
+}
+export interface IInputMovement extends IVector2 {
+    moveBind: Direction;
+    direction: FacingDirection;
+}
+export declare const gameMovement: IInputMovement[];
+/**
+ * A cardinal direction, the tile location of a tile to move to, to idle, or undefined to do nothing.
+ */
+export declare type MovementIntent = Direction | IVector2 | "idle" | undefined;
 export interface IPlayerTravelData {
     starvation: number;
     dehydration: number;

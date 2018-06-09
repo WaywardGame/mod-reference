@@ -12,11 +12,11 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Bindable, Delay, EquipType, FacingDirection, IInspect, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
+import { Delay, EquipType, FacingDirection, IInspect, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
-import { IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
+import { Direction, IPlayer, IPlayerTravelData, IRestData, MovementIntent } from "player/IPlayer";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
@@ -88,8 +88,8 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    getMovementIntent(): Bindable | undefined;
-    updateMovementIntent(bind: Bindable | undefined): void;
+    getMovementIntent(): MovementIntent;
+    updateMovementIntent(intent: MovementIntent): void;
     /**
      * Gets the max health of the player.
      *
@@ -145,6 +145,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     processInput(): void;
+    faceDirection(direction: Direction): void;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;

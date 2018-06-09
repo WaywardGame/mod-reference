@@ -41,6 +41,7 @@ export interface ISteamworks extends Emitter {
     onMessage(name: string, listener: (event: any, ...data: any[]) => any): boolean;
     onReady(): void;
     onUnload(): void;
+    openSaveFolder(): void;
     openLogsFolder(): void;
     openModsFolder(): void;
     openUrl(url: string): void;
