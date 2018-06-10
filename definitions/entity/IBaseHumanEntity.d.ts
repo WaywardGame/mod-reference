@@ -1,9 +1,18 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IDamageInfo } from "creature/ICreature";
 import IBaseEntity from "entity/IBaseEntity";
 import { EntityType } from "entity/IEntity";
 import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { Message, MessageType } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
@@ -50,7 +59,6 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     isGhost(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;
-    sendMessage(message: Message | string, type?: MessageType, ...args: any[]): boolean;
     setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaReduction(skillType: SkillType): void;

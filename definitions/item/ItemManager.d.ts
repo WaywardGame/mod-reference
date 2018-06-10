@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, SentenceCaseStyle, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
@@ -61,8 +71,8 @@ export default class ItemManager implements IItemManager {
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): IItem | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
-    getAdjacentContainers(point: IVector3): IContainer[];
-    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable): boolean;
+    getAdjacentContainers(point: IVector3, includeNpcs?: boolean): IContainer[];
+    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];

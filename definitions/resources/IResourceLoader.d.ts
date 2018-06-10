@@ -20,13 +20,14 @@ export declare enum PathType {
     MenuBarButtonIcon = 7,
     Mound = 8,
     Music = 9,
-    Sleep = 10,
-    SoundEffect = 11,
-    StatIcon = 12,
-    StatusEffect = 13,
-    StatusEffectIcon = 14,
-    Terrain = 15,
-    TileEvent = 16
+    Overlay = 10,
+    Sleep = 11,
+    SoundEffect = 12,
+    StatIcon = 13,
+    StatusEffect = 14,
+    StatusEffectIcon = 15,
+    Terrain = 16,
+    TileEvent = 17
 }
 export interface IResourceContainer {
     spriteTexture: WebGLTexture;

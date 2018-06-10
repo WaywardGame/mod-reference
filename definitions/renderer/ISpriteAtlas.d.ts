@@ -9,6 +9,7 @@ export interface ISpriteAtlas {
     itemsEquipped: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;
     npcs: ISpriteInfoList;
+    overlay: ISpriteInfoList;
     playerBody: ISpriteInfo;
     playerHairstyles: ISpriteInfoList;
     playerSleeping: ISpriteInfo;

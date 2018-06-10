@@ -36,7 +36,8 @@ export declare enum NetworkPropertyType {
     String = 6,
     Container = 7,
     Generic = 8,
-    Item = 9
+    Item = 9,
+    MovementIntent = 10
 }
 export interface INetworkedProperty {
     key: string;

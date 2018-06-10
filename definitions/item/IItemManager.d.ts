@@ -20,7 +20,7 @@ export interface IItemManager {
     decayItems(): boolean;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     generateLookups(): void;
-    getAdjacentContainers(point: IVector3): IContainer[];
+    getAdjacentContainers(point: IVector3, includeNpcs?: boolean): IContainer[];
     getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
@@ -47,7 +47,7 @@ export interface IItemManager {
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
-    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable): boolean;
+    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     isContainer(obj: IItem | IDoodad | IContainer | ITile): obj is IContainer;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;

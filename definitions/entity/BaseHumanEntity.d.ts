@@ -4,7 +4,6 @@ import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType, StatType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { Message, MessageType } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
@@ -12,7 +11,6 @@ import { ISkillSet } from "player/Skills";
 import { IOptions } from "save/data/ISaveDataGlobal";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
-    static sendMessage(human: IBaseHumanEntity | undefined, message: Message | string, type?: MessageType, ...args: any[]): boolean;
     entityType: EntityType;
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
@@ -38,7 +36,6 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     constructor();
     resetStatTimers(): void;
     getName(): string;
-    sendMessage(message: Message | string, type?: MessageType, ...args: any[]): boolean;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;

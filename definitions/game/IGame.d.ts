@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
@@ -7,7 +17,7 @@ import MessageManager from "game/MessageManager";
 import NoteManager from "game/NoteManager";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
-import { IMessagePack, Message, MessageType } from "language/IMessages";
+import { IMessagePack, Message } from "language/IMessages";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import { INPC } from "npc/INPC";
 import { ICharacter, IPlayer } from "player/IPlayer";
@@ -93,7 +103,6 @@ export interface IGame extends Emitter {
     damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo): number | undefined;
     deletePlayer(plys: IPlayer[], identifier: string): void;
     directionToMovement(direction: FacingDirection): IVector2;
-    displayMessageIfCanSeeTile(x: number, y: number, z: number, message: Message, messageType: MessageType, ...messageArgs: any[]): boolean;
     doLavaEvents(x: number, y: number, z: number): void;
     enableFlowFieldDebug(): void;
     fireBreath(x: number, y: number, z: number, facingDirection: FacingDirection, itemName?: string): void;
@@ -146,7 +155,6 @@ export interface IGame extends Emitter {
     makeLavaPassage(player: IPlayer): TerrainType | undefined;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
-    movementToDirection(x: number, y: number): FacingDirection;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
     outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;

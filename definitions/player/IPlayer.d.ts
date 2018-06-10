@@ -2,7 +2,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInspect, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
+import { Delay, EquipType, FacingDirection, HairColor, HairStyle, IInspect, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
@@ -67,7 +67,10 @@ export interface IPlayer extends IBaseHumanEntity {
     checkSkillMilestones(): void;
     checkWeight(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
-    faceDirection(direction: Direction): void;
+    /**
+     * Returns if the player changed their facing direction.
+     */
+    faceDirection(direction: Direction, ignoreTurnDelay?: boolean): boolean;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
@@ -199,10 +202,6 @@ export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
-export interface IMovementIntent {
-    bind: Bindable;
-    direction?: FacingDirection;
-}
 export declare enum Direction {
     Left = "left",
     Right = "right",
@@ -217,7 +216,7 @@ export declare const gameMovement: IInputMovement[];
 /**
  * A cardinal direction, the tile location of a tile to move to, to idle, or undefined to do nothing.
  */
-export declare type MovementIntent = Direction | IVector2 | "idle" | undefined;
+export declare type MovementIntent = Direction | "idle" | undefined;
 export interface IPlayerTravelData {
     starvation: number;
     dehydration: number;

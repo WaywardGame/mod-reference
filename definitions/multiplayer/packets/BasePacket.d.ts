@@ -4,6 +4,7 @@ import { IContainer, IItem } from "item/IItem";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
 import { INPC } from "npc/INPC";
+import { MovementIntent } from "player/IPlayer";
 import { IVector2 } from "utilities/math/IVector";
 export default abstract class BasePacket {
     protected static registrarId: number;
@@ -50,6 +51,8 @@ export default abstract class BasePacket {
     protected writeNPC(value: INPC): void;
     protected readItem(): IItem;
     protected writeItem(value: IItem): void;
+    protected readMovementIntent(): MovementIntent;
+    protected writeMovementIntent(value: MovementIntent): void;
     protected readItemOrDoodad(): IItem | IDoodad | undefined;
     protected writeItemOrDoodad(value: IItem | IDoodad): void;
     protected readItems(): IItem[];

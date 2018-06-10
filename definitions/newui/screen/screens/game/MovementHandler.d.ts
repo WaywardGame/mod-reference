@@ -10,8 +10,11 @@
  */
 import { BindCatcherApi } from "newui/BindingManager";
 export default class MovementHandler {
+    private readonly gameScreen;
     private lastMove;
     private intent;
+    private readonly walkToTileHandler;
+    constructor(gameScreen: Element);
     /**
      * Movement does not care if other binds are pressed, and it doesn't return whether it processed a press either.
      */
@@ -34,26 +37,4 @@ export default class MovementHandler {
      * Returns whether either of the previous statements are true.
      */
     private processDirectionBinds;
-    /**
-     * Returns the currently held directions.
-     */
-    private getHeldDirections;
-    /**
-     * Gets which direction is held on a given axis, or `undefined` if no direction (or both) are held.
-     */
-    private getDirectionHeldOnAxis;
-    /**
-     * Returns a vector representing the center of the screen.
-     */
-    private getScreenCenter;
-    /**
-     * Returns a direction from its angle in radians. (Value between 0 and τ)
-     */
-    private getDirectionFromRad;
-    /**
-     * Returns one or two directions from its angle in radians. (Value between 0 and τ)
-     *
-     * The cardinal directions each have 60°, while the ordinal directions have 30°
-     */
-    private getDirectionsFromRad;
 }

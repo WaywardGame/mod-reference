@@ -1,7 +1,7 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { DoodadType, GrowingStage, IModdable, IRGB, ItemQuality, SfxType, SkillType, TerrainType } from "Enums";
+import { DoodadType, GrowingStage, IModdable, IRGB, ItemQuality, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
 import { IContainer } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { ITileEvent } from "tile/ITileEvent";
@@ -46,6 +46,7 @@ export interface ITile extends Partial<ITileContainer> {
     doodad?: IDoodad;
     events?: ITileEvent[];
     npc?: INPC;
+    overlay?: IOverlayInfo;
 }
 export interface ITileOld {
     event?: ITileEvent[];
@@ -89,4 +90,14 @@ export interface ITemplate {
 export interface ITemplateDoodad {
     type: DoodadType;
     growingStages: GrowingStage[];
+}
+export interface IOverlayInfo {
+    type: OverlayType;
+    size?: number;
+    offsetX?: number;
+    offsetY?: number;
+    red?: number;
+    green?: number;
+    blue?: number;
+    alpha?: number;
 }

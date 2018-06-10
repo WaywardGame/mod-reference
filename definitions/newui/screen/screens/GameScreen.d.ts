@@ -41,6 +41,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     movementHandler: MovementHandler;
     private quadrantContainer;
     private readonly quadrantMap;
+    private readonly gameCanvas;
     constructor(api: UiApi);
     create(): void;
     openDialog<D = Dialog>(id: DialogId): D;

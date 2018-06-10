@@ -10,6 +10,7 @@ import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer, { MovementIntent } from "player/IPlayer";
+import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 export declare abstract class Mod extends BaseMod implements IHookHost {
@@ -108,6 +109,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onPlayerTickStart(player: IPlayer): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     onGameScreenVisible(): void;
+    onRenderOverlay(spriteBatch: ISpriteBatch): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     onTileUpdate(tile: ITile, x: number, y: number, z: number): void;
     onTurnEnd(player: IPlayer): void;

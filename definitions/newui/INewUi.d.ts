@@ -102,7 +102,7 @@ export interface IScaleManager {
     update(): void;
 }
 export interface ITooltipManager {
-    show(host: IComponent): ITooltip;
+    show(host: IComponent): ITooltip | undefined;
     hide(host?: IComponent): void;
 }
 export declare enum SaveLocation {

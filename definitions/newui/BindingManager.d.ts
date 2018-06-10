@@ -42,7 +42,8 @@ export interface BindCatcherApi {
     timeDown(key: string): number;
     timeDown(bind: Bindable): number;
     isMouseWithin(element: Element | IComponent): boolean;
-    isMouseWithin(element: Element | IComponent, mustBeTarget: boolean): boolean;
+    isMouseWithin(element: Element | IComponent, mustBeTarget?: boolean): boolean;
+    mouseStartWasWithin(element: Element | IComponent, mustBeTarget?: boolean): boolean;
 }
 export declare class BindingManager extends Emitter {
     private static readonly defaultBinds;
@@ -76,6 +77,7 @@ export declare class BindingManager extends Emitter {
     isAnythingPressed(id?: number): boolean;
     getMouse(id?: number): IVector2;
     isMouseWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
+    mouseStartWasWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;
     private startLoop;
 }

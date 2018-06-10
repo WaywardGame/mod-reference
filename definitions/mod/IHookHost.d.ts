@@ -9,6 +9,7 @@ import { ILanguage } from "language/ILanguage";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import IPlayer, { MovementIntent } from "player/IPlayer";
+import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 /**
@@ -482,6 +483,11 @@ export interface IHookHost {
      * Called when the game screen becomes visible. Messages sent before this point will not be displayed.
      */
     onGameScreenVisible?(): void;
+    /**
+     * Called when rendering the overlay
+     * @param spriteBatch The overlay sprite batch
+     */
+    onRenderOverlay?(spriteBatch: ISpriteBatch): void;
     /**
      * Called when a creature is spawned from a creature group
      * @param creatureGroup The creature group

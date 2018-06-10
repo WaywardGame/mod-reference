@@ -39,5 +39,7 @@ export default class ResourceLoader implements IResourceLoader {
     private loadHairstyle;
     private loadStatuses;
     private loadStatus;
+    private loadOverlays;
+    private loadOverlay;
     private loadOthers;
 }

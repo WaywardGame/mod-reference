@@ -3,6 +3,7 @@ import { IDoodad } from "doodad/IDoodad";
 import { IContainer, IItem } from "item/IItem";
 import BasePacket from "multiplayer/packets/BasePacket";
 import { INPC } from "npc/INPC";
+import { MovementIntent } from "player/IPlayer";
 import { IVector2 } from "utilities/math/IVector";
 export default abstract class IndexedPacket extends BasePacket {
     private _index;
@@ -40,6 +41,8 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedNPC(value?: INPC): void;
     protected readIndexedItem(): IItem | undefined;
     protected writeIndexedItem(value?: IItem): void;
+    protected readIndexedMovementIntent(): MovementIntent | undefined;
+    protected writeIndexedMovementIntent(value?: MovementIntent): void;
     protected readIndexedItemOrDoodad(): IItem | IDoodad | undefined;
     protected writeIndexedItemOrDoodad(value?: IItem | IDoodad): void;
     protected readIndexedItems(): IItem[] | undefined;
