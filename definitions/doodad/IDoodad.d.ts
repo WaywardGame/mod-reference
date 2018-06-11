@@ -12,6 +12,10 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
+    /**
+     * Returns whether the doodad can be trampled
+     */
+    canTrample(): boolean | undefined;
     isValid(): boolean;
     getTile(): ITile;
     addTreasureChestLoot(): void;
@@ -39,6 +43,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getInspect(): IInspect[];
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     update(): void;
+    isDangerous(): boolean;
 }
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: boolean;

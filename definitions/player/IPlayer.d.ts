@@ -75,7 +75,7 @@ export interface IPlayer extends IBaseHumanEntity {
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     getInspectHealthMessage(player: IPlayer): IMessagePack;
-    getMovementIntent(): MovementIntent;
+    getMovementIntent(): IMovementIntent;
     getReputation(): number;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
@@ -107,7 +107,7 @@ export interface IPlayer extends IBaseHumanEntity {
     updateDialogInfo(dialogIndex: string | number): void;
     updateDismantleTable(): void;
     updateMilestones(): void;
-    updateMovementIntent(intent: MovementIntent): void;
+    updateMovementIntent(intent: IMovementIntent): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateStatuses(): void;
     updateStrength(): void;
@@ -208,15 +208,21 @@ export declare enum Direction {
     Up = "up",
     Down = "down"
 }
+export declare function getDirectionFromMovement(x: number, y: number): Direction;
 export interface IInputMovement extends IVector2 {
     moveBind: Direction;
     direction: FacingDirection;
 }
 export declare const gameMovement: IInputMovement[];
-/**
- * A cardinal direction, the tile location of a tile to move to, to idle, or undefined to do nothing.
- */
 export declare type MovementIntent = Direction | "idle" | undefined;
+export declare const movementIntents: MovementIntent[];
+export interface IMovementIntent {
+    /**
+     * A cardinal direction, the tile location of a tile to move to, to idle, or undefined to do nothing.
+     */
+    intent?: MovementIntent;
+    shouldDisableTurnDelay: boolean;
+}
 export interface IPlayerTravelData {
     starvation: number;
     dehydration: number;

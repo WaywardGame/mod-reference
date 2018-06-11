@@ -9,14 +9,14 @@
  * https://waywardgame.github.io/
  */
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { MessageSource } from "game/IMessageManager";
+import { Source } from "game/IMessageManager";
 import { Message, MessageType } from "language/IMessages";
 import IPlayer from "player/IPlayer";
 import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessage {
     id: number;
-    source: MessageSource[];
+    source: Source[];
     message: IStringSection[];
 }
 export default class MessageManager {
@@ -31,9 +31,17 @@ export default class MessageManager {
      */
     clear(): void;
     /**
-     * Sets the source of the next message.
+     * Sets the sources of the next message. Removes any existing sources.
+     *
+     * Includes `Source.All` by default, and NOT `Source.Game`
      */
-    source(...sources: MessageSource[]): this;
+    source(noGameSource: true, ...sources: Array<Source | false | undefined>): this;
+    /**
+     * Sets the sources of the next message. Removes any existing sources.
+     *
+     * Includes `Source.All` and `Source.Game` by default
+     */
+    source(...sources: Array<Source | false | undefined>): this;
     /**
      * Sets the type of the next message.
      */

@@ -1,4 +1,4 @@
-export declare enum Source {
+export declare enum LogSource {
     ActionManager = 0,
     Audio = 1,
     BaseMod = 2,
@@ -43,8 +43,8 @@ declare class Log {
     debug: (...args: any[]) => void;
     info: (...args: any[]) => void;
     private sources;
-    constructor(...sources: Array<Source | string>);
-    setSources(...sources: Array<Source | string>): void;
+    constructor(...sources: Array<LogSource | string>);
+    setSources(...sources: Array<LogSource | string>): void;
     /**
      * Re-binds the Log methods. Called automatically when the winston instance is set.
      */
@@ -58,7 +58,7 @@ export interface ISourceFilter {
     /**
      * Any source that is not present in this array will not appear in the console.
      */
-    sources: Source[];
+    sources: LogSource[];
 }
 declare module Log {
     /**
@@ -70,27 +70,27 @@ declare module Log {
      * Returns a method that can be used to `Log.info` with the given sources.
      * @param sources A list of sources to log to.
      */
-    function info(...sources: Array<Source | string>): (...args: any[]) => void;
+    function info(...sources: Array<LogSource | string>): (...args: any[]) => void;
     /**
      * Returns a method that can be used to `Log.warn` with the given sources.
      * @param sources A list of sources to log to.
      */
-    function warn(...sources: Array<Source | string>): (...args: any[]) => void;
+    function warn(...sources: Array<LogSource | string>): (...args: any[]) => void;
     /**
      * Returns a method that can be used to `Log.error` with the given sources.
      * @param sources A list of sources to log to.
      */
-    function error(...sources: Array<Source | string>): (...args: any[]) => void;
+    function error(...sources: Array<LogSource | string>): (...args: any[]) => void;
     /**
      * Returns a method that can be used to `Log.trace` with the given sources.
      * @param sources A list of sources to log to.
      */
-    function trace(...sources: Array<Source | string>): (...args: any[]) => void;
+    function trace(...sources: Array<LogSource | string>): (...args: any[]) => void;
     /**
      * Returns a method that can be used to `Log.debug` with the given sources.
      * @param sources A list of sources to log to.
      */
-    function debug(...sources: Array<Source | string>): (...args: any[]) => void;
+    function debug(...sources: Array<LogSource | string>): (...args: any[]) => void;
 }
 export declare class NullLog extends Log {
     refresh(): void;

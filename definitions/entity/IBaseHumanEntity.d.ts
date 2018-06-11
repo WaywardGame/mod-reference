@@ -39,7 +39,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     swimming: boolean;
     canSendMessage: boolean;
     addMilestone(milestone: MilestoneType, data?: number): void;
-    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
+    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     cancelResting(reason: RestCancelReason): void;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;

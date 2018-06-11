@@ -51,10 +51,12 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     isEmbers(): boolean;
     getDoodadInfo(): DoodadInfo | undefined;
     canHarvest(): boolean;
+    canTrample(): boolean | undefined;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     getDurabilityMessage(this: IDoodad): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
     getInspect(): IInspect[];
+    isDangerous(): boolean;
     damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;

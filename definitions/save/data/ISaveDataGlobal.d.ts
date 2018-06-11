@@ -49,6 +49,7 @@ export interface ISaveDataGlobal {
 }
 export default ISaveDataGlobal;
 export interface IOptions {
+    allowDiagonalMovement: boolean;
     alternateContextMenu: boolean;
     alwaysShowMoreInformation: boolean;
     autoGatherHarvest: boolean;

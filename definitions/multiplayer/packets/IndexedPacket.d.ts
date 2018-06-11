@@ -1,9 +1,19 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { IContainer, IItem } from "item/IItem";
 import BasePacket from "multiplayer/packets/BasePacket";
 import { INPC } from "npc/INPC";
-import { MovementIntent } from "player/IPlayer";
+import { IMovementIntent } from "player/IPlayer";
 import { IVector2 } from "utilities/math/IVector";
 export default abstract class IndexedPacket extends BasePacket {
     private _index;
@@ -41,8 +51,8 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedNPC(value?: INPC): void;
     protected readIndexedItem(): IItem | undefined;
     protected writeIndexedItem(value?: IItem): void;
-    protected readIndexedMovementIntent(): MovementIntent | undefined;
-    protected writeIndexedMovementIntent(value?: MovementIntent): void;
+    protected readIndexedMovementIntent(): IMovementIntent | undefined;
+    protected writeIndexedMovementIntent(value?: IMovementIntent): void;
     protected readIndexedItemOrDoodad(): IItem | IDoodad | undefined;
     protected writeIndexedItemOrDoodad(value?: IItem | IDoodad): void;
     protected readIndexedItems(): IItem[] | undefined;

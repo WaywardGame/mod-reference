@@ -16,7 +16,7 @@ import { Delay, EquipType, FacingDirection, IInspect, ItemType, SkillType, TurnT
 import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
-import { Direction, IPlayer, IPlayerTravelData, IRestData, MovementIntent } from "player/IPlayer";
+import { Direction, IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
@@ -65,7 +65,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     nextMoveTime: number;
     nextMoveDirection: FacingDirection | undefined;
     private _milestoneUpdates;
-    private _movementIntent;
+    private readonly _movementIntent;
     constructor();
     startResting(restData: IRestData): void;
     /**
@@ -88,8 +88,8 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    getMovementIntent(): MovementIntent;
-    updateMovementIntent(intent: MovementIntent): void;
+    getMovementIntent(): IMovementIntent;
+    updateMovementIntent(movementIntent: IMovementIntent): void;
     /**
      * Gets the max health of the player.
      *

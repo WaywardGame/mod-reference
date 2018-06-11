@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { Bindable } from "Enums";
-import { MessageSource } from "game/IMessageManager";
+import { Source } from "game/IMessageManager";
 import { IMessage } from "game/MessageManager";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -23,7 +23,7 @@ import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/I
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageFilter {
     name: string;
-    allowedSources: MessageSource[];
+    allowedSources: Source[];
 }
 export default class Messages extends QuadrantComponent implements IHookHost {
     static preferredQuadrant: Quadrant;
@@ -34,7 +34,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     readonly input: Input;
     readonly filter: Button;
     filters: {
-        [key: string]: MessageSource[];
+        [key: string]: Source[];
     };
     private selectedFilter;
     private readonly pinnedNotes;

@@ -75,6 +75,9 @@ export interface IActionResult {
     skillGain?: IActionResultSkillGain | SkillType;
     milestone?: MilestoneType;
     soundEffect?: IActionResultSoundEffect | SfxType;
+    /**
+     * @deprecated
+     */
     messages: ActionMessages;
 }
 export interface IActionUpdateView {
@@ -108,4 +111,7 @@ export interface IActionResultSoundEffect {
 }
 export declare type ExecuteArgument = IActionArgument | IItem | undefined;
 export declare type ActionCallback = (player: IPlayer, argument: IActionArgument, result: IActionResult) => void;
+/**
+ * @deprecated
+ */
 export declare type ActionMessages = Array<IMessagePack | Message>;

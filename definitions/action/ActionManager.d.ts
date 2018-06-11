@@ -6,14 +6,14 @@ import GenericManager from "game/GenericManager";
 import { IGenericManager } from "game/IGenericManager";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import IPlayer from "player/IPlayer";
-import { Source } from "utilities/Log";
+import { LogSource } from "utilities/Log";
 export default class ActionManager extends GenericManager<IAction> implements IActionManager {
     private executing;
     setup(instance: IGenericManager<IAction>): void;
     execute(player: IPlayer | IBaseHumanEntity, actionType: ActionType, executeArgument?: ExecuteArgument): boolean | undefined;
     executeMultiplayer(player: IPlayer, actionPacket: ActionPacket, skipCanExecuteCheck?: boolean): any;
     processResult(human: IBaseHumanEntity, result: IActionResult): boolean | undefined;
-    protected getSource(): Source;
+    protected getSource(): LogSource;
     protected getEnumObject(): any;
     private canExecuteAction;
     private executeInternal;

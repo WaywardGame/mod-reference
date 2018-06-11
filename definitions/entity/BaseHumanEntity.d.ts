@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IDamageInfo } from "creature/ICreature";
 import BaseEntity from "entity/BaseEntity";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
@@ -61,7 +71,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     /**
      * Burn the player
      */
-    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
+    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     equip(item: IItem, slot: EquipType): void;
     unequip(item: IItem): void;

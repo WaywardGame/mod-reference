@@ -12,7 +12,7 @@ import { BindCatcherApi } from "newui/BindingManager";
 export default class MovementHandler {
     private readonly gameScreen;
     private lastMove;
-    private intent;
+    private readonly intent;
     private readonly walkToTileHandler;
     constructor(gameScreen: Element);
     /**
@@ -23,6 +23,10 @@ export default class MovementHandler {
      * Handles `Hook.OnMove`
      */
     onMoveStart(): void;
+    /**
+     * Handles `Hook.OnMoveComplete`
+     */
+    onMoveComplete(): void;
     private handleBinds;
     /**
      * Processes moving towards the mouse.

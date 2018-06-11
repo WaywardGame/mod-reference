@@ -525,6 +525,7 @@ declare const _default: {
     [Ui.MenuOptionsBindButtonResetTooltip]: string;
     [Ui.MenuOptionsBindButtonDeleteTooltip]: string;
     [Ui.MenuOptionsBindButtonAddTooltip]: string;
+    [Ui.MenuOptionsButtonAllowDiagonalMovement]: string;
     [Ui.MenuOptionsButtonAlwaysShowMoreInformation]: string;
     [Ui.MenuOptionsButtonAutoGatherHarvest]: string;
     [Ui.MenuOptionsButtonAutoGatherHarvestTooltip]: string;
