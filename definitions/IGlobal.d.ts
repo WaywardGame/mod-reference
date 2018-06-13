@@ -46,11 +46,15 @@ import IUi from "ui/IUi";
 
 declare global {
 	interface Description<T> {
-		[index: number]: T;
+		[index: number]: T | undefined;
 	}
 
-	interface SaferDescription<T> {
-		[index: number]: T | undefined;
+	/**
+	 * @deprecated
+	 * @see `Description`
+	 */
+	interface UnsafeDescription<T> {
+		[index: number]: T;
 	}
 
 	type SaferArray<T> = Array<T | undefined>;

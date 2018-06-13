@@ -108,8 +108,6 @@ declare const _default: {
     [Ui.GameInterruptReturnToTitleScreenDescription]: string;
     [Ui.GameInterruptReturnToTitleScreenDailyChallenge]: string;
     [Ui.GameInterruptReturnToTitleScreenDailyChallengeDescription]: string;
-    [Ui.GameInterruptReturnToTitleScreenDead]: string;
-    [Ui.GameInterruptReturnToTitleScreenDeadDescription]: string;
     [Ui.GameInterruptLoadingSaving]: string;
     [Ui.GameInterruptLoadingSavingDescription]: string;
     [Ui.GameInterruptLoadingQuitting]: string;
@@ -276,6 +274,12 @@ declare const _default: {
     [Ui.MenuGameEndDescriptionWin3]: string;
     [Ui.MenuGameEndShareFacebook]: string;
     [Ui.MenuGameEndShareTwitter]: string;
+    [Ui.MenuGameEndContinueAsGhost]: string;
+    [Ui.MenuGameEndReturnToIsland]: string;
+    [Ui.MenuGameEndExitToMenu]: string;
+    [Ui.MenuGameEndInterruptGhostDeleteSave]: string;
+    [Ui.MenuGameEndInterruptWonDeleteSave]: string;
+    [Ui.MenuGameEndInterruptDeleteSaveDescription]: string;
     [Ui.MenuHelpTitle]: string;
     [Ui.MenuHelpDescription]: string;
     [Ui.MenuHighscoresTitle]: string;
@@ -568,6 +572,8 @@ declare const _default: {
     [Ui.MenuPauseParagraphNotPaused]: string;
     [Ui.MenuPauseHeadingDedicatedServer]: string;
     [Ui.MenuPauseParagraphDedicatedServer]: string;
+    [Ui.MenuPauseInterruptGhostKeepSave]: string;
+    [Ui.MenuPauseInterruptGhostKeepSaveDescription]: string;
     [Ui.MenuMultiplayerTitle]: string;
     [Ui.MenuMultiplayerDescription]: string;
     [Ui.MenuMultiplayerOpenServer]: string;

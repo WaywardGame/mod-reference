@@ -1,10 +1,10 @@
 import { IActionDescription } from "action/IAction";
 import { IItemTypeGroup, ItemType, ItemTypeGroup } from "Enums";
 import { IGroupDescription, IItemDescription, IRecipeComponent } from "item/IItem";
-export declare const itemDescriptions: SaferDescription<IItemDescription>;
+export declare const itemDescriptions: Description<IItemDescription>;
 export default itemDescriptions;
 export declare const itemGroups: Description<IGroupDescription>;
-export declare const itemActionDescriptions: SaferDescription<IActionDescription>;
+export declare const itemActionDescriptions: Description<IActionDescription>;
 export declare function RecipeComponent(type: (ItemType | ItemTypeGroup), requiredAmount: number, consumedAmount: number, disassembleAmount?: number, ignoreWeight?: boolean): IRecipeComponent;
 export declare function ExtendItem(typeOrItemDescription: ItemType | Partial<IItemDescription>, extendWith: Partial<IItemDescription>): Description<IItemDescription>;
 export declare function isItemTypeGroup(itemType: ItemType | ItemTypeGroup | IItemTypeGroup): itemType is ItemTypeGroup;

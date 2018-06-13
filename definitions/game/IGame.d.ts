@@ -24,7 +24,7 @@ import { ICharacter, IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
-import { IHighscore, IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
+import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { ISaveInfo } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
@@ -63,7 +63,6 @@ export interface IGame extends Emitter {
     saveClear: boolean;
     playing: boolean;
     paused: boolean;
-    savedHighscore: IHighscore | undefined;
     autoSaveTimer: number;
     updateRender: boolean;
     fillCount: number;

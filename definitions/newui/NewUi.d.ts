@@ -2,7 +2,7 @@ import { IComponent, TranslationGenerator } from "newui/component/IComponent";
 import { IInterruptMenuFactory, UiApi } from "newui/INewUi";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
 import Screen from "newui/screen/Screen";
-import { MenuId } from "newui/screen/screens/menu/component/IMenu";
+import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 import TooltipManager from "newui/tooltip/TooltipManager";
 import HighlightManager from "newui/util/HighlightManager";
 import InterruptFactory from "newui/util/InterruptFactory";
@@ -32,9 +32,7 @@ export default class Ui extends Emitter implements UiApi {
     interrupt(): IInterruptMenuFactory;
     interruptWithConfirmation(title: TranslationGenerator, description?: TranslationGenerator): Promise<boolean>;
     interruptWithInfo(title: TranslationGenerator, description?: TranslationGenerator): Promise<void>;
-    interruptWithMenu(menuId: MenuId, args?: {
-        [key: string]: any;
-    }): Promise<void>;
+    interruptWithMenu(menuId: MenuId, initializer?: (menu: IMenu) => any): Promise<void>;
     showLoadingInterrupt(title: TranslationGenerator, description?: TranslationGenerator, canCancel?: boolean, specialType?: string): Promise<void>;
     hideLoadingInterrupt(): Promise<void>;
     /**

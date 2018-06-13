@@ -75,10 +75,6 @@ export interface IActionResult {
     skillGain?: IActionResultSkillGain | SkillType;
     milestone?: MilestoneType;
     soundEffect?: IActionResultSoundEffect | SfxType;
-    /**
-     * @deprecated
-     */
-    messages: ActionMessages;
 }
 export interface IActionUpdateView {
     updateFov: boolean;

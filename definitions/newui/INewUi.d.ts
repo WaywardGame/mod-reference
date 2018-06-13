@@ -2,7 +2,7 @@ import { InterruptChoice } from "language/ILanguage";
 import { HighlightSelector, IComponent, IHighlight, ITooltip, TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
-import { MenuId } from "newui/screen/screens/menu/component/IMenu";
+import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Emitter from "utilities/Emitter";
 export interface UiApi extends Emitter {
     tooltips: ITooltipManager;
@@ -135,9 +135,7 @@ export interface IInterruptFactory extends IInterruptMenuFactory {
     withLoading(until: Promise<any> | (() => Promise<any>), canCancel?: boolean, specialType?: string): Promise<void>;
 }
 export interface IInterruptMenuFactory {
-    withMenu(menuId: MenuId, args?: {
-        [key: string]: any;
-    }): Promise<void>;
+    withMenu<M extends IMenu = IMenu>(menuId: MenuId, initializer?: (menu: M) => any): Promise<void>;
 }
 export interface IHighlightManager {
     start(host: any, highlight: IHighlight): void;

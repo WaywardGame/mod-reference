@@ -59,4 +59,5 @@ export declare const argumentSegment: ISegment;
 export declare const conditionalSegment: ISegment;
 export declare const escapedSegment: ISegment;
 export declare const basicInterpolator: Interpolator;
-export declare function interpolate(str: string, ...args: any[]): IStringSection[];
+export declare function interpolateSectioned(str: string, ...args: any[]): IStringSection[];
+export declare function interpolate(str: string, ...args: any[]): string;

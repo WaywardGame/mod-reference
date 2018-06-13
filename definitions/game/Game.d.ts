@@ -14,7 +14,6 @@ import { IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
-import { IHighscore } from "save/data/ISaveDataGlobal";
 import { ISaveInfo } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
@@ -63,7 +62,6 @@ export default class Game extends Emitter implements IGame {
     notes: NoteManager;
     npcs: SaferArray<INPC>;
     realTimeTickSpeed: number;
-    savedHighscore: IHighscore | undefined;
     saveVersion: string;
     seeds: ISeeds;
     shouldUpdateTablesAndWeight: boolean;

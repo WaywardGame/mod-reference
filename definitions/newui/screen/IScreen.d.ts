@@ -19,8 +19,14 @@ export declare enum ScreenEvent {
      */
     CanShowTooltip = "AttemptShowTooltip"
 }
+export declare enum Background {
+    Default = 0,
+    Win = 1,
+    Death = 2
+}
 export interface IScreen extends IComponent {
     isOverlayScreen?: boolean;
+    background?: Background;
     /**
      * Remove the context menu from this element
      */

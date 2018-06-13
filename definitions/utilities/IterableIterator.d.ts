@@ -16,9 +16,9 @@ declare global {
         map<X>(mapper: (val: T) => X): IterableIterator<X>;
         /**
          * Returns an iterable that will loop only over the entries that match the given filter
-         * @param filter A function that returns true if the value should be included and false if it shouldn't
+         * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
          */
-        filter<X = T>(filter: (val: T) => boolean | number | undefined | null): IterableIterator<X>;
+        filter<X = T>(filter: (val: T) => any): IterableIterator<X>;
         /**
          * Returns an iterable that will first loop over the entries in itself, then the entries in the given iterables
          * @param iterables The other iterables to loop over
