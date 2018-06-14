@@ -70,11 +70,11 @@ declare const _default: {
     [Bindable.GameItemQuickMoveAll]: string;
     [Bindable.GameMoreInformation]: string;
     [Bindable.GameMoveDirection]: string;
-    [Bindable.GameMoveToTile]: string;
-    [Bindable.GameMoveToTilePreview]: string;
     [Bindable.GameMoveDown]: string;
     [Bindable.GameMoveLeft]: string;
     [Bindable.GameMoveRight]: string;
+    [Bindable.GameMoveToTile]: string;
+    [Bindable.GameMoveToTilePreview]: string;
     [Bindable.GameMoveUp]: string;
     [Bindable.GamePause]: string;
     [Bindable.GameQuickSlot1]: string;

@@ -8,17 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { PlayerState } from "Enums";
+import { Difficulty, PlayerState } from "Enums";
 import { IEnumInfo } from "utilities/enum/IEnum";
 export interface ISaveData {
     gameSlotName: string;
     gameState: PlayerState.Won | PlayerState.Ghost | PlayerState.None;
     gameBaseSeed: number | string;
     gameCreationTime: number;
-    saveManagerOriginalVersion: string;
     gameThumbnail: string;
     saveManagerSaveTime: number;
     saveManagerTicks: number;
+    saveManagerDifficulty: Difficulty;
+    saveManagerScore: number;
+    saveManagerOriginalVersion: string;
+    saveManagerDeathBy: string;
     modManagerSaveData: {
         [index: string]: any;
     };

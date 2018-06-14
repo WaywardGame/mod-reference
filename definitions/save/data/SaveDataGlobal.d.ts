@@ -13,7 +13,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
     gameLastPlayedVersion: string;
     gameHighscores: IHighscore[];
     gamePlayedCount: number;
-    options: any;
+    options: IOptions;
     playerMilestoneData: {
         [index: number]: IMilestoneData | undefined;
     };
@@ -45,5 +45,4 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
      * Resets all milestone progress
      */
     resetMilestones(): void;
-    private static cloneDefaultOptions;
 }

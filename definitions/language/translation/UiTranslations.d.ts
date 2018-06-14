@@ -311,6 +311,7 @@ declare const _default: {
     [Ui.MenuLoadGameSaveSortTurnCount]: string;
     [Ui.MenuLoadGameSaveTooltipLabelCreatedTime]: string;
     [Ui.MenuLoadGameSaveTooltipLabelSaveTime]: string;
+    [Ui.MenuLoadGameSaveTooltipLabelDifficulty]: string;
     [Ui.MenuLoadGameSaveTooltipLabelScore]: string;
     [Ui.MenuLoadGameSaveTooltipLabelSeed]: string;
     [Ui.MenuLoadGameSaveTooltipLabelTurns]: string;

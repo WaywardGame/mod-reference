@@ -1082,7 +1082,8 @@ export declare enum StatusType {
 }
 export declare enum OverlayType {
     WalkDots = 0,
-    Arrows = 1
+    Arrows = 1,
+    FootPrints = 2
 }
 export declare enum ItemQuality {
     None = 0,

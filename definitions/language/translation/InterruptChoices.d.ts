@@ -11,15 +11,15 @@
 import { InterruptChoice as Choice } from "language/ILanguage";
 declare const _default: {
     [Choice.Cancel]: string;
+    [Choice.ContinueAnyway]: string;
     [Choice.LocalFile]: string;
     [Choice.No]: string;
     [Choice.Ok]: string;
+    [Choice.OpenSaveFolderAndQuit]: string;
     [Choice.Rejoin]: string;
     [Choice.Rename]: string;
     [Choice.Retry]: string;
     [Choice.SteamWorkshop]: string;
     [Choice.Yes]: string;
-    [Choice.ContinueAnyway]: string;
-    [Choice.OpenSaveFolderAndQuit]: string;
 };
 export default _default;

@@ -23,6 +23,7 @@ import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
+import { IPlayer } from "player/IPlayer";
 import Player from "player/Player";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
@@ -54,6 +55,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onMove(player: Player): boolean | undefined;
     onMoveComplete(player: Player): void;
+    onPlayerDeath(player: IPlayer): undefined;
     /**
      * Adds a quadrant element to the screen.
      *

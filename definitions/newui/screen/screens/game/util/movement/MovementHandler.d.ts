@@ -27,6 +27,10 @@ export default class MovementHandler {
      * Handles `Hook.OnMoveComplete`
      */
     onMoveComplete(): void;
+    /**
+     * Handles `Hook.OnPlayerDeath`
+     */
+    onDeath(): void;
     private handleBinds;
     /**
      * Processes moving towards the mouse.

@@ -18,7 +18,6 @@ import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
-import { IOptions } from "save/data/ISaveDataGlobal";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
     entityType: EntityType;
@@ -33,7 +32,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     handToUse: EquipType;
     inventory: IContainer;
     lightBonus: number;
-    options: IOptions;
+    options: import("../save/data/ISaveDataGlobal").IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;
     score: number;

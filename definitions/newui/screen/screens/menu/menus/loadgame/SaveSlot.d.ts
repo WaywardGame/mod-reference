@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { Difficulty } from "Enums";
 import InputButton from "newui/component/InputButton";
 import { UiApi } from "newui/INewUi";
 export interface SaveSlotData {
@@ -24,6 +25,7 @@ export interface SaveSlotData {
     turns: number;
     seed: string;
     name: string;
+    difficulty: Difficulty;
 }
 export declare enum SaveSlotEvent {
     Rename = "Rename",
