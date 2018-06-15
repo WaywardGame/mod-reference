@@ -11,7 +11,7 @@
 import { Dictionary, UiTranslation } from "language/ILanguage";
 import { TranslationType } from "language/ILanguageManager";
 import { Message } from "language/IMessages";
-import Interpolator, { IStringSection } from "utilities/string/Interpolator";
+import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
 export interface ITranslationData {
     dictionary: Dictionary;
     entry: number | [number, TranslationType];
@@ -24,6 +24,7 @@ export default class Translation {
     static convertMakeStringToInterpolation(makeString: string): string;
     static formatList(entries: IterableOf<string | IStringSection[]>): IStringSection[];
     static getString(entries: IterableOf<string | IStringSection>): string;
+    static getAllTypes(dictionary: Dictionary, entry: number): Translation[];
     /**
      * DO NOT USE THIS METHOD
      *
@@ -38,10 +39,11 @@ export default class Translation {
     private readonly translationData;
     private baseTranslation;
     private usingOldSystem;
+    private interpolator;
     /**
      * Creates from a dictionary and entry
      */
-    constructor(dictionary: Dictionary, entry: number | string | [number, TranslationType]);
+    constructor(dictionary: Dictionary, entry: number | string | [number | string, TranslationType]);
     /**
      * Creates from a translation id. Entry matching is done by changing the case-style of the inputted
      * translation id, so if you provide an all lower-case string it will not work!
@@ -66,9 +68,10 @@ export default class Translation {
     /**
      * Vague constructor
      */
-    constructor(dictionary: number | string | ITranslationData, entry?: number | string | [number, TranslationType]);
+    constructor(dictionary: number | string | ITranslationData, entry?: number | string | [number | string, TranslationType]);
     setUsingOldSystem(): this;
     has(): boolean;
+    withSegments(...segments: ISegment[]): this;
     /**
      * Returns this translation as a list of string sections
      */

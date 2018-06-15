@@ -10,10 +10,23 @@
  */
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
-export interface ExtendsMenu {
-    new (uiApi: UiApi): Menu;
+export declare enum HelpArticle {
+    Welcome = 0,
+    Controls = 1,
+    Doodads = 2,
+    FastPickup = 3,
+    Death = 4,
+    Milestones = 5,
+    Bugs = 6,
+    HeldItems = 7,
+    Crafting = 8,
+    Encumberance = 9,
+    MovingItems = 10,
+    Interface = 11,
+    Quickslots = 12,
+    Multiplayer = 13,
+    ResourceGathering = 14
 }
-declare const menuMap: {
-    [key: number]: ExtendsMenu;
-};
-export default menuMap;
+export default class HelpArticleMenu extends Menu {
+    constructor(api: UiApi, article: HelpArticle);
+}

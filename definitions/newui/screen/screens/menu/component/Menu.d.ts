@@ -24,8 +24,8 @@ export default class Menu extends Component implements IMenu, IHookHost {
     protected tabContainer: Component;
     private readonly tabs;
     constructor(uiApi: UiApi, menuId: MenuId | string);
-    setTitle(initializer: (title: Heading) => any): void;
-    setDescription(initializer: (title: Text) => any): void;
+    setTitle(initializer: (title: Heading) => Heading): void;
+    setDescription(initializer: (title: Text) => Text): void;
     setOnBeforeShow(beforeShow: () => void | Promise<void>): void;
     show(): this;
     scrollToTop(): void;

@@ -7,7 +7,6 @@ export declare enum CheckButtonEvent {
     Change = "Change"
 }
 export declare class CheckButton extends Button implements IRefreshableValue<boolean> {
-    protected description: Paragraph;
     private refreshMethod;
     private _checked;
     readonly checked: boolean;

@@ -14,6 +14,14 @@ export interface IColorSection extends IStringSection {
 }
 export declare const colorSegment: ISegment;
 export declare const bindSegment: ISegment;
+export interface ILinkSection extends IColorSection, IDecoratedSection {
+    link: string | [string, string | undefined];
+}
+export declare const linkSegment: ISegment;
+export interface IFontSizeSection extends IStringSection {
+    fontSize: "heading" | undefined;
+}
+export declare const headingSegment: ISegment;
 export declare enum TextDecoration {
     Underline = 1,
     Bold = 2,

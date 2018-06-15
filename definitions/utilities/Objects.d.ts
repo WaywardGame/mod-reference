@@ -47,6 +47,7 @@ declare module Objects {
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function deepClone<T>(obj: T): T;
+    function addProperty(property: string, value: any): (object: any) => any;
     function followDirections<T>(target: any, directions: string[]): T | undefined;
 }
 export declare function Bound<T extends (...args: any[]) => any>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;

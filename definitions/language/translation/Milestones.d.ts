@@ -30,6 +30,7 @@ declare const _default: {
     [Milestone.Malevolent]: string[];
     [Milestone.Merchant]: string[];
     [Milestone.Navigator]: string[];
+    [Milestone.Notekeeper]: string[];
     [Milestone.Pacifier]: string[];
     [Milestone.Prepared]: string[];
     [Milestone.Pulchritudinous]: string[];

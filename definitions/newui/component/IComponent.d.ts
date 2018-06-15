@@ -19,6 +19,16 @@ export declare type AppendStrategy = "append" | "prepend" | {
 } | {
     before: IComponent;
 };
+export declare module AppendStrategy {
+    const Append = "append";
+    const Prepend = "prepend";
+    function after(component: IComponent): {
+        after: IComponent;
+    };
+    function before(component: IComponent): {
+        before: IComponent;
+    };
+}
 export interface IComponent extends Emitter {
     /**
      * The element that this `UiElement` instance wraps.

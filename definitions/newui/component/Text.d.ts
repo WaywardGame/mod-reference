@@ -1,3 +1,14 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
+import { IColorSection, IFontSizeSection, ILinkSection } from "language/Segments";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
@@ -17,4 +28,12 @@ export declare class Paragraph extends Text {
 }
 export declare class Heading extends Text {
     constructor(uiApi: UiApi);
+}
+export declare class BasicText extends Component {
+    private _link;
+    private linkHandler;
+    constructor(uiApi: UiApi);
+    setText(text: IStringSection | IColorSection | ILinkSection | IFontSizeSection): this;
+    setLinkHandler(handler?: (link: string | [string, string | undefined]) => boolean): void;
+    private onClick;
 }
