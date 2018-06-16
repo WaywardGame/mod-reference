@@ -15,6 +15,8 @@ export declare enum ReduceStrategy {
     Last = 2,
     /**
      * Returns a random valid hook result. (Calls the hook on all mods, then returns a random result from all valid results)
+     *
+     * Warning: Does not use the internal random system. Be careful, this could cause desyncs.
      */
     Random = 3
 }

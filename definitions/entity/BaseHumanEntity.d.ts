@@ -32,7 +32,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     handToUse: EquipType;
     inventory: IContainer;
     lightBonus: number;
-    options: import("../save/data/ISaveDataGlobal").IOptions;
+    options: import("save/data/ISaveDataGlobal").IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;
     score: number;

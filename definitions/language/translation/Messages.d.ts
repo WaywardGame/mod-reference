@@ -34,7 +34,6 @@ declare const _default: {
     [Message.AttemptedToDropAllIntoFire]: string;
     [Message.AttemptedToPlaceAllOnGround]: string;
     [Message.AttemptToTill]: string;
-    [Message.AwakeToFindYourself]: string;
     [Message.Back]: string;
     [Message.BadlyBurnedLostHealth]: string;
     [Message.BarteringSkillsProvided]: string;
@@ -439,6 +438,7 @@ declare const _default: {
     [Message.ObjectIsLockedAttemptToBreakIt]: string;
     [Message.Offer]: string;
     [Message.OfferAberrantFail]: string;
+    [Message.OfferAberrantFailButTamed]: string;
     [Message.OpenDoor]: string;
     [Message.OverEatingLostStamina]: string;
     [Message.OverHydratingLostStamina]: string;

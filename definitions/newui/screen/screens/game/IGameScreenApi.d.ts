@@ -20,8 +20,8 @@ export declare enum QuadrantComponentId {
     MenuBar = 3
 }
 export declare enum GameScreenEvent {
-    ShowDialog = 0,
-    HideDialog = 1
+    HideDialog = "ShowDialog",
+    ShowDialog = "HideDialog"
 }
 export default interface IGameScreenApi {
     readonly uiApi: UiApi;

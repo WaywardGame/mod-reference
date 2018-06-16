@@ -38,6 +38,7 @@ export declare abstract class BaseMod {
     addActionType(description: IActionDescription, callback: ActionCallback): number;
     addCommand(command: string, callback: CommandCallback): number;
     addSkillType(description: ISkillDescription): number;
+    addOverlay(name: string): number;
     addMusic(name: string): number;
     addSoundEffect(name: string, variations?: number): number;
     addHairstyle(description: IHairstyleDescription): number;

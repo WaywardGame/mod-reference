@@ -1,10 +1,11 @@
 import { PartOfDay } from "game/TimeManager";
 export declare enum Note {
-    Caving = 0,
-    Corpse = 1,
-    Inedible = 2,
-    Nightfall = 3,
-    Reputation = 4
+    Stranded = 0,
+    Caving = 1,
+    Corpse = 2,
+    Inedible = 3,
+    Nightfall = 4,
+    Reputation = 5
 }
 export declare type Time = PartOfDay | number;
 export interface INote {

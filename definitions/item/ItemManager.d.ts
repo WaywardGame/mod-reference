@@ -78,8 +78,8 @@ export default class ItemManager implements IItemManager {
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
-    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: true): string;
-    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: false): IStringSection[];
+    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: true, includeAnd?: boolean): string;
+    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: false, includeAnd?: boolean): IStringSection[];
     loadReferences(): void;
     saveTileReferences(): void;
     loadTileReferences(): void;

@@ -10,6 +10,7 @@
  */
 import { Note } from "game/NoteManager";
 declare const _default: {
+    [Note.Stranded]: string[];
     [Note.Nightfall]: string[];
     [Note.Reputation]: string[];
     [Note.Caving]: string[];

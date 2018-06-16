@@ -12,5 +12,8 @@ import { HelpArticle } from "newui/screen/screens/menu/menus/HelpArticle";
 declare const _default: {
     [HelpArticle.Welcome]: string[];
     [HelpArticle.Controls]: string[];
+    [HelpArticle.Doodads]: string[];
+    [HelpArticle.Death]: string[];
+    [HelpArticle.Milestones]: string[];
 };
 export default _default;

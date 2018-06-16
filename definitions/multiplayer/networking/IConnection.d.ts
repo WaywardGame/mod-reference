@@ -12,6 +12,7 @@ export interface IConnection {
     lastPacketNumberSent?: number;
     lastPacketNumberReceived?: number;
     addTimeout(milliseconds: number, callback: () => void): void;
+    startKeepAlive(): void;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
     isConnected(): boolean;

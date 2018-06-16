@@ -46,6 +46,8 @@ export interface IMultiplayer {
 export default IMultiplayer;
 export declare const maxPlayers = 32;
 export declare const defaultServerPort = 38740;
+export declare const keepAliveInterval = 4000;
+export declare const keepAliveTimeout = 15000;
 export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
