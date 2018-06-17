@@ -74,7 +74,6 @@ export interface IOptions {
     realTimeTickSpeed: number;
     rightClickInspect: boolean;
     rightHand: boolean;
-    screenshotMode: boolean;
     shouldLoadLastSave: boolean;
     skipSplash: boolean;
     tooltipsCreatures: boolean;

@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import IBaseEntity, { IStatChangeInfo } from "entity/IBaseEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
 import Component from "newui/component/Component";
@@ -41,9 +51,9 @@ export declare abstract class StatElement extends Component {
      */
     protected onStatChange(_?: any, stat?: IStat, oldValue?: number, info?: IStatChangeInfo): void;
     /**
-     * Event handler for when the stat tooltip is shown.
+     * Returns the component that should have the stat tooltip
      */
-    private onTooltip;
+    protected getTooltipElement(): Component;
 }
 export declare class Statbar extends StatElement {
     private readonly bar;
@@ -56,6 +66,7 @@ export declare class Statbar extends StatElement {
      * property `--stat-percent`, to update the statbar's fill width.
      */
     onStatChange(_?: any, stat?: IStat, oldValue?: number): void;
+    protected getTooltipElement(): Component;
 }
 export declare class StatAttribute extends StatElement {
     private readonly attribute;

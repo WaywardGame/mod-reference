@@ -73,7 +73,7 @@ export default class Ui extends Emitter implements IUi {
     onUpdateDirection(): void;
     highlightUnique(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
     highlight(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
-    toggleUIDisplay(): void;
+    toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
     changeEquipmentOption(id: string): void;

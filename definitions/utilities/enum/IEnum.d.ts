@@ -26,7 +26,9 @@ export declare enum EnumId {
     MenuBarButton = 18,
     CorpseType = 19,
     TileEventType = 20,
-    OverlayType = 21
+    OverlayType = 21,
+    MessageSource = 22,
+    NPCType = 23
 }
 export interface IEnumInfo {
     enumId: EnumId;

@@ -52,7 +52,7 @@ export default abstract class Dialog extends Component implements IDialog {
      *
      * Also the event handler for when the close button is pressed in the dialog's header.
      */
-    close(): void;
+    close(): Promise<boolean>;
     addPanel(id: string | number): Component;
     showPanel(id: string | number): Component | undefined;
     getPanel(id: string | number): Component | undefined;

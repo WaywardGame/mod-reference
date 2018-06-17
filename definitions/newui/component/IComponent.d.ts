@@ -12,7 +12,7 @@ export declare enum ComponentEvent {
     AddChild = 5,
     RemoveChild = 6,
     InputChange = 7,
-    Tooltip = 8
+    WillRemove = 8
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;

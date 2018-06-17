@@ -15,5 +15,9 @@ declare const _default: {
     [HelpArticle.Doodads]: string[];
     [HelpArticle.Death]: string[];
     [HelpArticle.Milestones]: string[];
+    [HelpArticle.FastPickup]: string[];
+    [HelpArticle.Actions]: string[];
+    [HelpArticle.HeldItems]: string[];
+    [HelpArticle.Bugs]: string[];
 };
 export default _default;

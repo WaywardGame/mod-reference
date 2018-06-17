@@ -99,10 +99,11 @@ export declare module FacingDirection {
 }
 export declare enum SaveType {
     InGame = 0,
-    Quit = 1,
-    BackToMainMenu = 2,
-    Multiplayer = 3,
-    DailyChallenge = 4
+    Death = 1,
+    Quit = 2,
+    BackToMainMenu = 3,
+    Multiplayer = 4,
+    DailyChallenge = 5
 }
 export declare enum LootGroupType {
     Low = 0,

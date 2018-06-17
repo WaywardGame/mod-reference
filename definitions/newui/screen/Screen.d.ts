@@ -31,7 +31,7 @@ export default abstract class Screen extends Component implements IScreen, IHook
      * Set the context menu for this element
      */
     setContextMenu(generator: () => IContextMenu): void;
-    hideContextMenu(contextMenu?: IContextMenu): void;
+    hideContextMenu(contextMenu?: IContextMenu): boolean;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     private onShow;
     private onClick;

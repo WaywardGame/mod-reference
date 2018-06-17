@@ -7,7 +7,7 @@ export default class MessagesDialog extends Dialog {
     constructor(api: IGameScreenApi);
     getID(): DialogId;
     getName(): UiTranslation;
-    close(): void;
     private onFocus;
     private onBlur;
+    private willRemove;
 }

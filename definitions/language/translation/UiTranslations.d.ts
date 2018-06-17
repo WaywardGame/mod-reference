@@ -464,7 +464,6 @@ declare const _default: {
     [Ui.MenuOptionsInterruptLoadingDescription]: string;
     [Ui.MenuOptionsButtonDitherFogOfWar]: string;
     [Ui.MenuOptionsButtonFullscreen]: string;
-    [Ui.MenuOptionsButtonScreenshotMode]: string;
     [Ui.MenuOptionsButtonPixelFont]: string;
     [Ui.MenuOptionsButtonDeveloperMode]: string;
     [Ui.MenuOptionsButtonDeveloperModeContextMenu]: string;
@@ -620,6 +619,8 @@ declare const _default: {
     [Ui.MiscPartOfDayNighttime]: string;
     [Ui.MiscBindableOr]: string;
     [Ui.MiscBindableNoBindings]: string;
+    [Ui.MiscTime]: string;
+    [Ui.MiscTimeMeridiem]: string;
     [Ui.SharedListSeparator]: string;
     [Ui.SteamworksInterruptURLOpenedInBrowser]: string;
     [Ui.SteamworksInterruptURLOpenedInBrowserDescription]: string;

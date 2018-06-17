@@ -13,19 +13,20 @@ import Menu from "newui/screen/screens/menu/component/Menu";
 export declare enum HelpArticle {
     Welcome = 0,
     Controls = 1,
-    Doodads = 2,
-    FastPickup = 3,
-    Death = 4,
-    Milestones = 5,
-    Bugs = 6,
-    HeldItems = 7,
-    Crafting = 8,
-    Encumberance = 9,
-    MovingItems = 10,
-    Interface = 11,
-    Quickslots = 12,
-    Multiplayer = 13,
-    ResourceGathering = 14
+    Actions = 2,
+    Doodads = 3,
+    FastPickup = 4,
+    Death = 5,
+    Milestones = 6,
+    Bugs = 7,
+    HeldItems = 8,
+    Crafting = 9,
+    Encumberance = 10,
+    MovingItems = 11,
+    Interface = 12,
+    Quickslots = 13,
+    Multiplayer = 14,
+    ResourceGathering = 15
 }
 export default class HelpArticleMenu extends Menu {
     constructor(api: UiApi, article: HelpArticle);

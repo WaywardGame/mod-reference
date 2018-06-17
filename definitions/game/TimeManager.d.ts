@@ -1,20 +1,29 @@
 export declare enum TimeFormat {
+    PartOfDay = 0,
     /**
      * EX: 3:00pm
      */
-    TwelveHour = 0,
+    TwelveHour = 1,
     /**
      * EX: 15:00
      */
-    TwentyFourHour = 1
+    TwentyFourHour = 2,
+    /**
+     * EX: 3pm
+     */
+    TwelveHourNoMinute = 3,
+    /**
+     * EX: 15 hours
+     */
+    TwentyFourHourNoMinute = 4
 }
 export declare enum PartOfDay {
-    Nighttime = "Nighttime",
-    Dawn = "Dawn",
-    Sunrise = "Sunrise",
-    Daytime = "Daytime",
-    Sunset = "Sunset",
-    Dusk = "Dusk"
+    Nighttime = 0,
+    Dawn = 1,
+    Sunrise = 2,
+    Daytime = 3,
+    Sunset = 4,
+    Dusk = 5
 }
 export declare enum DayQuarter {
     Day1 = 0,
@@ -129,7 +138,7 @@ export default class TimeManager implements ITimeManager {
      * @param time The time to use, defaulting to the current time.
      * @param format The format to use, defaulting to `TimeFormat.TwelveHour`
      */
-    getFormatted(time?: number, format?: TimeFormat): string;
+    getTranslation(time?: number, format?: TimeFormat): import("utilities/string/Interpolator").IStringSection[];
     /**
      * Returns how bright it is at the given time.
      * @param time The time to use, defaulting to the current time.

@@ -116,7 +116,7 @@ export interface IUi extends IPropSerializable, Emitter {
      * @param selectors A list of selectors and elements that should be highlighted
      */
     highlight(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
-    toggleUIDisplay(): void;
+    toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
     closeAllContainers(): void;

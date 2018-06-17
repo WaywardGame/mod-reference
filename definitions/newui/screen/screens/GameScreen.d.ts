@@ -46,7 +46,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     constructor(api: UiApi);
     create(): void;
     openDialog<D = Dialog>(id: DialogId): D;
-    closeDialog(id: DialogId): void;
+    closeDialog(id: DialogId): Promise<void>;
     toggleDialog(id: DialogId, force?: boolean): void;
     toggleDialogs(states: IDialogStates): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
