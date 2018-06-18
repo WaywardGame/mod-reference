@@ -20,10 +20,10 @@ export interface IMessage {
     message: IStringSection[];
 }
 export default class MessageManager {
-    private _source;
-    private _type;
     private readonly history;
     private lastMessageId;
+    private _source;
+    private _type;
     private canSend;
     getMessageHistory(): IterableIterator<IMessage>;
     /**

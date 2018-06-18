@@ -11,7 +11,6 @@
 import { IDamageInfo } from "creature/ICreature";
 import BaseEntity from "entity/BaseEntity";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { EntityType } from "entity/IEntity";
 import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType, StatType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { MilestoneType } from "player/IMilestone";
@@ -20,7 +19,6 @@ import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
-    entityType: EntityType;
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
     deathBy: string;

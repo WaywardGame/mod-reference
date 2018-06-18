@@ -12,15 +12,15 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Delay, EquipType, FacingDirection, IInspect, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
+import { Delay, Direction, EquipType, IInspect, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
-import { Direction, IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
+import { IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
+import NoteManager from "player/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector3 } from "utilities/math/IVector";
 export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
@@ -29,7 +29,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
     };
-    currentHint: HintType;
     dialogContainerInfo: IDialogInfo[];
     dialogInfo: {
         [index: string]: IDialogInfo;
@@ -43,6 +42,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     movementCompleteZ: number | undefined;
     name: string;
     noInputReceived: boolean;
+    notes: NoteManager;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
     revealedItems: {
@@ -63,7 +63,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     movementProgress: number;
     movementFinishTime: number;
     nextMoveTime: number;
-    nextMoveDirection: FacingDirection | undefined;
+    nextMoveDirection: Direction | undefined;
     private _milestoneUpdates;
     private readonly _movementIntent;
     constructor();
@@ -180,6 +180,8 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      */
     private onStatChange;
     private restTick;
-    private showStatsHint;
     private staminaSyncCheck;
+    private canWriteInHours;
+    private canWriteNote;
+    private onWriteNote;
 }

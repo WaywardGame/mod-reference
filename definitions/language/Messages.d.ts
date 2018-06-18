@@ -5,5 +5,5 @@ export declare const messages: UnsafeDescription<string>;
 export default messages;
 export declare const equipTypeToMessage: Message[];
 export declare const damageTypeToMessage: Message[];
-export declare function fullDamageType(damageType: DamageType): string;
+export declare function fullDamageType(...damageTypes: DamageType[]): string;
 export declare const recipeLevelToMessage: Message[];

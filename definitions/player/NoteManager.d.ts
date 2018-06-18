@@ -10,12 +10,25 @@
  */
 import { PartOfDay } from "game/TimeManager";
 export declare enum Note {
-    Stranded = 0,
-    Caving = 1,
-    Corpse = 2,
-    Inedible = 3,
-    Nightfall = 4,
-    Reputation = 5
+    Bleeding = 0,
+    Burned = 1,
+    Caving = 2,
+    Combat = 3,
+    Corpse = 4,
+    CreatureTaming = 5,
+    Dehydration = 6,
+    Durability = 7,
+    FailureInCrafting = 8,
+    Gardening = 9,
+    HealthIssues = 10,
+    Inedible = 11,
+    Merchantile = 12,
+    Nightfall = 13,
+    Poisoned = 14,
+    Reputation = 15,
+    StaminaReplenishment = 16,
+    Stranded = 17,
+    ToolUse = 18
 }
 export declare type Time = PartOfDay | string;
 export interface INote {
@@ -27,9 +40,16 @@ export interface INote {
     };
     args: any[];
 }
+export interface INoteHost {
+    canWriteInHours(): boolean;
+    canWriteNote(note: INote): boolean;
+    onWriteNote(index: number): void;
+}
 export default class NoteManager {
+    private readonly host;
     private readonly _notes;
+    constructor(host: INoteHost);
     readonly notes: INote[];
     getNote(id: number): INote | undefined;
-    write(note: Note, ...args: any[]): this;
+    write(note: Note, ...args: any[]): void;
 }

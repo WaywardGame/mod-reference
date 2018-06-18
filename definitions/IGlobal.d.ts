@@ -49,6 +49,8 @@ declare global {
 		[index: number]: T | undefined;
 	}
 
+	type Description2<E extends string | number, V> = { [key in E]: V } & { [key: number]: V | undefined };
+
 	/**
 	 * @deprecated
 	 * @see `Description`

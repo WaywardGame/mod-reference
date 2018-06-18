@@ -1,4 +1,4 @@
-import { FacingDirection, MoveType } from "Enums";
+import { Direction, MoveType } from "Enums";
 import { IFlowField } from "flowfield/IFlowField";
 import { DebugRendererDelegate } from "flowfield/IFlowFieldDebugRenderer";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
@@ -18,8 +18,8 @@ export default class FlowFieldManager implements IFlowFieldManager {
     getHeight(): number;
     isInFlowField(point: IVector3): boolean;
     isPlayerInFlowField(player: IPlayer): boolean;
-    getMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
-    getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
+    getMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
+    getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
     setPlayers(plys: IPlayer[]): void;
     update(): void;

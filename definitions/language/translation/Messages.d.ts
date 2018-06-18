@@ -461,6 +461,7 @@ declare const _default: {
     [Message.PlantHasResourcesToGather]: string;
     [Message.PlantHasResourcesToHarvest]: string;
     [Message.PlantHighlyFertile]: string;
+    [Message.Planting]: string;
     [Message.PlantIsFertile]: string;
     [Message.PlantIsNotFertile]: string;
     [Message.PlantNotReadyToHarvest]: string;

@@ -1,11 +1,13 @@
 import IBaseEntity, { IProperties, IStatChangeInfo, IStatus, Property, StatChangeReason } from "entity/IBaseEntity";
+import { EntityType } from "entity/IEntity";
 import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import StatFactory from "entity/StatFactory";
-import { FacingDirection, FireType, MoveType, SfxType, StatusType } from "Enums";
+import { Direction, FireType, MoveType, SfxType, StatusType } from "Enums";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class BaseEntity extends Emitter implements IBaseEntity {
+    entityType: EntityType;
     id: number;
     renamed?: string;
     z: number;
@@ -17,7 +19,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     anim: number;
     stopNextMovement: boolean;
     direction: IVector2;
-    facingDirection: FacingDirection;
+    facingDirection: Direction;
     stats: IStats;
     status: IStatus;
     properties: IProperties | undefined;

@@ -87,15 +87,12 @@ export declare enum DoorOrientation {
     Default = 0,
     Vertical = 1
 }
-export declare enum FacingDirection {
+export declare enum Direction {
     None = -1,
     East = 0,
     North = 1,
     West = 2,
     South = 3
-}
-export declare module FacingDirection {
-    function fromDirection(direction: "up" | "down" | "right" | "left"): FacingDirection.East | FacingDirection.North | FacingDirection.West | FacingDirection.South;
 }
 export declare enum SaveType {
     InGame = 0,

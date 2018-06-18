@@ -40,6 +40,9 @@ export default class Ui extends Emitter implements IUi {
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
+    /**
+     * @deprecated
+     */
     displayHint(human: IBaseHumanEntity | undefined, hintType: HintType, force?: boolean): boolean;
     tooltipRefresh(): void;
     refreshWorldTooltips(): void;

@@ -17,7 +17,7 @@ import { IMessagePack } from "language/IMessages";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 export default class Creature extends BaseEntity implements ICreature, IUnserializedCallback {
-    entityType: EntityType.Creature;
+    readonly entityType: EntityType.Creature;
     aberrant?: boolean;
     ai: AiType;
     enemy?: number;

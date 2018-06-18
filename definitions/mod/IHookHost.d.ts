@@ -1,14 +1,15 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Bindable, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMessage } from "game/MessageManager";
-import { INote } from "game/NoteManager";
 import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
-import IPlayer, { MovementIntent } from "player/IPlayer";
+import { INPC } from "npc/INPC";
+import IPlayer, { IMovementIntent } from "player/IPlayer";
+import { INote } from "player/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
@@ -95,10 +96,13 @@ export interface IHookHost {
      * Called when a creature tries to move
      * @param creature The creature object
      * @param tile The tile the creature is trying to move to
+     * @param x The x coordinate of the tile
+     * @param y The y coordinate of the tile
+     * @param z The z coordinate of the tile
      * @param moveType The creatures move type
      * @returns True if the creature can move, false if the creature cannot move, or undefined to use the default logic
      */
-    canCreatureMove?(creature: ICreature, tile: ITile, moveType: MoveType): boolean | undefined;
+    canCreatureMove?(creature: ICreature, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     /**
      * Called when a creature is about to be spawned
      * @param type The type of creature
@@ -130,6 +134,34 @@ export interface IHookHost {
      */
     canDropItem?(player: IPlayer, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
     /**
+     * Called before an npc attacks
+     * @param npc The npc object
+     * @param weapon The weapon used to attack
+     * @param attackType The attack type
+     * @returns False if the npc cannot attack, or undefined to use the default logic
+     */
+    canNPCAttack?(npc: INPC, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
+    /**
+     * Called when a npc tries to move
+     * @param npc The npc object
+     * @param tile The tile the npc is trying to move to
+     * @param x The x coordinate of the tile
+     * @param y The y coordinate of the tile
+     * @param z The z coordinate of the tile
+     * @param moveType The npcs move type
+     * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
+     */
+    canNPCMove?(npc: INPC, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
+    /**
+     * Called when a npc is about to be spawned
+     * @param type The type of npc
+     * @param x The x coordinate where the npc will be spawned
+     * @param y The y coordinate where the npc will be spawned
+     * @param z The z coordinate where the npc will be spawned
+     * @returns False if the npc cannot spawn, or undefined to use the default logic
+     */
+    canNPCSpawn?(type: NPCType, x: number, y: number, z: number): boolean | undefined;
+    /**
      * Called when an doodad is being picked up
      * @param player The player object
      * @param doodad The doodad object
@@ -158,6 +190,13 @@ export interface IHookHost {
      */
     canSeeCreature?(creature: ICreature, tile: ITile): boolean | undefined;
     /**
+     * Called when calculating npcs in the viewport
+     * @param npc The npc object
+     * @param tile The tile the npc is on
+     * @returns False if the player should not see the npc or undefined to use the default logic
+     */
+    canSeeNPC?(npc: INPC, tile: ITile): boolean | undefined;
+    /**
      * Called when rendering creatures in the viewport
      * @param creature The creature object
      * @param batchLayer The batch layer the creature will render in
@@ -181,7 +220,7 @@ export interface IHookHost {
      * @param player The player object
      * @returns The movement intent of the player or undefined to use the default logic
      */
-    getPlayerMovementIntent?(player: IPlayer): MovementIntent | undefined;
+    getPlayerMovementIntent?(player: IPlayer): IMovementIntent | undefined;
     /**
      * Called when getting the player's strength
      * @param strength The current strength of the player
@@ -413,7 +452,7 @@ export interface IHookHost {
      * @param direction The direction the player is facing
      * @returns False to cancel the move or undefined to use the default logic
      */
-    onMove?(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean | undefined;
+    onMove?(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     /**
      * Called when the player completes a movement
      * @param player The player object
@@ -424,12 +463,30 @@ export interface IHookHost {
      * @param player The player object
      * @param direction The direction the player is now facing
      */
-    onMoveDirectionUpdate?(player: IPlayer, direction: FacingDirection): void;
+    onMoveDirectionUpdate?(player: IPlayer, direction: Direction): void;
     /**
      * Called when no input is received
      * @param player The player object
      */
     onNoInputReceived?(player: IPlayer): void;
+    /**
+     * Called when an npc is damaged
+     * @param npc The npc object
+     * @param damageInfo The damage info object
+     * @returns The amount of damage the npc should take (the npc will take this damage) or undefined to use the default logic
+     */
+    onNPCDamage?(npc: INPC, damageInfo: IDamageInfo): number | undefined;
+    /**
+     * Called when an npc is killed
+     * @param player The npc object
+     * @returns False to stop the npc from dying or undefined to use the default logic
+     */
+    onNPCDeath?(npc: INPC): boolean | undefined;
+    /**
+     * Called when an npc spawns
+     * @param npc The npc object
+     */
+    onNPCSpawn?(npc: INPC): void;
     /**
      * Called when an doodad is picked up
      * @param player The player object
@@ -444,7 +501,7 @@ export interface IHookHost {
      */
     onPlayerDamage?(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     /**
-     * Called when the player is killed
+     * Called when a player is killed
      * @param player The player object
      * @returns False to stop the player from dying or undefined to use the default logic
      */
@@ -525,15 +582,17 @@ export interface IHookHost {
     onUpdateWeight?(player: IPlayer, newWeight: number): number | undefined;
     /**
      * Called when the player will write a note.
+     * @param player The player object
      * @param note The note that will be written.
      * @returns `false` if the note should be cancelled, or `undefined` to use the default logic
      */
-    onWriteNote?(note: INote): false | undefined;
+    onWriteNote?(player: IPlayer, note: INote): false | undefined;
     /**
      * Called when the player has written a note.
+     * @param player The player object
      * @param id The id of the note that was written.
      */
-    onWrittenNote?(id: number): void;
+    onWrittenNote?(player: IPlayer, id: number): void;
     /**
      * Called after an action has been executed
      * This is called after the action result is used
@@ -585,7 +644,7 @@ export interface IHookHost {
      * @param args The arguments
      * @returns False to cancel the command or undefined to use the default logic
      */
-    preExecuteCommand?(player: IPlayer, command: Command, args: string): boolean | undefined;
+    preExecuteCommand?(player: IPlayer, command: Command, args: string | undefined): boolean | undefined;
     /**
      * Called before rendering everything
      */

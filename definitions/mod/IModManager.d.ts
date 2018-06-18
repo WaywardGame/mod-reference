@@ -74,16 +74,6 @@ export interface IModManager {
     unload(index: number): void;
     unloadAll(reset?: boolean): void;
     /**
-     * @deprecated
-     * @see `getHook(hookName).call(...args)`
-     */
-    callHook<T = any>(hook: Hook, ...args: any[]): T;
-    /**
-     * @deprecated
-     * @see `getHook(hookName, defaultValue).call(...args)`
-     */
-    callHookWithDefault<T = any>(hook: Hook, defaultValue: T, ...args: any[]): T;
-    /**
      * Returns a `HookCallFactory` for the given hook name.
      * @param hook A hook name.
      * @param defaultValue The default value to return

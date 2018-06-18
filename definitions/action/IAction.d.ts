@@ -1,9 +1,8 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { ActionType, AttackType, Delay, EquipType, FacingDirection, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
+import { ActionType, AttackType, Delay, Direction, EquipType, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
-import { IMessagePack, Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
@@ -37,7 +36,7 @@ export interface IActionArgument {
     container?: IContainer;
     containerType?: IItem | IDoodad;
     creature?: ICreature;
-    direction?: FacingDirection;
+    direction?: Direction;
     doodad?: IDoodad;
     equipSlot?: EquipType;
     item?: IItem;
@@ -107,7 +106,3 @@ export interface IActionResultSoundEffect {
 }
 export declare type ExecuteArgument = IActionArgument | IItem | undefined;
 export declare type ActionCallback = (player: IPlayer, argument: IActionArgument, result: IActionResult) => void;
-/**
- * @deprecated
- */
-export declare type ActionMessages = Array<IMessagePack | Message>;

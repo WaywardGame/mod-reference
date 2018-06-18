@@ -25,16 +25,6 @@ export default class ModManager implements IModManager {
     getModFromIndex(i: number): IModInfo;
     getEnabledMods(): number[];
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
-    /**
-     * @deprecated
-     * @see `getHook(hookName).call(...args)`
-     */
-    callHook(hook: Hook, ...args: any[]): any;
-    /**
-     * @deprecated
-     * @see `getHook(hookName, defaultValue).call(...args)`
-     */
-    callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
     load(index: number, cacheHooks?: boolean): void;
     unload(index: number, cacheHooks?: boolean): void;
     save(index: number): void;

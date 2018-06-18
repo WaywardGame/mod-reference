@@ -20,6 +20,7 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import Input from "newui/component/Input";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import IPlayer from "player/IPlayer";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageFilter {
     name: string;
@@ -44,7 +45,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     scrollToNewest(): void;
     sendPinnedMessage(message: TranslationGenerator, onActivate: () => any): Button;
     onDisplayMessage(message: IMessage, addBackwards?: boolean): void;
-    onWrittenNote(id: number): void;
+    onWrittenNote(player: IPlayer, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Event handler for when the text in the chat box should be sent as a message.

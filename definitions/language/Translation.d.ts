@@ -22,7 +22,7 @@ export interface ILanguageEntryProvider {
 export default class Translation {
     static readonly defaultInterpolator: Interpolator;
     static convertMakeStringToInterpolation(makeString: string): string;
-    static formatList(entries: IterableOf<string | IStringSection[]>): IStringSection[];
+    static formatList(entries: IterableOf<string | IStringSection[]>, and?: boolean): IStringSection[];
     static getString(entries: IterableOf<string | IStringSection>): string;
     static getAllTypes(dictionary: Dictionary, entry: number): Translation[];
     /**

@@ -10,24 +10,7 @@
  */
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
-export declare enum HelpArticle {
-    Welcome = 0,
-    Controls = 1,
-    Actions = 2,
-    Doodads = 3,
-    FastPickup = 4,
-    Death = 5,
-    Milestones = 6,
-    Bugs = 7,
-    HeldItems = 8,
-    Crafting = 9,
-    Encumberance = 10,
-    MovingItems = 11,
-    Interface = 12,
-    Quickslots = 13,
-    Multiplayer = 14,
-    ResourceGathering = 15
-}
+import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 export default class HelpArticleMenu extends Menu {
     constructor(api: UiApi, article: HelpArticle);
 }

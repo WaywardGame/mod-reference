@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionType, Bindable, DialogId, EquipType, FacingDirection, ItemType, SkillType, SortType } from "Enums";
+import { ActionType, Bindable, DialogId, Direction, EquipType, ItemType, SkillType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
 import { Message } from "language/IMessages";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -109,7 +109,6 @@ export default class InGameScreen extends BaseScreen {
     cancelSorting(): void;
     setupContextMenu(): any;
     hasDelay(): boolean;
-    canMove(api: BindCatcherApi): boolean;
     onShow(): void;
     makeTopDialog(dialog: JQuery): void;
     onHide(): void;
@@ -122,7 +121,7 @@ export default class InGameScreen extends BaseScreen {
     highlightItemElementByItemType(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementByItemTypeWithNoItemId(itemType: ItemType, highlight: boolean, force?: boolean, skipCount?: boolean): void;
     highlightItemElementBySelector(selector: string, highlight: boolean, force?: boolean, skipCount?: boolean): void;
-    getMovementDirection(mouseX: number, mouseY: number): FacingDirection;
+    getMovementDirection(mouseX: number, mouseY: number): Direction;
     canUseHotkeys(): boolean;
     refreshStats(): void;
     blurInputs(): void;

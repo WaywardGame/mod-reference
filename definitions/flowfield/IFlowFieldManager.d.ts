@@ -1,4 +1,4 @@
-import { FacingDirection, MoveType } from "Enums";
+import { Direction, MoveType } from "Enums";
 import IFlowField from "flowfield/IFlowField";
 import { DebugRendererDelegate } from "flowfield/IFlowFieldDebugRenderer";
 import { IPlayer } from "player/IPlayer";
@@ -10,8 +10,8 @@ export interface IFlowFieldManager {
     };
     delete(): void;
     getHeight(): number;
-    getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
-    getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): FacingDirection;
+    getMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): Direction;
+    getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): Direction;
     getWidth(): number;
     isInFlowField(point: IVector3): boolean;
     isPlayerInFlowField(player: IPlayer): boolean;

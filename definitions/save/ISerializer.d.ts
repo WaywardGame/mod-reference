@@ -45,3 +45,4 @@ export declare enum Types {
     MessageManager = 25
 }
 export declare function SaveProperty(): PropertyDecorator;
+export declare function SaveAllProperties(): ClassDecorator;

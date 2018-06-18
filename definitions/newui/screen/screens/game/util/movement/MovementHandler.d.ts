@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IDamageInfo } from "creature/ICreature";
 import { BindCatcherApi } from "newui/BindingManager";
 export default class MovementHandler {
     private readonly gameScreen;
@@ -28,9 +29,13 @@ export default class MovementHandler {
      */
     onMoveComplete(): void;
     /**
+     * Handles `Hook.OnPlayerDamage`
+     */
+    onPlayerDamage(damageInfo: IDamageInfo): void;
+    /**
      * Handles `Hook.OnPlayerDeath`
      */
-    onDeath(): void;
+    onPlayerDeath(): void;
     private handleBinds;
     /**
      * Processes moving towards the mouse.

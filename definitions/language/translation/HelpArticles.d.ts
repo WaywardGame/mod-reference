@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { HelpArticle } from "newui/screen/screens/menu/menus/HelpArticle";
+import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 declare const _default: {
     [HelpArticle.Welcome]: string[];
     [HelpArticle.Controls]: string[];
@@ -19,5 +19,8 @@ declare const _default: {
     [HelpArticle.Actions]: string[];
     [HelpArticle.HeldItems]: string[];
     [HelpArticle.Bugs]: string[];
+    [HelpArticle.CreatureTaming]: string[];
+    [HelpArticle.Merchants]: string[];
+    [HelpArticle.Quickslots]: string[];
 };
 export default _default;

@@ -12,6 +12,7 @@ import { UiTranslation } from "language/ILanguage";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
+import IPlayer from "player/IPlayer";
 export declare enum NotesDialogEvent {
     /**
      * @param noteId The note that was shown
@@ -27,7 +28,7 @@ export default class NotesDialog extends Dialog {
     private note;
     private current;
     constructor(api: IGameScreenApi);
-    onWrittenNote(): void;
+    onWrittenNote(player: IPlayer): void;
     getID(): DialogId;
     getName(): UiTranslation;
     showNote(noteId: number): void;

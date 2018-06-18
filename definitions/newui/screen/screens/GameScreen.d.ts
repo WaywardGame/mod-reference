@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IDamageInfo } from "creature/ICreature";
 import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -55,6 +56,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onMove(player: Player): boolean | undefined;
     onMoveComplete(player: Player): void;
+    onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): undefined;
     onPlayerDeath(player: IPlayer): undefined;
     /**
      * Adds a quadrant element to the screen.

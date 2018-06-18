@@ -8,5 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import IPlayer from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
-export default function writeCorpseNote(tile: ITile): void;
+export default function writeCorpseNote(player: IPlayer, tile: ITile): void;

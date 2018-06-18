@@ -1,9 +1,11 @@
+import { EntityType } from "entity/IEntity";
 import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
-import { FacingDirection, FireType, MoveType, SfxType, StatusType } from "Enums";
+import { Direction, FireType, MoveType, SfxType, StatusType } from "Enums";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default interface IBaseEntity extends IVector3, Emitter {
+    entityType: EntityType;
     id: number;
     renamed?: string;
     fromX: number;
@@ -12,7 +14,7 @@ export default interface IBaseEntity extends IVector3, Emitter {
     anim: number;
     stopNextMovement: boolean;
     direction: IVector2;
-    facingDirection: FacingDirection;
+    facingDirection: Direction;
     stats: IStats;
     status: IStatus;
     getFacingPoint(): IVector3;

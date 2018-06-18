@@ -10,7 +10,6 @@
  */
 import { IDamageInfo } from "creature/ICreature";
 import IBaseEntity from "entity/IBaseEntity";
-import { EntityType } from "entity/IEntity";
 import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { MilestoneType } from "player/IMilestone";
@@ -19,7 +18,6 @@ import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IOptions } from "save/data/ISaveDataGlobal";
 export default interface IBaseHumanEntity extends IBaseEntity {
-    entityType: EntityType;
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
     deathBy: string;

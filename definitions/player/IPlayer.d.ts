@@ -2,22 +2,21 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Delay, EquipType, FacingDirection, HairColor, HairStyle, IInspect, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
+import { Delay, Direction, EquipType, HairColor, HairStyle, IInspect, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
 import { IExploreMap } from "renderer/IExploreMap";
 import { ITile } from "tile/ITerrain";
-import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
+import NoteManager from "player/NoteManager";
 export interface IPlayer extends IBaseHumanEntity {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
     };
-    currentHint: HintType;
     dialogContainerInfo: IDialogInfo[];
     dialogInfo: {
         [index: string]: IDialogInfo;
@@ -25,7 +24,6 @@ export interface IPlayer extends IBaseHumanEntity {
     exploredMapEncodedData: number[][];
     fromX: number;
     fromY: number;
-    hintSeen: boolean[];
     identifier: string;
     isConnecting: boolean;
     isMoving: boolean;
@@ -35,11 +33,12 @@ export interface IPlayer extends IBaseHumanEntity {
     movementCompleteZ: number | undefined;
     movementProgress: number;
     name: string;
-    nextMoveDirection: FacingDirection | undefined;
+    nextMoveDirection: Direction | undefined;
     nextMoveTime: number;
     nextX: number;
     nextY: number;
     noInputReceived: boolean;
+    notes: NoteManager;
     quickSlotInfo: IQuickSlotInfo[];
     revealedItems: {
         [index: number]: boolean;
@@ -68,7 +67,7 @@ export interface IPlayer extends IBaseHumanEntity {
     checkWeight(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     /**
-     * Returns if the player changed their facing direction.
+     * Returns true if the player changed their facing direction.
      */
     faceDirection(direction: Direction, ignoreTurnDelay?: boolean): boolean;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
@@ -202,16 +201,10 @@ export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
-export declare enum Direction {
-    Left = "left",
-    Right = "right",
-    Up = "up",
-    Down = "down"
-}
-export declare function getDirectionFromMovement(x: number, y: number): Direction;
+export declare function getDirectionFromMovement(x: number, y: number): Direction.East | Direction.North | Direction.West | Direction.South;
 export interface IInputMovement extends IVector2 {
     moveBind: Direction;
-    direction: FacingDirection;
+    direction: Direction;
 }
 export declare const gameMovement: IInputMovement[];
 export declare type MovementIntent = Direction | "idle" | undefined;

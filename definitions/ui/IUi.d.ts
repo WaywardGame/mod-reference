@@ -73,6 +73,9 @@ export interface IUi extends IPropSerializable, Emitter {
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
+    /**
+     * @deprecated Use `game.notes.write`
+     */
     displayHint(human: IBaseHumanEntity | undefined, hintType: HintType, force?: boolean): boolean;
     tooltipRefresh(): void;
     refreshWorldTooltips(): void;

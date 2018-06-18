@@ -16,7 +16,7 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     getRegistrarId(): number;
     update(): void;
     moveTo(x: number, y: number, z: number): boolean;
-    kill(): void;
+    kill(): boolean;
     isHostile(): boolean;
     isWaiting(): boolean;
     getDamageModifier(): number;

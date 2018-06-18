@@ -46,9 +46,9 @@ export interface ITimeManager {
     dayPercent: number;
 }
 export default class TimeManager implements ITimeManager {
-    dayLength: number;
-    transitionPercent: number;
-    dayStart: number;
+    readonly dayLength: number;
+    readonly transitionPercent: number;
+    readonly dayStart: number;
     private _ticks;
     private _dayPercent;
     constructor(turns: number);
