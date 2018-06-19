@@ -1,4 +1,3 @@
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DialogId, EquipType, ItemType, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
@@ -6,7 +5,6 @@ import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { IPropSerializable } from "save/ISerializer";
-import { HintType } from "ui/IHint";
 import Emitter from "utilities/Emitter";
 export interface IUiScreen {
     bindCatcher?: number;
@@ -73,10 +71,6 @@ export interface IUi extends IPropSerializable, Emitter {
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
-    /**
-     * @deprecated Use `game.notes.write`
-     */
-    displayHint(human: IBaseHumanEntity | undefined, hintType: HintType, force?: boolean): boolean;
     tooltipRefresh(): void;
     refreshWorldTooltips(): void;
     messageIdToText(message: Message): string;

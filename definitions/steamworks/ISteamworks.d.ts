@@ -10,7 +10,7 @@ export interface ISteamworks extends Emitter {
     deleteSaveGameMod(name: string): void;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     getAbsolutePath(...p: string[]): string;
-    getAsarPath(...p: string[]): string;
+    getAppPath(...p: string[]): string;
     getBetaName(): string;
     getBuildTime(): number | undefined;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
@@ -30,6 +30,7 @@ export interface ISteamworks extends Emitter {
     initialize(): void;
     isDedicatedServer(): boolean;
     isElectron(): boolean;
+    isUsingAsar(): boolean;
     isGreenworksEnabled(): boolean;
     isInLobby(): boolean;
     isOverlayWorking(): boolean;

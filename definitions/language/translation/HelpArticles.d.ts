@@ -10,17 +10,23 @@
  */
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 declare const _default: {
-    [HelpArticle.Welcome]: string[];
-    [HelpArticle.Controls]: string[];
-    [HelpArticle.Doodads]: string[];
-    [HelpArticle.Death]: string[];
-    [HelpArticle.Milestones]: string[];
-    [HelpArticle.FastPickup]: string[];
-    [HelpArticle.Actions]: string[];
-    [HelpArticle.HeldItems]: string[];
-    [HelpArticle.Bugs]: string[];
-    [HelpArticle.CreatureTaming]: string[];
-    [HelpArticle.Merchants]: string[];
-    [HelpArticle.Quickslots]: string[];
+    [HelpArticle.Welcome]: [string, string, string, string];
+    [HelpArticle.Controls]: [string, string, string, string];
+    [HelpArticle.Doodads]: [string, string, string, string];
+    [HelpArticle.Death]: [string, string, string, string];
+    [HelpArticle.Milestones]: [string, string, string, string];
+    [HelpArticle.FastPickup]: [string, string, string, string];
+    [HelpArticle.Actions]: [string, string, string, string];
+    [HelpArticle.HeldItems]: [string, string, string, string];
+    [HelpArticle.Bugs]: [string, string, string, string];
+    [HelpArticle.CreatureTaming]: [string, string, string, string];
+    [HelpArticle.Merchants]: [string, string, string, string];
+    [HelpArticle.Quickslots]: [string, string, string, string];
+    [HelpArticle.Crafting]: [string, string, string, string];
+    [HelpArticle.MovingItems]: [string, string, string, string];
+    [HelpArticle.Interface]: [string, string, string, string];
+    [HelpArticle.Multiplayer]: [string, string, string, string];
+    [HelpArticle.ResourceGathering]: [string, string, string, string];
+    [HelpArticle.Stats]: [string, string, string, string];
 };
 export default _default;

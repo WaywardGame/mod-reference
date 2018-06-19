@@ -6,11 +6,12 @@ import { Delay, Direction, EquipType, HairColor, HairStyle, IInspect, IModdable,
 import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
+import MessageManager from "player/MessageManager";
+import NoteManager from "player/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { ITile } from "tile/ITerrain";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-import NoteManager from "player/NoteManager";
 export interface IPlayer extends IBaseHumanEntity {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
@@ -29,6 +30,7 @@ export interface IPlayer extends IBaseHumanEntity {
     isMoving: boolean;
     isMovingClientside: boolean;
     lightBonus: number;
+    messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     movementProgress: number;
@@ -224,3 +226,5 @@ export interface IPlayerTravelData {
     state: PlayerState;
 }
 export declare const weightBonus = 25;
+export declare function isPlayer(human?: IBaseHumanEntity): human is IPlayer;
+export declare function isLocalPlayer(human?: IBaseHumanEntity): boolean;

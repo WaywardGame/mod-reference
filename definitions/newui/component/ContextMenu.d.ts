@@ -23,7 +23,6 @@ export default class ContextMenu<OptionType extends number | string = number | s
     disableOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     removeOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
     setPosition(x: number, y: number, right?: boolean): this;
-    remove(): this;
     hideAndRemove(): Promise<void>;
     private getDescription;
 }

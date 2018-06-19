@@ -6,7 +6,6 @@ import { IContainer, IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
-import { HintType } from "ui/IHint";
 import { IVector2 } from "utilities/math/IVector";
 export interface IActionBase {
     validateArguments?: IActionArgumentValidator;
@@ -68,7 +67,6 @@ export interface IActionResult {
     updateRender?: boolean;
     updateTablesAndWeight?: boolean;
     delay?: IActionResultDelay | Delay;
-    hint?: HintType;
     updateReputation?: number;
     staminaReduction?: SkillType;
     skillGain?: IActionResultSkillGain | SkillType;

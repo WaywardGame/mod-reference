@@ -16,6 +16,9 @@ export interface IUnserializedCallback {
 export interface IPropSerializable {
     getSerializationProperties(version: string): string[];
 }
+/**
+ * Do not add anything to this list unless Spacetech approves it
+ */
 export declare enum Types {
     Invalid = 0,
     Undefined = 1,

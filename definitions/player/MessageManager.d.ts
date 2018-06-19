@@ -9,27 +9,45 @@
  * https://waywardgame.github.io/
  */
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { Source } from "game/IMessageManager";
 import { Message, MessageType } from "language/IMessages";
-import IPlayer from "player/IPlayer";
+import { IMessage, IMessageManager, Source } from "player/IMessageManager";
 import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
-export interface IMessage {
+export interface IMessageHistoryItem {
     id: number;
-    source: Source[];
+    source: string;
     message: IStringSection[];
 }
-export default class MessageManager {
+export interface IMessageManagerHost {
+    canSeePosition(x: number, y: number, z: number): boolean;
+    shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
+    onDisplayMessage(message: IMessage): void;
+}
+export default class MessageManager implements IMessageManager {
+    private readonly host;
+    private static readonly noOpMessageManager;
+    static get(human?: IBaseHumanEntity): MessageManager;
+    /**
+     * Sends a message to everyone
+     * If this is a multiplayer game then:
+     * 		It will show the message to the local player
+     * 		When called on the server: Shows the message to the local player and
+     * 		When called on the client: Shows
+     * @param callback Message callback
+     */
+    static toAll(callback: (manager: MessageManager) => boolean): boolean;
     private readonly history;
     private lastMessageId;
     private _source;
     private _type;
+    private _sentToAll;
     private canSend;
+    constructor(host: IMessageManagerHost);
     getMessageHistory(): IterableIterator<IMessage>;
     /**
      * Clears the entire message history.
      */
-    clear(): void;
+    clear(): this;
     /**
      * Sets the sources of the next message. Removes any existing sources.
      *
@@ -47,10 +65,9 @@ export default class MessageManager {
      */
     type(type?: MessageType): this;
     /**
-     * Sets the human this message will be sent to. If the human is not the local player, or is undefined,
-     * the message will be sent.
+     * If the position is visible to this human, the message will be sent.
      */
-    toHuman(human?: IBaseHumanEntity, canSee?: IVector3): this;
+    ifVisible(canSee?: IVector3): this;
     /**
      * Sends a message, and adds it to the message history.
      * @param message The message to send.
@@ -59,8 +76,9 @@ export default class MessageManager {
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
     send(message: string | IStringSection[] | Message, ...args: any[]): boolean;
+    addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**
-     * Sends a chat message from the player
+     * Signal that the message was sent to everyone
      */
-    sendChatMessage(player: IPlayer, message: string): this;
+    sentToAll(sentToAll?: boolean): this;
 }

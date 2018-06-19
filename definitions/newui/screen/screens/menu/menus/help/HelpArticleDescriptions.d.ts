@@ -16,26 +16,32 @@ export interface IHelpArticle {
      */
     important?: true;
     image?: true | string;
+    section?: string | number;
 }
 export declare enum HelpArticle {
     Welcome = 0,
     Controls = 1,
-    Actions = 2,
-    Doodads = 3,
-    FastPickup = 4,
-    Death = 5,
-    Milestones = 6,
-    Bugs = 7,
-    HeldItems = 8,
-    Crafting = 9,
-    Encumberance = 10,
-    MovingItems = 11,
-    Interface = 12,
-    Quickslots = 13,
-    Multiplayer = 14,
-    ResourceGathering = 15,
-    CreatureTaming = 16,
-    Merchants = 17
+    Interface = 2,
+    MovingItems = 3,
+    Quickslots = 4,
+    FastPickup = 5,
+    Actions = 6,
+    Stats = 7,
+    Doodads = 8,
+    ResourceGathering = 9,
+    Milestones = 10,
+    HeldItems = 11,
+    CreatureTaming = 12,
+    Crafting = 13,
+    Merchants = 14,
+    Death = 15,
+    Multiplayer = 16,
+    Bugs = 17
+}
+export declare enum HelpArticleSection {
+    Interface = 0,
+    Gameplay = 1,
+    Other = 2
 }
 declare const descriptions: Description2<HelpArticle, IHelpArticle>;
 export default descriptions;

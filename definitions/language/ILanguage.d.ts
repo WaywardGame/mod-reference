@@ -1,8 +1,8 @@
 import { ActionType, BookType, CreatureType, DoodadType, DoodadTypeGroup, ItemType, ItemTypeGroup, OnEquipType, SkillType, TerrainType } from "Enums";
 import { Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
+import { Note } from "player/NoteManager";
 import { TileEventType } from "tile/ITileEvent";
-import { HintType } from "ui/IHint";
 /**
  * Choices for interrupts
  */
@@ -876,7 +876,7 @@ export interface ILanguage {
     setEntry(dictionary: Dictionary.Creature, entryIndex: CreatureType, prefix: string, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Doodad, entryIndex: DoodadType, prefix: string, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Doodad, entryIndex: DoodadTypeGroup, name: string, description: string): void;
-    setEntry(dictionary: Dictionary.Note, entryIndex: HintType, name: string, description: string): void;
+    setEntry(dictionary: Dictionary.Note, entryIndex: Note, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Item, entryIndex: ItemType, prefix: string, name: string, description?: string, plural?: string): void;
     setEntry(dictionary: Dictionary.Item, entryIndex: ItemTypeGroup, name: string, description: string): void;
     setEntry(dictionary: Dictionary.Message, entryIndex: Message, name: string): void;

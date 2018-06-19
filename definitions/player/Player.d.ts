@@ -17,6 +17,7 @@ import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
 import { IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
+import MessageManager from "player/MessageManager";
 import NoteManager from "player/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
@@ -38,6 +39,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     identifier: string;
     isConnecting: boolean;
     isMoving: boolean;
+    messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     name: string;
@@ -184,4 +186,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     private canWriteInHours;
     private canWriteNote;
     private onWriteNote;
+    private shouldDisplayMessage;
+    private onDisplayMessage;
 }

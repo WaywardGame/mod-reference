@@ -1,13 +1,11 @@
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DialogId, EquipType, ItemType, SentenceCaseStyle } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
-import { HintType } from "ui/IHint";
 import { IDialogInfo, IUi } from "ui/IUi";
 import InGameScreen from "ui/screens/InGameScreen";
 import Emitter from "utilities/Emitter";
@@ -40,10 +38,6 @@ export default class Ui extends Emitter implements IUi {
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
-    /**
-     * @deprecated
-     */
-    displayHint(human: IBaseHumanEntity | undefined, hintType: HintType, force?: boolean): boolean;
     tooltipRefresh(): void;
     refreshWorldTooltips(): void;
     messageIdToText(message: Message): string;

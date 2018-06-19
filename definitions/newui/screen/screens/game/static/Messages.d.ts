@@ -9,8 +9,6 @@
  * https://waywardgame.github.io/
  */
 import { Bindable } from "Enums";
-import { Source } from "game/IMessageManager";
-import { IMessage } from "game/MessageManager";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
@@ -20,6 +18,7 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import Input from "newui/component/Input";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import { IMessage, Source } from "player/IMessageManager";
 import IPlayer from "player/IPlayer";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageFilter {
@@ -28,6 +27,7 @@ export interface IMessageFilter {
 }
 export default class Messages extends QuadrantComponent implements IHookHost {
     static preferredQuadrant: Quadrant;
+    static sendChatMessage(sender: IPlayer, message: string): typeof Messages;
     readonly preferredQuadrant: Quadrant;
     readonly sendButton: Button;
     readonly pinnedMessages: Component;
@@ -44,7 +44,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     getName(): IStringSection[];
     scrollToNewest(): void;
     sendPinnedMessage(message: TranslationGenerator, onActivate: () => any): Button;
-    onDisplayMessage(message: IMessage, addBackwards?: boolean): void;
+    onDisplayMessage(player: IPlayer, message: IMessage, addBackwards?: boolean): void;
     onWrittenNote(player: IPlayer, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**

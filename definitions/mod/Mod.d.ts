@@ -1,14 +1,24 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
-import { IMessage } from "game/MessageManager";
 import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
+import { IMessage } from "player/IMessageManager";
 import IPlayer, { IMovementIntent } from "player/IPlayer";
 import { INote } from "player/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
@@ -82,8 +92,8 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onContainerItemUpdate(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     onCraft(player: IPlayer, item: IItem): void;
     onCreateWorld(world: IWorld): void;
-    onDisplayMessage(message: IMessage): void;
-    shouldDisplayMessage(message: IMessage, messageId: number): boolean | undefined;
+    onDisplayMessage(player: IPlayer, message: IMessage): void;
+    shouldDisplayMessage(player: IPlayer, message: IMessage, messageId: number): boolean | undefined;
     onDoodadSpawn(doodad: IDoodad): void;
     onGameEnd(state: PlayerState): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;

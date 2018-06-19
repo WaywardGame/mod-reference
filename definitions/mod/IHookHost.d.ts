@@ -1,13 +1,23 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
-import { IMessage } from "game/MessageManager";
 import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
+import { IMessage } from "player/IMessageManager";
 import IPlayer, { IMovementIntent } from "player/IPlayer";
 import { INote } from "player/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
@@ -315,9 +325,10 @@ export interface IHookHost {
     onCreateWorld?(world: IWorld): void;
     /**
      * Called when a message is displayed to the player
+     * @param player The player object
      * @param message The message data
      */
-    onDisplayMessage?(message: IMessage): void;
+    onDisplayMessage?(player: IPlayer, message: IMessage): void;
     /**
      * Called when a doodad spawns
      * @param doodad The doodad object
@@ -673,9 +684,10 @@ export interface IHookHost {
     shouldRender?(): RenderFlag | undefined;
     /**
      * Called when a message is about to be displayed
+     * @param player The player object
      * @param message The message that will be displayed
      * @param messageId The `Message`, or `-1` if the message being displayed isn't a `Message`
      * @returns False to not display the message or undefined to use the default logic
      */
-    shouldDisplayMessage?(message: IMessage, messageId: number): boolean | undefined;
+    shouldDisplayMessage?(player: IPlayer, message: IMessage, messageId: number): boolean | undefined;
 }
