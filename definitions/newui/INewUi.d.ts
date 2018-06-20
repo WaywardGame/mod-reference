@@ -145,7 +145,8 @@ export interface IHighlightManager {
 export declare enum UiApiEvent {
     Resize = 0,
     Interrupt = 1,
-    InterruptClose = 2
+    InterruptClose = 2,
+    LoadedFromSave = "LoadedFromSave"
 }
 export declare enum SelectDirection {
     Up = -1,

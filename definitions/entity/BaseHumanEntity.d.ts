@@ -49,6 +49,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
+    hasHandToUse(): boolean;
     getHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;
     getDamageModifier(): number;

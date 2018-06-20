@@ -28,6 +28,7 @@ export interface IMessageFilter {
 export default class Messages extends QuadrantComponent implements IHookHost {
     static preferredQuadrant: Quadrant;
     static sendChatMessage(sender: IPlayer, message: string): typeof Messages;
+    private static readonly defaultFilters;
     readonly preferredQuadrant: Quadrant;
     readonly sendButton: Button;
     readonly pinnedMessages: Component;
@@ -35,7 +36,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     readonly input: Input;
     readonly filter: Button;
     filters: {
-        [key: string]: Source[];
+        [key: string]: string[];
     };
     private selectedFilter;
     private readonly pinnedNotes;
@@ -66,7 +67,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     /**
      * Returns `true` if the message should not be displayed.
      */
-    private isMessageFiltered;
+    private isMessageFilteredOut;
     /**
      * Event handler for when the filter button is clicked
      */

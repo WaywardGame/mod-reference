@@ -15,7 +15,7 @@ import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageHistoryItem {
     id: number;
-    source: string;
+    source: string[];
     message: IStringSection[];
 }
 export interface IMessageManagerHost {
@@ -28,12 +28,20 @@ export default class MessageManager implements IMessageManager {
     private static readonly noOpMessageManager;
     static get(human?: IBaseHumanEntity): MessageManager;
     /**
-     * Sends a message to everyone
-     * If this is a multiplayer game then:
-     * 		It will show the message to the local player
-     * 		When called on the server: Shows the message to the local player and
-     * 		When called on the client: Shows
-     * @param callback Message callback
+     * Runs a callback with the message manager of every player. For sending messages, equivalent to the following:
+     * ```ts
+     * players.map(player => callback(player.messages)).some(sent => sent)
+     * ```
+     *
+     * Example usage:
+     * ```ts
+     * MessageManager.toAll(message => message.source(Source.Wellbeing)
+     * 	.type(MessageType.Bad)
+     * 	.send(Message.EveryoneHasBecomeInfected, reason));
+     * ```
+     *
+     * Note: When this is called from a client, it actually only displays the message to the client and syncs that with the server.
+     * When called from the server, it is sent to every client.
      */
     static toAll(callback: (manager: MessageManager) => boolean): boolean;
     private readonly history;

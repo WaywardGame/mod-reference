@@ -54,6 +54,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     getHandToUse(): EquipType | undefined;
     getMaxHealth(): number;
     getName(): string;
+    hasHandToUse(): boolean;
     isGhost(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;

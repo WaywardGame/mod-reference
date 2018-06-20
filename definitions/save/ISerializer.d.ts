@@ -45,7 +45,8 @@ export declare enum Types {
     NPC = 22,
     Map = 23,
     DoodadV2 = 24,
-    MessageManager = 25
+    MessageManager = 25,
+    Function = 26
 }
 export declare function SaveProperty(): PropertyDecorator;
 export declare function SaveAllProperties(): ClassDecorator;

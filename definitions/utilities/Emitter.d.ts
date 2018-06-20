@@ -40,6 +40,7 @@ export default class Emitter {
      * Until the given event happens, allows you to bind an event to another emitter.
      */
     until(event: string | number): IEmitterUntil<this>;
+    private ensureSubscribers;
 }
 export interface IEmitterUntil<T> {
     /**

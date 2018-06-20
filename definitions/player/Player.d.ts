@@ -86,6 +86,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
     canJump(): boolean;
+    hasHandToUse(): boolean;
     getHandToUse(): EquipType | undefined;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;

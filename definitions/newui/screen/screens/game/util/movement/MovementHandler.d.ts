@@ -50,4 +50,8 @@ export default class MovementHandler {
      * Returns whether either of the previous statements are true.
      */
     private processDirectionBinds;
+    /**
+     * Returns whether the mouse was within the GameScreen when it began to be held down.
+     */
+    private mouseWithin;
 }
