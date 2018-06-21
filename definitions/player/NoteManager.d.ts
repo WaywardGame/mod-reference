@@ -18,17 +18,18 @@ export declare enum Note {
     CreatureTaming = 5,
     Dehydration = 6,
     Durability = 7,
-    FailureInCrafting = 8,
-    Gardening = 9,
-    HealthIssues = 10,
-    Inedible = 11,
-    Merchantile = 12,
-    Nightfall = 13,
-    Poisoned = 14,
-    Reputation = 15,
-    StaminaReplenishment = 16,
-    Stranded = 17,
-    ToolUse = 18
+    Encumbered = 8,
+    FailureInCrafting = 9,
+    Gardening = 10,
+    HealthIssues = 11,
+    Inedible = 12,
+    Merchantile = 13,
+    Nightfall = 14,
+    Poisoned = 15,
+    Reputation = 16,
+    StaminaReplenishment = 17,
+    Stranded = 18,
+    ToolUse = 19
 }
 export declare type Time = PartOfDay | string;
 export interface INote {
@@ -51,5 +52,6 @@ export default class NoteManager {
     constructor(host: INoteHost);
     readonly notes: INote[];
     getNote(id: number): INote | undefined;
+    wasWritten(note: Note): boolean;
     write(note: Note, ...args: any[]): void;
 }

@@ -33,10 +33,11 @@ export declare enum HelpArticle {
     HeldItems = 11,
     CreatureTaming = 12,
     Crafting = 13,
-    Merchants = 14,
-    Death = 15,
-    Multiplayer = 16,
-    Bugs = 17
+    Overweight = 14,
+    Merchants = 15,
+    Death = 16,
+    Multiplayer = 17,
+    Bugs = 18
 }
 export declare enum HelpArticleSection {
     Interface = 0,

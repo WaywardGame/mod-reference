@@ -23,6 +23,7 @@ declare const _default: {
     [HelpArticle.Merchants]: [string, string, string, string];
     [HelpArticle.Quickslots]: [string, string, string, string];
     [HelpArticle.Crafting]: [string, string, string, string];
+    [HelpArticle.Overweight]: [string, string, string, string];
     [HelpArticle.MovingItems]: [string, string, string, string];
     [HelpArticle.Interface]: [string, string, string, string];
     [HelpArticle.Multiplayer]: [string, string, string, string];

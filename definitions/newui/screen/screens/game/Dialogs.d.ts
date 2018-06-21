@@ -1,7 +1,8 @@
 import { IVector2 } from "utilities/math/IVector";
 export declare enum DialogId {
-    Messages = "Messages",
-    Notes = "Notes"
+    Messages = 0,
+    Notes = 1,
+    MessagesEditFilters = 2
 }
 export declare enum Edge {
     Top = 0,
@@ -16,8 +17,5 @@ export interface IDialogDescription {
     maxSize: IVector2;
     edges: IEdges;
 }
-declare const _default: {
-    Messages: IDialogDescription;
-    Notes: IDialogDescription;
-};
-export default _default;
+declare const dialogDescriptions: Description2<DialogId, IDialogDescription>;
+export default dialogDescriptions;

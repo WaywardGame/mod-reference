@@ -27,6 +27,7 @@ export declare enum DialogEvent {
 export default abstract class Dialog extends Component implements IDialog {
     protected readonly gsapi: IGameScreenApi;
     private static topOrder;
+    private static topDialog;
     static makeTopDialog(element: HTMLElement): void;
     /**
      * The positions of each edge of the dialog. Stored as percentages.
@@ -65,6 +66,10 @@ export default abstract class Dialog extends Component implements IDialog {
      * Set the position of an edge.
      */
     setEdgePosition(edge: Edge, position: number): void;
+    /**
+     * Makes this dialog the top dialog.
+     */
+    focus(): void;
     /**
      * Mark that this dialog is "active"
      */
@@ -165,7 +170,6 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private getEdges;
     private getScale;
-    private focus;
     /**
      * Resets the position, causing it to be clamped to the viewport, using its current position
      *

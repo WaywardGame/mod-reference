@@ -28,6 +28,7 @@ export interface IMessageFilter {
 export default class Messages extends QuadrantComponent implements IHookHost {
     static preferredQuadrant: Quadrant;
     static sendChatMessage(sender: IPlayer, message: string): typeof Messages;
+    static readonly allFilterName: string;
     private static readonly defaultFilters;
     readonly preferredQuadrant: Quadrant;
     readonly sendButton: Button;
@@ -80,4 +81,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     private showNote;
     private onShowDialog;
     private onShowNote;
+    private editFilters;
+    private onFiltersEdited;
+    private onFiltersReset;
 }

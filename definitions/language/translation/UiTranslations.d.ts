@@ -19,6 +19,16 @@ declare const _default: {
     [Ui.GameDamageTypePiercing]: string;
     [Ui.GameDamageTypeFire]: string;
     [Ui.GameDialogMessagesName]: string;
+    [Ui.GameDialogMessagesEditFiltersName]: string;
+    [Ui.GameDialogMessagesEditFiltersLabelName]: string;
+    [Ui.GameDialogMessagesEditFiltersButtonDelete]: string;
+    [Ui.GameDialogMessagesEditFiltersButtonSave]: string;
+    [Ui.GameDialogMessagesEditFiltersButtonNew]: string;
+    [Ui.GameDialogMessagesEditFiltersButtonReset]: string;
+    [Ui.GameDialogMessagesEditFiltersInterruptSaveOverExisting]: string;
+    [Ui.GameDialogMessagesEditFiltersInterruptSaveOverExistingDescription]: string;
+    [Ui.GameDialogMessagesEditFiltersInterruptResetConfirm]: string;
+    [Ui.GameDialogMessagesEditFiltersInterruptResetConfirmDescription]: string;
     [Ui.GameDialogNotesName]: string;
     [Ui.GameDialogNotesNoteTime]: string;
     [Ui.GameDialogNotesNoteNumber]: string;
@@ -178,6 +188,7 @@ declare const _default: {
     [Ui.GameMessagesFilterAll]: string;
     [Ui.GameMessagesFilterGame]: string;
     [Ui.GameMessagesFilterChat]: string;
+    [Ui.GameMessagesFiltersEdit]: string;
     [Ui.GameMessagesNewNote]: string;
     [Ui.GameMultiplayerInterruptBanned]: string;
     [Ui.GameMultiplayerInterruptConnecting]: string;

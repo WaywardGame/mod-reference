@@ -64,7 +64,6 @@ export default class InGameScreen extends BaseScreen {
     elementDialogBook: JQuery;
     elementDialogBookContainer: JQuery;
     elementDialogOptions: JQuery;
-    elementContainers: JQuery;
     elementVersion: JQuery;
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];

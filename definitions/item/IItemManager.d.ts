@@ -32,9 +32,9 @@ export interface IItemManager {
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
-    getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
-    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: true, includeAnd?: boolean): string;
     getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: false, includeAnd?: boolean): IStringSection[];
+    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: true, includeAnd?: boolean): string;
+    getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
     getLegendaryWeightCapacity(container: IContainer): number;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
@@ -44,6 +44,7 @@ export interface IItemManager {
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;
+    getItemsByWeight(a: number, b: number): number;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;

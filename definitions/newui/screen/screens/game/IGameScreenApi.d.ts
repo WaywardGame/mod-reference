@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Component from "newui/component/Component";
-import { TranslationGenerator } from "newui/component/IComponent";
+import { IComponent, TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
@@ -33,7 +33,7 @@ export default interface IGameScreenApi {
     on(event: GameScreenEvent.ShowDialog, handler: (api: IGameScreenApi, dialog: IDialog) => any): void;
     on(event: GameScreenEvent.HideDialog, handler: (api: IGameScreenApi, id: DialogId) => any): void;
 }
-export interface IDialog {
+export interface IDialog extends IComponent {
     getID(): DialogId;
     getName(): TranslationGenerator;
 }

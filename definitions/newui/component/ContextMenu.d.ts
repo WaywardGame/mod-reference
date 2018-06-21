@@ -13,15 +13,16 @@ export declare enum ContextMenuEvent {
     Chosen = "Chosen",
     BecomeActive = "ShowSubmenu"
 }
-export default class ContextMenu<OptionType extends number | string = number | string> extends Component implements IContextMenu<OptionType> {
+export declare type ContextMenuOptionKeyValuePair<O extends number | string | symbol = number | string | symbol> = [O, IOptionDescription];
+export default class ContextMenu<O extends number | string | symbol = number | string | symbol> extends Component implements IContextMenu<O> {
     private activeOption;
     private readonly descriptions;
     private readonly options;
-    constructor(uiApi: UiApi, ...descriptions: Array<[OptionType, IOptionDescription]>);
+    constructor(uiApi: UiApi, ...descriptions: Array<ContextMenuOptionKeyValuePair<O>>);
     addAllDescribedOptions(): this;
-    addOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
-    disableOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
-    removeOptions(...options: ArrayOfTOrIterablesOfT<OptionType>): this;
+    addOptions(...options: ArrayOfTOrIterablesOfT<O>): this;
+    disableOptions(...options: ArrayOfTOrIterablesOfT<O>): this;
+    removeOptions(...options: ArrayOfTOrIterablesOfT<O>): this;
     setPosition(x: number, y: number, right?: boolean): this;
     hideAndRemove(): Promise<void>;
     private getDescription;

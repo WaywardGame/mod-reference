@@ -1277,7 +1277,7 @@ export interface ITerrainResourceItem extends IResourceItem {
 }
 export declare enum WeightStatus {
     None = 0,
-    Overweight = 1,
+    Overburdened = 1,
     Encumbered = 2
 }
 export declare enum ConnectionState {

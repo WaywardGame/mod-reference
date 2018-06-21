@@ -193,7 +193,7 @@ export interface IComponent extends Emitter {
      */
     repaint(): void;
 }
-export interface IContextMenu<OptionType extends number | string = number | string> extends IComponent {
+export interface IContextMenu<OptionType extends number | string | symbol = number | string | symbol> extends IComponent {
     setPosition(x: number, y: number, right?: boolean): this;
     hideAndRemove(): Promise<void>;
 }
