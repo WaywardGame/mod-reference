@@ -73,7 +73,7 @@ export default class Ui extends Emitter implements IUi {
     toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
-    changeEquipmentOption(id: string): void;
+    changeEquipmentOption(id: "leftHand" | "rightHand"): void;
     closeAllContainers(): void;
     openContainer(container: IContainer, containerName?: string): void;
     closeContainer(container: IContainer): void;

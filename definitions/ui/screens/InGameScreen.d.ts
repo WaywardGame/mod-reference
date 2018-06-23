@@ -63,7 +63,6 @@ export default class InGameScreen extends BaseScreen {
     elementDialogMap: JQuery;
     elementDialogBook: JQuery;
     elementDialogBookContainer: JQuery;
-    elementDialogOptions: JQuery;
     elementVersion: JQuery;
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
@@ -93,8 +92,7 @@ export default class InGameScreen extends BaseScreen {
     private lastStats;
     selector(): string;
     bindElements(): void;
-    changeEquipmentOption(id: string): void;
-    changeOption(id: string): void;
+    changeEquipmentOption(id: "leftHand" | "rightHand"): void;
     toggleCraftingTab(which: "crafting" | "dismantle", canClose?: boolean): void;
     toggleCraftingTabElements(which: "crafting" | "dismantle"): void;
     unbindElements(): void;

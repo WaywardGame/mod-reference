@@ -1137,8 +1137,7 @@ export declare enum DialogId {
     Map = 5,
     Container = 6,
     Book = 7,
-    Options = 8,
-    Custom = 9
+    Custom = 8
 }
 export declare enum SortType {
     Name = 0,
