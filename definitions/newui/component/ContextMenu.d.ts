@@ -4,6 +4,7 @@ import { IContextMenu, TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 export declare type IOptionDescription = {
     translation: TranslationGenerator;
+    create?(option: Button): Button;
 } & ({
     submenu(uiApi: UiApi): IContextMenu;
 } | {

@@ -145,6 +145,7 @@ export interface IGame extends Emitter {
     isPositionEmpty(x: number, y: number, z: number): boolean;
     isPositionFull(x: number, y: number, z: number): boolean;
     isRealTimeMode(): boolean;
+    isTileEmpty(tile: ITile): boolean;
     isTileFull(tile: ITile): boolean;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     makeLavaPassage(player: IPlayer): TerrainType | undefined;

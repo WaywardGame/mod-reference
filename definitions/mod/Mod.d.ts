@@ -76,7 +76,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     canSeeNPC(npc: INPC, tile: ITile): boolean | undefined;
     getCreatureSpriteBatchLayer(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     getPlayerFieldOfViewRadius(player: IPlayer): number | undefined;
-    getPlayerMaxHealth(player: IPlayer): number | undefined;
+    getPlayerMaxHealth(maxHealth: number, player: IPlayer): number;
     getPlayerMovementIntent(player: IPlayer): IMovementIntent | undefined;
     getPlayerStrength(strength: number, player: IPlayer): number;
     getPlayerSpriteBatchLayer(player: IPlayer, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
