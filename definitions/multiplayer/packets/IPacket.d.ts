@@ -1,13 +1,13 @@
 import { ConnectionState } from "Enums";
-import * as Utilities from "Utilities";
+import { IRandomHistory } from "utilities/Random";
 export declare enum PacketType {
     Client = 0,
     Server = 1,
-    Shared = 2,
+    Shared = 2
 }
 export interface ISynchronizationCheckData {
     packetNumber?: number;
-    afterRandomHistory?: Utilities.IRandomHistory[];
+    afterRandomHistory?: IRandomHistory[];
     beforeSyncChecks?: ISyncCheck;
     afterSyncChecks?: ISyncCheck;
 }
@@ -17,7 +17,7 @@ export interface ISyncCheck {
 export interface IPacket {
     getAllowedStates(): ConnectionState;
     getArrayBuffer(id?: number): ArrayBuffer;
-    getId(): number;
+    getRegistrarId(): number;
     getDebugInfo(): string;
     getSynchronizationCheckData(): ISynchronizationCheckData;
     getType(): PacketType;
@@ -37,6 +37,7 @@ export declare enum NetworkPropertyType {
     Container = 7,
     Generic = 8,
     Item = 9,
+    MovementIntent = 10
 }
 export interface INetworkedProperty {
     key: string;

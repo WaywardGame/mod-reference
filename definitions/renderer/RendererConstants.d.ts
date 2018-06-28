@@ -1,2 +1,2 @@
-export declare let emptyUint8Array: Uint8Array | null;
-export declare let subTileSize: number;
+export declare const emptyUint8Array: Uint8Array | null;
+export declare const subTileSize = 8;

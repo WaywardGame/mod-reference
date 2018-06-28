@@ -1,42 +1,40 @@
-import { AiType, ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature";
-import { CreatureType, FacingDirection, IMessagePack, ItemType, MoveType, SfxType } from "Enums";
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
+import { ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature";
+import BaseEntity from "entity/BaseEntity";
+import { AiType, EntityType } from "entity/IEntity";
+import { CreatureType, ItemType, MoveType, SfxType } from "Enums";
 import { IItem } from "item/IItem";
+import { IMessagePack } from "language/IMessages";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
-import { ITile } from "tile/ITerrain";
-export default class Creature implements ICreature, IUnserializedCallback {
+export default class Creature extends BaseEntity implements ICreature, IUnserializedCallback {
+    readonly entityType: EntityType.Creature;
     aberrant?: boolean;
     ai: AiType;
-    anim: number;
-    chickenEggCounter?: number;
-    direction: FacingDirection;
     enemy?: number;
     enemyAttempts?: number;
     enemyIsPlayer?: boolean;
-    fromX: number;
-    fromY: number;
-    goatMilkCounter?: number;
-    happiness?: number;
-    hp: number;
-    id: number;
     loot?: ItemType[];
-    maxhp: number;
-    moveType: MoveType | undefined;
-    renamed?: string;
     respawned?: boolean;
     shouldSkipNextUpdate: boolean;
-    stopNextMovement?: boolean;
     type: CreatureType;
-    x: number;
-    y: number;
-    z: number;
     private _description;
-    private _inFov;
-    private _movementFinishTime;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
+    /**
+     * Initializes the creature's stats. Used in the constructor & save conversion.
+     */
+    initializeStats(hp: number, maxhp?: number): void;
     description(): ICreatureDescription | undefined;
-    getTile(): ITile;
     isHidden(): boolean;
     isDefender(): boolean;
     getInspectHealthMessage(player: IPlayer): IMessagePack;
@@ -47,12 +45,7 @@ export default class Creature implements ICreature, IUnserializedCallback {
     release(): boolean;
     pet(): boolean;
     skipNextUpdate(): void;
-    isInFov(): boolean;
-    setInFov(inFov: boolean): void;
     getMoveType(): MoveType;
-    setMoveType(moveType: MoveType): void;
-    getMovementProgress(): number;
-    getMovementFinishTime(): number | undefined;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
@@ -61,11 +54,11 @@ export default class Creature implements ICreature, IUnserializedCallback {
     damage(damageInfo: IDamageInfo): number | undefined;
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
-    private findPath(result);
-    private checkCreatureMove(tileX, tileY, tileZ, moveType, isFinalMove?, ignorePlayer?);
-    private findPlayersWithinRadius(x, y, z, radius);
-    private processAttack(description, moveType, enemy);
-    private processMovement(description, moveType, enemy, nearestPlayer);
-    private processRandomAiChanges();
-    private processSpecialAbilities(enemy);
+    private findPath;
+    private checkCreatureMove;
+    private findPlayersWithinRadius;
+    private processAttack;
+    private processMovement;
+    private processAiChanges;
+    private processSpecialAbilities;
 }

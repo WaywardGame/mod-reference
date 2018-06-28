@@ -1,32 +1,49 @@
-import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IPointZ, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
-import { IContainer, IItemArray, IItemLegendary } from "item/IItem";
-import { Message } from "language/Messages";
+import DoodadInfo from "doodad/DoodadInfo";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
+import { ActionType, DoodadType, DoodadTypeGroup, DoorOrientation, EquipType, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
+import { IContainer, IItem, IItemArray, IItemLegendary } from "item/IItem";
+import { Message } from "language/IMessages";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
-export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IPointZ, Partial<IContainer> {
+import { IVector3 } from "utilities/math/IVector";
+export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer> {
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
+    /**
+     * Returns whether the doodad can be trampled
+     */
+    canTrample(): boolean | undefined;
     isValid(): boolean;
     getTile(): ITile;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
-    isReadyToGather(): boolean;
+    /**
+     * Can the doodad be gathered from in its current form?
+     */
+    canGather(): boolean;
+    /**
+     * Can the doodad be gathered from at all?
+     */
     isGatherable(): boolean;
     isEmbers(): boolean;
     canHarvest(): boolean;
     canPickup(player: IPlayer): boolean;
-    causeStatus(player: IPlayer): void;
-    checkForTrampling(playerOrCreatureId: IPlayer | number): boolean;
+    getPickupTypes(): ItemType[] | undefined;
+    getActions(): ActionType[] | undefined;
+    getDoodadInfo(): DoodadInfo | undefined;
+    causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
+    checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): void;
     getDurabilityMessage(): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
     getInspect(): IInspect[];
-    setOffTrap(player?: IPlayer, withMessage?: boolean): void;
+    setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     update(): void;
+    isDangerous(): boolean;
 }
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: boolean;
@@ -37,6 +54,8 @@ export interface IDoodadOptions extends IObjectOptions {
     legendary?: IItemLegendary;
     disassembly?: IItemArray;
     ownerIdentifier?: string;
+    item?: IItem;
+    step?: number;
 }
 export declare type IDoodadOld = Partial<IDoodad> & {
     growInto?: DoodadType;
@@ -59,7 +78,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     canGrow?: boolean;
     canGrowInCaves?: boolean;
     canStoke?: boolean;
-    canTrample?: boolean;
+    canTrampleWhenMature?: boolean;
     causesStatus?: StatusType[];
     damage?: number;
     disableDrop?: boolean;
@@ -70,13 +89,13 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isAnimated?: boolean;
     isFlammable?: boolean;
     isLocked?: boolean;
-    isRepairable?: boolean;
+    repairItem?: ItemType;
     isTall?: boolean;
     isTrap?: boolean;
     isWaterSource?: boolean;
     lit?: DoodadType;
     onBurn?: ItemType;
-    particles: IRGB;
+    particles?: IRGB;
     growthParticles?: IDoodadParticles;
     pickUp?: ItemType[];
     pickUpCanHurtHands?: boolean;

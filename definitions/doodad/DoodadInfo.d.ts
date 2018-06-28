@@ -1,5 +1,5 @@
-import Vec2 = TSM.vec2;
 import { DoodadType, TerrainType } from "Enums";
+import Vec2 from "utilities/math/Vector2";
 export default class DoodadInfo {
     type: DoodadType | TerrainType;
     tall: boolean;

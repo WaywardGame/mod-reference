@@ -11,6 +11,9 @@ export interface ITileAtlas {
     doodads: {
         [index: number]: DoodadInfo;
     };
+    doodadItems: {
+        [index: number]: DoodadInfo;
+    };
     mounds: {
         [index: number]: DoodadInfo;
     };

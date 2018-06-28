@@ -1,14 +1,21 @@
-import { ModType } from "mod/IModManager";
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
+import { ModType } from "mod/IModInfo";
 import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
 import Emitter from "utilities/Emitter";
 export default class Steamworks extends Emitter implements ISteamworks {
-    private installDir;
-    private readonly recordedProblems;
     private steamId;
     private betaName;
     private buildTime;
     private overlayWorks;
-    private platform;
     private initializingMods;
     private logsPath;
     private backupPath;
@@ -32,9 +39,10 @@ export default class Steamworks extends Emitter implements ISteamworks {
     isElectron(): boolean;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
-    getAbsolutePath(...p: string[]): any;
-    isLinux(): boolean;
-    isMac(): boolean;
+    getAbsolutePath(...p: string[]): string;
+    getAppPath(...p: string[]): string;
+    isUsingAsar(): boolean;
+    isTestMode(): boolean;
     isDedicatedServer(): boolean;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;
@@ -52,7 +60,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     clearRichPresence(): void;
     isInLobby(): boolean;
     createLobby(type: LobbyType): void;
-    setLobbyType(type: LobbyType): void;
+    setLobbyType(type: LobbyType): boolean;
     leaveLobby(): void;
     joinLobby(lobbyId: string): void;
     getLobbyData(name: string): string | undefined;
@@ -65,6 +73,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getPublishedItems(): Promise<IWorkshopItem[]>;
     openUrl(url: string): void;
     openWorkshop(publishId?: string): Promise<void>;
+    openSaveFolder(): void;
     openModsFolder(): void;
     openLogsFolder(): void;
     unsubscribe(publishId: string): Promise<void>;
@@ -81,41 +90,38 @@ export default class Steamworks extends Emitter implements ISteamworks {
     debugLog(...args: any[]): void;
     hasServerToJoin(): boolean;
     onReady(): void;
-    setupReporting(): void;
-    recordProblem(message: string): void;
     processBackups(): boolean;
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
-    private setupAndInitializeWorkshopMods(initialModState, retried?);
-    private initializeModsFromFolder(folderName, modType, callback);
-    private enumerateInstalledWorkshopMods();
-    private refreshSetupMods();
-    private removeTempFolders(destinationPath, id);
-    private refreshPublishedMods();
-    private getIdFromWorkshopItem(item);
-    private syncWorkshopItems();
-    private ugcSynchronizeItems();
-    private copyFolder(source, destination);
-    private saveFilesToCloud(id);
-    private getFileShareId(id);
-    private publishFileToWorkshop(id, title, description, publishedFileId);
-    private extractArchive(id, destination);
-    private safeOpenFolder(folder);
-    private onGameOverlayActive(isActive);
-    private onLobbyCreated(success, lobbyId, result?);
-    private onLobbyEntered(success, lobbyId, result?);
-    private onLobbyChatUpdate(lobbyId, steamIdUserChanged, state);
+    private setupAndInitializeWorkshopMods;
+    private initializeModsFromFolder;
+    private enumerateInstalledWorkshopMods;
+    private refreshSetupMods;
+    private removeTempFolders;
+    private refreshPublishedMods;
+    private getIdFromWorkshopItem;
+    private syncWorkshopItems;
+    private ugcSynchronizeItems;
+    private copyFolder;
+    private saveFilesToCloud;
+    private getFileShareId;
+    private publishFileToWorkshop;
+    private extractArchive;
+    private safeOpenFolder;
+    private onGameOverlayActive;
+    private onLobbyCreated;
+    private onLobbyEntered;
+    private onLobbyChatUpdate;
     /**
      * Called when the user tries to join a lobby from their friends list or from an invite. The game client should attempt to connect to specified lobby when this is received. If the game isn't running yet then the game will be automatically launched with the command line parameter +connect_lobby <64-bit lobby Steam ID> instead.
      */
-    private onLobbyJoinRequested(lobbyId);
-    private showCharacterSelectionForLobby(lobbyId);
-    private createFolderIfNotExists(folder);
-    private getSyncPath(name);
-    private getSharePathForModZip(name);
-    private getSharePathForModImage(name);
-    private recordEvent(categorySuffix, action);
-    private getFilesInFolder(folderPath);
+    private onLobbyJoinRequested;
+    private showCharacterSelectionForLobby;
+    private createFolderIfNotExists;
+    private getSyncPath;
+    private getSharePathForModZip;
+    private getSharePathForModImage;
+    private getFilesInFolder;
 }

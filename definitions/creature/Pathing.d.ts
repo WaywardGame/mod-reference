@@ -1,10 +1,3 @@
-import { IPoint, IPointZ } from "Enums";
 import { ITile } from "tile/ITerrain";
-export declare type IPathfindingNode = IPoint;
-export interface IPathfindingResult {
-    start: IPathfindingNode;
-    end: IPathfindingNode;
-    path: IPathfindingNode[];
-}
-export declare function findPath(isBlockingPath: (x: number, y: number) => boolean, result: IPathfindingResult, maxNodesChecked?: number): boolean;
-export declare function findPath2(start: IPathfindingNode, end: IPathfindingNode, z: number, canMoveCheck: (point: IPointZ, tile: ITile) => boolean, maxNodesChecked?: number): IPathfindingNode[] | undefined;
+import { IVector2 } from "utilities/math/IVector";
+export declare function findPath(start: IVector2, end: IVector2, z: number, isTileBlocked: (tile: ITile, pos: IVector2) => boolean, getTilePenalty?: (tile: ITile, pos: IVector2) => number, maxNodesChecked?: number): IVector2[] | undefined;

@@ -36,7 +36,7 @@ export declare enum Pre240TerrainType {
     CaveEntrance = 34,
     RedCarpet = 35,
     Lava = 36,
-    FertileDirt = 37,
+    FertileDirt = 37
 }
 export declare enum Pre240DoodadType {
     WoodenDoor = 0,
@@ -117,5 +117,5 @@ export declare enum Pre240DoodadType {
     StoneKiln = 75,
     LitStoneKiln = 76,
     WroughtIronAnvil = 77,
-    IronAnvil = 78,
+    IronAnvil = 78
 }

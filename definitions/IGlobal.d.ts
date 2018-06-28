@@ -1,3 +1,16 @@
+/*
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ * 
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ * 
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ * 
+ * 
+ */
+
 import IActionManager from "action/IActionManager";
 import IAudio from "audio/IAudio";
 import { ICommandManager } from "command/ICommandManager";
@@ -7,12 +20,13 @@ import IDoodadManager from "doodad/IDoodadManager";
 import { ItemType } from "Enums";
 import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
-import IResourceLoader from "IResourceLoader";
 import IItemManager from "item/IItemManager";
 import ILanguageManager from "language/ILanguageManager";
+import IHookManager from "mod/IHookManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import NewUi from "newui/NewUi";
+import INPCManager from "npc/INPCManager";
 import IPlayer from "player/IPlayer";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
@@ -20,6 +34,7 @@ import ISpriteAtlas from "renderer/ISpriteAtlas";
 import ITileAtlas from "renderer/ITileAtlas";
 import IWorld from "renderer/IWorld";
 import IWorldRenderer from "renderer/IWorldRenderer";
+import IResourceLoader from "resources/IResourceLoader";
 import ISaveData from "save/data/ISaveData";
 import ISaveDataGlobal from "save/data/ISaveDataGlobal";
 import ISaveManager from "save/ISaveManager";
@@ -31,11 +46,17 @@ import IUi from "ui/IUi";
 
 declare global {
 	interface Description<T> {
-		[index: number]: T;
+		[index: number]: T | undefined;
 	}
 
-	interface SaferDescription<T> {
-		[index: number]: T | undefined;
+	type Description2<E extends string | number, V> = { [key in E]: V } & { [key: number]: V | undefined };
+
+	/**
+	 * @deprecated
+	 * @see `Description`
+	 */
+	interface UnsafeDescription<T> {
+		[index: number]: T;
 	}
 
 	type SaferArray<T> = Array<T | undefined>;
@@ -50,9 +71,11 @@ declare global {
 	let fieldOfView: IFieldOfView;
 	let flowFieldManager: IFlowFieldManager;
 	let game: IGame;
+	let hookManager: IHookManager;
 	let itemManager: IItemManager;
 	let languageManager: ILanguageManager;
 	let localPlayer: IPlayer;
+	let npcManager: INPCManager;
 	let modManager: IModManager;
 	let multiplayer: IMultiplayer;
 	let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
@@ -133,4 +156,54 @@ declare global {
 
 		import(template: JQuery | HTMLTemplateElement): JQuery;
 	}
+
+	interface IFileSystem {
+		copy(source: string, destination: string, opt: (file: string) => boolean, cb: (err: string | null | undefined) => void): any;
+		emptyDir(destination: string, cb: (err: string | null | undefined) => void): any;
+		lstat(path: string, cb: (err: string | null | undefined, stats: IFileStat) => void): any;
+		lstatSync(path: string): IFileStat | undefined;
+		mkdirSync(path: string): any;
+		pathExistsSync(path: string): boolean;
+		readdir(path: string, cb: (err: string | null | undefined, files: string[]) => void): any;
+		readdirSync(path: string): string[];
+		readFileSync(path: string, opt?: any): string;
+		remove(path: string, cb: (err: string | null | undefined) => void): any;
+		rmdirSync(path: string): any;
+		unlinkSync(path: string): any;
+		writeFileSync(path: string, data: string, opt?: any): any;
+	}
+
+	interface IFile extends IFileStat {
+		name: string;
+		path: string;
+	}
+
+	interface IFileStat {
+		atime: Date;
+		mtime: Date;
+		ctime: Date;
+		isFile(): boolean;
+		isDirectory(): boolean;
+	}
+
+	interface IElectronApi {
+		greenworks: any | Error;
+		ipc: any;
+		shell: any;
+		os: any;
+		webFrame: any;
+		remote: any;
+		path: any;
+		winston: any;
+		fileSystem: IFileSystem;
+		matchmakingServer: IMatchmakingServer | undefined;
+	}
+
+	interface IElectron {
+		api: IElectronApi;
+		installPath: string;
+		appPath: string;
+		isTestMode: boolean;
+	}
+	let electron: IElectron | undefined | never;
 }

@@ -1,9 +1,15 @@
 export interface IRegistrarItem {
-    setId(id: number): void;
+    getRegistrarId(): number;
+    setRegistrarId(id: number): void;
 }
 export default class Registrar<T extends IRegistrarItem> {
     private readonly registrations;
-    get(id: number): T;
-    register(item: T): void;
-    unregister(items: T): void;
+    private readonly registrationSubTypeToMainType;
+    private baseItem;
+    get(id: number, includeSubTypes?: boolean): T | undefined;
+    isBase(item: T): boolean;
+    usesBase(id: number): boolean;
+    registerBase(item: T): void;
+    register(item: T, id?: number, subType?: number): void;
+    unregister(item: T): boolean;
 }

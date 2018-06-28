@@ -1,4 +1,4 @@
-import IFlowFieldManager from "IFlowFieldManager";
+import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 export default class FlowFieldDebugRenderer implements ITextureDebugRenderer {
     private readonly ff;

@@ -1,9 +1,9 @@
-import { ICreature } from "creature/ICreature";
-import { FacingDirection, MoveType } from "Enums";
+import { Direction, MoveType } from "Enums";
 import { IFlowField } from "flowfield/IFlowField";
 import { DebugRendererDelegate } from "flowfield/IFlowFieldDebugRenderer";
 import IFlowFieldManager from "flowfield/IFlowFieldManager";
 import { IPlayer } from "player/IPlayer";
+import { IVector3 } from "utilities/math/IVector";
 export default class FlowFieldManager implements IFlowFieldManager {
     private readonly size;
     delegate: DebugRendererDelegate;
@@ -16,15 +16,15 @@ export default class FlowFieldManager implements IFlowFieldManager {
     setDelegate(delegate: DebugRendererDelegate): void;
     getWidth(): number;
     getHeight(): number;
-    isCreatureInFlowField(creature: ICreature): boolean;
+    isInFlowField(point: IVector3): boolean;
     isPlayerInFlowField(player: IPlayer): boolean;
-    getMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
-    getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): FacingDirection;
+    getMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
+    getOpposingMoveDirection(x: number, y: number, z: number, moveType: MoveType): Direction;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
     setPlayers(plys: IPlayer[]): void;
     update(): void;
     reset(): void;
-    private getDirection(moveType, x, y, z, toward);
-    private getFlowField(moveType, z);
-    private getFlowFields();
+    private getDirection;
+    private getFlowField;
+    private getFlowFields;
 }

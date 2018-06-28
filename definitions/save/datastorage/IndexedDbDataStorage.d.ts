@@ -15,8 +15,8 @@ export default class IndexedDbDataStorage implements IAsyncDataStorage {
     deleteSlot(slot: number): Promise<boolean>;
     deleteAllSlots(): Promise<boolean>;
     deleteAllData(): Promise<any>;
-    private openIndexedDb();
-    private transferSaves();
-    private transferFromLocalStorageToIndexedDb(slot);
-    private waitForDatabase();
+    private openIndexedDb;
+    private transferSaves;
+    private transferFromLocalStorageToIndexedDb;
+    private waitForDatabase;
 }

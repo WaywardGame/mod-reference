@@ -1,5 +1,6 @@
-import Vec2 = TSM.vec2;
-export default class SpriteBatch {
+import ISpriteBatch from "renderer/ISpriteBatch";
+import Vec2 from "utilities/math/Vector2";
+export default class SpriteBatch implements ISpriteBatch {
     private static shaderProgram;
     private static readonly spriteLength;
     capacity: number;

@@ -1,5 +1,5 @@
-import Vec2 = TSM.vec2;
 import ISpriteInfo from "renderer/ISpriteInfo";
+import Vec2 from "utilities/math/Vector2";
 export default class SpritePacker {
     private readonly gl;
     width: number;
@@ -14,9 +14,9 @@ export default class SpritePacker {
     constructor(gl: WebGL2RenderingContext, width: number, height: number, nullSprite: boolean, padding: number);
     load(callback: () => void): void;
     addSprite(src: string, callback: (si: ISpriteInfo, imageElement?: HTMLImageElement) => void): void;
-    private loadSprite(sprite, callback, retry?);
-    private spriteLoaded(callback);
-    private checkFinished(callback);
-    private pack();
-    private packSprite(gl, image);
+    private loadSprite;
+    private spriteLoaded;
+    private checkFinished;
+    private pack;
+    private packSprite;
 }

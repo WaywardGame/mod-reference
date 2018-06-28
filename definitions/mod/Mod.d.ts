@@ -1,15 +1,30 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, AttackType, Command, CreatureType, DoodadType, EquipType, FacingDirection, IInspect, ItemQuality, ItemType, MoveType, Music, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { Message, MessageType } from "language/Messages";
+import { ILanguage } from "language/ILanguage";
 import BaseMod from "mod/BaseMod";
+import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
-import IPlayer from "player/IPlayer";
+import { INPC } from "npc/INPC";
+import { IMessage } from "player/IMessageManager";
+import IPlayer, { IMovementIntent } from "player/IPlayer";
+import { INote } from "player/NoteManager";
+import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
-export declare abstract class Mod extends BaseMod {
+export declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
      * @param saveDataGlobal The save data object you previously saved via onUninitialize()
@@ -40,500 +55,98 @@ export declare abstract class Mod extends BaseMod {
      * @returns An object containing the data you want to save
      */
     onSave(): any;
-    /**
-     * Get the ambient color
-     * @param colors The current ambient colors
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
     getAmbientColor(colors: number[]): number[] | undefined;
-    /**
-     * Get the ambient color while in caves
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
     getAmbientColorCave(): number[] | undefined;
-    /**
-     * Get the ambient color while its day time
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
     getAmbientColorDay(): number[] | undefined;
-    /**
-     * Get the ambient color while its night time
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
     getAmbientColorNight(): number[] | undefined;
-    /**
-     * Get the ambient light level
-     * @param ambientLight The current ambient light level
-     * @param z The world z index
-     * @returns the ambient light level or undefined to use the default light level
-     */
     getAmbientLightLevel(ambientLight: number, z: number): number | undefined;
-    /**
-     * Called before consuming an item
-     * @param player The player object
-     * @param itemType The item type
-     * @param actionType The action type
-     * @returns True if the player can consume the item (default logic isn't called, should use your own code for consumption), false if the player cannot consume the item, or undefined to use the default logic
-     */
     canConsumeItem(player: IPlayer, itemType: ItemType, actionType: ActionType): boolean | undefined;
-    /**
-     * Called before a creature attacks
-     * @param creature The creature object
-     * @param enemy The enemy (player or creature)
-     * @returns False if the creature cannot attack, or undefined to use the default logic
-     */
     canCreatureAttack(creature: ICreature, enemy: IPlayer | ICreature): boolean | undefined;
-    /**
-     * Called when a creature tries to move
-     * @param creature The creature object
-     * @param tile The tile the creature is trying to move to
-     * @param moveType The creatures move type
-     * @returns True if the creature can move, false if the creature cannot move, or undefined to use the default logic
-     */
-    canCreatureMove(creature: ICreature, tile: ITile, moveType: MoveType): boolean | undefined;
-    /**
-     * Called when a creature is about to be spawned
-     * @param type The type of creature
-     * @param x The x coordinate where the creature will be spawned
-     * @param y The y coordinate where the creature will be spawned
-     * @param z The z coordinate where the creature will be spawned
-     * @param aberrant True if the creature is an aberrant
-     * @returns False if the creature cannot spawn, or undefined to use the default logic
-     */
+    canCreatureMove(creature: ICreature, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     canCreatureSpawn(type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
-    /**
-     * Called when a doodad is about to be spawned
-     * @param type The type of doodad
-     * @param x The x coordinate where the doodad will be spawned
-     * @param y The y coordinate where the doodad will be spawned
-     * @param z The z coordinate where the doodad will be spawned
-     * @param options The doodad spawn options
-     * @returns False if the dooodad cannot spawn, or undefined to use the default logic
-     */
     canDoodadSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
-    /**
-     * Called when an item is being dropped
-     * @param player The player object
-     * @param item The item to be dropped
-     * @param tile The tile the item will be dropped on
-     * @param dropAll True if all items of this type will be dropped
-     * @param dropAllQuality If not undefined, all items of this quality will be dropped
-     * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
-     */
     canDropItem(player: IPlayer, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
-    /**
-     * Called when an doodad is being picked up
-     * @param player The player object
-     * @param doodad The doodad object
-     * @returns False if the doodad cannot be picked up, or undefined to use the default logic
-     */
+    canNPCAttack(npc: INPC, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
+    canNPCMove(npc: INPC, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
+    canNPCSpawn(type: NPCType, x: number, y: number, z: number): boolean | undefined;
     canPickupDoodad(player: IPlayer, doodad: IDoodad): boolean | undefined;
-    /**
-     * Called before a player attacks
-     * @param player The player object
-     * @param weapon The weapon used to attack
-     * @param attackType The attack type
-     * @returns False if the player cannot attack, or undefined to use the default logic
-     */
     canPlayerAttack(player: IPlayer, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
-    /**
-     * Called every frame where the mouse is not hovering over an item
-     * @param api The bind catcher api
-     * @returns False if the player can't move, undefined otherwise
-     */
     canClientMove(api: BindCatcherApi): false | undefined;
-    /**
-     * Called when calculating creatures in the viewport
-     * @param creature The creature object
-     * @param tile The tile the creature is on
-     * @returns False if the player should not see the creature or undefined to use the default logic
-     */
     canSeeCreature(creature: ICreature, tile: ITile): boolean | undefined;
-    /**
-     * Called when the next music track is requested
-     * @param currentMusicTrack The current music track
-     * @returns The music track that should be played next or undefined to use the default logic
-     */
-    getNextMusicTrack(currentMusicTrack: Music): Music | undefined;
-    /**
-     * Called when rendering creatures in the viewport
-     * @param creature The creature object
-     * @param batchLayer The batch layer the creature will render in
-     * @returns The batch layer the creature should render in or undefined to use the default logic
-     */
+    canSeeNPC(npc: INPC, tile: ITile): boolean | undefined;
     getCreatureSpriteBatchLayer(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
-    /**
-     * Called when getting the field of view radius for a player
-     * @param player The player object
-     * @returns The field of view radius for the player or undefined to use the default logic
-     */
     getPlayerFieldOfViewRadius(player: IPlayer): number | undefined;
-    /**
-     * Called when getting the players maximum health
-     * @param player The player object
-     * @returns The maximum health of the player or undefined to use the default logic
-     */
-    getPlayerMaxHealth(player: IPlayer): number | undefined;
-    /**
-     * Called when rendering the player in the viewport
-     * @param player The player object
-     * @param batchLayer The batch layer the player will render in
-     * @returns The batch layer the player should render in or undefined to use the default logic
-     */
+    getPlayerMaxHealth(maxHealth: number, player: IPlayer): number;
+    getPlayerMovementIntent(player: IPlayer): IMovementIntent | undefined;
+    getPlayerStrength(strength: number, player: IPlayer): number;
     getPlayerSpriteBatchLayer(player: IPlayer, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
-    /**
-     * Called when getting the players weight movement penalty
-     * @param player The player object
-     * @returns The weight movement penalty for the player or undefined to use the default logic
-     */
     getPlayerWeightMovementPenalty(player: IPlayer): number | undefined;
-    /**
-     * Called when getting the players weight status
-     * @param player The player object
-     * @returns The weight status of the player or undefined to use the default logic
-     */
     getPlayerWeightStatus(player: IPlayer): WeightStatus | undefined;
-    /**
-     * Called when retrieving the light level of a tile
-     * @param tile The tile that was updated
-     * @param x The x position of the tile
-     * @param y The y position of the tile
-     * @param z The z position of the tile
-     */
     getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
-    /**
-     * Called when checking if a player is swimming
-     * @param player The player object
-     * @param isSwimming True if the player is swimming
-     * @returns True if the player should be swimming, false if the player should not be swimming, or undefined to use the default logic
-     */
     isPlayerSwimming(player: IPlayer, isSwimming: boolean): boolean | undefined;
-    /**
-     * Called when checking if a tile is inspectable (used for showing custom world tooltips over tiles)
-     * Normally used in conjunction with the OnInspectTile hook
-     * @param tile The tile object
-     * @returns True if you want to show a custom inspect message, false to display no messages, or undefined to use the default logic
-     */
     isTileInspectable(tile: ITile): boolean | undefined;
-    /**
-     * Called when something is built on a tile
-     * @param player The player object
-     * @param item The item used to build the object
-     * @param tile The tile something was built on
-     * @param doodad The doodad that was created on the tile
-     */
     onBuild(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
-    /**
-     * Called when a button on the button bar is clicked
-     * @param button The button element
-     */
     onButtonBarClick(button: JQuery): void;
-    /**
-     * Called when an item is added to a container.
-     * @param item The item object
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
-     */
     onContainerItemAdd(item: IItem, container: IContainer): void;
-    /**
-     * Called when an item is removed from a container.
-     * @param item The item object
-     * @param container The container object the item was removed from.
-     */
     onContainerItemRemove(item: IItem, container: IContainer): void;
-    /**
-     * Called when an item is moved from one container to another.
-     * @param item The item object
-     * @param containerFrom The container object the item was moved to. This container might be inventory or a container within the inventory.
-     * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
-     */
     onContainerItemUpdate(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
-    /**
-     * Called when an item is crafted
-     * @param player The player object
-     * @param item The item that was crafted
-     */
     onCraft(player: IPlayer, item: IItem): void;
-    /**
-     * Called right after the world is created, but before the renderer
-     * @param world The world object
-     */
     onCreateWorld(world: IWorld): void;
-    /**
-     * Called when a message is about to be displayed to the player
-     * @param message The message
-     * @param messageType The message type
-     * @param args The message arguments
-     * @returns False to not display the message or undefined to use the default logic
-     */
-    onDisplayMessage(message: Message, messageType?: MessageType, ...args: any[]): boolean | undefined;
-    /**
-     * Called when a doodad spawns
-     * @param doodad The doodad object
-     */
+    onDisplayMessage(player: IPlayer, message: IMessage): void;
+    shouldDisplayMessage(player: IPlayer, message: IMessage, messageId: number): boolean | undefined;
     onDoodadSpawn(doodad: IDoodad): void;
-    /**
-     * Called when the game is ending
-     * @param playerState The ending player state
-     */
-    onGameEnd(playerState: PlayerState): void;
-    /**
-     * Called when the game is starting
-     * @param isLoadingSave True if a save game was loaded
-     * @param playedCount The number of times the player has played the game (globally, not per slot)
-     */
+    onGameEnd(state: PlayerState): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
-    /**
-     * Called when the game tick starts
-     */
     onGameTickStart(): void;
-    /**
-     * Called when the game tick ends
-     */
     onGameTickEnd(): void;
-    /**
-     * Called when a tile is being inspected
-     * @param player The player object
-     * @param tile The tile being inspected
-     * @returns The inspects to be shown or undefined to use the default logic
-     */
     onInspectTile(player: IPlayer, tile: ITile): IInspect[] | undefined;
-    /**
-     * Called when an item is added to the players inventory
-     * @param player The player object
-     * @param item The item object
-     * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
-     */
-    onInventoryItemAdd(player: IPlayer, item: IItem, container: IContainer): void;
-    /**
-     * Called when an item is removed from the players inventory
-     * @param player The player object
-     * @param item The item object
-     * @param container The container object the item was moved to.
-     */
-    onInventoryItemRemove(player: IPlayer, item: IItem, container: IContainer): void;
-    /**
-     * Called when an item is moved from one container to another, while still in the players inventory.
-     * @param player The player object
-     * @param item The item object
-     * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
-     */
-    onInventoryItemUpdate(player: IPlayer, item: IItem, container: IContainer): void;
-    /**
-     * Called when the player equips an item to a slot
-     * @param player The player object
-     * @param item The item being equipped
-     * @param slot The slot
-     */
+    onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemRemove(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemUpdate(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onItemDamage(item: IItem, modifier?: number): number | undefined;
     onItemEquip(player: IPlayer, item: IItem, slot: EquipType): void;
-    /**
-     * Called when a creature is damaged
-     * @param creature The creature object
-     * @param damageInfo The damage info object
-     * @returns The amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
-     */
+    onItemQuickslot(item: IItem, player: IPlayer, quickSlot: number | undefined): void;
     onCreatureDamage(creature: ICreature, damageInfo: IDamageInfo): number | undefined;
-    /**
-     * Called when a creature dies
-     * @param creature The creature object
-     */
     onCreatureDeath(creature: ICreature): void;
-    /**
-     * Called when a creature spawns
-     * @param creature The creature object
-     */
     onCreatureSpawn(creature: ICreature): void;
-    /**
-     * Called when in-game, on the bind catcher loop (once per frame). When overriding this method, make sure you return bindPressed.
-     * @param bindPressed Whether a bind has been pressed. Use this as a final check before processing a bind, and set it to true when a bind was pressed.
-     * @param api The bind catcher api, allowing you to check whether binds are pressed
-     * @returns True if a bind was pressed, undefined otherwise
-     */
-    onBindLoop(bindPressed: true | undefined, api: BindCatcherApi): true | undefined;
-    /**
-     * Called when the player is moving
-     * @param player The player object
-     * @param nextX The x position the player is moving to
-     * @param nextY The y position the player is moving to
-     * @param tile The tile the player is moving to
-     * @param direction The direction the player is facing
-     * @returns False to cancel the move or undefined to use the default logic
-     */
-    onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: FacingDirection): boolean | undefined;
-    /**
-     * Called when the player completes a movement
-     * @param player The player object
-     */
+    onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    onLanguageLoad(language: ILanguage): void;
+    onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveComplete(player: IPlayer): void;
-    /**
-     * Called when the player faces a different direction
-     * @param player The player object
-     * @param direction The direction the player is now facing
-     */
-    onMoveDirectionUpdate(player: IPlayer, direction: FacingDirection): void;
-    /**
-     * Called when no input is received
-     * @param player The player object
-     */
+    onMoveDirectionUpdate(player: IPlayer, direction: Direction): void;
     onNoInputReceived(player: IPlayer): void;
-    /**
-     * Called when an doodad is picked up
-     * @param player The player object
-     * @param doodad The doodad object
-     */
+    onNPCDamage(npc: INPC, damageInfo: IDamageInfo): number | undefined;
+    onNPCDeath(npc: INPC): boolean | undefined;
+    onNPCSpawn(npc: INPC): void;
     onPickupDoodad(player: IPlayer, doodad: IDoodad): void;
-    /**
-     * Called when a player is damaged
-     * @param player The player object
-     * @param damageInfo The damage info object
-     * @returns The amount of damage the player should take (the player will take this damage) or undefined to use the default logic
-     */
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
-    /**
-     * Called when the player is killed
-     * @param player The player object
-     * @returns False to stop the player from dying or undefined to use the default logic
-     */
     onPlayerDeath(player: IPlayer): boolean | undefined;
-    /**
-     * Called when a player joins the server
-     * @param player The player object
-     */
     onPlayerJoin(player: IPlayer): void;
-    /**
-     * Called when a player leaves the server
-     * Note: This hook is not called for the player who left the server (player will never be localPlayer)
-     * @param player The player object
-     */
     onPlayerLeave(player: IPlayer): void;
-    /**
-     * Called when the player tick ends
-     * @param player The player object
-     */
     onPlayerTickEnd(player: IPlayer): void;
-    /**
-     * Called when the player tick starts
-     * @param player The player object
-     */
     onPlayerTickStart(player: IPlayer): void;
-    /**
-     * Called when a sound effect is queued
-     * @param type The sound effect type
-     * @param x The x location in the world for the effect
-     * @param y The y location in the world for the effect
-     * @param z The z location in the world for the effect
-     * @returns False to cancel the sound effect, a sound effect to play instead of the given one, or undefined to use the default logic
-     */
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
-    /**
-     * Called when the in game screen is shown
-     */
-    onShowInGameScreen(): void;
-    /**
-     * Called when a creature is spawned from a creature group
-     * @param creatureGroup The creature group
-     * @param creaturePool The pool of creatures that can be spawned
-     * @param x The x position to spawn the creature
-     * @param y The y position to spawn the creature
-     * @param z The z position to spawn the creature
-     * @returns False to cancel spawning the creature or undefined to use the default logic
-     */
+    onGameScreenVisible(): void;
+    onRenderOverlay(spriteBatch: ISpriteBatch): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
-    /**
-     * Called when a tile is updated (tile type changed, doodad created on it, etc)
-     * @param tile The tile that was updated
-     * @param x The x position to spawn the creature
-     * @param y The y position to spawn the creature
-     * @param z The z position to spawn the creature
-     */
     onTileUpdate(tile: ITile, x: number, y: number, z: number): void;
-    /**
-     * Called when a turn is ending
-     * @param player The player object
-     */
     onTurnEnd(player: IPlayer): void;
-    /**
-     * Called when a turn is starting
-     * @param player The player object
-     */
     onTurnStart(player: IPlayer): void;
-    /**
-     * Called when the players weight is being updated
-     * @param player The player object
-     * @param newWeight The new weight of the player
-     * @returns A number to set the player weight to or undefined to use the default logic
-     */
     onUpdateWeight(player: IPlayer, newWeight: number): number | undefined;
-    /**
-     * Called after an action has been executed
-     * This is called after the action result is used
-     * @param player The player object
-     * @param actionType The action type
-     * @param actionArgument The action argument
-     * @param actionResult The action result
-     */
+    onWriteNote(player: IPlayer, note: INote): false | undefined;
+    onWrittenNote(player: IPlayer, id: number): void;
     postExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
-    /**
-     * Called after the world is generating
-     * @param generateNewWorld True if a new world is being generated
-     */
     postGenerateWorld(generateNewWorld: boolean): void;
-    /**
-     * Called after rendering everything
-     */
     postRender(): void;
-    /**
-     * Caller after post processing the world render
-     */
     postRenderPostProcess(): void;
-    /**
-     * Caller after rendering the world
-     * @param tileScale The tile scale
-     * @param viewWidth The width of the view port
-     * @param viewHeight The height of the view port
-     */
     postRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
-    /**
-     * Called before an action is executed
-     * This is called before the action result is used
-     * @param player The player object
-     * @param actionType The action type
-     * @param actionArgument The action argument
-     * @returns False to cancel the action or undefined to use the default logic
-     */
     preExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument): boolean | undefined;
-    /**
-     * Called before a command is executed
-     * @param player The player object
-     * @param command The command
-     * @param args The arguments
-     * @returns False to cancel the command or undefined to use the default logic
-     */
-    preExecuteCommand(player: IPlayer, command: Command, args: string): boolean | undefined;
-    /**
-     * Called before rendering everything
-     */
+    preLoadWorldDifferences(generateNewWorld: boolean): void;
+    preExecuteCommand(player: IPlayer, command: Command, args: string | undefined): boolean | undefined;
     preRender(): void;
-    /**
-     * Caller before post processing the world render
-     */
     preRenderPostProcess(): void;
-    /**
-     * Called before rendering the world
-     * @param tileScale The tile scale
-     * @param viewWidth The width of the view port
-     * @param viewHeight The height of the view port
-     */
     preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
-    /**
-     * Called when input is being processed
-     * @param player The player object
-     * @returns False to prevent input processing or undefined to use the default logic
-     */
     processInput(player: IPlayer): boolean | undefined;
-    /**
-     * Called when different object types are rendered
-     * @returns A bitwise list of render flags or undefined to use the default logic
-     */
     shouldRender(): RenderFlag | undefined;
 }
 export default Mod;

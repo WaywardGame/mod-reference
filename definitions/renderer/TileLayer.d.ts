@@ -1,4 +1,4 @@
-import Vec2 = TSM.vec2;
+import Vec2 from "utilities/math/Vector2";
 /**
  * Each tile in the wayward world is rendered as 4 subtiles (topleft, topright, bottomleft, bottomright).
  * The world consists of 3 tile layers (terrain, doodad, doodadOver).

@@ -1,12 +1,11 @@
-import { DialogId, EquipType, IMessagePack, ItemType, ScreenId, SentenceCaseStyle, SortType, StatType } from "Enums";
+import { DialogId, EquipType, ItemType, SentenceCaseStyle, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { Message, MessageType } from "language/Messages";
-import { BindCatcherApi } from "newui/BindingManager";
-import { MenuId } from "newui/INewUi";
-import { IPlayer } from "player/IPlayer";
+import { IMessagePack, Message } from "language/IMessages";
+import { ScreenId } from "newui/screen/IScreen";
+import { MenuId } from "newui/screen/screens/menu/component/IMenu";
+import Menu from "newui/screen/screens/menu/component/Menu";
 import { IPropSerializable } from "save/ISerializer";
-import { HintType } from "ui/IHint";
-import { Emitter } from "Utilities";
+import Emitter from "utilities/Emitter";
 export interface IUiScreen {
     bindCatcher?: number;
     selector(): string;
@@ -14,9 +13,7 @@ export interface IUiScreen {
     unbindElements(): void;
     show(data?: any): void;
     hide(): void;
-    onGameEnd(showBlocker: boolean): void;
     isVisible(): void;
-    onBindLoop?(api: BindCatcherApi): void;
 }
 export interface IDialogInfo {
     id?: string;
@@ -54,46 +51,30 @@ export interface IUi extends IPropSerializable, Emitter {
     screenInGame: IUiScreen;
     initialize(): void;
     initializeGameState(): void;
-    setupButtons(): void;
     getBody(): JQuery;
     getWidth(): number;
     getHeight(): number;
+    hideInGameScreen(): void;
     removeStyle(id: string): void;
     appendStyle(id: string, styleContent: string): void;
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
-    switchToScreen(screenId: ScreenId, menuId?: MenuId, ...args: any[]): void;
+    switchToScreen<M extends Menu = Menu>(screenId: ScreenId, menuId?: MenuId, menuInitializer?: (menu: M) => any): void;
     changeEquipmentOption(id: string): void;
     toggleOptions(): void;
     showOptionsScreen(): Promise<void>;
     onWindowResize(): void;
-    resetHelpHeight(): void;
     isInGameScreenShown(): boolean;
     setupItemBackgrounds(): void;
     refreshStats(): void;
-    shakeStat(stat: StatType): void;
-    refreshAttributes(): void;
     loadQuickSlots(): void;
-    onBindLoop(api: BindCatcherApi): void;
     isContextMenuOpen(): boolean;
     isOptionsOverlayShown(): boolean;
-    isHelpOverlayShown(): boolean;
-    isHelpOverlayEnabled(): boolean;
     isOptionsOverlayEnabled(): boolean;
-    displayHint(player: IPlayer | undefined, hintType: HintType, force?: boolean): boolean;
-    displayChatMessage(player: IPlayer, message: string): void;
-    getCurrentHint(): HintType;
-    setCurrentHint(hintType: HintType): void;
-    toggleHelp(): void;
-    hideHelpScreen(): void;
     tooltipRefresh(): void;
     refreshWorldTooltips(): void;
     messageIdToText(message: Message): string;
     getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
-    displayMessage(player: IPlayer | IPlayer[] | undefined, message: Message | string, messageType?: MessageType, ...args: any[]): void;
-    displayMessagePack(player: IPlayer | IPlayer[] | undefined, messagePack: IMessagePack): void;
-    getMessageCount(): number;
-    removeOldestMessage(): void;
     updateMilestonesDialog(): void;
     updateSkillsDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
@@ -106,8 +87,6 @@ export interface IUi extends IPropSerializable, Emitter {
     openBookDialog(title: string, content: string): void;
     closeMapDialog(): void;
     setFontStyle(): void;
-    addButton(translationId: string, imagePath: string, keyBind?: number): JQuery;
-    removeButton(button: JQuery): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
@@ -115,17 +94,31 @@ export interface IUi extends IPropSerializable, Emitter {
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
     setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
     refreshQuickSlots(): void;
+    getUsedQuickSlots(): number[];
     removeItemFromQuickSlot(itemId: number): void;
     removeItemFromEquipSlot(equip: EquipType): void;
     shouldRefreshMods(): boolean;
     setObjectUrl(objectUrl: string): void;
-    onGameEnd(showBlocker: boolean): void;
-    highlight(selector?: string[] | undefined, onlyFirstElement?: boolean, timeout?: number): void;
-    toggleUIDisplay(): void;
+    onGameEnd(showDeath: boolean): void;
+    /**
+     * Highlight any number of elements, replacing any other previous "unique highlight" elements, if they
+     * are still flashing
+     * @param iterations How many times the element should flash
+     * @param selectors A list of selectors and elements that should be highlighted
+     */
+    highlightUnique(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
+    /**
+     * Highlight any number of elements
+     * @param iterations How many times the element should flash
+     * @param selectors A list of selectors and elements that should be highlighted
+     */
+    highlight(iterations?: number, ...selectors: Array<string | HTMLElement>): void;
+    toggleUIDisplay(hide: boolean): void;
     getSerializationProperties(_: string): string[];
     onMove(): void;
     closeAllContainers(): void;
     openContainer(container: IContainer, containerName?: string): void;
+    refreshContainerName(container: IContainer): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;
     addItemToContainer(item: IItem, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
@@ -142,5 +135,5 @@ export interface IUi extends IPropSerializable, Emitter {
 export default IUi;
 export declare enum UiEvent {
     HelpShow = 0,
-    HelpHide = 1,
+    HelpHide = 1
 }

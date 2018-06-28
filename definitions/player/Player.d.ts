@@ -1,162 +1,117 @@
-import { ICreature, IDamageInfo } from "creature/ICreature";
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
+import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Bindable, Delay, EquipType, FacingDirection, IInspect, IMessagePack, IPoint, IPointZ, ItemQuality, ItemType, MoveType, PlayerState, RestCancelReason, SfxType, SkillType, StatType, TurnType, WeightStatus, WorldZ } from "Enums";
-import { IContainer, IItem } from "item/IItem";
-import { Message } from "language/Messages";
+import BaseHumanEntity from "entity/BaseHumanEntity";
+import { EntityType } from "entity/IEntity";
+import { Delay, Direction, EquipType, IInspect, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
+import { IItem } from "item/IItem";
+import { IMessagePack, Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
-import { IAttackHand, IMobCheck, IPlayer, IPlayerCustomization, IPlayerStatus, IPlayerTravelData, IRestData } from "player/IPlayer";
-import PlayerDefense from "player/PlayerDefense";
-import { ISkillSet } from "player/Skills";
+import { IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
+import MessageManager from "player/MessageManager";
+import NoteManager from "player/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
-import { IOptions } from "save/data/ISaveDataGlobal";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-export default class Player implements IPlayer, IPreSerializeCallback {
+import { IVector3 } from "utilities/math/IVector";
+export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
+    readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
-    attack: number;
-    attackFromEquip: IAttackHand;
-    benignity: number;
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
     };
-    currentHint: HintType;
-    customization: IPlayerCustomization;
-    deathBy: string;
-    defense: PlayerDefense;
-    defenses: number[];
-    dehydration: number;
-    dexterity: number;
     dialogContainerInfo: IDialogInfo[];
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
-    direction: IPoint;
-    equipped: {
-        [index: number]: number;
-    };
     exploredMapEncodedData: number[][];
-    facingDirection: FacingDirection;
-    handToUse: EquipType;
     hintSeen: boolean[];
-    id: number;
     identifier: string;
-    inventory: IContainer;
     isConnecting: boolean;
     isMoving: boolean;
-    lightBonus: number;
-    malignity: number;
+    messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
-    moveType: MoveType;
     name: string;
     noInputReceived: boolean;
-    options: IOptions;
+    notes: NoteManager;
     quickSlotInfo: IQuickSlotInfo[];
-    raft: number | undefined;
     realTimeTickActionDelay: number;
-    restData: IRestData | undefined;
     revealedItems: {
         [index: number]: boolean;
     };
-    score: number;
-    skills: ISkillSet;
-    spawnPoint: IPointZ;
-    starvation: number;
-    state: PlayerState;
-    stats: {
-        health: {
-            value: number;
-            timer: number;
-            regen: number;
-            regenBase: number;
-        };
-        stamina: {
-            value: number;
-            timer: number;
-            regen: number;
-            regenBase: number;
-        };
-        hunger: {
-            value: number;
-            timer: number;
-            regen: number;
-            regenBase: number;
-        };
-        thirst: {
-            value: number;
-            timer: number;
-            regen: number;
-            regenBase: number;
-        };
-    };
-    status: IPlayerStatus;
-    stopNextMovement: boolean;
-    strength: number;
-    swimming: boolean;
+    spawnPoint: IVector3;
     tamedCreatures: number[];
     travelData: IPlayerTravelData | undefined;
     turns: number;
     walkSoundCounter: number;
-    weight: number;
-    weightBonus: number;
-    x: number;
-    y: number;
-    z: WorldZ;
     exploredMap: IExploreMap[] | undefined;
     exploredMapNotSaved: IExploreMap[] | undefined;
     isMovingClientside: boolean;
     wasAbsentPlayer: boolean;
-    fromX: number;
-    fromY: number;
     nextX: number;
     nextY: number;
     nextProcessInput: number;
     movementProgress: number;
     movementFinishTime: number;
-    movementAnimation: number;
     nextMoveTime: number;
-    nextMoveDirection: FacingDirection | undefined;
+    nextMoveDirection: Direction | undefined;
     private _milestoneUpdates;
-    private _movementIntent;
+    private readonly _movementIntent;
     constructor();
+    startResting(restData: IRestData): void;
+    /**
+     * Updates caused by status effects such as bleeding, poison, and burns.
+     */
+    updateStatuses(): void;
     resetMovementStates(): void;
-    attributes(): void;
     setId(id: number): void;
-    setRaft(itemId: number | undefined): void;
+    setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
     staminaCheck(): boolean;
     addMilestone(milestone: MilestoneType, data?: number): void;
-    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: string, soundDelay?: number): number | undefined;
     calculateEquipmentStats(): void;
-    getTile(): ITile;
-    getPoint(): IPointZ;
-    getFacingPoint(): IPointZ;
-    getFacingTile(): ITile;
     getDefaultCarveTool(): IItem | undefined;
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
     canJump(): boolean;
-    canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    hasHandToUse(): boolean;
     getHandToUse(): EquipType | undefined;
-    getEquippedItems(): IItem[];
-    getEquippedItem(slot: EquipType): IItem | undefined;
-    getEquipSlotForItem(item: IItem): EquipType | undefined;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    getMovementIntent(): Bindable | undefined;
-    updateMovementIntent(bind: Bindable | undefined): void;
-    damageEquipment(): void;
+    getMovementIntent(): IMovementIntent;
+    updateMovementIntent(movementIntent: IMovementIntent): void;
+    /**
+     * Gets the max health of the player.
+     *
+     * Returns the result of `Hook.GetPlayerMaxHealth`, or the `max` in `Stat.Health`,
+     * if the result of the hook is `undefined`.
+     */
     getMaxHealth(): number;
-    createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
+    /**
+     * Gets the strength of the player.
+     *
+     * Returns the result of `Hook.GetPlayerStrength`, or the `max` in `Stat.Health`,
+     * if the result of the hook is `undefined`.
+     *
+     * Used internally for `Stat.Weight.max`
+     */
+    getStrength(): number;
     setup(completedMilestones: number): void;
     preSerializeObject(): void;
     restoreExploredMap(): void;
-    shakeStat(statType: StatType): void;
-    staminaReduction(skillType: SkillType): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
@@ -171,53 +126,67 @@ export default class Player implements IPlayer, IPreSerializeCallback {
     updateTablesAndWeight(): void;
     checkReputationMilestones(): void;
     getReputation(): number;
-    hurtHands(message: Message, damageMessage: Message): void;
-    /**
-     * Burn the player
-     */
-    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
+    hurtHands(message: Message, damageMessage: Message, hurtHands?: Message): void;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     getInspectHealthMessage(player: IPlayer): IMessagePack;
-    setPosition(point: IPointZ): void;
+    setPosition(point: IVector3): void;
     setZ(z: number): void;
     isLocalPlayer(): boolean;
     isGhost(): boolean;
     isServer(): boolean;
-    isResting(): boolean;
-    getName(html?: boolean): string;
-    isRestingCancelled(): boolean;
-    startResting(restData: IRestData): void;
-    cancelResting(reason: RestCancelReason): void;
+    getName(): string;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
-    updateStatsAndAttributes(): void;
     passTurn(turnType?: TurnType): void;
     tick(isPassTurn?: boolean): void;
-    queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
-    queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     kill(): void;
+    getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     processInput(): void;
-    getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
+    faceDirection(direction: Direction, ignoreTurnDelay?: boolean): boolean;
+    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
     updateMilestones(): void;
     healthSyncCheck(): void;
-    private slitherSuckerDamage();
-    private processMovement(turnType?);
-    private processTimers();
-    private swimCheck();
-    private isOnFire();
-    private restTick();
-    private statGain(stat, bypass);
-    private resetDefense();
-    private calculateStats();
-    private showStatsHint();
-    private staminaSyncCheck();
+    /**
+     * This needs to be called whenever the player's strength requires an update.
+     *
+     * Example usage includes:
+     * 1. When max health changes. Max health is used in calculating the strength.
+     * 2. If a mod is using the `GetPlayerStrength` hook and the calculation needs to be refreshed.
+     */
+    updateStrength(): void;
+    protected calculateStats(): void;
+    protected swimCheck(): void;
+    private slitherSuckerDamage;
+    private processMovement;
+    /**
+     * Event handler for when resting begins, weight changes, or strength changes.
+     */
+    private onStaminaUseChanged;
+    /**
+     * Event handler for when a status effect is applied or removed.
+     */
+    private onStatusEffectChanged;
+    /**
+     * Event handler for `EntityEvent.StatChanged`. Handles special functionality when stats are increased:
+     * 1. When resting & stamina is full, resting will be cancelled.
+     * 2. Health is sync-checked.
+     * 3. When hunger > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
+     * 4. When thirst > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
+     */
+    private onStatChange;
+    private restTick;
+    private staminaSyncCheck;
+    private canWriteInHours;
+    private canWriteNote;
+    private onWriteNote;
+    private shouldDisplayMessage;
+    private onDisplayMessage;
 }

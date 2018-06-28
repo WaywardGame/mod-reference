@@ -1,35 +1,52 @@
 import IAudio from "audio/IAudio";
 import { Music, SfxType } from "Enums";
+import EnumCursor from "utilities/enum/EnumCursor";
 export declare enum Fading {
     None = 0,
     In = 1,
-    Out = 2,
+    Out = 2
 }
 export default class WAudio implements IAudio {
-    musicSpeed: number;
-    fading: Fading;
-    private readonly music;
-    private readonly sfx;
-    private readonly soundQueue;
-    private readonly recentlyPlayedSounds;
-    private soundDelay;
-    private musicTrack;
-    private readonly fileFormat;
-    private readonly audioContext;
-    private readonly gainNode;
+    private readonly _musicInfo;
+    private readonly _sfxInfo;
+    private readonly _soundQueue;
+    private readonly _recentlyPlayedSounds;
+    private _fileFormat;
+    private _onInitializedPromise;
+    private _audioContext;
+    private _musicGainNode;
+    private _effectsGainNode;
+    private _musicSpeed;
+    private _soundDelay;
+    private _musicHandler;
     constructor();
-    setupMusic(track: HTMLAudioElement): void;
-    playMusic(): void;
-    updateMusicSpeed(speed: number): void;
-    fadeOut(): Promise<void>;
-    fadeIn(): Promise<void>;
-    playNextMusicTrack(): void;
-    playMusicTrack(musicTrack: Music): void;
-    updateVolume(): void;
-    updatePosition(): void;
+    /**
+     * Returns the current music handler, an instance of `EnumCursor<Music>`
+     */
+    getMusicHandler(): EnumCursor<Music>;
+    /**
+     * Sets the music handler to the provided instance of `EnumCursor<Music>`. Causes any playing music to stop.
+     */
+    setMusicHandler(musicHandler: EnumCursor<Music>): Promise<void>;
+    /**
+     * Resets the music handler to its original state.
+     */
+    resetMusicHandler(): Promise<void>;
+    /**
+     * Sets the current track to the first in the current music handler.
+     */
+    playMusic(): Promise<void>;
+    stopMusic(): void;
+    updateMusicSpeed(speed: number): Promise<void>;
+    updateVolume(): Promise<void>;
+    updatePosition(): Promise<void>;
     queueEffect(type: SfxType, x: number, y: number, z: number, delay?: number, speed?: number, noPosition?: boolean): void;
     processEffects(): void;
-    private isComparableSound(soundEffect, x, y, z, type, delay, speed, now, noPosition);
-    private playEffect(soundEffect, variation?);
-    private play(mediaElement);
+    private _stopMusic;
+    private _playMusic;
+    private _playEffect;
+    private _isComparableSound;
+    private _getAudioBuffer;
+    private initializeAudio;
+    private waitForAudioContext;
 }

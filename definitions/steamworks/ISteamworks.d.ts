@@ -1,4 +1,5 @@
-import { ModType } from "mod/IModManager";
+import { IPlayOptions } from "game/IGame";
+import { ModType } from "mod/IModInfo";
 import Emitter from "utilities/Emitter";
 export interface ISteamworks extends Emitter {
     clearRichPresence(): void;
@@ -8,7 +9,8 @@ export interface ISteamworks extends Emitter {
     debugLog(...args: any[]): void;
     deleteSaveGameMod(name: string): void;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
-    getAbsolutePath(p: string): any;
+    getAbsolutePath(...p: string[]): string;
+    getAppPath(...p: string[]): string;
     getBetaName(): string;
     getBuildTime(): number | undefined;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
@@ -28,11 +30,11 @@ export interface ISteamworks extends Emitter {
     initialize(): void;
     isDedicatedServer(): boolean;
     isElectron(): boolean;
+    isUsingAsar(): boolean;
     isGreenworksEnabled(): boolean;
     isInLobby(): boolean;
-    isLinux(): boolean;
-    isMac(): boolean;
     isOverlayWorking(): boolean;
+    isTestMode(): boolean;
     joinLobby(lobbyId: string): void;
     leaveLobby(): void;
     multiplayerLog(...args: any[]): void;
@@ -40,20 +42,19 @@ export interface ISteamworks extends Emitter {
     onMessage(name: string, listener: (event: any, ...data: any[]) => any): boolean;
     onReady(): void;
     onUnload(): void;
+    openSaveFolder(): void;
     openLogsFolder(): void;
     openModsFolder(): void;
     openUrl(url: string): void;
     openWorkshop(publishId?: string): Promise<void>;
     publishMod(modIndex: number): Promise<string>;
-    recordProblem(message: string): void;
     sendMessage(name: string, ...data: any[]): boolean;
     setLobbyData(name: string, data: string): boolean;
-    setLobbyType(type: LobbyType): void;
+    setLobbyType(type: LobbyType): boolean;
     setOverlayWorks(ipg: boolean): void;
     setRichPresence(key: string, value: string): boolean;
     setupMods(callback: () => void): void;
     setupMultiplayerLog(): void;
-    setupReporting(): void;
     toggleDeveloperTools(): void;
     unsubscribe(publishId: string): Promise<void>;
 }
@@ -93,11 +94,11 @@ export declare enum LobbyType {
     Private = 0,
     FriendsOnly = 1,
     Public = 2,
-    Invisible = 3,
+    Invisible = 3
 }
 export declare enum SteamworksEvent {
     OverlayShown = 0,
-    OverlayHidden = 1,
+    OverlayHidden = 1
 }
 export interface IDedicatedServerInfo {
     name: string;
@@ -106,4 +107,6 @@ export interface IDedicatedServerInfo {
     backupInterval: number;
     maxBackups: number;
     load: string | undefined;
+    console: boolean;
+    newGameOptions?: IPlayOptions;
 }

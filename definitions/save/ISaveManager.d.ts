@@ -5,7 +5,7 @@ export interface ISaveManager {
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteSlot(slot: number): Promise<boolean | undefined>;
     exportSave(slot: number): Promise<SaveObject>;
-    getFirstFreeSlot(): Promise<number>;
+    getFirstFreeSlot(): Promise<number | undefined>;
     getGameStateAsJson(): string;
     getMostRecentSlot(): Promise<number>;
     getSaveCount(): Promise<number>;
@@ -34,11 +34,11 @@ export declare enum SaveSort {
     SaveTime = 0,
     Name = 1,
     TurnCount = 2,
-    CreatedTime = 3,
+    CreatedTime = 3
 }
 export declare enum SortDirection {
     More = 1,
-    Less = -1,
+    Less = -1
 }
 export declare let dailyChallengeSlot: number;
 export declare let globalSlot: number;

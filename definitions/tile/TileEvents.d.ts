@@ -1,3 +1,3 @@
 import { ITileEventDescription } from "tile/ITileEvent";
-export declare const defines: (ITileEventDescription | undefined)[];
+declare const defines: Description<ITileEventDescription>;
 export default defines;

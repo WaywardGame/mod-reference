@@ -1,196 +1,162 @@
-import { Dictionary, InterruptChoice, UiTranslation } from "language/ILanguage";
-import { InterruptOptions } from "newui/menu/InterruptMenu";
-import { InputOptions } from "newui/util/Input";
-export declare enum ScreenId {
-    None = 0,
-    Splash = 1,
-    Menu = 2,
-    Game = 3,
-    Interrupt = 4,
-}
-export declare enum MenuId {
-    Back = -1,
-    None = 0,
-    About = 1,
-    Changelog = 2,
-    CharacterCreation = 3,
-    CharacterSelection = 4,
-    Friends = 5,
-    GameEnd = 6,
-    Highscores = 7,
-    Interrupt = 8,
-    JoinDedicatedServer = 9,
-    LoadGame = 10,
-    Main = 11,
-    Mods = 12,
-    Multiplayer = 13,
-    NewGame = 14,
-    News = 15,
-    Options = 16,
-    Pause = 17,
-}
-export declare enum TooltipLocation {
-    AboveLeft = 0,
-    AboveRight = 1,
-    TopLeft = 2,
-    TopRight = 3,
-    CenterLeft = 4,
-    CenterRight = 5,
-    BottomLeft = 6,
-    BottomRight = 7,
-    BeneathLeft = 8,
-    BeneathRight = 9,
-    Mouse = 10,
-}
-export declare enum Namespace {
-    SVG = "http://www.w3.org/2000/svg",
-}
-export interface UiElementOptions {
-    visible?: boolean;
-    elementType?: string;
-    namespace?: Namespace;
-    id?: string;
-    classes?: string[];
-    attributes?: {
-        [key: string]: string | number;
-    };
-    tooltip?: TooltipOptionsVague | boolean;
-    selectable?: SelectableLayer;
-}
-export declare enum SelectableLayer {
-    Primary = 0,
-    Secondary = 1,
-    Tertiary = 2,
-    Quaternary = 3,
-}
-export interface TooltipOptionsVague extends UiElementOptions {
-    tooltip?: never;
-    location: TooltipLocation;
-    heading?: TextOrTranslationData;
-    text?: TextOrTranslationData;
-    maxWidth?: number;
-    create?(...args: any[]): Promise<void>;
-}
-export declare type InterruptInputOptions = InputOptions & InterruptOptionsCanCancel;
-export interface InterruptOptionsCanCancel {
-    canCancel?: boolean;
-}
-export interface UiApi {
-    visibleMenu: MenuId | undefined;
-    visibleScreen: ScreenId | undefined;
-    getMenu(): IMenu | undefined;
-    getMenu(menuId: MenuId): IMenu | undefined;
-    getMenu(menuId?: MenuId): IMenu | undefined;
-    showMenu(menuId: MenuId, transition?: boolean, args?: {
-        [key: string]: any;
-    }, loadingInterrupt?: InterruptOptions): Promise<void>;
-    hideMenu(): Promise<void>;
-    backOneMenu(): Promise<void>;
-    getScreen(): IUiScreen | undefined;
-    getScreen(screenId: ScreenId): IUiScreen | undefined;
-    showScreen(screenId: ScreenId, transition?: boolean): Promise<void>;
-    hideScreen(): Promise<void>;
-    hideScreen(screenId: ScreenId): Promise<void>;
-    hideScreen(screen: IUiScreen): Promise<void>;
+import { InterruptChoice } from "language/ILanguage";
+import { HighlightSelector, IComponent, IHighlight, ITooltip, TranslationGenerator } from "newui/component/IComponent";
+import { IInput } from "newui/component/IInput";
+import { IScreen, ScreenId } from "newui/screen/IScreen";
+import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
+import Emitter from "utilities/Emitter";
+export interface UiApi extends Emitter {
+    tooltips: ITooltipManager;
+    scale: IScaleManager;
+    highlights: IHighlightManager;
+    /**
+     * Generator for all existing screens.
+     */
+    screens(): IterableIterator<IScreen>;
+    /**
+     * @param screenId The ID of the screen to return. If this screen is not initialized, returns undefined.
+     */
+    getScreen<S extends IScreen = IScreen>(screenId: ScreenId): S | undefined;
+    /**
+     * Returns the visible screen
+     */
+    getVisibleScreen<S extends IScreen = IScreen>(): S | undefined;
+    /**
+     * Returns if the given screen is visible
+     */
     isScreenVisible(screenId: ScreenId): boolean;
-    removeScreen(screenId: ScreenId): Promise<void>;
-    showTooltip(tooltipSource: IUiElement): Promise<void>;
-    showTooltip(tooltipOptions: TooltipOptionsVague, source?: IUiElement): Promise<void>;
-    showTooltip(tooltipOptions: TooltipOptionsVague | IUiElement, source?: IUiElement): Promise<void>;
-    hideTooltip(): Promise<void>;
-    hideTooltip(source: IUiElement): Promise<void>;
-    dumpTooltip(): Promise<void>;
-    dumpTooltip(source: IUiElement): Promise<void>;
-    interruptWithChoice(title: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
-    interruptWithChoice(title: TextOrTranslationData, description: TextOrTranslationData, choices: InterruptChoice[]): Promise<InterruptChoice>;
-    interruptWithConfirmation(title: TextOrTranslationData): Promise<boolean>;
-    interruptWithConfirmation(title: TextOrTranslationData, description: TextOrTranslationData): Promise<boolean>;
-    interruptWithInfo(title: TextOrTranslationData, description?: TextOrTranslationData): Promise<void>;
-    interruptWithInput(title: TextOrTranslationData, options?: InterruptInputOptions): Promise<string>;
-    interruptWithInput(title: TextOrTranslationData, description: TextOrTranslationData, options?: InterruptInputOptions): Promise<string>;
+    /**
+     * Shows a screen
+     * @param screenId The id of the screen to show
+     */
+    showScreen(screenId: ScreenId): void;
+    /**
+     * Hides the given screen.
+     */
+    hideScreen(screen: ScreenId | IScreen): void;
+    /**
+     * Returns a new interrupt factory with the given translation data.
+     */
+    interrupt(title: TranslationGenerator, description?: TranslationGenerator): IInterruptFactory;
+    /**
+     * Returns an interrupt factory that can only be used to create menus.
+     */
+    interrupt(): IInterruptMenuFactory;
+    /**
+     * Returns a promise that will resolve when the loading interrupt has been hidden.
+     */
+    hideLoadingInterrupt(): Promise<void>;
+    /**
+     * @deprecated
+     */
+    interruptWithConfirmation(title: TranslationGenerator): Promise<boolean>;
+    /**
+     * @deprecated
+     */
+    interruptWithConfirmation(title: TranslationGenerator, description: TranslationGenerator): Promise<boolean>;
+    /**
+     * @deprecated
+     */
+    interruptWithInfo(title: TranslationGenerator, description?: TranslationGenerator): Promise<void>;
+    /**
+     * @deprecated
+     */
     interruptWithMenu(menuId: MenuId, args?: {
         [key: string]: any;
     }): Promise<void>;
-    showLoadingInterrupt(title: TextOrTranslationData, description?: TextOrTranslationData, canCancel?: boolean): Promise<void>;
-    hideLoadingInterrupt(): Promise<void>;
-    refreshTranslations(element: HTMLElement | IUiElement): void;
-    getText(textOrTranslationData: TextOrTranslationData, shouldTrim?: false): string;
+    /**
+     * @deprecated
+     */
+    showLoadingInterrupt(title: TranslationGenerator, description?: TranslationGenerator, canCancel?: boolean): Promise<void>;
+    refreshTranslations(element: HTMLElement | IComponent): void;
     toggleFullscreen(fullscreen?: boolean): void;
+    storeElements(...elements: Array<HTMLElement | IComponent>): void;
+    registerDataHost(id: string | number, dataHost: object): void;
     playActivateSound(): void;
     playSelectSound(): void;
-    setScale(scale: number): void;
-    getMaximumScale(): number;
     setDialogOpacity(opacity: number): void;
-    on(event: UiApiEvent, callback: (...args: any[]) => any): void;
 }
-export declare enum UiElementEvent {
-    Show = 0,
-    Hide = 1,
-    Append = 2,
-    Remove = 3,
-    AddChild = 4,
-    RemoveChild = 5,
-    Change = 6,
+export interface IScaleManager {
+    /**
+     * Returns the minimum scale we allow (0.5, multiplier)
+     */
+    getMinimum(): number;
+    /**
+     * Returns the maximum scale the screen size will allow (multiplier)
+     */
+    getMaximum(): number;
+    /**
+     * Returns the current UI scale (after being clamped by min & max).
+     */
+    getCurrent(): number;
+    /**
+     * Returns the currently "requested" UI scale.
+     */
+    getRequested(): number;
+    /**
+     * Requests a new UI scale, a multiplier of the default size.
+     */
+    request(scale: number): void;
+    /**
+     * Updates the UI scale based on the current viewport.
+     */
+    update(): void;
+}
+export interface ITooltipManager {
+    show(host: IComponent): ITooltip | undefined;
+    hide(host?: IComponent): void;
+}
+export declare enum SaveLocation {
+    /**
+     * Used to mark a field to be saved locally (per save)
+     */
+    Local = 0,
+    /**
+     * Used to mark a field to be saved globally (across saves)
+     */
+    Global = 1,
+    /**
+     * Used to mark a field to be saved both locally and globally. Local data will override global data, if it exists.
+     */
+    Both = 2
+}
+/**
+ * Used to mark a field to be saved to either `saveData` or `saveDataGlobal`. Used in conjunction with
+ * `IGameScreenApi.registerDataHost(<id>, <the instance that contains fields marked with this decorator>)`
+ */
+export declare function Save(saveLocation: SaveLocation): any;
+export declare function savedProperties<T = any>(target: T): IterableIterator<[string, SaveLocation]>;
+export interface IInterruptFactory extends IInterruptMenuFactory {
+    withDescription(description: TranslationGenerator): this;
+    withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
+    withConfirmation(): Promise<boolean>;
+    withInfo(): Promise<void>;
+    withInput(inputInitializer?: (input: IInput) => any): Promise<string>;
+    withLoading(canCancel?: boolean, specialType?: string): Promise<void>;
+    withLoading(until: Promise<any> | (() => Promise<any>), canCancel?: boolean, specialType?: string): Promise<void>;
+}
+export interface IInterruptMenuFactory {
+    withMenu<M extends IMenu = IMenu>(menuId: MenuId, initializer?: (menu: M) => any): Promise<void>;
+}
+export interface IHighlightManager {
+    start(host: any, highlight: IHighlight): void;
+    end(host: any): void;
+    register(component: IComponent, selector: HighlightSelector, until?: string | number): void;
 }
 export declare enum UiApiEvent {
     Resize = 0,
     Interrupt = 1,
     InterruptClose = 2,
-}
-export interface IUiElement<T = {}> {
-    jsonData: DOMStringMap & T;
-    data: DOMStringMap;
-    trigger(event: UiElementEvent, ...args: any[]): Promise<any[]>;
-    on(event: string | number | Array<string | number>, callback: (...args: any[]) => any): void;
-    cancel(event: string | number | Array<string | number>, callback: (...args: any[]) => any): void;
-    addClass(...classes: string[]): this;
-    removeClass(...classes: string[]): this;
-    isVisible(): boolean;
-    show(...args: any[]): Promise<void>;
-    hide(...args: any[]): Promise<void>;
-    toggle(visible: boolean, ...args: any[]): Promise<void>;
-    appendTo(element: string | HTMLElement | IUiElement): this;
-    append(elements: Array<HTMLElement | IUiElement>): this;
-    remove(removeFromParent?: boolean): Promise<void>;
-    removeChild(child: IUiElement, removeChild?: boolean): void;
-    findDescendants(selector: string): NodeListOf<Element>;
-    contains(what: string | HTMLElement | IUiElement): boolean;
-    showTooltip(): void;
-}
-export interface IUiScreen extends IUiElement {
-    readonly bindingManagerId: number;
-    getMenu(): IMenu | undefined;
-    getMenu(menuId: MenuId): IMenu | undefined;
-    getMenu(menuId?: MenuId): IMenu | undefined;
+    LoadedFromSave = "LoadedFromSave"
 }
 export declare enum SelectDirection {
     Up = -1,
     Down = 1,
     Left = -2,
-    Right = 2,
+    Right = 2
 }
-export interface IMenu extends IUiElement {
-    selectNext(sound?: boolean): void;
-    selectPrevious(sound?: boolean): void;
-    select(element: HTMLElement): void;
-    getSelection(): HTMLElement;
-}
-export declare enum UiScreenEvent {
-    ShowMenu = "ShowMenu",
-    HideMenu = "HideMenu",
-    GoBackMenu = "GoBackMenu",
-    BindLoop = "BindLoop",
-}
-export interface TranslationData {
-    dictionary: Dictionary;
-    entry: number;
-    args?: any[] | (() => any[]);
-    properties?: string[];
-    shouldTrim?: false;
-}
-export declare type TextOrTranslationData = string | UiTranslation | TranslationData;
 export interface LoadMenuArgs {
     _wentBack: boolean;
 }
-export declare const minimumDialogOpacity = 0;
-export declare const defaultDialogOpacity = 50;
+export declare const DIALOG_OPACITY_MIN = 0;
+export declare const DIALOG_OPACITY_DEFAULT = 80;
+export declare const NEWUI_HOOK_PRIORITY = -99999999999;

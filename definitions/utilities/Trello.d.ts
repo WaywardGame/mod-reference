@@ -1,4 +1,14 @@
-import { IVersionInfo } from "Enums";
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
+import { IVersionInfo } from "utilities/Version";
 export interface ITrello {
     getChangelog(versionInfo: IVersionInfo): Promise<IChangelog | undefined>;
     getVersions(maxVersion?: IVersionInfo): Promise<IVersionInfo[]>;
@@ -45,15 +55,15 @@ export declare enum ChangelogSection {
     Modding = 4,
     Mod = 5,
     Technical = 6,
-    Misc = 7,
+    Misc = 7
 }
 export default class Trello implements ITrello {
     getChangelog(versionInfo: IVersionInfo): Promise<IChangelog | undefined>;
     getVersions(maxVersion?: IVersionInfo, board?: ITrelloBoard): Promise<IVersionInfo[]>;
-    private getCards(list);
-    private getBoard(boardId, checkClosed?);
-    private getListVersionInfo(list);
-    private findChangelogList(versionInfo, board?);
-    private parseChangelog(changelogData);
+    private getCards;
+    private getBoard;
+    private getListVersionInfo;
+    private findChangelogList;
+    private parseChangelog;
 }
-export declare const trello: default;
+export declare const trello: Trello;

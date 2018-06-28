@@ -1,8 +1,8 @@
-import Vec2 = TSM.vec2;
 import DoodadInfo from "doodad/DoodadInfo";
 import { TerrainType } from "Enums";
 import ITileAtlas from "renderer/ITileAtlas";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
+import Vec2 from "utilities/math/Vector2";
 export declare enum TileType {
     Q2TopRightQ1TopLeft = 0,
     Q2TopLeft = 1,
@@ -43,7 +43,7 @@ export declare enum TileType {
     Q3TopLeft = 36,
     Q3BottomRight = 37,
     Q4TopRight = 38,
-    Q4BottomLeft = 39,
+    Q4BottomLeft = 39
 }
 export declare function rotateTileType90Deg(tileType: TileType, times: number): TileType;
 export declare function getTileLoc(tileType: TileType, tileInfo: TerrainTileInfo, variation?: number): Vec2;
@@ -55,6 +55,9 @@ export default class TileAtlas implements ITileAtlas {
         [index: number]: TerrainTileInfo;
     };
     doodads: {
+        [index: number]: DoodadInfo;
+    };
+    doodadItems: {
         [index: number]: DoodadInfo;
     };
     mounds: {

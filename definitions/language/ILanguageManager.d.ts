@@ -1,10 +1,10 @@
 import { Dictionary, ILanguage, ILanguageExtension, ITranslation, UiTranslation } from "language/ILanguage";
 export declare enum TranslationType {
-    all = 0,
-    name = 1,
-    description = 2,
-    prefix = 3,
-    suffix = 4,
+    all = "all",
+    name = "name",
+    description = "description",
+    prefix = "prefix",
+    suffix = "suffix"
 }
 export declare enum LanguageExtensions {
 }

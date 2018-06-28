@@ -16,6 +16,9 @@ export interface IUnserializedCallback {
 export interface IPropSerializable {
     getSerializationProperties(version: string): string[];
 }
+/**
+ * Do not add anything to this list unless Spacetech approves it
+ */
 export declare enum Types {
     Invalid = 0,
     Undefined = 1,
@@ -39,5 +42,11 @@ export declare enum Types {
     Player = 19,
     ArrayV2 = 20,
     Doodad = 21,
+    NPC = 22,
+    Map = 23,
+    DoodadV2 = 24,
+    MessageManager = 25,
+    Function = 26
 }
 export declare function SaveProperty(): PropertyDecorator;
+export declare function SaveAllProperties(): ClassDecorator;

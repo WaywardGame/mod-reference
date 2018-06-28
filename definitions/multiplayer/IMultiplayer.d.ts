@@ -2,9 +2,8 @@ import { ICrafted } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-import { TextOrTranslationData } from "newui/INewUi";
-import { ICharacter } from "newui/util/Character";
-import { IPlayer } from "player/IPlayer";
+import { TextOrTranslationData, TranslationGenerator } from "newui/component/IComponent";
+import { ICharacter, IPlayer } from "player/IPlayer";
 import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayer {
     addAfterSyncChecks(packet: IPacket): void;
@@ -12,8 +11,8 @@ export interface IMultiplayer {
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     closeConnection(connection: IConnection): void;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
-    disconnect(reason?: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
-    disconnectAndResetGameState(reason: TextOrTranslationData, reasonDescription?: TextOrTranslationData): Promise<void>;
+    disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
+    disconnectAndResetGameState(reason: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): void;
     getBannedPlayers(): string[];
     getClients(): IConnection[];
@@ -47,6 +46,8 @@ export interface IMultiplayer {
 export default IMultiplayer;
 export declare const maxPlayers = 32;
 export declare const defaultServerPort = 38740;
+export declare const keepAliveInterval = 4000;
+export declare const keepAliveTimeout = 15000;
 export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
@@ -68,15 +69,15 @@ export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {
     Serverside = 1,
     Clientside = 2,
-    All = 3,
+    All = 3
 }
 export declare enum MultiplayerSyncCheck {
-    CanASeeB = 0,
-    Container = 1,
-    Creature = 2,
-    CreatureIsInFlowField = 3,
-    CreatureMoveDirection = 4,
-    CreatureMoveTypesInFov = 5,
+    BaseEntityManager = 0,
+    CanASeeB = 1,
+    Container = 2,
+    Creature = 3,
+    CreatureIsInFlowField = 4,
+    CreatureMoveDirection = 5,
     CreatureNearestPlayer = 6,
     Dismantle = 7,
     FlowFieldHashCode = 8,
@@ -100,7 +101,7 @@ export declare enum MultiplayerSyncCheck {
     Temp = 26,
     Tick = 27,
     Ticks = 28,
-    Weight = 29,
+    Weight = 29
 }
 export interface IMultiplayerWorldData {
     pid: number;

@@ -1,8 +1,11 @@
 import { Bindable, BindableType } from "Enums";
+import { IComponent } from "newui/component/IComponent";
+import Emitter from "utilities/Emitter";
+import { IVector2 } from "utilities/math/IVector";
 export declare enum KeyModifier {
     Shift = 0,
     Alt = 1,
-    Control = 2,
+    Control = 2
 }
 export interface IBinding {
     /**
@@ -23,6 +26,7 @@ export interface BindCatcherApi {
     time: number;
     mouseX: number;
     mouseY: number;
+    mousePosition: IVector2;
     wasPressed(key: string): boolean;
     wasPressed(bind: Bindable): boolean;
     /** wasReleased is only updated if wasPressed is also checked */
@@ -37,10 +41,11 @@ export interface BindCatcherApi {
     isAnythingDown(): boolean;
     timeDown(key: string): number;
     timeDown(bind: Bindable): number;
-    isMouseWithin(element: Element): boolean;
-    isMouseWithin(element: Element, mustBeTarget: boolean): boolean;
+    isMouseWithin(element: Element | IComponent): boolean;
+    isMouseWithin(element: Element | IComponent, mustBeTarget?: boolean): boolean;
+    mouseStartWasWithin(element: Element | IComponent, mustBeTarget?: boolean): boolean;
 }
-export declare class BindingManager {
+export declare class BindingManager extends Emitter {
     private static readonly defaultBinds;
     private readonly bindCatchers;
     private defaultBindCatcher;
@@ -61,6 +66,8 @@ export declare class BindingManager {
     getBindTranslation(bind: IBinding | IBinding[], separate: true): string[];
     registerBindCatcher(element: HTMLElement, shouldFocus?: boolean): number;
     deregisterBindCatcher(id: number): void;
+    disableBindsUntil(until: number | Promise<any>, id?: number): void;
+    areBindsDisabled(id?: number): boolean;
     setDefaultBindCatcher(id: number): void;
     getPressTime(bindOrKey: Bindable | string, id?: number): number;
     removePressState(bindOrKey: Bindable | string, id?: number): void;
@@ -68,8 +75,10 @@ export declare class BindingManager {
     checkModifiers(modifiers: KeyModifier[], exclude: string, id?: number): boolean;
     isPressed(bindOrKey: Bindable | string, id?: number): boolean;
     isAnythingPressed(id?: number): boolean;
+    getMouse(id?: number): IVector2;
+    isMouseWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
+    mouseStartWasWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;
-    beginLoop(id: number, cb: (api: BindCatcherApi) => any): void;
-    endLoop(id: number): void;
+    private startLoop;
 }
 export declare const bindingManager: BindingManager;

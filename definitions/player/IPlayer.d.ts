@@ -1,165 +1,106 @@
-import { ICreature, IDamageInfo } from "creature/ICreature";
+import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Bindable, Delay, EquipType, FacingDirection, HairColor, HairStyle, IInputMovement, IInspect, IMessagePack, IModdable, IPoint, IPointZ, IRGB, ItemQuality, ItemType, MoveType, PlayerState, RestCancelReason, RestType, SfxType, SkillType, SkinColor, StatType, TurnType, WeightStatus } from "Enums";
-import { IContainer, IItem } from "item/IItem";
-import { Message } from "language/Messages";
-import { MilestoneType } from "player/IMilestone";
-import PlayerDefense from "player/PlayerDefense";
-import { ISkillSet } from "player/Skills";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
+import { EntityType } from "entity/IEntity";
+import { Delay, Direction, EquipType, HairColor, HairStyle, IInspect, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
+import { IItem } from "item/IItem";
+import { IMessagePack, Message } from "language/IMessages";
+import { INPC } from "npc/INPC";
+import MessageManager from "player/MessageManager";
+import NoteManager from "player/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
-import { IOptions } from "save/data/ISaveDataGlobal";
 import { ITile } from "tile/ITerrain";
-import { HintType } from "ui/IHint";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-export interface IPlayer extends IPointZ {
+import { IVector2, IVector3 } from "utilities/math/IVector";
+export interface IPlayer extends IBaseHumanEntity {
+    entityType: EntityType.Player;
     absentLastUsedTime: number;
-    attack: number;
-    attackFromEquip: IAttackHand;
-    benignity: number;
     containerSortInfo: {
         [index: string]: IContainerSortInfo;
     };
-    currentHint: HintType;
-    customization: IPlayerCustomization;
-    deathBy: string;
-    defense: PlayerDefense;
-    defenses: number[];
-    dehydration: number;
-    dexterity: number;
     dialogContainerInfo: IDialogInfo[];
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
-    direction: IPoint;
-    equipped: {
-        [index: number]: number;
-    };
     exploredMapEncodedData: number[][];
-    facingDirection: FacingDirection;
     fromX: number;
     fromY: number;
-    handToUse: EquipType;
-    hintSeen: boolean[];
-    id: number;
     identifier: string;
-    inventory: IContainer;
     isConnecting: boolean;
     isMoving: boolean;
     isMovingClientside: boolean;
     lightBonus: number;
-    malignity: number;
-    movementAnimation: number;
+    messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
-    movementFinishTime: number;
     movementProgress: number;
-    moveType: MoveType;
     name: string;
-    nextMoveDirection: FacingDirection | undefined;
+    nextMoveDirection: Direction | undefined;
     nextMoveTime: number;
     nextX: number;
     nextY: number;
     noInputReceived: boolean;
-    options: IOptions;
+    notes: NoteManager;
     quickSlotInfo: IQuickSlotInfo[];
-    raft: number | undefined;
-    restData: IRestData | undefined;
     revealedItems: {
         [index: number]: boolean;
     };
-    score: number;
-    skills: ISkillSet;
-    spawnPoint: IPointZ | undefined;
-    starvation: number;
-    state: PlayerState;
-    stats: IStats;
-    status: IPlayerStatus;
-    stopNextMovement: boolean;
-    strength: number;
-    swimming: boolean;
+    spawnPoint: IVector3 | undefined;
     tamedCreatures: number[];
     travelData: IPlayerTravelData | undefined;
     turns: number;
     walkSoundCounter: number;
     wasAbsentPlayer: boolean;
-    weight: number;
-    weightBonus: number;
     x: number;
     y: number;
     z: number;
+    movementFinishTime: number;
     exploredMap: IExploreMap[] | undefined;
     exploredMapNotSaved: IExploreMap[] | undefined;
     addDelay(delay: Delay, replace?: boolean): void;
-    addMilestone(milestone: MilestoneType, data?: number): void;
-    attributes(): void;
-    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType): number | undefined;
     calculateEquipmentStats(): void;
-    cancelResting(reason: RestCancelReason): void;
     canJump(): boolean;
-    canSeeTile(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkAndRemoveBlood(): boolean;
     checkForGather(): IDoodad | undefined;
     checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
-    checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkReputationMilestones(): void;
     checkSkillMilestones(): void;
-    checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     checkWeight(): void;
-    createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
-    damage(amount: number, damageMessage: string, soundDelay?: number): number | undefined;
-    damage(damageInfo: IDamageInfo): number | undefined;
-    damageEquipment(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
-    getConsumeBonus(skillUse: SkillType, item: IItem | undefined): number;
+    /**
+     * Returns true if the player changed their facing direction.
+     */
+    faceDirection(direction: Direction, ignoreTurnDelay?: boolean): boolean;
+    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    getEquippedItem(slot: EquipType): IItem | undefined;
-    getEquippedItems(): IItem[];
-    getEquipSlotForItem(item: IItem): EquipType | undefined;
-    getFacingPoint(): IPointZ;
-    getFacingTile(): ITile;
-    getHandToUse(): EquipType | undefined;
     getInspectHealthMessage(player: IPlayer): IMessagePack;
-    getMaxHealth(): number;
-    getMovementFinishTime(): number;
-    getMovementIntent(): Bindable | undefined;
-    getName(html?: boolean): string;
+    getMovementIntent(): IMovementIntent;
     getReputation(): number;
-    getTile(): ITile;
-    getPoint(): IPointZ;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
+    getStrength(): number;
     hasDelay(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
     healthSyncCheck(): void;
-    hurtHands(message: Message, damageMessage: Message): void;
+    hurtHands(message: Message, damageMessage: Message, handMessage?: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     isFacingCarvableTile(): boolean;
-    isGhost(): boolean;
     isServer(): boolean;
     isLocalPlayer(): boolean;
-    isResting(): boolean;
-    isRestingCancelled(): boolean;
     passTurn(turnType?: TurnType): void;
     processInput(): void;
-    queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
-    queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     resetMovementStates(): void;
     restoreExploredMap(): void;
     revealItem(itemType: ItemType): void;
     setId(id: number): void;
-    setRaft(itemId: number | undefined): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setup(completedMilestones: number): void;
-    setPosition(point: IPointZ): void;
+    setPosition(point: IVector3): void;
     setZ(z: number): void;
-    shakeStat(statType: StatType): void;
-    skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     staminaCheck(): boolean;
-    staminaReduction(skillType: SkillType): void;
-    startResting(restData: IRestData): void;
     tick(isPassTurn?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
@@ -167,19 +108,14 @@ export interface IPlayer extends IPointZ {
     updateDialogInfo(dialogIndex: string | number): void;
     updateDismantleTable(): void;
     updateMilestones(): void;
-    updateMovementIntent(bind: Bindable | undefined): void;
+    updateMovementIntent(intent: IMovementIntent): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
-    updateReputation(reputation: number): void;
-    updateStatsAndAttributes(): void;
+    updateStatuses(): void;
+    updateStrength(): void;
     updateTables(): void;
     updateTablesAndWeight(): void;
 }
 export default IPlayer;
-export interface IPlayerStatus {
-    bleeding: boolean;
-    burned: boolean;
-    poisoned: boolean;
-}
 export interface IHairstyleDescription extends IModdable {
     name: string;
     imagePath?: string;
@@ -192,27 +128,20 @@ export interface IPlayerCustomization {
     hairColor: keyof typeof HairColor;
     skinColor: keyof typeof SkinColor;
 }
+export interface ICharacter {
+    name: string;
+    customization: IPlayerCustomization;
+}
 export interface IAttackHand {
     leftHand: number;
     rightHand: number;
-}
-export interface IStats {
-    health: IStat;
-    stamina: IStat;
-    hunger: IStat;
-    thirst: IStat;
-}
-export interface IStat {
-    value: number;
-    timer: number;
-    regen: number;
-    regenBase: number;
 }
 export interface IRestData {
     type: RestType;
     startHealth: number;
     totalCycles: number;
     itemId?: number;
+    doodadId?: number;
     cycle?: number;
     cancelReason?: RestCancelReason;
 }
@@ -238,13 +167,35 @@ export declare type IPlayerOld = Partial<IPlayer> & {
         hairColor: HairColor;
         skinColor: SkinColor;
     };
+    stats: IStatsOld;
+    strength: number;
+    dexterity: number;
+    starvation: number;
+    dehydration: number;
+    weight: number;
+    attack: number;
+    benignity: number;
+    malignity: number;
 };
+export interface IStatsOld {
+    health: IStatOld;
+    stamina: IStatOld;
+    hunger: IStatOld;
+    thirst: IStatOld;
+}
+export interface IStatOld {
+    value: number;
+    timer: number;
+    regen: number;
+    regenBase: number;
+}
 export interface IMobCheck {
     x: number;
     y: number;
     z: number;
     creature?: ICreature;
     player?: IPlayer;
+    npc?: INPC;
     obstacle?: boolean;
     water?: boolean;
 }
@@ -252,10 +203,20 @@ export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
+export declare function getDirectionFromMovement(x: number, y: number): Direction.East | Direction.North | Direction.West | Direction.South;
+export interface IInputMovement extends IVector2 {
+    moveBind: Direction;
+    direction: Direction;
+}
 export declare const gameMovement: IInputMovement[];
+export declare type MovementIntent = Direction | "idle" | undefined;
+export declare const movementIntents: MovementIntent[];
 export interface IMovementIntent {
-    bind: Bindable;
-    direction?: FacingDirection;
+    /**
+     * A cardinal direction, the tile location of a tile to move to, to idle, or undefined to do nothing.
+     */
+    intent?: MovementIntent;
+    shouldDisableTurnDelay: boolean;
 }
 export interface IPlayerTravelData {
     starvation: number;
@@ -265,3 +226,5 @@ export interface IPlayerTravelData {
     state: PlayerState;
 }
 export declare const weightBonus = 25;
+export declare function isPlayer(human?: IBaseHumanEntity): human is IPlayer;
+export declare function isLocalPlayer(human?: IBaseHumanEntity): boolean;

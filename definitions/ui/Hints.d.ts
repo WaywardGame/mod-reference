@@ -1,3 +1,2 @@
-import { IHint } from "ui/IHint";
-export declare const hints: IHint[];
+export declare const hints: any;
 export default hints;

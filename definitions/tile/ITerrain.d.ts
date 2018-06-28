@@ -1,9 +1,11 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { DoodadType, GrowingStage, IModdable, IPointZ, IRGB, ItemQuality, SfxType, SkillType, TerrainType } from "Enums";
+import { DoodadType, GrowingStage, IModdable, IRGB, ItemQuality, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
 import { IContainer } from "item/IItem";
+import { INPC } from "npc/INPC";
 import { ITileEvent } from "tile/ITileEvent";
+import { IVector3 } from "utilities/math/IVector";
 export interface ITerrainDescription extends IModdable {
     name?: string;
     passable?: boolean;
@@ -19,8 +21,8 @@ export interface ITerrainDescription extends IModdable {
     flammable?: boolean;
     gatherSkillUse?: SkillType;
     sound?: SfxType;
-    strength?: number;
     leftOver?: TerrainType;
+    baseTerrain?: TerrainType;
     terrainType?: TerrainType;
     doodad?: DoodadType;
     isMountain?: boolean;
@@ -35,13 +37,16 @@ export interface ITerrainDescription extends IModdable {
     deepWater?: boolean;
     reduceRest?: boolean;
     noResting?: boolean;
+    wet?: boolean;
 }
 export interface ITile extends Partial<ITileContainer> {
-    creature?: ICreature;
-    doodad?: IDoodad;
     corpses?: ICorpse[];
-    events?: ITileEvent[];
+    creature?: ICreature;
     data: number;
+    doodad?: IDoodad;
+    events?: ITileEvent[];
+    npc?: INPC;
+    overlay?: IOverlayInfo;
 }
 export interface ITileOld {
     event?: ITileEvent[];
@@ -49,16 +54,19 @@ export interface ITileOld {
 export interface ITileArray {
     [index: number]: ITile;
 }
-export declare type ITileContainer = IContainer & IPointZ;
+export declare type ITileContainer = IContainer & IVector3;
 export interface ITileData {
     type: TerrainType;
-    strength?: number;
     minDur?: number;
     maxDur?: number;
     quality?: ItemQuality;
     gfx?: number;
     tilled?: boolean;
+    step?: number;
 }
+export declare type ITileDataOld = Partial<ITileData> & {
+    strength?: number;
+};
 export declare enum TileTemplateType {
     House = 0,
     Pond = 1,
@@ -66,7 +74,7 @@ export declare enum TileTemplateType {
     Desert = 3,
     Beach = 4,
     Boat = 5,
-    Lava = 6,
+    Lava = 6
 }
 export interface ITemplate {
     terrainTypes: {
@@ -82,4 +90,14 @@ export interface ITemplate {
 export interface ITemplateDoodad {
     type: DoodadType;
     growingStages: GrowingStage[];
+}
+export interface IOverlayInfo {
+    type: OverlayType;
+    size?: number;
+    offsetX?: number;
+    offsetY?: number;
+    red?: number;
+    green?: number;
+    blue?: number;
+    alpha?: number;
 }

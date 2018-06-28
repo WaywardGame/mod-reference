@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { ISerializer } from "save/ISerializer";
 export default class Serializer implements ISerializer {
     maxBytes: number;
@@ -13,20 +23,22 @@ export default class Serializer implements ISerializer {
     loadToObject(data: string): void;
     readProperty(object: any, key: any): void;
     writeProperty(object: any, key: any): void;
-    private getSerializationProperties(object, version);
-    private readObject(object, key);
-    private readString();
-    private readArrayV2(object, key);
-    private readArrayBuffer();
-    private writeObject(object);
-    private writeString(value);
-    private writeArrayV2(value);
-    private writeArrayBuffer(object);
-    private isInteger(nVal);
-    private isByteSigned(num);
-    private isByteUnsigned(num);
-    private isShortSigned(num);
-    private isShortUnsigned(num);
-    private isIntegerSigned(num);
-    private isIntegerUnsigned(num);
+    private getSerializationProperties;
+    private readObject;
+    private readString;
+    private readArrayV2;
+    private readArrayBuffer;
+    private readMap;
+    private writeObject;
+    private writeString;
+    private writeArrayV2;
+    private writeArrayBuffer;
+    private writeMap;
+    private isInteger;
+    private isByteSigned;
+    private isByteUnsigned;
+    private isShortSigned;
+    private isShortUnsigned;
+    private isIntegerSigned;
+    private isIntegerUnsigned;
 }

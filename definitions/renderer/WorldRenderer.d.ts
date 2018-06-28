@@ -1,7 +1,7 @@
-import Vec2 = TSM.vec2;
 import IWorldRenderer from "renderer/IWorldRenderer";
 import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
+import Vec2 from "utilities/math/Vector2";
 export default class WorldRenderer implements IWorldRenderer {
     private readonly gl;
     private static textureShaderProgram;
@@ -42,7 +42,9 @@ export default class WorldRenderer implements IWorldRenderer {
     private readonly itemBatch;
     private readonly corpseBatch;
     private readonly creatureBatch;
-    private readonly creaturesInViewport;
+    private readonly creatureFlyingBatch;
+    private readonly overlayBatch;
+    private readonly entitiesInViewport;
     private viewportSpritesDirty;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext);
@@ -67,11 +69,19 @@ export default class WorldRenderer implements IWorldRenderer {
     };
     computeSpritesInViewport(): void;
     batchCreatures(): void;
-    private isFlyingOffset(tile);
-    private batchShadow(fromX, fromY, toX, toY, t, anim);
-    private batchPlayers(batchLayer);
-    private batchPlayer(player, batchLayer);
-    private spriteBatchForLayer(layer);
-    private shouldOffsetFlying(tile);
-    private computeSpritesInViewportInternal();
+    private isFlyingOffset;
+    private batchShadow;
+    private batchPlayers;
+    private batchHuman;
+    /**
+     * Renders the status effects currently on the human.
+     */
+    private renderStatusEffects;
+    /**
+     * Renders a status effect image.
+     */
+    private renderStatusEffect;
+    private spriteBatchForLayer;
+    private shouldOffsetFlying;
+    private computeSpritesInViewportInternal;
 }

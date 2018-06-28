@@ -19,6 +19,6 @@ export default class Particle implements IParticle {
     clear(): void;
     simulate(): void;
     render(x: any, y: any): void;
-    private findUnusedParticle();
-    private spawn(tileX, tileY, r, g, b, intensity, count);
+    private findUnusedParticle;
+    private spawn;
 }

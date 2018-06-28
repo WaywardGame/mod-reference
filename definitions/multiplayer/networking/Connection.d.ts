@@ -15,13 +15,16 @@ export declare abstract class Connection implements IConnection {
     protected _matchmakingInfo: IMatchmakingInfo | undefined;
     private _state;
     private _timeoutId;
+    private _keepAliveIntervalId;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined);
     addTimeout(milliseconds: number, callback: () => void): void;
+    startKeepAlive(): void;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
     close(): void;
     abstract isConnected(): boolean;
     abstract send(data: ArrayBuffer): void;
     abstract processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;
-    private _clearTimeout();
+    private _clearTimeout;
+    private _clearKeepAliveInterval;
 }

@@ -22,6 +22,6 @@ export declare abstract class Packet extends IndexedPacket implements IPacket {
     protected preReadData(): void;
     protected readData(): void;
     protected preProcess(): void;
-    private readSynchronizationCheck();
-    private writeSynchronizationCheck();
+    private readSynchronizationCheck;
+    private writeSynchronizationCheck;
 }

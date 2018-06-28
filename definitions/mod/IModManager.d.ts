@@ -1,15 +1,8 @@
 import { IPlayOptions } from "game/IGame";
-import { ILanguage } from "language/ILanguage";
-import { Hook, IModConfig } from "mod/IMod";
-import Mod from "mod/Mod";
-export declare enum ModState {
-    Disabled = 0,
-    Enabled = 1,
-    Loaded = 2,
-    Error = 3,
-    ChangingState = 4,
-    Temporary = 5,
-}
+import HookCallFactory from "mod/HookCallFactory";
+import { Hook } from "mod/IHookManager";
+import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
+import Log from "utilities/Log";
 export interface ICanLoadInfo {
     name: string;
     loadable: boolean;
@@ -25,58 +18,9 @@ export declare enum CanLoadState {
     ReqiredModNotLoaded = 7,
     LocalModPrecedence = 8,
     IncompatibleVersion = 9,
-    DisabledInMultiplayer = 10,
-}
-export declare enum ModType {
-    Internal = 0,
-    Local = 1,
-    Workshop = 2,
-}
-export interface IModProvides {
-    scripts: boolean;
-    languages: number;
-    stylesheets: number;
-    imageOverrides: boolean;
-    customizations: boolean;
-}
-export interface IImageOverrideDescription {
-    replace: string;
-    imagePath?: string;
-    animated?: boolean;
-}
-export declare type IImageOverrides = Array<string | IImageOverrideDescription>;
-export interface ICustomizations {
-    hairColors: string[];
-    skinColors: string[];
-    hairStyles: Array<string | {
-        name: string;
-        path: string;
-    }>;
-}
-export interface IModInfo {
-    config: IModConfig;
-    state: ModState;
-    path: string;
-    folderName: string;
-    type: ModType;
-    provides: IModProvides;
-    instance?: Mod;
-    initialized?: boolean;
-    publishedFileId?: string;
-    steamIDOwner?: string;
-    lastUpdated?: number;
-    installDate?: number;
-    createdDate?: number;
-    imageOverrides?: IImageOverrides;
-    customizations?: ICustomizations;
-    stylesheets?: string[];
-    languages?: Array<{
-        path: string;
-        instance?: ILanguage;
-    }>;
+    DisabledInMultiplayer = 10
 }
 export interface IModManager {
-    cacheHooks(): void;
     canLoad(index: number, fromModsMenu?: boolean): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
     getAuthor(index: number): string;
@@ -95,6 +39,7 @@ export interface IModManager {
     getEnabledMods(): number[];
     getModFromIndex(i: number): IModInfo;
     getMods(): IModInfo[];
+    getLog(index: number): Log;
     getName(index: number): string;
     getPath(index: number): string;
     getProvided(index: number): IModProvides;
@@ -110,7 +55,7 @@ export interface IModManager {
     isLoadedByName(name: string): boolean;
     isValid(index: number): boolean;
     load(index: number): void;
-    loadAll(options: Partial<IPlayOptions>, callback: (err: string | undefined, mods: string[]) => void): void;
+    loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
     reload(index: number): boolean;
     reloadByName(name: string): boolean;
     removeMod(id: number, uninstall?: boolean): void;
@@ -124,12 +69,16 @@ export interface IModManager {
     setSteamIdOwner(index: number, steamIdOwner: string): void;
     setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
     setupMods(callback: () => void): void;
-    uninitialize(index: number): void;
+    uninitialize(index: number): boolean;
     uninitializeAll(): void;
     unload(index: number): void;
     unloadAll(reset?: boolean): void;
-    callHook(hook: Hook, ...args: any[]): any;
-    callHookReduce(hook: Hook, ...args: any[]): any;
-    callHookWithDefault<T>(hook: Hook, defaultValue: T, ...args: any[]): T;
+    /**
+     * Returns a `HookCallFactory` for the given hook name.
+     * @param hook A hook name.
+     * @param defaultValue The default value to return
+     * @see `Mod` or `Hook` for a list of valid hook names.
+     */
+    getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
 }
 export default IModManager;

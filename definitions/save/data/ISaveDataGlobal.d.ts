@@ -1,11 +1,12 @@
-import { Difficulty, DropLocation, IBindArray, IKeyBind, IModBindArray } from "Enums";
+import { Difficulty, DropLocation, IKeyBind } from "Enums";
 import { ICrafted } from "game/IGame";
-import { ModState } from "mod/IModManager";
+import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
-import { ICharacter } from "newui/util/Character";
+import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import { IMilestoneData } from "player/IMilestone";
 import { IDialogInfo } from "ui/IUi";
-import * as Utilities from "Utilities";
+import { IEnumInfo } from "utilities/enum/IEnum";
+import { ISourceFilter } from "utilities/Log";
 export interface ISaveDataGlobal {
     gameCrafted: {
         [index: number]: ICrafted;
@@ -27,13 +28,16 @@ export interface ISaveDataGlobal {
         language?: string;
     };
     utilitiesEnumsAllocated: {
-        [index: string]: Utilities.Enums.IEnumInfo;
+        [index: string]: IEnumInfo;
     };
     savedDialogInfo: {
         [index: string]: IDialogInfo;
     };
     multiplayerBannedPlayers: string[];
-    characters: ICharacter[];
+    characters: ISavedCharacter[];
+    newui: {
+        [index: string]: any;
+    };
     /**
      * Resets all options to default
      */
@@ -45,35 +49,37 @@ export interface ISaveDataGlobal {
 }
 export default ISaveDataGlobal;
 export interface IOptions {
+    allowDiagonalMovement: boolean;
     alternateContextMenu: boolean;
-    autoGather: boolean;
+    alwaysShowMoreInformation: boolean;
+    autoGatherHarvest: boolean;
     autoPickup: boolean;
-    binds: IBindArray;
     bindings: IBindings;
+    consoleLogSourceFilter: ISourceFilter;
     currentGame: number;
     developerMode: boolean;
     developerModeContextMenu: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
-    dropOnGather: boolean;
     dropLocation: DropLocation;
+    dropOnGatherHarvest: boolean;
     fontStyle: boolean;
     fullscreen: boolean;
+    hideEquippedHeadgear: boolean;
     keepSortActive: boolean;
     leftHand: boolean;
-    modBinds: IModBindArray;
     muteEffects: boolean;
     muteMusic: boolean;
     protectedCraftingItems: boolean;
     realTimeTickSpeed: number;
     rightClickInspect: boolean;
     rightHand: boolean;
-    screenshotMode: boolean;
     shouldLoadLastSave: boolean;
     skipSplash: boolean;
     tooltipsCreatures: boolean;
     tooltipsDoodads: boolean;
     tooltipsItems: boolean;
+    tooltipsNPCs: boolean;
     tooltipsTerrain: boolean;
     uiScale: number;
     visionMode: boolean;
@@ -82,10 +88,8 @@ export interface IOptions {
     warnOnDangerousActions: boolean;
     warnWhenBreakingItems: boolean;
     warnWhenBreakingItemsOnCraft: boolean;
-    alwaysShowMoreInformation: boolean;
     windowMode: boolean;
     zoomLevel: number;
-    openNotesAutomatically: boolean;
 }
 export declare type IOptionsOld = Partial<IOptions> & {
     keyBinds: IKeyBind;
@@ -95,6 +99,7 @@ export declare type IOptionsOld = Partial<IOptions> & {
     skipIntro: boolean;
     worldTooltips: boolean;
     dropUnderYourself: boolean;
+    openNotesAutomatically: boolean;
 };
 export interface IHighscore {
     name: string;
