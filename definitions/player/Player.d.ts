@@ -56,7 +56,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     turns: number;
     walkSoundCounter: number;
     exploredMap: IExploreMap[] | undefined;
-    exploredMapNotSaved: IExploreMap[] | undefined;
     isMovingClientside: boolean;
     wasAbsentPlayer: boolean;
     nextX: number;

@@ -615,6 +615,7 @@ declare const _default: {
     [Ui.MenuSharedValueTickSpeed]: string;
     [Ui.MenuSharedValuePercentage]: string;
     [Ui.MiscPlayerNameDefault]: string;
+    [Ui.MiscPlayerNameServer]: string;
     [Ui.MiscSaveNameDefault]: string;
     [Ui.MiscSaveVersionUnknown]: string;
     [Ui.MiscDailyChallengeName]: string;
@@ -681,7 +682,6 @@ declare const _default: {
     [Ui.WindowTitleInventory]: string;
     [Ui.WindowTitleMap]: string;
     [Ui.WindowTitleMilestones]: string;
-    [Ui.WindowTitleOptions]: string;
     [Ui.WindowTitleSkills]: string;
 };
 export default _default;

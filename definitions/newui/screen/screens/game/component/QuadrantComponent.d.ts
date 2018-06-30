@@ -1,4 +1,5 @@
-import { IOptionDescription } from "newui/component/ContextMenu";
+import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
+import { UiApi } from "newui/INewUi";
 import StaticComponent from "newui/screen/screens/game/component/StaticComponent";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -39,10 +40,10 @@ export declare enum QuadrantComponentEvent {
  *
  * Changing the quadrant will not affect other elements: this is the responsisibility of the parent.
  */
-export default abstract class QuadrantComponent extends StaticComponent {
-    protected readonly gsapi: IGameScreenApi;
+export default abstract class QuadrantComponent<HasApi extends boolean = true> extends StaticComponent {
+    protected readonly gsapi: HasApi extends true ? IGameScreenApi : IGameScreenApi | undefined;
     readonly preferredQuadrant: Quadrant;
-    constructor(gsapi: IGameScreenApi);
+    constructor(api: IGameScreenApi | UiApi);
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event
      * with the parameters being the new quadrant and the old quadrant.
@@ -58,7 +59,7 @@ export default abstract class QuadrantComponent extends StaticComponent {
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     protected abstract getName(): IStringSection[];
-    protected getContextMenuDescription(): Array<[number | string, IOptionDescription]>;
+    protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
     /**
      * Returns a new context menu using this element's context menu descriptions
      */

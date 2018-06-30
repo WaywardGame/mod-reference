@@ -100,6 +100,7 @@ declare const _default: {
     [Message.ChatCommandsCommand]: string;
     [Message.ChatPingCommand]: string;
     [Message.ChatPlayerMessage]: string;
+    [Message.ChatServerMessage]: string;
     [Message.ChatPlayersCommand]: string;
     [Message.ChatUnbanCommand]: string;
     [Message.ChatUnknownCommand]: string;

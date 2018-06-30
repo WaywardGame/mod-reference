@@ -56,7 +56,6 @@ export interface IPlayer extends IBaseHumanEntity {
     z: number;
     movementFinishTime: number;
     exploredMap: IExploreMap[] | undefined;
-    exploredMapNotSaved: IExploreMap[] | undefined;
     addDelay(delay: Delay, replace?: boolean): void;
     calculateEquipmentStats(): void;
     canJump(): boolean;
