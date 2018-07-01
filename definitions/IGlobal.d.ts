@@ -92,6 +92,8 @@ declare global {
 	let ui: IUi;
 	let world: IWorld;
 	let newui: NewUi;
+	const VIEWPORT_MIN_WIDTH: number;
+	const VIEWPORT_MIN_HEIGHT: number;
 
 	// tslint:disable-next-line:variable-name
 	let Module: IWaywardCPP;

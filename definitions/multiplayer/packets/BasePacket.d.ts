@@ -49,8 +49,8 @@ export default abstract class BasePacket {
     protected writeString(value: string): void;
     protected readStringArray(): string[];
     protected writeStringArray(value: string[]): void;
-    protected readPoint(): IVector2;
-    protected writePoint(value: IVector2): void;
+    protected readVector2(): IVector2;
+    protected writeVector2(value: IVector2): void;
     protected readContainer(): IContainer;
     protected writeContainer(value: IContainer): void;
     protected readCreature(): ICreature | undefined;
@@ -69,5 +69,7 @@ export default abstract class BasePacket {
     protected writeItems(value: IItem[]): void;
     protected readObject(): any;
     protected writeObject(value: any): void;
+    protected readVector2Array(): IVector2[];
+    protected writeVector2Array(value: IVector2[]): void;
     private ensureSize;
 }

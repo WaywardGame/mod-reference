@@ -5,6 +5,7 @@ export interface INPC extends IBaseHumanEntity {
     entityType: EntityType.NPC;
     getActions(): ActionType[] | undefined;
     addAiType(ai: AiType): void;
+    updateDirection(x: number, y: number): void;
     update(): void;
     moveTo(x: number, y: number, z: number): boolean;
     isHostile(): boolean;

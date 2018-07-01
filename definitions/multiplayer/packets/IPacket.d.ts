@@ -37,7 +37,8 @@ export declare enum NetworkPropertyType {
     Container = 7,
     Generic = 8,
     Item = 9,
-    MovementIntent = 10
+    MovementIntent = 10,
+    Vector2Array = 11
 }
 export interface INetworkedProperty {
     key: string;

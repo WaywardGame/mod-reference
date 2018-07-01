@@ -60,7 +60,7 @@ export interface IUi extends IPropSerializable, Emitter {
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
     switchToScreen<M extends Menu = Menu>(screenId: ScreenId, menuId?: MenuId, menuInitializer?: (menu: M) => any): void;
-    changeEquipmentOption(id: string): void;
+    changeEquipmentOption(id: "leftHand" | "rightHand"): void;
     toggleOptions(): void;
     showOptionsScreen(): Promise<void>;
     onWindowResize(): void;
