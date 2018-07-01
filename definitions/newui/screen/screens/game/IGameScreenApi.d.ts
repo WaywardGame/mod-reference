@@ -28,7 +28,7 @@ export default interface IGameScreenApi {
     openDialog<D extends IDialog = IDialog>(id: DialogId): D;
     closeDialog(id: DialogId): void;
     toggleDialog(id: DialogId): void;
-    getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
+    getQuadrantComponent<C extends QuadrantComponent<boolean> = QuadrantComponent<boolean>>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
     on(event: GameScreenEvent.ShowDialog, handler: (api: IGameScreenApi, dialog: IDialog) => any): void;
     on(event: GameScreenEvent.HideDialog, handler: (api: IGameScreenApi, id: DialogId) => any): void;

@@ -23,7 +23,7 @@ import { IExploreMap } from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
-import { IVector3 } from "utilities/math/IVector";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
     readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
@@ -55,8 +55,8 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     travelData: IPlayerTravelData | undefined;
     turns: number;
     walkSoundCounter: number;
+    walkPath: IVector2[] | undefined;
     exploredMap: IExploreMap[] | undefined;
-    exploredMapNotSaved: IExploreMap[] | undefined;
     isMovingClientside: boolean;
     wasAbsentPlayer: boolean;
     nextX: number;
@@ -147,6 +147,8 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     kill(): void;
     getMovementProgress(): number;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
+    hasWalkPath(): boolean;
+    walkAlongPath(path: IVector2[] | undefined): void;
     processInput(): void;
     faceDirection(direction: Direction, ignoreTurnDelay?: boolean): boolean;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;

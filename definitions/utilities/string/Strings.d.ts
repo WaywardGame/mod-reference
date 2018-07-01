@@ -1,6 +1,8 @@
 import { CaseStyle, SentenceCaseStyle } from "Enums";
 export declare const matchLanguageLetters: RegExp;
 export declare const matchNotLanguageLetters: RegExp;
+export declare const matchInvalidPathLettersWindows: RegExp;
+export declare const matchInvalidPathLettersUnix: RegExp;
 declare module Strings {
     function parseMarkup(markupText: string): string;
     function formatSentenceCase(text: string, textCase: SentenceCaseStyle): string;

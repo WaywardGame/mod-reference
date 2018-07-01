@@ -62,7 +62,7 @@ export default class SaveManager implements ISaveManager {
     deleteAllData(): Promise<void>;
     compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
-    getGameStateAsJson(): string;
+    getGameStateAsJson(cleanup?: boolean): string;
     private getPropertiesToSerialize;
     private compressString;
     private decompressString;

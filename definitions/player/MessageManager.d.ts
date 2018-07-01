@@ -22,6 +22,7 @@ export interface IMessageManagerHost {
     canSeePosition(x: number, y: number, z: number): boolean;
     shouldDisplayMessage(message: IMessage, id: number): boolean | undefined;
     onDisplayMessage(message: IMessage): void;
+    getMessageStorageMax(): number;
 }
 export default class MessageManager implements IMessageManager {
     private readonly host;
@@ -52,6 +53,10 @@ export default class MessageManager implements IMessageManager {
     private canSend;
     constructor(host: IMessageManagerHost);
     getMessageHistory(): IterableIterator<IMessage>;
+    /**
+     * Cuts the message history down to the correct bounds (preferring the more recent messages)
+     */
+    pruneMessageHistory(): boolean;
     /**
      * Clears the entire message history.
      */

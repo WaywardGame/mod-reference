@@ -26,6 +26,7 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
      */
     getActions(): ActionType[] | undefined;
     addAiType(ai: AiType): void;
+    updateDirection(x: number, y: number): void;
     /**
      * The name of the npc - called when created
      */
@@ -59,5 +60,4 @@ export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
     protected move(): boolean;
     protected autoScaleStats(): void;
     private checkMove;
-    private updateDirection;
 }

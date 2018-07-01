@@ -13,9 +13,10 @@ import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
-import { IOptionDescription } from "newui/component/ContextMenu";
+import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import { TranslationGenerator } from "newui/component/IComponent";
 import Input from "newui/component/Input";
+import { UiApi } from "newui/INewUi";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { IMessage, Source } from "player/IMessageManager";
@@ -25,7 +26,7 @@ export interface IMessageFilter {
     name: string;
     allowedSources: Source[];
 }
-export default class Messages extends QuadrantComponent implements IHookHost {
+export default class Messages extends QuadrantComponent<false> implements IHookHost {
     static preferredQuadrant: Quadrant;
     static sendChatMessage(sender: IPlayer, message: string): typeof Messages;
     static readonly allFilterName: string;
@@ -41,7 +42,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     };
     private selectedFilter;
     private readonly pinnedNotes;
-    constructor(gsapi: IGameScreenApi);
+    constructor(api: IGameScreenApi | UiApi);
     getID(): QuadrantComponentId;
     getName(): IStringSection[];
     scrollToNewest(): void;
@@ -56,7 +57,7 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     /**
      * Returns the context menu for messages, used by the superclass (quadrant component)
      */
-    protected getContextMenuDescription(): Array<[number | string, IOptionDescription]>;
+    protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
     /**
      * Returns the basic context menu of messages, no matter what location it is in
      */

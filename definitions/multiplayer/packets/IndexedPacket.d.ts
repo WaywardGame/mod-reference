@@ -39,8 +39,8 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedString(value?: string): void;
     protected readIndexedStringArray(): string[] | undefined;
     protected writeIndexedStringArray(value?: string[]): void;
-    protected readIndexedPoint(): IVector2 | undefined;
-    protected writeIndexedPoint(value?: IVector2): void;
+    protected readIndexedVector2(): IVector2 | undefined;
+    protected writeIndexedVector2(value?: IVector2): void;
     protected readIndexedContainer(): IContainer | undefined;
     protected writeIndexedContainer(value?: IContainer): void;
     protected readIndexedCreature(): ICreature | undefined;
@@ -59,6 +59,8 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedItems(value?: IItem[]): void;
     protected readIndexedObject(): any;
     protected writeIndexedObject(value?: any): void;
+    protected readIndexedVector2Array(): IVector2[] | undefined;
+    protected writeIndexedVector2Array(value?: IVector2[]): void;
     private writeIndex;
     private readIndex;
 }

@@ -56,7 +56,6 @@ export interface IPlayer extends IBaseHumanEntity {
     z: number;
     movementFinishTime: number;
     exploredMap: IExploreMap[] | undefined;
-    exploredMapNotSaved: IExploreMap[] | undefined;
     addDelay(delay: Delay, replace?: boolean): void;
     calculateEquipmentStats(): void;
     canJump(): boolean;
@@ -78,27 +77,28 @@ export interface IPlayer extends IBaseHumanEntity {
     getInspectHealthMessage(player: IPlayer): IMessagePack;
     getMovementIntent(): IMovementIntent;
     getReputation(): number;
+    getStrength(): number;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
-    getStrength(): number;
     hasDelay(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
+    hasWalkPath(): boolean;
     healthSyncCheck(): void;
     hurtHands(message: Message, damageMessage: Message, handMessage?: Message): void;
     inspect(x: number, y: number, z?: number): void;
     inspectTile(tile: ITile): IInspect[];
     isFacingCarvableTile(): boolean;
-    isServer(): boolean;
     isLocalPlayer(): boolean;
+    isServer(): boolean;
     passTurn(turnType?: TurnType): void;
     processInput(): void;
     resetMovementStates(): void;
     restoreExploredMap(): void;
     revealItem(itemType: ItemType): void;
     setId(id: number): void;
+    setPosition(point: IVector3): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setup(completedMilestones: number): void;
-    setPosition(point: IVector3): void;
     setZ(z: number): void;
     staminaCheck(): boolean;
     tick(isPassTurn?: boolean): void;
@@ -114,6 +114,7 @@ export interface IPlayer extends IBaseHumanEntity {
     updateStrength(): void;
     updateTables(): void;
     updateTablesAndWeight(): void;
+    walkAlongPath(path: IVector2[] | undefined): void;
 }
 export default IPlayer;
 export interface IHairstyleDescription extends IModdable {
