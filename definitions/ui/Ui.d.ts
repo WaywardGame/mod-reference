@@ -88,4 +88,5 @@ export default class Ui extends Emitter implements IUi {
     openDialogs(): void;
     updateScrollableContainersList(): void;
     updateScrollableContainer(this: Element): void;
+    cancelSorting(): void;
 }

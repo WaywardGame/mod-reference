@@ -12,7 +12,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Delay, Direction, EquipType, IInspect, ItemType, SkillType, TurnType, WeightStatus } from "Enums";
+import { Delay, Direction, EquipType, IInspect, ItemType, RestType, SkillType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
 import { MilestoneType } from "player/IMilestone";
@@ -70,6 +70,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     private readonly _movementIntent;
     constructor();
     startResting(restData: IRestData): void;
+    showRestInterrupt(restType: RestType): void;
     /**
      * Updates caused by status effects such as bleeding, poison, and burns.
      */

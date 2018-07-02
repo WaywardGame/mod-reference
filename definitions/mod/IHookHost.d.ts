@@ -691,4 +691,9 @@ export interface IHookHost {
      * @returns False to not display the message or undefined to use the default logic
      */
     shouldDisplayMessage?(player: IPlayer, message: IMessage, messageId: number): boolean | undefined;
+    /**
+     * Called when determining if the player should stop walking to the tile
+     * @returns True to stop walk to tile movement, False to continue walk to tile movement, or undefined to use the default logic
+     */
+    shouldStopWalkToTileMovement?(): boolean | undefined;
 }

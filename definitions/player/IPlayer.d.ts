@@ -100,6 +100,7 @@ export interface IPlayer extends IBaseHumanEntity {
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setup(completedMilestones: number): void;
     setZ(z: number): void;
+    showRestInterrupt(restType: RestType): void;
     staminaCheck(): boolean;
     tick(isPassTurn?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;

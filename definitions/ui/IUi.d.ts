@@ -131,6 +131,7 @@ export interface IUi extends IPropSerializable, Emitter {
     updateScrollableContainersList(): void;
     updateScrollableContainer(this: Element): void;
     onUpdateDirection(): void;
+    cancelSorting(): void;
 }
 export default IUi;
 export declare enum UiEvent {

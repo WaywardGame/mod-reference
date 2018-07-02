@@ -148,5 +148,6 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
     processInput(player: IPlayer): boolean | undefined;
     shouldRender(): RenderFlag | undefined;
+    shouldStopWalkToTileMovement(): boolean | undefined;
 }
 export default Mod;
