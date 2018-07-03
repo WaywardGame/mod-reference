@@ -43,7 +43,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
-    damage(amount: number, damageMessage: string, soundDelay?: number): number | undefined;
+    damage(amount: number, damageMessage: string, soundDelay?: number, causesBlood?: boolean): number | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damageRandomEquipment(): void;
     equip(item: IItem, slot: EquipType): void;

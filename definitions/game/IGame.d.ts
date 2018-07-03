@@ -94,7 +94,7 @@ export interface IGame extends Emitter {
     checkForHiddenMob(human: IBaseHumanEntity, x: number, y: number, z: number): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
-    damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo): number | undefined;
+    damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     deletePlayer(plys: IPlayer[], identifier: string): void;
     directionToMovement(direction: Direction): IVector2;
     doLavaEvents(x: number, y: number, z: number): void;

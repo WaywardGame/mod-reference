@@ -81,6 +81,10 @@ export default class Translation {
      */
     getString(...args: any[]): string;
     /**
+     * Returns the base translation
+     */
+    getBaseTranslation(): string | undefined;
+    /**
      * Returns the translation ID
      */
     getId(translationData: ITranslationData): string;
