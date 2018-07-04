@@ -163,7 +163,7 @@ export default class Game extends Emitter implements IGame {
      */
     updateTablesAndWeight(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
-    damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo): number | undefined;
+    damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     isPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
     isPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): boolean;

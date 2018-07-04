@@ -124,7 +124,8 @@ export default class InGameScreen extends BaseScreen {
     blurInputs(): void;
     toggleDialog(dialog: JQuery): boolean;
     openDialog(dialog: JQuery): boolean;
-    onOpenDialog(): void;
+    onOpenDialog(dialog: JQuery): void;
+    focus(): void;
     closeDialog(dialog: JQuery): boolean;
     openMapDialog(): void;
     closeMapDialog(): void;

@@ -53,7 +53,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     getHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
-    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: string, soundDelay?: number): number | undefined;
+    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: string, soundDelay?: number, causesBlood?: boolean): number | undefined;
     getEquippedItems(): IItem[];
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquipSlotForItem(item: IItem): EquipType | undefined;

@@ -1,4 +1,5 @@
 import { UiTranslation } from "language/ILanguage";
+import { IHookHost } from "mod/IHookHost";
 import { IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -6,7 +7,7 @@ import { IPacket } from "multiplayer/packets/IPacket";
 import { TranslationGenerator } from "newui/component/IComponent";
 import IPlayer, { ICharacter } from "player/IPlayer";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
-export default class Multiplayer implements IMultiplayer {
+export default class Multiplayer implements IMultiplayer, IHookHost {
     private readonly _playerIdentifier;
     private _isServer;
     private _server;
@@ -66,6 +67,8 @@ export default class Multiplayer implements IMultiplayer {
     updatePlayerId(oldPid: number, newPid: number): void;
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;
+    preSaveGame(): void;
+    postSaveGame(): void;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;

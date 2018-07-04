@@ -635,6 +635,10 @@ export interface IHookHost {
      */
     postRenderWorld?(tileScale: number, viewWidth: number, viewHeight: number): void;
     /**
+     * Called after the game is saved
+     */
+    postSaveGame?(): void;
+    /**
      * Called before an action is executed
      * This is called before the action result is used
      * @param player The player object
@@ -673,6 +677,10 @@ export interface IHookHost {
      */
     preRenderWorld?(tileScale: number, viewWidth: number, viewHeight: number): void;
     /**
+     * Called before the game is saved
+     */
+    preSaveGame?(): void;
+    /**
      * Called when input is being processed
      * @param player The player object
      * @returns False to prevent input processing or undefined to use the default logic
@@ -691,4 +699,9 @@ export interface IHookHost {
      * @returns False to not display the message or undefined to use the default logic
      */
     shouldDisplayMessage?(player: IPlayer, message: IMessage, messageId: number): boolean | undefined;
+    /**
+     * Called when determining if the player should stop walking to the tile
+     * @returns True to stop walk to tile movement, False to continue walk to tile movement, or undefined to use the default logic
+     */
+    shouldStopWalkToTileMovement?(): boolean | undefined;
 }

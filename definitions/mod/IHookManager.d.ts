@@ -94,15 +94,18 @@ export declare enum Hook {
     PostRender = "postRender",
     PostRenderPostProcess = "postRenderPostProcess",
     PostRenderWorld = "postRenderWorld",
+    PostSaveGame = "postSaveGame",
     PreExecuteAction = "preExecuteAction",
     PreExecuteCommand = "preExecuteCommand",
     PreLoadWorldDifferences = "preLoadWorldDifferences",
     PreRender = "preRender",
     PreRenderPostProcess = "preRenderPostProcess",
     PreRenderWorld = "preRenderWorld",
+    PreSaveGame = "preSaveGame",
     ProcessInput = "processInput",
+    ShouldDisplayMessage = "shouldDisplayMessage",
     ShouldRender = "shouldRender",
-    ShouldDisplayMessage = "shouldDisplayMessage"
+    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement"
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {
