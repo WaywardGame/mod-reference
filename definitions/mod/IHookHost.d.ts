@@ -635,6 +635,10 @@ export interface IHookHost {
      */
     postRenderWorld?(tileScale: number, viewWidth: number, viewHeight: number): void;
     /**
+     * Called after the game is saved
+     */
+    postSaveGame?(): void;
+    /**
      * Called before an action is executed
      * This is called before the action result is used
      * @param player The player object
@@ -672,6 +676,10 @@ export interface IHookHost {
      * @param viewHeight The height of the view port
      */
     preRenderWorld?(tileScale: number, viewWidth: number, viewHeight: number): void;
+    /**
+     * Called before the game is saved
+     */
+    preSaveGame?(): void;
     /**
      * Called when input is being processed
      * @param player The player object

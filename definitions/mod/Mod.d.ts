@@ -140,12 +140,14 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     postRender(): void;
     postRenderPostProcess(): void;
     postRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
+    postSaveGame(): void;
     preExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument): boolean | undefined;
     preLoadWorldDifferences(generateNewWorld: boolean): void;
     preExecuteCommand(player: IPlayer, command: Command, args: string | undefined): boolean | undefined;
     preRender(): void;
     preRenderPostProcess(): void;
     preRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
+    preSaveGame(): void;
     processInput(player: IPlayer): boolean | undefined;
     shouldRender(): RenderFlag | undefined;
     shouldStopWalkToTileMovement(): boolean | undefined;
