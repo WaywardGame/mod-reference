@@ -67,7 +67,7 @@ export interface UiApi extends Emitter {
      * @deprecated
      */
     showLoadingInterrupt(title: TranslationGenerator, description?: TranslationGenerator, canCancel?: boolean): Promise<void>;
-    refreshTranslations(element: HTMLElement | IComponent): void;
+    refreshTranslations(element?: HTMLElement | IComponent): void;
     toggleFullscreen(fullscreen?: boolean): void;
     storeElements(...elements: Array<HTMLElement | IComponent>): void;
     registerDataHost(id: string | number, dataHost: object): void;
