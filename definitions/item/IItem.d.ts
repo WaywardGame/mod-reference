@@ -91,7 +91,7 @@ export interface IContainable {
     containedWithin?: IContainer;
 }
 export interface IContainer extends IContainable {
-    weightCapacity: number;
+    weightCapacity?: number;
     containedItems: IItemArray;
     itemOrders?: number[];
     containerType?: ContainerType;

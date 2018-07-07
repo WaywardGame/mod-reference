@@ -17,5 +17,5 @@ export default class ActionManager extends GenericManager<IAction> implements IA
     protected getEnumObject(): any;
     private canExecuteAction;
     private executeInternal;
-    private hasValidArguments;
+    private checkForInvalidArguments;
 }

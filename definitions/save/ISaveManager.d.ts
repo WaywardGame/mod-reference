@@ -49,6 +49,7 @@ export declare let propertiesToSerializeGlobal: ISerializeProperty[];
 export declare class SaveObject {
     version: string;
     data: any;
+    isCompressed: boolean;
 }
 export interface ISerializeProperty {
     key: string;
