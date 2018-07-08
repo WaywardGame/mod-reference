@@ -557,8 +557,12 @@ declare const _default: {
     [Ui.MenuOptionsButtonKeepSortActiveTooltip]: string;
     [Ui.MenuOptionsButtonProtectedCraftingItems]: string;
     [Ui.MenuOptionsButtonProtectedCraftingItemsTooltip]: string;
+    [Ui.MenuOptionsButtonUseAdjacentContainers]: string;
+    [Ui.MenuOptionsButtonUseAdjacentContainersTooltip]: string;
     [Ui.MenuOptionsButtonHideEquippedHeadgear]: string;
     [Ui.MenuOptionsButtonHideEquippedHeadgearTooltip]: string;
+    [Ui.MenuOptionsButtonEnableAutoSave]: string;
+    [Ui.MenuOptionsButtonEnableAutoSaveTooltip]: string;
     [Ui.MenuOptionsButtonWarnOnDangerousActions]: string;
     [Ui.MenuOptionsButtonWarnOnDangerousActionsTooltip]: string;
     [Ui.MenuOptionsButtonWarnWhenBreakingItemsOnCraft]: string;

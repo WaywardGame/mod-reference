@@ -5,7 +5,6 @@ import { Message } from "language/IMessages";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
-import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IItemManager {
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): boolean;
@@ -20,13 +19,14 @@ export interface IItemManager {
     decayItems(): boolean;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     generateLookups(): void;
-    getAdjacentContainers(point: IVector3, includeNpcs?: boolean): IContainer[];
+    getAdjacentContainers(player: IPlayer, includeNpcs?: boolean): IContainer[];
     getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
     getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup | IItemTypeGroup>;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
+    getItemForPlayer(player: IPlayer, search: ItemType | ItemTypeGroup): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
