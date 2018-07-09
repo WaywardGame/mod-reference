@@ -8,11 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IModInfo } from "mod/IModInfo";
 import { EnumId, IEnumInfo } from "utilities/enum/IEnum";
 declare module EnumManager {
-    function isModdable(enumObject: any): boolean;
-    function getMod(enumObject: any, enumName: string): IModInfo | undefined;
     function initialize(): void;
     function initializeGameState(): void;
     function restore(): void;

@@ -1,10 +1,13 @@
+import { IModInfo } from "mod/IModInfo";
 declare module Enums {
+    function isModdable(enumObject: any): boolean;
     /**
      * Returns whether this enum entry is modded.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
      * @param entry The entry in the enum. Usually its index.
      */
     function isModded<Enum extends number | string = number>(enumObject: any, entry: Enum): boolean;
+    function getMod(enumObject: any, enumName: string, isGlobalEnum: boolean): IModInfo | undefined;
     /**
      * Returns an enum entry by its name, case-insensitive.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc

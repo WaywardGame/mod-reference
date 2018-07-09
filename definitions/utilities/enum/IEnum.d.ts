@@ -37,4 +37,5 @@ export interface IEnumInfo {
     name: string;
     onUnallocate?: ((index: number) => void);
     modIndex?: number;
+    modName?: string;
 }

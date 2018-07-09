@@ -100,8 +100,8 @@ declare const _default: {
     [Message.ChatCommandsCommand]: string;
     [Message.ChatPingCommand]: string;
     [Message.ChatPlayerMessage]: string;
-    [Message.ChatServerMessage]: string;
     [Message.ChatPlayersCommand]: string;
+    [Message.ChatServerMessage]: string;
     [Message.ChatUnbanCommand]: string;
     [Message.ChatUnknownCommand]: string;
     [Message.Chest]: string;
@@ -596,6 +596,8 @@ declare const _default: {
     [Message.TimeIsNighttime]: string;
     [Message.TimeIsSunrise]: string;
     [Message.TimeIsSunset]: string;
+    [Message.ToDamageAChest]: string;
+    [Message.ToFight]: string;
     [Message.TooDamaged]: string;
     [Message.TooExhaustedToJump]: string;
     [Message.TradeBarterCreditForItem]: string;
@@ -618,7 +620,6 @@ declare const _default: {
     [Message.UnlockedChest]: string;
     [Message.UnlockedTime]: string;
     [Message.UnpurifiedWaterInStill]: string;
-    [Message.UsingBareFistsToFight]: string;
     [Message.UsingBareHands]: string;
     [Message.Vulnerable]: string;
     [Message.WaitUntilFireCooledToGetWater]: string;
