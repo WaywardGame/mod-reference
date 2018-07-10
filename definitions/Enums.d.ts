@@ -1061,7 +1061,7 @@ export declare enum Delay {
     TurnDirection = 2,
     ItemPickUp = 4
 }
-export declare enum RealTimeSpeed {
+export declare enum TickSpeed {
     Min = 10,
     Default = 50,
     Max = 80
@@ -1415,4 +1415,9 @@ export declare enum DropLocation {
     Facing = 0,
     Feet = 1,
     FeetWhenFacingBlocked = 2
+}
+export declare enum TurnMode {
+    Manual = 0,
+    Simulated = 1,
+    RealTime = 2
 }

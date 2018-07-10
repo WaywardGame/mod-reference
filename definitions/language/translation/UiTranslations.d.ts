@@ -458,10 +458,12 @@ declare const _default: {
     [Ui.MenuNewGameChoiceSingleplayerDescription]: string;
     [Ui.MenuNewGameChoiceMultiplayer]: string;
     [Ui.MenuNewGameChoiceMultiplayerDescription]: string;
-    [Ui.MenuNewGameChoiceTurnsManual]: string;
-    [Ui.MenuNewGameChoiceTurnsManualDescription]: string;
-    [Ui.MenuNewGameChoiceTurnsRealTime]: string;
-    [Ui.MenuNewGameChoiceTurnsRealTimeDescription]: string;
+    [Ui.MenuNewGameChoiceTurnModeManual]: string;
+    [Ui.MenuNewGameChoiceTurnModeManualDescription]: string;
+    [Ui.MenuNewGameChoiceTurnModeSimulated]: string;
+    [Ui.MenuNewGameChoiceTurnModeSimulatedDescription]: string;
+    [Ui.MenuNewGameChoiceTurnModeRealTime]: string;
+    [Ui.MenuNewGameChoiceTurnModeRealTimeDescription]: string;
     [Ui.MenuNewGameChoiceDifficultyTooltipMaxSaves]: string;
     [Ui.MenuNewsButtonDiscord]: string;
     [Ui.MenuNewsButtonFacebook]: string;

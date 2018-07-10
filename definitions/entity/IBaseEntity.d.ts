@@ -150,8 +150,9 @@ export default interface IBaseEntity extends IVector3, Emitter {
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
     on(event: EntityEvent.StatChanged, handler: (_: this, stat: IStat, oldValue: number, info: IStatChangeInfo) => any): this;
+    on(event: EntityEvent.StatMaxChanged, handler: (_: this, stat: IStat, oldValue: number, info: IStatChangeInfo) => any): this;
+    on(event: EntityEvent.StatBonusChanged, handler: (_: this, stat: IStat, oldValue: number, info: IStatChangeInfo) => any): this;
     on(event: EntityEvent.StatTimerChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
-    on(event: EntityEvent.StatMaxChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
     on(event: EntityEvent.StatusChange, handler: (_: this, status: StatusType, hasStatus: boolean) => any): this;
 }
 export declare enum EntityEvent {

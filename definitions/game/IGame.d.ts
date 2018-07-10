@@ -12,7 +12,7 @@ import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DamageType, Difficulty, Direction, FireType, IObjectDescription, ISeeds, ItemQuality, ItemType, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { DamageType, Difficulty, Direction, FireType, IObjectDescription, ISeeds, ItemQuality, ItemType, SaveType, SentenceCaseStyle, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import { IMessagePack, Message } from "language/IMessages";
@@ -71,7 +71,7 @@ export interface IGame extends Emitter {
         [index: number]: number;
     };
     previousSaveVersion: IVersionInfo;
-    realTimeTickSpeed: number;
+    tickSpeed: number;
     crafted: {
         [index: number]: ICrafted;
     };
@@ -145,6 +145,7 @@ export interface IGame extends Emitter {
     isPositionEmpty(x: number, y: number, z: number): boolean;
     isPositionFull(x: number, y: number, z: number): boolean;
     isRealTimeMode(): boolean;
+    getTickSpeed(): number;
     isTileEmpty(tile: ITile): boolean;
     isTileFull(tile: ITile): boolean;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
@@ -195,6 +196,8 @@ export declare type IGameOld = Partial<IGame> & {
     highscores: IHighscoreOld[];
     playedCount: number;
     dailyChallenge: boolean;
+    isRealTime: boolean;
+    realTimeTickSpeed: TickSpeed;
 };
 export interface IPlayOptions {
     slot: number | undefined;
@@ -204,7 +207,7 @@ export interface IPlayOptions {
     character: ICharacter;
     multiplayer: IMultiplayerOptions | undefined;
     multiplayerServerToJoin: ServerInfo | undefined;
-    realTime: boolean;
+    turnMode: TurnMode;
     realTimeTickSpeed: number;
     multiplayerWorld?: IMultiplayerWorldData;
 }
