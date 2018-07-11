@@ -123,6 +123,7 @@ export default class Game extends Emitter implements IGame {
     removePlayer(pid: number): void;
     deletePlayer(plys: IPlayer[], identifier: string): void;
     isRealTimeMode(): boolean;
+    getTurnMode(): TurnMode;
     getTickSpeed(): number;
     synchronizeFlowFields(plys: IPlayer[]): void;
     enableFlowFieldDebug(): void;

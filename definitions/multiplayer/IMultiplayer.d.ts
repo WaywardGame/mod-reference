@@ -1,3 +1,4 @@
+import { TurnMode } from "Enums";
 import { ICrafted } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -52,6 +53,7 @@ export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | ICon
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
     pvp: boolean;
+    turnMode: TurnMode;
     maxPlayers: number;
     realTimeTickSpeed: number;
     syncChecks: boolean | MultiplayerSyncCheck[];

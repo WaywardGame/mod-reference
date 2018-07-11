@@ -8,6 +8,7 @@ export default class MultiplayerMenu extends Menu {
     private readonly choiceLobbyPublic;
     private readonly choiceLobbyPrivate;
     private readonly pvp;
+    private readonly simulatedTurnMode;
     private readonly maxPlayers;
     private readonly tickSpeed;
     constructor(uiApi: UiApi);
