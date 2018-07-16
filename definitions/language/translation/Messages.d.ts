@@ -295,6 +295,7 @@ declare const _default: {
     [Message.LabelBase]: string;
     [Message.LabelCanIncrease]: string;
     [Message.LabelCraftingReputation]: string;
+    [Message.LabelCraftingSkillReputation]: string;
     [Message.LabelDecay]: string;
     [Message.LabelDefense]: string;
     [Message.LabelDurability]: string;
