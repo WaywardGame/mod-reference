@@ -27,7 +27,7 @@ export default class Ui extends Emitter implements IUi {
     setCheckboxValue(element: JQuery, id: string, checked: boolean): void;
     playClickSound(): void;
     hideInGameScreen(): void;
-    switchToScreen<M extends Menu = Menu>(screenId: ScreenId, menuId?: MenuId, menuInitializer?: (menu: M) => any): void;
+    switchToScreen<M extends Menu = Menu>(screenId: ScreenId, menuId?: MenuId, menuInitializer?: (menu: M) => any): Promise<void>;
     toggleOptions(): void;
     showOptionsScreen(): Promise<void>;
     onWindowResize(): void;
