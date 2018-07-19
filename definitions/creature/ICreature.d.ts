@@ -50,7 +50,8 @@ export declare enum SpawnGroup {
     Water = 2,
     WaterCave = 3,
     Cave = 4,
-    Night = 5
+    Night = 5,
+    StrongGuardians = 6
 }
 export declare enum SpawnableTiles {
     None = 0,
