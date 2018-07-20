@@ -1033,7 +1033,8 @@ export declare enum Command {
     Banned = 4,
     Ban = 5,
     Unban = 6,
-    Pause = 7
+    Pause = 7,
+    Save = 8
 }
 export declare enum PlayerState {
     None = 0,
@@ -1060,7 +1061,7 @@ export declare enum Delay {
     TurnDirection = 2,
     ItemPickUp = 4
 }
-export declare enum RealTimeSpeed {
+export declare enum TickSpeed {
     Min = 10,
     Default = 50,
     Max = 80
@@ -1414,4 +1415,9 @@ export declare enum DropLocation {
     Facing = 0,
     Feet = 1,
     FeetWhenFacingBlocked = 2
+}
+export declare enum TurnMode {
+    Manual = 0,
+    Simulated = 1,
+    RealTime = 2
 }

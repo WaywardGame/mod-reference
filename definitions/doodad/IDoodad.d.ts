@@ -98,7 +98,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     particles?: IRGB;
     growthParticles?: IDoodadParticles;
     pickUp?: ItemType[];
-    pickUpCanHurtHands?: boolean;
+    gatherCanHurtHands?: boolean;
     providesFire?: boolean;
     providesLight?: number;
     reduceDurabilityOnGather?: boolean;

@@ -21,8 +21,9 @@ export default class NewGameMenu extends Menu {
     private choiceSingleplayer;
     private choiceMultiplayer;
     private turnMode;
-    private choiceTurnsManual;
-    private choiceTurnsRealTime;
+    private choiceTurnModeManual;
+    private choiceTurnModeRealTime;
+    private choiceTurnModeSimulated;
     private lobbyType;
     private choiceLobbyFriends;
     private choiceLobbyPublic;

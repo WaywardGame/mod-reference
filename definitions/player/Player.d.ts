@@ -127,7 +127,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     updateTablesAndWeight(): void;
     checkReputationMilestones(): void;
     getReputation(): number;
-    hurtHands(message: Message, damageMessage: Message, hurtHands?: Message): void;
+    hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;

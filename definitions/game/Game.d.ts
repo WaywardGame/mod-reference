@@ -2,7 +2,7 @@ import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DamageType, Difficulty, Direction, FireType, IObjectDescription, ISeeds, ItemQuality, ItemType, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnType } from "Enums";
+import { DamageType, Difficulty, Direction, FireType, IObjectDescription, ISeeds, ItemQuality, ItemType, SaveType, SentenceCaseStyle, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -37,7 +37,7 @@ export default class Game extends Emitter implements IGame {
     isLoadingSave: boolean;
     paused: boolean;
     playing: boolean;
-    realTimeNextTick: number;
+    nextTickTime: number | undefined;
     saveClear: boolean;
     spawnCoords: IVector3;
     tile: ITileArray;
@@ -50,14 +50,14 @@ export default class Game extends Emitter implements IGame {
     difficulty: Difficulty;
     doodads: SaferArray<IDoodad>;
     flowFieldSyncCount: number;
-    isRealTime: boolean;
     items: IItemArray;
     lastCreationIds: {
         [index: number]: number;
     };
     mapGenVersion: string;
     npcs: SaferArray<INPC>;
-    realTimeTickSpeed: number;
+    turnMode: TurnMode;
+    tickSpeed: number;
     saveVersion: string;
     seeds: ISeeds;
     shouldUpdateTablesAndWeight: boolean;
@@ -123,6 +123,8 @@ export default class Game extends Emitter implements IGame {
     removePlayer(pid: number): void;
     deletePlayer(plys: IPlayer[], identifier: string): void;
     isRealTimeMode(): boolean;
+    getTurnMode(): TurnMode;
+    getTickSpeed(): number;
     synchronizeFlowFields(plys: IPlayer[]): void;
     enableFlowFieldDebug(): void;
     resetGameState(skipSave?: boolean): Promise<void>;
@@ -215,7 +217,7 @@ export default class Game extends Emitter implements IGame {
     private loadResources;
     private initializeGameState;
     private setZoomLevel;
-    private playGame;
+    private startGame;
     private upgradeSave;
     private upgradePlayer;
     private upgradeSaveMoveProperty;

@@ -63,6 +63,7 @@ export interface IOptions {
     directionTurnDelay: number;
     dropLocation: DropLocation;
     dropOnGatherHarvest: boolean;
+    enableAutoSave: boolean;
     fontStyle: boolean;
     fullscreen: boolean;
     hideEquippedHeadgear: boolean;
@@ -82,6 +83,7 @@ export interface IOptions {
     tooltipsNPCs: boolean;
     tooltipsTerrain: boolean;
     uiScale: number;
+    useAdjacentContainers: boolean;
     visionMode: boolean;
     volumeEffects: number;
     volumeMusic: number;
