@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { UiTranslation } from "language/ILanguage";
 import { IHookHost } from "mod/IHookHost";
 import { IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
@@ -6,8 +16,9 @@ import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TranslationGenerator } from "newui/component/IComponent";
 import IPlayer, { ICharacter } from "player/IPlayer";
+import Emitter from "utilities/Emitter";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
-export default class Multiplayer implements IMultiplayer, IHookHost {
+export default class Multiplayer extends Emitter implements IMultiplayer, IHookHost {
     private readonly _playerIdentifier;
     private _isServer;
     private _server;

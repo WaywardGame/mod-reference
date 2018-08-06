@@ -463,6 +463,7 @@ declare const _default: {
     [ItemGroup.Equipment]: string[];
     [ItemGroup.Fabric]: string[];
     [ItemGroup.Firemaking]: string[];
+    [ItemGroup.FireStarter]: string[];
     [ItemGroup.Food]: string[];
     [ItemGroup.Fruit]: string[];
     [ItemGroup.Fuel]: string[];

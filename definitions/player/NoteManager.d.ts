@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { PartOfDay } from "game/TimeManager";
+import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 export declare enum Note {
     Bleeding = 0,
     Burned = 1,
@@ -23,7 +24,7 @@ export declare enum Note {
     Gardening = 10,
     HealthIssues = 11,
     Inedible = 12,
-    Merchantile = 13,
+    Mercantile = 13,
     Nightfall = 14,
     Poisoned = 15,
     Reputation = 16,
@@ -31,6 +32,10 @@ export declare enum Note {
     Stranded = 18,
     ToolUse = 19
 }
+export interface INoteDescription {
+    learnMore?: HelpArticle;
+}
+export declare const noteDescriptions: OptionalDescriptions<Note, INoteDescription>;
 export declare type Time = PartOfDay | string;
 export interface INote {
     id: keyof typeof Note;

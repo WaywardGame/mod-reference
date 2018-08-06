@@ -1,7 +1,18 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 export default class Vector2 implements IVector2 {
     static readonly ZERO: Vector2;
+    static readonly ONE: Vector2;
     static copyRaw(vector: IVector2): IVector2;
     static cross(vector: IVector2, vector2: IVector2): Vector3;
     static cross<D extends IVector3>(vector: IVector2, vector2: IVector2, dest: D): D;

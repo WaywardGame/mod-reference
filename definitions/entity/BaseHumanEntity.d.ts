@@ -66,6 +66,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
+    getBurnDamage(skipParry?: boolean, equipType?: EquipType): number;
     /**
      * Burn the player
      */

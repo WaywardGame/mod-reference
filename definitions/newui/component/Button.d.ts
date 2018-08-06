@@ -9,19 +9,19 @@
  * https://waywardgame.github.io/
  */
 import Component from "newui/component/Component";
-import { TranslationGenerator } from "newui/component/IComponent";
+import { IDisableable, TranslationGenerator } from "newui/component/IComponent";
 import Text, { Paragraph } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
 export declare enum ButtonEvent {
     Activate = "Activate"
 }
-export default class Button extends Component {
+export default class Button extends Component implements IDisableable {
     playSound: boolean;
     protected readonly text: Text;
     private buttons;
     private description;
-    private _disabled;
     private _activated;
+    private _disabled;
     readonly disabled: boolean;
     constructor(api: UiApi, elementType?: string);
     setDisabled(val: boolean): this;

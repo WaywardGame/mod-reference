@@ -1,3 +1,15 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ *
+ *
+ */
 import DoodadInfo from "doodad/DoodadInfo";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, DoodadType, DoodadTypeGroup, DoorOrientation, EquipType, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
@@ -34,6 +46,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
     getDoodadInfo(): DoodadInfo | undefined;
+    canCauseStatus(human: IBaseHumanEntity, equipType?: EquipType): boolean;
     causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
@@ -43,7 +56,8 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getInspect(): IInspect[];
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     update(): void;
-    isDangerous(): boolean;
+    isDangerous(player: IPlayer): boolean;
+    getDamage(human: IBaseHumanEntity, equipType?: EquipType): number;
 }
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: boolean;

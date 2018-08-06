@@ -78,8 +78,13 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
      */
     private onQuadrantElementChange;
     /**
+     * Handles top/bottom quadrants (for when in two-column mode)
+     */
+    private updateQuadrantPositions;
+    /**
      * Returns the first unused `Quadrant`, or `Quadrant.None` if there are none.
      */
     private getUnusedQuadrant;
     private onDialogClose;
+    private updatePauseIcon;
 }

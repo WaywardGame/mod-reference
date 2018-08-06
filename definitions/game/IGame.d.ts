@@ -145,7 +145,10 @@ export interface IGame extends Emitter {
     isPositionEmpty(x: number, y: number, z: number): boolean;
     isPositionFull(x: number, y: number, z: number): boolean;
     isRealTimeMode(): boolean;
+    getTurnMode(): TurnMode;
+    setTurnMode(turnMode: TurnMode): void;
     getTickSpeed(): number;
+    setTickSpeed(tickSpeed: number): void;
     isTileEmpty(tile: ITile): boolean;
     isTileFull(tile: ITile): boolean;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
@@ -184,7 +187,9 @@ export interface IGame extends Emitter {
 }
 export default IGame;
 export declare enum GameEvent {
-    GlobalSlotLoaded = 0
+    GlobalSlotLoaded = 0,
+    Pause = 1,
+    Resume = 2
 }
 export declare type IGameOld = Partial<IGame> & {
     dayNight: number;

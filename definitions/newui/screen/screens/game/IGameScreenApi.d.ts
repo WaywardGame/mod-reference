@@ -34,6 +34,6 @@ export default interface IGameScreenApi {
     on(event: GameScreenEvent.HideDialog, handler: (api: IGameScreenApi, id: DialogId) => any): void;
 }
 export interface IDialog extends IComponent {
-    getID(): DialogId;
+    id: DialogId;
     getName(): TranslationGenerator;
 }

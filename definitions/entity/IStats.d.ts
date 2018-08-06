@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 export declare enum Stat {
     Health = 0,
     Stamina = 1,
@@ -30,7 +40,8 @@ export declare enum Stat {
     /**
      * Used for tamed animals
      */
-    Happiness = 11
+    Happiness = 11,
+    Tamed = 12
 }
 export declare type IStats = {
     [key in keyof typeof Stat]: IStat;

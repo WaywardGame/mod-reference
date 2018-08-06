@@ -17,6 +17,7 @@ import { IStatusEffectDescription } from "entity/StatusEffects";
 import { ItemType, ITerrainResourceItem } from "Enums";
 import { IItemDescription } from "item/IItem";
 import { ILanguageExtension } from "language/ILanguage";
+import { ModRegistration, SYMBOL_MOD_REGISTRATIONS } from "mod/ModRegistry";
 import * as Packets from "multiplayer/packets/Packets";
 import { IBinding } from "newui/BindingManager";
 import Component from "newui/component/Component";
@@ -30,10 +31,18 @@ import { ITerrainDescription } from "tile/ITerrain";
 import { ITileEventDescription } from "tile/ITileEvent";
 import { IDialogInfo } from "ui/IUi";
 import Log from "utilities/Log";
+declare const SYMBOL_WAIT_FOR_PROPERTY: unique symbol;
+interface IRegistry {
+    [SYMBOL_MOD_REGISTRATIONS]: ModRegistration[];
+    [SYMBOL_WAIT_FOR_PROPERTY]?: {
+        [key: string]: Array<(val: any) => void>;
+    };
+}
 export declare abstract class BaseMod {
     private readonly index;
     private allocatedEnums;
     private registeredPackets;
+    private readonly subRegistries;
     constructor(index: number);
     getIndex(): number;
     /**
@@ -43,10 +52,22 @@ export declare abstract class BaseMod {
     getLog(): Log;
     getPath(): string;
     loadFile(file: string, callback: (fileText: string, success: boolean) => void): boolean;
-    registerOptionsSection(initializer: (api: UiApi, optionsSection: Component) => any): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     getDialog(title: string): JQuery;
+    /**
+     * @deprecated
+     * @see `@Register.optionsSection`
+     */
+    registerOptionsSection(initializer: (api: UiApi, optionsSection: Component) => any): void;
+    /**
+     * @deprecated
+     * @see `@Register.action`
+     */
     addActionType(description: IActionDescription, callback: ActionCallback): number;
+    /**
+     * @deprecated
+     * @see `@Register.command`
+     */
     addCommand(command: string, callback: CommandCallback): number;
     addSkillType(description: ISkillDescription): number;
     addNPC(name: string, npcClass: INPCClass): number;
@@ -98,6 +119,20 @@ export declare abstract class BaseMod {
      * This is called internally after unloading a mod
      */
     unallocate(): void;
+    /**
+     * This is called internally. Handles decorator-registered methods & properties, such as actions, commands, or bindables
+     */
+    onBeforeInitialize(registry?: IRegistry): Promise<void>;
+    /**
+     * This is called internally. Handles decorator-registered methods & properties, such as actions, commands, or bindables
+     */
+    onBeforeLoad(registry?: IRegistry): Promise<void | any[]>;
+    private initializeRegistry;
+    private validateRegistration;
+    private register;
+    private getPropertyValue;
+    private getRegistrationValue;
+    private setRegistrationValue;
     private allocateEnum;
 }
 export default BaseMod;

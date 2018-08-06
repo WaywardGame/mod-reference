@@ -19,8 +19,11 @@ export default class Serializer implements ISerializer {
     private readonly version;
     private readonly skipOnUnserialized;
     constructor(object: any, objectKey: any, version: string, skipOnUnserialized?: boolean);
+    saveToUint8Array(): Uint8Array;
     saveToString(): string;
-    loadToObject(data: string): void;
+    load(data: string | Uint8Array): void;
+    loadFromUint8Array(bytes: Uint8Array): void;
+    loadFromString(data: string): void;
     readProperty(object: any, key: any): void;
     writeProperty(object: any, key: any): void;
     private getSerializationProperties;

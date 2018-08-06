@@ -37,6 +37,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     swimming: boolean;
     canSendMessage: boolean;
     addMilestone(milestone: MilestoneType, data?: number): void;
+    getBurnDamage(skipParry?: boolean, equipType?: EquipType): number;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     cancelResting(reason: RestCancelReason): void;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;

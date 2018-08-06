@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { Bindable } from "Enums";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
@@ -29,6 +39,7 @@ export default abstract class Dialog extends Component implements IDialog {
     private static topOrder;
     private static topDialog;
     static makeTopDialog(element: HTMLElement): void;
+    readonly id: DialogId;
     /**
      * The positions of each edge of the dialog. Stored as percentages.
      */
@@ -46,7 +57,7 @@ export default abstract class Dialog extends Component implements IDialog {
      * The description of how the dialog should be sized. (min, default, and max sizes and the position)
      */
     private description;
-    constructor(gsapi: IGameScreenApi);
+    constructor(gsapi: IGameScreenApi, id: number);
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Closes the dialog.
@@ -78,10 +89,6 @@ export default abstract class Dialog extends Component implements IDialog {
      * Mark that this dialog is not "active"
      */
     markInactive(): void;
-    /**
-     * The ID is used for `Switch With` context menu options
-     */
-    abstract getID(): DialogId;
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */

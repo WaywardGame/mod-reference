@@ -64,22 +64,28 @@ export interface IHookHost {
      * @param colors The current ambient colors
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
-    getAmbientColor?(colors: number[]): number[] | undefined;
+    getAmbientColor?(colors: [number, number, number]): [number, number, number] | undefined;
     /**
      * Get the ambient color while in caves
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
-    getAmbientColorCave?(): number[] | undefined;
+    getAmbientColorCave?(): [number, number, number] | undefined;
     /**
      * Get the ambient color while its day time
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
-    getAmbientColorDay?(): number[] | undefined;
+    getAmbientColorDay?(): [number, number, number] | undefined;
     /**
      * Get the ambient color while its night time
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
-    getAmbientColorNight?(): number[] | undefined;
+    getAmbientColorNight?(): [number, number, number] | undefined;
+    /**
+     * Get the fog color
+     * @param colors The current fog colors
+     * @returns the ambient color channels (3 numbers) or undefined to use the default color
+     */
+    getFogColor?(colors: [number, number, number]): [number, number, number] | undefined;
     /**
      * Get the ambient light level
      * @param ambientLight The current ambient light level
@@ -281,6 +287,11 @@ export interface IHookHost {
      * @returns True if you want to show a custom inspect message, false to display no messages, or undefined to use the default logic
      */
     isTileInspectable?(tile: ITile): boolean | undefined;
+    /**
+     * Called when checking if a tile is blocked, used for pathing.
+     * @param tile The tile to check
+     */
+    isTileBlocked?(tile: ITile): boolean | undefined;
     /**
      * Called when something is built on a tile
      * @param player The player object

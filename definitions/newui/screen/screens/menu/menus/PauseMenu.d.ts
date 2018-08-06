@@ -14,7 +14,7 @@ import { Heading, Paragraph } from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class PauseMenu extends Menu {
-    protected multiplayerButton: Button;
+    protected worldButton: Button;
     protected optionsButton: Button;
     protected optionsRow: BlockRow;
     protected paragraph: Paragraph;
@@ -25,5 +25,5 @@ export default class PauseMenu extends Menu {
     private getHeadingText;
     private getParagraphText;
     private onQuitButtonClick;
-    private getMultiplayerMenu;
+    private getWorldMenu;
 }

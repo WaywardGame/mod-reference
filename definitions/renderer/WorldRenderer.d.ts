@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import IWorldRenderer from "renderer/IWorldRenderer";
 import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
@@ -58,7 +68,8 @@ export default class WorldRenderer implements IWorldRenderer {
     setViewport(view: Vec2): void;
     getViewport(): Vec2;
     getTileViewport(): Vec2;
-    getAmbientColor(): number[];
+    getAmbientColor(): [number, number, number];
+    getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
     screenToTile(screenX: number, screenY: number): Vec2;

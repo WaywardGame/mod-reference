@@ -1,3 +1,15 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ *
+ *
+ */
 import { CaseStyle, SentenceCaseStyle } from "Enums";
 export declare const matchLanguageLetters: RegExp;
 export declare const matchNotLanguageLetters: RegExp;
@@ -14,5 +26,6 @@ declare module Strings {
     function fixObjectCaseStyle(obj: any, caseStyle: CaseStyle, whitelist?: string[]): any;
     function stripParentDirectoryAccessorsFromPath(path: string): string;
     function encodeURIComponentPath(p: string): string;
+    function generateTimestamp(date?: Date): string;
 }
 export default Strings;

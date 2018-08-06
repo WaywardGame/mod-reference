@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { Source } from "player/IMessageManager";
-declare const sources: Description2<Source, string>;
+declare const sources: Descriptions<Source, string>;
 export default sources;

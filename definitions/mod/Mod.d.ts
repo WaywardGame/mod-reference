@@ -55,10 +55,11 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
      * @returns An object containing the data you want to save
      */
     onSave(): any;
-    getAmbientColor(colors: number[]): number[] | undefined;
-    getAmbientColorCave(): number[] | undefined;
-    getAmbientColorDay(): number[] | undefined;
-    getAmbientColorNight(): number[] | undefined;
+    getAmbientColor(colors: [number, number, number]): [number, number, number] | undefined;
+    getAmbientColorCave(): [number, number, number] | undefined;
+    getAmbientColorDay(): [number, number, number] | undefined;
+    getAmbientColorNight(): [number, number, number] | undefined;
+    getFogColor(colors: [number, number, number]): [number, number, number] | undefined;
     getAmbientLightLevel(ambientLight: number, z: number): number | undefined;
     canConsumeItem(player: IPlayer, itemType: ItemType, actionType: ActionType): boolean | undefined;
     canCreatureAttack(creature: ICreature, enemy: IPlayer | ICreature): boolean | undefined;
@@ -85,6 +86,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
     isPlayerSwimming(player: IPlayer, isSwimming: boolean): boolean | undefined;
     isTileInspectable(tile: ITile): boolean | undefined;
+    isTileBlocked(tile: ITile): boolean | undefined;
     onBuild(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
     onButtonBarClick(button: JQuery): void;
     onContainerItemAdd(item: IItem, container: IContainer): void;

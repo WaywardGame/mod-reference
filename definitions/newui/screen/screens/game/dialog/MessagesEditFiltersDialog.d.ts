@@ -10,7 +10,6 @@
  */
 import { UiTranslation } from "language/ILanguage";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import { DialogId } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export declare enum MessagesEditFiltersDialogEvent {
     Edit = "Edit",
@@ -28,7 +27,6 @@ export default class MessagesEditFiltersDialog extends Dialog {
     initializeFilters(filters: {
         [key: string]: string[];
     }): this;
-    getID(): DialogId;
     getName(): UiTranslation;
     private editFilter;
     private isFilteredIn;

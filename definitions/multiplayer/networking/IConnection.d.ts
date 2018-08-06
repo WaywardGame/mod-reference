@@ -1,3 +1,15 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ *
+ *
+ */
 import { ConnectionState } from "Enums";
 import { MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
 import { IPacket } from "multiplayer/packets/IPacket";
@@ -11,6 +23,7 @@ export interface IConnection {
     bufferPacketId?: number;
     lastPacketNumberSent?: number;
     lastPacketNumberReceived?: number;
+    addConnectionTimeout(): void;
     addTimeout(milliseconds: number, callback: () => void): void;
     clearTimeout(): void;
     addKeepAliveTimeout(): void;
@@ -19,6 +32,6 @@ export interface IConnection {
     setState(state: ConnectionState): void;
     isConnected(): boolean;
     close(): void;
-    send(data: ArrayBuffer): void;
+    send(data: ArrayBuffer | Uint8Array): void;
     processMatchmakingMessage(message: ArrayBuffer | MatchmakingMessageData): Promise<boolean>;
 }

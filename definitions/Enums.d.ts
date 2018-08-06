@@ -716,7 +716,8 @@ export declare enum ItemTypeGroup {
     CoconutContainerOfPotableWater = 866,
     SandCastFlask = 867,
     Glue = 868,
-    Last = 869
+    FireStarter = 869,
+    Last = 870
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -1292,6 +1293,8 @@ export declare enum ConnectionState {
 export interface RequirementInfo extends IVector2, IVector3 {
     requirementsMet: boolean;
     isLava?: boolean;
+    doodadRequirementMet: boolean;
+    fireRequirementMet: boolean;
 }
 export interface IKeyBind {
     [index: number]: number;

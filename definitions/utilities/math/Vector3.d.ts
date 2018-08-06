@@ -1,6 +1,17 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IVector3 } from "utilities/math/IVector";
 export default class Vector3 implements IVector3 {
     static readonly ZERO: Vector3;
+    static readonly ONE: Vector3;
     static readonly UP: Vector3;
     static readonly RIGHT: Vector3;
     static readonly FORWARD: Vector3;

@@ -1,3 +1,15 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ *
+ *
+ */
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, SentenceCaseStyle, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
@@ -19,7 +31,7 @@ export interface IItemManager {
     decayItems(): boolean;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     generateLookups(): void;
-    getAdjacentContainers(player: IPlayer, includeNpcs?: boolean): IContainer[];
+    getAdjacentContainers(player: IPlayer, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
     getDefaultDurability(): number;
     getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
@@ -48,7 +60,7 @@ export interface IItemManager {
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
-    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean): boolean;
+    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     isContainer(obj: IItem | IDoodad | IContainer | ITile): obj is IContainer;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
@@ -59,8 +71,8 @@ export interface IItemManager {
     isTileContainer(container: IContainer | undefined): boolean;
     loadReferences(): void;
     loadTileReferences(): void;
-    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): void;
-    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): void;
+    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): boolean;
+    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): boolean;
     moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): boolean;
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;

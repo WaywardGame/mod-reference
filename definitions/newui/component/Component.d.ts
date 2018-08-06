@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -29,14 +39,12 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     private contextMenuGenerator?;
     private tooltipInitializer;
     private highlight;
+    private readonly debounces;
     readonly selectable: SelectableLayer | false;
     /**
      * Alias of `.element.addEventListener`
      */
-    readonly listen: {
-        <K extends "input" | "progress" | "select" | "change" | "abort" | "activate" | "beforeactivate" | "beforecopy" | "beforecut" | "beforedeactivate" | "beforepaste" | "blur" | "canplay" | "canplaythrough" | "click" | "contextmenu" | "copy" | "cuechange" | "cut" | "dblclick" | "deactivate" | "drag" | "dragend" | "dragenter" | "dragleave" | "dragover" | "dragstart" | "drop" | "durationchange" | "emptied" | "ended" | "error" | "focus" | "invalid" | "keydown" | "keypress" | "keyup" | "load" | "loadeddata" | "loadedmetadata" | "loadstart" | "mousedown" | "mouseenter" | "mouseleave" | "mousemove" | "mouseout" | "mouseover" | "mouseup" | "mousewheel" | "MSContentZoom" | "MSManipulationStateChanged" | "paste" | "pause" | "play" | "playing" | "ratechange" | "reset" | "scroll" | "seeked" | "seeking" | "selectstart" | "stalled" | "submit" | "suspend" | "timeupdate" | "volumechange" | "waiting" | "ariarequest" | "command" | "gotpointercapture" | "lostpointercapture" | "MSGestureChange" | "MSGestureDoubleTap" | "MSGestureEnd" | "MSGestureHold" | "MSGestureStart" | "MSGestureTap" | "MSGotPointerCapture" | "MSInertiaStart" | "MSLostPointerCapture" | "MSPointerCancel" | "MSPointerDown" | "MSPointerEnter" | "MSPointerLeave" | "MSPointerMove" | "MSPointerOut" | "MSPointerOver" | "MSPointerUp" | "touchcancel" | "touchend" | "touchmove" | "touchstart" | "webkitfullscreenchange" | "webkitfullscreenerror" | "pointercancel" | "pointerdown" | "pointerenter" | "pointerleave" | "pointermove" | "pointerout" | "pointerover" | "pointerup" | "wheel">(type: K, listener: (this: HTMLElement, ev: HTMLElementEventMap[K]) => any, options?: boolean | AddEventListenerOptions | undefined): void;
-        (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined): void;
-    };
+    readonly listen: (type: string, listener: EventListenerOrEventListenerObject, options?: boolean | AddEventListenerOptions | undefined) => this;
     private addEventListener;
     constructor(api: UiApi, elementType?: string, namespace?: Namespace);
     /**
@@ -88,6 +96,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     getStyle(styleName: string): string;
     schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;
     schedule(ms: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
+    schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
     private onMouseEnterForTooltip;
     private onMouseLeaveForTooltip;
