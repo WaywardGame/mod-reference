@@ -16,7 +16,7 @@ import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 export default class CreatureManager extends BaseEntityManager<ICreature> implements ICreatureManager {
     getEntities(): (ICreature | undefined)[];
-    getHappinessLevel(player: IPlayer, creatureDesc: ICreatureDescription): number;
+    getHappinessLevel(player: IPlayer, creature: ICreature): number;
     spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
     maybeSpawnClawWorm(player: IPlayer): void;

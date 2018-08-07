@@ -19,7 +19,6 @@ declare const _default: {
     [Message.All]: string;
     [Message.AllEquipmentUnEquipped]: string;
     [Message.AlreadyDesalinatedWaterInStill]: string;
-    [Message.AlreadyFullHealth]: string;
     [Message.AlreadyFullyRepaired]: string;
     [Message.AlreadyPreserved]: string;
     [Message.AlreadyWaterInStill]: string;
@@ -207,6 +206,7 @@ declare const _default: {
     [Message.FailedToCauseDamage]: string;
     [Message.FailedToCauseYouDamage]: string;
     [Message.FailedToDrawMap]: string;
+    [Message.FailedToIgniteTorch]: string;
     [Message.FailedToPickLock]: string;
     [Message.FailedToPlant]: string;
     [Message.FailedToPreserve]: string;
@@ -272,6 +272,8 @@ declare const _default: {
     [Message.Hours]: string;
     [Message.HurtHandsHittingWithoutWeapons]: string;
     [Message.HurtHandsWithNoTool]: string;
+    [Message.Ignite]: string;
+    [Message.IgnitedTorch]: string;
     [Message.Ineffective]: string;
     [Message.InExactLocationOfTreasure]: string;
     [Message.InjuredFromTrap]: string;
@@ -360,6 +362,8 @@ declare const _default: {
     [Message.MoveAllToInventory]: string;
     [Message.MoveAllToLastOpenedContainer]: string;
     [Message.MoveAllToOpenedContainer]: string;
+    [Message.MovedItem]: string;
+    [Message.MovedItems]: string;
     [Message.MoveOverTrapButDoNotSetOff]: string;
     [Message.MoveToFacingContainer]: string;
     [Message.MoveToInventory]: string;
@@ -680,6 +684,7 @@ declare const _default: {
     [Message.YouRepair]: string;
     [Message.YourFist]: string;
     [Message.YourHands]: string;
+    [Message.YourInventory]: string;
     [Message.YourRubbingNoEffect]: string;
     [Message.YouRub]: string;
     [Message.YouSalvaged]: string;

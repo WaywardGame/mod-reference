@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IHookManager";
@@ -11,6 +21,7 @@ export default class ModManager implements IModManager {
     private readonly internalMods;
     private readonly internalModsElectron;
     private readonly onLanguageLoadCallbacks;
+    private readonly onModInitializedCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
     unloadAll(reset?: boolean): void;
@@ -25,10 +36,18 @@ export default class ModManager implements IModManager {
     getModFromIndex(i: number): IModInfo;
     getEnabledMods(): number[];
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
-    load(index: number, cacheHooks?: boolean): void;
+    load(index: number, cacheHooks?: boolean): Promise<void>;
     unload(index: number, cacheHooks?: boolean): void;
     save(index: number): void;
+    /**
+     * UNUSED
+     * @deprecated
+     */
     reloadByName(name: string, cacheHooks?: boolean): boolean;
+    /**
+     * UNUSED
+     * @deprecated
+     */
     reload(index: number, cacheHooks?: boolean): boolean;
     isValid(index: number): boolean;
     isEnabled(index: number): boolean;
@@ -64,8 +83,21 @@ export default class ModManager implements IModManager {
     setCreatedDate(index: number, createdDate: number): void;
     getState(index: number): ModState;
     isInitializing(index: number): ModState;
-    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void, unloaded?: boolean): boolean;
+    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => any, unloaded?: boolean): Promise<boolean>;
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
+    /**
+     * Loads all of the stylesheets from the given mod.
+     */
+    private initializeStylesheets;
+    /**
+     * Initializes the languages for the given mod.
+     */
+    private initializeLanguages;
+    /**
+     * Initializes the customizations for the given mod.
+     */
+    private initializeCustomizations;
     private onLanguageLoad;
+    private onModInitialized;
 }

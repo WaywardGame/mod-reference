@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionType, Bindable, DialogId, Direction, EquipType, ItemType, SkillType, SortType } from "Enums";
-import { IContainer, IDismantleComponent, IItem, IRecipe } from "item/IItem";
+import { Bindable, DialogId, Direction, EquipType, ItemType, SkillType, SortType } from "Enums";
+import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { Message } from "language/IMessages";
 import { BindCatcherApi } from "newui/BindingManager";
 import { ITile } from "tile/ITerrain";
@@ -99,7 +99,6 @@ export default class InGameScreen extends BaseScreen {
     bindSortable(element: JQuery): void;
     pressHotKey(hotKeyNumber: number): boolean;
     useQuickSlot(slot: number): boolean;
-    runQuickslot(item: IItem, actionType: ActionType): void;
     isSorting(): boolean;
     runSortableAction(sortable: JQuery, action: string, ...data: any[]): void;
     runGlobalSortableAction(action: string, ...data: any[]): void;
@@ -150,9 +149,9 @@ export default class InGameScreen extends BaseScreen {
     saveItemOrder(containerElement: JQuery): void;
     showItemContextMenu(element: JQuery): void;
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
-    runContextMenuAction(itemId: number, containerId: number | undefined, action: IContextMenuAction, skipSound?: boolean): boolean;
+    runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean): boolean;
     onCraftingItemClick(element: JQuery): void;
-    onDismantleItemClick(element: JQuery): void;
+    onDismantleItemClick(dismantleItem: IItem | undefined): void;
     getTooltipHtml(element: JQuery): string | undefined;
     tooltipEnable(): void;
     tooltipRefresh(): void;
@@ -160,7 +159,6 @@ export default class InGameScreen extends BaseScreen {
     tooltipHide(): void;
     unSelectElements(): void;
     getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: boolean, isNPC: boolean): string;
-    additionalRequirements(itemType: ItemType, recipe: IRecipe): string;
     getTooltipHtmlForTile(tile: ITile): string;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     getUsedQuickSlots(): number[];
@@ -214,10 +212,12 @@ export default class InGameScreen extends BaseScreen {
     isContainerDialogOver(x: number, y: number): boolean;
     onUpdateDirection(): void;
     onBindLoop(api: BindCatcherApi, bindPressed: Bindable | boolean): boolean | Bindable;
+    private additionalRequirements;
     private runAction;
     private updateContextMenu;
     private runGatherOrHarvestAction;
     private runPourAction;
+    private runHealAction;
     private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;

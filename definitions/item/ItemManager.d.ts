@@ -35,10 +35,10 @@ export default class ItemManager implements IItemManager {
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     isContainer(obj: IItem | IDoodad | IContainer | ITile | IPlayer): obj is IContainer;
-    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): void;
+    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): boolean;
     computeContainerWeight(container: IContainer): number;
     getLegendaryWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): void;
+    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): boolean;
     moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
@@ -71,8 +71,8 @@ export default class ItemManager implements IItemManager {
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): IItem | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
-    getAdjacentContainers(player: IPlayer, includeNpcs?: boolean): IContainer[];
-    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean): boolean;
+    getAdjacentContainers(player: IPlayer, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
+    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];

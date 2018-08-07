@@ -140,6 +140,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     isGhost(): boolean;
     isServer(): boolean;
     getName(): string;
+    canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;

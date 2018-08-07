@@ -42,6 +42,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     };
     private selectedFilter;
     private readonly pinnedNotes;
+    private readonly messagesToDisplay;
     constructor(api: IGameScreenApi | UiApi);
     getID(): QuadrantComponentId;
     getName(): IStringSection[];
@@ -58,6 +59,8 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
      * Returns the context menu for messages, used by the superclass (quadrant component)
      */
     protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
+    private updateMessages;
+    private messages;
     /**
      * Returns the basic context menu of messages, no matter what location it is in
      */

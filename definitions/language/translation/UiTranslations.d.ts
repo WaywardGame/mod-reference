@@ -35,6 +35,7 @@ declare const _default: {
     [Ui.GameDialogNotesNoteLockedTitle]: string;
     [Ui.GameDialogNotesNoteLockedDescription]: string;
     [Ui.GameDialogNotesLinkId]: string;
+    [Ui.GameDialogNotesLinkLearnMore]: string;
     [Ui.GameDialogQuickSettingsName]: string;
     [Ui.GameStatsPercentage]: string;
     [Ui.GameStatsStatAttack]: string;
@@ -157,6 +158,8 @@ declare const _default: {
     [Ui.GameInterruptLoadFailureDescription]: string;
     [Ui.GameInterruptDesalinationNoNeed]: string;
     [Ui.GameInterruptDesalinationNoNeedDescription]: string;
+    [Ui.GameInterruptNoHealingRequired]: string;
+    [Ui.GameInterruptNoHealingRequiredDescription]: string;
     [Ui.GameInterruptConfirmationActionOnFire]: string;
     [Ui.GameInterruptConfirmationActionOnFireDescription]: string;
     [Ui.GameInterruptConfirmationDestroyOnGather]: string;
@@ -185,6 +188,10 @@ declare const _default: {
     [Ui.GameMessagesButtonSend]: string;
     [Ui.GameMessagesContextMenuShowAsDialog]: string;
     [Ui.GameMessagesContextMenuClear]: string;
+    [Ui.GameMessagesContextMenuCopy]: string;
+    [Ui.GameMessagesContextMenuExport]: string;
+    [Ui.GameMessagesContextMenuClearInterrupt]: string;
+    [Ui.GameMessagesContextMenuClearInterruptDescription]: string;
     [Ui.GameMessagesFilter]: string;
     [Ui.GameMessagesFilterAll]: string;
     [Ui.GameMessagesFilterGame]: string;
@@ -194,6 +201,9 @@ declare const _default: {
     [Ui.GameMultiplayerInterruptBanned]: string;
     [Ui.GameMultiplayerInterruptConnecting]: string;
     [Ui.GameMultiplayerInterruptConnectingDescription]: string;
+    [Ui.GameMultiplayerInterruptConnected]: string;
+    [Ui.GameMultiplayerInterruptConnectedDescriptionWaitingForWorldData]: string;
+    [Ui.GameMultiplayerInterruptConnectedDescriptionDownloadingWorldData]: string;
     [Ui.GameMultiplayerInterruptFailedToConnect]: string;
     [Ui.GameMultiplayerInterruptFailedToLoadMods]: string;
     [Ui.GameMultiplayerInterruptKicked]: string;
@@ -294,6 +304,7 @@ declare const _default: {
     [Ui.MenuGameEndInterruptDeleteSaveDescription]: string;
     [Ui.MenuHelpTitle]: string;
     [Ui.MenuHelpDescription]: string;
+    [Ui.MenuHelpLabelSearch]: string;
     [Ui.MenuHighscoresTitle]: string;
     [Ui.MenuHighscoresDescription]: string;
     [Ui.MenuHighscoresDifficultyFilterHardcore]: string;
@@ -582,7 +593,7 @@ declare const _default: {
     [Ui.MenuOptionsLabelDialogOpacity]: string;
     [Ui.MenuPauseButtonContinue]: string;
     [Ui.MenuPauseButtonOptions]: string;
-    [Ui.MenuPauseButtonMultiplayer]: string;
+    [Ui.MenuPauseButtonWorld]: string;
     [Ui.MenuPauseButtonTitleScreen]: string;
     [Ui.MenuPauseButtonStopServer]: string;
     [Ui.MenuPauseHeadingPaused]: string;
@@ -593,12 +604,13 @@ declare const _default: {
     [Ui.MenuPauseParagraphDedicatedServer]: string;
     [Ui.MenuPauseInterruptGhostKeepSave]: string;
     [Ui.MenuPauseInterruptGhostKeepSaveDescription]: string;
-    [Ui.MenuMultiplayerTitle]: string;
-    [Ui.MenuMultiplayerDescription]: string;
-    [Ui.MenuMultiplayerOpenServer]: string;
-    [Ui.MenuMultiplayerOpenServerDescription]: string;
-    [Ui.MenuMultiplayerPauseServer]: string;
-    [Ui.MenuMultiplayerPauseServerDescription]: string;
+    [Ui.MenuWorldTitle]: string;
+    [Ui.MenuWorldDescription]: string;
+    [Ui.MenuWorldHeadingMultiplayer]: string;
+    [Ui.MenuWorldOpenServer]: string;
+    [Ui.MenuWorldOpenServerDescription]: string;
+    [Ui.MenuWorldPauseServer]: string;
+    [Ui.MenuWorldPauseServerDescription]: string;
     [Ui.MenuJoinDedicatedServerTitle]: string;
     [Ui.MenuJoinDedicatedServerDescription]: string;
     [Ui.MenuJoinDedicatedServerIP]: string;

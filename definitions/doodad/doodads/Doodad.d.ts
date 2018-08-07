@@ -66,12 +66,14 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     getDurabilityMessage(this: IDoodad): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
     getInspect(): IInspect[];
-    isDangerous(): boolean;
+    isDangerous(player: IPlayer): boolean;
+    getDamage(human: IBaseHumanEntity, equipType?: EquipType): number;
     damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
     update(): void;
+    canCauseStatus(human: IBaseHumanEntity, equipType?: EquipType): boolean;
     causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     onUnserialized(): void;

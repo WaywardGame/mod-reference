@@ -11,6 +11,7 @@
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class ChangelogMenu extends Menu {
+    private static readonly modLinks;
     private readonly headingVersionName;
     private readonly labelChangeCount;
     private readonly changesContainer;

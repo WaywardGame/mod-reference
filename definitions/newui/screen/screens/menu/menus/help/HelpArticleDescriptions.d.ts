@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export interface IHelpArticle {
+import { IModdable } from "Enums";
+export interface IHelpArticle extends IModdable {
     /**
      * Whether this article is "important", which makes it take up the full row (instead of sharing
      * with another article). If the last article doesn't have a partner to share a row with, it appears
@@ -33,7 +34,7 @@ export declare enum HelpArticle {
     HeldItems = 11,
     Crafting = 12,
     Death = 13,
-    CreatureTaming = 14,
+    Taming = 14,
     Gardening = 15,
     Overweight = 16,
     Merchants = 17,
@@ -45,5 +46,5 @@ export declare enum HelpArticleSection {
     Gameplay = 1,
     Other = 2
 }
-declare const descriptions: Description2<HelpArticle, IHelpArticle>;
+declare const descriptions: Descriptions<HelpArticle, IHelpArticle>;
 export default descriptions;

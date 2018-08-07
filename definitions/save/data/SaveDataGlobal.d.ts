@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModInfo";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
@@ -37,6 +47,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
     newui: {
         [index: string]: any;
     };
+    lastDedicatedServerJoined: string | undefined;
     /**
      * Resets all options to default
      */

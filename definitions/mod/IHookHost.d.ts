@@ -23,6 +23,7 @@ import { INote } from "player/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
+import { IVector2 } from "utilities/math/IVector";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -64,22 +65,28 @@ export interface IHookHost {
      * @param colors The current ambient colors
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
-    getAmbientColor?(colors: number[]): number[] | undefined;
+    getAmbientColor?(colors: [number, number, number]): [number, number, number] | undefined;
     /**
      * Get the ambient color while in caves
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
-    getAmbientColorCave?(): number[] | undefined;
+    getAmbientColorCave?(): [number, number, number] | undefined;
     /**
      * Get the ambient color while its day time
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
-    getAmbientColorDay?(): number[] | undefined;
+    getAmbientColorDay?(): [number, number, number] | undefined;
     /**
      * Get the ambient color while its night time
      * @returns the ambient color channels (3 numbers) or undefined to use the default color
      */
-    getAmbientColorNight?(): number[] | undefined;
+    getAmbientColorNight?(): [number, number, number] | undefined;
+    /**
+     * Get the fog color
+     * @param colors The current fog colors
+     * @returns the ambient color channels (3 numbers) or undefined to use the default color
+     */
+    getFogColor?(colors: [number, number, number]): [number, number, number] | undefined;
     /**
      * Get the ambient light level
      * @param ambientLight The current ambient light level
@@ -259,6 +266,12 @@ export interface IHookHost {
      */
     getPlayerWeightStatus?(player: IPlayer): WeightStatus | undefined;
     /**
+     * Called when getting the position to render at. By default, this is the player's location.
+     * @param position The player's location
+     * @returns The new position to render at, or undefined to use the player's location
+     */
+    getCameraPosition?(position: IVector2): IVector2 | undefined;
+    /**
      * Called when retrieving the light level of a tile
      * @param tile The tile that was updated
      * @param x The x position of the tile
@@ -267,6 +280,16 @@ export interface IHookHost {
      * @returns The light level of the tile or undefined to use the default logic
      */
     getTileLightLevel?(tile: ITile, x: number, y: number, z: number): number | undefined;
+    /**
+     * Called when calculating the movement penalty of a tile.
+     * @param penalty The current penalty of the tile
+     * @param tile The tile to get the movement penalty of
+     */
+    getTilePenalty?(penalty: number, tile: ITile): number | undefined;
+    /**
+     * Called when setting the zoom level.
+     */
+    getZoomLevel?(): number | undefined;
     /**
      * Called when checking if a player is swimming
      * @param player The player object
@@ -281,6 +304,11 @@ export interface IHookHost {
      * @returns True if you want to show a custom inspect message, false to display no messages, or undefined to use the default logic
      */
     isTileInspectable?(tile: ITile): boolean | undefined;
+    /**
+     * Called when checking if a tile is blocked, used for pathing.
+     * @param tile The tile to check
+     */
+    isTileBlocked?(tile: ITile): true | undefined;
     /**
      * Called when something is built on a tile
      * @param player The player object
@@ -614,6 +642,10 @@ export interface IHookHost {
      * @param actionResult The action result
      */
     postExecuteAction?(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
+    /**
+     * Called after the field of view has initialized
+     */
+    postFieldOfView?(): void;
     /**
      * Called after the world is generating
      * @param generateNewWorld True if a new world is being generated

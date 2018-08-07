@@ -24,6 +24,7 @@ import { INote } from "player/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
+import { IVector2 } from "utilities/math/IVector";
 export declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -55,10 +56,11 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
      * @returns An object containing the data you want to save
      */
     onSave(): any;
-    getAmbientColor(colors: number[]): number[] | undefined;
-    getAmbientColorCave(): number[] | undefined;
-    getAmbientColorDay(): number[] | undefined;
-    getAmbientColorNight(): number[] | undefined;
+    getAmbientColor(colors: [number, number, number]): [number, number, number] | undefined;
+    getAmbientColorCave(): [number, number, number] | undefined;
+    getAmbientColorDay(): [number, number, number] | undefined;
+    getAmbientColorNight(): [number, number, number] | undefined;
+    getFogColor(colors: [number, number, number]): [number, number, number] | undefined;
     getAmbientLightLevel(ambientLight: number, z: number): number | undefined;
     canConsumeItem(player: IPlayer, itemType: ItemType, actionType: ActionType): boolean | undefined;
     canCreatureAttack(creature: ICreature, enemy: IPlayer | ICreature): boolean | undefined;
@@ -82,9 +84,13 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     getPlayerSpriteBatchLayer(player: IPlayer, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     getPlayerWeightMovementPenalty(player: IPlayer): number | undefined;
     getPlayerWeightStatus(player: IPlayer): WeightStatus | undefined;
+    getCameraPosition(position: IVector2): IVector2 | undefined;
     getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
+    getTilePenalty(penalty: number, tile: ITile): number;
+    getZoomLevel(): number | undefined;
     isPlayerSwimming(player: IPlayer, isSwimming: boolean): boolean | undefined;
     isTileInspectable(tile: ITile): boolean | undefined;
+    isTileBlocked(tile: ITile): true | undefined;
     onBuild(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
     onButtonBarClick(button: JQuery): void;
     onContainerItemAdd(item: IItem, container: IContainer): void;
@@ -136,6 +142,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onWriteNote(player: IPlayer, note: INote): false | undefined;
     onWrittenNote(player: IPlayer, id: number): void;
     postExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
+    postFieldOfView(): void;
     postGenerateWorld(generateNewWorld: boolean): void;
     postRender(): void;
     postRenderPostProcess(): void;

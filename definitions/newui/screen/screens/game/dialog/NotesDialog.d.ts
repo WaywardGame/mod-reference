@@ -10,7 +10,6 @@
  */
 import { UiTranslation } from "language/ILanguage";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import { DialogId } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import IPlayer from "player/IPlayer";
 export declare enum NotesDialogEvent {
@@ -25,11 +24,11 @@ export default class NotesDialog extends Dialog {
     private readonly title;
     private readonly noteId;
     private readonly noteLinks;
+    private readonly learnMoreLink;
     private note;
     private current;
     constructor(api: IGameScreenApi);
     onWrittenNote(player: IPlayer): void;
-    getID(): DialogId;
     getName(): UiTranslation;
     showNote(noteId: number): void;
     private previousNote;
@@ -37,4 +36,5 @@ export default class NotesDialog extends Dialog {
     private onShow;
     private onNoteNumberActivate;
     private refreshNotesPanel;
+    private learnMore;
 }

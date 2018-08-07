@@ -52,6 +52,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     toggleDialogs(states: IDialogStates): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
+    isMouseWithin(): boolean;
     onGameStart(): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onMove(player: Player): boolean | undefined;
@@ -78,8 +79,13 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
      */
     private onQuadrantElementChange;
     /**
+     * Handles top/bottom quadrants (for when in two-column mode)
+     */
+    private updateQuadrantPositions;
+    /**
      * Returns the first unused `Quadrant`, or `Quadrant.None` if there are none.
      */
     private getUnusedQuadrant;
     private onDialogClose;
+    private updatePauseIcon;
 }

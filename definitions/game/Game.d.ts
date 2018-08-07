@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
@@ -18,7 +28,7 @@ import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
 export default class Game extends Emitter implements IGame {
     readonly interval: number;
@@ -80,9 +90,9 @@ export default class Game extends Emitter implements IGame {
     notifier: INotifier;
     particle: IParticle;
     spriteTexture: WebGLTexture;
-    spriteTextureSizeInversed: Vec2;
+    spriteTextureSizeInversed: Vector2;
     tileTexture: WebGLTexture;
-    tileTextureSizeInversed: Vec2;
+    tileTextureSizeInversed: Vector2;
     visible: boolean;
     private gameCanvas;
     private thumbnailResolve?;
@@ -112,6 +122,7 @@ export default class Game extends Emitter implements IGame {
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     updateThumbnail(): Promise<void>;
     addZoomLevel(amount: number): void;
+    updateZoomLevel(): void;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     requestPlay(options: Partial<IPlayOptions> & {
@@ -124,7 +135,9 @@ export default class Game extends Emitter implements IGame {
     deletePlayer(plys: IPlayer[], identifier: string): void;
     isRealTimeMode(): boolean;
     getTurnMode(): TurnMode;
+    setTurnMode(turnMode: TurnMode): void;
     getTickSpeed(): number;
+    setTickSpeed(tickSpeed: number): void;
     synchronizeFlowFields(plys: IPlayer[]): void;
     enableFlowFieldDebug(): void;
     resetGameState(skipSave?: boolean): Promise<void>;
@@ -198,6 +211,7 @@ export default class Game extends Emitter implements IGame {
     wrapCoordinate(cordinate: number, reference: number): number;
     getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     isFlammable(x: number, y: number, z: number): boolean;
+    getCameraPosition(): IVector2;
     private updateOptionInternal;
     private tick;
     private updateEntityFov;
@@ -216,7 +230,6 @@ export default class Game extends Emitter implements IGame {
     private createWorldRenderer;
     private loadResources;
     private initializeGameState;
-    private setZoomLevel;
     private startGame;
     private upgradeSave;
     private upgradePlayer;

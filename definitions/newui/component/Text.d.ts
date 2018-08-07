@@ -12,12 +12,14 @@ import { IColorSection, IFontSizeSection, ILinkSection } from "language/Segments
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
-import { IStringSection } from "utilities/string/Interpolator";
+import { ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
-    static resolve(translation: TranslationGenerator | undefined): IStringSection[];
-    static toString(translation: TranslationGenerator | undefined): string;
+    static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[]): IStringSection[];
+    static toString(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[]): string;
+    private segments;
     private text;
     constructor(uiApi: UiApi, elementType?: string);
+    setSegments(...segments: ISegment[]): this;
     setText(text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;

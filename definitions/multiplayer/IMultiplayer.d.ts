@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { TurnMode } from "Enums";
 import { ICrafted } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
@@ -5,8 +15,14 @@ import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TextOrTranslationData, TranslationGenerator } from "newui/component/IComponent";
 import { ICharacter, IPlayer } from "player/IPlayer";
+import { SaveObject } from "save/ISaveManager";
 import { LobbyType } from "steamworks/ISteamworks";
-export interface IMultiplayer {
+import Emitter from "utilities/Emitter";
+export declare enum MultiplayerEvent {
+    Connect = 0,
+    Disconnect = 1
+}
+export interface IMultiplayer extends Emitter {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
@@ -55,7 +71,7 @@ export interface IMultiplayerOptions {
     pvp: boolean;
     turnMode: TurnMode;
     maxPlayers: number;
-    realTimeTickSpeed: number;
+    tickSpeed: number;
     syncChecks: boolean | MultiplayerSyncCheck[];
 }
 export interface IMultiplayerNetworkingOptions {
@@ -110,7 +126,7 @@ export interface IMultiplayerWorldData {
     playerCount: number;
     mods: IMultiplayerMod[];
     multiplayerOptions: IMultiplayerOptions;
-    saveObjectString: string;
+    saveObject: SaveObject;
     initialFlowFieldPids: number[];
     crafted: {
         [index: number]: ICrafted;

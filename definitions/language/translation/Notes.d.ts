@@ -23,7 +23,7 @@ declare const _default: {
     [Note.Gardening]: string[];
     [Note.HealthIssues]: string[];
     [Note.Inedible]: string[];
-    [Note.Merchantile]: string[];
+    [Note.Mercantile]: string[];
     [Note.Nightfall]: string[];
     [Note.Poisoned]: string[];
     [Note.Reputation]: string[];

@@ -20,7 +20,7 @@ declare const _default: {
     [Milestone.Doctor]: string[];
     [Milestone.DragonSlayer]: string[];
     [Milestone.Explorer]: string[];
-    [Milestone.Extincteur]: string[];
+    [Milestone.Exterminator]: string[];
     [Milestone.Friendly]: string[];
     [Milestone.Gardener]: string[];
     [Milestone.Gatherer]: string[];

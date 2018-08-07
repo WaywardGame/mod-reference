@@ -88,6 +88,7 @@ export interface IGame extends Emitter {
     readonly isDailyChallenge: boolean;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     addZoomLevel(amount: number): void;
+    updateZoomLevel(): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
     changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean): void;
@@ -103,6 +104,7 @@ export interface IGame extends Emitter {
     getAmbientLightLevel(z: number): number;
     getBenignity(): number | undefined;
     getBlackness(): number;
+    getCameraPosition(): IVector2;
     getCompletedMilestoneCount(): number;
     getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     getDifficulty(): Difficulty;
@@ -145,7 +147,10 @@ export interface IGame extends Emitter {
     isPositionEmpty(x: number, y: number, z: number): boolean;
     isPositionFull(x: number, y: number, z: number): boolean;
     isRealTimeMode(): boolean;
+    getTurnMode(): TurnMode;
+    setTurnMode(turnMode: TurnMode): void;
     getTickSpeed(): number;
+    setTickSpeed(tickSpeed: number): void;
     isTileEmpty(tile: ITile): boolean;
     isTileFull(tile: ITile): boolean;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
@@ -184,7 +189,9 @@ export interface IGame extends Emitter {
 }
 export default IGame;
 export declare enum GameEvent {
-    GlobalSlotLoaded = 0
+    GlobalSlotLoaded = 0,
+    Pause = 1,
+    Resume = 2
 }
 export declare type IGameOld = Partial<IGame> & {
     dayNight: number;

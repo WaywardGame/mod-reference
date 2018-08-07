@@ -24,7 +24,7 @@ declare const _default: {
     [HelpArticle.HeldItems]: [string, string, string, string];
     [HelpArticle.Crafting]: [string, string, string, string];
     [HelpArticle.Death]: [string, string, string, string];
-    [HelpArticle.CreatureTaming]: [string, string, string, string];
+    [HelpArticle.Taming]: [string, string, string, string];
     [HelpArticle.Gardening]: [string, string, string, string];
     [HelpArticle.Overweight]: [string, string, string, string];
     [HelpArticle.Merchants]: [string, string, string, string];

@@ -11,12 +11,10 @@
 import { UiTranslation } from "language/ILanguage";
 import { IRefreshable } from "newui/component/Refreshable";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import { DialogId } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export default class QuickSettingsDialog extends Dialog implements IRefreshable {
     private readonly refreshables;
     constructor(api: IGameScreenApi);
-    getID(): DialogId;
     getName(): UiTranslation;
     refresh(): this;
     private addRefreshable;

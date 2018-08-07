@@ -1,4 +1,4 @@
-/*
+/*!
  * Copyright Unlok, Vaughn Royko 2011-2018
  * http://www.unlok.ca
  * 
@@ -55,7 +55,7 @@ interface IMatchmakingServer {
 }
 
 interface IMatchmakingServerConnection {
-	send(data: ArrayBuffer): void;
+	send(data: ArrayBuffer | Uint8Array): void;
 }
 
 declare var require: IRequire;

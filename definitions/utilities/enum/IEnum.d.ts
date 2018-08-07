@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 export declare module EnumProperty {
     const NAME: unique symbol;
     const OFFICIAL_MAX: unique symbol;
@@ -28,7 +38,10 @@ export declare enum EnumId {
     TileEventType = 20,
     OverlayType = 21,
     MessageSource = 22,
-    NPCType = 23
+    NPCType = 23,
+    HelpArticle = 24,
+    Note = 25,
+    Dialog = 26
 }
 export interface IEnumInfo {
     enumId: EnumId;

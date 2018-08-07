@@ -70,4 +70,5 @@ export declare class SaveSlot extends InputButton {
      * Exports this save to a JSON file.
      */
     private exportToFile;
+    static getFileName(name?: string): string;
 }

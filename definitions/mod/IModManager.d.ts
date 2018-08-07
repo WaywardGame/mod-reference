@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IHookManager";
@@ -65,7 +75,7 @@ export interface IModManager {
     setInstallDate(index: number, installDate: number): void;
     setCreatedDate(index: number, createdDate: number): void;
     setPublishId(index: number, publishedFileId: string): void;
-    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): boolean;
+    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): Promise<boolean>;
     setSteamIdOwner(index: number, steamIdOwner: string): void;
     setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
     setupMods(callback: () => void): void;

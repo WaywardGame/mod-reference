@@ -1,3 +1,13 @@
+/*!
+ * Copyright Unlok, Vaughn Royko 2011-2018
+ * http://www.unlok.ca
+ *
+ * Credits & Thanks:
+ * http://www.unlok.ca/credits-thanks/
+ *
+ * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+ * https://waywardgame.github.io/
+ */
 import { Dictionary, ITranslationObject, UiTranslation } from "language/ILanguage";
 import Translation from "language/Translation";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
@@ -189,6 +199,15 @@ export interface IComponent extends Emitter {
      */
     schedule(ms: number, cb?: (this: this, button: this, ...args: any[]) => any, ...args: any[]): this;
     /**
+     * Runs the given callback with the given arguments, after the specified amount of time.
+     * `this` and the first argument are this element.
+     * @param ms The amount of time to wait before running the callback, in milliseconds.
+     * @param debounce The span of time to debounce in. (If this callback was scheduled again in this time, skip this earlier call)
+     * @param cb The callback to run.
+     * @param args The arguments with which to call the callback.
+     */
+    schedule(ms: number, debounce: number, cb?: (this: this, button: this, ...args: any[]) => any, ...args: any[]): this;
+    /**
      * Triggers a repaint on this element.
      */
     repaint(): void;
@@ -240,6 +259,10 @@ export interface ITooltip extends IComponent {
 }
 export interface IText extends IComponent {
     setText(translation: TranslationGenerator): this;
+}
+export interface IDisableable {
+    disabled: boolean;
+    setDisabled(disabled: boolean): this;
 }
 export declare type TranslationGenerator = Translation | UiTranslation | (() => IStringSection[] | Translation | UiTranslation | undefined);
 export declare type HighlightSelector = [HighlightType, string | number];

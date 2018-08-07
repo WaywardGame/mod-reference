@@ -1,3 +1,13 @@
+/*!
+* Copyright Unlok, Vaughn Royko 2011-2018
+* http://www.unlok.ca
+*
+* Credits & Thanks:
+* http://www.unlok.ca/credits-thanks/
+*
+* Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
+* https://waywardgame.github.io/
+*/
 import { ILanguage } from "language/ILanguage";
 import { IModConfig } from "mod/IMod";
 import Mod from "mod/Mod";
@@ -33,7 +43,9 @@ export declare enum TypeFlag {
     String = 16,
     Object = 32,
     Array = 64,
-    Function = 128
+    Function = 128,
+    True = 256,
+    False = 512
 }
 export declare enum ModState {
     Disabled = 0,
