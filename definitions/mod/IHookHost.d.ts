@@ -36,7 +36,7 @@ import { IVector2 } from "utilities/math/IVector";
  * }
  * ```
  */
-export declare function HookMethod(priority: number): (hook: IHookHost, property: string) => void;
+export declare function HookMethod(priority: number): <K extends keyof IHookHost>(hook: IHookHost, property: K, descriptor: TypedPropertyDescriptor<Exclude<IHookHost[K], undefined>>) => void;
 /**
  * A decorator for registering a hook method on a `IHookHost`.
  * Uses `HookPriority.Normal`
@@ -49,7 +49,7 @@ export declare function HookMethod(priority: number): (hook: IHookHost, property
  * }
  * ```
  */
-export declare function HookMethod(host: IHookHost, property: string): void;
+export declare function HookMethod<K extends keyof IHookHost>(host: IHookHost, property: K, descriptor: TypedPropertyDescriptor<Exclude<IHookHost[K], undefined>>): void;
 export declare const SYMBOL_HOOKS: unique symbol;
 export declare const SYMBOL_HOST_NAME: unique symbol;
 export declare module IHookHost {

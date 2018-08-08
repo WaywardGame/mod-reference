@@ -51,7 +51,8 @@ export default class Vector2 implements IVector2 {
     add(vector: IVector2): this;
     subtract(vector: IVector2): this;
     multiply(vector: IVector2 | number): this;
-    divide(vector: IVector2): this;
+    divide(vector: IVector2 | number): this;
+    floor(): this;
     lerp(vector: IVector2, amount: number): this;
     mod(n: number): this;
     scale(value: number): this;

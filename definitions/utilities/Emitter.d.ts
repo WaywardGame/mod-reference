@@ -24,7 +24,7 @@ export default class Emitter {
     /**
      * Binds an event handler to the given event. The event handler will be removed after the first trigger.
      */
-    once(event: string | number, cb: (emitter: this, ...data: any[]) => any): this;
+    once(events: string | number | Array<string | number>, cb: (emitter: this, ...data: any[]) => any): this;
     /**
      * Triggers the given event with any number of arguments.
      */
@@ -45,11 +45,11 @@ export default class Emitter {
     /**
      * Returns a promise that will resolve when the event is triggered.
      */
-    waitUntil(event: string | number): Promise<any[]>;
+    waitUntil(events: string | number | Array<string | number>): Promise<any[]>;
     /**
      * Until the given event happens, allows you to bind an event to another emitter.
      */
-    until(event: string | number): IEmitterUntil<this>;
+    until(untilEvents: string | number | Array<string | number>): IEmitterUntil<this>;
 }
 export interface IEmitterUntil<T> {
     /**

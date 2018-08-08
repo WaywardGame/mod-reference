@@ -27,6 +27,10 @@ export interface IDialogDescription {
     size: IVector2;
     maxSize: IVector2;
     edges: IEdges;
+    /**
+     * Whether to save if the dialog is open. If this is false, the dialog will always be closed when a game loads. Defaults to true.
+     */
+    saveOpen?: boolean;
 }
 declare const dialogDescriptions: Descriptions<DialogId, IDialogDescription>;
 export default dialogDescriptions;
