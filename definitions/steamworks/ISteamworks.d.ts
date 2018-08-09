@@ -42,6 +42,7 @@ export interface ISteamworks extends Emitter {
     initialize(): void;
     isDedicatedServer(): boolean;
     isElectron(): boolean;
+    closeWindow(): void;
     isUsingAsar(): boolean;
     isGreenworksEnabled(): boolean;
     isInLobby(): boolean;

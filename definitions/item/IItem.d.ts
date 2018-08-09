@@ -113,7 +113,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     durability?: number;
     doodad?: IDoodadDescription;
     doodadType?: DoodadType;
-    onBurn?: ItemType;
+    onBurn?: ItemType[];
     onUse?: {
         [index: number]: any;
     };
@@ -156,6 +156,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     plural?: string;
     hideHelmet?: boolean;
     worth?: number;
+    burnsLike?: ItemType[];
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }

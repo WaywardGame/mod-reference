@@ -26,6 +26,7 @@ export default class Ui extends Emitter implements IUi {
     private readonly elementBody;
     private elementScrollableContainers;
     private objectUrl;
+    private unloading;
     constructor();
     initialize(): void;
     initializeGameState(): void;
@@ -99,4 +100,6 @@ export default class Ui extends Emitter implements IUi {
     updateScrollableContainersList(): void;
     updateScrollableContainer(this: Element): void;
     cancelSorting(): void;
+    private onBeforeUnloadElectron;
+    private onBeforeUnloadBrowser;
 }

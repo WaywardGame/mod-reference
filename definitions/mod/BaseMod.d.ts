@@ -131,7 +131,7 @@ export declare abstract class BaseMod extends Emitter {
     /**
      * This is called internally. Handles decorator-registered methods & properties, such as actions, commands, or bindables
      */
-    onBeforeLoad(registry?: IRegistry): Promise<void | any[]>;
+    onBeforeLoad(registry?: IRegistry): Promise<void>;
     private initializeRegistry;
     private validateRegistration;
     private register;
