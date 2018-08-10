@@ -24,7 +24,7 @@ export default class SpritePacker {
     private readonly padding;
     private readonly loadedSprites;
     constructor(gl: WebGL2RenderingContext, width: number, height: number, nullSprite: boolean, padding: number);
-    load(callback: () => void): void;
+    load(callback: () => void): Promise<void>;
     addSprite(src: string, callback: (si: ISpriteInfo, imageElement?: HTMLImageElement) => void): void;
     private loadSprite;
     private spriteLoaded;
