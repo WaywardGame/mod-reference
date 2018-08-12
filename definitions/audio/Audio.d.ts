@@ -33,7 +33,7 @@ export default class WAudio implements IAudio {
     /**
      * Returns the current music handler, an instance of `EnumCursor<Music>`
      */
-    getMusicHandler(): EnumCursor<Music>;
+    getMusicHandler(): EnumCursor<Music, string>;
     /**
      * Sets the music handler to the provided instance of `EnumCursor<Music>`. Causes any playing music to stop.
      */

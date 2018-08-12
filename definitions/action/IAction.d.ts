@@ -37,7 +37,7 @@ export declare type IActionArgumentValidatorBase = {
 export interface IActionArgumentValidator extends IActionArgumentValidatorBase {
     allowNearbyItem?: boolean;
 }
-export interface IActionArgument<T = any> {
+export interface IActionArgument<T = unknown> {
     type?: ActionType;
     all?: boolean;
     attackType?: AttackType;

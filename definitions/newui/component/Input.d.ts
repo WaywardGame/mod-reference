@@ -42,7 +42,7 @@ export default class Input extends Component implements IRefreshable, IInput {
      * Reset the text of the input to the default, or to the clearTo option if that was provided
      * @param useDefault Whether to use the default over clearTo
      */
-    clear(useDefault?: boolean): void;
+    clear(useDefault?: boolean): this;
     focus(): void;
     blur(event?: Event): void;
     private keydown;
