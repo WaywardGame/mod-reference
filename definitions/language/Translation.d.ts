@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IObjectDescription, SentenceCaseStyle } from "Enums";
 import { Dictionary, UiTranslation } from "language/ILanguage";
 import { TranslationType } from "language/ILanguageManager";
 import { Message } from "language/IMessages";
@@ -33,6 +34,9 @@ export default class Translation {
      * Example uses include text the user inputs, and text from other sites (steam/trello)
      */
     static generator(pregeneratedText: string | IStringSection[]): () => IStringSection[];
+    static ofObjectName(description: IObjectDescription, caseStyle?: SentenceCaseStyle, prefix?: boolean): () => {
+        content: string;
+    }[];
     static provider: ILanguageEntryProvider;
     static ui: (entry: string | UiTranslation) => Translation;
     static message: (entry: string | Message) => Translation;

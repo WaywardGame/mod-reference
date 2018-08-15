@@ -49,7 +49,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     canCauseStatus(human: IBaseHumanEntity, equipType?: EquipType): boolean;
     causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
-    damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
+    damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): void;
     getDurabilityMessage(): Message;
     getGrowingMessage(textCase: SentenceCaseStyle): string;
@@ -108,7 +108,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isTrap?: boolean;
     isWaterSource?: boolean;
     lit?: DoodadType;
-    onBurn?: ItemType;
+    burnsLike?: ItemType[];
     particles?: IRGB;
     growthParticles?: IDoodadParticles;
     pickUp?: ItemType[];

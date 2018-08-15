@@ -16,6 +16,9 @@ import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 export declare enum DropdownEvent {
+    /**
+     * @param optionId The new option which is selected.
+     */
     Selection = "Selection"
 }
 export declare type IDropdownOption<OptionId = string | number> = [OptionId, (option: Button) => any];

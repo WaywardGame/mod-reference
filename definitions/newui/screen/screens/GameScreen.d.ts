@@ -54,6 +54,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
     isMouseWithin(): boolean;
+    wasMouseStartWithin(): boolean;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;

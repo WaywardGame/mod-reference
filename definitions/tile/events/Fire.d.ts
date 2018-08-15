@@ -8,10 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IItem } from "item/IItem";
+import { IResourceItem, ItemQuality } from "Enums";
+import { IContainer, IItem } from "item/IItem";
 import { ITileContainer } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 export declare function dissassemblyBurn(item: IItem, container: ITileContainer, disassembly: boolean): void;
+export declare function harvestGatherBurn(step: number, resources: IResourceItem[] | undefined, container: IContainer, quality: ItemQuality | undefined): void;
 declare const _default: {
     spreadMax: number;
     decayMax: number;

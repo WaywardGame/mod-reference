@@ -20,16 +20,16 @@ export default class Emitter {
      * Binds an event handler on the given event or events. If the event handler is already bound to one
      * of the given events, does nothing.
      */
-    on(events: string | number | Array<string | number>, cb: (emitter: this, ...data: any[]) => any): this;
+    on<D extends any[] = any[]>(events: string | number | Array<string | number>, cb: (emitter: this, ...data: D) => any): this;
     /**
      * Binds an event handler to the given event. The event handler will be removed after the first trigger.
      */
-    once(events: string | number | Array<string | number>, cb: (emitter: this, ...data: any[]) => any): this;
+    once<D extends any[] = any[]>(events: string | number | Array<string | number>, cb: (emitter: this, ...data: D) => any): this;
     /**
      * Triggers the given event with any number of arguments.
      */
     trigger(event: string | number, ...data: any[]): Promise<any[]>;
-    triggerSync<T = any>(event: string | number, ...data: any[]): T[];
+    triggerSync<T extends any[]>(event: string | number, ...data: any[]): T;
     /**
      * Removes all event handlers for the given event(s).
      */
@@ -55,5 +55,5 @@ export interface IEmitterUntil<T> {
     /**
      * Binds the given events on the given emitter. Removed when the `until` event occurs. Returns the original emitter.
      */
-    bind<E2 extends Emitter>(emitter: E2, events: string | number | Array<string | number>, cb: (emitter: E2, ...data: any[]) => any): T;
+    bind<D extends any[] = any[], E2 extends Emitter = Emitter>(emitter: E2, events: string | number | Array<string | number>, cb: (emitter: E2, ...data: D) => any): T;
 }

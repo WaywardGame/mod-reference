@@ -58,7 +58,7 @@ export interface ITile extends Partial<ITileContainer> {
     doodad?: IDoodad;
     events?: ITileEvent[];
     npc?: INPC;
-    overlay?: IOverlayInfo;
+    overlays?: IOverlayInfo[];
 }
 export interface ITileOld {
     event?: ITileEvent[];
