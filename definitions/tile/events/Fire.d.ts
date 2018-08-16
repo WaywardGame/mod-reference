@@ -13,7 +13,7 @@ import { IContainer, IItem } from "item/IItem";
 import { ITileContainer } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 export declare function dissassemblyBurn(item: IItem, container: ITileContainer, disassembly: boolean): void;
-export declare function harvestGatherBurn(step: number, resources: IResourceItem[] | undefined, container: IContainer, quality: ItemQuality | undefined): void;
+export declare function harvestGatherBurn(step: number, resources: IResourceItem[] | undefined, container: IContainer, quality: ItemQuality | undefined, tileEvent: ITileEvent): void;
 declare const _default: {
     spreadMax: number;
     decayMax: number;

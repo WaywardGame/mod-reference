@@ -17,6 +17,15 @@ import { ITile } from "tile/ITerrain";
 export default class CreatureManager extends BaseEntityManager<ICreature> implements ICreatureManager {
     getEntities(): (ICreature | undefined)[];
     getHappinessLevel(player: IPlayer, creature: ICreature): number;
+    /**
+     * Spawns a creature.
+     * @param creatureType The type of creature to spawn.
+     * @param x The tile X position
+     * @param y The tile Y position
+     * @param z The tile Z position
+     * @param bypass Whether to bypass checks for whether the creature can spawn there naturally. Defaults to false, if the creature can't spawn naturally, it won't.
+     * @param forceAberrant If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
+     */
     spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
     maybeSpawnClawWorm(player: IPlayer): void;
