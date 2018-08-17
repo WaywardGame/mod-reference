@@ -9,17 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { InterruptChoice as Choice } from "language/ILanguage";
-declare const _default: {
-    [Choice.Cancel]: string;
-    [Choice.ContinueAnyway]: string;
-    [Choice.LocalFile]: string;
-    [Choice.No]: string;
-    [Choice.Ok]: string;
-    [Choice.OpenSaveFolderAndQuit]: string;
-    [Choice.Rejoin]: string;
-    [Choice.Rename]: string;
-    [Choice.Retry]: string;
-    [Choice.SteamWorkshop]: string;
-    [Choice.Yes]: string;
-};
-export default _default;
+declare const interruptChoices: Descriptions<Choice, string>;
+export default interruptChoices;

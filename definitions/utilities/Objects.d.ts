@@ -16,8 +16,7 @@ declare module Objects {
     /**
      * Returns an iterator for an object's keys. Does not check if the key is prototypal!
      */
-    function keys<T, K = string>(object: T): IterableIterator<Extract<keyof T, K>>;
-    function keys<K>(object: any): IterableIterator<K>;
+    function keys<K = any, T = any>(object: T): IterableIterator<Extract<keyof T, K>>;
     /**
      * Returns an iterator for an object's values. Does not check if the values are prototypal!
      */
@@ -51,7 +50,7 @@ declare module Objects {
     /**
      * Creates an object from an iterable of entries, given in a tuple of `[key, value]`.
      */
-    function create<K extends string, V>(entriesIterable: IterableOf<[K, V]>): {
+    function create<K extends string | number | symbol, V>(entriesIterable: IterableOf<[K, V]>): {
         [key in K]: V;
     };
     function windowKeysToObject(windowKeys: string[]): any;

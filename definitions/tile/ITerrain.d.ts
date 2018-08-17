@@ -108,6 +108,8 @@ export interface IOverlayInfo {
     size?: number;
     offsetX?: number;
     offsetY?: number;
+    spriteOffsetX?: number;
+    spriteOffsetY?: number;
     red?: number;
     green?: number;
     blue?: number;

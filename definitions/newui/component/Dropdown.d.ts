@@ -28,6 +28,7 @@ export interface IDropdownData<OptionId = string | number> {
 }
 export default class Dropdown<OptionId = string | number> extends Component implements IRefreshableValue<IDropdownData<OptionId>>, IHookHost {
     protected optionsWrapper: Component;
+    private readonly optionsWrapperWrapper;
     private readonly inputButton;
     private options;
     private refreshMethod;
@@ -44,5 +45,6 @@ export default class Dropdown<OptionId = string | number> extends Component impl
     selectDefault(): void;
     setRefreshMethod(refresh: () => IDropdownData<OptionId>): this;
     refresh(): this;
+    private updateWrapperPosition;
     private filter;
 }

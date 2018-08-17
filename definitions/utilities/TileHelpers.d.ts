@@ -29,10 +29,10 @@ declare module TileHelpers {
     function setTilledRaw(data: number, value: number): number;
     function getTileVariation(x: number, y: number): number;
     module Overlay {
-        function add(tile: ITile, overlay: IOverlayInfo, ifNotExist?: (overlay: IOverlayInfo) => boolean): void;
+        function add(tile: ITile, overlay: IOverlayInfo, ifNotExist?: (overlay: IOverlayInfo) => boolean): boolean;
         function has(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;
-        function remove(tile: ITile, overlay: IOverlayInfo): void;
-        function remove(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): void;
+        function remove(tile: ITile, overlay: IOverlayInfo): boolean;
+        function remove(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;
     }
     function findMatchingTile(start: IVector3, isMatchingTile?: (point: IVector3, tile: ITile) => boolean, maxTilesChecked?: number, canVisitTile?: (point: IVector3, tile: ITile) => boolean): IVector3 | undefined;
     /**

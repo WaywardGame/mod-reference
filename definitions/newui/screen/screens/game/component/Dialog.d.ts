@@ -58,7 +58,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private description;
     constructor(gsapi: IGameScreenApi, id: number);
-    addScrollableWrapper(initializer: (wrapper: Component) => any): void;
+    addScrollableWrapper(initializer?: (wrapper: Component) => any): Component;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Closes the dialog.
