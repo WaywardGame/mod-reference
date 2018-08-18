@@ -30,7 +30,8 @@ export declare enum ModRegistrationType {
     HelpArticle = 7,
     Note = 8,
     Message = 9,
-    Overlay = 10
+    Overlay = 10,
+    MessageSource = 11
 }
 export interface IActionRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Action;
@@ -48,6 +49,10 @@ export interface INoteRegistration extends IBaseModRegistration {
 }
 export interface ICommandRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Command;
+    name: string;
+}
+export interface IMessageSourceRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.MessageSource;
     name: string;
 }
 export interface IMessageRegistration extends IBaseModRegistration {
@@ -86,7 +91,7 @@ export interface IDialogRegistration extends IBaseModRegistration {
         new (gsapi: IGameScreenApi): Dialog;
     };
 }
-export declare type ModRegistration = IActionRegistration | ICommandRegistration | IBindableRegistration | IOptionsSectionRegistration | IDictionaryRegistration | IRegistryRegistration | IDialogRegistration | IHelpArticleRegistration | INoteRegistration | IMessageRegistration | IOverlayRegistration;
+export declare type ModRegistration = IActionRegistration | ICommandRegistration | IBindableRegistration | IOptionsSectionRegistration | IDictionaryRegistration | IRegistryRegistration | IDialogRegistration | IHelpArticleRegistration | INoteRegistration | IMessageRegistration | IOverlayRegistration | IMessageSourceRegistration;
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -152,6 +157,13 @@ declare module Register {
      */
     function message(name: string): (target: any, key: string) => void;
     /**
+     * Registers a message source.
+     * @param name The name of the message source.
+     *
+     * The decorated property will be injected with the id of the registered message source.
+     */
+    function messageSource(name: string): (target: any, key: string) => void;
+    /**
      * Registers an overlay.
      * @param description The definition of the overlay.
      */
@@ -162,7 +174,7 @@ declare module Register {
      *
      * This decorator should be used on a valid `ActionCallback` method.
      */
-    function action(description: IActionDescription): (target: any, key: string, descriptor: TypedPropertyDescriptor<ActionCallback>) => void;
+    function action<T = any>(description: IActionDescription): (target: any, key: string, descriptor: TypedPropertyDescriptor<ActionCallback<T>>) => void;
     /**
      * Registers a command.
      * @param name The name of this command (what players will type to use it, eg: `/heal`).

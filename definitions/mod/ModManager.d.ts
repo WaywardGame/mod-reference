@@ -26,6 +26,7 @@ export default class ModManager implements IModManager {
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
     isMultiplayerCompatible(indexOrModInfo: number | IModInfo): boolean;
     isMultiplayerClientSide(indexOrModInfo: number | IModInfo): boolean;
+    isUnloadable(indexOrModInfo: number | IModInfo): boolean;
     unloadAll(reset?: boolean): void;
     setupMods(callback: () => void): void;
     saveAll(): void;

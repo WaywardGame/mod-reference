@@ -37,7 +37,7 @@ export declare type IActionArgumentValidatorBase = {
 export interface IActionArgumentValidator extends IActionArgumentValidatorBase {
     allowNearbyItem?: boolean;
 }
-export interface IActionArgument<T = unknown> {
+export declare type IActionArgument<T = any | undefined> = {
     type?: ActionType;
     all?: boolean;
     attackType?: AttackType;
@@ -68,8 +68,11 @@ export interface IActionArgument<T = unknown> {
     torch?: IItem;
     transmogrifee?: IItem;
     useActionType?: ActionType;
+} & (T extends undefined ? T extends any ? {
     object?: T;
-}
+} : {} : {
+    object: T;
+});
 export interface IActionResult {
     returnValue?: boolean;
     passTurn?: boolean | TurnType;
@@ -114,4 +117,4 @@ export interface IActionResultSoundEffect {
     noPosition?: boolean;
 }
 export declare type ExecuteArgument = IActionArgument | IItem | undefined;
-export declare type ActionCallback = (player: IPlayer, argument: IActionArgument, result: IActionResult) => void;
+export declare type ActionCallback<T = any> = (player: IPlayer, argument: IActionArgument<T>, result: IActionResult) => void;

@@ -25,3 +25,52 @@ export interface ISerializedLanguage {
 export declare const dictionaryEnums: any;
 export declare function deserialize(serialized: ISerializedLanguage, into?: ILanguage): Language | undefined;
 export declare function serialize(language: ILanguage, caseStyle?: CaseStyle): ISerializedLanguage;
+interface IDictionarySchema {
+    type: "object";
+    properties: {
+        [key: string]: any;
+    };
+}
+interface DictionarySchemas {
+    [key: string]: IDictionarySchema;
+}
+export declare function generateSchema(): {
+    title: string;
+    description: string;
+    type: string;
+    properties: {
+        dictionaries: {
+            description: string;
+            type: string;
+            properties: DictionarySchemas;
+        };
+    };
+    required: string[];
+    oneOf: ({
+        type: string;
+        properties: {
+            extends: {
+                description: string;
+                type: string;
+            };
+            name?: undefined;
+            shouldPluralize?: undefined;
+        };
+        required: string[];
+    } | {
+        type: string;
+        properties: {
+            name: {
+                description: string;
+                type: string;
+            };
+            shouldPluralize: {
+                description: string;
+                enum: boolean[];
+            };
+            extends?: undefined;
+        };
+        required: string[];
+    })[];
+};
+export {};

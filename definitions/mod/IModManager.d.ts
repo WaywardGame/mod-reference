@@ -66,6 +66,7 @@ export interface IModManager {
     isValid(index: number): boolean;
     isMultiplayerClientSide(indexOrModInfo: number | IModInfo): boolean;
     isMultiplayerCompatible(indexOrModInfo: number | IModInfo): boolean;
+    isUnloadable(indexOrModInfo: number | IModInfo): boolean;
     load(index: number): void;
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
     reload(index: number): boolean;
