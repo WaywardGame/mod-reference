@@ -24,10 +24,10 @@ export default class ModManager implements IModManager {
     private readonly onModInitializedCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
-    isMultiplayerCompatible(indexOrModInfo: number | IModInfo): boolean;
-    isMultiplayerClientSide(indexOrModInfo: number | IModInfo): boolean;
-    isUnloadable(indexOrModInfo: number | IModInfo): boolean;
-    unloadAll(reset?: boolean): void;
+    isMultiplayerCompatible(index: number): boolean;
+    isMultiplayerClientSide(index: number): boolean;
+    isUnloadable(index: number): boolean;
+    unloadAll(reset?: boolean): Promise<void>;
     setupMods(callback: () => void): void;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;

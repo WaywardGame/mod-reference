@@ -64,9 +64,9 @@ export interface IModManager {
     isLoaded(index: number): boolean;
     isLoadedByName(name: string): boolean;
     isValid(index: number): boolean;
-    isMultiplayerClientSide(indexOrModInfo: number | IModInfo): boolean;
-    isMultiplayerCompatible(indexOrModInfo: number | IModInfo): boolean;
-    isUnloadable(indexOrModInfo: number | IModInfo): boolean;
+    isMultiplayerClientSide(index: number): boolean;
+    isMultiplayerCompatible(index: number): boolean;
+    isUnloadable(index: number): boolean;
     load(index: number): void;
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
     reload(index: number): boolean;
@@ -85,7 +85,7 @@ export interface IModManager {
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
     unload(index: number): void;
-    unloadAll(reset?: boolean): void;
+    unloadAll(reset?: boolean): Promise<void>;
     /**
      * Returns a `HookCallFactory` for the given hook name.
      * @param hook A hook name.
