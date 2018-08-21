@@ -55,12 +55,13 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     getQuadrantContainer(): Component;
     isMouseWithin(): boolean;
     wasMouseStartWithin(): boolean;
-    onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveComplete(player: Player): void;
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     onPlayerDeath(player: IPlayer): boolean | undefined;
+    onGameTickEnd(): void;
     /**
      * Adds a quadrant element to the screen.
      *

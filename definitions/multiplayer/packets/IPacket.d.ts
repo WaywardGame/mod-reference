@@ -12,6 +12,7 @@
  */
 import { ConnectionState } from "Enums";
 import { IRandomHistory } from "utilities/Random";
+export declare const reservedBytes = 5;
 export declare enum PacketType {
     Client = 0,
     Server = 1,

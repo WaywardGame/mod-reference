@@ -109,7 +109,7 @@ export default class InGameScreen extends BaseScreen {
     makeTopDialog(dialog: JQuery): void;
     onHide(): void;
     initializeGameState(): void;
-    onGameEnd(showDeath: boolean): void;
+    onGameEnd(): void;
     getDialogIndex(dialogId: DialogId, customDialogInfo?: IDialogInfo): string;
     setupDialog(dialogId: DialogId, highlightItemId?: number, customDialogInfo?: IDialogInfo): JQueryUI.DialogOptions;
     onMouseMove(event: JQueryEventObject): void;

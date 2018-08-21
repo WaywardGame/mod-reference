@@ -29,6 +29,7 @@ export declare abstract class Packet extends IndexedPacket implements IPacket {
     sendTo(to: PacketTarget, force?: boolean): void;
     processAndSend(exclude?: PacketTarget): any;
     protected getInitialBufferSize(): number;
+    protected getIndexSize(): number;
     protected preWriteData(): void;
     protected writeData(): void;
     protected preReadData(): void;

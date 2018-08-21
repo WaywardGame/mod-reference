@@ -109,7 +109,7 @@ export interface IUi extends IPropSerializable, Emitter {
     removeItemFromEquipSlot(equip: EquipType): void;
     shouldRefreshMods(): boolean;
     setObjectUrl(objectUrl: string): void;
-    onGameEnd(showDeath: boolean): void;
+    onGameEnd(): void;
     /**
      * Highlight any number of elements, replacing any other previous "unique highlight" elements, if they
      * are still flashing

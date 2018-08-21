@@ -8,15 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
+import { IEntity } from "entity/IEntity";
 import { ActionType, AttackType, Delay, Direction, EquipType, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
-import { IVector2 } from "utilities/math/IVector";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IActionBase {
     validateArguments?: IActionArgumentValidator;
     usableAsGhost?: boolean;
@@ -44,22 +46,26 @@ export declare type IActionArgument<T = any | undefined> = {
     bypass?: boolean;
     container?: IContainer;
     containerType?: IItem | IDoodad;
+    corpse?: ICorpse;
     creature?: ICreature;
     direction?: Direction;
     doodad?: IDoodad;
+    entity?: IEntity;
     equipSlot?: EquipType;
     item?: IItem;
+    itemComponentsCanBurn?: boolean;
     itemComponentsConsumed?: IItem[];
     itemComponentsRequired?: IItem[];
-    itemComponentsCanBurn?: boolean;
     itemQuality?: ItemQuality;
     itemType?: ItemType;
+    lit?: IItem;
     name?: string;
     npc?: INPC;
+    player?: IPlayer;
     point?: IVector2;
+    position?: IVector3;
     preservee?: IItem;
     reinforcee?: IItem;
-    lit?: IItem;
     repairee?: IItem | IDoodad;
     restType?: RestType;
     silent?: boolean;
