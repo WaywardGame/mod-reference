@@ -11,6 +11,7 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { IEntity } from "entity/IEntity";
 import { IContainer, IItem } from "item/IItem";
 import BasePacket from "multiplayer/packets/BasePacket";
@@ -58,8 +59,10 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedNPC(value?: INPC): void;
     protected readIndexedCorpse(): ICorpse | undefined;
     protected writeIndexedCorpse(value?: ICorpse): void;
-    protected readIndexedEntity(): IEntity | undefined;
+    protected readIndexedEntity(): ICreature | INPC | IPlayer | undefined;
     protected writeIndexedEntity(value?: IEntity): void;
+    protected readIndexedHuman(): IBaseHumanEntity | undefined;
+    protected writeIndexedHuman(value?: IBaseHumanEntity): void;
     protected readIndexedItem(): IItem | undefined;
     protected writeIndexedItem(value?: IItem): void;
     protected readIndexedMovementIntent(): IMovementIntent | undefined;

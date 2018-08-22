@@ -13,7 +13,6 @@ import Vector3 from "utilities/math/Vector3";
 export default class Vector2 implements IVector2 {
     static readonly ZERO: Vector2;
     static readonly ONE: Vector2;
-    static copyRaw(vector: IVector2): IVector2;
     static cross(vector: IVector2, vector2: IVector2): Vector3;
     static cross<D extends IVector3>(vector: IVector2, vector2: IVector2, dest: D): D;
     static dot(vector: IVector2, vector2: IVector2): number;
@@ -60,4 +59,5 @@ export default class Vector2 implements IVector2 {
     normalize(): this;
     normalize<D extends IVector2>(dest: D): D;
     toRadians(): number;
+    raw(): IVector2;
 }

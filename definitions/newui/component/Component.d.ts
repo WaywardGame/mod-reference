@@ -71,7 +71,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
      */
     dumpFast(): this;
     setContents(html: string, escape?: boolean): this;
-    store(): void;
+    store(): this;
     findDescendants(selector: string): NodeListOf<Element>;
     setTooltip(initializer: (tooltip: ITooltip) => ITooltip): this;
     removeTooltip(): void;

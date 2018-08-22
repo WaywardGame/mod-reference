@@ -15,7 +15,6 @@ export default class Vector3 implements IVector3 {
     static readonly UP: Vector3;
     static readonly RIGHT: Vector3;
     static readonly FORWARD: Vector3;
-    static copyRaw(vector: IVector3): IVector3;
     static cross(vector: IVector3, vector2: IVector3): Vector3;
     static cross<D extends IVector3>(vector: IVector3, vector2: IVector3, dest: D): D;
     static dot(vector: IVector3, vector2: IVector3): number;
@@ -61,4 +60,5 @@ export default class Vector3 implements IVector3 {
     scale<D extends IVector3>(value: number, dest: D): D;
     normalize(): this;
     normalize<D extends IVector3>(dest: D): D;
+    raw(): IVector3;
 }

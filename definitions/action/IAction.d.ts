@@ -11,7 +11,7 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { IEntity } from "entity/IEntity";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, AttackType, Delay, Direction, EquipType, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
@@ -50,8 +50,9 @@ export declare type IActionArgument<T = any | undefined> = {
     creature?: ICreature;
     direction?: Direction;
     doodad?: IDoodad;
-    entity?: IEntity;
+    entity?: ICreature | INPC | IPlayer;
     equipSlot?: EquipType;
+    human?: IBaseHumanEntity;
     item?: IItem;
     itemComponentsCanBurn?: boolean;
     itemComponentsConsumed?: IItem[];
@@ -74,9 +75,9 @@ export declare type IActionArgument<T = any | undefined> = {
     torch?: IItem;
     transmogrifee?: IItem;
     useActionType?: ActionType;
-} & (T extends undefined ? T extends any ? {
+} & (undefined extends Extract<T, undefined> ? {
     object?: T;
-} : {} : {
+} : {
     object: T;
 });
 export interface IActionResult {
