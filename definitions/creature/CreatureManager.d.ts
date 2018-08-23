@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICreature, ICreatureDescription, SpawnGroup } from "creature/ICreature";
+import { ICreature, ICreatureDescription, SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import { ICreatureManager } from "creature/ICreatureManager";
 import BaseEntityManager from "entity/BaseEntityManager";
 import { CreatureType, MoveType } from "Enums";
@@ -25,8 +25,9 @@ export default class CreatureManager extends BaseEntityManager<ICreature> implem
      * @param z The tile Z position
      * @param bypass Whether to bypass checks for whether the creature can spawn there naturally. Defaults to false, if the creature can't spawn naturally, it won't.
      * @param forceAberrant If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
+     * @param spawnableTiles If set, this will overwrite the creature's description for which tiles it can spawn on
      */
-    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): ICreature | undefined;
+    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
     maybeSpawnClawWorm(player: IPlayer): void;
     remove(creature: ICreature): void;

@@ -10,7 +10,7 @@
  *
  *
  */
-import { ICreature } from "creature/ICreature";
+import { ICreature, SpawnableTiles } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
@@ -157,6 +157,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     hideHelmet?: boolean;
     worth?: number;
     burnsLike?: ItemType[];
+    spawnableTiles?: SpawnableTiles;
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }
