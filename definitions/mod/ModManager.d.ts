@@ -74,6 +74,7 @@ export default class ModManager implements IModManager {
     getProvided(index: number): IModProvides;
     canLoad(index: number, fromModsMenu?: boolean, count?: number): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
+    getIndexFromIdentifier(identifier: string): number[];
     getIndexFromName(name: string): number[];
     getIndexFromPublishId(publishFileId: string): number[];
     getIndexFromPath(path: string): number | undefined;

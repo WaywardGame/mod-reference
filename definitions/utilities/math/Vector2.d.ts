@@ -51,7 +51,7 @@ export default class Vector2 implements IVector2 {
     subtract(vector: IVector2): this;
     multiply(vector: IVector2 | number): this;
     divide(vector: IVector2 | number): this;
-    floor(): this;
+    floor(dest?: this): this;
     lerp(vector: IVector2, amount: number): this;
     mod(n: number): this;
     scale(value: number): this;
@@ -60,4 +60,5 @@ export default class Vector2 implements IVector2 {
     normalize<D extends IVector2>(dest: D): D;
     toRadians(): number;
     raw(): IVector2;
+    clamp(a: IVector2, b: IVector2): this;
 }

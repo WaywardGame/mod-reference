@@ -10,6 +10,7 @@
  *
  *
  */
+import { SpriteBatchLayer } from "Enums";
 import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import { IBound3 } from "utilities/math/Bound3";
@@ -44,5 +45,7 @@ export interface IWorldRenderer {
     getViewportBounds(): IBound3;
     computeSpritesInViewport(): void;
     batchCreatures(): void;
+    initializeSpriteBatch(layer: SpriteBatchLayer, reset?: true): void;
+    dispose(): void;
 }
 export default IWorldRenderer;

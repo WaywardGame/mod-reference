@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { SpriteBatchLayer } from "Enums";
 import IWorldRenderer from "renderer/IWorldRenderer";
 import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
@@ -49,15 +50,17 @@ export default class WorldRenderer implements IWorldRenderer {
     private readonly fogTextureStorage;
     private readonly vertexArraySingle;
     private readonly vertexArrayDouble;
-    private readonly itemBatch;
-    private readonly corpseBatch;
-    private readonly creatureBatch;
-    private readonly creatureFlyingBatch;
-    private readonly overlayBatch;
+    private itemBatch;
+    private corpseBatch;
+    private creatureBatch;
+    private creatureFlyingBatch;
+    private overlayBatch;
     private readonly entitiesInViewport;
     private viewportSpritesDirty;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext);
+    dispose(): void;
+    initializeSpriteBatch(layer: SpriteBatchLayer, reset?: boolean): void;
     updateAll(): void;
     setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vector2): any;
     getPixelSize(): number;

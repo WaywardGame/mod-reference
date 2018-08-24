@@ -32,6 +32,7 @@ export declare enum Hook {
     GetFogColor = "getFogColor",
     GetAmbientLightLevel = "getAmbientLightLevel",
     GetCreatureSpriteBatchLayer = "getCreatureSpriteBatchLayer",
+    GetMaxSpritesForLayer = "getMaxSpritesForLayer",
     GetPlayerFieldOfViewRadius = "getPlayerFieldOfViewRadius",
     GetPlayerMaxHealth = "getPlayerMaxHealth",
     GetPlayerMovementIntent = "getPlayerMovementIntent",

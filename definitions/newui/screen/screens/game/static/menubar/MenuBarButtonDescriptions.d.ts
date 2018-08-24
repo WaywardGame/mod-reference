@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable } from "Enums";
+import { Bindable, IModdable } from "Enums";
 import Button from "newui/component/Button";
 import { ITooltip } from "newui/component/IComponent";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
@@ -26,7 +26,7 @@ export declare enum MenuBarButtonType {
     Equipment = 10,
     Skills = 11
 }
-export interface IMenuBarButtonDescription {
+export interface IMenuBarButtonDescription extends IModdable {
     imagePath?: string;
     imageWidth?: number;
     imageHeight?: number;

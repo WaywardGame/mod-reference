@@ -48,6 +48,7 @@ export default class Game extends Emitter implements IGame {
     paused: boolean;
     playing: boolean;
     nextTickTime: number | undefined;
+    lastTickTime: number | undefined;
     saveClear: boolean;
     spawnCoords: IVector3;
     tile: ITileArray;

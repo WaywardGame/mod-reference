@@ -221,6 +221,13 @@ export interface IHookHost {
      */
     getCreatureSpriteBatchLayer?(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     /**
+     * Called when initializing each sprite batch layer.
+     * @param layer The SpriteBatchLayer that is being initialized
+     * @param maxSprites The default number of sprites that can be rendered at one time on this layer
+     * @returns The number of sprites that can be rendered at one time on this layer
+     */
+    getMaxSpritesForLayer?(layer: SpriteBatchLayer, maxSprites: number): number | undefined;
+    /**
      * Called when getting the field of view radius for a player
      * @param player The player object
      * @returns The field of view radius for the player or undefined to use the default logic
