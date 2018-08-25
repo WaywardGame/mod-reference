@@ -31,6 +31,7 @@ export default class Vector2 implements IVector2 {
     static product<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
     static quotient(vector: IVector2, vector2: IVector2): Vector2;
     static quotient<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
+    static range(a: IVector2, b: IVector2): IterableIterator<number[]>;
     private readonly values;
     x: number;
     y: number;

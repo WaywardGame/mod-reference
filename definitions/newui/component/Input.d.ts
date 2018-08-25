@@ -46,5 +46,6 @@ export default class Input extends Component implements IRefreshable, IInput {
     focus(): void;
     blur(event?: Event): void;
     private keydown;
+    private keyup;
     private change;
 }

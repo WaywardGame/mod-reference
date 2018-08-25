@@ -30,13 +30,15 @@ export default class Dropdown<OptionId = string | number> extends Component impl
     protected optionsWrapper: Component;
     private readonly optionsWrapperWrapper;
     private readonly inputButton;
-    private options;
+    private readonly options;
     private refreshMethod;
+    private visibleOptions;
     private defaultOption?;
     private open;
     private isFirstSelection;
     private _selection;
     readonly selection: OptionId;
+    private hovered;
     constructor(uiApi: UiApi);
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     showDropdown(): void;
