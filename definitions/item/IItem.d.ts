@@ -58,6 +58,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     disassembly?: IItemArray;
     order?: number;
     ownerIdentifier?: string;
+    readonly quality: number;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;

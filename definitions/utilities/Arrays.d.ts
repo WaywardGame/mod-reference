@@ -37,5 +37,11 @@ declare module Arrays {
      * Note: Be careful. This method can be very slow if used on a big array with a high count.
      */
     function random<T = any>(arr: T[], count: number, seeded?: boolean): T[];
+    /**
+     * Shuffles the contents of the given array using the Fisher-Yates Shuffle: https://bost.ocks.org/mike/shuffle/
+     * @returns The given array after shuffling its contents.
+     */
+    function shuffle<T>(arr: T[]): T[];
 }
 export default Arrays;
+export declare function tuple<T extends any[]>(...items: T): T;

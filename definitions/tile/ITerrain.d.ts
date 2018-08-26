@@ -97,6 +97,9 @@ export interface ITemplate {
         [id: string]: DoodadType | ITemplateDoodad;
     };
     doodad?: string[];
+    /**
+     * A decimal value, 0 for no degradation, 1 for 100% degradation (basically as if there was no template)
+     */
     degrade: number;
 }
 export interface ITemplateDoodad {
