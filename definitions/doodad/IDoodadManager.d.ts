@@ -15,7 +15,15 @@ export interface IDoodadManager {
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;
     getGardenFertilityMessage(spread: number): Message;
     isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): doodadType is DoodadTypeGroup;
-    remove(doodad: IDoodad): void;
+    /**
+     * Removes a doodad from the world.
+     * @param doodad The doodad to remove
+     * @param removeItems Whether to remove items.
+     *
+     * Note: This method will remove any items in them whether the `removeItems` parameter is provided or not. If the parameter is not
+     * provided, the assumption is that it will only be called on empty doodads. Therefore, if there *are* items, it will log a warning.
+     */
+    remove(doodad: IDoodad, removeItems?: true): void;
     updateAll(): void;
     verifyAndFixItemWeights(): void;
 }

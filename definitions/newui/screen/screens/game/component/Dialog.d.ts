@@ -25,14 +25,22 @@ export interface IDialogEdges {
 }
 export declare enum DialogEvent {
     /**
-     * Emitted synchronously with no arguments.
+     * This event is handled by the GameScreen.
      * @returns A `IterableOf<Dialog>` containing sibling dialogs. The list may contain this dialog.
      */
     GetDialogList = "GetDialogList",
     /**
      * Emitted when the close button is pressed in the dialog, or when the `close` method is called.
      */
-    Close = "Close"
+    Close = "Close",
+    /**
+     * Emitted when the dialog is resized
+     */
+    Resize = "Resize",
+    /**
+     * Emitted when the dialog is moved
+     */
+    Move = "Move"
 }
 export default abstract class Dialog extends Component implements IDialog {
     protected readonly gsapi: IGameScreenApi;

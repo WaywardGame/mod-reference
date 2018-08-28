@@ -29,6 +29,9 @@ export interface IActionDescription extends IActionBase {
     name?: string;
     description?: string;
 }
+export interface IActionDescriptionNamed extends IActionDescription {
+    name: string;
+}
 export interface IAction extends IActionBase, IGenericRegistration {
     type: ActionType;
     callback: ActionCallback;

@@ -40,7 +40,7 @@ declare module ResourcePath {
      *
      * Warning: Does not validate that `index` is in `enumObject`.
      */
-    function getResourceName(enumObject: any, index: number): string;
+    function getResourceName(enumObject: any, index: number, descriptions: IResourceData["descriptions"]): string;
     /**
      * Returns the resource type of the given `PathType`.
      */

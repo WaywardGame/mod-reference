@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionCallback, IActionDescription } from "action/IAction";
+import { ActionCallback, IActionDescriptionNamed } from "action/IAction";
 import { CommandCallback } from "command/ICommand";
 import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
@@ -53,7 +53,15 @@ export declare abstract class BaseMod extends Emitter {
     getLog(): Log;
     getPath(): string;
     loadFile(file: string, callback: (fileText: string, success: boolean) => void): boolean;
+    /**
+     * @deprecated
+     * @see `@Register.dialog`
+     */
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
+    /**
+     * @deprecated
+     * This method only works with dialogs registered using `BaseMod.createDialog`, which is deprecated in favor of the NewUi dialog registration.
+     */
     getDialog(title: string): JQuery;
     /**
      * @deprecated
@@ -64,7 +72,7 @@ export declare abstract class BaseMod extends Emitter {
      * @deprecated
      * @see `@Register.action`
      */
-    addActionType(description: IActionDescription, callback: ActionCallback): number;
+    addActionType(description: IActionDescriptionNamed, callback: ActionCallback): number;
     /**
      * @deprecated
      * @see `@Register.command`
@@ -77,7 +85,15 @@ export declare abstract class BaseMod extends Emitter {
      */
     addOverlay(name: string): number;
     addNPC(name: string, npcClass: INPCClass): number;
+    /**
+     * @deprecated
+     * @see `@Register.musicTrack`
+     */
     addMusic(name: string): number;
+    /**
+     * @deprecated
+     * @see `@Register.soundEffect`
+     */
     addSoundEffect(name: string, variations?: number): number;
     addHairstyle(description: IHairstyleDescription): number;
     addItem(description: IItemDescription): number;
@@ -86,18 +102,38 @@ export declare abstract class BaseMod extends Emitter {
     addTerrainResource(terrainType: number, terrainResource: ITerrainResourceItem[], defaultItem?: ItemType): void;
     addDoodad(description: IDoodadDescription): number;
     addTileEvent(description: ITileEventDescription): number;
+    /**
+     * @deprecated
+     * @see `@Register.dictionary`
+     */
     addDictionary(name: string, dictionaryEnum: any): number;
     extendLanguage(language: string, extension: ILanguageExtension): number;
+    /**
+     * @deprecated
+     * @see `@Register.message`
+     */
     addMessage(name: string, message: string): number;
+    /**
+     * @deprecated
+     * @see `@Register.messageSource`
+     */
     addMessageSource(name: string): number;
+    /**
+     * @deprecated
+     * @see `@Register.packet`
+     */
     registerPacket(packet: Packets.IPacketClass): void;
     /**
+     * @deprecated
+     * @see `@Register.bindable`
      * Adds a bindable and the default binding for it
      * @param name The name of the binding (when translated, the name will be `Mod<mod name><name>`)
      * @param binding The default binding or bindings of this bindable
      */
     addBindable(name: string, binding: IBinding | IBinding[]): number;
     /**
+     * @deprecated
+     * @see `@Register.stat`
      * Adds a new stat that can be added to entities, with a description of how the stat should be displayed
      * in a ui stat display.
      * @param name The name of this stat.
@@ -105,6 +141,8 @@ export declare abstract class BaseMod extends Emitter {
      */
     addStat(name: string, displayDescription: IStatDisplayDescription): number;
     /**
+     * @deprecated
+     * @see `@Register.statusEffect`
      * Adds a new status effect that can be added to entities, with a description of how the effect should
      * be rendered when on an entity.
      * @param name The name of the status effect.
@@ -112,6 +150,8 @@ export declare abstract class BaseMod extends Emitter {
      */
     addStatusEffect(name: string, description: IStatusEffectDescription): number;
     /**
+     * @deprecated
+     * @see `@Register.menuBarButton`
      * Adds a new button to the in-game menu bar.
      * @param name The name of the menu bar button.
      * @param description Details of how the menu bar button should display and what it should do.

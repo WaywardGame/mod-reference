@@ -18,6 +18,7 @@ declare global {
     type GeneratorOf<T> = () => IterableOf<T>;
     type GeneratorOrT<T> = T | (() => T);
     type ArrayOfTOrIterablesOfT<T> = Array<T | IterableOf<T>>;
+    type Falsey = 0 | "" | null | undefined;
     interface IterableIterator<T> {
         /**
          * Returns an iterable of type X, using the given map function
@@ -28,7 +29,12 @@ declare global {
          * Returns an iterable that will loop only over the entries that match the given filter
          * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
          */
-        filter<X = T>(filter: (val: T) => any): IterableIterator<X>;
+        filter2<X = T>(filter: (val: T) => any): IterableIterator<X>;
+        /**
+         * Returns an iterable that will loop only over the entries that match the given filter
+         * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
+         */
+        filter<X = never>(filter: (val: T) => any): IterableIterator<Exclude<T, X>>;
         /**
          * Returns an iterable that will first loop over the entries in itself, then the entries given
          * @param items The other items to loop over
@@ -227,8 +233,7 @@ declare module IterableIterator {
     const ALL: unique symbol;
 }
 export default IterableIterator;
-export declare function pipe<T = any>(...what: T[]): IterableIterator<T>;
-export declare function pipeArray<T = any>(what?: T[]): IterableIterator<T>;
+export declare function pipe<T extends any[]>(...what: T): IterableIterator<T[number]>;
 /**
  * A generator for numbers from `0` through `end` (exclusive)
  */
