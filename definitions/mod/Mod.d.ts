@@ -16,6 +16,7 @@ import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
+import { SaveDataType } from "mod/IMod";
 import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
 import { IMessage } from "player/IMessageManager";
@@ -25,7 +26,7 @@ import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
-export declare abstract class Mod extends BaseMod implements IHookHost {
+declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
      * @param saveDataGlobal The save data object you previously saved via onUninitialize()
@@ -159,5 +160,25 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     processInput(player: IPlayer): boolean | undefined;
     shouldRender(): RenderFlag | undefined;
     shouldStopWalkToTileMovement(): boolean | undefined;
+}
+declare module Mod {
+    /**
+     * Injects the decorated field with a mod instance.
+     * @param nameOrClass Given a mod name, the decorated field will be injected with the enabled/loaded instance of the mod by that name. Given a mod
+     * class, the decorated field will be injected with the enabled/loaded mod instance which is an instance of that class.
+     */
+    function instance<M extends string | (new (index: number) => Mod)>(nameOrClass: M): <K extends string | number | symbol, T extends { [k in K]: M extends new (index: number) => infer I ? I : Mod; }>(target: T, key: K) => void;
+    /**
+     * Injects the save data for a mod by its name or class.
+     * @param nameOrClass Given a mod name, the decorated field will be injected with save data from the enabled/loaded instance of
+     * the mod by that name. Given a mod class, the decorated field will be injected with the save data from the enabled/loaded mod
+     * instance which is an instance of that class.
+     * @param type Whether to inject the global save data for the mod, or the save data for the mod.
+     */
+    function data<M extends string | (new (index: number) => Mod), S extends SaveDataType>(nameOrClass: M, type: S): <K extends string | number | symbol, T extends { [k in K]: M extends new (index: number) => infer I ? S extends SaveDataType.Global ? I extends {
+        initializeGlobalData(data?: infer D | undefined): infer D;
+    } ? D : never : I extends {
+        initializeSaveData(data?: infer D | undefined): infer D;
+    } ? D : never : any; }>(target: T, key: K) => void;
 }
 export default Mod;

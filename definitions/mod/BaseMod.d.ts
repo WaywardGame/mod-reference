@@ -172,6 +172,18 @@ export declare abstract class BaseMod extends Emitter {
      * This is called internally. Handles decorator-registered methods & properties, such as actions, commands, or bindables
      */
     onBeforeLoad(registry?: IRegistry): Promise<void>;
+    /**
+     * Called when the save data for this mod is retrieved from a field decorated with `@SaveData`.
+     * @param data Any existing data, or `undefined`
+     * @returns The data that should be returned. Conventionally, this is an object of some kind. It must be JSON serializable.
+     */
+    initializeSaveData(data: any): any;
+    /**
+     * Called when the global data for this mod is retrieved from a field decorated with `@SaveData`.
+     * @param data Any existing data, or `undefined`
+     * @returns The data that should be returned. Conventionally, this is an object of some kind. It must be JSON serializable.
+     */
+    initializeGlobalData(data: any): any;
     private initializeRegistry;
     private validateRegistration;
     private register;

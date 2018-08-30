@@ -28,8 +28,8 @@ export default class Emitter {
     /**
      * Triggers the given event with any number of arguments.
      */
-    trigger(event: string | number, ...data: any[]): Promise<any[]>;
-    triggerSync<T extends any[]>(event: string | number, ...data: any[]): T;
+    triggerAsync(event: string | number, ...data: any[]): Promise<any[]>;
+    trigger<T extends any[]>(event: string | number, ...data: any[]): T;
     /**
      * Removes all event handlers for the given event(s).
      */
