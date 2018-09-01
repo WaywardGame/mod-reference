@@ -16,7 +16,6 @@ import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
-import { SaveDataType } from "mod/IMod";
 import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
 import { IMessage } from "player/IMessageManager";
@@ -25,6 +24,7 @@ import { INote } from "player/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
+import Log from "utilities/Log";
 import { IVector2 } from "utilities/math/IVector";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
@@ -164,21 +164,29 @@ declare abstract class Mod extends BaseMod implements IHookHost {
 declare module Mod {
     /**
      * Injects the decorated field with a mod instance.
-     * @param nameOrClass Given a mod name, the decorated field will be injected with the enabled/loaded instance of the mod by that name. Given a mod
-     * class, the decorated field will be injected with the enabled/loaded mod instance which is an instance of that class.
+     * @param name Given a mod name, the decorated field will be injected with the enabled/loaded instance of the mod by that name.
      */
-    function instance<M extends string | (new (index: number) => Mod)>(nameOrClass: M): <K extends string | number | symbol, T extends { [k in K]: M extends new (index: number) => infer I ? I : Mod; }>(target: T, key: K) => void;
+    function instance<M extends Mod>(name: string): <K extends string | number | symbol, T extends { [k in K]: M extends new (index: number) => infer I ? I : Mod; }>(target: T, key: K) => void;
+    /**
+     * Injects the decorated field with a mod's log.
+     * @param name Given a mod name, the decorated field will be injected with the log of the enabled/loaded mod by that name.
+     */
+    function log(name: string): <K extends string | number | symbol, T extends { [k in K]: Log; }>(target: T, key: K) => void;
     /**
      * Injects the save data for a mod by its name or class.
-     * @param nameOrClass Given a mod name, the decorated field will be injected with save data from the enabled/loaded instance of
-     * the mod by that name. Given a mod class, the decorated field will be injected with the save data from the enabled/loaded mod
-     * instance which is an instance of that class.
-     * @param type Whether to inject the global save data for the mod, or the save data for the mod.
+     * @param name Given a mod name, the decorated field will be injected with save data from the enabled/loaded instance of
+     * the mod by that name.
      */
-    function data<M extends string | (new (index: number) => Mod), S extends SaveDataType>(nameOrClass: M, type: S): <K extends string | number | symbol, T extends { [k in K]: M extends new (index: number) => infer I ? S extends SaveDataType.Global ? I extends {
-        initializeGlobalData(data?: infer D | undefined): infer D;
-    } ? D : never : I extends {
+    function saveData<M extends Mod = Mod>(name: string): <K extends string | number | symbol, T extends { [k in K]: M extends {
         initializeSaveData(data?: infer D | undefined): infer D;
-    } ? D : never : any; }>(target: T, key: K) => void;
+    } ? D : never; }>(target: T, key: K) => void;
+    /**
+     * Injects the global data for a mod by its name or class.
+     * @param name Given a mod name, the decorated field will be injected with global data from the enabled/loaded instance of
+     * the mod by that name.
+     */
+    function globalData<M extends Mod = Mod>(name: string): <K extends string | number | symbol, T extends { [k in K]: M extends {
+        initializeGlobalData(data?: infer D | undefined): infer D;
+    } ? D : never; }>(target: T, key: K) => void;
 }
 export default Mod;

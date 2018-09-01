@@ -29,7 +29,3 @@ export declare enum ModEvent {
     Unload = 0,
     Uninitialize = 1
 }
-export declare enum SaveDataType {
-    Global = "global",
-    Save = "save"
-}
