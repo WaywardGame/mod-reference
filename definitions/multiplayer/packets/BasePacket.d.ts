@@ -8,14 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
+import { IEntity } from "entity/IEntity";
 import { IContainer, IItem } from "item/IItem";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
 import { INPC } from "npc/INPC";
-import { IMovementIntent } from "player/IPlayer";
-import { IVector2 } from "utilities/math/IVector";
+import IPlayer, { IMovementIntent } from "player/IPlayer";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class BasePacket {
     protected static registrarId: number;
     "constructor": typeof BasePacket;
@@ -51,14 +54,24 @@ export default abstract class BasePacket {
     protected writeStringArray(value: string[]): void;
     protected readVector2(): IVector2;
     protected writeVector2(value: IVector2): void;
+    protected readVector3(): IVector3;
+    protected writeVector3(value: IVector3): void;
     protected readContainer(): IContainer;
     protected writeContainer(value: IContainer): void;
     protected readCreature(): ICreature | undefined;
     protected writeCreature(value: ICreature): void;
+    protected readPlayer(): IPlayer | undefined;
+    protected writePlayer(value: IPlayer): void;
     protected readDoodad(): IDoodad | undefined;
     protected writeDoodad(value: IDoodad): void;
     protected readNPC(): INPC | undefined;
     protected writeNPC(value: INPC): void;
+    protected readCorpse(): ICorpse | undefined;
+    protected writeCorpse(value: ICorpse): void;
+    protected readEntity(): IPlayer | ICreature | INPC | undefined;
+    protected writeHuman(value: IBaseHumanEntity): void;
+    protected readHuman(): IPlayer | INPC | undefined;
+    protected writeEntity(value: IEntity): void;
     protected readItem(): IItem;
     protected writeItem(value: IItem): void;
     protected readMovementIntent(): IMovementIntent;

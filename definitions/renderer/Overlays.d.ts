@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IModdable } from "Enums";
-export declare type IOverlayDescription = IModdable;
-export declare const overlayDescriptions: Description<IOverlayDescription>;
+import { IModdable, OverlayType } from "Enums";
+export interface IOverlayDescription extends IModdable {
+    imagePath?: string;
+}
+export declare const overlayDescriptions: OptionalDescriptions<OverlayType, IOverlayDescription>;

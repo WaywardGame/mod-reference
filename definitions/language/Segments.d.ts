@@ -30,7 +30,7 @@ export declare enum TextDecoration {
 export interface IDecoratedSection extends IStringSection {
     decoration: TextDecoration;
 }
-export declare function getDecorations(section: IStringSection): IterableIterator<[number, number]>;
+export declare function getDecorations(section: IStringSection): IterableIterator<[TextDecoration, number]>;
 export declare const italicizedSegment: ISegment;
 export declare const boldSegment: ISegment;
 export declare const underlineSegment: ISegment;

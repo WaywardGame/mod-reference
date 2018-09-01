@@ -34,22 +34,23 @@ export interface IModManager {
     canLoad(index: number, fromModsMenu?: boolean): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
     getAuthor(index: number): string;
+    getCreatedDate(index: number): number | undefined;
     getDescription(index: number): string;
+    getEnabledMods(): number[];
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
     getFolderName(index: number): string;
     getIdentifier(index: number): string;
+    getIndexFromIdentifier(identifier: string): number[];
     getIndexFromName(name: string): number[];
     getIndexFromPath(path: string): number | undefined;
     getIndexFromPublishId(publishFileId: string): number[];
-    getLastUpdatedDate(index: number): number | undefined;
     getInstallDate(index: number): number | undefined;
-    getCreatedDate(index: number): number | undefined;
+    getLastUpdatedDate(index: number): number | undefined;
     getLoadedModByName(name: string): IModInfo | undefined;
     getLoadedMods(): IModInfo[];
-    getEnabledMods(): number[];
+    getLog(index: number): Log;
     getModFromIndex(i: number): IModInfo;
     getMods(): IModInfo[];
-    getLog(index: number): Log;
     getName(index: number): string;
     getPath(index: number): string;
     getProvided(index: number): IModProvides;
@@ -63,6 +64,9 @@ export interface IModManager {
     isEnabledByName(name: string): boolean;
     isLoaded(index: number): boolean;
     isLoadedByName(name: string): boolean;
+    isMultiplayerClientSide(index: number): boolean;
+    isMultiplayerCompatible(index: number): boolean;
+    isUnloadable(index: number): boolean;
     isValid(index: number): boolean;
     load(index: number): void;
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
@@ -71,9 +75,9 @@ export interface IModManager {
     removeMod(id: number, uninstall?: boolean): void;
     save(index: number): void;
     saveAll(): void;
-    setLastUpdated(index: number, lastUpdated: number): void;
-    setInstallDate(index: number, installDate: number): void;
     setCreatedDate(index: number, createdDate: number): void;
+    setInstallDate(index: number, installDate: number): void;
+    setLastUpdated(index: number, lastUpdated: number): void;
     setPublishId(index: number, publishedFileId: string): void;
     setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): Promise<boolean>;
     setSteamIdOwner(index: number, steamIdOwner: string): void;
@@ -82,7 +86,7 @@ export interface IModManager {
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
     unload(index: number): void;
-    unloadAll(reset?: boolean): void;
+    unloadAll(reset?: boolean): Promise<void>;
     /**
      * Returns a `HookCallFactory` for the given hook name.
      * @param hook A hook name.

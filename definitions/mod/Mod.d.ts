@@ -24,7 +24,9 @@ import { INote } from "player/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
-export declare abstract class Mod extends BaseMod implements IHookHost {
+import Log from "utilities/Log";
+import { IVector2 } from "utilities/math/IVector";
+declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
      * @param saveDataGlobal The save data object you previously saved via onUninitialize()
@@ -76,6 +78,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     canSeeCreature(creature: ICreature, tile: ITile): boolean | undefined;
     canSeeNPC(npc: INPC, tile: ITile): boolean | undefined;
     getCreatureSpriteBatchLayer(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
+    getMaxSpritesForLayer(layer: SpriteBatchLayer, maxSprites: number): number | undefined;
     getPlayerFieldOfViewRadius(player: IPlayer): number | undefined;
     getPlayerMaxHealth(maxHealth: number, player: IPlayer): number;
     getPlayerMovementIntent(player: IPlayer): IMovementIntent | undefined;
@@ -83,10 +86,13 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     getPlayerSpriteBatchLayer(player: IPlayer, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     getPlayerWeightMovementPenalty(player: IPlayer): number | undefined;
     getPlayerWeightStatus(player: IPlayer): WeightStatus | undefined;
+    getCameraPosition(position: IVector2): IVector2 | undefined;
     getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
+    getTilePenalty(penalty: number, tile: ITile): number;
+    getZoomLevel(): number | undefined;
     isPlayerSwimming(player: IPlayer, isSwimming: boolean): boolean | undefined;
     isTileInspectable(tile: ITile): boolean | undefined;
-    isTileBlocked(tile: ITile): boolean | undefined;
+    isTileBlocked(tile: ITile): true | undefined;
     onBuild(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
     onButtonBarClick(button: JQuery): void;
     onContainerItemAdd(item: IItem, container: IContainer): void;
@@ -138,6 +144,7 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     onWriteNote(player: IPlayer, note: INote): false | undefined;
     onWrittenNote(player: IPlayer, id: number): void;
     postExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
+    postFieldOfView(): void;
     postGenerateWorld(generateNewWorld: boolean): void;
     postRender(): void;
     postRenderPostProcess(): void;
@@ -153,5 +160,33 @@ export declare abstract class Mod extends BaseMod implements IHookHost {
     processInput(player: IPlayer): boolean | undefined;
     shouldRender(): RenderFlag | undefined;
     shouldStopWalkToTileMovement(): boolean | undefined;
+}
+declare module Mod {
+    /**
+     * Injects the decorated field with a mod instance.
+     * @param name Given a mod name, the decorated field will be injected with the enabled/loaded instance of the mod by that name.
+     */
+    function instance<M extends Mod>(name: string): <K extends string | number | symbol, T extends { [k in K]: M extends new (index: number) => infer I ? I : Mod; }>(target: T, key: K) => void;
+    /**
+     * Injects the decorated field with a mod's log.
+     * @param name Given a mod name, the decorated field will be injected with the log of the enabled/loaded mod by that name.
+     */
+    function log(name: string): <K extends string | number | symbol, T extends { [k in K]: Log; }>(target: T, key: K) => void;
+    /**
+     * Injects the save data for a mod by its name or class.
+     * @param name Given a mod name, the decorated field will be injected with save data from the enabled/loaded instance of
+     * the mod by that name.
+     */
+    function saveData<M extends Mod = Mod>(name: string): <K extends string | number | symbol, T extends { [k in K]: M extends {
+        initializeSaveData(data?: infer D | undefined): infer D;
+    } ? D : never; }>(target: T, key: K) => void;
+    /**
+     * Injects the global data for a mod by its name or class.
+     * @param name Given a mod name, the decorated field will be injected with global data from the enabled/loaded instance of
+     * the mod by that name.
+     */
+    function globalData<M extends Mod = Mod>(name: string): <K extends string | number | symbol, T extends { [k in K]: M extends {
+        initializeGlobalData(data?: infer D | undefined): infer D;
+    } ? D : never; }>(target: T, key: K) => void;
 }
 export default Mod;

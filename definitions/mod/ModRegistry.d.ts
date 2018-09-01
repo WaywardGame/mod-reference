@@ -8,15 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionCallback, IActionDescription } from "action/IAction";
+import { ActionCallback, IActionDescriptionNamed } from "action/IAction";
 import { CommandCallback } from "command/ICommand";
+import { ActionType, Bindable, Command, Music, OverlayType, SfxType } from "Enums";
+import { Dictionary, InterruptChoice } from "language/ILanguage";
+import { Message } from "language/IMessages";
+import { IPacketClass } from "multiplayer/packets/Packets";
 import { IBinding } from "newui/BindingManager";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import { IDialogDescription } from "newui/screen/screens/game/Dialogs";
+import { DialogId, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
-import { IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
+import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
-import { INoteDescription } from "player/NoteManager";
+import { Source } from "player/IMessageManager";
+import { INoteDescription, Note } from "player/NoteManager";
+import { IOverlayDescription } from "renderer/Overlays";
 export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
 export declare enum ModRegistrationType {
     Action = 0,
@@ -28,16 +35,41 @@ export declare enum ModRegistrationType {
     Dialog = 6,
     HelpArticle = 7,
     Note = 8,
-    Message = 9
+    Message = 9,
+    Overlay = 10,
+    MessageSource = 11,
+    InterruptChoice = 12,
+    MenuBarButton = 13,
+    MusicTrack = 14,
+    SoundEffect = 15,
+    Packet = 16
+}
+export interface IMusicTrackRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.MusicTrack;
+    name: string;
+}
+export interface ISoundEffectRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.SoundEffect;
+    name: string;
+    variations?: number;
+}
+export interface IPacketRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Packet;
+    class: IPacketClass;
 }
 export interface IActionRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Action;
-    description: IActionDescription;
+    description: IActionDescriptionNamed;
 }
 export interface IHelpArticleRegistration extends IBaseModRegistration {
     type: ModRegistrationType.HelpArticle;
     name: string;
     description: IHelpArticle;
+}
+export interface IMenuBarButtonRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.MenuBarButton;
+    name: string;
+    description: IMenuBarButtonDescription;
 }
 export interface INoteRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Note;
@@ -48,9 +80,22 @@ export interface ICommandRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Command;
     name: string;
 }
+export interface IInterruptChoiceRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.InterruptChoice;
+    name: string;
+}
+export interface IMessageSourceRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.MessageSource;
+    name: string;
+}
 export interface IMessageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Message;
     name: string;
+}
+export interface IOverlayRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Overlay;
+    name: string;
+    description?: IOverlayDescription;
 }
 export interface IBindableRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Bindable;
@@ -79,7 +124,7 @@ export interface IDialogRegistration extends IBaseModRegistration {
         new (gsapi: IGameScreenApi): Dialog;
     };
 }
-export declare type ModRegistration = IActionRegistration | ICommandRegistration | IBindableRegistration | IOptionsSectionRegistration | IDictionaryRegistration | IRegistryRegistration | IDialogRegistration | IHelpArticleRegistration | INoteRegistration | IMessageRegistration;
+export declare type ModRegistration = IActionRegistration | ICommandRegistration | IBindableRegistration | IOptionsSectionRegistration | IDictionaryRegistration | IRegistryRegistration | IDialogRegistration | IHelpArticleRegistration | INoteRegistration | IMessageRegistration | IOverlayRegistration | IMessageSourceRegistration | IInterruptChoiceRegistration | IMenuBarButtonRegistration | IMusicTrackRegistration | ISoundEffectRegistration | IPacketRegistration;
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -88,7 +133,30 @@ declare module Register {
      */
     function registry(cls: {
         new (upperRegistry: any): any;
-    }): (target: any, key: string) => void;
+    }): <K extends string | number | symbol, T extends { [k in K]: object; }>(target: T, key: K) => void;
+    /**
+     * Registers a music track.
+     * @param name The name of the music track.
+     * @param description The definition of the music track.
+     *
+     * The decorated property will be injected with the id of the registered music track.
+     */
+    function musicTrack(name: string): <K extends string | number | symbol, T extends { [k in K]: Music; }>(target: T, key: K) => void;
+    /**
+     * Registers a sound effect.
+     * @param name The name of the sound effect.
+     * @param description The definition of the sound effect.
+     *
+     * The decorated property will be injected with the id of the registered sound effect.
+     */
+    function soundEffect(name: string, variations?: number): <K extends string | number | symbol, T extends { [k in K]: SfxType; }>(target: T, key: K) => void;
+    /**
+     * Registers a packet.
+     * @param cls The packet class.
+     *
+     * The decorated property will be injected with the passed packet class.
+     */
+    function packet<C extends IPacketClass>(cls: C): <K extends string | number | symbol, T extends { [k in K]: C; }>(target: T, key: K) => void;
     /**
      * Registers a help article.
      * @param name The name of the help article.
@@ -96,7 +164,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered help article.
      */
-    function helpArticle(name: string, description: IHelpArticle): (target: any, key: string) => void;
+    function helpArticle(name: string, description: IHelpArticle): <K extends string | number | symbol, T extends { [k in K]: HelpArticle; }>(target: T, key: K) => void;
     /**
      * Registers a note.
      * @param name The name of the note.
@@ -104,7 +172,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered note.
      */
-    function note(name: string, description?: INoteDescription): (target: any, key: string) => void;
+    function note(name: string, description?: INoteDescription): <K extends string | number | symbol, T extends { [k in K]: Note; }>(target: T, key: K) => void;
     /**
      * Registers a dialog.
      * @param name The name of the dialog.
@@ -115,7 +183,7 @@ declare module Register {
      */
     function dialog(name: string, description: IDialogDescription, cls: {
         new (gsapi: IGameScreenApi, id: number): Dialog;
-    }): (target: any, key: string) => void;
+    }): <K extends string | number | symbol, T extends { [k in K]: DialogId; }>(target: T, key: K) => void;
     /**
      * Registers a bindable.
      * @param name The name of the bindable.
@@ -125,7 +193,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered note.
      */
-    function bindable(name: string, ...defaultBindings: IBinding[]): (target: any, key: string) => void;
+    function bindable(name: string, ...defaultBindings: IBinding[]): <K extends string | number | symbol, T extends { [k in K]: Bindable; }>(target: T, key: K) => void;
     /**
      * Registers a dictionary.
      * @param name The name of the dictionary.
@@ -133,7 +201,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered dictionary.
      */
-    function dictionary(name: string, dictionaryEnum: any): (target: any, key: string) => void;
+    function dictionary(name: string, dictionaryEnum: any): <K extends string | number | symbol, T extends { [k in K]: Dictionary; }>(target: T, key: K) => void;
     /**
      * Registers a message.
      * @param name The name of the message.
@@ -143,14 +211,38 @@ declare module Register {
      * Note: This decorator replaces the previous `Mod.addMessage(name, message)` call. However, it does not support passing
      * a string. To translate your message, create a language file that extends English.
      */
-    function message(name: string): (target: any, key: string) => void;
+    function message(name: string): <K extends string | number | symbol, T extends { [k in K]: Message; }>(target: T, key: K) => void;
+    /**
+     * Registers an interrupt choice.
+     * @param name The name of the interrupt choice.
+     *
+     * The decorated property will be injected with the id of the registered interrupt choice.
+     */
+    function interruptChoice(name: string): <K extends string | number | symbol, T extends { [k in K]: InterruptChoice; }>(target: T, key: K) => void;
+    /**
+     * Registers a message source.
+     * @param name The name of the message source.
+     *
+     * The decorated property will be injected with the id of the registered message source.
+     */
+    function messageSource(name: string): <K extends string | number | symbol, T extends { [k in K]: Source; }>(target: T, key: K) => void;
+    /**
+     * Registers an overlay.
+     * @param description The definition of the overlay.
+     */
+    function overlay(name: string, description?: IOverlayDescription): <K extends string | number | symbol, T extends { [k in K]: OverlayType; }>(target: T, key: K) => void;
+    /**
+     * Registers a menu bar button.
+     * @param description The definition of the menu bar button.
+     */
+    function menuBarButton(name: string, description: IMenuBarButtonDescription): <K extends string | number | symbol, T extends { [k in K]: MenuBarButtonType; }>(target: T, key: K) => void;
     /**
      * Registers an action.
      * @param description The definition of this action.
      *
      * This decorator should be used on a valid `ActionCallback` method.
      */
-    function action(description: IActionDescription): (target: any, key: string, descriptor: TypedPropertyDescriptor<ActionCallback>) => void;
+    function action<T = any>(description: IActionDescriptionNamed): (target: any, key: string, descriptor: TypedPropertyDescriptor<ActionCallback<T>>) => void;
     /**
      * Registers a command.
      * @param name The name of this command (what players will type to use it, eg: `/heal`).
@@ -170,17 +262,61 @@ export declare const SYMBOL_REGISTRATION_ID: unique symbol;
 export interface RegisteredMethod {
     [SYMBOL_REGISTRATION_ID]: number;
 }
+declare const INVALID: unique symbol;
+/**
+ * This function and module is for retrieving the IDs of other registered things.
+ *
+ * # As a module
+ * Provides the method `id`, which is for retrieving the ID of `@Register`'d functions. For more information on using this method,
+ * see that method's documentation.
+ *
+ * # As a function
+ * As a function, its only purpose is for within other `@Register` decorators. It *does not actually return the ID*, but a temporary
+ * value that is internally used in lieu of it. Do *not* use this method outside of a decorator, and assume you're going to get the
+ * correct ID. You're not.
+ *
+ * To, it requires two type parameters:
+ * @param H The "Host" of the registration.
+ * @param T The type of the registration.
+ *
+ * For example, if you're trying to get a bindable that was registered by your mod, you would call it like this:
+ * `Registry<YourModClass, Bindable>().get("theNameOfTheFieldThatContainsTheBindableYouWant")`
+ *
+ * Here's a full example (excerpt from [Starter Quest](https://github.com/WaywardGame/starterquest)):
+ * ```ts
+ * @Register.bindable("Toggle", { key: "KeyJ" })
+ * 	public readonly bindable: Bindable;
+ *
+ * 	@Register.menuBarButton("Starter Quest", {
+ * 		bindable: registry<StarterQuest, Bindable>().get("bindable"),
+ * 		tooltip: tooltip => tooltip.addText(text => text
+ * 			.setText(new Translation(this.dictionary, StarterQuestDictionary.StarterQuestTitle))),
+ * 		onActivate: () => ui.toggleDialog(this.dialog)
+ * 	})
+ * 	public readonly menuBarButton: MenuBarButtonType;
+ * ```
+ */
+export declare function Registry<H, T>(): {
+    /**
+     * @param key The key of `H` which contains `T`.
+     * @returns A
+     */
+    get<K extends keyof H>(key: K): H[K] extends T ? T : typeof INVALID;
+};
 export declare module Registry {
-    class Registered<T> {
+    /**
+     * Returns the ID of a registered action or command callback which was decorated with its respective `@Register` decorator.
+     * @param method An action or command callback method
+     */
+    function id<M extends (...args: any[]) => any>(method: M): M extends ActionCallback ? ActionType : Command;
+    /**
+     * Used internally for `Registry<H, T>.get(key)`
+     */
+    class Registered {
         readonly key: string;
         constructor(key: string);
     }
-    function id(method: (...args: any[]) => any): number;
 }
-declare const INVALID: unique symbol;
-export declare function registry<H, T>(): {
-    get<K extends keyof H>(key: K): H[K] extends T ? Registry.Registered<T> & T : typeof INVALID;
-};
 export interface IBaseModRegistration {
     type: ModRegistrationType;
     key: string;

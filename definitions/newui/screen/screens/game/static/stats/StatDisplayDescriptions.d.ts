@@ -9,10 +9,10 @@
  * https://waywardgame.github.io/
  */
 import IBaseEntity from "entity/IBaseEntity";
-import { IStat, IStatBase } from "entity/IStats";
+import { IStat, IStatBase, Stat } from "entity/IStats";
 import Component from "newui/component/Component";
 import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/IStatDisplayDescription";
-declare const statDisplayDescriptions: Description<IStatDisplayDescription>;
+declare const statDisplayDescriptions: OptionalDescriptions<Stat, IStatDisplayDescription>;
 export interface IStatInfo extends Partial<IStatBase> {
     value: number;
     percent: number;

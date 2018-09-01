@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "creature/ICreature";
-import { Bindable } from "Enums";
+import { Bindable, Direction } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
@@ -26,6 +26,7 @@ import Stats from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
 import { IPlayer } from "player/IPlayer";
 import Player from "player/Player";
+import { ITile } from "tile/ITerrain";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };
@@ -52,12 +53,15 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     toggleDialogs(states: IDialogStates): void;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
-    onGameStart(): void;
+    isMouseWithin(): boolean;
+    wasMouseStartWithin(): boolean;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    onMove(player: Player): boolean | undefined;
+    onGameStart(isLoadingSave: boolean, playedCount: number): void;
+    onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveComplete(player: Player): void;
-    onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): undefined;
-    onPlayerDeath(player: IPlayer): undefined;
+    onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
+    onPlayerDeath(player: IPlayer): boolean | undefined;
+    onGameTickEnd(): void;
     /**
      * Adds a quadrant element to the screen.
      *

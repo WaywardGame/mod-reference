@@ -88,6 +88,7 @@ export interface IGame extends Emitter {
     readonly isDailyChallenge: boolean;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     addZoomLevel(amount: number): void;
+    updateZoomLevel(): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
     changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean): void;
@@ -103,6 +104,7 @@ export interface IGame extends Emitter {
     getAmbientLightLevel(z: number): number;
     getBenignity(): number | undefined;
     getBlackness(): number;
+    getCameraPosition(): IVector2;
     getCompletedMilestoneCount(): number;
     getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     getDifficulty(): Difficulty;

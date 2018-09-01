@@ -18,9 +18,9 @@ export declare enum EnumCursorEvent {
 export declare enum EnumCursorDefaultGenerator {
     Random = "Random"
 }
-declare class EnumCursor<T extends number> extends Emitter {
+declare class EnumCursor<E, K extends string = string> extends Emitter {
     protected enumObject: any;
-    protected values: T[];
+    protected values: E[];
     protected cursor: number;
     protected default: number | (() => number);
     private _filter;
@@ -28,7 +28,9 @@ declare class EnumCursor<T extends number> extends Emitter {
      * @param enumObject The full enumeration.
      * @param n The starting position of the cursor. Defaults to `0`.
      */
-    constructor(enumObject: any, n?: number);
+    constructor(enumObject: {
+        [key in K]: E;
+    }, n?: number);
     /**
      * Refreshes the internal list of enum entries. If the full enumeration has changed,
      * the cursor may be moved to a different entry.
@@ -39,11 +41,11 @@ declare class EnumCursor<T extends number> extends Emitter {
      * If the cursor has been set previously, it will likely be moved to a different entry.
      * @param filter A function that takes a name and enum value and returns whether the entry should be included.
      */
-    filter(filter: (name: string, value: T) => boolean): this;
+    filter(filter: (name: string, value: E) => boolean): this;
     /**
      * Returns the entry at the cursor position.
      */
-    get(): T;
+    get(): E;
     /**
      * Sets the cursor position.
      */
@@ -52,29 +54,29 @@ declare class EnumCursor<T extends number> extends Emitter {
      * Sets the cursor position to the position of this enum entry in the filtered list.
      * @returns The entry at the new cursor position.
      */
-    moveToEnumEntry(entry: T): T;
+    moveToEnumEntry(entry: E): E;
     /**
      * If the given amount is positive, moves forward that many entries.
      * If the given amount is negative, moves backward that many entries.
      * @returns The entry at the new cursor position.
      */
-    move(amt: number): T;
+    move(amt: number): E;
     /**
      * Moves the cursor to a random entry, then returns that entry.
      */
-    moveToRandom(): T;
+    moveToRandom(): E;
     /**
      * Moves to the default cursor position.
      */
-    moveToDefault(): T;
+    moveToDefault(): E;
     /**
      * Moves the cursor forward one entry, and returns the new entry.
      */
-    next(): T;
+    next(): E;
     /**
      * Moves the cursor backward one entry, and returns the new entry.
      */
-    previous(): T;
+    previous(): E;
     /**
      * Sets the default cursor position.
      */
@@ -91,7 +93,7 @@ declare class EnumCursor<T extends number> extends Emitter {
     /**
      * Sets the default cursor position to the position of the given entry in this cursor.
      */
-    setDefaultToEntry(entry: T): this;
+    setDefaultToEntry(entry: E): this;
     /**
      * Retrieves a random cursor position
      */

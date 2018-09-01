@@ -16,6 +16,9 @@ import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 export declare enum DropdownEvent {
+    /**
+     * @param optionId The new option which is selected.
+     */
     Selection = "Selection"
 }
 export declare type IDropdownOption<OptionId = string | number> = [OptionId, (option: Button) => any];
@@ -25,14 +28,17 @@ export interface IDropdownData<OptionId = string | number> {
 }
 export default class Dropdown<OptionId = string | number> extends Component implements IRefreshableValue<IDropdownData<OptionId>>, IHookHost {
     protected optionsWrapper: Component;
+    private readonly optionsWrapperWrapper;
     private readonly inputButton;
-    private options;
+    private readonly options;
     private refreshMethod;
+    private visibleOptions;
     private defaultOption?;
     private open;
     private isFirstSelection;
     private _selection;
     readonly selection: OptionId;
+    private hovered;
     constructor(uiApi: UiApi);
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     showDropdown(): void;
@@ -41,5 +47,6 @@ export default class Dropdown<OptionId = string | number> extends Component impl
     selectDefault(): void;
     setRefreshMethod(refresh: () => IDropdownData<OptionId>): this;
     refresh(): this;
+    private updateWrapperPosition;
     private filter;
 }

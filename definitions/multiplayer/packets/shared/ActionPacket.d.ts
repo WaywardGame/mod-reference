@@ -16,6 +16,7 @@ export default class ActionPacket extends PlayerTargetedSharedPacket {
     action: IActionArgument;
     getDebugInfo(): string;
     process(): void;
+    protected getIndexSize(): number;
     protected writeData(): void;
     protected readData(): void;
 }

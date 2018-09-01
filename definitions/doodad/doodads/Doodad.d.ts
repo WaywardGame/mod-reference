@@ -68,7 +68,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     getInspect(): IInspect[];
     isDangerous(player: IPlayer): boolean;
     getDamage(human: IBaseHumanEntity, equipType?: EquipType): number;
-    damage(forceBreak?: boolean, isTrample?: boolean, skipSound?: boolean, skipResources?: boolean): void;
+    damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;

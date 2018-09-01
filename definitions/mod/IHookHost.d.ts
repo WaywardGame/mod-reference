@@ -23,6 +23,7 @@ import { INote } from "player/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
+import { IVector2 } from "utilities/math/IVector";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -35,7 +36,7 @@ import { ITile } from "tile/ITerrain";
  * }
  * ```
  */
-export declare function HookMethod(priority: number): (hook: IHookHost, property: string) => void;
+export declare function HookMethod(priority: number): <K extends keyof IHookHost>(hook: IHookHost, property: K, descriptor: TypedPropertyDescriptor<Exclude<IHookHost[K], undefined>>) => void;
 /**
  * A decorator for registering a hook method on a `IHookHost`.
  * Uses `HookPriority.Normal`
@@ -48,7 +49,7 @@ export declare function HookMethod(priority: number): (hook: IHookHost, property
  * }
  * ```
  */
-export declare function HookMethod(host: IHookHost, property: string): void;
+export declare function HookMethod<K extends keyof IHookHost>(host: IHookHost, property: K, descriptor: TypedPropertyDescriptor<Exclude<IHookHost[K], undefined>>): void;
 export declare const SYMBOL_HOOKS: unique symbol;
 export declare const SYMBOL_HOST_NAME: unique symbol;
 export declare module IHookHost {
@@ -220,6 +221,13 @@ export interface IHookHost {
      */
     getCreatureSpriteBatchLayer?(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     /**
+     * Called when initializing each sprite batch layer.
+     * @param layer The SpriteBatchLayer that is being initialized
+     * @param maxSprites The default number of sprites that can be rendered at one time on this layer
+     * @returns The number of sprites that can be rendered at one time on this layer
+     */
+    getMaxSpritesForLayer?(layer: SpriteBatchLayer, maxSprites: number): number | undefined;
+    /**
      * Called when getting the field of view radius for a player
      * @param player The player object
      * @returns The field of view radius for the player or undefined to use the default logic
@@ -265,6 +273,12 @@ export interface IHookHost {
      */
     getPlayerWeightStatus?(player: IPlayer): WeightStatus | undefined;
     /**
+     * Called when getting the position to render at. By default, this is the player's location.
+     * @param position The player's location
+     * @returns The new position to render at, or undefined to use the player's location
+     */
+    getCameraPosition?(position: IVector2): IVector2 | undefined;
+    /**
      * Called when retrieving the light level of a tile
      * @param tile The tile that was updated
      * @param x The x position of the tile
@@ -273,6 +287,16 @@ export interface IHookHost {
      * @returns The light level of the tile or undefined to use the default logic
      */
     getTileLightLevel?(tile: ITile, x: number, y: number, z: number): number | undefined;
+    /**
+     * Called when calculating the movement penalty of a tile.
+     * @param penalty The current penalty of the tile
+     * @param tile The tile to get the movement penalty of
+     */
+    getTilePenalty?(penalty: number, tile: ITile): number | undefined;
+    /**
+     * Called when setting the zoom level.
+     */
+    getZoomLevel?(): number | undefined;
     /**
      * Called when checking if a player is swimming
      * @param player The player object
@@ -291,7 +315,7 @@ export interface IHookHost {
      * Called when checking if a tile is blocked, used for pathing.
      * @param tile The tile to check
      */
-    isTileBlocked?(tile: ITile): boolean | undefined;
+    isTileBlocked?(tile: ITile): true | undefined;
     /**
      * Called when something is built on a tile
      * @param player The player object
@@ -625,6 +649,10 @@ export interface IHookHost {
      * @param actionResult The action result
      */
     postExecuteAction?(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
+    /**
+     * Called after the field of view has initialized
+     */
+    postFieldOfView?(): void;
     /**
      * Called after the world is generating
      * @param generateNewWorld True if a new world is being generated

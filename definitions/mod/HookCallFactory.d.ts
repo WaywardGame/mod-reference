@@ -22,13 +22,18 @@ export declare enum ReduceStrategy {
     /**
      * Returns the last valid hook result. (Calls the hook on all mods, & returns the last valid)
      */
-    Last = 2,
+    Last 
     /**
      * Returns a random valid hook result. (Calls the hook on all mods, then returns a random result from all valid results)
      *
      * Warning: Does not use the internal random system. Be careful, this could cause desyncs.
      */
-    Random = 3
+    = 2
+    /**
+     * Returns a random valid hook result. (Calls the hook on all mods, then returns a random result from all valid results)
+     *
+     * Warning: Does not use the internal random system. Be careful, this could cause desyncs.
+     */
 }
 export declare type IReduceStrategy<R> = ReduceStrategy | ((newValue: R, lastValue?: R) => R);
 export default class HookCallFactory<H extends Hook, R = any> {
@@ -85,20 +90,11 @@ export default class HookCallFactory<H extends Hook, R = any> {
      */
     setDefault(defaultValue: R): this;
     /**
-     * Sets this hook call to use fast mode. In fast mode, results will not be validated, and the only
-     * supported `reduceStrategy` is `ReduceStrategy.First`
-     */
-    setFastCall(): this;
-    /**
      * This is the internal method for `HookCallFactory.call`. The separation of this method
      * and the `call` field is to allow the `call` field to have the method type of the hook
      * that will be called.
      */
     private _call;
-    /**
-     * A faster version of call that does not validate results & only works with `ReduceStrategy.First`
-     */
-    private _callFast;
     /**
      * Takes the iterator for hook results and turns it into a single result, based on the `reduceStrategy`.
      *
@@ -113,7 +109,6 @@ export default class HookCallFactory<H extends Hook, R = any> {
      * 5. If it's `ReduceStrategy.Random`:
      *   - A random result in the iterator is returned.
      */
-    private collect;
     /**
      * Filters the result of a hook, and returns whether it should be used.
      * This method relies on the value of `resultPredicate`.

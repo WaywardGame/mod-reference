@@ -37,6 +37,8 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private _multiplayerLogs;
     private importingSaveGameMod;
     isElectron(): boolean;
+    reload(): void;
+    closeWindow(): void;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
     getAbsolutePath(...p: string[]): string;

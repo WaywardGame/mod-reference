@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { ITileEventDescription } from "tile/ITileEvent";
-declare const defines: Description<ITileEventDescription>;
-export default defines;
+declare const tileEventDescriptions: Description<ITileEventDescription>;
+export default tileEventDescriptions;

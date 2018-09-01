@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { SpriteBatchLayer } from "Enums";
 import IWorldRenderer from "renderer/IWorldRenderer";
 import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
-import Vec2 from "utilities/math/Vector2";
+import Vector2 from "utilities/math/Vector2";
 export default class WorldRenderer implements IWorldRenderer {
     private readonly gl;
     private static textureShaderProgram;
@@ -49,33 +50,35 @@ export default class WorldRenderer implements IWorldRenderer {
     private readonly fogTextureStorage;
     private readonly vertexArraySingle;
     private readonly vertexArrayDouble;
-    private readonly itemBatch;
-    private readonly corpseBatch;
-    private readonly creatureBatch;
-    private readonly creatureFlyingBatch;
-    private readonly overlayBatch;
+    private itemBatch;
+    private corpseBatch;
+    private creatureBatch;
+    private creatureFlyingBatch;
+    private overlayBatch;
     private readonly entitiesInViewport;
     private viewportSpritesDirty;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext);
+    dispose(): void;
+    initializeSpriteBatch(layer: SpriteBatchLayer, reset?: boolean): void;
     updateAll(): void;
-    setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
+    setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vector2): any;
     getPixelSize(): number;
     getZoom(): number;
     getTileScale(): number;
     setTileScale(tileScale: number): void;
     setZoom(zoom: number): void;
-    setViewport(view: Vec2): void;
-    getViewport(): Vec2;
-    getTileViewport(): Vec2;
+    setViewport(view: Vector2): void;
+    getViewport(): Vector2;
+    getTileViewport(): Vector2;
     getAmbientColor(): [number, number, number];
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
-    screenToTile(screenX: number, screenY: number): Vec2;
+    screenToTile(screenX: number, screenY: number): Vector2;
     getViewportBounds(): {
-        min: Vec2;
-        max: Vec2;
+        min: Vector2;
+        max: Vector2;
         z: number;
     };
     computeSpritesInViewport(): void;

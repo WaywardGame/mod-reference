@@ -24,7 +24,10 @@ export default class ModManager implements IModManager {
     private readonly onModInitializedCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
-    unloadAll(reset?: boolean): void;
+    isMultiplayerCompatible(index: number): boolean;
+    isMultiplayerClientSide(index: number): boolean;
+    isUnloadable(index: number): boolean;
+    unloadAll(reset?: boolean): Promise<void>;
     setupMods(callback: () => void): void;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
@@ -71,6 +74,7 @@ export default class ModManager implements IModManager {
     getProvided(index: number): IModProvides;
     canLoad(index: number, fromModsMenu?: boolean, count?: number): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
+    getIndexFromIdentifier(identifier: string): number[];
     getIndexFromName(name: string): number[];
     getIndexFromPublishId(publishFileId: string): number[];
     getIndexFromPath(path: string): number | undefined;

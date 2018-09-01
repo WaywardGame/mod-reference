@@ -10,14 +10,14 @@
  *
  *
  */
-import { ICreature, ICreatureDescription, SpawnGroup } from "creature/ICreature";
+import { ICreature, ICreatureDescription, SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import IBaseEntityManager from "entity/IBaseEntityManager";
 import { CreatureType, MoveType } from "Enums";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 export interface ICreatureManager extends IBaseEntityManager<ICreature> {
     getHappinessLevel(player: IPlayer, creature: ICreature): number;
-    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean): ICreature | undefined;
+    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
     maybeSpawnClawWorm(player: IPlayer): void;
     updateAll(): void;

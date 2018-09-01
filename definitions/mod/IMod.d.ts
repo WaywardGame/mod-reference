@@ -25,3 +25,7 @@ export interface IModConfig {
     readonly customizations?: boolean;
     readonly publishedFileId?: string;
 }
+export declare enum ModEvent {
+    Unload = 0,
+    Uninitialize = 1
+}

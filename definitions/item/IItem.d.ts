@@ -10,7 +10,7 @@
  *
  *
  */
-import { ICreature } from "creature/ICreature";
+import { ICreature, SpawnableTiles } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
@@ -58,6 +58,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     disassembly?: IItemArray;
     order?: number;
     ownerIdentifier?: string;
+    readonly quality: number;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;
@@ -113,7 +114,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     durability?: number;
     doodad?: IDoodadDescription;
     doodadType?: DoodadType;
-    onBurn?: ItemType;
+    onBurn?: ItemType[];
     onUse?: {
         [index: number]: any;
     };
@@ -156,6 +157,8 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     plural?: string;
     hideHelmet?: boolean;
     worth?: number;
+    burnsLike?: ItemType[];
+    spawnableTiles?: SpawnableTiles;
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }

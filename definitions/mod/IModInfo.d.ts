@@ -13,6 +13,7 @@ import { IModConfig } from "mod/IMod";
 import Mod from "mod/Mod";
 import Log from "utilities/Log";
 export interface IModInfo {
+    index: number;
     config: IModConfig;
     state: ModState;
     path: string;
@@ -53,7 +54,8 @@ export declare enum ModState {
     Loaded = 2,
     Error = 3,
     ChangingState = 4,
-    Temporary = 5
+    Temporary = 5,
+    LoadedInMultiplayer = 6
 }
 export declare enum ModType {
     Internal = 0,

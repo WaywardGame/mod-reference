@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { TerrainType } from "Enums";
-import { ITile } from "tile/ITerrain";
+import { IOverlayInfo, ITile } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
 declare module TileHelpers {
     const maskGfx = 31;
@@ -28,6 +28,12 @@ declare module TileHelpers {
     function setTilled(tile: ITile, value: boolean): void;
     function setTilledRaw(data: number, value: number): number;
     function getTileVariation(x: number, y: number): number;
+    module Overlay {
+        function add(tile: ITile, overlay: IOverlayInfo, ifNotExist?: (overlay: IOverlayInfo) => boolean): boolean;
+        function has(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;
+        function remove(tile: ITile, overlay: IOverlayInfo): boolean;
+        function remove(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;
+    }
     function findMatchingTile(start: IVector3, isMatchingTile?: (point: IVector3, tile: ITile) => boolean, maxTilesChecked?: number, canVisitTile?: (point: IVector3, tile: ITile) => boolean): IVector3 | undefined;
     /**
      * Check is a tile is open

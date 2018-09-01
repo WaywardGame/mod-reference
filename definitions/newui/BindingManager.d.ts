@@ -12,6 +12,7 @@ import { Bindable, BindableType } from "Enums";
 import { IComponent } from "newui/component/IComponent";
 import Emitter from "utilities/Emitter";
 import { IVector2 } from "utilities/math/IVector";
+import Vector2 from "utilities/math/Vector2";
 export declare enum KeyModifier {
     Shift = 0,
     Alt = 1,
@@ -85,7 +86,7 @@ export declare class BindingManager extends Emitter {
     checkModifiers(modifiers: KeyModifier[], exclude: string, id?: number): boolean;
     isPressed(bindOrKey: Bindable | string, id?: number): boolean;
     isAnythingPressed(id?: number): boolean;
-    getMouse(id?: number): IVector2;
+    getMouse(id?: number): Vector2;
     isMouseWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
     mouseStartWasWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;

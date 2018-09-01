@@ -8,15 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, AttackType, Delay, Direction, EquipType, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
-import { IVector2 } from "utilities/math/IVector";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IActionBase {
     validateArguments?: IActionArgumentValidator;
     usableAsGhost?: boolean;
@@ -26,6 +28,9 @@ export interface IActionBase {
 export interface IActionDescription extends IActionBase {
     name?: string;
     description?: string;
+}
+export interface IActionDescriptionNamed extends IActionDescription {
+    name: string;
 }
 export interface IAction extends IActionBase, IGenericRegistration {
     type: ActionType;
@@ -37,29 +42,34 @@ export declare type IActionArgumentValidatorBase = {
 export interface IActionArgumentValidator extends IActionArgumentValidatorBase {
     allowNearbyItem?: boolean;
 }
-export interface IActionArgument {
+export declare type IActionArgument<T = any | undefined> = {
     type?: ActionType;
     all?: boolean;
     attackType?: AttackType;
     bypass?: boolean;
     container?: IContainer;
     containerType?: IItem | IDoodad;
+    corpse?: ICorpse;
     creature?: ICreature;
     direction?: Direction;
     doodad?: IDoodad;
+    entity?: ICreature | INPC | IPlayer;
     equipSlot?: EquipType;
+    human?: IBaseHumanEntity;
     item?: IItem;
+    itemComponentsCanBurn?: boolean;
     itemComponentsConsumed?: IItem[];
     itemComponentsRequired?: IItem[];
-    itemComponentsCanBurn?: boolean;
     itemQuality?: ItemQuality;
     itemType?: ItemType;
+    lit?: IItem;
     name?: string;
     npc?: INPC;
+    player?: IPlayer;
     point?: IVector2;
+    position?: IVector3;
     preservee?: IItem;
     reinforcee?: IItem;
-    lit?: IItem;
     repairee?: IItem | IDoodad;
     restType?: RestType;
     silent?: boolean;
@@ -68,8 +78,11 @@ export interface IActionArgument {
     torch?: IItem;
     transmogrifee?: IItem;
     useActionType?: ActionType;
-    object?: any;
-}
+} & (undefined extends Extract<T, undefined> ? {
+    object?: T;
+} : {
+    object: T;
+});
 export interface IActionResult {
     returnValue?: boolean;
     passTurn?: boolean | TurnType;
@@ -114,4 +127,4 @@ export interface IActionResultSoundEffect {
     noPosition?: boolean;
 }
 export declare type ExecuteArgument = IActionArgument | IItem | undefined;
-export declare type ActionCallback = (player: IPlayer, argument: IActionArgument, result: IActionResult) => void;
+export declare type ActionCallback<T = any> = (player: IPlayer, argument: IActionArgument<T>, result: IActionResult) => void;

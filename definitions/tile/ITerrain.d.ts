@@ -58,7 +58,7 @@ export interface ITile extends Partial<ITileContainer> {
     doodad?: IDoodad;
     events?: ITileEvent[];
     npc?: INPC;
-    overlay?: IOverlayInfo;
+    overlays?: IOverlayInfo[];
 }
 export interface ITileOld {
     event?: ITileEvent[];
@@ -97,6 +97,9 @@ export interface ITemplate {
         [id: string]: DoodadType | ITemplateDoodad;
     };
     doodad?: string[];
+    /**
+     * A decimal value, 0 for no degradation, 1 for 100% degradation (basically as if there was no template)
+     */
     degrade: number;
 }
 export interface ITemplateDoodad {
@@ -108,6 +111,8 @@ export interface IOverlayInfo {
     size?: number;
     offsetX?: number;
     offsetY?: number;
+    spriteOffsetX?: number;
+    spriteOffsetY?: number;
     red?: number;
     green?: number;
     blue?: number;

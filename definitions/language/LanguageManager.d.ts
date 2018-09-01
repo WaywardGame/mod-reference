@@ -47,6 +47,7 @@ export default class LanguageManager implements ILanguageManager {
     refreshUiTranslation(element: JQuery): void;
     evalString(str: string): string;
     serialize(language: ILanguage): any;
+    generateSchema(): void;
     load(language: ILanguage): void;
     shouldWarnOnInvalidOrMissingEntry(str?: string): boolean;
     serializeLanguageToFile(): void;

@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import IGame from "game/IGame";
 import { Dictionary, UiTranslation } from "language/ILanguage";
 import { TranslationType } from "language/ILanguageManager";
 import { Message } from "language/IMessages";
+import { TranslationGenerator } from "newui/component/IComponent";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
 export interface ITranslationData {
     dictionary: Dictionary;
@@ -32,7 +34,10 @@ export default class Translation {
      *
      * Example uses include text the user inputs, and text from other sites (steam/trello)
      */
-    static generator(pregeneratedText: string | IStringSection[]): () => IStringSection[];
+    static generator(textOrGenerator: GeneratorOrT<string | IStringSection[]>): TranslationGenerator;
+    static ofObjectName(...args: ArgumentsOf<IGame["getName"]>): TranslationGenerator;
+    static ofDescription(...args: ArgumentsOf<IGame["getNameFromDescription"]>): TranslationGenerator;
+    private static getStringSections;
     static provider: ILanguageEntryProvider;
     static ui: (entry: string | UiTranslation) => Translation;
     static message: (entry: string | Message) => Translation;

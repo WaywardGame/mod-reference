@@ -72,6 +72,7 @@ export interface IOptions {
     developerModeContextMenu: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
+    defaultCursor: boolean;
     dropLocation: DropLocation;
     dropOnGatherHarvest: boolean;
     enableAutoSave: boolean;

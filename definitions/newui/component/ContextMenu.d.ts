@@ -29,7 +29,7 @@ export default class ContextMenu<O extends number | string | symbol = number | s
     private activeOption;
     private readonly descriptions;
     private readonly options;
-    constructor(uiApi: UiApi, ...descriptions: Array<ContextMenuOptionKeyValuePair<O>>);
+    constructor(uiApi: UiApi, ...descriptions: Array<ContextMenuOptionKeyValuePair<O> | undefined>);
     addAllDescribedOptions(): this;
     addOptions(...options: ArrayOfTOrIterablesOfT<O>): this;
     disableOptions(...options: ArrayOfTOrIterablesOfT<O>): this;

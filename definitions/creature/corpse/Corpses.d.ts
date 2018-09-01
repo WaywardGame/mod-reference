@@ -11,5 +11,5 @@
  *
  */
 import { ICorpseDescription } from "creature/corpse/ICorpse";
-export declare let defines: (ICorpseDescription | undefined)[];
-export default defines;
+export declare let corpseDescriptions: (ICorpseDescription | undefined)[];
+export default corpseDescriptions;
