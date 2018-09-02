@@ -189,4 +189,5 @@ declare module Mod {
         initializeGlobalData(data?: infer D | undefined): infer D;
     } ? D : never; }>(target: T, key: K) => void;
 }
+export { Mod };
 export default Mod;

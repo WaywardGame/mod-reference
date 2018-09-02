@@ -20,21 +20,23 @@ declare module ResourcePath {
      * Returns the path of a resource.
      * @param pathType The type of resource this is.
      * @param index The index of this resource (indexed by this number in resource's enum)
-     * @param extra Anything extra to append to the path.
+     * @param customPath If this is retrieving the path to a modded item, and the path for that item doesn't appear in the
+     * description as `imagePath`, it may be passed here instead.
      */
-    function getPath(pathType: PathType, index: number): string;
+    function getPath(pathType: PathType, index: number, customPath?: string): string;
     /**
      * Returns the mod version of a given resource path.
      * @param path The current path of this resource.
      * @param descriptions The descriptions of this path type.
      * @param index The index of this resource.
+     * @param customPath Replaces the `imagePath` of the description.
      *
      * Steps taken:
      * 1. If the path is not a mod-added resource, it will return the given path. Otherwise:
      * 2. If the description has a custom path stored in `imagePath`, the given path is replaced with this path.
      * 3. Return `{modManager.getPath(modIndex)}/{path}`
      */
-    function getModPath(path: string, descriptions: IResourceData["descriptions"], index: number): string;
+    function getModPath(path: string, descriptions: IResourceData["descriptions"], index: number, customPath?: string): string;
     /**
      * Returns a resource's name.
      *
