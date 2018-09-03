@@ -25,12 +25,12 @@ export declare enum InterruptChoice {
     No = 3,
     Ok = 4,
     OpenSaveFolderAndQuit = 5,
-    Rejoin = 6,
-    Rename = 7,
-    Retry = 8,
-    SteamWorkshop = 9,
-    Yes = 10,
-    Quit = 11
+    Quit = 6,
+    Rejoin = 7,
+    Rename = 8,
+    Retry = 9,
+    SteamWorkshop = 10,
+    Yes = 11
 }
 /**
  * Ui messages that are on elements that don't change
