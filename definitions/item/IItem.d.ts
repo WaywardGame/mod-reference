@@ -81,7 +81,6 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
     getLocation(): IVector3 | undefined;
     dropInWater(human: IBaseHumanEntity, x?: number, y?: number): void;
-    dropInLava(human: IBaseHumanEntity, x?: number, y?: number): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
