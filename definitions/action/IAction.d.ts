@@ -23,6 +23,7 @@ export interface IActionBase {
     validateArguments?: IActionArgumentValidator;
     usableAsGhost?: boolean;
     usableWhenPaused?: boolean;
+    usableWhenResting?: boolean;
     ignoreHasDelay?: boolean;
 }
 export interface IActionDescription extends IActionBase {

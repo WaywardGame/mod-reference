@@ -41,7 +41,7 @@ export default class Game extends Emitter implements IGame {
     crafted: {
         [index: number]: ICrafted;
     };
-    fadeInAmount: number;
+    fadeInAmount: number | undefined;
     fillCount: number;
     fillTile: boolean[][];
     isLoadingSave: boolean;
