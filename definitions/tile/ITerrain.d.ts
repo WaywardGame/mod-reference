@@ -50,6 +50,7 @@ export interface ITerrainDescription extends IModdable {
     reduceRest?: boolean;
     noResting?: boolean;
     wet?: boolean;
+    tileOnConsume?: TerrainType;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: ICorpse[];
