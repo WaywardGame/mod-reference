@@ -141,8 +141,7 @@ export interface IInterruptFactory extends IInterruptMenuFactory {
     withConfirmation(): Promise<boolean>;
     withInfo(): Promise<void>;
     withInput(inputInitializer?: (input: IInput) => any): Promise<string>;
-    withLoading(canCancel?: boolean, specialType?: string): Promise<void>;
-    withLoading(until: Promise<any> | (() => Promise<any>), canCancel?: boolean, specialType?: string): Promise<void>;
+    withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (() => any), specialType?: string): Promise<void>;
 }
 export interface IInterruptMenuFactory {
     withMenu<M extends IMenu = IMenu>(menuId: MenuId, initializer?: (menu: M) => any): Promise<void>;

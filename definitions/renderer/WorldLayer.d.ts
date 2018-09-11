@@ -17,11 +17,11 @@ import { TerrainData } from "renderer/IWorld";
 import { IWorldLayer, onDoodadUpdateDelegate, onTileUpdateDelegate } from "renderer/IWorldLayer";
 import { ITile } from "tile/ITerrain";
 export default class WorldLayer implements IWorldLayer {
-    width: number;
-    height: number;
-    level: number;
-    lightLevelMap: IByteGrid;
-    lightBlockMap: IByteGrid;
+    readonly width: number;
+    readonly height: number;
+    readonly level: number;
+    readonly lightLevelMap: IByteGrid;
+    readonly lightBlockMap: IByteGrid;
     exploredMap: IExploreMap;
     onTileUpdate: onTileUpdateDelegate;
     onDoodadUpdate: onDoodadUpdateDelegate;
