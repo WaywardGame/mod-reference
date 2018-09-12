@@ -44,7 +44,8 @@ export declare enum LogSource {
     Utilities = 32,
     WebAssembly = 33,
     WebRTCConnection = 34,
-    WebSocketConnection = 35
+    WebSocketConnection = 35,
+    InterModRegistryManager = 36
 }
 declare class Log {
     warn: (...args: any[]) => void;

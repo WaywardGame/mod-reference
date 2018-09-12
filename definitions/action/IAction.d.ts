@@ -25,6 +25,7 @@ export interface IActionBase {
     usableWhenPaused?: boolean;
     usableWhenResting?: boolean;
     ignoreHasDelay?: boolean;
+    ignoreIsMoving?: boolean;
 }
 export interface IActionDescription extends IActionBase {
     name?: string;
