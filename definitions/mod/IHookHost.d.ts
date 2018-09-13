@@ -11,6 +11,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
@@ -298,12 +299,19 @@ export interface IHookHost {
      */
     getZoomLevel?(): number | undefined;
     /**
-     * Called when checking if a player is swimming
-     * @param player The player object
-     * @param isSwimming True if the player is swimming
-     * @returns True if the player should be swimming, false if the player should not be swimming, or undefined to use the default logic
+     * Called when checking if a human is swimming
+     * @param human The human
+     * @param isSwimming True if the human is swimming
+     * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
      */
-    isPlayerSwimming?(player: IPlayer, isSwimming: boolean): boolean | undefined;
+    isPlayerSwimming?(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
+    /**
+     * Called when checking if a human is swimming
+     * @param human The human
+     * @param isSwimming True if the human is swimming
+     * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
+     */
+    isHumanSwimming?(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
     /**
      * Called when checking if a tile is inspectable (used for showing custom world tooltips over tiles)
      * Normally used in conjunction with the OnInspectTile hook
