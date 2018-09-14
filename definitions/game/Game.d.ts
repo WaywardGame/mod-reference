@@ -195,7 +195,7 @@ export default class Game extends Emitter implements IGame {
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     setupSave(_: number): void;
-    onGlobalSlotLoaded(_: number, success: boolean): void;
+    onGlobalSlotLoaded(_: number, success: boolean): Promise<void>;
     onSaveLoaded(slot: number): void;
     getName(object: IItem | ICreature | IDoodad | IPlayer | IBaseHumanEntity | ICorpse | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;

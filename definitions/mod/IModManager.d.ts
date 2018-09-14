@@ -68,7 +68,6 @@ export interface IModManager {
     isMultiplayerCompatible(index: number): boolean;
     isUnloadable(index: number): boolean;
     isValid(index: number): boolean;
-    load(index: number): void;
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
     reload(index: number): boolean;
     reloadByName(name: string): boolean;
@@ -82,7 +81,7 @@ export interface IModManager {
     setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): Promise<boolean>;
     setSteamIdOwner(index: number, steamIdOwner: string): void;
     setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
-    setupMods(callback: () => void): void;
+    setupMods(): Promise<void>;
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
     unload(index: number): void;

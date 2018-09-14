@@ -51,7 +51,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     initialize(): void;
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;
-    setupMods(callback: () => void): void;
+    setupMods(): Promise<void>;
     getSteamId(): ISteamId | undefined;
     getFriends(): ISteamFriend[] | undefined;
     getScreenName(): string | undefined;
@@ -98,6 +98,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     multiplayerLog(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
     private setupAndInitializeWorkshopMods;
+    private processDisabledFailures;
     private initializeModsFromFolder;
     private enumerateInstalledWorkshopMods;
     private refreshSetupMods;

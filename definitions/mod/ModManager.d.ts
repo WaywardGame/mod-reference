@@ -17,7 +17,6 @@ import { CanLoadState, ICanLoadInfo, IModManager } from "mod/IModManager";
 import Log from "utilities/Log";
 export default class ModManager implements IModManager {
     private readonly mods;
-    private modsToSetup;
     private readonly internalMods;
     private readonly internalModsElectron;
     private readonly onLanguageLoadCallbacks;
@@ -28,7 +27,7 @@ export default class ModManager implements IModManager {
     isMultiplayerClientSide(index: number): boolean;
     isUnloadable(index: number): boolean;
     unloadAll(reset?: boolean): Promise<void>;
-    setupMods(callback: () => void): void;
+    setupMods(): Promise<void>;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
     setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): Promise<void>;
@@ -39,7 +38,7 @@ export default class ModManager implements IModManager {
     getModFromIndex(i: number): IModInfo;
     getEnabledMods(): number[];
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
-    load(index: number, cacheHooks?: boolean): Promise<void>;
+    load(index: number, loadOrder: number): Promise<void>;
     unload(index: number, cacheHooks?: boolean): void;
     save(index: number): void;
     /**
