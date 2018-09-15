@@ -1246,7 +1246,8 @@ export declare enum RestCancelReason {
     Damaged = 1,
     FullStamina = 2,
     NearbyCreatureDamagedDoodad = 3,
-    CreatureDamaged = 4
+    CreatureDamaged = 4,
+    Canceled = 5
 }
 export declare enum FireType {
     None = 0,

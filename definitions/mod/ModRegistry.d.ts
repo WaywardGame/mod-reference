@@ -13,6 +13,7 @@ import { CommandCallback } from "command/ICommand";
 import { ActionType, Bindable, Command, Music, OverlayType, SfxType } from "Enums";
 import { Dictionary, InterruptChoice } from "language/ILanguage";
 import { Message } from "language/IMessages";
+import InterModRegistry, { InterModRegistration } from "mod/InterModRegistry";
 import { IPacketClass } from "multiplayer/packets/Packets";
 import { IBinding } from "newui/BindingManager";
 import Dialog from "newui/screen/screens/game/component/Dialog";
@@ -42,7 +43,9 @@ export declare enum ModRegistrationType {
     MenuBarButton = 13,
     MusicTrack = 14,
     SoundEffect = 15,
-    Packet = 16
+    Packet = 16,
+    InterModRegistry = 17,
+    InterModRegistration = 18
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -124,7 +127,17 @@ export interface IDialogRegistration extends IBaseModRegistration {
         new (gsapi: IGameScreenApi): Dialog;
     };
 }
-export declare type ModRegistration = IActionRegistration | ICommandRegistration | IBindableRegistration | IOptionsSectionRegistration | IDictionaryRegistration | IRegistryRegistration | IDialogRegistration | IHelpArticleRegistration | INoteRegistration | IMessageRegistration | IOverlayRegistration | IMessageSourceRegistration | IInterruptChoiceRegistration | IMenuBarButtonRegistration | IMusicTrackRegistration | ISoundEffectRegistration | IPacketRegistration;
+export interface IInterModRegistryRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.InterModRegistry;
+    name: string;
+}
+export interface IInterModRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.InterModRegistration;
+    modName: string;
+    registryName: string;
+    value: any;
+}
+export declare type ModRegistration = IActionRegistration | ICommandRegistration | IBindableRegistration | IOptionsSectionRegistration | IDictionaryRegistration | IRegistryRegistration | IDialogRegistration | IHelpArticleRegistration | INoteRegistration | IMessageRegistration | IOverlayRegistration | IMessageSourceRegistration | IInterruptChoiceRegistration | IMenuBarButtonRegistration | IMusicTrackRegistration | ISoundEffectRegistration | IPacketRegistration | IInterModRegistryRegistration | IInterModRegistration;
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -236,6 +249,8 @@ declare module Register {
      * @param description The definition of the menu bar button.
      */
     function menuBarButton(name: string, description: IMenuBarButtonDescription): <K extends string | number | symbol, T extends { [k in K]: MenuBarButtonType; }>(target: T, key: K) => void;
+    function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
+    function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
     /**
      * Registers an action.
      * @param description The definition of this action.

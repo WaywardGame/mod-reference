@@ -64,7 +64,7 @@ export interface IGame extends Emitter {
     fillTile: boolean[][];
     spawnCoords: IVector3;
     contaminatedWater: IVector3[];
-    fadeInAmount: number;
+    fadeInAmount: number | undefined;
     time: TimeManager;
     absoluteTime: number;
     lastCreationIds: {

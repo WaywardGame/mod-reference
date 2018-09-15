@@ -401,6 +401,7 @@ declare const _default: {
     [Message.NoKindlingOrFuelItemsToStartFire]: string;
     [Message.NoKindlingToStartFire]: string;
     [Message.NoLongerFeelPainOfBeingBurned]: string;
+    [Message.NoLongerHostile]: string;
     [Message.NoMoreRoomInContainer]: string;
     [Message.NoNeedToStokeFire]: string;
     [Message.NoRoomForImprovement]: string;
@@ -548,6 +549,7 @@ declare const _default: {
     [Message.SomethingInTheWayOfPlacing]: string;
     [Message.SomethingInTheWayOfPlanting]: string;
     [Message.SomethingInWayOfClosingDoor]: string;
+    [Message.SoothedTheirBurnInjuries]: string;
     [Message.SoothedYourBurnInjuries]: string;
     [Message.Sort]: string;
     [Message.SortedByCategory]: string;

@@ -61,7 +61,6 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
     getLocation(): IVector3 | undefined;
-    dropInLava(player: IPlayer, x?: number, y?: number): void;
     dropInWater(human: IBaseHumanEntity, x?: number, y?: number): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;

@@ -68,11 +68,11 @@ export interface IOptions {
     bindings: IBindings;
     consoleLogSourceFilter: ISourceFilter;
     currentGame: number;
+    defaultCursor: boolean;
     developerMode: boolean;
     developerModeContextMenu: boolean;
     dialogOpacity: number;
     directionTurnDelay: number;
-    defaultCursor: boolean;
     dropLocation: DropLocation;
     dropOnGatherHarvest: boolean;
     enableAutoSave: boolean;

@@ -11,6 +11,7 @@
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { ILanguage } from "language/ILanguage";
@@ -90,7 +91,8 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
     getTilePenalty(penalty: number, tile: ITile): number;
     getZoomLevel(): number | undefined;
-    isPlayerSwimming(player: IPlayer, isSwimming: boolean): boolean | undefined;
+    isHumanSwimming(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
+    isPlayerSwimming(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
     isTileInspectable(tile: ITile): boolean | undefined;
     isTileBlocked(tile: ITile): true | undefined;
     onBuild(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
@@ -189,4 +191,5 @@ declare module Mod {
         initializeGlobalData(data?: infer D | undefined): infer D;
     } ? D : never; }>(target: T, key: K) => void;
 }
+export { Mod };
 export default Mod;

@@ -35,6 +35,7 @@ export interface IModInfo {
         instance?: ILanguage;
     }>;
     log: Log;
+    loadOrder: number;
 }
 export declare enum TypeFlag {
     Undefined = 1,

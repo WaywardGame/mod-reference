@@ -26,7 +26,7 @@ export interface InterruptOptions {
     description?: TranslationGenerator;
     choices?: InterruptChoice[];
     menuId?: MenuId;
-    canCancel?: boolean;
+    canCancel?: boolean | (() => any);
     specialType?: string;
     initializer?(menu: any): any;
     input?(input: IInput): any;

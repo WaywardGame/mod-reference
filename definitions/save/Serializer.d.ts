@@ -10,8 +10,9 @@
  */
 import { ISerializer } from "save/ISerializer";
 export default class Serializer implements ISerializer {
-    maxBytes: number;
-    private buffer;
+    static readonly maxBytes: number;
+    private static readonly buffer;
+    private static usingBuffer;
     private dataView;
     private byteOffset;
     private readonly object;
@@ -19,8 +20,8 @@ export default class Serializer implements ISerializer {
     private readonly version;
     private readonly skipOnUnserialized;
     constructor(object: any, objectKey: any, version: string, skipOnUnserialized?: boolean);
-    saveToUint8Array(): Uint8Array;
-    saveToString(): string;
+    saveToUint8Array(): Uint8Array | undefined;
+    saveToString(): string | undefined;
     load(data: string | Uint8Array): void;
     loadFromUint8Array(bytes: Uint8Array): void;
     loadFromString(data: string): void;

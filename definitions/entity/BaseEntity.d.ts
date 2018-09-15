@@ -42,7 +42,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     getStat<StatType extends IStatBase | undefined = IStat | undefined>(stat: Stat): StatType & (StatType extends IStatBase ? {
         base: StatType;
     } : undefined);
-    getStatInternal(stat: Stat): IStatBase;
+    getStatInternal(stat: Stat | IStat): IStatBase;
     getStatValue(stat: Stat | IStat): number;
     setStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     reduceStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
