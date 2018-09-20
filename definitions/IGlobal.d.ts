@@ -207,6 +207,7 @@ declare global {
 
 	interface IElectronApi {
 		greenworks: any | Error;
+		napi: INapi;
 		ipc: any;
 		shell: any;
 		os: any;
@@ -225,4 +226,28 @@ declare global {
 		isTestMode: boolean;
 	}
 	let electron: IElectron | undefined | never;
+
+	interface INapi {
+		discord: INapiDiscord;
+	}
+
+	interface INapiDiscord {
+		initialize(): void;
+		shutdown(): void;
+		runCallbacks(): void;
+		setOnJoinCallback(callback: (server: string) => void): void;
+		updatePresence(presenceInfo: INapiDiscordPresenceInfo): void;
+	}
+
+	interface INapiDiscordPresenceInfo {
+		details: string;
+		state?: string;
+		largeImageKey?: string;
+		largeImageText?: string;
+		smallImageKey?: string;
+		smallImageText?: string;
+		multiplayerServerId?: string;
+		multiplayerCurrentPlayers?: number;
+		multiplayerMaxPlayers?: number;
+	}
 }

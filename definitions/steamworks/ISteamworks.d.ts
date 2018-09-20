@@ -14,7 +14,7 @@ import { IPlayOptions } from "game/IGame";
 import { ModType } from "mod/IModInfo";
 import Emitter from "utilities/Emitter";
 export interface ISteamworks extends Emitter {
-    clearRichPresence(): void;
+    clearSteamRichPresence(): void;
     closeWindow(): void;
     createArchive(id: string, source: string, callback: (err?: string) => void): void;
     createLobby(type: LobbyType): void;
@@ -63,14 +63,16 @@ export interface ISteamworks extends Emitter {
     publishMod(modIndex: number): Promise<string>;
     reload(): void;
     sendMessage(name: string, ...data: any[]): boolean;
+    setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): void;
     setLobbyData(name: string, data: string): boolean;
     setLobbyType(type: LobbyType): boolean;
     setOverlayWorks(ipg: boolean): void;
-    setRichPresence(key: string, value: string): boolean;
+    setSteamRichPresence(key: string, value: string): boolean;
     setupMods(): Promise<void>;
     setupMultiplayerLog(): void;
     toggleDeveloperTools(): void;
     unsubscribe(publishId: string): Promise<void>;
+    updateDiscordPresence(): void;
 }
 export default ISteamworks;
 export interface ISteamId {

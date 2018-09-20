@@ -41,6 +41,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     closeWindow(): void;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
+    isNapiEnabled(): boolean;
     getAbsolutePath(...p: string[]): string;
     getAppPath(...p: string[]): string;
     isUsingAsar(): boolean;
@@ -58,8 +59,10 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getBetaName(): string;
     getBuildTime(): number | undefined;
     getPublishedMods(): IWorkshopItem[] | undefined;
-    setRichPresence(key: string, value: string): boolean;
-    clearRichPresence(): void;
+    setSteamRichPresence(key: string, value: string): boolean;
+    clearSteamRichPresence(): void;
+    updateDiscordPresence(): void;
+    setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): void;
     isInLobby(): boolean;
     createLobby(type: LobbyType): void;
     setLobbyType(type: LobbyType): boolean;
@@ -97,6 +100,8 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
+    private initializeGreenworks;
+    private initializeNapi;
     private setupAndInitializeWorkshopMods;
     private processDisabledFailures;
     private initializeModsFromFolder;
