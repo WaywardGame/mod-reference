@@ -13,7 +13,8 @@ import BaseEntity from "entity/BaseEntity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, ItemType, MoveType, SfxType } from "Enums";
 import { IItem } from "item/IItem";
-import { IMessagePack } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 export default class Creature extends BaseEntity implements ICreature, IUnserializedCallback {
@@ -34,11 +35,12 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
      * Initializes the creature's stats. Used in the constructor & save conversion.
      */
     initializeStats(hp: number, maxhp?: number): void;
+    getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectHealthMessage(player: IPlayer): IMessagePack;
-    getInspectResistVulnerabilityMessage(player: IPlayer): IMessagePack | undefined;
+    getInspectHealthMessage(player: IPlayer): Translation | Message;
+    getInspectResistVulnerabilityMessage(player: IPlayer): Translation | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     isTamed(): boolean;
     tame(player: IPlayer): boolean;

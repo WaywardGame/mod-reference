@@ -10,7 +10,7 @@
  */
 import { Bindable, DialogId, Direction, EquipType, ItemType, SkillType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { Message } from "language/IMessages";
+import Message from "language/dictionary/Message";
 import { BindCatcherApi } from "newui/BindingManager";
 import { ITile } from "tile/ITerrain";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
@@ -152,7 +152,7 @@ export default class InGameScreen extends BaseScreen {
     runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean): boolean;
     onCraftingItemClick(element: JQuery): void;
     onDismantleItemClick(dismantleItem: IItem | undefined): void;
-    getTooltipHtml(element: JQuery): string | undefined;
+    getTooltipHtml(element: JQuery): string;
     tooltipEnable(): void;
     tooltipRefresh(): void;
     tooltipDisable(): void;

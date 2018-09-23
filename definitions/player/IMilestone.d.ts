@@ -56,8 +56,6 @@ export declare enum MilestoneDataType {
     Check = 1
 }
 export interface IMilestone {
-    name?: string;
-    description?: string;
     amount: number;
     dataType?: MilestoneDataType;
     visibility?: MilestoneVisibilityType;

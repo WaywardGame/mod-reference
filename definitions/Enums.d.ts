@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IMessagePack } from "language/IMessages";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export declare enum TerrainMask {
     None = 0,
@@ -37,18 +36,6 @@ export declare enum AttackType {
     Sling = 3,
     Fire = 4,
     ThrowItem = 5
-}
-export declare enum InspectType {
-    None = 0,
-    Tile = 1,
-    Doodad = 2,
-    Creature = 3,
-    Items = 4,
-    Quality = 5,
-    Player = 6,
-    Corpses = 7,
-    TileEvents = 8,
-    NPC = 9
 }
 export declare enum MoveType {
     None = 0,
@@ -210,7 +197,8 @@ export declare enum ActionType {
     CloseContainer = 75,
     SmotherFire = 76,
     Trade = 77,
-    PlaceDown = 78
+    PlaceDown = 78,
+    Inspect = 79
 }
 export declare enum ItemType {
     None = 0,
@@ -722,7 +710,6 @@ export declare enum ItemTypeGroup {
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
     default: ItemType | ItemTypeGroup;
-    name: string;
 }
 export declare enum TerrainType {
     DeepSeawater = 0,
@@ -1180,11 +1167,6 @@ export declare enum CaseStyle {
     SnakeCase = 2,
     KebabCase = 3
 }
-export declare enum SentenceCaseStyle {
-    None = 0,
-    Title = 1,
-    Sentence = 2
-}
 export interface IOnEquipType {
     [index: number]: {};
 }
@@ -1200,10 +1182,6 @@ export interface IObjectOptions {
     quality?: ItemQuality;
 }
 export interface IObjectDescription {
-    name?: string;
-    description?: string;
-    suffix?: string;
-    prefix?: string;
     decayMax?: number;
     skillUse?: SkillType;
     weightCapacity?: number;
@@ -1218,12 +1196,6 @@ export interface TatteredMap extends IVector3 {
 export interface ISeeds {
     base: number | string;
     saved: number;
-}
-export interface IInspect {
-    type?: InspectType;
-    onlyShowInTooltip?: boolean;
-    onlyShowInMessages?: boolean;
-    messagePack: IMessagePack;
 }
 export interface IRGB {
     r: number;

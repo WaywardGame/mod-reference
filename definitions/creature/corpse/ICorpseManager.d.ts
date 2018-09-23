@@ -7,17 +7,18 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import { ICorpse } from "creature/corpse/ICorpse";
 import { CreatureType, ItemType } from "Enums";
+import Translation from "language/Translation";
+import { IStringSection } from "utilities/string/Interpolator";
 export interface ICorpseManager {
     create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string): ICorpse | undefined;
     updateAll(): void;
     getResources(corpse: ICorpse): ItemType[];
     remove(corpse: ICorpse): void;
     createBlood(x: number, y: number, z: number): void;
-    getCorpsesString(corpse: ICorpse[]): string;
+    getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number): Translation;
+    getListTranslation(corpses: ICorpse[]): IStringSection[];
 }
 export default ICorpseManager;

@@ -9,7 +9,8 @@
 * https://waywardgame.github.io/
 */
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { Message, MessageType } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import { MessageType } from "player/MessageManager";
 import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare enum Source {
@@ -90,5 +91,5 @@ export interface IMessageManager {
     source(...sources: Array<Source | false | undefined>): this;
     type(type?: MessageType): this;
     ifVisible(human?: IBaseHumanEntity, canSee?: IVector3): this;
-    send(message: string | IStringSection[] | Message, ...args: any[]): boolean;
+    send(message: Message, ...args: any[]): boolean;
 }

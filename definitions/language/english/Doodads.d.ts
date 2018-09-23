@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DoodadType as Doodad, DoodadTypeGroup as DoodadGroup } from "Enums";
+import { DoodadType as Doodad } from "Enums";
 declare const _default: {
     [Doodad.Acid]: string[];
     [Doodad.AnimalFatTorchStand]: string[];
@@ -98,10 +98,5 @@ declare const _default: {
     [Doodad.WoodenWall]: string[];
     [Doodad.WroughtIronAnvil]: string[];
     [Doodad.WroughtIronChest]: string[];
-    [DoodadGroup.Anvil]: string[];
-    [DoodadGroup.LitCampfire]: string[];
-    [DoodadGroup.LitFurnace]: string[];
-    [DoodadGroup.LitKiln]: string[];
-    [DoodadGroup.LitWaterStill]: string[];
 };
 export default _default;

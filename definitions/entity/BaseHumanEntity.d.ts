@@ -13,6 +13,8 @@ import BaseEntity from "entity/BaseEntity";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType, StatType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
@@ -21,7 +23,7 @@ export declare const REPUTATION_MAX = 64000;
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
-    deathBy: string;
+    deathBy: Message;
     defense: PlayerDefense;
     defenses: number[];
     equipped: {
@@ -53,7 +55,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     getHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
-    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: string, soundDelay?: number, causesBlood?: boolean): number | undefined;
+    damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: Message | Translation, soundDelay?: number, causesBlood?: boolean): number | undefined;
     getEquippedItems(): IItem[];
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquipSlotForItem(item: IItem): EquipType | undefined;

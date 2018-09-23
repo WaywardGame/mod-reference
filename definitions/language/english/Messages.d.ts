@@ -8,8 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Message } from "language/IMessages";
+import Message from "language/dictionary/Message";
 declare const _default: {
+    [Message.None]: string;
+    [Message.Aberrant]: string;
     [Message.AboutHours]: string;
     [Message.AddedFuelToFire]: string;
     [Message.AddedFuelToTorch]: string;
@@ -114,8 +116,8 @@ declare const _default: {
     [Message.Cook]: string;
     [Message.Cooked]: string;
     [Message.CopySelectedText]: string;
-    [Message.Corpse]: string;
     [Message.CorpseOf]: string;
+    [Message.CorpseOfNamed]: string;
     [Message.CouldNotDecipher]: string;
     [Message.Counterclockwise]: string;
     [Message.Craft]: string;
@@ -392,7 +394,6 @@ declare const _default: {
     [Message.NightQuarter2]: string;
     [Message.NightQuarter3]: string;
     [Message.NightQuarter4]: string;
-    [Message.No]: string;
     [Message.NoAmmunitionForThatWeapon]: string;
     [Message.NoBlackPowderToFireWeapon]: string;
     [Message.NoFireToStokeWith]: string;

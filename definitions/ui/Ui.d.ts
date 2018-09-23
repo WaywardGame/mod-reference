@@ -10,9 +10,9 @@
  */
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
-import { DialogId, EquipType, ItemType, SentenceCaseStyle } from "Enums";
+import { IInspect } from "action/actions/Inspect";
+import { DialogId, EquipType, ItemType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { IMessagePack, Message } from "language/IMessages";
 import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
@@ -51,8 +51,7 @@ export default class Ui extends Emitter implements IUi {
     isOptionsOverlayEnabled(): boolean;
     tooltipRefresh(): void;
     refreshWorldTooltips(): void;
-    messageIdToText(message: Message): string;
-    getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
+    getMessageHtml(inspection: IInspect, tag?: string, log?: boolean, addedClass?: string): string;
     updateMilestonesDialog(): void;
     updateSkillsDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;

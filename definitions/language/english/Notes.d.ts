@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Note } from "player/NoteManager";
+import Note from "language/dictionary/Note";
 declare const _default: {
     [Note.Bleeding]: string[];
     [Note.Burned]: string[];

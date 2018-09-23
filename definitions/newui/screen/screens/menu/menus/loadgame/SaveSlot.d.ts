@@ -32,6 +32,7 @@ export declare enum SaveSlotEvent {
     Delete = "Delete"
 }
 export declare class SaveSlot extends InputButton {
+    private deathby;
     readonly slotData: DOMStringMap & SaveSlotData;
     constructor(api: UiApi, slot: number);
     /**

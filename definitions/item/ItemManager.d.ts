@@ -9,10 +9,11 @@
  * https://waywardgame.github.io/
  */
 import { IDoodad } from "doodad/IDoodad";
-import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, SentenceCaseStyle, WeightType } from "Enums";
+import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
-import IItemManager from "item/IItemManager";
-import { Message } from "language/IMessages";
+import { IItemManager } from "item/IItemManager";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
@@ -35,10 +36,10 @@ export default class ItemManager implements IItemManager {
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     isContainer(obj: IItem | IDoodad | IContainer | ITile | IPlayer): obj is IContainer;
-    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): boolean;
+    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): IItem[];
     computeContainerWeight(container: IContainer): number;
     getLegendaryWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): boolean;
+    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
     moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
@@ -53,7 +54,7 @@ export default class ItemManager implements IItemManager {
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
     isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
-    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
+    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, article?: boolean, count?: number): Translation | IStringSection[];
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
     craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
@@ -77,9 +78,8 @@ export default class ItemManager implements IItemManager {
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
-    getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
-    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: true, includeAnd?: boolean): string;
-    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: false, includeAnd?: boolean): IStringSection[];
+    getItemTranslations(items: IItem[]): IterableIterator<Translation>;
+    getItemListTranslation(items: IItem[]): IStringSection[];
     loadReferences(): void;
     saveTileReferences(): void;
     loadTileReferences(): void;

@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IInspect } from "action/actions/Inspect";
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { ILanguage } from "language/ILanguage";
+import Language from "language/Language";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
@@ -304,13 +305,6 @@ export interface IHookHost {
      * @param isSwimming True if the human is swimming
      * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
      */
-    isPlayerSwimming?(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
-    /**
-     * Called when checking if a human is swimming
-     * @param human The human
-     * @param isSwimming True if the human is swimming
-     * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
-     */
     isHumanSwimming?(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
     /**
      * Called when checking if a tile is inspectable (used for showing custom world tooltips over tiles)
@@ -497,7 +491,7 @@ export interface IHookHost {
      * Called when a language is loaded
      * @param language The language that loaded
      */
-    onLanguageLoad?(language: ILanguage): void;
+    onLanguageLoad?(language: Language): void;
     /**
      * Called when the player is moving
      * @param player The player object

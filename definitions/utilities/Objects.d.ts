@@ -16,20 +16,28 @@ declare module Objects {
     /**
      * Returns an iterator for an object's keys. Does not check if the key is prototypal!
      */
-    function keys<K = any, T = any>(object: T): IterableIterator<Extract<keyof T, K>>;
+    function keys<T extends {
+        [key in K]?: any;
+    }, K extends keyof T>(object: T): IterableIterator<Extract<K, string>>;
+    function keys<K>(object: any): IterableIterator<K>;
     /**
      * Returns an iterator for an object's values. Does not check if the values are prototypal!
      */
-    function values<V = any>(object: {
-        [key: string]: V;
-    }): IterableIterator<V>;
+    function values<T extends {
+        [key in K]: any;
+    }, K extends keyof T>(object: T): IterableIterator<T extends {
+        [key in K]: infer V;
+    } ? V : never>;
+    function values<V>(object: any): IterableIterator<V>;
     /**
      * Returns an iterator for the entries of an object, given in a tuple of `[key, value]`.
      * Does not check if the entries are prototypal!
      */
     function entries<T extends {
-        [key in K]: V;
-    }, K extends Extract<keyof T, string>, V = any>(object: T): IterableIterator<[K, V]>;
+        [key in K]: any;
+    }, K extends keyof T>(object: T): IterableIterator<[Extract<K, string>, T extends {
+        [key in K]: infer V;
+    } ? V : never]>;
     function entries<K, V>(object: any): IterableIterator<[K, V]>;
     /**
      * Returns an iterator for an object's keys.

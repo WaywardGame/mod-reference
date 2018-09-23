@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IInspect } from "action/actions/Inspect";
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
-import { ILanguage } from "language/ILanguage";
+import Language from "language/Language";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -120,7 +121,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDeath(creature: ICreature): void;
     onCreatureSpawn(creature: ICreature): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    onLanguageLoad(language: ILanguage): void;
+    onLanguageLoad(language: Language): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveComplete(player: IPlayer): void;
     onMoveDirectionUpdate(player: IPlayer, direction: Direction): void;

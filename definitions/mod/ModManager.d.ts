@@ -19,7 +19,6 @@ export default class ModManager implements IModManager {
     private readonly mods;
     private readonly internalMods;
     private readonly internalModsElectron;
-    private readonly onLanguageLoadCallbacks;
     private readonly onModInitializedCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
@@ -101,6 +100,4 @@ export default class ModManager implements IModManager {
      * Initializes the customizations for the given mod.
      */
     private initializeCustomizations;
-    private onLanguageLoad;
-    private onModInitialized;
 }

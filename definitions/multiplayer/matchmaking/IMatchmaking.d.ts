@@ -10,7 +10,7 @@
  *
  *
  */
-import { UiTranslation } from "language/ILanguage";
+import UiTranslation from "language/dictionary/UiTranslation";
 export interface IMatchmaking {
     getIdentifier(): string;
     isConnected(): boolean;

@@ -10,6 +10,7 @@
  */
 import { Difficulty, DropLocation, IKeyBind } from "Enums";
 import { ICrafted } from "game/IGame";
+import { ISerializedTranslation } from "language/Translation";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
@@ -76,6 +77,7 @@ export interface IOptions {
     dropLocation: DropLocation;
     dropOnGatherHarvest: boolean;
     enableAutoSave: boolean;
+    fallBackToEnglish: boolean;
     fontStyle: boolean;
     fullscreen: boolean;
     hideEquippedHeadgear: boolean;
@@ -117,7 +119,7 @@ export declare type IOptionsOld = Partial<IOptions> & {
 };
 export interface IHighscore {
     name: string;
-    message: string;
+    message: ISerializedTranslation;
     turns: number;
     score: number;
     difficulty: Difficulty;

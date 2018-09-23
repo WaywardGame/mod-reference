@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { GrowthStageTranslation as GrowingStage } from "language/ILanguage";
+import { GrowingStage } from "Enums";
 declare const _default: {
     [GrowingStage.Germinating]: string[];
     [GrowingStage.Seedling]: string[];
@@ -17,12 +17,5 @@ declare const _default: {
     [GrowingStage.Flowering]: string[];
     [GrowingStage.Ripening]: string[];
     [GrowingStage.Dead]: string[];
-    [GrowingStage.FungusGerminating]: string[];
-    [GrowingStage.FungusSpreading]: string[];
-    [GrowingStage.FungusForming]: string[];
-    [GrowingStage.FungusYoung]: string[];
-    [GrowingStage.FungusFruiting]: string[];
-    [GrowingStage.FungusFull]: string[];
-    [GrowingStage.FungusDead]: string[];
 };
 export default _default;

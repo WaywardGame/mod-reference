@@ -7,8 +7,6 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import IActionManager from "action/IActionManager";
 import IAudio from "audio/IAudio";
@@ -18,7 +16,7 @@ import IDoodadManager from "doodad/IDoodadManager";
 import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
 import IItemManager from "item/IItemManager";
-import ILanguageManager from "language/ILanguageManager";
+import LanguageManager from "language/LanguageManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import NewUi from "newui/NewUi";
@@ -46,7 +44,7 @@ export declare let fieldOfView: IFieldOfView;
 export declare let flowFieldManager: IFlowFieldManager;
 export declare let game: IGame;
 export declare let itemManager: IItemManager;
-export declare let languageManager: ILanguageManager;
+export declare let languageManager: LanguageManager;
 export declare let localPlayer: IPlayer;
 export declare let modManager: IModManager;
 export declare let multiplayer: IMultiplayer;

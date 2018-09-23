@@ -8,11 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionCallback, IActionDescriptionNamed } from "action/IAction";
+import { ActionCallback, IActionBase } from "action/IAction";
 import { CommandCallback } from "command/ICommand";
-import { ActionType, Bindable, Command, Music, OverlayType, SfxType } from "Enums";
-import { Dictionary, InterruptChoice } from "language/ILanguage";
-import { Message } from "language/IMessages";
+import { ICorpseDescription } from "creature/corpse/ICorpse";
+import { ICreatureDescription } from "creature/ICreature";
+import { IDoodadDescription } from "doodad/IDoodad";
+import { ActionType, Bindable, Command, CreatureType, DoodadType, ItemType, ITerrainResourceItem, Music, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
+import { IItemDescription } from "item/IItem";
+import { Dictionary } from "language/Dictionaries";
+import InterruptChoice from "language/dictionary/InterruptChoice";
+import Message from "language/dictionary/Message";
+import Note from "language/dictionary/Note";
 import InterModRegistry, { InterModRegistration } from "mod/InterModRegistry";
 import { IPacketClass } from "multiplayer/packets/Packets";
 import { IBinding } from "newui/BindingManager";
@@ -23,29 +29,38 @@ import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/scree
 import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
 import { Source } from "player/IMessageManager";
-import { INoteDescription, Note } from "player/NoteManager";
+import { INoteDescription } from "player/NoteManager";
+import { ISkillDescription } from "player/Skills";
 import { IOverlayDescription } from "renderer/Overlays";
+import { ITerrainDescription } from "tile/ITerrain";
+import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
 export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
-export declare enum ModRegistrationType {
+export declare const enum ModRegistrationType {
     Action = 0,
-    Command = 1,
-    Bindable = 2,
-    OptionsSection = 3,
-    Dictionary = 4,
-    Registry = 5,
-    Dialog = 6,
+    Bindable = 1,
+    Command = 2,
+    Creature = 3,
+    Dialog = 4,
+    Dictionary = 5,
+    Doodad = 6,
     HelpArticle = 7,
-    Note = 8,
-    Message = 9,
-    Overlay = 10,
-    MessageSource = 11,
-    InterruptChoice = 12,
-    MenuBarButton = 13,
-    MusicTrack = 14,
-    SoundEffect = 15,
-    Packet = 16,
-    InterModRegistry = 17,
-    InterModRegistration = 18
+    InterModRegistration = 8,
+    InterModRegistry = 9,
+    InterruptChoice = 10,
+    Item = 11,
+    MenuBarButton = 12,
+    Message = 13,
+    MessageSource = 14,
+    MusicTrack = 15,
+    Note = 16,
+    OptionsSection = 17,
+    Overlay = 18,
+    Packet = 19,
+    Registry = 20,
+    Skill = 21,
+    SoundEffect = 22,
+    Terrain = 23,
+    TileEvent = 24
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -62,7 +77,8 @@ export interface IPacketRegistration extends IBaseModRegistration {
 }
 export interface IActionRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Action;
-    description: IActionDescriptionNamed;
+    name: string;
+    description: IActionBase;
 }
 export interface IHelpArticleRegistration extends IBaseModRegistration {
     type: ModRegistrationType.HelpArticle;
@@ -137,7 +153,42 @@ export interface IInterModRegistration extends IBaseModRegistration {
     registryName: string;
     value: any;
 }
-export declare type ModRegistration = IActionRegistration | ICommandRegistration | IBindableRegistration | IOptionsSectionRegistration | IDictionaryRegistration | IRegistryRegistration | IDialogRegistration | IHelpArticleRegistration | INoteRegistration | IMessageRegistration | IOverlayRegistration | IMessageSourceRegistration | IInterruptChoiceRegistration | IMenuBarButtonRegistration | IMusicTrackRegistration | ISoundEffectRegistration | IPacketRegistration | IInterModRegistryRegistration | IInterModRegistration;
+export interface ISkillRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Skill;
+    name: string;
+    description?: ISkillDescription;
+}
+export interface IItemRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Item;
+    name: string;
+    description?: IItemDescription;
+}
+export interface ICreatureRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Creature;
+    name: string;
+    description: ICreatureDescription;
+    corpseDescription?: ICorpseDescription;
+}
+export interface ITerrainRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Terrain;
+    name: string;
+    description?: ITerrainRegistrationDescription;
+}
+export interface ITerrainRegistrationDescription extends ITerrainDescription {
+    resources?: ITerrainResourceItem[];
+    defaultItem?: ItemType;
+}
+export interface IDoodadRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Doodad;
+    name: string;
+    description?: IDoodadDescription;
+}
+export interface ITileEventRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.TileEvent;
+    name: string;
+    description?: ITileEventDescription;
+}
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -186,6 +237,54 @@ declare module Register {
      * The decorated property will be injected with the id of the registered note.
      */
     function note(name: string, description?: INoteDescription): <K extends string | number | symbol, T extends { [k in K]: Note; }>(target: T, key: K) => void;
+    /**
+     * Registers a skill.
+     * @param name The name of the skill.
+     * @param description The definition of the skill.
+     *
+     * The decorated property will be injected with the id of the registered skill.
+     */
+    function skill(name: string, description?: ISkillDescription): <K extends string | number | symbol, T extends { [k in K]: SkillType; }>(target: T, key: K) => void;
+    /**
+     * Registers an item.
+     * @param name The name of the item.
+     * @param description The definition of the item.
+     *
+     * The decorated property will be injected with the id of the registered item.
+     */
+    function item(name: string, description?: IItemDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
+    /**
+     * Registers a creature.
+     * @param name The name of the creature.
+     * @param description The definition of the creature.
+     *
+     * The decorated property will be injected with the id of the registered creature.
+     */
+    function creature(name: string, description: ICreatureDescription, corpseDescription?: ICorpseDescription): <K extends string | number | symbol, T extends { [k in K]: CreatureType; }>(target: T, key: K) => void;
+    /**
+     * Registers a terrain.
+     * @param name The name of the terrain.
+     * @param description The definition of the terrain.
+     *
+     * The decorated property will be injected with the id of the registered terrain.
+     */
+    function terrain(name: string, description?: ITerrainRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: TerrainType; }>(target: T, key: K) => void;
+    /**
+     * Registers a doodad.
+     * @param name The name of the doodad.
+     * @param description The definition of the doodad.
+     *
+     * The decorated property will be injected with the id of the registered doodad.
+     */
+    function doodad(name: string, description?: IDoodadDescription): <K extends string | number | symbol, T extends { [k in K]: DoodadType; }>(target: T, key: K) => void;
+    /**
+     * Registers a tile event.
+     * @param name The name of the tile event.
+     * @param description The definition of the tile event.
+     *
+     * The decorated property will be injected with the id of the registered tile event.
+     */
+    function tileEvent(name: string, description?: ITileEventDescription): <K extends string | number | symbol, T extends { [k in K]: TileEventType; }>(target: T, key: K) => void;
     /**
      * Registers a dialog.
      * @param name The name of the dialog.
@@ -257,7 +356,7 @@ declare module Register {
      *
      * This decorator should be used on a valid `ActionCallback` method.
      */
-    function action<T = any>(description: IActionDescriptionNamed): (target: any, key: string, descriptor: TypedPropertyDescriptor<ActionCallback<T>>) => void;
+    function action<T = any>(name: string, description?: IActionBase): (target: any, key: string, descriptor: TypedPropertyDescriptor<ActionCallback<T>>) => void;
     /**
      * Registers a command.
      * @param name The name of this command (what players will type to use it, eg: `/heal`).
@@ -311,13 +410,9 @@ declare const INVALID: unique symbol;
  * 	public readonly menuBarButton: MenuBarButtonType;
  * ```
  */
-export declare function Registry<H, T>(): {
-    /**
-     * @param key The key of `H` which contains `T`.
-     * @returns A
-     */
-    get<K extends keyof H>(key: K): H[K] extends T ? T : typeof INVALID;
-};
+export declare function Registry<H, T extends ActionCallback>(): IRegistryRegisteredActionIntermediateGetter<H, T>;
+export declare function Registry<H, T extends CommandCallback>(): IRegistryRegisteredCommandIntermediateGetter<H, T>;
+export declare function Registry<H, T>(): IRegistryRegisteredPropertyIntermediateGetter<H, T>;
 export declare module Registry {
     /**
      * Returns the ID of a registered action or command callback which was decorated with its respective `@Register` decorator.
@@ -329,11 +424,37 @@ export declare module Registry {
      */
     class Registered {
         readonly key: string;
-        constructor(key: string);
+        readonly type: RegistryRegisteredIntermediateType;
+        constructor(key: string, type: RegistryRegisteredIntermediateType);
     }
 }
 export interface IBaseModRegistration {
     type: ModRegistrationType;
     key: string;
     registrationId: number;
+}
+export interface IRegistryRegisteredActionIntermediateGetter<H, T> {
+    /**
+     * @param key The key of `H` which contains an `ActionCallback`.
+     * @returns An intermediate value referencing the `ActionCallback` stored in the given key in `H`
+     */
+    getAction<K extends keyof H>(key: K): H[K] extends T ? ActionType : typeof INVALID;
+}
+export interface IRegistryRegisteredCommandIntermediateGetter<H, T> {
+    /**
+     * @param key The key of `H` which contains a `CommandCallback`.
+     * @returns An intermediate value referencing the `CommandCallback` stored in the given key in `H`
+     */
+    getCommand<K extends keyof H>(key: K): H[K] extends T ? Command : typeof INVALID;
+}
+export interface IRegistryRegisteredPropertyIntermediateGetter<H, T> {
+    /**
+     * @param key The key of `H` which contains `T`.
+     * @returns An intermediate value referencing the `T` stored in the given key in `H`
+     */
+    get<K extends keyof H>(key: K): H[K] extends T ? T : typeof INVALID;
+}
+export declare const enum RegistryRegisteredIntermediateType {
+    Property = 0,
+    Callback = 1
 }

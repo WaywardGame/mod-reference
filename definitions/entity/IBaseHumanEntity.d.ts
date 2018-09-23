@@ -12,6 +12,8 @@ import { IDamageInfo } from "creature/ICreature";
 import IBaseEntity from "entity/IBaseEntity";
 import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
@@ -20,7 +22,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 export default interface IBaseHumanEntity extends IBaseEntity {
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
-    deathBy: string;
+    deathBy: Message | Translation;
     defense: PlayerDefense;
     defenses: number[];
     equipped: {
@@ -44,7 +46,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
-    damage(amount: number, damageMessage: string, soundDelay?: number, causesBlood?: boolean): number | undefined;
+    damage(amount: number, damageMessage: Message | Translation, soundDelay?: number, causesBlood?: boolean): number | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damageRandomEquipment(): void;
     equip(item: IItem, slot: EquipType): void;

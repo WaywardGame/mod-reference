@@ -8,7 +8,7 @@
 * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
 * https://waywardgame.github.io/
 */
-import { ILanguage } from "language/ILanguage";
+import TranslationsProvider from "language/TranslationsProvider";
 import { IModConfig } from "mod/IMod";
 import Mod from "mod/Mod";
 import Log from "utilities/Log";
@@ -32,7 +32,7 @@ export interface IModInfo {
     stylesheets?: string[];
     languages?: Array<{
         path: string;
-        instance?: ILanguage;
+        instance?: TranslationsProvider;
     }>;
     log: Log;
     loadOrder: number;

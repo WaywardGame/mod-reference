@@ -8,12 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IInspect } from "action/actions/Inspect";
 import DoodadInfo from "doodad/DoodadInfo";
 import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, DoodadType, DoorOrientation, EquipType, GrowingStage, IInspect, ItemQuality, ItemType, SentenceCaseStyle } from "Enums";
+import { ActionType, DoodadType, DoorOrientation, EquipType, GrowingStage, ItemQuality, ItemType } from "Enums";
 import { IItemArray } from "item/IItem";
-import { Message } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
@@ -46,6 +48,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     static setRegistrarId(id: number): void;
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
     getRegistrarId(): number;
+    getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
@@ -64,7 +67,6 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     canTrample(): boolean | undefined;
     checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
     getDurabilityMessage(this: IDoodad): Message;
-    getGrowingMessage(textCase: SentenceCaseStyle): string;
     getInspect(): IInspect[];
     isDangerous(player: IPlayer): boolean;
     getDamage(human: IBaseHumanEntity, equipType?: EquipType): number;

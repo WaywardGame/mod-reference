@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IModdable } from "Enums";
 import { IVector2 } from "utilities/math/IVector";
 export declare enum DialogId {
     Messages = 0,
@@ -22,7 +23,7 @@ export declare enum Edge {
     Left = 3
 }
 export declare type IEdges = [[Edge.Left | Edge.Right, number], [Edge.Top | Edge.Bottom, number]];
-export interface IDialogDescription {
+export interface IDialogDescription extends IModdable {
     minSize: IVector2;
     size: IVector2;
     maxSize: IVector2;

@@ -44,11 +44,6 @@ export declare enum Hook {
     GetTileLightLevel = "getTileLightLevel",
     GetTilePenalty = "getTilePenalty",
     GetZoomLevel = "getZoomLevel",
-    /**
-     * @deprecated
-     * @see IsHumanSwimming
-     */
-    IsPlayerSwimming = "isPlayerSwimming",
     IsHumanSwimming = "isHumanSwimming",
     IsTileInspectable = "isTileInspectable",
     IsTileBlocked = "isTileBlocked",

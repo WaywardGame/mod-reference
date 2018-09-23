@@ -8,25 +8,44 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IGame from "game/IGame";
-import { Dictionary, UiTranslation } from "language/ILanguage";
-import { TranslationType } from "language/ILanguageManager";
-import { Message } from "language/IMessages";
+import { Dictionary } from "language/Dictionaries";
+import Message from "language/dictionary/Message";
+import UiTranslation from "language/dictionary/UiTranslation";
 import { TranslationGenerator } from "newui/component/IComponent";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
-export interface ITranslationData {
-    dictionary: Dictionary;
-    entry: number | [number, TranslationType];
+export declare type TranslationProvider = (dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean) => string[] | undefined;
+export declare const enum TextContext {
+    None = 0,
+    Lowercase = 1,
+    Uppercase = 2,
+    Title = 3,
+    Sentence = 4
 }
-export interface ILanguageEntryProvider {
-    get(dictionary: Dictionary, entry: number | [number, TranslationType]): string | undefined;
+export interface ISerializedTranslation {
+    isSerializedTranslation: true;
+    id: string;
+    context?: TextContext;
+    args: Array<string | number | boolean | any[] | object | ISerializedTranslation>;
+    failWith?: string | ISerializedTranslation | IStringSection[];
 }
-export default class Translation {
+declare class Translation {
     static readonly defaultInterpolator: Interpolator;
-    static convertMakeStringToInterpolation(makeString: string): string;
-    static formatList(entries: IterableOf<string | IStringSection[]>, and?: boolean): IStringSection[];
+    static provider: TranslationProvider;
+    static formatList(entries: IterableOf<string | IStringSection[] | Translation>, and?: boolean): IStringSection[];
     static getString(entries: IterableOf<string | IStringSection>): string;
-    static getAllTypes(dictionary: Dictionary, entry: number): Translation[];
+    static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
+    /**
+     * @deprecated
+     */
+    static convertMakeStringToInterpolation(makeString: string): string;
+    static nameOf(type: Dictionary, thing: number | {
+        type: number;
+        renamed?: string;
+    }, article?: boolean): Translation;
+    static nameOf(type: Dictionary, thing: number | {
+        type: number;
+        renamed?: string;
+    }, count?: number, article?: boolean): Translation;
     /**
      * DO NOT USE THIS METHOD
      *
@@ -35,48 +54,45 @@ export default class Translation {
      * Example uses include text the user inputs, and text from other sites (steam/trello)
      */
     static generator(textOrGenerator: GeneratorOrT<string | IStringSection[]>): TranslationGenerator;
-    static ofObjectName(...args: ArgumentsOf<IGame["getName"]>): TranslationGenerator;
-    static ofDescription(...args: ArgumentsOf<IGame["getNameFromDescription"]>): TranslationGenerator;
+    static deserialize(serializedTranslation: ISerializedTranslation): Translation;
     private static getStringSections;
-    static provider: ILanguageEntryProvider;
-    static ui: (entry: string | UiTranslation) => Translation;
-    static message: (entry: string | Message) => Translation;
+    readonly isValid: boolean;
     private readonly translationData;
-    private baseTranslation;
-    private usingOldSystem;
+    private readonly translationId;
+    private readonly args;
+    private readonly reformatters;
     private interpolator;
-    /**
-     * Creates from a dictionary and entry
-     */
-    constructor(dictionary: Dictionary, entry: number | string | [number | string, TranslationType]);
+    private context;
+    private failWith?;
+    constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     /**
      * Creates from a translation id. Entry matching is done by changing the case-style of the inputted
      * translation id, so if you provide an all lower-case string it will not work!
      *
      * Examples that do work:
      *
-     * - `Ui.MenuMainButtonContinueGame`
-     * - `ui.menu-main-button-continue-game`
-     * - `Ui.Menu-Main-Button-Continue-Game`
+     * - `Ui:MenuMainButtonContinueGame`
+     * - `ui:menuMainButtonContinueGame`
+     * - `ui:menu-main-button-continue-game`
+     * - `Ui:Menu-Main-Button-Continue-Game`
+     * - `Player.FirstName:random`
+     * - `Creature.AcidSpitterDemon:1`
      *
      * Examples that don't work:
      *
-     * - `UI.MENU-MAIN-BUTTON-CONTINUE-GAME`
-     * - `Ui.menumainbuttoncontinuegame`
-     * - `UI.MENUMAINBUTTONCONTINUEGAME`
+     * - `UI:MENU-MAIN-BUTTON-CONTINUE-GAME`
+     * - `Ui:menumainbuttoncontinuegame`
+     * - `UI:MENUMAINBUTTONCONTINUEGAME`
      */
     constructor(translationId: string);
-    /**
-     * Creates from an `ITranslationData`
-     */
-    constructor(translationData: ITranslationData);
-    /**
-     * Vague constructor
-     */
-    constructor(dictionary: number | string | ITranslationData, entry?: number | string | [number | string, TranslationType]);
-    setUsingOldSystem(): this;
-    has(): boolean;
     withSegments(...segments: ISegment[]): this;
+    addArgs(...args: any[]): this;
+    inContext(context?: TextContext): this;
+    addReformatter(reformatter: (sections: IStringSection[]) => IStringSection[], beginning?: boolean): this;
+    /**
+     * Sets what this translation will return if there is no translation.
+     */
+    setFailWith(failWith?: string | Translation | IStringSection[]): this;
     /**
      * Returns this translation as a list of string sections
      */
@@ -85,15 +101,12 @@ export default class Translation {
      * Returns the translation as a string
      */
     getString(...args: any[]): string;
-    /**
-     * Returns the base translation
-     */
-    getBaseTranslation(): string | undefined;
-    /**
-     * Returns the translation ID
-     */
-    getId(translationData: ITranslationData): string;
-    private parseTranslationId;
-    private getDictionaryId;
-    private getEntryId;
+    serialize(): ISerializedTranslation;
+    private getRawTranslations;
+    private getFailureSections;
 }
+declare module Translation {
+    const ui: (entry: string | UiTranslation) => Translation;
+    const message: (entry: string | Message) => Translation;
+}
+export default Translation;

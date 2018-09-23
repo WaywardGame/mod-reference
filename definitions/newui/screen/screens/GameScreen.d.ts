@@ -25,7 +25,6 @@ import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
 import { IPlayer } from "player/IPlayer";
-import Player from "player/Player";
 import { ITile } from "tile/ITerrain";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
@@ -58,7 +57,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
-    onMoveComplete(player: Player): void;
+    onMoveComplete(player: IPlayer): void;
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     onPlayerDeath(player: IPlayer): boolean | undefined;
     onGameTickEnd(): void;

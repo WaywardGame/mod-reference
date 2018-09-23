@@ -12,14 +12,14 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Delay, Direction, EquipType, HairColor, HairStyle, IInspect, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
+import { Delay, Direction, EquipType, HairColor, HairStyle, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
-import { IMessagePack, Message } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import MessageManager from "player/MessageManager";
 import NoteManager from "player/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
-import { ITile } from "tile/ITerrain";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayer extends IBaseHumanEntity {
@@ -71,7 +71,7 @@ export interface IPlayer extends IBaseHumanEntity {
     canJump(): boolean;
     checkAndRemoveBlood(): boolean;
     checkForGather(): IDoodad | undefined;
-    checkForGatherFire(): string | undefined;
+    checkForGatherFire(): Translation | undefined;
     checkForStill(): boolean;
     checkReputationMilestones(): void;
     checkSkillMilestones(): void;
@@ -84,7 +84,7 @@ export interface IPlayer extends IBaseHumanEntity {
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    getInspectHealthMessage(player: IPlayer): IMessagePack;
+    getInspectHealthMessage(player: IPlayer): Message | Translation;
     getMovementIntent(): IMovementIntent;
     getReputation(): number;
     getStrength(): number;
@@ -95,8 +95,6 @@ export interface IPlayer extends IBaseHumanEntity {
     hasWalkPath(): boolean;
     healthSyncCheck(): void;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
-    inspect(x: number, y: number, z?: number): void;
-    inspectTile(tile: ITile): IInspect[];
     isFacingCarvableTile(): boolean;
     isLocalPlayer(): boolean;
     isServer(): boolean;

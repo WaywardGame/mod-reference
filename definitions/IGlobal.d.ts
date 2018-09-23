@@ -21,7 +21,7 @@ import { ItemType } from "Enums";
 import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
 import IItemManager from "item/IItemManager";
-import ILanguageManager from "language/ILanguageManager";
+import LanguageManager from "language/LanguageManager";
 import IHookManager from "mod/IHookManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
@@ -90,7 +90,7 @@ declare global {
 	let game: IGame;
 	let hookManager: IHookManager;
 	let itemManager: IItemManager;
-	let languageManager: ILanguageManager;
+	let languageManager: LanguageManager;
 	let localPlayer: IPlayer;
 	let npcManager: INPCManager;
 	let modManager: IModManager;

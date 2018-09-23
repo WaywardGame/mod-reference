@@ -12,7 +12,7 @@ import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, AttackType, Delay, Direction, EquipType, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
+import { ActionType, AttackType, Delay, Direction, EquipType, IModdable, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
@@ -27,11 +27,7 @@ export interface IActionBase {
     ignoreHasDelay?: boolean;
     ignoreIsMoving?: boolean;
 }
-export interface IActionDescription extends IActionBase {
-    name?: string;
-    description?: string;
-}
-export interface IActionDescriptionNamed extends IActionDescription {
+export interface IActionDescription extends IActionBase, IModdable {
     name: string;
 }
 export interface IAction extends IActionBase, IGenericRegistration {

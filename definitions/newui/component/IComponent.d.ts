@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Dictionary, ITranslationObject, UiTranslation } from "language/ILanguage";
+import { Dictionary } from "language/Dictionaries";
+import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
@@ -227,7 +228,8 @@ export declare enum SelectableLayer {
 }
 export interface IBaseTranslationData {
     dictionary: Dictionary;
-    entry: number | [number, keyof ITranslationObject];
+    entry: number;
+    index: number | "random";
     args?: any[] | (() => any[]);
     properties?: string[];
     shouldTrim?: false;

@@ -179,9 +179,10 @@ declare global {
     interface Array<T> {
         /**
          * Returns an iterator for the values of this array.
-         * This method will be removed when it becomes native in Chromium 66+
+         * @param step By default, `1`, meaning it will iterate through each value in order.
+         * Example, `-1` iterates through the array in reverse, while `2` iterates through every other value in the array.
          */
-        values(): IterableIterator<T>;
+        values(step?: number): IterableIterator<T>;
         /**
          * Returns an iterator for tuples containing the indices and the values of this array.
          */

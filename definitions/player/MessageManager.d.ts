@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { Message, MessageType } from "language/IMessages";
+import Message from "language/dictionary/Message";
 import { IMessage, IMessageManager, Source } from "player/IMessageManager";
 import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -17,6 +17,15 @@ export interface IMessageHistoryItem {
     id: number;
     source: string[];
     message: IStringSection[];
+}
+export declare enum MessageType {
+    None = 0,
+    Bad = 1,
+    Good = 2,
+    Miss = 3,
+    Attack = 4,
+    Stat = 5,
+    Skill = 6
 }
 export interface IMessageManagerHost {
     canSeePosition(x: number, y: number, z: number): boolean;

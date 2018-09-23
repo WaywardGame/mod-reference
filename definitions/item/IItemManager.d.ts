@@ -7,13 +7,12 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import { IDoodad } from "doodad/IDoodad";
-import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, SentenceCaseStyle, WeightType } from "Enums";
+import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
-import { Message } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
@@ -44,10 +43,9 @@ export interface IItemManager {
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
-    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: false, includeAnd?: boolean): IStringSection[];
-    getItemsString(items: IItemArray, sentenceCase: SentenceCaseStyle | undefined, html: true, includeAnd?: boolean): string;
-    getItemsString(items: IItemArray, sentenceCase?: SentenceCaseStyle): string;
-    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, prefix?: boolean, sentenceCaseStyle?: SentenceCaseStyle): string;
+    getItemTranslations(items: IItem[]): IterableIterator<Translation>;
+    getItemListTranslation(items: IItem[]): IStringSection[];
+    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, article?: boolean, count?: number): IStringSection[] | Translation;
     getLegendaryWeightCapacity(container: IContainer): number;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
@@ -71,8 +69,8 @@ export interface IItemManager {
     isTileContainer(container: IContainer | undefined): boolean;
     loadReferences(): void;
     loadTileReferences(): void;
-    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): boolean;
-    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): boolean;
+    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
+    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): IItem[];
     moveToContainer(player: IPlayer | undefined, item: IItem, container: IContainer): boolean;
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;

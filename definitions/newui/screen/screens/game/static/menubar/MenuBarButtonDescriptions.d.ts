@@ -53,5 +53,5 @@ export declare enum MenuBarButtonGroup {
     Meta = 0,
     World = 1
 }
-declare const menuBarButtonDescriptions: Description<IMenuBarButtonDescription>;
+declare const menuBarButtonDescriptions: Descriptions<MenuBarButtonType, IMenuBarButtonDescription>;
 export default menuBarButtonDescriptions;

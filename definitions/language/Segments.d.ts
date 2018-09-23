@@ -14,6 +14,8 @@ export interface IColorSection extends IStringSection {
 }
 export declare const colorSegment: ISegment;
 export declare const bindSegment: ISegment;
+export declare const translationSegment: ISegment;
+export declare const conditionalTranslationSegment: ISegment;
 export interface ILinkSection extends IColorSection, IDecoratedSection {
     link: string | [string, string | undefined];
 }
@@ -30,7 +32,8 @@ export declare enum TextDecoration {
 export interface IDecoratedSection extends IStringSection {
     decoration: TextDecoration;
 }
-export declare function getDecorations(section: IStringSection): IterableIterator<[TextDecoration, number]>;
 export declare const italicizedSegment: ISegment;
 export declare const boldSegment: ISegment;
 export declare const underlineSegment: ISegment;
+export declare function getDecorations(section: IStringSection): IterableIterator<[TextDecoration, number]>;
+export declare const reformatSegment: ISegment;

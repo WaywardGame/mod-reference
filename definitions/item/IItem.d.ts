@@ -15,6 +15,7 @@ import { IDoodadDescription } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, StatType, TatteredMap } from "Enums";
+import Translation from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { IVector3 } from "utilities/math/IVector";
 export interface IRecipe {
@@ -59,6 +60,16 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     order?: number;
     ownerIdentifier?: string;
     readonly quality: number;
+    /**
+     * @param article Whether to include an article for the name of the item. Uses the article rules on the language. Defaults to `true`.
+     * @param count The number of this item that you're getting the name of. Defaults to `1`.
+     *
+     * Examples:
+     * - `item.getName()` // "a stone axe"
+     * - `item.getName(false)` // "stone axe"
+     * - `item.getName(undefined, 3)` // "stone axes"
+     */
+    getName(article?: boolean, count?: number): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;
@@ -168,10 +179,7 @@ export interface IDismantleDescription {
     reputation?: number;
 }
 export interface IGroupDescription {
-    name: string;
     types: ItemType[];
-    suffix?: string;
-    prefix?: string;
 }
 export declare enum ContainerReferenceType {
     Invalid = 0,

@@ -9,12 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { DamageType } from "Enums";
-import { Message } from "language/IMessages";
-export declare function makeString(msg: Message | string, ...variables: any[]): string;
-export declare const messages: {
-    [key in Message]: string;
-};
-export default messages;
+import Message from "language/dictionary/Message";
 export declare const equipTypeToMessage: Message[];
 export declare const damageTypeToMessage: Message[];
 export declare function fullDamageType(...damageTypes: DamageType[]): string;

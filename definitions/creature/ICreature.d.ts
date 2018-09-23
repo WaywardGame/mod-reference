@@ -13,7 +13,8 @@ import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, DamageType, Defense, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
 import { IItem } from "item/IItem";
-import { IMessagePack } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 export interface ICreature extends IBaseEntity, IObject<CreatureType> {
     entityType: EntityType.Creature;
@@ -25,11 +26,21 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType> {
     enemy?: number;
     enemyIsPlayer?: boolean;
     enemyAttempts?: number;
+    /**
+     * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
+     * @param count The number of this creature that you're getting the name of. Defaults to `1`.
+     *
+     * Examples:
+     * - `creature.getName()` // "an acid spitter demon"
+     * - `creature.getName(false)` // "acid spitter demon"
+     * - `creature.getName(undefined, 3)` // "acid spitter demons"
+     */
+    getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectHealthMessage(player: IPlayer): IMessagePack;
-    getInspectResistVulnerabilityMessage(player: IPlayer): IMessagePack | undefined;
+    getInspectHealthMessage(player: IPlayer): Message | Translation;
+    getInspectResistVulnerabilityMessage(player: IPlayer): Message | Translation | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     damage(damageInfo: IDamageInfo): number | undefined;
     isTamed(): boolean;
@@ -79,7 +90,6 @@ export declare enum SpawnableTiles {
     All = 12
 }
 export interface ICreatureDescription extends IModdable {
-    name?: string;
     minhp: number;
     maxhp: number;
     minatk: number;
@@ -103,10 +113,7 @@ export interface ICreatureDescription extends IModdable {
     noCorpse?: boolean;
     respawn?: boolean;
     reputation: number;
-    prefix?: string;
-    suffix?: string;
     waterAnimations?: boolean;
-    description?: string;
     tamingDifficulty?: number;
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
     lightSource?: boolean;
@@ -122,10 +129,10 @@ export interface IDamageInfo {
     human?: IBaseHumanEntity;
     amount: number;
     type: DamageType;
-    weaponName?: string;
+    weaponName?: Message | Translation;
     creature?: ICreature;
     skipMilestones?: boolean;
     legacy?: boolean;
-    damageMessage?: string;
+    damageMessage?: Message | Translation;
     soundDelay?: number;
 }

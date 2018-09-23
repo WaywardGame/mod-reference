@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { InterruptChoice } from "language/ILanguage";
+import InterruptChoice from "language/dictionary/InterruptChoice";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IInterruptFactory, UiApi } from "newui/INewUi";
