@@ -23,7 +23,7 @@ export declare const REPUTATION_MAX = 64000;
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
-    deathBy: Message;
+    deathBy: import("language/Translation").ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
     equipped: {

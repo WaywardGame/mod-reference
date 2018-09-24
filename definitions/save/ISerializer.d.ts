@@ -11,6 +11,8 @@
  *
  */
 export interface ISerializer {
+    readonly dataView: DataView;
+    byteOffset: number;
     readProperty(object: any, key: any): void;
     writeProperty(object: any, key: any): void;
 }

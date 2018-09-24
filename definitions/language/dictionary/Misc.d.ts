@@ -44,5 +44,10 @@ export declare enum MiscTranslation {
     UnknownCreature = 0,
     UnknownDoodad = 1,
     UnknownItem = 2,
-    UnknownTileEvent = 3
+    UnknownTileEvent = 3,
+    ReformatSingularNoun = 4,
+    ItemQuality = 5,
+    Thing = 6,
+    Message = 7,
+    CorpseOf = 8
 }

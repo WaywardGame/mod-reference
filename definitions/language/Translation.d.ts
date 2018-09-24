@@ -25,8 +25,10 @@ export interface ISerializedTranslation {
     isSerializedTranslation: true;
     id: string;
     context?: TextContext;
-    args: Array<string | number | boolean | any[] | object | ISerializedTranslation>;
+    normalize?: true;
+    args?: Array<string | number | boolean | any[] | object | ISerializedTranslation>;
     failWith?: string | ISerializedTranslation | IStringSection[];
+    reformatters?: ISerializedTranslation[];
 }
 declare class Translation {
     static readonly defaultInterpolator: Interpolator;
@@ -63,6 +65,7 @@ declare class Translation {
     private readonly reformatters;
     private interpolator;
     private context;
+    private normalize;
     private failWith?;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     /**
@@ -87,12 +90,16 @@ declare class Translation {
     constructor(translationId: string);
     withSegments(...segments: ISegment[]): this;
     addArgs(...args: any[]): this;
-    inContext(context?: TextContext): this;
-    addReformatter(reformatter: (sections: IStringSection[]) => IStringSection[], beginning?: boolean): this;
+    inContext(context?: TextContext, normalize?: boolean): this;
+    addReformatter(reformatter: Translation | ((sections: IStringSection[]) => IStringSection[]), beginning?: boolean): this;
     /**
      * Sets what this translation will return if there is no translation.
      */
     setFailWith(failWith?: string | Translation | IStringSection[]): this;
+    /**
+     * Returns true if this translation has been set to fail with another translation or string.
+     */
+    hasFailWith(): boolean;
     /**
      * Returns this translation as a list of string sections
      */

@@ -10,13 +10,15 @@
  */
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import Message from "language/dictionary/Message";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { IMessage, IMessageManager, Source } from "player/IMessageManager";
 import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageHistoryItem {
     id: number;
     source: string[];
-    message: IStringSection[];
+    type?: MessageType;
+    message: ISerializedTranslation | IStringSection[];
 }
 export declare enum MessageType {
     None = 0,
@@ -94,10 +96,10 @@ export default class MessageManager implements IMessageManager {
      * Sends a message, and adds it to the message history.
      * @param message The message to send.
      * @param args Arguments to interpolate the message with.
-     *
+     * `
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
-    send(message: string | IStringSection[] | Message, ...args: any[]): boolean;
+    send(message: Message | Translation, ...args: any[]): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**
      * Signal that the message was sent to everyone

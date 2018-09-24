@@ -1205,7 +1205,8 @@ export interface IRGB {
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
-    DailyChallenge = 2
+    DailyChallenge = 2,
+    Peaceful = 3
 }
 export declare enum WeightType {
     Normal = 0,

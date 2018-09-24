@@ -10,9 +10,9 @@
 */
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import Message from "language/dictionary/Message";
+import { ISerializedTranslation } from "language/Translation";
 import { MessageType } from "player/MessageManager";
 import { IVector3 } from "utilities/math/IVector";
-import { IStringSection } from "utilities/string/Interpolator";
 export declare enum Source {
     /**
      * Every message
@@ -82,7 +82,8 @@ export declare enum Source {
 export interface IMessage {
     id: number;
     source: Source[];
-    message: IStringSection[];
+    type?: MessageType;
+    message: ISerializedTranslation;
 }
 export interface IMessageManager {
     getMessageHistory(): IterableIterator<IMessage>;

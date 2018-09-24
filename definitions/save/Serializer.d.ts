@@ -13,8 +13,8 @@ export default class Serializer implements ISerializer {
     static readonly maxBytes: number;
     private static readonly buffer;
     private static usingBuffer;
-    private dataView;
-    private byteOffset;
+    dataView: DataView;
+    byteOffset: number;
     private readonly object;
     private readonly objectKey;
     private readonly version;

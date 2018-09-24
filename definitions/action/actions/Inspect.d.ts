@@ -13,6 +13,7 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { MessageType } from "player/MessageManager";
+import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare enum InspectType {
@@ -37,4 +38,4 @@ export interface IInspect {
 }
 export declare const action: IAction;
 export default action;
-export declare function inspect(inspectingPlayer: IPlayer, position: Vector3): IInspect[];
+export declare function inspect(inspectingPlayer: IPlayer, positionOrTile: Vector3 | ITile): IInspect[];

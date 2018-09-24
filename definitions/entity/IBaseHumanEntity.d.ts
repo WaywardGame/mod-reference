@@ -13,7 +13,7 @@ import IBaseEntity from "entity/IBaseEntity";
 import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
-import Translation from "language/Translation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
 import PlayerDefense from "player/PlayerDefense";
@@ -22,7 +22,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 export default interface IBaseHumanEntity extends IBaseEntity {
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
-    deathBy: Message | Translation;
+    deathBy: ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
     equipped: {

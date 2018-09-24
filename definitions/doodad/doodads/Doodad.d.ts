@@ -79,4 +79,22 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     onUnserialized(): void;
+    private processSpecials;
+    /**
+     * Check for items on top of lit/fire doodads, set them on fire
+     */
+    private processFire;
+    /**
+     * Spread the doodad around the world
+     */
+    private processSpread;
+    /**
+     * Grow over time
+     */
+    private processGrowing;
+    /**
+     * Decay over time
+     */
+    private processDecay;
+    private getGrowingStageTranslation;
 }

@@ -9,10 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { MiscTranslation } from "language/dictionary/Misc";
-declare const _default: {
-    [MiscTranslation.UnknownCreature]: string;
-    [MiscTranslation.UnknownItem]: string;
-    [MiscTranslation.UnknownDoodad]: string;
-    [MiscTranslation.UnknownTileEvent]: string;
-};
-export default _default;
+declare const miscTranslations: Descriptions<MiscTranslation, string>;
+export default miscTranslations;

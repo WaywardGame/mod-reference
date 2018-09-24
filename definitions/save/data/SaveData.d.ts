@@ -9,7 +9,6 @@
  * https://waywardgame.github.io/
  */
 import { Difficulty, PlayerState } from "Enums";
-import Message from "language/dictionary/Message";
 import { ISerializedTranslation } from "language/Translation";
 import ISaveData from "save/data/ISaveData";
 import { IEnumInfo } from "utilities/enum/IEnum";
@@ -26,7 +25,7 @@ export default class SaveData implements ISaveData {
     saveManagerDifficulty: Difficulty;
     saveManagerScore: number;
     saveManagerOriginalVersion: string;
-    saveManagerDeathBy: Message | ISerializedTranslation;
+    saveManagerDeathBy: ISerializedTranslation;
     modManagerSaveData: {
         [index: string]: any;
     };

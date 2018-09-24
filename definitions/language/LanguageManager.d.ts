@@ -13,6 +13,7 @@ import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
+import Translation from "language/Translation";
 import TranslationsProvider from "language/TranslationsProvider";
 export interface ISerializedTranslationsProvider {
     dictionaries: {
@@ -61,7 +62,6 @@ export default class LanguageManager {
     reformatSingularNoun(noun: string, count: number, article?: boolean): string;
     getNounType(noun: string, defaultType?: NounType): NounType;
     private plural;
-    private singular;
     private readonly uiTranslationsToSelector;
     private setup;
     private addTranslateSelector;
@@ -72,7 +72,7 @@ export interface ISelector {
     selector: string | string[];
     html?: boolean;
     attribute?: string;
-    func?(translation: string): string;
+    func?(translation: Translation): string;
 }
 export interface ISelectorArray {
     [index: number]: ISelector;
