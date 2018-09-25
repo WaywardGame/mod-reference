@@ -62,6 +62,7 @@ declare const _default: {
     [ItemGroup.Reinforce]: string[];
     [ItemGroup.Repair]: string[];
     [ItemGroup.Rock]: string[];
+    [ItemGroup.Sand]: string[];
     [ItemGroup.SandCastFlask]: string[];
     [ItemGroup.Seed]: string[];
     [ItemGroup.Sharpened]: string[];

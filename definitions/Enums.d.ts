@@ -242,7 +242,7 @@ export declare enum ItemType {
     Peat = 38,
     Sandstone = 39,
     PileOfGravel = 40,
-    PileOfSand = 41,
+    PileOfBeachSand = 41,
     WoodenArrow = 42,
     StoneAxe = 43,
     Bandage = 44,
@@ -632,7 +632,8 @@ export declare enum ItemType {
     StoneSandCastFlask = 428,
     AnimalGlue = 429,
     CopalResin = 430,
-    BoneMeal = 431
+    BoneMeal = 431,
+    PileOfDesertSand = 432
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -705,7 +706,8 @@ export declare enum ItemTypeGroup {
     SandCastFlask = 867,
     Glue = 868,
     FireStarter = 869,
-    Last = 870
+    Sand = 870,
+    Last = 871
 }
 export interface IItemTypeGroup {
     types: Array<ItemType | ItemTypeGroup>;
@@ -721,7 +723,7 @@ export declare enum TerrainType {
     Grass = 6,
     Gravel = 7,
     Dirt = 8,
-    Sand = 9,
+    BeachSand = 9,
     Snow = 10,
     Swamp = 11,
     Clay = 12,
@@ -745,7 +747,8 @@ export declare enum TerrainType {
     RocksWithCopper = 30,
     SandstoneWithCopper = 31,
     CoolingLava = 32,
-    Obsidian = 33
+    Obsidian = 33,
+    DesertSand = 34
 }
 export declare enum DoodadType {
     WoodenDoor = 0,

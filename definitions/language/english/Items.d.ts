@@ -272,9 +272,10 @@ declare const _default: {
     [Item.PeeledCoconut]: string[];
     [Item.Pemmican]: string[];
     [Item.PileOfAsh]: string[];
+    [Item.PileOfBeachSand]: string[];
     [Item.PileOfCompost]: string[];
+    [Item.PileOfDesertSand]: string[];
     [Item.PileOfGravel]: string[];
-    [Item.PileOfSand]: string[];
     [Item.PileOfSnow]: string[];
     [Item.Pineapple]: string[];
     [Item.PineappleSeeds]: string[];

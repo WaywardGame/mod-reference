@@ -11,6 +11,7 @@
 import { TerrainType as Terrain } from "Enums";
 declare const _default: {
     [Terrain.Ash]: string[];
+    [Terrain.BeachSand]: string[];
     [Terrain.CaveEntrance]: string[];
     [Terrain.Clay]: string[];
     [Terrain.ClayBrickFlooring]: string[];
@@ -18,6 +19,7 @@ declare const _default: {
     [Terrain.CoolingLava]: string[];
     [Terrain.DeepFreshWater]: string[];
     [Terrain.DeepSeawater]: string[];
+    [Terrain.DesertSand]: string[];
     [Terrain.Dirt]: string[];
     [Terrain.FertileSoil]: string[];
     [Terrain.FreshWater]: string[];
@@ -32,7 +34,6 @@ declare const _default: {
     [Terrain.RocksWithIron]: string[];
     [Terrain.RocksWithLimestone]: string[];
     [Terrain.RocksWithTalc]: string[];
-    [Terrain.Sand]: string[];
     [Terrain.Sandstone]: string[];
     [Terrain.SandstoneFlooring]: string[];
     [Terrain.SandstoneWithCopper]: string[];
