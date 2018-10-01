@@ -95,6 +95,7 @@ export interface ITemplate {
         [id: string]: DoodadType | ITemplateDoodad;
     };
     doodad?: string[];
+    tilled?: boolean;
     /**
      * A decimal value, 0 for no degradation, 1 for 100% degradation (basically as if there was no template)
      */

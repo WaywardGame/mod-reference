@@ -28,7 +28,7 @@ export declare enum Pre240TerrainType {
     PalmTreeWithCoconuts = 14,
     Gravel = 15,
     Dirt = 16,
-    Sand = 17,
+    BeachSand = 17,
     Snow = 18,
     Swamp = 19,
     Clay = 20,
