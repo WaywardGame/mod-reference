@@ -708,5 +708,7 @@ declare const _default: {
     [Message.YouTilled]: string;
     [Message.YouUnequip]: string;
     [Message.YouUsed]: string;
+    [Message.ResistOrVulnAll]: string;
+    [Message.ResistOrVuln]: string;
 };
 export default _default;

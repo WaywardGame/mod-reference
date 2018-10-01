@@ -10,7 +10,12 @@
  */
 import { DamageType } from "Enums";
 import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 export declare const equipTypeToMessage: Message[];
 export declare const damageTypeToMessage: Message[];
-export declare function fullDamageType(...damageTypes: DamageType[]): string;
+/**
+ * Damage types are bit flags, so multiple can be stored in one `DamageType`.
+ * This method returns a translated list of damage types.
+ */
+export declare function fullDamageType(damageTypes: DamageType[], reformatter?: (type: DamageType) => Translation): Translation;
 export declare const recipeLevelToMessage: Message[];

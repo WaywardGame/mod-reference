@@ -93,7 +93,7 @@ declare class Translation {
     withSegments(...segments: ISegment[]): this;
     addArgs(...args: any[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
-    addReformatter(reformatter: Translation | ((sections: IStringSection[]) => IStringSection[]), beginning?: boolean): this;
+    addReformatter(reformatter?: Translation | ((sections: IStringSection[]) => IStringSection[]), beginning?: boolean): this;
     /**
      * Sets what this translation will return if there is no translation.
      */

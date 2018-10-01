@@ -12,7 +12,7 @@ import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DamageType, Difficulty, Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
+import { Difficulty, Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
 import Message from "language/dictionary/Message";
@@ -107,7 +107,6 @@ export interface IGame extends Emitter {
     getBlackness(): number;
     getCameraPosition(): IVector2;
     getCompletedMilestoneCount(): number;
-    getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     getDifficulty(): Difficulty;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     getHeight(z0: number, z1: number, d: number): number;

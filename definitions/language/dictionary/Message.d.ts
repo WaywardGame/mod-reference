@@ -706,6 +706,8 @@ declare enum Message {
     YouThrew = 694,
     YouTilled = 695,
     YouUnequip = 696,
-    YouUsed = 697
+    YouUsed = 697,
+    ResistOrVulnAll = 698,
+    ResistOrVuln = 699
 }
 export default Message;

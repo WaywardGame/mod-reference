@@ -12,7 +12,7 @@ import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DamageType, Difficulty, Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
+import { Difficulty, Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
@@ -209,7 +209,6 @@ export default class Game extends Emitter implements IGame {
     doLavaEvents(x: number, y: number, z: number): void;
     getInspectHealthMessage(healthPercent: number, skillPercent: number, name: Translation | string): Message | Translation;
     wrapCoordinate(cordinate: number, reference: number): number;
-    getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     isFlammable(x: number, y: number, z: number): boolean;
     getCameraPosition(): IVector2;
     private updateOptionInternal;
