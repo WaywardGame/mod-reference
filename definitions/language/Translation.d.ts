@@ -12,6 +12,7 @@ import { Dictionary } from "language/Dictionaries";
 import Message from "language/dictionary/Message";
 import UiTranslation from "language/dictionary/UiTranslation";
 import { TranslationGenerator } from "newui/component/IComponent";
+import { Random } from "utilities/Random";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
 export declare type TranslationProvider = (dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean) => string[] | undefined;
 export declare const enum TextContext {
@@ -33,8 +34,8 @@ export interface ISerializedTranslation {
 declare class Translation {
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static formatList(entries: IterableOf<string | IStringSection[] | Translation>, and?: boolean): IStringSection[];
-    static getString(entries: IterableOf<string | IStringSection>): string;
+    static formatList(items: IterableOf<string | IStringSection[] | Translation>, and?: boolean): Translation;
+    static getString(...entries: ArrayOfTOrIterablesOfT<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
     /**
      * @deprecated
@@ -67,6 +68,7 @@ declare class Translation {
     private context;
     private normalize;
     private failWith?;
+    private random;
     constructor(dictionary: Dictionary | string, entry: number | string, index?: "random" | number);
     /**
      * Creates from a translation id. Entry matching is done by changing the case-style of the inputted
@@ -101,6 +103,12 @@ declare class Translation {
      */
     hasFailWith(): boolean;
     /**
+     * Sets the random source for this Translation. Uses general random by default, not seeded.
+     *
+     * Note: If this translation is an argument to another translation, it will use the random of the parent translation.
+     */
+    setRandom(random?: Random): this;
+    /**
      * Returns this translation as a list of string sections
      */
     get(...args: any[]): IStringSection[];
@@ -109,7 +117,18 @@ declare class Translation {
      */
     getString(...args: any[]): string;
     serialize(): ISerializedTranslation;
+    /**
+     * Gets the `IStringSection[]` representing this translation, resolved.
+     * If the translation is invalid, and `failWith` is set, it will return the result of `getFailureSections()`
+     */
+    private getSections;
+    /**
+     * Gets the list of raw translations provided for this dictionary and entry.
+     */
     private getRawTranslations;
+    /**
+     * Returns the resolved `IStringSection[]` of `failWith`, or the translation ID if `failWith` is not set.
+     */
     private getFailureSections;
 }
 declare module Translation {

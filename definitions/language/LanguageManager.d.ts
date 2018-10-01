@@ -49,18 +49,19 @@ export declare enum NounType {
 export default class LanguageManager {
     language: string;
     private readonly translationProviders;
+    readonly providers: ReadonlyArray<TranslationsProvider>;
     constructor();
     initialize(): void;
     getTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
     add(provider: TranslationsProvider): void;
     remove(provider: TranslationsProvider): void;
-    getProviders(language?: string, step?: number): IterableIterator<TranslationsProvider>;
     serialize(languageName?: string, caseStyle?: CaseStyle): ISerializedLanguage | undefined;
     serializeLanguageToFile(language?: string, caseStyle?: CaseStyle): void;
     deserialize(serialized: ISerializedLanguage | ISerializedLanguageExtension): Language | LanguageExtension;
     generateSchema(): void;
     reformatSingularNoun(noun: string, count: number, article?: boolean): string;
-    getNounType(noun: string, defaultType?: NounType): NounType;
+    private getProviders;
+    private getNounType;
     private plural;
     private readonly uiTranslationsToSelector;
     private setup;

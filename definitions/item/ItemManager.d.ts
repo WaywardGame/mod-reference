@@ -17,7 +17,6 @@ import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
-import { IStringSection } from "utilities/string/Interpolator";
 export default class ItemManager implements IItemManager {
     private readonly worldContainer;
     private cachedWeights;
@@ -54,7 +53,7 @@ export default class ItemManager implements IItemManager {
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
     isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
-    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, article?: boolean, count?: number): Translation | IStringSection[];
+    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
     craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
@@ -79,7 +78,7 @@ export default class ItemManager implements IItemManager {
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemTranslations(items: IItem[]): IterableIterator<Translation>;
-    getItemListTranslation(items: IItem[]): IStringSection[];
+    getItemListTranslation(items: IItem[]): Translation;
     loadReferences(): void;
     saveTileReferences(): void;
     loadTileReferences(): void;

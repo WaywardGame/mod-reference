@@ -63,13 +63,14 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     /**
      * @param article Whether to include an article for the name of the item. Uses the article rules on the language. Defaults to `true`.
      * @param count The number of this item that you're getting the name of. Defaults to `1`.
+     * @param showCount If `true`, adds the passed count to the translation, using `MiscTranslation.CountThing`.
      *
      * Examples:
      * - `item.getName()` // "a stone axe"
      * - `item.getName(false)` // "stone axe"
      * - `item.getName(undefined, 3)` // "stone axes"
      */
-    getName(article?: boolean, count?: number): Translation;
+    getName(article?: boolean, count?: number, showCount?: boolean): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;

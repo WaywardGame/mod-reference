@@ -11,14 +11,14 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { CreatureType, ItemType } from "Enums";
 import Translation from "language/Translation";
-import { IStringSection } from "utilities/string/Interpolator";
 export interface ICorpseManager {
     create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string): ICorpse | undefined;
     updateAll(): void;
     getResources(corpse: ICorpse): ItemType[];
     remove(corpse: ICorpse): void;
     createBlood(x: number, y: number, z: number): void;
-    getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number): Translation;
-    getListTranslation(corpses: ICorpse[]): IStringSection[];
+    getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number, showCount?: boolean): Translation;
+    getCorpseTranslations(corpses: ICorpse[]): IterableIterator<Translation>;
+    getCorpseListTranslation(corpses: ICorpse[]): Translation;
 }
 export default ICorpseManager;

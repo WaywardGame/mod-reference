@@ -19,7 +19,7 @@ export interface IRandomHistory {
 export interface IRandomGenerator {
     get(): number;
 }
-export declare class Random<G extends IRandomGenerator> {
+export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     generator: G;
     constructor(generator: G);
     float(max?: number): number;
@@ -70,8 +70,8 @@ export declare class SeededGenerator implements IRandomGenerator {
     startHistory(): void;
     stopHistory(): IRandomHistory[];
 }
-declare const globalRandom: Random<SeededGenerator>;
+declare const seededRandom: Random<SeededGenerator>;
 export declare const generalRandom: Random<{
     get: () => number;
 }>;
-export default globalRandom;
+export default seededRandom;

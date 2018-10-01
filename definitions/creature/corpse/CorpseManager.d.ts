@@ -18,6 +18,7 @@ export default class CorpseManager implements ICorpseManager {
     getResources(corpse: ICorpse): ItemType[];
     remove(corpse: ICorpse): void;
     createBlood(x: number, y: number, z: number): void;
-    getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number): Translation;
-    getListTranslation(corpses: ICorpse[]): import("utilities/string/Interpolator").IStringSection[];
+    getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number, showCount?: boolean): Translation;
+    getCorpseTranslations(corpses: ICorpse[]): IterableIterator<Translation>;
+    getCorpseListTranslation(corpses: ICorpse[]): Translation;
 }
