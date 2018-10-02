@@ -207,7 +207,7 @@ export default class Game extends Emitter implements IGame {
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
-    getInspectHealthMessage(healthPercent: number, skillPercent: number, name: Translation | string): Message | Translation;
+    getInspectHealthMessage(healthPercent: number, skillPercent: number, name: Translation): Message | Translation;
     wrapCoordinate(cordinate: number, reference: number): number;
     isFlammable(x: number, y: number, z: number): boolean;
     getCameraPosition(): IVector2;

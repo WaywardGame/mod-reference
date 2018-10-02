@@ -44,7 +44,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     protected _fovMaxRadius: number;
     constructor();
     resetStatTimers(): void;
-    getName(): string;
+    getName(): Translation;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;

@@ -11,6 +11,7 @@
 import { IModInfo } from "mod/IModInfo";
 declare module Enums {
     function isModdable(enumObject: any): boolean;
+    function getModStart(enumObject: any): number;
     /**
      * Returns whether this enum entry is modded.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc

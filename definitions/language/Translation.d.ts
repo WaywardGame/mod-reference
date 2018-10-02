@@ -91,6 +91,7 @@ declare class Translation {
      */
     constructor(translationId: string);
     withSegments(...segments: ISegment[]): this;
+    withSegments(priority: true, ...segments: ISegment[]): this;
     addArgs(...args: any[]): this;
     inContext(context?: TextContext, normalize?: boolean): this;
     addReformatter(reformatter?: Translation | ((sections: IStringSection[]) => IStringSection[]), beginning?: boolean): this;

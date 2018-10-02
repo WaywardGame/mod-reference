@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDoodad } from "doodad/IDoodad";
-import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
+import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -22,7 +22,7 @@ export interface IItemManager {
     checkMilestones(player: IPlayer, item: IItem): void;
     computeContainerWeight(container: IContainer): number;
     countItemsInContainer(container: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: IItem): number;
-    countItemsInContainerByGroup(container: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup | IItemTypeGroup, ignoreItem?: IItem): number;
+    countItemsInContainerByGroup(container: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
     craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality, fake?: boolean): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
@@ -32,19 +32,21 @@ export interface IItemManager {
     getAdjacentContainers(player: IPlayer, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
     getDefaultDurability(): number;
-    getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup): ItemType;
     getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;
-    getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup | IItemTypeGroup>;
-    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
+    getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
+    getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType): ItemType;
+    getGroupItems(itemGroup: ItemTypeGroup): Set<ItemType>;
     getItemForPlayer(player: IPlayer, search: ItemType | ItemTypeGroup): IItem | undefined;
+    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
+    getItemListTranslation(items: IItem[]): Translation;
+    getItemsByWeight(a: number, b: number): number;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemTranslations(items: IItem[]): IterableIterator<Translation>;
-    getItemListTranslation(items: IItem[]): Translation;
-    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, article?: boolean, count?: number): Translation;
+    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     getLegendaryWeightCapacity(container: IContainer): number;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
@@ -53,18 +55,17 @@ export interface IItemManager {
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;
-    getItemsByWeight(a: number, b: number): number;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     isContainer(obj: IItem | IDoodad | IContainer | ITile): obj is IContainer;
+    isGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
+    getGroups(itemType: ItemType): IterableIterator<ItemTypeGroup>;
     isInInventory(containable: IContainable): boolean;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
-    isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
-    isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
     loadReferences(): void;
     loadTileReferences(): void;

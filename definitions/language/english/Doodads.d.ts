@@ -38,6 +38,7 @@ declare const _default: {
     [Doodad.Grass]: string[];
     [Doodad.IronAnvil]: string[];
     [Doodad.IronChest]: string[];
+    [Doodad.JoshuaTree]: string[];
     [Doodad.Lettuce]: string[];
     [Doodad.LitAnimalFatTorchStand]: string[];
     [Doodad.LitBarkTorchStand]: string[];

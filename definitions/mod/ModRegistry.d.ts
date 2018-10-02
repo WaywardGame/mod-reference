@@ -13,8 +13,8 @@ import { CommandCallback } from "command/ICommand";
 import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
-import { ActionType, Bindable, Command, CreatureType, DoodadType, ItemType, ITerrainResourceItem, Music, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
-import { IItemDescription } from "item/IItem";
+import { ActionType, Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
+import { IItemDescription, IItemGroupDescription } from "item/IItem";
 import { Dictionary } from "language/Dictionaries";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import Message from "language/dictionary/Message";
@@ -35,7 +35,7 @@ import { IOverlayDescription } from "renderer/Overlays";
 import { ITerrainDescription } from "tile/ITerrain";
 import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
 export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
-export declare const enum ModRegistrationType {
+export declare enum ModRegistrationType {
     Action = 0,
     Bindable = 1,
     Command = 2,
@@ -60,7 +60,8 @@ export declare const enum ModRegistrationType {
     Skill = 21,
     SoundEffect = 22,
     Terrain = 23,
-    TileEvent = 24
+    TileEvent = 24,
+    ItemGroup = 25
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -188,7 +189,12 @@ export interface ITileEventRegistration extends IBaseModRegistration {
     name: string;
     description?: ITileEventDescription;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
+export interface IItemGroupRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.ItemGroup;
+    name: string;
+    description: IItemGroupDescription;
+}
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -348,6 +354,7 @@ declare module Register {
      * @param description The definition of the menu bar button.
      */
     function menuBarButton(name: string, description: IMenuBarButtonDescription): <K extends string | number | symbol, T extends { [k in K]: MenuBarButtonType; }>(target: T, key: K) => void;
+    function itemGroup(name: string, description: IItemGroupDescription): <K extends string | number | symbol, T extends { [k in K]: ItemTypeGroup; }>(target: T, key: K) => void;
     function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
     function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
     /**

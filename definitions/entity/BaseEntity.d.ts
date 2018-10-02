@@ -39,10 +39,12 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     initStat(factory: StatFactory): void;
     hasStat(stat: Stat): boolean;
     removeStat(stat: Stat): void;
-    getStat<StatType extends IStatBase | undefined = IStat | undefined>(stat: Stat): StatType & (StatType extends IStatBase ? {
+    getStat<StatType extends IStatBase | undefined = IStat | undefined>(stat: Stat, allowFailure?: boolean): StatType & (StatType extends IStatBase ? {
         base: StatType;
     } : undefined);
     getStatInternal(stat: Stat | IStat): IStatBase;
+    getStatInternal(stat: Stat | IStat, allowFailure: true): IStatBase | undefined;
+    getStatInternal(stat: Stat | IStat, allowFailure: boolean): IStatBase | undefined;
     getStatValue(stat: Stat | IStat): number;
     setStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     reduceStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;

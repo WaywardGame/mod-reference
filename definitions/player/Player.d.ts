@@ -11,6 +11,7 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import BaseHumanEntity from "entity/BaseHumanEntity";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { Delay, Direction, EquipType, ItemType, RestType, SkillType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
@@ -39,6 +40,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     identifier: string;
     isConnecting: boolean;
     isMoving: boolean;
+    lastAttackedBy: IBaseHumanEntity | ICreature | undefined;
     messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
@@ -137,7 +139,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     isLocalPlayer(): boolean;
     isGhost(): boolean;
     isServer(): boolean;
-    getName(): string;
+    getName(): Translation;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;

@@ -54,5 +54,6 @@ export declare enum MiscTranslation {
     ListItemSeparator = 10,
     AListAndB = 11,
     CountThing = 12,
-    Renamed = 13
+    Renamed = 13,
+    HumanName = 14
 }

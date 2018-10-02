@@ -39,6 +39,7 @@ export interface IPlayer extends IBaseHumanEntity {
     isConnecting: boolean;
     isMoving: boolean;
     isMovingClientside: boolean;
+    lastAttackedBy: IBaseHumanEntity | ICreature | undefined;
     lightBonus: number;
     messages: MessageManager;
     movementComplete: boolean;
@@ -208,6 +209,7 @@ export interface IMobCheck {
     npc?: INPC;
     obstacle?: boolean;
     water?: boolean;
+    freshWater?: boolean;
 }
 export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];

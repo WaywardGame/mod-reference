@@ -169,6 +169,10 @@ declare global {
          * Returns an iterator for tuples containing the indices and the values of this iterator.
          */
         entries(): IterableIterator<[number, T]>;
+        /**
+         * Returns whether the iterator has any entries, and a replacement iterator (this current iterator can't go backwards)
+         */
+        hasAny(): [boolean, IterableIterator<T>];
     }
     interface RegExp {
         /**
@@ -201,6 +205,9 @@ declare global {
          */
         last(): T;
         toggle(value: T, includes?: boolean): number;
+    }
+    interface Set<T> {
+        addAll(...iterables: Array<IterableOf<T> | Set<T>>): void;
     }
     interface Map<K, V> {
         /**

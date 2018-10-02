@@ -110,7 +110,7 @@ export interface IGame extends Emitter {
     getDifficulty(): Difficulty;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     getHeight(z0: number, z1: number, d: number): number;
-    getInspectHealthMessage(percent: number, skillPercent: number, name: Translation | string): Message | Translation;
+    getInspectHealthMessage(percent: number, skillPercent: number, name: Translation): Message | Translation;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number | undefined;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;

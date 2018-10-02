@@ -633,7 +633,11 @@ export declare enum ItemType {
     AnimalGlue = 429,
     CopalResin = 430,
     BoneMeal = 431,
-    PileOfDesertSand = 432
+    PileOfDesertSand = 432,
+    JoshuaTreeLeaves = 433,
+    JoshuaTreeFruit = 434,
+    JoshuaTreeFruitSeeds = 435,
+    CookedJoshuaTreeFruit = 436
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -708,10 +712,6 @@ export declare enum ItemTypeGroup {
     FireStarter = 869,
     Sand = 870,
     Last = 871
-}
-export interface IItemTypeGroup {
-    types: Array<ItemType | ItemTypeGroup>;
-    default: ItemType | ItemTypeGroup;
 }
 export declare enum TerrainType {
     DeepSeawater = 0,
@@ -839,7 +839,8 @@ export declare enum DoodadType {
     LitBarkTorchStand = 85,
     AnimalFatTorchStand = 86,
     LitAnimalFatTorchStand = 87,
-    Item = 88
+    Item = 88,
+    JoshuaTree = 89
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,

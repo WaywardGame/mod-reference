@@ -100,6 +100,7 @@ declare const _default: {
     [Item.CookedCod]: string[];
     [Item.CookedCornCob]: string[];
     [Item.CookedFishSteak]: string[];
+    [Item.CookedJoshuaTreeFruit]: string[];
     [Item.CookedMeat]: string[];
     [Item.CookedPotato]: string[];
     [Item.CookedReptileMeat]: string[];
@@ -213,6 +214,9 @@ declare const _default: {
     [Item.IronSpear]: string[];
     [Item.IronSword]: string[];
     [Item.IronTongs]: string[];
+    [Item.JoshuaTreeFruit]: string[];
+    [Item.JoshuaTreeFruitSeeds]: string[];
+    [Item.JoshuaTreeLeaves]: string[];
     [Item.Journal]: string[];
     [Item.LargeRock]: string[];
     [Item.LavaBeetleHelmet]: string[];

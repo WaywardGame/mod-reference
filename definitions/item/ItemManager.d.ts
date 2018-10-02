@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDoodad } from "doodad/IDoodad";
-import { CraftStatus, IItemTypeGroup, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
+import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
 import { IItemManager } from "item/IItemManager";
 import Message from "language/dictionary/Message";
@@ -29,7 +29,7 @@ export default class ItemManager implements IItemManager {
     removeContainerItems(container: IContainer): void;
     remove(item: IItem): void;
     getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;
-    getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup | IItemTypeGroup>;
+    getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality): IItem;
@@ -51,9 +51,7 @@ export default class ItemManager implements IItemManager {
     getTileContainer(x: number, y: number, z: number): IContainer;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
-    isItemTypeGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
-    isItemTypeInGroup(itemType: ItemType, itemGroupSearch: ItemTypeGroup): boolean;
-    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup | IItemTypeGroup, article?: boolean, count?: number): Translation;
+    getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
     craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
@@ -61,7 +59,7 @@ export default class ItemManager implements IItemManager {
     getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: IItem): number;
-    countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup | IItemTypeGroup, ignoreItem?: IItem): number;
+    countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem, excludeProtectedItems?: boolean): IItem | undefined;
     getItemForPlayer(player: IPlayer, search: ItemType | ItemTypeGroup): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
@@ -82,7 +80,10 @@ export default class ItemManager implements IItemManager {
     loadReferences(): void;
     saveTileReferences(): void;
     loadTileReferences(): void;
-    getDefaultItemFromItemGroup(itemGroup: ItemTypeGroup, weightType?: WeightType): ItemType;
+    isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
+    getGroupItems(itemGroup: ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
+    getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
+    getGroups(itemType: ItemType): IterableIterator<ItemTypeGroup>;
     checkMilestones(player: IPlayer, item: IItem): void;
     getDefaultDurability(): number;
     generateLookups(): void;

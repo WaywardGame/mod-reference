@@ -503,6 +503,8 @@ declare const _default: {
     [Message.RequiresYouFacingFireSource]: string;
     [Message.RequiresYouToBeAround]: string;
     [Message.Resistant]: string;
+    [Message.ResistOrVuln]: string;
+    [Message.ResistOrVulnAll]: string;
     [Message.Rest]: string;
     [Message.Rested]: string;
     [Message.Resting]: string;
@@ -708,7 +710,5 @@ declare const _default: {
     [Message.YouTilled]: string;
     [Message.YouUnequip]: string;
     [Message.YouUsed]: string;
-    [Message.ResistOrVulnAll]: string;
-    [Message.ResistOrVuln]: string;
 };
 export default _default;

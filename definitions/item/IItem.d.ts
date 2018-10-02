@@ -14,7 +14,7 @@ import { ICreature, SpawnableTiles } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, StatType, TatteredMap } from "Enums";
+import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, StatType, TatteredMap } from "Enums";
 import Translation from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { IVector3 } from "utilities/math/IVector";
@@ -28,7 +28,7 @@ export interface IRecipe {
     reputation: number;
 }
 export interface IRecipeComponent {
-    type: ItemType | ItemTypeGroup | IItemTypeGroup;
+    type: ItemType | ItemTypeGroup;
     requiredAmount: number;
     consumedAmount: number;
     disassembleAmount: number;
@@ -131,7 +131,6 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     };
     onEquipEffect?: any[];
     damageType?: DamageType;
-    group?: ItemTypeGroup[];
     weight?: number;
     reducedWeight?: number;
     minimumWeight?: number;
@@ -179,8 +178,9 @@ export interface IDismantleDescription {
     skill?: SkillType;
     reputation?: number;
 }
-export interface IGroupDescription {
-    types: ItemType[];
+export interface IItemGroupDescription {
+    types: Array<ItemType | ItemTypeGroup>;
+    default: ItemType | ItemTypeGroup;
 }
 export declare enum ContainerReferenceType {
     Invalid = 0,
