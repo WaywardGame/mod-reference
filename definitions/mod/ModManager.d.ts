@@ -58,6 +58,7 @@ export default class ModManager implements IModManager {
     getName(index: number): string;
     getLog(index: number): Log;
     getDescription(index: number): string;
+    getTags(index: number): string[];
     getVersion(index: number): string;
     getLastUpdatedDate(index: number): number | undefined;
     getInstallDate(index: number): number | undefined;

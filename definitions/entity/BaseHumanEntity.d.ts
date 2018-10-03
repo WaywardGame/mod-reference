@@ -23,7 +23,7 @@ export declare const REPUTATION_MAX = 64000;
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
-    deathBy: import("language/Translation").ISerializedTranslation;
+    deathBy: import("../language/Translation").ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
     equipped: {
@@ -32,7 +32,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     handToUse: EquipType;
     inventory: IContainer;
     lightBonus: number;
-    options: import("save/data/ISaveDataGlobal").IOptions;
+    options: import("../save/data/ISaveDataGlobal").IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;
     score: number;

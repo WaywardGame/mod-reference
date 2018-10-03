@@ -8,12 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DoodadTypeGroup as DoodadGroup } from "Enums";
-declare const _default: {
-    [DoodadGroup.Anvil]: string[];
-    [DoodadGroup.LitCampfire]: string[];
-    [DoodadGroup.LitFurnace]: string[];
-    [DoodadGroup.LitKiln]: string[];
-    [DoodadGroup.LitWaterStill]: string[];
-};
-export default _default;
+declare const doodadGroups: any;
+export default doodadGroups;

@@ -89,7 +89,6 @@ export interface IGame extends Emitter {
     readonly isDailyChallenge: boolean;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     addZoomLevel(amount: number): void;
-    updateZoomLevel(): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
     changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean): void;
@@ -131,12 +130,15 @@ export interface IGame extends Emitter {
     getSkillPercent(skill: SkillType): number | undefined;
     getStrength(): number | undefined;
     getTactics(): number | undefined;
+    getTickSpeed(): number;
     getTile(x: number, y: number, z: number): ITile;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getTileFromPoint(point: IVector3): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
+    getTurnMode(): TurnMode;
     getValidPlayerName(name: string | undefined): string;
     getWrappedCoord(x: number): number;
+    initGl(): Promise<void>;
     initialize(): void;
     isFlammable(x: number, y: number, z: number): boolean;
     isOnFire(tile: ITile): FireType;
@@ -145,10 +147,6 @@ export interface IGame extends Emitter {
     isPositionEmpty(x: number, y: number, z: number): boolean;
     isPositionFull(x: number, y: number, z: number): boolean;
     isRealTimeMode(): boolean;
-    getTurnMode(): TurnMode;
-    setTurnMode(turnMode: TurnMode): void;
-    getTickSpeed(): number;
-    setTickSpeed(tickSpeed: number): void;
     isTileEmpty(tile: ITile): boolean;
     isTileFull(tile: ITile): boolean;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
@@ -172,7 +170,9 @@ export interface IGame extends Emitter {
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
+    setTickSpeed(tickSpeed: number): void;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
+    setTurnMode(turnMode: TurnMode): void;
     setupSave(_: number): void;
     shouldRender(): number;
     synchronizeFlowFields(plys: IPlayer[]): void;
@@ -183,6 +183,7 @@ export interface IGame extends Emitter {
     updateTablesAndWeight(): void;
     updateThumbnail(): Promise<void>;
     updateView(updateFov: boolean): void;
+    updateZoomLevel(): void;
     wrapCoordinate(cordinate: number, reference: number): number;
 }
 export default IGame;

@@ -19,9 +19,6 @@ export declare enum NotesDialogEvent {
     ShowNote = 0
 }
 export default class NotesDialog extends Dialog {
-    private readonly noteBody;
-    private readonly time;
-    private readonly title;
     private readonly noteId;
     private readonly noteLinks;
     private readonly learnMoreLink;

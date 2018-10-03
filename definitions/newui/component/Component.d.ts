@@ -85,7 +85,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setContextMenu(generator: () => IContextMenu | undefined): void;
     setHighlight(highlight: IHighlight): this;
     removeHighlight(): void;
-    getBox(): ClientRect | DOMRect;
+    getBox(): DOMRect | ClientRect;
     getOffset(): {
         top: number;
         left: number;

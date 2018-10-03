@@ -8,12 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ItemQuality as Quality } from "Enums";
-declare const _default: {
-    [Quality.None]: string[];
-    [Quality.Random]: string[];
-    [Quality.Remarkable]: string[];
-    [Quality.Exceptional]: string[];
-    [Quality.Legendary]: string[];
-};
-export default _default;
+declare const qualities: any;
+export default qualities;

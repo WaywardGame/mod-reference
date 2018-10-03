@@ -10,7 +10,7 @@
  */
 import { ISerializer } from "save/ISerializer";
 export default class Serializer implements ISerializer {
-    static readonly maxBytes: number;
+    static readonly maxBytes = 50000000;
     private static readonly buffer;
     private static usingBuffer;
     dataView: DataView;

@@ -56,9 +56,9 @@ export interface ITimeManager {
     dayPercent: number;
 }
 export default class TimeManager implements ITimeManager {
-    readonly dayLength: number;
-    readonly transitionPercent: number;
-    readonly dayStart: number;
+    readonly dayLength = 3200;
+    readonly transitionPercent = 0.5;
+    readonly dayStart = 300;
     private _ticks;
     private _dayPercent;
     constructor(turns: number);
@@ -148,7 +148,7 @@ export default class TimeManager implements ITimeManager {
      * @param time The time to use, defaulting to the current time.
      * @param format The format to use, defaulting to `TimeFormat.TwelveHour`
      */
-    getTranslation(time?: number, format?: TimeFormat): import("utilities/string/Interpolator").IStringSection[];
+    getTranslation(time?: number, format?: TimeFormat): import("../utilities/string/Interpolator").IStringSection[];
     /**
      * Returns how bright it is at the given time.
      * @param time The time to use, defaulting to the current time.

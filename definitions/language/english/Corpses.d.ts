@@ -8,10 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { CreatureType as Creature } from "Enums";
-declare const _default: {
-    [Creature.Blood]: string[];
-    [Creature.FireElemental]: string[];
-    [Creature.WaterBlood]: string[];
-};
-export default _default;
+declare const corpses: any;
+export default corpses;

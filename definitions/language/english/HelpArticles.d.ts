@@ -9,26 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
-declare const _default: {
-    [HelpArticle.Welcome]: [string, string, string, string];
-    [HelpArticle.Controls]: [string, string, string, string];
-    [HelpArticle.Interface]: [string, string, string, string];
-    [HelpArticle.InventoryManagement]: [string, string, string, string];
-    [HelpArticle.Quickslots]: [string, string, string, string];
-    [HelpArticle.FastPickup]: [string, string, string, string];
-    [HelpArticle.Actions]: [string, string, string, string];
-    [HelpArticle.Stats]: [string, string, string, string];
-    [HelpArticle.Doodads]: [string, string, string, string];
-    [HelpArticle.ResourceGathering]: [string, string, string, string];
-    [HelpArticle.Milestones]: [string, string, string, string];
-    [HelpArticle.HeldItems]: [string, string, string, string];
-    [HelpArticle.Crafting]: [string, string, string, string];
-    [HelpArticle.Death]: [string, string, string, string];
-    [HelpArticle.Taming]: [string, string, string, string];
-    [HelpArticle.Gardening]: [string, string, string, string];
-    [HelpArticle.Overweight]: [string, string, string, string];
-    [HelpArticle.Merchants]: [string, string, string, string];
-    [HelpArticle.Multiplayer]: [string, string, string, string];
-    [HelpArticle.Bugs]: [string, string, string, string];
-};
-export default _default;
+declare const articles: Descriptions<HelpArticle, [string, string, string, string]>;
+export default articles;

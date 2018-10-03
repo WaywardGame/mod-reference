@@ -85,6 +85,7 @@ export interface IOptions {
     leftHand: boolean;
     muteEffects: boolean;
     muteMusic: boolean;
+    powerPreference: string;
     protectedCraftingItems: boolean;
     realTimeTickSpeed: number;
     rightClickInspect: boolean;

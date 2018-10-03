@@ -15,6 +15,7 @@ export interface IModConfig {
     readonly author: string;
     readonly file: string;
     readonly unloadable?: boolean;
+    readonly tags?: string[];
     readonly dependencies?: string[];
     readonly compatibleMinorVersions: number[];
     readonly multiplayerCompatible?: boolean;

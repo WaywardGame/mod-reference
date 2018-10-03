@@ -11,13 +11,8 @@
 import { IResourceItem, ItemQuality } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { ITileContainer } from "tile/ITerrain";
-import { ITileEvent } from "tile/ITileEvent";
+import { ITileEvent, ITileEventDescription } from "tile/ITileEvent";
 export declare function dissassemblyBurn(item: IItem, container: ITileContainer, disassembly: boolean): void;
 export declare function harvestGatherBurn(step: number, resources: IResourceItem[] | undefined, container: IContainer, quality: ItemQuality | undefined, tileEvent: ITileEvent): void;
-declare const _default: {
-    spreadMax: number;
-    decayMax: number;
-    animated: true;
-    update(tileEvent: ITileEvent): void;
-};
-export default _default;
+declare const fire: ITileEventDescription;
+export default fire;

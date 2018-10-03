@@ -32,8 +32,8 @@ import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
 export default class Game extends Emitter implements IGame {
-    readonly interval: number;
-    readonly mapSize: number;
+    readonly interval = 16.6666;
+    readonly mapSize = 512;
     readonly mapSizeSq: number;
     slot: number;
     previousSaveVersion: IVersionInfo;
@@ -105,7 +105,8 @@ export default class Game extends Emitter implements IGame {
     readonly isDailyChallenge: boolean;
     constructor();
     initialize(): void;
-    setupGl(restoring: boolean): void;
+    initGl(): Promise<void>;
+    setupGl(restoring: boolean): Promise<void>;
     resetWebGL(): void;
     setGlContextSize(width: number, height: number): void;
     resizeRenderer(): void;

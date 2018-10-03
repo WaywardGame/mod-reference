@@ -91,6 +91,7 @@ export default class ItemManager implements IItemManager {
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getItemsByWeight(a: number, b: number): number;
+    getItemsWeight(items: IItem[]): number;
     private updateItemOrderInternal;
     private loadReference;
     private removeFromContainerInternal;
