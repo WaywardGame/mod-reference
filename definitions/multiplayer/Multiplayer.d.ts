@@ -55,6 +55,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
+    getConnectedGameCode(): string | undefined;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
     getBannedPlayers(): string[];

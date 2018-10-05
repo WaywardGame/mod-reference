@@ -75,7 +75,7 @@ declare module Log {
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
      */
-    function setWinston(w: any, path: string): void;
+    function setWinston(winston: any, path: string): void;
     function setCallback(cb?: (...args: any[]) => void): void;
     /**
      * Returns a method that can be used to `Log.info` with the given sources.

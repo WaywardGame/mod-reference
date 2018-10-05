@@ -70,6 +70,8 @@ export interface ISteamworks extends Emitter {
     setSteamRichPresence(key: string, value: string): boolean;
     setupMods(): Promise<void>;
     setupMultiplayerLog(): void;
+    startPlaytimeTracking(): void;
+    stopPlaytimeTracking(): void;
     toggleDeveloperTools(): void;
     unsubscribe(publishId: string): Promise<void>;
     updateDiscordPresence(): void;

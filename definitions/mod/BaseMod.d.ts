@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { INPCClass } from "npc/NPCS";
 import { IDialogInfo } from "ui/IUi";
 import Emitter from "utilities/Emitter";
 import Log from "utilities/Log";
@@ -36,7 +35,6 @@ export declare abstract class BaseMod extends Emitter {
      * This method only works with dialogs registered using `BaseMod.createDialog`, which is deprecated in favor of the NewUi dialog registration.
      */
     getDialog(title: string): JQuery;
-    addNPC(name: string, npcClass: INPCClass): number;
     /**
      * Called when the save data for this mod is retrieved from a field decorated with `@SaveData`.
      * @param data Any existing data, or `undefined`

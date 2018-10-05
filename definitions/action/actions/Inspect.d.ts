@@ -15,7 +15,6 @@ import IPlayer from "player/IPlayer";
 import { MessageType } from "player/MessageManager";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
-import { IStringSection } from "utilities/string/Interpolator";
 export declare enum InspectType {
     None = 0,
     Tile = 1,
@@ -32,7 +31,7 @@ export interface IInspect {
     type?: InspectType;
     onlyShowInTooltip?: boolean;
     onlyShowInMessages?: boolean;
-    message: Message | Translation | IStringSection[];
+    message: Message | Translation;
     messageType?: MessageType;
     title?: true;
 }

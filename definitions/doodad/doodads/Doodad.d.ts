@@ -9,10 +9,11 @@
  * https://waywardgame.github.io/
  */
 import { IInspect } from "action/actions/Inspect";
+import { ICreature } from "creature/ICreature";
 import DoodadInfo from "doodad/DoodadInfo";
 import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, DoodadType, DoorOrientation, EquipType, GrowingStage, ItemQuality, ItemType } from "Enums";
+import { ActionType, DoodadType, DoorOrientation, EquipType, GrowingStage, IRGB, ItemQuality, ItemType } from "Enums";
 import { IItemArray } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -65,7 +66,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     getDoodadInfo(): DoodadInfo | undefined;
     canHarvest(): boolean;
     canTrample(): boolean | undefined;
-    checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
+    checkForTrampling(source: IBaseHumanEntity | ICreature): boolean;
     getDurabilityMessage(this: IDoodad): Message;
     getInspect(): IInspect[];
     isDangerous(player: IPlayer): boolean;
@@ -78,6 +79,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     canCauseStatus(human: IBaseHumanEntity, equipType?: EquipType): boolean;
     causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
+    getGrowthParticles(): IRGB | undefined;
     onUnserialized(): void;
     private processSpecials;
     /**

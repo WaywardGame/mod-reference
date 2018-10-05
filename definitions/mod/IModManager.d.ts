@@ -36,7 +36,7 @@ export interface IModManager {
     getAuthor(index: number): string;
     getCreatedDate(index: number): number | undefined;
     getDescription(index: number): string;
-    getTags(index: number): string[];
+    getTags(index: number): Set<string>;
     getEnabledMods(): number[];
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
     getFolderName(index: number): string;

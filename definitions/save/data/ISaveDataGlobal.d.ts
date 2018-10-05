@@ -49,7 +49,7 @@ export interface ISaveDataGlobal {
     newui: {
         [index: string]: any;
     };
-    lastDedicatedServerJoined: string | undefined;
+    lastServerJoined: string | undefined;
     /**
      * Resets all options to default
      */

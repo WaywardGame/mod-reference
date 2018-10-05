@@ -18,6 +18,7 @@ export default class WorldMenu extends Menu {
     private readonly tickSpeed;
     private readonly openServer;
     private readonly pause;
+    private readonly copyGameCode;
     private readonly lobbyType;
     private readonly choiceLobbyFriends;
     private readonly choiceLobbyPublic;
@@ -28,4 +29,5 @@ export default class WorldMenu extends Menu {
     private refresh;
     private updateTurnModes;
     private updateMultiplayer;
+    private copyGameCodeClick;
 }

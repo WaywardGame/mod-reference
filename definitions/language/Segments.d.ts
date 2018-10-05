@@ -8,13 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { Random } from "utilities/Random";
 import { ISegment, IStringSection } from "utilities/string/Interpolator";
 export interface IColorSection extends IStringSection {
     color: string;
 }
 export declare const colorSegment: ISegment;
 export declare const bindSegment: ISegment;
-export declare const translationSegment: ISegment;
+export declare function TranslationSegment(random: Random): ISegment & {
+    isTranslationSegment: true;
+};
 export declare const conditionalTranslationSegment: ISegment;
 export interface ILinkSection extends IColorSection, IDecoratedSection {
     link: string | [string, string | undefined];

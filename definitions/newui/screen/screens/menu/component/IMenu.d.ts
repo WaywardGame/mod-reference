@@ -18,7 +18,7 @@ export declare enum MenuId {
     Help = 4,
     Highscores = 5,
     Interrupt = 6,
-    JoinDedicatedServer = 7,
+    JoinServer = 7,
     LoadGame = 8,
     Main = 9,
     Mods = 10,

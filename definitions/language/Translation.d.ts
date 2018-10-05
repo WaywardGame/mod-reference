@@ -49,6 +49,7 @@ declare class Translation {
         type: number;
         renamed?: string;
     }, count?: number, article?: boolean): Translation;
+    static ofNumber(number: number, failWith?: string | Translation): Translation;
     /**
      * DO NOT USE THIS METHOD
      *

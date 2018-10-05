@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IInspect } from "action/actions/Inspect";
+import { ICreature } from "creature/ICreature";
 import DoodadInfo from "doodad/DoodadInfo";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, DoodadType, DoodadTypeGroup, DoorOrientation, EquipType, GrowingStage, IDoodadParticles, IDoodadResource, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SkillType, StatusType, TerrainType } from "Enums";
@@ -58,12 +59,13 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getDoodadInfo(): DoodadInfo | undefined;
     canCauseStatus(human: IBaseHumanEntity, equipType?: EquipType): boolean;
     causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
-    checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
+    checkForTrampling(source: IBaseHumanEntity | ICreature): boolean;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): void;
     getDurabilityMessage(): Message;
     getInspect(): IInspect[];
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
+    getGrowthParticles(): IRGB | undefined;
     update(): void;
     isDangerous(player: IPlayer): boolean;
     getDamage(human: IBaseHumanEntity, equipType?: EquipType): number;

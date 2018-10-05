@@ -121,6 +121,8 @@ export interface ICreatureDescription extends IModdable {
     noStumble?: boolean;
     particlesOnMove?: boolean;
     providesFire?: boolean;
+    canTrample?: boolean;
+    helpPlants?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;

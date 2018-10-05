@@ -21,39 +21,115 @@ export default function generateSchema(): {
     title: string;
     description: string;
     type: string;
-    properties: {
-        dictionaries: {
-            description: string;
-            type: string;
-            properties: DictionarySchemas;
-        };
-    };
-    required: string[];
-    oneOf: ({
+    allOf: ({
         type: string;
-        properties: {
-            extends: {
-                description: string;
-                type: string;
+        anyOf: ({
+            type: string;
+            properties: {
+                dictionaries: {
+                    description: string;
+                    type: string;
+                    properties: DictionarySchemas;
+                };
+                pluralizationRules?: undefined;
+                required?: undefined;
             };
-            name?: undefined;
-            shouldPluralize?: undefined;
-        };
-        required: string[];
+            required: string[];
+        } | {
+            type: string;
+            properties: {
+                pluralizationRules: {
+                    description: string;
+                    type: string;
+                    properties: {
+                        pluralRules: {
+                            description: string;
+                            type: string;
+                            additionalProperties: {
+                                type: string;
+                            };
+                        };
+                        singularRules: {
+                            description: string;
+                            type: string;
+                            additionalProperties: {
+                                type: string;
+                            };
+                        };
+                        uncountableRules: {
+                            description: string;
+                            type: string;
+                            minItems: number;
+                            items: {
+                                type: string;
+                            };
+                        };
+                        irregularRules: {
+                            description: string;
+                            type: string;
+                            minItems: number;
+                            items: {
+                                type: string;
+                                items: {
+                                    type: string;
+                                }[];
+                            };
+                        };
+                        articleRules: {
+                            description: string;
+                            type: string;
+                            minItems: number;
+                            items: {
+                                type: string;
+                                items: ({
+                                    anyOf: {
+                                        type: string;
+                                    }[];
+                                    type?: undefined;
+                                } | {
+                                    type: string;
+                                    anyOf?: undefined;
+                                })[];
+                            };
+                        };
+                    };
+                    additionalProperties: boolean;
+                };
+                required: string[];
+                dictionaries?: undefined;
+            };
+            required?: undefined;
+        })[];
+        oneOf?: undefined;
     } | {
         type: string;
-        properties: {
-            name: {
-                description: string;
-                type: string;
+        oneOf: ({
+            type: string;
+            properties: {
+                extends: {
+                    description: string;
+                    type: string;
+                };
+                name?: undefined;
+                shouldPluralize?: undefined;
             };
-            shouldPluralize: {
-                description: string;
-                enum: boolean[];
+            required: string[];
+        } | {
+            type: string;
+            properties: {
+                name: {
+                    description: string;
+                    type: string;
+                };
+                shouldPluralize: {
+                    description: string;
+                    enum: boolean[];
+                };
+                extends?: undefined;
             };
-            extends?: undefined;
-        };
-        required: string[];
+            required: string[];
+        })[];
+        anyOf?: undefined;
     })[];
 };
 export {};

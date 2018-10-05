@@ -47,7 +47,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
     newui: {
         [index: string]: any;
     };
-    lastDedicatedServerJoined: string | undefined;
+    lastServerJoined: string | undefined;
     /**
      * Resets all options to default
      */

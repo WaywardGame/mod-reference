@@ -13,7 +13,7 @@ import { CommandCallback } from "command/ICommand";
 import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
-import { ActionType, Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
+import { ActionType, Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, NPCType, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
 import { IItemDescription, IItemGroupDescription } from "item/IItem";
 import { Dictionary } from "language/Dictionaries";
 import InterruptChoice from "language/dictionary/InterruptChoice";
@@ -28,6 +28,7 @@ import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
+import { INPCClass } from "npc/NPCS";
 import { Source } from "player/IMessageManager";
 import { INoteDescription } from "player/NoteManager";
 import { ISkillDescription } from "player/Skills";
@@ -48,20 +49,21 @@ export declare enum ModRegistrationType {
     InterModRegistry = 9,
     InterruptChoice = 10,
     Item = 11,
-    MenuBarButton = 12,
-    Message = 13,
-    MessageSource = 14,
-    MusicTrack = 15,
-    Note = 16,
-    OptionsSection = 17,
-    Overlay = 18,
-    Packet = 19,
-    Registry = 20,
-    Skill = 21,
-    SoundEffect = 22,
-    Terrain = 23,
-    TileEvent = 24,
-    ItemGroup = 25
+    ItemGroup = 12,
+    MenuBarButton = 13,
+    Message = 14,
+    MessageSource = 15,
+    MusicTrack = 16,
+    Note = 17,
+    NPC = 18,
+    OptionsSection = 19,
+    Overlay = 20,
+    Packet = 21,
+    Registry = 22,
+    Skill = 23,
+    SoundEffect = 24,
+    Terrain = 25,
+    TileEvent = 26
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -75,6 +77,11 @@ export interface ISoundEffectRegistration extends IBaseModRegistration {
 export interface IPacketRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Packet;
     class: IPacketClass;
+}
+export interface INPCRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.NPC;
+    name: string;
+    class: INPCClass;
 }
 export interface IActionRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Action;
@@ -132,7 +139,7 @@ export interface IOptionsSectionRegistration extends IBaseModRegistration {
 }
 export interface IRegistryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Registry;
-    cls: {
+    class: {
         new (mod: any): any;
     };
 }
@@ -140,7 +147,7 @@ export interface IDialogRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dialog;
     name: string;
     description: IDialogDescription;
-    cls: {
+    class: {
         new (gsapi: IGameScreenApi): Dialog;
     };
 }
@@ -194,7 +201,7 @@ export interface IItemGroupRegistration extends IBaseModRegistration {
     name: string;
     description: IItemGroupDescription;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -227,6 +234,13 @@ declare module Register {
      * The decorated property will be injected with the passed packet class.
      */
     function packet<C extends IPacketClass>(cls: C): <K extends string | number | symbol, T extends { [k in K]: C; }>(target: T, key: K) => void;
+    /**
+     * Registers an NPC.
+     * @param cls The NPC class.
+     *
+     * The decorated property will be injected with the NPCType of the registered NPC.
+     */
+    function npc<C extends INPCClass>(name: string, cls: C): <K extends string | number | symbol, T extends { [k in K]: NPCType; }>(target: T, key: K) => void;
     /**
      * Registers a help article.
      * @param name The name of the help article.
