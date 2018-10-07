@@ -637,7 +637,8 @@ export declare enum ItemType {
     JoshuaTreeLeaves = 433,
     JoshuaTreeFruit = 434,
     JoshuaTreeFruitSeeds = 435,
-    CookedJoshuaTreeFruit = 436
+    CookedJoshuaTreeFruit = 436,
+    JoshuaTreeFlowers = 437
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
