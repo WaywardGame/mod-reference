@@ -46,12 +46,13 @@ interface JQuery {
 }
 
 interface IMatchmakingServer {
-	start(port?: number, serverClientMode?: boolean): string;
+	connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
+	disconnectCallbacks: Map<string, () => void>;
+	messageCallbacks: Map<string, (data: ArrayBuffer) => void>;
+
+	start(port?: number, localMode?: boolean): string;
 	stop(): void;
-	getConnections(): { [index: string]: IMatchmakingServerConnection };
-	addOnConnectCallback(callback: (id: string, connection: any) => void): void;
-	addOnDisconnectCallback(id: string, callback: () => void): void;
-	addOnMessageCallback(id: string, callback: (data: ArrayBuffer) => void): void;
+	getConnections(): Map<string, IMatchmakingServerConnection>;
 }
 
 interface IMatchmakingServerConnection {
