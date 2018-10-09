@@ -14,7 +14,9 @@ export declare enum DialogId {
     Messages = 0,
     Notes = 1,
     MessagesEditFilters = 2,
-    QuickSettings = 3
+    QuickSettings = 3,
+    Milestones = 4,
+    Skills = 5
 }
 export declare enum Edge {
     Top = 0,

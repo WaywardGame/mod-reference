@@ -94,8 +94,11 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     getChildren<C extends Component = Component>(): C[];
     scrollTo(child: Component, ms?: number): void;
     getStyle(styleName: string): string;
+    schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;
+    schedule<A extends any[]>(ms: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
+    schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
     private onMouseEnterForTooltip;

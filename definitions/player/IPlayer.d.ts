@@ -127,6 +127,14 @@ export interface IPlayer extends IBaseHumanEntity {
     walkAlongPath(path: IVector2[] | undefined): void;
 }
 export default IPlayer;
+export declare const enum PlayerEvent {
+    /**
+     * @param milestone The milestone that is being updated
+     * @param value The new value for this milestone
+     * @param max The max value for this milestone
+     */
+    MilestoneUpdate = "MilestoneUpdate"
+}
 export interface IHairstyleDescription extends IModdable {
     name: string;
     imagePath?: string;

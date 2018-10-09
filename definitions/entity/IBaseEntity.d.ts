@@ -159,11 +159,6 @@ export default interface IBaseEntity extends IVector3, Emitter {
     addProperty(property: Property, value: any): void;
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
-    on(event: EntityEvent.StatChanged, handler: (_: this, stat: IStat, oldValue: number, info: IStatChangeInfo) => any): this;
-    on(event: EntityEvent.StatMaxChanged, handler: (_: this, stat: IStat, oldValue: number, info: IStatChangeInfo) => any): this;
-    on(event: EntityEvent.StatBonusChanged, handler: (_: this, stat: IStat, oldValue: number, info: IStatChangeInfo) => any): this;
-    on(event: EntityEvent.StatTimerChanged, handler: (_: this, stat: IStat, oldValue: number) => any): this;
-    on(event: EntityEvent.StatusChange, handler: (_: this, status: StatusType, hasStatus: boolean) => any): this;
 }
 export declare enum EntityEvent {
     /**
@@ -174,9 +169,35 @@ export declare enum EntityEvent {
      * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
      */
     StatChanged = 0,
+    /**
+     * Called when a stat changes, for any reason
+     * @param emitter The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     */
     StatTimerChanged = 1,
+    /**
+     * Called when a stat changes, for any reason
+     * @param emitter The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
+     */
     StatMaxChanged = 2,
+    /**
+     * Called when a stat changes, for any reason
+     * @param emitter The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
+     */
     StatBonusChanged = 3,
+    /**
+     * Called when this entity gets or loses a status effect
+     * @param emitter The object this event is emitted from
+     * @param status The type of status effect that was gained or lost
+     * @param hasStatus Whether the entity now has the status effect
+     */
     StatusChange = 4
 }
 export declare enum StatChangeReason {

@@ -38,6 +38,20 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     state: PlayerState;
     swimming: boolean;
     canSendMessage: boolean;
+    /**
+     * @returns the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
+     */
+    getSkillCore(skill: SkillType): number;
+    /**
+     * Sets the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
+     * @param skill The skill to set the base value of.
+     * @param value The value (between 0 and 100) to set the skill to.
+     */
+    setSkillCore(skill: SkillType, value: number): void;
+    /**
+     * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
+     */
+    getSkill(skill: SkillType): number;
     addMilestone(milestone: MilestoneType, data?: number): void;
     getBurnDamage(skipParry?: boolean, equipType?: EquipType): number;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
@@ -69,4 +83,11 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     update(): void;
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
+}
+export declare const enum HumanEvent {
+    /**
+     * @param skill The skill that is changing
+     * @param value The new skill value (core + bonus)
+     */
+    SkillChange = "SkillChange"
 }

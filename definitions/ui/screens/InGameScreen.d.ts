@@ -56,10 +56,6 @@ export default class InGameScreen extends BaseScreen {
     elementDialogDismantleButton: JQuery;
     elementDialogEquipment: JQuery;
     elementDialogEquipmentContainer: JQuery;
-    elementDialogSkills: JQuery;
-    elementDialogSkillsContainer: JQuery;
-    elementDialogMilestones: JQuery;
-    elementDialogMilestonesContainer: JQuery;
     elementDialogMap: JQuery;
     elementDialogBook: JQuery;
     elementDialogBookContainer: JQuery;
@@ -179,8 +175,6 @@ export default class InGameScreen extends BaseScreen {
     setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
     removeItemFromEquipSlot(equip: EquipType): void;
     sortSkills(skills: SkillType[]): SkillType[];
-    updateSkillsDialog(): void;
-    updateMilestonesDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;

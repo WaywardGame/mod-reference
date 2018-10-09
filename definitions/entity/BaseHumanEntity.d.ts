@@ -45,6 +45,9 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     constructor();
     resetStatTimers(): void;
     getName(): Translation;
+    getSkillCore(skill: SkillType): number;
+    setSkillCore(skill: SkillType, value: number): void;
+    getSkill(skill: SkillType): number;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;
@@ -63,7 +66,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     addMilestone(milestone: MilestoneType, data?: number): void;
     update(): void;
     updateStatsAndAttributes(): void;
-    staminaReduction(skillType: SkillType): void;
+    staminaReduction(skill: SkillType): void;
     updateReputation(reputation: number): void;
     setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;

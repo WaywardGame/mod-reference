@@ -10,9 +10,8 @@
  */
 import { IModdable, StatType } from "Enums";
 export declare class SkillLevel {
-    percent: number;
-    bonus: number;
-    core: number;
+    readonly bonus: number;
+    readonly core: number;
 }
 export interface ISkillSet {
     [index: number]: SkillLevel;

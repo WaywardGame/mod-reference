@@ -78,6 +78,10 @@ declare global {
 
 	type SaferArray<T> = Array<T | undefined>;
 
+	type Mutable<T> = {
+		-readonly [P in keyof T]: T[P];
+	};
+
 	let absentPlayers: IPlayer[];
 	let actionManager: IActionManager;
 	let audio: IAudio;

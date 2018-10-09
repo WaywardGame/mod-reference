@@ -50,7 +50,7 @@ interface IMatchmakingServer {
 	disconnectCallbacks: Map<string, () => void>;
 	messageCallbacks: Map<string, (data: ArrayBuffer) => void>;
 
-	start(port?: number, localMode?: boolean): string;
+	start(port?: number, serverMode?: number): string;
 	stop(): void;
 	getConnections(): Map<string, IMatchmakingServerConnection>;
 }

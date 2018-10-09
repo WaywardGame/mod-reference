@@ -84,8 +84,6 @@ export interface IUi extends IPropSerializable, Emitter {
     tooltipRefresh(): void;
     refreshWorldTooltips(): void;
     getMessageHtml(inspection: IInspect, tag?: string, log?: boolean, addedClass?: string): string;
-    updateMilestonesDialog(): void;
-    updateSkillsDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];

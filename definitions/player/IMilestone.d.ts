@@ -47,9 +47,9 @@ export declare enum MilestoneType {
     Notekeeper = 33,
     Operator = 34
 }
-export declare enum MilestoneVisibilityType {
+export declare enum MilestoneVisibility {
     Visible = 0,
-    Invisibile = 1,
+    Invisible = 1,
     Hidden = 2
 }
 export declare enum MilestoneDataType {
@@ -59,7 +59,7 @@ export declare enum MilestoneDataType {
 export interface IMilestone {
     amount: number;
     dataType?: MilestoneDataType;
-    visibility?: MilestoneVisibilityType;
+    visibility?: MilestoneVisibility;
 }
 export interface IMilestoneData {
     amount: number;

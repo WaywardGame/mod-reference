@@ -50,6 +50,8 @@ export default class LanguageManager {
     language: string;
     private readonly translationProviders;
     readonly providers: ReadonlyArray<TranslationsProvider>;
+    private orderedTranslationProviders?;
+    readonly orderedProviders: ReadonlyArray<TranslationsProvider>;
     constructor();
     initialize(): void;
     getTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
@@ -60,7 +62,6 @@ export default class LanguageManager {
     deserialize(serialized: ISerializedLanguage | ISerializedLanguageExtension): Language | LanguageExtension;
     generateSchema(): void;
     reformatSingularNoun(noun: string, count: number, article?: boolean): string;
-    private getProviders;
     private getNounType;
     private plural;
     private readonly uiTranslationsToSelector;

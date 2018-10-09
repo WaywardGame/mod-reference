@@ -636,9 +636,12 @@ export declare enum ItemType {
     PileOfDesertSand = 432,
     JoshuaTreeLeaves = 433,
     JoshuaTreeFruit = 434,
-    JoshuaTreeFruitSeeds = 435,
+    JoshuaTreeSeeds = 435,
     CookedJoshuaTreeFruit = 436,
-    JoshuaTreeFlowers = 437
+    JoshuaTreeFlowers = 437,
+    SaguaroCactusSeeds = 438,
+    SaguaroCactusFruit = 439,
+    SaguaroCactusChunk = 440
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -841,7 +844,8 @@ export declare enum DoodadType {
     AnimalFatTorchStand = 86,
     LitAnimalFatTorchStand = 87,
     Item = 88,
-    JoshuaTree = 89
+    JoshuaTree = 89,
+    SaguaroCactus = 90
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -1126,12 +1130,10 @@ export declare enum DialogId {
     Inventory = 0,
     Crafting = 1,
     Equipment = 2,
-    Skills = 3,
-    Milestones = 4,
-    Map = 5,
-    Container = 6,
-    Book = 7,
-    Custom = 8
+    Map = 3,
+    Container = 4,
+    Book = 5,
+    Custom = 6
 }
 export declare enum SortType {
     Name = 0,
