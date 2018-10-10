@@ -60,7 +60,6 @@ export default class Ui extends Emitter implements IUi {
     hideActionsMenu(): void;
     openMapDialog(): void;
     closeMapDialog(): void;
-    openBookDialog(title: string, content: string): void;
     setFontStyle(): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     toggleDialog(dialog: JQuery): boolean;

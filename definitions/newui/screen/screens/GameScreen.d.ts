@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "creature/ICreature";
-import { Bindable, Direction } from "Enums";
+import { Bindable, BookType, Direction } from "Enums";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
@@ -61,6 +61,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     onPlayerDeath(player: IPlayer): boolean | undefined;
     onGameTickEnd(): void;
+    onOpenBook(player: IPlayer, book: BookType): void;
     /**
      * Adds a quadrant element to the screen.
      *

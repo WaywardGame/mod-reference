@@ -11,13 +11,14 @@
 import { EntityType } from "entity/IEntity";
 import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
 import { Direction, FireType, MoveType, SfxType, StatusType } from "Enums";
+import { ISerializedTranslation } from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default interface IBaseEntity extends IVector3, Emitter {
     entityType: EntityType;
     id: number;
-    renamed?: string;
+    renamed?: string | ISerializedTranslation;
     fromX: number;
     fromY: number;
     moveType: MoveType | undefined;

@@ -15,6 +15,7 @@ import { UiApi } from "newui/INewUi";
 import { ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
     static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[]): IStringSection[];
+    private static areIdenticalSections;
     static toString(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[]): string;
     private segments;
     private text;

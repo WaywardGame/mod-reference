@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ISerializedTranslation } from "language/Translation";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export declare enum TerrainMask {
     None = 0,
@@ -1132,8 +1133,7 @@ export declare enum DialogId {
     Equipment = 2,
     Map = 3,
     Container = 4,
-    Book = 5,
-    Custom = 6
+    Custom = 5
 }
 export declare enum SortType {
     Name = 0,
@@ -1180,7 +1180,7 @@ export interface IOnEquipType {
 export interface IObject<T> {
     type: T;
     id: number;
-    renamed?: string;
+    renamed?: string | ISerializedTranslation;
 }
 export interface IObjectOptions {
     decay?: number;

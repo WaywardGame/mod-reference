@@ -13,7 +13,7 @@ import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap } from "Enums";
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
-import Translation from "language/Translation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
@@ -34,7 +34,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     ownerIdentifier?: string;
     quality: ItemQuality;
     quickSlot: number | undefined;
-    renamed: string;
+    renamed: string | ISerializedTranslation;
     tatteredMap: TatteredMap;
     type: ItemType;
     weight: number;

@@ -90,7 +90,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
         top: number;
         left: number;
     };
-    getNthChild(nth?: number): Component;
+    getNthChild<C extends Component = Component>(nth?: number): C;
     getChildren<C extends Component = Component>(): C[];
     scrollTo(child: Component, ms?: number): void;
     getStyle(styleName: string): string;

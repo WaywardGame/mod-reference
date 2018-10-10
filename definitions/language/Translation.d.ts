@@ -43,11 +43,11 @@ declare class Translation {
     static convertMakeStringToInterpolation(makeString: string): string;
     static nameOf(type: Dictionary, thing: number | {
         type: number;
-        renamed?: string;
+        renamed?: string | ISerializedTranslation;
     }, article?: boolean): Translation;
     static nameOf(type: Dictionary, thing: number | {
         type: number;
-        renamed?: string;
+        renamed?: string | ISerializedTranslation;
     }, count?: number, article?: boolean): Translation;
     static ofNumber(number: number, failWith?: string | Translation): Translation;
     /**
@@ -58,6 +58,7 @@ declare class Translation {
      * Example uses include text the user inputs, and text from other sites (steam/trello)
      */
     static generator(textOrGenerator: GeneratorOrT<string | IStringSection[]>): TranslationGenerator;
+    static isSerializedTranslation(thing: unknown): thing is ISerializedTranslation;
     static deserialize(serializedTranslation: ISerializedTranslation): Translation;
     private static getStringSections;
     readonly isValid: boolean;

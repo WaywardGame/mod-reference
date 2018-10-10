@@ -79,6 +79,7 @@ export declare enum Hook {
     OnNPCDamage = "onNPCDamage",
     OnNPCDeath = "onNPCDeath",
     OnNPCSpawn = "onNPCSpawn",
+    OnOpenBook = "onOpenBook",
     OnPickupDoodad = "onPickupDoodad",
     OnPlayerDamage = "onPlayerDamage",
     OnPlayerDeath = "onPlayerDeath",

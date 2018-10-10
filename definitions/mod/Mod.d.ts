@@ -13,7 +13,7 @@ import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import Language from "language/Language";
 import BaseMod from "mod/BaseMod";
@@ -129,6 +129,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onNPCDamage(npc: INPC, damageInfo: IDamageInfo): number | undefined;
     onNPCDeath(npc: INPC): boolean | undefined;
     onNPCSpawn(npc: INPC): void;
+    onOpenBook(player: IPlayer, book: BookType): void;
     onPickupDoodad(player: IPlayer, doodad: IDoodad): void;
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     onPlayerDeath(player: IPlayer): boolean | undefined;

@@ -9,11 +9,14 @@
  * https://waywardgame.github.io/
  */
 import { Bindable } from "Enums";
+import UiTranslation from "language/dictionary/UiTranslation";
+import Translation from "language/Translation";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
-import { TranslationGenerator } from "newui/component/IComponent";
+import { IRefreshable } from "newui/component/Refreshable";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi, { IDialog } from "newui/screen/screens/game/IGameScreenApi";
+import { IStringSection } from "utilities/string/Interpolator";
 /**
  * The positions of each edge of the dialog. Stored as percentages.
  */
@@ -53,7 +56,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     edges: IDialogEdges;
     protected body: Component;
-    protected header: Component;
+    protected header: Component & IRefreshable;
     protected footer: Component;
     private readonly panels;
     private visiblePanel;
@@ -101,7 +104,7 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    abstract getName(): TranslationGenerator;
+    abstract getName(): IterableOf<IStringSection> | Translation | UiTranslation | undefined;
     /**
      * Event handler for when this dialog is appended
      */

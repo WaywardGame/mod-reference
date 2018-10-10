@@ -13,7 +13,7 @@ import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { ActionType, AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import Language from "language/Language";
 import { Hook } from "mod/IHookManager";
@@ -536,6 +536,12 @@ export interface IHookHost {
      * @param npc The npc object
      */
     onNPCSpawn?(npc: INPC): void;
+    /**
+     * Called when a book is opened by a player
+     * @param player The player that opened a book
+     * @param book The book that was opened
+     */
+    onOpenBook?(player: IPlayer, book: BookType): void;
     /**
      * Called when an doodad is picked up
      * @param player The player object

@@ -91,7 +91,6 @@ export interface IUi extends IPropSerializable, Emitter {
     hideContextMenu(): void;
     hideActionsMenu(): void;
     openMapDialog(): void;
-    openBookDialog(title: string, content: string): void;
     closeMapDialog(): void;
     setFontStyle(): void;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;

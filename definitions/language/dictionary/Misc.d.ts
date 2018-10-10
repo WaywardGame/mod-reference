@@ -29,7 +29,7 @@ export declare const enum SkillTranslation {
     Description = 1
 }
 export declare const enum BookTranslation {
-    Author = 0,
+    Title = 0,
     Text = 1
 }
 export declare const enum MilestoneTranslation {
