@@ -10,7 +10,7 @@
  */
 import { Bindable } from "Enums";
 import UiTranslation from "language/dictionary/UiTranslation";
-import Translation from "language/Translation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
 import { IRefreshable } from "newui/component/Refreshable";
@@ -104,7 +104,7 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    abstract getName(): IterableOf<IStringSection> | Translation | UiTranslation | undefined;
+    abstract getName(): IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
     /**
      * Event handler for when this dialog is appended
      */

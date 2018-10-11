@@ -10,6 +10,7 @@
  */
 import { IDamageInfo } from "creature/ICreature";
 import { Bindable, BookType, Direction } from "Enums";
+import { IMapRequest } from "game/IGame";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
@@ -62,6 +63,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onPlayerDeath(player: IPlayer): boolean | undefined;
     onGameTickEnd(): void;
     onOpenBook(player: IPlayer, book: BookType): void;
+    onReadMap(player: IPlayer, mapRequest: IMapRequest): void;
     /**
      * Adds a quadrant element to the screen.
      *

@@ -14,6 +14,7 @@ import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
 import Language from "language/Language";
 import BaseMod from "mod/BaseMod";
@@ -28,6 +29,7 @@ import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 import Log from "utilities/Log";
 import { IVector2 } from "utilities/math/IVector";
+import Vector3 from "utilities/math/Vector3";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -121,6 +123,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDeath(creature: ICreature): void;
     onCreatureSpawn(creature: ICreature): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
+    onDigTreasure(player: IPlayer, treasureTile: Vector3): void;
     onLanguageLoad(language: Language): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveComplete(player: IPlayer): void;
@@ -139,6 +142,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onPlayerTickStart(player: IPlayer): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     onGameScreenVisible(): void;
+    onReadMap(player: IPlayer, mapRequest: IMapRequest): void;
     onRenderOverlay(spriteBatch: ISpriteBatch): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     onTileUpdate(tile: ITile, x: number, y: number, z: number): void;

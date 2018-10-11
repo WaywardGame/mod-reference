@@ -44,6 +44,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _syncChecksSuppressed;
     private _disconnectingFromSyncIssue;
     private _ipAddress;
+    private readonly _matchmakingSecret;
     constructor();
     isConnected(): boolean;
     isReady(): boolean;
@@ -107,4 +108,5 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _sendData;
     private onStateChange;
     private convertToMatchmakingInfo;
+    private updateGlobalServerDirectory;
 }

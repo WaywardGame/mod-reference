@@ -56,7 +56,6 @@ export default class InGameScreen extends BaseScreen {
     elementDialogDismantleButton: JQuery;
     elementDialogEquipment: JQuery;
     elementDialogEquipmentContainer: JQuery;
-    elementDialogMap: JQuery;
     elementVersion: JQuery;
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
@@ -120,8 +119,6 @@ export default class InGameScreen extends BaseScreen {
     onOpenDialog(dialog: JQuery): void;
     focus(): void;
     closeDialog(dialog: JQuery): boolean;
-    openMapDialog(): void;
-    closeMapDialog(): void;
     closeAllDialogs(): boolean;
     autoOpenDialog(index: string | number, element: JQuery): boolean;
     openDialogs(): void;

@@ -10,7 +10,7 @@
  */
 import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
-import Translation from "language/Translation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -266,7 +266,7 @@ export interface IDisableable {
     disabled: boolean;
     setDisabled(disabled: boolean): this;
 }
-export declare type TranslationGenerator = Translation | UiTranslation | (() => IterableOf<IStringSection> | Translation | UiTranslation | undefined);
+export declare type TranslationGenerator = Translation | UiTranslation | ISerializedTranslation | (() => IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined);
 export declare type HighlightSelector = [HighlightType, string | number];
 export interface IHighlight {
     selectors: HighlightSelector[];

@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import UiTranslation from "language/dictionary/UiTranslation";
-import Translation from "language/Translation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import Component from "newui/component/Component";
 import { IComponent } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
@@ -41,5 +41,5 @@ interface IGameScreenApi {
 export default IGameScreenApi;
 export interface IDialog extends IComponent {
     id: DialogId;
-    getName(): IterableOf<IStringSection> | Translation | UiTranslation | undefined;
+    getName(): IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
 }

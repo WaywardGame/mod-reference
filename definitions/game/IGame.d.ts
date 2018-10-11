@@ -14,7 +14,7 @@ import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { Difficulty, Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
 import TimeManager from "game/TimeManager";
-import { IItemArray } from "item/IItem";
+import { IItem, IItemArray } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
@@ -30,6 +30,7 @@ import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vec2 from "utilities/math/Vector2";
+import Vector3 from "utilities/math/Vector3";
 import { IVersionInfo } from "utilities/Version";
 export interface IGame extends Emitter {
     interval: number;
@@ -151,7 +152,7 @@ export interface IGame extends Emitter {
     isTileFull(tile: ITile): boolean;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     makeLavaPassage(player: IPlayer): TerrainType | undefined;
-    makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
+    makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
     outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
@@ -228,6 +229,20 @@ export interface IPlayerOptions {
 export interface ICrafted {
     unlockTime: number;
     newUnlock: boolean;
+}
+export interface IMapRequest {
+    /**
+     * The item containing the map.
+     */
+    item: IItem;
+    /**
+     * The tile position of the top-left corner of the map.
+     */
+    tilePosition: Vector3;
+    /**
+     * Whether to involve your skill in how "readable" the map is. Defaults to false.
+     */
+    skillCheck?: boolean;
 }
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;

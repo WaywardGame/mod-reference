@@ -14,6 +14,7 @@ import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
 import Language from "language/Language";
 import { Hook } from "mod/IHookManager";
@@ -26,6 +27,7 @@ import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
+import Vector3 from "utilities/math/Vector3";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -488,6 +490,12 @@ export interface IHookHost {
      */
     onBindLoop?(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
+     * Called when a player digs up treasure.
+     * @param player The player that dug up treasure
+     * @param treasureTile The tile the player dug up treasure at
+     */
+    onDigTreasure?(player: IPlayer, treasureTile: Vector3): void;
+    /**
      * Called when a language is loaded
      * @param language The language that loaded
      */
@@ -595,6 +603,12 @@ export interface IHookHost {
      * Called when the game screen becomes visible. Messages sent before this point will not be displayed.
      */
     onGameScreenVisible?(): void;
+    /**
+     * Called when a map is read
+     * @param player The player that read the map
+     * @param mapRequest Information describing how to render the map.
+     */
+    onReadMap?(player: IPlayer, mapRequest: IMapRequest): void;
     /**
      * Called when rendering the overlay
      * @param spriteBatch The overlay sprite batch

@@ -50,8 +50,11 @@ interface IMatchmakingServer {
 	disconnectCallbacks: Map<string, () => void>;
 	messageCallbacks: Map<string, (data: ArrayBuffer) => void>;
 
-	start(port?: number, serverMode?: number): string;
+	isRunning(): boolean;
+	start(port?: number, disableServerDirectoryConnection?: boolean): string;
 	stop(): void;
+	updateName(name: string): void;
+	updateDirectory(players: number, maxPlayers: number): void;
 	getConnections(): Map<string, IMatchmakingServerConnection>;
 }
 

@@ -13,7 +13,7 @@ import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { Difficulty, Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
-import { ICrafted, IGame, IPlayerOptions, IPlayOptions } from "game/IGame";
+import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
 import Message from "language/dictionary/Message";
@@ -88,7 +88,6 @@ export default class Game extends Emitter implements IGame {
     debugRenderer: ITextureDebugRenderer;
     glContext: WebGL2RenderingContext | null;
     glVersion: number;
-    mapContext: CanvasRenderingContext2D | null;
     notifier: INotifier;
     particle: IParticle;
     spriteTexture: WebGLTexture;
@@ -150,7 +149,7 @@ export default class Game extends Emitter implements IGame {
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
     updateTablesAndWeightNextTick(): void;
-    makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
+    makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     getBlackness(): number;
     getAmbientLightLevel(z: number): number;
     updateAmbientLightLevel(z: number): void;

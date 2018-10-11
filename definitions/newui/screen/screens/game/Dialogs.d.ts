@@ -17,7 +17,8 @@ export declare enum DialogId {
     QuickSettings = 3,
     Milestones = 4,
     Skills = 5,
-    Book = 6
+    Book = 6,
+    Map = 7
 }
 export declare enum Edge {
     Top = 0,
@@ -35,6 +36,10 @@ export interface IDialogDescription extends IModdable {
      * Whether to save if the dialog is open. If this is false, the dialog will always be closed when a game loads. Defaults to true.
      */
     saveOpen?: boolean;
+    /**
+     * Whether resizing the dialog will keep it a square. Defaults to false.
+     */
+    square?: boolean;
 }
 declare const dialogDescriptions: Descriptions<DialogId, IDialogDescription>;
 export default dialogDescriptions;

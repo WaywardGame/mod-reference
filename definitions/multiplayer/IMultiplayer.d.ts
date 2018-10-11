@@ -64,7 +64,7 @@ export interface IMultiplayer extends Emitter {
 export default IMultiplayer;
 export declare const maxPlayers = 32;
 export declare const defaultServerPort = 38740;
-export declare const globalMatchmakingServerPort = 38741;
+export declare const globalMatchmakingServerPort = 38740;
 export declare const keepAliveInterval = 4000;
 export declare const keepAliveTimeout = 15000;
 export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
