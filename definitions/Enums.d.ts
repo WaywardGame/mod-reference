@@ -642,7 +642,10 @@ export declare enum ItemType {
     JoshuaTreeFlowers = 437,
     SaguaroCactusSeeds = 438,
     SaguaroCactusFruit = 439,
-    SaguaroCactusChunk = 440
+    SaguaroCactusChunk = 440,
+    StoneWell = 441,
+    SandstoneWell = 442,
+    ClayBrickWell = 443
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -855,7 +858,8 @@ export declare enum DoodadTypeGroup {
     LitKiln = 403,
     LitWaterStill = 404,
     Anvil = 405,
-    Last = 406
+    Well = 406,
+    Last = 407
 }
 export declare enum GrowingStage {
     Germinating = 0,

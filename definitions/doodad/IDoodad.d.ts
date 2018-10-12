@@ -81,6 +81,7 @@ export interface IDoodadOptions extends IObjectOptions {
     ownerIdentifier?: string;
     item?: IItem;
     step?: number;
+    well?: IWell;
 }
 export declare type IDoodadOld = Partial<IDoodad> & {
     growInto?: DoodadType;
@@ -143,4 +144,13 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isFence?: boolean;
     isUnlitTorch?: boolean;
     isLitTorch?: boolean;
+}
+export interface IWell {
+    quantity: number;
+    waterType: WaterType;
+}
+export declare enum WaterType {
+    None = 0,
+    FreshWater = 1,
+    SaltWater = 2
 }
