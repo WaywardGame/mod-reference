@@ -12,7 +12,8 @@ import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { Difficulty, Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
+import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
+import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
@@ -60,6 +61,7 @@ export default class Game extends Emitter implements IGame {
     creatures: SaferArray<ICreature>;
     creatureSpawnTimer: number;
     difficulty: Difficulty;
+    difficultyOptions: IDifficultyOptions;
     doodads: SaferArray<IDoodad>;
     flowFieldSyncCount: number;
     items: IItemArray;
@@ -83,6 +85,7 @@ export default class Game extends Emitter implements IGame {
     };
     tileEvents: SaferArray<ITileEvent>;
     time: TimeManager;
+    ticks: number;
     version: string;
     cartographyTexture: WebGLTexture;
     debugRenderer: ITextureDebugRenderer;
@@ -155,6 +158,7 @@ export default class Game extends Emitter implements IGame {
     updateAmbientLightLevel(z: number): void;
     updateReputation(reputation: number): void;
     getDifficulty(): Difficulty;
+    getDifficultyOptions(): IDifficultyOptions;
     getReputation(): number | undefined;
     getMalignity(): number | undefined;
     getBenignity(): number | undefined;

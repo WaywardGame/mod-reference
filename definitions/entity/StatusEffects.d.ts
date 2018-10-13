@@ -10,11 +10,15 @@
  */
 import IBaseEntity from "entity/IBaseEntity";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { IModdable } from "Enums";
+import { IModdable, StatusType } from "Enums";
 import StatusEffectRenderer from "renderer/StatusEffectRenderer";
 export interface IStatusEffectDescription extends IModdable {
     iconPath?: string | ((entity: IBaseEntity) => string);
     renderer: StatusEffectRenderer;
+    /**
+     * Whether the status effect can pass (is it possible to remove it from the human).
+     */
+    canPass(human: IBaseHumanEntity): boolean;
     /**
      * Whether the status effect should pass (be removed from the human).
      */
@@ -28,5 +32,6 @@ export interface IStatusEffectDescription extends IModdable {
      */
     onTick(human: IBaseHumanEntity): void;
 }
+export declare function canPass(statusType: StatusType): boolean;
 declare const statusEffectDescriptions: Description<IStatusEffectDescription>;
 export default statusEffectDescriptions;

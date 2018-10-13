@@ -12,7 +12,8 @@ import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { Difficulty, Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
+import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
+import { Difficulty } from "game/Difficulty";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import Message from "language/dictionary/Message";
@@ -32,6 +33,7 @@ import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vec2 from "utilities/math/Vector2";
 import Vector3 from "utilities/math/Vector3";
 import { IVersionInfo } from "utilities/Version";
+import { IDifficultyOptions } from "./Difficulty";
 export interface IGame extends Emitter {
     interval: number;
     mapSize: number;
@@ -108,6 +110,7 @@ export interface IGame extends Emitter {
     getCameraPosition(): IVector2;
     getCompletedMilestoneCount(): number;
     getDifficulty(): Difficulty;
+    getDifficultyOptions(): IDifficultyOptions;
     getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     getHeight(z0: number, z1: number, d: number): number;
     getInspectHealthMessage(percent: number, skillPercent: number, name: Translation): Message | Translation;
@@ -211,6 +214,7 @@ export interface IPlayOptions {
     name: string;
     seed: string | number | undefined;
     difficulty: Difficulty;
+    difficultyOptions: IDifficultyOptions;
     character: ICharacter;
     multiplayer: IMultiplayerOptions | undefined;
     multiplayerServerToJoin: ServerInfo | undefined;

@@ -20,7 +20,7 @@ export declare class RangeRow extends BlockRow implements IRefreshable, IDisable
     protected rangeInput: RangeInput;
     protected heading: Heading;
     protected rangeInputValueDisplay: RangeInputValueDisplay | undefined;
-    readonly value: number;
+    value: number;
     private _disabled;
     readonly disabled: boolean;
     constructor(api: UiApi);

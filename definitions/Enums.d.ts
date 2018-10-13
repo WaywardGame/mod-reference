@@ -1213,12 +1213,6 @@ export interface IRGB {
     g: number;
     b: number;
 }
-export declare enum Difficulty {
-    Hardcore = 0,
-    Casual = 1,
-    DailyChallenge = 2,
-    Peaceful = 3
-}
 export declare enum WeightType {
     Normal = 0,
     Static = 1,

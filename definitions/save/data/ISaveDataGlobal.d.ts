@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Difficulty, DropLocation, IKeyBind } from "Enums";
+import { DropLocation, IKeyBind } from "Enums";
+import { Difficulty } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
 import { ISerializedTranslation } from "language/Translation";
 import { ModState } from "mod/IModInfo";
