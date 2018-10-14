@@ -10,6 +10,8 @@
  */
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
+import Inspection from "game/inspection/Inspect";
+import { InspectionResult } from "game/inspection/Inspections";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -81,5 +83,6 @@ export interface IItemManager {
     saveTileReferences(): void;
     spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
+    inspect(inspection: Inspection, ...items: IItem[]): InspectionResult;
 }
 export default IItemManager;

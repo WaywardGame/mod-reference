@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IVector3 } from "utilities/math/IVector";
+import { IVector2, IVector3 } from "utilities/math/IVector";
 export default class Vector3 implements IVector3 {
     static readonly ZERO: Vector3;
     static readonly ONE: Vector3;
@@ -41,6 +41,7 @@ export default class Vector3 implements IVector3 {
     yz: [number, number];
     xyz: [number, number, number];
     constructor();
+    constructor(xy: IVector2, z: number);
     constructor(xyz: number | [number, number, number] | IVector3);
     constructor(x: number, y: number, z: number);
     at(index: number): number;

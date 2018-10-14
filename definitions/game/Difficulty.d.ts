@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { StatType, StatusType } from "Enums";
+import { Stat } from "entity/IStats";
+import { StatusType } from "Enums";
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
@@ -22,7 +23,7 @@ export interface IDifficultyOptions {
     reputationLossMultipler: number;
     initialMalignity: number;
     initialBenignity: number;
-    statChangeTimerMultipler: Map<StatType, number> | undefined;
+    statChangeTimerMultipler: Map<Stat, number> | undefined;
     initialTime: number;
     freezeTime: boolean;
     permanentStatusEffects: StatusType[] | undefined;

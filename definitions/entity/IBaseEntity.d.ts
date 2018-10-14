@@ -11,7 +11,7 @@
 import { EntityType } from "entity/IEntity";
 import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
 import { Direction, FireType, MoveType, SfxType, StatusType } from "Enums";
-import { ISerializedTranslation } from "language/Translation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
@@ -28,6 +28,7 @@ export default interface IBaseEntity extends IVector3, Emitter {
     facingDirection: Direction;
     stats: IStats;
     status: IStatus;
+    getName(): Translation;
     getFacingPoint(): IVector3;
     getFacingTile(): ITile;
     getMovementFinishTime(): number | undefined;

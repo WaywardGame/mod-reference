@@ -8,19 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IInspect } from "action/actions/Inspect";
 import { ICreature } from "creature/ICreature";
 import DoodadInfo from "doodad/DoodadInfo";
 import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions, IWell } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, DoodadType, DoorOrientation, EquipType, GrowingStage, IRGB, ItemQuality, ItemType } from "Enums";
+import Inspection from "game/inspection/Inspect";
+import { IInspectable, InspectionSection } from "game/inspection/Inspections";
 import { IItemArray } from "item/IItem";
-import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback {
+export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable {
     protected static registrarId: number;
     "constructor": typeof Doodad;
     containedItems: IItemArray;
@@ -52,6 +52,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     getRegistrarId(): number;
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
+    inspect({ context, inspectFire }: Inspection, section: InspectionSection): void;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
     getTile(): ITile;
@@ -68,8 +69,6 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     canHarvest(): boolean;
     canTrample(): boolean | undefined;
     checkForTrampling(source: IBaseHumanEntity | ICreature): boolean;
-    getDurabilityMessage(this: IDoodad): Message;
-    getInspect(): IInspect[];
     isDangerous(player: IPlayer): boolean;
     getDamage(human: IBaseHumanEntity, equipType?: EquipType): number;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
@@ -82,6 +81,9 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
     onUnserialized(): void;
+    private inspectGrowth;
+    private inspectFertility;
+    private inspectDurability;
     private processSpecials;
     /**
      * Check for items on top of lit/fire doodads, set them on fire

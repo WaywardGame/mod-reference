@@ -14,6 +14,7 @@ import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import { ActionType, Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, NPCType, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
+import { IInspectionHandler, InspectType } from "game/inspection/Inspections";
 import { IItemDescription, IItemGroupDescription } from "item/IItem";
 import { Dictionary } from "language/Dictionaries";
 import InterruptChoice from "language/dictionary/InterruptChoice";
@@ -63,7 +64,13 @@ export declare enum ModRegistrationType {
     Skill = 23,
     SoundEffect = 24,
     Terrain = 25,
-    TileEvent = 26
+    TileEvent = 26,
+    InspectionType = 27
+}
+export interface IInspectionTypeRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.InspectionType;
+    name: string;
+    description: IInspectionHandler | IInspectionHandler["handle"];
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -201,7 +208,7 @@ export interface IItemGroupRegistration extends IBaseModRegistration {
     name: string;
     description: IItemGroupDescription;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration | IInspectionTypeRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -363,6 +370,11 @@ declare module Register {
      * @param description The definition of the overlay.
      */
     function overlay(name: string, description?: IOverlayDescription): <K extends string | number | symbol, T extends { [k in K]: OverlayType; }>(target: T, key: K) => void;
+    /**
+     * Registers an inspection type, which will appear in tile tooltips or the messages after inspecting a tile.
+     * @param description The definition of the inspection type.
+     */
+    function inspectionType(name: string, description: IInspectionHandler | IInspectionHandler["handle"]): <K extends string | number | symbol, T extends { [k in K]: InspectType; }>(target: T, key: K) => void;
     /**
      * Registers a menu bar button.
      * @param description The definition of the menu bar button.

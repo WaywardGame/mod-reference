@@ -10,6 +10,8 @@
  *
  *
  */
+import Inspection from "game/inspection/Inspect";
+import { InspectionResult } from "game/inspection/Inspections";
 import { ITile } from "tile/ITerrain";
 import { ITileEvent, TileEventType } from "tile/ITileEvent";
 export interface ITileEventManager {
@@ -21,5 +23,6 @@ export interface ITileEventManager {
     canGather(tile: ITile): ITileEvent | undefined;
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): void;
+    inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
 }
 export default ITileEventManager;

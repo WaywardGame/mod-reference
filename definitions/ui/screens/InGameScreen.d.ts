@@ -12,7 +12,6 @@ import { Bindable, DialogId, Direction, EquipType, ItemType, SkillType, SortType
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
 import { BindCatcherApi } from "newui/BindingManager";
-import { ITile } from "tile/ITerrain";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
 import BaseScreen from "ui/screens/BaseScreen";
@@ -81,7 +80,6 @@ export default class InGameScreen extends BaseScreen {
     private isCurrentlySorting;
     private craftableItemTypes;
     private nonCraftableItemTypes;
-    private worldTooltip;
     private lastStats;
     selector(): string;
     bindElements(): void;
@@ -149,7 +147,6 @@ export default class InGameScreen extends BaseScreen {
     tooltipHide(): void;
     unSelectElements(): void;
     getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: boolean, isNPC: boolean): string;
-    getTooltipHtmlForTile(tile: ITile): string;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     getUsedQuickSlots(): number[];
     getFreeQuickSlots(): number[];

@@ -17,6 +17,7 @@ import { AttributeManipulator, ClassListManipulator, DataManipulator } from "new
 import Emitter from "utilities/Emitter";
 export default class Component extends Emitter implements IComponent, IHookHost {
     protected api: UiApi;
+    static get(element: HTMLElement): Component;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
@@ -52,7 +53,8 @@ export default class Component extends Emitter implements IComponent, IHookHost 
      *
      * Only call this directly after constructing the element.
      */
-    setElementType(elementType?: string, namespace?: Namespace): this;
+    setElement(element: HTMLElement): this;
+    setElement(elementType?: string, namespace?: Namespace): this;
     setId(id: string): this;
     jsonData<T>(): DOMStringMap & T;
     setSelectable(val: SelectableLayer | false): this;

@@ -10,7 +10,6 @@
  */
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
-import { IInspect } from "action/actions/Inspect";
 import { DialogId, EquipType, ItemType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { ScreenId } from "newui/screen/IScreen";
@@ -50,8 +49,6 @@ export default class Ui extends Emitter implements IUi {
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
     tooltipRefresh(): void;
-    refreshWorldTooltips(): void;
-    getMessageHtml(inspection: IInspect, tag?: string, log?: boolean, addedClass?: string): string;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];

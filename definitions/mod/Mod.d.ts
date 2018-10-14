@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IInspect } from "action/actions/Inspect";
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
@@ -96,7 +95,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     getZoomLevel(): number | undefined;
     isHumanSwimming(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
     isPlayerSwimming(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
-    isTileInspectable(tile: ITile): boolean | undefined;
     isTileBlocked(tile: ITile): true | undefined;
     onBuild(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
     onButtonBarClick(button: JQuery): void;
@@ -112,7 +110,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onGameTickStart(): void;
     onGameTickEnd(): void;
-    onInspectTile(player: IPlayer, tile: ITile): IInspect[] | undefined;
     onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     onInventoryItemRemove(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     onInventoryItemUpdate(player: IPlayer | undefined, item: IItem, container: IContainer): void;

@@ -17,7 +17,6 @@ import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
-import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
@@ -128,8 +127,6 @@ export default class Game extends Emitter implements IGame {
     updateThumbnail(): Promise<void>;
     addZoomLevel(amount: number): void;
     updateZoomLevel(): void;
-    getFireMessage(decay?: number, isOpenFire?: boolean): Message;
-    outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     requestPlay(options: Partial<IPlayOptions> & {
         slot: number;
     }): Promise<boolean>;
@@ -189,6 +186,7 @@ export default class Game extends Emitter implements IGame {
     isPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
     isPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
     getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
+    getPlayersAtPosition(position: IVector3, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeePosition(x: number, y: number, z: number): IPlayer[];
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
@@ -211,7 +209,6 @@ export default class Game extends Emitter implements IGame {
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
-    getInspectHealthMessage(healthPercent: number, skillPercent: number, name: Translation): Message | Translation;
     wrapCoordinate(cordinate: number, reference: number): number;
     isFlammable(x: number, y: number, z: number): boolean;
     getCameraPosition(): IVector2;

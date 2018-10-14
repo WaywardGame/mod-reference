@@ -32,6 +32,7 @@ export default class Vector2 implements IVector2 {
     static quotient(vector: IVector2, vector2: IVector2): Vector2;
     static quotient<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
     static range(a: IVector2, b: IVector2): IterableIterator<number[]>;
+    static is(thing: unknown): thing is IVector2;
     private readonly values;
     x: number;
     y: number;
@@ -45,7 +46,7 @@ export default class Vector2 implements IVector2 {
     copy<D extends IVector2>(dest: D): D;
     negate(): Vector2;
     negate<D extends IVector2>(dest: D): D;
-    equals(vector: IVector2, threshold?: number): boolean;
+    equals(vector: unknown, threshold?: number): boolean;
     length(): number;
     squaredLength(): number;
     add(vector: IVector2): this;

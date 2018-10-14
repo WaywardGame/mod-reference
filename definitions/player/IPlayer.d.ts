@@ -85,7 +85,6 @@ export interface IPlayer extends IBaseHumanEntity {
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    getInspectHealthMessage(player: IPlayer): Message | Translation;
     getMovementIntent(): IMovementIntent;
     getReputation(): number;
     getStrength(): number;

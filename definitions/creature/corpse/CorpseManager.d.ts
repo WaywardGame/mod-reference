@@ -11,6 +11,8 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import ICorpseManager from "creature/corpse/ICorpseManager";
 import { CreatureType, ItemType } from "Enums";
+import Inspection from "game/inspection/Inspect";
+import { InspectionResult } from "game/inspection/Inspections";
 import Translation from "language/Translation";
 export default class CorpseManager implements ICorpseManager {
     create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string): ICorpse | undefined;
@@ -21,4 +23,5 @@ export default class CorpseManager implements ICorpseManager {
     getName(typeOrCorpse: CreatureType | ICorpse, article?: boolean, count?: number, showCount?: boolean): Translation;
     getCorpseTranslations(corpses: ICorpse[]): IterableIterator<Translation>;
     getCorpseListTranslation(corpses: ICorpse[]): Translation;
+    inspect({ context }: Inspection, ...corpses: ICorpse[]): InspectionResult;
 }

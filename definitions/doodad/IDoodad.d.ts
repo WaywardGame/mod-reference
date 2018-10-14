@@ -8,18 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IInspect } from "action/actions/Inspect";
 import { ICreature } from "creature/ICreature";
 import DoodadInfo from "doodad/DoodadInfo";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ActionType, DoodadType, DoodadTypeGroup, DoorOrientation, EquipType, GrowingStage, IDoodadParticles, IDoodadResource, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SkillType, StatusType, TerrainType } from "Enums";
+import { IInspectable } from "game/inspection/Inspections";
 import { IContainer, IItem, IItemArray, IItemLegendary } from "item/IItem";
-import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
-export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer> {
+export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, IInspectable {
     /**
      * @param article Whether to include an article for the name of the doodad. Uses the article rules on the language. Defaults to `true`.
      * @param count The number of this doodad that you're getting the name of. Defaults to `1`.
@@ -62,8 +61,6 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     checkForTrampling(source: IBaseHumanEntity | ICreature): boolean;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): void;
-    getDurabilityMessage(): Message;
-    getInspect(): IInspect[];
     setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
     update(): void;

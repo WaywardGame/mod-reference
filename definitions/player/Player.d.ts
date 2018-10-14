@@ -133,7 +133,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
-    getInspectHealthMessage(player: IPlayer): Translation | Message;
     setPosition(point: IVector3): void;
     setZ(z: number): void;
     isLocalPlayer(): boolean;

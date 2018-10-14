@@ -13,6 +13,7 @@ import { EntityType } from "entity/IEntity";
 import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import StatFactory from "entity/StatFactory";
 import { Direction, FireType, MoveType, SfxType, StatusType } from "Enums";
+import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
@@ -36,6 +37,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     protected _movementFinishTime: number | undefined;
     private _inFov;
     constructor();
+    abstract getName(): Translation;
     initStat(factory: StatFactory): void;
     hasStat(stat: Stat): boolean;
     removeStat(stat: Stat): void;

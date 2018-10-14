@@ -67,7 +67,8 @@ declare class Translation {
     private readonly args;
     private readonly reformatters;
     private interpolator;
-    private context;
+    private _context;
+    readonly context: TextContext;
     private normalize;
     private failWith?;
     private random;

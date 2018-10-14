@@ -11,6 +11,7 @@
 import { DropLocation, IKeyBind } from "Enums";
 import { Difficulty } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
+import { InspectType } from "game/inspection/Inspections";
 import { ISerializedTranslation } from "language/Translation";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
@@ -93,11 +94,9 @@ export interface IOptions {
     rightHand: boolean;
     shouldLoadLastSave: boolean;
     skipSplash: boolean;
-    tooltipsCreatures: boolean;
-    tooltipsDoodads: boolean;
-    tooltipsItems: boolean;
-    tooltipsNPCs: boolean;
-    tooltipsTerrain: boolean;
+    tooltips: {
+        [key in InspectType]: boolean | undefined;
+    };
     uiScale: number;
     useAdjacentContainers: boolean;
     visionMode: boolean;
@@ -118,6 +117,11 @@ export declare type IOptionsOld = Partial<IOptions> & {
     worldTooltips: boolean;
     dropUnderYourself: boolean;
     openNotesAutomatically: boolean;
+    tooltipsCreatures: boolean;
+    tooltipsDoodads: boolean;
+    tooltipsNPCs: boolean;
+    tooltipsTerrain: boolean;
+    tooltipsItems: boolean;
 };
 export interface IHighscore {
     name: string;

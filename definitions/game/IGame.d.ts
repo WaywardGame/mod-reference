@@ -16,7 +16,6 @@ import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType
 import { Difficulty } from "game/Difficulty";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
-import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import { INPC } from "npc/INPC";
@@ -111,9 +110,7 @@ export interface IGame extends Emitter {
     getCompletedMilestoneCount(): number;
     getDifficulty(): Difficulty;
     getDifficultyOptions(): IDifficultyOptions;
-    getFireMessage(decay?: number, isOpenFire?: boolean): Message;
     getHeight(z0: number, z1: number, d: number): number;
-    getInspectHealthMessage(percent: number, skillPercent: number, name: Translation): Message | Translation;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number | undefined;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
@@ -126,6 +123,7 @@ export interface IGame extends Emitter {
     getPlayerByName(name: string): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
+    getPlayersAtPosition(position: IVector3, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeePosition(tileX: number, tileY: number, tileZ: number): IPlayer[];
@@ -158,7 +156,6 @@ export interface IGame extends Emitter {
     makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
-    outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     packGround(x: number, y: number, z: number): void;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     play(options: Partial<IPlayOptions>): Promise<boolean>;

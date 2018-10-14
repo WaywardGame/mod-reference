@@ -42,7 +42,8 @@ export declare enum EnumId {
     Note = 24,
     Dialog = 25,
     InterruptChoice = 26,
-    ItemTypeGroup = 27
+    ItemTypeGroup = 27,
+    InspectType = 28
 }
 export interface IEnumInfo {
     enumId: EnumId;

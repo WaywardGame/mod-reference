@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IInspect } from "action/actions/Inspect";
 import { IActionArgument, IActionResult } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
@@ -309,13 +308,6 @@ export interface IHookHost {
      */
     isHumanSwimming?(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
     /**
-     * Called when checking if a tile is inspectable (used for showing custom world tooltips over tiles)
-     * Normally used in conjunction with the OnInspectTile hook
-     * @param tile The tile object
-     * @returns True if you want to show a custom inspect message, false to display no messages, or undefined to use the default logic
-     */
-    isTileInspectable?(tile: ITile): boolean | undefined;
-    /**
      * Called when checking if a tile is blocked, used for pathing.
      * @param tile The tile to check
      */
@@ -393,13 +385,6 @@ export interface IHookHost {
      * Called when the game tick ends
      */
     onGameTickEnd?(): void;
-    /**
-     * Called when a tile is being inspected
-     * @param player The player object
-     * @param tile The tile being inspected
-     * @returns The inspects to be shown or undefined to use the default logic
-     */
-    onInspectTile?(player: IPlayer, tile: ITile): IInspect[] | undefined;
     /**
      * Called when an item is added to the players inventory
      * @param player The player object

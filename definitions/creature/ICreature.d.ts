@@ -12,11 +12,12 @@ import IBaseEntity from "entity/IBaseEntity";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, DamageType, Defense, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
+import { IInspectable } from "game/inspection/Inspections";
 import { IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
-export interface ICreature extends IBaseEntity, IObject<CreatureType> {
+export interface ICreature extends IBaseEntity, IObject<CreatureType>, IInspectable {
     entityType: EntityType.Creature;
     ai: AiType;
     anim: number;
@@ -39,8 +40,6 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType> {
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectHealthMessage(player: IPlayer): Message | Translation;
-    getInspectResistVulnerabilityMessage(player: IPlayer): Message | Translation | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     damage(damageInfo: IDamageInfo): number | undefined;
     isTamed(): boolean;

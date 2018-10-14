@@ -12,8 +12,9 @@ import { ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature
 import BaseEntity from "entity/BaseEntity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, ItemType, MoveType, SfxType } from "Enums";
+import Inspection from "game/inspection/Inspect";
+import { InspectionSection } from "game/inspection/Inspections";
 import { IItem } from "item/IItem";
-import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
@@ -28,6 +29,7 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     respawned?: boolean;
     shouldSkipNextUpdate: boolean;
     type: CreatureType;
+    originalMoveType: MoveType | undefined;
     private _description;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
@@ -37,10 +39,9 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     initializeStats(hp: number, maxhp?: number): void;
     getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
+    inspect({ inspector, context, inspectEntityHealth }: Inspection, section: InspectionSection): void;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectHealthMessage(player: IPlayer): Translation | Message;
-    getInspectResistVulnerabilityMessage(player: IPlayer): Translation | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     isTamed(): boolean;
     tame(player: IPlayer): boolean;
@@ -56,6 +57,8 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     damage(damageInfo: IDamageInfo): number | undefined;
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
+    private inspectResistancesAndVulnerabilities;
+    private inspectHappiness;
     private findPath;
     private checkCreatureMove;
     private findPlayersWithinRadius;

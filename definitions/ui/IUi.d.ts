@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IInspect } from "action/actions/Inspect";
 import { DialogId, EquipType, ItemType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
 import { ScreenId } from "newui/screen/IScreen";
@@ -82,8 +81,6 @@ export interface IUi extends IPropSerializable, Emitter {
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
     tooltipRefresh(): void;
-    refreshWorldTooltips(): void;
-    getMessageHtml(inspection: IInspect, tag?: string, log?: boolean, addedClass?: string): string;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];

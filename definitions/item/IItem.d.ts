@@ -90,7 +90,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     returns(): boolean;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: IPlayer): ICreature | undefined;
     getLocation(): IVector3 | undefined;
     dropInWater(human: IBaseHumanEntity, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;

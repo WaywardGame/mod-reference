@@ -10,6 +10,8 @@
  */
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
+import Inspection from "game/inspection/Inspect";
+import { InspectionResult } from "game/inspection/Inspections";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
 import { IItemManager } from "item/IItemManager";
 import Message from "language/dictionary/Message";
@@ -92,6 +94,7 @@ export default class ItemManager implements IItemManager {
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: IItem[]): number;
+    inspect({ context }: Inspection, ...items: IItem[]): InspectionResult;
     private updateItemOrderInternal;
     private loadReference;
     private removeFromContainerInternal;
