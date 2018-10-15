@@ -10,8 +10,8 @@
  */
 import { ICorpse } from "creature/corpse/ICorpse";
 import { CreatureType, ItemType } from "Enums";
+import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
-import { InspectionResult } from "game/inspection/Inspections";
 import Translation from "language/Translation";
 export interface ICorpseManager {
     create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string): ICorpse | undefined;

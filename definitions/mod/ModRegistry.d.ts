@@ -14,7 +14,9 @@ import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import { ActionType, Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, NPCType, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
-import { IInspectionHandler, InspectType } from "game/inspection/Inspections";
+import { DailyChallengeModifier, IDailyChallengeModifier } from "game/DailyChallenge";
+import { InspectType } from "game/inspection/IInspection";
+import { IInspectionHandler } from "game/inspection/Inspections";
 import { IItemDescription, IItemGroupDescription } from "item/IItem";
 import { Dictionary } from "language/Dictionaries";
 import InterruptChoice from "language/dictionary/InterruptChoice";
@@ -46,31 +48,37 @@ export declare enum ModRegistrationType {
     Dictionary = 5,
     Doodad = 6,
     HelpArticle = 7,
-    InterModRegistration = 8,
-    InterModRegistry = 9,
-    InterruptChoice = 10,
-    Item = 11,
-    ItemGroup = 12,
-    MenuBarButton = 13,
-    Message = 14,
-    MessageSource = 15,
-    MusicTrack = 16,
-    Note = 17,
-    NPC = 18,
-    OptionsSection = 19,
-    Overlay = 20,
-    Packet = 21,
-    Registry = 22,
-    Skill = 23,
-    SoundEffect = 24,
-    Terrain = 25,
-    TileEvent = 26,
-    InspectionType = 27
+    InspectionType = 8,
+    InterModRegistration = 9,
+    InterModRegistry = 10,
+    InterruptChoice = 11,
+    Item = 12,
+    ItemGroup = 13,
+    MenuBarButton = 14,
+    Message = 15,
+    MessageSource = 16,
+    MusicTrack = 17,
+    Note = 18,
+    NPC = 19,
+    OptionsSection = 20,
+    Overlay = 21,
+    Packet = 22,
+    Registry = 23,
+    Skill = 24,
+    SoundEffect = 25,
+    Terrain = 26,
+    TileEvent = 27,
+    DailyChallengeModifier = 28
 }
 export interface IInspectionTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InspectionType;
     name: string;
     description: IInspectionHandler | IInspectionHandler["handle"];
+}
+export interface IDailyChallengeModifierRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.DailyChallengeModifier;
+    name: string;
+    description: IDailyChallengeModifier | IDailyChallengeModifier["apply"];
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -208,7 +216,7 @@ export interface IItemGroupRegistration extends IBaseModRegistration {
     name: string;
     description: IItemGroupDescription;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration | IInspectionTypeRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -375,6 +383,11 @@ declare module Register {
      * @param description The definition of the inspection type.
      */
     function inspectionType(name: string, description: IInspectionHandler | IInspectionHandler["handle"]): <K extends string | number | symbol, T extends { [k in K]: InspectType; }>(target: T, key: K) => void;
+    /**
+     * Registers a daily challenge modifier, a "modifier" that will change based on the seed in daily challenge mode.
+     * @param description The definition of the daily challenge modifier.
+     */
+    function dailyChallengeModifier(name: string, description: IDailyChallengeModifier | IDailyChallengeModifier["apply"]): <K extends string | number | symbol, T extends { [k in K]: DailyChallengeModifier; }>(target: T, key: K) => void;
     /**
      * Registers a menu bar button.
      * @param description The definition of the menu bar button.

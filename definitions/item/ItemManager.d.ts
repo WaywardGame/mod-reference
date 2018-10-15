@@ -10,8 +10,8 @@
  */
 import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
+import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
-import { InspectionResult } from "game/inspection/Inspections";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
 import { IItemManager } from "item/IItemManager";
 import Message from "language/dictionary/Message";

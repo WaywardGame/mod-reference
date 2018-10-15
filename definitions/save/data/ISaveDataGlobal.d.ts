@@ -11,7 +11,7 @@
 import { DropLocation, IKeyBind } from "Enums";
 import { Difficulty } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
-import { InspectType } from "game/inspection/Inspections";
+import { InspectType } from "game/inspection/IInspection";
 import { ISerializedTranslation } from "language/Translation";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";

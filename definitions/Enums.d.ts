@@ -199,7 +199,8 @@ export declare enum ActionType {
     SmotherFire = 76,
     Trade = 77,
     PlaceDown = 78,
-    Inspect = 79
+    Inspect = 79,
+    Apply = 80
 }
 export declare enum ItemType {
     None = 0,
@@ -640,12 +641,14 @@ export declare enum ItemType {
     JoshuaTreeSeeds = 435,
     CookedJoshuaTreeFruit = 436,
     JoshuaTreeFlowers = 437,
-    SaguaroCactusSeeds = 438,
-    SaguaroCactusFruit = 439,
+    SaguaroCactusFruit = 438,
+    SaguaroCactusSeeds = 439,
     SaguaroCactusChunk = 440,
     StoneWell = 441,
     SandstoneWell = 442,
-    ClayBrickWell = 443
+    ClayBrickWell = 443,
+    AloeVeraLeaves = 444,
+    AloeVeraSeeds = 445
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -849,7 +852,8 @@ export declare enum DoodadType {
     LitAnimalFatTorchStand = 87,
     Item = 88,
     JoshuaTree = 89,
-    SaguaroCactus = 90
+    SaguaroCactus = 90,
+    AloeVera = 91
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -1149,7 +1153,8 @@ export declare enum SortType {
     Quality = 6,
     Category = 7,
     Durability = 8,
-    DiscoveredTime = 9
+    DiscoveredTime = 9,
+    Best = 10
 }
 export declare enum RestType {
     Resting = 0,

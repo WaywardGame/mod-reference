@@ -46,8 +46,8 @@ export interface IMatchmakingMessageData {
 }
 export interface IMatchmakingUpdateDirectoryMessageData extends IMatchmakingMessageData {
     type: MatchmakingMessageDataType.UpdateDirectory;
-    players: number;
-    maxPlayers: number;
+    serverDetails: Partial<IServerServerDetails>;
+    gameDetails: Partial<IServerGameDetails>;
     secret: string;
 }
 export interface IMatchmakingIpAddressMessageData extends IMatchmakingMessageData {

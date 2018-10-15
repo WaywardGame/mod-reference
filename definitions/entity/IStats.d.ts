@@ -34,14 +34,19 @@ export declare enum Stat {
      */
     Reputation = 9,
     /**
+     * A combination of `Stat.Hunger` + `Stat.Thirst`
+     * Does not exist on `Player` instances. Used for item legendaries.
+     */
+    Metabolism = 10,
+    /**
      * Used for chicken eggs and goat milk
      */
-    Produce = 10,
+    Produce = 11,
     /**
      * Used for tamed animals
      */
-    Happiness = 11,
-    Tamed = 12
+    Happiness = 12,
+    Tamed = 13
 }
 export declare type IStats = {
     [key in keyof typeof Stat]: IStat;

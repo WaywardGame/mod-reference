@@ -24,8 +24,9 @@ export declare enum DailyChallengeModifier {
     ReputationRate = 11,
     Peaceful = 12
 }
+export declare function applyDailyChallengeModifiers(difficultyOptions: IDifficultyOptions): IDifficultyOptions;
 export interface IDailyChallengeModifier {
     apply(difficultyOptions: IDifficultyOptions): void;
 }
-export declare function applyDailyChallengeModifiers(difficultyOptions: IDifficultyOptions): IDifficultyOptions;
-export declare const dailyChallengeModifiers: Descriptions<DailyChallengeModifier, IDailyChallengeModifier>;
+declare const dailyChallengeModifiers: Descriptions<DailyChallengeModifier, IDailyChallengeModifier | IDailyChallengeModifier["apply"]>;
+export default dailyChallengeModifiers;

@@ -13,6 +13,9 @@ import { IComponent } from "newui/component/IComponent";
 import Emitter from "utilities/Emitter";
 import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
+export declare const enum BindingManagerEvent {
+    BindsEnabled = "BindsEnabled"
+}
 export declare enum KeyModifier {
     Shift = 0,
     Alt = 1,

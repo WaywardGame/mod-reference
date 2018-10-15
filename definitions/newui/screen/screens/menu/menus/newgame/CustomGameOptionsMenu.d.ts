@@ -8,16 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IDifficultyOptions } from "game/Difficulty";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
-export default class FriendsMenu extends Menu {
-    private readonly serversContainer;
-    /**
-     * Do you want your friends in a box? Well, here you go! Your friends! In a box!
-     */
-    private readonly friendsContainer;
-    private readonly friendsErrorHeading;
-    constructor(api: UiApi);
+export default class CustomGameOptionsMenu extends Menu {
+    private readonly refreshables;
+    constructor(api: UiApi, options: () => IDifficultyOptions);
+    private addRefreshable;
     private refresh;
-    private refreshServers;
 }

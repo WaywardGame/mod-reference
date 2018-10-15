@@ -58,39 +58,11 @@ export interface IMultiplayer extends Emitter {
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
+    updateGlobalServerDirectory(): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;
-export declare const maxPlayers = 32;
-export declare const defaultServerPort = 38740;
-export declare const globalMatchmakingServerPort = 38740;
-export declare const keepAliveInterval = 4000;
-export declare const keepAliveTimeout = 15000;
-export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
-export interface IMultiplayerOptions {
-    lobbyType: LobbyType;
-    pvp: boolean;
-    turnMode: TurnMode;
-    maxPlayers: number;
-    tickSpeed: number;
-    syncChecks: boolean | MultiplayerSyncCheck[];
-}
-export interface IMultiplayerNetworkingOptions {
-    matchmakingServer: string;
-    matchmakingServerPort: number;
-    fakeLatency: number;
-    syncChecks: boolean | MultiplayerSyncCheck[];
-    enablePacketNumberChecks: boolean;
-    checkSeedHistory: boolean;
-    chunkSize: number;
-}
-export declare type ServerInfo = string | IMatchmakingInfo;
-export declare enum PacketAcceptType {
-    Serverside = 1,
-    Clientside = 2,
-    All = 3
-}
 export declare enum MultiplayerSyncCheck {
     BaseEntityManager = 0,
     CanASeeB = 1,
@@ -122,6 +94,35 @@ export declare enum MultiplayerSyncCheck {
     Tick = 27,
     Ticks = 28,
     Weight = 29
+}
+export declare const maxPlayers = 32;
+export declare const defaultServerPort = 38740;
+export declare const keepAliveInterval = 4000;
+export declare const keepAliveTimeout = 15000;
+export declare const networkingOptions: IMultiplayerNetworkingOptions;
+export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
+export interface IMultiplayerOptions {
+    lobbyType: LobbyType;
+    pvp: boolean;
+    turnMode: TurnMode;
+    maxPlayers: number;
+    tickSpeed: number;
+    syncChecks: boolean | MultiplayerSyncCheck[];
+}
+export interface IMultiplayerNetworkingOptions {
+    matchmakingServer: string;
+    matchmakingServerPort: number;
+    fakeLatency: number;
+    syncChecks: boolean | MultiplayerSyncCheck[];
+    enablePacketNumberChecks: boolean;
+    checkSeedHistory: boolean;
+    chunkSize: number;
+}
+export declare type ServerInfo = string | IMatchmakingInfo;
+export declare enum PacketAcceptType {
+    Serverside = 1,
+    Clientside = 2,
+    All = 3
 }
 export interface IMultiplayerWorldData {
     pid: number;

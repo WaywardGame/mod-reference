@@ -7,14 +7,13 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import { ICreature, SpawnableTiles } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, StatType, TatteredMap } from "Enums";
+import { Stat } from "entity/IStats";
+import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, TatteredMap } from "Enums";
 import Translation from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { IVector3 } from "utilities/math/IVector";
@@ -46,7 +45,7 @@ export interface IItemLegendary {
     type: LegendaryType;
     value: number;
     skill?: SkillType;
-    stat?: StatType;
+    stat?: Stat;
 }
 export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
     weight: number;

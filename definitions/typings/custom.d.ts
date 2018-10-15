@@ -45,6 +45,36 @@ interface JQuery {
 	getEquipSlot(): number;
 }
 
+interface IServer {
+	id: string;
+	connectionDetails: IServerConnectionDetails;
+	serverDetails: IServerServerDetails;
+	gameDetails: IServerGameDetails;
+}
+
+interface IServerConnectionDetails {
+	address: string;
+	port: number;
+	isDedicatedServer: boolean;
+}
+
+interface IServerServerDetails {
+	name: string;
+	description: string;
+	region: string;
+}
+
+interface IServerGameDetails {
+	players: number;
+	maxPlayers: number;
+	difficulty: number;
+	pvp: boolean;
+	reputation: number;
+	turns: number;
+	modded: boolean;
+	peaceful: boolean;
+}
+
 interface IMatchmakingServer {
 	connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
 	disconnectCallbacks: Map<string, () => void>;
@@ -54,7 +84,7 @@ interface IMatchmakingServer {
 	start(port?: number, disableServerDirectoryConnection?: boolean): string;
 	stop(): void;
 	updateName(name: string): void;
-	updateDirectory(players: number, maxPlayers: number): void;
+	updateDirectory(serverDetails: Partial<IServerServerDetails>, gameDetails: IServerGameDetails): void;
 	getConnections(): Map<string, IMatchmakingServerConnection>;
 }
 

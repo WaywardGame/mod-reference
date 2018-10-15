@@ -49,7 +49,7 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     /**
      * Chooses a random entry in an array and returns it
      */
-    choice(from: any[]): any;
+    choice<A extends any[]>(...from: A): A[number];
     shuffle<T>(array: T[]): T[];
     getElement<T>(array: T[]): T;
 }

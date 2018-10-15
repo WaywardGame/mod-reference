@@ -9,12 +9,12 @@
  * https://waywardgame.github.io/
  */
 import IBaseEntity from "entity/IBaseEntity";
-import { IInspectionSectionSimple, InspectionContext } from "game/inspection/Inspections";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
+import { IInspectionSectionSimple, InspectionContext } from "./IInspection";
 declare class Inspection {
     readonly inspector: IPlayer;
     readonly context: InspectionContext | string;

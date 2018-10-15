@@ -13,7 +13,7 @@ export declare enum MenuId {
     BACK = -1,
     NONE = 0,
     CharacterSelection = 1,
-    Friends = 2,
+    Multiplayer = 2,
     GameEnd = 3,
     Help = 4,
     Highscores = 5,

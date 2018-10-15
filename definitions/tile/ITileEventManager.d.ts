@@ -7,11 +7,9 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
+import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
-import { InspectionResult } from "game/inspection/Inspections";
 import { ITile } from "tile/ITerrain";
 import { ITileEvent, TileEventType } from "tile/ITileEvent";
 export interface ITileEventManager {

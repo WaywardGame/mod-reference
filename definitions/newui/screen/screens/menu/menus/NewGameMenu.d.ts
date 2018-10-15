@@ -29,16 +29,15 @@ export default class NewGameMenu extends Menu {
     private choiceLobbyPublic;
     private choiceLobbyPrivate;
     private inputPVP;
-    private inputCustomModePeaceful;
-    private inputCustomModeRespawnOnDeath;
-    private inputCustomModeReputationMultiplier;
     private maxPlayersRow;
     private tickSpeedRow;
     private buttonNext;
+    private customGameOptionsMenu;
+    private difficultyOptions;
     constructor(api: UiApi);
     create(): void;
     private refresh;
-    private updateCustomModeInputs;
     private getStartClickHandler;
     private getPlayOptions;
+    private getCustomGameOptionsMenu;
 }

@@ -95,4 +95,5 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     private getUnusedQuadrant;
     private onDialogClose;
     private updatePauseIcon;
+    private tryShowWorldTooltip;
 }

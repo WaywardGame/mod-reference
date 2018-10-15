@@ -10,14 +10,13 @@
  */
 import UiTranslation from "language/dictionary/UiTranslation";
 import { IHookHost } from "mod/IHookHost";
-import { IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
+import { IMultiplayer, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TranslationGenerator } from "newui/component/IComponent";
 import IPlayer, { ICharacter } from "player/IPlayer";
 import Emitter from "utilities/Emitter";
-export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export default class Multiplayer extends Emitter implements IMultiplayer, IHookHost {
     private readonly _playerIdentifier;
     private _isServer;
@@ -82,6 +81,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     syncGameState(): void;
     preSaveGame(): void;
     postSaveGame(): void;
+    updateGlobalServerDirectory(): void;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;
@@ -108,5 +108,4 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _sendData;
     private onStateChange;
     private convertToMatchmakingInfo;
-    private updateGlobalServerDirectory;
 }

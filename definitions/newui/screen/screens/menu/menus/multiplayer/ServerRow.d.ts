@@ -8,14 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Component from "newui/component/Component";
-import { ITooltip } from "newui/component/IComponent";
+import Button from "newui/component/Button";
+import { IRefreshable } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
-export default class WorldTooltipHandler {
-    private readonly api;
-    private lastPosition?;
-    constructor(api: UiApi, gameScreen: Component);
-    initializeTooltip(tooltip: ITooltip): ITooltip;
-    private onTooltipMove;
-    private refreshTooltip;
+export declare class ServerRow extends Button implements IRefreshable {
+    private readonly headingPlace;
+    private _server;
+    server: IServer;
+    private _place;
+    place: number;
+    constructor(api: UiApi, server: IServer);
+    refresh(): this;
 }
