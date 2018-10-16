@@ -15,3 +15,4 @@ export declare function startGame(gameOptions: () => IPlayOptions): () => void;
 export declare function startGame(gameOptions: IPlayOptions): void;
 export declare function menuSwitcher<M extends Menu = Menu>(menu: MenuId | M | (() => M), then?: (menu: M, ...args: any[]) => any): (...args: any[]) => void;
 export declare function switchMenu<M extends Menu = Menu>(menu: MenuId | M | (() => M), then?: (menu: M, ...args: any[]) => any, ...args: any[]): void;
+export declare function isModLoadable(publishId: string): [string, "notenabled" | "enabled" | "error"];

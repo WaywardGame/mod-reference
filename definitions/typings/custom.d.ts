@@ -60,6 +60,7 @@ interface IServerConnectionDetails {
 
 interface IServerServerDetails {
 	name: string;
+	hostName: string;
 	description: string;
 	region: string;
 }
@@ -70,9 +71,14 @@ interface IServerGameDetails {
 	difficulty: number;
 	pvp: boolean;
 	reputation: number;
-	turns: number;
-	modded: boolean;
+	days: number;
+	mods: IServerMod[];
 	peaceful: boolean;
+}
+
+interface IServerMod {
+	name: string;
+	publishFileId: string | undefined;
 }
 
 interface IMatchmakingServer {

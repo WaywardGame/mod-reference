@@ -13,10 +13,14 @@ import { IRefreshable } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 export declare class ServerRow extends Button implements IRefreshable {
     private readonly headingPlace;
+    private readonly difficulty;
+    private readonly pvp;
+    private readonly mods;
     private _server;
     server: IServer;
     private _place;
     place: number;
     constructor(api: UiApi, server: IServer);
     refresh(): this;
+    private getModsTooltip;
 }

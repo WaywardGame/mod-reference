@@ -44,10 +44,6 @@ export declare class SaveSlot extends InputButton {
      */
     private getTooltip;
     /**
-     * Event handler for when this button is activated.
-     */
-    private onActivate;
-    /**
      * Renames the save. Event handler for when this InputButton leaves edit mode.
      */
     private rename;

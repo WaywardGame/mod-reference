@@ -52,10 +52,10 @@ export declare enum SortDirection {
     More = 1,
     Less = -1
 }
-export declare let dailyChallengeSlot: number;
-export declare let globalSlot: number;
-export declare let multiplayerSlot: number;
-export declare let maxSlots: number;
+export declare let SLOT_DAILY_CHALLENGE: number;
+export declare let SLOT_GLOBAL: number;
+export declare let SLOT_MULTIPLAYER: number;
+export declare let SLOT_COUNT_MAX: number;
 export declare let propertiesToSerialize: ISerializeProperty[];
 export declare let propertiesToSerializeGlobal: ISerializeProperty[];
 export declare class SaveObject {
