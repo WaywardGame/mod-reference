@@ -60,7 +60,7 @@ interface IServerConnectionDetails {
 
 interface IServerServerDetails {
 	name: string;
-	hostName: string;
+	hostPlayerName: string;
 	description: string;
 	region: string;
 }

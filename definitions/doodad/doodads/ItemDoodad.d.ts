@@ -10,10 +10,11 @@
  *
  *
  */
+import { ActionType } from "action2/IAction";
 import DoodadInfo from "doodad/DoodadInfo";
 import Doodad from "doodad/doodads/Doodad";
 import { IDoodad, IDoodadDescription, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, ItemType } from "Enums";
+import { ItemType } from "Enums";
 import Translation from "language/Translation";
 export default class ItemDoodad extends Doodad implements IDoodad {
     itemType: ItemType;

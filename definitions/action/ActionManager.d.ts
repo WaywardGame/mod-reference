@@ -7,13 +7,11 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import { ExecuteArgument, IAction, IActionResult } from "action/IAction";
 import IActionManager from "action/IActionManager";
+import { ActionType } from "action2/IAction";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType } from "Enums";
 import GenericManager from "game/GenericManager";
 import { IGenericManager } from "game/IGenericManager";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";

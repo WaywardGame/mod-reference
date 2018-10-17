@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
@@ -18,7 +17,6 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
-import { ITile } from "tile/ITerrain";
 export default class ItemManager implements IItemManager {
     private readonly worldContainer;
     private cachedWeights;
@@ -36,7 +34,7 @@ export default class ItemManager implements IItemManager {
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
-    isContainer(obj: IItem | IDoodad | IContainer | ITile | IPlayer): obj is IContainer;
+    isContainer(obj: unknown): obj is IContainer;
     moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): IItem[];
     computeContainerWeight(container: IContainer): number;
     getLegendaryWeightCapacity(container: IContainer): number;

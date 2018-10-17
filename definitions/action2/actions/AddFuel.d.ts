@@ -8,10 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IAction } from "action/IAction";
-import { IGenericManager } from "game/IGenericManager";
-export default function setup(actionManager: IGenericManager<IAction>): void;
-export interface IActionDescriptionDescription {
-    showDestroyConfirmination?: boolean;
-}
-export declare const actionDescriptions: IActionDescriptionDescription[];
+import { Action } from "action2/Action";
+import { ActionArgument } from "action2/IAction";
+declare const _default: Action<[ActionArgument.Item, ActionArgument.Item], import("../../player/IPlayer").IPlayer>;
+export default _default;

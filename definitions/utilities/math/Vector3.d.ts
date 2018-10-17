@@ -32,6 +32,7 @@ export default class Vector3 implements IVector3 {
     static product<D extends IVector3>(vector: IVector3, vector2: IVector3, dest: D): D;
     static quotient(vector: IVector3, vector2: IVector3): Vector3;
     static quotient<D extends IVector3>(vector: IVector3, vector2: IVector3, dest: D): D;
+    static is(thing: unknown): thing is IVector3;
     private readonly values;
     x: number;
     y: number;

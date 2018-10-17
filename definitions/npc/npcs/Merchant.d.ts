@@ -8,8 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ActionType } from "action2/IAction";
 import { AiType } from "entity/IEntity";
-import { ActionType, EquipType, ItemType } from "Enums";
+import { EquipType, ItemType } from "Enums";
 import { IItem } from "item/IItem";
 import BaseNPC from "npc/BaseNPC";
 import { INPC } from "npc/INPC";

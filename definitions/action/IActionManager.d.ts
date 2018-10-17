@@ -11,8 +11,8 @@
  *
  */
 import { ExecuteArgument, IAction, IActionResult } from "action/IAction";
+import { ActionType } from "action2/IAction";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType } from "Enums";
 import { IGenericManager } from "game/IGenericManager";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import IPlayer from "player/IPlayer";

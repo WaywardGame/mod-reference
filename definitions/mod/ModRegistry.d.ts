@@ -9,11 +9,12 @@
  * https://waywardgame.github.io/
  */
 import { ActionCallback, IActionBase } from "action/IAction";
+import { ActionType } from "action2/IAction";
 import { CommandCallback } from "command/ICommand";
 import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
-import { ActionType, Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, NPCType, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
+import { Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, NPCType, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
 import { DailyChallengeModifier, IDailyChallengeModifier } from "game/DailyChallenge";
 import { InspectType } from "game/inspection/IInspection";
 import { IInspectionHandler } from "game/inspection/Inspections";

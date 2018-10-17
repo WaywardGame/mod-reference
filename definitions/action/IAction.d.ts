@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ActionType } from "action2/IAction";
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, AttackType, Delay, Direction, EquipType, IModdable, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
+import { AttackType, Delay, Direction, EquipType, IModdable, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IGenericRegistration } from "game/IGenericManager";
 import { IContainer, IItem } from "item/IItem";
 import { INPC } from "npc/INPC";

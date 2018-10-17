@@ -80,6 +80,15 @@ declare module Enums {
     function entries<E, K extends string>(enumObject: {
         [key in K]: E;
     }): IterableIterator<[K, E]>;
+    /**
+     * Returns whether the given number is a valid entry in an enum.
+     * @param enumObject The enum object to check for the entry.
+     * @param entry The value to check.
+     * @param isBasicEnum Whether the enum is a "basic" enum; IE, every entry is a number between 0 and Infinity
+     */
+    function isValid<E, K extends string>(enumObject: {
+        [key in K]: E;
+    }, entry: unknown, isBasicEnum?: boolean): entry is E;
     function toString(enumObject: any, n: number): string;
 }
 export default Enums;

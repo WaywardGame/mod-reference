@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IAction } from "action/IAction";
-import { IGenericManager } from "game/IGenericManager";
-export default function setup(actionManager: IGenericManager<IAction>): void;
-export interface IActionDescriptionDescription {
-    showDestroyConfirmination?: boolean;
+import { ActionArgumentTupleTypes, IActionDescription } from "action2/IAction";
+export default class ActionManager {
+    get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E> ? {
+        execute(executor: E, ...args: ActionArgumentTupleTypes<A>): any;
+    } : never;
+    private validate;
+    private validateArgument;
 }
-export declare const actionDescriptions: IActionDescriptionDescription[];

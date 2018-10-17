@@ -8,12 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ActionType } from "action2/IAction";
 import { ICreature, SpawnableTiles } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { Stat } from "entity/IStats";
-import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, TatteredMap } from "Enums";
+import { BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, TatteredMap } from "Enums";
 import Translation from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { IVector3 } from "utilities/math/IVector";

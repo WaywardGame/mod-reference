@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
 import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
@@ -17,7 +16,6 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
-import { ITile } from "tile/ITerrain";
 export interface IItemManager {
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
@@ -63,7 +61,7 @@ export interface IItemManager {
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
-    isContainer(obj: IItem | IDoodad | IContainer | ITile): obj is IContainer;
+    isContainer(obj: unknown): obj is IContainer;
     isGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
     getGroups(itemType: ItemType): IterableIterator<ItemTypeGroup>;
