@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IActionArgument, IActionResult } from "action/IAction";
-import { ActionType } from "action2/IAction";
+import { ActionType, IActionApi, IActionDescription } from "action2/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
@@ -651,12 +650,8 @@ export interface IHookHost {
     /**
      * Called after an action has been executed
      * This is called after the action result is used
-     * @param player The player object
-     * @param actionType The action type
-     * @param actionArgument The action argument
-     * @param actionResult The action result
      */
-    postExecuteAction?(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
+    postExecuteAction?(api: IActionApi, action: IActionDescription, args: any[]): void;
     /**
      * Called after the field of view has initialized
      */
@@ -688,12 +683,9 @@ export interface IHookHost {
     /**
      * Called before an action is executed
      * This is called before the action result is used
-     * @param player The player object
-     * @param actionType The action type
-     * @param actionArgument The action argument
      * @returns False to cancel the action or undefined to use the default logic
      */
-    preExecuteAction?(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument): boolean | undefined;
+    preExecuteAction?(api: IActionApi, action: IActionDescription, args: any[]): boolean | undefined;
     /**
      * Called before loading world differences
      * Loading differences involving setting up corpses, creatures, doodads, and related things onto the world

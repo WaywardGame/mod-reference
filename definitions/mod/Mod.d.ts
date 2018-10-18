@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IActionArgument, IActionResult } from "action/IAction";
-import { ActionType } from "action2/IAction";
+import { ActionType, IActionApi, IActionDescription } from "action2/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
@@ -149,14 +148,14 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onUpdateWeight(player: IPlayer, newWeight: number): number | undefined;
     onWriteNote(player: IPlayer, note: INote): false | undefined;
     onWrittenNote(player: IPlayer, id: number): void;
-    postExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
+    postExecuteAction(api: IActionApi, action: IActionDescription, args: any[]): void;
     postFieldOfView(): void;
     postGenerateWorld(generateNewWorld: boolean): void;
     postRender(): void;
     postRenderPostProcess(): void;
     postRenderWorld(tileScale: number, viewWidth: number, viewHeight: number): void;
     postSaveGame(): void;
-    preExecuteAction(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument): boolean | undefined;
+    preExecuteAction(api: IActionApi, action: IActionDescription, args: any[]): boolean | undefined;
     preLoadWorldDifferences(generateNewWorld: boolean): void;
     preExecuteCommand(player: IPlayer, command: Command, args: string | undefined): boolean | undefined;
     preRender(): void;

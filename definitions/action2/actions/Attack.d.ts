@@ -8,11 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionArgumentTupleTypes, IActionDescription } from "action2/IAction";
-export default class ActionManager {
-    get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E> ? {
-        execute(executor: E, ...args: ActionArgumentTupleTypes<A>): any;
-    } : never;
-    private validate;
-    private validateArgument;
-}
+import { Action } from "action2/Action";
+import { ActionArgument } from "action2/IAction";
+declare const _default: Action<[[ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.Item, ActionArgument.Undefined]], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer>;
+export default _default;

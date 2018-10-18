@@ -13,9 +13,10 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { Entity, EntityType } from "entity/IEntity";
-import { AttackType, Direction, DoodadType, EquipType, ItemQuality, ItemType, RestType, SfxType, SkillType } from "Enums";
+import { AttackType, Direction, DoodadType, EquipType, IRGB, ItemQuality, ItemType, RestType, SfxType, SkillType, TurnType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
+import { MilestoneType } from "player/IMilestone";
 import IPlayer from "player/IPlayer";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export declare enum ActionType {
@@ -118,26 +119,35 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
     handler(actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>): any;
 }
 export interface IActionApi<E extends Entity = Entity> {
-    executor: E;
-    type: ActionType;
-    setDelay(delay: number): this;
-    setPassTurn(): this;
+    readonly executor: E;
+    readonly type: ActionType;
+    setDelay(delay: number, replace?: boolean): this;
+    setPassTurn(turnType?: TurnType): this;
+    setUpdateView(updateFov?: boolean): this;
+    setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;
     setStaminaReduction(reduction: number): this;
     setSkillGain(skill: SkillType, amount?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
-    setItemsUsed(...items: IItem[]): this;
+    setReputationChange(amount: number): this;
+    setMilestone(milestone: MilestoneType, data?: number): this;
+    setParticle(color: IRGB, count?: number, inFront?: boolean): this;
+    setParticle(particle: IActionParticle): this;
 }
 export interface IActionSoundEffect {
     type: SfxType;
     inFront?: boolean;
-    x?: number;
-    y?: number;
-    z?: number;
+    position?: Partial<IVector3>;
     delay?: number;
     speed?: number;
     noPosition?: boolean;
+}
+export interface IActionParticle {
+    color: IRGB;
+    position?: Partial<IVector3>;
+    count?: number;
+    inFront?: boolean;
 }
 export declare function anyOf<A extends ActionArgument[]>(...actions: A): A;
 export declare enum ActionArgument {
@@ -146,30 +156,32 @@ export declare enum ActionArgument {
     Boolean = 2,
     Number = 3,
     String = 4,
-    Function = 5,
-    Array = 6,
-    Object = 7,
-    AttackType = 8,
-    Container = 9,
-    Item = 10,
-    Doodad = 11,
-    Corpse = 12,
-    Creature = 13,
-    NPC = 14,
-    Player = 15,
-    Human = 16,
-    EquipType = 17,
-    Direction = 18,
-    ItemQuality = 19,
-    ItemType = 20,
-    Vector2 = 21,
-    Vector3 = 22,
-    RestType = 23,
-    ActionType = 24,
-    DoodadType = 25,
-    Entity = 26
+    Array = 5,
+    Object = 6,
+    AttackType = 7,
+    Container = 8,
+    Item = 9,
+    Doodad = 10,
+    Corpse = 11,
+    Creature = 12,
+    NPC = 13,
+    Player = 14,
+    Human = 15,
+    EquipType = 16,
+    Direction = 17,
+    ItemQuality = 18,
+    ItemType = 19,
+    Vector2 = 20,
+    Vector3 = 21,
+    RestType = 22,
+    ActionType = 23,
+    DoodadType = 24,
+    Entity = 25,
+    ItemNearby = 26,
+    ItemInventory = 27,
+    ItemArray = 28
 }
-declare type ActionArgumentType<X extends ActionArgument> = X extends ActionArgument.Number ? number : X extends ActionArgument.Undefined ? undefined : X extends ActionArgument.Null ? null : X extends ActionArgument.Boolean ? boolean : X extends ActionArgument.Number ? number : X extends ActionArgument.String ? string : X extends ActionArgument.Function ? (...args: any[]) => any : X extends ActionArgument.Array ? any[] : X extends ActionArgument.Object ? any : X extends ActionArgument.AttackType ? AttackType : X extends ActionArgument.Container ? IContainer : X extends ActionArgument.Item ? IItem : X extends ActionArgument.Doodad ? IDoodad : X extends ActionArgument.Corpse ? ICorpse : X extends ActionArgument.Creature ? ICreature : X extends ActionArgument.NPC ? INPC : X extends ActionArgument.Player ? IPlayer : X extends ActionArgument.Human ? IBaseHumanEntity : X extends ActionArgument.EquipType ? EquipType : X extends ActionArgument.Direction ? Direction : X extends ActionArgument.ItemQuality ? ItemQuality : X extends ActionArgument.ItemType ? ItemType : X extends ActionArgument.Vector2 ? IVector2 : X extends ActionArgument.Vector3 ? IVector3 : X extends ActionArgument.RestType ? RestType : X extends ActionArgument.ActionType ? ActionType : X extends ActionArgument.DoodadType ? DoodadType : X extends ActionArgument.Entity ? Entity : never;
+declare type ActionArgumentType<X extends ActionArgument> = X extends ActionArgument.Number ? number : X extends ActionArgument.Undefined ? undefined : X extends ActionArgument.Null ? null : X extends ActionArgument.Boolean ? boolean : X extends ActionArgument.Number ? number : X extends ActionArgument.String ? string : X extends ActionArgument.Array ? any[] : X extends ActionArgument.Object ? any : X extends ActionArgument.AttackType ? AttackType : X extends ActionArgument.Container ? IContainer : X extends ActionArgument.Item ? IItem : X extends ActionArgument.ItemNearby ? IItem : X extends ActionArgument.ItemInventory ? IItem : X extends ActionArgument.ItemArray ? IItem[] : X extends ActionArgument.Doodad ? IDoodad : X extends ActionArgument.Corpse ? ICorpse : X extends ActionArgument.Creature ? ICreature : X extends ActionArgument.NPC ? INPC : X extends ActionArgument.Player ? IPlayer : X extends ActionArgument.Human ? IBaseHumanEntity : X extends ActionArgument.EquipType ? EquipType : X extends ActionArgument.Direction ? Direction : X extends ActionArgument.ItemQuality ? ItemQuality : X extends ActionArgument.ItemType ? ItemType : X extends ActionArgument.Vector2 ? IVector2 : X extends ActionArgument.Vector3 ? IVector3 : X extends ActionArgument.RestType ? RestType : X extends ActionArgument.ActionType ? ActionType : X extends ActionArgument.DoodadType ? DoodadType : X extends ActionArgument.Entity ? Entity : never;
 declare type ActionArgumentEntryType<X extends ActionArgument | ActionArgument[]> = X extends ActionArgument ? ActionArgumentType<X> : X extends ActionArgument[] ? ExtractActionArgumentArray<X> : never;
 declare type ExtractActionArgumentArray<X extends ActionArgument[]> = X extends [ActionArgument] ? [ActionArgumentType<X[0]>] : X extends [ActionArgument, ActionArgument] ? ActionArgumentType<X[0]> | ActionArgumentType<X[1]> : X extends [ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentType<X[0]> | ActionArgumentType<X[1]> | ActionArgumentType<X[2]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentType<X[0]> | ActionArgumentType<X[1]> | ActionArgumentType<X[2]> | ActionArgumentType<X[3]> : never;
 export declare type ActionArgumentTupleTypes<X extends Array<ActionArgument | ActionArgument[]>> = X extends [] ? [] : X extends [ActionArgument | ActionArgument[]] ? [ActionArgumentEntryType<X[0]>] : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? [ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>] : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? [ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>] : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? [ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>] : never;
