@@ -60,13 +60,15 @@ interface IServerConnectionDetails {
 
 interface IServerServerDetails {
 	name: string;
-	hostPlayerName: string;
 	description: string;
+	hostPlayerName: string;
+	hostPlayerId: string;
+	lobbyType: number;
 	region: string;
 }
 
 interface IServerGameDetails {
-	players: number;
+	players: string[];
 	maxPlayers: number;
 	difficulty: number;
 	pvp: boolean;

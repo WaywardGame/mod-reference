@@ -9,6 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { Action } from "action2/Action";
-import { ActionArgument } from "action2/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../player/IPlayer").IPlayer, void>;
+declare const _default: Action<[], import("../../player/IPlayer").IPlayer, boolean>;
 export default _default;

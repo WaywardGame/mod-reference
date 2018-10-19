@@ -213,7 +213,7 @@ export interface IPlayOptions {
     difficulty: Difficulty;
     difficultyOptions: IDifficultyOptions;
     character: ICharacter;
-    multiplayer: IMultiplayerOptions | undefined;
+    multiplayer: IMultiplayerOptions | true | undefined;
     multiplayerServerToJoin: ServerInfo | undefined;
     turnMode: TurnMode;
     realTimeTickSpeed: number;

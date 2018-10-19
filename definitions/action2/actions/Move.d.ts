@@ -10,5 +10,5 @@
  */
 import { Action } from "action2/Action";
 import { ActionArgument } from "action2/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../player/IPlayer").IPlayer, void>;
+declare const _default: Action<[ActionArgument.Direction], import("../../player/IPlayer").IPlayer, void>;
 export default _default;

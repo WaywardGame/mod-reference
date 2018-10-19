@@ -109,6 +109,10 @@ export interface IMultiplayerOptions {
     tickSpeed: number;
     syncChecks: boolean | MultiplayerSyncCheck[];
 }
+export interface IMultiplayerState {
+    enable: boolean;
+    options?: IMultiplayerOptions;
+}
 export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;
     matchmakingServerPort: number;

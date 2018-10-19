@@ -10,5 +10,10 @@
  */
 import { Action } from "action2/Action";
 import { ActionArgument } from "action2/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../player/IPlayer").IPlayer, void>;
+export declare enum GatherType {
+    Doodad = 0,
+    TileEvent = 1,
+    Tile = 2
+}
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/IPlayer").IPlayer, void>;
 export default _default;

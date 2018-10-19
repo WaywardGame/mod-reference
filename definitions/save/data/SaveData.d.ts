@@ -11,6 +11,7 @@
 import { PlayerState } from "Enums";
 import { Difficulty } from "game/Difficulty";
 import { ISerializedTranslation } from "language/Translation";
+import { IMultiplayerState } from "multiplayer/IMultiplayer";
 import ISaveData from "save/data/ISaveData";
 import { IEnumInfo } from "utilities/enum/IEnum";
 export declare const saveDataVersionUnknown = "Unknown";
@@ -36,6 +37,7 @@ export default class SaveData implements ISaveData {
             unloadable: boolean;
         };
     };
+    multiplayerState: IMultiplayerState;
     utilitiesEnumsAllocated: {
         [index: string]: IEnumInfo;
     };

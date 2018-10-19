@@ -639,7 +639,8 @@ export declare enum ItemTypeGroup {
     Glue = 868,
     FireStarter = 869,
     Sand = 870,
-    Last = 871
+    Untradable = 871,
+    Last = 872
 }
 export declare enum TerrainType {
     DeepSeawater = 0,

@@ -10,5 +10,6 @@
  */
 import { Action } from "action2/Action";
 import { ActionArgument } from "action2/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../../player/IPlayer").IPlayer, void>;
+import IPlayer from "player/IPlayer";
+declare const _default: Action<[ActionArgument.Vector2, [ActionArgument.Direction, ActionArgument.Undefined]], IPlayer, void>;
 export default _default;

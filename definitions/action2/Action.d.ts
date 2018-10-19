@@ -13,15 +13,15 @@ import { ICreature } from "creature/ICreature";
 import { Entity, EntityType } from "entity/IEntity";
 import { INPC } from "npc/INPC";
 import IPlayer from "player/IPlayer";
-export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity> implements IActionDescription<A, E> {
+export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity = Entity, R = void> implements IActionDescription<A, E, R> {
     readonly argumentTypes: A;
     readonly usability: {
         [key in ActionUsability]?: boolean;
     };
     validExecutors: EntityType[];
-    handler: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any;
+    handler: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => R;
     constructor(...argumentTypes: A);
-    setHandler(handler: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any): this;
+    setHandler<H extends (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any>(handler: H): Action<A, E, H extends (...args: any) => infer R2 ? R2 : void>;
     setUsableWhen(usability: ActionUsability): this;
     setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, EntityTypeTupleType<E2>>;
 }
