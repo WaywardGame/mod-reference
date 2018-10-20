@@ -565,7 +565,12 @@ export declare enum ItemType {
     SandstoneWell = 442,
     ClayBrickWell = 443,
     AloeVeraLeaves = 444,
-    AloeVeraSeeds = 445
+    AloeVeraSeeds = 445,
+    DeadScorpion = 446,
+    DeadAberrantScorpion = 447,
+    CookedScorpion = 448,
+    CookedAberrantScorpion = 449,
+    ScorpionStinger = 450
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -843,7 +848,8 @@ export declare enum CreatureType {
     LavaBeetle = 34,
     Goat = 35,
     SlitherSucker = 36,
-    Mudskipper = 37
+    Mudskipper = 37,
+    Scorpion = 38
 }
 export declare enum NPCType {
     Merchant = 0,

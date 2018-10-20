@@ -66,7 +66,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): Promise<void>;
     disconnectAndResetGameState(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     kick(player: IPlayer, reason: UiTranslation): void;
-    onPlaying(): void;
+    onPlaying(): Promise<void>;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     getClients(): IConnection[];
     closeConnection(connection: IConnection): void;

@@ -102,6 +102,7 @@ export interface ICreatureDescription extends IModdable {
     blood?: IRGB;
     aberrantBlood?: IRGB;
     loot?: ICreatureLoot[];
+    aberrantLoot?: ICreatureLoot[];
     spawnTiles: SpawnableTiles;
     spawnReputation?: number;
     spawnOnBenignity?: boolean;

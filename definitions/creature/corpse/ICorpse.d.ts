@@ -13,6 +13,7 @@ import { IVector3 } from "utilities/math/IVector";
 export interface ICorpseDescription extends IModdable {
     decay?: number;
     resource?: ICorpseResourceDrop[];
+    aberrantResource?: ICorpseResourceDrop[];
     carve?: boolean;
     skill?: SkillType;
     damage?: number;

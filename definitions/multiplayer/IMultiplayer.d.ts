@@ -47,7 +47,7 @@ export interface IMultiplayer extends Emitter {
     joinServer(info: ServerInfo, character?: ICharacter): void;
     kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
-    onPlaying(): void;
+    onPlaying(): Promise<void>;
     pausePacketProcessing(pause: boolean): void;
     queueSyncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): void;
     resetSyncPacketsWaiting(): void;

@@ -19,9 +19,9 @@ declare const actionDescriptions: {
     [ActionType.Attack]: import("./Action").Action<[[ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.Item, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Build]: import("./Action").Action<[ActionArgument.Item], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Carve]: import("./Action").Action<[ActionArgument.ItemInventory], import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Cast]: IActionDescription<(ActionArgument | ActionArgument[])[], import("../creature/ICreature").ICreature | import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.CloseContainer]: IActionDescription<(ActionArgument | ActionArgument[])[], import("../creature/ICreature").ICreature | import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.CloseDoor]: IActionDescription<(ActionArgument | ActionArgument[])[], import("../creature/ICreature").ICreature | import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Cast]: import("./Action").Action<[ActionArgument.Item], import("../player/IPlayer").IPlayer, void>;
+    [ActionType.CloseContainer]: import("./Action").Action<[ActionArgument.Container], import("../player/IPlayer").IPlayer, void>;
+    [ActionType.CloseDoor]: import("./Action").Action<[], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Craft]: IActionDescription<(ActionArgument | ActionArgument[])[], import("../creature/ICreature").ICreature | import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Decode]: IActionDescription<(ActionArgument | ActionArgument[])[], import("../creature/ICreature").ICreature | import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Dig]: IActionDescription<(ActionArgument | ActionArgument[])[], import("../creature/ICreature").ICreature | import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
