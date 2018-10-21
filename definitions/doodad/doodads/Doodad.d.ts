@@ -22,6 +22,7 @@ import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable {
+    static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
     "constructor": typeof Doodad;
     containedItems: IItemArray;
@@ -106,5 +107,4 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
      * Decay over time
      */
     private processDecay;
-    private getGrowingStageTranslation;
 }

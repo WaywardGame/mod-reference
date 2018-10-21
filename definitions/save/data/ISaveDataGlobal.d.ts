@@ -17,6 +17,7 @@ import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import { IMilestoneData } from "player/IMilestone";
+import { ICharacter } from "player/IPlayer";
 import { IDialogInfo } from "ui/IUi";
 import { IEnumInfo } from "utilities/enum/IEnum";
 import { ISourceFilter } from "utilities/Log";
@@ -47,6 +48,9 @@ export interface ISaveDataGlobal {
         [index: string]: IDialogInfo;
     };
     multiplayerBannedPlayers: string[];
+    multiplayerPreviousGames: {
+        [index: string]: ICharacter | undefined;
+    };
     characters: ISavedCharacter[];
     newui: {
         [index: string]: any;

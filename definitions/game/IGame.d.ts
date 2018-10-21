@@ -74,6 +74,7 @@ export interface IGame extends Emitter {
         [index: number]: number;
     };
     previousSaveVersion: IVersionInfo;
+    worldId: string;
     tickSpeed: number;
     crafted: {
         [index: number]: ICrafted;

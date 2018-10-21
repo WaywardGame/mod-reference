@@ -59,6 +59,7 @@ interface IServerConnectionDetails {
 }
 
 interface IServerServerDetails {
+	worldId: string;
 	name: string;
 	description: string;
 	hostPlayerName: string;
@@ -87,6 +88,7 @@ interface IMatchmakingServer {
 	connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
 	disconnectCallbacks: Map<string, () => void>;
 	messageCallbacks: Map<string, (data: ArrayBuffer) => void>;
+	ipAddress: string | undefined;
 
 	isRunning(): boolean;
 	start(port?: number, disableServerDirectoryConnection?: boolean): string;

@@ -17,5 +17,5 @@ export default class JoinServerMenu extends Menu {
     private onShow;
     private onInputEnter;
     private onInputChange;
-    private getOptions;
+    private getServerToJoin;
 }

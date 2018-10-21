@@ -86,6 +86,7 @@ export default class Game extends Emitter implements IGame {
     time: TimeManager;
     ticks: number;
     version: string;
+    worldId: string;
     cartographyTexture: WebGLTexture;
     debugRenderer: ITextureDebugRenderer;
     glContext: WebGL2RenderingContext | null;
@@ -104,7 +105,6 @@ export default class Game extends Emitter implements IGame {
     private playOptions;
     private readonly ambientLightLevelCache;
     readonly isDailyChallenge: boolean;
-    constructor();
     initialize(): void;
     initGl(): Promise<void>;
     setupGl(restoring: boolean): Promise<void>;
