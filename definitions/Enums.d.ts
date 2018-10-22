@@ -570,7 +570,13 @@ export declare enum ItemType {
     DeadAberrantScorpion = 447,
     CookedScorpion = 448,
     CookedAberrantScorpion = 449,
-    ScorpionStinger = 450
+    ScorpionStinger = 450,
+    CopperBakingTray = 451,
+    WroughtIronBakingTray = 452,
+    IronBakingTray = 453,
+    Flour = 454,
+    Dough = 455,
+    Hardtack = 456
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -645,7 +651,8 @@ export declare enum ItemTypeGroup {
     FireStarter = 869,
     Sand = 870,
     Untradable = 871,
-    Last = 872
+    Cookware = 872,
+    Last = 873
 }
 export declare enum TerrainType {
     DeepSeawater = 0,

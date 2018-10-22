@@ -200,9 +200,7 @@ export default class InGameScreen extends BaseScreen {
     private additionalRequirements;
     private runAction;
     private updateContextMenu;
-    private runGatherOrHarvestAction;
-    private runPourAction;
-    private runHealAction;
+    private confirmAction;
     private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;

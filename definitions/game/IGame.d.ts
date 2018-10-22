@@ -47,9 +47,9 @@ export interface IGame extends Emitter {
     tileData: {
         [index: number]: {
             [index: number]: {
-                [index: number]: ITileData[];
-            };
-        };
+                [index: number]: ITileData[] | undefined;
+            } | undefined;
+        } | undefined;
     };
     tileContainers: ITileContainer[];
     items: IItemArray;

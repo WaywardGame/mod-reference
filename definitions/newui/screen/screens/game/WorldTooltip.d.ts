@@ -13,9 +13,12 @@ import { ITooltip } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";
 export default class WorldTooltipHandler {
     private readonly api;
+    private lastMousePosition?;
     private lastPosition?;
+    private tooltip?;
     constructor(api: UiApi, gameScreen: Component);
     initializeTooltip(tooltip: ITooltip): ITooltip;
+    update(): void;
     private onTooltipMove;
     private refreshTooltip;
 }

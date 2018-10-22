@@ -27,7 +27,7 @@ export default class NotesDialog extends Dialog {
     constructor(api: IGameScreenApi);
     onWrittenNote(player: IPlayer, id: number): void;
     getName(): UiTranslation;
-    showNote(noteId: number): void;
+    showNote(noteId: number): this;
     private previousNote;
     private nextNote;
     private onShow;

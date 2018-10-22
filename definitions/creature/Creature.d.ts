@@ -45,6 +45,7 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     checkForBurn(moveType?: MoveType): boolean;
     isTamed(): boolean;
     tame(player: IPlayer): boolean;
+    increaseTamedCount(): void;
     release(): boolean;
     pet(): boolean;
     skipNextUpdate(): void;

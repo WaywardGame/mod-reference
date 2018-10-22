@@ -45,6 +45,7 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType>, IInspecta
     isTamed(): boolean;
     tame(player: IPlayer): boolean;
     release(): boolean;
+    increaseTamedCount(): void;
     pet(): boolean;
     skipNextUpdate(): void;
     onUnserialized(): void;

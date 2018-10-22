@@ -8,156 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
-/*!
- * Copyright Unlok, Vaughn Royko 2011-2018
- * http://www.unlok.ca
- *
- * Credits & Thanks:
- * http://www.unlok.ca/credits-thanks/
- *
- * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
- * https://waywardgame.github.io/
- */
 declare enum Message {
     None = 0,
     Aberrant = 1,
@@ -748,136 +598,137 @@ declare enum Message {
     Teleported = 586,
     ThanksBuying = 587,
     ThanksSelling = 588,
-    TheCreature = 589,
-    TheirFist = 590,
-    ThePlant = 591,
-    ThereIsNoSunToStartFire = 592,
-    ThereIsNothingToMilk = 593,
-    ThisCannotBeMilked = 594,
-    Throw = 595,
-    ThrownIntoDepths = 596,
-    ThrownIntoObstacle = 597,
-    Till = 598,
-    Tilling = 599,
-    TimeIs = 600,
-    TimeIsDawn = 601,
-    TimeIsDaytime = 602,
-    TimeIsDusk = 603,
-    TimeIsNighttime = 604,
-    TimeIsSunrise = 605,
-    TimeIsSunset = 606,
-    ToDamageAChest = 607,
-    ToFight = 608,
-    TooDamaged = 609,
-    TooExhaustedToJump = 610,
-    TradeBarterCreditForItem = 611,
-    TradeItemForBarterCredit = 612,
-    TradingWith = 613,
-    TrampledFire = 614,
-    TrampledIntoGround = 615,
-    TrampleIntoGround = 616,
-    Trampling = 617,
-    Transmogrification = 618,
-    Transmogrified = 619,
-    TrapStoppedYou = 620,
-    TravelToFarOffLands = 621,
-    TreasureIsBlocked = 622,
-    True = 623,
-    UnEquip = 624,
-    UnEquipAll = 625,
-    Unknown = 626,
-    UnknownItem = 627,
-    UnlockedChest = 628,
-    UnlockedTime = 629,
-    UnpurifiedWaterInStill = 630,
-    UsingBareHands = 631,
-    Vulnerable = 632,
-    WaitUntilFireCooledToGetWater = 633,
-    WalkingDistanceOfTreasure = 634,
-    Water = 635,
-    WaterGathering = 636,
-    WaterPutOutFire = 637,
-    Weight = 638,
-    WeightCapacity = 639,
-    WellIsDry = 640,
-    WildGoatRefusedToBeMilked = 641,
-    WillNotTrade = 642,
-    With = 643,
-    WithYouSee = 644,
-    WorkingYourselfIntoExhaustion = 645,
-    WorkingYourselfIntoExhaustionAndDrowning = 646,
-    YouApplied = 647,
-    YouAte = 648,
-    YouBeginResting = 649,
-    YouCannotDoThatYet = 650,
-    YouCooledLava = 651,
-    YouCrafted = 652,
-    YouDied = 653,
-    YouDisassembled = 654,
-    YouDismantled = 655,
-    YouDrank = 656,
-    YouEquip = 657,
-    YouFailedTo = 658,
-    YouFailedToExtinguishedFireFully = 659,
-    YouFailedToHeal = 660,
-    YouFailedToHealOther = 661,
-    YouFire = 662,
-    YouGathered = 663,
-    YouGatheredAndDropped = 664,
-    YouHardenedCooledLava = 665,
-    YouHarvested = 666,
-    YouHarvestedAndDropped = 667,
-    YouHaveDied = 668,
-    YouHaveEnabledDisabled = 669,
-    YouHaveHealedOther = 670,
-    YouHaveKilled = 671,
-    YouHaveReleased = 672,
-    YouHaveTamed = 673,
-    YouNeedMoreCredit = 674,
-    YouNoticeBecomeEnraged = 675,
-    YouNoticeDying = 676,
-    YouNoticeFertilityDecreasing = 677,
-    YouNoticeFertilityIncreasing = 678,
-    YouNoticeGrowing = 679,
-    YouNoticeLavaCooling = 680,
-    YouNoticeLavaHardening = 681,
-    YouNoticePerish = 682,
-    YouNoticeStumbleInjureItself = 683,
-    YouNoticeTakeFromGround = 684,
-    YouNoticeWoundsClosing = 685,
-    YouNoticeZombieHorde = 686,
-    YouOfferedToCreature = 687,
-    YouOpen = 688,
-    YouPacked = 689,
-    YouPickedUp = 690,
-    YouRepair = 691,
-    YourFist = 692,
-    YourHands = 693,
-    YourHighSkill = 694,
-    YourInventory = 695,
-    YourLowSkill = 696,
-    YourModerateSkill = 697,
-    YourRubbingNoEffect = 698,
-    YouRub = 699,
-    YouSalvaged = 700,
-    YouSee = 701,
-    YouSeeAnAberrant = 702,
-    YouSeeDrop = 703,
-    YouSeeEngulfFire = 704,
-    YouSeeHelpingPlant = 705,
-    YouSeeLay = 706,
-    YouSeeLayingTrap = 707,
-    YouSeeSpewLava = 708,
-    YouSeeSpitAcid = 709,
-    YouSeeSpringForth = 710,
-    YouSeeSummon = 711,
-    YouSeeSwampFlood = 712,
-    YouSeeTrampling = 713,
-    YouSeparate = 714,
-    YouSetTheTrapOff = 715,
-    YouThrew = 716,
-    YouTilled = 717,
-    YouUnequip = 718,
-    YouUsed = 719
+    The = 589,
+    TheCreature = 590,
+    TheirFist = 591,
+    ThePlant = 592,
+    ThereIsNoSunToStartFire = 593,
+    ThereIsNothingToMilk = 594,
+    ThisCannotBeMilked = 595,
+    Throw = 596,
+    ThrownIntoDepths = 597,
+    ThrownIntoObstacle = 598,
+    Till = 599,
+    Tilling = 600,
+    TimeIs = 601,
+    TimeIsDawn = 602,
+    TimeIsDaytime = 603,
+    TimeIsDusk = 604,
+    TimeIsNighttime = 605,
+    TimeIsSunrise = 606,
+    TimeIsSunset = 607,
+    ToDamageAChest = 608,
+    ToFight = 609,
+    TooDamaged = 610,
+    TooExhaustedToJump = 611,
+    TradeBarterCreditForItem = 612,
+    TradeItemForBarterCredit = 613,
+    TradingWith = 614,
+    TrampledFire = 615,
+    TrampledIntoGround = 616,
+    TrampleIntoGround = 617,
+    Trampling = 618,
+    Transmogrification = 619,
+    Transmogrified = 620,
+    TrapStoppedYou = 621,
+    TravelToFarOffLands = 622,
+    TreasureIsBlocked = 623,
+    True = 624,
+    UnEquip = 625,
+    UnEquipAll = 626,
+    Unknown = 627,
+    UnknownItem = 628,
+    UnlockedChest = 629,
+    UnlockedTime = 630,
+    UnpurifiedWaterInStill = 631,
+    UsingBareHands = 632,
+    Vulnerable = 633,
+    WaitUntilFireCooledToGetWater = 634,
+    WalkingDistanceOfTreasure = 635,
+    Water = 636,
+    WaterGathering = 637,
+    WaterPutOutFire = 638,
+    Weight = 639,
+    WeightCapacity = 640,
+    WellIsDry = 641,
+    WildGoatRefusedToBeMilked = 642,
+    WillNotTrade = 643,
+    With = 644,
+    WithYouSee = 645,
+    WorkingYourselfIntoExhaustion = 646,
+    WorkingYourselfIntoExhaustionAndDrowning = 647,
+    YouApplied = 648,
+    YouAte = 649,
+    YouBeginResting = 650,
+    YouCannotDoThatYet = 651,
+    YouCooledLava = 652,
+    YouCrafted = 653,
+    YouDied = 654,
+    YouDisassembled = 655,
+    YouDismantled = 656,
+    YouDrank = 657,
+    YouEquip = 658,
+    YouFailedTo = 659,
+    YouFailedToExtinguishedFireFully = 660,
+    YouFailedToHeal = 661,
+    YouFailedToHealOther = 662,
+    YouFire = 663,
+    YouGathered = 664,
+    YouGatheredAndDropped = 665,
+    YouHardenedCooledLava = 666,
+    YouHarvested = 667,
+    YouHarvestedAndDropped = 668,
+    YouHaveDied = 669,
+    YouHaveEnabledDisabled = 670,
+    YouHaveHealedOther = 671,
+    YouHaveKilled = 672,
+    YouHaveReleased = 673,
+    YouHaveTamed = 674,
+    YouNeedMoreCredit = 675,
+    YouNoticeBecomeEnraged = 676,
+    YouNoticeDying = 677,
+    YouNoticeFertilityDecreasing = 678,
+    YouNoticeFertilityIncreasing = 679,
+    YouNoticeGrowing = 680,
+    YouNoticeLavaCooling = 681,
+    YouNoticeLavaHardening = 682,
+    YouNoticePerish = 683,
+    YouNoticeStumbleInjureItself = 684,
+    YouNoticeTakeFromGround = 685,
+    YouNoticeWoundsClosing = 686,
+    YouNoticeZombieHorde = 687,
+    YouOfferedToCreature = 688,
+    YouOpen = 689,
+    YouPacked = 690,
+    YouPickedUp = 691,
+    YouRepair = 692,
+    YourFist = 693,
+    YourHands = 694,
+    YourHighSkill = 695,
+    YourInventory = 696,
+    YourLowSkill = 697,
+    YourModerateSkill = 698,
+    YourRubbingNoEffect = 699,
+    YouRub = 700,
+    YouSalvaged = 701,
+    YouSee = 702,
+    YouSeeAnAberrant = 703,
+    YouSeeDrop = 704,
+    YouSeeEngulfFire = 705,
+    YouSeeHelpingPlant = 706,
+    YouSeeLay = 707,
+    YouSeeLayingTrap = 708,
+    YouSeeSpewLava = 709,
+    YouSeeSpitAcid = 710,
+    YouSeeSpringForth = 711,
+    YouSeeSummon = 712,
+    YouSeeSwampFlood = 713,
+    YouSeeTrampling = 714,
+    YouSeparate = 715,
+    YouSetTheTrapOff = 716,
+    YouThrew = 717,
+    YouTilled = 718,
+    YouUnequip = 719,
+    YouUsed = 720
 }
 export default Message;

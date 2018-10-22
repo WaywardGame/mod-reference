@@ -47,7 +47,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     getID(): QuadrantComponentId;
     getName(): IStringSection[];
     scrollToNewest(): void;
-    sendPinnedMessage(message: TranslationGenerator, onActivate: () => any): Button;
+    sendPinnedMessage(message: TranslationGenerator, initializer: (button: Button) => any): Button;
     onDisplayMessage(player: IPlayer, message: IMessage, addBackwards?: boolean): void;
     onWrittenNote(player: IPlayer, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
@@ -82,7 +82,6 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
      */
     private changeFilter;
     private onPinnedMessageActivate;
-    private showNote;
     private onShowDialog;
     private onShowNote;
     private editFilters;

@@ -21,7 +21,7 @@ export default class InterruptFactory implements IInterruptFactory {
     private executed;
     constructor(api: UiApi, title?: TranslationGenerator, description?: TranslationGenerator);
     setCanCancel(canCancel?: boolean): this;
-    withDescription(description: TranslationGenerator): this;
+    withDescription(description?: TranslationGenerator): this;
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;
     withInfo(): Promise<void>;
