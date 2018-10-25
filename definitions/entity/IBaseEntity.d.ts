@@ -149,10 +149,11 @@ export default interface IBaseEntity extends IVector3, Emitter {
      * Sets whether the entity has the given `StatusType`
      * @param status The status to change
      * @param to Whether the entity will have the status
+     * @param reason The reason for the change
      *
      * Triggers `EntityEvent.StatusChange`
      */
-    setStatus(status: StatusType, to: boolean): void;
+    setStatus(status: StatusType, to: boolean, reason: StatusEffectChangeReason): void;
     /**
      * Generator for status effects on the entity.
      */
@@ -199,8 +200,14 @@ export declare enum EntityEvent {
      * @param emitter The object this event is emitted from
      * @param status The type of status effect that was gained or lost
      * @param hasStatus Whether the entity now has the status effect
+     * @param reason The reason for the change
      */
     StatusChange = 4
+}
+export declare enum StatusEffectChangeReason {
+    Gained = 0,
+    Passed = 1,
+    Treated = 2
 }
 export declare enum StatChangeReason {
     Normal = 0,

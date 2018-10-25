@@ -8,7 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Action } from "action2/Action";
-import { ActionArgument } from "action2/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/IPlayer").IPlayer, void>;
-export default _default;
+export declare function convertRateModifierActualToRange(actual: number): number;
+export declare function convertRateModifierRangeToActual(range: number): number;

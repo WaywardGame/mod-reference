@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import actionDescriptions from "action2/Actions";
-import { ActionArgument, ActionArgumentTupleTypes, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "action2/IAction";
+import actionDescriptions from "action/Actions";
+import { ActionArgument, ActionArgumentTupleTypes, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "action/IAction";
 import { Entity } from "entity/IEntity";
 import { IRGB, SfxType, SkillType, TurnType } from "Enums";
 import ActionPacket2 from "multiplayer/packets/shared/ActionPacket2";

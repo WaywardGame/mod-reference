@@ -67,8 +67,6 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedItem(value?: IItem): void;
     protected readIndexedMovementIntent(): IMovementIntent | undefined;
     protected writeIndexedMovementIntent(value?: IMovementIntent): void;
-    protected readIndexedItemOrDoodad(): IItem | IDoodad | undefined;
-    protected writeIndexedItemOrDoodad(value?: IItem | IDoodad): void;
     protected readIndexedItems(): IItem[] | undefined;
     protected writeIndexedItems(value?: IItem[]): void;
     protected readIndexedObject(): any;

@@ -23,6 +23,7 @@ export default class TileEventManager implements ITileEventManager {
     fireOverflow(x: number, y: number, z: number): void;
     getMovementProgress(tileEvent: ITileEvent): number;
     inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
+    is(thing: any): thing is ITileEvent;
     private _addToTile;
     private _removeFromTile;
 }

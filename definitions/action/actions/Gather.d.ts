@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IAction } from "action/IAction";
+import { Action } from "action/Action";
+import { ActionArgument } from "action/IAction";
 export declare enum GatherType {
     Doodad = 0,
     TileEvent = 1,
     Tile = 2
 }
-export declare const action: IAction;
-export default action;
+declare const _default: Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/IPlayer").IPlayer, void>;
+export default _default;

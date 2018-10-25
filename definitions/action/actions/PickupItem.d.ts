@@ -10,6 +10,6 @@
  *
  *
  */
-import { IAction } from "action/IAction";
-export declare const action: IAction;
-export default action;
+import { Action } from "action/Action";
+declare const _default: Action<[], import("../../player/IPlayer").IPlayer, void>;
+export default _default;

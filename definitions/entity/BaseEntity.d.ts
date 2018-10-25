@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseEntity, { IProperties, IStatChangeInfo, IStatus, Property, StatChangeReason } from "entity/IBaseEntity";
+import IBaseEntity, { IProperties, IStatChangeInfo, IStatus, Property, StatChangeReason, StatusEffectChangeReason } from "entity/IBaseEntity";
 import { EntityType } from "entity/IEntity";
 import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import StatFactory from "entity/StatFactory";
@@ -58,7 +58,7 @@ export default abstract class BaseEntity extends Emitter implements IBaseEntity 
     setStatAndMax(stat: Stat | IStat, max: number, current: number): void;
     updateStats(): void;
     hasStatus(status: StatusType): boolean;
-    setStatus(status: StatusType, to: boolean): void;
+    setStatus(status: StatusType, hasStatusEffect: boolean, reason: StatusEffectChangeReason): void;
     statuses(): IterableIterator<StatusType>;
     getTile(): ITile;
     getPoint(): IVector3;

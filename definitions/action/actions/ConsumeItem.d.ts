@@ -8,10 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IAction } from "action/IAction";
-export declare const drinkCure: IAction;
-export declare const drinkItem: IAction;
-export declare const eat: IAction;
-export declare const heal: IAction;
-export declare const apply: IAction;
-export declare const drinkInFront: IAction;
+import { Action } from "action/Action";
+import { ActionArgument } from "action/IAction";
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/IPlayer").IPlayer, void>;
+export default _default;

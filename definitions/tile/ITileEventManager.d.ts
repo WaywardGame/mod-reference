@@ -22,5 +22,6 @@ export interface ITileEventManager {
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): void;
     inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
+    is(thing: any): thing is ITileEvent;
 }
 export default ITileEventManager;

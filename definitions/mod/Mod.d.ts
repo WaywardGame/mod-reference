@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionType, IActionApi, IActionDescription } from "action2/IAction";
+import { ActionType, IActionApi, IActionDescription } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";

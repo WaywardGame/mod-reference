@@ -14,6 +14,5 @@ import Menu from "newui/screen/screens/menu/component/Menu";
 export default class CustomGameOptionsMenu extends Menu {
     private readonly refreshables;
     constructor(api: UiApi, options: () => IDifficultyOptions);
-    private addRefreshable;
     private refresh;
 }

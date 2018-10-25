@@ -18,6 +18,7 @@ import { IConnection } from "multiplayer/networking/IConnection";
 import { PacketType } from "multiplayer/packets/IPacket";
 import { INPC } from "npc/INPC";
 import IPlayer, { IMovementIntent } from "player/IPlayer";
+import { ITileEvent } from "tile/ITileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class BasePacket {
     protected static registrarId: number;
@@ -76,10 +77,10 @@ export default abstract class BasePacket {
     protected writeItem(value: IItem): void;
     protected readMovementIntent(): IMovementIntent;
     protected writeMovementIntent(value: IMovementIntent): void;
-    protected readItemOrDoodad(): IItem | IDoodad | undefined;
-    protected writeItemOrDoodad(value: IItem | IDoodad): void;
     protected readItems(): IItem[];
     protected writeItems(value: IItem[]): void;
+    protected readTileEvent(): ITileEvent | undefined;
+    protected writeTileEvent(value: ITileEvent): void;
     protected readObject(): any;
     protected writeObject(value: any): void;
     protected readVector2Array(): IVector2[];

@@ -23,5 +23,6 @@ export interface ICorpseManager {
     getCorpseTranslations(corpses: ICorpse[]): IterableIterator<Translation>;
     getCorpseListTranslation(corpses: ICorpse[]): Translation;
     inspect(inspection: Inspection, ...corpses: ICorpse[]): InspectionResult;
+    is(thing: any): thing is ICorpse;
 }
 export default ICorpseManager;

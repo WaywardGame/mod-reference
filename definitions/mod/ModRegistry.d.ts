@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionCallback, IActionBase } from "action/IAction";
-import { ActionType } from "action2/IAction";
+import { ActionType, IActionDescription } from "action/IAction";
 import { CommandCallback } from "command/ICommand";
 import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
@@ -102,7 +101,7 @@ export interface INPCRegistration extends IBaseModRegistration {
 export interface IActionRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Action;
     name: string;
-    description: IActionBase;
+    description: IActionDescription;
 }
 export interface IHelpArticleRegistration extends IBaseModRegistration {
     type: ModRegistrationType.HelpArticle;
@@ -394,16 +393,18 @@ declare module Register {
      * @param description The definition of the menu bar button.
      */
     function menuBarButton(name: string, description: IMenuBarButtonDescription): <K extends string | number | symbol, T extends { [k in K]: MenuBarButtonType; }>(target: T, key: K) => void;
+    /**
+     * Registers an item group.
+     * @param description The definition of the item group.
+     */
     function itemGroup(name: string, description: IItemGroupDescription): <K extends string | number | symbol, T extends { [k in K]: ItemTypeGroup; }>(target: T, key: K) => void;
-    function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
-    function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
     /**
      * Registers an action.
      * @param description The definition of this action.
-     *
-     * This decorator should be used on a valid `ActionCallback` method.
      */
-    function action<T = any>(name: string, description?: IActionBase): (target: any, key: string, descriptor: TypedPropertyDescriptor<ActionCallback<T>>) => void;
+    function action(name: string, description?: IActionDescription): <K extends string | number | symbol, T extends { [k in K]: ActionType; }>(target: T, key: K) => void;
+    function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
+    function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
     /**
      * Registers a command.
      * @param name The name of this command (what players will type to use it, eg: `/heal`).
@@ -457,7 +458,6 @@ declare const INVALID: unique symbol;
  * 	public readonly menuBarButton: MenuBarButtonType;
  * ```
  */
-export declare function Registry<H, T extends ActionCallback>(): IRegistryRegisteredActionIntermediateGetter<H, T>;
 export declare function Registry<H, T extends CommandCallback>(): IRegistryRegisteredCommandIntermediateGetter<H, T>;
 export declare function Registry<H, T>(): IRegistryRegisteredPropertyIntermediateGetter<H, T>;
 export declare module Registry {
@@ -465,7 +465,7 @@ export declare module Registry {
      * Returns the ID of a registered action or command callback which was decorated with its respective `@Register` decorator.
      * @param method An action or command callback method
      */
-    function id<M extends (...args: any[]) => any>(method: M): M extends ActionCallback ? ActionType : Command;
+    function id<M extends (...args: any[]) => any>(method: M): Command;
     /**
      * Used internally for `Registry<H, T>.get(key)`
      */

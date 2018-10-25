@@ -58,7 +58,19 @@ declare global {
          * @param collector A function that takes the iterable, and returns type X
          * @see `utilities/Collectors` for premade collectors
          */
-        collect<X>(collector: (val: IterableIterator<T>) => X, iterable: true): IterableIterator<X>;
+        collect<X>(iterable: true, collector: (val: IterableIterator<T>) => X): IterableIterator<X>;
+        /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the iterable, and returns type X
+         * @see `utilities/Collectors` for premade collectors
+         */
+        collect<X, A extends any[]>(collector: (val: IterableIterator<T>, ...args: A) => X, ...args: A): X;
+        /**
+         * Returns an iterable of type X, generated with the given collector function.
+         * @param collector A function that takes the iterable, and returns type X
+         * @see `utilities/Collectors` for premade collectors
+         */
+        collect<X, A extends any[]>(iterable: true, collector: (val: IterableIterator<T>, ...args: A) => X, ...args: A): IterableIterator<X>;
         /**
          * Loops the values of this iterable and calls the given function with each value.
          * @param user A function that takes a value. If the function returns `false`, iteration will not continue.

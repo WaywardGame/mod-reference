@@ -583,7 +583,7 @@ export declare enum ItemTypeGroup {
     Sharpened = 801,
     Carbon = 802,
     Arrow = 803,
-    Skewer = 804,
+    CookingEquipment = 804,
     Fuel = 805,
     Medicinal = 806,
     Meat = 807,

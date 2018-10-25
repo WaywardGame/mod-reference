@@ -10,7 +10,7 @@
  *
  *
  */
-import { ActionType } from "action2/IAction";
+import { ActionType } from "action/IAction";
 import DoodadInfo from "doodad/DoodadInfo";
 import Doodad from "doodad/doodads/Doodad";
 import { IDoodad, IDoodadDescription, IDoodadOptions } from "doodad/IDoodad";

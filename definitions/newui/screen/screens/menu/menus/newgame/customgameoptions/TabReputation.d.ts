@@ -8,6 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Action } from "action2/Action";
-declare const _default: Action<[], import("../../player/IPlayer").IPlayer, void>;
-export default _default;
+import { IDifficultyOptions } from "game/Difficulty";
+import { UiApi } from "newui/INewUi";
+import CustomGameOptionsTab from "newui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
+export default class TabReputation extends CustomGameOptionsTab {
+    constructor(api: UiApi, options: () => IDifficultyOptions);
+}

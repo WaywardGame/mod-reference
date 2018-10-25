@@ -84,7 +84,6 @@ export default class Game extends Emitter implements IGame {
     };
     tileEvents: SaferArray<ITileEvent>;
     time: TimeManager;
-    ticks: number;
     version: string;
     worldId: string;
     cartographyTexture: WebGLTexture;

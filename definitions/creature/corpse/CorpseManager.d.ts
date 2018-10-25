@@ -24,4 +24,5 @@ export default class CorpseManager implements ICorpseManager {
     getCorpseTranslations(corpses: ICorpse[]): IterableIterator<Translation>;
     getCorpseListTranslation(corpses: ICorpse[]): Translation;
     inspect({ context }: Inspection, ...corpses: ICorpse[]): InspectionResult;
+    is(thing: any): thing is ICorpse;
 }

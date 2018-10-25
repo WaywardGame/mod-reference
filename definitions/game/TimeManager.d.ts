@@ -45,22 +45,13 @@ export declare enum DayQuarter {
     Night3 = 6,
     Night4 = 7
 }
-export interface ITimeManager {
-    /**
-     * The percentage of the day which is night. Changing this field will inversely affect `dayPercent`
-     */
-    nightPercent: number;
-    /**
-     * The percentage of the day which is day. Changing this field will inversely affect `nightPercent`
-     */
+export default class TimeManager {
+    dayLength: number;
     dayPercent: number;
-}
-export default class TimeManager implements ITimeManager {
-    readonly dayLength = 3200;
-    readonly transitionPercent = 0.5;
-    readonly dayStart = 300;
+    frozenTime?: number;
     private _ticks;
-    private _dayPercent;
+    private readonly transitionPercent;
+    readonly dayStart: number;
     constructor(turns: number);
     /**
      * The total number of ticks passed.
@@ -74,8 +65,6 @@ export default class TimeManager implements ITimeManager {
      * Increments `ticks`.
      */
     nextTick(): void;
-    dayPercent: number;
-    nightPercent: number;
     /**
      * Returns a decimal representation of the current time. `0` is the start of the day, and `1` is the end.
      */
@@ -167,7 +156,7 @@ export default class TimeManager implements ITimeManager {
      * Setting the time with the result of `getTime` will likely not set to the same value.
      * This method is provided for save conversion and utility, and should rarely be used.
      */
-    setTime(time: number): void;
+    setTime(time: number): this;
     /**
      * The time returned by the time manager ignores that it's stored relative to the start of the day.
      * This method "realigns" a time from this version to one offset by the start of the day.

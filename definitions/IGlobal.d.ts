@@ -7,11 +7,8 @@
  * 
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- * 
- * 
  */
 
-import IActionManager from "action/IActionManager";
 import IAudio from "audio/IAudio";
 import { ICommandManager } from "command/ICommandManager";
 import ICorpseManager from "creature/corpse/ICorpseManager";
@@ -83,7 +80,6 @@ declare global {
 	};
 
 	let absentPlayers: IPlayer[];
-	let actionManager: IActionManager;
 	let audio: IAudio;
 	let commandManager: ICommandManager;
 	let corpseManager: ICorpseManager;
