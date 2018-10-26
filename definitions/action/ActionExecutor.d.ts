@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import actionDescriptions from "action/Actions";
-import { ActionArgument, ActionArgumentTupleTypes, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "action/IAction";
+import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentType, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "action/IAction";
 import { Entity } from "entity/IEntity";
 import { IRGB, SfxType, SkillType, TurnType } from "Enums";
 import ActionPacket2 from "multiplayer/packets/shared/ActionPacket2";
@@ -41,6 +41,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private updateRender?;
     private constructor();
     execute(executor: E, ...args: ActionArgumentTupleTypes<A>): R;
+    isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentType<AA>;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnType): this;
     setUpdateView(updateFov?: boolean): this;

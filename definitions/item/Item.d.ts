@@ -41,7 +41,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     weightCapacity: number;
     private _description;
     constructor(itemType?: ItemType | undefined, quality?: ItemQuality);
-    getName(article?: boolean, count?: number, showCount?: boolean): Translation;
+    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;

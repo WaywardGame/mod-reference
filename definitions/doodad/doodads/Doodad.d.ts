@@ -61,7 +61,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
-    canPickup(player: IPlayer): boolean;
+    canPickup(human: IBaseHumanEntity): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
     canGather(): boolean;

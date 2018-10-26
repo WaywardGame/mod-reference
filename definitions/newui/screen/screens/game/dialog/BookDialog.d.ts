@@ -17,7 +17,7 @@ export default class BookDialog extends Dialog {
     private book?;
     private readonly text;
     constructor(api: IGameScreenApi);
-    getName(): Translation | UiTranslation.GameDialogBookName;
+    getName(): UiTranslation.GameDialogBookName | Translation;
     setBook(book: BookType): void;
     private getText;
 }

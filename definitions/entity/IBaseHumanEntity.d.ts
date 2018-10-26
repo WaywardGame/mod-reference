@@ -10,17 +10,20 @@
  */
 import { IDamageInfo } from "creature/ICreature";
 import IBaseEntity from "entity/IBaseEntity";
-import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
+import { Delay, EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
+import MessageManager from "player/MessageManager";
+import NoteManager from "player/NoteManager";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IOptions } from "save/data/ISaveDataGlobal";
 export default interface IBaseHumanEntity extends IBaseEntity {
     attackFromEquip: IAttackHand;
+    canSendMessage: boolean;
     customization: IPlayerCustomization;
     deathBy: ISerializedTranslation;
     defense: PlayerDefense;
@@ -30,6 +33,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     };
     handToUse: EquipType;
     inventory: IContainer;
+    messages: MessageManager;
     options: IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;
@@ -37,7 +41,9 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     skills: ISkillSet;
     state: PlayerState;
     swimming: boolean;
-    canSendMessage: boolean;
+    identifier: string;
+    notes: NoteManager;
+    isLocalPlayer(): boolean;
     /**
      * @returns the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
      */
@@ -52,11 +58,12 @@ export default interface IBaseHumanEntity extends IBaseEntity {
      * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
      */
     getSkill(skill: SkillType): number;
+    addDelay(delay: Delay, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
-    getBurnDamage(skipParry?: boolean, equipType?: EquipType): number;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     cancelResting(reason: RestCancelReason): void;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
+    checkAndRemoveBlood(): boolean;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
@@ -64,6 +71,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     damage(damageInfo: IDamageInfo): number | undefined;
     damageRandomEquipment(): void;
     equip(item: IItem, slot: EquipType): void;
+    getBurnDamage(skipParry?: boolean, equipType?: EquipType): number;
     getDamageModifier(): number;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
@@ -71,6 +79,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     getHandToUse(): EquipType | undefined;
     getMaxHealth(): number;
     getName(): Translation;
+    hasDelay(): boolean;
     hasHandToUse(): boolean;
     isGhost(): boolean;
     isResting(): boolean;

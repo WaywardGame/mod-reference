@@ -11,5 +11,5 @@
  *
  */
 import { Action } from "action/Action";
-declare const _default: Action<[], import("../../player/IPlayer").IPlayer, void>;
+declare const _default: Action<[], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer, void>;
 export default _default;

@@ -26,12 +26,13 @@ declare enum Note {
     Gardening = 10,
     HealthIssues = 11,
     Inedible = 12,
-    Mercantile = 13,
-    Nightfall = 14,
-    Poisoned = 15,
-    Reputation = 16,
-    StaminaReplenishment = 17,
-    Stranded = 18,
-    ToolUse = 19
+    ItemQualities = 13,
+    Mercantile = 14,
+    Nightfall = 15,
+    Poisoned = 16,
+    Reputation = 17,
+    StaminaReplenishment = 18,
+    Stranded = 19,
+    ToolUse = 20
 }
 export default Note;

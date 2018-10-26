@@ -21,7 +21,7 @@ export default class MapDialog extends Dialog implements IHookHost {
     private item;
     private mapCanvas;
     constructor(api: IGameScreenApi);
-    getName(): Translation | UiTranslation.GameDialogMapName;
+    getName(): UiTranslation.GameDialogMapName | Translation;
     setMap(mapRequest: IMapRequest): void;
     onDigTreasure(player: IPlayer, treasureTile: Vector3): void;
     private onResize;

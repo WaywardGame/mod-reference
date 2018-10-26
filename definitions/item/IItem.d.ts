@@ -70,7 +70,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
      * - `item.getName(false)` // "stone axe"
      * - `item.getName(undefined, 3)` // "stone axes"
      */
-    getName(article?: boolean, count?: number, showCount?: boolean): Translation;
+    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;

@@ -183,11 +183,11 @@ export interface IHookHost {
     canNPCSpawn?(type: NPCType, x: number, y: number, z: number): boolean | undefined;
     /**
      * Called when an doodad is being picked up
-     * @param player The player object
+     * @param human The human object
      * @param doodad The doodad object
      * @returns False if the doodad cannot be picked up, or undefined to use the default logic
      */
-    canPickupDoodad?(player: IPlayer, doodad: IDoodad): boolean | undefined;
+    canPickupDoodad?(human: IBaseHumanEntity, doodad: IDoodad): boolean | undefined;
     /**
      * Called before a player attacks
      * @param player The player object
@@ -314,12 +314,12 @@ export interface IHookHost {
     isTileBlocked?(tile: ITile): true | undefined;
     /**
      * Called when something is built on a tile
-     * @param player The player object
+     * @param human The human object
      * @param item The item used to build the object
      * @param tile The tile something was built on
      * @param doodad The doodad that was created on the tile
      */
-    onBuild?(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
+    onBuild?(human: IBaseHumanEntity, item: IItem, tile: ITile, doodad: IDoodad): void;
     /**
      * Called when a button on the button bar is clicked
      * @param button The button element
@@ -346,10 +346,10 @@ export interface IHookHost {
     onContainerItemUpdate?(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     /**
      * Called when an item is crafted
-     * @param player The player object
+     * @param human The human object
      * @param item The item that was crafted
      */
-    onCraft?(player: IPlayer, item: IItem): void;
+    onCraft?(human: IBaseHumanEntity, item: IItem): void;
     /**
      * Called right after the world is created, but before the renderer
      * @param world The world object
@@ -501,11 +501,11 @@ export interface IHookHost {
      */
     onMoveComplete?(player: IPlayer): void;
     /**
-     * Called when the player faces a different direction
-     * @param player The player object
+     * Called when the human faces a different direction
+     * @param human The human object
      * @param direction The direction the player is now facing
      */
-    onMoveDirectionUpdate?(player: IPlayer, direction: Direction): void;
+    onMoveDirectionUpdate?(human: IBaseHumanEntity, direction: Direction): void;
     /**
      * Called when no input is received
      * @param player The player object

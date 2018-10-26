@@ -53,7 +53,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     isGatherable(): boolean;
     isEmbers(): boolean;
     canHarvest(): boolean;
-    canPickup(player: IPlayer): boolean;
+    canPickup(human: IBaseHumanEntity): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
     getDoodadInfo(): DoodadInfo | undefined;
