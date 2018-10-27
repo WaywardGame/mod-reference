@@ -17,6 +17,10 @@ export interface IConnection {
     playerIdentifier: string;
     matchmakingIdentifier: string;
     pid?: number;
+    /**
+     * Packets are queued while the player is connected.
+     * They are dequeued once the client loads the world - catch up logic
+     */
     queuedPackets: IPacket[];
     buffer?: Uint8Array;
     bufferOffset?: number;
@@ -24,14 +28,20 @@ export interface IConnection {
     lastPacketNumberSent?: number;
     lastPacketNumberReceived?: number;
     addConnectionTimeout(): void;
+    addKeepAliveTimeout(): void;
     addTimeout(milliseconds: number, callback: () => void): void;
     clearTimeout(): void;
-    addKeepAliveTimeout(): void;
-    startKeepAlive(): void;
-    getState(): ConnectionState;
-    setState(state: ConnectionState): void;
-    isConnected(): boolean;
     close(): void;
-    send(data: ArrayBuffer | Uint8Array): void;
+    getState(): ConnectionState;
+    isConnected(): boolean;
     processMatchmakingMessage(message: ArrayBuffer | MatchmakingMessageData): Promise<boolean>;
+    queuePacketData(data: ArrayBuffer): void;
+    send(data: ArrayBuffer | Uint8Array): void;
+    setState(state: ConnectionState): void;
+    startKeepAlive(): void;
+}
+export interface IQueuedData {
+    data: ArrayBuffer;
+    byteOffset: number;
+    retries?: number;
 }

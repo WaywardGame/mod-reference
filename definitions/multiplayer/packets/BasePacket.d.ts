@@ -11,7 +11,6 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { IEntity } from "entity/IEntity";
 import { IContainer, IItem } from "item/IItem";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -70,7 +69,7 @@ export default abstract class BasePacket {
     protected readCorpse(): ICorpse | undefined;
     protected writeCorpse(value: ICorpse): void;
     protected readEntity(): IPlayer | ICreature | INPC | undefined;
-    protected writeHuman(value: IBaseHumanEntity): void;
+    protected writeHuman(value: Human): void;
     protected readHuman(): IPlayer | INPC | undefined;
     protected writeEntity(value: IEntity): void;
     protected readItem(): IItem;

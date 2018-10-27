@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
@@ -73,7 +72,7 @@ export interface IItemManager {
     loadTileReferences(): void;
     moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
     moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): IItem[];
-    moveToContainer(human: IBaseHumanEntity | undefined, item: IItem, container: IContainer): boolean;
+    moveToContainer(human: Human | undefined, item: IItem, container: IContainer): boolean;
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     remove(item: IItem): void;

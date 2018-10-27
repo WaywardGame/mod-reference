@@ -12,7 +12,6 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import BaseHumanEntity from "entity/BaseHumanEntity";
 import { StatusEffectChangeReason } from "entity/IBaseEntity";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { IStat, Stat } from "entity/IStats";
 import { Direction, EquipType, ItemType, RestType, SkillType, StatusType, TurnType, WeightStatus } from "Enums";
@@ -39,7 +38,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     hintSeen: boolean[];
     isConnecting: boolean;
     isMoving: boolean;
-    lastAttackedBy: IBaseHumanEntity | ICreature | undefined;
+    lastAttackedBy: Human | ICreature | undefined;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     name: string;

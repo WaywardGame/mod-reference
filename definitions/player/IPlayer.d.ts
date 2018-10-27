@@ -36,7 +36,7 @@ export interface IPlayer extends IBaseHumanEntity {
     isConnecting: boolean;
     isMoving: boolean;
     isMovingClientside: boolean;
-    lastAttackedBy: IBaseHumanEntity | ICreature | undefined;
+    lastAttackedBy: Human | ICreature | undefined;
     lightBonus: number;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
@@ -237,5 +237,5 @@ export interface IPlayerTravelData {
     state: PlayerState;
 }
 export declare const weightBonus = 25;
-export declare function isPlayer(human?: IBaseHumanEntity): human is IPlayer;
-export declare function isLocalPlayer(human?: IBaseHumanEntity): boolean;
+export declare function isPlayer(human?: Human): human is IPlayer;
+export declare function isLocalPlayer(human?: Human): boolean;

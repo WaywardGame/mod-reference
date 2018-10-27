@@ -18,6 +18,10 @@ export declare abstract class Connection implements IConnection {
     playerIdentifier: string;
     matchmakingIdentifier: string;
     pid?: number;
+    /**
+     * Packets are queued while the player is connected.
+     * They are dequeued once the client loads the world - catch up logic
+     */
     queuedPackets: IPacket[];
     buffer?: Uint8Array;
     bufferOffset?: number;
@@ -26,9 +30,15 @@ export declare abstract class Connection implements IConnection {
     lastPacketNumberReceived?: number;
     protected _matchmakingInfo: IMatchmakingInfo | undefined;
     private _state;
+    /**
+     * Data is queued when packets are "sent" the client.
+     * Used for flow control
+     */
+    private readonly _queuedData;
     private _timeoutId;
     private _keepAliveIntervalId;
     constructor(matchmakingInfo: IMatchmakingInfo | undefined);
+    close(): void;
     addConnectionTimeout(): void;
     addTimeout(milliseconds: number, callback: () => void): void;
     clearTimeout(): void;
@@ -36,7 +46,8 @@ export declare abstract class Connection implements IConnection {
     startKeepAlive(): void;
     getState(): ConnectionState;
     setState(state: ConnectionState): void;
-    close(): void;
+    queuePacketData(data: ArrayBuffer): void;
+    processQueuedData(): void;
     abstract isConnected(): boolean;
     abstract send(data: ArrayBuffer | Uint8Array): void;
     abstract processMatchmakingMessage(message: MatchmakingMessageData): Promise<boolean>;

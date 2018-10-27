@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
@@ -40,7 +39,7 @@ export default class ItemManager implements IItemManager {
     computeContainerWeight(container: IContainer): number;
     getLegendaryWeightCapacity(container: IContainer): number;
     moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
-    moveToContainer(human: IBaseHumanEntity | undefined, item: IItem, container: IContainer): boolean;
+    moveToContainer(human: Human | undefined, item: IItem, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
     /**
@@ -51,10 +50,10 @@ export default class ItemManager implements IItemManager {
     resetMapsInContainer(container: IContainer): void;
     getTileContainer(x: number, y: number, z: number): IContainer;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
-    hasAdditionalRequirements(human: IBaseHumanEntity, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
+    hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
-    craft(human: IBaseHumanEntity, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
+    craft(human: Human, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;

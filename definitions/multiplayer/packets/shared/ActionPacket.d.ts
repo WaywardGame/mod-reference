@@ -10,7 +10,7 @@
  */
 import { ActionType } from "action/IAction";
 import EntityTargetedSharedPacket from "multiplayer/packets/EntityTargetedSharedPacket";
-export default class ActionPacket2 extends EntityTargetedSharedPacket {
+export default class ActionPacket extends EntityTargetedSharedPacket {
     action: ActionType;
     arguments: any[];
     getDebugInfo(): string;

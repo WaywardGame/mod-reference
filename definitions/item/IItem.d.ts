@@ -11,7 +11,6 @@
 import { ActionType } from "action/IAction";
 import { ICreature, SpawnableTiles } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { Stat } from "entity/IStats";
 import { BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, TatteredMap } from "Enums";
@@ -92,7 +91,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: IPlayer): ICreature | undefined;
     getLocation(): IVector3 | undefined;
-    dropInWater(human: IBaseHumanEntity, x?: number, y?: number, skipParticles?: boolean): void;
+    dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;

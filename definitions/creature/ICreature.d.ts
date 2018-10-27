@@ -9,7 +9,6 @@
  * https://waywardgame.github.io/
  */
 import IBaseEntity from "entity/IBaseEntity";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, DamageType, Defense, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
 import { IInspectable } from "game/inspection/Inspections";
@@ -130,7 +129,7 @@ export interface ICreatureLoot {
     chance?: number;
 }
 export interface IDamageInfo {
-    human?: IBaseHumanEntity;
+    human?: Human;
     amount: number;
     type: DamageType;
     weaponName?: Message | Translation;

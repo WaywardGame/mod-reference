@@ -8,7 +8,6 @@
 * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
 * https://waywardgame.github.io/
 */
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import Message from "language/dictionary/Message";
 import { ISerializedTranslation } from "language/Translation";
 import { MessageType } from "player/MessageManager";
@@ -91,6 +90,6 @@ export interface IMessageManager {
     source(noGameSource: true, ...sources: Array<Source | false | undefined>): this;
     source(...sources: Array<Source | false | undefined>): this;
     type(type?: MessageType): this;
-    ifVisible(human?: IBaseHumanEntity, canSee?: IVector3): this;
+    ifVisible(human?: Human, canSee?: IVector3): this;
     send(message: Message, ...args: any[]): boolean;
 }

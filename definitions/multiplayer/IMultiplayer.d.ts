@@ -116,7 +116,6 @@ export interface IMultiplayerState {
 export interface IMultiplayerNetworkingOptions {
     matchmakingServer: string;
     matchmakingServerPort: number;
-    fakeLatency: number;
     syncChecks: boolean | MultiplayerSyncCheck[];
     enablePacketNumberChecks: boolean;
     checkSeedHistory: boolean;

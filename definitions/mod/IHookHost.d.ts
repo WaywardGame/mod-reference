@@ -11,7 +11,6 @@
 import { ActionType, IActionApi, IActionDescription } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
@@ -187,7 +186,7 @@ export interface IHookHost {
      * @param doodad The doodad object
      * @returns False if the doodad cannot be picked up, or undefined to use the default logic
      */
-    canPickupDoodad?(human: IBaseHumanEntity, doodad: IDoodad): boolean | undefined;
+    canPickupDoodad?(human: Human, doodad: IDoodad): boolean | undefined;
     /**
      * Called before a player attacks
      * @param player The player object
@@ -306,7 +305,7 @@ export interface IHookHost {
      * @param isSwimming True if the human is swimming
      * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
      */
-    isHumanSwimming?(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
+    isHumanSwimming?(human: Human, isSwimming: boolean): boolean | undefined;
     /**
      * Called when checking if a tile is blocked, used for pathing.
      * @param tile The tile to check
@@ -319,7 +318,7 @@ export interface IHookHost {
      * @param tile The tile something was built on
      * @param doodad The doodad that was created on the tile
      */
-    onBuild?(human: IBaseHumanEntity, item: IItem, tile: ITile, doodad: IDoodad): void;
+    onBuild?(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
     /**
      * Called when a button on the button bar is clicked
      * @param button The button element
@@ -349,7 +348,7 @@ export interface IHookHost {
      * @param human The human object
      * @param item The item that was crafted
      */
-    onCraft?(human: IBaseHumanEntity, item: IItem): void;
+    onCraft?(human: Human, item: IItem): void;
     /**
      * Called right after the world is created, but before the renderer
      * @param world The world object
@@ -505,7 +504,7 @@ export interface IHookHost {
      * @param human The human object
      * @param direction The direction the player is now facing
      */
-    onMoveDirectionUpdate?(human: IBaseHumanEntity, direction: Direction): void;
+    onMoveDirectionUpdate?(human: Human, direction: Direction): void;
     /**
      * Called when no input is received
      * @param player The player object

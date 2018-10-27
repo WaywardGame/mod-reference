@@ -236,8 +236,6 @@ declare global {
         create<K, V>(entriesIterable: IterableOf<[K, V]>): Map<K, V>;
     }
     interface Function {
-        callNative: Function["call"];
-        applyNative: Function["apply"];
         bindNative: Function["bind"];
     }
     interface PromiseConstructor {

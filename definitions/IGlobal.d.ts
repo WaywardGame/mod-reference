@@ -14,6 +14,7 @@ import { ICommandManager } from "command/ICommandManager";
 import ICorpseManager from "creature/corpse/ICorpseManager";
 import ICreatureManager from "creature/ICreatureManager";
 import IDoodadManager from "doodad/IDoodadManager";
+import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { ItemType } from "Enums";
 import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
@@ -23,6 +24,7 @@ import IHookManager from "mod/IHookManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import NewUi from "newui/NewUi";
+import { INPC } from "npc/INPC";
 import INPCManager from "npc/INPCManager";
 import IPlayer from "player/IPlayer";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
@@ -78,6 +80,8 @@ declare global {
 	type Mutable<T> = {
 		-readonly [P in keyof T]: T[P];
 	};
+
+	type Human = IPlayer | INPC | IBaseHumanEntity;
 
 	let absentPlayers: IPlayer[];
 	let audio: IAudio;

@@ -9,7 +9,6 @@
  * https://waywardgame.github.io/
  */
 import IBaseEntity from "entity/IBaseEntity";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { IModdable } from "Enums";
 import StatusEffectRenderer from "renderer/StatusEffectRenderer";
 export interface IStatusEffectDescription extends IModdable {
@@ -18,15 +17,15 @@ export interface IStatusEffectDescription extends IModdable {
     /**
      * Whether the status effect should pass (be removed from the human).
      */
-    shouldPass(human: IBaseHumanEntity): boolean;
+    shouldPass(human: Human): boolean;
     /**
      * Event handler for when the status effect passes.
      */
-    onPassed(human: IBaseHumanEntity): void;
+    onPassed(human: Human): void;
     /**
      * Event handler for every tick that the human has the status effect.
      */
-    onTick(human: IBaseHumanEntity): void;
+    onTick(human: Human): void;
 }
 declare const statusEffectDescriptions: Description<IStatusEffectDescription>;
 export default statusEffectDescriptions;

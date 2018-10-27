@@ -9,7 +9,6 @@
  * https://waywardgame.github.io/
  */
 import { ICreature } from "creature/ICreature";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap } from "Enums";
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
@@ -63,7 +62,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: IPlayer): ICreature | undefined;
     getLocation(): IVector3 | undefined;
-    dropInWater(human: IBaseHumanEntity, x?: number, y?: number, skipParticles?: boolean): void;
+    dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;

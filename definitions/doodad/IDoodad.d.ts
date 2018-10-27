@@ -11,7 +11,6 @@
 import { ActionType } from "action/IAction";
 import { ICreature } from "creature/ICreature";
 import DoodadInfo from "doodad/DoodadInfo";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { DoodadType, DoodadTypeGroup, DoorOrientation, EquipType, GrowingStage, IDoodadParticles, IDoodadResource, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SkillType, StatusType, TerrainType } from "Enums";
 import { IInspectable } from "game/inspection/Inspections";
 import { IContainer, IItem, IItemArray, IItemLegendary } from "item/IItem";
@@ -53,20 +52,20 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     isGatherable(): boolean;
     isEmbers(): boolean;
     canHarvest(): boolean;
-    canPickup(human: IBaseHumanEntity): boolean;
+    canPickup(human: Human): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
     getDoodadInfo(): DoodadInfo | undefined;
-    canCauseStatus(human: IBaseHumanEntity, equipType?: EquipType): boolean;
-    causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
-    checkForTrampling(source: IBaseHumanEntity | ICreature): boolean;
+    canCauseStatus(human: Human, equipType?: EquipType): boolean;
+    causeStatus(human: Human, equipType?: EquipType): void;
+    checkForTrampling(source: Human | ICreature): boolean;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): void;
-    setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
+    setOffTrap(human?: Human, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
     update(): void;
     isDangerous(player: IPlayer): boolean;
-    getDamage(human: IBaseHumanEntity, equipType?: EquipType): number;
+    getDamage(human: Human, equipType?: EquipType): number;
 }
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: boolean;

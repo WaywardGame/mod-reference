@@ -11,7 +11,6 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions } from "game/IGame";
@@ -112,7 +111,7 @@ export default class Game extends Emitter implements IGame {
     resizeRenderer(): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
-    checkForHiddenMob(human: IBaseHumanEntity, x: number, y: number, z: number): void;
+    checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     getWrappedCoord(x: number): number;
     getTileFromPoint(point: IVector3): ITile;
@@ -180,7 +179,7 @@ export default class Game extends Emitter implements IGame {
      */
     updateTablesAndWeight(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
-    damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
+    damage(target: Human | ICreature, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     isPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
     isPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): boolean;

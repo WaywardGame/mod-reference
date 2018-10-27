@@ -33,7 +33,6 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _incomingPacketQueue;
     private _incomingPacketProcessingPaused;
     private _packetTickIntervalId;
-    private _outgoingPacketQueue;
     private _currentPacketProcessing;
     private _currentSyncPacketsWaiting;
     private _currentSyncPacketsProcessing;

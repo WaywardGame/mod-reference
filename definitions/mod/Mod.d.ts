@@ -11,7 +11,6 @@
 import { ActionType, IActionApi, IActionDescription } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
@@ -75,7 +74,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     canNPCAttack(npc: INPC, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
     canNPCMove(npc: INPC, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     canNPCSpawn(type: NPCType, x: number, y: number, z: number): boolean | undefined;
-    canPickupDoodad(human: IBaseHumanEntity, doodad: IDoodad): boolean | undefined;
+    canPickupDoodad(human: Human, doodad: IDoodad): boolean | undefined;
     canPlayerAttack(player: IPlayer, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
     canClientMove(api: BindCatcherApi): false | undefined;
     canSeeCreature(creature: ICreature, tile: ITile): boolean | undefined;
@@ -93,15 +92,15 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
     getTilePenalty(penalty: number, tile: ITile): number;
     getZoomLevel(): number | undefined;
-    isHumanSwimming(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
-    isPlayerSwimming(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
+    isHumanSwimming(human: Human, isSwimming: boolean): boolean | undefined;
+    isPlayerSwimming(human: Human, isSwimming: boolean): boolean | undefined;
     isTileBlocked(tile: ITile): true | undefined;
-    onBuild(human: IBaseHumanEntity, item: IItem, tile: ITile, doodad: IDoodad): void;
+    onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
     onButtonBarClick(button: JQuery): void;
     onContainerItemAdd(item: IItem, container: IContainer): void;
     onContainerItemRemove(item: IItem, container: IContainer): void;
     onContainerItemUpdate(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
-    onCraft(human: IBaseHumanEntity, item: IItem): void;
+    onCraft(human: Human, item: IItem): void;
     onCreateWorld(world: IWorld): void;
     onDisplayMessage(player: IPlayer, message: IMessage): void;
     shouldDisplayMessage(player: IPlayer, message: IMessage, messageId: number): boolean | undefined;
@@ -124,7 +123,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onLanguageLoad(language: Language): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveComplete(player: IPlayer): void;
-    onMoveDirectionUpdate(human: IBaseHumanEntity, direction: Direction): void;
+    onMoveDirectionUpdate(human: Human, direction: Direction): void;
     onNoInputReceived(player: IPlayer): void;
     onNPCDamage(npc: INPC, damageInfo: IDamageInfo): number | undefined;
     onNPCDeath(npc: INPC): boolean | undefined;

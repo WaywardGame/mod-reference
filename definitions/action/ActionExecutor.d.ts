@@ -12,7 +12,7 @@ import actionDescriptions from "action/Actions";
 import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentType, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "action/IAction";
 import { Entity } from "entity/IEntity";
 import { IRGB, SfxType, SkillType, TurnType } from "Enums";
-import ActionPacket2 from "multiplayer/packets/shared/ActionPacket2";
+import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import { MilestoneType } from "player/IMilestone";
 export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R> implements IActionApi<E> {
     private readonly action;
@@ -25,7 +25,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private static executing;
     static get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
     static get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
-    static executeMultiplayer(packet: ActionPacket2, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any>): any;
+    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any>): any;
     private _executor;
     readonly executor: E;
     private delay?;
