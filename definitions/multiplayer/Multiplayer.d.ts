@@ -54,8 +54,15 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
-    getConnectedGameCode(): string | undefined;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
+    /**
+     * Three types of game codes:
+     * 1. Dedicated server code - ex. home.spacetech.us:1234
+     * 2. Steam lobby code - ex. steam:109775241017071190
+     * 3. Global matchmaking server id - ex. 87287724-49aa-e556-4145-3ed96c649a20
+     */
+    getConnectedGameCode(): string | undefined;
+    convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;

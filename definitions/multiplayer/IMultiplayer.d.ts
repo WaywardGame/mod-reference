@@ -27,6 +27,7 @@ export interface IMultiplayer extends Emitter {
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     closeConnection(connection: IConnection): void;
+    convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     disconnectAndResetGameState(reason: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
@@ -99,6 +100,7 @@ export declare const maxPlayers = 32;
 export declare const defaultServerPort = 38740;
 export declare const keepAliveInterval = 4000;
 export declare const keepAliveTimeout = 15000;
+export declare const steamLobbyPrefix = "steam:";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
 export interface IMultiplayerOptions {

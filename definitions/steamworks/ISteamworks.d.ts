@@ -29,6 +29,7 @@ export interface ISteamworks extends Emitter {
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getFriends(): ISteamFriend[] | undefined;
     getLobbyData(name: string): string | undefined;
+    getLobbyId(): string | undefined;
     getLobbyMembers(): ISteamFriend[] | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;
     getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): IModPath | undefined;
