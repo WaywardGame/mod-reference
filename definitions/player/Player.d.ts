@@ -118,6 +118,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     getWeightMovementPenalty(): number;
     checkForGatherFire(): Translation | undefined;
     checkForStill(): boolean;
+    checkForWell(): boolean;
     checkForGather(): IDoodad | undefined;
     updateTables(): void;
     updateCraftTable(): void;

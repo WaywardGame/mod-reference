@@ -20,8 +20,10 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     };
     validExecutors: EntityType[];
     handler: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => R;
+    confirmer?: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>;
     constructor(...argumentTypes: A);
     setHandler<H extends (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any>(handler: H): Action<A, E, H extends (...args: any) => infer R2 ? R2 : void>;
+    setConfirmer(confirmer: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>): this;
     setUsableWhen(...usabilities: ActionUsability[]): this;
     setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, EntityTypeTupleType<E2>>;
 }

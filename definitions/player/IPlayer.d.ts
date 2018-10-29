@@ -67,6 +67,7 @@ export interface IPlayer extends IBaseHumanEntity {
     checkForGather(): IDoodad | undefined;
     checkForGatherFire(): Translation | undefined;
     checkForStill(): boolean;
+    checkForWell(): boolean;
     checkReputationMilestones(): void;
     checkSkillMilestones(): void;
     checkWeight(): void;

@@ -16,7 +16,7 @@ export declare let INVALID: ActionArgument;
 declare const actionDescriptions: {
     [ActionType.AddFuel]: import("./Action").Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Apply]: import("./Action").Action<[ActionArgument.ItemNearby], import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Attack]: import("./Action").Action<[[ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.Item, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Attack]: import("./Action").Action<[[ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.Item, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, Promise<void>>;
     [ActionType.Build]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Carve]: import("./Action").Action<[ActionArgument.ItemInventory], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Cast]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;

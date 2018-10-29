@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import ActionExecutor from "action/ActionExecutor";
+import actionDescriptions from "action/Actions";
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
@@ -117,11 +119,14 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
     };
     validExecutors: EntityType[];
     handler(actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>): R;
+    confirmer?(actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>): Promise<boolean>;
 }
 export interface IActionApi<E extends Entity = Entity> {
     readonly executor: E;
     readonly type: ActionType;
     isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is ActionArgumentType<A>;
+    get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E2, infer R> ? ActionExecutor<A, E2, R> : never;
+    get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E2, infer R> ? ActionExecutor<A, E2, R> : never;
     setDelay(delay: number, replace?: boolean): this;
     setPassTurn(turnType?: TurnType): this;
     setUpdateView(updateFov?: boolean): this;
@@ -136,6 +141,19 @@ export interface IActionApi<E extends Entity = Entity> {
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(color: IRGB, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
+    /**
+     * The items passed to this method will be damaged when the action completes. If damaging any of the items will result in the
+     * item breaking, a confirmation dialog will be shown asking if you want to proceed with the action.
+     */
+    addUsedItems(...items: IItem[]): Promise<boolean>;
+    /**
+     * Removes all items set as "used" by `addUsedItems`
+     */
+    removeUsedItems(): this;
+    /**
+     * Removes specific items set as "used" by `addUsedItems`
+     */
+    removeUsedItems(...items: IItem[]): this;
 }
 export interface IActionSoundEffect {
     type: SfxType;
@@ -182,9 +200,9 @@ export declare enum ActionArgument {
     NPC = 26,
     Player = 27,
     RestType = 28,
-    Vector2 = 29,
-    Vector3 = 30,
-    TileEvent = 31
+    TileEvent = 29,
+    Vector2 = 30,
+    Vector3 = 31
 }
 export declare type ActionArgumentType<X extends ActionArgument> = X extends ActionArgument.Number ? number : X extends ActionArgument.Undefined ? undefined : X extends ActionArgument.Null ? null : X extends ActionArgument.Boolean ? boolean : X extends ActionArgument.Number ? number : X extends ActionArgument.String ? string : X extends ActionArgument.Array ? any[] : X extends ActionArgument.Object ? any : X extends ActionArgument.AttackType ? AttackType : X extends ActionArgument.Container ? IContainer : X extends ActionArgument.Item ? IItem : X extends ActionArgument.ItemNearby ? IItem : X extends ActionArgument.ItemInventory ? IItem : X extends ActionArgument.ItemArray ? IItem[] : X extends ActionArgument.ItemArrayNearby ? IItem[] : X extends ActionArgument.ItemArrayInventory ? IItem[] : X extends ActionArgument.Doodad ? IDoodad : X extends ActionArgument.Corpse ? ICorpse : X extends ActionArgument.Creature ? ICreature : X extends ActionArgument.NPC ? INPC : X extends ActionArgument.Player ? IPlayer : X extends ActionArgument.Human ? Human : X extends ActionArgument.EquipType ? EquipType : X extends ActionArgument.Direction ? Direction : X extends ActionArgument.ItemQuality ? ItemQuality : X extends ActionArgument.ItemType ? ItemType : X extends ActionArgument.Vector2 ? IVector2 : X extends ActionArgument.Vector3 ? IVector3 : X extends ActionArgument.RestType ? RestType : X extends ActionArgument.ActionType ? ActionType : X extends ActionArgument.DoodadType ? DoodadType : X extends ActionArgument.Entity ? Entity : X extends ActionArgument.TileEvent ? ITileEvent : never;
 declare type ActionArgumentEntryType<X extends ActionArgument | ActionArgument[]> = X extends ActionArgument ? ActionArgumentType<X> : X extends ActionArgument[] ? ExtractActionArgumentArray<X> : never;

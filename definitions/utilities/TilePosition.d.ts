@@ -8,7 +8,5 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Action } from "action/Action";
-import { ActionArgument } from "action/IAction";
-declare const _default: Action<[[ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.Item, ActionArgument.Undefined]], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer, Promise<void>>;
-export default _default;
+export declare function getTileId(x: number, y: number, z: number): number;
+export declare function getTilePosition(id: number): [number, number, number];

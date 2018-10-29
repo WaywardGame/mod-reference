@@ -50,6 +50,9 @@ export interface IGame extends Emitter {
             } | undefined;
         } | undefined;
     };
+    wellData: {
+        [index: number]: IWell | undefined;
+    };
     tileContainers: ITileContainer[];
     items: IItemArray;
     creatures: SaferArray<ICreature>;
@@ -244,6 +247,15 @@ export interface IMapRequest {
      * Whether to involve your skill in how "readable" the map is. Defaults to false.
      */
     skillCheck?: boolean;
+}
+export interface IWell {
+    quantity: number;
+    waterType: WaterType;
+}
+export declare enum WaterType {
+    None = 0,
+    FreshWater = 1,
+    Seawater = 2
 }
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;

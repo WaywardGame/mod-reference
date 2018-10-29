@@ -13,7 +13,7 @@ import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions } from "game/IGame";
+import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
 import Translation from "language/Translation";
@@ -80,6 +80,9 @@ export default class Game extends Emitter implements IGame {
                 [index: number]: ITileData[];
             };
         };
+    };
+    wellData: {
+        [index: number]: IWell | undefined;
     };
     tileEvents: SaferArray<ITileEvent>;
     time: TimeManager;

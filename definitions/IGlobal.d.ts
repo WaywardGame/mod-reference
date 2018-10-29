@@ -207,6 +207,7 @@ declare global {
 		ctime: Date;
 		isFile(): boolean;
 		isDirectory(): boolean;
+		isSymbolicLink(): boolean;
 	}
 
 	interface IElectronApi {

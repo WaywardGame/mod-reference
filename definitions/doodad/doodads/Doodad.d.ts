@@ -11,7 +11,7 @@
 import { ActionType } from "action/IAction";
 import { ICreature } from "creature/ICreature";
 import DoodadInfo from "doodad/DoodadInfo";
-import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions, IWell } from "doodad/IDoodad";
+import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import { DoodadType, DoorOrientation, EquipType, GrowingStage, IRGB, ItemQuality, ItemType } from "Enums";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
@@ -45,7 +45,6 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     y: number;
     z: number;
     step: number | undefined;
-    well: IWell;
     private _description;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;

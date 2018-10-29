@@ -40,13 +40,13 @@ export interface IItemManager {
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
-    getItemListTranslation(items: IItem[]): Translation;
+    getItemListTranslation(items: IItem[], article?: boolean): Translation;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: IItem[]): number;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
-    getItemTranslations(items: IItem[]): IterableIterator<Translation>;
+    getItemTranslations(items: IItem[], article?: boolean): IterableIterator<Translation>;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     getLegendaryWeightCapacity(container: IContainer): number;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;

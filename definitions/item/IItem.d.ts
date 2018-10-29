@@ -168,8 +168,15 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     worth?: number;
     burnsLike?: ItemType[];
     spawnableTiles?: SpawnableTiles;
+    gather?: ILiquid;
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
+}
+export interface ILiquid {
+    milk: ItemType;
+    desalinated: ItemType;
+    unpurified: ItemType;
+    seawater: ItemType;
 }
 export interface IDismantleDescription {
     items: Array<[ItemType, number]>;
