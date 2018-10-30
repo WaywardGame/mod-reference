@@ -165,7 +165,7 @@ export default class Game extends Emitter implements IGame {
     getTactics(): number | undefined;
     getSkillPercent(skill: SkillType): number | undefined;
     getPlayerAverage(calc: (player: IPlayer) => number | undefined, round?: boolean): number | undefined;
-    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean): void;
+    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean, skipCaveDirt?: boolean): void;
     isPositionFull(x: number, y: number, z: number): boolean;
     isTileFull(tile: ITile): boolean;
     isOnFire(tile: ITile): FireType;

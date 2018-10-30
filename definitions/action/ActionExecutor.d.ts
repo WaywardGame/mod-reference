@@ -46,7 +46,8 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private particle?;
     private updateView?;
     private updateRender?;
-    private readonly usedItems;
+    private readonly items;
+    private itemsUsed;
     private constructor();
     execute(executor: E, ...args: ActionArgumentTupleTypes<A>): R;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentType<AA>;
@@ -66,8 +67,9 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setParticle(color: IRGB, inFront?: boolean): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
-    addUsedItems(...items: IItem[]): Promise<boolean>;
-    removeUsedItems(...items: IItem[]): this;
+    addItems(...addItems: Array<IItem | undefined>): Promise<boolean>;
+    removeItems(...items: Array<IItem | undefined>): this;
+    setItemsUsed(used?: boolean): this;
     private executeInternalOrMultiplayer;
     private executeInternal;
     private handleApi;

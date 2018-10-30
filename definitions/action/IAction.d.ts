@@ -142,18 +142,27 @@ export interface IActionApi<E extends Entity = Entity> {
     setParticle(color: IRGB, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
     /**
-     * The items passed to this method will be damaged when the action completes. If damaging any of the items will result in the
-     * item breaking, a confirmation dialog will be shown asking if you want to proceed with the action.
+     * The items passed to this method will be registered as items potentially to be damaged when the action completes.
+     * If damaging any of the items will result in the item breaking, and this method is called from the `confirmer` of the action,
+     * a confirmation dialog will be shown asking if you want to proceed with the action.
      */
-    addUsedItems(...items: IItem[]): Promise<boolean>;
+    addItems(...items: Array<IItem | undefined>): Promise<boolean>;
     /**
-     * Removes all items set as "used" by `addUsedItems`
+     * Removes all items added via `addItems`
      */
-    removeUsedItems(): this;
+    removeItems(): this;
     /**
-     * Removes specific items set as "used" by `addUsedItems`
+     * Removes specific items added by `addItems`
      */
-    removeUsedItems(...items: IItem[]): this;
+    removeItems(...items: Array<IItem | undefined>): this;
+    /**
+     * Sets that the items added to this action by `addItems` were "used" (so they will be damaged afterward).
+     */
+    setItemsUsed(): this;
+    /**
+     * Sets whether the items added to this action by `addItems` were "used" (IE, whether they will be damaged).
+     */
+    setItemsUsed(used?: boolean): this;
 }
 export interface IActionSoundEffect {
     type: SfxType;
