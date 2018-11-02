@@ -1013,7 +1013,9 @@ export declare enum StatType {
     Stamina = 2,
     Metabolism = 3,
     Health = 4,
-    Thirst = 5
+    Thirst = 5,
+    Zero = 6,
+    Miss = 7
 }
 export declare enum StatusType {
     Bleeding = 0,

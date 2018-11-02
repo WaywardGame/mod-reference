@@ -88,6 +88,10 @@ export interface IDifficultyOptionsStat {
      * The initial value of the stat, or `undefined` if it should be generated randomly
      */
     initialValue?: number;
+    /**
+     * The max value of the state, or `undefined` if it should be generated randomly
+     */
+    maxValue?: number;
 }
 export interface IDifficultyOptionsStatusEffect {
     /**

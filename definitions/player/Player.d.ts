@@ -14,7 +14,7 @@ import BaseHumanEntity from "entity/BaseHumanEntity";
 import { StatusEffectChangeReason } from "entity/IBaseEntity";
 import { EntityType } from "entity/IEntity";
 import { IStat, Stat } from "entity/IStats";
-import { Direction, EquipType, ItemType, RestType, SkillType, StatusType, TurnType, WeightStatus } from "Enums";
+import { Direction, EquipType, ItemType, RestCancelReason, RestType, SkillType, StatusType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -69,6 +69,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
     startResting(restData: IRestData): void;
+    cancelResting(reason: RestCancelReason): void;
     showRestInterrupt(restType: RestType): void;
     /**
      * Updates caused by status effects such as bleeding, poison, and burns.

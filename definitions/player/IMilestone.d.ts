@@ -45,7 +45,8 @@ export declare enum MilestoneType {
     Pacifier = 31,
     Merchant = 32,
     Notekeeper = 33,
-    Operator = 34
+    Operator = 34,
+    Huntsman = 35
 }
 export declare enum MilestoneVisibility {
     Visible = 0,
