@@ -61,7 +61,7 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     addDelay(delay: Delay, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
-    cancelResting(reason: RestCancelReason): void;
+    cancelResting(reason: RestCancelReason): boolean;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     checkAndRemoveBlood(): boolean;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;

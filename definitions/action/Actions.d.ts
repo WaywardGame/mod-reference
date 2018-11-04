@@ -93,7 +93,7 @@ declare const actionDescriptions: {
     [ActionType.Transmogrify]: import("./Action").Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.TraverseTheSea]: import("./Action").Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, Promise<void>>;
     [ActionType.Unequip]: import("./Action").Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
-    [ActionType.UpdateDirection]: import("./Action").Action<[ActionArgument.Direction, [ActionArgument.Boolean, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.UpdateDirection]: import("./Action").Action<[ActionArgument.Direction, [ActionArgument.Number, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.UseItem]: import("./Action").Action<[ActionArgument.ItemNearby, ActionArgument.ActionType], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
 };
 export default actionDescriptions;

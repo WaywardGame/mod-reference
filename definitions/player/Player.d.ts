@@ -69,7 +69,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
     startResting(restData: IRestData): void;
-    cancelResting(reason: RestCancelReason): void;
+    cancelResting(reason: RestCancelReason): boolean;
     showRestInterrupt(restType: RestType): void;
     /**
      * Updates caused by status effects such as bleeding, poison, and burns.
@@ -92,7 +92,10 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    getMovementIntent(): IMovementIntent;
+    getMovementIntent(): IMovementIntent | {
+        intent: Direction;
+        shouldDisableTurnDelay: boolean;
+    };
     updateMovementIntent(movementIntent: IMovementIntent): void;
     /**
      * Gets the max health of the player.
@@ -146,7 +149,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     hasWalkPath(): boolean;
     walkAlongPath(path: IVector2[] | undefined): void;
     processInput(): void;
-    faceDirection(direction: Direction, ignoreTurnDelay?: boolean): boolean;
+    faceDirection(direction: Direction, turnDelay?: number): boolean;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;

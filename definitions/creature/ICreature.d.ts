@@ -98,6 +98,11 @@ export interface ICreatureDescription extends IModdable {
     damageType: DamageType;
     ai: AiType;
     moveType: MoveType;
+    /**
+     * A percentage number for the amount of time the creature should skip movement
+     * 100 means the creature always skips their movement
+     */
+    skipMovementChance?: number;
     fishable?: boolean;
     blood?: IRGB;
     aberrantBlood?: IRGB;
@@ -123,6 +128,7 @@ export interface ICreatureDescription extends IModdable {
     providesFire?: boolean;
     canTrample?: boolean;
     helpPlants?: boolean;
+    speed?: number;
 }
 export interface ICreatureLoot {
     item: ItemType;

@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import IBaseEntity from "entity/IBaseEntity";
-import { IModdable } from "Enums";
+import { IModdable, StatusType } from "Enums";
 import StatusEffectRenderer from "renderer/StatusEffectRenderer";
 export interface IStatusEffectDescription extends IModdable {
     iconPath?: string | ((entity: IBaseEntity) => string);
@@ -27,5 +27,5 @@ export interface IStatusEffectDescription extends IModdable {
      */
     onTick(human: Human): void;
 }
-declare const statusEffectDescriptions: Description<IStatusEffectDescription>;
+declare const statusEffectDescriptions: OptionalDescriptions<StatusType, IStatusEffectDescription>;
 export default statusEffectDescriptions;

@@ -261,5 +261,5 @@ export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;
 export declare const lineOfSightDetail = 4;
 export declare const interval = 16.6666;
-export declare const maximumDirectionTurnDelay: number;
-export declare const defaultDirectionTurnDelay: number;
+export declare const maximumTurnDelay: number;
+export declare const defaultTurnDelay: number;

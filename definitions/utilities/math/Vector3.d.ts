@@ -63,4 +63,5 @@ export default class Vector3 implements IVector3 {
     normalize(): this;
     normalize<D extends IVector3>(dest: D): D;
     raw(): IVector3;
+    toString(): string;
 }

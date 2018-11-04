@@ -89,6 +89,7 @@ export interface IOptions {
     hideEquippedHeadgear: boolean;
     keepSortActive: boolean;
     leftHand: boolean;
+    mouseTurnDelay: number;
     muteEffects: boolean;
     muteMusic: boolean;
     powerPreference: string;

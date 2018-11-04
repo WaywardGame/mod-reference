@@ -44,21 +44,13 @@ import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
 import IUi from "ui/IUi";
 
 declare global {
-
-	/**
-	 * @deprecated
-	 * @see `OptionalDescriptions` or `Descriptions`
-	 */
-	interface Description<T> {
-		[index: number]: T | undefined;
-	}
-
 	/**
 	 * An object of descriptions. Each key in E *may* map to a valid description.
 	 * @param E The enum with which to index these descriptions.
 	 * @param V The description type.
 	 */
 	type OptionalDescriptions<E extends string | number, V> = { [key in E]?: V } & { [key: number]: V | undefined };
+
 	/**
 	 * An object of descriptions. Each key in E *will* map to a valid description.
 	 * @param E The enum with which to index these descriptions.
@@ -70,6 +62,7 @@ declare global {
 	 * Changes the return type of the given function, or creates a new function from the given arguments and return type. 
 	 */
 	type MaskReturn<F extends any[] | ((...args: any[]) => any), R> = F extends (...args: infer A) => any ? (...args: A) => R : (...args: Extract<F, any[]>) => R;
+
 	/**
 	 * Gets the arguments tuple of a function.
 	 */

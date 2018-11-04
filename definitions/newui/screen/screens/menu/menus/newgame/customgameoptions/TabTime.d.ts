@@ -7,9 +7,10 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { ITerrainResource, TerrainType } from "Enums";
-export declare const resource: OptionalDescriptions<TerrainType, ITerrainResource>;
-export default resource;
+import { IDifficultyOptions } from "game/Difficulty";
+import { UiApi } from "newui/INewUi";
+import CustomGameOptionsTab from "newui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
+export default class TabTime extends CustomGameOptionsTab {
+    constructor(api: UiApi, options: () => IDifficultyOptions);
+}

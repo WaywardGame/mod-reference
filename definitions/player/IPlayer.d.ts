@@ -75,7 +75,7 @@ export interface IPlayer extends IBaseHumanEntity {
     /**
      * Returns true if the player changed their facing direction.
      */
-    faceDirection(direction: Direction, ignoreTurnDelay?: boolean): boolean;
+    faceDirection(direction: Direction, turnDelay?: number): boolean;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
@@ -228,7 +228,7 @@ export interface IMovementIntent {
      * A cardinal direction, the tile location of a tile to move to, to idle, or undefined to do nothing.
      */
     intent?: MovementIntent;
-    shouldDisableTurnDelay: boolean;
+    turnDelay?: number;
 }
 export interface IPlayerTravelData {
     starvation: number;

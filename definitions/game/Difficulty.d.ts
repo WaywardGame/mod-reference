@@ -51,14 +51,6 @@ export interface IDifficultyOptions {
         statusEffects: Map<StatusType, IDifficultyOptionsStatusEffect>;
         reputation: {
             /**
-             * The rate at which malignity is gained
-             */
-            malignityMultiplier: number;
-            /**
-             * The rate at which benignity is gained
-             */
-            benignityMultiplier: number;
-            /**
              * The initial malignity
              */
             initialMalignity: number;
@@ -66,6 +58,14 @@ export interface IDifficultyOptions {
              * The initial benignity
              */
             initialBenignity: number;
+            /**
+             * The rate at which malignity is gained
+             */
+            malignityMultiplier: number;
+            /**
+             * The rate at which benignity is gained
+             */
+            benignityMultiplier: number;
         };
         /**
          * - Set to `false` to disable initial items
@@ -81,10 +81,6 @@ export interface IDifficultyOptions {
 }
 export interface IDifficultyOptionsStat {
     /**
-     * A multiplier for the speed at which the stat changes `1` is "default", `0` is "none", `2` is "two times speed"
-     */
-    changeTimerMultiplier: number;
-    /**
      * The initial value of the stat, or `undefined` if it should be generated randomly
      */
     initialValue?: number;
@@ -92,12 +88,12 @@ export interface IDifficultyOptionsStat {
      * The max value of the state, or `undefined` if it should be generated randomly
      */
     maxValue?: number;
+    /**
+     * A multiplier for the speed at which the stat changes `1` is "default", `0` is "none", `2` is "two times speed"
+     */
+    changeTimerMultiplier: number;
 }
 export interface IDifficultyOptionsStatusEffect {
-    /**
-     * A multiplier for the chance of this status effect to be passed each turn.
-     */
-    passChanceMultiplier: number;
     /**
      * Whether every player starts with this status effect.
      */
@@ -106,5 +102,9 @@ export interface IDifficultyOptionsStatusEffect {
      * Whether this status effect is untreatable (IE: it must pass naturally)
      */
     untreatable: boolean;
+    /**
+     * A multiplier for the chance of this status effect to be passed each turn.
+     */
+    passChanceMultiplier: number;
 }
 export declare function getDefaultDifficultyOptions(difficulty: Difficulty): IDifficultyOptions;

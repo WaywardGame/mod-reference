@@ -63,4 +63,5 @@ export default class Vector2 implements IVector2 {
     toRadians(): number;
     raw(): IVector2;
     clamp(a: IVector2, b: IVector2): this;
+    toString(): string;
 }

@@ -857,7 +857,8 @@ export declare enum CreatureType {
     SlitherSucker = 36,
     Mudskipper = 37,
     Scorpion = 38,
-    Rattlesnake = 39
+    Rattlesnake = 39,
+    AntelopeJackrabbit = 40
 }
 export declare enum NPCType {
     Merchant = 0,
