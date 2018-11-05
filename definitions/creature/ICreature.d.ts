@@ -53,6 +53,7 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType>, IInspecta
     getMovementFinishTime(): number | undefined;
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
+    checkUnder(checkX?: number, checkY?: number): boolean;
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
     initializeStats(hp: number, maxhp?: number): void;

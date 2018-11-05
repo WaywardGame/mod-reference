@@ -10,11 +10,12 @@
  */
 import { IDamageInfo } from "creature/ICreature";
 import { BindCatcherApi } from "newui/BindingManager";
+import WalkToTileHandler from "newui/screen/screens/game/util/movement/WalkToTileHandler";
 export default class MovementHandler {
     private readonly gameScreen;
+    readonly walkToTileHandler: WalkToTileHandler;
     private lastMove;
     private readonly intent;
-    private readonly walkToTileHandler;
     constructor(gameScreen: Element);
     /**
      * Movement does not care if other binds are pressed, and it doesn't return whether it processed a press either.

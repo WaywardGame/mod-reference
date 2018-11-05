@@ -53,6 +53,11 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
+    /**
+     * Checks under the creature for getting burned, setting off traps, eating items off the ground, and more
+     * @returns Returns whether the creature can keep moving (in the case of creatures with >= 2 speed)
+     */
+    checkUnder(checkX?: number, checkY?: number): boolean;
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
