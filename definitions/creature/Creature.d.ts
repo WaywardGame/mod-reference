@@ -57,10 +57,10 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
      * Checks under the creature for getting burned, setting off traps, eating items off the ground, and more
      * @returns Returns whether the creature can keep moving (in the case of creatures with >= 2 speed)
      */
-    checkUnder(checkX?: number, checkY?: number): boolean;
+    checkUnder(x?: number, y?: number): boolean;
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
-    damage(damageInfo: IDamageInfo): number | undefined;
+    damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
     private inspectResistancesAndVulnerabilities;
