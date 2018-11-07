@@ -588,7 +588,7 @@ export declare enum ItemTypeGroup {
     Medicinal = 806,
     Meat = 807,
     Food = 808,
-    Insect = 809,
+    Bait = 809,
     Liquid = 810,
     Treasure = 811,
     Rock = 812,
