@@ -16,6 +16,7 @@ import { EntityType } from "entity/IEntity";
 import { IStat, Stat } from "entity/IStats";
 import { Direction, EquipType, ItemType, RestCancelReason, RestType, SkillType, StatusType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
+import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
@@ -128,6 +129,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     updateCraftTable(): void;
     updateDismantleTable(): void;
     updateTablesAndWeight(): void;
+    getProtectedItemsOptions(): IProtectedItemOptions;
     checkReputationMilestones(): void;
     getReputation(): number;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;

@@ -30,6 +30,7 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     shouldSkipNextUpdate: boolean;
     type: CreatureType;
     originalMoveType: MoveType | undefined;
+    hitchedTo?: number;
     private _description;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
@@ -70,6 +71,12 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     private findPlayersWithinRadius;
     private processAttack;
     private processMovement;
+    /**
+     * Some creatures can break doodads, leading to lost rest or sleep when near them
+     * @param doodad The doodad to damage
+     * @param moveType The move type of the creature attempting to break the doodad
+     */
+    private breakDoodad;
     private processAiChanges;
     private processSpecialAbilities;
 }

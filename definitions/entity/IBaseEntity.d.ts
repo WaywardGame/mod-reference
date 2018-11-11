@@ -21,7 +21,7 @@ export default interface IBaseEntity extends IVector3, Emitter {
     renamed?: string | ISerializedTranslation;
     fromX: number;
     fromY: number;
-    moveType: MoveType | undefined;
+    readonly moveType: MoveType | undefined;
     anim: number;
     stopNextMovement: boolean;
     direction: IVector2;

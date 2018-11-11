@@ -45,6 +45,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     y: number;
     z: number;
     step: number | undefined;
+    hitchedCreature?: number;
     private _description;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;

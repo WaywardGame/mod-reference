@@ -38,20 +38,20 @@ export interface IItemManager {
     getGroupItems(itemGroup: ItemTypeGroup): Set<ItemType>;
     getItemForPlayer(player: IPlayer, search: ItemType | ItemTypeGroup): IItem | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
-    getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions): IItem | undefined;
+    getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions): IItem | undefined;
     getItemListTranslation(items: IItem[], article?: boolean): Translation;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: IItem[]): number;
-    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
-    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
+    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItemArray;
+    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItemArray;
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItemArray;
     getItemTranslations(items: IItem[], article?: boolean): IterableIterator<Translation>;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     getLegendaryWeightCapacity(container: IContainer): number;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
-    getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
+    getOrderedContainerItems(container: IContainer, excludeProtectedItems?: IProtectedItemOptions): IItem[];
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
@@ -84,3 +84,7 @@ export interface IItemManager {
     inspect(inspection: Inspection, ...items: IItem[]): InspectionResult;
 }
 export default IItemManager;
+export interface IProtectedItemOptions {
+    protect: boolean;
+    protectContainers: boolean;
+}

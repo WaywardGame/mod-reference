@@ -14,6 +14,7 @@ import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
 import { Direction, EquipType, HairColor, HairStyle, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
+import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
@@ -83,6 +84,7 @@ export interface IPlayer extends IBaseHumanEntity {
     getReputation(): number;
     getStrength(): number;
     getWeightMovementPenalty(): number;
+    getProtectedItemsOptions(): IProtectedItemOptions;
     getWeightStatus(): WeightStatus;
     hasTamedCreature(creature: ICreature): boolean;
     hasWalkPath(): boolean;

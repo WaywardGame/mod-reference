@@ -12,7 +12,7 @@ import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, Wei
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
-import { IItemManager } from "item/IItemManager";
+import { IItemManager, IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
@@ -60,12 +60,12 @@ export default class ItemManager implements IItemManager {
     getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
-    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem, excludeProtectedItems?: boolean): IItem | undefined;
+    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem | undefined;
     getItemForPlayer(player: IPlayer, search: ItemType | ItemTypeGroup): IItem | undefined;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: boolean): IItem | undefined;
-    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
-    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: boolean): IItemArray;
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem | undefined;
+    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItemArray;
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItemArray;
+    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItemArray;
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): IItem | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
@@ -73,7 +73,7 @@ export default class ItemManager implements IItemManager {
     isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
-    getOrderedContainerItems(container: IContainer, excludeProtectedItems?: boolean): IItem[];
+    getOrderedContainerItems(container: IContainer, protectedItemOptions?: IProtectedItemOptions | undefined): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemTranslations(items: IItem[], article?: boolean): IterableIterator<Translation>;
     getItemListTranslation(items: IItem[], article?: boolean): Translation;

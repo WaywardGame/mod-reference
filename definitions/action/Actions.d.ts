@@ -44,6 +44,7 @@ declare const actionDescriptions: {
     [ActionType.Harvest]: import("./Action").Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Heal]: import("./Action").Action<[ActionArgument.ItemNearby], import("../player/IPlayer").IPlayer, void>;
     [ActionType.HealOther]: import("./Action").Action<[ActionArgument.ItemInventory], import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Hitch]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Idle]: import("./Action").Action<[], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Ignite]: import("./Action").Action<[ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Inspect]: import("./Action").Action<[ActionArgument.Vector3], import("../player/IPlayer").IPlayer, void>;
@@ -93,6 +94,7 @@ declare const actionDescriptions: {
     [ActionType.Transmogrify]: import("./Action").Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.TraverseTheSea]: import("./Action").Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, Promise<void>>;
     [ActionType.Unequip]: import("./Action").Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Unhitch]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.UpdateDirection]: import("./Action").Action<[ActionArgument.Direction, [ActionArgument.Number, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.UseItem]: import("./Action").Action<[ActionArgument.ItemNearby, ActionArgument.ActionType], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
 };

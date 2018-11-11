@@ -26,6 +26,7 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType>, IInspecta
     enemy?: number;
     enemyIsPlayer?: boolean;
     enemyAttempts?: number;
+    hitchedTo?: number;
     /**
      * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
      * @param count The number of this creature that you're getting the name of. Defaults to `1`.

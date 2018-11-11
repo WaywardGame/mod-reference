@@ -93,6 +93,7 @@ export interface IOptions {
     muteEffects: boolean;
     muteMusic: boolean;
     powerPreference: string;
+    protectedCraftingItemContainers: boolean;
     protectedCraftingItems: boolean;
     realTimeTickSpeed: number;
     rightClickInspect: boolean;

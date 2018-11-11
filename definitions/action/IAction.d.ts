@@ -102,7 +102,9 @@ export declare enum ActionType {
     Trade = 77,
     PlaceDown = 78,
     Inspect = 79,
-    Apply = 80
+    Apply = 80,
+    Hitch = 81,
+    Unhitch = 82
 }
 export declare enum ActionUsability {
     Paused = 0,

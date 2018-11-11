@@ -576,7 +576,8 @@ export declare enum ItemType {
     IronBakingTray = 453,
     Flour = 454,
     Dough = 455,
-    Hardtack = 456
+    Hardtack = 456,
+    HitchingPost = 457
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -793,7 +794,8 @@ export declare enum DoodadTypeGroup {
     LitWaterStill = 404,
     Anvil = 405,
     Well = 406,
-    Last = 407
+    Hitch = 407,
+    Last = 408
 }
 export declare enum GrowingStage {
     Germinating = 0,
