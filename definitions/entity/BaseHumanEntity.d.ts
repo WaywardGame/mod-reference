@@ -55,6 +55,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     getSkillCore(skill: SkillType): number;
     setSkillCore(skill: SkillType, value: number): void;
     getSkill(skill: SkillType): number;
+    skillCheck(skill: SkillType, check: number): boolean;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;

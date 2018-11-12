@@ -20,8 +20,8 @@ declare const actionDescriptions: {
     [ActionType.Build]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Carve]: import("./Action").Action<[ActionArgument.ItemInventory], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Cast]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.CloseContainer]: import("./Action").Action<[ActionArgument.Container], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.CloseDoor]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.CloseContainer]: import("./Action").Action<[ActionArgument.Container, [ActionArgument.Boolean, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.CloseDoor]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, boolean>;
     [ActionType.Craft]: import("./Action").Action<[ActionArgument.ItemType, ActionArgument.ItemArrayNearby, ActionArgument.ItemArrayNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Decode]: import("./Action").Action<[ActionArgument.ItemNearby], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Dig]: import("./Action").Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;

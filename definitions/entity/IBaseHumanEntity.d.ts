@@ -58,6 +58,10 @@ export default interface IBaseHumanEntity extends IBaseEntity {
      * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
      */
     getSkill(skill: SkillType): number;
+    /**
+     * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
+     */
+    skillCheck(skill: SkillType, check: number): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;

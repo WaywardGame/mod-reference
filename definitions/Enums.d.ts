@@ -114,9 +114,9 @@ export declare enum EquipType {
     RightHand = 11
 }
 export declare enum RecipeLevel {
-    Advanced = 0,
-    Simple = 1,
-    Intermediate = 2,
+    Simple = 0,
+    Intermediate = 1,
+    Advanced = 2,
     Expert = 3
 }
 export declare enum ItemType {

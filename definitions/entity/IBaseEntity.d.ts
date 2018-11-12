@@ -106,10 +106,11 @@ export default interface IBaseEntity extends IVector3, Emitter {
      * Change the bonus for a stat.
      * @param stat The `Stat` to set the bonus of.
      * @param bonus The amount to increase/decrease the stat.
+     * @param reason Why this stat is changing.
      *
      * Triggers `EntityEvent.StatBonusChanged`, then `EntityEvent.StatChanged`
      */
-    setStatBonus(stat: Stat | IStat, bonus: number, info?: IStatChangeInfo): void;
+    setStatBonus(stat: Stat | IStat, bonus: number, reason?: IStatChangeInfo): void;
     /**
      * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
      * @param stat The `Stat` to set.
@@ -127,6 +128,7 @@ export default interface IBaseEntity extends IVector3, Emitter {
      * Sets how frequently the stat should change. Triggers `EntityEvent.StatTimerChange`
      * @param stat The `Stat` that should change.
      * @param timer How many turns should pass between changes.
+     * @param amount The amount the stat will change whenever the timer completes. Defaults to increase by `1`.
      *
      * If the stat already has a timer going, the difference of the new and old timers
      * is subtracted from the time remaining.
@@ -134,7 +136,7 @@ export default interface IBaseEntity extends IVector3, Emitter {
      * This method assumes the stat you're providing exists on this entity. If it doesn't,
      * it will likely error!
      */
-    setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
+    setStatChangeTimer(stat: Stat | IStat, timer: number, amount?: number): void;
     /**
      * Passes the "turn" for stats, decrements their `changeTimer`s. If a stat's timer reaches `0`,
      * the stat value is changed by `changeAmount` and the `changeTimer` is reset to `nextChangeTimer`

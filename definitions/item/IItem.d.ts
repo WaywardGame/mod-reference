@@ -101,6 +101,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     getWorth(legendaryWorth?: boolean): number | undefined;
     canBurnPlayer(): boolean;
     getBaseDefense(): number;
+    getDurabilityCharge(): number;
 }
 export interface IItemOld {
     equipped?: EquipType;

@@ -131,6 +131,7 @@ export interface ICreatureDescription extends IModdable {
     canTrample?: boolean;
     helpPlants?: boolean;
     speed?: number;
+    disableHitching?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;
