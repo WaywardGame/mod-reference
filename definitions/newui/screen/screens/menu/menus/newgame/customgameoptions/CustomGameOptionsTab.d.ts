@@ -18,9 +18,10 @@ export default class CustomGameOptionsTab extends Tab {
 }
 export declare enum CustomGameOptionsSection {
     General = 0,
-    Stats = 1,
+    Time = 1,
     Reputation = 2,
-    Inventory = 3,
-    Skills = 4,
-    Creatures = 5
+    Stats = 3,
+    StatusEffects = 4,
+    Skills = 5,
+    Inventory = 6
 }

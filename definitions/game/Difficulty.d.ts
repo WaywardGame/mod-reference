@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { Stat } from "entity/IStats";
-import { ItemType, StatusType } from "Enums";
+import { ItemType, SkillType, StatusType } from "Enums";
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
@@ -44,11 +44,24 @@ export interface IDifficultyOptions {
         dayPercent?: number;
     };
     player: {
+        /**
+         * A map of options for each stat.
+         */
         stats: Map<Stat, IDifficultyOptionsStat>;
         /**
          * A map of options for each status effect.
          */
         statusEffects: Map<StatusType, IDifficultyOptionsStatusEffect>;
+        /**
+         * Whether skills should be randomly generated.
+         *
+         * Note: Randomly generated skills can be overwritten by custom options in `skills`.
+         */
+        randomSkills: boolean;
+        /**
+         * Custom options for each skill.
+         */
+        skills: Map<SkillType, IDifficultyOptionsSkill>;
         reputation: {
             /**
              * The initial malignity
@@ -106,5 +119,15 @@ export interface IDifficultyOptionsStatusEffect {
      * A multiplier for the chance of this status effect to be passed each turn.
      */
     passChanceMultiplier: number;
+}
+export interface IDifficultyOptionsSkill {
+    /**
+     * The initial value of this skill.
+     */
+    initial?: number;
+    /**
+     * A multiplier for how fast the skill is gained.
+     */
+    gainMultiplier: number;
 }
 export declare function getDefaultDifficultyOptions(difficulty: Difficulty): IDifficultyOptions;
