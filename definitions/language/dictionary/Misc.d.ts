@@ -40,6 +40,10 @@ export declare const enum ActionTranslation {
     Name = 0,
     Description = 1
 }
+export declare const enum StatusEffectTranslation {
+    Past = 0,
+    Name = 1
+}
 export declare enum MiscTranslation {
     UnknownCreature = 0,
     UnknownDoodad = 1,

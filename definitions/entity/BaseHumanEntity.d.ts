@@ -13,6 +13,7 @@ import BaseEntity from "entity/BaseEntity";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { Delay, EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType, StatType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
+import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
@@ -21,6 +22,7 @@ import MessageManager from "player/MessageManager";
 import NoteManager from "player/NoteManager";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
+import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
     attackFromEquip: IAttackHand;
@@ -52,6 +54,8 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     resetStatTimers(): void;
     isLocalPlayer(): boolean;
     getName(): Translation;
+    getProtectedItemsOptions(): IProtectedItemOptions;
+    getReputation(): number;
     getSkillCore(skill: SkillType): number;
     setSkillCore(skill: SkillType, value: number): void;
     getSkill(skill: SkillType): number;
@@ -85,18 +89,24 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
      * Burn the player
      */
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
+    setPosition(point: IVector3): void;
+    setZ(z: number): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     equip(item: IItem, slot: EquipType): void;
     unequip(item: IItem): void;
+    unequipAll(): void;
+    canJump(): boolean;
     hasDelay(): boolean;
     addDelay(delay: Delay, replace?: boolean): void;
+    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
+    checkForGatherFire(): Translation | undefined;
+    calculateEquipmentStats(): void;
     /**
      * Improve one of the core player stats
      */
     protected statGain(stat: StatType, bypass: boolean): void;
     protected calculateStats(): void;
     protected resetDefense(): void;
-    protected calculateEquipmentStats(): void;
-    protected swimCheck(): void;
     protected updateSwimming(): void;
+    protected swimCheck(): void;
 }

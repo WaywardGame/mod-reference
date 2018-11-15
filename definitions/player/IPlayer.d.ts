@@ -12,11 +12,9 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
-import { Direction, EquipType, HairColor, HairStyle, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkillType, SkinColor, TurnType, WeightStatus } from "Enums";
+import { Direction, EquipType, HairColor, HairStyle, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
-import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
-import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
@@ -63,10 +61,7 @@ export interface IPlayer extends IBaseHumanEntity {
     z: number;
     movementFinishTime: number;
     exploredMap: IExploreMap[] | undefined;
-    calculateEquipmentStats(): void;
-    canJump(): boolean;
     checkForGather(): IDoodad | undefined;
-    checkForGatherFire(): Translation | undefined;
     checkForStill(): boolean;
     checkForWell(): boolean;
     checkReputationMilestones(): void;
@@ -77,14 +72,11 @@ export interface IPlayer extends IBaseHumanEntity {
      * Returns true if the player changed their facing direction.
      */
     faceDirection(direction: Direction, turnDelay?: number): boolean;
-    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     getMovementIntent(): IMovementIntent;
-    getReputation(): number;
     getStrength(): number;
     getWeightMovementPenalty(): number;
-    getProtectedItemsOptions(): IProtectedItemOptions;
     getWeightStatus(): WeightStatus;
     hasTamedCreature(creature: ICreature): boolean;
     hasWalkPath(): boolean;
@@ -98,10 +90,8 @@ export interface IPlayer extends IBaseHumanEntity {
     restoreExploredMap(): void;
     revealItem(itemType: ItemType): void;
     setId(id: number): void;
-    setPosition(point: IVector3): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setup(completedMilestones: number): void;
-    setZ(z: number): void;
     showRestInterrupt(restType: RestType): void;
     staminaCheck(): boolean;
     tick(isPassTurn?: boolean): void;

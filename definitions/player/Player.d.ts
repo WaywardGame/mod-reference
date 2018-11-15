@@ -16,7 +16,6 @@ import { EntityType } from "entity/IEntity";
 import { IStat, Stat } from "entity/IStats";
 import { Direction, EquipType, ItemType, RestCancelReason, RestType, SkillType, StatusType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
-import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
@@ -87,7 +86,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     getDefaultCarveTool(): IItem | undefined;
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
-    canJump(): boolean;
     hasHandToUse(): boolean;
     getHandToUse(): EquipType | undefined;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
@@ -121,7 +119,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
     getWeightMovementPenalty(): number;
-    checkForGatherFire(): Translation | undefined;
     checkForStill(): boolean;
     checkForWell(): boolean;
     checkForGather(): IDoodad | undefined;
@@ -129,9 +126,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     updateCraftTable(): void;
     updateDismantleTable(): void;
     updateTablesAndWeight(): void;
-    getProtectedItemsOptions(): IProtectedItemOptions;
     checkReputationMilestones(): void;
-    getReputation(): number;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setPosition(point: IVector3): void;
@@ -152,7 +147,6 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     walkAlongPath(path: IVector2[] | undefined): void;
     processInput(): void;
     faceDirection(direction: Direction, turnDelay?: number): boolean;
-    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
     updateMilestones(): void;

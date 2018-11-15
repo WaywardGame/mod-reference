@@ -219,6 +219,30 @@ declare global {
          */
         last(): T;
         toggle(value: T, includes?: boolean): number;
+        /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the iterable, and returns type X
+         * @see `utilities/Collectors` for premade collectors
+         */
+        collect<X>(collector: (val: IterableOf<T>) => X): X;
+        /**
+         * Returns an iterable of type X, generated with the given collector function.
+         * @param collector A function that takes the iterable, and returns type X
+         * @see `utilities/Collectors` for premade collectors
+         */
+        collect<X>(iterable: true, collector: (val: IterableOf<T>) => X): IterableOf<X>;
+        /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the iterable, and returns type X
+         * @see `utilities/Collectors` for premade collectors
+         */
+        collect<X, A extends any[]>(collector: (val: IterableOf<T>, ...args: A) => X, ...args: A): X;
+        /**
+         * Returns an iterable of type X, generated with the given collector function.
+         * @param collector A function that takes the iterable, and returns type X
+         * @see `utilities/Collectors` for premade collectors
+         */
+        collect<X, A extends any[]>(iterable: true, collector: (val: IterableOf<T>, ...args: A) => X, ...args: A): IterableOf<X>;
     }
     interface Set<T> {
         addAll(...iterables: Array<IterableOf<T> | Set<T>>): void;

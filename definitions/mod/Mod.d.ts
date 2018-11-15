@@ -65,12 +65,12 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     getAmbientColorNight(): [number, number, number] | undefined;
     getFogColor(colors: [number, number, number]): [number, number, number] | undefined;
     getAmbientLightLevel(ambientLight: number, z: number): number | undefined;
-    canConsumeItem(player: IPlayer, itemType: ItemType, actionType: ActionType): boolean | undefined;
+    canConsumeItem(human: Human, itemType: ItemType, actionType: ActionType): boolean | undefined;
     canCreatureAttack(creature: ICreature, enemy: IPlayer | ICreature): boolean | undefined;
     canCreatureMove(creature: ICreature, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     canCreatureSpawn(type: CreatureType, x: number, y: number, z: number, aberrant: boolean): boolean | undefined;
     canDoodadSpawn(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
-    canDropItem(player: IPlayer, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
+    canDropItem(human: Human, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
     canNPCAttack(npc: INPC, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
     canNPCMove(npc: INPC, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     canNPCSpawn(type: NPCType, x: number, y: number, z: number): boolean | undefined;
@@ -119,7 +119,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDeath(creature: ICreature): void;
     onCreatureSpawn(creature: ICreature): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    onDigTreasure(player: IPlayer, treasureTile: Vector3): void;
+    onDigTreasure(human: Human, treasureTile: Vector3): void;
     onLanguageLoad(language: Language): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveComplete(player: IPlayer): void;
@@ -128,7 +128,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onNPCDamage(npc: INPC, damageInfo: IDamageInfo): number | undefined;
     onNPCDeath(npc: INPC): boolean | undefined;
     onNPCSpawn(npc: INPC): void;
-    onOpenBook(player: IPlayer, book: BookType): void;
+    onOpenBook(human: Human, book: BookType): void;
     onPickupDoodad(player: IPlayer, doodad: IDoodad): void;
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     onPlayerDeath(player: IPlayer): boolean | undefined;
@@ -138,7 +138,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onPlayerTickStart(player: IPlayer): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     onGameScreenVisible(): void;
-    onReadMap(player: IPlayer, mapRequest: IMapRequest): void;
+    onReadMap(human: Human, mapRequest: IMapRequest): void;
     onRenderOverlay(spriteBatch: ISpriteBatch): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     onTileUpdate(tile: ITile, x: number, y: number, z: number): void;

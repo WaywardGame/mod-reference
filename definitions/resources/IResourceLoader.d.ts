@@ -38,7 +38,8 @@ export declare enum PathType {
     StatusEffect = 15,
     StatusEffectIcon = 16,
     Terrain = 17,
-    TileEvent = 18
+    TileEvent = 18,
+    DifficultyOptionsIcon = 19
 }
 export interface IResourceContainer {
     spriteTexture: WebGLTexture;

@@ -35,10 +35,10 @@ export default class ItemManager implements IItemManager {
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     isContainer(obj: unknown): obj is IContainer;
-    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): IItem[];
+    moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: ItemQuality): IItem[];
     computeContainerWeight(container: IContainer): number;
     getLegendaryWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
+    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
     moveToContainer(human: Human | undefined, item: IItem, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
@@ -61,7 +61,7 @@ export default class ItemManager implements IItemManager {
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem | undefined;
-    getItemForPlayer(player: IPlayer, search: ItemType | ItemTypeGroup): IItem | undefined;
+    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem | undefined;
     getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItemArray;
     getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItemArray;
@@ -69,7 +69,7 @@ export default class ItemManager implements IItemManager {
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): IItem | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
-    getAdjacentContainers(player: IPlayer, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
+    getAdjacentContainers(human: Human, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;

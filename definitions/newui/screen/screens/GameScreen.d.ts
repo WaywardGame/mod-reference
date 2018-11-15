@@ -64,7 +64,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     onPlayerDeath(player: IPlayer): boolean | undefined;
     onGameTickEnd(): void;
-    onOpenBook(player: IPlayer, book: BookType): void;
+    onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: IPlayer, mapRequest: IMapRequest): void;
     /**
      * Adds a quadrant element to the screen.

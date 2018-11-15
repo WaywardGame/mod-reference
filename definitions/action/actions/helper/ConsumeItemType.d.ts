@@ -11,5 +11,6 @@
 import { ActionType, IActionApi } from "action/IAction";
 import { ItemType } from "Enums";
 import { IItem } from "item/IItem";
+import { INPC } from "npc/INPC";
 import IPlayer from "player/IPlayer";
-export default function consumeItemType(action: IActionApi<IPlayer>, item: IItem | ItemType, actionType?: ActionType): boolean;
+export default function consumeItemType(action: IActionApi<IPlayer | INPC>, item: IItem | ItemType, actionType?: ActionType): boolean;

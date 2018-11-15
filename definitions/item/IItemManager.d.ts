@@ -23,7 +23,7 @@ export interface IItemManager {
     computeContainerWeight(container: IContainer): number;
     countItemsInContainer(container: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(container: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
-    craft(player: IPlayer, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
+    craft(human: Human, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     create(itemType: ItemType, container: IContainer, quality?: ItemQuality, fake?: boolean): IItem;
     createFake(itemType: ItemType, quality?: ItemQuality): IItem;
     decayItems(): boolean;
@@ -36,7 +36,7 @@ export interface IItemManager {
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType): ItemType;
     getGroupItems(itemGroup: ItemTypeGroup): Set<ItemType>;
-    getItemForPlayer(player: IPlayer, search: ItemType | ItemTypeGroup): IItem | undefined;
+    getItemForHuman(human: Human, search: ItemType | ItemTypeGroup): IItem | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions): IItem | undefined;
     getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions): IItem | undefined;
@@ -57,7 +57,7 @@ export interface IItemManager {
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
-    hasAdditionalRequirements(player: IPlayer, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
+    hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
@@ -70,8 +70,8 @@ export interface IItemManager {
     isTileContainer(container: IContainer | undefined): boolean;
     loadReferences(): void;
     loadTileReferences(): void;
-    moveAllFromContainerToContainer(player: IPlayer | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
-    moveAllFromContainerToInventory(player: IPlayer, container: IContainer, ofQuality?: ItemQuality): IItem[];
+    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
+    moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: ItemQuality): IItem[];
     moveToContainer(human: Human | undefined, item: IItem, container: IContainer): boolean;
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;

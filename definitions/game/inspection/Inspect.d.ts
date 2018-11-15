@@ -11,16 +11,15 @@
 import IBaseEntity from "entity/IBaseEntity";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
-import IPlayer from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
 import { IInspectionSectionSimple, InspectionContext } from "./IInspection";
 declare class Inspection {
-    readonly inspector: IPlayer;
+    readonly inspector: Human;
     readonly context: InspectionContext | string;
     readonly tile: ITile;
     readonly tilePosition: Vector3;
-    static inspect(inspector: IPlayer, tilePosition: Vector3, context: InspectionContext | string): IterableIterator<IInspectionSectionSimple>;
+    static inspect(inspector: Human, tilePosition: Vector3, context: InspectionContext | string): IterableIterator<IInspectionSectionSimple>;
     private constructor();
     inspectEntityHealth(entity: IBaseEntity, entityName?: Translation, revealer?: Translation, skillPercent?: number, healthPercent?: number): Translation | undefined;
     inspectFire(decay?: number, isOpenFire?: boolean): Translation | undefined;

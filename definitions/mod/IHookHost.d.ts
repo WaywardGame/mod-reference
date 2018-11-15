@@ -98,12 +98,12 @@ export interface IHookHost {
     getAmbientLightLevel?(ambientLight: number, z: number): number | undefined;
     /**
      * Called before consuming an item
-     * @param player The player object
+     * @param human The human object
      * @param itemType The item type
      * @param actionType The action type
-     * @returns True if the player can consume the item (default logic isn't called, should use your own code for consumption), false if the player cannot consume the item, or undefined to use the default logic
+     * @returns True if the human can consume the item (default logic isn't called, should use your own code for consumption), false if the human cannot consume the item, or undefined to use the default logic
      */
-    canConsumeItem?(player: IPlayer, itemType: ItemType, actionType: ActionType): boolean | undefined;
+    canConsumeItem?(human: Human, itemType: ItemType, actionType: ActionType): boolean | undefined;
     /**
      * Called before a creature attacks
      * @param creature The creature object
@@ -144,14 +144,14 @@ export interface IHookHost {
     canDoodadSpawn?(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
     /**
      * Called when an item is being dropped
-     * @param player The player object
+     * @param human The human object
      * @param item The item to be dropped
      * @param tile The tile the item will be dropped on
      * @param dropAll True if all items of this type will be dropped
      * @param dropAllQuality If not undefined, all items of this quality will be dropped
      * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
      */
-    canDropItem?(player: IPlayer, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
+    canDropItem?(human: Human, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
     /**
      * Called before an npc attacks
      * @param npc The npc object
@@ -474,11 +474,11 @@ export interface IHookHost {
      */
     onBindLoop?(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
-     * Called when a player digs up treasure.
-     * @param player The player that dug up treasure
-     * @param treasureTile The tile the player dug up treasure at
+     * Called when a human digs up treasure.
+     * @param human The human that dug up treasure
+     * @param treasureTile The tile the human dug up treasure at
      */
-    onDigTreasure?(player: IPlayer, treasureTile: Vector3): void;
+    onDigTreasure?(human: Human, treasureTile: Vector3): void;
     /**
      * Called when a language is loaded
      * @param language The language that loaded
@@ -530,10 +530,10 @@ export interface IHookHost {
     onNPCSpawn?(npc: INPC): void;
     /**
      * Called when a book is opened by a player
-     * @param player The player that opened a book
+     * @param human The human that opened a book
      * @param book The book that was opened
      */
-    onOpenBook?(player: IPlayer, book: BookType): void;
+    onOpenBook?(human: Human, book: BookType): void;
     /**
      * Called when an doodad is picked up
      * @param player The player object
@@ -592,7 +592,7 @@ export interface IHookHost {
      * @param player The player that read the map
      * @param mapRequest Information describing how to render the map.
      */
-    onReadMap?(player: IPlayer, mapRequest: IMapRequest): void;
+    onReadMap?(human: Human, mapRequest: IMapRequest): void;
     /**
      * Called when rendering the overlay
      * @param spriteBatch The overlay sprite batch

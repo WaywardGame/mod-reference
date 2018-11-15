@@ -130,4 +130,5 @@ export interface IDifficultyOptionsSkill {
      */
     gainMultiplier: number;
 }
+export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare function getDefaultDifficultyOptions(difficulty: Difficulty): IDifficultyOptions;

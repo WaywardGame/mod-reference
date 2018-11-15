@@ -258,6 +258,7 @@ export interface ITooltip extends IComponent {
     addText(initializer: (text: IText) => any): this;
     addHeading(initializer: (text: IText) => any): this;
     addParagraph(initializer: (text: IText) => any): this;
+    addList(...initializers: Array<((text: IText) => any) | undefined | false>): this;
 }
 export interface IText extends IComponent {
     setText(translation: TranslationGenerator): this;

@@ -14,6 +14,14 @@ export default class MultiplayerMenu extends Menu {
     private readonly serversContainer;
     private readonly serverMap;
     private readonly newGameButton;
+    private readonly playersHeading;
+    private friends;
+    private playersOnline;
     constructor(api: UiApi);
     private refresh;
+    private getMultiplayerInfo;
+    private isVisibleServer;
+    private sortServers;
+    private getSortValue;
+    private isFriend;
 }

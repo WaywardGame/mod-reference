@@ -30,6 +30,7 @@ export default class Tooltip extends Component implements ITooltip {
     addText(initializer: (text: Text) => any): this;
     addHeading(initializer: (text: Text) => any): this;
     addParagraph(initializer: (text: Paragraph) => any): this;
+    addList(...initializers: Array<((text: Text) => any) | undefined | false>): this;
     updatePosition(position?: {
         x: number;
         y: number;

@@ -75,7 +75,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setContents(html: string, escape?: boolean): this;
     store(): this;
     findDescendants(selector: string): NodeListOf<Element>;
-    setTooltip(initializer: (tooltip: ITooltip) => ITooltip): this;
+    setTooltip(initializer?: (tooltip: ITooltip) => ITooltip): this;
     removeTooltip(): void;
     /**
      * Remove the context menu from this element
@@ -87,6 +87,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setContextMenu(generator: () => IContextMenu | undefined): void;
     setHighlight(highlight: IHighlight): this;
     removeHighlight(): void;
+    setStyle(property: string, value: string | number): this;
     getBox(): DOMRect | ClientRect;
     getOffset(): {
         top: number;

@@ -14,7 +14,6 @@ import Translation from "language/Translation";
 import { IHookHost } from "mod/IHookHost";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
-import IPlayer from "player/IPlayer";
 import Vector3 from "utilities/math/Vector3";
 export default class MapDialog extends Dialog implements IHookHost {
     private readonly canvas;
@@ -23,6 +22,6 @@ export default class MapDialog extends Dialog implements IHookHost {
     constructor(api: IGameScreenApi);
     getName(): UiTranslation.GameDialogMapName | Translation;
     setMap(mapRequest: IMapRequest): void;
-    onDigTreasure(player: IPlayer, treasureTile: Vector3): void;
+    onDigTreasure(human: Human, treasureTile: Vector3): void;
     private onResize;
 }

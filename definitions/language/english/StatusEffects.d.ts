@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { StatusType } from "Enums";
-declare const statusEffects: Descriptions<StatusType, string>;
+declare const statusEffects: Descriptions<StatusType, [string, string]>;
 export default statusEffects;
