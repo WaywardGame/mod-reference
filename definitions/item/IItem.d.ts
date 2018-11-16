@@ -10,7 +10,7 @@
  */
 import { ActionType } from "action/IAction";
 import { ICreature, SpawnableTiles } from "creature/ICreature";
-import { IDoodadDescription } from "doodad/IDoodad";
+import { IDoodad, IDoodadDescription } from "doodad/IDoodad";
 import { EntityType } from "entity/IEntity";
 import { Stat } from "entity/IStats";
 import { BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, TatteredMap } from "Enums";
@@ -102,6 +102,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     canBurnPlayer(): boolean;
     getBaseDefense(): number;
     getDurabilityCharge(): number;
+    revertFromDoodad(doodad: IDoodad): void;
 }
 export interface IItemOld {
     equipped?: EquipType;

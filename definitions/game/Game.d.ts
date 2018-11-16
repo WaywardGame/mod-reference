@@ -202,7 +202,7 @@ export default class Game extends Emitter implements IGame {
     onGlobalSlotLoaded(_: number, success: boolean): Promise<void>;
     onSaveLoaded(slot: number): void;
     directionToMovement(direction: Direction): IVector2;
-    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation): void;
+    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     updateOption(player: IPlayer | undefined, id: keyof IOptions, value: boolean | number): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     getCompletedMilestoneCount(): number;

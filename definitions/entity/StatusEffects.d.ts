@@ -17,7 +17,7 @@ export interface IStatusEffectDescription extends IModdable {
     /**
      * Whether the status effect should pass (be removed from the human).
      */
-    shouldPass(human: Human): boolean;
+    shouldPass(human: Human, passChanceMultiplier: number): boolean;
     /**
      * Event handler for when the status effect passes.
      */
@@ -25,7 +25,7 @@ export interface IStatusEffectDescription extends IModdable {
     /**
      * Event handler for every tick that the human has the status effect.
      */
-    onTick(human: Human): void;
+    onTick(human: Human, effectMultiplier: number): void;
 }
 declare const statusEffectDescriptions: OptionalDescriptions<StatusType, IStatusEffectDescription>;
 export default statusEffectDescriptions;

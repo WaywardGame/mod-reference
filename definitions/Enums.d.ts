@@ -1049,7 +1049,8 @@ export declare enum LegendaryType {
     Malignity = 8,
     Range = 9,
     UseBenefits = 10,
-    Worth = 11
+    Worth = 11,
+    TrapDamage = 12
 }
 export declare enum RenderFlag {
     None = 0,

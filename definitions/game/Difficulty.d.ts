@@ -94,7 +94,7 @@ export interface IDifficultyOptions {
 }
 export interface IDifficultyOptionsStat {
     /**
-     * The initial value of the stat, or `undefined` if it should be generated randomly
+     * A percentage: 0-100. The initial value of the stat, or `undefined` if it should be generated randomly
      */
     initialValue?: number;
     /**
@@ -119,6 +119,14 @@ export interface IDifficultyOptionsStatusEffect {
      * A multiplier for the chance of this status effect to be passed each turn.
      */
     passChanceMultiplier: number;
+    /**
+     * A multiplier for the number of ticks between effect ticks.
+     */
+    effectRateMultiplier: number;
+    /**
+     * Decrease or increase the effect of the... effect.
+     */
+    effectMultiplier: number;
 }
 export interface IDifficultyOptionsSkill {
     /**

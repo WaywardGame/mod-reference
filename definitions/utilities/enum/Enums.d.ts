@@ -53,15 +53,19 @@ declare module Enums {
     /**
      * Returns a random enum entry.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
+     * @param filter Repeats the choice until the random value matches the filter
      *
-     * Each call to this method requires a loop on the full enum until reaching the
+     * Note: Each call to this method requires a loop on the full enum until reaching the
      * index of the randomly chosen entry. Do not call this often.
      *
-     * Uses seeded random. Using this method on non-game methods may cause seed desyncs.
+     * Note: Uses seeded random. Using this method on non-game methods may cause seed desyncs.
+     *
+     * Note: When provided with a filter & most values in the enum don't match, this method can
+     * take a very long time. *Use the filter with caution.*
      */
     function getRandom<E, K extends string>(enumObject: {
         [key in K]: E;
-    }): E;
+    }, filter?: (value: E) => boolean): E;
     /**
      * Iterate over the names of the entries in an enum.
      */

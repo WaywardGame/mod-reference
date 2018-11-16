@@ -22,7 +22,9 @@ export interface IRandomGenerator {
 export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     generator: G;
     constructor(generator: G);
-    float(max?: number): number;
+    float(): number;
+    float(max: number): number;
+    float(min: number, max: number): number;
     /**
      * Generates a random integer between 0 (inclusive) and max (exclusive)
      */

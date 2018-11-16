@@ -105,7 +105,7 @@ export interface IGame extends Emitter {
     directionToMovement(direction: Direction): IVector2;
     doLavaEvents(x: number, y: number, z: number): void;
     enableFlowFieldDebug(): void;
-    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation): void;
+    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     getAmbientLightLevel(z: number): number;
     getBenignity(): number | undefined;
     getBlackness(): number;

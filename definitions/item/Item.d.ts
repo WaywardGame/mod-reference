@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { ICreature } from "creature/ICreature";
+import { IDoodad } from "doodad/IDoodad";
 import { EntityType } from "entity/IEntity";
 import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap } from "Enums";
 import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
@@ -74,6 +75,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     canBurnPlayer(): boolean;
     getBaseDefense(): number;
     getDurabilityCharge(): number;
+    revertFromDoodad(doodad: IDoodad): void;
     onUnserialized(): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;

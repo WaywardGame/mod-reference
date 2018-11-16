@@ -225,10 +225,6 @@ export interface IStatChangeInfo<T = any> {
      * Whether this change is "important" (for example, used when actions affect stats)
      */
     important?: boolean;
-    /**
-     * Any other data
-     */
-    extra?: T;
 }
 export declare module IStatChangeInfo {
     /**
