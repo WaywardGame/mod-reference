@@ -15,7 +15,7 @@ import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad
 import { DoodadType, DoorOrientation, EquipType, GrowingStage, IRGB, ItemQuality, ItemType } from "Enums";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
-import { IItemArray } from "item/IItem";
+import { IItemArray, IItemLegendary } from "item/IItem";
 import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
@@ -44,6 +44,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
     x: number;
     y: number;
     z: number;
+    legendary?: IItemLegendary | undefined;
     step: number | undefined;
     hitchedCreature?: number;
     private _description;
