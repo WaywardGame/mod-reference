@@ -1050,7 +1050,8 @@ export declare enum LegendaryType {
     Range = 9,
     UseBenefits = 10,
     Worth = 11,
-    TrapDamage = 12
+    TrapDamage = 12,
+    MaxWeight = 13
 }
 export declare enum RenderFlag {
     None = 0,

@@ -46,7 +46,12 @@ export declare enum Stat {
      * Used for tamed animals
      */
     Happiness = 12,
-    Tamed = 13
+    Tamed = 13,
+    /**
+     * Adds to a player's max weight.
+     * Does not exist on `Player` instances. Used for item legendaries.
+     */
+    MaxWeightBonus = 14
 }
 export declare type IStats = {
     [key in keyof typeof Stat]: IStat;
