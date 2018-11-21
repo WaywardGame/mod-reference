@@ -1051,7 +1051,8 @@ export declare enum LegendaryType {
     UseBenefits = 10,
     Worth = 11,
     TrapDamage = 12,
-    MaxWeight = 13
+    MaxWeight = 13,
+    ContainerWeight = 14
 }
 export declare enum RenderFlag {
     None = 0,

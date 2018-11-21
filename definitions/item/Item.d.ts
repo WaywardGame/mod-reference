@@ -76,6 +76,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     getBaseDefense(): number;
     getDurabilityCharge(): number;
     revertFromDoodad(doodad: IDoodad): void;
+    getContainerWeightReduction(): number;
     onUnserialized(): void;
     private checkIfItemsMatch;
     private checkIfItemArraysMatch;

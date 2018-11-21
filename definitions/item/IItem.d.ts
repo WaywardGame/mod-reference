@@ -103,6 +103,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     getBaseDefense(): number;
     getDurabilityCharge(): number;
     revertFromDoodad(doodad: IDoodad): void;
+    getContainerWeightReduction(): number;
 }
 export interface IItemOld {
     equipped?: EquipType;
