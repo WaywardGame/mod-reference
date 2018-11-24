@@ -24,7 +24,7 @@ export default class ChoiceList<C extends Choice = Choice> extends BlockRow impl
     readonly disabled: boolean;
     constructor(uiApi: UiApi);
     setDisabled(val: boolean): this;
-    setChoices(...choices: ArrayOfTOrIterablesOfT<C>): this;
+    setChoices(...choices: ArrayOfIterablesOfOr<C>): this;
     refresh(): this;
     setRefreshMethod(refreshMethod: (choiceList: this) => C): this;
     choose(chosen?: C): void;

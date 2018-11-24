@@ -64,7 +64,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     hide(): this;
     toggle(visible?: boolean): this;
     appendTo(where: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
-    append(...elements: ArrayOfTOrIterablesOfT<HTMLElement | IComponent | undefined | false>): this;
+    append(...elements: ArrayOfIterablesOfOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
     contains(what: string | HTMLElement | IComponent): boolean;
     dump(filter?: (element: Component) => boolean): this;

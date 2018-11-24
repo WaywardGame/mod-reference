@@ -35,7 +35,7 @@ declare class Translation {
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
     static formatList(items: IterableOf<string | IStringSection[] | Translation>, and?: boolean): Translation;
-    static getString(...entries: ArrayOfTOrIterablesOfT<string | IStringSection | Translation>): string;
+    static getString(...entries: ArrayOfIterablesOfOr<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
     /**
      * @deprecated
@@ -57,7 +57,7 @@ declare class Translation {
      *
      * Example uses include text the user inputs, and text from other sites (steam/trello)
      */
-    static generator(textOrGenerator: GeneratorOrT<string | IStringSection[]>): TranslationGenerator;
+    static generator(textOrGenerator: GetterOfOr<string | IStringSection[]>): TranslationGenerator;
     static isSerializedTranslation(thing: unknown): thing is ISerializedTranslation;
     static deserialize(serializedTranslation: ISerializedTranslation): Translation;
     private static getStringSections;

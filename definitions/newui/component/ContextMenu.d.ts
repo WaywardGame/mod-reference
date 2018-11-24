@@ -31,9 +31,9 @@ export default class ContextMenu<O extends number | string | symbol = number | s
     private readonly options;
     constructor(uiApi: UiApi, ...descriptions: Array<ContextMenuOptionKeyValuePair<O> | undefined>);
     addAllDescribedOptions(): this;
-    addOptions(...options: ArrayOfTOrIterablesOfT<O>): this;
-    disableOptions(...options: ArrayOfTOrIterablesOfT<O>): this;
-    removeOptions(...options: ArrayOfTOrIterablesOfT<O>): this;
+    addOptions(...options: ArrayOfIterablesOfOr<O>): this;
+    disableOptions(...options: ArrayOfIterablesOfOr<O>): this;
+    removeOptions(...options: ArrayOfIterablesOfOr<O>): this;
     setPosition(x: number, y: number, right?: boolean): this;
     hideAndRemove(): Promise<void>;
     private getDescription;
