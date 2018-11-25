@@ -8,16 +8,24 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseEntity, { IProperties, IStatChangeInfo, IStatus, Property, StatChangeReason, StatusEffectChangeReason } from "entity/IBaseEntity";
-import { EntityType } from "entity/IEntity";
+import { ICreature } from "creature/ICreature";
+import IEntity, { EntityPlayerCreatureNpc, EntityType, IProperties, IStatChangeInfo, IStatus, Property, StatChangeReason, StatusEffectChangeReason } from "entity/IEntity";
 import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import StatFactory from "entity/StatFactory";
 import { Direction, FireType, MoveType, SfxType, StatusType } from "Enums";
 import Translation from "language/Translation";
+import { INPC } from "npc/INPC";
+import IPlayer from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default abstract class BaseEntity extends Emitter implements IBaseEntity {
+export default abstract class Entity extends Emitter implements IEntity {
+    static is(entity: IEntity | undefined, entityType: EntityType.NPC): entity is INPC;
+    static is(entity: IEntity | undefined, entityType: EntityType.Creature): entity is ICreature;
+    static is(entity: IEntity | undefined, entityType: EntityType.Player): entity is IPlayer;
+    static isNot(entity: IEntity | undefined, entityType: EntityType.NPC): entity is Exclude<EntityPlayerCreatureNpc, INPC>;
+    static isNot(entity: IEntity | undefined, entityType: EntityType.Creature): entity is Exclude<EntityPlayerCreatureNpc, ICreature>;
+    static isNot(entity: IEntity | undefined, entityType: EntityType.Player): entity is Exclude<EntityPlayerCreatureNpc, IPlayer>;
     entityType: EntityType;
     id: number;
     renamed?: string;

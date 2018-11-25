@@ -39,19 +39,18 @@ export declare enum Stat {
      */
     Metabolism = 10,
     /**
+     * Used to calculate the max weight & max health of the player.
+     */
+    Strength = 11,
+    /**
      * Used for chicken eggs and goat milk
      */
-    Produce = 11,
+    Produce = 12,
     /**
      * Used for tamed animals
      */
-    Happiness = 12,
-    Tamed = 13,
-    /**
-     * Adds to a player's max weight.
-     * Does not exist on `Player` instances. Used for item legendaries.
-     */
-    MaxWeightBonus = 14
+    Happiness = 13,
+    Tamed = 14
 }
 export declare type IStats = {
     [key in keyof typeof Stat]: IStat;

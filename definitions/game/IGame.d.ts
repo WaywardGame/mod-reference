@@ -133,7 +133,7 @@ export interface IGame extends Emitter {
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getReputation(): number | undefined;
     getSkillPercent(skill: SkillType): number | undefined;
-    getStrength(): number | undefined;
+    getMaxWeight(): number | undefined;
     getTactics(): number | undefined;
     getTickSpeed(): number;
     getTile(x: number, y: number, z: number): ITile;

@@ -10,12 +10,12 @@
  */
 import actionDescriptions from "action/Actions";
 import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentType, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "action/IAction";
-import { Entity } from "entity/IEntity";
+import { EntityPlayerCreatureNpc } from "entity/IEntity";
 import { IRGB, SfxType, SkillType, TurnType } from "Enums";
 import { IItem } from "item/IItem";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import { MilestoneType } from "player/IMilestone";
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends Entity, R> implements IActionApi<E> {
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc, R> implements IActionApi<E> {
     private readonly action;
     readonly type: number;
     /**
@@ -30,7 +30,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      * Note: Prefer `IActionApi.get` if you're calling this from within another action.
      */
     static get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
-    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, Entity, any>): any;
+    static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, EntityPlayerCreatureNpc, any>): any;
     private _executor;
     readonly executor: E;
     private isNestedAction;
@@ -76,4 +76,4 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private canExecute;
     private isUsableWhen;
 }
-export declare function getArgumentType(executor: Entity, expected: ActionArgument[], actual: unknown): ActionArgument | undefined;
+export declare function getArgumentType(executor: EntityPlayerCreatureNpc, expected: ActionArgument[], actual: unknown): ActionArgument | undefined;

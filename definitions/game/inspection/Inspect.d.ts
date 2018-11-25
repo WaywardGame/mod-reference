@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseEntity from "entity/IBaseEntity";
+import IEntity from "entity/IEntity";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
@@ -21,7 +21,7 @@ declare class Inspection {
     readonly tilePosition: Vector3;
     static inspect(inspector: Human, tilePosition: Vector3, context: InspectionContext | string): IterableIterator<IInspectionSectionSimple>;
     private constructor();
-    inspectEntityHealth(entity: IBaseEntity, entityName?: Translation, revealer?: Translation, skillPercent?: number, healthPercent?: number): Translation | undefined;
+    inspectEntityHealth(entity: IEntity, entityName?: Translation, revealer?: Translation, skillPercent?: number, healthPercent?: number): Translation | undefined;
     inspectFire(decay?: number, isOpenFire?: boolean): Translation | undefined;
 }
 declare module Inspection {

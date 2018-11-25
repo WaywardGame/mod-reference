@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IModdable, SkillType, StatType } from "Enums";
+import { Stat } from "entity/IStats";
+import { IModdable, SkillType } from "Enums";
 export declare class SkillLevel {
     readonly bonus: number;
     readonly core: number;
@@ -17,7 +18,7 @@ export interface ISkillSet {
     [index: number]: SkillLevel;
 }
 export interface ISkillDescription extends IModdable {
-    attribute?: StatType;
+    attribute?: Stat;
     reputation?: number;
 }
 export declare function skillSet(): ISkillSet;

@@ -9,9 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { ActionType } from "action/IAction";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { AiType, EntityType } from "entity/IEntity";
-export interface INPC extends IBaseHumanEntity {
+import IHuman from "entity/IHuman";
+export interface INPC extends IHuman {
     entityType: EntityType.NPC;
     ai: AiType;
     getRegistrarId(): number;

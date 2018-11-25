@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature";
-import BaseEntity from "entity/BaseEntity";
+import Entity from "entity/Entity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, ItemType, MoveType, SfxType } from "Enums";
 import Inspection from "game/inspection/Inspect";
@@ -18,7 +18,7 @@ import { IItem } from "item/IItem";
 import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
-export default class Creature extends BaseEntity implements ICreature, IUnserializedCallback {
+export default class Creature extends Entity implements ICreature, IUnserializedCallback {
     readonly entityType: EntityType.Creature;
     aberrant?: boolean;
     ai: AiType;

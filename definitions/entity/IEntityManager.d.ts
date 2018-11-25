@@ -8,14 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IMoveTypeZ } from "creature/ICreatureManager";
-import { IBaseEntityManager } from "entity/IBaseEntityManager";
-import { Entity } from "entity/IEntity";
-import Bound3 from "utilities/math/Bound3";
-export default abstract class BaseEntityManager<T extends Entity> implements IBaseEntityManager<T> {
-    private moveTypesInFov;
+import { EntityPlayerCreatureNpc } from "entity/IEntity";
+import { MoveType } from "Enums";
+import { IBound3 } from "utilities/math/Bound3";
+export interface IEntityManager<T extends EntityPlayerCreatureNpc> {
+    getEntities(): SaferArray<T>;
     remove(entity: T): void;
-    updateFov(bounds: Bound3[]): number;
+    updateFov(bounds: IBound3[]): number;
     getMoveTypesInFov(): IMoveTypeZ[];
-    abstract getEntities(): SaferArray<T>;
+}
+export default IEntityManager;
+export interface IMoveTypeZ {
+    moveType: MoveType;
+    z: number;
 }

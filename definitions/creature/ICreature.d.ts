@@ -8,15 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseEntity from "entity/IBaseEntity";
-import { AiType, EntityType } from "entity/IEntity";
+import IEntity, { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, DamageType, Defense, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
 import { IInspectable } from "game/inspection/Inspections";
 import { IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
-export interface ICreature extends IBaseEntity, IObject<CreatureType>, IInspectable {
+export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable {
     entityType: EntityType.Creature;
     ai: AiType;
     anim: number;

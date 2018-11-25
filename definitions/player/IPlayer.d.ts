@@ -10,16 +10,18 @@
  */
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
 import { EntityType } from "entity/IEntity";
+import IHuman from "entity/IHuman";
 import { Direction, EquipType, HairColor, HairStyle, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
 import { INPC } from "npc/INPC";
+import MessageManager from "player/MessageManager";
+import NoteManager from "player/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export interface IPlayer extends IBaseHumanEntity {
+export interface IPlayer extends IHuman {
     entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
@@ -37,6 +39,7 @@ export interface IPlayer extends IBaseHumanEntity {
     isMovingClientside: boolean;
     lastAttackedBy: Human | ICreature | undefined;
     lightBonus: number;
+    messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     movementProgress: number;
@@ -46,6 +49,7 @@ export interface IPlayer extends IBaseHumanEntity {
     nextX: number;
     nextY: number;
     noInputReceived: boolean;
+    notes: NoteManager;
     quickSlotInfo: IQuickSlotInfo[];
     revealedItems: {
         [index: number]: boolean;
@@ -75,7 +79,7 @@ export interface IPlayer extends IBaseHumanEntity {
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
     getMovementIntent(): IMovementIntent;
-    getStrength(): number;
+    getMaxWeight(): number;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
     hasTamedCreature(creature: ICreature): boolean;
@@ -229,6 +233,7 @@ export interface IPlayerTravelData {
     itemId: number | undefined;
     state: PlayerState;
 }
-export declare const weightBonus = 25;
-export declare function isPlayer(human?: Human): human is IPlayer;
-export declare function isLocalPlayer(human?: Human): boolean;
+/**
+ * The amount of extra weight the player can hold (added to max health)
+ */
+export declare const STRENGTH_BONUS = 25;

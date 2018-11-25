@@ -161,7 +161,7 @@ export default class Game extends Emitter implements IGame {
     getMalignity(): number | undefined;
     getBenignity(): number | undefined;
     getMaxHealth(): number | undefined;
-    getStrength(): number | undefined;
+    getMaxWeight(): number | undefined;
     getTactics(): number | undefined;
     getSkillPercent(skill: SkillType): number | undefined;
     getPlayerAverage(calc: (player: IPlayer) => number | undefined, round?: boolean): number | undefined;

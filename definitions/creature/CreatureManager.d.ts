@@ -10,10 +10,10 @@
  */
 import { ICreature, ICreatureDescription, SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import { ICreatureManager } from "creature/ICreatureManager";
-import BaseEntityManager from "entity/BaseEntityManager";
+import EntityManager from "entity/EntityManager";
 import { CreatureType, MoveType } from "Enums";
 import { ITile } from "tile/ITerrain";
-export default class CreatureManager extends BaseEntityManager<ICreature> implements ICreatureManager {
+export default class CreatureManager extends EntityManager<ICreature> implements ICreatureManager {
     getEntities(): (ICreature | undefined)[];
     getHappinessLevel(human: Human, creature: ICreature): number;
     /**

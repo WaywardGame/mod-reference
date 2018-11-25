@@ -249,13 +249,6 @@ export interface IHookHost {
      */
     getPlayerMovementIntent?(player: IPlayer): IMovementIntent | undefined;
     /**
-     * Called when getting the player's strength
-     * @param strength The current strength of the player
-     * @param player The player object
-     * @returns The new strength of the player
-     */
-    getPlayerStrength?(strength: number, player: IPlayer): number;
-    /**
      * Called when rendering the player in the viewport
      * @param player The player object
      * @param batchLayer The batch layer the player will render in

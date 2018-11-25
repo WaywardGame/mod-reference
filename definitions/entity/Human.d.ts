@@ -9,9 +9,10 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "creature/ICreature";
-import BaseEntity from "entity/BaseEntity";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { Delay, EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType, StatType } from "Enums";
+import Entity from "entity/Entity";
+import IHuman from "entity/IHuman";
+import { Stat } from "entity/IStats";
+import { Delay, EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
@@ -24,7 +25,7 @@ import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
-export default abstract class BaseHumanEntity extends BaseEntity implements IBaseHumanEntity {
+export default abstract class Human extends Entity implements IHuman {
     attackFromEquip: IAttackHand;
     customization: IPlayerCustomization;
     deathBy: import("../language/Translation").ISerializedTranslation;
@@ -104,7 +105,7 @@ export default abstract class BaseHumanEntity extends BaseEntity implements IBas
     /**
      * Improve one of the core player stats
      */
-    protected statGain(stat: StatType, bypass: boolean): void;
+    protected statGain(stat: Stat, bypass: boolean): void;
     protected calculateStats(): void;
     protected resetDefense(): void;
     protected updateSwimming(): void;

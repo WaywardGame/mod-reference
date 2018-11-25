@@ -11,7 +11,7 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { IEntity } from "entity/IEntity";
+import IEntity from "entity/IEntity";
 import { IContainer, IItem } from "item/IItem";
 import BasePacket from "multiplayer/packets/BasePacket";
 import { INPC } from "npc/INPC";

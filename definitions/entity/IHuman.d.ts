@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "creature/ICreature";
-import IBaseEntity from "entity/IBaseEntity";
+import IEntity from "entity/IEntity";
 import { Delay, EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
@@ -17,13 +17,11 @@ import Message from "language/dictionary/Message";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
-import MessageManager from "player/MessageManager";
-import NoteManager from "player/NoteManager";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { IVector3 } from "utilities/math/IVector";
-export default interface IBaseHumanEntity extends IBaseEntity {
+export default interface IHuman extends IEntity {
     attackFromEquip: IAttackHand;
     canSendMessage: boolean;
     customization: IPlayerCustomization;
@@ -35,7 +33,6 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     };
     handToUse: EquipType;
     inventory: IContainer;
-    messages: MessageManager;
     options: IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;
@@ -44,7 +41,6 @@ export default interface IBaseHumanEntity extends IBaseEntity {
     state: PlayerState;
     swimming: boolean;
     identifier: string;
-    notes: NoteManager;
     isLocalPlayer(): boolean;
     /**
      * @returns the "base value" of the skill (ignoring any bonuses applied by legendary equipment)

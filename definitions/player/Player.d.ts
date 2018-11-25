@@ -10,9 +10,9 @@
  */
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import BaseHumanEntity from "entity/BaseHumanEntity";
-import { StatusEffectChangeReason } from "entity/IBaseEntity";
-import { EntityType } from "entity/IEntity";
+import Human from "entity/Human";
+import { EntityType, StatusEffectChangeReason } from "entity/IEntity";
+import IHuman from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { Direction, EquipType, ItemType, RestCancelReason, RestType, SkillType, StatusType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
@@ -20,11 +20,13 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
+import MessageManager from "player/MessageManager";
+import NoteManager from "player/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
+export default class Player extends Human implements IPlayer, IPreSerializeCallback {
     readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
@@ -38,11 +40,13 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     hintSeen: boolean[];
     isConnecting: boolean;
     isMoving: boolean;
-    lastAttackedBy: Human | ICreature | undefined;
+    lastAttackedBy: IHuman | ICreature | undefined;
+    messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     name: string;
     noInputReceived: boolean;
+    notes: NoteManager;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
     revealedItems: {
@@ -111,7 +115,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      *
      * Used internally for `Stat.Weight.max`
      */
-    getStrength(): number;
+    getMaxWeight(): number;
     setup(completedMilestones: number): void;
     preSerializeObject(): void;
     restoreExploredMap(): void;

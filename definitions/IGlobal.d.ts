@@ -14,7 +14,7 @@ import { ICommandManager } from "command/ICommandManager";
 import ICorpseManager from "creature/corpse/ICorpseManager";
 import ICreatureManager from "creature/ICreatureManager";
 import IDoodadManager from "doodad/IDoodadManager";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
+import IHuman from "entity/IHuman";
 import { ItemType } from "Enums";
 import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
@@ -74,7 +74,7 @@ declare global {
 		-readonly [P in keyof T]: T[P];
 	};
 
-	type Human = IPlayer | INPC | IBaseHumanEntity;
+	type Human = IPlayer | INPC | IHuman;
 
 	let absentPlayers: IPlayer[];
 	let audio: IAudio;

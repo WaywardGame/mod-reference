@@ -9,13 +9,13 @@
  * https://waywardgame.github.io/
  */
 import { ActionType } from "action/IAction";
-import BaseHumanEntity from "entity/BaseHumanEntity";
+import Human from "entity/Human";
 import { AiType, EntityType } from "entity/IEntity";
 import { EquipType, ItemType } from "Enums";
 import { IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { IPlayerCustomization } from "player/IPlayer";
-export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
+export default abstract class BaseNPC extends Human implements INPC {
     protected static registrarId: number;
     readonly entityType: EntityType.NPC;
     "constructor": typeof BaseNPC;
