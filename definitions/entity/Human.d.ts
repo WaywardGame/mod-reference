@@ -20,7 +20,7 @@ import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
 import MessageManager from "player/MessageManager";
-import NoteManager from "player/NoteManager";
+import NoteManager from "player/note/NoteManager";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
 import { IVector3 } from "utilities/math/IVector";

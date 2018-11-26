@@ -21,7 +21,7 @@ import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
 import { IMessage } from "player/IMessageManager";
 import IPlayer, { IMovementIntent } from "player/IPlayer";
-import { INote } from "player/NoteManager";
+import { INote } from "player/note/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
@@ -192,5 +192,4 @@ declare module Mod {
         initializeGlobalData(data?: infer D | undefined): infer D;
     } ? D : never; }>(target: T, key: K) => void;
 }
-export { Mod };
 export default Mod;

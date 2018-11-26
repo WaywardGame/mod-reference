@@ -21,7 +21,7 @@ import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
 import MessageManager from "player/MessageManager";
-import NoteManager from "player/NoteManager";
+import NoteManager from "player/note/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";

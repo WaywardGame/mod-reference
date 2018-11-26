@@ -248,4 +248,6 @@ declare global {
 		multiplayerCurrentPlayers?: number;
 		multiplayerMaxPlayers?: number;
 	}
+
+	function Override(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
 }

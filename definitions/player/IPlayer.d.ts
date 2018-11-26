@@ -17,7 +17,7 @@ import { IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
 import { INPC } from "npc/INPC";
 import MessageManager from "player/MessageManager";
-import NoteManager from "player/NoteManager";
+import NoteManager from "player/note/NoteManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";

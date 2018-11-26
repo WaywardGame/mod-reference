@@ -33,7 +33,7 @@ import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/
 import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
 import { INPCClass } from "npc/NPCS";
 import { Source } from "player/IMessageManager";
-import { INoteDescription } from "player/NoteManager";
+import { INoteDescription } from "player/note/NoteManager";
 import { ISkillDescription } from "player/Skills";
 import { IOverlayDescription } from "renderer/Overlays";
 import { ITerrainDescription } from "tile/ITerrain";
