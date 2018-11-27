@@ -237,11 +237,18 @@ export interface IHookHost {
     getPlayerFieldOfViewRadius?(player: IPlayer): number | undefined;
     /**
      * Called when getting the player's maximum health
-     * @param maxHealth The current max health (after any other previous mods)
+     * @param maxHealth The current max health of the player (after any other previous mods)
      * @param player The player object
      * @returns The maximum health of the player
      */
     getPlayerMaxHealth?(maxHealth: number, player: IPlayer): number;
+    /**
+     * Called when getting the player's maximum weight
+     * @param strength The current max health of the player (after any other previous mods)
+     * @param player The player object
+     * @returns The maximum health of the player
+     */
+    getPlayerMaxWeight?(maxWeight: number, player: IPlayer): number;
     /**
      * Called when getting the players movement intent
      * @param player The player object

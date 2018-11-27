@@ -35,6 +35,7 @@ export declare enum Hook {
     GetMaxSpritesForLayer = "getMaxSpritesForLayer",
     GetPlayerFieldOfViewRadius = "getPlayerFieldOfViewRadius",
     GetPlayerMaxHealth = "getPlayerMaxHealth",
+    GetPlayerMaxWeight = "getPlayerMaxWeight",
     GetPlayerMovementIntent = "getPlayerMovementIntent",
     GetPlayerSpriteBatchLayer = "getPlayerSpriteBatchLayer",
     GetPlayerWeightMovementPenalty = "getPlayerWeightMovementPenalty",

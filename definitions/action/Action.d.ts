@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionArgument, ActionArgumentTupleTypes, ActionUsability, IActionApi, IActionDescription } from "action/IAction";
+import { ActionArgument, ActionArgumentTupleTypes, ActionUsability, IActionApi, IActionConfirmerApi, IActionDescription, IActionHandlerApi } from "action/IAction";
 import { ICreature } from "creature/ICreature";
 import { EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
 import { INPC } from "npc/INPC";
@@ -19,11 +19,13 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
         [key in ActionUsability]?: boolean;
     };
     validExecutors: EntityType[];
-    handler: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => R;
-    confirmer?: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>;
+    preExecutionHandler?: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any;
+    handler: (actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>) => R;
+    confirmer?: (actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>;
     constructor(...argumentTypes: A);
-    setHandler<H extends (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any>(handler: H): Action<A, E, H extends (...args: any) => infer R2 ? R2 : void>;
-    setConfirmer(confirmer: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>): this;
+    setPreExecutionHandler(handler: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any): this;
+    setConfirmer(confirmer: (actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>): this;
+    setHandler<H extends (actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>) => any>(handler: H): Action<A, E, H extends (...args: any) => infer R2 ? R2 : void>;
     setUsableWhen(...usabilities: ActionUsability[]): this;
     setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, EntityTypeTupleType<E2>>;
 }

@@ -83,6 +83,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     getMaxSpritesForLayer(layer: SpriteBatchLayer, maxSprites: number): number | undefined;
     getPlayerFieldOfViewRadius(player: IPlayer): number | undefined;
     getPlayerMaxHealth(maxHealth: number, player: IPlayer): number;
+    getPlayerMaxWeight(maxWeight: number, player: IPlayer): number;
     getPlayerMovementIntent(player: IPlayer): IMovementIntent | undefined;
     getPlayerSpriteBatchLayer(player: IPlayer, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     getPlayerWeightMovementPenalty(player: IPlayer): number | undefined;

@@ -120,8 +120,9 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
         [key in ActionUsability]?: boolean;
     };
     validExecutors: EntityType[];
-    handler(actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>): R;
-    confirmer?(actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>): Promise<boolean>;
+    preExecutionHandler?(actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>): any;
+    handler(actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>): R;
+    confirmer?(actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>): Promise<boolean>;
 }
 export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> {
     readonly executor: E;
@@ -145,10 +146,8 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
     setParticle(particle: IActionParticle): this;
     /**
      * The items passed to this method will be registered as items potentially to be damaged when the action completes.
-     * If damaging any of the items will result in the item breaking, and this method is called from the `confirmer` of the action,
-     * a confirmation dialog will be shown asking if you want to proceed with the action.
      */
-    addItems(...items: Array<IItem | undefined>): Promise<boolean>;
+    addItems(...items: Array<IItem | undefined>): this;
     /**
      * Removes all items added via `addItems`
      */
@@ -157,6 +156,8 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
      * Removes specific items added by `addItems`
      */
     removeItems(...items: Array<IItem | undefined>): this;
+}
+export interface IActionHandlerApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> extends IActionApi<E> {
     /**
      * Sets that the items added to this action by `addItems` were "used" (so they will be damaged afterward).
      */
@@ -165,6 +166,18 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
      * Sets whether the items added to this action by `addItems` were "used" (IE, whether they will be damaged).
      */
     setItemsUsed(used?: boolean): this;
+}
+export interface IActionConfirmerApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> extends IActionApi<E> {
+    /**
+     * If damaging any of the "used items" for this action will result in the item breaking, and this method is
+     * called from the `confirmer` of the action, a confirmation dialog will be shown asking if you want to
+     * proceed with the action.
+     *
+     * Note: This is called automatically if items are added in the `preExecutionHandler`. This should only be used in
+     * a custom confirmer if new items are added to the action here, and items *aren't* added in the `preExecutionHandler`.
+     * Otherwise the player could get two confirmations, and that's annoying.
+     */
+    confirmItemsBroken(): Promise<boolean>;
 }
 export interface IActionSoundEffect {
     type: SfxType;
