@@ -68,6 +68,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
     addItems(...addItems: Array<IItem | undefined>): this;
+    getItems(): IterableIterator<IItem>;
     removeItems(...items: Array<IItem | undefined>): this;
     setItemsUsed(used?: boolean): this;
     confirmItemsBroken(): Promise<boolean>;

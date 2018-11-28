@@ -577,7 +577,8 @@ export declare enum ItemType {
     Flour = 454,
     Dough = 455,
     Hardtack = 456,
-    HitchingPost = 457
+    HitchingPost = 457,
+    ShreddedPaper = 458
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

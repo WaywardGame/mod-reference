@@ -12,6 +12,7 @@ import { ActionType } from "action/IAction";
 import { ICreature, SpawnableTiles } from "creature/ICreature";
 import { IDoodad, IDoodadDescription } from "doodad/IDoodad";
 import { EntityType } from "entity/IEntity";
+import IHuman from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, TatteredMap } from "Enums";
 import Translation from "language/Translation";
@@ -47,6 +48,12 @@ export interface IItemLegendary {
     skill?: SkillType;
     stat?: Stat;
 }
+export interface IItemUsed {
+    usedBy?: string[];
+    recipe?: ItemType;
+    skill?: SkillType;
+    map?: IVector3;
+}
 export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
     weight: number;
     equippedId?: number;
@@ -58,6 +65,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     disassembly?: IItemArray;
     order?: number;
     ownerIdentifier?: string;
+    used?: IItemUsed;
     readonly quality: number;
     /**
      * @param article Whether to include an article for the name of the item. Uses the article rules on the language. Defaults to `true`.
@@ -87,6 +95,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     clearQuickSlot(): void;
     changeInto(itemType: ItemType, disableNotify?: boolean): void;
     returns(): boolean;
+    setUsed(itemUse?: IItemUsed, human?: IHuman): void;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: IPlayer): ICreature | undefined;

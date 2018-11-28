@@ -11,8 +11,9 @@
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { EntityType } from "entity/IEntity";
+import IHuman from "entity/IHuman";
 import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap } from "Enums";
-import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary } from "item/IItem";
+import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary, IItemUsed } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
@@ -32,6 +33,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     minDur: number;
     order: number;
     ownerIdentifier?: string;
+    used?: IItemUsed;
     quality: ItemQuality;
     quickSlot: number | undefined;
     renamed: string | ISerializedTranslation;
@@ -59,6 +61,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     isDecayed(): boolean;
     changeInto(type: ItemType, disableNotify?: boolean): void;
     returns(): boolean;
+    setUsed(itemUse?: IItemUsed, human?: IHuman): void;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
     spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: IPlayer): ICreature | undefined;

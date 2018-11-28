@@ -149,6 +149,10 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
      */
     addItems(...items: Array<IItem | undefined>): this;
     /**
+     * Returns the items registered for this action via `addItems`.
+     */
+    getItems(): IterableIterator<IItem>;
+    /**
      * Removes all items added via `addItems`
      */
     removeItems(): this;
