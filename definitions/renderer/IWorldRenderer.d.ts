@@ -11,22 +11,24 @@
  *
  */
 import { SpriteBatchLayer } from "Enums";
-import * as TileAdaptor from "renderer/TileAdaptors";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import { IBound3 } from "utilities/math/Bound3";
 import Vec2 from "utilities/math/Vector2";
+import { ITileAdaptor } from "./TileAdaptors";
+import Wall from "./tileAdaptors/Wall";
+import Fence from "./tileAdaptors/Fence";
 export interface IWorldRenderer {
     positionBuffer: WebGLBuffer;
     layers: WorldLayerRenderer[];
-    dirtAdaptor: TileAdaptor.Dirt;
-    tillAdaptor: TileAdaptor.Till;
-    waterAdaptor: TileAdaptor.Water;
-    lavaAdaptor: TileAdaptor.Lava;
-    fenceAdaptor: TileAdaptor.Fence;
-    mountainAdaptor: TileAdaptor.Mountain;
-    wallAdaptor: TileAdaptor.Wall;
-    defaultAdaptor: TileAdaptor.Default;
-    floorAdaptor: TileAdaptor.Floor;
+    dirtAdaptor: ITileAdaptor;
+    tillAdaptor: ITileAdaptor;
+    waterAdaptor: ITileAdaptor;
+    lavaAdaptor: ITileAdaptor;
+    fenceAdaptor: Fence;
+    mountainAdaptor: ITileAdaptor;
+    wallAdaptor: Wall;
+    defaultAdaptor: ITileAdaptor;
+    floorAdaptor: ITileAdaptor;
     updateAll(): void;
     setSpriteTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
     getPixelSize(): number;

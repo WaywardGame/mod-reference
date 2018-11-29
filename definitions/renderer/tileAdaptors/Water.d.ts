@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export declare enum RequirementType {
-    KillCreature = 0,
-    CollectItem = 1,
-    GetSkill = 2,
-    SailToCivilization = 3
+import { TerrainType } from "Enums";
+import IWorldLayer from "renderer/IWorldLayer";
+import { ITileAdaptation } from "../TileAdaptors";
+import Default from "./Default";
+export default class Water extends Default {
+    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
 }

@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IDoodad } from "doodad/IDoodad";
 import { DoodadType, TerrainType } from "Enums";
 import IWorldLayer from "renderer/IWorldLayer";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
@@ -38,37 +39,7 @@ export interface ITileAdaptor {
 export interface IDoodadAdaptor {
     adapt(world: IWorldLayer, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
 }
+export declare let defaultBackground: TerrainTileInfo;
 export declare function setDefaultBackground(tileInfo: TerrainTileInfo): void;
-export declare class Default implements ITileAdaptor {
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-    protected getTerrainBeneathTile(x: number, y: number): TerrainType;
-}
-export declare class Till implements ITileAdaptor {
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-}
-export declare class Mountain extends Default {
-    private mountainTopFlag;
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-    private getTileType;
-}
+export declare function isDoor(doodad?: IDoodad): boolean;
 export declare function getWaterType(terrainType: TerrainType): number;
-export declare class Water extends Default {
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-}
-export declare class Lava extends Default {
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-}
-export declare class Dirt implements ITileAdaptor {
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-}
-export declare class Fence implements IDoodadAdaptor {
-    adaptGate(world: IWorldLayer, x: number, y: number, doodadType: DoodadType, vertical: boolean, result: ITileAdaptation): void;
-    adapt(world: IWorldLayer, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
-}
-export declare class Wall implements IDoodadAdaptor {
-    adaptDoor(world: IWorldLayer, x: number, y: number, doodadType: DoodadType, vertical: boolean, result: ITileAdaptation): void;
-    adapt(world: IWorldLayer, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;
-}
-export declare class Floor extends Default {
-    adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
-}

@@ -10,9 +10,11 @@
  */
 import { SpriteBatchLayer } from "Enums";
 import IWorldRenderer from "renderer/IWorldRenderer";
-import * as TileAdaptor from "renderer/TileAdaptors";
+import Wall from "renderer/tileAdaptors/Wall";
+import Fence from "renderer/tileAdaptors/Fence";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import Vector2 from "utilities/math/Vector2";
+import { ITileAdaptor } from "./TileAdaptors";
 export default class WorldRenderer implements IWorldRenderer {
     private readonly gl;
     private static textureShaderProgram;
@@ -22,15 +24,15 @@ export default class WorldRenderer implements IWorldRenderer {
     positionBuffer: WebGLBuffer;
     ditherTexture: WebGLTexture;
     layers: WorldLayerRenderer[];
-    dirtAdaptor: TileAdaptor.Dirt;
-    tillAdaptor: TileAdaptor.Till;
-    waterAdaptor: TileAdaptor.Water;
-    lavaAdaptor: TileAdaptor.Lava;
-    fenceAdaptor: TileAdaptor.Fence;
-    mountainAdaptor: TileAdaptor.Mountain;
-    wallAdaptor: TileAdaptor.Wall;
-    defaultAdaptor: TileAdaptor.Default;
-    floorAdaptor: TileAdaptor.Floor;
+    dirtAdaptor: ITileAdaptor;
+    tillAdaptor: ITileAdaptor;
+    waterAdaptor: ITileAdaptor;
+    lavaAdaptor: ITileAdaptor;
+    fenceAdaptor: Fence;
+    mountainAdaptor: ITileAdaptor;
+    wallAdaptor: Wall;
+    defaultAdaptor: ITileAdaptor;
+    floorAdaptor: ITileAdaptor;
     private readonly ambientIntensity;
     private readonly ambientColorDay;
     private readonly ambientColorDawn;

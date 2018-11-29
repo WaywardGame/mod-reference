@@ -11,6 +11,7 @@
 import { ActionType, IActionApi, IActionDescription } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
+import IEntity from "entity/IEntity";
 import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
@@ -385,6 +386,10 @@ export interface IHookHost {
      */
     onGameTickEnd?(): void;
     /**
+     * Called when an entity is killed by another entity.
+     */
+    onEntityKill?(attacker: IEntity, target: IEntity): void;
+    /**
      * Called when an item is added to the players inventory
      * @param player The player object
      * @param item The item object
@@ -598,6 +603,10 @@ export interface IHookHost {
      * @param spriteBatch The overlay sprite batch
      */
     onRenderOverlay?(spriteBatch: ISpriteBatch): void;
+    /**
+     * Called when the player sails to civilization.
+     */
+    onSailToCivilization?(): void;
     /**
      * Called when a creature is spawned from a creature group
      * @param creatureGroup The creature group

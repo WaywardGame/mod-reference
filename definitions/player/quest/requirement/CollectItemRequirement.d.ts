@@ -8,19 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IEntity from "entity/IEntity";
-import { CreatureType } from "Enums";
+import { ItemType } from "Enums";
 import Translation from "language/Translation";
+import IPlayer from "player/IPlayer";
 import Requirement, { RequirementFactory } from "player/quest/requirement/Requirement";
-export default class KillCreatureRequirementFactory extends RequirementFactory<[CreatureType, number], KillCreatureRequirement> {
+export default class CollectItemRequirementFactory extends RequirementFactory<[ItemType, number], CollectItemRequirement> {
     constructor();
-    protected getRequirementClass(): typeof KillCreatureRequirement;
-    protected validateOptions(creatureType: unknown, killQuantity: unknown): boolean;
-    private onKill;
+    protected getRequirementClass(): typeof CollectItemRequirement;
+    protected validateOptions(itemType: unknown, quantity: unknown): boolean;
+    private onInventoryChange;
 }
-declare class KillCreatureRequirement extends Requirement<[CreatureType, number]> {
-    private kills;
-    onCreatureKill(attacker: IEntity, target: IEntity): boolean;
+declare class CollectItemRequirement extends Requirement<[ItemType, number]> {
+    private collected;
+    onInventoryChange(player: IPlayer): boolean;
     getTranslation(): Translation;
 }
 export {};
