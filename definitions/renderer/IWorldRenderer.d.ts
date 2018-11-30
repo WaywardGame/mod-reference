@@ -11,12 +11,12 @@
  *
  */
 import { SpriteBatchLayer } from "Enums";
+import { ITileAdaptor } from "renderer/TileAdaptors";
+import Fence from "renderer/tileAdaptors/Fence";
+import Wall from "renderer/tileAdaptors/Wall";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import { IBound3 } from "utilities/math/Bound3";
 import Vec2 from "utilities/math/Vector2";
-import { ITileAdaptor } from "./TileAdaptors";
-import Wall from "./tileAdaptors/Wall";
-import Fence from "./tileAdaptors/Fence";
 export interface IWorldRenderer {
     positionBuffer: WebGLBuffer;
     layers: WorldLayerRenderer[];

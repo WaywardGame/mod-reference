@@ -48,7 +48,7 @@ declare class Translation {
     static nameOf(type: Dictionary, thing: number | {
         type: number;
         renamed?: string | ISerializedTranslation;
-    }, count?: number, article?: boolean): Translation;
+    }, count?: number, article?: boolean, ...args: any[]): Translation;
     static ofNumber(number: number, failWith?: string | Translation): Translation;
     /**
      * DO NOT USE THIS METHOD
@@ -120,6 +120,7 @@ declare class Translation {
      * Returns the translation as a string
      */
     getString(...args: any[]): string;
+    toString(): string;
     serialize(): ISerializedTranslation;
     /**
      * Gets the `IStringSection[]` representing this translation, resolved.

@@ -10,11 +10,11 @@
  */
 import { SpriteBatchLayer } from "Enums";
 import IWorldRenderer from "renderer/IWorldRenderer";
-import Wall from "renderer/tileAdaptors/Wall";
+import { ITileAdaptor } from "renderer/TileAdaptors";
 import Fence from "renderer/tileAdaptors/Fence";
+import Wall from "renderer/tileAdaptors/Wall";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import Vector2 from "utilities/math/Vector2";
-import { ITileAdaptor } from "./TileAdaptors";
 export default class WorldRenderer implements IWorldRenderer {
     private readonly gl;
     private static textureShaderProgram;

@@ -146,7 +146,7 @@ export default class InGameScreen extends BaseScreen {
     tooltipDisable(): void;
     tooltipHide(): void;
     unSelectElements(): void;
-    getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: boolean, isNPC: boolean): string;
+    getTooltipHtmlForItem(item: IItem | undefined, itemType: ItemType, isQuickSlot: boolean, isDismantle: boolean, isNPC: boolean): string;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     getUsedQuickSlots(): number[];
     getFreeQuickSlots(): number[];

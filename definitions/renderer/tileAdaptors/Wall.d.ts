@@ -10,7 +10,7 @@
  */
 import { DoodadType } from "Enums";
 import IWorldLayer from "renderer/IWorldLayer";
-import { IDoodadAdaptor, ITileAdaptation } from "../TileAdaptors";
+import { IDoodadAdaptor, ITileAdaptation } from "renderer/TileAdaptors";
 export default class Wall implements IDoodadAdaptor {
     adaptDoor(world: IWorldLayer, x: number, y: number, doodadType: DoodadType, vertical: boolean, result: ITileAdaptation): void;
     adapt(world: IWorldLayer, x: number, y: number, doodadType: DoodadType, result: ITileAdaptation): void;

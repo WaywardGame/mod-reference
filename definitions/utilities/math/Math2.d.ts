@@ -18,11 +18,11 @@ declare module Math2 {
     /**
      * Clamps the given number in the range 0-1
      */
-    const clamp1: any;
+    const clamp1: (value: number) => number;
     /**
      * Clamps the given number in the range 0-255
      */
-    const clamp255: any;
+    const clamp255: (value: number) => number;
     function roundNumber(num: number, dec: number): number;
     /**
      * Return a number between `from` and `to`, using the decimal `t`

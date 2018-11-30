@@ -12,7 +12,7 @@ import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
-import { Difficulty } from "game/Difficulty";
+import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import Translation from "language/Translation";
@@ -31,7 +31,6 @@ import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vec2 from "utilities/math/Vector2";
 import Vector3 from "utilities/math/Vector3";
 import { IVersionInfo } from "utilities/Version";
-import { IDifficultyOptions } from "./Difficulty";
 export interface IGame extends Emitter {
     interval: number;
     mapSize: number;

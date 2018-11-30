@@ -9,11 +9,11 @@
  * https://waywardgame.github.io/
  */
 import IEntity from "entity/IEntity";
+import { IInspectionSectionSimple, InspectionContext } from "game/inspection/IInspection";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
-import { IInspectionSectionSimple, InspectionContext } from "./IInspection";
 declare class Inspection {
     readonly inspector: Human;
     readonly context: InspectionContext | string;

@@ -10,7 +10,7 @@
  */
 import { TerrainType } from "Enums";
 import IWorldLayer from "renderer/IWorldLayer";
-import { ITileAdaptor, ITileAdaptation } from "../TileAdaptors";
+import { ITileAdaptation, ITileAdaptor } from "renderer/TileAdaptors";
 export default class Dirt implements ITileAdaptor {
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;
 }
