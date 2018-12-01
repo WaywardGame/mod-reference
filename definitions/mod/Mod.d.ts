@@ -12,7 +12,8 @@ import { ActionType, IActionApi, IActionDescription } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IEntity from "entity/IEntity";
-import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import IHuman from "entity/IHuman";
+import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SkillType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
 import Language from "language/Language";
@@ -111,6 +112,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onGameTickStart(): void;
     onGameTickEnd(): void;
     onEntityKill(attacker: IEntity, target: IEntity): void;
+    onHumanSkillChange(human: IHuman, skill: SkillType, currentSkill: number): void;
     onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     onInventoryItemRemove(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     onInventoryItemUpdate(player: IPlayer | undefined, item: IItem, container: IContainer): void;

@@ -9,18 +9,6 @@
  * https://waywardgame.github.io/
  */
 import { ItemType } from "Enums";
-import Translation from "language/Translation";
-import IPlayer from "player/IPlayer";
-import Requirement, { RequirementFactory } from "player/quest/requirement/Requirement";
-export default class CollectItemRequirementFactory extends RequirementFactory<[ItemType, number], CollectItemRequirement> {
-    constructor();
-    protected getRequirementClass(): typeof CollectItemRequirement;
-    protected validateOptions(itemType: unknown, quantity: unknown): boolean;
-    private onInventoryChange;
-}
-declare class CollectItemRequirement extends Requirement<[ItemType, number]> {
-    private collected;
-    onInventoryChange(player: IPlayer): boolean;
-    getTranslation(): Translation;
-}
-export {};
+import { Requirement } from "player/quest/requirement/Requirement";
+declare const collectItemRequirement: Requirement<[ItemType, number], never>;
+export default collectItemRequirement;

@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { CreatureType } from "Enums";
-import { Requirement } from "player/quest/requirement/Requirement";
-export interface IKillCreatureRequirement {
-    kills: number;
+import { IRequirement } from "player/quest/requirement/IRequirement";
+export declare enum QuestType {
+    DailyChallenge = 0
 }
-declare const killCreatureRequirement: Requirement<[CreatureType, number], IKillCreatureRequirement>;
-export default killCreatureRequirement;
+export interface IQuest {
+    type: QuestType;
+    requirements: IRequirement[];
+}
