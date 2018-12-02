@@ -19,14 +19,15 @@ export declare const enum RequirementEvent {
     Met = 0,
     Update = 1
 }
-export interface IRequirement<O extends any[] = any[]> {
+export interface IRequirement<O extends any[] = any[], D extends {} = {}> {
     type: RequirementType;
     options: O;
     hidden: boolean;
     completed: boolean;
-}
-export interface IRequirementApi<O extends any[], D> {
-    host: IPlayer;
-    requirement: IRequirement<O>;
     data: D;
+}
+export interface IRequirementApi<O extends any[] = any[], D extends {} = {}> {
+    host: IPlayer;
+    requirement: IRequirement<O, D>;
+    updated: boolean;
 }

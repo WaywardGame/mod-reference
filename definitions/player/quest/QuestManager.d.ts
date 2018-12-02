@@ -8,11 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Quest } from "player/quest/quest/Quest";
+import { IHookHost } from "mod/IHookHost";
+import IPlayer from "player/IPlayer";
+import { QuestType } from "player/quest/quest/IQuest";
 import Emitter from "utilities/Emitter";
-export default class QuestManager extends Emitter {
+export default class QuestManager extends Emitter implements IHookHost {
+    private readonly host;
     private readonly quests;
-    addQuest(quest: Quest): this;
+    private readonly triggers;
+    private readonly initializedQuests;
+    constructor(host: IPlayer);
+    add(type: QuestType): this;
+    onGameScreenVisible(): void;
+    private init;
+    private onUpdateRequirement;
+    private onCompleteRequirement;
 }
 export declare const enum QuestManagerEvent {
     /**

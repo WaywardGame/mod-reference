@@ -22,6 +22,7 @@ import { MilestoneType } from "player/IMilestone";
 import { IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
 import MessageManager from "player/MessageManager";
 import NoteManager from "player/note/NoteManager";
+import QuestManager from "player/quest/QuestManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IPreSerializeCallback } from "save/ISerializer";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
@@ -47,6 +48,7 @@ export default class Player extends Human implements IPlayer, IPreSerializeCallb
     name: string;
     noInputReceived: boolean;
     notes: NoteManager;
+    quests: QuestManager;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
     revealedItems: {

@@ -18,6 +18,7 @@ import Message from "language/dictionary/Message";
 import { INPC } from "npc/INPC";
 import MessageManager from "player/MessageManager";
 import NoteManager from "player/note/NoteManager";
+import QuestManager from "player/quest/QuestManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
@@ -50,6 +51,7 @@ export interface IPlayer extends IHuman {
     nextY: number;
     noInputReceived: boolean;
     notes: NoteManager;
+    quests: QuestManager;
     quickSlotInfo: IQuickSlotInfo[];
     revealedItems: {
         [index: number]: boolean;

@@ -15,4 +15,5 @@ export declare enum QuestType {
 export interface IQuest {
     type: QuestType;
     requirements: IRequirement[];
+    complete: boolean;
 }

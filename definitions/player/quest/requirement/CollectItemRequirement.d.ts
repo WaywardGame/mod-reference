@@ -10,5 +10,5 @@
  */
 import { ItemType } from "Enums";
 import { Requirement } from "player/quest/requirement/Requirement";
-declare const collectItemRequirement: Requirement<[ItemType, number], never>;
+declare const collectItemRequirement: Requirement<[ItemType, number], {}>;
 export default collectItemRequirement;

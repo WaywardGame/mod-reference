@@ -12,12 +12,13 @@ import Translation from "language/Translation";
 import { IQuest, QuestType } from "player/quest/quest/IQuest";
 import { IRequirement, RequirementType } from "player/quest/requirement/IRequirement";
 import { RequirementArgs } from "player/quest/Requirements";
+import Emitter from "utilities/Emitter";
 export declare const enum QuestEvent {
     Update = 0,
     Complete = 1
 }
-export declare class Quest {
-    protected readonly type: QuestType;
+export declare class Quest extends Emitter {
+    readonly type: QuestType;
     title?: Translation | ((quest: IQuest) => Translation);
     description?: Translation | ((quest: IQuest) => Translation);
     private readonly requirements;
@@ -30,9 +31,8 @@ export declare class Quest {
     setDescription(translation?: Translation): this;
     getTitle(quest: IQuest): Translation;
     getDescription(quest: IQuest): Translation;
-    /**
-     * Used on initial `IQuest` construction; can be used to add quests that change based on outside factors.
-     */
-    protected getRequirements(): IterableIterator<IRequirement<any[]>>;
+    create(): IQuest;
+    getTriggers(instance: IQuest): IterableIterator<[IRequirement<any[], {}>, IterableIterator<[import("../../../mod/IHookManager").Hook, (api: import("../requirement/IRequirement").IRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
+    protected getRequirements(): IterableIterator<IRequirement<any[], {}>>;
     protected createRequirement<R extends RequirementType>(type: R, ...options: RequirementArgs<R>): IRequirement<RequirementArgs<R>>;
 }

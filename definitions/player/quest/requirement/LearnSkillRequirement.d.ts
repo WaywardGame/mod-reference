@@ -10,5 +10,5 @@
  */
 import { SkillType } from "Enums";
 import { Requirement } from "player/quest/requirement/Requirement";
-declare const learnSkillRequirement: Requirement<[SkillType, number], never>;
+declare const learnSkillRequirement: Requirement<[SkillType, number], {}>;
 export default learnSkillRequirement;

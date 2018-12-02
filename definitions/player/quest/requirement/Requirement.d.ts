@@ -14,10 +14,12 @@ import Mod from "mod/Mod";
 import { IRequirementApi } from "player/quest/requirement/IRequirement";
 import Emitter from "utilities/Emitter";
 export declare type RequirementApi<R extends Requirement<any, any>> = R extends Requirement<infer O, infer D> ? IRequirementApi<O, D> : never;
-export declare class Requirement<O extends any[] = [], D = never> extends Emitter {
+export declare class Requirement<O extends any[] = [], D extends {} = {}> extends Emitter {
+    readonly defaultData: D;
     private readonly triggers;
     private readonly externalTriggers;
     private translation?;
+    constructor(defaultData: D);
     // @ts-ignore
 	setTrigger<H extends Hook>(hook: H, checker: (api: RequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IRequirementApi<O, D>, ...args: any[]) => boolean]>;

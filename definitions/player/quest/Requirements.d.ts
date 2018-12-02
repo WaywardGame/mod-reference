@@ -11,10 +11,10 @@
 import { RequirementType } from "player/quest/requirement/IRequirement";
 import { Requirement } from "player/quest/requirement/Requirement";
 declare const requirements: {
-    [RequirementType.SailToCivilization]: Requirement<[], never>;
+    [RequirementType.SailToCivilization]: Requirement<[], {}>;
     [RequirementType.KillCreature]: Requirement<[import("../../Enums").CreatureType, number], import("./requirement/KillCreatureRequirement").IKillCreatureRequirement>;
-    [RequirementType.CollectItem]: Requirement<[import("../../Enums").ItemType, number], never>;
-    [RequirementType.LearnSkill]: Requirement<[import("../../Enums").SkillType, number], never>;
+    [RequirementType.CollectItem]: Requirement<[import("../../Enums").ItemType, number], {}>;
+    [RequirementType.LearnSkill]: Requirement<[import("../../Enums").SkillType, number], {}>;
 };
 export default requirements;
 export declare type RequirementArgs<R extends RequirementType> = (typeof requirements)[R] extends Requirement<infer O, any> ? O : (typeof requirements)[R] extends Requirement<infer O2> ? O2 : never;
