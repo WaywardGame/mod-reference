@@ -19,6 +19,7 @@ export declare class Requirement<O extends any[] = [], D extends {} = {}> extend
     private readonly triggers;
     private readonly externalTriggers;
     private translation?;
+    private completionAmountGetter;
     constructor(defaultData: D);
     // @ts-ignore
 	setTrigger<H extends Hook>(hook: H, checker: (api: RequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
@@ -26,5 +27,7 @@ export declare class Requirement<O extends any[] = [], D extends {} = {}> extend
     setExternalTrigger(emitter: Emitter, ...events: Array<string | number>): this;
     setTranslation(translation: Translation | ((api: RequirementApi<this>) => Translation)): this;
     getTranslation(api: RequirementApi<this>): Translation;
+    setCompletionAmountGetter(getter: (api: RequirementApi<this>) => number): this;
+    getCompletionAmount(api: RequirementApi<this>): number;
     protected validateOptions(...options: O): boolean;
 }

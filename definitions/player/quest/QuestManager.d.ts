@@ -10,7 +10,7 @@
  */
 import { IHookHost } from "mod/IHookHost";
 import IPlayer from "player/IPlayer";
-import { QuestType } from "player/quest/quest/IQuest";
+import { IQuest, QuestType } from "player/quest/quest/IQuest";
 import Emitter from "utilities/Emitter";
 export default class QuestManager extends Emitter implements IHookHost {
     private readonly host;
@@ -18,7 +18,9 @@ export default class QuestManager extends Emitter implements IHookHost {
     private readonly triggers;
     private readonly initializedQuests;
     constructor(host: IPlayer);
+    get(): QuestInstance[];
     add(type: QuestType): this;
+    onPlayerJoin(player: IPlayer): void;
     onGameScreenVisible(): void;
     private init;
     private onUpdateRequirement;
@@ -27,12 +29,27 @@ export default class QuestManager extends Emitter implements IHookHost {
 export declare const enum QuestManagerEvent {
     /**
      * Emitted when a quest is completed.
-     * @param quest The completed `Quest`
+     * @param quest The completed `IQuestInstance`
      */
     QuestComplete = 0,
     /**
      * Emitted when a new quest is added.
-     * @param quest The `Quest` that was added
+     * @param quest The `IQuestInstance` that was added
      */
-    QuestGet = 1
+    QuestGet = 1,
+    /**
+     * Emitted when a quest is updated (a requirement is updated)
+     * @param quest The `IQuestInstance` that was updated
+     */
+    QuestUpdate = 2
+}
+export declare class QuestInstance extends Emitter {
+    private readonly host;
+    private readonly quest;
+    readonly id: number;
+    constructor(host: IPlayer, quest: IQuest, id: number);
+    getTitle(): import("../../language/Translation").default;
+    getDescription(): import("../../language/Translation").default;
+    getRequirements(): IterableIterator<import("./quest/Quest").RequirementInstance>;
+    getCompletionAmount(): number;
 }

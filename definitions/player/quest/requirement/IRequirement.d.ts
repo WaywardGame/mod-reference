@@ -16,8 +16,8 @@ export declare enum RequirementType {
     SailToCivilization = 3
 }
 export declare const enum RequirementEvent {
-    Met = 0,
-    Update = 1
+    Met = "Met",
+    Update = "Update"
 }
 export interface IRequirement<O extends any[] = any[], D extends {} = {}> {
     type: RequirementType;

@@ -19,12 +19,13 @@ export declare enum MenuBarButtonType {
     QuickSettings = 3,
     Milestones = 4,
     Notes = 5,
-    Messages = 6,
-    Actions = 7,
-    Inventory = 8,
-    Crafting = 9,
-    Equipment = 10,
-    Skills = 11
+    Quests = 6,
+    Messages = 7,
+    Actions = 8,
+    Inventory = 9,
+    Crafting = 10,
+    Equipment = 11,
+    Skills = 12
 }
 export interface IMenuBarButtonDescription extends IModdable {
     imagePath?: string;

@@ -13,7 +13,7 @@ import { Quest } from "player/quest/quest/Quest";
 import { RequirementType } from "player/quest/requirement/IRequirement";
 export default class DailyChallenge extends Quest {
     constructor();
-    protected getRequirements(): IterableIterator<import("../requirement/IRequirement").IRequirement<any[], {}> | import("../requirement/IRequirement").IRequirement<[ItemType, number], {}> | import("../requirement/IRequirement").IRequirement<[SkillType, number], {}> | import("../requirement/IRequirement").IRequirement<[CreatureType, number], {}> | {
+    protected createRequirements(): IterableIterator<import("../requirement/IRequirement").IRequirement<any[], {}> | import("../requirement/IRequirement").IRequirement<[ItemType, number], {}> | import("../requirement/IRequirement").IRequirement<[SkillType, number], {}> | import("../requirement/IRequirement").IRequirement<[CreatureType, number], {}> | {
         hidden: boolean;
         type: RequirementType;
         options: [];
