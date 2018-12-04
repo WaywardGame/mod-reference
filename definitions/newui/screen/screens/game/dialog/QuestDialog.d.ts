@@ -19,8 +19,9 @@ export default class QuestDialog extends Dialog implements IHookHost {
     private current;
     constructor(api: IGameScreenApi);
     getName(): UiTranslation;
+    showQuest(id: number): this;
+    private getPins;
     private onSwitchPanel;
     private addQuest;
-    private showQuest;
     private getQuest;
 }

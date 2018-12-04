@@ -933,15 +933,24 @@ export declare enum SkillType {
     Bartering = 28
 }
 export declare enum Music {
-    ShipWrecked = 0,
-    DarkerWorld = 1,
-    TheFirstSpark = 2,
-    NomadsHeartBeat = 3,
-    TheWildBorn = 4,
-    NightOwl = 5,
-    Savage = 6,
-    Underworld = 7,
-    ShudderSounds = 8
+    Shipwrecked = 0,
+    OpeningTheme = 1,
+    DarkerWorld = 2,
+    Crux = 3,
+    TheFirstSpark = 4,
+    HauntingInterlude = 5,
+    NomadsHeartBeat = 6,
+    LootStep = 7,
+    PerilsOfPlunder = 8,
+    DreamInterlude = 9,
+    TheWildBorn = 10,
+    NightOwl = 11,
+    SurvivalInstinct = 12,
+    Savage = 13,
+    Underworld = 14,
+    ThirdSunrise = 15,
+    WistfulInterlude = 16,
+    ShudderSounds = 17
 }
 export declare enum SfxType {
     Bow = 0,
