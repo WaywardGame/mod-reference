@@ -55,6 +55,7 @@ export default class WorldRenderer implements IWorldRenderer {
     private itemBatch;
     private corpseBatch;
     private creatureBatch;
+    private overTreesBatch;
     private creatureFlyingBatch;
     private overlayBatch;
     private readonly entitiesInViewport;

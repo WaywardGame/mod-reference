@@ -13,7 +13,10 @@ export declare enum RequirementType {
     KillCreature = 0,
     CollectItem = 1,
     LearnSkill = 2,
-    SailToCivilization = 3
+    SailToCivilization = 3,
+    LearnSkills = 4,
+    LearnAnySkill = 5,
+    KillCreatures = 6
 }
 export declare const enum RequirementEvent {
     Met = "Met",

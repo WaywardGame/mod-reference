@@ -24,4 +24,6 @@ export default class QuestDialog extends Dialog implements IHookHost {
     private onSwitchPanel;
     private addQuest;
     private getQuest;
+    private getTitle;
+    private getDescription;
 }

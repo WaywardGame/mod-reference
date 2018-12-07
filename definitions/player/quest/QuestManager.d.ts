@@ -44,7 +44,7 @@ export declare const enum QuestManagerEvent {
     QuestUpdate = 2
 }
 export declare class QuestInstance extends Emitter {
-    private readonly host;
+    readonly host: IPlayer;
     private readonly quest;
     readonly id: number;
     constructor(host: IPlayer, quest: IQuest, id: number);

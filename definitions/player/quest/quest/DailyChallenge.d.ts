@@ -11,6 +11,7 @@
 import { Quest } from "player/quest/quest/Quest";
 import { IRequirement, RequirementType } from "player/quest/requirement/IRequirement";
 export default class DailyChallenge extends Quest {
+    private static readonly possibleRequirements;
     constructor();
     protected createRequirements(): IterableIterator<IRequirement<any[], {}> | {
         hidden: boolean;
@@ -19,5 +20,7 @@ export default class DailyChallenge extends Quest {
         completed: boolean;
         data: {};
     }>;
+    private createRandomRequirement;
     private onUpdate;
+    private onRequirementComplete;
 }

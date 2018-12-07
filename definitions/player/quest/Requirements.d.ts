@@ -13,8 +13,11 @@ import { Requirement } from "player/quest/requirement/Requirement";
 declare const requirements: {
     [RequirementType.SailToCivilization]: Requirement<[], {}>;
     [RequirementType.KillCreature]: Requirement<[import("../../Enums").CreatureType, number], import("./requirement/KillCreatureRequirement").IKillCreatureRequirement>;
+    [RequirementType.KillCreatures]: Requirement<[number], import("./requirement/KillCreaturesRequirement").IKillCreaturesRequirement>;
     [RequirementType.CollectItem]: Requirement<[import("../../Enums").ItemType, number], {}>;
     [RequirementType.LearnSkill]: Requirement<[import("../../Enums").SkillType, number], {}>;
+    [RequirementType.LearnSkills]: Requirement<[number], {}>;
+    [RequirementType.LearnAnySkill]: Requirement<[number], {}>;
 };
 export default requirements;
 export declare type RequirementArgs<R extends RequirementType> = (typeof requirements)[R] extends Requirement<infer O, any> ? O : (typeof requirements)[R] extends Requirement<infer O2> ? O2 : never;

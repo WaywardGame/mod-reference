@@ -16,7 +16,8 @@ import { RequirementArgs } from "player/quest/Requirements";
 import Emitter from "utilities/Emitter";
 export declare const enum QuestEvent {
     Update = 0,
-    Complete = 1
+    RequirementCompleted = 1,
+    Complete = 2
 }
 export declare class Quest extends Emitter {
     readonly type: QuestType;

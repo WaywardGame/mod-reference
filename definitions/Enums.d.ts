@@ -22,7 +22,8 @@ export declare enum SpriteBatchLayer {
     Item = 1,
     Creature = 2,
     CreatureFlying = 3,
-    Overlay = 4
+    Overlay = 4,
+    OverTrees = 5
 }
 export declare enum WorldZ {
     Min = 0,
@@ -1073,6 +1074,7 @@ export declare enum RenderFlag {
     Creature = 8,
     Terrain = 16,
     Overlay = 32,
+    OverTrees = 64,
     All = 65535
 }
 export declare enum OnEquipType {

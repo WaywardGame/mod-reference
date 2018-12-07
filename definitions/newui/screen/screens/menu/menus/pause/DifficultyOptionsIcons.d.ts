@@ -26,7 +26,8 @@ export declare enum DifficultyOptionsIcon {
     Poisoned = 11,
     Burned = 12,
     Skills = 13,
-    NoItems = 14
+    NoItems = 14,
+    Weight = 15
 }
 export interface IDifficultyOptionsIcon extends IModdable {
     imagePath?: string;
