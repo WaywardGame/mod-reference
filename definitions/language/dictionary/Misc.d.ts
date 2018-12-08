@@ -60,12 +60,14 @@ export declare enum MiscTranslation {
     Message = 8,
     CorpseOf = 9,
     AAndB = 10,
-    ListItemSeparator = 11,
-    AListAndB = 12,
-    CountThing = 13,
-    Renamed = 14,
-    HumanName = 15,
-    ItemQualityColor = 16,
-    Aberrant = 17,
-    ItemLegendary = 18
+    AOrB = 11,
+    ListItemSeparator = 12,
+    AListAndB = 13,
+    AListOrB = 14,
+    CountThing = 15,
+    Renamed = 16,
+    HumanName = 17,
+    ItemQualityColor = 18,
+    Aberrant = 19,
+    ItemLegendary = 20
 }

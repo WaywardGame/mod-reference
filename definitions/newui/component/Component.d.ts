@@ -17,7 +17,10 @@ import { AttributeManipulator, ClassListManipulator, DataManipulator } from "new
 import Emitter from "utilities/Emitter";
 export default class Component extends Emitter implements IComponent, IHookHost {
     protected api: UiApi;
-    static get(element: HTMLElement): Component;
+    private static readonly map;
+    static get(selector: string): Component;
+    static get(element: Element): Component;
+    static all(selector: string): IterableIterator<Component>;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;

@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { StatusType } from "Enums";
 import { IDifficultyOptions } from "game/Difficulty";
 export declare enum DailyChallengeModifier {
     NoHealthRegeneration = 0,
@@ -44,3 +45,4 @@ export declare const PERMANENT_STATUS_EFFECT_MULTIPLIER_RATE = 4;
 export declare const PERMANENT_STATUS_EFFECT_MULTIPLIER = 0.5;
 declare const dailyChallengeModifiers: Descriptions<DailyChallengeModifier, IDailyChallengeModifier>;
 export default dailyChallengeModifiers;
+export declare function isPermanentEffect(effect: StatusType): boolean;

@@ -45,11 +45,12 @@ export declare const enum QuestManagerEvent {
 }
 export declare class QuestInstance extends Emitter {
     readonly host: IPlayer;
-    private readonly quest;
+    readonly data: IQuest;
     readonly id: number;
-    constructor(host: IPlayer, quest: IQuest, id: number);
-    getTitle(): import("../../language/Translation").default;
-    getDescription(): import("../../language/Translation").default;
+    constructor(host: IPlayer, data: IQuest, id: number);
+    getTitle(): import("../../language/Translation").default | undefined;
+    getDescription(): import("../../language/Translation").default | undefined;
     getRequirements(): IterableIterator<import("./quest/Quest").RequirementInstance>;
+    getChildren(): IterableIterator<QuestType>;
     getCompletionAmount(): number;
 }

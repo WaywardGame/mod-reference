@@ -34,6 +34,10 @@ import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/opt
 import { INPCClass } from "npc/NPCS";
 import { Source } from "player/IMessageManager";
 import { INoteDescription } from "player/note/NoteManager";
+import { QuestType } from "player/quest/quest/IQuest";
+import { Quest } from "player/quest/quest/Quest";
+import { RequirementType } from "player/quest/requirement/IRequirement";
+import { Requirement } from "player/quest/requirement/Requirement";
 import { ISkillDescription } from "player/Skills";
 import { IOverlayDescription } from "renderer/Overlays";
 import { ITerrainDescription } from "tile/ITerrain";
@@ -68,7 +72,9 @@ export declare enum ModRegistrationType {
     Skill = 25,
     SoundEffect = 26,
     Terrain = 27,
-    TileEvent = 28
+    TileEvent = 28,
+    Quest = 29,
+    QuestRequirement = 30
 }
 export interface IInspectionTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InspectionType;
@@ -216,7 +222,17 @@ export interface IItemGroupRegistration extends IBaseModRegistration {
     name: string;
     description: IItemGroupDescription;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
+export interface IQuestRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Quest;
+    name: string;
+    description: Quest;
+}
+export interface IQuestRequirementRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.QuestRequirement;
+    name: string;
+    description: Requirement;
+}
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration | IQuestRegistration | IQuestRequirementRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -398,6 +414,16 @@ declare module Register {
      * @param description The definition of the item group.
      */
     function itemGroup(name: string, description: IItemGroupDescription): <K extends string | number | symbol, T extends { [k in K]: ItemTypeGroup; }>(target: T, key: K) => void;
+    /**
+     * Registers a quest.
+     * @param description The definition of the quest.
+     */
+    function quest(name: string, description: Quest): <K extends string | number | symbol, T extends { [k in K]: QuestType; }>(target: T, key: K) => void;
+    /**
+     * Registers a quest requirement.
+     * @param description The definition of the quest requirement.
+     */
+    function questRequirement(name: string, description: Requirement<any>): <K extends string | number | symbol, T extends { [k in K]: RequirementType; }>(target: T, key: K) => void;
     /**
      * Registers an action.
      * @param description The definition of this action.

@@ -41,7 +41,8 @@ export declare enum Dictionary {
     StatusEffect = 29,
     Terrain = 30,
     TileEvent = 31,
-    Ui = 32
+    Ui = 32,
+    EquipSlot = 33
 }
 export declare type Enum = {
     [key: string]: number;

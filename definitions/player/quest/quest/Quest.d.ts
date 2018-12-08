@@ -20,21 +20,22 @@ export declare const enum QuestEvent {
     Complete = 2
 }
 export declare class Quest extends Emitter {
-    readonly type: QuestType;
+    type?: QuestType | undefined;
     title?: Translation | ((quest: IQuest) => Translation);
     description?: Translation | ((quest: IQuest) => Translation);
     private readonly requirements;
     private readonly children;
     private readonly requirementInstances;
-    constructor(type: QuestType);
+    constructor(type?: QuestType | undefined);
     addRequirement<R extends RequirementType>(type: R, ...args: RequirementArgs<R>): this;
-    addChildQuests(...children: Quest[]): this;
-    getChildren(): IterableIterator<Quest>;
+    addRequirement<RA extends any[]>(type: RequirementType, ...args: RA): this;
+    addChildQuests(...children: QuestType[]): this;
+    getChildren(): IterableIterator<QuestType>;
     setTitle(translation?: Translation | ((quest: IQuest) => Translation)): this;
     setDescription(translation?: Translation): this;
-    create(): IQuest;
-    getTitle(quest: IQuest): Translation;
-    getDescription(quest: IQuest): Translation;
+    create(type?: QuestType | undefined): IQuest;
+    getTitle(quest: IQuest): Translation | undefined;
+    getDescription(quest: IQuest): Translation | undefined;
     getTriggers(instance: IQuest): IterableIterator<[IRequirement<any[], {}>, IterableIterator<[import("../../../mod/IHookManager").Hook, (api: IRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
     getRequirements(host: IPlayer, instance: IQuest): IterableIterator<RequirementInstance>;
     getRequirement(host: IPlayer, quest: IQuest, requirement: IRequirement): RequirementInstance | undefined;
@@ -48,4 +49,5 @@ export declare class RequirementInstance extends Emitter {
     constructor(host: IPlayer, data: IRequirement, id: number);
     getTranslation(): Translation;
     getCompletionAmount(): number;
+    getRelations(): [import("../../../newui/component/IComponent").HighlightType, string | number][];
 }

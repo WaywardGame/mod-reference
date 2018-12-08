@@ -25,6 +25,12 @@ declare module Math2 {
     const clamp255: (value: number) => number;
     function roundNumber(num: number, dec: number): number;
     /**
+     * Returns a number rounded to a multiple
+     *
+     * Example: `roundNumberToMultiple(97, 10): 100`
+     */
+    function roundNumberToMultiple(num: number, multiple: number): number;
+    /**
      * Return a number between `from` and `to`, using the decimal `t`
      *
      * Example: `lerp(1, 2, .5): 1.5`

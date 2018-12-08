@@ -11,6 +11,7 @@
 import Translation from "language/Translation";
 import { Hook } from "mod/IHookManager";
 import Mod from "mod/Mod";
+import { HighlightSelector } from "newui/component/IComponent";
 import { IRequirementApi } from "player/quest/requirement/IRequirement";
 import Emitter from "utilities/Emitter";
 export declare type RequirementApi<R extends Requirement<any, any>> = R extends Requirement<infer O, infer D> ? IRequirementApi<O, D> : never;
@@ -20,11 +21,15 @@ export declare class Requirement<O extends any[] = [], D extends {} = {}> extend
     private readonly externalTriggers;
     private translation?;
     private completionAmountGetter;
+    private relationsHandler?;
     constructor(defaultData: D);
     // @ts-ignore
 	setTrigger<H extends Hook>(hook: H, checker: (api: RequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setExternalTrigger(emitter: Emitter, ...events: Array<string | number>): this;
+    setRelations(relations: HighlightSelector[]): this;
+    setRelations(handler: (api: RequirementApi<this>) => HighlightSelector[]): this;
+    getRelations(api: RequirementApi<this>): [import("../../../newui/component/IComponent").HighlightType, string | number][];
     setTranslation(translation: Translation | ((api: RequirementApi<this>) => Translation)): this;
     getTranslation(api: RequirementApi<this>): Translation;
     setCompletionAmountGetter(getter: (api: RequirementApi<this>) => number): this;

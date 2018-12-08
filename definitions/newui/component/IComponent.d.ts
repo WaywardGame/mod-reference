@@ -275,5 +275,6 @@ export interface IHighlight {
 }
 export declare enum HighlightType {
     Stat = 0,
-    MenuBarButton = 1
+    MenuBarButton = 1,
+    Selector = 2
 }

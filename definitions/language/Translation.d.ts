@@ -31,10 +31,15 @@ export interface ISerializedTranslation {
     failWith?: string | ISerializedTranslation | IStringSection[];
     reformatters?: ISerializedTranslation[];
 }
+export declare const enum ListEnder {
+    None = 0,
+    And = 1,
+    Or = 2
+}
 declare class Translation {
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static formatList(items: IterableOf<string | IStringSection[] | Translation>, and?: boolean): Translation;
+    static formatList(items: IterableOf<string | IStringSection[] | Translation>, ender?: ListEnder | false): Translation;
     static getString(...entries: ArrayOfIterablesOfOr<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
     /**
