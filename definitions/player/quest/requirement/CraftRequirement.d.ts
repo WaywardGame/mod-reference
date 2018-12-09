@@ -10,5 +10,7 @@
  */
 import { ItemType } from "Enums";
 import { Requirement } from "player/quest/requirement/Requirement";
-declare const _default: Requirement<[ItemType, number], {}>;
+declare const _default: Requirement<[ItemType, number], {
+    crafted: number;
+}>;
 export default _default;

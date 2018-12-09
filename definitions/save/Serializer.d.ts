@@ -19,7 +19,8 @@ export default class Serializer implements ISerializer {
     private readonly objectKey;
     private readonly version;
     private readonly skipOnUnserialized;
-    constructor(object: any, objectKey: any, version: string, skipOnUnserialized?: boolean);
+    private readonly skipConcreteTypeCreation;
+    constructor(object: any, objectKey: any, version: string, skipOnUnserialized?: boolean, skipConcreteTypeCreation?: boolean);
     saveToUint8Array(): Uint8Array | undefined;
     saveToString(): string | undefined;
     load(data: string | Uint8Array): void;

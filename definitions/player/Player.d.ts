@@ -72,6 +72,7 @@ export default class Player extends Human implements IPlayer, IPreSerializeCallb
     private _milestoneUpdates;
     private readonly _movementIntent;
     constructor();
+    setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
     startResting(restData: IRestData): void;
@@ -102,6 +103,7 @@ export default class Player extends Human implements IPlayer, IPreSerializeCallb
         shouldDisableTurnDelay: boolean;
     };
     updateMovementIntent(movementIntent: IMovementIntent): void;
+    resetStatTimers(): void;
     /**
      * Gets the max health of the player.
      *

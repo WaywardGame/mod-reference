@@ -10,13 +10,15 @@
  */
 import IPlayer from "player/IPlayer";
 export declare enum RequirementType {
-    KillCreature = 0,
+    SailToCivilization = 0,
     CollectItem = 1,
-    LearnSkill = 2,
-    SailToCivilization = 3,
-    LearnSkills = 4,
-    LearnAnySkill = 5,
-    KillCreatures = 6
+    KillCreature = 2,
+    KillCreatures = 3,
+    LearnSkill = 4,
+    LearnSkills = 5,
+    LearnAnySkill = 6,
+    Equip = 7,
+    Craft = 8
 }
 export declare const enum RequirementEvent {
     Met = "Met",

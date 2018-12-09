@@ -23,6 +23,11 @@ export interface ICreatureManager extends IEntityManager<ICreature> {
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
     checkSpawnReputation(creatureDescription: ICreatureDescription, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean): CreatureType[];
+    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number): ISpawnableCreatures;
+}
+export interface ISpawnableCreatures {
+    pool: CreatureType[];
+    aberrantChance: number;
 }
 export default ICreatureManager;
 export interface IMoveTypeZ {

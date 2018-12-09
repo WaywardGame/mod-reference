@@ -12,6 +12,18 @@ import { Quest } from "player/quest/quest/Quest";
 import { IRequirement, RequirementType } from "player/quest/requirement/IRequirement";
 export default class DailyChallenge extends Quest {
     private static readonly possibleRequirements;
+    /**
+     * These are the only items that can be requested to collect
+     */
+    private static readonly itemCollectWhitelist;
+    /**
+     * These are the only skills that can be requested to learn
+     */
+    private static readonly skillLearnWhitelist;
+    /**
+     * These creatures will always be excluded from the possible creatures to be requested to kill, even if they're spawnable
+     */
+    private static readonly creatureKillBlacklist;
     constructor();
     protected createRequirements(): IterableIterator<IRequirement<any[], {}> | {
         hidden: boolean;
@@ -21,6 +33,7 @@ export default class DailyChallenge extends Quest {
         data: {};
     }>;
     private createRandomRequirement;
+    private getCreatureToKill;
     private onUpdate;
     private onRequirementComplete;
 }

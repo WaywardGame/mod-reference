@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { Requirement } from "player/quest/requirement/Requirement";
-declare const learnSkillsRequirement: Requirement<[number], {}>;
-export default learnSkillsRequirement;
+declare const _default: Requirement<[number], {}>;
+export default _default;

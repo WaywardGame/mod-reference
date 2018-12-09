@@ -423,7 +423,7 @@ declare module Register {
      * Registers a quest requirement.
      * @param description The definition of the quest requirement.
      */
-    function questRequirement(name: string, description: Requirement<any>): <K extends string | number | symbol, T extends { [k in K]: RequirementType; }>(target: T, key: K) => void;
+    function questRequirement(name: string, description: Requirement<any, any>): <K extends string | number | symbol, T extends { [k in K]: RequirementType; }>(target: T, key: K) => void;
     /**
      * Registers an action.
      * @param description The definition of this action.

@@ -47,6 +47,7 @@ export declare class RequirementInstance extends Emitter {
     readonly id: number;
     private readonly api;
     constructor(host: IPlayer, data: IRequirement, id: number);
+    triggerInitialization(): boolean;
     getTranslation(): Translation;
     getCompletionAmount(): number;
     getRelations(): [import("../../../newui/component/IComponent").HighlightType, string | number][];

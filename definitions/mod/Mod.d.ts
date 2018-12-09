@@ -33,34 +33,25 @@ import Vector3 from "utilities/math/Vector3";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
-     * @param saveDataGlobal The save data object you previously saved via onUninitialize()
      */
-    onInitialize(saveDataGlobal: any): void;
+    onInitialize(): void;
     /**
      * Called before the mod is uninitialized (when it's disabled via the Mod Manager)
-     * @returns An object containing the data you want to save (saved globally, not per slot)
      */
-    onUninitialize(): any;
+    onUninitialize(): void;
     /**
      * Called after the mod is uninitialized
      */
-    onUninitialized(): any;
+    onUninitialized(): void;
     /**
      * Called when the mod is loaded.
      * This will be called after a player starts a game (ran before resources & the world are setup)
-     * @param saveData The save data object you previously saved via onSave()
      */
-    onLoad(saveData: any): void;
+    onLoad(): void;
     /**
      * Called when the mod is unloaded
      */
     onUnload(): void;
-    /**
-     * Called when the game is saved or the mod is unloaded
-     * This will be called before onUnload
-     * @returns An object containing the data you want to save
-     */
-    onSave(): any;
     getAmbientColor(colors: [number, number, number]): [number, number, number] | undefined;
     getAmbientColorCave(): [number, number, number] | undefined;
     getAmbientColorDay(): [number, number, number] | undefined;

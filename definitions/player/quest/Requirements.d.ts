@@ -18,6 +18,10 @@ declare const requirements: {
     [RequirementType.LearnSkill]: Requirement<[import("../../Enums").SkillType, number], {}>;
     [RequirementType.LearnSkills]: Requirement<[number], {}>;
     [RequirementType.LearnAnySkill]: Requirement<[number], {}>;
+    [RequirementType.Equip]: Requirement<[import("../../Enums").EquipType[], import("../../Enums").ItemTypeGroup[]], {}>;
+    [RequirementType.Craft]: Requirement<[import("../../Enums").ItemType, number], {
+        crafted: number;
+    }>;
 };
 export default requirements;
 export declare type RequirementArgs<R extends RequirementType> = (typeof requirements)[R] extends Requirement<infer O, any> ? O : (typeof requirements)[R] extends Requirement<infer O2> ? O2 : never;

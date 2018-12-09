@@ -28,6 +28,10 @@ export default class CreatureManager extends EntityManager<ICreature> implements
      */
     spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
+    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number): {
+        pool: CreatureType[];
+        aberrantChance: number;
+    };
     maybeSpawnClawWorm(human: Human): void;
     remove(creature: ICreature): void;
     updateAll(): void;

@@ -13,5 +13,5 @@ import { Requirement } from "player/quest/requirement/Requirement";
 export interface IKillCreatureRequirement {
     kills: number;
 }
-declare const killCreatureRequirement: Requirement<[CreatureType, number], IKillCreatureRequirement>;
-export default killCreatureRequirement;
+declare const _default: Requirement<[CreatureType, number], IKillCreatureRequirement>;
+export default _default;

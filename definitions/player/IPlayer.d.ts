@@ -12,6 +12,7 @@ import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { EntityType } from "entity/IEntity";
 import IHuman from "entity/IHuman";
+import { IStat, Stat } from "entity/IStats";
 import { Direction, EquipType, HairColor, HairStyle, IModdable, IRGB, ItemType, PlayerState, RestCancelReason, RestType, SkinColor, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
 import Message from "language/dictionary/Message";
@@ -67,6 +68,7 @@ export interface IPlayer extends IHuman {
     z: number;
     movementFinishTime: number;
     exploredMap: IExploreMap[] | undefined;
+    setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     checkForGather(): IDoodad | undefined;
     checkForStill(): boolean;
     checkForWell(): boolean;
@@ -148,9 +150,6 @@ export interface IRestData {
     type: RestType;
     startHealth: number;
     totalCycles: number;
-    multipliers: {
-        [index: number]: number;
-    };
     itemId?: number;
     doodadId?: number;
     cycle?: number;

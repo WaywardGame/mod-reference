@@ -56,10 +56,6 @@ export default class Ui extends Emitter implements IUi {
     hideContextMenu(): void;
     hideActionsMenu(): void;
     setFontStyle(): void;
-    createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
-    toggleDialog(dialog: JQuery): boolean;
-    openDialog(dialog: JQuery): boolean;
-    closeDialog(dialog: JQuery): boolean;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
     setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
     refreshQuickSlots(): void;
