@@ -19,7 +19,6 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private toggleLogSource;
     private toggleDeveloperTools;
     private openLogsFolder;
-    private toggleContextMenu;
     private toggleDeveloperMode;
     private reloadGame;
 }

@@ -27,6 +27,7 @@ export default class ItemManager implements IItemManager {
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): boolean;
     removeContainerItems(container: IContainer): void;
+    exists(item: IItem): boolean;
     remove(item: IItem): void;
     getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;

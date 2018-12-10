@@ -89,7 +89,7 @@ export declare enum SaveType {
     Quit = 2,
     BackToMainMenu = 3,
     Multiplayer = 4,
-    DailyChallenge = 5
+    Challenge = 5
 }
 export declare enum LootGroupType {
     Low = 0,

@@ -22,6 +22,9 @@ declare const requirements: {
     [RequirementType.Craft]: Requirement<[import("../../Enums").ItemType, number], {
         crafted: number;
     }>;
+    [RequirementType.Dismantle]: Requirement<[import("../../Enums").ItemType[], number], {
+        dismantled: number;
+    }>;
 };
 export default requirements;
 export declare type RequirementArgs<R extends RequirementType> = (typeof requirements)[R] extends Requirement<infer O, any> ? O : (typeof requirements)[R] extends Requirement<infer O2> ? O2 : never;

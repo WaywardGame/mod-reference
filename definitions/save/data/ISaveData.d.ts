@@ -13,6 +13,7 @@ import { Difficulty } from "game/Difficulty";
 import { ISerializedTranslation } from "language/Translation";
 import { IMultiplayerState } from "multiplayer/IMultiplayer";
 import { IEnumInfo } from "utilities/enum/IEnum";
+import IClientStore from "../clientStore/IClientStore";
 export interface ISaveData {
     gameSlotName: string;
     gameState: PlayerState.Won | PlayerState.Ghost | PlayerState.None;
@@ -41,5 +42,6 @@ export interface ISaveData {
     newui: {
         [index: string]: any;
     };
+    clientStore: Map<string, IClientStore>;
 }
 export default ISaveData;

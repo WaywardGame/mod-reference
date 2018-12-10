@@ -10,6 +10,8 @@
  *
  *
  */
+import IPlayer from "player/IPlayer";
+import IClientStore from "./clientStore/IClientStore";
 export interface ISaveManager {
     compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
@@ -17,6 +19,7 @@ export interface ISaveManager {
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteSlot(slot: number): Promise<boolean | undefined>;
     exportSave(slot: number): Promise<SaveObject>;
+    getClientStore(player?: IPlayer): IClientStore;
     getFirstFreeSlot(): Promise<number | undefined>;
     getGameStateAsJson(cleanup?: boolean): string;
     getMostRecentSlot(): Promise<number>;

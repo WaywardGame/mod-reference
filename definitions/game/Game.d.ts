@@ -105,7 +105,7 @@ export default class Game extends Emitter implements IGame {
     private renderingEnabled;
     private playOptions;
     private readonly ambientLightLevelCache;
-    readonly isDailyChallenge: boolean;
+    readonly isChallenge: boolean;
     initialize(): void;
     initGl(): Promise<void>;
     setupGl(restoring: boolean): Promise<void>;

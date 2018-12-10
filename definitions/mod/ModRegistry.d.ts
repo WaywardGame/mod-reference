@@ -14,7 +14,7 @@ import { ICorpseDescription } from "creature/corpse/ICorpse";
 import { ICreatureDescription } from "creature/ICreature";
 import { IDoodadDescription } from "doodad/IDoodad";
 import { Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, NPCType, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
-import { DailyChallengeModifier, IDailyChallengeModifier } from "game/DailyChallenge";
+import { ChallengeModifier, IDailyChallengeModifier } from "game/Challenge";
 import { InspectType } from "game/inspection/IInspection";
 import { IInspectionHandler } from "game/inspection/Inspections";
 import { IItemDescription, IItemGroupDescription } from "item/IItem";
@@ -403,7 +403,7 @@ declare module Register {
      * Registers a daily challenge modifier, a "modifier" that will change based on the seed in daily challenge mode.
      * @param description The definition of the daily challenge modifier.
      */
-    function dailyChallengeModifier(name: string, description: IDailyChallengeModifier | IDailyChallengeModifier["apply"]): <K extends string | number | symbol, T extends { [k in K]: DailyChallengeModifier; }>(target: T, key: K) => void;
+    function dailyChallengeModifier(name: string, description: IDailyChallengeModifier | IDailyChallengeModifier["apply"]): <K extends string | number | symbol, T extends { [k in K]: ChallengeModifier; }>(target: T, key: K) => void;
     /**
      * Registers a menu bar button.
      * @param description The definition of the menu bar button.

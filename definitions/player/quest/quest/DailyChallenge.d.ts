@@ -24,6 +24,8 @@ export default class DailyChallenge extends Quest {
      * These creatures will always be excluded from the possible creatures to be requested to kill, even if they're spawnable
      */
     private static readonly creatureKillBlacklist;
+    private readonly existingRequirements;
+    private readonly possibleRequirements;
     constructor();
     protected createRequirements(): IterableIterator<IRequirement<any[], {}> | {
         hidden: boolean;
@@ -33,7 +35,6 @@ export default class DailyChallenge extends Quest {
         data: {};
     }>;
     private createRandomRequirement;
-    private getCreatureToKill;
     private onUpdate;
     private onRequirementComplete;
 }

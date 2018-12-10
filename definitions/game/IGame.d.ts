@@ -90,7 +90,7 @@ export interface IGame extends Emitter {
     debugRenderer: ITextureDebugRenderer;
     notifier: INotifier;
     cartographyTexture: WebGLTexture;
-    readonly isDailyChallenge: boolean;
+    readonly isChallenge: boolean;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     addZoomLevel(amount: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;

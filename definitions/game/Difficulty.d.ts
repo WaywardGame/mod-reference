@@ -13,7 +13,7 @@ import { ItemType, SkillType, StatusType } from "Enums";
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
-    DailyChallenge = 2,
+    Challenge = 2,
     Custom = 3
 }
 export interface IDifficultyOptions {
@@ -94,7 +94,9 @@ export interface IDifficultyOptions {
 }
 export interface IDifficultyOptionsStat {
     /**
-     * A percentage: 0-100. The initial value of the stat, or `undefined` if it should be generated randomly
+     * If this is for `Stat.Strength`, this will be the max health and max weight.
+     *
+     * Otherwise: A percentage: 0-100. The initial value of the stat, or `undefined` if it should be generated randomly
      */
     initialValue?: number;
     /**
@@ -139,4 +141,4 @@ export interface IDifficultyOptionsSkill {
     gainMultiplier: number;
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
-export declare function getDefaultDifficultyOptions(difficulty: Difficulty): IDifficultyOptions;
+export declare function getDefaultDifficultyOptions(difficulty: Difficulty, seed?: number): IDifficultyOptions;

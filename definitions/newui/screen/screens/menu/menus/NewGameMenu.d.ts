@@ -37,6 +37,7 @@ export default class NewGameMenu extends Menu {
     private difficultyOptions;
     constructor(api: UiApi);
     create(): void;
+    private updateDifficultyOptions;
     private refresh;
     private getStartClickHandler;
     private getPlayOptions;

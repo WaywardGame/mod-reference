@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IColorSection, IFontSizeSection, ILinkSection } from "language/Segments";
+import { IColorSection } from "language/segment/ColorSegment";
+import { IFontSizeSection } from "language/segment/HeadingSegment";
+import { ILinkSection } from "language/segment/LinkSegment";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { UiApi } from "newui/INewUi";

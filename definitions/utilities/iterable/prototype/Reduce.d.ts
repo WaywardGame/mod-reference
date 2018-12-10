@@ -20,7 +20,7 @@ declare global {
          * @param reducer A function that returns a new result, taking a new entry and the result from the previous iteration, or
          * @param initialValue if it's the first iteration.
          */
-        reduce<X>(reducer: (newValue: T, oldValue: X) => X, initialValue: T): X;
+        reduce<X>(reducer: (newValue: T, oldValue: X) => X, initialValue: X): X;
     }
 }
 export declare function reduce(this: IterableIterator<any>, reducer: (oldValue: any | undefined, entry: any) => any, defaultValue?: any): any;

@@ -20,7 +20,7 @@ import { INPC } from "npc/INPC";
 import MessageManager from "player/MessageManager";
 import NoteManager from "player/note/NoteManager";
 import QuestManager from "player/quest/QuestManager";
-import { IExploreMap } from "renderer/IExploreMap";
+import IClientStore from "save/clientStore/IClientStore";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayer extends IHuman {
@@ -33,7 +33,6 @@ export interface IPlayer extends IHuman {
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
-    exploredMapEncodedData: number[][];
     fromX: number;
     fromY: number;
     isConnecting: boolean;
@@ -66,8 +65,8 @@ export interface IPlayer extends IHuman {
     x: number;
     y: number;
     z: number;
+    readonly clientStore: IClientStore;
     movementFinishTime: number;
-    exploredMap: IExploreMap[] | undefined;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     checkForGather(): IDoodad | undefined;
     checkForStill(): boolean;
@@ -95,7 +94,6 @@ export interface IPlayer extends IHuman {
     passTurn(turnType?: TurnType): void;
     processInput(): void;
     resetMovementStates(): void;
-    restoreExploredMap(): void;
     revealItem(itemType: ItemType): void;
     setId(id: number): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
@@ -186,6 +184,8 @@ export declare type IPlayerOld = Partial<IPlayer> & {
     attack: number;
     benignity: number;
     malignity: number;
+    exploredMapEncodedData: number[][];
+    messages: MessageManager;
 };
 export interface IStatsOld {
     health: IStatOld;

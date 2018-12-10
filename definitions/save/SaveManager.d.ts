@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import IPlayer from "player/IPlayer";
+import IClientStore from "save/clientStore/IClientStore";
 import { ISaveInfo, ISaveManager, SaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 export default class SaveManager implements ISaveManager {
     private loadedGlobalSlot;
@@ -35,6 +37,10 @@ export default class SaveManager implements ISaveManager {
      * Returns the index of the first free slot
      */
     getFirstFreeSlot(): Promise<number | undefined>;
+    /**
+     * Returns the players ClientStore
+     */
+    getClientStore(player?: IPlayer): IClientStore;
     /**
      * Gets the used slots, ordered by one of a few properties of the saveData in that slot
      */

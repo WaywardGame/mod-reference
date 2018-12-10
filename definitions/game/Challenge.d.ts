@@ -10,7 +10,7 @@
  */
 import { StatusType } from "Enums";
 import { IDifficultyOptions } from "game/Difficulty";
-export declare enum DailyChallengeModifier {
+export declare enum ChallengeModifier {
     NoHealthRegeneration = 0,
     NoStaminaRegeneration = 1,
     EternalNight = 2,
@@ -25,8 +25,8 @@ export declare enum DailyChallengeModifier {
     BenignityRate = 11,
     MalignityRate = 12
 }
-export declare const EXCLUSIVE_MODIFIERS: DailyChallengeModifier[][];
-export declare function applyDailyChallengeModifiers(difficultyOptions: IDifficultyOptions): IDifficultyOptions;
+export declare const EXCLUSIVE_MODIFIERS: ChallengeModifier[][];
+export declare function applyChallengeModifiers(difficultyOptions: IDifficultyOptions, seed?: number): IDifficultyOptions;
 export interface IDailyChallengeModifier {
     /**
      * How often this modifier should be chosen compared to the others
@@ -43,6 +43,6 @@ export interface IDailyChallengeModifier {
 }
 export declare const PERMANENT_STATUS_EFFECT_MULTIPLIER_RATE = 4;
 export declare const PERMANENT_STATUS_EFFECT_MULTIPLIER = 0.5;
-declare const dailyChallengeModifiers: Descriptions<DailyChallengeModifier, IDailyChallengeModifier>;
+declare const dailyChallengeModifiers: Descriptions<ChallengeModifier, IDailyChallengeModifier>;
 export default dailyChallengeModifiers;
 export declare function isPermanentEffect(effect: StatusType): boolean;

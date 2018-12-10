@@ -24,10 +24,10 @@ import MessageManager from "player/MessageManager";
 import NoteManager from "player/note/NoteManager";
 import QuestManager from "player/quest/QuestManager";
 import { IExploreMap } from "renderer/IExploreMap";
-import { IPreSerializeCallback } from "save/ISerializer";
+import IClientStore from "save/clientStore/IClientStore";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default class Player extends Human implements IPlayer, IPreSerializeCallback {
+export default class Player extends Human implements IPlayer {
     readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
@@ -37,7 +37,6 @@ export default class Player extends Human implements IPlayer, IPreSerializeCallb
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
-    exploredMapEncodedData: number[][];
     hintSeen: boolean[];
     isConnecting: boolean;
     isMoving: boolean;
@@ -71,7 +70,8 @@ export default class Player extends Human implements IPlayer, IPreSerializeCallb
     nextMoveDirection: Direction | undefined;
     private _milestoneUpdates;
     private readonly _movementIntent;
-    constructor();
+    constructor(identifier?: string);
+    readonly clientStore: IClientStore;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
@@ -121,8 +121,6 @@ export default class Player extends Human implements IPlayer, IPreSerializeCallb
      */
     getMaxWeight(): number;
     setup(completedMilestones: number): void;
-    preSerializeObject(): void;
-    restoreExploredMap(): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
