@@ -16,12 +16,13 @@ export default class QuestManager extends Emitter implements IHookHost {
     private readonly host;
     private readonly quests;
     private readonly triggers;
+    private readonly hostTriggers;
     private readonly initializedQuests;
     constructor(host: IPlayer);
     get(): QuestInstance[];
     add(type: QuestType): this;
     onPlayerJoin(player: IPlayer): void;
-    onGameScreenVisible(): void;
+    onGameStart(isLoadingSave: boolean, playedCount: number): void;
     private init;
     private onUpdateRequirement;
     private onCompleteRequirement;

@@ -46,3 +46,4 @@ export declare const PERMANENT_STATUS_EFFECT_MULTIPLIER = 0.5;
 declare const dailyChallengeModifiers: Descriptions<ChallengeModifier, IDailyChallengeModifier>;
 export default dailyChallengeModifiers;
 export declare function isPermanentEffect(effect: StatusType): boolean;
+export declare function isEternalNight(options?: IDifficultyOptions): boolean;

@@ -122,7 +122,12 @@ export declare const enum PlayerEvent {
      * @param value The new value for this milestone
      * @param max The max value for this milestone
      */
-    MilestoneUpdate = "MilestoneUpdate"
+    MilestoneUpdate = "MilestoneUpdate",
+    /**
+     * @param key The key of `IOptions` that was changed on this player
+     * @param value The value this key was set to
+     */
+    UpdateOption = "UpdateOption"
 }
 export interface IHairstyleDescription extends IModdable {
     name: string;
@@ -215,6 +220,7 @@ export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
 export declare const setupHealthItems: ItemType[];
+export declare const setupLightItems: ItemType[];
 export declare const setupBookItems: ItemType[];
 export declare function getDirectionFromMovement(x: number, y: number): Direction.East | Direction.North | Direction.West | Direction.South;
 export interface IInputMovement extends IVector2 {

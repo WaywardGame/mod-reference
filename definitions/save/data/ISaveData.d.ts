@@ -39,9 +39,6 @@ export interface ISaveData {
     utilitiesEnumsAllocated: {
         [index: string]: IEnumInfo;
     };
-    newui: {
-        [index: string]: any;
-    };
     clientStore: Map<string, IClientStore>;
 }
 export default ISaveData;

@@ -68,13 +68,13 @@ export declare enum ModRegistrationType {
     OptionsSection = 21,
     Overlay = 22,
     Packet = 23,
-    Registry = 24,
-    Skill = 25,
-    SoundEffect = 26,
-    Terrain = 27,
-    TileEvent = 28,
-    Quest = 29,
-    QuestRequirement = 30
+    Quest = 24,
+    QuestRequirement = 25,
+    Registry = 26,
+    Skill = 27,
+    SoundEffect = 28,
+    Terrain = 29,
+    TileEvent = 30
 }
 export interface IInspectionTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InspectionType;
@@ -232,7 +232,7 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: Requirement;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration | IQuestRegistration | IQuestRequirementRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.

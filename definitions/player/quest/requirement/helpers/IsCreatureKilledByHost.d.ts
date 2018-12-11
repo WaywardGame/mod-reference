@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IClientData } from "save/clientStore/IClientStore";
-declare const clientData: {
-    [key in keyof IClientData]: new () => IClientData[key];
-};
-export default clientData;
+import { ICreature } from "creature/ICreature";
+import { IDoodad } from "doodad/IDoodad";
+import IEntity from "entity/IEntity";
+import IPlayer from "player/IPlayer";
+export default function isCreatureKilledByHost(host: IPlayer, attacker: IEntity | IDoodad, target: IEntity): target is ICreature;

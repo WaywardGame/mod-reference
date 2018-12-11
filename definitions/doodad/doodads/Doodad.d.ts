@@ -20,7 +20,7 @@ import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable {
+declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable {
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
     "constructor": typeof Doodad;
@@ -108,3 +108,7 @@ export default class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnseriali
      */
     private processDecay;
 }
+declare module Doodad {
+    function is(value: any): value is IDoodad;
+}
+export default Doodad;

@@ -13,6 +13,9 @@ declare module Collectors {
     function toArray<T>(iterable: IterableOf<T>): T[];
     function toMap<K, V>(iterable: IterableOf<[K, V]>): Map<any, any>;
     function toString(join: string): (iterable: IterableOf<any>) => string;
+    function addTo<T>(set: Set<T>): (iterable: IterableOf<T>) => Set<T>;
+    function pushTo<T>(arr: T[]): (iterable: IterableOf<T>) => T[];
+    function setTo<K, V>(map: Map<K, V>): (iterable: IterableOf<[K, V]>) => Map<K, V>;
     /**
      * Returns the first value in this iterator, or `undefined` if there are no values.
      */

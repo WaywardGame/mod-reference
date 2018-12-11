@@ -134,7 +134,7 @@ export declare enum SaveLocation {
  * `IGameScreenApi.registerDataHost(<id>, <the instance that contains fields marked with this decorator>)`
  */
 export declare function Save(saveLocation: SaveLocation): any;
-export declare function savedProperties<T = any>(target: T): IterableIterator<[string, SaveLocation]>;
+export declare function savedProperties(target: any): Map<string, SaveLocation>;
 export interface IInterruptFactory extends IInterruptMenuFactory {
     withDescription(description: TranslationGenerator): this;
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;

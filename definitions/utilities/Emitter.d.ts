@@ -8,12 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export declare enum EmitterEvent {
-    AddHandler = 0,
-    CancelHandler = 1,
-    CancelAll = 2,
-    TriggerEvent = 3
-}
 export default class Emitter {
     private subscribers;
     /**

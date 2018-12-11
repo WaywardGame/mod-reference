@@ -18,7 +18,7 @@ export declare type RequirementApi<R extends Requirement<any, any>> = R extends 
 export declare class Requirement<O extends any[] = [], D extends {} = {}> extends Emitter {
     readonly defaultData: D;
     private readonly triggers;
-    private readonly externalTriggers;
+    private readonly hostTriggers;
     private translation?;
     private completionAmountGetter;
     private relationsHandler?;
@@ -27,9 +27,10 @@ export declare class Requirement<O extends any[] = [], D extends {} = {}> extend
     // @ts-ignore
 	setTrigger<H extends Hook>(hook: H, checker: (api: RequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IRequirementApi<O, D>, ...args: any[]) => boolean]>;
+    setHostTrigger(event: string | number, checker: (api: RequirementApi<this>, ...args: any[]) => boolean): this;
+    getHostTriggers(): IterableIterator<[string | number, (api: IRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: RequirementApi<this>) => boolean): this;
     getInitializeTrigger(): ((api: RequirementApi<this>) => boolean) | undefined;
-    setExternalTrigger(emitter: Emitter, ...events: Array<string | number>): this;
     setRelations(relations: HighlightSelector[]): this;
     setRelations(handler: (api: RequirementApi<this>) => HighlightSelector[]): this;
     getRelations(api: RequirementApi<this>): [import("../../../newui/component/IComponent").HighlightType, string | number][];

@@ -8,8 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IClientData } from "save/clientStore/IClientStore";
-declare const clientData: {
-    [key in keyof IClientData]: new () => IClientData[key];
-};
-export default clientData;
+export default class NewUiData {
+    private readonly data;
+    get<T>(id: string | number, key: string, or?: T): T;
+    set(id: string | number, key: string, value: any): void;
+    has(id: string | number, key: string): boolean;
+    update(id: string | number, key: string): void;
+}

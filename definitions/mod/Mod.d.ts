@@ -102,7 +102,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onGameTickStart(): void;
     onGameTickEnd(): void;
-    onEntityKill(attacker: IEntity, target: IEntity): void;
+    onEntityKill(attacker: IEntity | IDoodad, target: IEntity): void;
     onHumanSkillChange(human: IHuman, skill: SkillType, currentSkill: number): void;
     onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     onInventoryItemRemove(player: IPlayer | undefined, item: IItem, container: IContainer): void;

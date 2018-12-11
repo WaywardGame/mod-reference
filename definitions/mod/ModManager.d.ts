@@ -29,7 +29,7 @@ export default class ModManager implements IModManager {
     setupMods(): Promise<void>;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
-    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): Promise<void>;
+    setupMod(folderName: string, modType: ModType, initialModState?: ModState): Promise<number | undefined>;
     removeMod(id: number, uninstall?: boolean): void;
     getMods(): IModInfo[];
     getLoadedMods(): IModInfo[];
@@ -38,18 +38,16 @@ export default class ModManager implements IModManager {
     getEnabledMods(): number[];
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
     load(index: number, loadOrder: number): Promise<void>;
-    unload(index: number, cacheHooks?: boolean): void;
+    unload(index: number, cacheHooks?: boolean): Promise<void>;
     save(index: number): void;
     /**
-     * UNUSED
-     * @deprecated
+     * Used by pro developers
      */
-    reloadByName(name: string, cacheHooks?: boolean): boolean;
+    reloadByName(name: string, cacheHooks?: boolean): Promise<boolean>;
     /**
-     * UNUSED
-     * @deprecated
+     * Used by pro developers
      */
-    reload(index: number, cacheHooks?: boolean): boolean;
+    reload(index: number, cacheHooks?: boolean): Promise<boolean>;
     isValid(index: number): boolean;
     isEnabled(index: number): boolean;
     isLoaded(index: number): boolean;

@@ -42,8 +42,5 @@ export default class SaveData implements ISaveData {
     utilitiesEnumsAllocated: {
         [index: string]: IEnumInfo;
     };
-    newui: {
-        [index: string]: any;
-    };
     clientStore: Map<string, IClientStore>;
 }

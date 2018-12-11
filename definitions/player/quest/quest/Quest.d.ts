@@ -37,6 +37,7 @@ export declare class Quest extends Emitter {
     getTitle(quest: IQuest): Translation | undefined;
     getDescription(quest: IQuest): Translation | undefined;
     getTriggers(instance: IQuest): IterableIterator<[IRequirement<any[], {}>, IterableIterator<[import("../../../mod/IHookManager").Hook, (api: IRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
+    getHostTriggers(instance: IQuest): IterableIterator<[IRequirement<any[], {}>, IterableIterator<[string | number, (api: IRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
     getRequirements(host: IPlayer, instance: IQuest): IterableIterator<RequirementInstance>;
     getRequirement(host: IPlayer, quest: IQuest, requirement: IRequirement): RequirementInstance | undefined;
     protected createRequirements(): IterableIterator<IRequirement<any[], {}>>;

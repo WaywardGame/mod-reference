@@ -389,7 +389,7 @@ export interface IHookHost {
     /**
      * Called when an entity is killed by another entity.
      */
-    onEntityKill?(attacker: IEntity, target: IEntity): void;
+    onEntityKill?(attacker: IEntity | IDoodad, target: IEntity): void;
     /**
      * Called when a human's skill changes.
      * @param human The human whose skill changed
