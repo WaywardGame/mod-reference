@@ -10,7 +10,7 @@
  */
 import { IRequirement } from "player/quest/requirement/IRequirement";
 export declare enum QuestType {
-    DailyChallenge = 0
+    Challenge = 0
 }
 export interface IQuest {
     type: QuestType;

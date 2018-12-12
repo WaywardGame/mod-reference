@@ -64,7 +64,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
      */
     protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
     private addPinnedNote;
-    private addPinnedQuest;
+    private addPinnedQuestRequirement;
     private onQuestGet;
     private hasIncompletePinnedRequirement;
     private updateMessages;

@@ -14,8 +14,11 @@ import Dialog from "newui/screen/screens/game/component/Dialog";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export default class QuestDialog extends Dialog implements IHookHost {
     private readonly requirements;
-    private readonly questsPanel;
     private readonly questLinks;
+    private readonly questsActiveWrapper;
+    private readonly questsActiveHeading;
+    private readonly questsCompletedWrapper;
+    private readonly questsCompletedHeading;
     private current;
     constructor(api: IGameScreenApi);
     getName(): UiTranslation;
@@ -28,4 +31,7 @@ export default class QuestDialog extends Dialog implements IHookHost {
     private getDescription;
     private onSwitchPanel;
     private onQuestComplete;
+}
+export declare const enum QuestLinkEvent {
+    Complete = "Complete"
 }

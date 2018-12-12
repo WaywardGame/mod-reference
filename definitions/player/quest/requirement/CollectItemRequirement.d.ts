@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ItemType } from "Enums";
+import { ItemType, ItemTypeGroup } from "Enums";
 import { Requirement } from "player/quest/requirement/Requirement";
-declare const _default: Requirement<[ItemType, number], {}>;
+declare const _default: Requirement<[(ItemType | ItemTypeGroup)[], number], {}>;
 export default _default;

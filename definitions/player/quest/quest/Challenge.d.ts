@@ -10,7 +10,7 @@
  */
 import { Quest } from "player/quest/quest/Quest";
 import { IRequirement, RequirementType } from "player/quest/requirement/IRequirement";
-export default class DailyChallenge extends Quest {
+export default class Challenge extends Quest {
     private static readonly possibleRequirements;
     /**
      * These are the only items that can be requested to collect

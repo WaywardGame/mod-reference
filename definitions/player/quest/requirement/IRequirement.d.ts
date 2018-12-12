@@ -19,7 +19,8 @@ export declare enum RequirementType {
     LearnAnySkill = 6,
     Equip = 7,
     Craft = 8,
-    Dismantle = 9
+    Dismantle = 9,
+    Build = 10
 }
 export declare const enum RequirementEvent {
     Met = "Met",

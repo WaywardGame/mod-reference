@@ -54,6 +54,10 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     choice<A extends any[]>(...from: A): A[number];
     shuffle<T>(array: T[]): T[];
     getElement<T>(array: T[]): T;
+    /**
+     * Returns a random T from the given choices, where each choice is weighted by a number. Higher numbers = higher chance.
+     */
+    weightedChoice<T>(choices: Array<[number, T]>): T;
 }
 export declare class SeededGenerator implements IRandomGenerator {
     private debug;
