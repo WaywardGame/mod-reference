@@ -8,14 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Music } from "Enums";
-import EnumCursor from "utilities/enum/EnumCursor";
-export default class DefaultMusicHandler extends EnumCursor<Music, keyof typeof Music> {
-    private readonly history;
-    constructor();
-    next(): Music;
-    private getMaxHistoryLength;
-    private getRandom;
-    private weightAgainstRecentlyPlayed;
-    private getPlayable;
-}
+declare const _default: {
+    [key: number]: [string, string];
+};
+export default _default;

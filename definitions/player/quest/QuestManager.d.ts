@@ -15,12 +15,23 @@ import Emitter from "utilities/Emitter";
 export default class QuestManager extends Emitter implements IHookHost {
     private readonly host;
     private readonly quests;
-    private readonly triggers;
+    private readonly hookTriggers;
     private readonly hostTriggers;
     private readonly initializedQuests;
     constructor(host: IPlayer);
-    get(): QuestInstance[];
+    /**
+     * Get all quests
+     */
+    getQuests(): QuestInstance[];
+    /**
+     * Get all quests of the given type
+     */
+    getQuests(type: QuestType): QuestInstance[];
     add(type: QuestType): this;
+    /**
+     * Removes all quests & disposes of any quest requirement triggers
+     */
+    reset(): this;
     onPlayerJoin(player: IPlayer): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     private init;

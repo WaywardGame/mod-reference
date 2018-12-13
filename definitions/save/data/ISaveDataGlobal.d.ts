@@ -81,6 +81,7 @@ export interface IOptions {
     dialogOpacity: number;
     directionTurnDelay: number;
     dropLocation: DropLocation;
+    musicPlaylist: MusicPlaylist;
     dropOnGatherHarvest: boolean;
     enableAutoSave: boolean;
     fallBackToEnglish: boolean;
@@ -113,6 +114,11 @@ export interface IOptions {
     warnWhenBreakingItemsOnCraft: boolean;
     windowMode: boolean;
     zoomLevel: number;
+}
+export declare enum MusicPlaylist {
+    Ordered = 0,
+    Shuffle = 1,
+    Dynamic = 2
 }
 export declare type IOptionsOld = Partial<IOptions> & {
     keyBinds: IKeyBind;

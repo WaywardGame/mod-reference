@@ -13,6 +13,7 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
+import { IVector2 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare enum ComponentEvent {
     Show = 0,
@@ -259,6 +260,7 @@ export interface ITooltip extends IComponent {
     addHeading(initializer: (text: IText) => any): this;
     addParagraph(initializer: (text: IText) => any): this;
     addList(...initializers: Array<((text: IText) => any) | undefined | false>): this;
+    updatePosition(position: IVector2): this;
 }
 export interface IText extends IComponent {
     setText(translation: TranslationGenerator): this;

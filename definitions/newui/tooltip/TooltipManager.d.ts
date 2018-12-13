@@ -13,6 +13,7 @@ import { ITooltipManager, UiApi } from "newui/INewUi";
 import Tooltip from "newui/tooltip/Tooltip";
 export default class TooltipManager implements ITooltipManager {
     private readonly api;
+    private readonly tooltipWrapper;
     private host;
     private tooltip;
     constructor(api: UiApi);

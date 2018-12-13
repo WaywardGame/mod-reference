@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import IPlayer from "player/IPlayer";
 import { Quest } from "player/quest/quest/Quest";
 import { IRequirement, RequirementType } from "player/quest/requirement/IRequirement";
 export default class Challenge extends Quest {
+    static getCreaturesToKill(player: IPlayer): IterableIterator<any>;
     private static readonly possibleRequirements;
     /**
      * These are the only items that can be requested to collect

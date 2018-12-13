@@ -22,6 +22,7 @@ export default class MilestonesDialog extends Dialog {
     private getFilterString;
     private getTooltip;
     private getMilestoneReadout;
+    private isMilestoneComplete;
     private getMilestoneAmount;
     private visibility;
 }

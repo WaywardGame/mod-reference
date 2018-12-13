@@ -20,9 +20,10 @@ export default class ItemDoodad extends Doodad implements IDoodad {
     itemType: ItemType;
     constructor(id?: number, x?: number, y?: number, z?: number, options?: IDoodadOptions);
     description(): IDoodadDescription | undefined;
-    getName(article?: boolean, count?: number): Translation;
     getDoodadInfo(): DoodadInfo | undefined;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
+    protected getNameTranslation(article?: boolean, count?: number): Translation;
+    protected getDescriptionTranslation(): Translation;
     private _itemDescription;
 }

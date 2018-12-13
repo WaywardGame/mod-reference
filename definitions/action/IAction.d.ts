@@ -127,6 +127,8 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
 export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> {
     readonly executor: E;
     readonly type: ActionType;
+    readonly actionStack: ReadonlyArray<ActionType>;
+    readonly lastAction: ActionType;
     isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is ActionArgumentType<A>;
     get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E2, infer R> ? ActionExecutor<A, E2, R> : never;
     get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E2, infer R> ? ActionExecutor<A, E2, R> : never;

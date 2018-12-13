@@ -16,6 +16,10 @@ export declare const enum DoodadTranslation {
     Name = 0,
     Description = 1
 }
+export declare const enum DoodadItemTranslation {
+    Name = 0,
+    Description = 1
+}
 export declare const enum TileEventTranslation {
     Name = 0,
     Description = 1
@@ -47,6 +51,10 @@ export declare const enum StatusEffectTranslation {
 export declare const enum QuestTranslation {
     Title = 0,
     Description = 1
+}
+export declare const enum MusicPlaylistTranslation {
+    Name = 0,
+    Tooltip = 1
 }
 export declare enum MiscTranslation {
     Unknown = 0,

@@ -33,8 +33,11 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, EntityPlayerCreatureNpc, any>): any;
     private _executor;
     readonly executor: E;
-    private isNestedAction;
+    private _actionStack;
+    readonly actionStack: ActionType[];
+    readonly lastAction: ActionType;
     private executionStage;
+    private shouldSkipConfirmation;
     private delay?;
     private passTurn;
     private updateTablesAndWeight;
@@ -49,6 +52,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private readonly items;
     private itemsUsed;
     private constructor();
+    skipConfirmation(): this;
     execute(executor: E, ...args: ActionArgumentTupleTypes<A>): R;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentType<AA>;
     get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A2, infer E2, infer R2> ? ActionExecutor<A2, E2, R2> : never;
