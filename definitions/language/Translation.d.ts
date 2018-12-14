@@ -37,6 +37,7 @@ export declare const enum ListEnder {
     Or = 2
 }
 declare class Translation {
+    static readonly RANDOM = "random";
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
     static formatList(items: IterableOf<string | IStringSection[] | Translation>, ender?: ListEnder | false): Translation;

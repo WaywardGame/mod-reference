@@ -59,6 +59,9 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getBetaName(): string;
     getBuildTime(): number | undefined;
     getPublishedMods(): IWorkshopItem[] | undefined;
+    getStatInt(name: string): number | undefined;
+    incrementStat(name: string): void;
+    getGlobalStatInt(name: string): number | undefined;
     startPlaytimeTracking(): void;
     stopPlaytimeTracking(): void;
     setSteamRichPresence(key: string, value: string): boolean;

@@ -56,6 +56,10 @@ export declare const enum MusicPlaylistTranslation {
     Name = 0,
     Tooltip = 1
 }
+export declare const enum DifficultyTranslation {
+    Name = 0,
+    Description = 1
+}
 export declare enum MiscTranslation {
     Unknown = 0,
     UnknownCreature = 1,

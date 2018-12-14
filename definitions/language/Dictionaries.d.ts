@@ -10,21 +10,33 @@
  */
 import { ActionType } from "action/IAction";
 import { Stat } from "entity/IStats";
-import { Bindable, BookType, CreatureType, DoodadType, DoodadTypeGroup, EquipType, GrowingStage, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, OnEquipType, SkillType, StatusType, TerrainType } from "Enums";
+import { Bindable, BookType, CreatureType, DamageType, DoodadType, DoodadTypeGroup, EquipType, GrowingStage, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, OnEquipType, SkillType, StatusType, TerrainType } from "Enums";
+import { Difficulty } from "game/Difficulty";
 import { InspectType } from "game/inspection/IInspection";
+import { PartOfDay } from "game/TimeManager";
+import { GameEndMessage } from "language/dictionary/GameEndMessage";
 import HumanName from "language/dictionary/HumanName";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import Message from "language/dictionary/Message";
 import { MiscTranslation } from "language/dictionary/Misc";
 import Note from "language/dictionary/Note";
 import UiTranslation from "language/dictionary/UiTranslation";
+import { ModType } from "mod/IModInfo";
+import { CanLoadState } from "mod/IModManager";
+import { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { CharacterSort } from "newui/screen/screens/menu/menus/character/Character";
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
+import { HighscoreSort } from "newui/screen/screens/menu/menus/highscores/IHighscoresMenu";
+import { Responsibility } from "newui/screen/screens/menu/menus/main/AboutMenu";
+import { ModSort } from "newui/screen/screens/menu/menus/mods/IModsMenu";
 import { Source } from "player/IMessageManager";
 import { MilestoneType } from "player/IMilestone";
 import { QuestType } from "player/quest/quest/IQuest";
 import { RequirementType } from "player/quest/requirement/IRequirement";
 import { MusicPlaylist } from "save/data/ISaveDataGlobal";
+import { SaveSort } from "save/ISaveManager";
 import { TileEventType } from "tile/ITileEvent";
+import { ChangelogSection } from "utilities/Trello";
 export declare enum Dictionary {
     Action = 0,
     Bindable = 1,
@@ -32,36 +44,49 @@ export declare enum Dictionary {
     Book = 3,
     Corpse = 4,
     Creature = 5,
-    Doodad = 6,
-    DoodadGroup = 7,
-    DoodadItem = 8,
-    EquipSlot = 9,
-    Growth = 10,
-    GrowthFungus = 11,
-    HelpArticle = 12,
-    HumanName = 13,
-    InspectType = 14,
-    InterruptChoice = 15,
-    Item = 16,
-    ItemGroup = 17,
-    ItemQuality = 18,
-    LegendaryType = 19,
-    Message = 20,
-    Milestone = 21,
-    Misc = 22,
-    Note = 23,
-    Number = 24,
-    OnEquip = 25,
-    Quest = 26,
-    QuestRequirement = 27,
-    Skill = 28,
-    Source = 29,
-    Stat = 30,
-    StatusEffect = 31,
-    Terrain = 32,
-    TileEvent = 33,
-    Ui = 34,
-    MusicPlaylist = 35
+    DamageType = 6,
+    Doodad = 7,
+    DoodadGroup = 8,
+    DoodadItem = 9,
+    EquipSlot = 10,
+    Growth = 11,
+    GrowthFungus = 12,
+    HelpArticle = 13,
+    HumanName = 14,
+    InspectType = 15,
+    InterruptChoice = 16,
+    Item = 17,
+    ItemGroup = 18,
+    ItemQuality = 19,
+    LegendaryType = 20,
+    Message = 21,
+    Milestone = 22,
+    Misc = 23,
+    MusicPlaylist = 24,
+    Note = 25,
+    Number = 26,
+    OnEquip = 27,
+    Quest = 28,
+    QuestRequirement = 29,
+    Skill = 30,
+    Source = 31,
+    Stat = 32,
+    StatusEffect = 33,
+    Terrain = 34,
+    TileEvent = 35,
+    Ui = 36,
+    TeamMemberResponsibility = 37,
+    UiQuadrant = 38,
+    ChangelogSection = 39,
+    CharacterSort = 40,
+    GameEndMessage = 41,
+    Difficulty = 42,
+    HighscoreSort = 43,
+    SaveSlotSort = 44,
+    ModType = 45,
+    ModSort = 46,
+    ModLoadError = 47,
+    PartOfDay = 48
 }
 export declare type Enum = {
     [key: string]: number;
@@ -76,6 +101,7 @@ declare const dictionaries: {
     [Dictionary.Book]: typeof BookType;
     [Dictionary.Corpse]: typeof CreatureType;
     [Dictionary.Creature]: typeof CreatureType;
+    [Dictionary.DamageType]: typeof DamageType;
     [Dictionary.Doodad]: typeof DoodadType;
     [Dictionary.DoodadGroup]: typeof DoodadTypeGroup;
     [Dictionary.DoodadItem]: typeof ItemType;
@@ -93,6 +119,7 @@ declare const dictionaries: {
     [Dictionary.Message]: typeof Message;
     [Dictionary.Milestone]: typeof MilestoneType;
     [Dictionary.Misc]: typeof MiscTranslation;
+    [Dictionary.MusicPlaylist]: typeof MusicPlaylist;
     [Dictionary.Note]: typeof Note;
     [Dictionary.Number]: symbol;
     [Dictionary.OnEquip]: typeof OnEquipType;
@@ -105,7 +132,18 @@ declare const dictionaries: {
     [Dictionary.Terrain]: typeof TerrainType;
     [Dictionary.TileEvent]: typeof TileEventType;
     [Dictionary.Ui]: typeof UiTranslation;
-    [Dictionary.MusicPlaylist]: typeof MusicPlaylist;
+    [Dictionary.TeamMemberResponsibility]: typeof Responsibility;
+    [Dictionary.UiQuadrant]: typeof Quadrant;
+    [Dictionary.ChangelogSection]: typeof ChangelogSection;
+    [Dictionary.CharacterSort]: typeof CharacterSort;
+    [Dictionary.GameEndMessage]: typeof GameEndMessage;
+    [Dictionary.Difficulty]: typeof Difficulty;
+    [Dictionary.HighscoreSort]: typeof HighscoreSort;
+    [Dictionary.SaveSlotSort]: typeof SaveSort;
+    [Dictionary.ModType]: typeof ModType;
+    [Dictionary.ModSort]: typeof ModSort;
+    [Dictionary.ModLoadError]: typeof CanLoadState;
+    [Dictionary.PartOfDay]: typeof PartOfDay;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

@@ -81,7 +81,6 @@ export interface IOptions {
     dialogOpacity: number;
     directionTurnDelay: number;
     dropLocation: DropLocation;
-    musicPlaylist: MusicPlaylist;
     dropOnGatherHarvest: boolean;
     enableAutoSave: boolean;
     fallBackToEnglish: boolean;
@@ -91,6 +90,7 @@ export interface IOptions {
     keepSortActive: boolean;
     leftHand: boolean;
     mouseTurnDelay: number;
+    musicPlaylist: MusicPlaylist;
     muteEffects: boolean;
     muteMusic: boolean;
     powerPreference: string;

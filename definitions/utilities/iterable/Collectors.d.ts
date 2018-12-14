@@ -19,7 +19,7 @@ declare module Collectors {
     /**
      * Returns the first value in this iterator, or `undefined` if there are no values.
      */
-    function first(): <X>(iterable: IterableOf<X>) => X;
+    function first(): <X>(iterable: IterableOf<X>) => X | undefined;
     /**
      * Returns the first value in this iterator.
      * @param orElse Returns this if there are no values.
@@ -30,7 +30,7 @@ declare module Collectors {
      *
      * Note: Requires looping through every entry in this iterator.
      */
-    function last(): <X>(iterable: IterableOf<X>) => X;
+    function last(): <X>(iterable: IterableOf<X>) => X | undefined;
     /**
      * Returns the last value in this iterator.
      * @param orElse Returns this if there are no values.
@@ -43,7 +43,7 @@ declare module Collectors {
      *
      * Note: Requires looping through every entry in this iterator.
      */
-    function random(): <X>(iterable: IterableOf<X>) => X;
+    function random(): <X>(iterable: IterableOf<X>) => X | undefined;
     /**
      * Returns a random value in this iterator.
      * @param orElse Returns this if there are no values.

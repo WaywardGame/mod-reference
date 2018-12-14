@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Translation from "language/Translation";
 export declare enum TimeFormat {
     PartOfDay = 0,
     /**
@@ -137,7 +138,7 @@ export default class TimeManager {
      * @param time The time to use, defaulting to the current time.
      * @param format The format to use, defaulting to `TimeFormat.TwelveHour`
      */
-    getTranslation(time?: number, format?: TimeFormat): import("../utilities/string/Interpolator").IStringSection[];
+    getTranslation(time?: number, format?: TimeFormat): Translation;
     /**
      * Returns how bright it is at the given time.
      * @param time The time to use, defaulting to the current time.

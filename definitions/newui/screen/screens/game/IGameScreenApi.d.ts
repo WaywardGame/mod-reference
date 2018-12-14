@@ -49,7 +49,7 @@ export declare enum PinType {
 }
 export interface IMessages {
     getPins(): IPinnedMessage[];
-    pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage;
+    pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage | undefined;
 }
 export interface IPinnedMessage extends Component {
     type: PinType;

@@ -51,7 +51,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     getPins(): IPinnedMessage[];
     scrollToNewest(): void;
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
-    pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage;
+    pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage | undefined;
     onDisplayMessage(player: IPlayer, message: IMessage, addBackwards?: boolean): void;
     onWrittenNote(player: IPlayer, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;

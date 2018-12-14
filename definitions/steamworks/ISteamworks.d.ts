@@ -28,6 +28,7 @@ export interface ISteamworks extends Emitter {
     getBuildTime(): number | undefined;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getFriends(): ISteamFriend[] | undefined;
+    getGlobalStatInt(name: string): number | undefined;
     getLobbyData(name: string): string | undefined;
     getLobbyId(): string | undefined;
     getLobbyMembers(): ISteamFriend[] | undefined;
@@ -37,9 +38,11 @@ export interface ISteamworks extends Emitter {
     getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
     getPublishedMods(): IWorkshopItem[] | undefined;
     getScreenName(): string | undefined;
+    getStatInt(name: string): number | undefined;
     getSteamId(): ISteamId | undefined;
     hasServerToJoin(): boolean;
     importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
+    incrementStat(name: string): void;
     initialize(): void;
     isDedicatedServer(): boolean;
     isElectron(): boolean;
