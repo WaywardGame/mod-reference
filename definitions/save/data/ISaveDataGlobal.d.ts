@@ -93,7 +93,7 @@ export interface IOptions {
     musicPlaylist: MusicPlaylist;
     muteEffects: boolean;
     muteMusic: boolean;
-    powerPreference: string;
+    powerPreference: PowerMode;
     protectedCraftingItemContainers: boolean;
     protectedCraftingItems: boolean;
     realTimeTickSpeed: number;
@@ -119,6 +119,11 @@ export declare enum MusicPlaylist {
     Ordered = 0,
     Shuffle = 1,
     Dynamic = 2
+}
+export declare enum PowerMode {
+    Default = "default",
+    LowPower = "low-power",
+    HighPerformance = "high-performance"
 }
 export declare type IOptionsOld = Partial<IOptions> & {
     keyBinds: IKeyBind;

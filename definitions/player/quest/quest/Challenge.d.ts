@@ -12,7 +12,7 @@ import IPlayer from "player/IPlayer";
 import { Quest } from "player/quest/quest/Quest";
 import { IRequirement, RequirementType } from "player/quest/requirement/IRequirement";
 export default class Challenge extends Quest {
-    static getCreaturesToKill(player: IPlayer): IterableIterator<any>;
+    static getCreaturesOfRequirements(player: IPlayer): IterableIterator<any>;
     private static readonly possibleRequirements;
     /**
      * These are the only items that can be requested to collect
@@ -26,6 +26,12 @@ export default class Challenge extends Quest {
      * These creatures will always be excluded from the possible creatures to be requested to kill, even if they're spawnable
      */
     private static readonly creatureKillBlacklist;
+    /**
+     * These creatures will always be excluded from the possible creatures to be requested to tame, even if they're spawnable
+     *
+     * Creatures that can't be tamed will already be excluded by default
+     */
+    private static readonly creatureTameBlacklist;
     private readonly existingRequirements;
     private readonly possibleRequirements;
     constructor();

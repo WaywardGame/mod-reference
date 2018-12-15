@@ -26,6 +26,8 @@ declare const requirements: {
         dismantled: number;
     }>;
     [RequirementType.Build]: Requirement<[(import("../../Enums").ItemType | import("../../Enums").ItemTypeGroup)[]], {}>;
+    [RequirementType.TameCreature]: Requirement<[import("../../Enums").CreatureType, number], import("./requirement/TameCreatureRequirement").ITameCreatureRequirement>;
+    [RequirementType.TameCreatures]: Requirement<[number], import("./requirement/TameCreaturesRequirement").ITameCreaturesRequirement>;
 };
 export default requirements;
 export declare type RequirementArgs<R extends RequirementType> = (typeof requirements)[R] extends Requirement<infer O, any> ? O : (typeof requirements)[R] extends Requirement<infer O2> ? O2 : never;

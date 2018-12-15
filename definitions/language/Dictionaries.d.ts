@@ -10,7 +10,7 @@
  */
 import { ActionType } from "action/IAction";
 import { Stat } from "entity/IStats";
-import { Bindable, BookType, CreatureType, DamageType, DoodadType, DoodadTypeGroup, EquipType, GrowingStage, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, OnEquipType, SkillType, StatusType, TerrainType } from "Enums";
+import { Bindable, BindableType, BookType, CreatureType, DamageType, DoodadType, DoodadTypeGroup, EquipType, GrowingStage, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, OnEquipType, SkillType, StatusType, TerrainType } from "Enums";
 import { Difficulty } from "game/Difficulty";
 import { InspectType } from "game/inspection/IInspection";
 import { PartOfDay } from "game/TimeManager";
@@ -33,60 +33,62 @@ import { Source } from "player/IMessageManager";
 import { MilestoneType } from "player/IMilestone";
 import { QuestType } from "player/quest/quest/IQuest";
 import { RequirementType } from "player/quest/requirement/IRequirement";
-import { MusicPlaylist } from "save/data/ISaveDataGlobal";
+import { MusicPlaylist, PowerMode } from "save/data/ISaveDataGlobal";
 import { SaveSort } from "save/ISaveManager";
 import { TileEventType } from "tile/ITileEvent";
 import { ChangelogSection } from "utilities/Trello";
 export declare enum Dictionary {
     Action = 0,
     Bindable = 1,
-    BindPress = 2,
-    Book = 3,
-    Corpse = 4,
-    Creature = 5,
-    DamageType = 6,
-    Doodad = 7,
-    DoodadGroup = 8,
-    DoodadItem = 9,
-    EquipSlot = 10,
-    Growth = 11,
-    GrowthFungus = 12,
-    HelpArticle = 13,
-    HumanName = 14,
-    InspectType = 15,
-    InterruptChoice = 16,
-    Item = 17,
-    ItemGroup = 18,
-    ItemQuality = 19,
-    LegendaryType = 20,
-    Message = 21,
-    Milestone = 22,
-    Misc = 23,
-    MusicPlaylist = 24,
-    Note = 25,
-    Number = 26,
-    OnEquip = 27,
-    Quest = 28,
-    QuestRequirement = 29,
-    Skill = 30,
-    Source = 31,
-    Stat = 32,
-    StatusEffect = 33,
-    Terrain = 34,
-    TileEvent = 35,
-    Ui = 36,
-    TeamMemberResponsibility = 37,
-    UiQuadrant = 38,
-    ChangelogSection = 39,
-    CharacterSort = 40,
-    GameEndMessage = 41,
-    Difficulty = 42,
-    HighscoreSort = 43,
-    SaveSlotSort = 44,
-    ModType = 45,
-    ModSort = 46,
-    ModLoadError = 47,
-    PartOfDay = 48
+    BindableType = 2,
+    BindPress = 3,
+    Book = 4,
+    ChangelogSection = 5,
+    CharacterSort = 6,
+    Corpse = 7,
+    Creature = 8,
+    DamageType = 9,
+    Difficulty = 10,
+    Doodad = 11,
+    DoodadGroup = 12,
+    DoodadItem = 13,
+    EquipSlot = 14,
+    GameEndMessage = 15,
+    Growth = 16,
+    GrowthFungus = 17,
+    HelpArticle = 18,
+    HighscoreSort = 19,
+    HumanName = 20,
+    InspectType = 21,
+    InterruptChoice = 22,
+    Item = 23,
+    ItemGroup = 24,
+    ItemQuality = 25,
+    LegendaryType = 26,
+    Message = 27,
+    Milestone = 28,
+    Misc = 29,
+    ModLoadError = 30,
+    ModSort = 31,
+    ModType = 32,
+    MusicPlaylist = 33,
+    Note = 34,
+    Number = 35,
+    OnEquip = 36,
+    PartOfDay = 37,
+    PowerMode = 38,
+    Quest = 39,
+    QuestRequirement = 40,
+    SaveSlotSort = 41,
+    Skill = 42,
+    Source = 43,
+    Stat = 44,
+    StatusEffect = 45,
+    TeamMemberResponsibility = 46,
+    Terrain = 47,
+    TileEvent = 48,
+    Ui = 49,
+    UiQuadrant = 50
 }
 export declare type Enum = {
     [key: string]: number;
@@ -97,18 +99,24 @@ export declare const SYMBOL_ANY_DICTIONARY: unique symbol;
 declare const dictionaries: {
     [Dictionary.Action]: typeof ActionType;
     [Dictionary.Bindable]: typeof Bindable;
+    [Dictionary.BindableType]: typeof BindableType;
     [Dictionary.BindPress]: symbol;
     [Dictionary.Book]: typeof BookType;
+    [Dictionary.ChangelogSection]: typeof ChangelogSection;
+    [Dictionary.CharacterSort]: typeof CharacterSort;
     [Dictionary.Corpse]: typeof CreatureType;
     [Dictionary.Creature]: typeof CreatureType;
     [Dictionary.DamageType]: typeof DamageType;
+    [Dictionary.Difficulty]: typeof Difficulty;
     [Dictionary.Doodad]: typeof DoodadType;
     [Dictionary.DoodadGroup]: typeof DoodadTypeGroup;
     [Dictionary.DoodadItem]: typeof ItemType;
     [Dictionary.EquipSlot]: typeof EquipType;
+    [Dictionary.GameEndMessage]: typeof GameEndMessage;
     [Dictionary.Growth]: typeof GrowingStage;
     [Dictionary.GrowthFungus]: typeof GrowingStage;
     [Dictionary.HelpArticle]: typeof HelpArticle;
+    [Dictionary.HighscoreSort]: typeof HighscoreSort;
     [Dictionary.HumanName]: typeof HumanName;
     [Dictionary.InspectType]: typeof InspectType;
     [Dictionary.InterruptChoice]: typeof InterruptChoice;
@@ -119,31 +127,27 @@ declare const dictionaries: {
     [Dictionary.Message]: typeof Message;
     [Dictionary.Milestone]: typeof MilestoneType;
     [Dictionary.Misc]: typeof MiscTranslation;
+    [Dictionary.ModLoadError]: typeof CanLoadState;
+    [Dictionary.ModSort]: typeof ModSort;
+    [Dictionary.ModType]: typeof ModType;
     [Dictionary.MusicPlaylist]: typeof MusicPlaylist;
     [Dictionary.Note]: typeof Note;
     [Dictionary.Number]: symbol;
     [Dictionary.OnEquip]: typeof OnEquipType;
+    [Dictionary.PartOfDay]: typeof PartOfDay;
+    [Dictionary.PowerMode]: typeof PowerMode;
     [Dictionary.Quest]: typeof QuestType;
     [Dictionary.QuestRequirement]: typeof RequirementType;
+    [Dictionary.SaveSlotSort]: typeof SaveSort;
     [Dictionary.Skill]: typeof SkillType;
     [Dictionary.Source]: typeof Source;
     [Dictionary.Stat]: typeof Stat;
     [Dictionary.StatusEffect]: typeof StatusType;
+    [Dictionary.TeamMemberResponsibility]: typeof Responsibility;
     [Dictionary.Terrain]: typeof TerrainType;
     [Dictionary.TileEvent]: typeof TileEventType;
     [Dictionary.Ui]: typeof UiTranslation;
-    [Dictionary.TeamMemberResponsibility]: typeof Responsibility;
     [Dictionary.UiQuadrant]: typeof Quadrant;
-    [Dictionary.ChangelogSection]: typeof ChangelogSection;
-    [Dictionary.CharacterSort]: typeof CharacterSort;
-    [Dictionary.GameEndMessage]: typeof GameEndMessage;
-    [Dictionary.Difficulty]: typeof Difficulty;
-    [Dictionary.HighscoreSort]: typeof HighscoreSort;
-    [Dictionary.SaveSlotSort]: typeof SaveSort;
-    [Dictionary.ModType]: typeof ModType;
-    [Dictionary.ModSort]: typeof ModSort;
-    [Dictionary.ModLoadError]: typeof CanLoadState;
-    [Dictionary.PartOfDay]: typeof PartOfDay;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

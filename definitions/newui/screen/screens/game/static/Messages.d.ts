@@ -43,6 +43,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     };
     private selectedFilter;
     private readonly pinnedNotes;
+    private readonly seenNotes;
     private readonly pinnedQuestRequirements;
     private readonly messagesToDisplay;
     constructor(api: IGameScreenApi | UiApi);

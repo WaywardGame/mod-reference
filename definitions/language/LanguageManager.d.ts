@@ -64,6 +64,7 @@ export default class LanguageManager {
     reformatSingularNoun(noun: string, count: number, article?: boolean): string;
     private getNounType;
     private plural;
+    private getEntryNameFromEntryId;
     private readonly uiTranslationsToSelector;
     private setup;
     private addTranslateSelector;
