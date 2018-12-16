@@ -11,7 +11,8 @@
  *
  */
 import IPlayer from "player/IPlayer";
-import IClientStore from "./clientStore/IClientStore";
+import IClientStore from "save/clientStore/IClientStore";
+import { ISerializer } from "save/ISerializer";
 export interface ISaveManager {
     compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
@@ -38,6 +39,7 @@ export interface ISaveManager {
     save(slot: number, unloading?: boolean): Promise<ISaveInfo>;
     savePartialData(slot: number, object: any, key: string, saveObjectKey: string): Promise<number>;
     savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any): Promise<number>;
+    getSerializer(): ISerializer;
 }
 export default ISaveManager;
 export interface ISaveInfo {
@@ -55,7 +57,7 @@ export declare enum SortDirection {
     More = 1,
     Less = -1
 }
-export declare let SLOT_DAILY_CHALLENGE: number;
+export declare let SLOT_CHALLENGE: number;
 export declare let SLOT_GLOBAL: number;
 export declare let SLOT_MULTIPLAYER: number;
 export declare let SLOT_COUNT_MAX: number;

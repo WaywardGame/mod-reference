@@ -173,7 +173,7 @@ export interface IComponent extends Emitter {
     /**
      * Returns a new array of the children
      */
-    getChildren(): IComponent[];
+    getChildren(): IterableIterator<IComponent>;
     /**
      * Scrolls this element so the given child is at the top of the viewport.
      * @param child The child to scroll to

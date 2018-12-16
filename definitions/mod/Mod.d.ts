@@ -113,6 +113,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureDamage(creature: ICreature, damageInfo: IDamageInfo): number | undefined;
     onCreatureDeath(creature: ICreature): void;
     onCreatureSpawn(creature: ICreature): void;
+    onCreatureTamed(creature: ICreature, owner: IPlayer): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onDigTreasure(human: Human, treasureTile: Vector3): void;
     onLanguageLoad(language: Language): void;
@@ -135,7 +136,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onGameScreenVisible(): void;
     onReadMap(human: Human, mapRequest: IMapRequest): void;
     onRenderOverlay(spriteBatch: ISpriteBatch): void;
-    onSailToCivilization(): void;
+    onSailToCivilization(player: IPlayer): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
     onTileUpdate(tile: ITile, x: number, y: number, z: number): void;
     onTurnEnd(player: IPlayer): void;

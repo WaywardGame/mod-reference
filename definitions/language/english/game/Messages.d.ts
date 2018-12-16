@@ -8,5 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-declare const messages: any;
+import Message from "language/dictionary/Message";
+declare const messages: Descriptions<Message, string>;
 export default messages;

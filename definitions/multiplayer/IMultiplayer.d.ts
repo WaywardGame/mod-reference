@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { TurnMode } from "Enums";
+import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -134,6 +135,8 @@ export interface IMultiplayerWorldData {
     playerCount: number;
     mods: IMultiplayerMod[];
     multiplayerOptions: IMultiplayerOptions;
+    difficulty: Difficulty;
+    difficultyOptions: IDifficultyOptions;
     saveObject: SaveObject;
     initialFlowFieldPids: number[];
     crafted: {

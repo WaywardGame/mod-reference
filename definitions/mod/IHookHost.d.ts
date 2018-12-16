@@ -458,6 +458,12 @@ export interface IHookHost {
      */
     onCreatureSpawn?(creature: ICreature): void;
     /**
+     * Called when a creature becomes tamed
+     * @param creature The creature object
+     * @param owner The human which the creature is tamed for
+     */
+    onCreatureTamed?(creature: ICreature, owner: IPlayer): void;
+    /**
      * Called when in-game, on the bind catcher loop (once per frame).
      * @param bindPressed Whether a bind has been pressed. Use this as a final check before processing a bind, and set it to true when a bind was pressed.
      * @param api The bind catcher api, allowing you to check whether binds are pressed
@@ -612,9 +618,10 @@ export interface IHookHost {
      */
     onRenderOverlay?(spriteBatch: ISpriteBatch): void;
     /**
-     * Called when the player sails to civilization.
+     * Called when a player sails to civilization.
+     * @param player The player that sailed to civilization
      */
-    onSailToCivilization?(): void;
+    onSailToCivilization?(player: IPlayer): void;
     /**
      * Called when a creature is spawned from a creature group
      * @param creatureGroup The creature group

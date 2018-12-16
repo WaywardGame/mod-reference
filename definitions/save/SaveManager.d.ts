@@ -11,10 +11,12 @@
 import IPlayer from "player/IPlayer";
 import IClientStore from "save/clientStore/IClientStore";
 import { ISaveInfo, ISaveManager, SaveObject, SaveSort, SortDirection } from "save/ISaveManager";
+import ISerializer from "save/ISerializer";
 export default class SaveManager implements ISaveManager {
     private loadedGlobalSlot;
     private readonly dataStorage;
     private multiplayerSlotData;
+    private readonly serializer;
     isEnabled(): boolean;
     initialize(): Promise<void>;
     /**
@@ -78,6 +80,7 @@ export default class SaveManager implements ISaveManager {
     deleteAllData(): Promise<void>;
     compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
     decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
+    getSerializer(): ISerializer;
     getGameStateAsJson(cleanup?: boolean): string;
     private getPropertiesToSerialize;
     private compressString;

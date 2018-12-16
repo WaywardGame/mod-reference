@@ -116,7 +116,8 @@ export declare enum Hook {
     ProcessInput = "processInput",
     ShouldDisplayMessage = "shouldDisplayMessage",
     ShouldRender = "shouldRender",
-    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement"
+    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement",
+    OnCreatureTamed = "onCreatureTamed"
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {

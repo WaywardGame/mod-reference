@@ -138,7 +138,8 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
     setUpdateRender(): this;
     setUpdateTablesAndWeight(): this;
     setStaminaReduction(skill?: SkillType): this;
-    setSkillGain(skill: SkillType, amount?: number): this;
+    addSkillGains(...skills: Array<[SkillType, number?]>): this;
+    addSkillGains(skill: SkillType, amount?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
     setReputationChange(amount: number): this;

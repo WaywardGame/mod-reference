@@ -29,6 +29,10 @@ export interface IDialogEdges {
     [Edge.Bottom]: number;
     [Edge.Left]: number;
 }
+export interface ISavedEdges {
+    scale: number;
+    edges: IDialogEdges;
+}
 /**
  * An enum for every position that a dialog handle can be in.
  */
@@ -88,6 +92,11 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private lastEdges;
     /**
+     * Edge positions of the dialog saved the last time the dialog was resized by the user, with a scale. When the scale returns to
+     * the scale of these saved positions, the dialog uses these positions rather than autoresizing.
+     */
+    private savedEdges?;
+    /**
      * The description of how the dialog should be sized. (min, default, and max sizes and the position)
      */
     private description;
@@ -128,6 +137,7 @@ export default abstract class Dialog extends Component implements IDialog {
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     abstract getName(): IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
+    private saveEdgesForScale;
     /**
      * Event handler for when this dialog is appended
      */

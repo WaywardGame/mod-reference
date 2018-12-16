@@ -10,6 +10,7 @@
  */
 import { IImageOverrideDescription } from "mod/IModInfo";
 import { IResourceContainer, IResourceLoader } from "resources/IResourceLoader";
+import ResolvablePromise from "utilities/promise/ResolvablePromise";
 export default class ResourceLoader implements IResourceLoader {
     private concurrent;
     private loadingCount;
@@ -21,7 +22,7 @@ export default class ResourceLoader implements IResourceLoader {
     private tilePacker;
     private imageOverrides;
     initialize(gl: WebGL2RenderingContext): void;
-    loadResources(container: IResourceContainer, callback: () => void): void;
+    loadResources(container: IResourceContainer): ResolvablePromise;
     continueLoading(): void;
     takeLoadingSlot(callback: () => void): void;
     releaseLoadingSlot(): void;

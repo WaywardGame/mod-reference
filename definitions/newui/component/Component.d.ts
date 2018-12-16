@@ -18,8 +18,8 @@ import Emitter from "utilities/Emitter";
 export default class Component extends Emitter implements IComponent, IHookHost {
     protected api: UiApi;
     private static readonly map;
-    static get(selector: string): Component;
-    static get(element: Element): Component;
+    static get<C extends Component = Component>(selector: string): C;
+    static get<C extends Component = Component>(element: Element): C;
     static all(selector: string): IterableIterator<Component>;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
@@ -27,7 +27,6 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     private static removeFromParent;
     static remove(elementToRemove: string | IComponent | HTMLElement): void;
     readonly element: HTMLElement;
-    readonly parent: Component;
     readonly classes: ClassListManipulator<this>;
     readonly attributes: AttributeManipulator<this>;
     readonly data: DataManipulator<this>;
@@ -35,6 +34,9 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     readonly childCount: number;
     readonly scrollHeight: number;
     readonly style: CSSStyleDeclaration;
+    /**
+     * @deprecated Prefer `getChildren`
+     */
     protected children: Component[];
     private _element;
     private _parent;
@@ -66,6 +68,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     show(): this;
     hide(): this;
     toggle(visible?: boolean): this;
+    getParent<C extends Component = Component>(): C | null;
     appendTo(where: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
     append(...elements: ArrayOfIterablesOfOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
@@ -97,7 +100,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
         left: number;
     };
     getNthChild<C extends Component = Component>(nth?: number): C;
-    getChildren<C extends Component = Component>(): C[];
+    getChildren<C extends Component = Component>(): IterableIterator<C>;
     scrollTo(child: Component, ms?: number): void;
     getStyle(styleName: string): string;
     schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;

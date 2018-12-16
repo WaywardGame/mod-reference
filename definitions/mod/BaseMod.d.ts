@@ -25,7 +25,7 @@ export declare abstract class BaseMod extends Emitter {
     getPath(): string;
     loadFile(file: string, callback: (fileText: string, success: boolean) => void): boolean;
     /**
-     * Called when the save data for this mod is retrieved from a field decorated with `@SaveData`.
+     * Called when the save data for this mod is retrieved from a field decorated with `@Mod.saveData`.
      * @param data Any existing data, or `undefined`
      * @returns The data that should be returned. Conventionally, this is an object of some kind. It must be JSON serializable.
      *
@@ -33,7 +33,7 @@ export declare abstract class BaseMod extends Emitter {
      */
     initializeSaveData(data: any): any;
     /**
-     * Called when the global data for this mod is retrieved from a field decorated with `@SaveData`.
+     * Called when the global data for this mod is retrieved from a field decorated with `@Mod.globalData`.
      * @param data Any existing data, or `undefined`
      * @returns The data that should be returned. Conventionally, this is an object of some kind. It must be JSON serializable.
      *

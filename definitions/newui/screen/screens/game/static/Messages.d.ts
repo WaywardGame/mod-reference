@@ -49,7 +49,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     constructor(api: IGameScreenApi | UiApi);
     getID(): QuadrantComponentId;
     getName(): IStringSection[];
-    getPins(): IPinnedMessage[];
+    getPins(): IterableIterator<IPinnedMessage>;
     scrollToNewest(): void;
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
     pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage | undefined;

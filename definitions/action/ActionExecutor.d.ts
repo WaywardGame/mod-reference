@@ -44,7 +44,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private staminaReduction?;
     private reputationChange;
     private milestone?;
-    private skillGain?;
+    private skillGains?;
     private sfx?;
     private particle?;
     private updateView?;
@@ -64,7 +64,8 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setUpdateTablesAndWeight(): this;
     setStaminaReduction(reduction?: SkillType): this;
     setReputationChange(amount: number): this;
-    setSkillGain(skill: SkillType, amount?: number): this;
+    addSkillGains(...skills: Array<[SkillType, number?]>): this;
+    addSkillGains(skill: SkillType, amount?: number): this;
     setMilestone(milestone: MilestoneType, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
@@ -82,4 +83,4 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private canExecute;
     private isUsableWhen;
 }
-export declare function getArgumentType(executor: EntityPlayerCreatureNpc, expected: ActionArgument[], actual: unknown): ActionArgument | undefined;
+export declare function getArgumentType(executor: EntityPlayerCreatureNpc, expected: ActionArgument | ActionArgument[], actual: unknown): ActionArgument | undefined;

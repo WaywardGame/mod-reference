@@ -155,12 +155,6 @@ declare global {
 		new(): IKDTree;
 	}
 
-	interface IMsgPack {
-		encode(object: any): Uint8Array;
-		decode(array: Uint8Array): any;
-	}
-	const msgpack: IMsgPack;
-
 	interface JQuery {
 		getItemType(): ItemType;
 

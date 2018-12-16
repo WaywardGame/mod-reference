@@ -91,6 +91,7 @@ export interface IPlayer extends IHuman {
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     isFacingCarvableTile(): boolean;
     isServer(): boolean;
+    kill(): void;
     passTurn(turnType?: TurnType): void;
     processInput(): void;
     resetMovementStates(): void;

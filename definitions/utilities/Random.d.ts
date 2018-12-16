@@ -59,6 +59,7 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      */
     weightedChoice<T>(choices: Array<[number, T]>): T;
 }
+export declare function convertStringToSeed(seed: string | number): number;
 export declare class SeededGenerator implements IRandomGenerator {
     private debug;
     private seed;
