@@ -17,6 +17,7 @@ import QuadrantComponent from "newui/screen/screens/game/component/QuadrantCompo
 import { DialogId } from "newui/screen/screens/game/Dialogs";
 import { RequirementInstance } from "player/quest/quest/Quest";
 import { QuestInstance } from "player/quest/QuestManager";
+import Emitter from "utilities/Emitter";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare enum QuadrantComponentId {
     Messages = 0,
@@ -47,9 +48,13 @@ export declare enum PinType {
     QuestRequirement = 1,
     Misc = 2
 }
-export interface IMessages {
+export interface IMessages extends Emitter {
     getPins(): IterableIterator<IPinnedMessage>;
     pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage | undefined;
+}
+export declare const enum MessagesEvent {
+    PinQuestRequirement = 0,
+    UnpinQuestRequirement = 1
 }
 export interface IPinnedMessage extends Component {
     type: PinType;

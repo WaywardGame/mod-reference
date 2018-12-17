@@ -53,7 +53,13 @@ export declare const enum QuestManagerEvent {
      * Emitted when a quest is updated (a requirement is updated)
      * @param quest The `IQuestInstance` that was updated
      */
-    QuestUpdate = 2
+    QuestUpdate = 2,
+    /**
+     * Emitted when a quest requirement is completed
+     * @param quest The `IQuestInstance` of the requirement which was updated
+     * @param requirement The `IRequirementInstance` that was updated
+     */
+    RequirementComplete = 3
 }
 export declare class QuestInstance extends Emitter {
     readonly host: IPlayer;

@@ -24,7 +24,6 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
-    private static removeFromParent;
     static remove(elementToRemove: string | IComponent | HTMLElement): void;
     readonly element: HTMLElement;
     readonly classes: ClassListManipulator<this>;
@@ -34,12 +33,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     readonly childCount: number;
     readonly scrollHeight: number;
     readonly style: CSSStyleDeclaration;
-    /**
-     * @deprecated Prefer `getChildren`
-     */
-    protected children: Component[];
     private _element;
-    private _parent;
     private scrollingChild?;
     private _data;
     private contextMenuGenerator?;

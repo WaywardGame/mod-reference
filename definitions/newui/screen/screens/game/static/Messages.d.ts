@@ -67,7 +67,9 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     private addPinnedNote;
     private addPinnedQuestRequirement;
     private onQuestGet;
-    private hasIncompletePinnedRequirement;
+    private onRequirementComplete;
+    private pinRequirementsFromQuest;
+    private hasIncompletePinnedRequirementFromAnotherQuest;
     private updateMessages;
     private messages;
     /**

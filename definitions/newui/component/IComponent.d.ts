@@ -15,16 +15,16 @@ import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementMa
 import Emitter from "utilities/Emitter";
 import { IVector2 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
-export declare enum ComponentEvent {
-    Show = 0,
-    Hide = 1,
-    Append = 2,
-    Remove = 3,
-    RemoveForAppend = 4,
-    AddChild = 5,
-    RemoveChild = 6,
-    InputChange = 7,
-    WillRemove = 8
+export declare const enum ComponentEvent {
+    Show = "Show",
+    Hide = "Hide",
+    Append = "Append",
+    Remove = "Remove",
+    RemoveForAppend = "RemoveForAppend",
+    AddChild = "AddChild",
+    RemoveChild = "RemoveChild",
+    InputChange = "InputChange",
+    WillRemove = "WillRemove"
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;
