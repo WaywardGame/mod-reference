@@ -123,6 +123,7 @@ export interface IActionDescription<A extends Array<ActionArgument | ActionArgum
     preExecutionHandler?(actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>): any;
     handler(actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>): R;
     confirmer?(actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>): Promise<boolean>;
+    clone(): IActionDescription<A, E, R>;
 }
 export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> {
     readonly executor: E;

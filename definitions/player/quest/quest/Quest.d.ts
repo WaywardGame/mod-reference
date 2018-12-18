@@ -26,9 +26,11 @@ export declare class Quest extends Emitter {
     private readonly requirements;
     private readonly children;
     private readonly requirementInstances;
+    private _needsManualCompletion;
     constructor(type?: QuestType | undefined);
     addRequirement<R extends RequirementType>(type: R, ...args: RequirementArgs<R>): this;
     addRequirement<RA extends any[]>(type: RequirementType, ...args: RA): this;
+    setNeedsManualCompletion(): this;
     addChildQuests(...children: QuestType[]): this;
     getChildren(): IterableIterator<QuestType>;
     setTitle(translation?: Translation | ((quest: IQuest) => Translation)): this;
@@ -40,6 +42,7 @@ export declare class Quest extends Emitter {
     getHostTriggers(instance: IQuest): IterableIterator<[IRequirement<any[], {}>, IterableIterator<[string | number, (api: IRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
     getRequirements(host: IPlayer, instance: IQuest): IterableIterator<RequirementInstance>;
     getRequirement(host: IPlayer, quest: IQuest, requirement: IRequirement): RequirementInstance | undefined;
+    needsManualCompletion(): boolean;
     protected createRequirements(): IterableIterator<IRequirement<any[], {}>>;
     protected createRequirement<R extends RequirementType>(type: R, ...options: RequirementArgs<R>): IRequirement<RequirementArgs<R>>;
 }

@@ -32,6 +32,7 @@ export default class QuestManager extends Emitter implements IHookHost {
      * Removes all quests & disposes of any quest requirement triggers
      */
     reset(): this;
+    complete(questInstance: QuestInstance): boolean;
     onPlayerJoin(player: IPlayer): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     private init;
@@ -59,7 +60,7 @@ export declare const enum QuestManagerEvent {
      * @param quest The `IQuestInstance` of the requirement which was updated
      * @param requirement The `IRequirementInstance` that was updated
      */
-    RequirementComplete = 3
+    RequirementMet = 3
 }
 export declare class QuestInstance extends Emitter {
     readonly host: IPlayer;
@@ -69,6 +70,8 @@ export declare class QuestInstance extends Emitter {
     getTitle(): import("../../language/Translation").default | undefined;
     getDescription(): import("../../language/Translation").default | undefined;
     getRequirements(): IterableIterator<import("./quest/Quest").RequirementInstance>;
+    needsManualCompletion(): boolean;
+    complete(): this;
     getChildren(): IterableIterator<QuestType>;
     getCompletionAmount(): number;
 }

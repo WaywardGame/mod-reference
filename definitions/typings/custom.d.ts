@@ -47,15 +47,8 @@ interface JQuery {
 
 interface IServer {
 	id: string;
-	connectionDetails: IServerConnectionDetails;
 	serverDetails: IServerServerDetails;
 	gameDetails: IServerGameDetails;
-}
-
-interface IServerConnectionDetails {
-	address: string;
-	port: number;
-	isDedicatedServer: boolean;
 }
 
 interface IServerServerDetails {
@@ -66,6 +59,8 @@ interface IServerServerDetails {
 	hostPlayerId: string;
 	lobbyType: number;
 	region: string;
+	code: string;
+	isDedicatedServer: boolean;
 }
 
 interface IServerGameDetails {

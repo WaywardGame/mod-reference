@@ -9,10 +9,11 @@
  * https://waywardgame.github.io/
  */
 import UiTranslation from "language/dictionary/UiTranslation";
+import { ISerializedTranslation } from "language/Translation";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class DisplayInterruptPacket extends ClientPacket {
     title: UiTranslation;
     description: UiTranslation;
-    args: any;
+    args: ISerializedTranslation[];
     process(): Promise<void>;
 }

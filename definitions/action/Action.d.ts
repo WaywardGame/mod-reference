@@ -28,6 +28,7 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     setHandler<H extends (actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>) => any>(handler: H): Action<A, E, H extends (...args: any) => infer R2 ? R2 : void>;
     setUsableWhen(...usabilities: ActionUsability[]): this;
     setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, EntityTypeTupleType<E2>>;
+    clone(): Action<A, never, R>;
 }
 declare type EntityTypeType<E extends EntityType> = E extends EntityType.Creature ? ICreature : E extends EntityType.NPC ? INPC : IPlayer;
 declare type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeType<E[0]> : E extends [EntityType, EntityType] ? EntityTypeType<E[0]> | EntityTypeType<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeType<E[0]> | EntityTypeType<E[1]> | EntityTypeType<E[2]> : never;
