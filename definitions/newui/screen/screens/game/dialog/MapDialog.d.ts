@@ -17,11 +17,17 @@ import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import Vector3 from "utilities/math/Vector3";
 export default class MapDialog extends Dialog implements IHookHost {
     private readonly canvas;
-    private item;
+    private readonly textWrapper;
+    private readonly direction;
     private mapCanvas;
+    private map;
+    private decodePosition;
+    private decodeSkill;
     constructor(api: IGameScreenApi);
     getName(): Translation | UiTranslation.GameDialogMapName;
-    setMap(mapRequest: IMapRequest): void;
+    decode(mapRequest: IMapRequest): void;
     onDigTreasure(human: Human, treasureTile: Vector3): void;
+    private getDistance;
+    private getDirection;
     private onResize;
 }

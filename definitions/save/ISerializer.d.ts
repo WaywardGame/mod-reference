@@ -66,7 +66,9 @@ export declare enum Types {
     DoodadV2 = 24,
     MessageManager = 25,
     Function = 26,
-    ClientStore = 27
+    ClientStore = 27,
+    Vector3 = 28,
+    Vector2 = 29
 }
 export declare function SaveProperty(): PropertyDecorator;
 export declare function SaveAllProperties(): ClassDecorator;
