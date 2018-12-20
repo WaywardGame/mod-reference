@@ -11,6 +11,7 @@
 import { IModInfo } from "mod/IModInfo";
 declare module Enums {
     function isModdable(enumObject: any): boolean;
+    function getModStart(enumObject: any): number;
     /**
      * Returns whether this enum entry is modded.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
@@ -52,15 +53,19 @@ declare module Enums {
     /**
      * Returns a random enum entry.
      * @param enumObject The full enumeration. EG: ItemType, CreatureType, DoodadType, etc
+     * @param filter Repeats the choice until the random value matches the filter
      *
-     * Each call to this method requires a loop on the full enum until reaching the
+     * Note: Each call to this method requires a loop on the full enum until reaching the
      * index of the randomly chosen entry. Do not call this often.
      *
-     * Uses seeded random. Using this method on non-game methods may cause seed desyncs.
+     * Note: Uses seeded random. Using this method on non-game methods may cause seed desyncs.
+     *
+     * Note: When provided with a filter & most values in the enum don't match, this method can
+     * take a very long time. *Use the filter with caution.*
      */
     function getRandom<E, K extends string>(enumObject: {
         [key in K]: E;
-    }): E;
+    }, filter?: (value: E) => boolean): E;
     /**
      * Iterate over the names of the entries in an enum.
      */
@@ -79,6 +84,15 @@ declare module Enums {
     function entries<E, K extends string>(enumObject: {
         [key in K]: E;
     }): IterableIterator<[K, E]>;
+    /**
+     * Returns whether the given number is a valid entry in an enum.
+     * @param enumObject The enum object to check for the entry.
+     * @param entry The value to check.
+     * @param isBasicEnum Whether the enum is a "basic" enum; IE, every entry is a number between 0 and Infinity
+     */
+    function isValid<E, K extends string>(enumObject: {
+        [key in K]: E;
+    }, entry: unknown, isBasicEnum?: boolean): entry is E;
     function toString(enumObject: any, n: number): string;
 }
 export default Enums;

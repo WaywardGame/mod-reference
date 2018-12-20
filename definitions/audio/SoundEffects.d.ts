@@ -11,4 +11,5 @@
  *
  */
 import { ISoundEffectDescription } from "audio/IMusic";
-export declare const soundEffectDescriptions: Description<ISoundEffectDescription>;
+import { SfxType } from "Enums";
+export declare const soundEffectDescriptions: OptionalDescriptions<SfxType, ISoundEffectDescription>;

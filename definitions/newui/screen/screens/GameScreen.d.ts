@@ -9,7 +9,8 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "creature/ICreature";
-import { Bindable, Direction } from "Enums";
+import { Bindable, BookType, Direction } from "Enums";
+import { IMapRequest } from "game/IGame";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
@@ -24,8 +25,8 @@ import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
+import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltip";
 import { IPlayer } from "player/IPlayer";
-import Player from "player/Player";
 import { ITile } from "tile/ITerrain";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
@@ -42,6 +43,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     quickslots: Quickslots;
     messages: Messages;
     movementHandler: MovementHandler;
+    worldTooltipHandler: WorldTooltipHandler;
     private quadrantContainer;
     private readonly quadrantMap;
     private readonly gameCanvas;
@@ -58,10 +60,12 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
-    onMoveComplete(player: Player): void;
+    onMoveComplete(player: IPlayer): void;
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     onPlayerDeath(player: IPlayer): boolean | undefined;
     onGameTickEnd(): void;
+    onOpenBook(human: Human, book: BookType): void;
+    onReadMap(player: IPlayer, mapRequest: IMapRequest): void;
     /**
      * Adds a quadrant element to the screen.
      *
@@ -91,4 +95,5 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     private getUnusedQuadrant;
     private onDialogClose;
     private updatePauseIcon;
+    private tryShowWorldTooltip;
 }

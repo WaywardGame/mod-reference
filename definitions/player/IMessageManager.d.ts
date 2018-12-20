@@ -8,10 +8,10 @@
 * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
 * https://waywardgame.github.io/
 */
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { Message, MessageType } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import { ISerializedTranslation } from "language/Translation";
+import { MessageType } from "player/MessageManager";
 import { IVector3 } from "utilities/math/IVector";
-import { IStringSection } from "utilities/string/Interpolator";
 export declare enum Source {
     /**
      * Every message
@@ -81,7 +81,8 @@ export declare enum Source {
 export interface IMessage {
     id: number;
     source: Source[];
-    message: IStringSection[];
+    type?: MessageType;
+    message: ISerializedTranslation;
 }
 export interface IMessageManager {
     getMessageHistory(): IterableIterator<IMessage>;
@@ -89,6 +90,6 @@ export interface IMessageManager {
     source(noGameSource: true, ...sources: Array<Source | false | undefined>): this;
     source(...sources: Array<Source | false | undefined>): this;
     type(type?: MessageType): this;
-    ifVisible(human?: IBaseHumanEntity, canSee?: IVector3): this;
-    send(message: string | IStringSection[] | Message, ...args: any[]): boolean;
+    ifVisible(human?: Human, canSee?: IVector3): this;
+    send(message: Message, ...args: any[]): boolean;
 }

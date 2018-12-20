@@ -43,19 +43,18 @@ export interface ITrelloChangelog {
 export interface IChangelog {
     version: IVersionInfo;
     sections: {
-        [index: number]: ITrelloCard[] | undefined;
+        [index in ChangelogSection]?: ITrelloCard[];
     };
     changeCount: number;
 }
 export declare enum ChangelogSection {
-    New = 0,
-    Improvements = 1,
-    BugFixes = 2,
-    Balance = 3,
-    Modding = 4,
-    Mod = 5,
-    Technical = 6,
-    Misc = 7
+    New = "New",
+    Improvement = "Improvement",
+    Bug = "Bug",
+    Balance = "Balance",
+    Modding = "Modding",
+    Mod = "Mod",
+    Technical = "Technical"
 }
 export default class Trello implements ITrello {
     getChangelog(versionInfo: IVersionInfo): Promise<IChangelog | undefined>;

@@ -40,7 +40,7 @@ export default class Menu extends Component implements IMenu, IHookHost {
     show(): this;
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;
-    addTabs(...tabs: ArrayOfTOrIterablesOfT<Tab>): void;
+    addTabs(...tabs: ArrayOfIterablesOfOr<Tab>): void;
     addSubtabs(tab: Tab): this;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
@@ -61,13 +61,13 @@ export declare class Tab<I extends string | number | undefined = string | number
     readonly subtabs: Tab<string | number | undefined>[];
     constructor(api: UiApi, id: I);
     setSection(section: MenuSection): this;
-    setSubTabs(...tabs: ArrayOfTOrIterablesOfT<Tab>): void;
+    setSubTabs(...tabs: ArrayOfIterablesOfOr<Tab>): void;
 }
 export declare class MenuSection extends Component {
     readonly heading: Heading;
     readonly content: Component;
     constructor(api: UiApi);
     setTitle(initializer: (title: Heading) => Heading): this;
-    addContent(...content: ArrayOfTOrIterablesOfT<Component | undefined>): this;
+    addContent(...content: ArrayOfIterablesOfOr<Component | undefined>): this;
     dumpContent(): this;
 }

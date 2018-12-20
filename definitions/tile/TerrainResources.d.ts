@@ -10,6 +10,6 @@
  *
  *
  */
-import { ITerrainResource } from "Enums";
-export declare const resource: Description<ITerrainResource>;
+import { ITerrainResource, TerrainType } from "Enums";
+export declare const resource: OptionalDescriptions<TerrainType, ITerrainResource>;
 export default resource;

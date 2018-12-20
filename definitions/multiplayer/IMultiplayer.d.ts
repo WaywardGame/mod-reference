@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { TurnMode } from "Enums";
+import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -27,12 +28,14 @@ export interface IMultiplayer extends Emitter {
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     closeConnection(connection: IConnection): void;
+    convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     disconnectAndResetGameState(reason: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): void;
     getBannedPlayers(): string[];
     getClients(): IConnection[];
+    getConnectedGameCode(): string | undefined;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
     getDefaultOptions(): IMultiplayerOptions;
@@ -46,7 +49,7 @@ export interface IMultiplayer extends Emitter {
     joinServer(info: ServerInfo, character?: ICharacter): void;
     kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
-    onPlaying(): void;
+    onPlaying(): Promise<void>;
     pausePacketProcessing(pause: boolean): void;
     queueSyncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): void;
     resetSyncPacketsWaiting(): void;
@@ -57,38 +60,11 @@ export interface IMultiplayer extends Emitter {
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;
     syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
+    updateGlobalServerDirectory(): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     updatePlayerId(oldPid: number, newPid: number): void;
 }
 export default IMultiplayer;
-export declare const maxPlayers = 32;
-export declare const defaultServerPort = 38740;
-export declare const keepAliveInterval = 4000;
-export declare const keepAliveTimeout = 15000;
-export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
-export interface IMultiplayerOptions {
-    lobbyType: LobbyType;
-    pvp: boolean;
-    turnMode: TurnMode;
-    maxPlayers: number;
-    tickSpeed: number;
-    syncChecks: boolean | MultiplayerSyncCheck[];
-}
-export interface IMultiplayerNetworkingOptions {
-    matchmakingServer: string;
-    matchmakingServerPort: number;
-    fakeLatency: number;
-    syncChecks: boolean | MultiplayerSyncCheck[];
-    enablePacketNumberChecks: boolean;
-    checkSeedHistory: boolean;
-    chunkSize: number;
-}
-export declare type ServerInfo = string | IMatchmakingInfo;
-export declare enum PacketAcceptType {
-    Serverside = 1,
-    Clientside = 2,
-    All = 3
-}
 export declare enum MultiplayerSyncCheck {
     BaseEntityManager = 0,
     CanASeeB = 1,
@@ -121,11 +97,46 @@ export declare enum MultiplayerSyncCheck {
     Ticks = 28,
     Weight = 29
 }
+export declare const maxPlayers = 32;
+export declare const defaultServerPort = 38740;
+export declare const keepAliveInterval = 4000;
+export declare const keepAliveTimeout = 15000;
+export declare const steamLobbyPrefix = "steam:";
+export declare const networkingOptions: IMultiplayerNetworkingOptions;
+export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
+export interface IMultiplayerOptions {
+    lobbyType: LobbyType;
+    pvp: boolean;
+    turnMode: TurnMode;
+    maxPlayers: number;
+    tickSpeed: number;
+    syncChecks: boolean | MultiplayerSyncCheck[];
+}
+export interface IMultiplayerState {
+    enable: boolean;
+    options?: IMultiplayerOptions;
+}
+export interface IMultiplayerNetworkingOptions {
+    matchmakingServer: string;
+    matchmakingServerPort: number;
+    syncChecks: boolean | MultiplayerSyncCheck[];
+    enablePacketNumberChecks: boolean;
+    checkSeedHistory: boolean;
+    chunkSize: number;
+}
+export declare type ServerInfo = string | IMatchmakingInfo;
+export declare enum PacketAcceptType {
+    Serverside = 1,
+    Clientside = 2,
+    All = 3
+}
 export interface IMultiplayerWorldData {
     pid: number;
     playerCount: number;
     mods: IMultiplayerMod[];
     multiplayerOptions: IMultiplayerOptions;
+    difficulty: Difficulty;
+    difficultyOptions: IDifficultyOptions;
     saveObject: SaveObject;
     initialFlowFieldPids: number[];
     crafted: {

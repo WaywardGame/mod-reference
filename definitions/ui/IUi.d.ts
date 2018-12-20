@@ -8,9 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DialogId, EquipType, ItemType, SentenceCaseStyle, SortType } from "Enums";
+import { DialogId, EquipType, ItemType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { IMessagePack, Message } from "language/IMessages";
 import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
@@ -82,25 +81,13 @@ export interface IUi extends IPropSerializable, Emitter {
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
     tooltipRefresh(): void;
-    refreshWorldTooltips(): void;
-    messageIdToText(message: Message): string;
-    getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
-    updateMilestonesDialog(): void;
-    updateSkillsDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];
     updateItem(item: IItem): void;
     hideContextMenu(): void;
     hideActionsMenu(): void;
-    openMapDialog(): void;
-    openBookDialog(title: string, content: string): void;
-    closeMapDialog(): void;
     setFontStyle(): void;
-    createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
-    toggleDialog(dialog: JQuery): boolean;
-    openDialog(dialog: JQuery): boolean;
-    closeDialog(dialog: JQuery): boolean;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
     setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
     refreshQuickSlots(): void;

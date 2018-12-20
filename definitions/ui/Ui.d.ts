@@ -10,9 +10,8 @@
  */
 import "ui/functional/FunctionalSortable";
 import "ui/functional/FunctionalTooltip";
-import { DialogId, EquipType, ItemType, SentenceCaseStyle } from "Enums";
+import { DialogId, EquipType, ItemType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { IMessagePack, Message } from "language/IMessages";
 import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
@@ -50,25 +49,13 @@ export default class Ui extends Emitter implements IUi {
     isOptionsOverlayShown(): boolean;
     isOptionsOverlayEnabled(): boolean;
     tooltipRefresh(): void;
-    refreshWorldTooltips(): void;
-    messageIdToText(message: Message): string;
-    getMessageHtml(messagePack: IMessagePack, tag?: string, textCase?: SentenceCaseStyle, log?: boolean, addedClass?: string): string;
-    updateMilestonesDialog(): void;
-    updateSkillsDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];
     updateItem(item: IItem): void;
     hideContextMenu(): void;
     hideActionsMenu(): void;
-    openMapDialog(): void;
-    closeMapDialog(): void;
-    openBookDialog(title: string, content: string): void;
     setFontStyle(): void;
-    createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
-    toggleDialog(dialog: JQuery): boolean;
-    openDialog(dialog: JQuery): boolean;
-    closeDialog(dialog: JQuery): boolean;
     setEquipSlot(equip: EquipType, itemId: number, internal?: boolean): void;
     setQuickSlot(quickSlot: number, itemId: number, internal?: boolean): void;
     refreshQuickSlots(): void;

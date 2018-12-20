@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { InterruptChoice } from "language/ILanguage";
+import InterruptChoice from "language/dictionary/InterruptChoice";
 import { HighlightSelector, IComponent, IHighlight, ITooltip, TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IScreen, ScreenId } from "newui/screen/IScreen";
@@ -112,7 +112,7 @@ export interface IScaleManager {
     update(): void;
 }
 export interface ITooltipManager {
-    show(host: IComponent): ITooltip | undefined;
+    show(host: IComponent, force?: boolean): ITooltip | undefined;
     hide(host?: IComponent): void;
 }
 export declare enum SaveLocation {
@@ -134,7 +134,7 @@ export declare enum SaveLocation {
  * `IGameScreenApi.registerDataHost(<id>, <the instance that contains fields marked with this decorator>)`
  */
 export declare function Save(saveLocation: SaveLocation): any;
-export declare function savedProperties<T = any>(target: T): IterableIterator<[string, SaveLocation]>;
+export declare function savedProperties(target: any): Map<string, SaveLocation>;
 export interface IInterruptFactory extends IInterruptMenuFactory {
     withDescription(description: TranslationGenerator): this;
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;

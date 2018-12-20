@@ -10,21 +10,24 @@
  */
 import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import BaseHumanEntity from "entity/BaseHumanEntity";
-import { EntityType } from "entity/IEntity";
-import { Delay, Direction, EquipType, IInspect, ItemType, RestType, SkillType, TurnType, WeightStatus } from "Enums";
+import Human from "entity/Human";
+import { EntityType, StatusEffectChangeReason } from "entity/IEntity";
+import IHuman from "entity/IHuman";
+import { IStat, Stat } from "entity/IStats";
+import { Direction, EquipType, ItemType, RestCancelReason, RestType, SkillType, StatusType, TurnType, WeightStatus } from "Enums";
 import { IItem } from "item/IItem";
-import { IMessagePack, Message } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { MilestoneType } from "player/IMilestone";
 import { IMovementIntent, IPlayer, IPlayerTravelData, IRestData } from "player/IPlayer";
 import MessageManager from "player/MessageManager";
-import NoteManager from "player/NoteManager";
+import NoteManager from "player/note/NoteManager";
+import QuestManager from "player/quest/QuestManager";
 import { IExploreMap } from "renderer/IExploreMap";
-import { IPreSerializeCallback } from "save/ISerializer";
-import { ITile } from "tile/ITerrain";
+import IClientStore from "save/clientStore/IClientStore";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default class Player extends BaseHumanEntity implements IPlayer, IPreSerializeCallback {
+export default class Player extends Human implements IPlayer {
     readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
@@ -34,17 +37,17 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     dialogInfo: {
         [index: string]: IDialogInfo;
     };
-    exploredMapEncodedData: number[][];
     hintSeen: boolean[];
-    identifier: string;
     isConnecting: boolean;
     isMoving: boolean;
+    lastAttackedBy: IHuman | ICreature | undefined;
     messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     name: string;
     noInputReceived: boolean;
     notes: NoteManager;
+    quests: QuestManager;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
     revealedItems: {
@@ -61,15 +64,19 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     wasAbsentPlayer: boolean;
     nextX: number;
     nextY: number;
-    nextProcessInput: number;
     movementProgress: number;
     movementFinishTime: number;
     nextMoveTime: number;
     nextMoveDirection: Direction | undefined;
     private _milestoneUpdates;
     private readonly _movementIntent;
-    constructor();
+    constructor(identifier?: string);
+    readonly clientStore: IClientStore;
+    setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
+    setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
+    setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
     startResting(restData: IRestData): void;
+    cancelResting(reason: RestCancelReason): boolean;
     showRestInterrupt(restType: RestType): void;
     /**
      * Updates caused by status effects such as bleeding, poison, and burns.
@@ -86,14 +93,17 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     getDefaultCarveTool(): IItem | undefined;
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
-    canJump(): boolean;
     hasHandToUse(): boolean;
     getHandToUse(): EquipType | undefined;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    getMovementIntent(): IMovementIntent;
+    getMovementIntent(): IMovementIntent | {
+        intent: Direction;
+        shouldDisableTurnDelay: boolean;
+    };
     updateMovementIntent(movementIntent: IMovementIntent): void;
+    resetStatTimers(): void;
     /**
      * Gets the max health of the player.
      *
@@ -109,37 +119,27 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
      *
      * Used internally for `Stat.Weight.max`
      */
-    getStrength(): number;
+    getMaxWeight(): number;
     setup(completedMilestones: number): void;
-    preSerializeObject(): void;
-    restoreExploredMap(): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
     getWeightMovementPenalty(): number;
-    checkAndRemoveBlood(): boolean;
-    checkForGatherFire(): string | undefined;
     checkForStill(): boolean;
+    checkForWell(): boolean;
     checkForGather(): IDoodad | undefined;
     updateTables(): void;
     updateCraftTable(): void;
     updateDismantleTable(): void;
     updateTablesAndWeight(): void;
     checkReputationMilestones(): void;
-    getReputation(): number;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
-    hasDelay(): boolean;
-    addDelay(delay: Delay, replace?: boolean): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
-    inspect(x: number, y: number, z?: number): void;
-    inspectTile(tile: ITile): IInspect[];
-    getInspectHealthMessage(player: IPlayer): IMessagePack;
     setPosition(point: IVector3): void;
     setZ(z: number): void;
-    isLocalPlayer(): boolean;
     isGhost(): boolean;
     isServer(): boolean;
-    getName(): string;
+    getName(): Translation;
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateDialogInfo(dialogIndex: string | number): void;
@@ -152,8 +152,7 @@ export default class Player extends BaseHumanEntity implements IPlayer, IPreSeri
     hasWalkPath(): boolean;
     walkAlongPath(path: IVector2[] | undefined): void;
     processInput(): void;
-    faceDirection(direction: Direction, ignoreTurnDelay?: boolean): boolean;
-    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
+    faceDirection(direction: Direction, turnDelay?: number): boolean;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
     updateMilestones(): void;

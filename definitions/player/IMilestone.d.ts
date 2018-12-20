@@ -44,11 +44,13 @@ export declare enum MilestoneType {
     Seasoned = 30,
     Pacifier = 31,
     Merchant = 32,
-    Notekeeper = 33
+    Notekeeper = 33,
+    Operator = 34,
+    Huntsman = 35
 }
-export declare enum MilestoneVisibilityType {
+export declare enum MilestoneVisibility {
     Visible = 0,
-    Invisibile = 1,
+    Invisible = 1,
     Hidden = 2
 }
 export declare enum MilestoneDataType {
@@ -56,11 +58,9 @@ export declare enum MilestoneDataType {
     Check = 1
 }
 export interface IMilestone {
-    name?: string;
-    description?: string;
     amount: number;
     dataType?: MilestoneDataType;
-    visibility?: MilestoneVisibilityType;
+    visibility?: MilestoneVisibility;
 }
 export interface IMilestoneData {
     amount: number;

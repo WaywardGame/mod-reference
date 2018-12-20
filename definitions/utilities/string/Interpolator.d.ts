@@ -10,6 +10,7 @@
  */
 export interface ISegmentApi {
     interpolate(str: string, ...args: any[]): IStringSection[];
+    interpolateString(str: string, ...args: any[]): string;
 }
 export interface ISegment {
     startChar?: string;
@@ -25,11 +26,16 @@ declare class Interpolator {
     readonly segments: ISegment[];
     constructor(...segments: ISegment[]);
     interpolate(str: string, ...args: any[]): IStringSection[];
+    interpolateString(str: string, ...args: any[]): string;
     private handleChar;
     static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }
 declare module Interpolator {
     function getArgument(keyMap: string, ...args: any[]): string | undefined;
+    /**
+     * Returns the index of the first occurrence of character in the provided string which is not inside a segment `{}`.
+     * Returns `-1` if there is no occurrence.
+     */
     function getIndexOfTopLevel(character: string, segment: string): number;
 }
 export default Interpolator;

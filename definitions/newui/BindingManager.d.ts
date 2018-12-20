@@ -13,6 +13,9 @@ import { IComponent } from "newui/component/IComponent";
 import Emitter from "utilities/Emitter";
 import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
+export declare const enum BindingManagerEvent {
+    BindsEnabled = "BindsEnabled"
+}
 export declare enum KeyModifier {
     Shift = 0,
     Alt = 1,
@@ -71,10 +74,10 @@ export declare class BindingManager extends Emitter {
     deleteBinding(bindable: Bindable): void;
     resetBinding(bindable: Bindable): void;
     doBindsIntersect(bindableA: Bindable, bindableB: Bindable): boolean;
-    getBindTranslation(bindable: Bindable): string;
-    getBindTranslation(bind: IBinding | IBinding[]): string;
-    getBindTranslation(bindable: Bindable, separate: true): string[];
-    getBindTranslation(bind: IBinding | IBinding[], separate: true): string[];
+    getBindingsTranslation(bindable: Bindable): string;
+    getBindingsTranslation(bind: IBinding | IBinding[]): string;
+    getBindingsTranslation(bindable: Bindable, separate: true): string[];
+    getBindingsTranslation(bind: IBinding | IBinding[], separate: true): string[];
     registerBindCatcher(element: HTMLElement, shouldFocus?: boolean): number;
     deregisterBindCatcher(id: number): void;
     disableBindsUntil(until: number | Promise<any>, id?: number): void;
@@ -91,5 +94,6 @@ export declare class BindingManager extends Emitter {
     mouseStartWasWithin(element: Element | IComponent, mustBeTarget?: boolean, id?: number): boolean;
     manualLoop(id: number): () => BindCatcherApi;
     private startLoop;
+    private getBindPressTranslation;
 }
 export declare const bindingManager: BindingManager;

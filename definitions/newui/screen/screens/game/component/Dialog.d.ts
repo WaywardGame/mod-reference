@@ -9,11 +9,17 @@
  * https://waywardgame.github.io/
  */
 import { Bindable } from "Enums";
+import UiTranslation from "language/dictionary/UiTranslation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { BindCatcherApi } from "newui/BindingManager";
+import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
+import { IRefreshable } from "newui/component/Refreshable";
+import { UiApi } from "newui/INewUi";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import IGameScreenApi, { IDialog } from "newui/screen/screens/game/IGameScreenApi";
+import { IStringSection } from "utilities/string/Interpolator";
 /**
  * The positions of each edge of the dialog. Stored as percentages.
  */
@@ -22,6 +28,24 @@ export interface IDialogEdges {
     [Edge.Right]: number;
     [Edge.Bottom]: number;
     [Edge.Left]: number;
+}
+export interface ISavedEdges {
+    scale: number;
+    edges: IDialogEdges;
+}
+/**
+ * An enum for every position that a dialog handle can be in.
+ */
+declare enum HandlePosition {
+    Top = 0,
+    TopRight = 1,
+    Right = 2,
+    BottomRight = 3,
+    Bottom = 4,
+    BottomLeft = 5,
+    Left = 6,
+    TopLeft = 7,
+    Header = 8
 }
 export declare enum DialogEvent {
     /**
@@ -40,7 +64,13 @@ export declare enum DialogEvent {
     /**
      * Emitted when the dialog is moved
      */
-    Move = "Move"
+    Move = "Move",
+    /**
+     * Emitted when the dialog panel changes
+     * @param id The string or number representing the panel that was switched to
+     * @param panel The panel that was switched to
+     */
+    SwitchPanel = "SwitchPanel"
 }
 export default abstract class Dialog extends Component implements IDialog {
     protected readonly gsapi: IGameScreenApi;
@@ -53,7 +83,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     edges: IDialogEdges;
     protected body: Component;
-    protected header: Component;
+    protected header: Header;
     protected footer: Component;
     private readonly panels;
     private visiblePanel;
@@ -61,6 +91,11 @@ export default abstract class Dialog extends Component implements IDialog {
      * The last edge positions of the dialog. Used when a handle is being moved.
      */
     private lastEdges;
+    /**
+     * Edge positions of the dialog saved the last time the dialog was resized by the user, with a scale. When the scale returns to
+     * the scale of these saved positions, the dialog uses these positions rather than autoresizing.
+     */
+    private savedEdges?;
     /**
      * The description of how the dialog should be sized. (min, default, and max sizes and the position)
      */
@@ -101,7 +136,8 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    abstract getName(): TranslationGenerator;
+    abstract getName(): IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
+    private saveEdgesForScale;
     /**
      * Event handler for when this dialog is appended
      */
@@ -193,3 +229,25 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private resetPosition;
 }
+/**
+ * A component that emits events for being dragged. Takes a `HandlePosition` to be styled with.
+ */
+declare class Handle extends Component {
+    private lastMousePosition?;
+    readonly position: HandlePosition;
+    constructor(uiApi: UiApi, position: HandlePosition, elementType?: string);
+    private dragStart;
+    private drag;
+    private dragEnd;
+}
+/**
+ * You can drag the header, so it's a `Handle` as well.
+ */
+export declare class Header extends Handle implements IRefreshable {
+    readonly backButton: Button;
+    private readonly text;
+    constructor(api: UiApi);
+    setText(text: TranslationGenerator): void;
+    refresh(): this;
+}
+export {};

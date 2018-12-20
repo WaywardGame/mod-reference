@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import BaseHumanEntity from "entity/BaseHumanEntity";
+import { ActionType } from "action/IAction";
+import Human from "entity/Human";
 import { AiType, EntityType } from "entity/IEntity";
-import { ActionType, EquipType, ItemType } from "Enums";
+import { EquipType, ItemType } from "Enums";
 import { IItem } from "item/IItem";
 import { INPC } from "npc/INPC";
 import { IPlayerCustomization } from "player/IPlayer";
-export default abstract class BaseNPC extends BaseHumanEntity implements INPC {
+export default abstract class BaseNPC extends Human implements INPC {
     protected static registrarId: number;
     readonly entityType: EntityType.NPC;
     "constructor": typeof BaseNPC;

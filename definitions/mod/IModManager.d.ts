@@ -36,6 +36,7 @@ export interface IModManager {
     getAuthor(index: number): string;
     getCreatedDate(index: number): number | undefined;
     getDescription(index: number): string;
+    getTags(index: number): Set<string>;
     getEnabledMods(): number[];
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
     getFolderName(index: number): string;
@@ -69,8 +70,8 @@ export interface IModManager {
     isUnloadable(index: number): boolean;
     isValid(index: number): boolean;
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
-    reload(index: number): boolean;
-    reloadByName(name: string): boolean;
+    reload(index: number): Promise<boolean>;
+    reloadByName(name: string): Promise<boolean>;
     removeMod(id: number, uninstall?: boolean): void;
     save(index: number): void;
     saveAll(): void;
@@ -80,11 +81,11 @@ export interface IModManager {
     setPublishId(index: number, publishedFileId: string): void;
     setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => void): Promise<boolean>;
     setSteamIdOwner(index: number, steamIdOwner: string): void;
-    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): void;
+    setupMod(folderName: string, modType: ModType, initialModState?: ModState): Promise<number | undefined>;
     setupMods(): Promise<void>;
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
-    unload(index: number): void;
+    unload(index: number): Promise<void>;
     unloadAll(reset?: boolean): Promise<void>;
     /**
      * Returns a `HookCallFactory` for the given hook name.

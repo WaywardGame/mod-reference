@@ -25,4 +25,6 @@ export default class TabVideo extends Tab implements IRefreshable {
     private onInterfaceScaleChangeFinish;
     private onViewportResize;
     private getUiScaleTooltip;
+    private onPowerPreferenceSelect;
+    private getPowerPreferenceDropdownData;
 }

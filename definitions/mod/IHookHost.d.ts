@@ -8,23 +8,26 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IActionArgument, IActionResult } from "action/IAction";
+import { ActionType, IActionApi, IActionDescription } from "action/IAction";
 import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, AttackType, Bindable, Command, CreatureType, Direction, DoodadType, EquipType, IInspect, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SpriteBatchLayer, WeightStatus } from "Enums";
+import IEntity from "entity/IEntity";
+import IHuman from "entity/IHuman";
+import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SkillType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
-import { ILanguage } from "language/ILanguage";
+import Language from "language/Language";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
 import { IMessage } from "player/IMessageManager";
 import IPlayer, { IMovementIntent } from "player/IPlayer";
-import { INote } from "player/NoteManager";
+import { INote } from "player/note/NoteManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
+import Vector3 from "utilities/math/Vector3";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -97,12 +100,12 @@ export interface IHookHost {
     getAmbientLightLevel?(ambientLight: number, z: number): number | undefined;
     /**
      * Called before consuming an item
-     * @param player The player object
+     * @param human The human object
      * @param itemType The item type
      * @param actionType The action type
-     * @returns True if the player can consume the item (default logic isn't called, should use your own code for consumption), false if the player cannot consume the item, or undefined to use the default logic
+     * @returns True if the human can consume the item (default logic isn't called, should use your own code for consumption), false if the human cannot consume the item, or undefined to use the default logic
      */
-    canConsumeItem?(player: IPlayer, itemType: ItemType, actionType: ActionType): boolean | undefined;
+    canConsumeItem?(human: Human, itemType: ItemType, actionType: ActionType): boolean | undefined;
     /**
      * Called before a creature attacks
      * @param creature The creature object
@@ -143,14 +146,14 @@ export interface IHookHost {
     canDoodadSpawn?(type: DoodadType, x: number, y: number, z: number, options: IDoodadOptions): boolean | undefined;
     /**
      * Called when an item is being dropped
-     * @param player The player object
+     * @param human The human object
      * @param item The item to be dropped
      * @param tile The tile the item will be dropped on
      * @param dropAll True if all items of this type will be dropped
      * @param dropAllQuality If not undefined, all items of this quality will be dropped
      * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
      */
-    canDropItem?(player: IPlayer, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
+    canDropItem?(human: Human, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
     /**
      * Called before an npc attacks
      * @param npc The npc object
@@ -181,11 +184,11 @@ export interface IHookHost {
     canNPCSpawn?(type: NPCType, x: number, y: number, z: number): boolean | undefined;
     /**
      * Called when an doodad is being picked up
-     * @param player The player object
+     * @param human The human object
      * @param doodad The doodad object
      * @returns False if the doodad cannot be picked up, or undefined to use the default logic
      */
-    canPickupDoodad?(player: IPlayer, doodad: IDoodad): boolean | undefined;
+    canPickupDoodad?(human: Human, doodad: IDoodad): boolean | undefined;
     /**
      * Called before a player attacks
      * @param player The player object
@@ -236,24 +239,24 @@ export interface IHookHost {
     getPlayerFieldOfViewRadius?(player: IPlayer): number | undefined;
     /**
      * Called when getting the player's maximum health
-     * @param maxHealth The current max health (after any other previous mods)
+     * @param maxHealth The current max health of the player (after any other previous mods)
      * @param player The player object
      * @returns The maximum health of the player
      */
     getPlayerMaxHealth?(maxHealth: number, player: IPlayer): number;
+    /**
+     * Called when getting the player's maximum weight
+     * @param strength The current max health of the player (after any other previous mods)
+     * @param player The player object
+     * @returns The maximum health of the player
+     */
+    getPlayerMaxWeight?(maxWeight: number, player: IPlayer): number;
     /**
      * Called when getting the players movement intent
      * @param player The player object
      * @returns The movement intent of the player or undefined to use the default logic
      */
     getPlayerMovementIntent?(player: IPlayer): IMovementIntent | undefined;
-    /**
-     * Called when getting the player's strength
-     * @param strength The current strength of the player
-     * @param player The player object
-     * @returns The new strength of the player
-     */
-    getPlayerStrength?(strength: number, player: IPlayer): number;
     /**
      * Called when rendering the player in the viewport
      * @param player The player object
@@ -304,21 +307,7 @@ export interface IHookHost {
      * @param isSwimming True if the human is swimming
      * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
      */
-    isPlayerSwimming?(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
-    /**
-     * Called when checking if a human is swimming
-     * @param human The human
-     * @param isSwimming True if the human is swimming
-     * @returns True if the human should be swimming, false if they should not be swimming, or undefined to use the default logic
-     */
-    isHumanSwimming?(human: IBaseHumanEntity, isSwimming: boolean): boolean | undefined;
-    /**
-     * Called when checking if a tile is inspectable (used for showing custom world tooltips over tiles)
-     * Normally used in conjunction with the OnInspectTile hook
-     * @param tile The tile object
-     * @returns True if you want to show a custom inspect message, false to display no messages, or undefined to use the default logic
-     */
-    isTileInspectable?(tile: ITile): boolean | undefined;
+    isHumanSwimming?(human: Human, isSwimming: boolean): boolean | undefined;
     /**
      * Called when checking if a tile is blocked, used for pathing.
      * @param tile The tile to check
@@ -326,12 +315,12 @@ export interface IHookHost {
     isTileBlocked?(tile: ITile): true | undefined;
     /**
      * Called when something is built on a tile
-     * @param player The player object
+     * @param human The human object
      * @param item The item used to build the object
      * @param tile The tile something was built on
      * @param doodad The doodad that was created on the tile
      */
-    onBuild?(player: IPlayer, item: IItem, tile: ITile, doodad: IDoodad): void;
+    onBuild?(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
     /**
      * Called when a button on the button bar is clicked
      * @param button The button element
@@ -358,10 +347,10 @@ export interface IHookHost {
     onContainerItemUpdate?(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     /**
      * Called when an item is crafted
-     * @param player The player object
+     * @param human The human object
      * @param item The item that was crafted
      */
-    onCraft?(player: IPlayer, item: IItem): void;
+    onCraft?(human: Human, item: IItem): void;
     /**
      * Called right after the world is created, but before the renderer
      * @param world The world object
@@ -398,12 +387,16 @@ export interface IHookHost {
      */
     onGameTickEnd?(): void;
     /**
-     * Called when a tile is being inspected
-     * @param player The player object
-     * @param tile The tile being inspected
-     * @returns The inspects to be shown or undefined to use the default logic
+     * Called when an entity is killed by another entity.
      */
-    onInspectTile?(player: IPlayer, tile: ITile): IInspect[] | undefined;
+    onEntityKill?(attacker: IEntity | IDoodad, target: IEntity): void;
+    /**
+     * Called when a human's skill changes.
+     * @param human The human whose skill changed
+     * @param skill The skill that changed
+     * @param currentSkill The new value of the skill
+     */
+    onHumanSkillChange?(human: IHuman, skill: SkillType, currentSkill: number): void;
     /**
      * Called when an item is added to the players inventory
      * @param player The player object
@@ -465,6 +458,12 @@ export interface IHookHost {
      */
     onCreatureSpawn?(creature: ICreature): void;
     /**
+     * Called when a creature becomes tamed
+     * @param creature The creature object
+     * @param owner The human which the creature is tamed for
+     */
+    onCreatureTamed?(creature: ICreature, owner: IPlayer): void;
+    /**
      * Called when in-game, on the bind catcher loop (once per frame).
      * @param bindPressed Whether a bind has been pressed. Use this as a final check before processing a bind, and set it to true when a bind was pressed.
      * @param api The bind catcher api, allowing you to check whether binds are pressed
@@ -494,10 +493,16 @@ export interface IHookHost {
      */
     onBindLoop?(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
+     * Called when a human digs up treasure.
+     * @param human The human that dug up treasure
+     * @param treasureTile The tile the human dug up treasure at
+     */
+    onDigTreasure?(human: Human, treasureTile: Vector3): void;
+    /**
      * Called when a language is loaded
      * @param language The language that loaded
      */
-    onLanguageLoad?(language: ILanguage): void;
+    onLanguageLoad?(language: Language): void;
     /**
      * Called when the player is moving
      * @param player The player object
@@ -514,11 +519,11 @@ export interface IHookHost {
      */
     onMoveComplete?(player: IPlayer): void;
     /**
-     * Called when the player faces a different direction
-     * @param player The player object
+     * Called when the human faces a different direction
+     * @param human The human object
      * @param direction The direction the player is now facing
      */
-    onMoveDirectionUpdate?(player: IPlayer, direction: Direction): void;
+    onMoveDirectionUpdate?(human: Human, direction: Direction): void;
     /**
      * Called when no input is received
      * @param player The player object
@@ -542,6 +547,12 @@ export interface IHookHost {
      * @param npc The npc object
      */
     onNPCSpawn?(npc: INPC): void;
+    /**
+     * Called when a book is opened by a player
+     * @param human The human that opened a book
+     * @param book The book that was opened
+     */
+    onOpenBook?(human: Human, book: BookType): void;
     /**
      * Called when an doodad is picked up
      * @param player The player object
@@ -596,10 +607,21 @@ export interface IHookHost {
      */
     onGameScreenVisible?(): void;
     /**
+     * Called when a map is read
+     * @param player The player that read the map
+     * @param mapRequest Information describing how to render the map.
+     */
+    onReadMap?(human: Human, mapRequest: IMapRequest): void;
+    /**
      * Called when rendering the overlay
      * @param spriteBatch The overlay sprite batch
      */
     onRenderOverlay?(spriteBatch: ISpriteBatch): void;
+    /**
+     * Called when a player sails to civilization.
+     * @param player The player that sailed to civilization
+     */
+    onSailToCivilization?(player: IPlayer): void;
     /**
      * Called when a creature is spawned from a creature group
      * @param creatureGroup The creature group
@@ -651,12 +673,8 @@ export interface IHookHost {
     /**
      * Called after an action has been executed
      * This is called after the action result is used
-     * @param player The player object
-     * @param actionType The action type
-     * @param actionArgument The action argument
-     * @param actionResult The action result
      */
-    postExecuteAction?(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument, actionResult: IActionResult): void;
+    postExecuteAction?(api: IActionApi, action: IActionDescription, args: any[]): void;
     /**
      * Called after the field of view has initialized
      */
@@ -688,12 +706,9 @@ export interface IHookHost {
     /**
      * Called before an action is executed
      * This is called before the action result is used
-     * @param player The player object
-     * @param actionType The action type
-     * @param actionArgument The action argument
      * @returns False to cancel the action or undefined to use the default logic
      */
-    preExecuteAction?(player: IPlayer, actionType: ActionType, actionArgument: IActionArgument): boolean | undefined;
+    preExecuteAction?(api: IActionApi, action: IActionDescription, args: any[]): boolean | undefined;
     /**
      * Called before loading world differences
      * Loading differences involving setting up corpses, creatures, doodads, and related things onto the world

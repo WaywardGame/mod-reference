@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Translation from "language/Translation";
 export declare enum TimeFormat {
     PartOfDay = 0,
     /**
@@ -45,22 +46,13 @@ export declare enum DayQuarter {
     Night3 = 6,
     Night4 = 7
 }
-export interface ITimeManager {
-    /**
-     * The percentage of the day which is night. Changing this field will inversely affect `dayPercent`
-     */
-    nightPercent: number;
-    /**
-     * The percentage of the day which is day. Changing this field will inversely affect `nightPercent`
-     */
+export default class TimeManager {
+    dayLength: number;
     dayPercent: number;
-}
-export default class TimeManager implements ITimeManager {
-    readonly dayLength: number;
-    readonly transitionPercent: number;
-    readonly dayStart: number;
+    frozenTime?: number;
     private _ticks;
-    private _dayPercent;
+    private readonly transitionPercent;
+    readonly dayStart: number;
     constructor(turns: number);
     /**
      * The total number of ticks passed.
@@ -74,8 +66,6 @@ export default class TimeManager implements ITimeManager {
      * Increments `ticks`.
      */
     nextTick(): void;
-    dayPercent: number;
-    nightPercent: number;
     /**
      * Returns a decimal representation of the current time. `0` is the start of the day, and `1` is the end.
      */
@@ -148,7 +138,7 @@ export default class TimeManager implements ITimeManager {
      * @param time The time to use, defaulting to the current time.
      * @param format The format to use, defaulting to `TimeFormat.TwelveHour`
      */
-    getTranslation(time?: number, format?: TimeFormat): import("utilities/string/Interpolator").IStringSection[];
+    getTranslation(time?: number, format?: TimeFormat): Translation;
     /**
      * Returns how bright it is at the given time.
      * @param time The time to use, defaulting to the current time.
@@ -167,7 +157,7 @@ export default class TimeManager implements ITimeManager {
      * Setting the time with the result of `getTime` will likely not set to the same value.
      * This method is provided for save conversion and utility, and should rarely be used.
      */
-    setTime(time: number): void;
+    setTime(time: number): this;
     /**
      * The time returned by the time manager ignores that it's stored relative to the start of the day.
      * This method "realigns" a time from this version to one offset by the start of the day.

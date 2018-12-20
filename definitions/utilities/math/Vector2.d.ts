@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import ISerializer, { ISerializable } from "save/ISerializer";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
-export default class Vector2 implements IVector2 {
+export default class Vector2 implements IVector2, ISerializable {
     static readonly ZERO: Vector2;
     static readonly ONE: Vector2;
     static cross(vector: IVector2, vector2: IVector2): Vector3;
@@ -32,6 +33,7 @@ export default class Vector2 implements IVector2 {
     static quotient(vector: IVector2, vector2: IVector2): Vector2;
     static quotient<D extends IVector2>(vector: IVector2, vector2: IVector2, dest: D): D;
     static range(a: IVector2, b: IVector2): IterableIterator<number[]>;
+    static is(thing: unknown): thing is IVector2;
     private readonly values;
     x: number;
     y: number;
@@ -45,7 +47,7 @@ export default class Vector2 implements IVector2 {
     copy<D extends IVector2>(dest: D): D;
     negate(): Vector2;
     negate<D extends IVector2>(dest: D): D;
-    equals(vector: IVector2, threshold?: number): boolean;
+    equals(vector: unknown, threshold?: number): boolean;
     length(): number;
     squaredLength(): number;
     add(vector: IVector2): this;
@@ -62,4 +64,7 @@ export default class Vector2 implements IVector2 {
     toRadians(): number;
     raw(): IVector2;
     clamp(a: IVector2, b: IVector2): this;
+    toString(): string;
+    serializeObject(serializer: ISerializer): void;
+    deserializeObject(serializer: ISerializer): void;
 }

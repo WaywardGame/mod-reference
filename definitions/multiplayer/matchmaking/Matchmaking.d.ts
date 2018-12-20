@@ -19,6 +19,7 @@ export declare class Matchmaking implements IMatchmaking {
     private webSocket?;
     constructor(info: IMatchmakingInfo, onConnected: (matchmaking: IMatchmaking) => void, onCloseOrError: (matchmaking: IMatchmaking) => void, onMessage: (matchmaking: IMatchmaking, message: ArrayBuffer | MatchmakingMessageData) => void);
     getIdentifier(): string;
+    getChannel(): string;
     isConnected(): boolean;
     connect(): void;
     disconnect(): void;

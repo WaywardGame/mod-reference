@@ -8,37 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionCallback, IActionDescriptionNamed } from "action/IAction";
-import { CommandCallback } from "command/ICommand";
-import { ICorpseDescription } from "creature/corpse/ICorpse";
-import { ICreatureDescription } from "creature/ICreature";
-import { IDoodadDescription } from "doodad/IDoodad";
-import { IStatusEffectDescription } from "entity/StatusEffects";
-import { ItemType, ITerrainResourceItem } from "Enums";
-import { IItemDescription } from "item/IItem";
-import { ILanguageExtension } from "language/ILanguage";
-import { ModRegistration, SYMBOL_MOD_REGISTRATIONS } from "mod/ModRegistry";
-import * as Packets from "multiplayer/packets/Packets";
-import { IBinding } from "newui/BindingManager";
-import Component from "newui/component/Component";
-import { UiApi } from "newui/INewUi";
-import { IMenuBarButtonDescription } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
-import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/IStatDisplayDescription";
-import { INPCClass } from "npc/NPCS";
-import { IHairstyleDescription } from "player/IPlayer";
-import { ISkillDescription } from "player/Skills";
-import { ITerrainDescription } from "tile/ITerrain";
-import { ITileEventDescription } from "tile/ITileEvent";
-import { IDialogInfo } from "ui/IUi";
 import Emitter from "utilities/Emitter";
 import Log from "utilities/Log";
-declare const SYMBOL_WAIT_FOR_PROPERTY: unique symbol;
-interface IRegistry {
-    [SYMBOL_MOD_REGISTRATIONS]: ModRegistration[];
-    [SYMBOL_WAIT_FOR_PROPERTY]?: {
-        [key: string]: Array<(val: any) => void>;
-    };
-}
 export declare abstract class BaseMod extends Emitter {
     private readonly index;
     private allocatedEnums;
@@ -47,150 +18,140 @@ export declare abstract class BaseMod extends Emitter {
     constructor(index: number);
     getIndex(): number;
     /**
-     * Returns the name of this mod. Uses the constructor name as a fallback.
+     * Returns the name of this mod.
      */
     getName(): string;
     getLog(): Log;
     getPath(): string;
     loadFile(file: string, callback: (fileText: string, success: boolean) => void): boolean;
     /**
-     * @deprecated
-     * @see `@Register.dialog`
-     */
-    createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
-    /**
-     * @deprecated
-     * This method only works with dialogs registered using `BaseMod.createDialog`, which is deprecated in favor of the NewUi dialog registration.
-     */
-    getDialog(title: string): JQuery;
-    /**
-     * @deprecated
-     * @see `@Register.optionsSection`
-     */
-    registerOptionsSection(initializer: (api: UiApi, optionsSection: Component) => any): void;
-    /**
-     * @deprecated
-     * @see `@Register.action`
-     */
-    addActionType(description: IActionDescriptionNamed, callback: ActionCallback): number;
-    /**
-     * @deprecated
-     * @see `@Register.command`
-     */
-    addCommand(command: string, callback: CommandCallback): number;
-    addSkillType(description: ISkillDescription): number;
-    /**
-     * @deprecated
-     * @see `@Register.overlay`
-     */
-    addOverlay(name: string): number;
-    addNPC(name: string, npcClass: INPCClass): number;
-    /**
-     * @deprecated
-     * @see `@Register.musicTrack`
-     */
-    addMusic(name: string): number;
-    /**
-     * @deprecated
-     * @see `@Register.soundEffect`
-     */
-    addSoundEffect(name: string, variations?: number): number;
-    addHairstyle(description: IHairstyleDescription): number;
-    addItem(description: IItemDescription): number;
-    addCreature(description: ICreatureDescription, corpseDescription?: ICorpseDescription): number;
-    addTerrain(description: ITerrainDescription, terrainType?: number): number;
-    addTerrainResource(terrainType: number, terrainResource: ITerrainResourceItem[], defaultItem?: ItemType): void;
-    addDoodad(description: IDoodadDescription): number;
-    addTileEvent(description: ITileEventDescription): number;
-    /**
-     * @deprecated
-     * @see `@Register.dictionary`
-     */
-    addDictionary(name: string, dictionaryEnum: any): number;
-    extendLanguage(language: string, extension: ILanguageExtension): number;
-    /**
-     * @deprecated
-     * @see `@Register.message`
-     */
-    addMessage(name: string, message: string): number;
-    /**
-     * @deprecated
-     * @see `@Register.messageSource`
-     */
-    addMessageSource(name: string): number;
-    /**
-     * @deprecated
-     * @see `@Register.packet`
-     */
-    registerPacket(packet: Packets.IPacketClass): void;
-    /**
-     * @deprecated
-     * @see `@Register.bindable`
-     * Adds a bindable and the default binding for it
-     * @param name The name of the binding (when translated, the name will be `Mod<mod name><name>`)
-     * @param binding The default binding or bindings of this bindable
-     */
-    addBindable(name: string, binding: IBinding | IBinding[]): number;
-    /**
-     * @deprecated
-     * @see `@Register.stat`
-     * Adds a new stat that can be added to entities, with a description of how the stat should be displayed
-     * in a ui stat display.
-     * @param name The name of this stat.
-     * @param displayDescription The display description of this stat.
-     */
-    addStat(name: string, displayDescription: IStatDisplayDescription): number;
-    /**
-     * @deprecated
-     * @see `@Register.statusEffect`
-     * Adds a new status effect that can be added to entities, with a description of how the effect should
-     * be rendered when on an entity.
-     * @param name The name of the status effect.
-     * @param description The render description of this status effect.
-     */
-    addStatusEffect(name: string, description: IStatusEffectDescription): number;
-    /**
-     * @deprecated
-     * @see `@Register.menuBarButton`
-     * Adds a new button to the in-game menu bar.
-     * @param name The name of the menu bar button.
-     * @param description Details of how the menu bar button should display and what it should do.
-     */
-    addMenuBarButton(name: string, description: IMenuBarButtonDescription): number;
-    itemNameToObjectType(name: string): ItemType | undefined;
-    getItemByType(itemType: ItemType): IItemDescription | undefined;
-    getItemByName(name: string): IItemDescription | undefined;
-    /**
-     * This is called internally after unloading a mod
-     */
-    unallocate(): void;
-    /**
-     * This is called internally. Handles decorator-registered methods & properties, such as actions, commands, or bindables
-     */
-    onBeforeInitialize(registry?: IRegistry): Promise<void>;
-    /**
-     * This is called internally. Handles decorator-registered methods & properties, such as actions, commands, or bindables
-     */
-    onBeforeLoad(registry?: IRegistry): Promise<void>;
-    /**
-     * Called when the save data for this mod is retrieved from a field decorated with `@SaveData`.
+     * Called when the save data for this mod is retrieved from a field decorated with `@Mod.saveData`.
      * @param data Any existing data, or `undefined`
      * @returns The data that should be returned. Conventionally, this is an object of some kind. It must be JSON serializable.
+     *
+     * This method is meant to be overridden. It is called internally.
      */
     initializeSaveData(data: any): any;
     /**
-     * Called when the global data for this mod is retrieved from a field decorated with `@SaveData`.
+     * Called when the global data for this mod is retrieved from a field decorated with `@Mod.globalData`.
      * @param data Any existing data, or `undefined`
      * @returns The data that should be returned. Conventionally, this is an object of some kind. It must be JSON serializable.
+     *
+     * This method is meant to be overridden. It is called internally.
      */
     initializeGlobalData(data: any): any;
+    /**
+     * Event handler for `ModEvent.Unallocate`.
+     */
+    private onUnallocate;
+    /**
+     * Event handler for `ModEvent.PreInitialize`.
+     *
+     * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Initialize`
+     */
+    private onBeforeInitialize;
+    /**
+     * Event handler for `ModEvent.PreLoad`.
+     *
+     * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Load`
+     */
+    private onBeforeLoad;
+    /**
+     * All mods by default are `IRegistry`s, and any fields decorated with ` @Register.registry(Class)` are constructed as `IRegistry`s.
+     *
+     * This method goes through all the "registrations" stored in `[SYMBOL_MOD_REGISTRATIONS]` on the registry (these are added by the
+     * ` @Register.thing` decorators) and actually registers them with the game.
+     *
+     * Since registrations can reference other registrations, each registration is mapped to a promise, which will resolve when it's
+     * completely registered (all registrations it depends upon are registered, and then it itself is registered).
+     *
+     * @param registrationTime There are two times in which registrations actually happen:
+     * 	1. `ModRegistrationTime.Initialize` — When the mod is enabled, or the game starts, if the mod is already enabled
+     * 	2. `ModRegistrationTime.Load` — When a world is loaded
+     *
+     * Registrations which will only be used in saves are registered in `ModRegistrationTime.Load`, all other registrations are
+     * registered in `ModRegistrationTime.Initialize`. This method will only initialize the registrations for the given time.
+     *
+     * @param registry The `IRegistry` to initialize.
+     *
+     * @returns When all registrations are complete.
+     */
     private initializeRegistry;
-    private validateRegistration;
+    /**
+     * Registers a registration in a registry. Wow™
+     *
+     * @param registry The `IRegistry` that the registration is from.
+     * @param registration A `ModRegistration` — This is a type alias for any possible interface that extends `IBaseRegistration`.
+     *
+     * ------
+     * 1. The registration is validated with `validateRegistration`. This is an asynchronous operation that replaces any references to
+     * other registrations with their values, once they are registered. See `validateRegistration` for more details.
+     * 2. The name of the registration is generated: `Mod<modname><registration.name (in pascal case, with all non-letters removed)>`
+     * 3. If the registration contains a `description` field, sets the `modIndex` property in the description to this mod's index.
+     * 4. If the registration is not "basic", IE: it needs to do something besides allocate an enum, it will have an entry in a switch
+     * block for its `registration.type`. If it doesn't, by default it just allocates the enum using `registrationTypeToEnumMap`.
+     */
     private register;
-    private getPropertyValue;
-    private getRegistrationValue;
-    private setRegistrationValue;
+    /**
+     * All `@Register.thing` decorators that take arguments can reference other registrations via `Registry<Mod, Thing>().get("name")`.
+     * On the type side, that method returns `Thing`, but internally, a `Registry.Registered` instance is returned.
+     *
+     * @param registry The `IRegistry` that this registration is a part of.
+     * @param registration An `IModRegistration`, or an object descendant in an `IModRegistration`. This object will be looped through,
+     * and any values in it which are instances of `Registry.Registered` are asynchronously replaced with their registered values.
+     *
+     * @returns The passed `IModRegistration`, after asynchonously replacing all instances of `Registry.Registered` with their target
+     * registration values.
+     */
+    private validateRegistration;
+    /**
+     * An asynchronous getter for a registration ID in the given `IRegistry`.
+     *
+     * @param registry The registry to get a registration ID from.
+     * @param property The property containing the registration ID.
+     * (Contains a field/method, decorated with a ` @Register.thing` decorator)
+     * @param type Whether the field is for a method or a property.
+     * (Examples include actions/commands for methods & bindables/creatures for properties)
+     *
+     * - If the type is a property, and the field has a value, it's returned immediately.
+     * - If the type is a method, and an ID is returned by `Registry.id(registry[property])`, the ID will be returned.
+     * - If neither of the above statements are true, a promise is returned which will be resolved once the property has been
+     * registered, with the registration ID. To do this, the resolve method of the promise is stored in the internal
+     * `[SYMBOL_WAIT_FOR_PROPERTY]` object, indexed by the property name. They will be called by `setRegistrationPropertyValue`
+     */
+    private getRegistrationId;
+    /**
+     * @param registry The registry to get a property value from.
+     * @param property The property to get the value of.
+     */
+    private getRegistrationPropertyValue;
+    /**
+     * Resolves any promises waiting for this property (created by `getRegistrationId`) with the given value, then sets the property on
+     * the registry to the given value.
+     * @param registry The registry to set a property of.
+     * @param property The property to set the value of.
+     * @param value The value to set the property to.
+     */
+    private setRegistrationPropertyValue;
+    /**
+     * Resolves any promises waiting for this property (created by `getRegistrationId`) with the given value. The promises are stored in
+     * `registry[SYMBOL_WAIT_FOR_PROPERTY][property]`. They are deleted afterwards as they are no longer needed.
+     * @param registry The registry which contains the property which has been registered.
+     * @param property The property containing the registration that has been registered.
+     * @param value The registration ID of this property.
+     */
+    private resolveWaitForProperty;
+    /**
+     * Allocates an enum for this mod.
+     * @param id The enum type.
+     * @param name The name of the enumeration value.
+     * @param objectValue An object to register with the enum. For example, all values in the creature enumeration have a corresponding
+     * `description` object.
+     * @param onAllocate A callback for when the enum has been allocated.
+     * @param onUnallocate A callback for when the enum has been unallocated.
+     */
     private allocateEnum;
+    private addTerrainResource;
 }
 export default BaseMod;
 export interface IButton {

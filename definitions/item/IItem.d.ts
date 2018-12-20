@@ -7,14 +7,15 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
+import { ActionType } from "action/IAction";
 import { ICreature, SpawnableTiles } from "creature/ICreature";
-import { IDoodadDescription } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
+import { IDoodad, IDoodadDescription } from "doodad/IDoodad";
 import { EntityType } from "entity/IEntity";
-import { ActionType, BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IItemTypeGroup, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, StatType, TatteredMap } from "Enums";
+import IHuman from "entity/IHuman";
+import { Stat } from "entity/IStats";
+import { BookType, CreatureType, DamageType, Defense, DoodadType, DoodadTypeGroup, EquipType, IModdable, IObject, IObjectDescription, IObjectOptions, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, RecipeLevel, SkillType, TatteredMap } from "Enums";
+import Translation from "language/Translation";
 import IPlayer from "player/IPlayer";
 import { IVector3 } from "utilities/math/IVector";
 export interface IRecipe {
@@ -27,7 +28,7 @@ export interface IRecipe {
     reputation: number;
 }
 export interface IRecipeComponent {
-    type: ItemType | ItemTypeGroup | IItemTypeGroup;
+    type: ItemType | ItemTypeGroup;
     requiredAmount: number;
     consumedAmount: number;
     disassembleAmount: number;
@@ -45,7 +46,13 @@ export interface IItemLegendary {
     type: LegendaryType;
     value: number;
     skill?: SkillType;
-    stat?: StatType;
+    stat?: Stat;
+}
+export interface IItemUsed {
+    usedBy?: string[];
+    recipe?: ItemType;
+    skill?: SkillType;
+    map?: IVector3;
 }
 export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
     weight: number;
@@ -58,7 +65,19 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     disassembly?: IItemArray;
     order?: number;
     ownerIdentifier?: string;
+    used?: IItemUsed;
     readonly quality: number;
+    /**
+     * @param article Whether to include an article for the name of the item. Uses the article rules on the language. Defaults to `true`.
+     * @param count The number of this item that you're getting the name of. Defaults to `1`.
+     * @param showCount If `true`, adds the passed count to the translation, using `MiscTranslation.CountThing`.
+     *
+     * Examples:
+     * - `item.getName()` // "a stone axe"
+     * - `item.getName(false)` // "stone axe"
+     * - `item.getName(undefined, 3)` // "stone axes"
+     */
+    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;
     shouldBeProtected(): boolean;
@@ -76,11 +95,12 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     clearQuickSlot(): void;
     changeInto(itemType: ItemType, disableNotify?: boolean): void;
     returns(): boolean;
+    setUsed(itemUse?: IItemUsed, human?: IHuman): void;
     spawnOnBreak(): ICreature | undefined;
     spawnOnDecay(): ICreature | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean): ICreature | undefined;
+    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: IPlayer): ICreature | undefined;
     getLocation(): IVector3 | undefined;
-    dropInWater(human: IBaseHumanEntity, x?: number, y?: number): void;
+    dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: ItemQuality): void;
@@ -90,6 +110,9 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     getWorth(legendaryWorth?: boolean): number | undefined;
     canBurnPlayer(): boolean;
     getBaseDefense(): number;
+    getDurabilityCharge(): number;
+    revertFromDoodad(doodad: IDoodad): void;
+    getContainerWeightReduction(): number;
 }
 export interface IItemOld {
     equipped?: EquipType;
@@ -119,7 +142,6 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     };
     onEquipEffect?: any[];
     damageType?: DamageType;
-    group?: ItemTypeGroup[];
     weight?: number;
     reducedWeight?: number;
     minimumWeight?: number;
@@ -158,8 +180,15 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     worth?: number;
     burnsLike?: ItemType[];
     spawnableTiles?: SpawnableTiles;
+    gather?: ILiquid;
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
+}
+export interface ILiquid {
+    milk: ItemType;
+    desalinated: ItemType;
+    unpurified: ItemType;
+    seawater: ItemType;
 }
 export interface IDismantleDescription {
     items: Array<[ItemType, number]>;
@@ -167,11 +196,9 @@ export interface IDismantleDescription {
     skill?: SkillType;
     reputation?: number;
 }
-export interface IGroupDescription {
-    name: string;
-    types: ItemType[];
-    suffix?: string;
-    prefix?: string;
+export interface IItemGroupDescription {
+    types: Array<ItemType | ItemTypeGroup>;
+    default: ItemType | ItemTypeGroup;
 }
 export declare enum ContainerReferenceType {
     Invalid = 0,

@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseEntity from "entity/IBaseEntity";
+import IEntity from "entity/IEntity";
 import { IStat, IStatBase, Stat } from "entity/IStats";
 import Component from "newui/component/Component";
 import { IStatDisplayDescription } from "newui/screen/screens/game/static/stats/IStatDisplayDescription";
@@ -23,7 +23,7 @@ export interface IStatInfo extends Partial<IStatBase> {
  * @param predicate A function that takes an `IStatInfo` object and returns whether it "matches".
  * @param handler A function that takes whether the info matches, the `statElement`, the entity, and the `IStatInfo` object and "handles" it.
  */
-export declare function when(predicate: (info: IStatInfo) => boolean, handler: (matched: boolean, statElement: Component, entity: IBaseEntity, info: IStatInfo) => any): (statElement: Component, entity: IBaseEntity, stat: IStat, oldValue?: number | undefined) => void;
+export declare function when(predicate: (info: IStatInfo) => boolean, handler: (matched: boolean, statElement: Component, entity: IEntity, info: IStatInfo) => any): (statElement: Component, entity: IEntity, stat: IStat, oldValue?: number | undefined) => void;
 /**
  * Returns a `when()` handler that will toggle classes on a `statElement` based on whether the `predicate` matched.
  */

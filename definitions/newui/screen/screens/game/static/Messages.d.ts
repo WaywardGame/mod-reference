@@ -14,19 +14,20 @@ import { BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
-import { TranslationGenerator } from "newui/component/IComponent";
 import Input from "newui/component/Input";
 import { UiApi } from "newui/INewUi";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import IGameScreenApi, { IMessages, IPinnedMessage, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { IMessage, Source } from "player/IMessageManager";
 import IPlayer from "player/IPlayer";
+import { RequirementInstance } from "player/quest/quest/Quest";
+import { QuestInstance } from "player/quest/QuestManager";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageFilter {
     name: string;
     allowedSources: Source[];
 }
-export default class Messages extends QuadrantComponent<false> implements IHookHost {
+export default class Messages extends QuadrantComponent<false> implements IHookHost, IMessages {
     static preferredQuadrant: Quadrant;
     static sendChatMessage(sender: IPlayer, message: string): typeof Messages;
     static readonly allFilterName: string;
@@ -42,12 +43,16 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     };
     private selectedFilter;
     private readonly pinnedNotes;
+    private readonly seenNotes;
+    private readonly pinnedQuestRequirements;
     private readonly messagesToDisplay;
     constructor(api: IGameScreenApi | UiApi);
     getID(): QuadrantComponentId;
     getName(): IStringSection[];
+    getPins(): IterableIterator<IPinnedMessage>;
     scrollToNewest(): void;
-    sendPinnedMessage(message: TranslationGenerator, onActivate: () => any): Button;
+    sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
+    pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage | undefined;
     onDisplayMessage(player: IPlayer, message: IMessage, addBackwards?: boolean): void;
     onWrittenNote(player: IPlayer, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
@@ -59,6 +64,12 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
      * Returns the context menu for messages, used by the superclass (quadrant component)
      */
     protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
+    private addPinnedNote;
+    private addPinnedQuestRequirement;
+    private onQuestGet;
+    private onRequirementComplete;
+    private pinRequirementsFromQuest;
+    private hasIncompletePinnedRequirementFromAnotherQuest;
     private updateMessages;
     private messages;
     /**
@@ -81,11 +92,14 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
      * Changes the message filter
      */
     private changeFilter;
-    private onPinnedMessageActivate;
-    private showNote;
     private onShowDialog;
     private onShowNote;
     private editFilters;
     private onFiltersEdited;
     private onFiltersReset;
+}
+export declare class PinnedMessage extends Button {
+    readonly type: PinType;
+    readonly id: any;
+    constructor(api: UiApi, type: PinType, id: any);
 }

@@ -11,6 +11,13 @@
  *
  */
 export interface ISerializer {
+    readonly dataView: DataView;
+    byteOffset: number;
+    saveToUint8Array(object: any, objectKey: any): Uint8Array | undefined;
+    saveToString(object: any, objectKey: any): string | undefined;
+    load(object: any, objectKey: any, data: string | Uint8Array): void;
+    loadFromUint8Array(object: any, objectKey: any, bytes: Uint8Array): void;
+    loadFromString(object: any, objectKey: any, data: string): void;
     readProperty(object: any, key: any): void;
     writeProperty(object: any, key: any): void;
 }
@@ -58,7 +65,10 @@ export declare enum Types {
     Map = 23,
     DoodadV2 = 24,
     MessageManager = 25,
-    Function = 26
+    Function = 26,
+    ClientStore = 27,
+    Vector3 = 28,
+    Vector2 = 29
 }
 export declare function SaveProperty(): PropertyDecorator;
 export declare function SaveAllProperties(): ClassDecorator;

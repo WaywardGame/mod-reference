@@ -17,13 +17,15 @@ import { AttributeManipulator, ClassListManipulator, DataManipulator } from "new
 import Emitter from "utilities/Emitter";
 export default class Component extends Emitter implements IComponent, IHookHost {
     protected api: UiApi;
+    private static readonly map;
+    static get<C extends Component = Component>(selector: string): C;
+    static get<C extends Component = Component>(element: Element): C;
+    static all(selector: string): IterableIterator<Component>;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
-    private static removeFromParent;
     static remove(elementToRemove: string | IComponent | HTMLElement): void;
     readonly element: HTMLElement;
-    readonly parent: Component;
     readonly classes: ClassListManipulator<this>;
     readonly attributes: AttributeManipulator<this>;
     readonly data: DataManipulator<this>;
@@ -31,9 +33,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     readonly childCount: number;
     readonly scrollHeight: number;
     readonly style: CSSStyleDeclaration;
-    protected children: Component[];
     private _element;
-    private _parent;
     private scrollingChild?;
     private _data;
     private contextMenuGenerator?;
@@ -52,7 +52,8 @@ export default class Component extends Emitter implements IComponent, IHookHost 
      *
      * Only call this directly after constructing the element.
      */
-    setElementType(elementType?: string, namespace?: Namespace): this;
+    setElement(element: HTMLElement): this;
+    setElement(elementType?: string, namespace?: Namespace): this;
     setId(id: string): this;
     jsonData<T>(): DOMStringMap & T;
     setSelectable(val: SelectableLayer | false): this;
@@ -61,8 +62,9 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     show(): this;
     hide(): this;
     toggle(visible?: boolean): this;
+    getParent<C extends Component = Component>(): C | null;
     appendTo(where: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
-    append(...elements: ArrayOfTOrIterablesOfT<HTMLElement | IComponent | undefined | false>): this;
+    append(...elements: ArrayOfIterablesOfOr<HTMLElement | IComponent | undefined | false>): this;
     remove(): this;
     contains(what: string | HTMLElement | IComponent): boolean;
     dump(filter?: (element: Component) => boolean): this;
@@ -73,7 +75,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setContents(html: string, escape?: boolean): this;
     store(): this;
     findDescendants(selector: string): NodeListOf<Element>;
-    setTooltip(initializer: (tooltip: ITooltip) => ITooltip): this;
+    setTooltip(initializer?: (tooltip: ITooltip) => ITooltip): this;
     removeTooltip(): void;
     /**
      * Remove the context menu from this element
@@ -85,17 +87,21 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setContextMenu(generator: () => IContextMenu | undefined): void;
     setHighlight(highlight: IHighlight): this;
     removeHighlight(): void;
+    setStyle(property: string, value: string | number): this;
     getBox(): ClientRect | DOMRect;
     getOffset(): {
         top: number;
         left: number;
     };
-    getNthChild(nth?: number): Component;
-    getChildren<C extends Component = Component>(): C[];
+    getNthChild<C extends Component = Component>(nth?: number): C;
+    getChildren<C extends Component = Component>(): IterableIterator<C>;
     scrollTo(child: Component, ms?: number): void;
     getStyle(styleName: string): string;
+    schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;
+    schedule<A extends any[]>(ms: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
+    schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
     private onMouseEnterForTooltip;

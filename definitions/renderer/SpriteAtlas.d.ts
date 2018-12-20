@@ -18,6 +18,7 @@ export default class SpriteAtlas implements ISpriteAtlas {
     items: ISpriteInfoList;
     itemsEquipped: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;
+    miss: ISpriteInfo;
     npcs: ISpriteInfoList;
     overlay: ISpriteInfoList;
     playerBody: ISpriteInfo;

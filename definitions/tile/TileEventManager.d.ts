@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { InspectionResult } from "game/inspection/IInspection";
+import Inspection from "game/inspection/Inspect";
 import { ITile } from "tile/ITerrain";
 import { ITileEvent, TileEventType } from "tile/ITileEvent";
 import ITileEventManager from "tile/ITileEventManager";
@@ -20,6 +22,8 @@ export default class TileEventManager implements ITileEventManager {
     updateAll(): void;
     fireOverflow(x: number, y: number, z: number): void;
     getMovementProgress(tileEvent: ITileEvent): number;
+    inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
+    is(thing: any): thing is ITileEvent;
     private _addToTile;
     private _removeFromTile;
 }

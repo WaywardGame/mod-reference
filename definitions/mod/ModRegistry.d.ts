@@ -8,11 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionCallback, IActionDescriptionNamed } from "action/IAction";
+import { ActionType, IActionDescription } from "action/IAction";
 import { CommandCallback } from "command/ICommand";
-import { ActionType, Bindable, Command, Music, OverlayType, SfxType } from "Enums";
-import { Dictionary, InterruptChoice } from "language/ILanguage";
-import { Message } from "language/IMessages";
+import { ICorpseDescription } from "creature/corpse/ICorpse";
+import { ICreatureDescription } from "creature/ICreature";
+import { IDoodadDescription } from "doodad/IDoodad";
+import { Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, NPCType, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
+import { ChallengeModifier, IDailyChallengeModifier } from "game/Challenge";
+import { InspectType } from "game/inspection/IInspection";
+import { IInspectionHandler } from "game/inspection/Inspections";
+import { IItemDescription, IItemGroupDescription } from "item/IItem";
+import { Dictionary } from "language/Dictionaries";
+import InterruptChoice from "language/dictionary/InterruptChoice";
+import Message from "language/dictionary/Message";
+import Note from "language/dictionary/Note";
 import InterModRegistry, { InterModRegistration } from "mod/InterModRegistry";
 import { IPacketClass } from "multiplayer/packets/Packets";
 import { IBinding } from "newui/BindingManager";
@@ -22,30 +31,60 @@ import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
+import { INPCClass } from "npc/NPCS";
 import { Source } from "player/IMessageManager";
-import { INoteDescription, Note } from "player/NoteManager";
+import { INoteDescription } from "player/note/NoteManager";
+import { QuestType } from "player/quest/quest/IQuest";
+import { Quest } from "player/quest/quest/Quest";
+import { RequirementType } from "player/quest/requirement/IRequirement";
+import { Requirement } from "player/quest/requirement/Requirement";
+import { ISkillDescription } from "player/Skills";
 import { IOverlayDescription } from "renderer/Overlays";
+import { ITerrainDescription } from "tile/ITerrain";
+import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
 export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
 export declare enum ModRegistrationType {
     Action = 0,
-    Command = 1,
-    Bindable = 2,
-    OptionsSection = 3,
-    Dictionary = 4,
-    Registry = 5,
-    Dialog = 6,
-    HelpArticle = 7,
-    Note = 8,
-    Message = 9,
-    Overlay = 10,
-    MessageSource = 11,
+    Bindable = 1,
+    Command = 2,
+    Creature = 3,
+    DailyChallengeModifier = 4,
+    Dialog = 5,
+    Dictionary = 6,
+    Doodad = 7,
+    HelpArticle = 8,
+    InspectionType = 9,
+    InterModRegistration = 10,
+    InterModRegistry = 11,
     InterruptChoice = 12,
-    MenuBarButton = 13,
-    MusicTrack = 14,
-    SoundEffect = 15,
-    Packet = 16,
-    InterModRegistry = 17,
-    InterModRegistration = 18
+    Item = 13,
+    ItemGroup = 14,
+    MenuBarButton = 15,
+    Message = 16,
+    MessageSource = 17,
+    MusicTrack = 18,
+    Note = 19,
+    NPC = 20,
+    OptionsSection = 21,
+    Overlay = 22,
+    Packet = 23,
+    Quest = 24,
+    QuestRequirement = 25,
+    Registry = 26,
+    Skill = 27,
+    SoundEffect = 28,
+    Terrain = 29,
+    TileEvent = 30
+}
+export interface IInspectionTypeRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.InspectionType;
+    name: string;
+    description: IInspectionHandler | IInspectionHandler["handle"];
+}
+export interface IDailyChallengeModifierRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.DailyChallengeModifier;
+    name: string;
+    description: IDailyChallengeModifier | IDailyChallengeModifier["apply"];
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -60,9 +99,15 @@ export interface IPacketRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Packet;
     class: IPacketClass;
 }
+export interface INPCRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.NPC;
+    name: string;
+    class: INPCClass;
+}
 export interface IActionRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Action;
-    description: IActionDescriptionNamed;
+    name: string;
+    description: IActionDescription;
 }
 export interface IHelpArticleRegistration extends IBaseModRegistration {
     type: ModRegistrationType.HelpArticle;
@@ -115,7 +160,7 @@ export interface IOptionsSectionRegistration extends IBaseModRegistration {
 }
 export interface IRegistryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Registry;
-    cls: {
+    class: {
         new (mod: any): any;
     };
 }
@@ -123,7 +168,7 @@ export interface IDialogRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dialog;
     name: string;
     description: IDialogDescription;
-    cls: {
+    class: {
         new (gsapi: IGameScreenApi): Dialog;
     };
 }
@@ -137,7 +182,57 @@ export interface IInterModRegistration extends IBaseModRegistration {
     registryName: string;
     value: any;
 }
-export declare type ModRegistration = IActionRegistration | ICommandRegistration | IBindableRegistration | IOptionsSectionRegistration | IDictionaryRegistration | IRegistryRegistration | IDialogRegistration | IHelpArticleRegistration | INoteRegistration | IMessageRegistration | IOverlayRegistration | IMessageSourceRegistration | IInterruptChoiceRegistration | IMenuBarButtonRegistration | IMusicTrackRegistration | ISoundEffectRegistration | IPacketRegistration | IInterModRegistryRegistration | IInterModRegistration;
+export interface ISkillRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Skill;
+    name: string;
+    description?: ISkillDescription;
+}
+export interface IItemRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Item;
+    name: string;
+    description?: IItemDescription;
+}
+export interface ICreatureRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Creature;
+    name: string;
+    description: ICreatureDescription;
+    corpseDescription?: ICorpseDescription;
+}
+export interface ITerrainRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Terrain;
+    name: string;
+    description?: ITerrainRegistrationDescription;
+}
+export interface ITerrainRegistrationDescription extends ITerrainDescription {
+    resources?: ITerrainResourceItem[];
+    defaultItem?: ItemType;
+}
+export interface IDoodadRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Doodad;
+    name: string;
+    description?: IDoodadDescription;
+}
+export interface ITileEventRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.TileEvent;
+    name: string;
+    description?: ITileEventDescription;
+}
+export interface IItemGroupRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.ItemGroup;
+    name: string;
+    description: IItemGroupDescription;
+}
+export interface IQuestRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Quest;
+    name: string;
+    description: Quest;
+}
+export interface IQuestRequirementRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.QuestRequirement;
+    name: string;
+    description: Requirement;
+}
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -171,6 +266,13 @@ declare module Register {
      */
     function packet<C extends IPacketClass>(cls: C): <K extends string | number | symbol, T extends { [k in K]: C; }>(target: T, key: K) => void;
     /**
+     * Registers an NPC.
+     * @param cls The NPC class.
+     *
+     * The decorated property will be injected with the NPCType of the registered NPC.
+     */
+    function npc<C extends INPCClass>(name: string, cls: C): <K extends string | number | symbol, T extends { [k in K]: NPCType; }>(target: T, key: K) => void;
+    /**
      * Registers a help article.
      * @param name The name of the help article.
      * @param description The definition of the help article.
@@ -186,6 +288,54 @@ declare module Register {
      * The decorated property will be injected with the id of the registered note.
      */
     function note(name: string, description?: INoteDescription): <K extends string | number | symbol, T extends { [k in K]: Note; }>(target: T, key: K) => void;
+    /**
+     * Registers a skill.
+     * @param name The name of the skill.
+     * @param description The definition of the skill.
+     *
+     * The decorated property will be injected with the id of the registered skill.
+     */
+    function skill(name: string, description?: ISkillDescription): <K extends string | number | symbol, T extends { [k in K]: SkillType; }>(target: T, key: K) => void;
+    /**
+     * Registers an item.
+     * @param name The name of the item.
+     * @param description The definition of the item.
+     *
+     * The decorated property will be injected with the id of the registered item.
+     */
+    function item(name: string, description?: IItemDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
+    /**
+     * Registers a creature.
+     * @param name The name of the creature.
+     * @param description The definition of the creature.
+     *
+     * The decorated property will be injected with the id of the registered creature.
+     */
+    function creature(name: string, description: ICreatureDescription, corpseDescription?: ICorpseDescription): <K extends string | number | symbol, T extends { [k in K]: CreatureType; }>(target: T, key: K) => void;
+    /**
+     * Registers a terrain.
+     * @param name The name of the terrain.
+     * @param description The definition of the terrain.
+     *
+     * The decorated property will be injected with the id of the registered terrain.
+     */
+    function terrain(name: string, description?: ITerrainRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: TerrainType; }>(target: T, key: K) => void;
+    /**
+     * Registers a doodad.
+     * @param name The name of the doodad.
+     * @param description The definition of the doodad.
+     *
+     * The decorated property will be injected with the id of the registered doodad.
+     */
+    function doodad(name: string, description?: IDoodadDescription): <K extends string | number | symbol, T extends { [k in K]: DoodadType; }>(target: T, key: K) => void;
+    /**
+     * Registers a tile event.
+     * @param name The name of the tile event.
+     * @param description The definition of the tile event.
+     *
+     * The decorated property will be injected with the id of the registered tile event.
+     */
+    function tileEvent(name: string, description?: ITileEventDescription): <K extends string | number | symbol, T extends { [k in K]: TileEventType; }>(target: T, key: K) => void;
     /**
      * Registers a dialog.
      * @param name The name of the dialog.
@@ -245,19 +395,42 @@ declare module Register {
      */
     function overlay(name: string, description?: IOverlayDescription): <K extends string | number | symbol, T extends { [k in K]: OverlayType; }>(target: T, key: K) => void;
     /**
+     * Registers an inspection type, which will appear in tile tooltips or the messages after inspecting a tile.
+     * @param description The definition of the inspection type.
+     */
+    function inspectionType(name: string, description: IInspectionHandler | IInspectionHandler["handle"]): <K extends string | number | symbol, T extends { [k in K]: InspectType; }>(target: T, key: K) => void;
+    /**
+     * Registers a daily challenge modifier, a "modifier" that will change based on the seed in daily challenge mode.
+     * @param description The definition of the daily challenge modifier.
+     */
+    function dailyChallengeModifier(name: string, description: IDailyChallengeModifier | IDailyChallengeModifier["apply"]): <K extends string | number | symbol, T extends { [k in K]: ChallengeModifier; }>(target: T, key: K) => void;
+    /**
      * Registers a menu bar button.
      * @param description The definition of the menu bar button.
      */
     function menuBarButton(name: string, description: IMenuBarButtonDescription): <K extends string | number | symbol, T extends { [k in K]: MenuBarButtonType; }>(target: T, key: K) => void;
-    function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
-    function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
+    /**
+     * Registers an item group.
+     * @param description The definition of the item group.
+     */
+    function itemGroup(name: string, description: IItemGroupDescription): <K extends string | number | symbol, T extends { [k in K]: ItemTypeGroup; }>(target: T, key: K) => void;
+    /**
+     * Registers a quest.
+     * @param description The definition of the quest.
+     */
+    function quest(name: string, description: Quest): <K extends string | number | symbol, T extends { [k in K]: QuestType; }>(target: T, key: K) => void;
+    /**
+     * Registers a quest requirement.
+     * @param description The definition of the quest requirement.
+     */
+    function questRequirement(name: string, description: Requirement<any, any>): <K extends string | number | symbol, T extends { [k in K]: RequirementType; }>(target: T, key: K) => void;
     /**
      * Registers an action.
      * @param description The definition of this action.
-     *
-     * This decorator should be used on a valid `ActionCallback` method.
      */
-    function action<T = any>(description: IActionDescriptionNamed): (target: any, key: string, descriptor: TypedPropertyDescriptor<ActionCallback<T>>) => void;
+    function action(name: string, description?: IActionDescription): <K extends string | number | symbol, T extends { [k in K]: ActionType; }>(target: T, key: K) => void;
+    function interModRegistry<V>(name: string): <K extends string | number | symbol, T extends { [k in K]: InterModRegistry<V>; }>(target: T, key: K) => void;
+    function interModRegistration<V>(modName: string, registryName: string, value: V): <K extends string | number | symbol, T extends { [k in K]: InterModRegistration<V>; }>(target: T, key: K) => void;
     /**
      * Registers a command.
      * @param name The name of this command (what players will type to use it, eg: `/heal`).
@@ -311,29 +484,50 @@ declare const INVALID: unique symbol;
  * 	public readonly menuBarButton: MenuBarButtonType;
  * ```
  */
-export declare function Registry<H, T>(): {
-    /**
-     * @param key The key of `H` which contains `T`.
-     * @returns A
-     */
-    get<K extends keyof H>(key: K): H[K] extends T ? T : typeof INVALID;
-};
+export declare function Registry<H, T extends CommandCallback>(): IRegistryRegisteredCommandIntermediateGetter<H, T>;
+export declare function Registry<H, T>(): IRegistryRegisteredPropertyIntermediateGetter<H, T>;
 export declare module Registry {
     /**
      * Returns the ID of a registered action or command callback which was decorated with its respective `@Register` decorator.
      * @param method An action or command callback method
      */
-    function id<M extends (...args: any[]) => any>(method: M): M extends ActionCallback ? ActionType : Command;
+    function id<M extends (...args: any[]) => any>(method: M): Command;
     /**
      * Used internally for `Registry<H, T>.get(key)`
      */
     class Registered {
         readonly key: string;
-        constructor(key: string);
+        readonly type: RegistryRegisteredIntermediateType;
+        constructor(key: string, type: RegistryRegisteredIntermediateType);
     }
 }
 export interface IBaseModRegistration {
     type: ModRegistrationType;
     key: string;
     registrationId: number;
+}
+export interface IRegistryRegisteredActionIntermediateGetter<H, T> {
+    /**
+     * @param key The key of `H` which contains an `ActionCallback`.
+     * @returns An intermediate value referencing the `ActionCallback` stored in the given key in `H`
+     */
+    getAction<K extends keyof H>(key: K): H[K] extends T ? ActionType : typeof INVALID;
+}
+export interface IRegistryRegisteredCommandIntermediateGetter<H, T> {
+    /**
+     * @param key The key of `H` which contains a `CommandCallback`.
+     * @returns An intermediate value referencing the `CommandCallback` stored in the given key in `H`
+     */
+    getCommand<K extends keyof H>(key: K): H[K] extends T ? Command : typeof INVALID;
+}
+export interface IRegistryRegisteredPropertyIntermediateGetter<H, T> {
+    /**
+     * @param key The key of `H` which contains `T`.
+     * @returns An intermediate value referencing the `T` stored in the given key in `H`
+     */
+    get<K extends keyof H>(key: K): H[K] extends T ? T : typeof INVALID;
+}
+export declare const enum RegistryRegisteredIntermediateType {
+    Property = 0,
+    Callback = 1
 }

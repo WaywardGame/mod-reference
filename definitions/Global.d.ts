@@ -7,10 +7,7 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import IActionManager from "action/IActionManager";
 import IAudio from "audio/IAudio";
 import ICorpseManager from "creature/corpse/ICorpseManager";
 import ICreatureManager from "creature/ICreatureManager";
@@ -18,7 +15,7 @@ import IDoodadManager from "doodad/IDoodadManager";
 import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
 import IItemManager from "item/IItemManager";
-import ILanguageManager from "language/ILanguageManager";
+import LanguageManager from "language/LanguageManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import NewUi from "newui/NewUi";
@@ -37,7 +34,6 @@ import ISteamworks from "steamworks/ISteamworks";
 import ITileEventManager from "tile/ITileEventManager";
 import IUi from "ui/IUi";
 export declare let absentPlayers: IPlayer[];
-export declare let actionManager: IActionManager;
 export declare let audio: IAudio;
 export declare let corpseManager: ICorpseManager;
 export declare let creatureManager: ICreatureManager;
@@ -46,7 +42,7 @@ export declare let fieldOfView: IFieldOfView;
 export declare let flowFieldManager: IFlowFieldManager;
 export declare let game: IGame;
 export declare let itemManager: IItemManager;
-export declare let languageManager: ILanguageManager;
+export declare let languageManager: LanguageManager;
 export declare let localPlayer: IPlayer;
 export declare let modManager: IModManager;
 export declare let multiplayer: IMultiplayer;

@@ -7,18 +7,28 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
+import { ActionType } from "action/IAction";
+import { ICreature } from "creature/ICreature";
 import DoodadInfo from "doodad/DoodadInfo";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { ActionType, DoodadType, DoodadTypeGroup, DoorOrientation, EquipType, GrowingStage, IDoodadParticles, IDoodadResource, IInspect, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SentenceCaseStyle, SkillType, StatusType, TerrainType } from "Enums";
+import { DoodadType, DoodadTypeGroup, DoorOrientation, EquipType, GrowingStage, IDoodadParticles, IDoodadResource, IModdable, IObject, IObjectDescription, IObjectOptions, IRGB, ItemType, SkillType, StatusType, TerrainType } from "Enums";
+import { IInspectable } from "game/inspection/Inspections";
 import { IContainer, IItem, IItemArray, IItemLegendary } from "item/IItem";
-import { Message } from "language/IMessages";
+import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
-export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer> {
+export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, IInspectable {
+    /**
+     * @param article Whether to include an article for the name of the doodad. Uses the article rules on the language. Defaults to `true`.
+     * @param count The number of this doodad that you're getting the name of. Defaults to `1`.
+     *
+     * Examples:
+     * - `doodad.getName()` // "a stone furnace"
+     * - `doodad.getName(false)` // "stone furnace"
+     * - `doodad.getName(undefined, 3)` // "stone furnaces"
+     */
+    getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
     canGrow(): boolean;
@@ -42,22 +52,20 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     isGatherable(): boolean;
     isEmbers(): boolean;
     canHarvest(): boolean;
-    canPickup(player: IPlayer): boolean;
+    canPickup(human: Human): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
     getDoodadInfo(): DoodadInfo | undefined;
-    canCauseStatus(human: IBaseHumanEntity, equipType?: EquipType): boolean;
-    causeStatus(human: IBaseHumanEntity, equipType?: EquipType): void;
-    checkForTrampling(humanOrCreatureId: IBaseHumanEntity | number): boolean;
+    canCauseStatus(human: Human, equipType?: EquipType): boolean;
+    causeStatus(human: Human, equipType?: EquipType): void;
+    checkForTrampling(source: Human | ICreature): boolean;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): void;
-    getDurabilityMessage(): Message;
-    getGrowingMessage(textCase: SentenceCaseStyle): string;
-    getInspect(): IInspect[];
-    setOffTrap(human?: IBaseHumanEntity, withMessage?: boolean): void;
+    setOffTrap(human?: Human, withMessage?: boolean): void;
+    getGrowthParticles(): IRGB | undefined;
     update(): void;
     isDangerous(player: IPlayer): boolean;
-    getDamage(human: IBaseHumanEntity, equipType?: EquipType): number;
+    getDamage(human: Human, equipType?: EquipType): number;
 }
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: boolean;
@@ -70,6 +78,7 @@ export interface IDoodadOptions extends IObjectOptions {
     ownerIdentifier?: string;
     item?: IItem;
     step?: number;
+    hitchedCreature?: number;
 }
 export declare type IDoodadOld = Partial<IDoodad> & {
     growInto?: DoodadType;

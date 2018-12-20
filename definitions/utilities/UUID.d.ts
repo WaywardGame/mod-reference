@@ -10,5 +10,6 @@
  */
 declare module UUID {
     function create(): string;
+    function isValid(uuid: string): boolean;
 }
 export default UUID;

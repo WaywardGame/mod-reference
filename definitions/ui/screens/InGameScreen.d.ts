@@ -10,9 +10,8 @@
  */
 import { Bindable, DialogId, Direction, EquipType, ItemType, SkillType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
-import { Message } from "language/IMessages";
+import Message from "language/dictionary/Message";
 import { BindCatcherApi } from "newui/BindingManager";
-import { ITile } from "tile/ITerrain";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
 import BaseScreen from "ui/screens/BaseScreen";
@@ -56,13 +55,6 @@ export default class InGameScreen extends BaseScreen {
     elementDialogDismantleButton: JQuery;
     elementDialogEquipment: JQuery;
     elementDialogEquipmentContainer: JQuery;
-    elementDialogSkills: JQuery;
-    elementDialogSkillsContainer: JQuery;
-    elementDialogMilestones: JQuery;
-    elementDialogMilestonesContainer: JQuery;
-    elementDialogMap: JQuery;
-    elementDialogBook: JQuery;
-    elementDialogBookContainer: JQuery;
     elementVersion: JQuery;
     elementContainerDialogs: JQuery[];
     elementOtherDialogs: JQuery[];
@@ -88,7 +80,6 @@ export default class InGameScreen extends BaseScreen {
     private isCurrentlySorting;
     private craftableItemTypes;
     private nonCraftableItemTypes;
-    private worldTooltip;
     private lastStats;
     selector(): string;
     bindElements(): void;
@@ -126,9 +117,6 @@ export default class InGameScreen extends BaseScreen {
     onOpenDialog(dialog: JQuery): void;
     focus(): void;
     closeDialog(dialog: JQuery): boolean;
-    openMapDialog(): void;
-    closeMapDialog(): void;
-    openBookDialog(title: string, content: string): void;
     closeAllDialogs(): boolean;
     autoOpenDialog(index: string | number, element: JQuery): boolean;
     openDialogs(): void;
@@ -152,14 +140,13 @@ export default class InGameScreen extends BaseScreen {
     runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean): boolean;
     onCraftingItemClick(element: JQuery): void;
     onDismantleItemClick(dismantleItem: IItem | undefined): void;
-    getTooltipHtml(element: JQuery): string | undefined;
+    getTooltipHtml(element: JQuery): string;
     tooltipEnable(): void;
     tooltipRefresh(): void;
     tooltipDisable(): void;
     tooltipHide(): void;
     unSelectElements(): void;
-    getTooltipHtmlForItem(item: IItem, itemType: ItemType, isQuickSlot: boolean, isDismantle: boolean, isNPC: boolean): string;
-    getTooltipHtmlForTile(tile: ITile): string;
+    getTooltipHtmlForItem(item: IItem | undefined, itemType: ItemType, isQuickSlot: boolean, isDismantle: boolean, isNPC: boolean): string;
     createDialog(container: JQuery, dialogInfo: IDialogInfo): JQuery;
     getUsedQuickSlots(): number[];
     getFreeQuickSlots(): number[];
@@ -179,8 +166,6 @@ export default class InGameScreen extends BaseScreen {
     setEquipSlot(equip: EquipType, itemId?: number, internal?: boolean): void;
     removeItemFromEquipSlot(equip: EquipType): void;
     sortSkills(skills: SkillType[]): SkillType[];
-    updateSkillsDialog(): void;
-    updateMilestonesDialog(): void;
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     createCraftItemElements(containerSortInfo: IContainerSortInfo): void;
@@ -215,9 +200,7 @@ export default class InGameScreen extends BaseScreen {
     private additionalRequirements;
     private runAction;
     private updateContextMenu;
-    private runGatherOrHarvestAction;
-    private runPourAction;
-    private runHealAction;
+    private confirmAction;
     private isOverlayVisible;
     private readonly onInterrupt;
     private readonly onInterruptClosed;

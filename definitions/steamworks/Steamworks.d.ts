@@ -30,7 +30,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private readonly workshopUrl;
     private readonly workshopFileUrl;
     private readonly ignoredDirectories;
-    private _serverIdToJoin;
+    private _serverToJoin;
     private _dedicatedServerInfo;
     private _nextBackupTime;
     private _currentLobbyId;
@@ -41,6 +41,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     closeWindow(): void;
     isOverlayWorking(): boolean;
     isGreenworksEnabled(): boolean;
+    isNapiEnabled(): boolean;
     getAbsolutePath(...p: string[]): string;
     getAppPath(...p: string[]): string;
     isUsingAsar(): boolean;
@@ -58,8 +59,16 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getBetaName(): string;
     getBuildTime(): number | undefined;
     getPublishedMods(): IWorkshopItem[] | undefined;
-    setRichPresence(key: string, value: string): boolean;
-    clearRichPresence(): void;
+    getStatInt(name: string): number | undefined;
+    incrementStat(name: string): void;
+    getGlobalStatInt(name: string): number | undefined;
+    startPlaytimeTracking(): void;
+    stopPlaytimeTracking(): void;
+    setSteamRichPresence(key: string, value: string): boolean;
+    clearSteamRichPresence(): void;
+    updateDiscordPresence(): void;
+    setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): void;
+    getLobbyId(): string | undefined;
     isInLobby(): boolean;
     createLobby(type: LobbyType): void;
     setLobbyType(type: LobbyType): boolean;
@@ -97,6 +106,8 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
     multiplayerLogError(...args: any[]): void;
+    private initializeGreenworks;
+    private initializeNapi;
     private setupAndInitializeWorkshopMods;
     private processDisabledFailures;
     private initializeModsFromFolder;
@@ -121,10 +132,11 @@ export default class Steamworks extends Emitter implements ISteamworks {
      * Called when the user tries to join a lobby from their friends list or from an invite. The game client should attempt to connect to specified lobby when this is received. If the game isn't running yet then the game will be automatically launched with the command line parameter +connect_lobby <64-bit lobby Steam ID> instead.
      */
     private onLobbyJoinRequested;
-    private showCharacterSelectionForLobby;
+    private showCharacterSelectionForMultiplayer;
     private createFolderIfNotExists;
     private getSyncPath;
     private getSharePathForModZip;
     private getSharePathForModImage;
     private getFilesInFolder;
+    private logDebugInfo;
 }

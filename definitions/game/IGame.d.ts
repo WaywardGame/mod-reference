@@ -11,11 +11,11 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { DamageType, Difficulty, Direction, FireType, IObjectDescription, ISeeds, ItemQuality, ItemType, SaveType, SentenceCaseStyle, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
+import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
+import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
-import { IMessagePack, Message } from "language/IMessages";
+import Translation from "language/Translation";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import { INPC } from "npc/INPC";
 import { ICharacter, IPlayer } from "player/IPlayer";
@@ -29,6 +29,7 @@ import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vec2 from "utilities/math/Vector2";
+import Vector3 from "utilities/math/Vector3";
 import { IVersionInfo } from "utilities/Version";
 export interface IGame extends Emitter {
     interval: number;
@@ -44,9 +45,12 @@ export interface IGame extends Emitter {
     tileData: {
         [index: number]: {
             [index: number]: {
-                [index: number]: ITileData[];
-            };
-        };
+                [index: number]: ITileData[] | undefined;
+            } | undefined;
+        } | undefined;
+    };
+    wellData: {
+        [index: number]: IWell | undefined;
     };
     tileContainers: ITileContainer[];
     items: IItemArray;
@@ -71,6 +75,7 @@ export interface IGame extends Emitter {
         [index: number]: number;
     };
     previousSaveVersion: IVersionInfo;
+    worldId: string;
     tickSpeed: number;
     crafted: {
         [index: number]: ICrafted;
@@ -85,39 +90,34 @@ export interface IGame extends Emitter {
     debugRenderer: ITextureDebugRenderer;
     notifier: INotifier;
     cartographyTexture: WebGLTexture;
-    readonly isDailyChallenge: boolean;
+    readonly isChallenge: boolean;
     addPlayer(playerOptions?: Partial<IPlayerOptions>): IPlayer;
     addZoomLevel(amount: number): void;
-    updateZoomLevel(): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
-    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean): void;
-    checkForHiddenMob(human: IBaseHumanEntity, x: number, y: number, z: number): void;
+    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean, skipCaveDirt?: boolean): void;
+    checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
     consumeWaterTile(x: number, y: number, z: number): void;
-    damage(target: IPlayer | ICreature | IBaseHumanEntity, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
+    damage(target: IPlayer | ICreature | Human, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     deletePlayer(plys: IPlayer[], identifier: string): void;
     directionToMovement(direction: Direction): IVector2;
     doLavaEvents(x: number, y: number, z: number): void;
     enableFlowFieldDebug(): void;
-    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: string): void;
+    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     getAmbientLightLevel(z: number): number;
     getBenignity(): number | undefined;
     getBlackness(): number;
     getCameraPosition(): IVector2;
     getCompletedMilestoneCount(): number;
-    getDamageTypeString(damageTypes: DamageType[], prefixes?: string[]): string;
     getDifficulty(): Difficulty;
-    getFireMessage(decay?: number, isOpenFire?: boolean): Message;
+    getDifficultyOptions(): IDifficultyOptions;
     getHeight(z0: number, z1: number, d: number): number;
-    getInspectHealthMessage(percent: number, skillPercent: number, name: string): IMessagePack;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number | undefined;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     getMaxHealth(): number | undefined;
     getMovementFinishTime(): number;
-    getName(object: IItem | ICreature | IDoodad | IPlayer | IBaseHumanEntity | ICorpse | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
-    getNameFromDescription(description: IObjectDescription | undefined, textCase?: SentenceCaseStyle, withPrefix?: boolean): string;
     getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
     getOrCreateTile(x: number, y: number, z: number): ITile;
     getOrCreateTileData(x: number, y: number, z: number): ITileData[];
@@ -125,20 +125,24 @@ export interface IGame extends Emitter {
     getPlayerByName(name: string): IPlayer | undefined;
     getPlayerByPid(pid: number): IPlayer | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
+    getPlayersAtPosition(position: IVector3, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeePosition(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
     getReputation(): number | undefined;
     getSkillPercent(skill: SkillType): number | undefined;
-    getStrength(): number | undefined;
+    getMaxWeight(): number | undefined;
     getTactics(): number | undefined;
+    getTickSpeed(): number;
     getTile(x: number, y: number, z: number): ITile;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
     getTileFromPoint(point: IVector3): ITile;
     getTileUnsafe(x: number, y: number, z: number): ITile;
+    getTurnMode(): TurnMode;
     getValidPlayerName(name: string | undefined): string;
     getWrappedCoord(x: number): number;
+    initGl(): Promise<void>;
     initialize(): void;
     isFlammable(x: number, y: number, z: number): boolean;
     isOnFire(tile: ITile): FireType;
@@ -147,18 +151,13 @@ export interface IGame extends Emitter {
     isPositionEmpty(x: number, y: number, z: number): boolean;
     isPositionFull(x: number, y: number, z: number): boolean;
     isRealTimeMode(): boolean;
-    getTurnMode(): TurnMode;
-    setTurnMode(turnMode: TurnMode): void;
-    getTickSpeed(): number;
-    setTickSpeed(tickSpeed: number): void;
     isTileEmpty(tile: ITile): boolean;
     isTileFull(tile: ITile): boolean;
     makeCaveEntrance(player: IPlayer): TerrainType | undefined;
     makeLavaPassage(player: IPlayer): TerrainType | undefined;
-    makeMiniMap(offsetX: number, offsetY: number, offsetZ: number, skillCheck?: boolean): void;
+    makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     onGlobalSlotLoaded(_: number, success: boolean): void;
     onSaveLoaded(slot: number): void;
-    outputFireMessage(player: IPlayer, decay?: number, isOpenFire?: boolean): void;
     packGround(x: number, y: number, z: number): void;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     play(options: Partial<IPlayOptions>): Promise<boolean>;
@@ -174,7 +173,9 @@ export interface IGame extends Emitter {
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
+    setTickSpeed(tickSpeed: number): void;
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
+    setTurnMode(turnMode: TurnMode): void;
     setupSave(_: number): void;
     shouldRender(): number;
     synchronizeFlowFields(plys: IPlayer[]): void;
@@ -185,6 +186,7 @@ export interface IGame extends Emitter {
     updateTablesAndWeight(): void;
     updateThumbnail(): Promise<void>;
     updateView(updateFov: boolean): void;
+    updateZoomLevel(): void;
     wrapCoordinate(cordinate: number, reference: number): number;
 }
 export default IGame;
@@ -211,8 +213,9 @@ export interface IPlayOptions {
     name: string;
     seed: string | number | undefined;
     difficulty: Difficulty;
+    difficultyOptions: IDifficultyOptions;
     character: ICharacter;
-    multiplayer: IMultiplayerOptions | undefined;
+    multiplayer: IMultiplayerOptions | true | undefined;
     multiplayerServerToJoin: ServerInfo | undefined;
     turnMode: TurnMode;
     realTimeTickSpeed: number;
@@ -230,9 +233,32 @@ export interface ICrafted {
     unlockTime: number;
     newUnlock: boolean;
 }
+export interface IMapRequest {
+    /**
+     * The item containing the map.
+     */
+    item: IItem;
+    /**
+     * The tile position of the top-left corner of the map.
+     */
+    tilePosition: Vector3;
+    /**
+     * Whether to involve your skill in how "readable" the map is. Defaults to false.
+     */
+    skillCheck?: boolean;
+}
+export interface IWell {
+    quantity: number;
+    waterType: WaterType;
+}
+export declare enum WaterType {
+    None = 0,
+    FreshWater = 1,
+    Seawater = 2
+}
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;
 export declare const lineOfSightDetail = 4;
 export declare const interval = 16.6666;
-export declare const maximumDirectionTurnDelay: number;
-export declare const defaultDirectionTurnDelay: number;
+export declare const maximumTurnDelay: number;
+export declare const defaultTurnDelay: number;

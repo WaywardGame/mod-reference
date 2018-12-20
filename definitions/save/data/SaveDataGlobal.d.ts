@@ -12,6 +12,7 @@ import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModInfo";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import { IMilestoneData } from "player/IMilestone";
+import { ICharacter } from "player/IPlayer";
 import ISaveDataGlobal, { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
 import { IDialogInfo } from "ui/IUi";
 import { IEnumInfo } from "utilities/enum/IEnum";
@@ -43,11 +44,14 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
         [index: string]: IDialogInfo;
     };
     multiplayerBannedPlayers: string[];
+    multiplayerPreviousGames: {
+        [index: string]: ICharacter | undefined;
+    };
     characters: ISavedCharacter[];
     newui: {
         [index: string]: any;
     };
-    lastDedicatedServerJoined: string | undefined;
+    lastServerJoined: string | undefined;
     /**
      * Resets all options to default
      */

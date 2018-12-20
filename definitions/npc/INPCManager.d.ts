@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IBaseEntityManager } from "entity/IBaseEntityManager";
+import { IEntityManager } from "entity/IEntityManager";
 import { NPCType } from "Enums";
 import { INPC } from "npc/INPC";
-export interface INPCManager extends IBaseEntityManager<INPC> {
+export interface INPCManager extends IEntityManager<INPC> {
     spawn(npcType: NPCType, x: number, y: number, z: number): INPC | undefined;
     updateAll(): void;
 }

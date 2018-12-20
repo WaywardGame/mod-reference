@@ -7,25 +7,24 @@
  * 
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- * 
- * 
  */
 
-import IActionManager from "action/IActionManager";
 import IAudio from "audio/IAudio";
 import { ICommandManager } from "command/ICommandManager";
 import ICorpseManager from "creature/corpse/ICorpseManager";
 import ICreatureManager from "creature/ICreatureManager";
 import IDoodadManager from "doodad/IDoodadManager";
+import IHuman from "entity/IHuman";
 import { ItemType } from "Enums";
 import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
 import IGame from "game/IGame";
 import IItemManager from "item/IItemManager";
-import ILanguageManager from "language/ILanguageManager";
+import LanguageManager from "language/LanguageManager";
 import IHookManager from "mod/IHookManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import NewUi from "newui/NewUi";
+import { INPC } from "npc/INPC";
 import INPCManager from "npc/INPCManager";
 import IPlayer from "player/IPlayer";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
@@ -45,21 +44,13 @@ import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
 import IUi from "ui/IUi";
 
 declare global {
-
-	/**
-	 * @deprecated
-	 * @see `OptionalDescriptions` or `Descriptions`
-	 */
-	interface Description<T> {
-		[index: number]: T | undefined;
-	}
-
 	/**
 	 * An object of descriptions. Each key in E *may* map to a valid description.
 	 * @param E The enum with which to index these descriptions.
 	 * @param V The description type.
 	 */
 	type OptionalDescriptions<E extends string | number, V> = { [key in E]?: V } & { [key: number]: V | undefined };
+
 	/**
 	 * An object of descriptions. Each key in E *will* map to a valid description.
 	 * @param E The enum with which to index these descriptions.
@@ -71,6 +62,7 @@ declare global {
 	 * Changes the return type of the given function, or creates a new function from the given arguments and return type. 
 	 */
 	type MaskReturn<F extends any[] | ((...args: any[]) => any), R> = F extends (...args: infer A) => any ? (...args: A) => R : (...args: Extract<F, any[]>) => R;
+
 	/**
 	 * Gets the arguments tuple of a function.
 	 */
@@ -78,8 +70,13 @@ declare global {
 
 	type SaferArray<T> = Array<T | undefined>;
 
+	type Mutable<T> = {
+		-readonly [P in keyof T]: T[P];
+	};
+
+	type Human = IPlayer | INPC | IHuman;
+
 	let absentPlayers: IPlayer[];
-	let actionManager: IActionManager;
 	let audio: IAudio;
 	let commandManager: ICommandManager;
 	let corpseManager: ICorpseManager;
@@ -90,7 +87,7 @@ declare global {
 	let game: IGame;
 	let hookManager: IHookManager;
 	let itemManager: IItemManager;
-	let languageManager: ILanguageManager;
+	let languageManager: LanguageManager;
 	let localPlayer: IPlayer;
 	let npcManager: INPCManager;
 	let modManager: IModManager;
@@ -158,12 +155,6 @@ declare global {
 		new(): IKDTree;
 	}
 
-	interface IMsgPack {
-		encode(object: any): Uint8Array;
-		decode(array: Uint8Array): any;
-	}
-	const msgpack: IMsgPack;
-
 	interface JQuery {
 		getItemType(): ItemType;
 
@@ -203,10 +194,12 @@ declare global {
 		ctime: Date;
 		isFile(): boolean;
 		isDirectory(): boolean;
+		isSymbolicLink(): boolean;
 	}
 
 	interface IElectronApi {
 		greenworks: any | Error;
+		napi: INapi;
 		ipc: any;
 		shell: any;
 		os: any;
@@ -225,4 +218,39 @@ declare global {
 		isTestMode: boolean;
 	}
 	let electron: IElectron | undefined | never;
+
+	interface INapi {
+		discord: INapiDiscord;
+	}
+
+	interface INapiDiscord {
+		initialize(): void;
+		shutdown(): void;
+		runCallbacks(): void;
+		setOnJoinCallback(callback: (server: string) => void): void;
+		updatePresence(presenceInfo: INapiDiscordPresenceInfo): void;
+	}
+
+	interface INapiDiscordPresenceInfo {
+		details: string;
+		state?: string;
+		largeImageKey?: string;
+		largeImageText?: string;
+		smallImageKey?: string;
+		smallImageText?: string;
+		multiplayerServerId?: string;
+		multiplayerCurrentPlayers?: number;
+		multiplayerMaxPlayers?: number;
+	}
+
+	function Override(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
+
+	interface CallableFunction extends Function {
+		bind<T, A0, A1, A2, A3, A4, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A6, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A8, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, arg9: A9, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, arg9: A9): (...args: A) => R;
+	}
 }

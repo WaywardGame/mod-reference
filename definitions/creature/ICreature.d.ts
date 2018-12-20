@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseEntity from "entity/IBaseEntity";
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { AiType, EntityType } from "entity/IEntity";
+import IEntity, { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, DamageType, Defense, IModdable, IObject, IRGB, ItemType, ItemTypeGroup, LootGroupType, MoveType, StatusType } from "Enums";
+import { IInspectable } from "game/inspection/Inspections";
 import { IItem } from "item/IItem";
-import { IMessagePack } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
-export interface ICreature extends IBaseEntity, IObject<CreatureType> {
+export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable {
     entityType: EntityType.Creature;
     ai: AiType;
     anim: number;
@@ -25,16 +25,26 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType> {
     enemy?: number;
     enemyIsPlayer?: boolean;
     enemyAttempts?: number;
+    hitchedTo?: number;
+    /**
+     * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
+     * @param count The number of this creature that you're getting the name of. Defaults to `1`.
+     *
+     * Examples:
+     * - `creature.getName()` // "an acid spitter demon"
+     * - `creature.getName(false)` // "acid spitter demon"
+     * - `creature.getName(undefined, 3)` // "acid spitter demons"
+     */
+    getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectHealthMessage(player: IPlayer): IMessagePack;
-    getInspectResistVulnerabilityMessage(player: IPlayer): IMessagePack | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     damage(damageInfo: IDamageInfo): number | undefined;
     isTamed(): boolean;
     tame(player: IPlayer): boolean;
     release(): boolean;
+    increaseTamedCount(): void;
     pet(): boolean;
     skipNextUpdate(): void;
     onUnserialized(): void;
@@ -43,6 +53,7 @@ export interface ICreature extends IBaseEntity, IObject<CreatureType> {
     getMovementFinishTime(): number | undefined;
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
+    checkUnder(checkX?: number, checkY?: number): boolean;
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
     initializeStats(hp: number, maxhp?: number): void;
@@ -61,7 +72,8 @@ export declare enum SpawnGroup {
     WaterCave = 3,
     Cave = 4,
     Night = 5,
-    StrongGuardians = 6
+    StrongGuardians = 6,
+    FreshWater = 7
 }
 export declare enum SpawnableTiles {
     None = 0,
@@ -79,7 +91,6 @@ export declare enum SpawnableTiles {
     All = 12
 }
 export interface ICreatureDescription extends IModdable {
-    name?: string;
     minhp: number;
     maxhp: number;
     minatk: number;
@@ -88,10 +99,16 @@ export interface ICreatureDescription extends IModdable {
     damageType: DamageType;
     ai: AiType;
     moveType: MoveType;
+    /**
+     * A percentage number for the amount of time the creature should skip movement
+     * 100 means the creature always skips their movement
+     */
+    skipMovementChance?: number;
     fishable?: boolean;
     blood?: IRGB;
     aberrantBlood?: IRGB;
     loot?: ICreatureLoot[];
+    aberrantLoot?: ICreatureLoot[];
     spawnTiles: SpawnableTiles;
     spawnReputation?: number;
     spawnOnBenignity?: boolean;
@@ -103,29 +120,30 @@ export interface ICreatureDescription extends IModdable {
     noCorpse?: boolean;
     respawn?: boolean;
     reputation: number;
-    prefix?: string;
-    suffix?: string;
     waterAnimations?: boolean;
-    description?: string;
     tamingDifficulty?: number;
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
     lightSource?: boolean;
     noStumble?: boolean;
     particlesOnMove?: boolean;
     providesFire?: boolean;
+    canTrample?: boolean;
+    helpPlants?: boolean;
+    speed?: number;
+    disableHitching?: boolean;
 }
 export interface ICreatureLoot {
     item: ItemType;
     chance?: number;
 }
 export interface IDamageInfo {
-    human?: IBaseHumanEntity;
+    human?: Human;
     amount: number;
     type: DamageType;
-    weaponName?: string;
+    weaponName?: Message | Translation;
     creature?: ICreature;
     skipMilestones?: boolean;
     legacy?: boolean;
-    damageMessage?: string;
+    damageMessage?: Message | Translation;
     soundDelay?: number;
 }

@@ -11,6 +11,7 @@
  *
  */
 import { IDoodadDescription, IGroupDescription } from "doodad/IDoodad";
-export declare const doodadDescriptions: Description<IDoodadDescription>;
+import { DoodadType, DoodadTypeGroup } from "Enums";
+export declare const doodadDescriptions: OptionalDescriptions<DoodadType, IDoodadDescription>;
 export default doodadDescriptions;
-export declare const doodadGroups: Description<IGroupDescription>;
+export declare const doodadGroups: OptionalDescriptions<DoodadTypeGroup, IGroupDescription>;

@@ -8,20 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ItemType, SkillType } from "Enums";
-import { ITileEvent } from "tile/ITileEvent";
-declare const _default: {
-    items: {
-        type: ItemType.HoneyFungus;
-    }[];
-    skillUse: SkillType.Mycology;
-    particles: {
-        r: number;
-        g: number;
-        b: number;
-    };
-    spreadMax: number;
-    create(tileEvent: ITileEvent): void;
-    update(tileEvent: ITileEvent): void;
-};
-export default _default;
+import { ITileEventDescription } from "tile/ITileEvent";
+declare const fungus: ITileEventDescription;
+export default fungus;

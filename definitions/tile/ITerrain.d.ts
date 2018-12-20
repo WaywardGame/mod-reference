@@ -19,7 +19,6 @@ import { INPC } from "npc/INPC";
 import { ITileEvent } from "tile/ITileEvent";
 import { IVector3 } from "utilities/math/IVector";
 export interface ITerrainDescription extends IModdable {
-    name?: string;
     passable?: boolean;
     particles: IRGB;
     durability?: number;
@@ -41,8 +40,6 @@ export interface ITerrainDescription extends IModdable {
     background?: TerrainType;
     noBackground?: boolean;
     isOre?: boolean;
-    suffix?: string;
-    prefix?: string;
     animated?: boolean;
     tillable?: boolean;
     hasMound?: boolean;
@@ -98,6 +95,7 @@ export interface ITemplate {
         [id: string]: DoodadType | ITemplateDoodad;
     };
     doodad?: string[];
+    tilled?: boolean;
     /**
      * A decimal value, 0 for no degradation, 1 for 100% degradation (basically as if there was no template)
      */

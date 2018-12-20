@@ -19,7 +19,6 @@ export default class ModManager implements IModManager {
     private readonly mods;
     private readonly internalMods;
     private readonly internalModsElectron;
-    private readonly onLanguageLoadCallbacks;
     private readonly onModInitializedCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
@@ -30,7 +29,7 @@ export default class ModManager implements IModManager {
     setupMods(): Promise<void>;
     saveAll(): void;
     getFile(modIndex: number, file: string, callback: (data: string, success: boolean) => void): boolean;
-    setupMod(folderName: string, modType: ModType, callback: (id?: number) => void, initialModState?: ModState): Promise<void>;
+    setupMod(folderName: string, modType: ModType, initialModState?: ModState): Promise<number | undefined>;
     removeMod(id: number, uninstall?: boolean): void;
     getMods(): IModInfo[];
     getLoadedMods(): IModInfo[];
@@ -39,18 +38,16 @@ export default class ModManager implements IModManager {
     getEnabledMods(): number[];
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
     load(index: number, loadOrder: number): Promise<void>;
-    unload(index: number, cacheHooks?: boolean): void;
+    unload(index: number, cacheHooks?: boolean): Promise<void>;
     save(index: number): void;
     /**
-     * UNUSED
-     * @deprecated
+     * Used by pro developers
      */
-    reloadByName(name: string, cacheHooks?: boolean): boolean;
+    reloadByName(name: string, cacheHooks?: boolean): Promise<boolean>;
     /**
-     * UNUSED
-     * @deprecated
+     * Used by pro developers
      */
-    reload(index: number, cacheHooks?: boolean): boolean;
+    reload(index: number, cacheHooks?: boolean): Promise<boolean>;
     isValid(index: number): boolean;
     isEnabled(index: number): boolean;
     isLoaded(index: number): boolean;
@@ -59,6 +56,7 @@ export default class ModManager implements IModManager {
     getName(index: number): string;
     getLog(index: number): Log;
     getDescription(index: number): string;
+    getTags(index: number): Set<string>;
     getVersion(index: number): string;
     getLastUpdatedDate(index: number): number | undefined;
     getInstallDate(index: number): number | undefined;
@@ -101,6 +99,4 @@ export default class ModManager implements IModManager {
      * Initializes the customizations for the given mod.
      */
     private initializeCustomizations;
-    private onLanguageLoad;
-    private onModInitialized;
 }

@@ -10,6 +10,15 @@
  */
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
+export declare enum Responsibility {
+    Programming = 0,
+    Design = 1,
+    Web = 2,
+    Art = 3,
+    PR = 4,
+    UX = 5,
+    Music = 6
+}
 export default class AboutMenu extends Menu {
     constructor(uiApi: UiApi);
 }

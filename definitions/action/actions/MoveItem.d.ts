@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IAction } from "action/IAction";
-export declare const action: IAction;
-export default action;
+import { Action } from "action/Action";
+import { ActionArgument } from "action/IAction";
+import { INPC } from "npc/INPC";
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Container, ActionArgument.Undefined], [ActionArgument.Container, ActionArgument.Undefined], [ActionArgument.ItemType, ActionArgument.Undefined], [ActionArgument.ItemQuality, ActionArgument.Undefined]], INPC | import("../../player/IPlayer").IPlayer, void>;
+export default _default;

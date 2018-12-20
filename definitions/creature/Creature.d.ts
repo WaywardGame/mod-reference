@@ -9,14 +9,16 @@
  * https://waywardgame.github.io/
  */
 import { ICreature, ICreatureDescription, IDamageInfo } from "creature/ICreature";
-import BaseEntity from "entity/BaseEntity";
+import Entity from "entity/Entity";
 import { AiType, EntityType } from "entity/IEntity";
 import { CreatureType, ItemType, MoveType, SfxType } from "Enums";
+import Inspection from "game/inspection/Inspect";
+import { InspectionSection } from "game/inspection/Inspections";
 import { IItem } from "item/IItem";
-import { IMessagePack } from "language/IMessages";
+import Translation from "language/Translation";
 import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
-export default class Creature extends BaseEntity implements ICreature, IUnserializedCallback {
+export default class Creature extends Entity implements ICreature, IUnserializedCallback {
     readonly entityType: EntityType.Creature;
     aberrant?: boolean;
     ai: AiType;
@@ -27,6 +29,8 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     respawned?: boolean;
     shouldSkipNextUpdate: boolean;
     type: CreatureType;
+    originalMoveType: MoveType | undefined;
+    hitchedTo?: number;
     private _description;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
@@ -34,14 +38,15 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
      * Initializes the creature's stats. Used in the constructor & save conversion.
      */
     initializeStats(hp: number, maxhp?: number): void;
+    getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
+    inspect({ inspector, context, inspectEntityHealth }: Inspection, section: InspectionSection): void;
     isHidden(): boolean;
     isDefender(): boolean;
-    getInspectHealthMessage(player: IPlayer): IMessagePack;
-    getInspectResistVulnerabilityMessage(player: IPlayer): IMessagePack | undefined;
     checkForBurn(moveType?: MoveType): boolean;
     isTamed(): boolean;
     tame(player: IPlayer): boolean;
+    increaseTamedCount(): void;
     release(): boolean;
     pet(): boolean;
     skipNextUpdate(): void;
@@ -49,16 +54,29 @@ export default class Creature extends BaseEntity implements ICreature, IUnserial
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
+    /**
+     * Checks under the creature for getting burned, setting off traps, eating items off the ground, and more
+     * @returns Returns whether the creature can keep moving (in the case of creatures with >= 2 speed)
+     */
+    checkUnder(x?: number, y?: number): boolean;
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
-    damage(damageInfo: IDamageInfo): number | undefined;
+    damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
+    private inspectResistancesAndVulnerabilities;
+    private inspectHappiness;
     private findPath;
     private checkCreatureMove;
     private findPlayersWithinRadius;
     private processAttack;
     private processMovement;
+    /**
+     * Some creatures can break doodads, leading to lost rest or sleep when near them
+     * @param doodad The doodad to damage
+     * @param moveType The move type of the creature attempting to break the doodad
+     */
+    private breakDoodad;
     private processAiChanges;
     private processSpecialAbilities;
 }

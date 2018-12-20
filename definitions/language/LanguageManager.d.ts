@@ -8,49 +8,75 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Dictionary, ILanguage, ILanguageExtension, ITranslation, UiTranslation } from "language/ILanguage";
-import ILanguageManager, { TranslationType } from "language/ILanguageManager";
-export default class LanguageManager implements ILanguageManager {
-    private readonly languages;
-    private loaded;
-    private readonly uiTranslationsToSelector;
+import { CaseStyle } from "Enums";
+import { Dictionary } from "language/Dictionaries";
+import UiTranslation from "language/dictionary/UiTranslation";
+import Language from "language/Language";
+import LanguageExtension from "language/LanguageExtension";
+import Translation from "language/Translation";
+import TranslationsProvider from "language/TranslationsProvider";
+export interface ISerializedTranslationsProvider {
+    dictionaries: {
+        [key: string]: {
+            [key: string]: string | string[];
+        };
+    };
+    pluralizationRules?: {
+        pluralRules?: {
+            [key: string]: string;
+        };
+        singularRules?: {
+            [key: string]: string;
+        };
+        uncountables?: string[];
+        irregularRules?: Array<[string, string]>;
+        articleRules?: Array<[number, string, string]>;
+    };
+}
+export interface ISerializedLanguage extends ISerializedTranslationsProvider {
+    name: string;
+    alternateFontStyle?: boolean;
+}
+export interface ISerializedLanguageExtension extends ISerializedTranslationsProvider {
+    extends: string;
+}
+export declare enum NounType {
+    Singular = 0,
+    Plural = 1,
+    Uncountable = 2,
+    Unknown = 3
+}
+export default class LanguageManager {
+    language: string;
+    private readonly translationProviders;
+    readonly providers: ReadonlyArray<TranslationsProvider>;
+    private orderedTranslationProviders?;
+    readonly orderedProviders: ReadonlyArray<TranslationsProvider>;
     constructor();
-    add(language: ILanguage): void;
-    remove(language: ILanguage): void;
-    extendLanguage(id: number, languageName: string, extension: ILanguageExtension): void;
-    removeExtension(id: number): void;
-    getDefault(): ILanguage;
-    addTranslateSelector(id: UiTranslation, selector: string | string[], attribute?: string, html?: boolean, func?: (translation: string) => string): void;
-    addTranslateSelectors(...translateSelectors: Array<([UiTranslation, string | string[]] | [UiTranslation, string | string[], string] | [UiTranslation, string | string[], string, boolean] | [UiTranslation, string | string[], string, boolean, (translation: string) => string])>): void;
-    getLanguages(): ILanguage[];
-    getLanguage(name: string): ILanguage | undefined;
-    getLoaded(): ILanguage;
-    getDictionary(dictionaryName: string): Dictionary;
-    getEntry(dictionaryName: string, entryName: string): number;
-    getDictionaryId(dictionaryName: string): Dictionary;
-    getEntryId(dictionaryName: string, entryName: string): number;
-    parseTranslationId(translationId: string): [number, number, TranslationType] | undefined;
-    createTranslationId(dictionary: number, entry: number, translationType?: TranslationType): string;
-    getTranslation(translationId: string): string | ITranslation;
-    getTranslation(dictionary: Dictionary, entry: number): ITranslation;
-    getTranslation(dictionary: Dictionary, entry: number, translationType: TranslationType.all): ITranslation;
-    getTranslation(dictionary: Dictionary, entry: number, translationType: TranslationType): string;
-    getTranslationString(translationId: string): string;
-    getTranslationString(dictionary: Dictionary.BindPress, entry: string): string;
-    getTranslationString(dictionary: Dictionary, entry: number): string;
-    getTranslationString(dictionary: Dictionary, entry: number, translationType: TranslationType.all): string;
-    getTranslationString(dictionary: Dictionary, entry: number, translationType: TranslationType): string;
-    getTranslationString(translation: ITranslation): string;
-    getUiTranslation(translation: UiTranslation): string;
-    reload(): void;
-    refreshUiTranslations(v: UiTranslation | string): void;
-    refreshUiTranslation(element: JQuery): void;
-    evalString(str: string): string;
-    serialize(language: ILanguage): any;
+    initialize(): void;
+    getTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
+    add(provider: TranslationsProvider): void;
+    remove(provider: TranslationsProvider): void;
+    serialize(languageName?: string, caseStyle?: CaseStyle): ISerializedLanguage | undefined;
+    serializeLanguageToFile(language?: string, caseStyle?: CaseStyle): void;
+    deserialize(serialized: ISerializedLanguage | ISerializedLanguageExtension): Language | LanguageExtension;
     generateSchema(): void;
-    load(language: ILanguage): void;
-    shouldWarnOnInvalidOrMissingEntry(str?: string): boolean;
-    serializeLanguageToFile(): void;
-    private warnOnInvalidOrMissingEntries;
+    reformatSingularNoun(noun: string, count: number, article?: boolean): string;
+    private getNounType;
+    private plural;
+    private getEntryNameFromEntryId;
+    private readonly uiTranslationsToSelector;
     private setup;
+    private addTranslateSelector;
+    private addTranslateSelectors;
+    refreshUiTranslations(v: UiTranslation | string): void;
+}
+export interface ISelector {
+    selector: string | string[];
+    html?: boolean;
+    attribute?: string;
+    func?(translation: Translation): string;
+}
+export interface ISelectorArray {
+    [index: number]: ISelector;
 }

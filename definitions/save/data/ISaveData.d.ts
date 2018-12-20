@@ -8,8 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Difficulty, PlayerState } from "Enums";
+import { PlayerState } from "Enums";
+import { Difficulty } from "game/Difficulty";
+import { ISerializedTranslation } from "language/Translation";
+import { IMultiplayerState } from "multiplayer/IMultiplayer";
 import { IEnumInfo } from "utilities/enum/IEnum";
+import IClientStore from "../clientStore/IClientStore";
 export interface ISaveData {
     gameSlotName: string;
     gameState: PlayerState.Won | PlayerState.Ghost | PlayerState.None;
@@ -21,7 +25,7 @@ export interface ISaveData {
     saveManagerDifficulty: Difficulty;
     saveManagerScore: number;
     saveManagerOriginalVersion: string;
-    saveManagerDeathBy: string;
+    saveManagerDeathBy: ISerializedTranslation;
     modManagerSaveData: {
         [index: string]: any;
     };
@@ -31,11 +35,10 @@ export interface ISaveData {
             unloadable: boolean;
         };
     };
+    multiplayerState: IMultiplayerState;
     utilitiesEnumsAllocated: {
         [index: string]: IEnumInfo;
     };
-    newui: {
-        [index: string]: any;
-    };
+    clientStore: Map<string, IClientStore>;
 }
 export default ISaveData;

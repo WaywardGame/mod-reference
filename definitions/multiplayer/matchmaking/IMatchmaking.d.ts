@@ -10,9 +10,10 @@
  *
  *
  */
-import { UiTranslation } from "language/ILanguage";
+import UiTranslation from "language/dictionary/UiTranslation";
 export interface IMatchmaking {
     getIdentifier(): string;
+    getChannel(): string;
     isConnected(): boolean;
     connect(): void;
     disconnect(): void;
@@ -29,6 +30,7 @@ export interface MatchmakingMessage {
     data?: MatchmakingMessageData;
 }
 export declare enum MatchmakingMessageDataType {
+    UpdateDirectory = -2,
     IpAddress = -1,
     JoinChannel = 0,
     IceCandidate = 1,
@@ -42,6 +44,12 @@ export interface IMatchmakingMessageData {
     matchmakingIdentifier?: string;
     targetMatchmakingIdentifier?: string;
 }
+export interface IMatchmakingUpdateDirectoryMessageData extends IMatchmakingMessageData {
+    type: MatchmakingMessageDataType.UpdateDirectory;
+    serverDetails: Partial<IServerServerDetails>;
+    gameDetails: Partial<IServerGameDetails>;
+    secret: string;
+}
 export interface IMatchmakingIpAddressMessageData extends IMatchmakingMessageData {
     type: MatchmakingMessageDataType.IpAddress;
     ip?: string;
@@ -51,6 +59,7 @@ export interface IMatchmakingJoinChannelMessageData extends IMatchmakingMessageD
     clientVersion: string;
     clientBuild: number | undefined;
     playerIdentifier: string;
+    secret?: string;
 }
 export interface IMatchmakingIceCandidateMessageData extends IMatchmakingMessageData {
     type: MatchmakingMessageDataType.IceCandidate;
@@ -72,4 +81,4 @@ export interface IMatchmakingUnableToJoinGameMessageData extends IMatchmakingMes
     entry: UiTranslation;
     args?: Array<number | string>;
 }
-export declare type MatchmakingMessageData = IMatchmakingIpAddressMessageData | IMatchmakingJoinChannelMessageData | IMatchmakingIceCandidateMessageData | IMatchmakingSessionDescriptionMessageData | IMatchmakingHostIpAddressMessageData | IMatchmakingConnectedMessageData | IMatchmakingUnableToJoinGameMessageData;
+export declare type MatchmakingMessageData = IMatchmakingUpdateDirectoryMessageData | IMatchmakingIpAddressMessageData | IMatchmakingJoinChannelMessageData | IMatchmakingIceCandidateMessageData | IMatchmakingSessionDescriptionMessageData | IMatchmakingHostIpAddressMessageData | IMatchmakingConnectedMessageData | IMatchmakingUnableToJoinGameMessageData;

@@ -10,13 +10,12 @@
  */
 import { ICreature, ICreatureDescription, SpawnableTiles, SpawnGroup } from "creature/ICreature";
 import { ICreatureManager } from "creature/ICreatureManager";
-import BaseEntityManager from "entity/BaseEntityManager";
+import EntityManager from "entity/EntityManager";
 import { CreatureType, MoveType } from "Enums";
-import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
-export default class CreatureManager extends BaseEntityManager<ICreature> implements ICreatureManager {
+export default class CreatureManager extends EntityManager<ICreature> implements ICreatureManager {
     getEntities(): (ICreature | undefined)[];
-    getHappinessLevel(player: IPlayer, creature: ICreature): number;
+    getHappinessLevel(human: Human, creature: ICreature): number;
     /**
      * Spawns a creature.
      * @param creatureType The type of creature to spawn.
@@ -29,7 +28,11 @@ export default class CreatureManager extends BaseEntityManager<ICreature> implem
      */
     spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
-    maybeSpawnClawWorm(player: IPlayer): void;
+    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number): {
+        pool: CreatureType[];
+        aberrantChance: number;
+    };
+    maybeSpawnClawWorm(human: Human): void;
     remove(creature: ICreature): void;
     updateAll(): void;
     /**

@@ -11,4 +11,5 @@
  *
  */
 import { IMusicDescription } from "audio/IMusic";
-export declare const musicDescriptions: Description<IMusicDescription>;
+import { Music } from "Enums";
+export declare const musicDescriptions: OptionalDescriptions<Music, IMusicDescription>;

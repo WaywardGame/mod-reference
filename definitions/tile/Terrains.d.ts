@@ -10,6 +10,7 @@
  *
  *
  */
+import { TerrainType } from "Enums";
 import { ITerrainDescription } from "tile/ITerrain";
-export declare const terrainDescriptions: Description<ITerrainDescription>;
+export declare const terrainDescriptions: OptionalDescriptions<TerrainType, ITerrainDescription>;
 export default terrainDescriptions;

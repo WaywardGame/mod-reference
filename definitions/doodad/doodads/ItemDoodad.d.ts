@@ -10,10 +10,12 @@
  *
  *
  */
+import { ActionType } from "action/IAction";
 import DoodadInfo from "doodad/DoodadInfo";
 import Doodad from "doodad/doodads/Doodad";
 import { IDoodad, IDoodadDescription, IDoodadOptions } from "doodad/IDoodad";
-import { ActionType, ItemType } from "Enums";
+import { ItemType } from "Enums";
+import Translation from "language/Translation";
 export default class ItemDoodad extends Doodad implements IDoodad {
     itemType: ItemType;
     constructor(id?: number, x?: number, y?: number, z?: number, options?: IDoodadOptions);
@@ -21,5 +23,7 @@ export default class ItemDoodad extends Doodad implements IDoodad {
     getDoodadInfo(): DoodadInfo | undefined;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
+    protected getNameTranslation(article?: boolean, count?: number): Translation;
+    protected getDescriptionTranslation(): Translation;
     private _itemDescription;
 }

@@ -10,7 +10,7 @@
  *
  *
  */
-import { UiTranslation } from "language/ILanguage";
+import UiTranslation from "language/dictionary/UiTranslation";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class ShowLoadingScreenPacket extends ClientPacket {
     title: UiTranslation;

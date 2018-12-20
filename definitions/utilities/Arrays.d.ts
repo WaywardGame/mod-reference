@@ -41,7 +41,9 @@ declare module Arrays {
      * Shuffles the contents of the given array using the Fisher-Yates Shuffle: https://bost.ocks.org/mike/shuffle/
      * @returns The given array after shuffling its contents.
      */
-    function shuffle<T>(arr: T[]): T[];
+    function shuffle<T>(arr: T[], r?: import("./Random").Random<{
+        get: () => number;
+    }>): T[];
+    function toggle(arr: any[], value: any, includes?: boolean): number;
 }
 export default Arrays;
-export declare function tuple<T extends any[]>(...items: T): T;

@@ -35,22 +35,16 @@ export declare enum Hook {
     GetMaxSpritesForLayer = "getMaxSpritesForLayer",
     GetPlayerFieldOfViewRadius = "getPlayerFieldOfViewRadius",
     GetPlayerMaxHealth = "getPlayerMaxHealth",
+    GetPlayerMaxWeight = "getPlayerMaxWeight",
     GetPlayerMovementIntent = "getPlayerMovementIntent",
     GetPlayerSpriteBatchLayer = "getPlayerSpriteBatchLayer",
-    GetPlayerStrength = "getPlayerStrength",
     GetPlayerWeightMovementPenalty = "getPlayerWeightMovementPenalty",
     GetPlayerWeightStatus = "getPlayerWeightStatus",
     GetCameraPosition = "getCameraPosition",
     GetTileLightLevel = "getTileLightLevel",
     GetTilePenalty = "getTilePenalty",
     GetZoomLevel = "getZoomLevel",
-    /**
-     * @deprecated
-     * @see IsHumanSwimming
-     */
-    IsPlayerSwimming = "isPlayerSwimming",
     IsHumanSwimming = "isHumanSwimming",
-    IsTileInspectable = "isTileInspectable",
     IsTileBlocked = "isTileBlocked",
     OnBindLoop = "onBindLoop",
     OnBuild = "onBuild",
@@ -62,6 +56,7 @@ export declare enum Hook {
     OnCreatureDamage = "onCreatureDamage",
     OnCreatureDeath = "onCreatureDeath",
     OnCreatureSpawn = "onCreatureSpawn",
+    OnDigTreasure = "onDigTreasure",
     OnDisplayMessage = "onDisplayMessage",
     OnDoodadSpawn = "onDoodadSpawn",
     OnGameEnd = "onGameEnd",
@@ -69,7 +64,8 @@ export declare enum Hook {
     OnGameStart = "onGameStart",
     OnGameTickEnd = "onGameTickEnd",
     OnGameTickStart = "onGameTickStart",
-    OnInspectTile = "onInspectTile",
+    OnEntityKill = "onEntityKill",
+    OnHumanSkillChange = "onHumanSkillChange",
     OnInventoryItemAdd = "onInventoryItemAdd",
     OnInventoryItemRemove = "onInventoryItemRemove",
     OnInventoryItemUpdate = "onInventoryItemUpdate",
@@ -84,6 +80,7 @@ export declare enum Hook {
     OnNPCDamage = "onNPCDamage",
     OnNPCDeath = "onNPCDeath",
     OnNPCSpawn = "onNPCSpawn",
+    OnOpenBook = "onOpenBook",
     OnPickupDoodad = "onPickupDoodad",
     OnPlayerDamage = "onPlayerDamage",
     OnPlayerDeath = "onPlayerDeath",
@@ -92,7 +89,9 @@ export declare enum Hook {
     OnPlayerTickEnd = "onPlayerTickEnd",
     OnPlayerTickStart = "onPlayerTickStart",
     OnQueueSoundEffect = "onQueueSoundEffect",
+    OnReadMap = "onReadMap",
     OnRenderOverlay = "onRenderOverlay",
+    OnSailToCivilization = "onSailToCivilization",
     OnSpawnCreatureFromGroup = "onSpawnCreatureFromGroup",
     OnTileUpdate = "onTileUpdate",
     OnTurnEnd = "onTurnEnd",
@@ -117,7 +116,8 @@ export declare enum Hook {
     ProcessInput = "processInput",
     ShouldDisplayMessage = "shouldDisplayMessage",
     ShouldRender = "shouldRender",
-    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement"
+    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement",
+    OnCreatureTamed = "onCreatureTamed"
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {

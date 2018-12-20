@@ -17,35 +17,36 @@ export declare enum LogSource {
     CommandManager = 5,
     CorpseManager = 6,
     CreatureManager = 7,
-    DoodadManager = 8,
-    EnumManager = 9,
-    FlowFieldManager = 10,
-    Game = 11,
-    HookManager = 12,
-    ItemManager = 13,
-    Languages = 14,
-    MapGen = 15,
-    Matchmaking = 16,
-    Mod = 17,
-    Mods = 18,
-    Multiplayer = 19,
-    NewUi = 20,
-    NPCManager = 21,
-    Packet = 22,
-    Player = 23,
-    ResourceLoader = 24,
-    SaveManager = 25,
-    Serializer = 26,
-    Shaders = 27,
-    Steamworks = 28,
-    TileEventManager = 29,
-    Trello = 30,
-    Ui = 31,
-    Utilities = 32,
-    WebAssembly = 33,
-    WebRTCConnection = 34,
-    WebSocketConnection = 35,
-    InterModRegistryManager = 36
+    DailyChallenge = 8,
+    DoodadManager = 9,
+    EnumManager = 10,
+    FlowFieldManager = 11,
+    Game = 12,
+    HookManager = 13,
+    InterModRegistryManager = 14,
+    ItemManager = 15,
+    Languages = 16,
+    MapGen = 17,
+    Matchmaking = 18,
+    Mod = 19,
+    Mods = 20,
+    Multiplayer = 21,
+    NewUi = 22,
+    NPCManager = 23,
+    Packet = 24,
+    Player = 25,
+    ResourceLoader = 26,
+    SaveManager = 27,
+    Serializer = 28,
+    Shaders = 29,
+    Steamworks = 30,
+    TileEventManager = 31,
+    Trello = 32,
+    Ui = 33,
+    Utilities = 34,
+    WebAssembly = 35,
+    WebRTCConnection = 36,
+    WebSocketConnection = 37
 }
 declare class Log {
     warn: (...args: any[]) => void;
@@ -75,7 +76,7 @@ declare module Log {
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
      */
-    function setWinston(w: any, path: string): void;
+    function setWinston(winston: any, path: string): void;
     function setCallback(cb?: (...args: any[]) => void): void;
     /**
      * Returns a method that can be used to `Log.info` with the given sources.

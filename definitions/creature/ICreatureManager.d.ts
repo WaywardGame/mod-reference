@@ -11,19 +11,23 @@
  *
  */
 import { ICreature, ICreatureDescription, SpawnableTiles, SpawnGroup } from "creature/ICreature";
-import IBaseEntityManager from "entity/IBaseEntityManager";
+import IEntityManager from "entity/IEntityManager";
 import { CreatureType, MoveType } from "Enums";
-import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
-export interface ICreatureManager extends IBaseEntityManager<ICreature> {
-    getHappinessLevel(player: IPlayer, creature: ICreature): number;
+export interface ICreatureManager extends IEntityManager<ICreature> {
+    getHappinessLevel(human: Human, creature: ICreature): number;
     spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
-    maybeSpawnClawWorm(player: IPlayer): void;
+    maybeSpawnClawWorm(human: Human): void;
     updateAll(): void;
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
     checkSpawnReputation(creatureDescription: ICreatureDescription, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean): CreatureType[];
+    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number): ISpawnableCreatures;
+}
+export interface ISpawnableCreatures {
+    pool: CreatureType[];
+    aberrantChance: number;
 }
 export default ICreatureManager;
 export interface IMoveTypeZ {

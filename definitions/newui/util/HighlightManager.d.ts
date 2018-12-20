@@ -17,5 +17,6 @@ export default class HighlightManager implements IHighlightManager {
     end(host: any): void;
     register(component: IComponent, selector: HighlightSelector, until?: ComponentEvent): void;
     private getHighlightSelectorId;
+    private getHighlightComponents;
     private startHighlight;
 }

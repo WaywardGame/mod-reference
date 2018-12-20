@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Translation from "language/Translation";
 import { BlockRow } from "newui/component/BlockRow";
 import { IDisableable } from "newui/component/IComponent";
 import { RangeInput } from "newui/component/RangeInput";
@@ -20,14 +21,14 @@ export declare class RangeRow extends BlockRow implements IRefreshable, IDisable
     protected rangeInput: RangeInput;
     protected heading: Heading;
     protected rangeInputValueDisplay: RangeInputValueDisplay | undefined;
-    readonly value: number;
+    value: number;
     private _disabled;
     readonly disabled: boolean;
     constructor(api: UiApi);
     setDisabled(val: boolean): this;
     editRange(rangeInputInitializer: (rangeInput: RangeInput) => RangeInput): this;
     setLabel(label: (label: Heading) => Heading): this;
-    setDisplayValue(display: boolean | ((val: number) => IStringSection[])): this;
+    setDisplayValue(display: boolean | ((val: number) => IStringSection[] | Translation)): this;
     addDefaultButton(defaultValue?: () => number): this;
     refresh(): this;
     private updateDisplay;

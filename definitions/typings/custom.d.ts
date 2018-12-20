@@ -45,13 +45,52 @@ interface JQuery {
 	getEquipSlot(): number;
 }
 
+interface IServer {
+	id: string;
+	serverDetails: IServerServerDetails;
+	gameDetails: IServerGameDetails;
+}
+
+interface IServerServerDetails {
+	worldId: string;
+	name: string;
+	description: string;
+	hostPlayerName: string;
+	hostPlayerId: string;
+	lobbyType: number;
+	region: string;
+	code: string;
+	isDedicatedServer: boolean;
+}
+
+interface IServerGameDetails {
+	players: string[];
+	maxPlayers: number;
+	difficulty: number;
+	pvp: boolean;
+	reputation: number;
+	days: number;
+	mods: IServerMod[];
+	peaceful: boolean;
+}
+
+interface IServerMod {
+	name: string;
+	publishFileId: string | undefined;
+}
+
 interface IMatchmakingServer {
-	start(port?: number, serverClientMode?: boolean): string;
+	connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
+	disconnectCallbacks: Map<string, () => void>;
+	messageCallbacks: Map<string, (data: ArrayBuffer) => void>;
+	ipAddress: string | undefined;
+
+	isRunning(): boolean;
+	start(port?: number, disableServerDirectoryConnection?: boolean): string;
 	stop(): void;
-	getConnections(): { [index: string]: IMatchmakingServerConnection };
-	addOnConnectCallback(callback: (id: string, connection: any) => void): void;
-	addOnDisconnectCallback(id: string, callback: () => void): void;
-	addOnMessageCallback(id: string, callback: (data: ArrayBuffer) => void): void;
+	updateName(name: string): void;
+	updateDirectory(serverDetails: Partial<IServerServerDetails>, gameDetails: IServerGameDetails): void;
+	getConnections(): Map<string, IMatchmakingServerConnection>;
 }
 
 interface IMatchmakingServerConnection {

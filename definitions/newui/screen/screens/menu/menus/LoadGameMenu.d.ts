@@ -11,6 +11,7 @@
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class LoadGameMenu extends Menu {
+    isMultiplayer: boolean;
     private readonly slots;
     private slotsWrapper;
     private sort;

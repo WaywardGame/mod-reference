@@ -8,16 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { UiTranslation } from "language/ILanguage";
+import UiTranslation from "language/dictionary/UiTranslation";
 import { IHookHost } from "mod/IHookHost";
-import { IMultiplayer, IMultiplayerNetworkingOptions, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
+import { IMultiplayer, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { TranslationGenerator } from "newui/component/IComponent";
 import IPlayer, { ICharacter } from "player/IPlayer";
 import Emitter from "utilities/Emitter";
-export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export default class Multiplayer extends Emitter implements IMultiplayer, IHookHost {
     private readonly _playerIdentifier;
     private _isServer;
@@ -34,7 +33,6 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _incomingPacketQueue;
     private _incomingPacketProcessingPaused;
     private _packetTickIntervalId;
-    private _outgoingPacketQueue;
     private _currentPacketProcessing;
     private _currentSyncPacketsWaiting;
     private _currentSyncPacketsProcessing;
@@ -44,6 +42,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _syncChecksSuppressed;
     private _disconnectingFromSyncIssue;
     private _ipAddress;
+    private readonly _matchmakingSecret;
     constructor();
     isConnected(): boolean;
     isReady(): boolean;
@@ -56,6 +55,14 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     setOptions(options: IMultiplayerOptions): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
+    /**
+     * Three types of game codes:
+     * 1. Dedicated server code - ex. home.spacetech.us:1234
+     * 2. Steam lobby code - ex. steam:109775241017071190
+     * 3. Global matchmaking server id - ex. 87287724-49aa-e556-4145-3ed96c649a20
+     */
+    getConnectedGameCode(): string | undefined;
+    convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
@@ -65,7 +72,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): Promise<void>;
     disconnectAndResetGameState(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     kick(player: IPlayer, reason: UiTranslation): void;
-    onPlaying(): void;
+    onPlaying(): Promise<void>;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     getClients(): IConnection[];
     closeConnection(connection: IConnection): void;
@@ -80,6 +87,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     syncGameState(): void;
     preSaveGame(): void;
     postSaveGame(): void;
+    updateGlobalServerDirectory(): void;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;

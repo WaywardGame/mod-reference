@@ -8,21 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Dictionary, ITranslationObject, UiTranslation } from "language/ILanguage";
-import Translation from "language/Translation";
+import { Dictionary } from "language/Dictionaries";
+import UiTranslation from "language/dictionary/UiTranslation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
 import Emitter from "utilities/Emitter";
+import { IVector2 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
-export declare enum ComponentEvent {
-    Show = 0,
-    Hide = 1,
-    Append = 2,
-    Remove = 3,
-    RemoveForAppend = 4,
-    AddChild = 5,
-    RemoveChild = 6,
-    InputChange = 7,
-    WillRemove = 8
+export declare const enum ComponentEvent {
+    Show = "Show",
+    Hide = "Hide",
+    Append = "Append",
+    Remove = "Remove",
+    RemoveForAppend = "RemoveForAppend",
+    AddChild = "AddChild",
+    RemoveChild = "RemoveChild",
+    InputChange = "InputChange",
+    WillRemove = "WillRemove"
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;
@@ -171,7 +173,7 @@ export interface IComponent extends Emitter {
     /**
      * Returns a new array of the children
      */
-    getChildren(): IComponent[];
+    getChildren(): IterableIterator<IComponent>;
     /**
      * Scrolls this element so the given child is at the top of the viewport.
      * @param child The child to scroll to
@@ -227,7 +229,8 @@ export declare enum SelectableLayer {
 }
 export interface IBaseTranslationData {
     dictionary: Dictionary;
-    entry: number | [number, keyof ITranslationObject];
+    entry: number;
+    index: number | "random";
     args?: any[] | (() => any[]);
     properties?: string[];
     shouldTrim?: false;
@@ -256,6 +259,8 @@ export interface ITooltip extends IComponent {
     addText(initializer: (text: IText) => any): this;
     addHeading(initializer: (text: IText) => any): this;
     addParagraph(initializer: (text: IText) => any): this;
+    addList(...initializers: Array<((text: IText) => any) | undefined | false>): this;
+    updatePosition(position: IVector2): this;
 }
 export interface IText extends IComponent {
     setText(translation: TranslationGenerator): this;
@@ -264,7 +269,7 @@ export interface IDisableable {
     disabled: boolean;
     setDisabled(disabled: boolean): this;
 }
-export declare type TranslationGenerator = Translation | UiTranslation | (() => IterableOf<IStringSection> | Translation | UiTranslation | undefined);
+export declare type TranslationGenerator = Translation | UiTranslation | ISerializedTranslation | (() => IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined);
 export declare type HighlightSelector = [HighlightType, string | number];
 export interface IHighlight {
     selectors: HighlightSelector[];
@@ -272,5 +277,6 @@ export interface IHighlight {
 }
 export declare enum HighlightType {
     Stat = 0,
-    MenuBarButton = 1
+    MenuBarButton = 1,
+    Selector = 2
 }

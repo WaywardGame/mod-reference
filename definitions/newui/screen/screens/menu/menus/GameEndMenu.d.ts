@@ -12,7 +12,7 @@ import { PlayerState } from "Enums";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { IHighscore } from "save/data/ISaveDataGlobal";
-export interface GameEndData {
+export interface IGameEndData {
     state: PlayerState.Won | PlayerState.Dead;
     highscore: IHighscore;
 }
@@ -20,7 +20,7 @@ export default class GameEndMenu extends Menu {
     private readonly highscore;
     private gameEndData;
     constructor(api: UiApi);
-    setGameEndData(gameEndData: GameEndData): this;
+    setGameEndData(gameEndData: IGameEndData): this;
     private onShow;
     private getHeading;
     private getTagline;

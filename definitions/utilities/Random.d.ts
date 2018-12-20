@@ -19,10 +19,12 @@ export interface IRandomHistory {
 export interface IRandomGenerator {
     get(): number;
 }
-export declare class Random<G extends IRandomGenerator> {
+export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     generator: G;
     constructor(generator: G);
-    float(max?: number): number;
+    float(): number;
+    float(max: number): number;
+    float(min: number, max: number): number;
     /**
      * Generates a random integer between 0 (inclusive) and max (exclusive)
      */
@@ -49,10 +51,15 @@ export declare class Random<G extends IRandomGenerator> {
     /**
      * Chooses a random entry in an array and returns it
      */
-    choice(from: any[]): any;
+    choice<A extends any[]>(...from: A): A[number];
     shuffle<T>(array: T[]): T[];
     getElement<T>(array: T[]): T;
+    /**
+     * Returns a random T from the given choices, where each choice is weighted by a number. Higher numbers = higher chance.
+     */
+    weightedChoice<T>(choices: Array<[number, T]>): T;
 }
+export declare function convertStringToSeed(seed: string | number): number;
 export declare class SeededGenerator implements IRandomGenerator {
     private debug;
     private seed;
@@ -70,8 +77,8 @@ export declare class SeededGenerator implements IRandomGenerator {
     startHistory(): void;
     stopHistory(): IRandomHistory[];
 }
-declare const globalRandom: Random<SeededGenerator>;
+declare const seededRandom: Random<SeededGenerator>;
 export declare const generalRandom: Random<{
     get: () => number;
 }>;
-export default globalRandom;
+export default seededRandom;

@@ -43,7 +43,14 @@ declare module TileHelpers {
      * Check if a tile is a suitable spawn point
      */
     function isSuitableSpawnPointTile(point: IVector3, tile: ITile): boolean;
-    function getAdjacentTiles(point: IVector3, includePoint?: boolean): ITile[];
     function getSuitableSpawnPoint(): IVector3;
+    /**
+     * Array version of TileHelpers.tilesAround
+     */
+    function getTilesAround(point: IVector3, includeCurrentTile?: boolean): ITile[];
+    /**
+     * IterableIterator version of TileHelpers.getTilesAround
+     */
+    function tilesAround(point: IVector3, includeCurrentTile?: boolean): IterableIterator<ITile>;
 }
 export default TileHelpers;

@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { UiTranslation } from "language/ILanguage";
+import UiTranslation from "language/dictionary/UiTranslation";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import IPlayer from "player/IPlayer";
@@ -19,9 +19,6 @@ export declare enum NotesDialogEvent {
     ShowNote = 0
 }
 export default class NotesDialog extends Dialog {
-    private readonly noteBody;
-    private readonly time;
-    private readonly title;
     private readonly noteId;
     private readonly noteLinks;
     private readonly learnMoreLink;
@@ -30,7 +27,7 @@ export default class NotesDialog extends Dialog {
     constructor(api: IGameScreenApi);
     onWrittenNote(player: IPlayer, id: number): void;
     getName(): UiTranslation;
-    showNote(noteId: number): void;
+    showNote(noteId: number): this;
     private previousNote;
     private nextNote;
     private onShow;

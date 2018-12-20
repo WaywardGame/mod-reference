@@ -10,7 +10,9 @@
  */
 import { SpriteBatchLayer } from "Enums";
 import IWorldRenderer from "renderer/IWorldRenderer";
-import * as TileAdaptor from "renderer/TileAdaptors";
+import { ITileAdaptor } from "renderer/TileAdaptors";
+import Fence from "renderer/tileAdaptors/Fence";
+import Wall from "renderer/tileAdaptors/Wall";
 import WorldLayerRenderer from "renderer/WorldLayerRenderer";
 import Vector2 from "utilities/math/Vector2";
 export default class WorldRenderer implements IWorldRenderer {
@@ -22,15 +24,15 @@ export default class WorldRenderer implements IWorldRenderer {
     positionBuffer: WebGLBuffer;
     ditherTexture: WebGLTexture;
     layers: WorldLayerRenderer[];
-    dirtAdaptor: TileAdaptor.Dirt;
-    tillAdaptor: TileAdaptor.Till;
-    waterAdaptor: TileAdaptor.Water;
-    lavaAdaptor: TileAdaptor.Lava;
-    fenceAdaptor: TileAdaptor.Fence;
-    mountainAdaptor: TileAdaptor.Mountain;
-    wallAdaptor: TileAdaptor.Wall;
-    defaultAdaptor: TileAdaptor.Default;
-    floorAdaptor: TileAdaptor.Floor;
+    dirtAdaptor: ITileAdaptor;
+    tillAdaptor: ITileAdaptor;
+    waterAdaptor: ITileAdaptor;
+    lavaAdaptor: ITileAdaptor;
+    fenceAdaptor: Fence;
+    mountainAdaptor: ITileAdaptor;
+    wallAdaptor: Wall;
+    defaultAdaptor: ITileAdaptor;
+    floorAdaptor: ITileAdaptor;
     private readonly ambientIntensity;
     private readonly ambientColorDay;
     private readonly ambientColorDawn;
@@ -53,6 +55,7 @@ export default class WorldRenderer implements IWorldRenderer {
     private itemBatch;
     private corpseBatch;
     private creatureBatch;
+    private overTreesBatch;
     private creatureFlyingBatch;
     private overlayBatch;
     private readonly entitiesInViewport;

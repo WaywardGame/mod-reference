@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { UiTranslation } from "language/ILanguage";
+import UiTranslation from "language/dictionary/UiTranslation";
+import { ISerializedTranslation } from "language/Translation";
 import ClientPacket from "multiplayer/packets/ClientPacket";
 export default class DisplayInterruptPacket extends ClientPacket {
     title: UiTranslation;
     description: UiTranslation;
-    args: any;
+    args: ISerializedTranslation[];
     process(): Promise<void>;
 }

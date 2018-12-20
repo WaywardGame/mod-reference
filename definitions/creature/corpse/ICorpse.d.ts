@@ -7,19 +7,16 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import { CreatureType, IModdable, IObject, ItemType, SkillType } from "Enums";
 import { IVector3 } from "utilities/math/IVector";
 export interface ICorpseDescription extends IModdable {
-    name?: string;
     decay?: number;
     resource?: ICorpseResourceDrop[];
+    aberrantResource?: ICorpseResourceDrop[];
     carve?: boolean;
     skill?: SkillType;
     damage?: number;
-    prefix?: string;
     blood?: boolean;
     lightSource?: boolean;
     animated?: boolean;

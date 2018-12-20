@@ -8,8 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IVector3 } from "utilities/math/IVector";
-export default class Vector3 implements IVector3 {
+import ISerializer, { ISerializable } from "save/ISerializer";
+import { IVector2, IVector3 } from "utilities/math/IVector";
+export default class Vector3 implements IVector3, ISerializable {
     static readonly ZERO: Vector3;
     static readonly ONE: Vector3;
     static readonly UP: Vector3;
@@ -32,6 +33,7 @@ export default class Vector3 implements IVector3 {
     static product<D extends IVector3>(vector: IVector3, vector2: IVector3, dest: D): D;
     static quotient(vector: IVector3, vector2: IVector3): Vector3;
     static quotient<D extends IVector3>(vector: IVector3, vector2: IVector3, dest: D): D;
+    static is(thing: unknown): thing is IVector3;
     private readonly values;
     x: number;
     y: number;
@@ -41,6 +43,7 @@ export default class Vector3 implements IVector3 {
     yz: [number, number];
     xyz: [number, number, number];
     constructor();
+    constructor(xy: IVector2, z: number);
     constructor(xyz: number | [number, number, number] | IVector3);
     constructor(x: number, y: number, z: number);
     at(index: number): number;
@@ -61,4 +64,7 @@ export default class Vector3 implements IVector3 {
     normalize(): this;
     normalize<D extends IVector3>(dest: D): D;
     raw(): IVector3;
+    toString(): string;
+    serializeObject(serializer: ISerializer): void;
+    deserializeObject(serializer: ISerializer): void;
 }

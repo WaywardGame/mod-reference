@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Difficulty } from "Enums";
+import { Difficulty } from "game/Difficulty";
 import InputButton from "newui/component/InputButton";
 import { UiApi } from "newui/INewUi";
 export interface SaveSlotData {
@@ -32,6 +32,7 @@ export declare enum SaveSlotEvent {
     Delete = "Delete"
 }
 export declare class SaveSlot extends InputButton {
+    private deathby;
     readonly slotData: DOMStringMap & SaveSlotData;
     constructor(api: UiApi, slot: number);
     /**
@@ -42,10 +43,6 @@ export declare class SaveSlot extends InputButton {
      * The tooltip generator for this component.
      */
     private getTooltip;
-    /**
-     * Event handler for when this button is activated.
-     */
-    private onActivate;
     /**
      * Renames the save. Event handler for when this InputButton leaves edit mode.
      */

@@ -8,12 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export declare enum EmitterEvent {
-    AddHandler = 0,
-    CancelHandler = 1,
-    CancelAll = 2,
-    TriggerEvent = 3
-}
 export default class Emitter {
     private subscribers;
     /**
@@ -28,8 +22,8 @@ export default class Emitter {
     /**
      * Triggers the given event with any number of arguments.
      */
-    triggerAsync(event: string | number, ...data: any[]): Promise<any[]>;
-    trigger<T extends any[]>(event: string | number, ...data: any[]): T;
+    emitAsync(event: string | number, ...data: any[]): Promise<any[]>;
+    emit<T extends any[]>(event: string | number, ...data: any[]): T;
     /**
      * Removes all event handlers for the given event(s).
      */

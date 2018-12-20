@@ -8,15 +8,25 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IBaseHumanEntity from "entity/IBaseHumanEntity";
-import { Message, MessageType } from "language/IMessages";
+import Message from "language/dictionary/Message";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { IMessage, IMessageManager, Source } from "player/IMessageManager";
 import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageHistoryItem {
     id: number;
     source: string[];
-    message: IStringSection[];
+    type?: MessageType;
+    message: ISerializedTranslation | IStringSection[];
+}
+export declare enum MessageType {
+    None = 0,
+    Bad = 1,
+    Good = 2,
+    Miss = 3,
+    Attack = 4,
+    Stat = 5,
+    Skill = 6
 }
 export interface IMessageManagerHost {
     canSeePosition(x: number, y: number, z: number): boolean;
@@ -27,7 +37,7 @@ export interface IMessageManagerHost {
 export default class MessageManager implements IMessageManager {
     private readonly host;
     private static readonly noOpMessageManager;
-    static get(human?: IBaseHumanEntity): MessageManager;
+    static get(human?: Human): MessageManager;
     /**
      * Runs a callback with the message manager of every player. For sending messages, equivalent to the following:
      * ```ts
@@ -85,10 +95,10 @@ export default class MessageManager implements IMessageManager {
      * Sends a message, and adds it to the message history.
      * @param message The message to send.
      * @param args Arguments to interpolate the message with.
-     *
+     * `
      * Note: After sending a message, the message source, type, and human (if any) are reset.
      */
-    send(message: string | IStringSection[] | Message, ...args: any[]): boolean;
+    send(message: Message | Translation, ...args: any[]): boolean;
     addToHistory(messageHistoryItem: IMessageHistoryItem): void;
     /**
      * Signal that the message was sent to everyone

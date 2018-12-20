@@ -19,6 +19,10 @@ export interface SortRowData<Sort> {
     initializeOption(button: Button, sort: [string, Sort]): any;
 }
 export declare enum SortRowEvent {
+    /**
+     * @param sort The sort type (value in the sort enum)
+     * @param direction a SortDirection
+     */
     Sort = "Sort"
 }
 export default class SortRow<Sort extends number> extends LabelledRow implements IRefreshableValue<SortRowData<Sort>> {

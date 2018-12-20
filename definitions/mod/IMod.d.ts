@@ -15,6 +15,7 @@ export interface IModConfig {
     readonly author: string;
     readonly file: string;
     readonly unloadable?: boolean;
+    readonly tags?: string[];
     readonly dependencies?: string[];
     readonly compatibleMinorVersions: number[];
     readonly multiplayerCompatible?: boolean;
@@ -27,5 +28,23 @@ export interface IModConfig {
 }
 export declare enum ModEvent {
     Unload = 0,
-    Uninitialize = 1
+    Uninitialize = 1,
+    /**
+     * Asynchronously triggered before a mod is initialized.
+     *
+     * Internally, this is used for mod registrations.
+     */
+    PreInitialize = 2,
+    /**
+     * Asynchronously triggered before a mod is loaded (when a world is loaded).
+     *
+     * Internally, this is used for mod registrations.
+     */
+    PreLoad = 3,
+    /**
+     * Called after a mod is unloaded. (A world is exited)
+     *
+     * Internally, this is used to clean up some mod registrations.
+     */
+    Unallocate = 4
 }
