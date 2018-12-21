@@ -10,5 +10,6 @@
  */
 import { Action } from "action/Action";
 import { ActionArgument } from "action/IAction";
-declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/IPlayer").IPlayer, Promise<void>>;
+import IPlayer from "player/IPlayer";
+declare const _default: Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], IPlayer, void>;
 export default _default;

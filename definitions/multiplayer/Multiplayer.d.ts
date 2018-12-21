@@ -23,6 +23,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _server;
     private readonly _clients;
     private _joinServerTimeoutId;
+    private _joinedMatchmakingInfo;
     private _connectedMatchmakingInfo;
     private _globalMatchmaking;
     private _globalMatchmakingRetryTimeoutId;

@@ -21,9 +21,9 @@ export interface ICreatureManager extends IEntityManager<ICreature> {
     maybeSpawnClawWorm(human: Human): void;
     updateAll(): void;
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
-    checkSpawnReputation(creatureDescription: ICreatureDescription, bypass?: boolean): boolean;
+    checkSpawnReputation(creatureDescription: ICreatureDescription, reputation?: number, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean): CreatureType[];
-    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number): ISpawnableCreatures;
+    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, reputation?: number, time?: number): ISpawnableCreatures;
 }
 export interface ISpawnableCreatures {
     pool: CreatureType[];

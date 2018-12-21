@@ -66,6 +66,7 @@ export declare enum ModType {
 export interface IModProvides {
     scripts: boolean;
     languages: number;
+    languageExtensions: number;
     stylesheets: number;
     imageOverrides: boolean;
     customizations: boolean;
