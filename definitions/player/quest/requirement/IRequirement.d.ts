@@ -26,7 +26,8 @@ export declare enum RequirementType {
 }
 export declare const enum RequirementEvent {
     Met = "Met",
-    Update = "Update"
+    Update = "Update",
+    Visible = "Visible"
 }
 export interface IRequirement<O extends any[] = any[], D extends {} = {}> {
     type: RequirementType;

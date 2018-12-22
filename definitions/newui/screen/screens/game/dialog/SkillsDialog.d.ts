@@ -14,6 +14,7 @@ import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export default class SkillsDialog extends Dialog {
     private readonly skills;
     private readonly inputFilter;
+    private readonly sortRow;
     constructor(api: IGameScreenApi);
     getName(): UiTranslation;
     private updateSkill;

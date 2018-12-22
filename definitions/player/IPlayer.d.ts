@@ -107,6 +107,7 @@ export interface IPlayer extends IHuman {
     updateCraftTable(): void;
     updateDialogInfo(dialogIndex: string | number): void;
     updateDismantleTable(): void;
+    updateHandToUse(): void;
     updateMilestones(): void;
     updateMovementIntent(intent: IMovementIntent): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;

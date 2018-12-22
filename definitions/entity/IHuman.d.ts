@@ -31,9 +31,9 @@ export default interface IHuman extends IEntity {
     equipped: {
         [index: number]: number;
     };
-    handToUse: EquipType;
+    readonly handToUse: EquipType | undefined;
     inventory: IContainer;
-    options: IOptions;
+    readonly options: IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;
     score: number;
@@ -82,7 +82,7 @@ export default interface IHuman extends IEntity {
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];
     getEquipSlotForItem(item: IItem): EquipType | undefined;
-    getHandToUse(): EquipType | undefined;
+    getAndSwitchHandToUse(): EquipType | undefined;
     getMaxHealth(): number;
     getName(): Translation;
     getProtectedItemsOptions(): IProtectedItemOptions;
@@ -92,6 +92,7 @@ export default interface IHuman extends IEntity {
     isGhost(): boolean;
     isResting(): boolean;
     isRestingCancelled(): boolean;
+    setOptions(options: IOptions): void;
     setPosition(point: IVector3): void;
     setRaft(itemId: number | undefined): boolean;
     setZ(z: number): void;

@@ -77,6 +77,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     removeItems(...items: Array<IItem | undefined>): this;
     setItemsUsed(used?: boolean): this;
     confirmItemsBroken(): Promise<boolean>;
+    private executeConfirmer;
     private executeInternalOrMultiplayer;
     private executeInternal;
     private handleApi;
