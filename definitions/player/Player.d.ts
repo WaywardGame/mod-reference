@@ -25,6 +25,7 @@ import NoteManager from "player/note/NoteManager";
 import QuestManager from "player/quest/QuestManager";
 import { IExploreMap } from "renderer/IExploreMap";
 import IClientStore from "save/clientStore/IClientStore";
+import { IOptions } from "save/data/ISaveDataGlobal";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default class Player extends Human implements IPlayer {
@@ -72,6 +73,7 @@ export default class Player extends Human implements IPlayer {
     private readonly _movementIntent;
     constructor(identifier?: string);
     readonly clientStore: IClientStore;
+    setOptions(options: IOptions): void;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
@@ -94,7 +96,11 @@ export default class Player extends Human implements IPlayer {
     isFacingCarvableTile(): boolean;
     hasTamedCreature(creature: ICreature): boolean;
     hasHandToUse(): boolean;
-    getHandToUse(): EquipType | undefined;
+    getAndSwitchHandToUse(): EquipType | undefined;
+    /**
+     * Ensure handToUse is valid given the players options
+     */
+    updateHandToUse(): void;
     equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;

@@ -45,4 +45,5 @@ export default class Challenge extends Quest {
     private createRandomRequirement;
     private onUpdate;
     private onRequirementComplete;
+    private getSpawnableCreatures;
 }

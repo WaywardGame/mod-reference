@@ -76,7 +76,11 @@ export declare enum Source {
     /**
      * Messages pertaining to your wellbeing — stats, status effects, etc.
      */
-    Wellbeing = 15
+    Wellbeing = 15,
+    /**
+     * "You felt your X increasing" messages
+     */
+    Stat = 16
 }
 export interface IMessage {
     id: number;

@@ -23,6 +23,7 @@ import MessageManager from "player/MessageManager";
 import NoteManager from "player/note/NoteManager";
 import PlayerDefense from "player/PlayerDefense";
 import { ISkillSet } from "player/Skills";
+import { IOptions } from "save/data/ISaveDataGlobal";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity implements IHuman {
@@ -34,13 +35,13 @@ export default abstract class Human extends Entity implements IHuman {
     equipped: {
         [index: number]: number;
     };
-    handToUse: EquipType;
+    handToUse: EquipType | undefined;
     identifier: string;
     inventory: IContainer;
     lightBonus: number;
     messages: MessageManager;
     notes: NoteManager;
-    options: import("../save/data/ISaveDataGlobal").IOptions;
+    options: IOptions;
     raft: number | undefined;
     restData: IRestData | undefined;
     score: number;
@@ -54,6 +55,7 @@ export default abstract class Human extends Entity implements IHuman {
     constructor();
     resetStatTimers(): void;
     isLocalPlayer(): boolean;
+    setOptions(options: IOptions): void;
     getName(): Translation;
     getProtectedItemsOptions(): IProtectedItemOptions;
     getReputation(): number;
@@ -68,7 +70,7 @@ export default abstract class Human extends Entity implements IHuman {
     cancelResting(reason: RestCancelReason): boolean;
     createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
     hasHandToUse(): boolean;
-    getHandToUse(): EquipType | undefined;
+    getAndSwitchHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
     damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: Message | Translation, soundDelay?: number, causesBlood?: boolean): number | undefined;

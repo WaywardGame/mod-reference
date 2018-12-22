@@ -28,7 +28,7 @@ export default class CreatureManager extends EntityManager<ICreature> implements
      */
     spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
-    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number): {
+    getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, reputation?: number, time?: number): {
         pool: CreatureType[];
         aberrantChance: number;
     };
@@ -40,7 +40,7 @@ export default class CreatureManager extends EntityManager<ICreature> implements
      * @return Blocked penalty - Do no return 0!
      */
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
-    checkSpawnReputation(creatureDescription: ICreatureDescription, bypass?: boolean): boolean;
-    getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean): CreatureType[];
+    checkSpawnReputation(creatureDescription: ICreatureDescription, reputation?: number, bypass?: boolean): boolean;
+    getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean, reputation?: number): CreatureType[];
     private getReputationAberrantBonus;
 }

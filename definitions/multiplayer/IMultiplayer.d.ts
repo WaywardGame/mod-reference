@@ -30,7 +30,7 @@ export interface IMultiplayer extends Emitter {
     closeConnection(connection: IConnection): void;
     convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
-    disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
+    disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator, unloading?: boolean): Promise<void>;
     disconnectAndResetGameState(reason: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): void;
     getBannedPlayers(): string[];
@@ -66,36 +66,39 @@ export interface IMultiplayer extends Emitter {
 }
 export default IMultiplayer;
 export declare enum MultiplayerSyncCheck {
-    BaseEntityManager = 0,
-    CanASeeB = 1,
-    Container = 2,
-    Creature = 3,
-    CreatureIsInFlowField = 4,
-    CreatureMoveDirection = 5,
-    CreatureNearestPlayer = 6,
-    Dismantle = 7,
-    FlowFieldHashCode = 8,
-    FlowFieldValue = 9,
-    HealthChange = 10,
-    InventoryCount = 11,
-    IsTileEmpty = 12,
-    Item = 13,
-    ItemCraft = 14,
-    ItemDamage = 15,
-    ItemOrder = 16,
-    LastCreationIds = 17,
-    PenaltyFieldHashCode = 18,
-    PlaceOnTile = 19,
-    PlayerPositions = 20,
-    Players = 21,
-    Random = 22,
-    Seed = 23,
-    StaminaChanges = 24,
-    Stats = 25,
-    Temp = 26,
-    Tick = 27,
-    Ticks = 28,
-    Weight = 29
+    ActionAttack = 0,
+    ActionMove = 1,
+    BaseEntityManager = 2,
+    CanASeeB = 3,
+    Container = 4,
+    Creature = 5,
+    CreatureIsInFlowField = 6,
+    CreatureMoveDirection = 7,
+    CreatureNearestPlayer = 8,
+    Dismantle = 9,
+    FlowFieldHashCode = 10,
+    FlowFieldValue = 11,
+    HandToUse = 12,
+    HealthChange = 13,
+    InventoryCount = 14,
+    IsTileEmpty = 15,
+    Item = 16,
+    ItemCraft = 17,
+    ItemDamage = 18,
+    ItemOrder = 19,
+    LastCreationIds = 20,
+    PenaltyFieldHashCode = 21,
+    PlaceOnTile = 22,
+    PlayerPositions = 23,
+    Players = 24,
+    Random = 25,
+    Seed = 26,
+    StaminaChanges = 27,
+    Stats = 28,
+    Temp = 29,
+    Tick = 30,
+    Ticks = 31,
+    Weight = 32
 }
 export declare const maxPlayers = 32;
 export declare const defaultServerPort = 38740;
@@ -123,6 +126,8 @@ export interface IMultiplayerNetworkingOptions {
     enablePacketNumberChecks: boolean;
     checkSeedHistory: boolean;
     chunkSize: number;
+    logPackets: boolean;
+    stopWebRtc: boolean;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {

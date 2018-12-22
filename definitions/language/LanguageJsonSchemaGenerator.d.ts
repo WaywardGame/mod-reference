@@ -32,7 +32,6 @@ export default function generateSchema(): {
                     properties: DictionarySchemas;
                 };
                 pluralizationRules?: undefined;
-                required?: undefined;
             };
             required: string[];
         } | {
@@ -95,10 +94,9 @@ export default function generateSchema(): {
                     };
                     additionalProperties: boolean;
                 };
-                required: string[];
                 dictionaries?: undefined;
             };
-            required?: undefined;
+            required: string[];
         })[];
         oneOf?: undefined;
     } | {

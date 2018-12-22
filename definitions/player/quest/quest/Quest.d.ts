@@ -55,4 +55,5 @@ export declare class RequirementInstance extends Emitter {
     getTranslation(): Translation;
     getCompletionAmount(): number;
     getRelations(): [import("../../../newui/component/IComponent").HighlightType, string | number][];
+    setVisible(): this;
 }

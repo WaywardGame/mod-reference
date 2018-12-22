@@ -13,7 +13,6 @@ import Menu from "newui/screen/screens/menu/component/Menu";
 export default class MultiplayerMenu extends Menu {
     private readonly serversContainer;
     private readonly serverMap;
-    private readonly newGameButton;
     private readonly playersHeading;
     private friends;
     private playersOnline;

@@ -23,6 +23,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _server;
     private readonly _clients;
     private _joinServerTimeoutId;
+    private _joinedMatchmakingInfo;
     private _connectedMatchmakingInfo;
     private _globalMatchmaking;
     private _globalMatchmakingRetryTimeoutId;
@@ -68,7 +69,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     joinServer(serverInfo: ServerInfo, character?: ICharacter): void;
-    disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
+    disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator, unloading?: boolean): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): Promise<void>;
     disconnectAndResetGameState(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
     kick(player: IPlayer, reason: UiTranslation): void;
