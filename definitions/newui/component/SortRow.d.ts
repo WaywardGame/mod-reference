@@ -37,5 +37,5 @@ export default class SortRow<Sort extends number> extends LabelledRow implements
     setDisabledSorts(val: Sort[], refresh?: boolean): this;
     setRefreshMethod(refresh: () => SortRowData<Sort>): this;
     refresh(): this;
-    triggerSort(): Promise<void>;
+    triggerSort(): void;
 }

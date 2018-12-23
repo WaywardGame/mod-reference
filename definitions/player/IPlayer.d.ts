@@ -104,9 +104,7 @@ export interface IPlayer extends IHuman {
     tick(isPassTurn?: boolean): void;
     unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
-    updateCraftTable(): void;
     updateDialogInfo(dialogIndex: string | number): void;
-    updateDismantleTable(): void;
     updateHandToUse(): void;
     updateMilestones(): void;
     updateMovementIntent(intent: IMovementIntent): void;

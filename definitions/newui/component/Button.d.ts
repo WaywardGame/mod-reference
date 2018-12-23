@@ -25,7 +25,7 @@ export default class Button extends Component implements IDisableable {
     readonly disabled: boolean;
     constructor(api: UiApi, elementType?: string, listen?: boolean);
     setDisabled(val?: boolean): this;
-    activate(playSound?: boolean): Promise<void>;
+    activate(playSound?: boolean): void;
     addButton(initializer: (button: Button) => Button): this;
     addDescription(initializer: (description: Paragraph) => any): this;
     setText(text?: TranslationGenerator): this;

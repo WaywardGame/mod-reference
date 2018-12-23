@@ -104,7 +104,7 @@ export default class Game extends Emitter implements IGame {
     private simulateInterval?;
     private renderingEnabled;
     private playOptions;
-    private readonly ambientLightLevelCache;
+    private ambientLightLevelCache;
     readonly isChallenge: boolean;
     initialize(): void;
     initGl(): Promise<void>;

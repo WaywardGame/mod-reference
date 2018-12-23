@@ -11,6 +11,7 @@
 import Message from "language/dictionary/Message";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IMessage, IMessageManager, Source } from "player/IMessageManager";
+import IPlayer from "player/IPlayer";
 import { IVector3 } from "utilities/math/IVector";
 import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageHistoryItem {
@@ -54,7 +55,7 @@ export default class MessageManager implements IMessageManager {
      * Note: When this is called from a client, it actually only displays the message to the client and syncs that with the server.
      * When called from the server, it is sent to every client.
      */
-    static toAll(callback: (manager: MessageManager) => boolean): boolean;
+    static toAll(callback: (manager: MessageManager, player: IPlayer) => boolean): boolean;
     private readonly history;
     private lastMessageId;
     private _source;
