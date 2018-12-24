@@ -27,6 +27,8 @@ export interface IMultiplayer extends Emitter {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
+    clearSyncPacketsWaiting(waitId?: string): void;
+    clearSyncPacketWaiting(packet: IPacket, wait: number): void;
     closeConnection(connection: IConnection): void;
     convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
@@ -51,15 +53,25 @@ export interface IMultiplayer extends Emitter {
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onPlaying(): Promise<void>;
     pausePacketProcessing(pause: boolean): void;
-    queueSyncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): void;
-    resetSyncPacketsWaiting(): void;
     sendPacket(packet: IPacket, exclude?: PacketTarget): void;
     sendPacketTo(to: PacketTarget, packet: IPacket, force?: boolean): void;
     setBanned(identifier: string, ban: boolean): boolean;
     setOptions(options: IMultiplayerOptions): void;
     suppressSyncChecks(suppress: boolean): void;
     syncGameState(): void;
-    syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, waitId?: number): any;
+    /**
+     * Sends a packet in a synchronized way to the server or clients
+     *
+     * When ran as a server, clientSide() is called and the packet data is sent to all the clients.
+     *
+     * When ran as a client, the packet is sent to the server. The server is expected to call this method, which in turn sends the packet back to the client. When the client receives the packet, this method a second time and clientSide() is called.
+     *
+     * @param packet The packet
+     * @param clientSide The method to run for the client or server.
+     * @param checkId When true, this packet will not be sent to the server/client if the same packet is already being processed. When false, this packet will not be sent if any packet is already being processed. Useful when dealing with methods that could end up sending multiple packets while a packet is already being processed.
+     * @param wait When true, the client will keep track of what packets it sent to the server. If the client calls this method again before the server responds, it will not send a duplicate packet. It will wait for the server to send the packet back before allowing another one to be sent. When true, it will keep track of duplicate packets based on the packet type. When it's a number, it will keep track of duplicate packets based on the packet type + the number.
+     */
+    syncPacket(packet: IPacket, clientSide?: () => any, checkId?: boolean, wait?: number | true): any;
     updateGlobalServerDirectory(): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
     updatePlayerId(oldPid: number, newPid: number): void;
@@ -128,6 +140,7 @@ export interface IMultiplayerNetworkingOptions {
     chunkSize: number;
     logPackets: boolean;
     stopWebRtc: boolean;
+    fakeRoundTripTime: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {

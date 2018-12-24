@@ -61,6 +61,7 @@ interface IServerServerDetails {
 	region: string;
 	code: string;
 	isDedicatedServer: boolean;
+	buildTime: number | undefined;
 }
 
 interface IServerGameDetails {

@@ -132,6 +132,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onPlayerLeave(player: IPlayer): void;
     onPlayerTickEnd(player: IPlayer): void;
     onPlayerTickStart(player: IPlayer): void;
+    onPlayerWalkToTilePath(player: IPlayer, path: IVector2[] | undefined): void;
     onQueueSoundEffect(type: SfxType, x: number, y: number, z: number): SfxType | boolean | undefined;
     onGameScreenVisible(): void;
     onReadMap(human: Human, mapRequest: IMapRequest): void;
