@@ -60,7 +60,7 @@ export default abstract class QuadrantComponent<HasApi extends boolean = true> e
      *
      * Does not emit the event if the quadrant is not changing.
      */
-    setQuadrant(quadrant: Quadrant, trigger?: boolean): Promise<void>;
+    setQuadrant(quadrant: Quadrant, trigger?: boolean): void;
     /**
      * The ID is used for `Switch With` context menu options
      */

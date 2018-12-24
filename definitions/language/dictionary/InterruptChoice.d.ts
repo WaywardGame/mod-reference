@@ -16,13 +16,14 @@ declare enum InterruptChoice {
     ContinueAnyway = 1,
     LocalFile = 2,
     No = 3,
-    Ok = 4,
-    OpenSaveFolderAndQuit = 5,
-    Quit = 6,
-    Rejoin = 7,
-    Rename = 8,
-    Retry = 9,
-    SteamWorkshop = 10,
-    Yes = 11
+    NoWarn = 4,
+    Ok = 5,
+    OpenSaveFolderAndQuit = 6,
+    Quit = 7,
+    Rejoin = 8,
+    Rename = 9,
+    Retry = 10,
+    SteamWorkshop = 11,
+    Yes = 12
 }
 export default InterruptChoice;

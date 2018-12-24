@@ -22,6 +22,7 @@ export default class ItemManager implements IItemManager {
     private cachedWeights;
     private cachedDecaysIntoWeights;
     private cachedDefaultItemForGroup;
+    private cachedItemGroups;
     constructor();
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;

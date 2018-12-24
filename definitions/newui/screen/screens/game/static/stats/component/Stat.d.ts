@@ -15,6 +15,7 @@ import Text from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatElement extends Component {
+    private readonly stat;
     private readonly entity;
     constructor(api: UiApi, entity: IEntity, stat: Stat);
     /**
@@ -54,6 +55,7 @@ export declare abstract class StatElement extends Component {
      * Returns the component that should have the stat tooltip
      */
     protected getTooltipElement(): Component;
+    private getTooltip;
 }
 export declare class Statbar extends StatElement {
     private readonly bar;

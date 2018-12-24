@@ -14,6 +14,7 @@ export default class ItemRecipeRequirementChecker {
     private readonly player;
     private readonly recipe?;
     private readonly trackItems?;
+    private readonly cacheItems?;
     itemBaseComponent: IItem | undefined;
     itemComponentsRequired: IItemArray;
     itemComponentsConsumed: IItemArray;
@@ -21,9 +22,12 @@ export default class ItemRecipeRequirementChecker {
     numComponentsNeeded: number;
     private baseComponent;
     private components;
-    constructor(player: IPlayer, recipe?: IRecipe | undefined, trackItems?: boolean | undefined);
+    private adjacentContainers;
+    private readonly itemsToProcess;
+    constructor(player: IPlayer, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined);
     amountNeededForComponent(componentIndex: number): number;
     requirementsMet(): boolean;
+    setAdjacentContainers(adjacentContainers: IContainer[] | undefined): void;
     isDiscovered(): boolean;
     /**
      * Looks inside the players inventory and around adjacent opened doodads

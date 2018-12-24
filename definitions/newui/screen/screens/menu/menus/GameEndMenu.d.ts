@@ -27,6 +27,5 @@ export default class GameEndMenu extends Menu {
     private getContinueButtonText;
     private continue;
     private exitToMenu;
-    private shouldSaveSlot;
     private share;
 }
