@@ -42,7 +42,6 @@ export declare class InspectionSection implements IInspectionSection {
      * An array of objects representing paragraphs/headings in this inspection section.
      */
     readonly content: IInspection[];
-    constructor();
     /**
      * Adds headings/paragraphs to this inspection section.
      */

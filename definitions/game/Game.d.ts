@@ -153,7 +153,7 @@ export default class Game extends Emitter implements IGame {
     makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     getBlackness(): number;
     getAmbientLightLevel(z: number): number;
-    updateAmbientLightLevel(z: number): void;
+    getAndUpdateAmbientLightLevel(z: number): number;
     updateReputation(reputation: number): void;
     getDifficulty(): Difficulty;
     getDifficultyOptions(): IDifficultyOptions;

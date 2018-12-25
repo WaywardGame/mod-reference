@@ -28,6 +28,7 @@ export default class FieldOfView implements IFieldOfView {
     disabled: boolean;
     blurEnabled: boolean;
     computeOffset: Vec2;
+    transitionProgress: number;
     private debugRenderer;
     private texLight01;
     private texLight02;
@@ -37,6 +38,8 @@ export default class FieldOfView implements IFieldOfView {
     private viewQuadVertexArray;
     private viewQuadBuffer;
     private seed;
+    private lastAmbientLightLevel;
+    private transitionFinishTime;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext, radius: number, maxRadius: number, subdivisions?: number);
     resetGl(gl: WebGL2RenderingContext): void;
@@ -44,6 +47,8 @@ export default class FieldOfView implements IFieldOfView {
     getTextureSize(): number;
     getSubdivisions(): number;
     tickSeed(): void;
+    updateTransitionProgress(): boolean;
+    resetTransitionProgress(): void;
     compute(force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;

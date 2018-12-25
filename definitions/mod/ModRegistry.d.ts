@@ -160,17 +160,13 @@ export interface IOptionsSectionRegistration extends IBaseModRegistration {
 }
 export interface IRegistryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Registry;
-    class: {
-        new (mod: any): any;
-    };
+    class: new (mod: any) => any;
 }
 export interface IDialogRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dialog;
     name: string;
     description: IDialogDescription;
-    class: {
-        new (gsapi: IGameScreenApi): Dialog;
-    };
+    class: new (gsapi: IGameScreenApi) => Dialog;
 }
 export interface IInterModRegistryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InterModRegistry;
@@ -239,9 +235,7 @@ declare module Register {
      *
      * The decorated property will be injected with the constructed instance of the provided registry class.
      */
-    function registry(cls: {
-        new (upperRegistry: any): any;
-    }): <K extends string | number | symbol, T extends { [k in K]: object; }>(target: T, key: K) => void;
+    function registry(cls: new (upperRegistry: any) => any): <K extends string | number | symbol, T extends { [k in K]: object; }>(target: T, key: K) => void;
     /**
      * Registers a music track.
      * @param name The name of the music track.
@@ -344,9 +338,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered dialog.
      */
-    function dialog(name: string, description: IDialogDescription, cls: {
-        new (gsapi: IGameScreenApi, id: number): Dialog;
-    }): <K extends string | number | symbol, T extends { [k in K]: DialogId; }>(target: T, key: K) => void;
+    function dialog(name: string, description: IDialogDescription, cls: new (gsapi: IGameScreenApi, id: number) => Dialog): <K extends string | number | symbol, T extends { [k in K]: DialogId; }>(target: T, key: K) => void;
     /**
      * Registers a bindable.
      * @param name The name of the bindable.

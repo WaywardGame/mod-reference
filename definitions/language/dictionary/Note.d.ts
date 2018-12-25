@@ -33,6 +33,7 @@ declare enum Note {
     Reputation = 17,
     StaminaReplenishment = 18,
     Stranded = 19,
-    ToolUse = 20
+    ToolUse = 20,
+    TreasureHunting = 21
 }
 export default Note;

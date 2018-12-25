@@ -20,10 +20,11 @@ export interface IFieldOfView {
     disabled: boolean;
     readonly maxRadius: number;
     readonly radius: number;
+    readonly transitionProgress: number;
     texLight: WebGLTexture;
     texLightOld: WebGLTexture;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
-    compute(force?: boolean): void;
+    compute(force?: boolean, ambientLightLevel?: number): void;
     createDebugRenderer(): ITextureDebugRenderer;
     getBounds(player: IPlayer, radius?: number): IBound3;
     getSubdivisions(): number;
@@ -31,5 +32,7 @@ export interface IFieldOfView {
     resetGl(gl: WebGL2RenderingContext): void;
     tickSeed(): void;
     updateRadius(radius: number, maxRadius: number): void;
+    updateTransitionProgress(): boolean;
+    resetTransitionProgress(): void;
 }
 export default IFieldOfView;

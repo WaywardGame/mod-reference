@@ -23,7 +23,7 @@ declare const actionDescriptions: {
     [ActionType.CloseContainer]: import("./Action").Action<[ActionArgument.Container, [ActionArgument.Boolean, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.CloseDoor]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, boolean>;
     [ActionType.Craft]: import("./Action").Action<[ActionArgument.ItemType, ActionArgument.ItemArrayNearby, ActionArgument.ItemArrayNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Decode]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Decode]: import("./Action").Action<[ActionArgument.ItemNearby], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Dig]: import("./Action").Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Disassemble]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Dismantle]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
