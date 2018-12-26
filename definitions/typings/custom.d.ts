@@ -77,6 +77,7 @@ interface IServerGameDetails {
 
 interface IServerMod {
 	name: string;
+	version: string;
 	publishFileId: string | undefined;
 }
 

@@ -33,6 +33,7 @@ export default class WalkToTileHandler {
     reset(target?: IVector2, clearWalkPath?: boolean): void;
     /**
      * Removes the overlay from the tiles and updates the game view
+     * @returns True if the overlays were reset
      */
     private resetOverlays;
     /**

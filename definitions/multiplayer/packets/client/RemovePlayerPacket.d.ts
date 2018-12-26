@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { DisconnectReason } from "multiplayer/IMultiplayer";
 import PlayerTargetedClientPacket from "multiplayer/packets/PlayerTargetedClientPacket";
 export default class RemovePlayerPacket extends PlayerTargetedClientPacket {
+    reason: DisconnectReason;
     process(): void;
 }

@@ -29,11 +29,11 @@ export interface IMultiplayer extends Emitter {
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     clearSyncPacketsWaiting(waitId?: string): void;
     clearSyncPacketWaiting(packet: IPacket, wait: number): void;
-    closeConnection(connection: IConnection): void;
+    closeConnection(reason: DisconnectReason, connection: IConnection): void;
     convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
-    disconnect(reason?: TranslationGenerator, reasonDescription?: TranslationGenerator, unloading?: boolean): Promise<void>;
-    disconnectAndResetGameState(reason: TranslationGenerator, reasonDescription?: TranslationGenerator): Promise<void>;
+    disconnect(reason?: DisconnectReason, reasonDescription?: TranslationGenerator, unloading?: boolean): Promise<void>;
+    disconnectAndResetGameState(reason: DisconnectReason, reasonDescription?: TranslationGenerator): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): void;
     getBannedPlayers(): string[];
     getClients(): IConnection[];
@@ -165,4 +165,15 @@ export interface IMultiplayerMod {
     name: string;
     version: string;
     publishedFileId: string | undefined;
+}
+export declare enum DisconnectReason {
+    ConnectionTimeout = 0,
+    Desync = 1,
+    KeepAliveTimeout = 2,
+    Kick = 3,
+    Left = 4,
+    LostConnection = 5,
+    ServerShutdown = 6,
+    UnableToJoinGame = 7,
+    UnableToLoadMods = 8
 }

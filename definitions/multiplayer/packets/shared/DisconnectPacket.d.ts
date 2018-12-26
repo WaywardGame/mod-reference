@@ -9,8 +9,10 @@
  * https://waywardgame.github.io/
  */
 import UiTranslation from "language/dictionary/UiTranslation";
-import ClientPacket from "multiplayer/packets/ClientPacket";
-export default class DisconnectPacket extends ClientPacket {
+import { DisconnectReason } from "multiplayer/IMultiplayer";
+import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedSharedPacket";
+export default class DisconnectPacket extends PlayerTargetedSharedPacket {
+    reason: DisconnectReason;
     message: UiTranslation;
     process(): void;
 }

@@ -13,7 +13,7 @@ import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell } from "game/IGame";
+import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell, RenderSource } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
 import Translation from "language/Translation";
@@ -53,7 +53,6 @@ export default class Game extends Emitter implements IGame {
     spawnCoords: IVector3;
     tile: ITileArray;
     updateFieldOfView: boolean;
-    updateRender: boolean;
     contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;
     creatures: SaferArray<ICreature>;
@@ -99,6 +98,7 @@ export default class Game extends Emitter implements IGame {
     tileTexture: WebGLTexture;
     tileTextureSizeInversed: Vector2;
     visible: boolean;
+    private _updateRender;
     private gameCanvas;
     private thumbnailResolve?;
     private simulateInterval?;
@@ -175,7 +175,8 @@ export default class Game extends Emitter implements IGame {
     getMovementFinishTime(): number;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     tickRealtime(): void;
-    updateView(updateFov: boolean): void;
+    updateView(source: RenderSource, updateFov: boolean): void;
+    updateRender(source: RenderSource, fromUpdateView?: boolean): void;
     /**
      * AVOID USING THIS. USE updateTablesAndWeightNextTick INSTEAD!
      * For most cases you don't need this
