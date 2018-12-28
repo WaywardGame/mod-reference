@@ -105,7 +105,7 @@ export interface IGame extends Emitter {
     enableFlowFieldDebug(): void;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     getAmbientLightLevel(z: number): number;
-    getBenignity(): number | undefined;
+    getBenignity(): number;
     getBlackness(): number;
     getCameraPosition(): IVector2;
     getCompletedMilestoneCount(): number;
@@ -113,9 +113,9 @@ export interface IGame extends Emitter {
     getDifficultyOptions(): IDifficultyOptions;
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
-    getMalignity(): number | undefined;
+    getMalignity(): number;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
-    getMaxHealth(): number | undefined;
+    getMaxHealth(): number;
     getMovementFinishTime(): number;
     getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
     getOrCreateTile(x: number, y: number, z: number): ITile;
@@ -129,10 +129,10 @@ export interface IGame extends Emitter {
     getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeePosition(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
-    getReputation(): number | undefined;
-    getSkillPercent(skill: SkillType): number | undefined;
-    getMaxWeight(): number | undefined;
-    getTactics(): number | undefined;
+    getReputation(): number;
+    getSkillPercent(skill: SkillType): number;
+    getMaxWeight(): number;
+    getTactics(): number;
     getTickSpeed(): number;
     getTile(x: number, y: number, z: number): ITile;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;

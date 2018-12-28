@@ -106,6 +106,7 @@ export default class Game extends Emitter implements IGame {
     private playOptions;
     private ambientLightLevelCache;
     readonly isChallenge: boolean;
+    updateRender: (source: RenderSource) => void;
     initialize(): void;
     initGl(): Promise<void>;
     setupGl(restoring: boolean): Promise<void>;
@@ -157,14 +158,14 @@ export default class Game extends Emitter implements IGame {
     updateReputation(reputation: number): void;
     getDifficulty(): Difficulty;
     getDifficultyOptions(): IDifficultyOptions;
-    getReputation(): number | undefined;
-    getMalignity(): number | undefined;
-    getBenignity(): number | undefined;
-    getMaxHealth(): number | undefined;
-    getMaxWeight(): number | undefined;
-    getTactics(): number | undefined;
-    getSkillPercent(skill: SkillType): number | undefined;
-    getPlayerAverage(calc: (player: IPlayer) => number | undefined, round?: boolean): number | undefined;
+    getReputation(): number;
+    getMalignity(): number;
+    getBenignity(): number;
+    getMaxHealth(): number;
+    getMaxWeight(): number;
+    getTactics(): number;
+    getSkillPercent(skill: SkillType): number;
+    getPlayerAverage(calc: (player: IPlayer) => number | undefined, round?: boolean): number;
     changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean, skipCaveDirt?: boolean): void;
     isPositionFull(x: number, y: number, z: number): boolean;
     isTileFull(tile: ITile): boolean;
@@ -175,8 +176,9 @@ export default class Game extends Emitter implements IGame {
     getMovementFinishTime(): number;
     passTurn(player: IPlayer, turnType?: TurnType): void;
     tickRealtime(): void;
+    updateView(updateFov: boolean): void;
     updateView(source: RenderSource, updateFov: boolean): void;
-    updateRender(source: RenderSource, fromUpdateView?: boolean): void;
+    updateRenderInternal(source: RenderSource, fromUpdateView?: boolean): void;
     /**
      * AVOID USING THIS. USE updateTablesAndWeightNextTick INSTEAD!
      * For most cases you don't need this
