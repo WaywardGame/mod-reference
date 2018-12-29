@@ -11,6 +11,7 @@
 import { IDamageInfo } from "creature/ICreature";
 import { BindCatcherApi } from "newui/BindingManager";
 import WalkToTileHandler from "newui/screen/screens/game/util/movement/WalkToTileHandler";
+import { IVector2 } from "utilities/math/IVector";
 export default class MovementHandler {
     private readonly gameScreen;
     readonly walkToTileHandler: WalkToTileHandler;
@@ -37,6 +38,10 @@ export default class MovementHandler {
      * Handles `Hook.OnPlayerDeath`
      */
     onPlayerDeath(): void;
+    /**
+     * Handles `Hook.OnPlayerWalkToTilePath`
+     */
+    onPlayerWalkToTilePath(path: IVector2[] | undefined): void;
     private handleBinds;
     /**
      * Processes moving towards the mouse.

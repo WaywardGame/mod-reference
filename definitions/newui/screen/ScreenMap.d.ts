@@ -10,9 +10,7 @@
  */
 import { UiApi } from "newui/INewUi";
 import { IScreen } from "newui/screen/IScreen";
-export interface ExtendsScreen {
-    new (uiApi: UiApi): IScreen;
-}
+export declare type ExtendsScreen = new (uiApi: UiApi) => IScreen;
 declare const screenMap: {
     [key: number]: ExtendsScreen;
 };

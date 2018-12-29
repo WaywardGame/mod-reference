@@ -8,9 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import UiTranslation from "language/dictionary/UiTranslation";
-import ClientPacket from "multiplayer/packets/ClientPacket";
-export default class DisconnectPacket extends ClientPacket {
-    message: UiTranslation;
-    process(): void;
+declare global {
+    interface IterableIterator<T> {
+        /**
+         * Returns an the number of elements in the IterableIterator
+         */
+        length(): number;
+    }
 }
+export declare function length(this: IterableIterator<any>): number;

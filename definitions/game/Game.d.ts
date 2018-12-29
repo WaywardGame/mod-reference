@@ -13,7 +13,7 @@ import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell } from "game/IGame";
+import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell, RenderSource } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
 import Translation from "language/Translation";
@@ -53,7 +53,6 @@ export default class Game extends Emitter implements IGame {
     spawnCoords: IVector3;
     tile: ITileArray;
     updateFieldOfView: boolean;
-    updateRender: boolean;
     contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;
     creatures: SaferArray<ICreature>;
@@ -99,6 +98,7 @@ export default class Game extends Emitter implements IGame {
     tileTexture: WebGLTexture;
     tileTextureSizeInversed: Vector2;
     visible: boolean;
+    private _updateRender;
     private gameCanvas;
     private thumbnailResolve?;
     private simulateInterval?;
@@ -106,6 +106,7 @@ export default class Game extends Emitter implements IGame {
     private playOptions;
     private ambientLightLevelCache;
     readonly isChallenge: boolean;
+    updateRender: (source: RenderSource) => void;
     initialize(): void;
     initGl(): Promise<void>;
     setupGl(restoring: boolean): Promise<void>;
@@ -153,18 +154,18 @@ export default class Game extends Emitter implements IGame {
     makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     getBlackness(): number;
     getAmbientLightLevel(z: number): number;
-    updateAmbientLightLevel(z: number): void;
+    getAndUpdateAmbientLightLevel(z: number): number;
     updateReputation(reputation: number): void;
     getDifficulty(): Difficulty;
     getDifficultyOptions(): IDifficultyOptions;
-    getReputation(): number | undefined;
-    getMalignity(): number | undefined;
-    getBenignity(): number | undefined;
-    getMaxHealth(): number | undefined;
-    getMaxWeight(): number | undefined;
-    getTactics(): number | undefined;
-    getSkillPercent(skill: SkillType): number | undefined;
-    getPlayerAverage(calc: (player: IPlayer) => number | undefined, round?: boolean): number | undefined;
+    getReputation(): number;
+    getMalignity(): number;
+    getBenignity(): number;
+    getMaxHealth(): number;
+    getMaxWeight(): number;
+    getTactics(): number;
+    getSkillPercent(skill: SkillType): number;
+    getPlayerAverage(calc: (player: IPlayer) => number | undefined, round?: boolean): number;
     changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean, skipCaveDirt?: boolean): void;
     isPositionFull(x: number, y: number, z: number): boolean;
     isTileFull(tile: ITile): boolean;
@@ -176,6 +177,8 @@ export default class Game extends Emitter implements IGame {
     passTurn(player: IPlayer, turnType?: TurnType): void;
     tickRealtime(): void;
     updateView(updateFov: boolean): void;
+    updateView(source: RenderSource, updateFov: boolean): void;
+    updateRenderInternal(source: RenderSource, fromUpdateView?: boolean): void;
     /**
      * AVOID USING THIS. USE updateTablesAndWeightNextTick INSTEAD!
      * For most cases you don't need this

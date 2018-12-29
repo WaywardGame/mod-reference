@@ -63,7 +63,6 @@ export interface IGame extends Emitter {
     playing: boolean;
     paused: boolean;
     autoSaveTimer: number;
-    updateRender: boolean;
     fillCount: number;
     fillTile: boolean[][];
     spawnCoords: IVector3;
@@ -106,7 +105,7 @@ export interface IGame extends Emitter {
     enableFlowFieldDebug(): void;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     getAmbientLightLevel(z: number): number;
-    getBenignity(): number | undefined;
+    getBenignity(): number;
     getBlackness(): number;
     getCameraPosition(): IVector2;
     getCompletedMilestoneCount(): number;
@@ -114,9 +113,9 @@ export interface IGame extends Emitter {
     getDifficultyOptions(): IDifficultyOptions;
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
-    getMalignity(): number | undefined;
+    getMalignity(): number;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
-    getMaxHealth(): number | undefined;
+    getMaxHealth(): number;
     getMovementFinishTime(): number;
     getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
     getOrCreateTile(x: number, y: number, z: number): ITile;
@@ -130,10 +129,10 @@ export interface IGame extends Emitter {
     getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeePosition(tileX: number, tileY: number, tileZ: number): IPlayer[];
     getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
-    getReputation(): number | undefined;
-    getSkillPercent(skill: SkillType): number | undefined;
-    getMaxWeight(): number | undefined;
-    getTactics(): number | undefined;
+    getReputation(): number;
+    getSkillPercent(skill: SkillType): number;
+    getMaxWeight(): number;
+    getTactics(): number;
     getTickSpeed(): number;
     getTile(x: number, y: number, z: number): ITile;
     getTileData(x: number, y: number, z: number): ITileData[] | undefined;
@@ -182,10 +181,11 @@ export interface IGame extends Emitter {
     tickRealtime(): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     updateOption(player: IPlayer | undefined, id: keyof IOptions, value: boolean | number): void;
+    updateRender(source: RenderSource): void;
     updateReputation(reputation: number): void;
     updateTablesAndWeight(): void;
     updateThumbnail(): Promise<void>;
-    updateView(updateFov: boolean): void;
+    updateView(source: RenderSource, updateFov: boolean): void;
     updateZoomLevel(): void;
     wrapCoordinate(cordinate: number, reference: number): number;
 }
@@ -255,6 +255,44 @@ export declare enum WaterType {
     None = 0,
     FreshWater = 1,
     Seawater = 2
+}
+export declare enum RenderSource {
+    ActionManager = 0,
+    FovTransition = 1,
+    FovUpdate = 2,
+    GamePassTurn = 3,
+    GameTick = 4,
+    HiddenMob = 5,
+    ItemEquip = 6,
+    ItemEquipEffect = 7,
+    ItemUnequip = 8,
+    Mod = 9,
+    MovementCreature = 10,
+    MovementNPC = 11,
+    MovementPlayerPost = 12,
+    MovementPlayerPre = 13,
+    MovementPlayerZPost = 14,
+    MovementPlayerZPre = 15,
+    MovementTileEvent = 16,
+    MultiplayerDisconnect = 17,
+    OptionHeadgear = 18,
+    OptionVisionMode = 19,
+    OptionZoomLevel = 20,
+    PlayerKill = 21,
+    PlayerRemove = 22,
+    PlayerRest = 23,
+    PlayerRestStart = 24,
+    PlayerRestStop = 25,
+    PlayerWalkToTilePath = 26,
+    PlayerWalkToTilePathOverburdened = 27,
+    PlayerWalkToTilePathPreview = 28,
+    PlayerWalkToTilePathReset = 29,
+    RemoveBlood = 30,
+    Resize = 31,
+    SetupGl = 32,
+    StartGame = 33,
+    TileUpdate = 34,
+    WorldLayerRendererFlush = 35
 }
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;

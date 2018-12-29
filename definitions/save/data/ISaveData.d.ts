@@ -12,8 +12,8 @@ import { PlayerState } from "Enums";
 import { Difficulty } from "game/Difficulty";
 import { ISerializedTranslation } from "language/Translation";
 import { IMultiplayerState } from "multiplayer/IMultiplayer";
+import IClientStore from "save/clientStore/IClientStore";
 import { IEnumInfo } from "utilities/enum/IEnum";
-import IClientStore from "../clientStore/IClientStore";
 export interface ISaveData {
     gameSlotName: string;
     gameState: PlayerState.Won | PlayerState.Ghost | PlayerState.None;

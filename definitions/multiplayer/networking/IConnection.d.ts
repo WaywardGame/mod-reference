@@ -43,5 +43,6 @@ export interface IConnection {
 export interface IQueuedData {
     data: ArrayBuffer;
     byteOffset: number;
+    sendAfter: number | undefined;
     retries?: number;
 }

@@ -22,18 +22,24 @@ export default class WalkToTileHandler {
      */
     onMoveComplete(): void;
     /**
+     * Event handler for when the players walk to tile path is set
+     */
+    onPlayerWalkToTilePath(path: IVector2[] | undefined): void;
+    /**
      * Resets the handler, removing any intent, path, and target.
      * @param target Resets the overlays to this target
+     * @param clearWalkPath Resets the walk along path
      */
-    reset(target?: IVector2): void;
+    reset(target?: IVector2, clearWalkPath?: boolean): void;
     /**
      * Removes the overlay from the tiles and updates the game view
+     * @returns True if the overlays were reset
      */
     private resetOverlays;
     /**
      * Finds a path to a target and then updates the overlay to that path (if it was valid)
      */
-    private setupPath;
+    private findPath;
     /**
      * Returns the penalty of the given tile (just how much we *don't* want to step there)
      */

@@ -88,6 +88,7 @@ export declare enum Hook {
     OnPlayerLeave = "onPlayerLeave",
     OnPlayerTickEnd = "onPlayerTickEnd",
     OnPlayerTickStart = "onPlayerTickStart",
+    OnPlayerWalkToTilePath = "onPlayerWalkToTilePath",
     OnQueueSoundEffect = "onQueueSoundEffect",
     OnReadMap = "onReadMap",
     OnRenderOverlay = "onRenderOverlay",

@@ -594,6 +594,12 @@ export interface IHookHost {
      */
     onPlayerTickStart?(player: IPlayer): void;
     /**
+     * Called when the players walk to tile path is set
+     * @param player The player object
+     * @param path The path
+     */
+    onPlayerWalkToTilePath?(player: IPlayer, path: IVector2[] | undefined): void;
+    /**
      * Called when a sound effect is queued
      * @param type The sound effect type
      * @param x The x location in the world for the effect

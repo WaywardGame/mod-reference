@@ -14,7 +14,7 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import Vector2 from "utilities/math/Vector2";
 import Vector3 from "utilities/math/Vector3";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer, void>;
+declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/IPlayer").IPlayer, void>;
 export default _default;
 export declare function getCartographyDistance(skill: number, distance: number): Translation | Message;
 export declare function getCartographyDirection(skill: number, humanPosition: Vector2, mapPosition: Vector3): Message.None | Message;

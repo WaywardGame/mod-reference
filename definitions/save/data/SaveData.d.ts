@@ -12,9 +12,9 @@ import { PlayerState } from "Enums";
 import { Difficulty } from "game/Difficulty";
 import { ISerializedTranslation } from "language/Translation";
 import { IMultiplayerState } from "multiplayer/IMultiplayer";
+import IClientStore from "save/clientStore/IClientStore";
 import ISaveData from "save/data/ISaveData";
 import { IEnumInfo } from "utilities/enum/IEnum";
-import IClientStore from "../clientStore/IClientStore";
 export declare const saveDataVersionUnknown = "Unknown";
 export default class SaveData implements ISaveData {
     gameSlotName: string;

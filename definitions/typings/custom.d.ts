@@ -61,6 +61,7 @@ interface IServerServerDetails {
 	region: string;
 	code: string;
 	isDedicatedServer: boolean;
+	buildTime: number | undefined;
 }
 
 interface IServerGameDetails {
@@ -76,6 +77,7 @@ interface IServerGameDetails {
 
 interface IServerMod {
 	name: string;
+	version: string;
 	publishFileId: string | undefined;
 }
 

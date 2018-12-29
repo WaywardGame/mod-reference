@@ -28,6 +28,7 @@ import MovementHandler from "newui/screen/screens/game/util/movement/MovementHan
 import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltip";
 import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
+import { IVector2 } from "utilities/math/IVector";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };
@@ -63,6 +64,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     onMoveComplete(player: IPlayer): void;
     onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
     onPlayerDeath(player: IPlayer): boolean | undefined;
+    onPlayerWalkToTilePath(player: IPlayer, path: IVector2[] | undefined): void;
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: IPlayer, mapRequest: IMapRequest): void;

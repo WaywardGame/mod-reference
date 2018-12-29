@@ -798,7 +798,8 @@ export declare enum DoodadTypeGroup {
     Anvil = 405,
     Well = 406,
     Hitch = 407,
-    Last = 408
+    GatheredPlant = 408,
+    Last = 409
 }
 export declare enum GrowingStage {
     Germinating = 0,

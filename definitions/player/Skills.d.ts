@@ -15,7 +15,7 @@ export declare class SkillLevel {
     readonly core: number;
 }
 export interface ISkillSet {
-    [index: number]: SkillLevel;
+    [index: number]: SkillLevel | undefined;
 }
 export interface ISkillDescription extends IModdable {
     attribute?: Stat;
