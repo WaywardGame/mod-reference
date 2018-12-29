@@ -59,7 +59,7 @@ export default abstract class Entity extends Emitter implements IEntity {
     setStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     reduceStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
     increaseStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
-    setStatBonus(stat: Stat | IStat, bonus: number, info?: IStatChangeInfo): void;
+    setStatBonus(stat: Stat | IStat, bonus: number, info?: StatChangeReason | IStatChangeInfo): void;
     getStatMax(stat: Stat | IStat): number | undefined;
     setStatMax(stat: Stat | IStat, amount: number): void;
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;

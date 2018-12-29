@@ -112,7 +112,7 @@ export default interface IEntity extends IVector3, Emitter {
      *
      * Triggers `EntityEvent.StatBonusChanged`, then `EntityEvent.StatChanged`
      */
-    setStatBonus(stat: Stat | IStat, bonus: number, reason?: IStatChangeInfo): void;
+    setStatBonus(stat: Stat | IStat, bonus: number, reason?: StatChangeReason | IStatChangeInfo): void;
     /**
      * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
      * @param stat The `Stat` to set.
@@ -216,7 +216,8 @@ export declare enum StatusEffectChangeReason {
 export declare enum StatChangeReason {
     Normal = 0,
     ChangeTimer = 1,
-    BonusChanged = 2
+    BonusChanged = 2,
+    Upgrade = 3
 }
 export interface IStatChangeInfo<T = any> {
     /**
