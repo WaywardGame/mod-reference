@@ -30,7 +30,10 @@ export interface ISerializedTranslationsProvider {
         };
         uncountables?: string[];
         irregularRules?: Array<[string, string]>;
-        articleRules?: Array<[number, string, string]>;
+        articleRules?: Array<[number | {
+            min: number;
+            max?: number;
+        }, string, string]>;
     };
 }
 export interface ISerializedLanguage extends ISerializedTranslationsProvider {

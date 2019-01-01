@@ -12,7 +12,11 @@ export declare type PluralRule = [RegExp, string];
 export declare type SingularRule = [RegExp, string];
 export declare type UncountableRule = RegExp;
 export declare type IrregularRule = [string, string];
-export declare type NameRule = [number, RegExp, string];
+export declare type NameRule = [CountMatcher, RegExp, string];
+export declare type CountMatcher = number | {
+    min: number;
+    max?: number;
+};
 export interface IPluralizationRules {
     pluralRules: PluralRule[];
     singularRules: SingularRule[];
@@ -33,6 +37,6 @@ export default abstract class TranslationsProvider {
     setPluralizationRules(...rules: Array<PluralRule | [string, string]>): this;
     setSingularizationRules(...rules: Array<SingularRule | [string, string]>): this;
     setUncountableRules(...rules: Array<RegExp | string>): this;
-    setArticleRules(...rules: Array<NameRule | [number, string, string]>): this;
+    setArticleRules(...rules: Array<NameRule | [CountMatcher, string, string]>): this;
     private getEntryName;
 }

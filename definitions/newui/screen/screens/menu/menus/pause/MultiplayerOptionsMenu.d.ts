@@ -14,6 +14,7 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly openServer;
     private readonly pause;
     private readonly copyGameCode;
+    private readonly inviteSteamFriends;
     private readonly lobbyType;
     private readonly choiceLobbyFriends;
     private readonly choiceLobbyPublic;
@@ -24,4 +25,5 @@ export default class MultiplayerOptionsMenu extends Menu {
     private refresh;
     private updateMultiplayer;
     private copyGameCodeClick;
+    private inviteSteamFriendsClick;
 }

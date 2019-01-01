@@ -21,7 +21,9 @@ import { LobbyType } from "steamworks/ISteamworks";
 import Emitter from "utilities/Emitter";
 export declare enum MultiplayerEvent {
     Connect = 0,
-    Disconnect = 1
+    Disconnect = 1,
+    JoinLobby = 2,
+    LeaveLobby = 3
 }
 export interface IMultiplayer extends Emitter {
     addAfterSyncChecks(packet: IPacket): void;
@@ -51,6 +53,7 @@ export interface IMultiplayer extends Emitter {
     joinServer(info: ServerInfo, character?: ICharacter): void;
     kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
+    onLobbyExited(lobbyId: string): void;
     onPlaying(): Promise<void>;
     pausePacketProcessing(pause: boolean): void;
     sendPacket(packet: IPacket, exclude?: PacketTarget): void;

@@ -62,6 +62,7 @@ export interface ISteamworks extends Emitter {
     openModsFolder(): void;
     openSaveFolder(): void;
     openUrl(url: string): void;
+    openInviteDialog(): void;
     openWorkshop(publishId?: string): Promise<void>;
     processBackups(): boolean;
     publishMod(modIndex: number): Promise<string>;
