@@ -183,10 +183,13 @@ export interface ISkillRegistration extends IBaseModRegistration {
     name: string;
     description?: ISkillDescription;
 }
+export interface IItemRegistrationDescription extends IItemDescription {
+    groups?: ItemTypeGroup[];
+}
 export interface IItemRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Item;
     name: string;
-    description?: IItemDescription;
+    description?: IItemRegistrationDescription;
 }
 export interface ICreatureRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Creature;
@@ -297,7 +300,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered item.
      */
-    function item(name: string, description?: IItemDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
+    function item(name: string, description?: IItemRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
     /**
      * Registers a creature.
      * @param name The name of the creature.
