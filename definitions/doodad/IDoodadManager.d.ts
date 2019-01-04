@@ -11,8 +11,11 @@
 import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { DoodadType, DoodadTypeGroup } from "Enums";
 export interface IDoodadManager {
+    generateLookups(): void;
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;
     isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): doodadType is DoodadTypeGroup;
+    isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup): boolean;
+    getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     /**
      * Removes a doodad from the world.
      * @param doodad The doodad to remove

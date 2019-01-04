@@ -63,6 +63,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getDefaultDurability(): void;
     setOffTrap(human?: Human, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
+    increaseFertility(): boolean;
     update(): void;
     isDangerous(player: IPlayer): boolean;
     getDamage(human: Human, equipType?: EquipType): number;

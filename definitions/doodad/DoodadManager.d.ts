@@ -12,9 +12,14 @@ import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IDoodadManager from "doodad/IDoodadManager";
 import { DoodadType, DoodadTypeGroup } from "Enums";
 export default class DoodadManager implements IDoodadManager {
+    private cachedGroups;
+    constructor();
+    generateLookups(): void;
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;
     remove(doodad: IDoodad, removeItems?: boolean): void;
     updateAll(): void;
     isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): doodadType is DoodadTypeGroup;
+    isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup): boolean;
+    getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     verifyAndFixItemWeights(): void;
 }
