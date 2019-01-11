@@ -52,7 +52,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     getPins(): IterableIterator<IPinnedMessage>;
     scrollToNewest(): void;
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
-    pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage | undefined;
+    pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | undefined;
     onDisplayMessage(player: IPlayer, message: IMessage, addBackwards?: boolean): void;
     onWrittenNote(player: IPlayer, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
@@ -66,6 +66,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     protected getContextMenuDescription(): ContextMenuOptionKeyValuePair[];
     private addPinnedNote;
     private addPinnedQuestRequirement;
+    private unpinRequirement;
     private onQuestGet;
     private onRequirementComplete;
     private pinRequirementsFromQuest;

@@ -20,7 +20,7 @@ export default class LoadGameMenu extends Menu {
     private newGameButton;
     private importButton;
     constructor(uiApi: UiApi);
-    protected onBeforeShow(): Promise<void> | undefined;
+    protected onBeforeShow(): Promise<void>;
     private refresh;
     private onImport;
     private updateNewGameButton;

@@ -16,7 +16,7 @@ export declare let INVALID: ActionArgument;
 declare const actionDescriptions: {
     [ActionType.AddFuel]: import("./Action").Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Apply]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Attack]: import("./Action").Action<[[ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.Item, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Attack]: import("./Action").Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Build]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Carve]: import("./Action").Action<[ActionArgument.ItemInventory], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Cast]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
@@ -35,7 +35,7 @@ declare const actionDescriptions: {
     [ActionType.Eat]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Equip]: import("./Action").Action<[ActionArgument.ItemNearby, ActionArgument.EquipType, [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Extinguish]: import("./Action").Action<[ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Fire]: import("./Action").Action<[ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Fire]: import("./Action").Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Gather]: import("./Action").Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.GatherMilk]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.GatherTreasure]: import("./Action").Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
@@ -78,9 +78,9 @@ declare const actionDescriptions: {
     [ActionType.RubCounterclockwise]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.SailToCivilization]: import("./Action").Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.SetDown]: import("./Action").Action<[ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Shoot]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Shoot]: import("./Action").Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Sleep]: import("./Action").Action<[[ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Doodad, ActionArgument.Undefined], [ActionArgument.RestType, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Sling]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Sling]: import("./Action").Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.SmotherFire]: import("./Action").Action<[ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Squeeze]: import("./Action").Action<[ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.StartFire]: import("./Action").Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
@@ -88,7 +88,7 @@ declare const actionDescriptions: {
     [ActionType.Tame]: import("./Action").Action<[], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Teleport]: import("./Action").Action<[ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.TellTime]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Throw]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.Throw]: import("./Action").Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Till]: import("./Action").Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Trade]: import("./Action").Action<[ActionArgument.NPC], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Transmogrify]: import("./Action").Action<[ActionArgument.ItemInventory, [ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
