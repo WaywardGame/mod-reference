@@ -17,7 +17,6 @@ export default class NewGameMenu extends Menu {
     choiceMultiplayer: Choice;
     private slot;
     private inputName;
-    private inputNameRow;
     private inputSeed;
     private inputSeedRow;
     private difficulty;
@@ -42,4 +41,5 @@ export default class NewGameMenu extends Menu {
     private getStartClickHandler;
     private getPlayOptions;
     private getCustomGameOptionsMenu;
+    private getDefaultSaveName;
 }

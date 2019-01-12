@@ -15,7 +15,9 @@ export default class PauseMenu extends Menu {
     private readonly modesButton;
     private readonly multiplayerButton;
     private readonly optionsRow;
+    private readonly multiplayerRow;
     private readonly difficultyOptionIcons;
+    private readonly pauseButton;
     private multiplayerOptionsMenu;
     constructor(uiApi: UiApi);
     showMultiplayerOptionsMenu(): this;

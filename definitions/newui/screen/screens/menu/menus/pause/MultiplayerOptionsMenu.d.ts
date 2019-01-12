@@ -12,7 +12,6 @@ import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class MultiplayerOptionsMenu extends Menu {
     private readonly openServer;
-    private readonly pause;
     private readonly copyGameCode;
     private readonly inviteSteamFriends;
     private readonly lobbyType;

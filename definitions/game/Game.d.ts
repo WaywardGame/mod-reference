@@ -216,6 +216,7 @@ export default class Game extends Emitter implements IGame {
     wrapCoordinate(cordinate: number, reference: number): number;
     isFlammable(x: number, y: number, z: number): boolean;
     getCameraPosition(): IVector2;
+    getExactCameraPosition(): Vector2;
     private updateOptionInternal;
     private tick;
     private updateEntityFov;

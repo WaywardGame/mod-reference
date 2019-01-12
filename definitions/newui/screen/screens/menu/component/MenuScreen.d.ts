@@ -30,6 +30,14 @@ export default abstract class MenuScreen extends Screen {
      * Gets the menu by the given ID, initializing it if it does not already exist.
      */
     getMenu<M extends Menu = Menu>(menuId: MenuId): M;
-    removeFromChain(menu: Menu): void;
+    removeFromChain(menu: Menu): this;
+    /**
+     * Sets the visible menu to be the new top menu. (Removes super-menus, keeps sub-menus)
+     */
+    setTopMenu(): this;
+    /**
+     * Sets the given menu to be the new top menu. (Removes super-menus, keeps sub-menus)
+     */
+    setTopMenu(menu: Menu): this;
     private onHide;
 }

@@ -31,6 +31,8 @@ export default class Input extends Component implements IRefreshable, IInput {
     private placeholder;
     private shouldBlurWhenEnterPressed;
     private shouldBlurWhenEnterPressedAndEmpty;
+    private hasChanged;
+    readonly changed: boolean;
     constructor(uiApi: UiApi);
     setMaxLength(maxLength?: number): this;
     setCanBeEmpty(canBeEmpty?: boolean): this;
