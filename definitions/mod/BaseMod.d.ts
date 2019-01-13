@@ -99,9 +99,6 @@ export declare abstract class BaseMod extends Emitter {
      * @param registry The `IRegistry` that this registration is a part of.
      * @param registration An `IModRegistration`, or an object descendant in an `IModRegistration`. This object will be looped through,
      * and any values in it which are instances of `Registry.Registered` are asynchronously replaced with their registered values.
-     *
-     * @returns The passed `IModRegistration`, after asynchonously replacing all instances of `Registry.Registered` with their target
-     * registration values.
      */
     private validateRegistration;
     /**
@@ -115,9 +112,6 @@ export declare abstract class BaseMod extends Emitter {
      *
      * - If the type is a property, and the field has a value, it's returned immediately.
      * - If the type is a method, and an ID is returned by `Registry.id(registry[property])`, the ID will be returned.
-     * - If neither of the above statements are true, a promise is returned which will be resolved once the property has been
-     * registered, with the registration ID. To do this, the resolve method of the promise is stored in the internal
-     * `[SYMBOL_WAIT_FOR_PROPERTY]` object, indexed by the property name. They will be called by `setRegistrationPropertyValue`
      */
     private getRegistrationId;
     /**
@@ -133,14 +127,6 @@ export declare abstract class BaseMod extends Emitter {
      * @param value The value to set the property to.
      */
     private setRegistrationPropertyValue;
-    /**
-     * Resolves any promises waiting for this property (created by `getRegistrationId`) with the given value. The promises are stored in
-     * `registry[SYMBOL_WAIT_FOR_PROPERTY][property]`. They are deleted afterwards as they are no longer needed.
-     * @param registry The registry which contains the property which has been registered.
-     * @param property The property containing the registration that has been registered.
-     * @param value The registration ID of this property.
-     */
-    private resolveWaitForProperty;
     /**
      * Allocates an enum for this mod.
      * @param id The enum type.

@@ -38,6 +38,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     readonly log: Component;
     readonly input: Input;
     readonly filter: Button;
+    pinNotesAutomatically: boolean;
     filters: {
         [key: string]: string[];
     };

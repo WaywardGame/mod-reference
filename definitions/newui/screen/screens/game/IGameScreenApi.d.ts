@@ -49,6 +49,7 @@ export declare enum PinType {
     Misc = 2
 }
 export interface IMessages extends Emitter {
+    pinNotesAutomatically: boolean;
     getPins(): IterableIterator<IPinnedMessage>;
     pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage | undefined;
 }
