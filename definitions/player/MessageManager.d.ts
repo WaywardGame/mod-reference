@@ -17,6 +17,8 @@ import { IStringSection } from "utilities/string/Interpolator";
 export interface IMessageHistoryItem {
     id: number;
     source: string[];
+    time: number;
+    turn: number;
     type?: MessageType;
     message: ISerializedTranslation | IStringSection[];
 }

@@ -10,10 +10,12 @@
  *
  *
  */
-import PlayerTargetedServerPacket from "multiplayer/packets/PlayerTargetedServerPacket";
-export default class LogsPacket extends PlayerTargetedServerPacket {
+import ServerPacket from "multiplayer/packets/ServerPacket";
+/**
+ * The player sends this to the server when they have desynced
+ */
+export default class DesyncPacket extends ServerPacket {
     logs: string;
-    containsServerGameState: boolean | undefined;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;
     process(): void;

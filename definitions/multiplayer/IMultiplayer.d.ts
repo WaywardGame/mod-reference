@@ -42,7 +42,6 @@ export interface IMultiplayer extends Emitter {
     getConnectedGameCode(): string | undefined;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
-    getDefaultOptions(): IMultiplayerOptions;
     getOptions(): IMultiplayerOptions;
     getPlayerIdentifier(): string;
     isClient(): boolean;
@@ -121,6 +120,7 @@ export declare const keepAliveInterval = 4000;
 export declare const keepAliveTimeout = 15000;
 export declare const steamLobbyPrefix = "steam:";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
+export declare function getDefaultMultiplayerOptions(): IMultiplayerOptions;
 export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
@@ -144,6 +144,7 @@ export interface IMultiplayerNetworkingOptions {
     logPackets: boolean;
     stopWebRtc: boolean;
     fakeRoundTripTime: number;
+    recentPacketTracking: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {

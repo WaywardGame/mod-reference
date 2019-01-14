@@ -27,7 +27,6 @@ export default class NewGameMenu extends Menu {
     private lobbyType;
     private choiceLobbyFriends;
     private choiceLobbyPublic;
-    private choiceLobbyPrivate;
     private inputPVP;
     private maxPlayersRow;
     private tickSpeedRow;

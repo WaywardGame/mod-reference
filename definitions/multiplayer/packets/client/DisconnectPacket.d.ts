@@ -10,9 +10,11 @@
  */
 import UiTranslation from "language/dictionary/UiTranslation";
 import { DisconnectReason } from "multiplayer/IMultiplayer";
-import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedSharedPacket";
-export default class DisconnectPacket extends PlayerTargetedSharedPacket {
+import ClientPacket from "multiplayer/packets/ClientPacket";
+export default class DisconnectPacket extends ClientPacket {
     reason: DisconnectReason;
-    message: UiTranslation;
+    description: UiTranslation | undefined;
+    isSyncCheckEnabled(): boolean;
+    isAllowedWhenPaused(): boolean;
     process(): void;
 }

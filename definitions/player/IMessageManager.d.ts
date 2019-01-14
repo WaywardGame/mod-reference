@@ -85,6 +85,8 @@ export declare enum Source {
 export interface IMessage {
     id: number;
     source: Source[];
+    time: number;
+    turn: number;
     type?: MessageType;
     message: ISerializedTranslation;
 }

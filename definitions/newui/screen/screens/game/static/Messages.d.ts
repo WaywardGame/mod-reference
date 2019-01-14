@@ -17,12 +17,13 @@ import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import Input from "newui/component/Input";
 import { UiApi } from "newui/INewUi";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import IGameScreenApi, { IMessages, IPinnedMessage, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import IGameScreenApi, { IMessages, IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { IMessage, Source } from "player/IMessageManager";
 import IPlayer from "player/IPlayer";
 import { RequirementInstance } from "player/quest/quest/Quest";
 import { QuestInstance } from "player/quest/QuestManager";
 import { IStringSection } from "utilities/string/Interpolator";
+export declare const DEFAULT_MAX_MESSAGES = 30;
 export interface IMessageFilter {
     name: string;
     allowedSources: Source[];
@@ -43,6 +44,10 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
         [key: string]: string[];
     };
     private selectedFilter;
+    private showSendButton;
+    private showOptionsButton;
+    private messageTimestamps;
+    private maxMessages;
     private readonly pinnedNotes;
     private readonly seenNotes;
     private readonly pinnedQuestRequirements;
@@ -51,6 +56,14 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     getID(): QuadrantComponentId;
     getName(): IStringSection[];
     getPins(): IterableIterator<IPinnedMessage>;
+    getMessageTimestampMode(): MessageTimestamp;
+    setMessageTimestampMode(mode: MessageTimestamp): this;
+    shouldShowSendButton(): boolean;
+    setShouldShowSendButton(shouldShow: boolean): this;
+    shouldShowOptionsButton(): boolean;
+    setShouldShowOptionsButton(shouldShow: boolean): this;
+    getMaxMessages(): number;
+    setMaxMessages(maxMessages: number): this;
     scrollToNewest(): void;
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
     pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | undefined;
@@ -72,6 +85,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     private onRequirementComplete;
     private pinRequirementsFromQuest;
     private hasIncompletePinnedRequirementFromAnotherQuest;
+    private showOptions;
     private updateMessages;
     private messages;
     /**
@@ -94,6 +108,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
      * Changes the message filter
      */
     private changeFilter;
+    private refreshLog;
     private onShowDialog;
     private onShowNote;
     private editFilters;

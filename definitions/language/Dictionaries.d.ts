@@ -24,6 +24,7 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import { ModType } from "mod/IModInfo";
 import { CanLoadState } from "mod/IModManager";
 import { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { MessageTimestamp } from "newui/screen/screens/game/IGameScreenApi";
 import { CharacterSort } from "newui/screen/screens/menu/menus/character/Character";
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { HighscoreSort } from "newui/screen/screens/menu/menus/highscores/IHighscoresMenu";
@@ -88,7 +89,8 @@ export declare enum Dictionary {
     Terrain = 47,
     TileEvent = 48,
     Ui = 49,
-    UiQuadrant = 50
+    UiQuadrant = 50,
+    MessagesTimestampMode = 51
 }
 export declare type Enum = {
     [key: string]: number;
@@ -148,6 +150,7 @@ declare const dictionaries: {
     [Dictionary.TileEvent]: typeof TileEventType;
     [Dictionary.Ui]: typeof UiTranslation;
     [Dictionary.UiQuadrant]: typeof Quadrant;
+    [Dictionary.MessagesTimestampMode]: typeof MessageTimestamp;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;
