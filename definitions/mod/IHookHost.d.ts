@@ -27,6 +27,7 @@ import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
+import { IStringSection } from "utilities/string/Interpolator";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -385,6 +386,10 @@ export interface IHookHost {
      * Called when the game tick ends
      */
     onGameTickEnd?(): void;
+    /**
+     * Called whenever a translation is resolved.
+     */
+    onGetTranslation?(result: IStringSection[]): IStringSection[];
     /**
      * Called when an entity is killed by another entity.
      */

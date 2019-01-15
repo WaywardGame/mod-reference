@@ -29,6 +29,7 @@ import { ITile } from "tile/ITerrain";
 import Log from "utilities/Log";
 import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
+import { IStringSection } from "utilities/string/Interpolator";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -101,6 +102,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onGameTickStart(): void;
     onGameTickEnd(): void;
+    onGetTranslation(translation: IStringSection[]): IStringSection[];
     onEntityKill(attacker: IEntity | IDoodad, target: IEntity): void;
     onHumanSkillChange(human: IHuman, skill: SkillType, currentSkill: number): void;
     onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
