@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { TurnMode } from "Enums";
+import { PlayerState, TurnMode } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
@@ -129,6 +129,8 @@ export interface IMultiplayerOptions {
     maxPlayers: number;
     tickSpeed: number;
     syncChecks: boolean | MultiplayerSyncCheck[];
+    newPlayerState?: PlayerState;
+    description?: string;
 }
 export interface IMultiplayerState {
     enable: boolean;

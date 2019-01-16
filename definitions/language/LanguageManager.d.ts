@@ -56,6 +56,7 @@ export default class LanguageManager {
     readonly orderedProviders: ReadonlyArray<TranslationsProvider>;
     constructor();
     initialize(): void;
+    shouldUseAlternateFontStyle(): boolean;
     refreshUiTranslations(): void;
     getTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
     add(provider: TranslationsProvider): void;

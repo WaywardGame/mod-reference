@@ -131,5 +131,7 @@ export interface IDedicatedServerInfo {
     maxBackups: number;
     load: string | undefined;
     console: boolean;
-    newGameOptions?: Partial<IPlayOptions>;
+    newGameOptions?: Partial<IPlayOptions> & {
+        dailyChallenge?: boolean;
+    };
 }

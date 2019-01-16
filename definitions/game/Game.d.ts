@@ -217,6 +217,7 @@ export default class Game extends Emitter implements IGame {
     isFlammable(x: number, y: number, z: number): boolean;
     getCameraPosition(): IVector2;
     getExactCameraPosition(): Vector2;
+    restartDedicatedServer(): boolean;
     private updateOptionInternal;
     private tick;
     private updateEntityFov;
@@ -236,6 +237,9 @@ export default class Game extends Emitter implements IGame {
     private loadResources;
     private initializeGameState;
     private startGame;
+    private initializeDedicatedServer;
+    private dedicatedServerExit;
+    private dedicatedServerNewGame;
     private upgradeSave;
     private upgradePlayer;
     private upgradeSaveMoveProperty;

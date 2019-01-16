@@ -170,6 +170,7 @@ export interface IGame extends Emitter {
     resetGameState(skipSave?: boolean): Promise<void>;
     resetWebGL(): void;
     resizeRenderer(): void;
+    restartDedicatedServer(): void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
