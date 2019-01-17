@@ -11,7 +11,6 @@
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class PauseMenu extends Menu {
-    private readonly optionsButton;
     private readonly modesButton;
     private readonly multiplayerButton;
     private readonly optionsRow;

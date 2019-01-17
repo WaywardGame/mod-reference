@@ -31,6 +31,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
+    getOwner(): IPlayer | undefined;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;

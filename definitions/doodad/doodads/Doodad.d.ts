@@ -73,6 +73,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     checkForTrampling(source: Human | ICreature): boolean;
     isDangerous(player: IPlayer): boolean;
     getDamage(human: Human, equipType?: EquipType): number;
+    getOwner(): IPlayer | undefined;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;
