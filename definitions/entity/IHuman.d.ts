@@ -10,7 +10,7 @@
  */
 import { IDamageInfo } from "creature/ICreature";
 import IEntity from "entity/IEntity";
-import { Delay, EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
+import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
@@ -60,7 +60,7 @@ export default interface IHuman extends IEntity {
      * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
      */
     skillCheck(skill: SkillType, check: number): boolean;
-    addDelay(delay: Delay, replace?: boolean): void;
+    addDelay(delay: number, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
     burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     calculateEquipmentStats(): void;
@@ -111,4 +111,14 @@ export declare const enum HumanEvent {
      * @param value The new skill value (core + bonus)
      */
     SkillChange = "SkillChange"
+}
+export declare const enum Delay {
+    None = 0,
+    LongPause = 25,
+    Movement = 10,
+    ShortPause = 13,
+    Collision = 40,
+    TurnDirection = 2,
+    ItemPickUp = 4,
+    ReallyLongPause = 100
 }

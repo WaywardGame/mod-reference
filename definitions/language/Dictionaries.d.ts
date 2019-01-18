@@ -10,7 +10,7 @@
  */
 import { ActionType } from "action/IAction";
 import { Stat } from "entity/IStats";
-import { Bindable, BindableType, BookType, CreatureType, DamageType, DoodadType, DoodadTypeGroup, EquipType, GrowingStage, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, OnEquipType, SkillType, StatusType, TerrainType } from "Enums";
+import { Bindable, BindableType, BookType, Command, CreatureType, DamageType, DoodadType, DoodadTypeGroup, EquipType, GrowingStage, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, OnEquipType, SkillType, StatusType, TerrainType } from "Enums";
 import { Difficulty } from "game/Difficulty";
 import { InspectType } from "game/inspection/IInspection";
 import { PartOfDay } from "game/TimeManager";
@@ -90,7 +90,8 @@ export declare enum Dictionary {
     TileEvent = 48,
     Ui = 49,
     UiQuadrant = 50,
-    MessagesTimestampMode = 51
+    MessagesTimestampMode = 51,
+    Command = 52
 }
 export declare type Enum = {
     [key: string]: number;
@@ -151,6 +152,7 @@ declare const dictionaries: {
     [Dictionary.Ui]: typeof UiTranslation;
     [Dictionary.UiQuadrant]: typeof Quadrant;
     [Dictionary.MessagesTimestampMode]: typeof MessageTimestamp;
+    [Dictionary.Command]: typeof Command;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;
