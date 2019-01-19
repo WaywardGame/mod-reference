@@ -11,13 +11,16 @@
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class PauseMenu extends Menu {
-    private readonly worldButton;
-    private readonly optionsButton;
+    private readonly modesButton;
+    private readonly multiplayerButton;
     private readonly optionsRow;
+    private readonly multiplayerRow;
     private readonly difficultyOptionIcons;
-    private multiplayerMenu;
+    private readonly pauseButton;
+    private multiplayerOptionsMenu;
     constructor(uiApi: UiApi);
-    showWorldMenu(): this;
+    showMultiplayerOptionsMenu(): this;
+    private showWModesMenu;
     private onShow;
     private refreshDifficultyOptions;
     /**

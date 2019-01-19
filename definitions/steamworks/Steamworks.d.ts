@@ -84,6 +84,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     getPublishedItems(): Promise<IWorkshopItem[]>;
     openUrl(url: string): void;
     openWorkshop(publishId?: string): Promise<void>;
+    openInviteDialog(): void;
     openSaveFolder(): void;
     openModsFolder(): void;
     openLogsFolder(): void;

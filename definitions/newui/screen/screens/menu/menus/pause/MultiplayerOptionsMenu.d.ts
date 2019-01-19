@@ -10,21 +10,19 @@
  */
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
-export default class LoadGameMenu extends Menu {
-    isMultiplayer: boolean;
-    private readonly slots;
-    private slotsWrapper;
-    private sort;
-    private sortDirection;
-    private slotsRemainingHeading;
-    private newGameButton;
-    private importButton;
+export default class MultiplayerOptionsMenu extends Menu {
+    private readonly openServer;
+    private readonly copyGameCode;
+    private readonly inviteSteamFriends;
+    private readonly lobbyType;
+    private readonly choiceLobbyFriends;
+    private readonly choiceLobbyPublic;
+    private readonly choiceLobbyPrivate;
+    private readonly pvp;
+    private readonly maxPlayers;
     constructor(uiApi: UiApi);
-    protected onBeforeShow(): Promise<void>;
     private refresh;
-    private onImport;
-    private updateNewGameButton;
-    private addSlot;
-    private deleteSlot;
-    private sortSlots;
+    private updateMultiplayer;
+    private copyGameCodeClick;
+    private inviteSteamFriendsClick;
 }

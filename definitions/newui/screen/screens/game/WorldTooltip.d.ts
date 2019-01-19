@@ -18,7 +18,7 @@ export default class WorldTooltipHandler {
     private tooltip?;
     constructor(api: UiApi, gameScreen: Component);
     initializeTooltip(tooltip: ITooltip): ITooltip;
-    update(): void;
+    update(force?: boolean): void;
     private onTooltipMove;
     private refreshTooltip;
 }

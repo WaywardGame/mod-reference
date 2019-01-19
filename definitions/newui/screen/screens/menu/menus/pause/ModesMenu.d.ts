@@ -10,24 +10,13 @@
  */
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
-export default class WorldMenu extends Menu {
+export default class ModesMenu extends Menu {
     private readonly turnMode;
     private readonly choiceTurnModeManual;
     private readonly choiceTurnModeSimulated;
     private readonly choiceTurnModeRealTime;
     private readonly tickSpeed;
-    private readonly openServer;
-    private readonly pause;
-    private readonly copyGameCode;
-    private readonly lobbyType;
-    private readonly choiceLobbyFriends;
-    private readonly choiceLobbyPublic;
-    private readonly choiceLobbyPrivate;
-    private readonly pvp;
-    private readonly maxPlayers;
     constructor(uiApi: UiApi);
     private refresh;
     private updateTurnModes;
-    private updateMultiplayer;
-    private copyGameCodeClick;
 }

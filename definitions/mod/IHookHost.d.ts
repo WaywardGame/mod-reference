@@ -16,7 +16,6 @@ import IHuman from "entity/IHuman";
 import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SkillType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
-import Language from "language/Language";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
@@ -28,6 +27,7 @@ import IWorld from "renderer/IWorld";
 import { ITile } from "tile/ITerrain";
 import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
+import { IStringSection } from "utilities/string/Interpolator";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -387,6 +387,10 @@ export interface IHookHost {
      */
     onGameTickEnd?(): void;
     /**
+     * Called whenever a translation is resolved.
+     */
+    onGetTranslation?(result: IStringSection[]): IStringSection[];
+    /**
      * Called when an entity is killed by another entity.
      */
     onEntityKill?(attacker: IEntity | IDoodad, target: IEntity): void;
@@ -499,10 +503,10 @@ export interface IHookHost {
      */
     onDigTreasure?(human: Human, treasureTile: Vector3): void;
     /**
-     * Called when a language is loaded
-     * @param language The language that loaded
+     * Called when the language is changed
+     * @param languageName The name of the newly selected language
      */
-    onLanguageLoad?(language: Language): void;
+    onLanguageChange?(languageName: string): void;
     /**
      * Called when the player is moving
      * @param player The player object

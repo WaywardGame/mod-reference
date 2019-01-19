@@ -16,7 +16,6 @@ import IHuman from "entity/IHuman";
 import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SkillType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMapRequest } from "game/IGame";
 import { IContainer, IItem } from "item/IItem";
-import Language from "language/Language";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -30,6 +29,7 @@ import { ITile } from "tile/ITerrain";
 import Log from "utilities/Log";
 import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
+import { IStringSection } from "utilities/string/Interpolator";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -102,6 +102,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onGameTickStart(): void;
     onGameTickEnd(): void;
+    onGetTranslation(translation: IStringSection[]): IStringSection[];
     onEntityKill(attacker: IEntity | IDoodad, target: IEntity): void;
     onHumanSkillChange(human: IHuman, skill: SkillType, currentSkill: number): void;
     onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
@@ -116,7 +117,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onCreatureTamed(creature: ICreature, owner: IPlayer): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onDigTreasure(human: Human, treasureTile: Vector3): void;
-    onLanguageLoad(language: Language): void;
+    onLanguageChange(languageName: string): void;
     onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     onMoveComplete(player: IPlayer): void;
     onMoveDirectionUpdate(human: Human, direction: Direction): void;

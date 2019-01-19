@@ -10,7 +10,6 @@
  */
 import { CaseStyle } from "Enums";
 import { Dictionary } from "language/Dictionaries";
-import UiTranslation from "language/dictionary/UiTranslation";
 import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
 import Translation from "language/Translation";
@@ -30,7 +29,10 @@ export interface ISerializedTranslationsProvider {
         };
         uncountables?: string[];
         irregularRules?: Array<[string, string]>;
-        articleRules?: Array<[number, string, string]>;
+        articleRules?: Array<[number | {
+            min: number;
+            max?: number;
+        }, string, string]>;
     };
 }
 export interface ISerializedLanguage extends ISerializedTranslationsProvider {
@@ -54,6 +56,8 @@ export default class LanguageManager {
     readonly orderedProviders: ReadonlyArray<TranslationsProvider>;
     constructor();
     initialize(): void;
+    shouldUseAlternateFontStyle(): boolean;
+    refreshUiTranslations(): void;
     getTranslation(dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean): string[] | undefined;
     add(provider: TranslationsProvider): void;
     remove(provider: TranslationsProvider): void;
@@ -69,7 +73,7 @@ export default class LanguageManager {
     private setup;
     private addTranslateSelector;
     private addTranslateSelectors;
-    refreshUiTranslations(v: UiTranslation | string): void;
+    private refreshUiTranslation;
 }
 export interface ISelector {
     selector: string | string[];

@@ -74,5 +74,7 @@ export default class Ui extends Emitter implements UiApi {
      * @param save Whether or not to save the new scale into options. Defaults to true.
      */
     setDialogOpacity(opacity?: number, save?: boolean): void;
-    private onLanguageLoad;
+    addStylesheet(path: string): void;
+    removeStylesheet(path: string): void;
+    private onLanguageChange;
 }

@@ -7,8 +7,16 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
+ *
+ *
  */
-import { Action } from "action/Action";
-import { ActionArgument } from "action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby], import("../../player/IPlayer").IPlayer | import("../../npc/INPC").INPC, void>;
-export default _default;
+import ServerPacket from "multiplayer/packets/ServerPacket";
+/**
+ * The player sends this to the server when they have desynced
+ */
+export default class DesyncPacket extends ServerPacket {
+    logs: string;
+    isSyncCheckEnabled(): boolean;
+    isAllowedWhenPaused(): boolean;
+    process(): void;
+}

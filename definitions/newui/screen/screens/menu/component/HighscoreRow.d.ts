@@ -20,11 +20,4 @@ export declare class HighscoreRow extends Block {
     private _place;
     place: number;
     constructor(api: UiApi, highscore?: IHighscore);
-    private getName;
-    private getPlaceText;
-    private getDifficultyTooltip;
-    private getDeathby;
-    private getScoreText;
-    private getTurnsText;
-    private getDate;
 }

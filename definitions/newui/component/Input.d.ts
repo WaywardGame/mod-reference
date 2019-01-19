@@ -29,7 +29,10 @@ export default class Input extends Component implements IRefreshable, IInput {
     private canBeEmpty;
     private clearTo;
     private placeholder;
+    private shouldBlurWhenEnterPressed;
     private shouldBlurWhenEnterPressedAndEmpty;
+    private hasChanged;
+    readonly changed: boolean;
     constructor(uiApi: UiApi);
     setMaxLength(maxLength?: number): this;
     setCanBeEmpty(canBeEmpty?: boolean): this;
@@ -37,6 +40,7 @@ export default class Input extends Component implements IRefreshable, IInput {
     setClearTo(clearTo?: () => string): this;
     setPlaceholder(generator: TranslationGenerator): this;
     setShouldBlurWhenEnterPressedAndEmpty(shouldBlurWhenEnterPressedAndEmpty?: boolean): this;
+    setShouldBlurWhenEnterPressed(shouldBlurWhenEnterPressed?: boolean): this;
     refresh(): this;
     /**
      * Reset the text of the input to the default, or to the clearTo option if that was provided

@@ -41,6 +41,7 @@ export default class Menu extends Component implements IMenu, IHookHost {
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;
     addTabs(...tabs: ArrayOfIterablesOfOr<Tab>): void;
+    getTabs(): IterableIterator<Tab<string | number | undefined>>;
     addSubtabs(tab: Tab): this;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**

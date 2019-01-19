@@ -7,8 +7,7 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-export declare const hints: any;
-export default hints;
+import { MessageTimestamp } from "newui/screen/screens/game/IGameScreenApi";
+declare const messagesTimestampModes: Descriptions<MessageTimestamp, string>;
+export default messagesTimestampModes;

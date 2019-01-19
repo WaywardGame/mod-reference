@@ -18,8 +18,10 @@ export default class InterruptFactory implements IInterruptFactory {
     private readonly title;
     private description;
     private canCancel;
+    private isTopMenu;
     private executed;
     constructor(api: UiApi, title?: TranslationGenerator, description?: TranslationGenerator);
+    setTopMenu(topMenu?: boolean): this;
     setCanCancel(canCancel?: boolean): this;
     withDescription(description?: TranslationGenerator): this;
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;

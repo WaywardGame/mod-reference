@@ -11,13 +11,12 @@
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import Component from "newui/component/Component";
-import { IComponent } from "newui/component/IComponent";
+import Input from "newui/component/Input";
 import { UiApi } from "newui/INewUi";
 import QuadrantComponent from "newui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
 import { RequirementInstance } from "player/quest/quest/Quest";
 import { QuestInstance } from "player/quest/QuestManager";
-import Emitter from "utilities/Emitter";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare enum QuadrantComponentId {
     Messages = 0,
@@ -48,7 +47,22 @@ export declare enum PinType {
     QuestRequirement = 1,
     Misc = 2
 }
-export interface IMessages extends Emitter {
+export declare enum MessageTimestamp {
+    None = 0,
+    RealTime = 1,
+    Turn = 2
+}
+export interface IMessages extends Component {
+    pinNotesAutomatically: boolean;
+    input: Input;
+    getMessageTimestampMode(): MessageTimestamp;
+    setMessageTimestampMode(mode?: MessageTimestamp): this;
+    shouldShowSendButton(): boolean;
+    setShouldShowSendButton(shouldShow: boolean): this;
+    shouldShowOptionsButton(): boolean;
+    setShouldShowOptionsButton(shouldShow: boolean): this;
+    getMaxMessages(): number;
+    setMaxMessages(max: number): this;
     getPins(): IterableIterator<IPinnedMessage>;
     pinQuestRequirement(quest: QuestInstance, requirement: RequirementInstance): IPinnedMessage | undefined;
 }
@@ -60,7 +74,9 @@ export interface IPinnedMessage extends Component {
     type: PinType;
     id: any;
 }
-export interface IDialog extends IComponent {
+export interface IDialog extends Component {
     id: DialogId;
     getName(): IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
+    showPanel(id: string | number): Component | undefined;
+    showSettingsPanel(): this;
 }

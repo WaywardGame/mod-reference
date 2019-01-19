@@ -90,6 +90,7 @@ interface IMatchmakingServer {
 	isRunning(): boolean;
 	start(port?: number, disableServerDirectoryConnection?: boolean): string;
 	stop(): void;
+	setLogCallback(logFunc: ((...args: any[]) => void) | undefined): void;
 	updateName(name: string): void;
 	updateDirectory(serverDetails: Partial<IServerServerDetails>, gameDetails: IServerGameDetails): void;
 	getConnections(): Map<string, IMatchmakingServerConnection>;

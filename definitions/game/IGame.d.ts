@@ -28,7 +28,7 @@ import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-import Vec2 from "utilities/math/Vector2";
+import { default as Vec2, default as Vector2 } from "utilities/math/Vector2";
 import Vector3 from "utilities/math/Vector3";
 import { IVersionInfo } from "utilities/Version";
 export interface IGame extends Emitter {
@@ -108,6 +108,7 @@ export interface IGame extends Emitter {
     getBenignity(): number;
     getBlackness(): number;
     getCameraPosition(): IVector2;
+    getExactCameraPosition(): Vector2;
     getCompletedMilestoneCount(): number;
     getDifficulty(): Difficulty;
     getDifficultyOptions(): IDifficultyOptions;
@@ -169,6 +170,7 @@ export interface IGame extends Emitter {
     resetGameState(skipSave?: boolean): Promise<void>;
     resetWebGL(): void;
     resizeRenderer(): void;
+    restartDedicatedServer(): void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;

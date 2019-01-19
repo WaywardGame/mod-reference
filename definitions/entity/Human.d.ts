@@ -12,7 +12,7 @@ import { IDamageInfo } from "creature/ICreature";
 import Entity from "entity/Entity";
 import IHuman from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import { Delay, EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
+import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
@@ -49,9 +49,9 @@ export default abstract class Human extends Entity implements IHuman {
     state: PlayerState;
     swimming: boolean;
     canSendMessage: boolean;
-    protected _nextProcessInput: number;
     protected _fovRadius: number;
     protected _fovMaxRadius: number;
+    private readonly privateStore;
     constructor();
     resetStatTimers(): void;
     isLocalPlayer(): boolean;
@@ -100,7 +100,7 @@ export default abstract class Human extends Entity implements IHuman {
     unequipAll(): void;
     canJump(): boolean;
     hasDelay(): boolean;
-    addDelay(delay: Delay, replace?: boolean): void;
+    addDelay(delay: number, replace?: boolean): void;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;

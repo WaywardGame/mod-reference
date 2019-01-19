@@ -68,19 +68,20 @@ export interface ICreatureOld extends ICreature {
 export declare enum SpawnGroup {
     Any = 0,
     Guardians = 1,
-    Water = 2,
-    WaterCave = 3,
+    Seawater = 2,
+    CaveWater = 3,
     Cave = 4,
     Night = 5,
     StrongGuardians = 6,
-    FreshWater = 7
+    FreshWater = 7,
+    EasyNight = 8
 }
 export declare enum SpawnableTiles {
     None = 0,
     Default = 1,
     DefaultWithLava = 2,
     DefaultWithWater = 3,
-    DeepWater = 4,
+    DeepSeawater = 4,
     Water = 5,
     Flying = 6,
     Ghost = 7,
@@ -88,7 +89,9 @@ export declare enum SpawnableTiles {
     Lava = 9,
     Wet = 10,
     Ground = 11,
-    All = 12
+    All = 12,
+    Seawater = 13,
+    FreshWater = 14
 }
 export interface ICreatureDescription extends IModdable {
     minhp: number;

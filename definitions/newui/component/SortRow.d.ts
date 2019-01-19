@@ -38,4 +38,5 @@ export default class SortRow<Sort extends number> extends LabelledRow implements
     setRefreshMethod(refresh: () => SortRowData<Sort>): this;
     refresh(): this;
     triggerSort(): void;
+    triggerSortAsync(): Promise<any[]>;
 }

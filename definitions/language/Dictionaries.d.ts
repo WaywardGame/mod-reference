@@ -10,7 +10,7 @@
  */
 import { ActionType } from "action/IAction";
 import { Stat } from "entity/IStats";
-import { Bindable, BindableType, BookType, CreatureType, DamageType, DoodadType, DoodadTypeGroup, EquipType, GrowingStage, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, OnEquipType, SkillType, StatusType, TerrainType } from "Enums";
+import { Bindable, BindableType, BookType, Command, CreatureType, DamageType, DoodadType, DoodadTypeGroup, EquipType, GrowingStage, ItemQuality, ItemType, ItemTypeGroup, LegendaryType, OnEquipType, SkillType, StatusType, TerrainType } from "Enums";
 import { Difficulty } from "game/Difficulty";
 import { InspectType } from "game/inspection/IInspection";
 import { PartOfDay } from "game/TimeManager";
@@ -24,6 +24,7 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import { ModType } from "mod/IModInfo";
 import { CanLoadState } from "mod/IModManager";
 import { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { MessageTimestamp } from "newui/screen/screens/game/IGameScreenApi";
 import { CharacterSort } from "newui/screen/screens/menu/menus/character/Character";
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { HighscoreSort } from "newui/screen/screens/menu/menus/highscores/IHighscoresMenu";
@@ -45,50 +46,52 @@ export declare enum Dictionary {
     Book = 4,
     ChangelogSection = 5,
     CharacterSort = 6,
-    Corpse = 7,
-    Creature = 8,
-    DamageType = 9,
-    Difficulty = 10,
-    Doodad = 11,
-    DoodadGroup = 12,
-    DoodadItem = 13,
-    EquipSlot = 14,
-    GameEndMessage = 15,
-    Growth = 16,
-    GrowthFungus = 17,
-    HelpArticle = 18,
-    HighscoreSort = 19,
-    HumanName = 20,
-    InspectType = 21,
-    InterruptChoice = 22,
-    Item = 23,
-    ItemGroup = 24,
-    ItemQuality = 25,
-    LegendaryType = 26,
-    Message = 27,
-    Milestone = 28,
-    Misc = 29,
-    ModLoadError = 30,
-    ModSort = 31,
-    ModType = 32,
-    MusicPlaylist = 33,
-    Note = 34,
-    Number = 35,
-    OnEquip = 36,
-    PartOfDay = 37,
-    PowerMode = 38,
-    Quest = 39,
-    QuestRequirement = 40,
-    SaveSlotSort = 41,
-    Skill = 42,
-    Source = 43,
-    Stat = 44,
-    StatusEffect = 45,
-    TeamMemberResponsibility = 46,
-    Terrain = 47,
-    TileEvent = 48,
-    Ui = 49,
-    UiQuadrant = 50
+    Command = 7,
+    Corpse = 8,
+    Creature = 9,
+    DamageType = 10,
+    Difficulty = 11,
+    Doodad = 12,
+    DoodadGroup = 13,
+    DoodadItem = 14,
+    EquipSlot = 15,
+    GameEndMessage = 16,
+    Growth = 17,
+    GrowthFungus = 18,
+    HelpArticle = 19,
+    HighscoreSort = 20,
+    HumanName = 21,
+    InspectType = 22,
+    InterruptChoice = 23,
+    Item = 24,
+    ItemGroup = 25,
+    ItemQuality = 26,
+    LegendaryType = 27,
+    Message = 28,
+    MessagesTimestampMode = 29,
+    Milestone = 30,
+    Misc = 31,
+    ModLoadError = 32,
+    ModSort = 33,
+    ModType = 34,
+    MusicPlaylist = 35,
+    Note = 36,
+    Number = 37,
+    OnEquip = 38,
+    PartOfDay = 39,
+    PowerMode = 40,
+    Quest = 41,
+    QuestRequirement = 42,
+    SaveSlotSort = 43,
+    Skill = 44,
+    Source = 45,
+    Stat = 46,
+    StatusEffect = 47,
+    TeamMemberResponsibility = 48,
+    Terrain = 49,
+    TileEvent = 50,
+    Ui = 51,
+    UiQuadrant = 52
 }
 export declare type Enum = {
     [key: string]: number;
@@ -104,6 +107,7 @@ declare const dictionaries: {
     [Dictionary.Book]: typeof BookType;
     [Dictionary.ChangelogSection]: typeof ChangelogSection;
     [Dictionary.CharacterSort]: typeof CharacterSort;
+    [Dictionary.Command]: typeof Command;
     [Dictionary.Corpse]: typeof CreatureType;
     [Dictionary.Creature]: typeof CreatureType;
     [Dictionary.DamageType]: typeof DamageType;
@@ -125,6 +129,7 @@ declare const dictionaries: {
     [Dictionary.ItemQuality]: typeof ItemQuality;
     [Dictionary.LegendaryType]: typeof LegendaryType;
     [Dictionary.Message]: typeof Message;
+    [Dictionary.MessagesTimestampMode]: typeof MessageTimestamp;
     [Dictionary.Milestone]: typeof MilestoneType;
     [Dictionary.Misc]: typeof MiscTranslation;
     [Dictionary.ModLoadError]: typeof CanLoadState;

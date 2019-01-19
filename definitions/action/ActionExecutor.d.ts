@@ -38,8 +38,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     readonly lastAction: ActionType;
     private executionStage;
     private shouldSkipConfirmation;
-    private delay?;
-    private passTurn;
+    private readonly privateStore;
     private updateTablesAndWeight;
     private staminaReduction?;
     private reputationChange;

@@ -104,6 +104,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
+    forceShowTooltip(): void;
     private onMouseEnterForTooltip;
     private onMouseLeaveForTooltip;
     private onMouseEnterForHighlights;

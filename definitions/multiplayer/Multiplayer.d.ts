@@ -40,6 +40,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     private _syncCheckStack;
     private _activeSyncCheck;
     private _syncChecksSuppressed;
+    private _recentPackets;
     private _disconnectingFromSyncIssue;
     private _ipAddress;
     private readonly _matchmakingSecret;
@@ -50,7 +51,6 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     isClient(): boolean;
     isProcessingPacket(): boolean;
     getPlayerIdentifier(): string;
-    getDefaultOptions(): IMultiplayerOptions;
     getOptions(): IMultiplayerOptions;
     setOptions(options: IMultiplayerOptions): void;
     updateOptions(updates: Partial<IMultiplayerOptions>): void;
@@ -74,6 +74,7 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     kick(player: IPlayer, reason: UiTranslation): void;
     onPlaying(): Promise<void>;
     onLobbyEntered(success: boolean, lobbyId: string): void;
+    onLobbyExited(lobbyId: string): void;
     getClients(): IConnection[];
     closeConnection(reason: DisconnectReason, connection: IConnection): void;
     sendPacket(packet: IPacket, exclude?: PacketTarget): void;

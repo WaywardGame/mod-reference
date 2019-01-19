@@ -58,6 +58,10 @@ export declare enum DialogEvent {
      */
     Close = "Close",
     /**
+     * Emitted when the settings button is pressed in the dialog.
+     */
+    Options = "Options",
+    /**
      * Emitted when the dialog is resized
      */
     Resize = "Resize",
@@ -86,7 +90,9 @@ export default abstract class Dialog extends Component implements IDialog {
     protected header: Header;
     protected footer: Component;
     private readonly panels;
-    private visiblePanel;
+    private currentPanel;
+    private lastPanel;
+    private readonly visiblePanel;
     /**
      * The last edge positions of the dialog. Used when a handle is being moved.
      */
@@ -102,6 +108,8 @@ export default abstract class Dialog extends Component implements IDialog {
     private description;
     constructor(gsapi: IGameScreenApi, id: number);
     addScrollableWrapper(initializer?: (wrapper: Component) => any): Component;
+    addSettingsPanel(): Component;
+    showSettingsPanel(): this;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Closes the dialog.
@@ -137,6 +145,7 @@ export default abstract class Dialog extends Component implements IDialog {
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
     abstract getName(): IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
+    private hideSettingsPanel;
     private saveEdgesForScale;
     /**
      * Event handler for when this dialog is appended
@@ -245,6 +254,7 @@ declare class Handle extends Component {
  */
 export declare class Header extends Handle implements IRefreshable {
     readonly backButton: Button;
+    readonly optionsButton: Button;
     private readonly text;
     constructor(api: UiApi);
     setText(text: TranslationGenerator): void;

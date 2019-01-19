@@ -46,5 +46,11 @@ export declare enum ModEvent {
      *
      * Internally, this is used to clean up some mod registrations.
      */
-    Unallocate = 4
+    Unallocate = 4,
+    /**
+     * Called when a mod is setup. (Modders — Don't use this, just run code in your constructor.)
+     *
+     * Internally, this is used for some mod registrations.
+     */
+    Setup = 5
 }

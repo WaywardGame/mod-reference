@@ -1009,6 +1009,9 @@ export declare enum ObjectContext {
     TileEvent = 4,
     Corpse = 5
 }
+/**
+ * @deprecated Use the const enum in `entity/IHuman.ts`
+ */
 export declare enum Delay {
     None = 0,
     LongPause = 25,

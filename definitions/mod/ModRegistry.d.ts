@@ -22,6 +22,8 @@ import { Dictionary } from "language/Dictionaries";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import Message from "language/dictionary/Message";
 import Note from "language/dictionary/Note";
+import Language from "language/Language";
+import LanguageExtension from "language/LanguageExtension";
 import InterModRegistry, { InterModRegistration } from "mod/InterModRegistry";
 import { IPacketClass } from "multiplayer/packets/Packets";
 import { IBinding } from "newui/BindingManager";
@@ -59,22 +61,32 @@ export declare enum ModRegistrationType {
     InterruptChoice = 12,
     Item = 13,
     ItemGroup = 14,
-    MenuBarButton = 15,
-    Message = 16,
-    MessageSource = 17,
-    MusicTrack = 18,
-    Note = 19,
-    NPC = 20,
-    OptionsSection = 21,
-    Overlay = 22,
-    Packet = 23,
-    Quest = 24,
-    QuestRequirement = 25,
-    Registry = 26,
-    Skill = 27,
-    SoundEffect = 28,
-    Terrain = 29,
-    TileEvent = 30
+    Language = 15,
+    LanguageExtension = 16,
+    MenuBarButton = 17,
+    Message = 18,
+    MessageSource = 19,
+    MusicTrack = 20,
+    Note = 21,
+    NPC = 22,
+    OptionsSection = 23,
+    Overlay = 24,
+    Packet = 25,
+    Quest = 26,
+    QuestRequirement = 27,
+    Registry = 28,
+    Skill = 29,
+    SoundEffect = 30,
+    Terrain = 31,
+    TileEvent = 32
+}
+export interface ILanguageRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Language;
+    instance: Language;
+}
+export interface ILanguageExtensionRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.LanguageExtension;
+    instance: LanguageExtension;
 }
 export interface IInspectionTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InspectionType;
@@ -183,10 +195,13 @@ export interface ISkillRegistration extends IBaseModRegistration {
     name: string;
     description?: ISkillDescription;
 }
+export interface IItemRegistrationDescription extends IItemDescription {
+    groups?: ItemTypeGroup[];
+}
 export interface IItemRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Item;
     name: string;
-    description?: IItemDescription;
+    description?: IItemRegistrationDescription;
 }
 export interface ICreatureRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Creature;
@@ -228,7 +243,7 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: Requirement;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -236,6 +251,20 @@ declare module Register {
      * The decorated property will be injected with the constructed instance of the provided registry class.
      */
     function registry(cls: new (upperRegistry: any) => any): <K extends string | number | symbol, T extends { [k in K]: object; }>(target: T, key: K) => void;
+    /**
+     * Registers a language.
+     * @param instance The language instance.
+     *
+     * The decorated property will be injected with the provided language instance.
+     */
+    function language<L extends Language>(instance: L): <K extends string | number | symbol, T extends { [k in K]: L; }>(target: T, key: K) => void;
+    /**
+     * Registers a language extension.
+     * @param instance The language extension instance.
+     *
+     * The decorated property will be injected with the provided language extension instance.
+     */
+    function languageExtension<L extends LanguageExtension>(instance: L): <K extends string | number | symbol, T extends { [k in K]: L; }>(target: T, key: K) => void;
     /**
      * Registers a music track.
      * @param name The name of the music track.
@@ -297,7 +326,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered item.
      */
-    function item(name: string, description?: IItemDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
+    function item(name: string, description?: IItemRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: ItemType; }>(target: T, key: K) => void;
     /**
      * Registers a creature.
      * @param name The name of the creature.

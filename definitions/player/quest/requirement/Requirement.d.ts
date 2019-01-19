@@ -25,7 +25,6 @@ export declare class Requirement<O extends any[] = [], D extends {} = {}> extend
     private initializeTrigger?;
     constructor(defaultData: D);
     // @ts-ignore
-	// @ts-ignore
 	setTrigger<H extends Hook>(hook: H, checker: (api: RequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setHostTrigger(event: string | number, checker: (api: RequirementApi<this>, ...args: any[]) => boolean): this;

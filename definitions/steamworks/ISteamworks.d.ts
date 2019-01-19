@@ -62,6 +62,7 @@ export interface ISteamworks extends Emitter {
     openModsFolder(): void;
     openSaveFolder(): void;
     openUrl(url: string): void;
+    openInviteDialog(): void;
     openWorkshop(publishId?: string): Promise<void>;
     processBackups(): boolean;
     publishMod(modIndex: number): Promise<string>;
@@ -130,5 +131,7 @@ export interface IDedicatedServerInfo {
     maxBackups: number;
     load: string | undefined;
     console: boolean;
-    newGameOptions?: Partial<IPlayOptions>;
+    newGameOptions?: Partial<IPlayOptions> & {
+        dailyChallenge?: boolean;
+    };
 }

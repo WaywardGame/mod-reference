@@ -10,5 +10,5 @@
  */
 import { Action } from "action/Action";
 import { ActionArgument } from "action/IAction";
-declare const _default: Action<[[ActionArgument.AttackType, ActionArgument.Undefined], [ActionArgument.Item, ActionArgument.Undefined]], import("../../player/IPlayer").IPlayer | import("../../npc/INPC").INPC, void>;
+declare const _default: Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer, void>;
 export default _default;

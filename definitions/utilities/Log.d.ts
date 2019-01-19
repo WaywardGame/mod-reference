@@ -28,25 +28,26 @@ export declare enum LogSource {
     Languages = 16,
     MapGen = 17,
     Matchmaking = 18,
-    Mod = 19,
-    Mods = 20,
-    Multiplayer = 21,
-    NewUi = 22,
-    NPCManager = 23,
-    Packet = 24,
-    Player = 25,
-    ResourceLoader = 26,
-    SaveManager = 27,
-    Serializer = 28,
-    Shaders = 29,
-    Steamworks = 30,
-    TileEventManager = 31,
-    Trello = 32,
-    Ui = 33,
-    Utilities = 34,
-    WebAssembly = 35,
-    WebRTCConnection = 36,
-    WebSocketConnection = 37
+    MatchmakingServer = 19,
+    Mod = 20,
+    Mods = 21,
+    Multiplayer = 22,
+    NewUi = 23,
+    NPCManager = 24,
+    Packet = 25,
+    Player = 26,
+    ResourceLoader = 27,
+    SaveManager = 28,
+    Serializer = 29,
+    Shaders = 30,
+    Steamworks = 31,
+    TileEventManager = 32,
+    Trello = 33,
+    Ui = 34,
+    Utilities = 35,
+    WebAssembly = 36,
+    WebRTCConnection = 37,
+    WebSocketConnection = 38
 }
 declare class Log {
     warn: (...args: any[]) => void;
@@ -68,15 +69,16 @@ export interface ISourceFilter {
      */
     miscSourceFilter: string;
     /**
-     * Any source that is not present in this array will not appear in the console.
+     * Any source present in this array will not appear in the console.
      */
-    sources: LogSource[];
+    disabledSources: string[];
 }
 declare module Log {
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
      */
     function setWinston(winston: any, path: string): void;
+    function refresh(): void;
     function setCallback(cb?: (...args: any[]) => void): void;
     /**
      * Returns a method that can be used to `Log.info` with the given sources.

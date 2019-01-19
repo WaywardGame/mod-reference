@@ -67,8 +67,8 @@ export interface ISaveDataGlobal {
 }
 export default ISaveDataGlobal;
 export interface IOptions {
-    allowDiagonalMovement: boolean;
     alternateContextMenu: boolean;
+    alternatingDirectionMovement: boolean;
     alwaysShowMoreInformation: boolean;
     autoGatherHarvest: boolean;
     autoPickup: boolean;
@@ -139,6 +139,7 @@ export declare type IOptionsOld = Partial<IOptions> & {
     tooltipsNPCs: boolean;
     tooltipsTerrain: boolean;
     tooltipsItems: boolean;
+    allowDiagonalMovement: boolean;
 };
 export interface IHighscore {
     name: string;

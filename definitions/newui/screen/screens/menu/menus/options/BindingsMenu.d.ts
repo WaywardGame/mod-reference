@@ -8,7 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Action } from "action/Action";
-import { ActionArgument } from "action/IAction";
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../player/IPlayer").IPlayer | import("../../npc/INPC").INPC, void>;
-export default _default;
+import { UiApi } from "newui/INewUi";
+import Menu from "newui/screen/screens/menu/component/Menu";
+export default class BindingsMenu extends Menu {
+    private readonly modBindingsTab;
+    private readonly bindCatcher;
+    private readonly bindSections;
+    constructor(api: UiApi);
+    onShow(): this;
+    private filterBindRows;
+    private getSelector;
+}

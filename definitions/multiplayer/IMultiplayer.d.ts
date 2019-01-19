@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { TurnMode } from "Enums";
+import { PlayerState, TurnMode } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
@@ -21,7 +21,9 @@ import { LobbyType } from "steamworks/ISteamworks";
 import Emitter from "utilities/Emitter";
 export declare enum MultiplayerEvent {
     Connect = 0,
-    Disconnect = 1
+    Disconnect = 1,
+    JoinLobby = 2,
+    LeaveLobby = 3
 }
 export interface IMultiplayer extends Emitter {
     addAfterSyncChecks(packet: IPacket): void;
@@ -40,7 +42,6 @@ export interface IMultiplayer extends Emitter {
     getConnectedGameCode(): string | undefined;
     getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
     getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
-    getDefaultOptions(): IMultiplayerOptions;
     getOptions(): IMultiplayerOptions;
     getPlayerIdentifier(): string;
     isClient(): boolean;
@@ -51,6 +52,7 @@ export interface IMultiplayer extends Emitter {
     joinServer(info: ServerInfo, character?: ICharacter): void;
     kick(player: IPlayer, message: TextOrTranslationData): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
+    onLobbyExited(lobbyId: string): void;
     onPlaying(): Promise<void>;
     pausePacketProcessing(pause: boolean): void;
     sendPacket(packet: IPacket, exclude?: PacketTarget): void;
@@ -118,6 +120,7 @@ export declare const keepAliveInterval = 4000;
 export declare const keepAliveTimeout = 15000;
 export declare const steamLobbyPrefix = "steam:";
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
+export declare function getDefaultMultiplayerOptions(): IMultiplayerOptions;
 export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
@@ -126,6 +129,8 @@ export interface IMultiplayerOptions {
     maxPlayers: number;
     tickSpeed: number;
     syncChecks: boolean | MultiplayerSyncCheck[];
+    newPlayerState?: PlayerState;
+    description?: string;
 }
 export interface IMultiplayerState {
     enable: boolean;
@@ -141,6 +146,7 @@ export interface IMultiplayerNetworkingOptions {
     logPackets: boolean;
     stopWebRtc: boolean;
     fakeRoundTripTime: number;
+    recentPacketTracking: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {

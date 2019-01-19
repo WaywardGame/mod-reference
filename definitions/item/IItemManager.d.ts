@@ -53,6 +53,7 @@ export interface IItemManager {
     getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: IProtectedItemOptions): IItem[];
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
+    getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
     getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;
@@ -68,7 +69,7 @@ export interface IItemManager {
     isInInventory(containable: IContainable): boolean;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
-    loadReferences(): void;
+    loadReferences(isTraveling: boolean): void;
     loadTileReferences(): void;
     moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType, ofQuality?: ItemQuality, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: ItemQuality): IItem[];

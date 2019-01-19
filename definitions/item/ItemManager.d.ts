@@ -79,7 +79,7 @@ export default class ItemManager implements IItemManager {
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
     getItemTranslations(items: IItem[], article?: boolean): IterableIterator<Translation>;
     getItemListTranslation(items: IItem[], article?: boolean): Translation;
-    loadReferences(): void;
+    loadReferences(isTraveling: boolean): void;
     saveTileReferences(): void;
     loadTileReferences(): void;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
