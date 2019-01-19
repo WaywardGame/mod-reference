@@ -65,12 +65,16 @@ export declare abstract class BaseMod extends Emitter {
      * Since registrations can reference other registrations, each registration is mapped to a promise, which will resolve when it's
      * completely registered (all registrations it depends upon are registered, and then it itself is registered).
      *
-     * @param registrationTime There are two times in which registrations actually happen:
+     * @param registrationTime There are three times in which registrations actually happen:
      * 	1. `ModRegistrationTime.Initialize` — When the mod is enabled, or the game starts, if the mod is already enabled
      * 	2. `ModRegistrationTime.Load` — When a world is loaded
+     * 	3. `ModRegistrationTime.Setup` — When the mod is set up
      *
-     * Registrations which will only be used in saves are registered in `ModRegistrationTime.Load`, all other registrations are
-     * registered in `ModRegistrationTime.Initialize`. This method will only initialize the registrations for the given time.
+     * Registrations which will only be used in saves are registered in `ModRegistrationTime.Load`.
+     * Registrations which need to be noted always, whether or not the mod is enabled (such as languages) are registered in `ModRegistrationTime.Setup`.
+     * All other registrations are registered in `ModRegistrationTime.Initialize`.
+     *
+     * This method will only initialize the registrations for the given time.
      *
      * @param registry The `IRegistry` to initialize.
      *

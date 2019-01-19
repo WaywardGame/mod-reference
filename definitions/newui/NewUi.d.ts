@@ -75,5 +75,6 @@ export default class Ui extends Emitter implements UiApi {
      */
     setDialogOpacity(opacity?: number, save?: boolean): void;
     addStylesheet(path: string): void;
+    removeStylesheet(path: string): void;
     private onLanguageChange;
 }

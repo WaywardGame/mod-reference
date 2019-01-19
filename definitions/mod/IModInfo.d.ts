@@ -31,7 +31,7 @@ export interface IModInfo {
     customizations?: ICustomizations;
     stylesheets?: string[];
     languages?: Array<{
-        path: string;
+        path?: string;
         instance?: TranslationsProvider;
     }>;
     log: Log;
