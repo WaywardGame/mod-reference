@@ -81,9 +81,22 @@ export default function generateSchema(): {
                             items: {
                                 type: string;
                                 items: ({
-                                    anyOf: {
+                                    anyOf: ({
                                         type: string;
-                                    }[];
+                                        properties?: undefined;
+                                        required?: undefined;
+                                    } | {
+                                        type: string;
+                                        properties: {
+                                            min: {
+                                                type: string;
+                                            };
+                                            max: {
+                                                type: string;
+                                            };
+                                        };
+                                        required: string[];
+                                    })[];
                                     type?: undefined;
                                 } | {
                                     type: string;

@@ -16,7 +16,7 @@ export declare type NameRule = [CountMatcher, RegExp, string];
 export declare type CountMatcher = number | {
     min: number;
     max?: number;
-};
+} | null;
 export interface IPluralizationRules {
     pluralRules: PluralRule[];
     singularRules: SingularRule[];

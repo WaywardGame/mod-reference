@@ -32,7 +32,7 @@ export interface ISerializedTranslationsProvider {
         articleRules?: Array<[number | {
             min: number;
             max?: number;
-        }, string, string]>;
+        } | null, string, string]>;
     };
 }
 export interface ISerializedLanguage extends ISerializedTranslationsProvider {
