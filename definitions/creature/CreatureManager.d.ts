@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -32,7 +32,7 @@ export default class CreatureManager extends EntityManager<ICreature> implements
         pool: CreatureType[];
         aberrantChance: number;
     };
-    maybeSpawnClawWorm(human: Human): void;
+    maybeSpawnClawWorm(target: Human | ICreature): void;
     remove(creature: ICreature): void;
     updateAll(): void;
     /**

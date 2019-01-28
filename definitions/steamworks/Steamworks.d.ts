@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -110,7 +110,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private initializeGreenworks;
     private initializeNapi;
     private setupAndInitializeWorkshopMods;
-    private processDisabledFailures;
+    private setupWorkshopMods;
     private initializeModsFromFolder;
     private enumerateInstalledWorkshopMods;
     private refreshSetupMods;
