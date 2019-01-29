@@ -18,6 +18,7 @@ export default class Notifier implements INotifier {
     private mostRecent;
     private mostRecentLife;
     private count;
+    private notificationCount;
     private readonly notifications;
     private readonly spriteBatch;
     private nextUpdate;

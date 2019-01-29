@@ -119,6 +119,5 @@ export declare const enum Delay {
     ShortPause = 13,
     Collision = 40,
     TurnDirection = 2,
-    ItemPickUp = 4,
     ReallyLongPause = 100
 }
