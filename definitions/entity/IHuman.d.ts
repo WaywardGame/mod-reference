@@ -10,7 +10,7 @@
  */
 import { IDamageInfo } from "creature/ICreature";
 import IEntity from "entity/IEntity";
-import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
+import { EquipType, FireType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
@@ -62,7 +62,7 @@ export default interface IHuman extends IEntity {
     skillCheck(skill: SkillType, check: number): boolean;
     addDelay(delay: number, replace?: boolean): void;
     addMilestone(milestone: MilestoneType, data?: number): void;
-    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
+    burn(burnType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     calculateEquipmentStats(): void;
     cancelResting(reason: RestCancelReason): boolean;
     canJump(): boolean;
@@ -76,7 +76,7 @@ export default interface IHuman extends IEntity {
     damage(damageInfo: IDamageInfo): number | undefined;
     damageRandomEquipment(): void;
     equip(item: IItem, slot: EquipType): void;
-    getBurnDamage(skipParry?: boolean, equipType?: EquipType): number;
+    getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
     getDamageModifier(): number;
     getEquippedItem(slot: EquipType): IItem | undefined;
