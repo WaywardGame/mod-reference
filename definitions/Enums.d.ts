@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IDoodad } from "doodad/IDoodad";
 import { ISerializedTranslation } from "language/Translation";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export declare enum TerrainMask {
@@ -1239,6 +1240,7 @@ export interface RequirementInfo extends IVector2, IVector3 {
     isLava?: boolean;
     doodadRequirementMet: boolean;
     fireRequirementMet: boolean;
+    requiredDoodad: IDoodad | undefined;
 }
 export interface IKeyBind {
     [index: number]: number;

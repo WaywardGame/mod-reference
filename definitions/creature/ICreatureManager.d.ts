@@ -24,6 +24,7 @@ export interface ICreatureManager extends IEntityManager<ICreature> {
     checkSpawnReputation(creatureDescription: ICreatureDescription, reputation?: number, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean): CreatureType[];
     getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, reputation?: number, time?: number): ISpawnableCreatures;
+    exists(creature: ICreature): boolean;
 }
 export interface ISpawnableCreatures {
     pool: CreatureType[];

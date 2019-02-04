@@ -32,6 +32,7 @@ export default class CreatureManager extends EntityManager<ICreature> implements
         pool: CreatureType[];
         aberrantChance: number;
     };
+    exists(creature: ICreature): boolean;
     maybeSpawnClawWorm(target: Human | ICreature): void;
     remove(creature: ICreature): void;
     updateAll(): void;
