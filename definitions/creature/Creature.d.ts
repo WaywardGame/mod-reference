@@ -62,8 +62,8 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
-    onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
+    onUnserialized(): void;
     private inspectResistancesAndVulnerabilities;
     private inspectHappiness;
     private findPath;

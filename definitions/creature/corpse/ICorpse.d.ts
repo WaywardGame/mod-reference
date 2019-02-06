@@ -29,4 +29,5 @@ export interface ICorpse extends IObject<CreatureType>, IVector3 {
     decay?: number;
     aberrant?: boolean;
     step?: number;
+    qualityBonus?: number;
 }

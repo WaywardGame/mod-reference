@@ -14,7 +14,7 @@ import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import Translation from "language/Translation";
 export interface ICorpseManager {
-    create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string): ICorpse | undefined;
+    create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number): ICorpse | undefined;
     updateAll(): void;
     getResources(corpse: ICorpse): ItemType[];
     remove(corpse: ICorpse): void;

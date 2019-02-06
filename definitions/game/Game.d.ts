@@ -11,7 +11,7 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
+import { Direction, FireType, ISeeds, ItemQuality, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell, RenderSource } from "game/IGame";
 import TimeManager from "game/TimeManager";
@@ -210,7 +210,7 @@ export default class Game extends Emitter implements IGame {
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
-    getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
+    getRandomQuality(bonusQuality?: number): ItemQuality;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
     wrapCoordinate(cordinate: number, reference: number): number;
