@@ -29,6 +29,7 @@ export default class Menu extends Component implements IMenu, IHookHost {
     isSubmenu: boolean;
     readonly selection: SelectionHandler;
     protected readonly title: Heading;
+    protected readonly buttonBack: BackButton;
     protected readonly description: Text;
     protected readonly content: Component;
     protected tabContainer: Component;
@@ -71,4 +72,12 @@ export declare class MenuSection extends Component {
     setTitle(initializer: (title: Heading) => Heading): this;
     addContent(...content: ArrayOfIterablesOfOr<Component | undefined>): this;
     dumpContent(): this;
+}
+export declare const enum BackButtonType {
+    Back = 0,
+    Check = 1
+}
+export declare class BackButton extends Button {
+    constructor(api: UiApi);
+    setType(type: BackButtonType): void;
 }

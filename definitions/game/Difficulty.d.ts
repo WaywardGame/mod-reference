@@ -59,6 +59,10 @@ export interface IDifficultyOptions {
          */
         randomSkills: boolean;
         /**
+         * Configuration that affects every skill which doesn't have its own configuration.
+         */
+        globalSkills: IDifficultyOptionsSkill;
+        /**
          * Custom options for each skill.
          */
         skills: Map<SkillType, IDifficultyOptionsSkill>;

@@ -17,7 +17,7 @@ export declare enum CheckButtonEvent {
     Change = "Change"
 }
 export declare class CheckButton extends Button implements IRefreshableValue<boolean> {
-    private refreshMethod;
+    protected refreshMethod: () => boolean;
     private _checked;
     readonly checked: boolean;
     constructor(uiApi: UiApi);

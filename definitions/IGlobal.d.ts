@@ -58,6 +58,8 @@ declare global {
 	 */
 	type Descriptions<E extends string | number, V> = { [key in E]: V } & { [key: number]: V | undefined };
 
+	type Class<T> = new () => T;
+
 	/**
 	 * Changes the return type of the given function, or creates a new function from the given arguments and return type. 
 	 */
