@@ -77,7 +77,7 @@ declare module Log {
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.
      */
-    function setWinston(winston: any, path: string): void;
+    function setupFileLogger(fileSystem: IFileSystem, path: IPath, logsPath: string): void;
     function refresh(): void;
     function setCallback(cb?: (...args: any[]) => void): void;
     /**

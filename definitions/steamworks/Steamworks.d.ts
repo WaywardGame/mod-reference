@@ -19,7 +19,6 @@ export default class Steamworks extends Emitter implements ISteamworks {
     private initializingMods;
     private logsPath;
     private backupPath;
-    private logFilePath;
     private modsPath;
     private workshopPath;
     private workshopModsPath;
@@ -43,6 +42,7 @@ export default class Steamworks extends Emitter implements ISteamworks {
     isGreenworksEnabled(): boolean;
     isNapiEnabled(): boolean;
     getAbsolutePath(...p: string[]): string;
+    isAbsolutePath(path: string): boolean;
     getAppPath(...p: string[]): string;
     isUsingAsar(): boolean;
     isTestMode(): boolean;
@@ -99,7 +99,6 @@ export default class Steamworks extends Emitter implements ISteamworks {
      */
     importFromSaveGameMod(modIndex: number, json: string, callback?: (success: boolean) => void): Promise<boolean>;
     deleteSaveGameMod(name: string): void;
-    debugLog(...args: any[]): void;
     hasServerToJoin(): boolean;
     onReady(): void;
     processBackups(): boolean;

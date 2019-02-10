@@ -123,9 +123,7 @@ declare global {
 		KDTree: IKDTreeConstructor;
 	}
 
-	interface IByteGridConstructor {
-		new(width: number, height: number): IByteGrid;
-	}
+	type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
 
 	interface INavigation {
 		getNode(x: number, y: number): INavigationNode;
@@ -142,9 +140,7 @@ declare global {
 		getConnection(direction: number): INavigationNode | undefined;
 	}
 
-	interface INavigationConstructor {
-		new(autoConnect: boolean): INavigation;
-	}
+	type INavigationConstructor = new (autoConnect: boolean) => INavigation;
 
 	interface IKDTree {
 		insertPoint(x: number, y: number): void;
@@ -153,9 +149,7 @@ declare global {
 		delete(): void;
 	}
 
-	interface IKDTreeConstructor {
-		new(): IKDTree;
-	}
+	type IKDTreeConstructor = new () => IKDTree;
 
 	interface JQuery {
 		getItemType(): ItemType;
@@ -170,11 +164,13 @@ declare global {
 	}
 
 	interface IFileSystem {
+		createWriteStream(path: string, opts: any): IFileStream;
 		copy(source: string, destination: string, opt: (file: string) => boolean, cb: (err: string | null | undefined) => void): any;
 		emptyDir(destination: string, cb: (err: string | null | undefined) => void): any;
-		lstat(path: string, cb: (err: string | null | undefined, stats: IFileStat) => void): any;
-		lstatSync(path: string): IFileStat | undefined;
+		stat(path: string, cb: (err: string | null | undefined, stats: IFileStat) => void): any;
+		statSync(path: string): IFileStat | undefined;
 		mkdirSync(path: string): any;
+		existsSync(path: string): string;
 		pathExistsSync(path: string): boolean;
 		readdir(path: string, cb: (err: string | null | undefined, files: string[]) => void): any;
 		readdirSync(path: string): string[];
@@ -183,6 +179,12 @@ declare global {
 		rmdirSync(path: string): any;
 		unlinkSync(path: string): any;
 		writeFileSync(path: string, data: string, opt?: any): any;
+	}
+
+	interface IFileStream {
+		on(type: "error", callback: (err: any) => void): void;
+		write(data: string): void;
+		close(): void;
 	}
 
 	interface IFile extends IFileStat {
@@ -194,9 +196,16 @@ declare global {
 		atime: Date;
 		mtime: Date;
 		ctime: Date;
+		size: number;
 		isFile(): boolean;
 		isDirectory(): boolean;
 		isSymbolicLink(): boolean;
+	}
+
+	interface IPath {
+		join(...path: string[]): string;
+		basename(...path: string[]): string;
+		isAbsolute(path: string): boolean;
 	}
 
 	interface IElectronApi {
@@ -207,8 +216,7 @@ declare global {
 		os: any;
 		webFrame: any;
 		remote: any;
-		path: any;
-		winston: any;
+		path: IPath;
 		fileSystem: IFileSystem;
 		matchmakingServer: IMatchmakingServer | undefined;
 	}
