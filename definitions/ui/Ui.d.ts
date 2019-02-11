@@ -23,6 +23,8 @@ export default class Ui extends Emitter implements IUi {
     private readonly elementDocument;
     private readonly elementWindow;
     private readonly elementBody;
+    private bodyWidth;
+    private bodyHeight;
     private elementScrollableContainers;
     private objectUrl;
     private unloading;

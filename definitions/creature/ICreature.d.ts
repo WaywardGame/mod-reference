@@ -49,6 +49,7 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
     skipNextUpdate(): void;
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
+    hasAi(aiType: AiType): boolean;
     setMoveType(moveType: MoveType): void;
     getMovementFinishTime(): number | undefined;
     update(): boolean;
