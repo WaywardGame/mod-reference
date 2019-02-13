@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import ChoiceList, { Choice } from "newui/component/ChoiceList";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
@@ -33,10 +34,15 @@ export default class NewGameMenu extends Menu {
     private buttonNext;
     private customGameOptionsMenu;
     private difficultyOptions;
+    private wasEditedPreShown;
     constructor(api: UiApi);
     create(): void;
+    setSeed(seed: string | number, lock?: boolean): this;
+    setDifficulty(difficulty: Difficulty, lock?: boolean): this;
+    setDifficultyOptions(options: IDifficultyOptions): this;
     private updateDifficultyOptions;
     private refresh;
+    private refreshAsync;
     private getStartClickHandler;
     private getPlayOptions;
     private getCustomGameOptionsMenu;

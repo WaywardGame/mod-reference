@@ -181,6 +181,9 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     burnsLike?: ItemType[];
     spawnableTiles?: SpawnableTiles;
     gather?: ILiquid;
+    tier?: {
+        [index: number]: number;
+    };
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }

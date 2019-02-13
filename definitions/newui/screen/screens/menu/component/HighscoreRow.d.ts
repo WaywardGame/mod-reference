@@ -15,6 +15,7 @@ export declare class HighscoreRow extends Block {
     private readonly headingPlace;
     private readonly difficulty;
     private readonly deathBy;
+    private readonly replay;
     private _highscore;
     highscore: IHighscore | undefined;
     private _place;

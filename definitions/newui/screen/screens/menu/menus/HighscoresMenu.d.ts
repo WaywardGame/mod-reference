@@ -20,4 +20,5 @@ export default class HighscoresMenu extends Menu {
     private refresh;
     private sort;
     private filter;
+    private play;
 }
