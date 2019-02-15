@@ -11,7 +11,14 @@
 import { Block } from "newui/component/Block";
 import { UiApi } from "newui/INewUi";
 import { IHighscore } from "save/data/ISaveDataGlobal";
-export declare class HighscoreRow extends Block {
+export declare const enum HighscoreRowEvent {
+    /**
+     * Emitted asynchronously before the replay request will be processed.
+     * @return `true` or `undefined` to replay, `false` to cancel.
+     */
+    Replay = "replay"
+}
+export default class HighscoreRow extends Block {
     private readonly headingPlace;
     private readonly difficulty;
     private readonly deathBy;

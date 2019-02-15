@@ -9,14 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import ChoiceList, { Choice } from "newui/component/ChoiceList";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class NewGameMenu extends Menu {
-    multiplayerMode: ChoiceList;
-    choiceSingleplayer: Choice;
-    choiceMultiplayer: Choice;
-    private slot;
     private inputName;
     private inputSeed;
     private inputSeedRow;
@@ -33,6 +28,10 @@ export default class NewGameMenu extends Menu {
     private tickSpeedRow;
     private buttonNext;
     private customGameOptionsMenu;
+    private multiplayerMode;
+    private choiceMultiplayer;
+    private choiceSingleplayer;
+    private slot;
     private difficultyOptions;
     private wasEditedPreShown;
     constructor(api: UiApi);
@@ -40,6 +39,7 @@ export default class NewGameMenu extends Menu {
     setSeed(seed: string | number, lock?: boolean): this;
     setDifficulty(difficulty: Difficulty, lock?: boolean): this;
     setDifficultyOptions(options: IDifficultyOptions): this;
+    setMultiplayer(): this;
     private updateDifficultyOptions;
     private refresh;
     private refreshAsync;

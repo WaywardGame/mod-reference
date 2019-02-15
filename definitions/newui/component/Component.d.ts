@@ -62,6 +62,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     show(): this;
     hide(): this;
     toggle(visible?: boolean): this;
+    exists(): boolean;
     getParent<C extends Component = Component>(): C | null;
     appendTo(where: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
     append(...elements: ArrayOfIterablesOfOr<HTMLElement | IComponent | undefined | false>): this;

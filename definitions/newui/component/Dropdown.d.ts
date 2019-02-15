@@ -47,6 +47,9 @@ export default class Dropdown<OptionId = string | number> extends Component impl
     selectDefault(): void;
     setRefreshMethod(refresh: () => IDropdownData<OptionId>): this;
     refresh(): this;
+    private selectNext;
+    private selectPrevious;
+    private selectionMove;
     private updateWrapperPosition;
     private filter;
 }
