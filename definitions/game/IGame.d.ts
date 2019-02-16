@@ -215,7 +215,7 @@ export interface IPlayOptions {
     name: string;
     seed: string | number | undefined;
     difficulty: Difficulty;
-    difficultyOptions: IDifficultyOptions;
+    difficultyOptions?: IDifficultyOptions;
     character: ICharacter;
     multiplayer: IMultiplayerOptions | true | undefined;
     multiplayerServerToJoin: ServerInfo | undefined;

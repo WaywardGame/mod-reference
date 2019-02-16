@@ -160,7 +160,7 @@ export interface IMultiplayerWorldData {
     mods: IMultiplayerMod[];
     multiplayerOptions: IMultiplayerOptions;
     difficulty: Difficulty;
-    difficultyOptions: IDifficultyOptions;
+    difficultyOptions?: IDifficultyOptions;
     saveObject: SaveObject;
     initialFlowFieldPids: number[];
     crafted: {

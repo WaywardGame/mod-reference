@@ -17,6 +17,7 @@ import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import Input from "newui/component/Input";
 import { UiApi } from "newui/INewUi";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
+import { IFilters } from "newui/screen/screens/game/dialog/MessagesEditFiltersDialog";
 import IGameScreenApi, { IMessages, IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { IMessage, Source } from "player/IMessageManager";
 import IPlayer from "player/IPlayer";
@@ -40,9 +41,7 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     readonly input: Input;
     readonly filter: Button;
     pinNotesAutomatically: boolean;
-    filters: {
-        [key: string]: string[];
-    };
+    filters: IFilters;
     private selectedFilter;
     private showSendButton;
     private showOptionsButton;

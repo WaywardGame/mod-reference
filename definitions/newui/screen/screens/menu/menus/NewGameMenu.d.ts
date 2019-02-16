@@ -32,7 +32,7 @@ export default class NewGameMenu extends Menu {
     private choiceMultiplayer;
     private choiceSingleplayer;
     private slot;
-    private difficultyOptions;
+    private difficultyOptions?;
     private wasEditedPreShown;
     constructor(api: UiApi);
     create(): void;
@@ -40,11 +40,12 @@ export default class NewGameMenu extends Menu {
     setDifficulty(difficulty: Difficulty, lock?: boolean): this;
     setDifficultyOptions(options: IDifficultyOptions): this;
     setMultiplayer(): this;
-    private updateDifficultyOptions;
+    private updateDifficulty;
     private refresh;
     private refreshAsync;
     private getStartClickHandler;
     private getPlayOptions;
     private getCustomGameOptionsMenu;
+    private getDifficultyOptions;
     private getDefaultSaveName;
 }
