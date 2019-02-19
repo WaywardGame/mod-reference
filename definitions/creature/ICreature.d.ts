@@ -77,22 +77,25 @@ export declare enum SpawnGroup {
     FreshWater = 7,
     EasyNight = 8
 }
-export declare enum SpawnableTiles {
+export declare enum TileGroups {
     None = 0,
     Default = 1,
     DefaultWithLava = 2,
     DefaultWithWater = 3,
     DeepSeawater = 4,
-    Water = 5,
-    Flying = 6,
-    Ghost = 7,
-    Desert = 8,
-    Lava = 9,
-    Wet = 10,
-    Ground = 11,
-    All = 12,
-    Seawater = 13,
-    FreshWater = 14
+    DeepWater = 5,
+    ShallowWater = 6,
+    Water = 7,
+    Flying = 8,
+    Ghost = 9,
+    Desert = 10,
+    Lava = 11,
+    Wet = 12,
+    Ground = 13,
+    All = 14,
+    Seawater = 15,
+    FreshWater = 16,
+    Swamp = 17
 }
 export interface ICreatureDescription extends IModdable {
     minhp: number;
@@ -113,7 +116,7 @@ export interface ICreatureDescription extends IModdable {
     aberrantBlood?: IRGB;
     loot?: ICreatureLoot[];
     aberrantLoot?: ICreatureLoot[];
-    spawnTiles: SpawnableTiles;
+    spawnTiles: TileGroups;
     spawnReputation?: number;
     spawnOnBenignity?: boolean;
     spawnGroup?: SpawnGroup[];
@@ -135,6 +138,9 @@ export interface ICreatureDescription extends IModdable {
     helpPlants?: boolean;
     speed?: number;
     disableHitching?: boolean;
+    tileMissChance?: {
+        [index: number]: number;
+    };
 }
 export interface ICreatureLoot {
     item: ItemType;

@@ -10,13 +10,13 @@
  *
  *
  */
-import { ICreature, ICreatureDescription, SpawnableTiles, SpawnGroup } from "creature/ICreature";
+import { ICreature, ICreatureDescription, SpawnGroup, TileGroups } from "creature/ICreature";
 import IEntityManager from "entity/IEntityManager";
 import { CreatureType, MoveType } from "Enums";
 import { ITile } from "tile/ITerrain";
 export interface ICreatureManager extends IEntityManager<ICreature> {
     getHappinessLevel(human: Human, creature: ICreature): number;
-    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
+    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroups): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
     maybeSpawnClawWorm(target: Human | ICreature): void;
     updateAll(): void;

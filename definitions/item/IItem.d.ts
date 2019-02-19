@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { ActionType } from "action/IAction";
-import { ICreature, SpawnableTiles } from "creature/ICreature";
+import { ICreature, TileGroups } from "creature/ICreature";
 import { IDoodad, IDoodadDescription } from "doodad/IDoodad";
 import { EntityType } from "entity/IEntity";
 import IHuman from "entity/IHuman";
@@ -179,7 +179,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     hideHelmet?: boolean;
     worth?: number;
     burnsLike?: ItemType[];
-    spawnableTiles?: SpawnableTiles;
+    spawnableTiles?: TileGroups;
     gather?: ILiquid;
     tier?: {
         [index: number]: number;

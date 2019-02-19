@@ -77,7 +77,7 @@ export default interface IHuman extends IEntity {
     damageRandomEquipment(): void;
     equip(item: IItem, slot: EquipType): void;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
-    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
+    getConsumeBonus(item: IItem | undefined, skillUse?: SkillType): number;
     getDamageModifier(): number;
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquippedItems(): IItem[];

@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICreature, ICreatureDescription, SpawnableTiles, SpawnGroup } from "creature/ICreature";
+import { ICreature, ICreatureDescription, SpawnGroup, TileGroups } from "creature/ICreature";
 import { ICreatureManager } from "creature/ICreatureManager";
 import EntityManager from "entity/EntityManager";
 import { CreatureType, MoveType } from "Enums";
@@ -26,7 +26,7 @@ export default class CreatureManager extends EntityManager<ICreature> implements
      * @param forceAberrant If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
      * @param spawnableTiles If set, this will overwrite the creature's description for which tiles it can spawn on
      */
-    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
+    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroups): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
     getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, reputation?: number, time?: number): {
         pool: CreatureType[];

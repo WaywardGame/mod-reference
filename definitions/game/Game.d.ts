@@ -124,7 +124,7 @@ export default class Game extends Emitter implements IGame {
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
     getOrCreateTile(x: number, y: number, z: number): ITile;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
-    gameLoop: (timeStamp: any) => void;
+    gameLoop: (timeStamp: number) => void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     updateThumbnail(): Promise<void>;
     addZoomLevel(amount: number): void;

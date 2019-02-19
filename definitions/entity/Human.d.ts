@@ -101,7 +101,7 @@ export default abstract class Human extends Entity implements IHuman {
     canJump(): boolean;
     hasDelay(): boolean;
     addDelay(delay: number, replace?: boolean): void;
-    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
+    getConsumeBonus(item: IItem | undefined, skillUse?: SkillType): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
     /**

@@ -12,6 +12,6 @@
  */
 import { ICreatureDescription } from "creature/ICreature";
 import { CreatureType, TerrainType } from "Enums";
-export declare const spawnableTiles: TerrainType[][];
+export declare const tileGroups: TerrainType[][];
 export declare const creatureDescriptions: OptionalDescriptions<CreatureType, ICreatureDescription>;
 export default creatureDescriptions;

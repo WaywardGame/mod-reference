@@ -97,6 +97,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     getNthChild<C extends Component = Component>(nth?: number): C;
     getChildren<C extends Component = Component>(): IterableIterator<C>;
     scrollTo(child: Component, ms?: number): void;
+    scrollTo(child: Component, offsetTop: number, ms?: number): void;
     getStyle(styleName: string): string;
     schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;

@@ -24,6 +24,7 @@ export default class SpriteBatch implements ISpriteBatch {
     private readonly colorArray;
     private readonly gl;
     private begun;
+    private useAlpha;
     private readonly vertexArray;
     constructor(gl: WebGL2RenderingContext, maxSprites: number, depthOffset?: number);
     static resetGl(): void;
