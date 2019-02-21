@@ -18,13 +18,19 @@ export declare enum Difficulty {
 }
 export interface IDifficultyOptions {
     /**
-     * Whether creatures attack when unprovoked
-     */
-    peaceful: boolean;
-    /**
      * Whether players respawn when they die
      */
     respawn: boolean;
+    /**
+     * Whether creatures attack when unprovoked
+     */
+    peaceful: boolean;
+    creatures: {
+        /**
+         * Whether creatures can spawn as aberrant
+         */
+        globalAberrantSpawns: boolean;
+    };
     time: {
         /**
          * A number between `0` and `1`, where `0` is the start of the day and `1` is the end.

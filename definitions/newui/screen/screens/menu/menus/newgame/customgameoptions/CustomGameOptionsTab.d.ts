@@ -23,5 +23,6 @@ export declare enum CustomGameOptionsSection {
     Stats = 3,
     StatusEffects = 4,
     Skills = 5,
-    Inventory = 6
+    Inventory = 6,
+    Creatures = 7
 }
