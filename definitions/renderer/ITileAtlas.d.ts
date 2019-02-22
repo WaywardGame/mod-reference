@@ -29,6 +29,7 @@ export interface ITileAtlas {
     mounds: {
         [index: number]: DoodadInfo;
     };
+    generateLookups(): void;
     isMountain(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
     isLava(type: TerrainType): boolean;
