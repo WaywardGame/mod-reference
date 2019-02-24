@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { Stat } from "entity/IStats";
-import { ItemType, SkillType, StatusType } from "Enums";
+import { CreatureType, ItemType, SkillType, StatusType } from "Enums";
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
@@ -27,9 +27,13 @@ export interface IDifficultyOptions {
     peaceful: boolean;
     creatures: {
         /**
-         * Whether creatures can spawn as aberrant
+         * Whether creatures can spawn as aberrant.
          */
         globalAberrantSpawns: boolean;
+        /**
+         * Custom options for each creature.
+         */
+        creature: Map<CreatureType, IDifficultyOptionsCreature>;
     };
     time: {
         /**
@@ -149,6 +153,16 @@ export interface IDifficultyOptionsSkill {
      * A multiplier for how fast the skill is gained.
      */
     gainMultiplier: number;
+}
+export interface IDifficultyOptionsCreature {
+    /**
+     * Can spawn at all.
+     */
+    allowSpawning: boolean;
+    /**
+     * Can spawn as aberrant.
+     */
+    aberrantSpawns: boolean;
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare function getDefaultDifficultyOptions(difficulty: Difficulty, seed?: number): IDifficultyOptions;
