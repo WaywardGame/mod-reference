@@ -18,6 +18,8 @@ export interface UiApi extends Emitter {
     tooltips: ITooltipManager;
     scale: IScaleManager;
     highlights: IHighlightManager;
+    windowWidth: number;
+    windowHeight: number;
     /**
      * Generator for all existing screens.
      */

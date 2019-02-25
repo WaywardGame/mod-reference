@@ -17,6 +17,8 @@ import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 export interface IItemManager {
+    getItemTypes(): ReadonlyArray<ItemType>;
+    getItemsWithRecipes(): ReadonlyArray<ItemType>;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
     checkMilestones(player: IPlayer, item: IItem): void;

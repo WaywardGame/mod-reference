@@ -260,7 +260,7 @@ export interface ITooltip extends IComponent {
     addHeading(initializer: (text: IText) => any): this;
     addParagraph(initializer: (text: IText) => any): this;
     addList(...initializers: Array<((text: IText) => any) | undefined | false>): this;
-    updatePosition(position: IVector2): this;
+    updatePosition(position: IVector2, force?: true): this;
 }
 export interface IText extends IComponent {
     setText(translation: TranslationGenerator): this;

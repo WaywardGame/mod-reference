@@ -70,15 +70,11 @@ declare module Enums2 {
     /**
      * Iterate over the names of the entries in an enum.
      */
-    function keys<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }): Stream<K>;
+    function keys<T>(enumObject: T): Stream<keyof T>;
     /**
      * Iterate over the values in an enum.
      */
-    function values<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }): Stream<E>;
+    function values<T>(enumObject: T): Stream<T[keyof T]>;
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */

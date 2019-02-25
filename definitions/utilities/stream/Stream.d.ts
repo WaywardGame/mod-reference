@@ -21,11 +21,19 @@ export default class Stream<T> implements Iterable<T>, IStream<T> {
     /**
      * Returns a Stream that iterates over the entries of a map, in key-value tuples.
      */
-    static entries<K, V>(map: Map<K, V>): Stream<[K, V]>;
+    static entries<K, V>(map?: Map<K, V>): Stream<[K, V]>;
     /**
      * Returns a Stream that iterates over the entries of an object, in key-value tuples.
      */
-    static entries<T extends object>(obj: T): Stream<[keyof T, T[keyof T]]>;
+    static entries<T extends object>(obj?: T): Stream<[Extract<keyof T, string>, T[Extract<keyof T, string>]]>;
+    /**
+     * Returns a Stream that iterates over the entries of an object, in key-value tuples.
+     */
+    static entries<E extends number, T>(obj?: Descriptions<E, T>): Stream<[E, T]>;
+    /**
+     * Returns a Stream that iterates over the entries of an object, in key-value tuples.
+     */
+    static entries<K, V>(obj?: any): Stream<[K, V]>;
     /**
      * Returns a Stream that iterates over the keys of a map.
      */
@@ -35,9 +43,23 @@ export default class Stream<T> implements Iterable<T>, IStream<T> {
      */
     static keys<T extends object>(obj: T): Stream<keyof T>;
     /**
+     * Returns a Stream that iterates over the entries of an object, in key-value tuples.
+     */
+    static keys<E extends number, T>(obj?: Descriptions<E, T>): Stream<E>;
+    /**
+     * Returns a Stream that iterates over the keys of an object.
+     */
+    static keys<K extends string | number>(obj: {
+        [key in K]: any;
+    }): Stream<K>;
+    /**
      * Returns a Stream that iterates over the values of a map.
      */
-    static values<K>(map: Map<K, any>): Stream<K>;
+    static values<V>(map: Map<any, V>): Stream<V>;
+    /**
+     * Returns a Stream that iterates over the keys of an object.
+     */
+    static values<E extends number, T>(obj?: Descriptions<E, T>): Stream<T>;
     /**
      * Returns a Stream that iterates over the values of an object.
      */
@@ -169,6 +191,12 @@ export default class Stream<T> implements Iterable<T>, IStream<T> {
      * Returns a new Stream containing the items in this Stream and then the items in all provided Streams or Iterables.
      */
     merge<N>(...iterables: Array<Stream<N> | Iterable<N>>): Stream<T | N>;
+    /**
+     * Returns a new Stream of the same type, after first collecting this Stream into an array.
+     *
+     * This method is an alias of `Stream.fromIterable(stream.toArray())`.
+     */
+    collectStream(): Stream<T>;
     /**
      * Returns the item at the given index.
      *
