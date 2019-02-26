@@ -1164,6 +1164,7 @@ export interface IObjectDescription {
     skillUse?: SkillType;
     weightCapacity?: number;
     imagePath?: string;
+    preservationChance?: number;
 }
 export interface IModdable {
     modIndex?: number;

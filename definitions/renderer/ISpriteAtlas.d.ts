@@ -17,11 +17,11 @@ export interface ISpriteInfoList {
 export interface ISpriteAtlas {
     corpses: ISpriteInfoList;
     creatures: ISpriteInfoList;
+    immune: ISpriteInfo;
     items: ISpriteInfoList;
     itemsEquipped: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;
     miss: ISpriteInfo;
-    immune: ISpriteInfo;
     npcs: ISpriteInfoList;
     overlay: ISpriteInfoList;
     playerBody: ISpriteInfo;

@@ -15,11 +15,11 @@ import ISpriteInfo from "renderer/ISpriteInfo";
 export default class SpriteAtlas implements ISpriteAtlas {
     corpses: ISpriteInfoList;
     creatures: ISpriteInfoList;
+    immune: ISpriteInfo;
     items: ISpriteInfoList;
     itemsEquipped: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;
     miss: ISpriteInfo;
-    immune: ISpriteInfo;
     npcs: ISpriteInfoList;
     overlay: ISpriteInfoList;
     playerBody: ISpriteInfo;
