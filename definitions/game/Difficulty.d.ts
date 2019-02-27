@@ -10,6 +10,7 @@
  */
 import { Stat } from "entity/IStats";
 import { CreatureType, ItemType, SkillType, StatusType } from "Enums";
+import { IVersionInfo } from "utilities/Version";
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
@@ -21,11 +22,11 @@ export interface IDifficultyOptions {
      * Whether players respawn when they die
      */
     respawn: boolean;
-    /**
-     * Whether creatures attack when unprovoked
-     */
-    peaceful: boolean;
     creatures: {
+        /**
+         * Whether creatures attack when unprovoked
+         */
+        peaceful: boolean;
         /**
          * Whether creatures can spawn as aberrant.
          */
@@ -166,3 +167,9 @@ export interface IDifficultyOptionsCreature {
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare function getDefaultDifficultyOptions(difficulty: Difficulty, seed?: number): IDifficultyOptions;
+export interface IDifficultyOptionsOld extends IDifficultyOptions {
+    peaceful?: boolean;
+}
+export declare module IDifficultyOptions {
+    function upgrade(difficultyOptions: IDifficultyOptionsOld, version: IVersionInfo): boolean;
+}

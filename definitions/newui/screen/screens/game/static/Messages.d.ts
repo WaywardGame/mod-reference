@@ -51,6 +51,9 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     private readonly seenNotes;
     private readonly pinnedQuestRequirements;
     private readonly messagesToDisplay;
+    private readonly chatSentHistory;
+    private chatHistoryIndex;
+    private pushedCurrentToHistory;
     constructor(api: IGameScreenApi | UiApi);
     getID(): QuadrantComponentId;
     getName(): IStringSection[];

@@ -13,7 +13,7 @@ import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
 import { Direction, FireType, ISeeds, ItemQuality, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell, RenderSource } from "game/IGame";
+import { FireStage, ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell, RenderSource } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
 import Translation from "language/Translation";
@@ -218,6 +218,7 @@ export default class Game extends Emitter implements IGame {
     getCameraPosition(): IVector2;
     getExactCameraPosition(): Vector2;
     restartDedicatedServer(): boolean;
+    getFireStage(decay: number): FireStage;
     private updateOptionInternal;
     private tick;
     private updateEntityFov;

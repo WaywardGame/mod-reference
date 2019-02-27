@@ -22,9 +22,9 @@ declare class Inspection {
     static inspect(inspector: Human, tilePosition: Vector3, context: InspectionContext | string): IterableIterator<IInspectionSectionSimple>;
     private constructor();
     inspectEntityHealth(entity: IEntity, entityName?: Translation, revealer?: Translation, skillPercent?: number, healthPercent?: number): Translation | undefined;
-    inspectFire(decay?: number, isOpenFire?: boolean): Translation | undefined;
+    inspectFire(decay?: number): Translation | undefined;
 }
 declare module Inspection {
-    function ofFire(decay?: number, isOpenFire?: boolean): Message;
+    function ofFire(decay?: number): Message;
 }
 export default Inspection;

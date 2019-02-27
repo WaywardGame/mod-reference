@@ -731,7 +731,7 @@ declare enum UiTranslation {
     DifficultyOptionsPeaceful = 716,
     DifficultyOptionsAberrantSpawnsDisabled = 717,
     DifficultyOptionsCreatureSpawningDisabled = 718,
-    DifficultyOptionsCreatureAberrantSpawnsDisabled = 719,
+    DifficultyOptionsCreatureAberrantSpawns = 719,
     DifficultyOptionsRespawn = 720,
     DifficultyOptionsEternalNight = 721,
     DifficultyOptionsTimeInitial = 722,

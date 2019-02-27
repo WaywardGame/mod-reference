@@ -171,6 +171,7 @@ export interface IGame extends Emitter {
     resetWebGL(): void;
     resizeRenderer(): void;
     restartDedicatedServer(): void;
+    getFireStage(decay: number): FireStage;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
@@ -257,6 +258,13 @@ export declare enum WaterType {
     None = 0,
     FreshWater = 1,
     Seawater = 2
+}
+export declare enum FireStage {
+    Embers = 0,
+    AlmostExtinguished = 1,
+    Struggling = 2,
+    Healthy = 3,
+    Raging = 4
 }
 export declare enum RenderSource {
     ActionManager = 0,
