@@ -42,6 +42,7 @@ export interface IGame extends Emitter {
     saveVersion: string | undefined;
     isLoadingSave: boolean;
     tile: ITileArray;
+    tileDecorations: Uint16Array;
     tileData: {
         [index: number]: {
             [index: number]: {

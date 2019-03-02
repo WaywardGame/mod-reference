@@ -14,8 +14,9 @@ import { Hook } from "mod/IHookManager";
 import { IModConfig } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
 import { CanLoadState, ICanLoadInfo, IModManager } from "mod/IModManager";
+import Emitter from "utilities/Emitter";
 import Log from "utilities/Log";
-export default class ModManager implements IModManager {
+export default class ModManager extends Emitter implements IModManager {
     private readonly mods;
     private readonly internalMods;
     private readonly internalModsElectron;

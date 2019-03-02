@@ -29,11 +29,11 @@ export default class Stream<T> implements Iterable<T>, IStream<T> {
     /**
      * Returns a Stream that iterates over the entries of an object, in key-value tuples.
      */
-    static entries<E extends number, T>(obj?: Descriptions<E, T>): Stream<[E, T]>;
-    /**
-     * Returns a Stream that iterates over the entries of an object, in key-value tuples.
-     */
     static entries<K, V>(obj?: any): Stream<[K, V]>;
+    /**
+     * Returns a Stream that iterates over the entries of a Descriptions object, in key-value tuples.
+     */
+    static descriptions<E extends number, T>(obj?: Descriptions<E, T>): Stream<[E, T]>;
     /**
      * Returns a Stream that iterates over the keys of a map.
      */
@@ -335,6 +335,33 @@ export default class Stream<T> implements Iterable<T>, IStream<T> {
      * @param mapper A mapping function which takes an item in this Stream and returns a key-value pair.
      */
     toMap<K, V, KN, VN>(map: Map<KN, VN>, mapper: (value: T, index: number) => [K, V]): Map<K, V>;
+    /**
+     * Constructs an object from the key-value pairs in this Stream.
+     */
+    toObject(): T extends [infer K, infer V] ? {
+        [key in Extract<K, string | number | symbol>]: V;
+    } : never;
+    /**
+     * Puts the key-value pairs in this Stream into the given object.
+     */
+    toObject<O>(obj: O): T extends [infer K, infer V] ? O & {
+        [key in Extract<K, string | number | symbol>]: V;
+    } : never;
+    /**
+     * Constructs an object from the items in this Stream, using a mapping function.
+     * @param mapper A mapping function which takes an item in this Stream and returns a key-value pair.
+     */
+    toObject<K extends string | number | symbol, V>(mapper: (value: T, index: number) => [K, V]): {
+        [key in K]: V;
+    };
+    /**
+     * Puts the key-value pairs in this Stream into the given object, using a mapping function.
+     * @param map The map to put key-value pairs into.
+     * @param mapper A mapping function which takes an item in this Stream and returns a key-value pair.
+     */
+    toObject<K extends string | number | symbol, V, O>(obj: O, mapper: (value: T, index: number) => [K, V]): O & {
+        [key in K]: V;
+    };
     /**
      * Combines the items in this Stream into a string.
      * @param concatenator A substring to be placed between every item in this Stream. If not provided, uses `""`

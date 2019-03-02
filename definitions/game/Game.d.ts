@@ -52,6 +52,7 @@ export default class Game extends Emitter implements IGame {
     saveClear: boolean;
     spawnCoords: IVector3;
     tile: ITileArray;
+    tileDecorations: Uint16Array;
     updateFieldOfView: boolean;
     contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;

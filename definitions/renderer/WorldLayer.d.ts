@@ -33,6 +33,7 @@ export default class WorldLayer implements IWorldLayer {
     getTileType(x: number, y: number): TerrainType;
     getTile(x: number, y: number): TerrainData;
     getType(terrain: TerrainData): TerrainType;
+    getTileDecoration(x: number, y: number): number;
     isWall(terrain: TerrainData): boolean;
     isFence(terrain: TerrainData): boolean;
     isTilled(terrain: TerrainData): boolean;

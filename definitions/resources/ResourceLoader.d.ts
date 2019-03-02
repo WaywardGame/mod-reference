@@ -40,6 +40,8 @@ export default class ResourceLoader implements IResourceLoader {
     private loadSleep;
     private loadTerrains;
     private loadTerrain;
+    private loadTerrainDecorations;
+    private loadTerrainDecoration;
     private loadDoodads;
     private loadDoodad;
     private loadDoodadItems;
