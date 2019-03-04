@@ -210,4 +210,5 @@ export default class InGameScreen extends BaseScreen {
     private quickSlotBindPressed;
     private quickSlotToggleBindPressed;
     private determineSort;
+    private getBestSort;
 }

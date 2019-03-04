@@ -1116,7 +1116,8 @@ export declare enum SortType {
     Category = 7,
     Durability = 8,
     DiscoveredTime = 9,
-    Best = 10
+    BestForCraftingRequirements = 10,
+    BestForCraftingConsumables = 11
 }
 export declare enum RestType {
     Resting = 0,
