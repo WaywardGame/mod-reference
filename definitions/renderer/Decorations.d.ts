@@ -12,7 +12,10 @@ import { IModdable, TerrainType } from "Enums";
 import IWorldLayer from "renderer/IWorldLayer";
 import { ITileAdaptation } from "renderer/TileAdaptors";
 export declare enum TerrainDecoration {
-    Grass = 0
+    Grass = 0,
+    BeachSand = 1,
+    DesertSand = 2,
+    Dirt = 3
 }
 export interface ITerrainDecorationBase {
     terrainTypes: TerrainType[];
