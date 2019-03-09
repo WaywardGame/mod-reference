@@ -23,7 +23,16 @@ export interface ITerrainDecorationBase {
     adapt: AdaptionFunction | ITerrainDecorationVariationAdaption;
 }
 export interface ITerrainDecorationVariationAdaption {
+    /**
+     * The number of different sprites that could be used for this decoration. For instance, if your image is 3-tiles wide (48x16)
+     * and you set this number to 3, it would choose between any of the three tiles randomly for each decorated tile.
+     */
     variationCount: number;
+    /**
+     * Decorations can't be made less rare, but they can be made more rare with this property.
+     * When not provided, decorated tiles use a rarity of 1.0 (always). 0.0 means never. It's linear.
+     */
+    rarity?: number;
 }
 /**
  * Takes an x, y, and z coordinate and a randomly-generated "variation index", and returns an `ITileAdaptation`
@@ -38,6 +47,6 @@ export declare const terrainDecorations: Descriptions<TerrainDecoration, ITerrai
 declare module TerrainDecorations {
     function initialize(): void;
     function has(terrain: TerrainType): boolean;
-    function adapt(world: IWorldLayer, tileX: number, tileY: number, terrain: TerrainType, adaption: ITileAdaptation, variation: number): ITileAdaptation | undefined;
+    function adapt(world: IWorldLayer, tileX: number, tileY: number, terrain: TerrainType, adaptation: ITileAdaptation, variation: number): ITileAdaptation | undefined;
 }
 export default TerrainDecorations;
