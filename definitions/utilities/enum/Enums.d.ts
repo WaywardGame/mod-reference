@@ -1,5 +1,5 @@
 /*!
-* Copyright Unlok, Vaughn Royko 2011-2018
+* Copyright Unlok, Vaughn Royko 2011-2019
 * http://www.unlok.ca
 *
 * Credits & Thanks:
@@ -63,9 +63,7 @@ declare module Enums {
      * Note: When provided with a filter & most values in the enum don't match, this method can
      * take a very long time. *Use the filter with caution.*
      */
-    function getRandom<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }, filter?: (value: E) => boolean): E;
+    function getRandom<T>(enumObject: T, filter?: (value: T[keyof T]) => boolean): T[keyof T];
     /**
      * Iterate over the names of the entries in an enum.
      */
@@ -75,15 +73,11 @@ declare module Enums {
     /**
      * Iterate over the values in an enum.
      */
-    function values<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }): IterableIterator<E>;
+    function values<T>(enumObject: T): IterableIterator<T[keyof T]>;
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */
-    function entries<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }): IterableIterator<[K, E]>;
+    function entries<T>(enumObject: T): IterableIterator<[keyof T, T[keyof T]]>;
     /**
      * Returns whether the given number is a valid entry in an enum.
      * @param enumObject The enum object to check for the entry.

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,7 +9,8 @@
  * https://waywardgame.github.io/
  */
 import { Stat } from "entity/IStats";
-import { ItemType, SkillType, StatusType } from "Enums";
+import { CreatureType, ItemType, SkillType, StatusType } from "Enums";
+import { IVersionInfo } from "utilities/Version";
 export declare enum Difficulty {
     Hardcore = 0,
     Casual = 1,
@@ -18,13 +19,23 @@ export declare enum Difficulty {
 }
 export interface IDifficultyOptions {
     /**
-     * Whether creatures attack when unprovoked
-     */
-    peaceful: boolean;
-    /**
      * Whether players respawn when they die
      */
     respawn: boolean;
+    creatures: {
+        /**
+         * Whether creatures attack when unprovoked
+         */
+        peaceful: boolean;
+        /**
+         * Whether creatures can spawn as aberrant.
+         */
+        globalAberrantSpawns: boolean;
+        /**
+         * Custom options for each creature.
+         */
+        creature: Map<CreatureType, IDifficultyOptionsCreature>;
+    };
     time: {
         /**
          * A number between `0` and `1`, where `0` is the start of the day and `1` is the end.
@@ -58,6 +69,10 @@ export interface IDifficultyOptions {
          * Note: Randomly generated skills can be overwritten by custom options in `skills`.
          */
         randomSkills: boolean;
+        /**
+         * Configuration that affects every skill which doesn't have its own configuration.
+         */
+        globalSkills: IDifficultyOptionsSkill;
         /**
          * Custom options for each skill.
          */
@@ -140,5 +155,21 @@ export interface IDifficultyOptionsSkill {
      */
     gainMultiplier: number;
 }
+export interface IDifficultyOptionsCreature {
+    /**
+     * Can spawn at all.
+     */
+    allowSpawning: boolean;
+    /**
+     * Can spawn as aberrant.
+     */
+    aberrantSpawns: boolean;
+}
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare function getDefaultDifficultyOptions(difficulty: Difficulty, seed?: number): IDifficultyOptions;
+export interface IDifficultyOptionsOld extends IDifficultyOptions {
+    peaceful?: boolean;
+}
+export declare module IDifficultyOptions {
+    function upgrade(difficultyOptions: IDifficultyOptionsOld, version: IVersionInfo): boolean;
+}

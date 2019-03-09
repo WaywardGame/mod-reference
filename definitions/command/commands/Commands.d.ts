@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { ICommand } from "command/ICommand";
-export declare const command: ICommand;
-export default command;
+declare const _default: ICommand;
+export default _default;

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,6 +12,7 @@ import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IHookManager";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
+import Emitter from "utilities/Emitter";
 import Log from "utilities/Log";
 export interface ICanLoadInfo {
     name: string;
@@ -30,7 +31,11 @@ export declare enum CanLoadState {
     IncompatibleVersion = 9,
     DisabledInMultiplayer = 10
 }
-export interface IModManager {
+export declare const enum ModManagerEvent {
+    LoadAll = "LoadAll",
+    UnloadAll = "UnloadAll"
+}
+export interface IModManager extends Emitter {
     canLoad(index: number, fromModsMenu?: boolean): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
     getAuthor(index: number): string;

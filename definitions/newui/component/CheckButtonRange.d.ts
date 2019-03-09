@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -18,8 +18,8 @@ export declare enum CheckButtonRangeEvent {
     Change = "Change2"
 }
 export default class CheckButtonRange extends CheckButton {
+    readonly rangeInput: RangeInput;
     protected rangeInputValueDisplay: RangeInputValueDisplay | undefined;
-    private readonly rangeInput;
     private readonly rangeWrapper;
     private valueWhenDisabled;
     constructor(api: UiApi, valueWhenDisabled?: number);

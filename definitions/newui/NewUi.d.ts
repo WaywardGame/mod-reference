@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -25,6 +25,10 @@ export default class Ui extends Emitter implements UiApi {
     private storageElement;
     private readonly screenManager;
     private readonly dataHosts;
+    private _windowWidth;
+    readonly windowWidth: number;
+    private _windowHeight;
+    readonly windowHeight: number;
     constructor();
     screens(): IterableIterator<Screen>;
     getScreen<S extends IScreen = Screen>(screenId: ScreenId): S | undefined;

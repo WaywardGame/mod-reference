@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -71,7 +71,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     canHarvest(): boolean;
     canTrample(): boolean | undefined;
     checkForTrampling(source: Human | ICreature): boolean;
-    isDangerous(player: IPlayer): boolean;
+    isDangerous(human: Human): boolean;
     getDamage(human: Human, equipType?: EquipType): number;
     getOwner(): IPlayer | undefined;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,20 +10,21 @@
  *
  *
  */
-import { ICreature, ICreatureDescription, SpawnableTiles, SpawnGroup } from "creature/ICreature";
+import { ICreature, ICreatureDescription, SpawnGroup, TileGroup } from "creature/ICreature";
 import IEntityManager from "entity/IEntityManager";
 import { CreatureType, MoveType } from "Enums";
 import { ITile } from "tile/ITerrain";
 export interface ICreatureManager extends IEntityManager<ICreature> {
     getHappinessLevel(human: Human, creature: ICreature): number;
-    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: SpawnableTiles): ICreature | undefined;
+    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
-    maybeSpawnClawWorm(human: Human): void;
+    maybeSpawnClawWorm(target: Human | ICreature): void;
     updateAll(): void;
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
     checkSpawnReputation(creatureDescription: ICreatureDescription, reputation?: number, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean): CreatureType[];
     getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, reputation?: number, time?: number): ISpawnableCreatures;
+    exists(creature: ICreature): boolean;
 }
 export interface ISpawnableCreatures {
     pool: CreatureType[];

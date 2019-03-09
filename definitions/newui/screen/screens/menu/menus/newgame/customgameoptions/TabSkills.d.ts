@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,14 +9,16 @@
  * https://waywardgame.github.io/
  */
 import { IDifficultyOptions } from "game/Difficulty";
+import { IRefreshable } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
 import CustomGameOptionsTab from "newui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
-export default class TabSkills extends CustomGameOptionsTab {
+export default class TabSkills extends CustomGameOptionsTab implements IRefreshable {
     private readonly options;
     private readonly skillComponentMap;
     private readonly addSkillConfigDropdown;
     private readonly skillsWrapper;
     constructor(api: UiApi, options: () => IDifficultyOptions);
+    refresh(): this;
     private addSkill;
     private sortSkills;
 }

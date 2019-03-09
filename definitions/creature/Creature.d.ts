@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -41,10 +41,11 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
     inspect({ inspector, context, inspectEntityHealth }: Inspection, section: InspectionSection): void;
+    hasAi(aiType: AiType): boolean;
     isHidden(): boolean;
     isDefender(): boolean;
-    checkForBurn(moveType?: MoveType): boolean;
     isTamed(): boolean;
+    checkForBurn(moveType?: MoveType): boolean;
     tame(player: IPlayer): boolean;
     increaseTamedCount(): void;
     release(): boolean;
@@ -62,8 +63,8 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
-    onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
+    onUnserialized(): void;
     private inspectResistancesAndVulnerabilities;
     private inspectHappiness;
     private findPath;

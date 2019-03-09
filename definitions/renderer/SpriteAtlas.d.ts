@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,6 +15,7 @@ import ISpriteInfo from "renderer/ISpriteInfo";
 export default class SpriteAtlas implements ISpriteAtlas {
     corpses: ISpriteInfoList;
     creatures: ISpriteInfoList;
+    immune: ISpriteInfo;
     items: ISpriteInfoList;
     itemsEquipped: ISpriteInfoList;
     itemsSmall: ISpriteInfoList;

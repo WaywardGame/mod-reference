@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,10 +19,10 @@ export interface ISteamworks extends Emitter {
     createArchive(id: string, source: string, callback: (err?: string) => void): void;
     createLobby(type: LobbyType): void;
     createSaveGameMod(name: string, slot: number): Promise<boolean>;
-    debugLog(...args: any[]): void;
     deleteSaveGameMod(name: string): void;
     fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
     getAbsolutePath(...p: string[]): string;
+    isAbsolutePath(path: string): boolean;
     getAppPath(...p: string[]): string;
     getBetaName(): string;
     getBuildTime(): number | undefined;

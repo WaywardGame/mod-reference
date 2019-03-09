@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,6 +10,7 @@
  *
  *
  */
+import IEntity from "entity/IEntity";
 import { ItemType, StatType } from "Enums";
 import INotifier from "renderer/INotifier";
 import Vec2 from "utilities/math/Vector2";
@@ -18,16 +19,17 @@ export default class Notifier implements INotifier {
     private mostRecent;
     private mostRecentLife;
     private count;
+    private notificationCount;
     private readonly notifications;
     private readonly spriteBatch;
     private nextUpdate;
     constructor(gl: WebGL2RenderingContext, capacity: number);
     setTexture(texture: WebGLTexture, inverseTextureSize: Vec2): void;
     clear(): void;
-    addItem(x: number, y: number, z: number, type: ItemType): void;
-    addStat(x: number, y: number, z: number, type: StatType, value: number): void;
-    update(): void;
-    render(x: number, y: number, tileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
-    private addNote;
-    private renderNote;
+    addItem(entity: IEntity, type: ItemType): void;
+    addStat(entity: IEntity, type: StatType, value: number): void;
+    update(timeStamp: number): void;
+    render(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
+    private addNotification;
+    private renderNotification;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { ActionType } from "action/IAction";
-import { ICreature, SpawnableTiles } from "creature/ICreature";
+import { ICreature, TileGroup } from "creature/ICreature";
 import { IDoodad, IDoodadDescription } from "doodad/IDoodad";
 import { EntityType } from "entity/IEntity";
 import IHuman from "entity/IHuman";
@@ -179,8 +179,11 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     hideHelmet?: boolean;
     worth?: number;
     burnsLike?: ItemType[];
-    spawnableTiles?: SpawnableTiles;
+    spawnableTiles?: TileGroup;
     gather?: ILiquid;
+    tier?: {
+        [index: number]: number;
+    };
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }

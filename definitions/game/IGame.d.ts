@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,7 +11,7 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
+import { Direction, FireType, ISeeds, ItemQuality, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
@@ -42,6 +42,7 @@ export interface IGame extends Emitter {
     saveVersion: string | undefined;
     isLoadingSave: boolean;
     tile: ITileArray;
+    tileDecorations: Uint16Array;
     tileData: {
         [index: number]: {
             [index: number]: {
@@ -129,7 +130,7 @@ export interface IGame extends Emitter {
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeePosition(tileX: number, tileY: number, tileZ: number): IPlayer[];
-    getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
+    getRandomQuality(bonusQuality?: number): ItemQuality;
     getReputation(): number;
     getSkillPercent(skill: SkillType): number;
     getMaxWeight(): number;
@@ -171,6 +172,7 @@ export interface IGame extends Emitter {
     resetWebGL(): void;
     resizeRenderer(): void;
     restartDedicatedServer(): void;
+    getFireStage(decay: number): FireStage;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     setGlContextSize(width: number, height: number): void;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
@@ -215,7 +217,7 @@ export interface IPlayOptions {
     name: string;
     seed: string | number | undefined;
     difficulty: Difficulty;
-    difficultyOptions: IDifficultyOptions;
+    difficultyOptions?: IDifficultyOptions;
     character: ICharacter;
     multiplayer: IMultiplayerOptions | true | undefined;
     multiplayerServerToJoin: ServerInfo | undefined;
@@ -257,6 +259,13 @@ export declare enum WaterType {
     None = 0,
     FreshWater = 1,
     Seawater = 2
+}
+export declare enum FireStage {
+    Embers = 0,
+    AlmostExtinguished = 1,
+    Struggling = 2,
+    Healthy = 3,
+    Raging = 4
 }
 export declare enum RenderSource {
     ActionManager = 0,

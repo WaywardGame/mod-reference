@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,6 +17,8 @@ import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import { IPlayer } from "player/IPlayer";
 export interface IItemManager {
+    getItemTypes(): ReadonlyArray<ItemType>;
+    getItemsWithRecipes(): ReadonlyArray<ItemType>;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
     checkMilestones(player: IPlayer, item: IItem): void;
@@ -55,7 +57,7 @@ export interface IItemManager {
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
-    getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
+    getRandomQuality(bonusQuality?: number): ItemQuality;
     getTileContainer(x: number, y: number, z: number): IContainer;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;

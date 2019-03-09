@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -40,6 +40,8 @@ export default class ResourceLoader implements IResourceLoader {
     private loadSleep;
     private loadTerrains;
     private loadTerrain;
+    private loadTerrainDecorations;
+    private loadTerrainDecoration;
     private loadDoodads;
     private loadDoodad;
     private loadDoodadItems;

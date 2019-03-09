@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,14 +10,15 @@
  *
  *
  */
+import IEntity from "entity/IEntity";
 import { ItemType, StatType } from "Enums";
 import Vec2 from "utilities/math/Vector2";
 export interface INotifier {
-    addItem(x: number, y: number, z: number, type: ItemType): void;
-    addStat(x: number, y: number, z: number, type: StatType, value: number): void;
+    addItem(entity: IEntity, type: ItemType): void;
+    addStat(entity: IEntity, type: StatType, value: number): void;
     clear(): void;
-    update(): void;
+    update(timeStamp: number): void;
     setTexture(texture: WebGLTexture, inverseTextureSize: Vec2): void;
-    render(x: number, y: number, tileSize: number, tileScale: number, viewWidth: number, viewHeight: number): void;
+    render(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
 }
 export default INotifier;

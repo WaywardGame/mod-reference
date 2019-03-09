@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -62,6 +62,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     show(): this;
     hide(): this;
     toggle(visible?: boolean): this;
+    exists(): boolean;
     getParent<C extends Component = Component>(): C | null;
     appendTo(where: string | HTMLElement | IComponent, appendStrategy?: AppendStrategy): this;
     append(...elements: ArrayOfIterablesOfOr<HTMLElement | IComponent | undefined | false>): this;
@@ -88,7 +89,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setHighlight(highlight: IHighlight): this;
     removeHighlight(): void;
     setStyle(property: string, value: string | number): this;
-    getBox(): ClientRect | DOMRect;
+    getBox(): DOMRect | ClientRect;
     getOffset(): {
         top: number;
         left: number;
@@ -96,6 +97,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     getNthChild<C extends Component = Component>(nth?: number): C;
     getChildren<C extends Component = Component>(): IterableIterator<C>;
     scrollTo(child: Component, ms?: number): void;
+    scrollTo(child: Component, offsetTop: number, ms?: number): void;
     getStyle(styleName: string): string;
     schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;

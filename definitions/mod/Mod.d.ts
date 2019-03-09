@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,7 +15,9 @@ import IEntity from "entity/IEntity";
 import IHuman from "entity/IHuman";
 import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SkillType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMapRequest } from "game/IGame";
+import { IInspectionSection } from "game/inspection/IInspection";
 import { IContainer, IItem } from "item/IItem";
+import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import BaseMod from "mod/BaseMod";
 import { IHookHost } from "mod/IHookHost";
 import { BindCatcherApi } from "newui/BindingManager";
@@ -108,6 +110,8 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     onInventoryItemRemove(player: IPlayer | undefined, item: IItem, container: IContainer): void;
     onInventoryItemUpdate(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onInspectionSection(section: IInspectionSection): void;
+    shouldCraft(requirementsMet: boolean, item: ItemType, checker: ItemRecipeRequirementChecker): boolean | undefined;
     onItemDamage(item: IItem, modifier?: number): number | undefined;
     onItemEquip(player: IPlayer, item: IItem, slot: EquipType): void;
     onItemQuickslot(item: IItem, player: IPlayer, quickSlot: number | undefined): void;

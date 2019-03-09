@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ import { IDamageInfo } from "creature/ICreature";
 import Entity from "entity/Entity";
 import IHuman from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import { EquipType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
+import { EquipType, FireType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
 import { IContainer, IItem } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
@@ -87,11 +87,11 @@ export default abstract class Human extends Entity implements IHuman {
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkAndRemoveBlood(): boolean;
-    getBurnDamage(skipParry?: boolean, equipType?: EquipType): number;
+    getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     /**
      * Burn the player
      */
-    burn(skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
+    burn(fireType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     setPosition(point: IVector3): void;
     setZ(z: number): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
@@ -101,7 +101,7 @@ export default abstract class Human extends Entity implements IHuman {
     canJump(): boolean;
     hasDelay(): boolean;
     addDelay(delay: number, replace?: boolean): void;
-    getConsumeBonus(item: IItem | undefined, skillUse: SkillType | undefined): number;
+    getConsumeBonus(item: IItem | undefined, skillUse?: SkillType): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
     /**

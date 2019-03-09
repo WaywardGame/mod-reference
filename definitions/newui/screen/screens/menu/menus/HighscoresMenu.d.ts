@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -20,4 +20,5 @@ export default class HighscoresMenu extends Menu {
     private refresh;
     private sort;
     private filter;
+    private play;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { TileGroup } from "creature/ICreature";
 import { TerrainType } from "Enums";
 import { IOverlayInfo, ITile } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
@@ -28,6 +29,7 @@ declare module TileHelpers {
     function setTilled(tile: ITile, value: boolean): void;
     function setTilledRaw(data: number, value: number): number;
     function getTileVariation(x: number, y: number): number;
+    function isTypeInGroup(tile: ITile | TerrainType, group: TileGroup): boolean;
     module Overlay {
         function add(tile: ITile, overlay: IOverlayInfo, ifNotExist?: (overlay: IOverlayInfo) => boolean): boolean;
         function has(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;

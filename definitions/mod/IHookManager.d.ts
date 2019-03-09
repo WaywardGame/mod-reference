@@ -1,5 +1,5 @@
 /**
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -29,9 +29,10 @@ export declare enum Hook {
     GetAmbientColorCave = "getAmbientColorCave",
     GetAmbientColorDay = "getAmbientColorDay",
     GetAmbientColorNight = "getAmbientColorNight",
-    GetFogColor = "getFogColor",
     GetAmbientLightLevel = "getAmbientLightLevel",
+    GetCameraPosition = "getCameraPosition",
     GetCreatureSpriteBatchLayer = "getCreatureSpriteBatchLayer",
+    GetFogColor = "getFogColor",
     GetMaxSpritesForLayer = "getMaxSpritesForLayer",
     GetPlayerFieldOfViewRadius = "getPlayerFieldOfViewRadius",
     GetPlayerMaxHealth = "getPlayerMaxHealth",
@@ -40,7 +41,6 @@ export declare enum Hook {
     GetPlayerSpriteBatchLayer = "getPlayerSpriteBatchLayer",
     GetPlayerWeightMovementPenalty = "getPlayerWeightMovementPenalty",
     GetPlayerWeightStatus = "getPlayerWeightStatus",
-    GetCameraPosition = "getCameraPosition",
     GetTileLightLevel = "getTileLightLevel",
     GetTilePenalty = "getTilePenalty",
     GetZoomLevel = "getZoomLevel",
@@ -56,17 +56,19 @@ export declare enum Hook {
     OnCreatureDamage = "onCreatureDamage",
     OnCreatureDeath = "onCreatureDeath",
     OnCreatureSpawn = "onCreatureSpawn",
+    OnCreatureTamed = "onCreatureTamed",
     OnDigTreasure = "onDigTreasure",
     OnDisplayMessage = "onDisplayMessage",
     OnDoodadSpawn = "onDoodadSpawn",
+    OnEntityKill = "onEntityKill",
     OnGameEnd = "onGameEnd",
     OnGameScreenVisible = "onGameScreenVisible",
     OnGameStart = "onGameStart",
     OnGameTickEnd = "onGameTickEnd",
     OnGameTickStart = "onGameTickStart",
     OnGetTranslation = "onGetTranslation",
-    OnEntityKill = "onEntityKill",
     OnHumanSkillChange = "onHumanSkillChange",
+    OnInspectionSection = "onInspectionSection",
     OnInventoryItemAdd = "onInventoryItemAdd",
     OnInventoryItemRemove = "onInventoryItemRemove",
     OnInventoryItemUpdate = "onInventoryItemUpdate",
@@ -116,10 +118,10 @@ export declare enum Hook {
     PreRenderWorld = "preRenderWorld",
     PreSaveGame = "preSaveGame",
     ProcessInput = "processInput",
+    ShouldCraft = "shouldCraft",
     ShouldDisplayMessage = "shouldDisplayMessage",
     ShouldRender = "shouldRender",
-    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement",
-    OnCreatureTamed = "onCreatureTamed"
+    ShouldStopWalkToTileMovement = "shouldStopWalkToTileMovement"
 }
 export declare const globalHooks: Hook[];
 export declare enum HookPriority {

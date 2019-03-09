@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -16,7 +16,7 @@ export declare type NameRule = [CountMatcher, RegExp, string];
 export declare type CountMatcher = number | {
     min: number;
     max?: number;
-};
+} | null;
 export interface IPluralizationRules {
     pluralRules: PluralRule[];
     singularRules: SingularRule[];

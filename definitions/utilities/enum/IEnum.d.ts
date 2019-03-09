@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -46,7 +46,8 @@ export declare enum EnumId {
     InspectType = 28,
     DailyChallengeModifier = 29,
     Quest = 30,
-    QuestRequirement = 31
+    QuestRequirement = 31,
+    TerrainDecoration = 32
 }
 export interface IEnumInfo {
     enumId: EnumId;

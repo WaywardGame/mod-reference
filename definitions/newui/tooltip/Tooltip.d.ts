@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,6 +19,9 @@ export default class Tooltip extends Component implements ITooltip {
     private readonly source;
     readonly location: TooltipLocation;
     cache: boolean;
+    private box;
+    private sourceBox;
+    private lastBoxTime;
     constructor(api: UiApi, source: Component);
     setLocation(location: TooltipLocation): this;
     /**
@@ -34,7 +37,7 @@ export default class Tooltip extends Component implements ITooltip {
     updatePosition(position?: {
         x: number;
         y: number;
-    }): this;
+    }, force?: boolean): this;
     private onShow;
     private onHide;
     private onMouseMove;

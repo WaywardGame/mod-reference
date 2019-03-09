@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,6 +10,7 @@
  */
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
+import { ISteamFriend } from "steamworks/ISteamworks";
 export default class PauseMenu extends Menu {
     private readonly modesButton;
     private readonly multiplayerButton;
@@ -17,11 +18,18 @@ export default class PauseMenu extends Menu {
     private readonly multiplayerRow;
     private readonly difficultyOptionIcons;
     private readonly pauseButton;
+    private readonly gameIcons;
     private multiplayerOptionsMenu;
+    private steamworksFriends;
+    readonly difficulty: import("../../../../../game/Difficulty").Difficulty;
+    readonly pvp: boolean;
+    readonly mods: [string, import("../../../../util/Misc").ModLoadability][];
+    readonly friends: ISteamFriend[];
     constructor(uiApi: UiApi);
     showMultiplayerOptionsMenu(): this;
     private showWModesMenu;
     private onShow;
+    private refreshGameIcons;
     private refreshDifficultyOptions;
     /**
      * Returns the formatted CSS url for the stat icon.

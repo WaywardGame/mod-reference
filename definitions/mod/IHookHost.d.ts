@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -15,7 +15,9 @@ import IEntity from "entity/IEntity";
 import IHuman from "entity/IHuman";
 import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SkillType, SpriteBatchLayer, WeightStatus } from "Enums";
 import { IMapRequest } from "game/IGame";
+import { IInspectionSection } from "game/inspection/IInspection";
 import { IContainer, IItem } from "item/IItem";
+import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import { Hook } from "mod/IHookManager";
 import { BindCatcherApi } from "newui/BindingManager";
 import { INPC } from "npc/INPC";
@@ -422,6 +424,19 @@ export interface IHookHost {
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
     onInventoryItemUpdate?(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    /**
+     * Called when inspecting a tile, for every section that may be shown. (This includes sections with no content)
+     * @param section One of the sections that will be included in the inspection.
+     */
+    onInspectionSection?(section: IInspectionSection): void;
+    /**
+     * Called when a craft is "requested". This currently happens when clicking an item in the crafting dialog.
+     * @param requirementsMet Whether the requirements are currently met. This hook is a `reduce` hook, so this will contain
+     * whatever the result of the last hook host was, or the value of `checker.requirementsMet()`, by default.
+     * @param item The item to be crafted.
+     * @param checker The recipe requirement checker for this craft.
+     */
+    shouldCraft?(requirementsMet: boolean, item: ItemType, checker: ItemRecipeRequirementChecker): boolean | undefined;
     /**
      * Called when an item is damaged
      * @param player The player object

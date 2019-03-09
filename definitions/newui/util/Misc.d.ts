@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -17,4 +17,9 @@ export declare function startGame(gameOptions: IPlayOptions): void;
 export declare function menuSwitcher<M extends Menu = Menu>(menu: MenuId | M | (() => M), then?: (menu: M, ...args: any[]) => any): (...args: any[]) => void;
 export declare function switchMenu<M extends Menu = Menu>(menu: MenuId | M | (() => M), then?: (menu: M, ...args: any[]) => any, ...args: any[]): void;
 export declare function switchToJoinServer(serverToJoin: ServerInfo): void;
-export declare function isModLoadable(publishId: string): [string, "notenabled" | "enabled" | "error"];
+export declare const enum ModLoadability {
+    NotEnabled = "notenabled",
+    Enabled = "enabled",
+    Error = "error"
+}
+export declare function isModLoadable(publishId?: string): [string, ModLoadability];

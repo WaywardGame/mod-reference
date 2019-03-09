@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -41,6 +41,7 @@ import { Quest } from "player/quest/quest/Quest";
 import { RequirementType } from "player/quest/requirement/IRequirement";
 import { Requirement } from "player/quest/requirement/Requirement";
 import { ISkillDescription } from "player/Skills";
+import { ITerrainDecorationBase, TerrainDecoration } from "renderer/Decorations";
 import { IOverlayDescription } from "renderer/Overlays";
 import { ITerrainDescription } from "tile/ITerrain";
 import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
@@ -78,7 +79,8 @@ export declare enum ModRegistrationType {
     Skill = 29,
     SoundEffect = 30,
     Terrain = 31,
-    TileEvent = 32
+    TerrainDecoration = 32,
+    TileEvent = 33
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -214,6 +216,10 @@ export interface ITerrainRegistration extends IBaseModRegistration {
     name: string;
     description?: ITerrainRegistrationDescription;
 }
+export interface ITerrainDecorationRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.TerrainDecoration;
+    description?: ITerrainDecorationBase;
+}
 export interface ITerrainRegistrationDescription extends ITerrainDescription {
     resources?: ITerrainResourceItem[];
     defaultItem?: ItemType;
@@ -243,7 +249,7 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: Requirement;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainRegistration | ITileEventRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -343,6 +349,13 @@ declare module Register {
      * The decorated property will be injected with the id of the registered terrain.
      */
     function terrain(name: string, description?: ITerrainRegistrationDescription): <K extends string | number | symbol, T extends { [k in K]: TerrainType; }>(target: T, key: K) => void;
+    /**
+     * Registers a terrain decoration.
+     * @param description The definition of the terrain decoration.
+     *
+     * The decorated property will be injected with the id of the registered terrain.
+     */
+    function terrainDecoration(name: string, description: ITerrainDecorationBase): <K extends string | number | symbol, T extends { [k in K]: TerrainDecoration; }>(target: T, key: K) => void;
     /**
      * Registers a doodad.
      * @param name The name of the doodad.

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,7 @@ import { ICreature } from "creature/ICreature";
 import IEntity, { EntityPlayerCreatureNpc, EntityType, IProperties, IStatChangeInfo, IStatus, Property, StatChangeReason, StatusEffectChangeReason } from "entity/IEntity";
 import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import StatFactory from "entity/StatFactory";
-import { Direction, FireType, MoveType, SfxType, StatusType } from "Enums";
+import { Direction, FireType, ItemType, MoveType, SfxType, StatType, StatusType } from "Enums";
 import Translation from "language/Translation";
 import { INPC } from "npc/INPC";
 import IPlayer from "player/IPlayer";
@@ -49,8 +49,8 @@ export default abstract class Entity extends Emitter implements IEntity {
     initStat(factory: StatFactory): void;
     hasStat(stat: Stat): boolean;
     removeStat(stat: Stat): void;
-    getStat<StatType extends IStatBase | undefined = IStat | undefined>(stat: Stat, allowFailure?: boolean): StatType & (StatType extends IStatBase ? {
-        base: StatType;
+    getStat<Staty extends IStatBase | undefined = IStat | undefined>(stat: Stat, allowFailure?: boolean): Staty & (Staty extends IStatBase ? {
+        base: Staty;
     } : undefined);
     getStatInternal(stat: Stat | IStat): IStatBase;
     getStatInternal(stat: Stat | IStat, allowFailure: true): IStatBase | undefined;
@@ -72,6 +72,7 @@ export default abstract class Entity extends Emitter implements IEntity {
     getPoint(): IVector3;
     getFacingPoint(): IVector3;
     getFacingTile(): ITile;
+    getMovementPoint(): IVector2;
     getMovementProgress(): number;
     getMovementFinishTime(): number | undefined;
     getMoveType(): MoveType;
@@ -82,6 +83,8 @@ export default abstract class Entity extends Emitter implements IEntity {
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
+    notifyItem(itemType: ItemType): void;
+    notifyStat(type: StatType, value: number): void;
     hasProperty(property: Property): boolean;
     addProperty(property: Property, value: any): void;
     getProperty<T>(property: Property): T | undefined;

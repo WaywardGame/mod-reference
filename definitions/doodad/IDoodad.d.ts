@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -66,7 +66,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getGrowthParticles(): IRGB | undefined;
     increaseFertility(): boolean;
     update(): void;
-    isDangerous(player: IPlayer): boolean;
+    isDangerous(human: Human): boolean;
     getDamage(human: Human, equipType?: EquipType): number;
 }
 export interface IDoodadOptions extends IObjectOptions {

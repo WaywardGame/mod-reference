@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IDoodad } from "doodad/IDoodad";
 import { ISerializedTranslation } from "language/Translation";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export declare enum TerrainMask {
@@ -1019,7 +1020,6 @@ export declare enum Delay {
     ShortPause = 13,
     Collision = 40,
     TurnDirection = 2,
-    ItemPickUp = 4,
     ReallyLongPause = 100
 }
 export declare enum TickSpeed {
@@ -1035,7 +1035,8 @@ export declare enum StatType {
     Health = 4,
     Thirst = 5,
     Zero = 6,
-    Miss = 7
+    Miss = 7,
+    Immune = 8
 }
 export declare enum StatusType {
     Bleeding = 0,
@@ -1115,7 +1116,8 @@ export declare enum SortType {
     Category = 7,
     Durability = 8,
     DiscoveredTime = 9,
-    Best = 10
+    BestForCraftingRequirements = 10,
+    BestForCraftingConsumables = 11
 }
 export declare enum RestType {
     Resting = 0,
@@ -1163,6 +1165,7 @@ export interface IObjectDescription {
     skillUse?: SkillType;
     weightCapacity?: number;
     imagePath?: string;
+    preservationChance?: number;
 }
 export interface IModdable {
     modIndex?: number;
@@ -1240,6 +1243,7 @@ export interface RequirementInfo extends IVector2, IVector3 {
     isLava?: boolean;
     doodadRequirementMet: boolean;
     fireRequirementMet: boolean;
+    requiredDoodad: IDoodad | undefined;
 }
 export interface IKeyBind {
     [index: number]: number;

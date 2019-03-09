@@ -1,5 +1,5 @@
 /*!
-* Copyright Unlok, Vaughn Royko 2011-2018
+* Copyright Unlok, Vaughn Royko 2011-2019
 * http://www.unlok.ca
 *
 * Credits & Thanks:
@@ -19,6 +19,6 @@ export default class TooltipManager implements ITooltipManager {
     constructor(api: UiApi);
     show(host: IComponent, force?: boolean): Tooltip | undefined;
     hide(host?: IComponent | undefined, forceRemove?: boolean): void;
-    private hideLoop;
+    private loop;
     private onScreenResize;
 }

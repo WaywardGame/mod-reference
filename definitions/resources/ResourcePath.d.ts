@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -50,7 +50,7 @@ declare module ResourcePath {
     /**
      * Returns the domain for the given `PathType`, or `undefined` if the `PathType` has no domain.
      */
-    function getPathDomain(pathType: PathType): "character" | "ui/icons" | undefined;
+    function getPathDomain(pathType: PathType): "character" | "ui/icons" | "terrain" | undefined;
     /**
      * Returns the name of the given `PathType`
      */

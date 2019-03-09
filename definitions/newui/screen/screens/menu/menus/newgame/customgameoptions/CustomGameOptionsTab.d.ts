@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -23,5 +23,6 @@ export declare enum CustomGameOptionsSection {
     Stats = 3,
     StatusEffects = 4,
     Skills = 5,
-    Inventory = 6
+    Inventory = 6,
+    Creatures = 7
 }

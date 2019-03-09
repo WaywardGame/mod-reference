@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,6 +13,7 @@ import { IStat, IStatMax, Stat } from "entity/IStats";
 import Component from "newui/component/Component";
 import Text from "newui/component/Text";
 import { UiApi } from "newui/INewUi";
+import Stream from "utilities/stream/Stream";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatElement extends Component {
     private readonly stat;
@@ -78,10 +79,10 @@ export declare class StatAttribute extends StatElement {
 export declare class Statbars extends Component {
     private readonly _statbars;
     readonly statbars: Map<Stat, Statbar>;
-    constructor(uiApi: UiApi, entity: IEntity, iterableOfStats: IterableIterator<Stat>);
+    constructor(uiApi: UiApi, entity: IEntity, iterableOfStats: Stream<Stat>);
 }
 export declare class StatAttributes extends Component {
     private readonly _stats;
     readonly stats: Map<Stat, StatAttribute>;
-    constructor(uiApi: UiApi, entity: IEntity, iterableOfStats: IterableIterator<Stat>);
+    constructor(uiApi: UiApi, entity: IEntity, iterableOfStats: Stream<Stat>);
 }

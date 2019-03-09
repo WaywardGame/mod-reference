@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -23,7 +23,11 @@ export default class ItemManager implements IItemManager {
     private cachedDecaysIntoWeights;
     private cachedDefaultItemForGroup;
     private cachedItemGroups;
+    private cachedItemTypes;
+    private cachedItemTypesWithRecipes;
     constructor();
+    getItemTypes(): ReadonlyArray<ItemType>;
+    getItemsWithRecipes(): ReadonlyArray<ItemType>;
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): boolean;
@@ -51,7 +55,7 @@ export default class ItemManager implements IItemManager {
     spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     resetMapsInContainer(container: IContainer): void;
     getTileContainer(x: number, y: number, z: number): IContainer;
-    getRandomQuality(itemType: ItemType, bonusQuality?: number): ItemQuality;
+    getRandomQuality(bonusQuality?: number): ItemQuality;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;

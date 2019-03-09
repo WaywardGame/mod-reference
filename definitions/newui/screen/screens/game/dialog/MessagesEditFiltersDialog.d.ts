@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,27 +9,30 @@
  * https://waywardgame.github.io/
  */
 import UiTranslation from "language/dictionary/UiTranslation";
+import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export declare enum MessagesEditFiltersDialogEvent {
     Edit = "Edit",
     Reset = "Reset"
 }
+export interface IFilters {
+    [key: string]: IFilter;
+}
+export interface IFilter {
+    [key: string]: ThreeStateButtonState;
+}
 export default class MessagesEditFiltersDialog extends Dialog {
-    filters: {
-        [key: string]: string[];
-    };
+    filters: IFilters;
     private editingFilter;
     private readonly name;
     private readonly sourceButtons;
     private readonly filterContainer;
     constructor(api: IGameScreenApi);
-    initializeFilters(filters: {
-        [key: string]: string[];
-    }): this;
+    initializeFilters(filters: IFilters): this;
     getName(): UiTranslation;
     private editFilter;
-    private isFilteredIn;
+    private getSourceState;
     private deleteFilter;
     private saveFilter;
     private onEditName;

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,24 +11,17 @@
  *
  */
 import DoodadInfo from "doodad/DoodadInfo";
-import { TerrainType } from "Enums";
+import { DoodadType, ItemType, TerrainType } from "Enums";
+import { TerrainDecoration } from "renderer/Decorations";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
 export interface ITileAtlas {
-    terrain: {
-        [index: number]: TerrainTileInfo;
-    };
-    terrainTilled: {
-        [index: number]: TerrainTileInfo | undefined;
-    };
-    doodads: {
-        [index: number]: DoodadInfo;
-    };
-    doodadItems: {
-        [index: number]: DoodadInfo;
-    };
-    mounds: {
-        [index: number]: DoodadInfo;
-    };
+    terrain: OptionalDescriptions<TerrainType, TerrainTileInfo>;
+    terrainTilled: OptionalDescriptions<TerrainType, TerrainTileInfo>;
+    terrainDecoration: OptionalDescriptions<TerrainDecoration, DoodadInfo>;
+    doodads: OptionalDescriptions<DoodadType, DoodadInfo>;
+    doodadItems: OptionalDescriptions<ItemType, DoodadInfo>;
+    mounds: OptionalDescriptions<TerrainType, DoodadInfo>;
+    generateLookups(): void;
     isMountain(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
     isLava(type: TerrainType): boolean;

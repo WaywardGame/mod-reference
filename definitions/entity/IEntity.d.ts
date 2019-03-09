@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,7 +10,7 @@
  */
 import { ICreature } from "creature/ICreature";
 import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
-import { Direction, FireType, MoveType, SfxType, StatusType } from "Enums";
+import { Direction, FireType, ItemType, MoveType, SfxType, StatType, StatusType } from "Enums";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { INPC } from "npc/INPC";
 import IPlayer from "player/IPlayer";
@@ -33,6 +33,7 @@ export default interface IEntity extends IVector3, Emitter {
     getName(): Translation;
     getFacingPoint(): IVector3;
     getFacingTile(): ITile;
+    getMovementPoint(): IVector2;
     getMovementFinishTime(): number | undefined;
     getMovementProgress(): number;
     getPoint(): IVector3;
@@ -45,6 +46,8 @@ export default interface IEntity extends IVector3, Emitter {
     canSeePosition(tileX: number, tileY: number, tileZ: number, isClientSide?: boolean): boolean;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
     queueSoundEffectInFront(type: SfxType, delay?: number, speed?: number, noPosition?: boolean): void;
+    notifyItem(itemType: ItemType): void;
+    notifyStat(type: StatType, value: number): void;
     /**
      * Initializes the given stat from the given `StatFactory` instance.
      * @param factory The factory to initialize the stat from.
@@ -65,7 +68,7 @@ export default interface IEntity extends IVector3, Emitter {
      * passed a type which extends `IStatBase` for automatic narrowing.
      * @param stat The `Stat` to get
      */
-    getStat<StatType extends IStatBase | undefined = IStat | undefined>(stat: Stat): StatType;
+    getStat<Staty extends IStatBase | undefined = IStat | undefined>(stat: Stat): Staty;
     /**
      * Returns the value of the given stat, or `undefined` if the stat does not exist.
      */

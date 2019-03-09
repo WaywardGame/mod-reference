@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,20 +11,20 @@
 import Button from "newui/component/Button";
 import { IRefreshable } from "newui/component/Refreshable";
 import { UiApi } from "newui/INewUi";
+import { ModLoadability } from "newui/util/Misc";
 import { ISteamFriend } from "steamworks/ISteamworks";
 export declare class ServerRow extends Button implements IRefreshable {
     private readonly getFriend;
     private readonly headingPlace;
-    private readonly difficulty;
-    private readonly pvp;
-    private readonly mods;
-    private readonly friends;
+    private readonly gameIcons;
     private _server;
     server: IServer;
     private _place;
     place: number;
+    readonly difficulty: number;
+    readonly pvp: boolean;
+    readonly mods: [string, ModLoadability][];
+    readonly friends: ISteamFriend[];
     constructor(api: UiApi, server: IServer, getFriend: (player: string) => ISteamFriend | undefined);
     refresh(): this;
-    private getModsTooltip;
-    private getFriendsTooltip;
 }

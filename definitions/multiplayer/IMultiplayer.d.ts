@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -160,7 +160,7 @@ export interface IMultiplayerWorldData {
     mods: IMultiplayerMod[];
     multiplayerOptions: IMultiplayerOptions;
     difficulty: Difficulty;
-    difficultyOptions: IDifficultyOptions;
+    difficultyOptions?: IDifficultyOptions;
     saveObject: SaveObject;
     initialFlowFieldPids: number[];
     crafted: {

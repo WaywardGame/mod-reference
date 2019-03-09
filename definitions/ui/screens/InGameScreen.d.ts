@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -10,6 +10,7 @@
  */
 import { Bindable, DialogId, Direction, EquipType, ItemType, SkillType, SortType } from "Enums";
 import { IContainer, IDismantleComponent, IItem } from "item/IItem";
+import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";
 import { BindCatcherApi } from "newui/BindingManager";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
@@ -139,6 +140,7 @@ export default class InGameScreen extends BaseScreen {
     onContextMenuAction(element: JQuery, action: IContextMenuAction, toElement?: JQuery): boolean;
     runContextMenuAction(itemId: number, action: IContextMenuAction, skipSound?: boolean): boolean;
     onCraftingItemClick(element: JQuery): void;
+    craftItem(item: ItemType, checker: ItemRecipeRequirementChecker): Promise<void>;
     onDismantleItemClick(dismantleItem: IItem | undefined): void;
     getTooltipHtml(element: JQuery): string;
     tooltipEnable(): void;
@@ -208,4 +210,5 @@ export default class InGameScreen extends BaseScreen {
     private quickSlotBindPressed;
     private quickSlotToggleBindPressed;
     private determineSort;
+    private getBestSort;
 }

@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -13,21 +13,22 @@ import { IDifficultyOptions } from "game/Difficulty";
 import { ITooltip } from "newui/component/IComponent";
 export declare enum DifficultyOptionsIcon {
     Peaceful = 0,
-    Respawn = 1,
-    EternalNight = 2,
-    Time = 3,
-    Benignity = 4,
-    Malignity = 5,
-    Health = 6,
-    Stamina = 7,
-    Hunger = 8,
-    Thirst = 9,
-    Bleeding = 10,
-    Poisoned = 11,
-    Burned = 12,
-    Skills = 13,
-    NoItems = 14,
-    Weight = 15
+    Creatures = 1,
+    Respawn = 2,
+    EternalNight = 3,
+    Time = 4,
+    Benignity = 5,
+    Malignity = 6,
+    Health = 7,
+    Stamina = 8,
+    Hunger = 9,
+    Thirst = 10,
+    Bleeding = 11,
+    Poisoned = 12,
+    Burned = 13,
+    Skills = 14,
+    NoItems = 15,
+    Weight = 16
 }
 export interface IDifficultyOptionsIcon extends IModdable {
     imagePath?: string;

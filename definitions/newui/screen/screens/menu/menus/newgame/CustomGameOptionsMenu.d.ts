@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -12,7 +12,10 @@ import { IDifficultyOptions } from "game/Difficulty";
 import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class CustomGameOptionsMenu extends Menu {
+    private readonly options;
     private readonly refreshables;
     constructor(api: UiApi, options: () => IDifficultyOptions);
     private refresh;
+    private exportOptions;
+    private importOptions;
 }

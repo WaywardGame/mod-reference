@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -11,9 +11,9 @@
 import { ICorpse } from "creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Direction, FireType, ISeeds, ItemQuality, ItemType, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
+import { Direction, FireType, ISeeds, ItemQuality, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell, RenderSource } from "game/IGame";
+import { FireStage, ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell, RenderSource } from "game/IGame";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
 import Translation from "language/Translation";
@@ -52,6 +52,7 @@ export default class Game extends Emitter implements IGame {
     saveClear: boolean;
     spawnCoords: IVector3;
     tile: ITileArray;
+    tileDecorations: Uint16Array;
     updateFieldOfView: boolean;
     contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;
@@ -124,7 +125,7 @@ export default class Game extends Emitter implements IGame {
     setTile(x: number, y: number, z: number, tile: ITile): ITile;
     getOrCreateTile(x: number, y: number, z: number): ITile;
     setPaused(paused: boolean, showChatMessage?: boolean): void;
-    gameLoop: (timeStamp: any) => void;
+    gameLoop: (timeStamp: number) => void;
     saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
     updateThumbnail(): Promise<void>;
     addZoomLevel(amount: number): void;
@@ -210,7 +211,7 @@ export default class Game extends Emitter implements IGame {
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
-    getRandomQuality(itemType?: ItemType, bonusQuality?: number): ItemQuality;
+    getRandomQuality(bonusQuality?: number): ItemQuality;
     getMaxDurability(quality: ItemQuality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
     wrapCoordinate(cordinate: number, reference: number): number;
@@ -218,6 +219,7 @@ export default class Game extends Emitter implements IGame {
     getCameraPosition(): IVector2;
     getExactCameraPosition(): Vector2;
     restartDedicatedServer(): boolean;
+    getFireStage(decay: number): FireStage;
     private updateOptionInternal;
     private tick;
     private updateEntityFov;

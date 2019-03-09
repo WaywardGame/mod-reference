@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -19,7 +19,9 @@ export declare enum InputEvent {
     Enter = "Enter",
     Escape = "Escape",
     Focus = "Focus",
-    Blur = "Blur"
+    Blur = "Blur",
+    UpArrow = "UpArrow",
+    DownArrow = "DownArrow"
 }
 export default class Input extends Component implements IRefreshable, IInput {
     default: (() => string) | undefined;

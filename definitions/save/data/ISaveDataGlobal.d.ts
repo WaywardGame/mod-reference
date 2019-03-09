@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2018
+ * Copyright Unlok, Vaughn Royko 2011-2019
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { DropLocation, IKeyBind } from "Enums";
-import { Difficulty } from "game/Difficulty";
+import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
 import { InspectType } from "game/inspection/IInspection";
 import { ISerializedTranslation } from "language/Translation";
@@ -149,6 +149,8 @@ export interface IHighscore {
     difficulty: Difficulty;
     date: number;
     characterName: string;
+    seed?: string | number;
+    difficultyOptions?: IDifficultyOptions;
 }
 export declare type IHighscoreOld = Partial<IHighscore> & {
     dailyChallenge: boolean;
