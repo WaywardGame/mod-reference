@@ -119,6 +119,7 @@ export declare const defaultServerPort = 38740;
 export declare const keepAliveInterval = 4000;
 export declare const keepAliveTimeout = 15000;
 export declare const steamLobbyPrefix = "steam:";
+export declare const defaultSyncChecks: MultiplayerSyncCheck[];
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export declare function getDefaultMultiplayerOptions(): IMultiplayerOptions;
 export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
