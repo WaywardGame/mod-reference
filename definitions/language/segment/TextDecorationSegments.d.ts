@@ -20,4 +20,4 @@ export interface IDecoratedSection extends IStringSection {
 export declare const italicizedSegment: ISegment;
 export declare const boldSegment: ISegment;
 export declare const underlineSegment: ISegment;
-export declare function getDecorations(section: IStringSection): IterableIterator<[TextDecoration, number]>;
+export declare function getDecorations(section: IStringSection): import("../../utilities/stream/Stream").default<[TextDecoration, number]>;

@@ -9,58 +9,6 @@
  * https://waywardgame.github.io/
  */
 declare module Objects {
-    /**
-     * Uses a `for .. in` loop to check if an object has no keys.
-     */
-    function isEmpty(object: any): boolean;
-    /**
-     * Returns an iterator for an object's keys. Does not check if the key is prototypal!
-     */
-    function keys<T extends {
-        [key in K]?: any;
-    }, K extends keyof T>(object: T): IterableIterator<Extract<K, string>>;
-    function keys<K>(object: any): IterableIterator<K>;
-    /**
-     * Returns an iterator for an object's values. Does not check if the values are prototypal!
-     */
-    function values<T extends {
-        [key in K]: any;
-    }, K extends keyof T>(object: T): IterableIterator<T extends {
-        [key in K]: infer V;
-    } ? V : never>;
-    function values<V>(object: any): IterableIterator<V>;
-    /**
-     * Returns an iterator for the entries of an object, given in a tuple of `[key, value]`.
-     * Does not check if the entries are prototypal!
-     */
-    function entries<T extends {
-        [key in K]: any;
-    }, K extends keyof T>(object: T): IterableIterator<[Extract<K, string>, T extends {
-        [key in K]: infer V;
-    } ? V : never]>;
-    function entries<K, V>(object: any): IterableIterator<[K, V]>;
-    /**
-     * Returns an iterator for an object's keys.
-     */
-    function ownKeys(object: any): IterableIterator<string>;
-    /**
-     * Returns an iterator for an object's values.
-     */
-    function ownValues<V = any>(object: {
-        [key: string]: V;
-    }): IterableIterator<V>;
-    /**
-     * Returns an iterator for the entries of an object, given in a tuple of `[key, value]`.
-     */
-    function ownEntries<V = any>(object: {
-        [key: string]: V;
-    }): IterableIterator<[string, V]>;
-    /**
-     * Creates an object from an iterable of entries, given in a tuple of `[key, value]`.
-     */
-    function create<K extends string | number | symbol, V>(entriesIterable: IterableOf<[K, V]>): {
-        [key in K]: V;
-    };
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function deepClone<T>(obj: T): T;
@@ -75,4 +23,4 @@ export interface IPrivateStore<T> {
     set<K extends keyof T>(key: K, value: T[K]): void;
     get<K extends keyof T>(key: K): T[K];
 }
-export declare function initializePrivateStore(target: any, initializer?: Array<[symbol, any]>): void;
+export declare function initializePrivateStore(target: any, key: string | number | symbol, initializer?: Array<[symbol, any]>): void;

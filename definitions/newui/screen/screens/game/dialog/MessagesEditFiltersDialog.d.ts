@@ -11,7 +11,6 @@
 import UiTranslation from "language/dictionary/UiTranslation";
 import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export declare enum MessagesEditFiltersDialogEvent {
     Edit = "Edit",
     Reset = "Reset"
@@ -28,7 +27,7 @@ export default class MessagesEditFiltersDialog extends Dialog {
     private readonly name;
     private readonly sourceButtons;
     private readonly filterContainer;
-    constructor(api: IGameScreenApi);
+    constructor();
     initializeFilters(filters: IFilters): this;
     getName(): UiTranslation;
     private editFilter;

@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { MessageType } from "entity/player/MessageManager";
 import Translation from "language/Translation";
-import { MessageType } from "player/MessageManager";
 export declare enum InspectType {
     Player = 0,
     NPC = 1,
@@ -39,12 +39,12 @@ export interface IInspectionSection {
      * The border color of an inspection section.
      */
     border?: string;
-    content: IterableOf<Translation | IInspection | undefined>;
+    content: Iterable<Translation | IInspection | undefined>;
 }
 export interface IInspectionSectionSimple extends IInspectionSection {
-    content: IterableIterator<IInspection>;
+    content: Iterable<IInspection>;
 }
-export declare type InspectionResult = IterableOf<IInspectionSection | IInspectionSection["content"] | undefined> | undefined;
+export declare type InspectionResult = Iterable<IInspectionSection | IInspectionSection["content"] | undefined> | undefined;
 export interface IInspection {
     text: Translation;
     /**

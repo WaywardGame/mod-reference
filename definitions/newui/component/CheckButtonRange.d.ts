@@ -13,7 +13,6 @@ import Translation from "language/Translation";
 import { CheckButton } from "newui/component/CheckButton";
 import { RangeInput } from "newui/component/RangeInput";
 import { RangeInputValueDisplay } from "newui/component/RangeInputValueDisplay";
-import { UiApi } from "newui/INewUi";
 export declare enum CheckButtonRangeEvent {
     Change = "Change2"
 }
@@ -22,7 +21,7 @@ export default class CheckButtonRange extends CheckButton {
     protected rangeInputValueDisplay: RangeInputValueDisplay | undefined;
     private readonly rangeWrapper;
     private valueWhenDisabled;
-    constructor(api: UiApi, valueWhenDisabled?: number);
+    constructor(valueWhenDisabled?: number);
     setValueWhenDisabled(valueWhenDisabled?: number): this;
     editRange(rangeInitializer: (range: RangeInput) => RangeInput): this;
     setDisplayValue(display: boolean | UiTranslation | ((val: number, enabled: boolean) => Translation)): this;

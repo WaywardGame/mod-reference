@@ -60,6 +60,10 @@ export declare const enum DifficultyTranslation {
     Name = 0,
     Description = 1
 }
+export declare const enum InterruptTranslation {
+    Title = 0,
+    Description = 1
+}
 export declare enum MiscTranslation {
     Unknown = 0,
     UnknownCreature = 1,
@@ -67,7 +71,7 @@ export declare enum MiscTranslation {
     UnknownItem = 3,
     UnknownTileEvent = 4,
     ReformatSingularNoun = 5,
-    ItemQuality = 6,
+    Quality = 6,
     Thing = 7,
     Message = 8,
     CorpseOf = 9,

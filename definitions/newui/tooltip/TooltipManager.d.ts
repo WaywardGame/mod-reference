@@ -9,14 +9,14 @@
 * https://waywardgame.github.io/
 */
 import { IComponent } from "newui/component/IComponent";
-import { ITooltipManager, UiApi } from "newui/INewUi";
+import { ITooltipManager } from "newui/INewUi";
+import NewUi from "newui/NewUi";
 import Tooltip from "newui/tooltip/Tooltip";
 export default class TooltipManager implements ITooltipManager {
-    private readonly api;
     private readonly tooltipWrapper;
     private host;
     private tooltip;
-    constructor(api: UiApi);
+    constructor(newui: NewUi);
     show(host: IComponent, force?: boolean): Tooltip | undefined;
     hide(host?: IComponent | undefined, forceRemove?: boolean): void;
     private loop;

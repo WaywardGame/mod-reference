@@ -8,32 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDamageInfo } from "creature/ICreature";
-import { Bindable, BookType, Direction } from "Enums";
+import { IDamageInfo } from "entity/creature/ICreature";
+import { IPlayer } from "entity/player/IPlayer";
 import { IMapRequest } from "game/IGame";
+import { BookType } from "item/IItem";
 import { IHookHost } from "mod/IHookHost";
-import { BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
-import { UiApi } from "newui/INewUi";
 import Screen from "newui/screen/Screen";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import { DialogId } from "newui/screen/screens/game/Dialogs";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import MenuBar from "newui/screen/screens/game/static/MenuBar";
 import Messages from "newui/screen/screens/game/static/Messages";
 import Quickslots from "newui/screen/screens/game/static/Quickslots";
 import Stats from "newui/screen/screens/game/static/Stats";
 import MovementHandler from "newui/screen/screens/game/util/movement/MovementHandler";
 import WorldTooltipHandler from "newui/screen/screens/game/WorldTooltip";
-import { IPlayer } from "player/IPlayer";
 import { ITile } from "tile/ITerrain";
+import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };
-export default class GameScreen extends Screen implements IHookHost, IGameScreenApi {
-    readonly uiApi: UiApi;
+export default class GameScreen extends Screen implements IHookHost {
     dialogs: Map<DialogId, Dialog>;
     visibleDialogs: IDialogStates;
     quadrantComponentQuadrants: {
@@ -48,7 +46,7 @@ export default class GameScreen extends Screen implements IHookHost, IGameScreen
     private quadrantContainer;
     private readonly quadrantMap;
     private readonly gameCanvas;
-    constructor(api: UiApi);
+    constructor();
     create(): void;
     openDialog<D = Dialog>(id: DialogId): D;
     closeDialog(id: DialogId): Promise<void>;

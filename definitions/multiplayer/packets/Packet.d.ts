@@ -7,11 +7,9 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { ConnectionState } from "Enums";
 import { PacketTarget } from "multiplayer/IMultiplayer";
+import { ConnectionState } from "multiplayer/networking/IConnection";
 import IndexedPacket from "multiplayer/packets/IndexedPacket";
 import { IPacket, ISynchronizationCheckData } from "multiplayer/packets/IPacket";
 export declare abstract class Packet extends IndexedPacket implements IPacket {

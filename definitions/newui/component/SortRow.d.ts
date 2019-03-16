@@ -11,7 +11,6 @@
 import Button from "newui/component/Button";
 import { LabelledRow } from "newui/component/LabelledRow";
 import { IRefreshableValue } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 import { SortDirection } from "save/ISaveManager";
 export interface SortRowData<Sort> {
     sortEnum: any;
@@ -33,7 +32,7 @@ export default class SortRow<Sort extends number> extends LabelledRow implements
     private refreshMethod;
     readonly sort: Sort;
     readonly sortDirection: SortDirection;
-    constructor(uiApi: UiApi);
+    constructor();
     setDisabledSorts(val: Sort[], refresh?: boolean): this;
     setRefreshMethod(refresh: () => SortRowData<Sort>): this;
     refresh(): this;

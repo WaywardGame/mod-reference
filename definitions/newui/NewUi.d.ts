@@ -8,46 +8,36 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IComponent, TranslationGenerator } from "newui/component/IComponent";
-import { IInterruptMenuFactory, UiApi } from "newui/INewUi";
-import { IScreen, ScreenId } from "newui/screen/IScreen";
-import Screen from "newui/screen/Screen";
-import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
+import Interrupt from "language/dictionary/Interrupt";
+import { IComponent } from "newui/component/IComponent";
+import { IInterruptMenuFactory } from "newui/INewUi";
+import ScreenManager from "newui/screen/ScreenManager";
 import TooltipManager from "newui/tooltip/TooltipManager";
 import HighlightManager from "newui/util/HighlightManager";
 import InterruptFactory from "newui/util/InterruptFactory";
 import ScaleManager from "newui/util/ScaleManager";
 import Emitter from "utilities/Emitter";
-export default class Ui extends Emitter implements UiApi {
+export default class Ui extends Emitter {
     readonly tooltips: TooltipManager;
     readonly scale: ScaleManager;
     readonly highlights: HighlightManager;
-    private storageElement;
-    private readonly screenManager;
-    private readonly dataHosts;
+    readonly screens: ScreenManager;
     private _windowWidth;
     readonly windowWidth: number;
     private _windowHeight;
     readonly windowHeight: number;
+    private storageElement;
+    private readonly dataHosts;
     constructor();
-    screens(): IterableIterator<Screen>;
-    getScreen<S extends IScreen = Screen>(screenId: ScreenId): S | undefined;
-    getVisibleScreen<S extends IScreen = Screen>(): S | undefined;
-    isScreenVisible(screenId: ScreenId): boolean;
-    showScreen<S extends IScreen = Screen>(screenId: ScreenId): S;
-    hideScreen(screen: ScreenId | Screen): void;
     /**
      * Returns a new interrupt factory with the given translation data.
      */
-    interrupt(title: TranslationGenerator, description?: TranslationGenerator): InterruptFactory;
+    interrupt(interrupt: Interrupt, ...args: any[]): InterruptFactory;
     /**
      * Returns an interrupt factory that can only be used to create menus.
      */
     interrupt(): IInterruptMenuFactory;
-    interruptWithConfirmation(title: TranslationGenerator, description?: TranslationGenerator): Promise<boolean>;
-    interruptWithInfo(title: TranslationGenerator, description?: TranslationGenerator): Promise<void>;
-    interruptWithMenu(menuId: MenuId, initializer?: (menu: IMenu) => any): Promise<void>;
-    showLoadingInterrupt(title: TranslationGenerator, description?: TranslationGenerator, canCancel?: boolean, specialType?: string): Promise<void>;
+    showLoadingInterrupt(interrupt: Interrupt, ...args: any[]): Promise<void>;
     hideLoadingInterrupt(): Promise<void>;
     /**
      * @param elements The elements to refresh translations inside

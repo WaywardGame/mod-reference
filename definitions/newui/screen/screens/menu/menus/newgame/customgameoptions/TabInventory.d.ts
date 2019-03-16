@@ -9,8 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDifficultyOptions } from "game/Difficulty";
-import { UiApi } from "newui/INewUi";
 import CustomGameOptionsTab from "newui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
 export default class TabItems extends CustomGameOptionsTab {
-    constructor(api: UiApi, options: () => IDifficultyOptions);
+    constructor(options: () => IDifficultyOptions);
 }

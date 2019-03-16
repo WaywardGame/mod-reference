@@ -8,14 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable, DialogId, Direction, EquipType, ItemType, SkillType, SortType } from "Enums";
-import { IContainer, IDismantleComponent, IItem } from "item/IItem";
+import { EquipType, SkillType } from "entity/IHuman";
+import { IContainer, IDismantleComponent, IItem, ItemType } from "item/IItem";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";
-import { BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
+import { SortType } from "SortType";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
-import { IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
+import { DialogId, IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";
 import BaseScreen from "ui/screens/BaseScreen";
+import { Direction } from "utilities/math/Direction";
 export declare enum TextElementId {
     Weight = 0,
     Attack = 1,

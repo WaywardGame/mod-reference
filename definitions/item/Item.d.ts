@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICreature } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
+import { CreatureType, ICreature } from "entity/creature/ICreature";
 import { EntityType } from "entity/IEntity";
-import IHuman from "entity/IHuman";
-import { BookType, CreatureType, EquipType, ItemQuality, ItemType, TatteredMap } from "Enums";
-import { IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary, IItemUsed } from "item/IItem";
+import IHuman, { EquipType } from "entity/IHuman";
+import IPlayer from "entity/player/IPlayer";
+import { Quality } from "game/IObject";
+import { BookType, IContainable, IContainer, IItem, IItemArray, IItemDescription, IItemLegendary, IItemUsed, ItemType, TatteredMap } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
-import IPlayer from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
 export default class Item implements IItem, IContainer, IContainable, IUnserializedCallback {
@@ -34,7 +34,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     order: number;
     ownerIdentifier?: string;
     used?: IItemUsed;
-    quality: ItemQuality;
+    quality: Quality;
     quickSlot: number | undefined;
     renamed: string | ISerializedTranslation;
     tatteredMap: TatteredMap;
@@ -42,7 +42,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     weight: number;
     weightCapacity: number;
     private _description;
-    constructor(itemType?: ItemType | undefined, quality?: ItemQuality);
+    constructor(itemType?: ItemType | undefined, quality?: Quality);
     getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;
@@ -69,7 +69,7 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
-    setQuality(quality?: ItemQuality): void;
+    setQuality(quality?: Quality): void;
     setLegendary(): void;
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;

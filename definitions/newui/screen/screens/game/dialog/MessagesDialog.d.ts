@@ -10,9 +10,8 @@
  */
 import UiTranslation from "language/dictionary/UiTranslation";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export default class MessagesDialog extends Dialog {
-    constructor(api: IGameScreenApi);
+    constructor();
     getName(): UiTranslation;
     private onFocus;
     private onBlur;

@@ -11,29 +11,30 @@
 
 import IAudio from "audio/IAudio";
 import { ICommandManager } from "command/ICommandManager";
-import ICorpseManager from "creature/corpse/ICorpseManager";
-import ICreatureManager from "creature/ICreatureManager";
 import IDoodadManager from "doodad/IDoodadManager";
+import ICorpseManager from "entity/creature/corpse/ICorpseManager";
+import ICreatureManager from "entity/creature/ICreatureManager";
+import { IFlowFieldManager } from "entity/flowfield/IFlowFieldManager";
 import IHuman from "entity/IHuman";
-import { ItemType } from "Enums";
-import { IFlowFieldManager } from "flowfield/IFlowFieldManager";
+import { INPC } from "entity/npc/INPC";
+import INPCManager from "entity/npc/INPCManager";
+import IPlayer from "entity/player/IPlayer";
 import IGame from "game/IGame";
+import { ItemType } from "item/IItem";
 import IItemManager from "item/IItemManager";
 import LanguageManager from "language/LanguageManager";
 import IHookManager from "mod/IHookManager";
 import IModManager from "mod/IModManager";
 import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import NewUi from "newui/NewUi";
-import { INPC } from "npc/INPC";
-import INPCManager from "npc/INPCManager";
-import IPlayer from "player/IPlayer";
+import GameScreen from "newui/screen/screens/GameScreen";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
 import ISpriteAtlas from "renderer/ISpriteAtlas";
 import ITileAtlas from "renderer/ITileAtlas";
 import IWorld from "renderer/IWorld";
 import IWorldRenderer from "renderer/IWorldRenderer";
-import IResourceLoader from "resources/IResourceLoader";
+import IResourceLoader from "resource/IResourceLoader";
 import ISaveData from "save/data/ISaveData";
 import ISaveDataGlobal from "save/data/ISaveDataGlobal";
 import ISaveManager from "save/ISaveManager";
@@ -78,6 +79,15 @@ declare global {
 
 	type Human = IPlayer | INPC | IHuman;
 
+	type IterableOr<T> = T | T[] | IterableIterator<T>;
+
+	type GeneratorOf<T> = () => Iterable<T>;
+
+	type GetterOfOr<T> = T | (() => T);
+
+	type ArrayOfIterablesOr<T> = Array<T | Iterable<T>>;
+
+	// autosort
 	let absentPlayers: IPlayer[];
 	let audio: IAudio;
 	let commandManager: ICommandManager;
@@ -87,14 +97,16 @@ declare global {
 	let fieldOfView: IFieldOfView;
 	let flowFieldManager: IFlowFieldManager;
 	let game: IGame;
+	let gameScreen: GameScreen | undefined;
 	let hookManager: IHookManager;
 	let itemManager: IItemManager;
 	let languageManager: LanguageManager;
 	let localPlayer: IPlayer;
-	let npcManager: INPCManager;
 	let modManager: IModManager;
 	let multiplayer: IMultiplayer;
 	let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
+	let newui: NewUi;
+	let npcManager: INPCManager;
 	let players: IPlayer[];
 	let renderer: IWorldRenderer;
 	let resourceLoader: IResourceLoader;
@@ -107,7 +119,7 @@ declare global {
 	let tileEventManager: ITileEventManager;
 	let ui: IUi;
 	let world: IWorld;
-	let newui: NewUi;
+
 	const VIEWPORT_MIN_WIDTH: number;
 	const VIEWPORT_MIN_HEIGHT: number;
 
@@ -254,6 +266,8 @@ declare global {
 	}
 
 	function Override(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
+
+	function TsIgnore(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
 
 	interface CallableFunction extends Function {
 		bind<T, A0, A1, A2, A3, A4, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4): (...args: A) => R;

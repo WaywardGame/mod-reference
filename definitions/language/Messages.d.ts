@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DamageType } from "Enums";
+import { DamageType } from "entity/IEntity";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 export declare const equipTypeToMessage: Message[];

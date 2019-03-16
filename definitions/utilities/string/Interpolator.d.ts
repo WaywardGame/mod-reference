@@ -16,7 +16,7 @@ export interface ISegment {
     startChar?: string;
     endChar?: string;
     regex: RegExp;
-    handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | IterableOf<IStringSection>;
+    handle(match: RegExpMatchArray, segment: string, api: ISegmentApi, ...args: any[]): string | IStringSection | Iterable<IStringSection>;
 }
 export interface IStringSection {
     content: string;
@@ -31,7 +31,7 @@ declare class Interpolator {
     static combineLikeSections(sections: IStringSection[], ignoreKeys?: string[]): void;
 }
 declare module Interpolator {
-    function getArgument(keyMap: string, ...args: any[]): string | undefined;
+    function getArgument(keyMap: string, ...args: any[]): any;
     /**
      * Returns the index of the first occurrence of character in the provided string which is not inside a segment `{}`.
      * Returns `-1` if there is no occurrence.

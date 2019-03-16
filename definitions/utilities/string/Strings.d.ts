@@ -8,7 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { CaseStyle } from "Enums";
+export declare enum CaseStyle {
+    PascalCase = 0,
+    CamelCase = 1,
+    SnakeCase = 2,
+    KebabCase = 3
+}
 export declare const matchLanguageLetters: RegExp;
 export declare const matchNotLanguageLetters: RegExp;
 export declare const matchInvalidPathLettersWindows: RegExp;

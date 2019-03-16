@@ -7,14 +7,14 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType, ItemType, TerrainType } from "Enums";
+import { DoodadType } from "doodad/IDoodad";
+import { ItemType } from "item/IItem";
 import { TerrainDecoration } from "renderer/Decorations";
 import ITileAtlas from "renderer/ITileAtlas";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
+import { TerrainType } from "tile/ITerrain";
 import Vec2 from "utilities/math/Vector2";
 export declare enum TileType {
     Q2TopRightQ1TopLeft = 0,

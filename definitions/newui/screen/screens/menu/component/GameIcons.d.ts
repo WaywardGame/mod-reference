@@ -11,7 +11,6 @@
 import { Difficulty } from "game/Difficulty";
 import Component from "newui/component/Component";
 import { IRefreshable } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 import { ISteamFriend } from "steamworks/ISteamworks";
 export interface IGameIconsHost {
     difficulty: Difficulty;
@@ -25,7 +24,7 @@ export default class GameIcons extends Component implements IRefreshable {
     private readonly pvp;
     private readonly mods;
     private readonly friends;
-    constructor(api: UiApi, host: IGameIconsHost);
+    constructor(host: IGameIconsHost);
     refresh(): this;
     private getModsTooltip;
     private getFriendsTooltip;

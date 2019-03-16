@@ -7,14 +7,12 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { ActionType } from "action/IAction";
 import DoodadInfo from "doodad/DoodadInfo";
 import Doodad from "doodad/doodads/Doodad";
 import { IDoodad, IDoodadDescription, IDoodadOptions } from "doodad/IDoodad";
-import { ItemType } from "Enums";
+import { ActionType } from "entity/action/IAction";
+import { ItemType } from "item/IItem";
 import Translation from "language/Translation";
 export default class ItemDoodad extends Doodad implements IDoodad {
     itemType: ItemType;

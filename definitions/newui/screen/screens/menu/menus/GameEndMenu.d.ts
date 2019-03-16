@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { PlayerState } from "Enums";
-import { UiApi } from "newui/INewUi";
+import { PlayerState } from "entity/player/IPlayer";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { IHighscore } from "save/data/ISaveDataGlobal";
 export interface IGameEndData {
@@ -19,7 +18,7 @@ export interface IGameEndData {
 export default class GameEndMenu extends Menu {
     private readonly highscore;
     private gameEndData;
-    constructor(api: UiApi);
+    constructor();
     setGameEndData(gameEndData: IGameEndData): this;
     private onShow;
     private getHeading;

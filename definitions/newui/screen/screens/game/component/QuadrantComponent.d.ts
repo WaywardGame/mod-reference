@@ -9,9 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
-import { UiApi } from "newui/INewUi";
 import StaticComponent from "newui/screen/screens/game/component/StaticComponent";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import { IStringSection } from "utilities/string/Interpolator";
 /**
  * Since when do quadrants refer to 8 sections, this ain't no octagon
@@ -50,10 +48,9 @@ export declare enum QuadrantComponentEvent {
  *
  * Changing the quadrant will not affect other elements: this is the responsisibility of the parent.
  */
-export default abstract class QuadrantComponent<HasApi extends boolean = true> extends StaticComponent {
-    protected readonly gsapi: HasApi extends true ? IGameScreenApi : IGameScreenApi | undefined;
+export default abstract class QuadrantComponent extends StaticComponent {
     readonly preferredQuadrant: Quadrant;
-    constructor(api: IGameScreenApi | UiApi);
+    constructor();
     /**
      * Changes the quadrant of this element, then emits the `ChangeQuadrant` event
      * with the parameters being the new quadrant and the old quadrant.

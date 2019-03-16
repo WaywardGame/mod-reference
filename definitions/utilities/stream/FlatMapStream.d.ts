@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IStream from "utilities/stream/IStream";
-export default class FlatMapStream<T, R> implements IStream<R> {
+import { IStreamable } from "utilities/stream/IStream";
+export default class FlatMapStream<T, R> implements IStreamable<R> {
     private readonly stream;
     private readonly mapper?;
     private subIterable;
@@ -17,6 +17,6 @@ export default class FlatMapStream<T, R> implements IStream<R> {
     private _done;
     readonly value: R;
     readonly done: boolean;
-    constructor(stream: IStream<T>, mapper?: ((value: T) => IterableOf<R>) | undefined);
+    constructor(stream: IStreamable<T>, mapper?: ((value: T) => Iterable<R>) | undefined);
     next(): void;
 }

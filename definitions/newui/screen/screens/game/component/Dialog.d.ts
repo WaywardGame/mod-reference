@@ -8,17 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable } from "Enums";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
-import { BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 import { DialogId, Edge, IDialogDescription } from "newui/screen/screens/game/Dialogs";
-import IGameScreenApi, { IDialog } from "newui/screen/screens/game/IGameScreenApi";
+import { IDialog } from "newui/screen/screens/game/IGameScreenApi";
 import { IStringSection } from "utilities/string/Interpolator";
 /**
  * The positions of each edge of the dialog. Stored as percentages.
@@ -77,7 +75,6 @@ export declare enum DialogEvent {
     SwitchPanel = "SwitchPanel"
 }
 export default abstract class Dialog extends Component implements IDialog {
-    protected readonly gsapi: IGameScreenApi;
     private static topOrder;
     private static topDialog;
     static makeTopDialog(element: HTMLElement): void;
@@ -106,7 +103,7 @@ export default abstract class Dialog extends Component implements IDialog {
      * The description of how the dialog should be sized. (min, default, and max sizes and the position)
      */
     private description;
-    constructor(gsapi: IGameScreenApi, id: number);
+    constructor(id: number);
     addScrollableWrapper(initializer?: (wrapper: Component) => any): Component;
     addSettingsPanel(): Component;
     showSettingsPanel(): this;
@@ -144,7 +141,7 @@ export default abstract class Dialog extends Component implements IDialog {
     /**
      * The name is displayed in the `Move To` context menu option, and in the `Switch With` options
      */
-    abstract getName(): IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
+    abstract getName(): Iterable<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined;
     private hideSettingsPanel;
     private saveEdgesForScale;
     /**
@@ -244,7 +241,7 @@ export default abstract class Dialog extends Component implements IDialog {
 declare class Handle extends Component {
     private lastMousePosition?;
     readonly position: HandlePosition;
-    constructor(uiApi: UiApi, position: HandlePosition, elementType?: string);
+    constructor(position: HandlePosition, elementType?: string);
     private dragStart;
     private drag;
     private dragEnd;
@@ -256,7 +253,7 @@ export declare class Header extends Handle implements IRefreshable {
     readonly backButton: Button;
     readonly optionsButton: Button;
     private readonly text;
-    constructor(api: UiApi);
+    constructor();
     setText(text: TranslationGenerator): void;
     refresh(): this;
 }

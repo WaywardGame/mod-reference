@@ -10,14 +10,13 @@
  */
 import { IDifficultyOptions } from "game/Difficulty";
 import { IRefreshable } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 import CustomGameOptionsTab from "newui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
 export default class TabCreatures extends CustomGameOptionsTab implements IRefreshable {
     private readonly options;
     private readonly creatureComponentMap;
     private readonly addCreatureConfigDropdown;
     private readonly creaturesWrapper;
-    constructor(api: UiApi, options: () => IDifficultyOptions);
+    constructor(options: () => IDifficultyOptions);
     refresh(): this;
     private addCreature;
     private sortCreatures;

@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { QuestType } from "player/quest/quest/IQuest";
+import { QuestType } from "entity/player/quest/quest/IQuest";
 declare const quests: Descriptions<QuestType, [string, string]>;
 export default quests;

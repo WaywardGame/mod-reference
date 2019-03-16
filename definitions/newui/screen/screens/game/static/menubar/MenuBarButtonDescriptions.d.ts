@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable, IModdable } from "Enums";
+import { IModdable } from "mod/ModRegistry";
+import { Bindable } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import { ITooltip } from "newui/component/IComponent";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export declare enum MenuBarButtonType {
     Menu = 0,
     Save = 1,
@@ -46,7 +46,7 @@ export interface IMenuBarButtonDescription extends IModdable {
      * What should happen when this button is clicked.
      * @returns `false` if the activation was cancelled, `true` or `undefined` otherwise.
      */
-    onActivate(api: IGameScreenApi): boolean | undefined | void | Promise<void>;
+    onActivate(): boolean | undefined | void | Promise<void>;
     tooltip?(tooltip: ITooltip): ITooltip;
     onCreate?(button: Button): void;
 }

@@ -8,13 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IModdable, IObject, IObjectDescription, IResourceItem, IRGB } from "Enums";
+import { ILootItem } from "game/ILoot";
+import { IObject, IObjectDescription } from "game/IObject";
+import { IModdable } from "mod/ModRegistry";
+import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 export interface ITileEventDescription extends IObjectDescription, IModdable {
     spreadMax?: number;
     decayMax?: number;
     animated?: boolean;
-    items?: IResourceItem[];
+    items?: ILootItem[];
     particles?: IRGB;
     graphicVariation?: boolean;
     isFlammable?: boolean;

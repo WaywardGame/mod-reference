@@ -8,25 +8,27 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICorpse } from "creature/corpse/ICorpse";
-import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Direction, FireType, ISeeds, ItemQuality, SaveType, SkillType, TerrainType, TurnMode, TurnType } from "Enums";
+import { ICorpse } from "entity/creature/corpse/ICorpse";
+import { ICreature, IDamageInfo } from "entity/creature/ICreature";
+import { SkillType } from "entity/IHuman";
+import { INPC } from "entity/npc/INPC";
+import { IPlayer, TurnType } from "entity/player/IPlayer";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { FireStage, ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, IWell, RenderSource } from "game/IGame";
+import { FireStage, FireType, ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TurnMode } from "game/IGame";
+import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
 import Translation from "language/Translation";
-import { INPC } from "npc/INPC";
-import { IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { ISaveInfo } from "save/ISaveManager";
-import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
+import { ITile, ITileArray, ITileContainer, ITileData, TerrainType } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
+import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
@@ -211,8 +213,8 @@ export default class Game extends Emitter implements IGame {
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
-    getRandomQuality(bonusQuality?: number): ItemQuality;
-    getMaxDurability(quality: ItemQuality, itemDurability: number): number;
+    getRandomQuality(bonusQuality?: number): Quality;
+    getMaxDurability(quality: Quality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
     wrapCoordinate(cordinate: number, reference: number): number;
     isFlammable(x: number, y: number, z: number): boolean;

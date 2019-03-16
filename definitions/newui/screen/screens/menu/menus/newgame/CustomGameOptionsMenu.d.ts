@@ -9,12 +9,11 @@
  * https://waywardgame.github.io/
  */
 import { IDifficultyOptions } from "game/Difficulty";
-import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class CustomGameOptionsMenu extends Menu {
     private readonly options;
     private readonly refreshables;
-    constructor(api: UiApi, options: () => IDifficultyOptions);
+    constructor(options: () => IDifficultyOptions);
     private refresh;
     private exportOptions;
     private importOptions;

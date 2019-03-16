@@ -9,7 +9,6 @@
  * https://waywardgame.github.io/
  */
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class NewGameMenu extends Menu {
     private inputName;
@@ -34,7 +33,7 @@ export default class NewGameMenu extends Menu {
     private slot;
     private difficultyOptions?;
     private wasEditedPreShown;
-    constructor(api: UiApi);
+    constructor();
     create(): void;
     setSeed(seed: string | number, lock?: boolean): this;
     setDifficulty(difficulty: Difficulty, lock?: boolean): this;

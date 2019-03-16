@@ -11,12 +11,11 @@
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IContextMenu, TranslationGenerator } from "newui/component/IComponent";
-import { UiApi } from "newui/INewUi";
 export declare type IOptionDescription = {
     translation: TranslationGenerator;
     create?(option: Button): Button;
 } & ({
-    submenu(uiApi: UiApi): IContextMenu;
+    submenu(): IContextMenu;
 } | {
     onActivate(): any;
 });
@@ -29,11 +28,11 @@ export default class ContextMenu<O extends number | string | symbol = number | s
     private activeOption;
     private readonly descriptions;
     private readonly options;
-    constructor(uiApi: UiApi, ...descriptions: Array<ContextMenuOptionKeyValuePair<O> | undefined>);
+    constructor(...descriptions: Array<ContextMenuOptionKeyValuePair<O> | undefined>);
     addAllDescribedOptions(): this;
-    addOptions(...options: ArrayOfIterablesOfOr<O>): this;
-    disableOptions(...options: ArrayOfIterablesOfOr<O>): this;
-    removeOptions(...options: ArrayOfIterablesOfOr<O>): this;
+    addOptions(...options: ArrayOfIterablesOr<O>): this;
+    disableOptions(...options: ArrayOfIterablesOr<O>): this;
+    removeOptions(...options: ArrayOfIterablesOr<O>): this;
     setPosition(x: number, y: number, right?: boolean): this;
     hideAndRemove(): Promise<void>;
     private getDescription;
@@ -42,10 +41,10 @@ export declare class ContextMenuOption extends Button {
     private submenu?;
     private readonly submenuDescription?;
     private isActive;
-    constructor(uiApi: UiApi, description: IOptionDescription);
+    constructor(description: IOptionDescription);
     hideSubmenu(): void;
     hideAndRemove(): Promise<void>;
     onSelected(): void;
     onUnselected(): void;
-    protected showSubmenu(generator: (uiApi: UiApi) => IContextMenu): void;
+    protected showSubmenu(generator: () => IContextMenu): void;
 }

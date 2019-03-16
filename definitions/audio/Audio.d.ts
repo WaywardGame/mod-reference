@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IAudio from "audio/IAudio";
-import { Music, SfxType } from "Enums";
+import IAudio, { Music, SfxType } from "audio/IAudio";
 import EnumCursor from "utilities/enum/EnumCursor";
 export declare enum Fading {
     None = 0,

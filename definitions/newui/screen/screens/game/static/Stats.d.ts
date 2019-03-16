@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IPlayer } from "entity/player/IPlayer";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
-import { IPlayer } from "player/IPlayer";
+import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import { IStringSection } from "utilities/string/Interpolator";
 export default class Stats extends QuadrantComponent {
     static preferredQuadrant: Quadrant;
     readonly preferredQuadrant: Quadrant;
     private player;
-    constructor(gsapi: IGameScreenApi, player: IPlayer);
+    constructor(player: IPlayer);
     setPlayer(player: IPlayer): void;
     getID(): QuadrantComponentId;
     protected getName(): IStringSection[];

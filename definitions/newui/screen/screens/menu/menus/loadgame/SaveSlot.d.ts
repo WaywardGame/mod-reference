@@ -10,7 +10,6 @@
  */
 import { Difficulty } from "game/Difficulty";
 import InputButton from "newui/component/InputButton";
-import { UiApi } from "newui/INewUi";
 export interface SaveSlotData {
     slot: number;
     score: number;
@@ -32,9 +31,9 @@ export declare enum SaveSlotEvent {
     Delete = "Delete"
 }
 export declare class SaveSlot extends InputButton {
+    slotData: SaveSlotData;
     private deathby;
-    readonly slotData: DOMStringMap & SaveSlotData;
-    constructor(api: UiApi, slot: number);
+    constructor(slot: number);
     /**
      * Loads the data for this save slot.
      */

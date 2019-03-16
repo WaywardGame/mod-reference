@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { DoodadType, DoodadTypeGroup } from "Enums";
+import { DoodadType, DoodadTypeGroup, IDoodad, IDoodadOptions } from "doodad/IDoodad";
 export interface IDoodadManager {
     generateLookups(): void;
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;

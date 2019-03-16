@@ -9,11 +9,10 @@
  * https://waywardgame.github.io/
  */
 import { IRefreshable } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 import { Tab } from "newui/screen/screens/menu/component/Menu";
 export default class TabControls extends Tab implements IRefreshable {
     private readonly refreshables;
-    constructor(api: UiApi);
+    constructor();
     refresh(): this;
     private addRefreshable;
 }

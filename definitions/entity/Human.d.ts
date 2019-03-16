@@ -8,27 +8,28 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDamageInfo } from "creature/ICreature";
+import { IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import IHuman from "entity/IHuman";
+import IHuman, { EquipType, ICustomizations, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import { EquipType, FireType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
-import { IContainer, IItem } from "item/IItem";
+import { MilestoneType } from "entity/player/IMilestone";
+import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
+import MessageManager from "entity/player/MessageManager";
+import NoteManager from "entity/player/note/NoteManager";
+import PlayerDefense from "entity/player/PlayerDefense";
+import { ISkillSet } from "entity/player/Skills";
+import { FireType } from "game/IGame";
+import { Quality } from "game/IObject";
+import { IContainer, IItem, ItemType } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
-import { MilestoneType } from "player/IMilestone";
-import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
-import MessageManager from "player/MessageManager";
-import NoteManager from "player/note/NoteManager";
-import PlayerDefense from "player/PlayerDefense";
-import { ISkillSet } from "player/Skills";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity implements IHuman {
     attackFromEquip: IAttackHand;
-    customization: IPlayerCustomization;
+    customization: ICustomizations;
     deathBy: import("../language/Translation").ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
@@ -68,7 +69,7 @@ export default abstract class Human extends Entity implements IHuman {
     isRestingCancelled(): boolean;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
-    createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
+    createItemInInventory(itemType: ItemType, quality?: Quality): IItem;
     hasHandToUse(): boolean;
     getAndSwitchHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;

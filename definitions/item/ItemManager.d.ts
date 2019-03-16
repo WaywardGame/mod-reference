@@ -8,15 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { CraftStatus, ItemQuality, ItemType, ItemTypeGroup, RequirementInfo, WeightType } from "Enums";
+import { INPC } from "entity/npc/INPC";
+import { IPlayer } from "entity/player/IPlayer";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
-import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription } from "item/IItem";
-import { IItemManager, IProtectedItemOptions } from "item/IItemManager";
+import { Quality } from "game/IObject";
+import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription, ItemType, ItemTypeGroup } from "item/IItem";
+import { CraftStatus, IItemManager, IProtectedItemOptions, RequirementInfo, WeightType } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
-import { INPC } from "npc/INPC";
-import { IPlayer } from "player/IPlayer";
+import Stream from "utilities/stream/Stream";
 export default class ItemManager implements IItemManager {
     private readonly worldContainer;
     private cachedWeights;
@@ -34,17 +35,17 @@ export default class ItemManager implements IItemManager {
     removeContainerItems(container: IContainer): void;
     exists(item: IItem): boolean;
     remove(item: IItem): void;
-    getDisassemblyComponents(description: IItemDescription, quality: ItemQuality | undefined): IItemArray;
+    getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItemArray;
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
-    create(itemType: ItemType, container: IContainer, quality?: ItemQuality): IItem;
-    createFake(itemType: ItemType, quality?: ItemQuality): IItem;
+    create(itemType: ItemType, container: IContainer, quality?: Quality): IItem;
+    createFake(itemType: ItemType, quality?: Quality): IItem;
     isContainer(obj: unknown): obj is IContainer;
-    moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: ItemQuality): IItem[];
+    moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): IItem[];
     computeContainerWeight(container: IContainer): number;
     getLegendaryWeightCapacity(container: IContainer): number;
-    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: ItemQuality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
+    moveAllFromContainerToContainer(human: Human | undefined, fromContainer: IContainer, toContainer: IContainer, itemType?: ItemType | undefined, ofQuality?: Quality | undefined, checkWeight?: boolean, onMoveItem?: (item: IItem) => void): IItem[];
     moveToContainer(human: Human | undefined, item: IItem, container: IContainer): boolean;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
@@ -55,7 +56,7 @@ export default class ItemManager implements IItemManager {
     spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     resetMapsInContainer(container: IContainer): void;
     getTileContainer(x: number, y: number, z: number): IContainer;
-    getRandomQuality(bonusQuality?: number): ItemQuality;
+    getRandomQuality(bonusQuality?: number): Quality;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
@@ -81,7 +82,7 @@ export default class ItemManager implements IItemManager {
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, protectedItemOptions?: IProtectedItemOptions | undefined): IItem[];
     reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
-    getItemTranslations(items: IItem[], article?: boolean): IterableIterator<Translation>;
+    getItemTranslations(items: IItem[], article?: boolean): Stream<Translation>;
     getItemListTranslation(items: IItem[], article?: boolean): Translation;
     loadReferences(isTraveling: boolean): void;
     saveTileReferences(): void;
@@ -89,12 +90,12 @@ export default class ItemManager implements IItemManager {
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
     getGroupItems(itemGroup: ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
-    getGroups(itemType: ItemType): IterableIterator<ItemTypeGroup>;
+    getGroups(itemType: ItemType): Stream<ItemTypeGroup>;
     checkMilestones(player: IPlayer, item: IItem): void;
     getDefaultDurability(): number;
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
-    getQualityBasedOnSkill(itemQuality: ItemQuality | undefined, skillValue: number, qualityBypass?: boolean): ItemQuality | undefined;
+    getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, qualityBypass?: boolean): Quality | undefined;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: IItem[]): number;

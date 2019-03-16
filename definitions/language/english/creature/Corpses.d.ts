@@ -8,5 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-declare const corpses: any;
+import { CreatureType } from "entity/creature/ICreature";
+declare const corpses: OptionalDescriptions<CreatureType, string>;
 export default corpses;

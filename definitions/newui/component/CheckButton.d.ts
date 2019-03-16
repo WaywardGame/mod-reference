@@ -12,7 +12,6 @@ import Button from "newui/component/Button";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { Paragraph } from "newui/component/Text";
-import { UiApi } from "newui/INewUi";
 export declare enum CheckButtonEvent {
     Change = "Change"
 }
@@ -20,7 +19,7 @@ export declare class CheckButton extends Button implements IRefreshableValue<boo
     protected refreshMethod: () => boolean;
     private _checked;
     readonly checked: boolean;
-    constructor(uiApi: UiApi);
+    constructor();
     setChecked(checked: boolean, triggerEvent?: boolean): this;
     trySetChecked(checked: boolean, triggerEvent?: boolean): boolean;
     toggleChecked(): void;

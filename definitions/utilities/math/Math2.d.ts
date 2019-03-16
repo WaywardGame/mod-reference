@@ -23,7 +23,12 @@ declare module Math2 {
      * Clamps the given number in the range 0-255
      */
     const clamp255: (value: number) => number;
-    function roundNumber(num: number, dec: number): number;
+    /**
+     * Returns a number rounded to a certain number of decimal places.
+     *
+     * Example: `roundNumber(1.24999999, 2): 1.25`
+     */
+    function roundNumber(num: number, places: number): number;
     /**
      * Returns a number rounded to a multiple
      *

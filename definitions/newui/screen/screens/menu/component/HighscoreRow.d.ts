@@ -9,7 +9,6 @@
  * https://waywardgame.github.io/
  */
 import { Block } from "newui/component/Block";
-import { UiApi } from "newui/INewUi";
 import { IHighscore } from "save/data/ISaveDataGlobal";
 export declare const enum HighscoreRowEvent {
     /**
@@ -27,5 +26,5 @@ export default class HighscoreRow extends Block {
     highscore: IHighscore | undefined;
     private _place;
     place: number;
-    constructor(api: UiApi, highscore?: IHighscore);
+    constructor(highscore?: IHighscore);
 }

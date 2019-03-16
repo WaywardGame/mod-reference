@@ -8,18 +8,20 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionType } from "action/IAction";
-import { ICreature } from "creature/ICreature";
 import DoodadInfo from "doodad/DoodadInfo";
-import { IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
-import { DoodadType, DoorOrientation, EquipType, GrowingStage, IRGB, ItemQuality, ItemType } from "Enums";
+import { DoodadType, DoorOrientation, GrowingStage, IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
+import { ActionType } from "entity/action/IAction";
+import { ICreature } from "entity/creature/ICreature";
+import { EquipType } from "entity/IHuman";
+import { IPlayer } from "entity/player/IPlayer";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
-import { IItemArray, IItemLegendary } from "item/IItem";
+import { Quality } from "game/IObject";
+import { IItemArray, IItemLegendary, ItemType } from "item/IItem";
 import Translation from "language/Translation";
-import { IPlayer } from "player/IPlayer";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
+import { IRGB } from "utilities/Color";
 declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable {
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
@@ -34,7 +36,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     minDur?: number;
     orientation?: DoorOrientation;
     ownerIdentifier?: string;
-    quality?: ItemQuality;
+    quality?: Quality;
     renamed?: string;
     spread?: number;
     treasure?: boolean;

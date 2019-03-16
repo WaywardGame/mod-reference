@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { CaseStyle } from "Enums";
 import { Dictionary } from "language/Dictionaries";
 import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
 import Translation from "language/Translation";
 import TranslationsProvider from "language/TranslationsProvider";
+import { CaseStyle } from "utilities/string/Strings";
 export interface ISerializedTranslationsProvider {
     dictionaries: {
         [key: string]: {

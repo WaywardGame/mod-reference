@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { TerrainType } from "Enums";
 import IWorldLayer from "renderer/IWorldLayer";
 import { ITileAdaptation } from "renderer/TileAdaptors";
 import Default from "renderer/tileAdaptors/Default";
+import { TerrainType } from "tile/ITerrain";
 export default class Mountain extends Default {
     private mountainTopFlag;
     adapt(world: IWorldLayer, x: number, y: number, terrainType: TerrainType, result: ITileAdaptation): void;

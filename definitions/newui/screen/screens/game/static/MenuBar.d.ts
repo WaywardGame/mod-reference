@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
-import IGameScreenApi, { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import { QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import MenuBarButton from "newui/screen/screens/game/static/menubar/MenuBarButton";
 import { MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -19,7 +19,7 @@ export default class MenuBar extends QuadrantComponent {
     private _buttons;
     readonly buttons: Map<MenuBarButtonType, MenuBarButton>;
     private readonly groups;
-    constructor(gsapi: IGameScreenApi);
+    constructor();
     /**
      * Removes any existing groups of menubar buttons, then initializes new ones from the `MenuBarButtonType` enum.
      */

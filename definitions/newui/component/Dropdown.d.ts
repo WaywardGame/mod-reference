@@ -8,13 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
-import { BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 export declare enum DropdownEvent {
     /**
      * @param optionId The new option which is selected.
@@ -24,7 +22,7 @@ export declare enum DropdownEvent {
 export declare type IDropdownOption<OptionId = string | number> = [OptionId, (option: Button) => any];
 export interface IDropdownData<OptionId = string | number> {
     defaultOption: OptionId;
-    options: IterableOf<IDropdownOption<OptionId>>;
+    options: Iterable<IDropdownOption<OptionId>>;
 }
 export default class Dropdown<OptionId = string | number> extends Component implements IRefreshableValue<IDropdownData<OptionId>>, IHookHost {
     protected optionsWrapper: Component;
@@ -39,7 +37,7 @@ export default class Dropdown<OptionId = string | number> extends Component impl
     private _selection;
     readonly selection: OptionId;
     private hovered;
-    constructor(uiApi: UiApi);
+    constructor();
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     showDropdown(): void;
     hideDropdown(): void;

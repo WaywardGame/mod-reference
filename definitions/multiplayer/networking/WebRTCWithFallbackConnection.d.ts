@@ -7,12 +7,10 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { ConnectionState } from "Enums";
 import { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
 import { Connection } from "multiplayer/networking/Connection";
+import { ConnectionState } from "multiplayer/networking/IConnection";
 export declare class WebRTCWithFallbackConnection extends Connection {
     private readonly onConnected?;
     private _webRTCTimeoutId;

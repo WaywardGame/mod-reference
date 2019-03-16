@@ -10,7 +10,6 @@
  */
 import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 export declare enum RangeInputEvent {
     Change = "Change",
     Finish = "Finish"
@@ -24,7 +23,7 @@ export declare class RangeInput extends Component implements IRefreshableValue<n
     readonly min: number;
     readonly max: number;
     readonly step: number;
-    constructor(uiApi: UiApi);
+    constructor();
     clamp(): this;
     setStep(step: number): this;
     setMax(max: number, clamp?: boolean): this;

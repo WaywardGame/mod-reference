@@ -7,12 +7,9 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { ConnectionState } from "Enums";
 import { IMatchmakingInfo, MatchmakingMessageData } from "multiplayer/matchmaking/IMatchmaking";
-import { IConnection } from "multiplayer/networking/IConnection";
+import { ConnectionState, IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 export declare abstract class Connection implements IConnection {
     playerIdentifier: string;

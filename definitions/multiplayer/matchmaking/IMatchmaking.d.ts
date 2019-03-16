@@ -7,10 +7,8 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import UiTranslation from "language/dictionary/UiTranslation";
+import { UnableToJoinReason } from "multiplayer/IMultiplayer";
 export interface IMatchmaking {
     getIdentifier(): string;
     getChannel(): string;
@@ -78,7 +76,7 @@ export interface IMatchmakingConnectedMessageData extends IMatchmakingMessageDat
 }
 export interface IMatchmakingUnableToJoinGameMessageData extends IMatchmakingMessageData {
     type: MatchmakingMessageDataType.UnableToJoinGame;
-    entry: UiTranslation;
+    reason: UnableToJoinReason;
     args?: Array<number | string>;
 }
 export declare type MatchmakingMessageData = IMatchmakingUpdateDirectoryMessageData | IMatchmakingIpAddressMessageData | IMatchmakingJoinChannelMessageData | IMatchmakingIceCandidateMessageData | IMatchmakingSessionDescriptionMessageData | IMatchmakingHostIpAddressMessageData | IMatchmakingConnectedMessageData | IMatchmakingUnableToJoinGameMessageData;

@@ -7,12 +7,10 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import IEntity from "entity/IEntity";
-import { ItemType, StatType } from "Enums";
-import INotifier from "renderer/INotifier";
+import { ItemType } from "item/IItem";
+import INotifier, { StatType } from "renderer/INotifier";
 import Vec2 from "utilities/math/Vector2";
 export default class Notifier implements INotifier {
     private readonly capacity;

@@ -9,17 +9,15 @@
  * https://waywardgame.github.io/
  */
 import Translation from "language/Translation";
-import { UiApi } from "newui/INewUi";
 export declare enum EnumSort {
     Name = 0,
     Id = 1
 }
 export default class EnumContextMenu<E extends number, K extends string> {
-    private readonly api;
     private translator?;
     private readonly enumEntries;
     private _sort;
-    constructor(api: UiApi, e: {
+    constructor(e: {
         [key in K]: E;
     }, translator?: ((e: E) => Translation) | undefined);
     setTranslator(translator: (e: E) => Translation): this;

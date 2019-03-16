@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DropLocation, IKeyBind } from "Enums";
+import { DropLocation } from "entity/action/actions/Drop";
+import { ICharacter } from "entity/IHuman";
+import { IMilestoneData } from "entity/player/IMilestone";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted } from "game/IGame";
 import { InspectType } from "game/inspection/IInspection";
@@ -16,8 +18,6 @@ import { ISerializedTranslation } from "language/Translation";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
-import { IMilestoneData } from "player/IMilestone";
-import { ICharacter } from "player/IPlayer";
 import { IDialogInfo } from "ui/IUi";
 import { IEnumInfo } from "utilities/enum/IEnum";
 import { ISourceFilter } from "utilities/Log";
@@ -126,7 +126,9 @@ export declare enum PowerMode {
     HighPerformance = "high-performance"
 }
 export declare type IOptionsOld = Partial<IOptions> & {
-    keyBinds: IKeyBind;
+    keyBinds: {
+        [index: number]: number;
+    };
     directionTurnDelay: boolean;
     developerLogging: boolean;
     hints: boolean;

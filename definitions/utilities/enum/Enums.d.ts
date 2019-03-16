@@ -9,7 +9,8 @@
 * https://waywardgame.github.io/
 */
 import { IModInfo } from "mod/IModInfo";
-declare module Enums {
+import Stream from "utilities/stream/Stream";
+declare module Enums2 {
     function isModdable(enumObject: any): boolean;
     function getModStart(enumObject: any): number;
     /**
@@ -62,22 +63,22 @@ declare module Enums {
      *
      * Note: When provided with a filter & most values in the enum don't match, this method can
      * take a very long time. *Use the filter with caution.*
+     * If you intend to filter out a lot of the enum values, consider using:
+     * `Enums.values(enum).filter(filterMethod).shuffle().first()`
      */
     function getRandom<T>(enumObject: T, filter?: (value: T[keyof T]) => boolean): T[keyof T];
     /**
      * Iterate over the names of the entries in an enum.
      */
-    function keys<E, K extends string>(enumObject: {
-        [key in K]: E;
-    }): IterableIterator<K>;
+    function keys<T>(enumObject: T): Stream<keyof T>;
     /**
      * Iterate over the values in an enum.
      */
-    function values<T>(enumObject: T): IterableIterator<T[keyof T]>;
+    function values<T>(enumObject: T): Stream<T[keyof T]>;
     /**
      * Iterate over the entries in an enum. Yields a tuple containing the name and value of each entry.
      */
-    function entries<T>(enumObject: T): IterableIterator<[keyof T, T[keyof T]]>;
+    function entries<T>(enumObject: T): Stream<[keyof T, T[keyof T]]>;
     /**
      * Returns whether the given number is a valid entry in an enum.
      * @param enumObject The enum object to check for the entry.
@@ -89,4 +90,4 @@ declare module Enums {
     }, entry: unknown, isBasicEnum?: boolean): entry is E;
     function toString(enumObject: any, n: number): string;
 }
-export default Enums;
+export default Enums2;

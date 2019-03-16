@@ -10,7 +10,6 @@
  */
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { UiApi } from "newui/INewUi";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";
 export declare enum InterruptMenuEvent {
@@ -26,7 +25,7 @@ export default class InterruptMenu extends Menu {
     private readonly settingOptionsQueue;
     private isResolved;
     readonly type: InterruptType;
-    constructor(api: UiApi);
+    constructor();
     setOptions(options: InterruptOptions): Promise<void>;
     setText(title?: TranslationGenerator, description?: TranslationGenerator): void;
     cancelInterrupt(): Promise<void>;

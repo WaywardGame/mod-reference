@@ -9,11 +9,10 @@
  * https://waywardgame.github.io/
  */
 import { IRefreshable } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 import { Tab } from "newui/screen/screens/menu/component/Menu";
 export default class CustomGameOptionsTab extends Tab {
     readonly refreshables: IRefreshable[];
-    constructor(api: UiApi, id: CustomGameOptionsSection);
+    constructor(id: CustomGameOptionsSection);
     protected addRefreshables(...refreshables: IRefreshable[]): this;
 }
 export declare enum CustomGameOptionsSection {

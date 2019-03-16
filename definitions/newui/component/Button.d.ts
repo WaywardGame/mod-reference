@@ -11,7 +11,6 @@
 import Component from "newui/component/Component";
 import { IDisableable, TranslationGenerator } from "newui/component/IComponent";
 import Text, { Paragraph } from "newui/component/Text";
-import { UiApi } from "newui/INewUi";
 export declare enum ButtonEvent {
     Activate = "Activate"
 }
@@ -23,7 +22,7 @@ export default class Button extends Component implements IDisableable {
     private _activated;
     private _disabled;
     readonly disabled: boolean;
-    constructor(api: UiApi, elementType?: string, listen?: boolean);
+    constructor(elementType?: string, listen?: boolean);
     setDisabled(val?: boolean): this;
     activate(playSound?: boolean): void;
     addButton(initializer: (button: Button) => Button): this;

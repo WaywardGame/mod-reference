@@ -10,11 +10,10 @@
  */
 import UiTranslation from "language/dictionary/UiTranslation";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export default class MilestonesDialog extends Dialog {
     private readonly milestones;
     private readonly sortRow;
-    constructor(api: IGameScreenApi);
+    constructor();
     getName(): UiTranslation;
     private updateMilestone;
     private sort;

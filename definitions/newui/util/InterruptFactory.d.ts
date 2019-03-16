@@ -8,21 +8,25 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Interrupt from "language/dictionary/Interrupt";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
-import { IInterruptFactory, UiApi } from "newui/INewUi";
+import { IInterruptFactory } from "newui/INewUi";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 export default class InterruptFactory implements IInterruptFactory {
-    private readonly api;
-    private readonly title;
+    private readonly interrupt?;
+    private title;
     private description;
     private canCancel;
     private isTopMenu;
     private executed;
-    constructor(api: UiApi, title?: TranslationGenerator, description?: TranslationGenerator);
+    private readonly args;
+    constructor(interrupt?: Interrupt | undefined, ...args: any[]);
     setTopMenu(topMenu?: boolean): this;
     setCanCancel(canCancel?: boolean): this;
+    addArgs(...args: any[]): this;
+    withTitle(title?: TranslationGenerator): this;
     withDescription(description?: TranslationGenerator): this;
     withChoice(...choices: InterruptChoice[]): Promise<InterruptChoice>;
     withConfirmation(): Promise<boolean>;

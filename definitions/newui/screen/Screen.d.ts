@@ -8,21 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
-import { BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
 import { IContextMenu } from "newui/component/IComponent";
-import { UiApi } from "newui/INewUi";
-import { Background, IScreen, ScreenId } from "newui/screen/IScreen";
+import { Background, ScreenId } from "newui/screen/IScreen";
 import Log from "utilities/Log";
-export default abstract class Screen extends Component implements IScreen, IHookHost {
+export default abstract class Screen extends Component implements IHookHost {
     isOverlayScreen: boolean;
     protected lastTooltipSource?: Component;
     protected log: Log;
     private contextMenu?;
     background: Background;
-    constructor(api: UiApi, screenId: ScreenId);
+    constructor(screenId: ScreenId);
     /**
      * Remove the context menu from this element
      */
@@ -31,6 +29,13 @@ export default abstract class Screen extends Component implements IScreen, IHook
      * Set the context menu for this element
      */
     setContextMenu(generator: () => IContextMenu): void;
+    /**
+     * Remove any current context menu and set the visible context menu for this screen to the given context menu
+     */
+    setContextMenu(contextMenu: IContextMenu): void;
+    /**
+     * Hides the currently visible context menu.
+     */
     hideContextMenu(contextMenu?: IContextMenu): boolean;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     private onShow;

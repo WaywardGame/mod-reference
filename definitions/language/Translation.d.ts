@@ -40,8 +40,8 @@ declare class Translation {
     static readonly RANDOM = "random";
     static readonly defaultInterpolator: Interpolator;
     static provider: TranslationProvider;
-    static formatList(items: IterableOf<string | IStringSection[] | Translation>, ender?: ListEnder | false): Translation;
-    static getString(...entries: ArrayOfIterablesOfOr<string | IStringSection | Translation>): string;
+    static formatList(items: Iterable<string | IStringSection[] | Translation | ISerializedTranslation>, ender?: ListEnder | false): Translation;
+    static getString(...entries: ArrayOfIterablesOr<string | IStringSection | Translation>): string;
     static getAll(dictionary: Dictionary | string, entry?: number | string): Translation[];
     /**
      * @deprecated
@@ -118,6 +118,7 @@ declare class Translation {
      * Note: If this translation is an argument to another translation, it will use the random of the parent translation.
      */
     setRandom(random?: Random): this;
+    hasTranslation(): boolean;
     /**
      * Returns this translation as a list of string sections
      */

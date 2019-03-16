@@ -8,8 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { CreatureType } from "entity/creature/ICreature";
+import { StatusType } from "entity/IEntity";
+import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import { CreatureType, ItemType, SkillType, StatusType } from "Enums";
+import { ItemType } from "item/IItem";
 import { IVersionInfo } from "utilities/Version";
 export declare enum Difficulty {
     Hardcore = 0,

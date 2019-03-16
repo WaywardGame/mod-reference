@@ -10,12 +10,11 @@
  */
 import UiTranslation from "language/dictionary/UiTranslation";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export default class SkillsDialog extends Dialog {
     private readonly skills;
     private readonly inputFilter;
     private readonly sortRow;
-    constructor(api: IGameScreenApi);
+    constructor();
     getName(): UiTranslation;
     private updateSkill;
     private sort;

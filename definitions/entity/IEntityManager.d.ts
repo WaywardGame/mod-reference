@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { EntityPlayerCreatureNpc } from "entity/IEntity";
-import { MoveType } from "Enums";
+import { EntityPlayerCreatureNpc, MoveType } from "entity/IEntity";
 import { IBound3 } from "utilities/math/Bound3";
 export interface IEntityManager<T extends EntityPlayerCreatureNpc> {
     getEntities(): SaferArray<T>;

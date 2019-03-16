@@ -8,10 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IScaleManager, UiApi } from "newui/INewUi";
+import { IScaleManager } from "newui/INewUi";
 export default class ScaleManager implements IScaleManager {
-    private readonly api;
-    constructor(api: UiApi);
     getMinimum(): number;
     getMaximum(): number;
     getCurrent(): number;

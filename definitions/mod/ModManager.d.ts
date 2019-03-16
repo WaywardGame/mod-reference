@@ -13,7 +13,7 @@ import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IHookManager";
 import { IModConfig } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
-import { CanLoadState, ICanLoadInfo, IModManager } from "mod/IModManager";
+import { CanLoadState, ICanLoadInfo, IModManager, ModLoadFailureReason } from "mod/IModManager";
 import Emitter from "utilities/Emitter";
 import Log from "utilities/Log";
 export default class ModManager extends Emitter implements IModManager {
@@ -22,7 +22,7 @@ export default class ModManager extends Emitter implements IModManager {
     private readonly internalModsElectron;
     private readonly onModInitializedCallbacks;
     constructor();
-    loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
+    loadAll(options: Partial<IPlayOptions>): Promise<Array<[ModLoadFailureReason, ...any[]]>>;
     isMultiplayerCompatible(index: number): boolean;
     isMultiplayerClientSide(index: number): boolean;
     isUnloadable(index: number): boolean;

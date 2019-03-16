@@ -12,13 +12,12 @@ import IEntity, { IStatChangeInfo } from "entity/IEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
 import Component from "newui/component/Component";
 import Text from "newui/component/Text";
-import { UiApi } from "newui/INewUi";
 import Stream from "utilities/stream/Stream";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatElement extends Component {
     private readonly stat;
     private readonly entity;
-    constructor(api: UiApi, entity: IEntity, stat: Stat);
+    constructor(entity: IEntity, stat: Stat);
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
      */
@@ -61,7 +60,7 @@ export declare abstract class StatElement extends Component {
 export declare class Statbar extends StatElement {
     private readonly bar;
     private readonly text;
-    constructor(uiApi: UiApi, entity: IEntity, stat: Stat);
+    constructor(entity: IEntity, stat: Stat);
     getDisplayElement(): Text;
     getGenericStatValue(stat: IStatMax): IStringSection[];
     /**
@@ -73,16 +72,16 @@ export declare class Statbar extends StatElement {
 }
 export declare class StatAttribute extends StatElement {
     private readonly attribute;
-    constructor(uiApi: UiApi, entity: IEntity, stat: Stat);
+    constructor(entity: IEntity, stat: Stat);
     getDisplayElement(): Text;
 }
 export declare class Statbars extends Component {
     private readonly _statbars;
     readonly statbars: Map<Stat, Statbar>;
-    constructor(uiApi: UiApi, entity: IEntity, iterableOfStats: Stream<Stat>);
+    constructor(entity: IEntity, iterableOfStats: Stream<Stat>);
 }
 export declare class StatAttributes extends Component {
     private readonly _stats;
     readonly stats: Map<Stat, StatAttribute>;
-    constructor(uiApi: UiApi, entity: IEntity, iterableOfStats: Stream<Stat>);
+    constructor(entity: IEntity, iterableOfStats: Stream<Stat>);
 }

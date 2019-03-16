@@ -8,13 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DialogId, EquipType, ItemType, SortType } from "Enums";
-import { IContainer, IDismantleComponent, IItem } from "item/IItem";
+import { EquipType } from "entity/IHuman";
+import { IContainer, IDismantleComponent, IItem, ItemType } from "item/IItem";
 import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { IPropSerializable } from "save/ISerializer";
+import { SortType } from "SortType";
 import Emitter from "utilities/Emitter";
+export declare enum DialogId {
+    Inventory = 0,
+    Crafting = 1,
+    Equipment = 2,
+    Map = 3,
+    Container = 4,
+    Custom = 5
+}
 export interface IUiScreen {
     bindCatcher?: number;
     selector(): string;

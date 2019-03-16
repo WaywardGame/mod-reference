@@ -14,12 +14,13 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 import Vector3 from "utilities/math/Vector3";
+import Stream from "utilities/stream/Stream";
 declare class Inspection {
     readonly inspector: Human;
     readonly context: InspectionContext | string;
     readonly tile: ITile;
     readonly tilePosition: Vector3;
-    static inspect(inspector: Human, tilePosition: Vector3, context: InspectionContext | string): IterableIterator<IInspectionSectionSimple>;
+    static inspect(inspector: Human, tilePosition: Vector3, context: InspectionContext | string): Stream<IInspectionSectionSimple>;
     private constructor();
     inspectEntityHealth(entity: IEntity, entityName?: Translation, revealer?: Translation, skillPercent?: number, healthPercent?: number): Translation | undefined;
     inspectFire(decay?: number): Translation | undefined;

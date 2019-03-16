@@ -8,14 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { PlayerState, TurnMode } from "Enums";
+import { ICharacter } from "entity/IHuman";
+import { IPlayer, PlayerState } from "entity/player/IPlayer";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { ICrafted } from "game/IGame";
+import { ICrafted, TurnMode } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-import { TextOrTranslationData, TranslationGenerator } from "newui/component/IComponent";
-import { ICharacter, IPlayer } from "player/IPlayer";
 import { SaveObject } from "save/ISaveManager";
 import { LobbyType } from "steamworks/ISteamworks";
 import Emitter from "utilities/Emitter";
@@ -34,8 +33,8 @@ export interface IMultiplayer extends Emitter {
     closeConnection(reason: DisconnectReason, connection: IConnection): void;
     convertGameCodeToServerInfo(gameCode: string): ServerInfo;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
-    disconnect(reason?: DisconnectReason, reasonDescription?: TranslationGenerator, unloading?: boolean): Promise<void>;
-    disconnectAndResetGameState(reason: DisconnectReason, reasonDescription?: TranslationGenerator): Promise<void>;
+    disconnect(reason?: DisconnectReason, args?: any[], unloading?: boolean): Promise<void>;
+    disconnectAndResetGameState(reason: DisconnectReason, args?: any[]): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): void;
     getBannedPlayers(): string[];
     getClients(): IConnection[];
@@ -50,7 +49,7 @@ export interface IMultiplayer extends Emitter {
     isReady(): boolean;
     isServer(): boolean;
     joinServer(info: ServerInfo, character?: ICharacter): void;
-    kick(player: IPlayer, message: TextOrTranslationData): void;
+    kick(player: IPlayer, reason: DisconnectReason): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onLobbyExited(lobbyId: string): void;
     onPlaying(): Promise<void>;
@@ -182,5 +181,17 @@ export declare enum DisconnectReason {
     LostConnection = 5,
     ServerShutdown = 6,
     UnableToJoinGame = 7,
-    UnableToLoadMods = 8
+    UnableToLoadMods = 8,
+    Banned = 9
+}
+export declare enum UnableToJoinReason {
+    BuildMismatch = 0,
+    DuplicateIdentifier = 1,
+    FriendsOnly = 2,
+    ServerFull = 3,
+    SteamRequired = 4,
+    UnknownError = 5,
+    VersionMismatch = 6,
+    Banned = 7,
+    FailedToLoadMods = 8
 }

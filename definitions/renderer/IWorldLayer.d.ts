@@ -7,15 +7,13 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType, TerrainMask, TerrainType } from "Enums";
+import { DoodadType } from "doodad/IDoodad";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
 import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
-import { ITile } from "tile/ITerrain";
+import { ITile, TerrainType } from "tile/ITerrain";
 export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean) => void;
 export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariation: number, hasGraphicVariation: boolean, flushImmediate: boolean) => void;
 export interface IWorldLayer {
@@ -41,3 +39,10 @@ export interface IWorldLayer {
     delete(): void;
 }
 export default IWorldLayer;
+export declare enum TerrainMask {
+    None = 0,
+    Type = 536870911,
+    Tilled = 536870912,
+    Wall = 1073741824,
+    Fence = 2147483648
+}

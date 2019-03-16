@@ -144,8 +144,3 @@ export declare abstract class BaseMod extends Emitter {
     private addTerrainResource;
 }
 export default BaseMod;
-export interface IButton {
-    name: string;
-    tooltip: string;
-    keyBind?: number;
-}

@@ -8,13 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable } from "Enums";
 import { IHookHost } from "mod/IHookHost";
-import { BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
+import { IComponent } from "newui/component/IComponent";
 import Text, { Heading } from "newui/component/Text";
-import { UiApi } from "newui/INewUi";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 import SelectionHandler from "newui/screen/screens/menu/component/SelectionHandler";
 export declare enum MenuEvent {
@@ -34,15 +33,15 @@ export default class Menu extends Component implements IMenu, IHookHost {
     protected readonly content: Component;
     protected tabContainer: Component;
     private readonly tabs;
-    constructor(uiApi: UiApi, menuId: MenuId | string);
+    constructor(menuId: MenuId | string);
     setTitle(initializer: (title: Heading) => Heading): void;
     setDescription(initializer: (title: Text) => Text): void;
     setOnBeforeShow(beforeShow: () => void | Promise<void>): void;
     show(): this;
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;
-    addTabs(...tabs: ArrayOfIterablesOfOr<Tab>): void;
-    getTabs(): IterableIterator<Tab<string | number | undefined>>;
+    addTabs(...tabs: ArrayOfIterablesOr<Tab>): void;
+    getTabs(): import("../../../../../utilities/stream/Stream").default<Tab<string | number | undefined>>;
     addSubtabs(tab: Tab): this;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
@@ -61,16 +60,16 @@ export declare class Tab<I extends string | number | undefined = string | number
     section: MenuSection | undefined;
     private _subtabs;
     readonly subtabs: Tab<string | number | undefined>[];
-    constructor(api: UiApi, id: I);
+    constructor(id: I);
     setSection(section: MenuSection): this;
-    setSubTabs(...tabs: ArrayOfIterablesOfOr<Tab>): void;
+    setSubTabs(...tabs: ArrayOfIterablesOr<Tab>): void;
 }
 export declare class MenuSection extends Component {
     readonly heading: Heading;
     readonly content: Component;
-    constructor(api: UiApi);
+    constructor();
     setTitle(initializer: (title: Heading) => Heading): this;
-    addContent(...content: ArrayOfIterablesOfOr<Component | undefined>): this;
+    addContent(...content: ArrayOfIterablesOr<IComponent | undefined>): this;
     dumpContent(): this;
 }
 export declare const enum BackButtonType {
@@ -78,6 +77,6 @@ export declare const enum BackButtonType {
     Check = 1
 }
 export declare class BackButton extends Button {
-    constructor(api: UiApi);
+    constructor();
     setType(type: BackButtonType): void;
 }

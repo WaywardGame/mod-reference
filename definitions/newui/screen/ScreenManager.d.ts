@@ -8,37 +8,60 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { UiApi } from "newui/INewUi";
-import { IScreen, ScreenId } from "newui/screen/IScreen";
+import { ScreenId } from "newui/screen/IScreen";
 import Screen from "newui/screen/Screen";
+import Stream from "utilities/stream/Stream";
 export default class ScreenManager {
-    private readonly _screens;
-    private readonly api;
-    private visibleScreen;
-    private overlayScreen;
-    constructor(uiApi: UiApi);
+    private readonly screens;
+    private visible;
+    private overlay;
     /**
-     * Generator for all initialized screens.
+     * Streams all initialized screens.
      */
-    screens(): IterableIterator<IScreen>;
+    all(): Stream<Screen>;
     /**
-     * Returns a screen. If the screen is not already initialized, initializes it.
+     * Returns a screen, or `undefined`, if the screen is not initialized.
      * @param screenId The ID of the screen to return
      */
-    getScreen<S extends IScreen = Screen>(screenId: ScreenId): S | undefined;
+    get<S extends Screen = Screen>(screenId: ScreenId): S | undefined;
     /**
-     * The ID of the visible screen
+     * If the screen by the given ID is not already initialized, initializes it.
+     * @param screenId The ID of the screen to initialize
+     * @returns The initialized screen
      */
-    getVisibleScreen<S extends IScreen = Screen>(): S | undefined;
+    initialize<S extends Screen = Screen>(screenId: ScreenId): S;
     /**
-     * Returns if the given screen id is the currently visible screen.
+     * Returns the "top" screen.
+     *
+     * There are two screen layers:
+     * 1. The main layer
+     * 2. The overlay layer
+     *
+     * The overlay layer is always in front of the main layer, therefore if there is no overlay screen visible,
+     * this method returns the main layer screen. Otherwise, this method returns the overlay layer screen.
      */
-    isScreenVisible(screenId: ScreenId): boolean;
+    getTop<S extends Screen = Screen>(): S | undefined;
+    /**
+     * Returns if the given screen id is the "top" screen.
+     *
+     * There are two screen layers:
+     * 1. The main layer
+     * 2. The overlay layer
+     *
+     * The overlay layer is always in front of the main layer, therefore if there is no overlay screen visible,
+     * this method returns if the given screen ID is the main layer screen. Otherwise, this method returns
+     * if the given screen ID is the overlay layer screen.
+     */
+    isTop(screenId: ScreenId): boolean;
+    /**
+     * Returns if the given screen id is a currently visible screen (either the main screen or the overlay screen).
+     */
+    isVisible(screenId: ScreenId): boolean;
     /**
      * Shows a screen
      * @param screenId The id of the screen to show
      */
-    show<S extends IScreen = Screen>(screenId: ScreenId): S;
+    show<S extends Screen = Screen>(screenId: ScreenId): S;
     /**
      * Hides the given screen, or the current screen if none is passed.
      */
@@ -46,11 +69,11 @@ export default class ScreenManager {
     /**
      * Returns the ID of a screen
      */
-    private getScreenId;
+    private getId;
     /**
      * Hides a screen, then removes it after 1 second.
      */
-    private hideAndRemoveScreen;
+    private hideAndRemove;
     /**
      * Removes a screen, or does nothing if the given screen is not initialized.
      */

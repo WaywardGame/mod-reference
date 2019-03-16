@@ -13,7 +13,6 @@ import { IFontSizeSection } from "language/segment/HeadingSegment";
 import { ILinkSection } from "language/segment/LinkSegment";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
-import { UiApi } from "newui/INewUi";
 import { ISegment, IStringSection } from "utilities/string/Interpolator";
 export default class Text extends Component {
     static resolve(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[]): IStringSection[];
@@ -21,7 +20,7 @@ export default class Text extends Component {
     static toString(translation: TranslationGenerator | undefined, additionalSegments?: ISegment[]): string;
     private segments;
     private text;
-    constructor(uiApi: UiApi, elementType?: string);
+    constructor(elementType?: string);
     setSegments(...segments: ISegment[]): this;
     setText(text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;
@@ -29,15 +28,15 @@ export default class Text extends Component {
     refresh(): void;
 }
 export declare class Paragraph extends Text {
-    constructor(uiApi: UiApi);
+    constructor();
 }
 export declare class Heading extends Text {
-    constructor(uiApi: UiApi);
+    constructor();
 }
 export declare class BasicText extends Component {
     private _link;
     private linkHandler;
-    constructor(uiApi: UiApi);
+    constructor();
     setText(text: IStringSection | IColorSection | ILinkSection | IFontSizeSection): this;
     setLinkHandler(handler?: (link: string | [string, string | undefined]) => boolean): void;
     private onClick;

@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { UiApi } from "newui/INewUi";
 import { ScreenId } from "newui/screen/IScreen";
 import Screen from "newui/screen/Screen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
@@ -18,7 +17,7 @@ export default abstract class MenuScreen extends Screen {
         [key: number]: Menu;
     };
     protected menuChain: Menu[];
-    constructor(api: UiApi, screenId: ScreenId);
+    constructor(screenId: ScreenId);
     /**
      * Returns the visible menu (top of the chain)
      */

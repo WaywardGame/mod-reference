@@ -7,10 +7,7 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { TerrainType } from "Enums";
-import { ITerrainDescription } from "tile/ITerrain";
+import { ITerrainDescription, TerrainType } from "tile/ITerrain";
 export declare const terrainDescriptions: OptionalDescriptions<TerrainType, ITerrainDescription>;
 export default terrainDescriptions;

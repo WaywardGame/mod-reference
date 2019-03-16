@@ -8,13 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IRGB } from "Enums";
+import { ICustomizations } from "entity/IHuman";
 import Component from "newui/component/Component";
-import { UiApi } from "newui/INewUi";
-import { IPlayerCustomization } from "player/IPlayer";
+import { IRGB } from "utilities/Color";
 export declare class SVG extends Component {
     private readonly filters;
-    constructor(uiApi: UiApi);
+    constructor();
     createFilter(id: string): this;
     setFilterColor(id: string, color: IRGB): void;
 }
@@ -35,7 +34,7 @@ export default class CharacterPreview extends Component {
     private readonly svg;
     private _loaded;
     readonly loaded: boolean;
-    constructor(api: UiApi, customization: IPlayerCustomization, filters?: CharacterPreviewFilters);
+    constructor(customization: ICustomizations, filters?: CharacterPreviewFilters);
     getFilters(): CharacterPreviewFilters;
     update(): this;
     rotate(direction: CharacterPreviewRotation): void;

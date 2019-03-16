@@ -11,7 +11,6 @@
 import UiTranslation from "language/dictionary/UiTranslation";
 import { IHookHost } from "mod/IHookHost";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 export default class QuestDialog extends Dialog implements IHookHost {
     private readonly questsActiveWrapper;
     private readonly questsActiveHeading;
@@ -23,7 +22,7 @@ export default class QuestDialog extends Dialog implements IHookHost {
     private readonly childQuests;
     private readonly completeQuestButton;
     private current;
-    constructor(api: IGameScreenApi);
+    constructor();
     getName(): UiTranslation;
     showQuest(id: number): this;
     private refreshFooter;

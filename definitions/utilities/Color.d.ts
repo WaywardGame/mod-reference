@@ -7,10 +7,12 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { IRGB } from "Enums";
+export interface IRGB {
+    r: number;
+    g: number;
+    b: number;
+}
 declare function Color(color: IRGB): IRGB;
 declare function Color(r: number, g: number, b: number): IRGB;
 declare function Color(rgb: string): IRGB;

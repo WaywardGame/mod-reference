@@ -8,25 +8,27 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICorpse } from "creature/corpse/ICorpse";
-import { ICreature, IDamageInfo } from "creature/ICreature";
 import { IDoodad } from "doodad/IDoodad";
-import { Direction, FireType, ISeeds, ItemQuality, SaveType, SkillType, TerrainType, TickSpeed, TurnMode, TurnType } from "Enums";
+import { ICorpse } from "entity/creature/corpse/ICorpse";
+import { ICreature, IDamageInfo } from "entity/creature/ICreature";
+import { ICharacter, SkillType } from "entity/IHuman";
+import { INPC } from "entity/npc/INPC";
+import { IPlayer, TurnType } from "entity/player/IPlayer";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
+import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
 import { IItem, IItemArray } from "item/IItem";
 import Translation from "language/Translation";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
-import { INPC } from "npc/INPC";
-import { ICharacter, IPlayer } from "player/IPlayer";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { IParticle } from "renderer/particle/IParticle";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { ISaveInfo } from "save/ISaveManager";
-import { ITile, ITileArray, ITileContainer, ITileData } from "tile/ITerrain";
+import { ITile, ITileArray, ITileContainer, ITileData, TerrainType } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
 import Emitter from "utilities/Emitter";
+import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { default as Vec2, default as Vector2 } from "utilities/math/Vector2";
 import Vector3 from "utilities/math/Vector3";
@@ -116,7 +118,7 @@ export interface IGame extends Emitter {
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number;
-    getMaxDurability(quality: ItemQuality, itemDurability: number): number;
+    getMaxDurability(quality: Quality, itemDurability: number): number;
     getMaxHealth(): number;
     getMovementFinishTime(): number;
     getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;
@@ -130,7 +132,7 @@ export interface IGame extends Emitter {
     getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): IPlayer[];
     getPlayersThatSeePosition(tileX: number, tileY: number, tileZ: number): IPlayer[];
-    getRandomQuality(bonusQuality?: number): ItemQuality;
+    getRandomQuality(bonusQuality?: number): Quality;
     getReputation(): number;
     getSkillPercent(skill: SkillType): number;
     getMaxWeight(): number;
@@ -198,6 +200,16 @@ export declare enum GameEvent {
     GlobalSlotLoaded = 0,
     Pause = 1,
     Resume = 2
+}
+export declare enum TickSpeed {
+    Min = 10,
+    Default = 50,
+    Max = 80
+}
+export declare enum TurnMode {
+    Manual = 0,
+    Simulated = 1,
+    RealTime = 2
 }
 export declare type IGameOld = Partial<IGame> & {
     dayNight: number;
@@ -304,6 +316,25 @@ export declare enum RenderSource {
     StartGame = 33,
     TileUpdate = 34,
     WorldLayerRendererFlush = 35
+}
+export declare enum FireType {
+    None = 0,
+    Doodad = 1,
+    Fire = 2,
+    Lava = 3,
+    CoolingLava = 4
+}
+export interface ISeeds {
+    base: number | string;
+    saved: number;
+}
+export declare enum SaveType {
+    InGame = 0,
+    Death = 1,
+    Quit = 2,
+    BackToMainMenu = 3,
+    Multiplayer = 4,
+    Challenge = 5
 }
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;

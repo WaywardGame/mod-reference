@@ -9,12 +9,11 @@
  * https://waywardgame.github.io/
  */
 import { IRefreshable } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 import { Tab } from "newui/screen/screens/menu/component/Menu";
 export default class TabAudio extends Tab implements IRefreshable {
     private readonly volumeEffects;
     private readonly volumeMusic;
-    constructor(api: UiApi);
+    constructor();
     refresh(): this;
     private onMuteEffects;
     private onEffectVolumeChange;

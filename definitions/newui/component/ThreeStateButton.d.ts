@@ -12,7 +12,6 @@ import Button from "newui/component/Button";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { Paragraph } from "newui/component/Text";
-import { UiApi } from "newui/INewUi";
 export declare const enum ThreeStateButtonEvent {
     Change = "Change"
 }
@@ -25,7 +24,7 @@ export declare class ThreeStateButton extends Button implements IRefreshableValu
     protected refreshMethod: () => ThreeStateButtonState;
     private _state;
     readonly state: ThreeStateButtonState;
-    constructor(uiApi: UiApi);
+    constructor();
     setState(state: ThreeStateButtonState, triggerEvent?: boolean): this;
     trySetState(state: ThreeStateButtonState, triggerEvent?: boolean): boolean;
     toggleState(): void;

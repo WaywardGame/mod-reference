@@ -8,23 +8,26 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDamageInfo } from "creature/ICreature";
+import { IDamageInfo } from "entity/creature/ICreature";
 import IEntity from "entity/IEntity";
-import { EquipType, FireType, ItemQuality, ItemType, PlayerState, RestCancelReason, SkillType } from "Enums";
-import { IContainer, IItem } from "item/IItem";
+import { MilestoneType } from "entity/player/IMilestone";
+import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
+import PlayerDefense from "entity/player/PlayerDefense";
+import { ISkillSet } from "entity/player/Skills";
+import { FireType } from "game/IGame";
+import { Quality } from "game/IObject";
+import { IContainer, IItem, ItemType } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation, { ISerializedTranslation } from "language/Translation";
-import { MilestoneType } from "player/IMilestone";
-import { IAttackHand, IMobCheck, IPlayerCustomization, IRestData } from "player/IPlayer";
-import PlayerDefense from "player/PlayerDefense";
-import { ISkillSet } from "player/Skills";
+import { IModdable } from "mod/ModRegistry";
 import { IOptions } from "save/data/ISaveDataGlobal";
+import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 export default interface IHuman extends IEntity {
     attackFromEquip: IAttackHand;
     canSendMessage: boolean;
-    customization: IPlayerCustomization;
+    customization: ICustomizations;
     deathBy: ISerializedTranslation;
     defense: PlayerDefense;
     defenses: number[];
@@ -71,7 +74,7 @@ export default interface IHuman extends IEntity {
     checkForGatherFire(): Translation | undefined;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
-    createItemInInventory(itemType: ItemType, quality?: ItemQuality): IItem;
+    createItemInInventory(itemType: ItemType, quality?: Quality): IItem;
     damage(amount: number, damageMessage: Message | Translation, soundDelay?: number, causesBlood?: boolean): number | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damageRandomEquipment(): void;
@@ -112,6 +115,22 @@ export declare const enum HumanEvent {
      */
     SkillChange = "SkillChange"
 }
+export interface IHairstyleDescription extends IModdable {
+    name: string;
+    imagePath?: string;
+}
+export interface IColorDescription extends IModdable {
+    color: IRGB;
+}
+export interface ICustomizations {
+    hairStyle: keyof typeof HairStyle;
+    hairColor: keyof typeof HairColor;
+    skinColor: keyof typeof SkinColor;
+}
+export interface ICharacter {
+    name: string;
+    customization: ICustomizations;
+}
 export declare const enum Delay {
     None = 0,
     LongPause = 25,
@@ -120,4 +139,104 @@ export declare const enum Delay {
     Collision = 40,
     TurnDirection = 2,
     ReallyLongPause = 100
+}
+export declare enum EquipType {
+    None = 0,
+    Held = 1,
+    Legs = 2,
+    Chest = 3,
+    Head = 4,
+    Belt = 5,
+    Feet = 6,
+    Neck = 7,
+    Hands = 8,
+    Back = 9,
+    LeftHand = 10,
+    RightHand = 11
+}
+export declare enum HairColor {
+    "#e7c978" = 0,
+    "#b9793d" = 1,
+    "#b84627" = 2,
+    "#7f3721" = 3,
+    "#7e4b1c" = 4,
+    "#422116" = 5,
+    "#28222a" = 6,
+    "#bfb0a8" = 7,
+    "#ffffff" = 8
+}
+export declare enum SkinColor {
+    "#fddcd4" = 0,
+    "#d6be93" = 1,
+    "#f0ceab" = 2,
+    "#c7a077" = 3,
+    "#d89a72" = 4,
+    "#89623a" = 5,
+    "#88563b" = 6,
+    "#613429" = 7,
+    "#361e1c" = 8
+}
+export declare enum HairStyle {
+    None = 0,
+    Spike = 1,
+    Bun = 2,
+    Ponytail = 3,
+    Afro = 4,
+    Bouncy = 5,
+    Dreads = 6,
+    Shaved = 7,
+    Long = 8,
+    Mohawk = 9
+}
+export declare enum RestCancelReason {
+    CreatureNearby = 0,
+    Damaged = 1,
+    FullStamina = 2,
+    NearbyCreatureDamagedDoodad = 3,
+    CreatureDamaged = 4,
+    Canceled = 5
+}
+export interface IRestData {
+    type: RestType;
+    startHealth: number;
+    totalCycles: number;
+    itemId?: number;
+    doodadId?: number;
+    cycle?: number;
+    cancelReason?: RestCancelReason;
+}
+export declare enum RestType {
+    Resting = 0,
+    Sleeping = 1
+}
+export declare enum SkillType {
+    Chemistry = 0,
+    Anatomy = 1,
+    Marksmanship = 2,
+    Blacksmithing = 3,
+    Botany = 4,
+    Camping = 5,
+    Cartography = 6,
+    Claythrowing = 7,
+    Cooking = 8,
+    Fishing = 9,
+    Fletching = 10,
+    Glassblowing = 11,
+    Leatherworking = 12,
+    LockPicking = 13,
+    Lumberjacking = 14,
+    Mining = 15,
+    Mycology = 16,
+    Parrying = 17,
+    Stonecrafting = 18,
+    Swimming = 19,
+    Tactics = 20,
+    Tailoring = 21,
+    Throwing = 22,
+    Tinkering = 23,
+    Trapping = 24,
+    Woodworking = 25,
+    Taming = 26,
+    Gardening = 27,
+    Bartering = 28
 }

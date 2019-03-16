@@ -7,10 +7,7 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { SpriteBatchLayer } from "Enums";
 import { ITileAdaptor } from "renderer/TileAdaptors";
 import Fence from "renderer/tileAdaptors/Fence";
 import Wall from "renderer/tileAdaptors/Wall";
@@ -51,3 +48,22 @@ export interface IWorldRenderer {
     dispose(): void;
 }
 export default IWorldRenderer;
+export declare enum SpriteBatchLayer {
+    Corpse = 0,
+    Item = 1,
+    Creature = 2,
+    CreatureFlying = 3,
+    Overlay = 4,
+    OverTrees = 5
+}
+export declare enum RenderFlag {
+    None = 0,
+    Corpse = 1,
+    Item = 2,
+    Player = 4,
+    Creature = 8,
+    Terrain = 16,
+    Overlay = 32,
+    OverTrees = 64,
+    All = 65535
+}

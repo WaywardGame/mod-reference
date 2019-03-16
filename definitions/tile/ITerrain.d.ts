@@ -7,16 +7,18 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { ICorpse } from "creature/corpse/ICorpse";
-import { ICreature } from "creature/ICreature";
-import { IDoodad } from "doodad/IDoodad";
-import { DoodadType, GrowingStage, IModdable, IRGB, ItemQuality, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
+import { SfxType } from "audio/IAudio";
+import { DoodadType, GrowingStage, IDoodad } from "doodad/IDoodad";
+import { ICorpse } from "entity/creature/corpse/ICorpse";
+import { ICreature } from "entity/creature/ICreature";
+import { SkillType } from "entity/IHuman";
+import { INPC } from "entity/npc/INPC";
+import { Quality } from "game/IObject";
 import { IContainer } from "item/IItem";
-import { INPC } from "npc/INPC";
+import { IModdable } from "mod/ModRegistry";
 import { ITileEvent } from "tile/ITileEvent";
+import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 export interface ITerrainDescription extends IModdable {
     passable?: boolean;
@@ -69,7 +71,7 @@ export interface ITileData {
     type: TerrainType;
     minDur?: number;
     maxDur?: number;
-    quality?: ItemQuality;
+    quality?: Quality;
     gfx?: number;
     tilled?: boolean;
     step?: number;
@@ -116,4 +118,46 @@ export interface IOverlayInfo {
     green?: number;
     blue?: number;
     alpha?: number;
+}
+export declare enum OverlayType {
+    WalkDots = 0,
+    Arrows = 1,
+    FootPrints = 2
+}
+export declare enum TerrainType {
+    DeepSeawater = 0,
+    Seawater = 1,
+    ShallowSeawater = 2,
+    DeepFreshWater = 3,
+    FreshWater = 4,
+    ShallowFreshWater = 5,
+    Grass = 6,
+    Gravel = 7,
+    Dirt = 8,
+    BeachSand = 9,
+    Snow = 10,
+    Swamp = 11,
+    Clay = 12,
+    Ash = 13,
+    Rocks = 14,
+    RocksWithIron = 15,
+    RocksWithTalc = 16,
+    RocksWithCoal = 17,
+    RocksWithLimestone = 18,
+    CobblestoneFlooring = 19,
+    Sandstone = 20,
+    SandstoneFlooring = 21,
+    SandstoneWithIron = 22,
+    SandstoneWithNiter = 23,
+    WoodenFlooring = 24,
+    ClayBrickFlooring = 25,
+    CaveEntrance = 26,
+    RedCarpet = 27,
+    Lava = 28,
+    FertileSoil = 29,
+    RocksWithCopper = 30,
+    SandstoneWithCopper = 31,
+    CoolingLava = 32,
+    Obsidian = 33,
+    DesertSand = 34
 }

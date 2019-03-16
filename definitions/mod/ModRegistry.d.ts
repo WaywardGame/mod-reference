@@ -8,17 +8,27 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionType, IActionDescription } from "action/IAction";
-import { CommandCallback } from "command/ICommand";
-import { ICorpseDescription } from "creature/corpse/ICorpse";
-import { ICreatureDescription } from "creature/ICreature";
-import { IDoodadDescription } from "doodad/IDoodad";
-import { Bindable, Command, CreatureType, DoodadType, ItemType, ItemTypeGroup, ITerrainResourceItem, Music, NPCType, OverlayType, SfxType, SkillType, TerrainType } from "Enums";
+import { Music, SfxType } from "audio/IAudio";
+import { Command, CommandCallback } from "command/ICommand";
+import { DoodadType, IDoodadDescription } from "doodad/IDoodad";
+import { ActionType, IActionDescription } from "entity/action/IAction";
+import { ICorpseDescription } from "entity/creature/corpse/ICorpse";
+import { CreatureType, ICreatureDescription } from "entity/creature/ICreature";
+import { SkillType } from "entity/IHuman";
+import { INPCClass, NPCType } from "entity/npc/NPCS";
+import { Source } from "entity/player/IMessageManager";
+import { INoteDescription } from "entity/player/note/NoteManager";
+import { QuestType } from "entity/player/quest/quest/IQuest";
+import { Quest } from "entity/player/quest/quest/Quest";
+import { RequirementType } from "entity/player/quest/requirement/IRequirement";
+import { Requirement } from "entity/player/quest/requirement/Requirement";
+import { ISkillDescription } from "entity/player/Skills";
 import { ChallengeModifier, IDailyChallengeModifier } from "game/Challenge";
 import { InspectType } from "game/inspection/IInspection";
 import { IInspectionHandler } from "game/inspection/Inspections";
-import { IItemDescription, IItemGroupDescription } from "item/IItem";
+import { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "item/IItem";
 import { Dictionary } from "language/Dictionaries";
+import Interrupt from "language/dictionary/Interrupt";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import Message from "language/dictionary/Message";
 import Note from "language/dictionary/Note";
@@ -26,25 +36,20 @@ import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
 import InterModRegistry, { InterModRegistration } from "mod/InterModRegistry";
 import { IPacketClass } from "multiplayer/packets/Packets";
-import { IBinding } from "newui/BindingManager";
+import { Bindable, IBinding } from "newui/BindingManager";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import { DialogId, IDialogDescription } from "newui/screen/screens/game/Dialogs";
-import IGameScreenApi from "newui/screen/screens/game/IGameScreenApi";
 import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
 import { HelpArticle, IHelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 import { ModOptionSectionInitializer } from "newui/screen/screens/menu/menus/options/TabMods";
-import { INPCClass } from "npc/NPCS";
-import { Source } from "player/IMessageManager";
-import { INoteDescription } from "player/note/NoteManager";
-import { QuestType } from "player/quest/quest/IQuest";
-import { Quest } from "player/quest/quest/Quest";
-import { RequirementType } from "player/quest/requirement/IRequirement";
-import { Requirement } from "player/quest/requirement/Requirement";
-import { ISkillDescription } from "player/Skills";
 import { ITerrainDecorationBase, TerrainDecoration } from "renderer/Decorations";
 import { IOverlayDescription } from "renderer/Overlays";
-import { ITerrainDescription } from "tile/ITerrain";
+import { ITerrainDescription, OverlayType, TerrainType } from "tile/ITerrain";
 import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
+import { ITerrainLootItem } from "tile/TerrainResources";
+export interface IModdable {
+    modIndex?: number;
+}
 export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
 export declare enum ModRegistrationType {
     Action = 0,
@@ -80,7 +85,8 @@ export declare enum ModRegistrationType {
     SoundEffect = 30,
     Terrain = 31,
     TerrainDecoration = 32,
-    TileEvent = 33
+    TileEvent = 33,
+    Interrupt = 34
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -154,6 +160,10 @@ export interface IMessageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Message;
     name: string;
 }
+export interface IInterruptRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.Interrupt;
+    name: string;
+}
 export interface IOverlayRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Overlay;
     name: string;
@@ -180,7 +190,7 @@ export interface IDialogRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Dialog;
     name: string;
     description: IDialogDescription;
-    class: new (gsapi: IGameScreenApi) => Dialog;
+    class: new () => Dialog;
 }
 export interface IInterModRegistryRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InterModRegistry;
@@ -221,7 +231,7 @@ export interface ITerrainDecorationRegistration extends IBaseModRegistration {
     description?: ITerrainDecorationBase;
 }
 export interface ITerrainRegistrationDescription extends ITerrainDescription {
-    resources?: ITerrainResourceItem[];
+    resources?: ITerrainLootItem[];
     defaultItem?: ItemType;
 }
 export interface IDoodadRegistration extends IBaseModRegistration {
@@ -249,7 +259,7 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: Requirement;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | IInterruptRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -380,7 +390,7 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered dialog.
      */
-    function dialog(name: string, description: IDialogDescription, cls: new (gsapi: IGameScreenApi, id: number) => Dialog): <K extends string | number | symbol, T extends { [k in K]: DialogId; }>(target: T, key: K) => void;
+    function dialog(name: string, description: IDialogDescription, cls: new (id: number) => Dialog): <K extends string | number | symbol, T extends { [k in K]: DialogId; }>(target: T, key: K) => void;
     /**
      * Registers a bindable.
      * @param name The name of the bindable.
@@ -405,10 +415,17 @@ declare module Register {
      *
      * The decorated property will be injected with the id of the registered message.
      *
-     * Note: This decorator replaces the previous `Mod.addMessage(name, message)` call. However, it does not support passing
-     * a string. To translate your message, create a language file that extends English.
+     * Note: The method does not support passing a translated English string. To translate your message, create a language
+     * file that extends English.
      */
     function message(name: string): <K extends string | number | symbol, T extends { [k in K]: Message; }>(target: T, key: K) => void;
+    /**
+     * Registers an interrupt.
+     * @param name The name of the interrupt.
+     *
+     * The decorated property will be injected with the id of the registered interrupt.
+     */
+    function interrupt(name: string): <K extends string | number | symbol, T extends { [k in K]: Interrupt; }>(target: T, key: K) => void;
     /**
      * Registers an interrupt choice.
      * @param name The name of the interrupt choice.

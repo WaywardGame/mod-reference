@@ -7,10 +7,8 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { IRGB } from "Enums";
+import { IRGB } from "utilities/Color";
 export interface IParticle {
     clear(): void;
     create(tileX: number, tileY: number, tileZ: number, particle: IRGB): void;

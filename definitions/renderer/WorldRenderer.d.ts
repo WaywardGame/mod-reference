@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { SpriteBatchLayer } from "Enums";
-import IWorldRenderer from "renderer/IWorldRenderer";
+import IWorldRenderer, { SpriteBatchLayer } from "renderer/IWorldRenderer";
 import { ITileAdaptor } from "renderer/TileAdaptors";
 import Fence from "renderer/tileAdaptors/Fence";
 import Wall from "renderer/tileAdaptors/Wall";

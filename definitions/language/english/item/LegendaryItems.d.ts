@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { LegendaryType } from "Enums";
+import { LegendaryType } from "item/IItem";
 declare const legendaryItems: Descriptions<LegendaryType, string>;
 export default legendaryItems;

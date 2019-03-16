@@ -8,25 +8,30 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ActionType, IActionApi, IActionDescription } from "action/IAction";
-import { ICreature, IDamageInfo, SpawnGroup } from "creature/ICreature";
-import { IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import IEntity from "entity/IEntity";
-import IHuman from "entity/IHuman";
-import { AttackType, Bindable, BookType, Command, CreatureType, Direction, DoodadType, EquipType, ItemQuality, ItemType, MoveType, NPCType, PlayerState, RenderFlag, SfxType, SkillType, SpriteBatchLayer, WeightStatus } from "Enums";
+import { SfxType } from "audio/IAudio";
+import { Command } from "command/ICommand";
+import { DoodadType, IDoodad, IDoodadOptions } from "doodad/IDoodad";
+import { ActionType, IActionApi, IActionDescription } from "entity/action/IAction";
+import { CreatureType, ICreature, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
+import IEntity, { AttackType, MoveType } from "entity/IEntity";
+import IHuman, { EquipType, SkillType } from "entity/IHuman";
+import { INPC } from "entity/npc/INPC";
+import { NPCType } from "entity/npc/NPCS";
+import { IMessage } from "entity/player/IMessageManager";
+import IPlayer, { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
+import { INote } from "entity/player/note/NoteManager";
 import { IMapRequest } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
-import { IContainer, IItem } from "item/IItem";
+import { Quality } from "game/IObject";
+import { BookType, IContainer, IItem, ItemType } from "item/IItem";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import { Hook } from "mod/IHookManager";
-import { BindCatcherApi } from "newui/BindingManager";
-import { INPC } from "npc/INPC";
-import { IMessage } from "player/IMessageManager";
-import IPlayer, { IMovementIntent } from "player/IPlayer";
-import { INote } from "player/note/NoteManager";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
+import { RenderFlag, SpriteBatchLayer } from "renderer/IWorldRenderer";
 import { ITile } from "tile/ITerrain";
+import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -155,7 +160,7 @@ export interface IHookHost {
      * @param dropAllQuality If not undefined, all items of this quality will be dropped
      * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
      */
-    canDropItem?(human: Human, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: ItemQuality | undefined): boolean | undefined;
+    canDropItem?(human: Human, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
     /**
      * Called before an npc attacks
      * @param npc The npc object

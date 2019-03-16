@@ -8,16 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DialogId, EquipType, ItemType } from "Enums";
-import { IContainer, IDismantleComponent, IItem } from "item/IItem";
+import { EquipType } from "entity/IHuman";
+import { IContainer, IDismantleComponent, IItem, ItemType } from "item/IItem";
 import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
-import "ui/functional/FunctionalSortable";
-import "ui/functional/FunctionalTooltip";
-import { IDialogInfo, IUi } from "ui/IUi";
+import { DialogId, IDialogInfo, IUi } from "ui/IUi";
 import InGameScreen from "ui/screens/InGameScreen";
 import Emitter from "utilities/Emitter";
+import "ui/functional/FunctionalSortable";
+import "ui/functional/FunctionalTooltip";
 export default class Ui extends Emitter implements IUi {
     screenInGame: InGameScreen;
     private readonly elementDocument;

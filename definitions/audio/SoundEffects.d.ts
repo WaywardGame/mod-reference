@@ -7,9 +7,7 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
+import { SfxType } from "audio/IAudio";
 import { ISoundEffectDescription } from "audio/IMusic";
-import { SfxType } from "Enums";
 export declare const soundEffectDescriptions: OptionalDescriptions<SfxType, ISoundEffectDescription>;

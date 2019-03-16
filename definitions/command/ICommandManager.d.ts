@@ -7,13 +7,10 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { ICommand } from "command/ICommand";
-import { Command } from "Enums";
+import { Command, ICommand } from "command/ICommand";
+import { IPlayer } from "entity/player/IPlayer";
 import { IGenericManager } from "game/IGenericManager";
-import { IPlayer } from "player/IPlayer";
 export interface ICommandManager extends IGenericManager<ICommand> {
     execute(player: IPlayer, cmd: Command, args?: string): void;
 }

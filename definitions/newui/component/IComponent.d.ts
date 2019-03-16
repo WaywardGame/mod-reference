@@ -11,9 +11,10 @@
 import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
-import { AttributeManipulator, ClassListManipulator } from "newui/util/ElementManipulator";
+import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
 import Emitter from "utilities/Emitter";
 import { IVector2 } from "utilities/math/IVector";
+import Stream from "utilities/stream/Stream";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare const enum ComponentEvent {
     Show = "Show",
@@ -51,14 +52,6 @@ export interface IComponent extends Emitter {
      */
     dataset: DOMStringMap;
     /**
-     * The `scrollHeight` of the internal element.
-     */
-    scrollHeight: number;
-    /**
-     * The `style` of the internal element.
-     */
-    style: CSSStyleDeclaration;
-    /**
      * The number of child `UiElement`s in this element.
      */
     childCount: number;
@@ -66,18 +59,15 @@ export interface IComponent extends Emitter {
      * The selectable layer of this element, or `false` if it is not selectable.
      */
     selectable: false | SelectableLayer;
-    classes: ClassListManipulator<this>;
+    classes: ClassManipulator<this>;
     attributes: AttributeManipulator<this>;
+    style: StyleManipulator<this>;
+    data: DataManipulator<this>;
     listen: Element["addEventListener"];
     /**
      * Sets the ID of this component's element.
      */
     setId(id: string): this;
-    /**
-     * Return a proxy for the data on this element that uses `JSON.stringify` and `JSON.parse` to set
-     * and retrieve data.
-     */
-    jsonData<T = any>(): DOMStringMap & T;
     /**
      * Returns whether the element is visible.
      */
@@ -105,7 +95,7 @@ export interface IComponent extends Emitter {
      * Append every element of a list of elements.
      * @param elements A varargs list of elements or iterables of elements. `undefined` is skipped
      */
-    append(...elements: Array<HTMLElement | IComponent | undefined | IterableOf<HTMLElement | IComponent | undefined>>): this;
+    append(...elements: ArrayOfIterablesOr<HTMLElement | IComponent | undefined | false>): this;
     /**
      * Remove this element.
      *
@@ -173,7 +163,7 @@ export interface IComponent extends Emitter {
     /**
      * Returns a new array of the children
      */
-    getChildren(): IterableIterator<IComponent>;
+    getChildren(): Stream<IComponent>;
     /**
      * Scrolls this element so the given child is at the top of the viewport.
      * @param child The child to scroll to
@@ -269,7 +259,7 @@ export interface IDisableable {
     disabled: boolean;
     setDisabled(disabled: boolean): this;
 }
-export declare type TranslationGenerator = Translation | UiTranslation | ISerializedTranslation | (() => IterableOf<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined);
+export declare type TranslationGenerator = Translation | UiTranslation | ISerializedTranslation | (() => Iterable<IStringSection> | Translation | UiTranslation | ISerializedTranslation | undefined);
 export declare type HighlightSelector = [HighlightType, string | number];
 export interface IHighlight {
     selectors: HighlightSelector[];

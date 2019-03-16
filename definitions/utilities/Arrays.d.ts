@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+export declare function tuple<T extends any[]>(...items: T): T;
 declare module Arrays {
     /**
      * Produces an array of the numbers @param min (inclusive) to @param max (exclusive), in steps of @param step

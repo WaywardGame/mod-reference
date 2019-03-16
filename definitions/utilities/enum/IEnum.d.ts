@@ -47,7 +47,8 @@ export declare enum EnumId {
     DailyChallengeModifier = 29,
     Quest = 30,
     QuestRequirement = 31,
-    TerrainDecoration = 32
+    TerrainDecoration = 32,
+    Interrupt = 33
 }
 export interface IEnumInfo {
     enumId: EnumId;

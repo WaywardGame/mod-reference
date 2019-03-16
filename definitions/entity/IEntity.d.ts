@@ -8,14 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICreature } from "creature/ICreature";
+import { SfxType } from "audio/IAudio";
+import { ICreature } from "entity/creature/ICreature";
 import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
-import { Direction, FireType, ItemType, MoveType, SfxType, StatType, StatusType } from "Enums";
+import { INPC } from "entity/npc/INPC";
+import IPlayer from "entity/player/IPlayer";
+import { FireType } from "game/IGame";
+import { ItemType } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
-import { INPC } from "npc/INPC";
-import IPlayer from "player/IPlayer";
+import { StatType } from "renderer/INotifier";
 import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
+import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default interface IEntity extends IVector3, Emitter {
     entityType: EntityType;
@@ -245,6 +249,11 @@ export declare module IStatChangeInfo {
      */
     function get<T = any>(reasonOrInfo: StatChangeReason | IStatChangeInfo, important?: boolean): IStatChangeInfo<T>;
 }
+export declare enum StatusType {
+    Bleeding = 0,
+    Poisoned = 1,
+    Burned = 2
+}
 export declare type IStatus = Writable<{
     [key in keyof typeof StatusType]: boolean;
 }, keyof typeof StatusType>;
@@ -271,4 +280,45 @@ export declare enum AiType {
     Defender = 128,
     Fleeing = 256,
     Waiting = 512
+}
+export declare enum MoveType {
+    None = 0,
+    Water = 1,
+    ShallowWater = 2,
+    Land = 4,
+    Tree = 8,
+    Mountain = 16,
+    Fire = 32,
+    BreakDoodads = 64,
+    WetLand = 128,
+    Flying = 15
+}
+export declare enum AttackType {
+    Melee = 0,
+    HandToHand = 1,
+    Shoot = 2,
+    Sling = 3,
+    Fire = 4,
+    ThrowItem = 5
+}
+export declare enum DamageType {
+    Blunt = 1,
+    Slashing = 2,
+    Piercing = 4,
+    Fire = 8,
+    True = 16
+}
+export declare class Defense {
+    base: number;
+    resist: Resistances;
+    vulnerable: Vulnerabilities;
+    constructor(base: number, resist: Resistances, vulnerable: Vulnerabilities);
+}
+export declare class Vulnerabilities {
+    [index: number]: number;
+    constructor(...args: any[]);
+}
+export declare class Resistances {
+    [index: number]: number;
+    constructor(...args: any[]);
 }

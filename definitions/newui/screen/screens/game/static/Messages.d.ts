@@ -8,28 +8,27 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable } from "Enums";
+import { IMessage, Source } from "entity/player/IMessageManager";
+import IPlayer from "entity/player/IPlayer";
+import { RequirementInstance } from "entity/player/quest/quest/Quest";
+import { QuestInstance } from "entity/player/quest/QuestManager";
 import { IHookHost } from "mod/IHookHost";
-import { BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import Input from "newui/component/Input";
-import { UiApi } from "newui/INewUi";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import { IFilters } from "newui/screen/screens/game/dialog/MessagesEditFiltersDialog";
-import IGameScreenApi, { IMessages, IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
-import { IMessage, Source } from "player/IMessageManager";
-import IPlayer from "player/IPlayer";
-import { RequirementInstance } from "player/quest/quest/Quest";
-import { QuestInstance } from "player/quest/QuestManager";
+import { IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import Stream from "utilities/stream/Stream";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare const DEFAULT_MAX_MESSAGES = 30;
 export interface IMessageFilter {
     name: string;
     allowedSources: Source[];
 }
-export default class Messages extends QuadrantComponent<false> implements IHookHost, IMessages {
+export default class Messages extends QuadrantComponent implements IHookHost {
     static preferredQuadrant: Quadrant;
     static sendChatMessage(sender: IPlayer, message: string): typeof Messages;
     static readonly allFilterName: string;
@@ -54,10 +53,10 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
     private readonly chatSentHistory;
     private chatHistoryIndex;
     private pushedCurrentToHistory;
-    constructor(api: IGameScreenApi | UiApi);
+    constructor();
     getID(): QuadrantComponentId;
     getName(): IStringSection[];
-    getPins(): IterableIterator<IPinnedMessage>;
+    getPins(): Stream<IPinnedMessage>;
     getMessageTimestampMode(): MessageTimestamp;
     setMessageTimestampMode(mode: MessageTimestamp): this;
     shouldShowSendButton(): boolean;
@@ -120,5 +119,5 @@ export default class Messages extends QuadrantComponent<false> implements IHookH
 export declare class PinnedMessage extends Button {
     readonly type: PinType;
     readonly id: any;
-    constructor(api: UiApi, type: PinType, id: any);
+    constructor(type: PinType, id: any);
 }

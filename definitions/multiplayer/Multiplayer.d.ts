@@ -8,14 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import UiTranslation from "language/dictionary/UiTranslation";
+import { ICharacter } from "entity/IHuman";
+import IPlayer from "entity/player/IPlayer";
 import { IHookHost } from "mod/IHookHost";
-import { DisconnectReason, IMultiplayer, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo } from "multiplayer/IMultiplayer";
+import { DisconnectReason, IMultiplayer, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-import { TranslationGenerator } from "newui/component/IComponent";
-import IPlayer, { ICharacter } from "player/IPlayer";
 import Emitter from "utilities/Emitter";
 export default class Multiplayer extends Emitter implements IMultiplayer, IHookHost {
     private readonly _playerIdentifier;
@@ -68,10 +67,11 @@ export default class Multiplayer extends Emitter implements IMultiplayer, IHookH
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     joinServer(serverInfo: ServerInfo, character?: ICharacter): void;
-    disconnect(reason?: DisconnectReason, reasonDescription?: TranslationGenerator, unloading?: boolean): Promise<void>;
+    disconnect(reason?: DisconnectReason, args?: any[], unloading?: boolean): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): Promise<void>;
-    disconnectAndResetGameState(reason?: DisconnectReason, reasonDescription?: TranslationGenerator): Promise<void>;
-    kick(player: IPlayer, reason: UiTranslation): void;
+    disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;
+    disconnectAndResetGameState(reason?: DisconnectReason, reasonDescription?: any[]): Promise<void>;
+    kick(player: IPlayer, reason: DisconnectReason.Kick | DisconnectReason.Banned): void;
     onPlaying(): Promise<void>;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onLobbyExited(lobbyId: string): void;

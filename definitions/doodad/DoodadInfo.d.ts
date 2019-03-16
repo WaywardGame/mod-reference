@@ -7,11 +7,10 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
-import { DoodadType, TerrainType } from "Enums";
+import { DoodadType } from "doodad/IDoodad";
 import { TerrainDecoration } from "renderer/Decorations";
+import { TerrainType } from "tile/ITerrain";
 import Vec2 from "utilities/math/Vector2";
 export default class DoodadInfo {
     type: DoodadType | TerrainType | TerrainDecoration;

@@ -11,7 +11,6 @@
 import Component from "newui/component/Component";
 import { ITooltip, TooltipLocation } from "newui/component/IComponent";
 import Text, { Paragraph } from "newui/component/Text";
-import { UiApi } from "newui/INewUi";
 export declare const enum TooltipEvent {
     Move = "Move"
 }
@@ -22,7 +21,7 @@ export default class Tooltip extends Component implements ITooltip {
     private box;
     private sourceBox;
     private lastBoxTime;
-    constructor(api: UiApi, source: Component);
+    constructor(source: Component);
     setLocation(location: TooltipLocation): this;
     /**
      * Sets the max width of this tooltip.

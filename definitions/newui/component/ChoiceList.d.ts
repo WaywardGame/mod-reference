@@ -12,7 +12,6 @@ import { BlockRow } from "newui/component/BlockRow";
 import { CheckButton } from "newui/component/CheckButton";
 import { IDisableable } from "newui/component/IComponent";
 import { IRefreshableValue } from "newui/component/Refreshable";
-import { UiApi } from "newui/INewUi";
 export declare enum ChoiceListEvent {
     Choose = "Selection"
 }
@@ -22,9 +21,9 @@ export default class ChoiceList<C extends Choice = Choice> extends BlockRow impl
     readonly choice: C;
     private _disabled;
     readonly disabled: boolean;
-    constructor(uiApi: UiApi);
+    constructor();
     setDisabled(val: boolean): this;
-    setChoices(...choices: ArrayOfIterablesOfOr<C>): this;
+    setChoices(...choices: ArrayOfIterablesOr<C>): this;
     refresh(): this;
     setRefreshMethod(refreshMethod: (choiceList: this) => C): this;
     choose(chosen?: C): void;
@@ -33,5 +32,5 @@ export default class ChoiceList<C extends Choice = Choice> extends BlockRow impl
 }
 export declare class Choice<I extends string | number | undefined = string | number | undefined> extends CheckButton {
     readonly id: I;
-    constructor(uiApi: UiApi, id: I);
+    constructor(id: I);
 }

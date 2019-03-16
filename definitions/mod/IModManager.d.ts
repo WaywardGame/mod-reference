@@ -31,6 +31,13 @@ export declare enum CanLoadState {
     IncompatibleVersion = 9,
     DisabledInMultiplayer = 10
 }
+export declare enum ModLoadFailureReason {
+    IsDisabled = 0,
+    NotInstalled = 1,
+    NotMultiplayerCompatible = 2,
+    UnableToLoad = 3,
+    VersionMismatch = 4
+}
 export declare const enum ModManagerEvent {
     LoadAll = "LoadAll",
     UnloadAll = "UnloadAll"
@@ -74,7 +81,7 @@ export interface IModManager extends Emitter {
     isMultiplayerCompatible(index: number): boolean;
     isUnloadable(index: number): boolean;
     isValid(index: number): boolean;
-    loadAll(options: Partial<IPlayOptions>): Promise<string | undefined>;
+    loadAll(options: Partial<IPlayOptions>): Promise<Array<[ModLoadFailureReason, ...any[]]>>;
     reload(index: number): Promise<boolean>;
     reloadByName(name: string): Promise<boolean>;
     removeMod(id: number, uninstall?: boolean): void;

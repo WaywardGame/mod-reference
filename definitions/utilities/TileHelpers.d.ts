@@ -8,9 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { TileGroup } from "creature/ICreature";
-import { TerrainType } from "Enums";
-import { IOverlayInfo, ITile } from "tile/ITerrain";
+import { TileGroup } from "entity/creature/ICreature";
+import { IOverlayInfo, ITile, TerrainType } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
 declare module TileHelpers {
     const maskGfx = 31;

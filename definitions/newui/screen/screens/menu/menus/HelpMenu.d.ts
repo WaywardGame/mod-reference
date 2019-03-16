@@ -8,16 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable } from "Enums";
-import { BindCatcherApi } from "newui/BindingManager";
-import { UiApi } from "newui/INewUi";
+import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { HelpArticle } from "newui/screen/screens/menu/menus/help/HelpArticleDescriptions";
 export default class HelpMenu extends Menu {
     private readonly searchInput;
     private readonly articles;
     private readonly canShowArticle;
-    constructor(api: UiApi);
+    constructor();
     showArticle(article: HelpArticle): Promise<this>;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     private filterArticles;

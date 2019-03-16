@@ -56,7 +56,7 @@ export declare class InspectionSection implements IInspectionSection {
     /**
      * Adds headings/paragraphs from the callback function to this inspection section, if the first argument is a truthy value.
      */
-    addIf(ifTruthy: boolean | number | string | undefined | null, add: () => IterableOfOr<IInspection | Translation | undefined | Message.None>): this;
+    addIf(ifTruthy: boolean | number | string | undefined | null, add: () => IterableOr<IInspection | Translation | undefined | Message.None>): this;
 }
 declare const inspections: OptionalDescriptions<InspectType, IInspectionHandler | IInspectionHandler["handle"]>;
 export default inspections;

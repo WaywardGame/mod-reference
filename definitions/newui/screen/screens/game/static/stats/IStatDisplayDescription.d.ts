@@ -10,7 +10,7 @@
  */
 import IEntity from "entity/IEntity";
 import { IStat, StatDisplayType } from "entity/IStats";
-import { IModdable } from "Enums";
+import { IModdable } from "mod/ModRegistry";
 import Component from "newui/component/Component";
 import { ITooltip } from "newui/component/IComponent";
 import { IStringSection } from "utilities/string/Interpolator";

@@ -15,7 +15,6 @@ import { RangeInput } from "newui/component/RangeInput";
 import { RangeInputValueDisplay } from "newui/component/RangeInputValueDisplay";
 import { IRefreshable } from "newui/component/Refreshable";
 import { Heading } from "newui/component/Text";
-import { UiApi } from "newui/INewUi";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare class RangeRow extends BlockRow implements IRefreshable, IDisableable {
     protected rangeInput: RangeInput;
@@ -24,7 +23,7 @@ export declare class RangeRow extends BlockRow implements IRefreshable, IDisable
     value: number;
     private _disabled;
     readonly disabled: boolean;
-    constructor(api: UiApi);
+    constructor();
     setDisabled(val: boolean): this;
     editRange(rangeInputInitializer: (rangeInput: RangeInput) => RangeInput): this;
     setLabel(label: (label: Heading) => Heading): this;

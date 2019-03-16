@@ -7,11 +7,9 @@
  *
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
- *
- *
  */
 import IEntity from "entity/IEntity";
-import { ItemType, StatType } from "Enums";
+import { ItemType } from "item/IItem";
 import Vec2 from "utilities/math/Vector2";
 export interface INotifier {
     addItem(entity: IEntity, type: ItemType): void;
@@ -22,3 +20,14 @@ export interface INotifier {
     render(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number): void;
 }
 export default INotifier;
+export declare enum StatType {
+    EnemyHealth = 0,
+    Stat = 1,
+    Stamina = 2,
+    Metabolism = 3,
+    Health = 4,
+    Thirst = 5,
+    Zero = 6,
+    Miss = 7,
+    Immune = 8
+}
