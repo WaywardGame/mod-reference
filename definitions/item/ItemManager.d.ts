@@ -27,8 +27,8 @@ export default class ItemManager implements IItemManager {
     private cachedItemTypes;
     private cachedItemTypesWithRecipes;
     constructor();
-    getItemTypes(): ReadonlyArray<ItemType>;
-    getItemsWithRecipes(): ReadonlyArray<ItemType>;
+    getItemTypes(): readonly ItemType[];
+    getItemsWithRecipes(): readonly ItemType[];
     getContainerReference(container: IContainer | undefined, parentObject?: any, showWarnings?: boolean): ContainerReference;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple?: boolean, skipMessage?: boolean): boolean;

@@ -51,9 +51,9 @@ export declare enum NounType {
 export default class LanguageManager {
     language: string;
     private readonly translationProviders;
-    readonly providers: ReadonlyArray<TranslationsProvider>;
+    readonly providers: readonly TranslationsProvider[];
     private orderedTranslationProviders?;
-    readonly orderedProviders: ReadonlyArray<TranslationsProvider>;
+    readonly orderedProviders: readonly TranslationsProvider[];
     constructor();
     initialize(): void;
     shouldUseAlternateFontStyle(): boolean;
