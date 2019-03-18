@@ -88,6 +88,7 @@ export interface IItemManager {
     spawn(itemTypes: ItemType[] | undefined, x: number, y: number, z: number): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     inspect(inspection: Inspection, ...items: IItem[]): InspectionResult;
+    copyProperties(item: IItem, item2: IItem): void;
     exists(item: IItem): boolean;
 }
 export default IItemManager;

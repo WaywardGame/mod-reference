@@ -64,29 +64,29 @@ export declare enum ModRegistrationType {
     InspectionType = 9,
     InterModRegistration = 10,
     InterModRegistry = 11,
-    InterruptChoice = 12,
-    Item = 13,
-    ItemGroup = 14,
-    Language = 15,
-    LanguageExtension = 16,
-    MenuBarButton = 17,
-    Message = 18,
-    MessageSource = 19,
-    MusicTrack = 20,
-    Note = 21,
-    NPC = 22,
-    OptionsSection = 23,
-    Overlay = 24,
-    Packet = 25,
-    Quest = 26,
-    QuestRequirement = 27,
-    Registry = 28,
-    Skill = 29,
-    SoundEffect = 30,
-    Terrain = 31,
-    TerrainDecoration = 32,
-    TileEvent = 33,
-    Interrupt = 34
+    Interrupt = 12,
+    InterruptChoice = 13,
+    Item = 14,
+    ItemGroup = 15,
+    Language = 16,
+    LanguageExtension = 17,
+    MenuBarButton = 18,
+    Message = 19,
+    MessageSource = 20,
+    MusicTrack = 21,
+    Note = 22,
+    NPC = 23,
+    OptionsSection = 24,
+    Overlay = 25,
+    Packet = 26,
+    Quest = 27,
+    QuestRequirement = 28,
+    Registry = 29,
+    Skill = 30,
+    SoundEffect = 31,
+    Terrain = 32,
+    TerrainDecoration = 33,
+    TileEvent = 34
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -259,7 +259,7 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: Requirement;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration | IInterruptRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.

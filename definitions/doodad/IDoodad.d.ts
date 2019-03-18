@@ -76,6 +76,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
 }
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: boolean;
+    stillContainer?: IItem;
     gfx?: number;
     spread?: number;
     treasure?: boolean;

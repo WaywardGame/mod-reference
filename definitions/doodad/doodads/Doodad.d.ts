@@ -17,7 +17,7 @@ import { IPlayer } from "entity/player/IPlayer";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
 import { Quality } from "game/IObject";
-import { IItemArray, IItemLegendary, ItemType } from "item/IItem";
+import { IItem, IItemArray, IItemLegendary, ItemType } from "item/IItem";
 import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
@@ -29,6 +29,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     containedItems: IItemArray;
     decay?: number;
     gatherReady?: boolean;
+    stillContainer?: IItem;
     gfx?: number;
     id: number;
     itemOrders?: number[];

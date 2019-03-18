@@ -109,7 +109,9 @@ export declare enum ActionType {
     Inspect = 79,
     Apply = 80,
     Hitch = 81,
-    Unhitch = 82
+    Unhitch = 82,
+    AttachContainer = 83,
+    DetachContainer = 84
 }
 export declare enum ActionUsability {
     Paused = 0,
@@ -232,10 +234,10 @@ export declare enum ActionArgument {
     ItemArrayNearby = 21,
     ItemInventory = 22,
     ItemNearby = 23,
-    Quality = 24,
-    ItemType = 25,
-    NPC = 26,
-    Player = 27,
+    ItemType = 24,
+    NPC = 25,
+    Player = 26,
+    Quality = 27,
     RestType = 28,
     TileEvent = 29,
     Vector2 = 30,

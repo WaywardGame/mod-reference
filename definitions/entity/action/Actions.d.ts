@@ -16,6 +16,7 @@ export declare let INVALID: ActionArgument;
 declare const actionDescriptions: {
     [ActionType.AddFuel]: import("./Action").Action<[ActionArgument.ItemNearby, ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Apply]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.AttachContainer]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Attack]: import("./Action").Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Build]: import("./Action").Action<[ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Carve]: import("./Action").Action<[ActionArgument.ItemInventory], import("../player/IPlayer").IPlayer, void>;
@@ -24,6 +25,7 @@ declare const actionDescriptions: {
     [ActionType.CloseDoor]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, boolean>;
     [ActionType.Craft]: import("./Action").Action<[ActionArgument.ItemType, ActionArgument.ItemArrayNearby, ActionArgument.ItemArrayNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Decode]: import("./Action").Action<[ActionArgument.ItemNearby], import("../player/IPlayer").IPlayer, void>;
+    [ActionType.DetachContainer]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Dig]: import("./Action").Action<[[ActionArgument.ItemInventory, ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Disassemble]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Dismantle]: import("./Action").Action<[ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;

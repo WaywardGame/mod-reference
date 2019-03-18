@@ -100,6 +100,7 @@ export default class ItemManager implements IItemManager {
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: IItem[]): number;
     inspect({ context }: Inspection, ...items: IItem[]): InspectionResult;
+    copyProperties(item: IItem, item2: IItem): void;
     private updateItemOrderInternal;
     private loadReference;
     private removeFromContainerInternal;

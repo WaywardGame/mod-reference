@@ -64,48 +64,48 @@ export declare enum Dictionary {
     Doodad = 12,
     DoodadGroup = 13,
     DoodadItem = 14,
-    EquipSlot = 15,
-    GameEndMessage = 16,
-    Growth = 17,
-    GrowthFungus = 18,
-    HelpArticle = 19,
-    HighscoreSort = 20,
-    HumanName = 21,
-    InspectType = 22,
-    InterruptChoice = 23,
-    Item = 24,
-    ItemGroup = 25,
-    Quality = 26,
-    LegendaryType = 27,
-    Message = 28,
-    MessagesTimestampMode = 29,
-    Milestone = 30,
-    Misc = 31,
-    ModLoadError = 32,
-    ModSort = 33,
-    ModType = 34,
-    MusicPlaylist = 35,
-    Note = 36,
-    Number = 37,
-    EquipEffect = 38,
-    PartOfDay = 39,
-    PowerMode = 40,
-    Quest = 41,
-    QuestRequirement = 42,
-    SaveSlotSort = 43,
-    Skill = 44,
-    Source = 45,
-    Stat = 46,
-    StatusEffect = 47,
-    TeamMemberResponsibility = 48,
-    Terrain = 49,
-    TileEvent = 50,
-    Ui = 51,
-    UiQuadrant = 52,
-    Interrupt = 53,
-    MultiplayerDisconnectReason = 54,
-    UnableToJoinReason = 55,
-    ModLoadFailureReason = 56
+    EquipEffect = 15,
+    EquipSlot = 16,
+    GameEndMessage = 17,
+    Growth = 18,
+    GrowthFungus = 19,
+    HelpArticle = 20,
+    HighscoreSort = 21,
+    HumanName = 22,
+    InspectType = 23,
+    Interrupt = 24,
+    InterruptChoice = 25,
+    Item = 26,
+    ItemGroup = 27,
+    LegendaryType = 28,
+    Message = 29,
+    MessagesTimestampMode = 30,
+    Milestone = 31,
+    Misc = 32,
+    ModLoadError = 33,
+    ModLoadFailureReason = 34,
+    ModSort = 35,
+    ModType = 36,
+    MultiplayerDisconnectReason = 37,
+    MusicPlaylist = 38,
+    Note = 39,
+    Number = 40,
+    PartOfDay = 41,
+    PowerMode = 42,
+    Quality = 43,
+    Quest = 44,
+    QuestRequirement = 45,
+    SaveSlotSort = 46,
+    Skill = 47,
+    Source = 48,
+    Stat = 49,
+    StatusEffect = 50,
+    TeamMemberResponsibility = 51,
+    Terrain = 52,
+    TileEvent = 53,
+    Ui = 54,
+    UiQuadrant = 55,
+    UnableToJoinReason = 56
 }
 export declare type Enum = {
     [key: string]: number;
@@ -129,6 +129,7 @@ declare const dictionaries: {
     [Dictionary.Doodad]: typeof DoodadType;
     [Dictionary.DoodadGroup]: typeof DoodadTypeGroup;
     [Dictionary.DoodadItem]: typeof ItemType;
+    [Dictionary.EquipEffect]: typeof EquipEffect;
     [Dictionary.EquipSlot]: typeof EquipType;
     [Dictionary.GameEndMessage]: typeof GameEndMessage;
     [Dictionary.Growth]: typeof GrowingStage;
@@ -137,24 +138,26 @@ declare const dictionaries: {
     [Dictionary.HighscoreSort]: typeof HighscoreSort;
     [Dictionary.HumanName]: typeof HumanName;
     [Dictionary.InspectType]: typeof InspectType;
+    [Dictionary.Interrupt]: typeof Interrupt;
     [Dictionary.InterruptChoice]: typeof InterruptChoice;
     [Dictionary.Item]: typeof ItemType;
     [Dictionary.ItemGroup]: typeof ItemTypeGroup;
-    [Dictionary.Quality]: typeof Quality;
     [Dictionary.LegendaryType]: typeof LegendaryType;
     [Dictionary.Message]: typeof Message;
     [Dictionary.MessagesTimestampMode]: typeof MessageTimestamp;
     [Dictionary.Milestone]: typeof MilestoneType;
     [Dictionary.Misc]: typeof MiscTranslation;
     [Dictionary.ModLoadError]: typeof CanLoadState;
+    [Dictionary.ModLoadFailureReason]: typeof ModLoadFailureReason;
     [Dictionary.ModSort]: typeof ModSort;
     [Dictionary.ModType]: typeof ModType;
+    [Dictionary.MultiplayerDisconnectReason]: typeof DisconnectReason;
     [Dictionary.MusicPlaylist]: typeof MusicPlaylist;
     [Dictionary.Note]: typeof Note;
     [Dictionary.Number]: symbol;
-    [Dictionary.EquipEffect]: typeof EquipEffect;
     [Dictionary.PartOfDay]: typeof PartOfDay;
     [Dictionary.PowerMode]: typeof PowerMode;
+    [Dictionary.Quality]: typeof Quality;
     [Dictionary.Quest]: typeof QuestType;
     [Dictionary.QuestRequirement]: typeof RequirementType;
     [Dictionary.SaveSlotSort]: typeof SaveSort;
@@ -167,10 +170,7 @@ declare const dictionaries: {
     [Dictionary.TileEvent]: typeof TileEventType;
     [Dictionary.Ui]: typeof UiTranslation;
     [Dictionary.UiQuadrant]: typeof Quadrant;
-    [Dictionary.Interrupt]: typeof Interrupt;
-    [Dictionary.MultiplayerDisconnectReason]: typeof DisconnectReason;
     [Dictionary.UnableToJoinReason]: typeof UnableToJoinReason;
-    [Dictionary.ModLoadFailureReason]: typeof ModLoadFailureReason;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

@@ -106,6 +106,7 @@ export interface IOptions {
     };
     uiScale: number;
     useAdjacentContainers: boolean;
+    useNewCraftingSystem: boolean;
     visionMode: boolean;
     volumeEffects: number;
     volumeMusic: number;
