@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IRequirement } from "entity/player/quest/requirement/IRequirement";
+import { IQuestRequirement } from "entity/player/quest/requirement/IRequirement";
 export declare enum QuestType {
     Challenge = 0
 }
 export interface IQuest {
     type: QuestType;
-    requirements: IRequirement[];
+    requirements: IQuestRequirement[];
     complete: boolean;
 }

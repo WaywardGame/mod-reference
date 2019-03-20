@@ -20,8 +20,8 @@ import { Source } from "entity/player/IMessageManager";
 import { INoteDescription } from "entity/player/note/NoteManager";
 import { QuestType } from "entity/player/quest/quest/IQuest";
 import { Quest } from "entity/player/quest/quest/Quest";
-import { RequirementType } from "entity/player/quest/requirement/IRequirement";
-import { Requirement } from "entity/player/quest/requirement/Requirement";
+import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
+import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 import { ISkillDescription } from "entity/player/Skills";
 import { ChallengeModifier, IDailyChallengeModifier } from "game/Challenge";
 import { InspectType } from "game/inspection/IInspection";
@@ -257,7 +257,7 @@ export interface IQuestRegistration extends IBaseModRegistration {
 export interface IQuestRequirementRegistration extends IBaseModRegistration {
     type: ModRegistrationType.QuestRequirement;
     name: string;
-    description: Requirement;
+    description: QuestRequirement;
 }
 export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
@@ -474,7 +474,7 @@ declare module Register {
      * Registers a quest requirement.
      * @param description The definition of the quest requirement.
      */
-    function questRequirement(name: string, description: Requirement<any, any>): <K extends string | number | symbol, T extends { [k in K]: RequirementType; }>(target: T, key: K) => void;
+    function questRequirement(name: string, description: QuestRequirement<any, any>): <K extends string | number | symbol, T extends { [k in K]: QuestRequirementType; }>(target: T, key: K) => void;
     /**
      * Registers an action.
      * @param description The definition of this action.

@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { Quest } from "entity/player/quest/quest/Quest";
-import { IRequirement } from "entity/player/quest/requirement/IRequirement";
+import { IQuestRequirement } from "entity/player/quest/requirement/IRequirement";
 import Stream from "utilities/stream/Stream";
 export default class Challenge extends Quest {
     static getCreaturesOfRequirements(): Stream<any>;
@@ -35,7 +35,7 @@ export default class Challenge extends Quest {
     private readonly existingRequirements;
     private readonly possibleRequirements;
     constructor();
-    protected createRequirements(): Stream<IRequirement<any[], {}>>;
+    protected createRequirements(): Stream<IQuestRequirement<any[], {}>>;
     private createRandomRequirement;
     private onUpdate;
     private onRequirementComplete;

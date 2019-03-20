@@ -9,6 +9,6 @@
  * https://waywardgame.github.io/
  */
 import { SkillType } from "entity/IHuman";
-import { Requirement } from "entity/player/quest/requirement/Requirement";
-declare const _default: Requirement<[SkillType, number], {}>;
+import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
+declare const _default: QuestRequirement<[SkillType, number], {}>;
 export default _default;

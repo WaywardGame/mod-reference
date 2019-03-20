@@ -10,7 +10,7 @@
  */
 import IPlayer from "entity/player/IPlayer";
 import { IQuest, QuestType } from "entity/player/quest/quest/IQuest";
-import { IRequirement, IRequirementApi, RequirementType } from "entity/player/quest/requirement/IRequirement";
+import { IQuestRequirement, IQuestRequirementApi, QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { RequirementArgs } from "entity/player/quest/Requirements";
 import Translation from "language/Translation";
 import Emitter from "utilities/Emitter";
@@ -28,8 +28,8 @@ export declare class Quest extends Emitter {
     private readonly requirementInstances;
     private _needsManualCompletion;
     constructor(type?: QuestType | undefined);
-    addRequirement<R extends RequirementType>(type: R, ...args: RequirementArgs<R>): this;
-    addRequirement<RA extends any[]>(type: RequirementType, ...args: RA): this;
+    addRequirement<R extends QuestRequirementType>(type: R, ...args: RequirementArgs<R>): this;
+    addRequirement<RA extends any[]>(type: QuestRequirementType, ...args: RA): this;
     setNeedsManualCompletion(): this;
     addChildQuests(...children: QuestType[]): this;
     getChildren(): import("../../../../utilities/stream/Stream").default<QuestType>;
@@ -38,19 +38,19 @@ export declare class Quest extends Emitter {
     create(type?: QuestType | undefined): IQuest;
     getTitle(quest: IQuest): Translation | undefined;
     getDescription(quest: IQuest): Translation | undefined;
-    getTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IRequirement<any[], {}>, IterableIterator<[import("../../../../mod/IHookManager").Hook, (api: IRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
-    getHostTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IRequirement<any[], {}>, IterableIterator<[string | number, (api: IRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
+    getTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[import("../../../../mod/IHookManager").Hook, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
+    getHostTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[string | number, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
     getRequirements(host: IPlayer, instance: IQuest): import("../../../../utilities/stream/Stream").default<RequirementInstance>;
-    getRequirement(host: IPlayer, quest: IQuest, requirement: IRequirement): RequirementInstance | undefined;
+    getRequirement(host: IPlayer, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;
-    protected createRequirements(): import("../../../../utilities/stream/Stream").default<IRequirement<any[], {}>>;
-    protected createRequirement<R extends RequirementType>(type: R, ...options: RequirementArgs<R>): IRequirement<RequirementArgs<R>>;
+    protected createRequirements(): import("../../../../utilities/stream/Stream").default<IQuestRequirement<any[], {}>>;
+    protected createRequirement<R extends QuestRequirementType>(type: R, ...options: RequirementArgs<R>): IQuestRequirement<RequirementArgs<R>>;
 }
 export declare class RequirementInstance extends Emitter {
-    readonly data: IRequirement;
+    readonly data: IQuestRequirement;
     readonly id: number;
     private readonly api;
-    constructor(host: IPlayer, data: IRequirement, id: number);
+    constructor(host: IPlayer, data: IQuestRequirement, id: number);
     triggerInitialization(): boolean;
     getTranslation(): Translation;
     getCompletionAmount(): number;

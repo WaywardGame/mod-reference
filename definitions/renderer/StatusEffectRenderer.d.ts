@@ -10,7 +10,7 @@
  */
 import ISpriteInfo from "renderer/ISpriteInfo";
 import { IRGB } from "utilities/Color";
-import { PriorityList } from "utilities/PriorityList";
+import { PriorityMap } from "utilities/PriorityMap";
 export declare type IRenderFunction = (sprite: number | ISpriteInfo) => void;
 export declare type IRenderLayerImplementation = (render: IRenderFunction) => any;
 export declare type SpriteLineOrRenderLayerImpl = number | IRenderLayerImplementation;
@@ -28,7 +28,7 @@ export declare enum RenderPriority {
 }
 export default class StatusEffectRenderer {
     readonly priority: number;
-    protected layers: Map<StatusEffectRenderLayer, PriorityList<SpriteLineOrRenderLayerImpl>>;
+    protected layers: Map<StatusEffectRenderLayer, PriorityMap<SpriteLineOrRenderLayerImpl[]>>;
     protected tints: IRGB[];
     constructor(priority?: RenderPriority);
     /**

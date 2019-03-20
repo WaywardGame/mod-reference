@@ -21,6 +21,7 @@ import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
+import Stream from "utilities/stream/Stream";
 export default interface IEntity extends IVector3, Emitter {
     entityType: EntityType;
     id: number;
@@ -168,7 +169,7 @@ export default interface IEntity extends IVector3, Emitter {
     /**
      * Generator for status effects on the entity.
      */
-    statuses(): IterableIterator<StatusType>;
+    statuses(): Stream<StatusType>;
     hasProperty(property: Property): boolean;
     addProperty(property: Property, value: any): void;
     getProperty<T>(property: Property): T | undefined;

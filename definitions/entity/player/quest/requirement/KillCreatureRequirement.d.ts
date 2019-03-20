@@ -9,9 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { CreatureType } from "entity/creature/ICreature";
-import { Requirement } from "entity/player/quest/requirement/Requirement";
+import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 export interface IKillCreatureRequirement {
     kills: number;
 }
-declare const _default: Requirement<[CreatureType, number], IKillCreatureRequirement>;
+declare const _default: QuestRequirement<[CreatureType, number], IKillCreatureRequirement>;
 export default _default;

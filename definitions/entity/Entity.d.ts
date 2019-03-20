@@ -23,6 +23,7 @@ import { ITile } from "tile/ITerrain";
 import Emitter from "utilities/Emitter";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
+import Stream from "utilities/stream/Stream";
 export default abstract class Entity extends Emitter implements IEntity {
     static is(entity: IEntity | undefined, entityType: EntityType.NPC): entity is INPC;
     static is(entity: IEntity | undefined, entityType: EntityType.Creature): entity is ICreature;
@@ -71,7 +72,7 @@ export default abstract class Entity extends Emitter implements IEntity {
     updateStats(): void;
     hasStatus(status: StatusType): boolean;
     setStatus(status: StatusType, hasStatusEffect: boolean, reason: StatusEffectChangeReason): void;
-    statuses(): IterableIterator<StatusType>;
+    statuses(): Stream<StatusType>;
     getTile(): ITile;
     getPoint(): IVector3;
     getFacingPoint(): IVector3;

@@ -18,7 +18,7 @@ import { Stat } from "entity/IStats";
 import { Source } from "entity/player/IMessageManager";
 import { MilestoneType } from "entity/player/IMilestone";
 import { QuestType } from "entity/player/quest/quest/IQuest";
-import { RequirementType } from "entity/player/quest/requirement/IRequirement";
+import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { Difficulty } from "game/Difficulty";
 import { InspectType } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
@@ -159,7 +159,7 @@ declare const dictionaries: {
     [Dictionary.PowerMode]: typeof PowerMode;
     [Dictionary.Quality]: typeof Quality;
     [Dictionary.Quest]: typeof QuestType;
-    [Dictionary.QuestRequirement]: typeof RequirementType;
+    [Dictionary.QuestRequirement]: typeof QuestRequirementType;
     [Dictionary.SaveSlotSort]: typeof SaveSort;
     [Dictionary.Skill]: typeof SkillType;
     [Dictionary.Source]: typeof Source;

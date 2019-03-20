@@ -14,6 +14,7 @@ import { ICreature, IDamageInfo } from "entity/creature/ICreature";
 import { ICharacter, SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
 import { IPlayer, TurnType } from "entity/player/IPlayer";
+import EventEmitter from "event/EventEmitter";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
@@ -27,13 +28,12 @@ import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
 import { ISaveInfo } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData, TerrainType } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
-import Emitter from "utilities/Emitter";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import { default as Vec2, default as Vector2 } from "utilities/math/Vector2";
 import Vector3 from "utilities/math/Vector3";
 import { IVersionInfo } from "utilities/Version";
-export interface IGame extends Emitter {
+export interface IGame extends EventEmitter.Host<IGameEvents> {
     interval: number;
     mapSize: number;
     mapSizeSq: number;
@@ -196,10 +196,10 @@ export interface IGame extends Emitter {
     wrapCoordinate(cordinate: number, reference: number): number;
 }
 export default IGame;
-export declare enum GameEvent {
-    GlobalSlotLoaded = 0,
-    Pause = 1,
-    Resume = 2
+export interface IGameEvents {
+    globalSlotLoaded(): void;
+    pause(): void;
+    resume(): void;
 }
 export declare enum TickSpeed {
     Min = 10,

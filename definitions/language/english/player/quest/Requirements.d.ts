@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { RequirementType } from "entity/player/quest/requirement/IRequirement";
-declare const requirements: Descriptions<RequirementType, string>;
+import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
+declare const requirements: Descriptions<QuestRequirementType, string>;
 export default requirements;

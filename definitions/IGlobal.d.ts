@@ -87,6 +87,8 @@ declare global {
 
 	type ArrayOfIterablesOr<T> = Array<T | Iterable<T>>;
 
+	type AnyFunction = (...args: any[]) => any;
+
 	// autosort
 	let absentPlayers: IPlayer[];
 	let audio: IAudio;

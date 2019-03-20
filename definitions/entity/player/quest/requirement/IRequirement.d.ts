@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import IPlayer from "entity/player/IPlayer";
-export declare enum RequirementType {
+export declare enum QuestRequirementType {
     SailToCivilization = 0,
     CollectItem = 1,
     KillCreature = 2,
@@ -24,20 +24,20 @@ export declare enum RequirementType {
     TameCreature = 11,
     TameCreatures = 12
 }
-export declare const enum RequirementEvent {
+export declare const enum QuestRequirementEvent {
     Met = "Met",
     Update = "Update",
     Visible = "Visible"
 }
-export interface IRequirement<O extends any[] = any[], D extends {} = {}> {
-    type: RequirementType;
+export interface IQuestRequirement<O extends any[] = any[], D extends {} = {}> {
+    type: QuestRequirementType;
     options: O;
     hidden: boolean;
     completed: boolean;
     data: D;
 }
-export interface IRequirementApi<O extends any[] = any[], D extends {} = {}> {
+export interface IQuestRequirementApi<O extends any[] = any[], D extends {} = {}> {
     host: IPlayer;
-    requirement: IRequirement<O, D>;
+    requirement: IQuestRequirement<O, D>;
     updated: boolean;
 }

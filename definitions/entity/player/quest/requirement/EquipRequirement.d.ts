@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { EquipType } from "entity/IHuman";
-import { Requirement } from "entity/player/quest/requirement/Requirement";
+import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 import { ItemTypeGroup } from "item/IItem";
-declare const _default: Requirement<[EquipType[], ItemTypeGroup[]], {}>;
+declare const _default: QuestRequirement<[EquipType[], ItemTypeGroup[]], {}>;
 export default _default;

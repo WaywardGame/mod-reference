@@ -33,6 +33,16 @@ export interface IPartitions<K, V> extends IStreamable<[K, Stream<V>]> {
      */
     partitions(): Stream<[K, Stream<V>]>;
 }
+/**
+ * Note: When "splatting" a stream, it's actually faster (but not by much) to first collect it into an array:
+ * ```ts
+ * // slower
+ * [...Stream.range(10)]
+ *
+ * // faster
+ * [...Stream.range(10).toArray()]
+ * ```
+ */
 export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
     static readonly empty: Stream<any>;
     static from<T>(iterable: Iterable<T> | IStreamable<T>): Stream<T>;
@@ -400,15 +410,20 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      */
     abstract random(orElse?: T, random?: Random): T | undefined;
     /**
-     * Returns a value of type X, generated with the given collector function.
-     * @param collector A function that takes the iterable, and returns type X
+     * Returns a value of type R, generated with the given collector function.
+     * @param collector A function that takes the iterable, and returns type R
      */
     abstract collect<R>(collector: (stream: Stream<T>) => R): R;
     /**
-     * Returns a value of type X, generated with the given collector function.
-     * @param collector A function that takes the iterable, and returns type X
+     * Returns a value of type R, generated with the given collector function.
+     * @param collector A function that takes the iterable, and returns type R
      */
     abstract collect<R, A extends any[]>(collector: (stream: Stream<T>, ...args: A) => R, ...args: A): R;
+    /**
+     * Returns a value of type R, generated with the given collector function.
+     * @param collector A function that takes the splatted values in this iterable, and returns type R
+     */
+    abstract splat<R>(collector: (...args: T[]) => R): R;
     /**
      * Collects the items in this Stream to an array.
      */
@@ -481,6 +496,34 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      * @param concatenator Takes the current string and the next value and returns the new string.
      */
     abstract toString(concatenator: (current: string, value: T) => string): string;
+    /**
+     * Iterates through the entire stream.
+     */
+    abstract iterateToEnd(): void;
+    /**
+     * Iterates through the entire stream.
+     *
+     * Note: Alias of `iterateToEnd()`
+     */
+    abstract finish(): void;
+    /**
+     * Iterates through the entire stream.
+     *
+     * Note: Alias of `iterateToEnd()`
+     */
+    abstract end(): void;
+    /**
+     * Iterates through the entire stream.
+     *
+     * Note: Alias of `iterateToEnd()`
+     */
+    abstract complete(): void;
+    /**
+     * Iterates through the entire stream.
+     *
+     * Note: Alias of `iterateToEnd()`
+     */
+    abstract flush(): void;
     /**
      * Runs a function on each item in this Stream.
      * @param user The function to call for each item

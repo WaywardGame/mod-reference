@@ -14,8 +14,9 @@ import { ICreature, IDamageInfo } from "entity/creature/ICreature";
 import { SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
 import { IPlayer, TurnType } from "entity/player/IPlayer";
+import EventEmitter from "event/EventEmitter";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { FireStage, FireType, ICrafted, IGame, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TurnMode } from "game/IGame";
+import { FireStage, FireType, ICrafted, IGame, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TurnMode } from "game/IGame";
 import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
@@ -27,12 +28,11 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { ISaveInfo } from "save/ISaveManager";
 import { ITile, ITileArray, ITileContainer, ITileData, TerrainType } from "tile/ITerrain";
 import { ITileEvent } from "tile/ITileEvent";
-import Emitter from "utilities/Emitter";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
-export default class Game extends Emitter implements IGame {
+export default class Game extends EventEmitter.Host<IGameEvents> implements IGame {
     readonly interval = 16.6666;
     readonly mapSize = 512;
     readonly mapSizeSq: number;
