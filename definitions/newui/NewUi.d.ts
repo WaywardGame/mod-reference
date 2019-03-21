@@ -8,16 +8,24 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import Interrupt from "language/dictionary/Interrupt";
+import InterruptChoice from "language/dictionary/InterruptChoice";
 import { IComponent } from "newui/component/IComponent";
 import { IInterruptMenuFactory } from "newui/INewUi";
 import ScreenManager from "newui/screen/ScreenManager";
 import TooltipManager from "newui/tooltip/TooltipManager";
 import HighlightManager from "newui/util/HighlightManager";
+import { InterruptOptions } from "newui/util/IInterrupt";
 import InterruptFactory from "newui/util/InterruptFactory";
 import ScaleManager from "newui/util/ScaleManager";
-import Emitter from "utilities/Emitter";
-export default class Ui extends Emitter {
+export interface IUiEvents {
+    resize(): any;
+    interrupt(options: Partial<InterruptOptions>): any;
+    interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
+    loadedFromSave(): any;
+}
+export default class Ui extends EventEmitter.Host<IUiEvents> {
     readonly tooltips: TooltipManager;
     readonly scale: ScaleManager;
     readonly highlights: HighlightManager;
@@ -70,5 +78,6 @@ export default class Ui extends Emitter {
     setDialogOpacity(opacity?: number, save?: boolean): void;
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
-    private onLanguageChange;
+    protected onInterruptClosed(): void;
+    protected onLanguageChange(language: string): void;
 }

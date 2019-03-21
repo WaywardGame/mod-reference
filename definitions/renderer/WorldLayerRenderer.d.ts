@@ -28,7 +28,7 @@ export default class WorldLayerRenderer {
     private readonly doodadOverLayer;
     constructor(gl: WebGL2RenderingContext, renderer: IWorldRenderer, worldLayer: IWorldLayer, width: number, height: number, positionBuffer: WebGLBuffer);
     updateAll(): void;
-    setDoodad(x: number, y: number, doodad: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, variation: number, hasGraphicVariation: boolean, flushImmediate?: boolean): void;
+    setDoodad(x: number, y: number, doodad: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, variationX: number, variationY: number, hasGraphicVariation: boolean, flushImmediate?: boolean): void;
     renderFullbright(x: number, y: number, tileScale: number, viewWidth: number, viewHeight: number, renderFixedDepth: boolean): void;
     private computeTile;
     private updateTileLightBlock;

@@ -10,13 +10,13 @@
  */
 import { ICharacter } from "entity/IHuman";
 import IPlayer from "entity/player/IPlayer";
+import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
-import { DisconnectReason, IMultiplayer, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
+import { DisconnectReason, IMultiplayer, IMultiplayerEvents, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-import Emitter from "utilities/Emitter";
-export default class Multiplayer extends Emitter implements IMultiplayer, IHookHost {
+export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> implements IMultiplayer, IHookHost {
     private readonly _playerIdentifier;
     private _isServer;
     private _server;

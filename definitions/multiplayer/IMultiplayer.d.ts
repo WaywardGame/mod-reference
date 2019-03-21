@@ -10,6 +10,7 @@
  */
 import { ICharacter } from "entity/IHuman";
 import { IPlayer, PlayerState } from "entity/player/IPlayer";
+import EventEmitter from "event/EventEmitter";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { ICrafted, TurnMode } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
@@ -17,14 +18,13 @@ import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
 import { SaveObject } from "save/ISaveManager";
 import { LobbyType } from "steamworks/ISteamworks";
-import Emitter from "utilities/Emitter";
-export declare enum MultiplayerEvent {
-    Connect = 0,
-    Disconnect = 1,
-    JoinLobby = 2,
-    LeaveLobby = 3
+export interface IMultiplayerEvents {
+    connect(): any;
+    disconnect(): any;
+    joinLobby(lobbyId: string): any;
+    leaveLobby(lobbyId: string): any;
 }
-export interface IMultiplayer extends Emitter {
+export interface IMultiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;

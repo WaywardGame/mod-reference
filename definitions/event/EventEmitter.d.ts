@@ -20,11 +20,17 @@ export interface IEventEmitterHostClass<E> extends Class<any> {
 declare type ArgsOf<F> = ArgumentsOf<Extract<F, (...args: any[]) => any>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, (...args: any[]) => any>>;
 declare type Handler<F> = (...args: ArgsOf<F>) => ReturnOf<F>;
+export declare const enum EmitStrategy {
+    Race = 0,
+    All = 1
+}
 declare class EventEmitter<E> {
     private readonly hostClass;
     private readonly subscriptions;
     constructor(hostClass: any);
-    emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;
+    emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): void;
+    emitStream<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;
+    emitAsync<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Promise<void>;
     subscribe<K extends keyof E>(event: K, handler: Handler<E[K]>, priority?: number): void;
     unsubscribe<K extends keyof E>(event: K, handler: Handler<E[K]>, priority?: number): boolean;
     waitFor<K extends keyof E>(event: K, priority?: number): Promise<ArgumentsOf<Extract<E[K], (...args: any[]) => any>>>;

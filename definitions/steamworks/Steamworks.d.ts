@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
-import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworks, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
-import Emitter from "utilities/Emitter";
-export default class Steamworks extends Emitter implements ISteamworks {
+import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworks, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> implements ISteamworks {
     private steamId;
     private betaName;
     private buildTime;

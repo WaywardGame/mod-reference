@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { Dictionary } from "language/Dictionaries";
 import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
@@ -48,7 +49,10 @@ export declare enum NounType {
     Uncountable = 2,
     Unknown = 3
 }
-export default class LanguageManager {
+export interface ILanguageEvents {
+    change(language: string): void;
+}
+export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> {
     language: string;
     private readonly translationProviders;
     readonly providers: readonly TranslationsProvider[];

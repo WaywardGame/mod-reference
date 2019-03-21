@@ -66,6 +66,7 @@ export default class GameScreen extends Screen implements IHookHost {
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: IPlayer, mapRequest: IMapRequest): void;
+    protected tryShowWorldTooltip(): Promise<void>;
     /**
      * Adds a quadrant element to the screen.
      *
@@ -95,5 +96,4 @@ export default class GameScreen extends Screen implements IHookHost {
     private getUnusedQuadrant;
     private onDialogClose;
     private updatePauseIcon;
-    private tryShowWorldTooltip;
 }

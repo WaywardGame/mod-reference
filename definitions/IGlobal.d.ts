@@ -89,6 +89,20 @@ declare global {
 
 	type AnyFunction = (...args: any[]) => any;
 
+	type ReturnTypeOrT<T> = T extends (...args: any[]) => infer R ? R : T;
+
+	type PropertyOf<T, K extends string | number | symbol> = T extends { [key in K]: infer V } ? V : never;
+
+	interface AsyncIterator<T> {
+		next(value?: any): Promise<IteratorResult<T>>;
+		return?(value?: any): Promise<IteratorResult<T>>;
+		throw?(e?: any): Promise<IteratorResult<T>>;
+	}
+
+	interface SymbolConstructor {
+		readonly asyncIterator: unique symbol;
+	}
+
 	// autosort
 	let absentPlayers: IPlayer[];
 	let audio: IAudio;

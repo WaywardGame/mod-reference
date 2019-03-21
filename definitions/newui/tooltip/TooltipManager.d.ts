@@ -10,15 +10,14 @@
 */
 import { IComponent } from "newui/component/IComponent";
 import { ITooltipManager } from "newui/INewUi";
-import NewUi from "newui/NewUi";
 import Tooltip from "newui/tooltip/Tooltip";
 export default class TooltipManager implements ITooltipManager {
     private readonly tooltipWrapper;
     private host;
     private tooltip;
-    constructor(newui: NewUi);
+    constructor();
     show(host: IComponent, force?: boolean): Tooltip | undefined;
     hide(host?: IComponent | undefined, forceRemove?: boolean): void;
+    protected onScreenResize(): void;
     private loop;
-    private onScreenResize;
 }

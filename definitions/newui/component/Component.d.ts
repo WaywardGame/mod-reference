@@ -58,6 +58,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setElement(elementType?: string, namespace?: Namespace): this;
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
+    registerEventBusSubscriber(): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     isVisible(): boolean;
     show(): this;

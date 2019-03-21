@@ -104,6 +104,7 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
     done: boolean;
     value: T;
     abstract [Symbol.iterator](): Iterator<T>;
+    abstract [Symbol.asyncIterator](): AsyncIterator<T extends Promise<infer R> ? R : never>;
     /**
      * Returns a Stream that will loop only over the entries that match the given filter
      * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
@@ -424,6 +425,18 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      * @param collector A function that takes the splatted values in this iterable, and returns type R
      */
     abstract splat<R>(collector: (...args: T[]) => R): R;
+    /**
+     * Returns a promise that will return the value of the first completed promise in this stream.
+     *
+     * Note: Alias of `Promise.race(stream.toArray())`
+     */
+    abstract race(): Promise<T extends Promise<infer R> ? R : never>;
+    /**
+     * Returns a promise of a stream with all items await-ed.
+     *
+     * Note: Alias of `Promise.all(stream.toArray()).stream()`
+     */
+    abstract rest(): Promise<T extends Promise<infer R> ? Stream<R> : never>;
     /**
      * Collects the items in this Stream to an array.
      */

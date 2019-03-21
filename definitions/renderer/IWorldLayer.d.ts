@@ -15,7 +15,7 @@ import IExploreMap from "renderer/IExploreMap";
 import { TerrainData } from "renderer/IWorld";
 import { ITile, TerrainType } from "tile/ITerrain";
 export declare type onTileUpdateDelegate = (x: number, y: number, flushImmediate: boolean) => void;
-export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariation: number, hasGraphicVariation: boolean, flushImmediate: boolean) => void;
+export declare type onDoodadUpdateDelegate = (x: number, y: number, doodadType: DoodadType | undefined, doodadInfo: DoodadInfo | undefined, doodadVariationX: number, doodadVariationY: number, hasGraphicVariation: boolean, flushImmediate: boolean) => void;
 export interface IWorldLayer {
     width: number;
     height: number;

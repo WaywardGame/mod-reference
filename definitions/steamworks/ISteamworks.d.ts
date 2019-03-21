@@ -8,10 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { IPlayOptions } from "game/IGame";
 import { ModType } from "mod/IModInfo";
-import Emitter from "utilities/Emitter";
-export interface ISteamworks extends Emitter {
+export interface ISteamworksEvents {
+    overlayShown(): any;
+    overlayHidden(): any;
+}
+export interface ISteamworks extends EventEmitter.Host<ISteamworksEvents> {
     clearSteamRichPresence(): void;
     closeWindow(): void;
     createArchive(id: string, source: string, callback: (err?: string) => void): void;
@@ -116,10 +120,6 @@ export declare enum LobbyType {
     FriendsOnly = 1,
     Public = 2,
     Invisible = 3
-}
-export declare enum SteamworksEvent {
-    OverlayShown = 0,
-    OverlayHidden = 1
 }
 export interface IDedicatedServerInfo {
     name: string;
