@@ -17,3 +17,4 @@ declare global {
         matches(string: string): Stream<RegExpExecArray>;
     }
 }
+export default function (): void;

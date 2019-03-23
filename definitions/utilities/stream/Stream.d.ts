@@ -122,6 +122,14 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      */
     abstract filter2<X = T>(filter: (val: T) => any): Stream<X>;
     /**
+     * Returns a Stream that will loop only over the entries that match the given filter
+     * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
+     *
+     * Note: The only difference between this method and `filter2` is the type argument: This method excludes the type argument,
+     * while the other returns it.
+     */
+    abstract filterNot<X = never>(filter: (val: T) => any): Stream<Exclude<T, X>>;
+    /**
      * Returns a Stream of type X, using the given mapper function
      * @param mapper A function that maps an entry of type T to its corresponding type X
      */

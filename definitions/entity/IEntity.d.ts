@@ -10,19 +10,20 @@
  */
 import { SfxType } from "audio/IAudio";
 import { ICreature } from "entity/creature/ICreature";
-import { IStat, IStatBase, IStatFactory, IStats, Stat } from "entity/IStats";
+import { IStat, IStatBase, IStatFactory, IStatMax, IStats, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
 import IPlayer from "entity/player/IPlayer";
+import EventEmitter from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { ItemType } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { StatType } from "renderer/INotifier";
 import { ITile } from "tile/ITerrain";
-import Emitter from "utilities/Emitter";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Stream from "utilities/stream/Stream";
-export default interface IEntity extends IVector3, Emitter {
+export default interface IEntity extends IVector3 {
+    event: EventEmitter<IEntityEvents<this>>;
     entityType: EntityType;
     id: number;
     renamed?: string | ISerializedTranslation;
@@ -175,46 +176,45 @@ export default interface IEntity extends IVector3, Emitter {
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
 }
-export declare enum EntityEvent {
+export interface IEntityEvents<E extends IEntity = IEntity> {
     /**
      * Called when a stat changes, for any reason
-     * @param emitter The object this event is emitted from
+     * @param entity The object this event is emitted from
      * @param stat An IStat object, the stat that was affected
      * @param oldValue The value that the stat changed from
      * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
      */
-    StatChanged = 0,
+    statChanged(entity: E, stat: IStat, oldValue: number, info: IStatChangeInfo): void;
     /**
      * Called when a stat changes, for any reason
-     * @param emitter The object this event is emitted from
+     * @param entity The object this event is emitted from
      * @param stat An IStat object, the stat that was affected
      * @param oldValue The value that the stat changed from
      */
-    StatTimerChanged = 1,
+    statTimerChanged(entity: E, stat: IStat, oldValue?: number): void;
     /**
      * Called when a stat changes, for any reason
-     * @param emitter The object this event is emitted from
+     * @param entity The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     */
+    statMaxChanged(entity: E, stat: IStatMax, oldValue?: number, info?: IStatChangeInfo): void;
+    /**
+     * Called when a stat changes, for any reason
+     * @param entity The object this event is emitted from
      * @param stat An IStat object, the stat that was affected
      * @param oldValue The value that the stat changed from
      * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
      */
-    StatMaxChanged = 2,
-    /**
-     * Called when a stat changes, for any reason
-     * @param emitter The object this event is emitted from
-     * @param stat An IStat object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
-     */
-    StatBonusChanged = 3,
+    statBonusChanged(entity: E, stat: IStat, oldValue?: number, info?: IStatChangeInfo): void;
     /**
      * Called when this entity gets or loses a status effect
-     * @param emitter The object this event is emitted from
+     * @param entity The object this event is emitted from
      * @param status The type of status effect that was gained or lost
      * @param hasStatus Whether the entity now has the status effect
      * @param reason The reason for the change
      */
-    StatusChange = 4
+    statusChange(entity: E, status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
 }
 export declare enum StatusEffectChangeReason {
     Gained = 0,

@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 export interface IInjectionApi<T extends {
-    [key in K]: (...args: any[]) => any;
+    [key in K]: AnyFunction;
 }, K extends keyof T> {
     executingInstance: T;
     originalMethod: T[K];
@@ -18,7 +18,7 @@ export interface IInjectionApi<T extends {
     cancelled: boolean;
 }
 declare type InjectionMethod<T extends {
-    [key in K]: (...args: any[]) => any;
+    [key in K]: AnyFunction;
 }, K extends keyof T> = T[K] extends (...args: infer A) => any ? (api: IInjectionApi<T, K>, ...args: A) => void : never;
 export declare const enum InjectionPosition {
     /**
@@ -31,7 +31,7 @@ export declare const enum InjectionPosition {
     Post = "post"
 }
 export declare function Inject<T extends {
-    [key in K]: (...args: any[]) => any;
+    [key in K]: AnyFunction;
 }, K extends keyof T>(injectInto: Class<T>, property: K, position: InjectionPosition, priority?: number): (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<InjectionMethod<T, K>>) => void;
 /**
  * Classes decorated with `Injector` will have their methods automatically injected using `inject`.

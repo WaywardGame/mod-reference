@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IHookManager";
 import { IModConfig } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
-import { CanLoadState, ICanLoadInfo, IModManager, ModLoadFailureReason } from "mod/IModManager";
-import Emitter from "utilities/Emitter";
+import { CanLoadState, ICanLoadInfo, IModManager, IModManagerEvents, ModLoadFailureReason } from "mod/IModManager";
 import Log from "utilities/Log";
-export default class ModManager extends Emitter implements IModManager {
+export default class ModManager extends EventEmitter.Host<IModManagerEvents> implements IModManager {
     private readonly mods;
     private readonly internalMods;
     private readonly internalModsElectron;
@@ -85,7 +85,7 @@ export default class ModManager extends Emitter implements IModManager {
     setCreatedDate(index: number, createdDate: number): void;
     getState(index: number): ModState;
     isInitializing(index: number): ModState;
-    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: () => any, unloaded?: boolean): Promise<boolean>;
+    setState(index: number, state: ModState, force?: boolean, cacheHooks?: boolean, callback?: NullaryFunction, unloaded?: boolean): Promise<boolean>;
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
     /**

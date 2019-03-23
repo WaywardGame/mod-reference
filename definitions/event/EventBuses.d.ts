@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IPlayerEvents } from "entity/player/IPlayer";
 import { IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
 import { IGameEvents } from "game/IGame";
 import { ILanguageEvents } from "language/LanguageManager";
+import { IModManagerEvents } from "mod/IModManager";
 import { IMultiplayerEvents } from "multiplayer/IMultiplayer";
 import { IUiEvents } from "newui/NewUi";
 import { ISteamworksEvents } from "steamworks/ISteamworks";
@@ -19,7 +21,10 @@ export declare enum EventBus {
     Ui = 1,
     Language = 2,
     Multiplayer = 3,
-    Steamworks = 4
+    Steamworks = 4,
+    Mods = 5,
+    Players = 6,
+    LocalPlayer = 7
 }
 declare const eventBuses: {
     [EventBus.Game](): IEventEmitterHostClass<IGameEvents>;
@@ -27,10 +32,16 @@ declare const eventBuses: {
     [EventBus.Ui](): IEventEmitterHostClass<IUiEvents>;
     [EventBus.Multiplayer](): IEventEmitterHostClass<IMultiplayerEvents>;
     [EventBus.Steamworks](): IEventEmitterHostClass<ISteamworksEvents>;
+    [EventBus.Mods](): IEventEmitterHostClass<IModManagerEvents>;
+    [EventBus.Players](): IEventEmitterHostClass<IPlayerEvents>;
+    [EventBus.LocalPlayer](): IEventEmitterHost<IPlayerEvents>;
 };
 export default eventBuses;
 export declare module EventBus {
+    function register<E extends EventBus>(eventBus: E, classOrHost: ReturnType<(typeof eventBuses)[E]>): void;
     function register(eventBus: EventBus): (constructor: Class<any>) => void;
+    function onEventBusRegistration(eventBus: EventBus, handler: NullaryFunction): void;
+    function subscriber<S extends Class<any>>(constructor: S): S;
 }
 export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export declare type EventNameFromIndex<I extends EventBus> = keyof Events<ReturnType<(typeof eventBuses)[I]>>;

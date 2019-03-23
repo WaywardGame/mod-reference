@@ -10,20 +10,24 @@
  */
 import { IDoodad } from "doodad/IDoodad";
 import { ICreature } from "entity/creature/ICreature";
-import { EntityType } from "entity/IEntity";
-import IHuman, { EquipType, HairColor, HairStyle, RestType, SkinColor } from "entity/IHuman";
+import { EntityType, IEntityEvents } from "entity/IEntity";
+import IHuman, { EquipType, HairColor, HairStyle, IHumanEvents, RestType, SkinColor } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
+import { MilestoneType } from "entity/player/IMilestone";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
+import EventEmitter from "event/EventEmitter";
 import { IItem, ItemType } from "item/IItem";
 import Message from "language/dictionary/Message";
 import IClientStore from "save/clientStore/IClientStore";
+import { IOptions } from "save/data/ISaveDataGlobal";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayer extends IHuman {
+    event: EventEmitter<IPlayerEvents<this>> & EventEmitter<IHumanEvents<this>> & EventEmitter<IEntityEvents<this>>;
     entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
@@ -116,18 +120,18 @@ export interface IPlayer extends IHuman {
     walkAlongPath(path: IVector2[] | undefined): void;
 }
 export default IPlayer;
-export declare const enum PlayerEvent {
+export interface IPlayerEvents<P extends IPlayer = IPlayer> extends IHumanEvents<P> {
     /**
      * @param milestone The milestone that is being updated
      * @param value The new value for this milestone
      * @param max The max value for this milestone
      */
-    MilestoneUpdate = "MilestoneUpdate",
+    milestoneUpdate(player: P, milestone: MilestoneType, value: number, max: number): void;
     /**
      * @param key The key of `IOptions` that was changed on this player
      * @param value The value this key was set to
      */
-    UpdateOption = "UpdateOption"
+    updateOption<O extends keyof IOptions>(player: P, key: O, value: IOptions[O]): void;
 }
 export declare enum TurnType {
     CheckUnderPlayer = 0,

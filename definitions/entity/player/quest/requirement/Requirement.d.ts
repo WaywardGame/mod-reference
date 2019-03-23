@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IPlayerEvents } from "entity/player/IPlayer";
 import { IQuestRequirementApi } from "entity/player/quest/requirement/IRequirement";
 import Translation from "language/Translation";
 import { Hook } from "mod/IHookManager";
@@ -29,8 +30,8 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> e
      */
     setTrigger<H extends Hook>(hook: H, checker: (api: QuestRequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
-    setHostTrigger(event: string | number, checker: (api: QuestRequirementApi<this>, ...args: any[]) => boolean): this;
-    getHostTriggers(): IterableIterator<[string | number, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
+    setHostTrigger<E extends keyof IPlayerEvents>(event: E, checker: (api: QuestRequirementApi<this>, ...args: ArgumentsOf<IPlayerEvents[E]>) => boolean): this;
+    getHostTriggers(): IterableIterator<["milestoneUpdate" | "updateOption" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange", (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: QuestRequirementApi<this>) => boolean): this;
     getInitializeTrigger(): ((api: QuestRequirementApi<this>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;

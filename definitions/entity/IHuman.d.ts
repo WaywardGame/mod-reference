@@ -9,11 +9,12 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "entity/creature/ICreature";
-import IEntity from "entity/IEntity";
+import IEntity, { IEntityEvents } from "entity/IEntity";
 import { MilestoneType } from "entity/player/IMilestone";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
+import EventEmitter from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { IContainer, IItem, ItemType } from "item/IItem";
@@ -25,6 +26,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 export default interface IHuman extends IEntity {
+    event: EventEmitter<IHumanEvents<this>> & EventEmitter<IEntityEvents<this>>;
     attackFromEquip: IAttackHand;
     canSendMessage: boolean;
     customization: ICustomizations;
@@ -108,12 +110,12 @@ export default interface IHuman extends IEntity {
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
 }
-export declare const enum HumanEvent {
+export interface IHumanEvents<H extends IHuman = IHuman> extends IEntityEvents<H> {
     /**
      * @param skill The skill that is changing
      * @param value The new skill value (core + bonus)
      */
-    SkillChange = "SkillChange"
+    skillChange(human: H, skill: SkillType, value: number): void;
 }
 export interface IHairstyleDescription extends IModdable {
     name: string;

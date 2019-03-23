@@ -45,9 +45,11 @@ export interface ITerrainDecoration extends ITerrainDecorationBase, IModdable {
     type: TerrainDecoration;
 }
 export declare const terrainDecorations: Descriptions<TerrainDecoration, ITerrainDecorationBase>;
-declare module TerrainDecorations {
-    function initialize(): void;
-    function has(terrain: TerrainType): boolean;
-    function adapt(world: IWorldLayer, tileX: number, tileY: number, terrain: TerrainType, adaptation: ITileAdaptation, variation: number): ITileAdaptation | undefined;
+declare class TerrainDecorations {
+    private cachedDecorations;
+    has(terrain: TerrainType): boolean;
+    adapt(world: IWorldLayer, tileX: number, tileY: number, terrain: TerrainType, adaptation: ITileAdaptation, variation: number): ITileAdaptation | undefined;
+    protected cacheDecorations(): void;
 }
-export default TerrainDecorations;
+declare const _default: TerrainDecorations;
+export default _default;

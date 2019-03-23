@@ -221,7 +221,7 @@ export interface IBaseTranslationData {
     dictionary: Dictionary;
     entry: number;
     index: number | "random";
-    args?: any[] | (() => any[]);
+    args?: any[] | (NullaryFunction[]);
     properties?: string[];
     shouldTrim?: false;
 }

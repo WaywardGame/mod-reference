@@ -542,7 +542,7 @@ export declare module Registry {
      * Returns the ID of a registered action or command callback which was decorated with its respective `@Register` decorator.
      * @param method An action or command callback method
      */
-    function id<M extends (...args: any[]) => any>(method: M): Command;
+    function id<M extends AnyFunction>(method: M): Command;
     /**
      * Used internally for `Registry<H, T>.get(key)`
      */

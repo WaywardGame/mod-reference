@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { IPlayOptions } from "game/IGame";
 import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IHookManager";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
-import Emitter from "utilities/Emitter";
 import Log from "utilities/Log";
 export interface ICanLoadInfo {
     name: string;
@@ -38,11 +38,11 @@ export declare enum ModLoadFailureReason {
     UnableToLoad = 3,
     VersionMismatch = 4
 }
-export declare const enum ModManagerEvent {
-    LoadAll = "LoadAll",
-    UnloadAll = "UnloadAll"
+export interface IModManagerEvents {
+    loadAll(): void;
+    unloadAll(): void;
 }
-export interface IModManager extends Emitter {
+export interface IModManager extends EventEmitter.Host<IModManagerEvents> {
     canLoad(index: number, fromModsMenu?: boolean): CanLoadState;
     canLoadFromIdentifier(identifier: string): ICanLoadInfo;
     getAuthor(index: number): string;

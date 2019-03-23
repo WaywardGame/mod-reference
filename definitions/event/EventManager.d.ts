@@ -10,8 +10,8 @@
  */
 import { EventBus, EventHandlerFromIndex, EventNameFromIndex } from "event/EventBuses";
 import { IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
-declare type ArgsOf<F> = ArgumentsOf<Extract<F, (...args: any[]) => any>>;
-declare type ReturnOf<F> = ReturnType<Extract<F, (...args: any[]) => any>>;
+declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
+declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<F> = (...args: ArgsOf<F>) => ReturnOf<F>;
 declare module EventManager {
     function subscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: EventHandlerFromIndex<I, P>, priority?: number): void;
@@ -29,6 +29,4 @@ declare module EventManager {
     function deregisterEventBusSubscriber(subscriber: object): void;
 }
 export default EventManager;
-declare type DescriptorForEventHandler<H extends (...args: any[]) => any> = TypedPropertyDescriptor<H | // allow the actual event handler signature
-(() => ReturnType<H>)>;
-export declare function EventHandler<I extends EventBus, P extends string>(injectInto: I, property: P, priority?: number): (host: any, property2: string | number | symbol, descriptor: DescriptorForEventHandler<Extract<EventHandlerFromIndex<I, P>, (...args: any[]) => any>>) => void;
+export declare function EventHandler<E extends EventBus>(injectInto: E): <P extends EventNameFromIndex<E>>(property: P, priority?: number) => (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<FunctionOrNoParams<Extract<EventHandlerFromIndex<E, P>, AnyFunction>>>) => void;

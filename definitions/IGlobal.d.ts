@@ -45,6 +45,11 @@ import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
 import IUi from "ui/IUi";
 
 declare global {
+
+	type AnyFunction = (...args: any[]) => any;
+	type NullaryFunction<O = any> = () => O;
+	type UnaryFunction<I = any, O = any> = (input: I) => O;
+
 	/**
 	 * An object of descriptions. Each key in E *may* map to a valid description.
 	 * @param E The enum with which to index these descriptions.
@@ -64,12 +69,12 @@ declare global {
 	/**
 	 * Changes the return type of the given function, or creates a new function from the given arguments and return type. 
 	 */
-	type MaskReturn<F extends any[] | ((...args: any[]) => any), R> = F extends (...args: infer A) => any ? (...args: A) => R : (...args: Extract<F, any[]>) => R;
+	type MaskReturn<F extends any[] | AnyFunction, R> = F extends (...args: infer A) => any ? (...args: A) => R : (...args: Extract<F, any[]>) => R;
 
 	/**
 	 * Gets the arguments tuple of a function.
 	 */
-	type ArgumentsOf<F extends (...args: any[]) => any> = F extends (...args: infer A) => any ? A : [];
+	type ArgumentsOf<F extends AnyFunction> = F extends (...args: infer A) => any ? A : [];
 
 	type SaferArray<T> = Array<T | undefined>;
 
@@ -87,11 +92,11 @@ declare global {
 
 	type ArrayOfIterablesOr<T> = Array<T | Iterable<T>>;
 
-	type AnyFunction = (...args: any[]) => any;
-
 	type ReturnTypeOrT<T> = T extends (...args: any[]) => infer R ? R : T;
 
 	type PropertyOf<T, K extends string | number | symbol> = T extends { [key in K]: infer V } ? V : never;
+
+	type FunctionOrNoParams<H extends AnyFunction> = H | (() => ReturnType<H>);
 
 	interface AsyncIterator<T> {
 		next(value?: any): Promise<IteratorResult<T>>;

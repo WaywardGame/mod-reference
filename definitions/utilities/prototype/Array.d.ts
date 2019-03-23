@@ -28,6 +28,10 @@ declare global {
          */
         last(): T | undefined;
         /**
+         * Removes the values from this array that match the given predicate function.
+         */
+        removeIf(predicate: (val: T, index: number) => boolean): this;
+        /**
          * Returns a value of type X, generated with the given collector function.
          * @param collector A function that takes the iterable, and returns type X
          * @see `utilities/Collectors` for premade collectors
