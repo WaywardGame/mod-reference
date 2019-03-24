@@ -50,6 +50,7 @@ export declare abstract class BaseMod extends Emitter {
      * Handles registration of fields decorated with ` @Register.thing`, which occur at `ModRegistrationTime.Initialize`
      */
     private onBeforeInitialize;
+    private onBeforeUninitialize;
     /**
      * Event handler for `ModEvent.PreLoad`.
      *

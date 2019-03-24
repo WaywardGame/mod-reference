@@ -36,7 +36,6 @@ import Log from "utilities/Log";
 import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
-import { IStringSection } from "utilities/string/Interpolator";
 declare abstract class Mod extends BaseMod implements IHookHost {
     /**
      * Called when the mod is initialized (when it's enabled via the Mod Manager)
@@ -59,12 +58,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
      * Called when the mod is unloaded
      */
     onUnload(): void;
-    getAmbientColor(colors: [number, number, number]): [number, number, number] | undefined;
-    getAmbientColorCave(): [number, number, number] | undefined;
-    getAmbientColorDay(): [number, number, number] | undefined;
-    getAmbientColorNight(): [number, number, number] | undefined;
-    getFogColor(colors: [number, number, number]): [number, number, number] | undefined;
-    getAmbientLightLevel(ambientLight: number, z: number): number | undefined;
     canConsumeItem(human: Human, itemType: ItemType, actionType: ActionType): boolean | undefined;
     canCreatureAttack(creature: ICreature, enemy: IPlayer | ICreature): boolean | undefined;
     canCreatureMove(creature: ICreature, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
@@ -89,14 +82,12 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     getPlayerWeightMovementPenalty(player: IPlayer): number | undefined;
     getPlayerWeightStatus(player: IPlayer): WeightStatus | undefined;
     getCameraPosition(position: IVector2): IVector2 | undefined;
-    getTileLightLevel(tile: ITile, x: number, y: number, z: number): number | undefined;
     getTilePenalty(penalty: number, tile: ITile): number;
     getZoomLevel(): number | undefined;
     isHumanSwimming(human: Human, isSwimming: boolean): boolean | undefined;
     isPlayerSwimming(human: Human, isSwimming: boolean): boolean | undefined;
     isTileBlocked(tile: ITile): true | undefined;
     onBuild(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
-    onButtonBarClick(button: JQuery): void;
     onContainerItemAdd(item: IItem, container: IContainer): void;
     onContainerItemRemove(item: IItem, container: IContainer): void;
     onContainerItemUpdate(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
@@ -109,7 +100,6 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     onGameTickStart(): void;
     onGameTickEnd(): void;
-    onGetTranslation(translation: IStringSection[]): IStringSection[];
     onEntityKill(attacker: IEntity | IDoodad, target: IEntity): void;
     onHumanSkillChange(human: IHuman, skill: SkillType, currentSkill: number): void;
     onInventoryItemAdd(player: IPlayer | undefined, item: IItem, container: IContainer): void;

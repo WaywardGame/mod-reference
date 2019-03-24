@@ -39,9 +39,9 @@ declare const eventBuses: {
 export default eventBuses;
 export declare module EventBus {
     function register<E extends EventBus>(eventBus: E, classOrHost: ReturnType<(typeof eventBuses)[E]>): void;
-    function register(eventBus: EventBus): (constructor: Class<any>) => void;
+    function register(eventBus: EventBus): (constructor: NullaryClass<any>) => void;
     function onEventBusRegistration(eventBus: EventBus, handler: NullaryFunction): void;
-    function subscriber<S extends Class<any>>(constructor: S): S;
+    function subscriber<S extends NullaryClass<any>>(constructor: S): S;
 }
 export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export declare type EventNameFromIndex<I extends EventBus> = keyof Events<ReturnType<(typeof eventBuses)[I]>>;

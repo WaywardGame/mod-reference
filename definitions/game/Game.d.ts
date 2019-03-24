@@ -156,8 +156,13 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     updateTablesAndWeightNextTick(): void;
     makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
     getBlackness(): number;
+    /**
+     * Note: Don't inject here. This gets called ten million times. If you want to override this functionality,
+     * use `calculateAmbientLightLevel`
+     */
     getAmbientLightLevel(z: number): number;
-    getAndUpdateAmbientLightLevel(z: number): number;
+    updateAmbientLightLevel(z: number): number;
+    calculateAmbientLightLevel(z: number): number;
     updateReputation(reputation: number): void;
     getDifficulty(): Difficulty;
     getDifficultyOptions(): IDifficultyOptions;
@@ -203,6 +208,10 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     getPlayerByName(name: string): IPlayer | undefined;
     getValidPlayerName(name: string | undefined): string;
     getHeight(z0: number, z1: number, d: number): number;
+    /**
+     * Calculates the light level of a tile.
+     */
+    calculateTileLightLevel(tile: ITile, x: number, y: number, z: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     setupSave(_: number): void;
     onGlobalSlotLoaded(_: number, success: boolean): Promise<void>;

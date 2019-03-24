@@ -34,7 +34,6 @@ import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
-import { IStringSection } from "utilities/string/Interpolator";
 /**
  * A decorator for registering a hook method on an `IHookHost`.
  * @param priority The priority of this hook method. Defaults to `HookPriority.Normal`
@@ -71,40 +70,6 @@ export interface IHookHost {
         [hook in Hook]?: number;
     };
     [SYMBOL_HOST_NAME]?: string[];
-    /**
-     * Get the ambient color
-     * @param colors The current ambient colors
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
-    getAmbientColor?(colors: [number, number, number]): [number, number, number] | undefined;
-    /**
-     * Get the ambient color while in caves
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
-    getAmbientColorCave?(): [number, number, number] | undefined;
-    /**
-     * Get the ambient color while its day time
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
-    getAmbientColorDay?(): [number, number, number] | undefined;
-    /**
-     * Get the ambient color while its night time
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
-    getAmbientColorNight?(): [number, number, number] | undefined;
-    /**
-     * Get the fog color
-     * @param colors The current fog colors
-     * @returns the ambient color channels (3 numbers) or undefined to use the default color
-     */
-    getFogColor?(colors: [number, number, number]): [number, number, number] | undefined;
-    /**
-     * Get the ambient light level
-     * @param ambientLight The current ambient light level
-     * @param z The world z index
-     * @returns the ambient light level or undefined to use the default light level
-     */
-    getAmbientLightLevel?(ambientLight: number, z: number): number | undefined;
     /**
      * Called before consuming an item
      * @param human The human object
@@ -290,15 +255,6 @@ export interface IHookHost {
      */
     getCameraPosition?(position: IVector2): IVector2 | undefined;
     /**
-     * Called when retrieving the light level of a tile
-     * @param tile The tile that was updated
-     * @param x The x position of the tile
-     * @param y The y position of the tile
-     * @param z The z position of the tile
-     * @returns The light level of the tile or undefined to use the default logic
-     */
-    getTileLightLevel?(tile: ITile, x: number, y: number, z: number): number | undefined;
-    /**
      * Called when calculating the movement penalty of a tile.
      * @param penalty The current penalty of the tile
      * @param tile The tile to get the movement penalty of
@@ -328,11 +284,6 @@ export interface IHookHost {
      * @param doodad The doodad that was created on the tile
      */
     onBuild?(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
-    /**
-     * Called when a button on the button bar is clicked
-     * @param button The button element
-     */
-    onButtonBarClick?(button: JQuery): void;
     /**
      * Called when an item is added to a container.
      * @param item The item object
@@ -393,10 +344,6 @@ export interface IHookHost {
      * Called when the game tick ends
      */
     onGameTickEnd?(): void;
-    /**
-     * Called whenever a translation is resolved.
-     */
-    onGetTranslation?(result: IStringSection[]): IStringSection[];
     /**
      * Called when an entity is killed by another entity.
      */

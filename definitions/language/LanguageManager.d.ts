@@ -14,6 +14,7 @@ import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
 import Translation from "language/Translation";
 import TranslationsProvider from "language/TranslationsProvider";
+import { IStringSection } from "utilities/string/Interpolator";
 import { CaseStyle } from "utilities/string/Strings";
 export interface ISerializedTranslationsProvider {
     dictionaries: {
@@ -51,6 +52,7 @@ export declare enum NounType {
 }
 export interface ILanguageEvents {
     change(language: string): void;
+    postGetTranslation(sections: IStringSection[]): IStringSection[] | undefined;
 }
 export default class LanguageManager extends EventEmitter.Host<ILanguageEvents> {
     language: string;

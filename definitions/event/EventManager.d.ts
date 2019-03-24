@@ -14,10 +14,10 @@ declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<F> = (...args: ArgsOf<F>) => ReturnOf<F>;
 declare module EventManager {
-    function subscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: EventHandlerFromIndex<I, P>, priority?: number): void;
-    function subscribe<E, K extends keyof E>(emitter: IEventEmitterHost<E> | IEventEmitterHostClass<E>, event: K, handler: Handler<E[K]>, priority?: number): void;
-    function unsubscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: EventHandlerFromIndex<I, P>, priority?: number): boolean;
-    function unsubscribe<E, K extends keyof E>(emitter: IEventEmitterHost<E> | IEventEmitterHostClass<E>, event: K, handler: Handler<E[K]>, priority?: number): boolean;
+    function subscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: IterableOr<EventHandlerFromIndex<I, P>>, priority?: number): void;
+    function subscribe<E, K extends keyof E>(emitter: IEventEmitterHost<E> | IEventEmitterHostClass<E>, event: K, handler: IterableOr<Handler<E[K]>>, priority?: number): void;
+    function unsubscribe<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, handler: IterableOr<EventHandlerFromIndex<I, P>>, priority?: number): boolean;
+    function unsubscribe<E, K extends keyof E>(emitter: IEventEmitterHost<E> | IEventEmitterHostClass<E>, event: K, handler: IterableOr<Handler<E[K]>>, priority?: number): boolean;
     function waitFor<I extends EventBus, P extends EventNameFromIndex<I>>(emitter: I, event: P, priority?: number): Promise<ArgsOf<EventHandlerFromIndex<I, P>>>;
     function waitFor<E, K extends keyof E>(emitter: IEventEmitterHost<E> | IEventEmitterHostClass<E>, event: K, priority?: number): Promise<ArgsOf<E[K]>>;
     interface IUntilSubscriber {

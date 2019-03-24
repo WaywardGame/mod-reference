@@ -148,12 +148,12 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
     abstract flatMap<X>(mapper: (value: T) => Iterable<X>): Stream<X>;
     /**
      * Returns a new Stream iterating over every value of each value of this iterator. The values in this
-     * Stream must be iterable.
+     * Stream don't have to be iterable.
      */
     abstract flatMap(): Stream<Flat1<T>>;
     /**
      * Returns a new Stream iterating over every value of each value of this Stream. The values in this
-     * Stream must be iterable.
+     * Stream don't have to be iterable.
      */
     abstract flatMap<X>(): Stream<X>;
     /**

@@ -15,6 +15,14 @@ declare global {
          * Returns a Stream for the values of this Set.
          */
         stream(): Stream<T>;
+        /**
+         * Adds all given values to the set.
+         */
+        addAll(...values: T[]): this;
+        /**
+         * Deletes all given values from the set. Returns whether any values were deleted.
+         */
+        deleteAll(...values: T[]): boolean;
     }
 }
 export default function (): void;

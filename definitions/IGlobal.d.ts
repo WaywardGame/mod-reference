@@ -64,7 +64,8 @@ declare global {
 	 */
 	type Descriptions<E extends string | number, V> = { [key in E]: V } & { [key: number]: V | undefined };
 
-	type Class<T> = new () => T;
+	type NullaryClass<T> = new () => T;
+	type Class<T> = new (...args: any[]) => T;
 
 	/**
 	 * Changes the return type of the given function, or creates a new function from the given arguments and return type. 
@@ -84,7 +85,8 @@ declare global {
 
 	type Human = IPlayer | INPC | IHuman;
 
-	type IterableOr<T> = T | T[] | IterableIterator<T>;
+	type IterableOr<T> = T | Iterable<T>;
+	type ArrayOr<T> = T | T[];
 
 	type GeneratorOf<T> = () => Iterable<T>;
 
@@ -97,6 +99,9 @@ declare global {
 	type PropertyOf<T, K extends string | number | symbol> = T extends { [key in K]: infer V } ? V : never;
 
 	type FunctionOrNoParams<H extends AnyFunction> = H | (() => ReturnType<H>);
+
+	type Head<T extends any[]> = T[0];
+	type Tail<A extends any[]> = ((...args: A) => any) extends ((_: any, ...args: infer A2) => any) ? A2 : never;
 
 	interface AsyncIterator<T> {
 		next(value?: any): Promise<IteratorResult<T>>;

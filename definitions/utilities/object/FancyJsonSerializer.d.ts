@@ -15,6 +15,6 @@ declare module FancyJsonSerializer {
         serialize(instance: T): S;
         deserialize(obj: S): T;
     }
-    function registerClassSerializer<T, S>(cls: Class<T>, classSerializer: IClassSerializer<T, S>): void;
+    function registerClassSerializer<T, S>(cls: NullaryClass<T>, classSerializer: IClassSerializer<T, S>): void;
 }
 export default FancyJsonSerializer;

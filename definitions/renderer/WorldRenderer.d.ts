@@ -32,11 +32,6 @@ export default class WorldRenderer implements IWorldRenderer {
     wallAdaptor: Wall;
     defaultAdaptor: ITileAdaptor;
     floorAdaptor: ITileAdaptor;
-    private readonly ambientIntensity;
-    private readonly ambientColorDay;
-    private readonly ambientColorDawn;
-    private readonly ambientColorNight;
-    private readonly ambientColorCave;
     private readonly screenspaceViewport;
     private readonly worldspaceViewport;
     private tileScale;
@@ -73,7 +68,12 @@ export default class WorldRenderer implements IWorldRenderer {
     setViewport(view: Vector2): void;
     getViewport(): Vector2;
     getTileViewport(): Vector2;
-    getAmbientColor(): [number, number, number];
+    calculateAmbientColor(): [number, number, number];
+    getAmbientColorCave(): [number, number, number];
+    getAmbientColorDay(): [number, number, number];
+    getAmbientColorNight(): [number, number, number];
+    getAmbientColorDawn(): [number, number, number];
+    getAmbientIntensity(): number;
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;

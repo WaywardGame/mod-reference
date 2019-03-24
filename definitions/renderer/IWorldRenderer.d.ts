@@ -36,7 +36,33 @@ export interface IWorldRenderer {
     setViewport(view: Vec2): void;
     getViewport(): Vec2;
     getTileViewport(): Vec2;
-    getAmbientColor(): [number, number, number];
+    /**
+     * Calculates the ambient color (color of the light), a 3-value tuple of RGB numbers 0-1.
+     */
+    calculateAmbientColor(): [number, number, number];
+    /**
+     * Get the ambient color (color of the light) while in caves, a 3-value tuple of RGB numbers 0-1.
+     */
+    getAmbientColorCave(): [number, number, number];
+    /**
+     * Get the ambient color (color of the light) of daytime, a 3-value tuple of RGB numbers 0-1.
+     */
+    getAmbientColorDay(): [number, number, number];
+    /**
+     * Get the ambient color (color of the light) of nighttime, a 3-value tuple of RGB numbers 0-1.
+     */
+    getAmbientColorNight(): [number, number, number];
+    /**
+     * Get the ambient color (color of the light) of dawn, a 3-value tuple of RGB numbers 0-1.
+     */
+    getAmbientColorDawn(): [number, number, number];
+    /**
+     * Get the intensity (light level) of the ambient light.
+     */
+    getAmbientIntensity(): number;
+    /**
+     * Get the color of the fog of war, a 3-value tuple of RGB numbers 0-1.
+     */
     getFogColor(): [number, number, number];
     renderWorld(x: number, y: number, z: number): void;
     render(): void;
