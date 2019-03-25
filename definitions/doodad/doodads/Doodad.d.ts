@@ -28,6 +28,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     "constructor": typeof Doodad;
     containedItems: IItemArray;
     decay?: number;
+    disassembly?: IItemArray;
     gatherReady?: boolean;
     stillContainer?: IItem;
     gfx?: number;
