@@ -754,7 +754,15 @@ export declare enum ItemType {
     Dough = 455,
     Hardtack = 456,
     HitchingPost = 457,
-    ShreddedPaper = 458
+    ShreddedPaper = 458,
+    RawMudskipper = 459,
+    RawAberrantMudskipper = 460,
+    CookedMudskipper = 461,
+    CookedAberrantMudskipper = 462,
+    RawRedSnapper = 463,
+    CookedRedSnapper = 464,
+    RawWalleye = 465,
+    CookedWalleye = 466
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

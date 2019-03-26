@@ -59,7 +59,9 @@ export declare enum CreatureType {
     Mudskipper = 37,
     Scorpion = 38,
     Rattlesnake = 39,
-    AntelopeJackrabbit = 40
+    AntelopeJackrabbit = 40,
+    RedSnapper = 41,
+    Walleye = 42
 }
 export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable {
     entityType: EntityType.Creature;
