@@ -31,7 +31,7 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> e
     setTrigger<H extends Hook>(hook: H, checker: (api: QuestRequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setHostTrigger<E extends keyof IPlayerEvents>(event: E, checker: (api: QuestRequirementApi<this>, ...args: ArgumentsOf<IPlayerEvents[E]>) => boolean): this;
-    getHostTriggers(): IterableIterator<["milestoneUpdate" | "updateOption" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange", (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
+    getHostTriggers(): IterableIterator<["milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange", (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: QuestRequirementApi<this>) => boolean): this;
     getInitializeTrigger(): ((api: QuestRequirementApi<this>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;

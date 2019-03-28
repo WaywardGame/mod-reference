@@ -19,7 +19,8 @@ export declare enum DialogId {
     Skills = 5,
     Book = 6,
     Map = 7,
-    Quests = 8
+    Quests = 8,
+    Crafting = 9
 }
 export declare enum Edge {
     Top = 0,

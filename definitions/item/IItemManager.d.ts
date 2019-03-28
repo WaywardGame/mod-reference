@@ -40,7 +40,7 @@ export interface IItemManager {
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItemArray;
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType): ItemType;
-    getGroupItems(itemGroup: ItemTypeGroup): Set<ItemType>;
+    getGroupItems(itemGroup: ItemTypeGroup | ItemType): Set<ItemType>;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup): IItem | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions): IItem | undefined;
@@ -69,7 +69,7 @@ export interface IItemManager {
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     isContainer(obj: unknown): obj is IContainer;
     isGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;
-    isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
+    isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     getGroups(itemType: ItemType): Stream<ItemTypeGroup>;
     isInInventory(containable: IContainable): boolean;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;

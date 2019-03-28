@@ -107,6 +107,7 @@ export default abstract class Dialog extends Component implements IDialog {
     addScrollableWrapper(initializer?: (wrapper: Component) => any): Component;
     addSettingsPanel(): Component;
     showSettingsPanel(): this;
+    resetSizeAndPosition(): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Closes the dialog.
@@ -233,7 +234,7 @@ export default abstract class Dialog extends Component implements IDialog {
      *
      * Also the event handler for when the viewport resizes
      */
-    private resetPosition;
+    private correctPosition;
 }
 /**
  * A component that emits events for being dragged. Takes a `HandlePosition` to be styled with.

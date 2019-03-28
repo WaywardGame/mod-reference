@@ -9,3 +9,9 @@
  * https://waywardgame.github.io/
  */
 export declare function isIterable(obj: any): obj is Iterable<any>;
+export declare function shortestIterable<I extends Iterable<any>, IN extends Array<Iterable<any>>>(iterable: I, ...iterables: IN): I | IN[number];
+export declare function longestIterable<I extends Iterable<any>, IN extends Array<Iterable<any>>>(iterable: I, ...iterables: IN): I | IN[number];
+export declare function length(iterable: Iterable<any>): number;
+export declare module Guard {
+    function instanceOf<T>(cls: Class<T>): (val: unknown) => val is T;
+}

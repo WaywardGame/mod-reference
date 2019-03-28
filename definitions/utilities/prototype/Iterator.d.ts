@@ -35,7 +35,7 @@ declare global {
          *
          * Note: Alias of `iterator.stream().filter()`
          */
-        filter<X = never>(filter: (val: T) => any): IterableIterator<Exclude<T, X>>;
+        filter<X = never>(filter: (val: T) => any): Stream<Exclude<T, X>>;
         /**
          * Returns an iterable that will loop only over the entries that match the given filter
          * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
@@ -45,7 +45,7 @@ declare global {
          *
          * Note: Alias of `iterator.stream().filter2()`
          */
-        filter2<X = T>(filter: (val: T) => any): IterableIterator<X>;
+        filter2<X = T>(filter: (val: T) => any): Stream<X>;
         /**
          * Returns a new Stream iterating over each value of the current iterator, first run through the given mapper function.
          *

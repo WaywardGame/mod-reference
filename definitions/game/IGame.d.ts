@@ -200,6 +200,7 @@ export interface IGameEvents {
     globalSlotLoaded(): void;
     pause(): void;
     resume(): void;
+    play(): void;
 }
 export declare enum TickSpeed {
     Min = 10,

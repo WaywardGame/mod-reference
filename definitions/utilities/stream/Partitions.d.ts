@@ -25,6 +25,7 @@ export default class Partitions<T, K> implements IPartitions<K, T> {
     constructor(stream: IStreamable<T>, sorter: (val: T, index: number) => K, streamMapper: <V>(val: IStreamable<V>) => Stream<V>);
     get(key: K): Stream<T>;
     partitions(): Stream<[K, Stream<T>]>;
+    toMap<I extends Iterable<T> = T[]>(mapper?: (value: Stream<T>, key: K) => I): Map<K, I>;
     next(): void;
     private getPartition;
     private getFunctionForRetrievingNextInPartition;

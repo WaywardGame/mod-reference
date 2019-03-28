@@ -80,6 +80,7 @@ export interface IDifficultyOptions {
          * Custom options for each skill.
          */
         skills: Map<SkillType, IDifficultyOptionsSkill>;
+        allRecipesUnlocked: boolean;
         reputation: {
             /**
              * The initial malignity

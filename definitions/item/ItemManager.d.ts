@@ -59,7 +59,7 @@ export default class ItemManager implements IItemManager {
     getRandomQuality(bonusQuality?: number): Quality;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
-    isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup): boolean;
+    isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     craft(human: Human, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
@@ -88,7 +88,7 @@ export default class ItemManager implements IItemManager {
     saveTileReferences(): void;
     loadTileReferences(): void;
     isGroup(item: ItemType | ItemTypeGroup): item is ItemTypeGroup;
-    getGroupItems(itemGroup: ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
+    getGroupItems(itemGroup: ItemType | ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): Stream<ItemTypeGroup>;
     checkMilestones(player: IPlayer, item: IItem): void;

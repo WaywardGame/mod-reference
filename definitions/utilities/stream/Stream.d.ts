@@ -32,6 +32,10 @@ export interface IPartitions<K, V> extends IStreamable<[K, Stream<V>]> {
      * a stream in either location will also empty it in the other.
      */
     partitions(): Stream<[K, Stream<V>]>;
+    /**
+     * Returns a new Map constructed from the partitioned Streams, indexed by their partition keys.
+     */
+    toMap<I extends Iterable<V> = V[]>(mapper?: (value: Stream<V>, key: K) => I): Map<K, I>;
 }
 /**
  * Note: When "splatting" a stream, it's actually faster (but not by much) to first collect it into an array:
@@ -105,6 +109,14 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
     value: T;
     abstract [Symbol.iterator](): Iterator<T>;
     abstract [Symbol.asyncIterator](): AsyncIterator<T extends Promise<infer R> ? R : never>;
+    /**
+     * Returns a Stream that will loop only over the entries that match the given filter
+     * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
+     *
+     * Note: The only difference between this method and `filter2` is the type argument: This method excludes the type argument,
+     * while the other returns it.
+     */
+    abstract filter<R extends T>(filter: (val: T) => val is R): Stream<R>;
     /**
      * Returns a Stream that will loop only over the entries that match the given filter
      * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
@@ -219,7 +231,7 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      * 	.toArray(); // ["dog", "cat", "pig", "cow"]
      * ```
      */
-    abstract partition<K>(sorter: (val: T) => K): IPartitions<K, T>;
+    abstract partition<K, V = T>(sorter: (val: T) => K, mapper?: (val: T) => V): IPartitions<K, V>;
     /**
      * Returns a `Partitions` instance where the T items (should be 2-value Tuples) of this Stream are split into two
      * partition Streams: "key" and "value".
