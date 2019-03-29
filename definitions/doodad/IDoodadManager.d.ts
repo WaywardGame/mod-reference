@@ -12,8 +12,8 @@ import { DoodadType, DoodadTypeGroup, IDoodad, IDoodadOptions } from "doodad/IDo
 export interface IDoodadManager {
     generateLookups(): void;
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;
-    isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): doodadType is DoodadTypeGroup;
-    isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup): boolean;
+    isGroup(doodadType: (DoodadType | DoodadTypeGroup)): doodadType is DoodadTypeGroup;
+    isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     /**
      * Removes a doodad from the world.

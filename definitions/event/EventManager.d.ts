@@ -29,4 +29,5 @@ declare module EventManager {
     function deregisterEventBusSubscriber(subscriber: object): void;
 }
 export default EventManager;
+export declare function EventHandler<E>(injectInto: "self", ownClass: AnyClass<IEventEmitterHost<E>>): <P extends keyof E>(property: P, priority?: number) => (host: IEventEmitterHost<E>, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<FunctionOrNoParams<Extract<E[P], AnyFunction>>>) => void;
 export declare function EventHandler<E extends EventBus>(injectInto: E): <P extends EventNameFromIndex<E>>(property: P, priority?: number) => (host: any, property2: string | number | symbol, descriptor: TypedPropertyDescriptor<FunctionOrNoParams<Extract<EventHandlerFromIndex<E, P>, AnyFunction>>>) => void;

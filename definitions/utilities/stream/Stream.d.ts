@@ -273,34 +273,34 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      */
     abstract at(index: number, orElse?: T): T | undefined;
     /**
-     * Returns true if the predicate returns true for any of the items in this Stream
+     * Returns true if the predicate returns a truthy value for any of the items in this Stream
      * @param predicate A predicate function that takes a Stream value and its index.
      */
-    abstract any(predicate: (val: T, index: number) => boolean): boolean;
+    abstract any(predicate: (val: T, index: number) => any): boolean;
     /**
-     * Returns true if the predicate returns true for any of the items in this Stream
+     * Returns true if the predicate returns a truthy value for any of the items in this Stream
      * @param predicate A predicate function that takes a Stream value and its index.
      *
      * Note: Alias of `any()`
      */
-    abstract some(predicate: (val: T, index: number) => boolean): boolean;
+    abstract some(predicate: (val: T, index: number) => any): boolean;
     /**
-     * Returns true if the predicate returns true for every item in the Stream
+     * Returns true if the predicate returns a truthy value for every item in the Stream
      * @param predicate A predicate function that takes a Stream value and its index.
      */
-    abstract every(predicate: (val: T, index: number) => boolean): boolean;
+    abstract every(predicate: (val: T, index: number) => any): boolean;
     /**
-     * Returns true if the predicate returns true for every item in the Stream
+     * Returns true if the predicate returns a truthy value for every item in the Stream
      * @param predicate A predicate function that takes a Stream value and its index.
      *
      * Note: Alias of `every()`
      */
-    abstract all(predicate: (val: T, index: number) => boolean): boolean;
+    abstract all(predicate: (val: T, index: number) => any): boolean;
     /**
-     * Returns true if the predicate returns false for every item in the Stream
+     * Returns true if the predicate returns a falsey value for every item in the Stream
      * @param predicate A predicate function that takes a Stream value and its index.
      */
-    abstract none(predicate: (val: T, index: number) => boolean): boolean;
+    abstract none(predicate: (val: T, index: number) => any): boolean;
     /**
      * Returns whether the Stream includes any of the the given values. Uses strict equality comparison. `===`
      */

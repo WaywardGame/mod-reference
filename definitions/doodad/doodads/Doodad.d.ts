@@ -58,6 +58,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     getRegistrarId(): number;
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
+    description(partial: true): Partial<IDoodadDescription>;
     inspect({ context, inspectFire }: Inspection, section: InspectionSection): void;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;

@@ -18,6 +18,7 @@ import { InspectionSection } from "game/inspection/Inspections";
 import { IItem, ItemType } from "item/IItem";
 import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
+import { ITile } from "tile/ITerrain";
 export default class Creature extends Entity implements ICreature, IUnserializedCallback {
     readonly entityType: EntityType.Creature;
     aberrant?: boolean;
@@ -40,6 +41,7 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     initializeStats(hp: number, maxhp?: number): void;
     getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
+    description(partial: true): Partial<ICreatureDescription>;
     inspect({ inspector, context, inspectEntityHealth }: Inspection, section: InspectionSection): void;
     hasAi(aiType: AiType): boolean;
     isHidden(): boolean;
@@ -54,7 +56,6 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     getMoveType(): MoveType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
     update(): boolean;
-    moveTo(x: number, y: number, z: number): boolean;
     /**
      * Checks under the creature for getting burned, setting off traps, eating items off the ground, and more
      * @returns Returns whether the creature can keep moving (in the case of creatures with >= 2 speed)
@@ -65,6 +66,7 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
     offer(items: IItem[]): IItem | undefined;
     onUnserialized(): void;
+    protected preMove(creature: this, oldTile: ITile, tile: ITile): void;
     private inspectResistancesAndVulnerabilities;
     private inspectHappiness;
     private findPath;

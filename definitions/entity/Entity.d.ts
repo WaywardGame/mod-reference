@@ -48,7 +48,7 @@ export default abstract class Entity implements IEntity {
     stats: IStats;
     status: IStatus;
     properties: IProperties | undefined;
-    protected _movementFinishTime: number | undefined;
+    private _movementFinishTime;
     private _inFov;
     constructor();
     abstract getName(): Translation;
@@ -78,6 +78,7 @@ export default abstract class Entity implements IEntity {
     getPoint(): IVector3;
     getFacingPoint(): IVector3;
     getFacingTile(): ITile;
+    moveTo(x: number, y: number, z: number): boolean;
     getMovementPoint(): IVector2;
     getMovementProgress(): number;
     getMovementFinishTime(): number | undefined;

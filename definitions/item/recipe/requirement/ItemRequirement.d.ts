@@ -13,8 +13,13 @@ import RecipeRequirement, { IRecipeApi } from "item/recipe/RecipeRequirement";
 export default class ItemRequirement extends RecipeRequirement {
     readonly item: ItemType | ItemTypeGroup;
     readonly quantity: number;
-    readonly consume: boolean;
-    constructor(item: ItemType | ItemTypeGroup, quantity?: number, consume?: boolean);
+    private consume;
+    private disassembleable;
+    constructor(item: ItemType | ItemTypeGroup, quantity?: number, initializer?: (requirement: ItemRequirement) => any);
+    consumed(): boolean;
+    setConsumed(consumed?: boolean): this;
+    canBeDisassembled(): boolean;
+    setCanBeDisassembled(disassembleable?: boolean): this;
     isMet(api: IRecipeApi, quantity?: number): boolean;
     private freeUsedItem;
     private getUsedItems;

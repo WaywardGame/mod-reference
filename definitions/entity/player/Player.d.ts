@@ -29,6 +29,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
+import Vector3 from "utilities/math/Vector3";
 export default class Player extends Human implements IPlayer {
     event: EventEmitter<IPlayerEvents<this>> & EventEmitter<IHumanEvents<this>> & EventEmitter<IEntityEvents<this>>;
     readonly entityType: EntityType.Player;
@@ -144,6 +145,7 @@ export default class Player extends Human implements IPlayer {
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setPosition(point: IVector3): void;
+    getNextPosition(): Vector3;
     setZ(z: number): void;
     isGhost(): boolean;
     isServer(): boolean;
@@ -173,6 +175,10 @@ export default class Player extends Human implements IPlayer {
      * 2. If a mod is using the `GetPlayerStrength` hook and the calculation needs to be refreshed.
      */
     updateStrength(): void;
+    /**
+     * Do not call.
+     */
+    moveTo(): boolean;
     protected calculateStats(): void;
     protected swimCheck(): void;
     private slitherSuckerDamage;

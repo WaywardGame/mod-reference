@@ -10,13 +10,24 @@
  */
 import IEntity from "entity/IEntity";
 import { IItem } from "item/IItem";
-import { RecipeRequirementType } from "item/recipe/IRecipeRequirement";
+import { ITile } from "tile/ITerrain";
 import Stream from "utilities/stream/Stream";
+export declare enum RecipeRequirementType {
+    Item = 0,
+    Tool = 1,
+    Doodad = 2,
+    Fire = 3
+}
 export interface IUseItemStrategy {
     items: IItem[];
     freeUsedItem(api: IRecipeApi, item: IItem): boolean;
 }
 export interface IRecipeApi {
+    /**
+     * Gets a stream of the tiles around the crafter entity.
+     * @param includeCrafterTile Whether the tile the crafter is on should be included. Defaults to `true`.
+     */
+    tilesAroundCrafter(includeCrafterTile?: boolean): Stream<ITile>;
     getCrafter(): IEntity;
     getUsableItems(): Set<IItem>;
     getUsedItems(): Stream<IItem>;

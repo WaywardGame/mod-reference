@@ -17,13 +17,16 @@ export interface IEventEmitterHost<E> {
 export interface IEventEmitterHostClass<E> extends NullaryClass<any> {
     [SYMBOL_SUBSCRIPTIONS]: Map<keyof E, PriorityMap<Set<IterableOr<Handler<any>>>>>;
 }
+export interface ISelfSubscribedEmitter<E> {
+    [SYMBOL_SUBSCRIPTIONS]: Array<[keyof E, string | number | symbol, number?]>;
+}
 declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<F> = (...args: ArgsOf<F>) => ReturnOf<F>;
 declare class EventEmitter<E> {
     private readonly hostClass;
     private readonly subscriptions;
-    constructor(hostClass: any);
+    constructor(host: any);
     copyFrom(emitter: EventEmitter<E>): void;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): void;
     emitStream<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;

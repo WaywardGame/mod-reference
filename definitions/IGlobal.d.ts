@@ -19,6 +19,7 @@ import IHuman from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
 import INPCManager from "entity/npc/INPCManager";
 import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import IGame from "game/IGame";
 import { ItemType } from "item/IItem";
 import IItemManager from "item/IItemManager";
@@ -66,6 +67,8 @@ declare global {
 
 	type NullaryClass<T> = new () => T;
 	type Class<T> = new (...args: any[]) => T;
+	// tslint:disable-next-line ban-types No other type will work here except "Function" 
+	type AnyClass<T> = (Function & { prototype: T });
 
 	/**
 	 * Changes the return type of the given function, or creates a new function from the given arguments and return type. 
@@ -75,7 +78,10 @@ declare global {
 	/**
 	 * Gets the arguments tuple of a function.
 	 */
-	type ArgumentsOf<F extends AnyFunction> = F extends (...args: infer A) => any ? A : [];
+	type ArgumentsOf<F extends AnyFunction | Class<any>> =
+		F extends (...args: infer A) => any ? A :
+		F extends new (...args: infer A) => any ? A :
+		[];
 
 	type SaferArray<T> = Array<T | undefined>;
 
@@ -127,7 +133,7 @@ declare global {
 	let hookManager: IHookManager;
 	let itemManager: IItemManager;
 	let languageManager: LanguageManager;
-	let localPlayer: IPlayer;
+	let localPlayer: Player;
 	let modManager: IModManager;
 	let multiplayer: IMultiplayer;
 	let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;

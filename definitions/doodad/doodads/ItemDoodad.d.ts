@@ -18,6 +18,7 @@ export default class ItemDoodad extends Doodad implements IDoodad {
     itemType: ItemType;
     constructor(id?: number, x?: number, y?: number, z?: number, options?: IDoodadOptions);
     description(): IDoodadDescription | undefined;
+    description(partial: true): Partial<IDoodadDescription>;
     getDoodadInfo(): DoodadInfo | undefined;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;

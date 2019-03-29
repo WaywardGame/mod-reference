@@ -84,7 +84,14 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
      * - `creature.getName(undefined, 3)` // "acid spitter demons"
      */
     getName(article?: boolean, count?: number): Translation;
+    /**
+     * Returns the description for this creature
+     */
     description(): ICreatureDescription | undefined;
+    /**
+     * Returns the description for this creature, or an empty object if there is no description.
+     */
+    description(partial: true): Partial<ICreatureDescription>;
     isHidden(): boolean;
     isDefender(): boolean;
     checkForBurn(moveType?: MoveType): boolean;

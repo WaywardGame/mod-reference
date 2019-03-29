@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export declare enum RecipeRequirementType {
-    Item = 0,
-    Doodad = 1,
-    Fire = 2
+import { ItemType, ItemTypeGroup } from "item/IItem";
+import ItemRequirement from "item/recipe/requirement/ItemRequirement";
+export default class ToolRequirement extends ItemRequirement {
+    constructor(item: ItemType | ItemTypeGroup, quantity?: number);
 }

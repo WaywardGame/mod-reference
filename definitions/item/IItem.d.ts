@@ -17,6 +17,7 @@ import { Stat } from "entity/IStats";
 import IPlayer from "entity/player/IPlayer";
 import { IObject, IObjectDescription, IObjectOptions, Quality } from "game/IObject";
 import { TatteredMap } from "item/IItem";
+import Recipe from "item/recipe/Recipe";
 import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
 import { IVector3 } from "utilities/math/IVector";
@@ -123,11 +124,11 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     use?: ActionType[];
     ranged?: IRanged;
     recipe?: IRecipe;
+    recipes?: Array<(recipe: Recipe) => Recipe>;
     disassemble?: boolean;
     requiredForDisassembly?: Array<ItemType | ItemTypeGroup>;
     decaysInto?: ItemType;
     twoHanded?: boolean;
-    recipes?: ItemType[];
     keepDurabilityOnCraft?: boolean;
     craftable?: boolean;
     dismantle?: IDismantleDescription;
@@ -150,6 +151,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     tier?: {
         [index: number]: number;
     };
+    recipeCache?: ItemType[];
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;
 }

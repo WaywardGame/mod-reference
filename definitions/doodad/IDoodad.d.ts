@@ -34,7 +34,14 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
      * - `doodad.getName(undefined, 3)` // "stone furnaces"
      */
     getName(article?: boolean, count?: number): Translation;
+    /**
+     * Returns the description for this doodad
+     */
     description(): IDoodadDescription | undefined;
+    /**
+     * Returns the description for this doodad, or an empty object if there is no description.
+     */
+    description(partial: true): Partial<IDoodadDescription>;
     changeType(doodadType: DoodadType): void;
     getOwner(): IPlayer | undefined;
     canGrow(): boolean;

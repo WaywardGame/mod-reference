@@ -9,12 +9,24 @@
  * https://waywardgame.github.io/
  */
 import IEntity from "entity/IEntity";
-import { IContainer } from "item/IItem";
-import RecipeRequirement from "item/recipe/RecipeRequirement";
+import { SkillType } from "entity/IHuman";
+import { IContainer, RecipeLevel } from "item/IItem";
+import RecipeRequirement, { RecipeRequirementType } from "item/recipe/RecipeRequirement";
+import { RecipeRequirementClass } from "item/recipe/RecipeRequirements";
 export default class Recipe {
     private readonly requirements;
+    private skill;
+    private level;
+    private reputation;
+    constructor();
     getRequirements(): import("../../utilities/stream/Stream").default<RecipeRequirement>;
-    addRequirement(requirement: RecipeRequirement): this;
+    addRequirement<R extends RecipeRequirementType>(requirementType: R, ...args: ArgumentsOf<RecipeRequirementClass<R>>): this;
+    getSkill(): SkillType;
+    setSkill(skill: SkillType): this;
+    getLevel(): RecipeLevel;
+    setLevel(level: RecipeLevel): this;
+    getReputation(): number;
+    setReputation(reputation: number): this;
     canCraft(crafter: IEntity, inventories: IContainer[]): boolean;
     requirementsStatus(crafter: IEntity, inventories: IContainer[]): import("../../utilities/stream/Stream").default<[RecipeRequirement, boolean]>;
 }

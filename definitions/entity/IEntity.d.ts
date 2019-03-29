@@ -215,6 +215,8 @@ export interface IEntityEvents<E extends IEntity = IEntity> {
      * @param reason The reason for the change
      */
     statusChange(entity: E, status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
+    preMove(entity: E, fromTile: ITile, toTile: ITile): boolean | undefined | void;
+    postMove(entity: E, fromTile: ITile, toTile: ITile): void;
 }
 export declare enum StatusEffectChangeReason {
     Gained = 0,

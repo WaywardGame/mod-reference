@@ -17,8 +17,8 @@ export default class DoodadManager implements IDoodadManager {
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;
     remove(doodad: IDoodad, removeItems?: boolean): void;
     updateAll(): void;
-    isDoodadTypeGroup(doodadType: (DoodadType | DoodadTypeGroup)): doodadType is DoodadTypeGroup;
-    isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup): boolean;
+    isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
+    isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
     verifyAndFixItemWeights(): void;
 }

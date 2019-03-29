@@ -8,11 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import ItemDoodad from "doodad/doodads/ItemDoodad";
-import { IDoodad, IDoodadDescription } from "doodad/IDoodad";
-export default class SolarStill extends ItemDoodad implements IDoodad {
-    getRegistrarId(): number;
-    description(): IDoodadDescription | undefined;
-    description(partial: true): Partial<IDoodadDescription>;
-    update(): void;
+import { DoodadType, DoodadTypeGroup } from "doodad/IDoodad";
+import RecipeRequirement, { IRecipeApi } from "item/recipe/RecipeRequirement";
+export default class DoodadRequirement extends RecipeRequirement {
+    readonly doodad: DoodadType | DoodadTypeGroup;
+    constructor(doodad: DoodadType | DoodadTypeGroup);
+    isMet(api: IRecipeApi): boolean;
 }

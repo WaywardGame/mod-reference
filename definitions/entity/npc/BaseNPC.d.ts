@@ -14,6 +14,7 @@ import { AiType, EntityType } from "entity/IEntity";
 import { EquipType, ICustomizations } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
 import { IItem, ItemType } from "item/IItem";
+import { ITile } from "tile/ITerrain";
 export default abstract class BaseNPC extends Human implements INPC {
     protected static registrarId: number;
     readonly entityType: EntityType.NPC;
@@ -25,7 +26,6 @@ export default abstract class BaseNPC extends Human implements INPC {
     constructor(id?: number, x?: number, y?: number, z?: number);
     getRegistrarId(): number;
     update(): void;
-    moveTo(x: number, y: number, z: number): boolean;
     kill(): boolean;
     isHostile(): boolean;
     isWaiting(): boolean;
@@ -69,5 +69,7 @@ export default abstract class BaseNPC extends Human implements INPC {
     protected attack(): boolean;
     protected move(): boolean;
     protected autoScaleStats(): void;
+    protected preMove(npc: this, oldTile: ITile, tile: ITile): void;
+    protected postMove(): void;
     private checkMove;
 }
