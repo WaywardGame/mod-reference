@@ -14,7 +14,9 @@ export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
 export interface IEventEmitterHost<E> {
     event: EventEmitter<E>;
 }
-export interface IEventEmitterHostClass<E> extends NullaryClass<any> {
+export interface IEventEmitterHostClass<E> extends Class<IEventEmitterHost<E>> {
+}
+export interface ITrueEventEmitterHostClass<E> extends Class<any> {
     [SYMBOL_SUBSCRIPTIONS]: Map<keyof E, PriorityMap<Set<IterableOr<Handler<any>>>>>;
 }
 export interface ISelfSubscribedEmitter<E> {

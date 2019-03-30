@@ -11,8 +11,10 @@
 import { CreatureType, ICreature, ICreatureDescription, SpawnGroup, TileGroup } from "entity/creature/ICreature";
 import { MoveType } from "entity/IEntity";
 import IEntityManager from "entity/IEntityManager";
+import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 export interface ICreatureManager extends IEntityManager<ICreature> {
+    getName(creature: ICreature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
     getHappinessLevel(human: Human, creature: ICreature): number;
     spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup): ICreature | undefined;
     spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;

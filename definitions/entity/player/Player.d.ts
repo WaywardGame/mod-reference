@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDoodad } from "doodad/IDoodad";
-import { ICreature } from "entity/creature/ICreature";
+import { CreatureType, ICreature } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import { EntityType, IEntityEvents, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import IHuman, { EquipType, IHumanEvents, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
@@ -29,7 +29,6 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-import Vector3 from "utilities/math/Vector3";
 export default class Player extends Human implements IPlayer {
     event: EventEmitter<IPlayerEvents<this>> & EventEmitter<IHumanEvents<this>> & EventEmitter<IEntityEvents<this>>;
     readonly entityType: EntityType.Player;
@@ -72,11 +71,13 @@ export default class Player extends Human implements IPlayer {
     movementFinishTime: number;
     nextMoveTime: number;
     nextMoveDirection: Direction | undefined;
+    displayCreature?: CreatureType;
     private _milestoneUpdates;
     private readonly _movementIntent;
     constructor(identifier?: string);
     readonly clientStore: IClientStore;
     setOptions(options: IOptions): void;
+    getDisplayCreature(): CreatureType | undefined;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatus(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
@@ -145,7 +146,7 @@ export default class Player extends Human implements IPlayer {
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
     setPosition(point: IVector3): void;
-    getNextPosition(): Vector3;
+    getNextPosition(): IVector3;
     setZ(z: number): void;
     isGhost(): boolean;
     isServer(): boolean;

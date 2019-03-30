@@ -11,9 +11,24 @@
 import IEntity, { StatusType } from "entity/IEntity";
 import { IModdable } from "mod/ModRegistry";
 import StatusEffectRenderer from "renderer/StatusEffectRenderer";
+import { IRGB } from "utilities/Color";
 export interface IStatusEffectDescription extends IModdable {
     iconPath?: string | ((entity: IEntity) => string);
     renderer: StatusEffectRenderer;
+    particles?: {
+        /**
+         * Particle effect for every turn, in a 2-val tuple.
+         * @param countOrChance If a number less than `1`, the chance of the particle effect happening. Greater than `1` increases the number of particles.
+         * @param color The color of the particle effect
+         */
+        onTurn?: [number, IRGB];
+        /**
+         * Particle effect for every status effect tick (20 turns), in a 2-val tuple.
+         * @param countOrChance If a number less than `1`, the chance of the particle effect happening. Greater than `1` increases the number of particles.
+         * @param color The color of the particle effect
+         */
+        onTick?: [number, IRGB];
+    };
     /**
      * Whether the status effect should pass (be removed from the human).
      */

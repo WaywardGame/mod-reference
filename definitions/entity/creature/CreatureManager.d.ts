@@ -12,9 +12,11 @@ import { CreatureType, ICreature, ICreatureDescription, SpawnGroup, TileGroup } 
 import { ICreatureManager } from "entity/creature/ICreatureManager";
 import EntityManager from "entity/EntityManager";
 import { MoveType } from "entity/IEntity";
+import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
 export default class CreatureManager extends EntityManager<ICreature> implements ICreatureManager {
     getEntities(): (ICreature | undefined)[];
+    getName(creature: ICreature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
     getHappinessLevel(human: Human, creature: ICreature): number;
     /**
      * Spawns a creature.

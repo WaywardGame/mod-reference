@@ -70,6 +70,6 @@ export default abstract class BaseNPC extends Human implements INPC {
     protected move(): boolean;
     protected autoScaleStats(): void;
     protected preMove(npc: this, oldTile: ITile, tile: ITile): void;
-    protected postMove(): void;
+    protected postMove(npc: this, fromTile: ITile, toTile: ITile): void;
     private checkMove;
 }

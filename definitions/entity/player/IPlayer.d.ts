@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDoodad } from "doodad/IDoodad";
-import { ICreature } from "entity/creature/ICreature";
+import { CreatureType, ICreature } from "entity/creature/ICreature";
 import { EntityType, IEntityEvents } from "entity/IEntity";
 import IHuman, { EquipType, HairColor, HairStyle, IHumanEvents, RestType, SkinColor } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
@@ -89,6 +89,7 @@ export interface IPlayer extends IHuman {
     getMaxWeight(): number;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
+    getDisplayCreature(): CreatureType | undefined;
     hasTamedCreature(creature: ICreature): boolean;
     hasWalkPath(): boolean;
     healthSyncCheck(): void;

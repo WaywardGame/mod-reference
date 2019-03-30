@@ -13,11 +13,11 @@ import { IContainer, IDismantleComponent, IItem, ItemType } from "item/IItem";
 import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
+import "ui/functional/FunctionalSortable";
+import "ui/functional/FunctionalTooltip";
 import { DialogId, IDialogInfo, IUi } from "ui/IUi";
 import InGameScreen from "ui/screens/InGameScreen";
 import Emitter from "utilities/Emitter";
-import "ui/functional/FunctionalSortable";
-import "ui/functional/FunctionalTooltip";
 export default class Ui extends Emitter implements IUi {
     screenInGame: InGameScreen;
     private readonly elementDocument;
