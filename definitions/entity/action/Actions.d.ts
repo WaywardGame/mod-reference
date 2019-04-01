@@ -57,7 +57,7 @@ declare const actionDescriptions: {
     [ActionType.OpenContainer]: import("./Action").Action<[import("./IAction").ActionArgument.Container, [import("./IAction").ActionArgument.Boolean, import("./IAction").ActionArgument.Undefined]], import("../player/IPlayer").IPlayer | import("../npc/INPC").INPC, void>;
     [ActionType.OpenDoor]: import("./Action").Action<[], import("../player/IPlayer").IPlayer | import("../npc/INPC").INPC, boolean>;
     [ActionType.Paddle]: import("./Action").Action<[import("./IAction").ActionArgument.ItemInventory], import("../player/IPlayer").IPlayer, void>;
-    [ActionType.Pet]: import("./Action").Action<[], import("../player/IPlayer").IPlayer | import("../npc/INPC").INPC, void>;
+    [ActionType.Pet]: import("./Action").Action<[], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Pickup]: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.PickupAllItems]: import("./Action").Action<[], import("../player/IPlayer").IPlayer | import("../npc/INPC").INPC, void>;
     [ActionType.PickupItem]: import("./Action").Action<[], import("../player/IPlayer").IPlayer | import("../npc/INPC").INPC, void>;

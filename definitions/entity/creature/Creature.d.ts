@@ -51,7 +51,6 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     tame(player: IPlayer): boolean;
     increaseTamedCount(): void;
     release(): boolean;
-    pet(): boolean;
     skipNextUpdate(): void;
     getMoveType(): MoveType;
     queueSoundEffect(type: SfxType, delay?: number, speed?: number): void;
@@ -65,6 +64,7 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     getOwner(): IPlayer | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
     offer(items: IItem[]): IItem | undefined;
+    processSpecialAbilities(enemy: IPlayer | ICreature | undefined, bypass?: boolean): boolean;
     onUnserialized(): void;
     protected preMove(creature: this, oldTile: ITile, tile: ITile): void;
     private inspectResistancesAndVulnerabilities;
@@ -81,5 +81,4 @@ export default class Creature extends Entity implements ICreature, IUnserialized
      */
     private breakDoodad;
     private processAiChanges;
-    private processSpecialAbilities;
 }

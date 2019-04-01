@@ -100,7 +100,6 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
     tame(player: IPlayer): boolean;
     release(): boolean;
     increaseTamedCount(): void;
-    pet(): boolean;
     skipNextUpdate(): void;
     onUnserialized(): void;
     offer(items: IItem[]): IItem | undefined;
@@ -112,6 +111,7 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
     checkUnder(checkX?: number, checkY?: number): boolean;
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
+    processSpecialAbilities(enemy: IPlayer | ICreature | undefined, bypass?: boolean): boolean;
     initializeStats(hp: number, maxhp?: number): void;
 }
 export interface ICreatureOld extends ICreature {

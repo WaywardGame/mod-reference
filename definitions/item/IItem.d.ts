@@ -764,7 +764,8 @@ export declare enum ItemType {
     RawRedSnapper = 463,
     CookedRedSnapper = 464,
     RawWalleye = 465,
-    CookedWalleye = 466
+    CookedWalleye = 466,
+    WoodenShield = 467
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
