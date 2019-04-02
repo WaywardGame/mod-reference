@@ -10,7 +10,6 @@
  */
 import { IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import { IEntityEvents } from "entity/IEntity";
 import IHuman, { EquipType, ICustomizations, IHumanEvents, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { MilestoneType } from "entity/player/IMilestone";
@@ -19,7 +18,7 @@ import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
-import EventEmitter from "event/EventEmitter";
+import { ExtendedEvents } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { IContainer, IItem, ItemType } from "item/IItem";
@@ -30,7 +29,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity implements IHuman {
-    event: EventEmitter<IHumanEvents<this>> & EventEmitter<IEntityEvents<this>>;
+    event: ExtendedEvents<this, Entity, IHumanEvents>;
     attackFromEquip: IAttackHand;
     customization: ICustomizations;
     deathBy: import("../language/Translation").ISerializedTranslation;

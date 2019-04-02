@@ -8,21 +8,23 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IRefreshable } from "newui/component/Refreshable";
-export declare enum InputEvent {
-    Change = "Change",
-    Done = "Done",
-    Enter = "Enter",
-    Escape = "Escape",
-    Focus = "Focus",
-    Blur = "Blur",
-    UpArrow = "UpArrow",
-    DownArrow = "DownArrow"
+export interface IInputEvents {
+    change(text: string): any;
+    done(text: string): any;
+    enter(): any;
+    escape(): any;
+    focus(): any;
+    blur(): any;
+    upArrow(): any;
+    downArrow(): any;
 }
 export default class Input extends Component implements IRefreshable, IInput {
+    event: ExtendedEvents<this, Component, IInputEvents>;
     default: (() => string) | undefined;
     text: string;
     private keydownEnter;

@@ -15,8 +15,8 @@ export default class ModsMenu extends Menu {
     constructor();
     getModRow(index: number): ModRow | undefined;
     protected onOverlayHidden(): Promise<void>;
+    protected refreshMods(): void;
     private create;
-    private refreshMods;
     private sortMods;
     private setAllModStates;
     private addModSection;

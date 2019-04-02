@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import { IComponent } from "newui/component/IComponent";
+import { IMenuEvents } from "newui/screen/screens/menu/component/Menu";
 export declare enum MenuId {
     BACK = -1,
     NONE = 0,
@@ -27,6 +29,7 @@ export declare enum MenuId {
     Pause = 13
 }
 export interface IMenu extends IComponent {
+    event: ExtendedEvents<this, IComponent, IMenuEvents>;
     canCancel: boolean | undefined;
     isSubmenu: boolean;
     selection: ISelectionHandler;

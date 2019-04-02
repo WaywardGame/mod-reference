@@ -9,15 +9,17 @@
  * https://waywardgame.github.io/
  */
 import IPlayer from "entity/player/IPlayer";
+import { ExtendedEvents } from "event/EventEmitter";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Dialog from "newui/screen/screens/game/component/Dialog";
-export declare enum NotesDialogEvent {
+export interface INotesDialogEvents {
     /**
      * @param noteId The note that was shown
      */
-    ShowNote = 0
+    showNote(noteId: number): any;
 }
 export default class NotesDialog extends Dialog {
+    event: ExtendedEvents<this, Dialog, INotesDialogEvents>;
     private readonly noteId;
     private readonly noteLinks;
     private readonly learnMoreLink;
@@ -27,9 +29,9 @@ export default class NotesDialog extends Dialog {
     onWrittenNote(player: IPlayer, id: number): void;
     getName(): UiTranslation;
     showNote(noteId: number): this;
+    protected onShow(): void;
     private previousNote;
     private nextNote;
-    private onShow;
     private onNoteNumberActivate;
     private refreshNotesPanel;
     private learnMore;

@@ -16,6 +16,6 @@ export default class ModesMenu extends Menu {
     private readonly choiceTurnModeRealTime;
     private readonly tickSpeed;
     constructor();
-    private refresh;
+    protected refresh(): void;
     private updateTurnModes;
 }

@@ -13,7 +13,7 @@ export default class JoinServerMenu extends Menu {
     private readonly serverInput;
     private readonly joinButton;
     constructor();
-    private onShow;
+    protected onShow(): void;
     private onInputEnter;
     private onInputChange;
     private getServerToJoin;

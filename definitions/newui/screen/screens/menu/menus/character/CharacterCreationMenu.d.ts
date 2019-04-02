@@ -27,9 +27,9 @@ export default class CharacterCreationMenu extends Menu {
     private defaultName;
     constructor();
     setGameOptions(gameOptions: Partial<IPlayOptions>): this;
+    protected onShow(): void;
     private randomizeName;
     private randomize;
-    private onShow;
     private create;
     private createEditorButton;
     private rotate;

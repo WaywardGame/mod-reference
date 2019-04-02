@@ -8,24 +8,29 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter, { ExtendedEvents } from "event/EventEmitter";
 import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
+import { ContextMenuOption } from "newui/component/ContextMenu";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
-import Emitter from "utilities/Emitter";
 import { IVector2 } from "utilities/math/IVector";
+import Vector2 from "utilities/math/Vector2";
 import Stream from "utilities/stream/Stream";
 import { IStringSection } from "utilities/string/Interpolator";
-export declare const enum ComponentEvent {
-    Show = "Show",
-    Hide = "Hide",
-    Append = "Append",
-    Remove = "Remove",
-    RemoveForAppend = "RemoveForAppend",
-    AddChild = "AddChild",
-    RemoveChild = "RemoveChild",
-    InputChange = "InputChange",
-    WillRemove = "WillRemove"
+export interface IComponentEvents {
+    show(): void;
+    hide(): void;
+    append(to: HTMLElement | IComponent): void;
+    remove(): void;
+    removeForAppend(): void;
+    addChild(child: HTMLElement | IComponent): void;
+    removeChild(): void;
+    inputChange(event: Event): void;
+    /**
+     * @returns `false` to cancel removal.
+     */
+    willRemove(): boolean | void;
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;
@@ -42,7 +47,7 @@ export declare module AppendStrategy {
         before: IComponent;
     };
 }
-export interface IComponent extends Emitter {
+export interface IComponent extends EventEmitter.Host<IComponentEvents> {
     /**
      * The element that this `UiElement` instance wraps.
      */
@@ -204,7 +209,12 @@ export interface IComponent extends Emitter {
      */
     repaint(): void;
 }
+export interface IContextMenuEvents {
+    chosen(choice: ContextMenuOption): any;
+    becomeActive(): any;
+}
 export interface IContextMenu<OptionType extends number | string | symbol = number | string | symbol> extends IComponent {
+    event: ExtendedEvents<this, IComponent, IContextMenuEvents>;
     setPosition(x: number, y: number, right?: boolean): this;
     hideAndRemove(): Promise<void>;
 }
@@ -242,7 +252,11 @@ export declare enum TooltipLocation {
     BeneathRight = 9,
     Mouse = 10
 }
+export interface ITooltipEvents {
+    move(position: Vector2): any;
+}
 export interface ITooltip extends IComponent {
+    event: ExtendedEvents<this, IComponent, ITooltipEvents>;
     setLocation(location: TooltipLocation): this;
     setMaxWidth(maxWidth: number): this;
     setNoCache(): this;

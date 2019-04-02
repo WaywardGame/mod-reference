@@ -78,12 +78,6 @@ export interface IHighlightManager {
     end(host: any): void;
     register(component: IComponent, selector: HighlightSelector, until?: string | number): void;
 }
-export declare enum UiApiEvent {
-    Resize = 0,
-    Interrupt = 1,
-    InterruptClose = 2,
-    LoadedFromSave = "LoadedFromSave"
-}
 export declare enum SelectDirection {
     Up = -1,
     Down = 1,

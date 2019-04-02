@@ -16,4 +16,5 @@ export declare enum ColumnType {
 export declare class BlockRow extends Component {
     constructor(elementType?: string);
     setColumns(...columns: ColumnType[]): this;
+    protected onChildrenChange(): void;
 }

@@ -24,14 +24,13 @@ import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Stream from "utilities/stream/Stream";
-export default abstract class Entity implements IEntity {
+export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IEntity {
     static is(entity: IEntity | undefined, entityType: EntityType.NPC): entity is INPC;
     static is(entity: IEntity | undefined, entityType: EntityType.Creature): entity is ICreature;
     static is(entity: IEntity | undefined, entityType: EntityType.Player): entity is IPlayer;
     static isNot(entity: IEntity | undefined, entityType: EntityType.NPC): entity is Exclude<EntityPlayerCreatureNpc, INPC>;
     static isNot(entity: IEntity | undefined, entityType: EntityType.Creature): entity is Exclude<EntityPlayerCreatureNpc, ICreature>;
     static isNot(entity: IEntity | undefined, entityType: EntityType.Player): entity is Exclude<EntityPlayerCreatureNpc, IPlayer>;
-    event: EventEmitter<IEntityEvents<this>>;
     entityType: EntityType;
     id: number;
     renamed?: string;

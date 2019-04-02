@@ -19,7 +19,7 @@ export default class CharacterSelectionMenu extends Menu {
     constructor();
     create(): void;
     refresh(): void;
-    private onShow;
+    protected onShow(): void;
     private sortCharacters;
     private getCharacterCreationMenu;
 }

@@ -8,12 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import Button from "newui/component/Button";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { Paragraph } from "newui/component/Text";
-export declare const enum ThreeStateButtonEvent {
-    Change = "Change"
+export interface IThreeStateButtonEvents {
+    /**
+     * @param state The state this button is changing to.
+     * @param oldState The state this button is changing from.
+     * @returns `false` to cancel the change.
+     */
+    willChange(state: ThreeStateButtonState, oldState?: ThreeStateButtonState): boolean | void;
+    /**
+     * @param state The new state of this button.
+     */
+    change(state: ThreeStateButtonState): any;
 }
 export declare enum ThreeStateButtonState {
     Null = 0,
@@ -21,6 +31,7 @@ export declare enum ThreeStateButtonState {
     Off = 2
 }
 export declare class ThreeStateButton extends Button implements IRefreshableValue<ThreeStateButtonState> {
+    event: ExtendedEvents<this, Button, IThreeStateButtonEvents>;
     protected refreshMethod: () => ThreeStateButtonState;
     private _state;
     readonly state: ThreeStateButtonState;

@@ -8,15 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation from "language/Translation";
 import { CheckButton } from "newui/component/CheckButton";
 import { RangeInput } from "newui/component/RangeInput";
 import { RangeInputValueDisplay } from "newui/component/RangeInputValueDisplay";
-export declare enum CheckButtonRangeEvent {
-    Change = "Change2"
+interface ICheckButtonRangeEvents {
+    change(value?: number): any;
 }
 export default class CheckButtonRange extends CheckButton {
+    event: ExtendedEvents<this, CheckButton, ICheckButtonRangeEvents>;
     readonly rangeInput: RangeInput;
     protected rangeInputValueDisplay: RangeInputValueDisplay | undefined;
     private readonly rangeWrapper;
@@ -29,3 +31,4 @@ export default class CheckButtonRange extends CheckButton {
     private change;
     private updateDisplay;
 }
+export {};

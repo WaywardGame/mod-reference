@@ -79,5 +79,5 @@ export default class Ui extends EventEmitter.Host<IUiEvents> {
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
     protected onInterruptClosed(): void;
-    protected onLanguageChange(language: string): void;
+    protected onLanguageChange(_: any, language: string): void;
 }

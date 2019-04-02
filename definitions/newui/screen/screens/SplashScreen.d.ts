@@ -13,6 +13,6 @@ import Screen from "newui/screen/Screen";
 export default class SplashScreen extends Screen {
     constructor();
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    private create;
+    protected create(): Promise<void>;
     private showNext;
 }

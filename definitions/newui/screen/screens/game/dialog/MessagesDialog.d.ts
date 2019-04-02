@@ -13,7 +13,7 @@ import Dialog from "newui/screen/screens/game/component/Dialog";
 export default class MessagesDialog extends Dialog {
     constructor();
     getName(): UiTranslation;
+    protected willRemove(): void;
     private onFocus;
     private onBlur;
-    private willRemove;
 }

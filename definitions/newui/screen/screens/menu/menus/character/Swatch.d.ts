@@ -10,7 +10,7 @@
  */
 import { IColorDescription } from "entity/IHuman";
 import ChoiceList, { Choice } from "newui/component/ChoiceList";
-export declare class SwatchList<T extends number> extends ChoiceList {
+export declare class SwatchList<T extends number> extends ChoiceList<Swatch> {
     private readonly colors;
     constructor(colors: {
         [index: number]: IColorDescription | undefined;

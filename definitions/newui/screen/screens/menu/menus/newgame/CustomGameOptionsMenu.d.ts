@@ -14,7 +14,7 @@ export default class CustomGameOptionsMenu extends Menu {
     private readonly options;
     private readonly refreshables;
     constructor(options: () => IDifficultyOptions);
-    private refresh;
+    protected refresh(): void;
     private exportOptions;
     private importOptions;
 }

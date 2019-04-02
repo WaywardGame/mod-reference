@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Quest } from "entity/player/quest/quest/Quest";
+import { Quest, RequirementInstance } from "entity/player/quest/quest/Quest";
+import { QuestInstance } from "entity/player/quest/QuestManager";
 import { IQuestRequirement } from "entity/player/quest/requirement/IRequirement";
 import Stream from "utilities/stream/Stream";
 export default class Challenge extends Quest {
@@ -36,8 +37,8 @@ export default class Challenge extends Quest {
     private readonly possibleRequirements;
     constructor();
     protected createRequirements(): Stream<IQuestRequirement<any[], {}>>;
+    protected onUpdate(quest: QuestInstance): void;
+    protected onRequirementComplete(quest: QuestInstance, completedRequirement: RequirementInstance): void;
     private createRandomRequirement;
-    private onUpdate;
-    private onRequirementComplete;
     private getSpawnableCreatures;
 }

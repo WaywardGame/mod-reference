@@ -24,10 +24,10 @@ export declare enum QuestRequirementType {
     TameCreature = 11,
     TameCreatures = 12
 }
-export declare const enum QuestRequirementEvent {
-    Met = "Met",
-    Update = "Update",
-    Visible = "Visible"
+export interface IQuestRequirementEvents {
+    met(requirement: IQuestRequirement): any;
+    update(requirement: IQuestRequirement): any;
+    visible(): any;
 }
 export interface IQuestRequirement<O extends any[] = any[], D extends {} = {}> {
     type: QuestRequirementType;

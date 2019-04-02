@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
@@ -16,13 +17,14 @@ import { IComponent } from "newui/component/IComponent";
 import Text, { Heading } from "newui/component/Text";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 import SelectionHandler from "newui/screen/screens/menu/component/SelectionHandler";
-export declare enum MenuEvent {
-    Tab = "Tab",
-    GoBackFrom = "GoBackFrom",
-    CancelBind = "CancelBind",
-    EnterBind = "EnterBind"
+export interface IMenuEvents {
+    tab(): any;
+    goBackFrom(): any;
+    cancelBind(): false | void;
+    enterBind(): any;
 }
 export default class Menu extends Component implements IMenu, IHookHost {
+    event: ExtendedEvents<this, Component, IMenuEvents>;
     menuId: MenuId | string;
     canCancel: boolean | undefined;
     isSubmenu: boolean;
@@ -50,12 +52,13 @@ export default class Menu extends Component implements IMenu, IHookHost {
      */
     protected wentBackTo(): boolean;
     protected onBeforeShow(): Promise<void> | void;
-    private onShowMenu;
+    protected onShowMenu(): void;
 }
-export declare enum TabEvent {
-    EditSubtabs = "EditSubtabs"
+export interface ITabEvents {
+    editSubtabs(): any;
 }
 export declare class Tab<I extends string | number | undefined = string | number | undefined> extends Button {
+    event: ExtendedEvents<this, Button, ITabEvents>;
     readonly id: I;
     section: MenuSection | undefined;
     private _subtabs;

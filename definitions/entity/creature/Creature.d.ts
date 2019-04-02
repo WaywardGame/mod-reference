@@ -66,7 +66,7 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     offer(items: IItem[]): IItem | undefined;
     processSpecialAbilities(enemy: IPlayer | ICreature | undefined, bypass?: boolean): boolean;
     onUnserialized(): void;
-    protected preMove(creature: this, oldTile: ITile, tile: ITile): void;
+    protected preMove(oldTile: ITile, tile: ITile): void;
     private inspectResistancesAndVulnerabilities;
     private inspectHappiness;
     private findPath;

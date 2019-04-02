@@ -10,15 +10,15 @@
  */
 import { IDoodad } from "doodad/IDoodad";
 import { CreatureType, ICreature } from "entity/creature/ICreature";
-import { EntityType, IEntityEvents } from "entity/IEntity";
-import IHuman, { EquipType, HairColor, HairStyle, IHumanEvents, RestType, SkinColor } from "entity/IHuman";
+import { EntityType } from "entity/IEntity";
+import IHuman, { EquipType, HairColor, HairStyle, RestType, SkinColor } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
 import { MilestoneType } from "entity/player/IMilestone";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
-import EventEmitter from "event/EventEmitter";
+import { ExtendedEvents } from "event/EventEmitter";
 import { IContainer, IItem, ItemType } from "item/IItem";
 import Message from "language/dictionary/Message";
 import IClientStore from "save/clientStore/IClientStore";
@@ -27,7 +27,7 @@ import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } f
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayer extends IHuman {
-    event: EventEmitter<IPlayerEvents<this>> & EventEmitter<IHumanEvents<this>> & EventEmitter<IEntityEvents<this>>;
+    event: ExtendedEvents<this, IHuman, IPlayerEvents>;
     entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
@@ -121,32 +121,32 @@ export interface IPlayer extends IHuman {
     walkAlongPath(path: IVector2[] | undefined): void;
 }
 export default IPlayer;
-export interface IPlayerEvents<P extends IPlayer = IPlayer> extends IHumanEvents<P> {
+export interface IPlayerEvents {
     /**
      * @param milestone The milestone that is being updated
      * @param value The new value for this milestone
      * @param max The max value for this milestone
      */
-    milestoneUpdate(player: P, milestone: MilestoneType, value: number, max: number): void;
+    milestoneUpdate(milestone: MilestoneType, value: number, max: number): void;
     /**
      * @param key The key of `IOptions` that was changed on this player
      * @param value The value this key was set to
      */
-    updateOption<O extends keyof IOptions>(player: P, key: O, value: IOptions[O]): void;
+    updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): void;
     /**
      * Called when an item is added to the player's inventory
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    inventoryItemAdd(player: P, item: IItem, container: IContainer): void;
+    inventoryItemAdd(item: IItem, container: IContainer): void;
     /**
      * Called when an item is removed from the players inventory
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to.
      */
-    inventoryItemRemove(player: P, item: IItem, container: IContainer): void;
+    inventoryItemRemove(item: IItem, container: IContainer): void;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
      * @param player The player object
@@ -154,7 +154,7 @@ export interface IPlayerEvents<P extends IPlayer = IPlayer> extends IHumanEvents
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
      */
-    inventoryItemUpdate(player: P, item: IItem, container: IContainer, previousContainer?: IContainer): void;
+    inventoryItemUpdate(item: IItem, container: IContainer, previousContainer?: IContainer): void;
 }
 export declare enum TurnType {
     CheckUnderPlayer = 0,

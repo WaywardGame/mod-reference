@@ -16,6 +16,7 @@ export default class MultiplayerMenu extends Menu {
     private friends;
     private playersOnline;
     constructor();
+    protected onShow(): Promise<void>;
     private refresh;
     private getMultiplayerInfo;
     private isVisibleServer;

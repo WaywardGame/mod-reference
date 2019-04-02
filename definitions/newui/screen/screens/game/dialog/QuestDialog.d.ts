@@ -25,6 +25,8 @@ export default class QuestDialog extends Dialog implements IHookHost {
     constructor();
     getName(): UiTranslation;
     showQuest(id: number): this;
+    protected onSwitchPanel(panelId: string | number): void;
+    private onQuestOrRequirementComplete;
     private refreshFooter;
     private addRequirementRow;
     private addQuest;
@@ -32,9 +34,4 @@ export default class QuestDialog extends Dialog implements IHookHost {
     private getPins;
     private getTitle;
     private getDescription;
-    private onSwitchPanel;
-    private onQuestOrRequirementComplete;
-}
-export declare const enum QuestLinkEvent {
-    Complete = "Complete"
 }

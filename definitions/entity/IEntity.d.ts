@@ -22,8 +22,7 @@ import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Stream from "utilities/stream/Stream";
-export default interface IEntity extends IVector3 {
-    event: EventEmitter<IEntityEvents<this>>;
+export default interface IEntity extends IVector3, EventEmitter.Host<IEntityEvents> {
     entityType: EntityType;
     id: number;
     renamed?: string | ISerializedTranslation;
@@ -176,7 +175,28 @@ export default interface IEntity extends IVector3 {
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
 }
-export interface IEntityEvents<E extends IEntity = IEntity> {
+export interface IEntityEvents {
+    /**
+     * Called when a stat changes, for any reason
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
+     */
+    statChanged(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
+    /**
+     * Called when a stat changes, for any reason
+     * @param entity The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     */
+    statTimerChanged(stat: IStat, oldValue?: number): void;
+    /**
+     * Called when a stat changes, for any reason
+     * @param entity The object this event is emitted from
+     * @param stat An IStat object, the stat that was affected
+     * @param oldValue The value that the stat changed from
+     */
+    statMaxChanged(stat: IStatMax, oldValue?: number, info?: IStatChangeInfo): void;
     /**
      * Called when a stat changes, for any reason
      * @param entity The object this event is emitted from
@@ -184,29 +204,7 @@ export interface IEntityEvents<E extends IEntity = IEntity> {
      * @param oldValue The value that the stat changed from
      * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
      */
-    statChanged(entity: E, stat: IStat, oldValue: number, info: IStatChangeInfo): void;
-    /**
-     * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
-     * @param stat An IStat object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     */
-    statTimerChanged(entity: E, stat: IStat, oldValue?: number): void;
-    /**
-     * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
-     * @param stat An IStat object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     */
-    statMaxChanged(entity: E, stat: IStatMax, oldValue?: number, info?: IStatChangeInfo): void;
-    /**
-     * Called when a stat changes, for any reason
-     * @param entity The object this event is emitted from
-     * @param stat An IStat object, the stat that was affected
-     * @param oldValue The value that the stat changed from
-     * @param info An IStatChangeInfo object describing why the change occurred. It will always be passed with a `reason`
-     */
-    statBonusChanged(entity: E, stat: IStat, oldValue?: number, info?: IStatChangeInfo): void;
+    statBonusChanged(stat: IStat, oldValue?: number, info?: IStatChangeInfo): void;
     /**
      * Called when this entity gets or loses a status effect
      * @param entity The object this event is emitted from
@@ -214,9 +212,9 @@ export interface IEntityEvents<E extends IEntity = IEntity> {
      * @param hasStatus Whether the entity now has the status effect
      * @param reason The reason for the change
      */
-    statusChange(entity: E, status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
-    preMove(entity: E, fromTile: ITile, toTile: ITile): boolean | undefined | void;
-    postMove(entity: E, fromTile: ITile, toTile: ITile): void;
+    statusChange(status: StatusType, hasStatus: boolean, reason: StatusEffectChangeReason): void;
+    preMove(fromTile: ITile, toTile: ITile): boolean | undefined | void;
+    postMove(fromTile: ITile, toTile: ITile): void;
 }
 export declare enum StatusEffectChangeReason {
     Gained = 0,

@@ -8,15 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import Translation from "language/Translation";
 import { BlockRow } from "newui/component/BlockRow";
 import { IDisableable } from "newui/component/IComponent";
-import { RangeInput } from "newui/component/RangeInput";
+import { IRangeInputEvents, RangeInput } from "newui/component/RangeInput";
 import { RangeInputValueDisplay } from "newui/component/RangeInputValueDisplay";
 import { IRefreshable } from "newui/component/Refreshable";
 import { Heading } from "newui/component/Text";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare class RangeRow extends BlockRow implements IRefreshable, IDisableable {
+    event: ExtendedEvents<this, BlockRow, IRangeInputEvents>;
     protected rangeInput: RangeInput;
     protected heading: Heading;
     protected rangeInputValueDisplay: RangeInputValueDisplay | undefined;

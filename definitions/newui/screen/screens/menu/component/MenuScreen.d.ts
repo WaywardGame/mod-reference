@@ -8,7 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ScreenId } from "newui/screen/IScreen";
 import Screen from "newui/screen/Screen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
@@ -17,7 +16,6 @@ export default abstract class MenuScreen extends Screen {
         [key: number]: Menu;
     };
     protected menuChain: Menu[];
-    constructor(screenId: ScreenId);
     /**
      * Returns the visible menu (top of the chain)
      */
@@ -38,5 +36,5 @@ export default abstract class MenuScreen extends Screen {
      * Sets the given menu to be the new top menu. (Removes super-menus, keeps sub-menus)
      */
     setTopMenu(menu: Menu): this;
-    private onHide;
+    protected onScreenHide(): void;
 }

@@ -20,8 +20,9 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly pvp;
     private readonly maxPlayers;
     constructor();
-    private refresh;
+    protected refresh(): void;
     private updateMultiplayer;
+    private toggleServer;
     private copyGameCodeClick;
     private inviteSteamFriendsClick;
 }

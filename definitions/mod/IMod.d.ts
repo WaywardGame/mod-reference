@@ -26,31 +26,31 @@ export interface IModConfig {
     readonly customizations?: boolean;
     readonly publishedFileId?: string;
 }
-export declare enum ModEvent {
-    Unload = 0,
-    Uninitialize = 1,
+export interface IModEvents {
+    unload(): any;
+    uninitialize(): any;
     /**
      * Asynchronously triggered before a mod is initialized.
      *
      * Internally, this is used for mod registrations.
      */
-    PreInitialize = 2,
+    preInitialize(): any;
     /**
      * Asynchronously triggered before a mod is loaded (when a world is loaded).
      *
      * Internally, this is used for mod registrations.
      */
-    PreLoad = 3,
+    preLoad(): any;
     /**
      * Called after a mod is unloaded. (A world is exited)
      *
      * Internally, this is used to clean up some mod registrations.
      */
-    Unallocate = 4,
+    unallocate(): any;
     /**
      * Called when a mod is setup. (Modders — Don't use this, just run code in your constructor.)
      *
      * Internally, this is used for some mod registrations.
      */
-    Setup = 5
+    setup(): any;
 }

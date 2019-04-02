@@ -10,16 +10,17 @@
  */
 import IPlayer from "entity/player/IPlayer";
 import { IQuest, QuestType } from "entity/player/quest/quest/IQuest";
-import { IQuestRequirement, IQuestRequirementApi, QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
+import { QuestInstance } from "entity/player/quest/QuestManager";
+import { IQuestRequirement, IQuestRequirementApi, IQuestRequirementEvents, QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { RequirementArgs } from "entity/player/quest/Requirements";
+import EventEmitter from "event/EventEmitter";
 import Translation from "language/Translation";
-import Emitter from "utilities/Emitter";
-export declare const enum QuestEvent {
-    Update = 0,
-    RequirementCompleted = 1,
-    Complete = 2
+export interface IQuestEvents {
+    update(quest: QuestInstance, requirement: RequirementInstance): any;
+    requirementCompleted(quest: QuestInstance, requirement: RequirementInstance): any;
+    complete(quest: IQuest): any;
 }
-export declare class Quest extends Emitter {
+export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     type?: QuestType | undefined;
     title?: Translation | ((quest: IQuest) => Translation);
     description?: Translation | ((quest: IQuest) => Translation);
@@ -39,14 +40,14 @@ export declare class Quest extends Emitter {
     getTitle(quest: IQuest): Translation | undefined;
     getDescription(quest: IQuest): Translation | undefined;
     getTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[import("../../../../mod/IHookManager").Hook, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
-    getHostTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
+    getHostTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate", (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
     getRequirements(host: IPlayer, instance: IQuest): import("../../../../utilities/stream/Stream").default<RequirementInstance>;
     getRequirement(host: IPlayer, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;
     protected createRequirements(): import("../../../../utilities/stream/Stream").default<IQuestRequirement<any[], {}>>;
     protected createRequirement<R extends QuestRequirementType>(type: R, ...options: RequirementArgs<R>): IQuestRequirement<RequirementArgs<R>>;
 }
-export declare class RequirementInstance extends Emitter {
+export declare class RequirementInstance extends EventEmitter.Host<IQuestRequirementEvents> {
     readonly data: IQuestRequirement;
     readonly id: number;
     private readonly api;

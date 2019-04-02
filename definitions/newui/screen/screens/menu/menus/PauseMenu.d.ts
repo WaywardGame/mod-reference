@@ -11,6 +11,10 @@
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { ISteamFriend } from "steamworks/ISteamworks";
 export default class PauseMenu extends Menu {
+    readonly difficulty: import("../../../../../game/Difficulty").Difficulty;
+    readonly pvp: boolean;
+    readonly mods: [string, import("../../../../util/Misc").ModLoadability][];
+    readonly friends: ISteamFriend[];
     private readonly modesButton;
     private readonly multiplayerButton;
     private readonly optionsRow;
@@ -20,14 +24,10 @@ export default class PauseMenu extends Menu {
     private readonly gameIcons;
     private multiplayerOptionsMenu;
     private steamworksFriends;
-    readonly difficulty: import("../../../../../game/Difficulty").Difficulty;
-    readonly pvp: boolean;
-    readonly mods: [string, import("../../../../util/Misc").ModLoadability][];
-    readonly friends: ISteamFriend[];
     constructor();
     showMultiplayerOptionsMenu(): this;
+    protected onShow(): void;
     private showWModesMenu;
-    private onShow;
     private refreshGameIcons;
     private refreshDifficultyOptions;
     /**

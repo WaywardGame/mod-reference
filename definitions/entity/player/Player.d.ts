@@ -11,15 +11,15 @@
 import { IDoodad } from "doodad/IDoodad";
 import { CreatureType, ICreature } from "entity/creature/ICreature";
 import Human from "entity/Human";
-import { EntityType, IEntityEvents, StatusEffectChangeReason, StatusType } from "entity/IEntity";
-import IHuman, { EquipType, IHumanEvents, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
+import { EntityType, StatusEffectChangeReason, StatusType } from "entity/IEntity";
+import IHuman, { EquipType, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { MilestoneType } from "entity/player/IMilestone";
 import { IMovementIntent, IPlayer, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
-import EventEmitter from "event/EventEmitter";
+import { ExtendedEvents } from "event/EventEmitter";
 import { IContainer, IItem, ItemType } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -30,7 +30,7 @@ import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } f
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default class Player extends Human implements IPlayer {
-    event: EventEmitter<IPlayerEvents<this>> & EventEmitter<IHumanEvents<this>> & EventEmitter<IEntityEvents<this>>;
+    event: ExtendedEvents<this, Human, IPlayerEvents>;
     readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {

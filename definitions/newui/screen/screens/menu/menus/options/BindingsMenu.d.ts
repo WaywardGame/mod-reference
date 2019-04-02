@@ -14,7 +14,7 @@ export default class BindingsMenu extends Menu {
     private readonly bindCatcher;
     private readonly bindSections;
     constructor();
-    onShow(): this;
+    onShow(): void;
     private filterBindRows;
     private getSelector;
 }

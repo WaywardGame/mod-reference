@@ -14,16 +14,17 @@ import { ModLoadability } from "newui/util/Misc";
 import { ISteamFriend } from "steamworks/ISteamworks";
 export declare class ServerRow extends Button implements IRefreshable {
     private readonly getFriend;
-    private readonly headingPlace;
-    private readonly gameIcons;
-    private _server;
     server: IServer;
-    private _place;
     place: number;
     readonly difficulty: number;
     readonly pvp: boolean;
     readonly mods: [string, ModLoadability][];
     readonly friends: ISteamFriend[];
+    private readonly headingPlace;
+    private readonly gameIcons;
+    private _server;
+    private _place;
     constructor(server: IServer, getFriend: (player: string) => ISteamFriend | undefined);
     refresh(): this;
+    protected onActivate(): void;
 }

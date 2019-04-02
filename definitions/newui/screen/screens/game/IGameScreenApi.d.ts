@@ -19,10 +19,6 @@ export declare enum QuadrantComponentId {
     Quickslots = 2,
     MenuBar = 3
 }
-export declare enum GameScreenEvent {
-    HideDialog = "ShowDialog",
-    ShowDialog = "HideDialog"
-}
 export declare enum PinType {
     Note = 0,
     QuestRequirement = 1,
@@ -33,9 +29,9 @@ export declare enum MessageTimestamp {
     RealTime = 1,
     Turn = 2
 }
-export declare const enum MessagesEvent {
-    PinQuestRequirement = 0,
-    UnpinQuestRequirement = 1
+export interface IMessagesEvents {
+    pinQuestRequirement(pin: IPinnedMessage): any;
+    unpinQuestRequirement(pin: IPinnedMessage): any;
 }
 export interface IPinnedMessage extends Component {
     type: PinType;

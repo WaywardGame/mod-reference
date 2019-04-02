@@ -101,6 +101,7 @@ declare global {
 	type ArrayOfIterablesOr<T> = Array<T | Iterable<T>>;
 
 	type ReturnTypeOrT<T> = T extends (...args: any[]) => infer R ? R : T;
+	type InstanceOf<T extends Class<any> | AnyClass<any>> = T extends Class<any> ? InstanceType<T> : T extends { prototype: infer P } ? P : never;
 
 	type PropertyOf<T, K extends string | number | symbol> = T extends { [key in K]: infer V } ? V : never;
 
@@ -108,6 +109,8 @@ declare global {
 
 	type Head<T extends any[]> = T[0];
 	type Tail<A extends any[]> = ((...args: A) => any) extends ((_: any, ...args: infer A2) => any) ? A2 : never;
+
+	type AddHead<H, A extends any[]> = ArgumentsOf<(arg1: H, ...args: A) => any>;
 
 	interface AsyncIterator<T> {
 		next(value?: any): Promise<IteratorResult<T>>;

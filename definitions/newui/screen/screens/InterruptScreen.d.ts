@@ -18,4 +18,5 @@ export default class InterruptScreen extends MenuScreen {
     backOneMenu(): this;
     interrupt(options: InterruptOptions): Promise<InterruptChoice | string | boolean | void>;
     hideLoadingInterrupt(): Promise<void>;
+    protected onHide(): void;
 }

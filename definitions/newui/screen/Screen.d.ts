@@ -38,7 +38,7 @@ export default abstract class Screen extends Component implements IHookHost {
      */
     hideContextMenu(contextMenu?: IContextMenu): boolean;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    private onShow;
+    protected onScreenShow(): void;
     private onClick;
     private onDocumentClick;
 }

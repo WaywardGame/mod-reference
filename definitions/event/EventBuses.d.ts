@@ -8,14 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IPlayerEvents } from "entity/player/IPlayer";
-import { IEventEmitterHost, ITrueEventEmitterHostClass } from "event/EventEmitter";
-import { IGameEvents } from "game/IGame";
-import { ILanguageEvents } from "language/LanguageManager";
-import { IModManagerEvents } from "mod/IModManager";
-import { IMultiplayerEvents } from "multiplayer/IMultiplayer";
-import { IUiEvents } from "newui/NewUi";
-import { ISteamworksEvents } from "steamworks/ISteamworks";
+import Player from "entity/player/Player";
+import { EventHandlerFromHostOrHostClassAndName, EventNamesFromHostOrHostClass, IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
+import Game from "game/Game";
+import LanguageManager from "language/LanguageManager";
+import ModManager from "mod/ModManager";
+import Multiplayer from "multiplayer/Multiplayer";
+import Ui from "newui/NewUi";
+import Steamworks from "steamworks/Steamworks";
 export declare enum EventBus {
     Game = 0,
     Ui = 1,
@@ -27,14 +27,14 @@ export declare enum EventBus {
     LocalPlayer = 7
 }
 declare const eventBuses: {
-    [EventBus.Game](): ITrueEventEmitterHostClass<IGameEvents>;
-    [EventBus.Language](): ITrueEventEmitterHostClass<ILanguageEvents>;
-    [EventBus.Ui](): ITrueEventEmitterHostClass<IUiEvents>;
-    [EventBus.Multiplayer](): ITrueEventEmitterHostClass<IMultiplayerEvents>;
-    [EventBus.Steamworks](): ITrueEventEmitterHostClass<ISteamworksEvents>;
-    [EventBus.Mods](): ITrueEventEmitterHostClass<IModManagerEvents>;
-    [EventBus.Players](): ITrueEventEmitterHostClass<IPlayerEvents>;
-    [EventBus.LocalPlayer](): IEventEmitterHost<IPlayerEvents>;
+    [EventBus.Game](): typeof Game;
+    [EventBus.Language](): typeof LanguageManager;
+    [EventBus.Ui](): typeof Ui;
+    [EventBus.Multiplayer](): typeof Multiplayer;
+    [EventBus.Steamworks](): typeof Steamworks;
+    [EventBus.Mods](): typeof ModManager;
+    [EventBus.Players](): typeof Player;
+    [EventBus.LocalPlayer](): Player;
 };
 export default eventBuses;
 export declare module EventBus {
@@ -43,6 +43,12 @@ export declare module EventBus {
     function onEventBusRegistration(eventBus: EventBus, handler: NullaryFunction): void;
     function subscriber<S extends NullaryClass<any>>(constructor: S): S;
 }
-export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends ITrueEventEmitterHostClass<infer E> ? E : never;
+export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export declare type EventNameFromIndex<I extends EventBus> = keyof Events<ReturnType<(typeof eventBuses)[I]>>;
-export declare type EventHandlerFromIndex<I extends EventBus, K extends string | number | symbol> = PropertyOf<Events<ReturnType<(typeof eventBuses)[I]>>, K>;
+export declare type EventHandlerFromIndex<I extends EventBus, K extends string | number | symbol> = Handler<HostFromHostOrHostClass<ReturnType<(typeof eventBuses)[I]>>, PropertyOf<Events<ReturnType<(typeof eventBuses)[I]>>, K>>;
+export declare type EventNameFromIndexRecursive<I extends EventBus> = EventNamesFromHostOrHostClass<ReturnType<(typeof eventBuses)[I]>>;
+export declare type EventHandlerFromIndexRecursive<I extends EventBus, K extends string | number | symbol> = Handler<HostFromHostOrHostClass<ReturnType<(typeof eventBuses)[I]>>, EventHandlerFromHostOrHostClassAndName<ReturnType<(typeof eventBuses)[I]>, K>>;
+declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
+declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
+declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
+declare type HostFromHostOrHostClass<H extends IEventEmitterHost<any> | IEventEmitterHostClass<any>> = H extends IEventEmitterHost<any> ? H : InstanceOf<Extract<H, IEventEmitterHostClass<any>>>;

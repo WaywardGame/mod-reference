@@ -11,7 +11,7 @@
 import { HairStyle, ICustomizations } from "entity/IHuman";
 import ChoiceList, { Choice } from "newui/component/ChoiceList";
 import { CharacterPreviewFilters, CharacterPreviewRotation } from "newui/screen/screens/menu/menus/character/CharacterPreview";
-export declare class HairstyleList extends ChoiceList {
+export declare class HairstyleList extends ChoiceList<HairstyleChoice> {
     private readonly baseCustomization;
     private readonly filters?;
     constructor(baseCustomization: ICustomizations, filters?: CharacterPreviewFilters | undefined);

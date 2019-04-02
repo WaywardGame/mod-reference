@@ -20,7 +20,7 @@ export default class GameEndMenu extends Menu {
     private gameEndData;
     constructor();
     setGameEndData(gameEndData: IGameEndData): this;
-    private onShow;
+    protected onShow(): void;
     private getHeading;
     private getTagline;
     private getContinueButtonText;

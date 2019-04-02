@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import StaticComponent from "newui/screen/screens/game/component/StaticComponent";
 import { IStringSection } from "utilities/string/Interpolator";
@@ -23,19 +24,19 @@ export declare enum Quadrant {
     Bottom = 5,
     BottomLeft = 6
 }
-export declare enum QuadrantComponentEvent {
+export interface IQuadrantComponentEvents {
     /**
      * Emitted with the following arguments:
      * @param quadrant The new quadrant of this element
      * @param oldQuadrant The old quadrant of this element
      */
-    ChangeQuadrant = "ChangeQuadrant",
+    changeQuadrant(quadrant: Quadrant, oldQuadrant: Quadrant): any;
     /**
      * Emitted synchronously with no arguments.
      * @returns A `IterableOf<QuadrantElement>` containing sibling quadrant elements. The list
      * may contain this quadrant element.
      */
-    GetQuadrantElementList = "GetQuadrantElementList"
+    getQuadrantElementList(): Iterable<QuadrantComponent>;
 }
 /**
  * An element that displays in one quadrant of the screen.
@@ -49,6 +50,7 @@ export declare enum QuadrantComponentEvent {
  * Changing the quadrant will not affect other elements: this is the responsisibility of the parent.
  */
 export default abstract class QuadrantComponent extends StaticComponent {
+    event: ExtendedEvents<this, StaticComponent, IQuadrantComponentEvents>;
     readonly preferredQuadrant: Quadrant;
     constructor();
     /**

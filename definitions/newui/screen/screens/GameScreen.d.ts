@@ -10,6 +10,7 @@
  */
 import { IDamageInfo } from "entity/creature/ICreature";
 import { IPlayer } from "entity/player/IPlayer";
+import { ExtendedEvents } from "event/EventEmitter";
 import { IMapRequest } from "game/IGame";
 import { BookType } from "item/IItem";
 import { IHookHost } from "mod/IHookHost";
@@ -31,7 +32,12 @@ import { IVector2 } from "utilities/math/IVector";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };
+export interface IGameScreenEvents {
+    hideDialog(dialog: DialogId): any;
+    showDialog(dialogId: Dialog): any;
+}
 export default class GameScreen extends Screen implements IHookHost {
+    event: ExtendedEvents<this, Screen, IGameScreenEvents>;
     dialogs: Map<DialogId, Dialog>;
     visibleDialogs: IDialogStates;
     quadrantComponentQuadrants: {
@@ -47,7 +53,6 @@ export default class GameScreen extends Screen implements IHookHost {
     private readonly quadrantMap;
     private readonly gameCanvas;
     constructor();
-    create(): void;
     openDialog<D = Dialog>(id: DialogId): D;
     closeDialog(id: DialogId): Promise<void>;
     toggleDialog(id: DialogId, force?: boolean): void;
@@ -66,6 +71,7 @@ export default class GameScreen extends Screen implements IHookHost {
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
     onReadMap(player: IPlayer, mapRequest: IMapRequest): void;
+    protected create(): void;
     protected tryShowWorldTooltip(): Promise<void>;
     /**
      * Adds a quadrant element to the screen.

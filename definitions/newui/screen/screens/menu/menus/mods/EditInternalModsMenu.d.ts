@@ -12,6 +12,6 @@ import Menu from "newui/screen/screens/menu/component/Menu";
 export default class EditInternalModsMenu extends Menu {
     private readonly inputAddNewInternalMod;
     constructor();
-    private goBackFrom;
+    protected goBackFrom(): Promise<void>;
     private addInternalMod;
 }

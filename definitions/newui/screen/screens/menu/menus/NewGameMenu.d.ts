@@ -39,9 +39,9 @@ export default class NewGameMenu extends Menu {
     setDifficulty(difficulty: Difficulty, lock?: boolean): this;
     setDifficultyOptions(options: IDifficultyOptions): this;
     setMultiplayer(): this;
+    protected refreshAsync(): Promise<void>;
     private updateDifficulty;
     private refresh;
-    private refreshAsync;
     private getStartClickHandler;
     private getPlayOptions;
     private getCustomGameOptionsMenu;

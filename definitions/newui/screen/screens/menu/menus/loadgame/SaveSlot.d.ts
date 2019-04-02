@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import { Difficulty } from "game/Difficulty";
 import InputButton from "newui/component/InputButton";
 export interface SaveSlotData {
@@ -26,14 +27,19 @@ export interface SaveSlotData {
     name: string;
     difficulty: Difficulty;
 }
-export declare enum SaveSlotEvent {
-    Rename = "Rename",
-    Delete = "Delete"
+export interface ISaveSlotEvents {
+    rename(): any;
+    delete(): any;
 }
 export declare class SaveSlot extends InputButton {
+    event: ExtendedEvents<this, InputButton, ISaveSlotEvents>;
     slotData: SaveSlotData;
     private deathby;
     constructor(slot: number);
+    /**
+     * Renames the save. Event handler for when this InputButton leaves edit mode.
+     */
+    protected rename(newName: string): Promise<void>;
     /**
      * Loads the data for this save slot.
      */
@@ -42,10 +48,6 @@ export declare class SaveSlot extends InputButton {
      * The tooltip generator for this component.
      */
     private getTooltip;
-    /**
-     * Renames the save. Event handler for when this InputButton leaves edit mode.
-     */
-    private rename;
     /**
      * Deletes the save. Event handler for the delete sub-button.
      */

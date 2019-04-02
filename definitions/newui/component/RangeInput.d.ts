@@ -8,13 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
-export declare enum RangeInputEvent {
-    Change = "Change",
-    Finish = "Finish"
+export interface IRangeInputEvents {
+    change(val: number): any;
+    finish(val: number): any;
 }
 export declare class RangeInput extends Component implements IRefreshableValue<number> {
+    event: ExtendedEvents<this, Component, IRangeInputEvents>;
     element: HTMLInputElement;
     private refreshMethod;
     private clampOnRefresh;
@@ -28,7 +30,7 @@ export declare class RangeInput extends Component implements IRefreshableValue<n
     setStep(step: number): this;
     setMax(max: number, clamp?: boolean): this;
     setMin(min: number, clamp?: boolean): this;
-    update(eventTrigger?: RangeInputEvent): void;
+    update(eventTrigger?: keyof IRangeInputEvents): void;
     refresh(): this;
     setRefreshMethod(refresh: () => number): this;
     noClampOnRefresh(): this;

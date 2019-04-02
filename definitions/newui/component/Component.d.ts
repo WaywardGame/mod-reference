@@ -8,13 +8,13 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
-import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { AppendStrategy, IComponent, IComponentEvents, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
-import Emitter from "utilities/Emitter";
 import Stream from "utilities/stream/Stream";
-export default class Component extends Emitter implements IComponent, IHookHost {
+export default class Component extends EventEmitter.Host<IComponentEvents> implements IComponent, IHookHost {
     private static readonly map;
     static get<C extends Component = Component>(selector: string): C;
     static get<C extends Component = Component>(element: Element): C;
@@ -59,6 +59,7 @@ export default class Component extends Emitter implements IComponent, IHookHost 
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
     registerEventBusSubscriber(): void;
+    registerHookHost(name?: string): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     isVisible(): boolean;
     show(): this;

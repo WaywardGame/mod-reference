@@ -8,13 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import Component from "newui/component/Component";
 import { IDisableable, TranslationGenerator } from "newui/component/IComponent";
 import Text, { Paragraph } from "newui/component/Text";
-export declare enum ButtonEvent {
-    Activate = "Activate"
+export interface IButtonEvents {
+    activate(): void;
 }
 export default class Button extends Component implements IDisableable {
+    event: ExtendedEvents<this, Component, IButtonEvents>;
     playSound: boolean;
     protected readonly text: Text;
     private buttons;

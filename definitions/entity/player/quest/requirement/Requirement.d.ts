@@ -14,9 +14,8 @@ import Translation from "language/Translation";
 import { Hook } from "mod/IHookManager";
 import Mod from "mod/Mod";
 import { HighlightSelector } from "newui/component/IComponent";
-import Emitter from "utilities/Emitter";
 export declare type QuestRequirementApi<R extends QuestRequirement<any, any>> = R extends QuestRequirement<infer O, infer D> ? IQuestRequirementApi<O, D> : never;
-export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> extends Emitter {
+export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     readonly defaultData: D;
     private readonly triggers;
     private readonly hostTriggers;
@@ -31,7 +30,7 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> e
     setTrigger<H extends Hook>(hook: H, checker: (api: QuestRequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setHostTrigger<E extends keyof IPlayerEvents>(event: E, checker: (api: QuestRequirementApi<this>, ...args: ArgumentsOf<IPlayerEvents[E]>) => boolean): this;
-    getHostTriggers(): IterableIterator<["milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
+    getHostTriggers(): IterableIterator<["milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate", (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: QuestRequirementApi<this>) => boolean): this;
     getInitializeTrigger(): ((api: QuestRequirementApi<this>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;

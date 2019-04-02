@@ -10,10 +10,11 @@
  */
 import IPlayer from "entity/player/IPlayer";
 import { IQuest, QuestType } from "entity/player/quest/quest/IQuest";
+import { RequirementInstance } from "entity/player/quest/quest/Quest";
+import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
-import Emitter from "utilities/Emitter";
 import Stream from "utilities/stream/Stream";
-export default class QuestManager extends Emitter implements IHookHost {
+export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents> implements IHookHost {
     private readonly host;
     private readonly quests;
     private readonly hookTriggers;
@@ -40,39 +41,45 @@ export default class QuestManager extends Emitter implements IHookHost {
     private onUpdateRequirement;
     private onCompleteRequirement;
 }
-export declare const enum QuestManagerEvent {
+export interface IQuestManagerEvents {
     /**
      * Emitted when a quest is completed.
      * @param quest The completed `IQuestInstance`
      */
-    QuestComplete = 0,
+    questComplete(quest: QuestInstance): any;
     /**
      * Emitted when a new quest is added.
      * @param quest The `IQuestInstance` that was added
      */
-    QuestGet = 1,
+    questGet(quest: QuestInstance): any;
     /**
      * Emitted when a quest is updated (a requirement is updated)
      * @param quest The `IQuestInstance` that was updated
      */
-    QuestUpdate = 2,
+    questUpdate(quest: QuestInstance): any;
     /**
      * Emitted when a quest requirement is completed
      * @param quest The `IQuestInstance` of the requirement which was updated
      * @param requirement The `IRequirementInstance` that was updated
      */
-    RequirementMet = 3
+    requirementMet(quest: QuestInstance, requirement: RequirementInstance): any;
 }
-export declare class QuestInstance extends Emitter {
+export declare class QuestInstance extends EventEmitter.Host<IQuestInstanceEvents> {
     readonly host: IPlayer;
     readonly data: IQuest;
     readonly id: number;
     constructor(host: IPlayer, data: IQuest, id: number);
     getTitle(): import("../../../language/Translation").default | undefined;
     getDescription(): import("../../../language/Translation").default | undefined;
-    getRequirements(): Stream<import("./quest/Quest").RequirementInstance>;
+    getRequirements(): Stream<RequirementInstance>;
     needsManualCompletion(): boolean;
     complete(): this;
     getChildren(): Stream<QuestType>;
     getCompletionAmount(): number;
 }
+interface IQuestInstanceEvents {
+    update(): any;
+    manualCompletion(): any;
+    complete(): any;
+}
+export {};

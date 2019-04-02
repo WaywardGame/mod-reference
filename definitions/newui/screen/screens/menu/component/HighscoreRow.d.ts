@@ -8,16 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ExtendedEvents } from "event/EventEmitter";
 import { Block } from "newui/component/Block";
 import { IHighscore } from "save/data/ISaveDataGlobal";
-export declare const enum HighscoreRowEvent {
+export interface IHighscoreRowEvents {
     /**
      * Emitted asynchronously before the replay request will be processed.
-     * @return `true` or `undefined` to replay, `false` to cancel.
+     * @return `false` to cancel.
      */
-    Replay = "replay"
+    replay(): boolean | void | Promise<boolean | void>;
 }
 export default class HighscoreRow extends Block {
+    event: ExtendedEvents<this, Block, IHighscoreRowEvents>;
     private readonly headingPlace;
     private readonly difficulty;
     private readonly deathBy;

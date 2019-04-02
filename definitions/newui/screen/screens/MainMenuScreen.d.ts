@@ -11,4 +11,5 @@
 import MenuScreen from "newui/screen/screens/menu/component/MenuScreen";
 export default class MainMenuScreen extends MenuScreen {
     constructor();
+    onShow(): void;
 }

@@ -20,10 +20,10 @@ export declare class BindRow extends Button implements IRefreshable {
     private readonly modName;
     constructor(bindable: Bindable, bindCatcher: BindCatcher);
     refresh(): this;
+    protected onActivate(): Promise<void>;
     private getBindableName;
     private getBindTranslations;
     private getBind;
-    private onActivate;
 }
 export declare class BindCatcher extends Component {
     private readonly bindText;

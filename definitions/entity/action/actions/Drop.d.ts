@@ -15,5 +15,5 @@ export declare enum DropLocation {
     Feet = 1,
     FeetWhenFacingBlocked = 2
 }
-declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../player/IPlayer").IPlayer | import("../../npc/INPC").INPC, void>;
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.Boolean, ActionArgument.Undefined], [ActionArgument.Boolean, ActionArgument.Undefined]], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer, void>;
 export default _default;

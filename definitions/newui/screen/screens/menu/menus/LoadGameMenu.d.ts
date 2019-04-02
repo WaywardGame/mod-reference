@@ -20,6 +20,7 @@ export default class LoadGameMenu extends Menu {
     private importButton;
     constructor();
     protected onSteamworksHide(): Promise<void>;
+    protected goBackFrom(): void;
     protected onBeforeShow(): Promise<void>;
     private refresh;
     private onImport;

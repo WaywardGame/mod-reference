@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Emitter from "utilities/Emitter";
+import EventEmitter from "event/EventEmitter";
+import { IModEvents } from "mod/IMod";
 import Log from "utilities/Log";
-export declare abstract class BaseMod extends Emitter {
+export declare abstract class BaseMod extends EventEmitter.Host<IModEvents> {
     private readonly index;
     private allocatedEnums;
     private registeredPackets;
