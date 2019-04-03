@@ -89,6 +89,10 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     setOffTrap(human?: Human, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
     increaseFertility(): boolean;
+    /**
+     * Keep our wells up-to-date with what is happening underground
+     */
+    setWellStatus(): void;
     onUnserialized(): void;
     protected getNameTranslation(article?: boolean, count?: number): Translation;
     protected getDescriptionTranslation(): Translation;

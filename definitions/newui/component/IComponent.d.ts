@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import EventEmitter, { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import EventEmitter, { IEventEmitter } from "event/EventEmitter";
 import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
@@ -18,7 +19,7 @@ import { IVector2 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import Stream from "utilities/stream/Stream";
 import { IStringSection } from "utilities/string/Interpolator";
-export interface IComponentEvents {
+interface IComponentEvents {
     show(): void;
     hide(): void;
     append(to: HTMLElement | IComponent): void;
@@ -209,12 +210,12 @@ export interface IComponent extends EventEmitter.Host<IComponentEvents> {
      */
     repaint(): void;
 }
-export interface IContextMenuEvents {
+interface IContextMenuEvents extends Events<IComponent> {
     chosen(choice: ContextMenuOption): any;
     becomeActive(): any;
 }
 export interface IContextMenu<OptionType extends number | string | symbol = number | string | symbol> extends IComponent {
-    event: ExtendedEvents<this, IComponent, IContextMenuEvents>;
+    event: IEventEmitter<this, IContextMenuEvents>;
     setPosition(x: number, y: number, right?: boolean): this;
     hideAndRemove(): Promise<void>;
 }
@@ -252,11 +253,11 @@ export declare enum TooltipLocation {
     BeneathRight = 9,
     Mouse = 10
 }
-export interface ITooltipEvents {
+export interface ITooltipEvents extends IComponentEvents {
     move(position: Vector2): any;
 }
 export interface ITooltip extends IComponent {
-    event: ExtendedEvents<this, IComponent, ITooltipEvents>;
+    event: IEventEmitter<this, ITooltipEvents>;
     setLocation(location: TooltipLocation): this;
     setMaxWidth(maxWidth: number): this;
     setNoCache(): this;
@@ -284,3 +285,4 @@ export declare enum HighlightType {
     MenuBarButton = 1,
     Selector = 2
 }
+export {};

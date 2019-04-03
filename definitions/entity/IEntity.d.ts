@@ -175,7 +175,7 @@ export default interface IEntity extends IVector3, EventEmitter.Host<IEntityEven
     getProperty<T>(property: Property): T | undefined;
     removeProperty(property: Property): boolean;
 }
-export interface IEntityEvents {
+interface IEntityEvents {
     /**
      * Called when a stat changes, for any reason
      * @param stat An IStat object, the stat that was affected
@@ -323,3 +323,4 @@ export declare class Resistances {
     [index: number]: number;
     constructor(...args: any[]);
 }
+export {};

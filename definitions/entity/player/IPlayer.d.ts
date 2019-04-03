@@ -18,7 +18,8 @@ import { MilestoneType } from "entity/player/IMilestone";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { IContainer, IItem, ItemType } from "item/IItem";
 import Message from "language/dictionary/Message";
 import IClientStore from "save/clientStore/IClientStore";
@@ -27,7 +28,7 @@ import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } f
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export interface IPlayer extends IHuman {
-    event: ExtendedEvents<this, IHuman, IPlayerEvents>;
+    event: IEventEmitter<this, IPlayerEvents>;
     entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
@@ -121,7 +122,7 @@ export interface IPlayer extends IHuman {
     walkAlongPath(path: IVector2[] | undefined): void;
 }
 export default IPlayer;
-export interface IPlayerEvents {
+interface IPlayerEvents extends Events<IHuman> {
     /**
      * @param milestone The milestone that is being updated
      * @param value The new value for this milestone

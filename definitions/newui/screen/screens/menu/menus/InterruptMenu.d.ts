@@ -8,17 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import InterruptChoice from "language/dictionary/InterruptChoice";
 import { TranslationGenerator } from "newui/component/IComponent";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { InterruptOptions, InterruptType } from "newui/util/IInterrupt";
-export interface IInterruptMenuEvents {
+interface IInterruptMenuEvents extends Events<Menu> {
     resolve(choice?: InterruptChoice | string): any;
     cancel(triggerChoice?: boolean): any;
 }
 export default class InterruptMenu extends Menu {
-    event: ExtendedEvents<this, Menu, IInterruptMenuEvents>;
+    event: IEventEmitter<this, IInterruptMenuEvents>;
     private _type;
     private readonly interruptTitle;
     private readonly interruptDescription;
@@ -38,3 +39,4 @@ export default class InterruptMenu extends Menu {
     protected onEnter(): void;
     protected onHide(): any;
 }
+export {};

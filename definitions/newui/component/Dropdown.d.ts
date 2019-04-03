@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
-export interface IDropdownEvents<O = string | number> {
+interface IDropdownEvents<O = string | number> extends Events<Component> {
     /**
      * @param optionId The new option which is selected.
      */
@@ -26,7 +27,7 @@ export interface IDropdownData<OptionId = string | number> {
     options: Iterable<IDropdownOption<OptionId>>;
 }
 export default class Dropdown<O = string | number> extends Component implements IRefreshableValue<IDropdownData<O>>, IHookHost {
-    event: ExtendedEvents<this, Component, IDropdownEvents<O>>;
+    event: IEventEmitter<this, IDropdownEvents<O>>;
     protected optionsWrapper: Component;
     private readonly optionsWrapperWrapper;
     private readonly inputButton;
@@ -53,3 +54,4 @@ export default class Dropdown<O = string | number> extends Component implements 
     private updateWrapperPosition;
     private filter;
 }
+export {};

@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
@@ -47,7 +48,7 @@ declare enum HandlePosition {
     TopLeft = 7,
     Header = 8
 }
-export interface IDialogEvents {
+interface IDialogEvents extends Events<Component> {
     /**
      * This event is handled by the GameScreen.
      * @returns A `IterableOf<Dialog>` containing sibling dialogs. The list may contain this dialog.
@@ -80,7 +81,7 @@ export default abstract class Dialog extends Component implements IDialog {
     private static topOrder;
     private static topDialog;
     static makeTopDialog(element: HTMLElement): void;
-    event: ExtendedEvents<this, Component, IDialogEvents>;
+    event: IEventEmitter<this, IDialogEvents>;
     readonly id: DialogId;
     /**
      * The positions of each edge of the dialog. Stored as percentages.
@@ -239,7 +240,7 @@ export default abstract class Dialog extends Component implements IDialog {
      */
     private correctPosition;
 }
-interface IHandleEvents {
+interface IHandleEvents extends Events<Component> {
     moveStart(): any;
     move(change: Vector2): any;
     moveEnd(): any;
@@ -248,7 +249,7 @@ interface IHandleEvents {
  * A component that emits events for being dragged. Takes a `HandlePosition` to be styled with.
  */
 declare class Handle extends Component {
-    event: ExtendedEvents<this, Component, IHandleEvents>;
+    event: IEventEmitter<this, IHandleEvents>;
     private lastMousePosition?;
     readonly position: HandlePosition;
     constructor(position: HandlePosition, elementType?: string);
@@ -256,14 +257,14 @@ declare class Handle extends Component {
     private drag;
     private dragEnd;
 }
-interface IHeaderEvents {
+interface IHeaderEvents extends Events<Handle> {
     close(): any;
 }
 /**
  * You can drag the header, so it's a `Handle` as well.
  */
 export declare class Header extends Handle implements IRefreshable {
-    event: ExtendedEvents<this, Handle, IHeaderEvents>;
+    event: IEventEmitter<this, IHeaderEvents>;
     readonly backButton: Button;
     readonly optionsButton: Button;
     private readonly text;

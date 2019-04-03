@@ -8,17 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { IModInfo } from "mod/IModInfo";
 import { CheckButton } from "newui/component/CheckButton";
-export interface IModRowEvents {
+interface IModRowEvents extends Events<CheckButton> {
     shouldRefreshMenu(): any;
 }
 export interface ModRowData {
     modInfo: IModInfo;
 }
 export default class ModRow extends CheckButton {
-    event: ExtendedEvents<this, CheckButton, IModRowEvents>;
+    event: IEventEmitter<this, IModRowEvents>;
     readonly info: IModInfo;
     readonly index: number;
     private buttonOptions;
@@ -33,3 +34,4 @@ export default class ModRow extends CheckButton {
     private isLoadable;
     private onPublish;
 }
+export {};

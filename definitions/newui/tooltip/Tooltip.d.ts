@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import Component from "newui/component/Component";
-import { ITooltip, ITooltipEvents, TooltipLocation } from "newui/component/IComponent";
+import { ITooltip, TooltipLocation } from "newui/component/IComponent";
 import Text, { Paragraph } from "newui/component/Text";
 export default class Tooltip extends Component implements ITooltip {
     private readonly source;
-    event: ExtendedEvents<this, Component, ITooltipEvents>;
+    event: IEventEmitter<this, Events<ITooltip>>;
     readonly location: TooltipLocation;
     cache: boolean;
     private box;

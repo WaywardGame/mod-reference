@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import Button from "newui/component/Button";
 import { LabelledRow } from "newui/component/LabelledRow";
 import { IRefreshableValue } from "newui/component/Refreshable";
@@ -18,7 +19,7 @@ export interface SortRowData<Sort> {
     defaultSort: Sort;
     initializeOption(button: Button, sort: [string, Sort]): any;
 }
-export interface ISortRowEvents<S extends number> {
+interface ISortRowEvents<S extends number> extends Events<LabelledRow> {
     /**
      * @param sort The sort type (value in the sort enum)
      * @param direction a SortDirection
@@ -26,7 +27,7 @@ export interface ISortRowEvents<S extends number> {
     sort(sort: S, direction: SortDirection): any;
 }
 export default class SortRow<S extends number> extends LabelledRow implements IRefreshableValue<SortRowData<S>> {
-    event: ExtendedEvents<this, LabelledRow, ISortRowEvents<S>>;
+    event: IEventEmitter<this, ISortRowEvents<S>>;
     private _sort;
     private _sortDirection;
     private disabledSorts;
@@ -39,5 +40,6 @@ export default class SortRow<S extends number> extends LabelledRow implements IR
     setRefreshMethod(refresh: () => SortRowData<S>): this;
     refresh(): this;
     triggerSort(): void;
-    triggerSortAsync(): Promise<import("../../utilities/stream/Stream").default<{}>>;
+    triggerSortAsync(): Promise<import("../../utilities/stream/Stream").default<any>>;
 }
+export {};

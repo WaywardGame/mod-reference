@@ -12,7 +12,7 @@ import { PriorityMap } from "utilities/PriorityMap";
 import Stream from "utilities/stream/Stream";
 export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
 export interface IEventEmitterHost<E> {
-    event: EventEmitter<this, E>;
+    event: IEventEmitter<this, E>;
 }
 export interface IEventEmitterHostClass<E> extends Class<IEventEmitterHost<E>> {
 }
@@ -25,100 +25,40 @@ export interface ISelfSubscribedEmitter<E> {
 declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
-interface IEventEmitter {
-    subscribe: AnyFunction;
-    unsubscribe: AnyFunction;
-    until: any;
-    waitFor: AnyFunction;
-    copyFrom: AnyFunction;
-    emit: AnyFunction;
-    emitStream: AnyFunction;
-    emitReduce: AnyFunction;
-    emitAsync: AnyFunction;
+export interface IEventEmitter<H = any, E = any> {
+    copyFrom(emitter: IEventEmitter<H, E>): void;
+    emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
+    emitStream<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;
+    emitReduce<K extends keyof E, A extends ReturnOf<E[K]> & Head<ArgsOf<E[K]>>>(event: K, arg: A, ...args: Tail<ArgsOf<E[K]>>): Extract<ReturnOf<E[K]> & Head<ArgsOf<E[K]>>, undefined> extends undefined ? (undefined extends A ? ReturnOf<E[K]> : A) : ReturnOf<E[K]>;
+    emitAsync<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Promise<Stream<(Extract<ReturnOf<E[K]>, Promise<any>> extends Promise<infer R> ? R : never) | Exclude<ReturnOf<E[K]>, Promise<any>>>>;
+    subscribe<K extends ArrayOr<keyof E>>(event: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
+    unsubscribe<K extends ArrayOr<keyof E>>(event: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): boolean;
+    waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
+    until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
+    until(promise: Promise<any>): IUntilSubscriber<H, E>;
 }
-interface IEventEmitterEventSubscriberBlackMagic<E> {
-    subscribe(event: E, ...args: any[]): any;
+interface IUntilSubscriber<H, E> {
+    subscribe<K extends ArrayOr<keyof E>>(event: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
 }
-declare class EventEmitter<H, E> implements IEventEmitter {
+declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     private readonly host;
     private readonly hostClass;
     private readonly subscriptions;
     constructor(host: H);
-    copyFrom(emitter: EventEmitter<H, E>): void;
+    copyFrom(emitter: IEventEmitter<H, E>): void;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emitStream<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;
     emitReduce<K extends keyof E, A extends ReturnOf<E[K]> & Head<ArgsOf<E[K]>>>(event: K, arg: A, ...args: Tail<ArgsOf<E[K]>>): Extract<ReturnOf<E[K]> & Head<ArgsOf<E[K]>>, undefined> extends undefined ? (undefined extends A ? ReturnOf<E[K]> : A) : ReturnOf<E[K]>;
-    emitAsync<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Promise<ReturnType<Extract<E[K], AnyFunction>> extends Promise<infer R> ? Stream<R> : never>;
-    subscribe<K extends keyof E>(event: K, handler: IterableOr<Handler<H, E[K]>>, priority?: number): H;
-    unsubscribe<K extends keyof E>(event: K, handler: IterableOr<Handler<H, E[K]>>, priority?: number): boolean;
-    waitFor<K extends keyof E>(event: K, priority?: number): Promise<ArgumentsOf<Extract<E[K], AnyFunction>>>;
-    until<H2 extends IEventEmitterHost<any>>(emitter: H2, ...events: Array<EventNamesFromBlackMagic<H2>>): H extends {
-        event: IEventEmitter;
-    } ? H["event"] & {
-        [key in Exclude<keyof IEventEmitter, "subscribe">]: never;
-    } : never;
-    until(promise: Promise<any>): H extends {
-        event: IEventEmitter;
-    } ? H["event"] & {
-        [key in Exclude<keyof IEventEmitter, "subscribe">]: never;
-    } : never;
+    emitAsync<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Promise<any>;
+    subscribe<K extends ArrayOr<keyof E>>(events: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
+    unsubscribe<K extends ArrayOr<keyof E>>(events: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): boolean;
+    waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
+    until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
+    until(promise: Promise<any>): IUntilSubscriber<H, E>;
 }
-declare const x: unique symbol;
-export declare type ExtendedEvents<H, T extends {
-    event: EventEmitter<any, any>;
-}, EN> = typeof x & EventEmitter<H, EN> & ExtractEmitters<H, T>;
-declare type ExtractEmitters<H, T extends {
-    event: any;
-}> = {
-    [1]: T extends {
-        event: ExtendedEvents<any, infer B, infer E>;
-    } ? ExtractEmitters<H, B> & EventEmitter<H, E> : never;
-    [0]: T extends {
-        event: EventEmitter<any, infer E>;
-    } ? EventEmitter<H, E> : never;
-}[T extends {
-    event: typeof x;
-} ? 1 : 0];
-export declare type EventNamesFromHostOrHostClass<H extends IEventEmitterHost<any> | IEventEmitterHostClass<any>> = H extends IEventEmitterHost<any> ? ExtractEventNames<H> : ExtractEventNames<InstanceOf<Extract<H, IEventEmitterHostClass<any>>>>;
-declare type ExtractEventNames<T extends {
-    event: any;
-}> = {
-    [1]: T extends {
-        event: ExtendedEvents<any, infer B, infer E>;
-    } ? ExtractEventNames<B> | keyof E : never;
-    [0]: T extends {
-        event: EventEmitter<any, infer E>;
-    } ? keyof E : never;
-}[T extends {
-    event: typeof x;
-} ? 1 : 0];
-declare type EventNamesFromBlackMagic<H extends IEventEmitterHost<any> | IEventEmitterHostClass<any>> = H extends IEventEmitterHost<any> ? ExtractEventNamesBlackMagic<H> : ExtractEventNamesBlackMagic<InstanceOf<Extract<H, IEventEmitterHostClass<any>>>>;
-declare type ExtractEventNamesBlackMagic<T extends {
-    event: any;
-}> = {
-    [1]: T extends {
-        event: ExtendedEvents<any, infer B, infer E>;
-    } ? ExtractEventNamesBlackMagic<B> | keyof E : never;
-    [0]: T extends {
-        event: IEventEmitterEventSubscriberBlackMagic<infer E>;
-    } ? E : never;
-}[T["event"] extends typeof x ? 1 : 0];
-export declare type EventHandlerFromHostOrHostClassAndName<H extends IEventEmitterHost<any> | IEventEmitterHostClass<any>, K extends string | number | symbol> = H extends IEventEmitterHost<any> ? FindEventHandler<H, K> : FindEventHandler<InstanceOf<Extract<H, IEventEmitterHostClass<any>>>, K>;
-declare type FindEventHandler<T extends {
-    event: any;
-}, K extends string | number | symbol> = {
-    [1]: T extends {
-        event: ExtendedEvents<any, infer B, infer E>;
-    } ? (K extends keyof E ? E[K] : FindEventHandler<B, K>) : never;
-    [0]: T extends {
-        event: EventEmitter<any, infer E>;
-    } ? (K extends keyof E ? E[K] : never) : never;
-}[T extends {
-    event: typeof x;
-} ? 1 : 0];
 declare module EventEmitter {
     class Host<E> implements IEventEmitterHost<E> {
-        readonly event: EventEmitter<this, E>;
+        readonly event: IEventEmitter<this, E>;
     }
 }
 export default EventEmitter;

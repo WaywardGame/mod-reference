@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Player from "entity/player/Player";
-import { EventHandlerFromHostOrHostClassAndName, EventNamesFromHostOrHostClass, IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
+import { IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
 import Game from "game/Game";
 import LanguageManager from "language/LanguageManager";
 import ModManager from "mod/ModManager";
@@ -46,8 +46,6 @@ export declare module EventBus {
 export declare type Events<T> = T extends IEventEmitterHost<infer E> ? E : T extends IEventEmitterHostClass<infer E> ? E : never;
 export declare type EventNameFromIndex<I extends EventBus> = keyof Events<ReturnType<(typeof eventBuses)[I]>>;
 export declare type EventHandlerFromIndex<I extends EventBus, K extends string | number | symbol> = Handler<HostFromHostOrHostClass<ReturnType<(typeof eventBuses)[I]>>, PropertyOf<Events<ReturnType<(typeof eventBuses)[I]>>, K>>;
-export declare type EventNameFromIndexRecursive<I extends EventBus> = EventNamesFromHostOrHostClass<ReturnType<(typeof eventBuses)[I]>>;
-export declare type EventHandlerFromIndexRecursive<I extends EventBus, K extends string | number | symbol> = Handler<HostFromHostOrHostClass<ReturnType<(typeof eventBuses)[I]>>, EventHandlerFromHostOrHostClassAndName<ReturnType<(typeof eventBuses)[I]>, K>>;
 declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;

@@ -10,7 +10,8 @@
  */
 import { IDamageInfo } from "entity/creature/ICreature";
 import { IPlayer } from "entity/player/IPlayer";
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { IMapRequest } from "game/IGame";
 import { BookType } from "item/IItem";
 import { IHookHost } from "mod/IHookHost";
@@ -32,12 +33,12 @@ import { IVector2 } from "utilities/math/IVector";
 export declare type IDialogStates = {
     [key in DialogId]: boolean;
 };
-export interface IGameScreenEvents {
+interface IGameScreenEvents extends Events<Screen> {
     hideDialog(dialog: DialogId): any;
     showDialog(dialogId: Dialog): any;
 }
 export default class GameScreen extends Screen implements IHookHost {
-    event: ExtendedEvents<this, Screen, IGameScreenEvents>;
+    event: IEventEmitter<this, IGameScreenEvents>;
     dialogs: Map<DialogId, Dialog>;
     visibleDialogs: IDialogStates;
     quadrantComponentQuadrants: {
@@ -103,3 +104,4 @@ export default class GameScreen extends Screen implements IHookHost {
     private onDialogClose;
     private updatePauseIcon;
 }
+export {};

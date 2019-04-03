@@ -10,11 +10,12 @@
  */
 import { SfxType } from "audio/IAudio";
 import { ICreature } from "entity/creature/ICreature";
-import IEntity, { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatChangeInfo, IStatus, MoveType, Property, StatChangeReason, StatusEffectChangeReason, StatusType } from "entity/IEntity";
+import IEntity, { EntityPlayerCreatureNpc, EntityType, IProperties, IStatChangeInfo, IStatus, MoveType, Property, StatChangeReason, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
 import IPlayer from "entity/player/IPlayer";
 import StatFactory from "entity/StatFactory";
+import { Events } from "event/EventBuses";
 import EventEmitter from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { ItemType } from "item/IItem";
@@ -24,7 +25,7 @@ import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Stream from "utilities/stream/Stream";
-export default abstract class Entity extends EventEmitter.Host<IEntityEvents> implements IEntity {
+export default abstract class Entity extends EventEmitter.Host<Events<IEntity>> implements IEntity {
     static is(entity: IEntity | undefined, entityType: EntityType.NPC): entity is INPC;
     static is(entity: IEntity | undefined, entityType: EntityType.Creature): entity is ICreature;
     static is(entity: IEntity | undefined, entityType: EntityType.Player): entity is IPlayer;

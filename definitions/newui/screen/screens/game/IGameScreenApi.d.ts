@@ -29,10 +29,6 @@ export declare enum MessageTimestamp {
     RealTime = 1,
     Turn = 2
 }
-export interface IMessagesEvents {
-    pinQuestRequirement(pin: IPinnedMessage): any;
-    unpinQuestRequirement(pin: IPinnedMessage): any;
-}
 export interface IPinnedMessage extends Component {
     type: PinType;
     id: any;

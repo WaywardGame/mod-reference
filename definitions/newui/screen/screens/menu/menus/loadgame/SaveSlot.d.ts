@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { Difficulty } from "game/Difficulty";
 import InputButton from "newui/component/InputButton";
 export interface SaveSlotData {
@@ -27,12 +28,12 @@ export interface SaveSlotData {
     name: string;
     difficulty: Difficulty;
 }
-export interface ISaveSlotEvents {
+interface ISaveSlotEvents extends Events<InputButton> {
     rename(): any;
     delete(): any;
 }
 export declare class SaveSlot extends InputButton {
-    event: ExtendedEvents<this, InputButton, ISaveSlotEvents>;
+    event: IEventEmitter<this, ISaveSlotEvents>;
     slotData: SaveSlotData;
     private deathby;
     constructor(slot: number);
@@ -70,3 +71,4 @@ export declare class SaveSlot extends InputButton {
     private exportToFile;
     static getFileName(name?: string): string;
 }
+export {};

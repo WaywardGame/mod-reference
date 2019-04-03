@@ -8,14 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { IRefreshable } from "newui/component/Refreshable";
 import { Tab } from "newui/screen/screens/menu/component/Menu";
-interface ITabSaveDataEvents {
+interface ITabSaveDataEvents extends Events<Tab> {
     refresh(): any;
 }
 export default class TabSaveData extends Tab implements IRefreshable {
-    event: ExtendedEvents<this, Tab, ITabSaveDataEvents>;
+    event: IEventEmitter<this, ITabSaveDataEvents>;
     constructor();
     refresh(): this;
     private onClearBindings;

@@ -14,7 +14,8 @@ import { MilestoneType } from "entity/player/IMilestone";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { IContainer, IItem, ItemType } from "item/IItem";
@@ -26,7 +27,7 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 export default interface IHuman extends IEntity {
-    event: ExtendedEvents<this, IEntity, IHumanEvents>;
+    event: IEventEmitter<this, IHumanEvents>;
     attackFromEquip: IAttackHand;
     canSendMessage: boolean;
     customization: ICustomizations;
@@ -110,7 +111,7 @@ export default interface IHuman extends IEntity {
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
 }
-export interface IHumanEvents {
+interface IHumanEvents extends Events<IEntity> {
     /**
      * @param skill The skill that is changing
      * @param value The new skill value (core + bonus)
@@ -242,3 +243,4 @@ export declare enum SkillType {
     Gardening = 27,
     Bartering = 28
 }
+export {};

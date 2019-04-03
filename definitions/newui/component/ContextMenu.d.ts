@@ -8,10 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
-import { IContextMenu, IContextMenuEvents, TranslationGenerator } from "newui/component/IComponent";
+import { IContextMenu, TranslationGenerator } from "newui/component/IComponent";
 export declare type IOptionDescription = {
     translation: TranslationGenerator;
     create?(option: Button): Button;
@@ -22,7 +23,7 @@ export declare type IOptionDescription = {
 });
 export declare type ContextMenuOptionKeyValuePair<O extends number | string | symbol = number | string | symbol> = [O, IOptionDescription];
 export default class ContextMenu<O extends number | string | symbol = number | string | symbol> extends Component implements IContextMenu<O> {
-    event: ExtendedEvents<this, Component, IContextMenuEvents>;
+    event: IEventEmitter<this, Events<IContextMenu>>;
     private activeOption;
     private readonly descriptions;
     private readonly options;
@@ -35,12 +36,12 @@ export default class ContextMenu<O extends number | string | symbol = number | s
     hideAndRemove(): Promise<void>;
     private getDescription;
 }
-export interface IContextMenuOptionEvents {
+interface IContextMenuOptionEvents extends Events<Button> {
     chosen(choice?: ContextMenuOption): any;
     becomeActive(): any;
 }
 export declare class ContextMenuOption extends Button {
-    event: ExtendedEvents<this, Button, IContextMenuOptionEvents>;
+    event: IEventEmitter<this, IContextMenuOptionEvents>;
     private submenu?;
     private readonly submenuDescription?;
     private isActive;
@@ -51,3 +52,4 @@ export declare class ContextMenuOption extends Button {
     onUnselected(): void;
     protected showSubmenu(generator: () => IContextMenu): void;
 }
+export {};

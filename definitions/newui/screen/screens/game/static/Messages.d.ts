@@ -12,7 +12,8 @@ import { IMessage, Source } from "entity/player/IMessageManager";
 import IPlayer from "entity/player/IPlayer";
 import { RequirementInstance } from "entity/player/quest/quest/Quest";
 import { QuestInstance } from "entity/player/quest/QuestManager";
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
@@ -21,7 +22,7 @@ import { ContextMenuOptionKeyValuePair } from "newui/component/ContextMenu";
 import Input from "newui/component/Input";
 import QuadrantComponent, { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import { IFilters } from "newui/screen/screens/game/dialog/MessagesEditFiltersDialog";
-import { IMessagesEvents, IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
+import { IPinnedMessage, MessageTimestamp, PinType, QuadrantComponentId } from "newui/screen/screens/game/IGameScreenApi";
 import Stream from "utilities/stream/Stream";
 import { IStringSection } from "utilities/string/Interpolator";
 export declare const DEFAULT_MAX_MESSAGES = 30;
@@ -29,12 +30,16 @@ export interface IMessageFilter {
     name: string;
     allowedSources: Source[];
 }
+interface IMessagesEvents extends Events<QuadrantComponent> {
+    pinQuestRequirement(pin: IPinnedMessage): any;
+    unpinQuestRequirement(pin: IPinnedMessage): any;
+}
 export default class Messages extends QuadrantComponent implements IHookHost {
     static preferredQuadrant: Quadrant;
     static sendChatMessage(sender: IPlayer, message: string): typeof Messages;
     static readonly allFilterName: string;
     private static readonly defaultFilters;
-    event: ExtendedEvents<this, QuadrantComponent, IMessagesEvents>;
+    event: IEventEmitter<this, IMessagesEvents>;
     readonly preferredQuadrant: Quadrant;
     readonly sendButton: Button;
     readonly pinnedMessages: Component;
@@ -123,3 +128,4 @@ export declare class PinnedMessage extends Button {
     readonly id: any;
     constructor(type: PinType, id: any);
 }
+export {};

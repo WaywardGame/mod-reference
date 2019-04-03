@@ -8,15 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import Button from "newui/component/Button";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
-interface ICharacterEvents {
+interface ICharacterEvents extends Events<Button> {
     delete(character: ISavedCharacter): any;
     customize(character: ISavedCharacter): any;
 }
 export default class CharacterButton extends Button {
-    event: ExtendedEvents<this, Button, ICharacterEvents>;
+    event: IEventEmitter<this, ICharacterEvents>;
     private readonly preview;
     private readonly _character;
     readonly character: ISavedCharacter;

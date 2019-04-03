@@ -8,16 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { BlockRow } from "newui/component/BlockRow";
 import { CheckButton } from "newui/component/CheckButton";
 import { IDisableable } from "newui/component/IComponent";
 import { IRefreshableValue } from "newui/component/Refreshable";
-export interface IChoiceListEvents<C extends Choice = Choice> {
+interface IChoiceListEvents<C extends Choice = Choice> extends Events<BlockRow> {
     choose(choice: C): any;
 }
 export default class ChoiceList<C extends Choice = Choice> extends BlockRow implements IRefreshableValue<C>, IDisableable {
-    event: ExtendedEvents<this, BlockRow, IChoiceListEvents<C>>;
+    event: IEventEmitter<this, IChoiceListEvents<C>>;
     private refreshMethod;
     private _selection;
     readonly choice: C;
@@ -36,3 +37,4 @@ export declare class Choice<I extends string | number | undefined = string | num
     readonly id: I;
     constructor(id: I);
 }
+export {};

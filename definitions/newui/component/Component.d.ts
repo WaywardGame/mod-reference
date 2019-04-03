@@ -8,13 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { Events } from "event/EventBuses";
 import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
-import { AppendStrategy, IComponent, IComponentEvents, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
 import Stream from "utilities/stream/Stream";
-export default class Component extends EventEmitter.Host<IComponentEvents> implements IComponent, IHookHost {
+export default class Component extends EventEmitter.Host<Events<IComponent>> implements IComponent, IHookHost {
     private static readonly map;
     static get<C extends Component = Component>(selector: string): C;
     static get<C extends Component = Component>(element: Element): C;
@@ -58,8 +59,8 @@ export default class Component extends EventEmitter.Host<IComponentEvents> imple
     setElement(elementType?: string, namespace?: Namespace): this;
     setId(id: string): this;
     setSelectable(val: SelectableLayer | false): this;
-    registerEventBusSubscriber(): void;
-    registerHookHost(name?: string): void;
+    registerEventBusSubscriber(...untilEvents: Array<keyof Events<this>>): void;
+    registerHookHost(name?: string, ...untilEvents: Array<keyof Events<this>>): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     isVisible(): boolean;
     show(): this;

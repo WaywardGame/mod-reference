@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ExtendedEvents } from "event/EventEmitter";
+import { Events } from "event/EventBuses";
+import { IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
@@ -17,14 +18,8 @@ import { IComponent } from "newui/component/IComponent";
 import Text, { Heading } from "newui/component/Text";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 import SelectionHandler from "newui/screen/screens/menu/component/SelectionHandler";
-export interface IMenuEvents {
-    tab(): any;
-    goBackFrom(): any;
-    cancelBind(): false | void;
-    enterBind(): any;
-}
 export default class Menu extends Component implements IMenu, IHookHost {
-    event: ExtendedEvents<this, Component, IMenuEvents>;
+    event: IEventEmitter<this, Events<IMenu>>;
     menuId: MenuId | string;
     canCancel: boolean | undefined;
     isSubmenu: boolean;
@@ -54,11 +49,11 @@ export default class Menu extends Component implements IMenu, IHookHost {
     protected onBeforeShow(): Promise<void> | void;
     protected onShowMenu(): void;
 }
-export interface ITabEvents {
+interface ITabEvents extends Events<Button> {
     editSubtabs(): any;
 }
 export declare class Tab<I extends string | number | undefined = string | number | undefined> extends Button {
-    event: ExtendedEvents<this, Button, ITabEvents>;
+    event: IEventEmitter<this, ITabEvents>;
     readonly id: I;
     section: MenuSection | undefined;
     private _subtabs;
@@ -83,3 +78,4 @@ export declare class BackButton extends Button {
     constructor();
     setType(type: BackButtonType): void;
 }
+export {};
