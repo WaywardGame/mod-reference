@@ -32,7 +32,7 @@ import Message from "language/dictionary/Message";
 import { MiscTranslation } from "language/dictionary/Misc";
 import Note from "language/dictionary/Note";
 import UiTranslation from "language/dictionary/UiTranslation";
-import { ModType } from "mod/IModInfo";
+import { ModProvide, ModType } from "mod/IModInfo";
 import { CanLoadState, ModLoadFailureReason } from "mod/IModManager";
 import { DisconnectReason, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { Bindable, BindableType } from "newui/BindingManager";
@@ -105,7 +105,8 @@ export declare enum Dictionary {
     TileEvent = 53,
     Ui = 54,
     UiQuadrant = 55,
-    UnableToJoinReason = 56
+    UnableToJoinReason = 56,
+    ModProvide = 57
 }
 export declare type Enum = {
     [key: string]: number;
@@ -171,6 +172,7 @@ declare const dictionaries: {
     [Dictionary.Ui]: typeof UiTranslation;
     [Dictionary.UiQuadrant]: typeof Quadrant;
     [Dictionary.UnableToJoinReason]: typeof UnableToJoinReason;
+    [Dictionary.ModProvide]: typeof ModProvide;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

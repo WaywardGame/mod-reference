@@ -15,23 +15,25 @@ import { CheckButton } from "newui/component/CheckButton";
 interface IModRowEvents extends Events<CheckButton> {
     shouldRefreshMenu(): any;
 }
-export interface ModRowData {
-    modInfo: IModInfo;
-}
 export default class ModRow extends CheckButton {
-    event: IEventEmitter<this, IModRowEvents>;
-    readonly info: IModInfo;
     readonly index: number;
+    readonly info: IModInfo;
+    event: IEventEmitter<this, IModRowEvents>;
     private buttonOptions;
     private buttonView;
     private buttonPublish;
-    constructor(modIndex: number, modInfo: IModInfo);
+    constructor(index: number, info: IModInfo);
     updateButtons(): void;
-    onChecked(checked: boolean, prompts?: boolean): Promise<boolean>;
-    protected onToggle(checked: boolean): void;
+    setEnabled(enabled: boolean, prompts?: boolean): Promise<boolean>;
+    protected onToggle(checked: boolean): Promise<void>;
+    private checkDependants;
+    private checkDependencies;
+    private tryEnableDependencies;
     private canPublish;
     private getDependencyNames;
-    private isLoadable;
+    private onDelete;
     private onPublish;
+    private getTooltip;
+    private isLoadable;
 }
 export {};

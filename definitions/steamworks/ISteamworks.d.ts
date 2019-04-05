@@ -81,6 +81,7 @@ export interface ISteamworks extends EventEmitter.Host<ISteamworksEvents> {
     stopPlaytimeTracking(): void;
     toggleDeveloperTools(): void;
     unsubscribe(publishId: string): Promise<void>;
+    updateSteamRichPresence(): void;
     updateDiscordPresence(): void;
 }
 export default ISteamworks;

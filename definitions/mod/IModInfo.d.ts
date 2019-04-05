@@ -63,6 +63,14 @@ export declare enum ModType {
     Local = 1,
     Workshop = 2
 }
+export declare enum ModProvide {
+    Scripts = "scripts",
+    Languages = "languages",
+    LanguageExtensions = "languageExtensions",
+    Stylesheets = "stylesheets",
+    ImageOverrides = "imageOverrides",
+    Customizations = "customizations"
+}
 export interface IModProvides {
     scripts: boolean;
     languages: number;

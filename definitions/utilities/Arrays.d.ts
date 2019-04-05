@@ -28,7 +28,7 @@ declare module Arrays {
      * @param max A number, exclusive
      */
     function range(max: number): number[];
-    function equals(array1: any[] | undefined, array2: any[] | undefined): boolean;
+    function equals(array1: ArrayLike<number> | undefined, array2: ArrayLike<number> | undefined): boolean;
     /**
      * Returns a new array containing random choices from a given array.
      * @param arr The array to return items from

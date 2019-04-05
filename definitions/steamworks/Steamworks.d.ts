@@ -66,6 +66,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> imp
     stopPlaytimeTracking(): void;
     setSteamRichPresence(key: string, value: string): boolean;
     clearSteamRichPresence(): void;
+    updateSteamRichPresence(): void;
     updateDiscordPresence(): void;
     setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): void;
     getLobbyId(): string | undefined;

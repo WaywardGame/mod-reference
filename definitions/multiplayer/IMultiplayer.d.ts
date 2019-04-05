@@ -23,6 +23,7 @@ export interface IMultiplayerEvents {
     disconnect(): any;
     joinLobby(lobbyId: string): any;
     leaveLobby(lobbyId: string): any;
+    stateChange(): any;
 }
 export interface IMultiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     addAfterSyncChecks(packet: IPacket): void;

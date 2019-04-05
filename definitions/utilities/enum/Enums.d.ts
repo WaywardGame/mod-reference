@@ -10,7 +10,7 @@
 */
 import { IModInfo } from "mod/IModInfo";
 import Stream from "utilities/stream/Stream";
-declare module Enums2 {
+declare module Enums {
     function isModdable(enumObject: any): boolean;
     function getModStart(enumObject: any): number;
     /**
@@ -90,4 +90,4 @@ declare module Enums2 {
     }, entry: unknown, isBasicEnum?: boolean): entry is E;
     function toString(enumObject: any, n: number): string;
 }
-export default Enums2;
+export default Enums;
