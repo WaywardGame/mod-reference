@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { DisconnectReason } from "multiplayer/IMultiplayer";
-declare const disconnectReasons: OptionalDescriptions<DisconnectReason, string | [string, string]>;
+declare const disconnectReasons: OptionalDescriptions<DisconnectReason, string>;
 export default disconnectReasons;
