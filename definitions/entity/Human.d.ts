@@ -97,7 +97,7 @@ export default abstract class Human extends Entity implements IHuman {
      */
     burn(fireType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     setPosition(point: IVector3): void;
-    setZ(z: number): void;
+    setZ(z: number, updateFlowField?: boolean): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
     equip(item: IItem, slot: EquipType): void;
     unequip(item: IItem): void;
