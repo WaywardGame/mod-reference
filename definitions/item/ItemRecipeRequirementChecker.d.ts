@@ -8,10 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IPlayer from "entity/player/IPlayer";
 import { IContainer, IItem, IItemArray, IRecipe } from "item/IItem";
 export default class ItemRecipeRequirementChecker {
-    private readonly player;
+    private readonly human;
     private readonly recipe?;
     private readonly trackItems?;
     private readonly cacheItems?;
@@ -24,13 +23,13 @@ export default class ItemRecipeRequirementChecker {
     private components;
     private adjacentContainers;
     private readonly itemsToProcess;
-    constructor(player: IPlayer, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined);
+    constructor(human: Human, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined);
     amountNeededForComponent(componentIndex: number): number;
     requirementsMet(): boolean;
     setAdjacentContainers(adjacentContainers: IContainer[] | undefined): void;
     isDiscovered(): boolean;
     /**
-     * Looks inside the players inventory and around adjacent opened doodads
+     * Looks inside the humans inventory and around adjacent opened doodads
      * @returns true if the recipe's requirements are satisfied
      */
     process(allowProtectedCraftingItems?: boolean): boolean;

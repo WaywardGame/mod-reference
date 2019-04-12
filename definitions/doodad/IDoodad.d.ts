@@ -123,7 +123,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     disableDrop?: boolean;
     gather?: IDoodadLoot;
     graphicVariation?: boolean;
-    group?: DoodadTypeGroup;
+    group?: DoodadTypeGroup[];
     harvest?: IDoodadLoot;
     isAnimated?: boolean;
     isFlammable?: boolean;
@@ -157,6 +157,9 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isFence?: boolean;
     isUnlitTorch?: boolean;
     isLitTorch?: boolean;
+    tier?: {
+        [index: number]: number;
+    };
 }
 export interface IDoodadParticles {
     [index: number]: IRGB;
@@ -268,7 +271,8 @@ export declare enum DoodadTypeGroup {
     Well = 406,
     Hitch = 407,
     GatheredPlant = 408,
-    Last = 409
+    FireSource = 409,
+    Last = 410
 }
 export declare enum DoorOrientation {
     Default = 0,

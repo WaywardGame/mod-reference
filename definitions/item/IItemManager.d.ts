@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
+import { DoodadType, DoodadTypeGroup, IDoodad } from "doodad/IDoodad";
 import { INPC } from "entity/npc/INPC";
 import { IPlayer } from "entity/player/IPlayer";
 import { InspectionResult } from "game/inspection/IInspection";
@@ -34,7 +34,7 @@ export interface IItemManager {
     decayItems(): boolean;
     derefenceContainerReference(containerRef: ContainerReference): object | undefined;
     generateLookups(): void;
-    getAdjacentContainers(player: IPlayer, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
+    getAdjacentContainers(human: Human, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
     getDefaultDurability(): number;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItemArray;
@@ -44,7 +44,7 @@ export interface IItemManager {
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup): IItem | undefined;
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions): IItem | undefined;
-    getItemInInventoryByGroup(player: IPlayer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions): IItem | undefined;
+    getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions): IItem | undefined;
     getItemListTranslation(items: IItem[], article?: boolean): Translation;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: IItem[]): number;
@@ -109,6 +109,11 @@ export interface RequirementInfo extends IVector2, IVector3 {
     doodadRequirementMet: boolean;
     fireRequirementMet: boolean;
     requiredDoodad: IDoodad | undefined;
+    doodadsUsed: IDoodadsUsed[];
+}
+export interface IDoodadsUsed {
+    doodad: IDoodad;
+    group: DoodadType | DoodadTypeGroup;
 }
 export interface IProtectedItemOptions {
     protect: boolean;
