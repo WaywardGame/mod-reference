@@ -111,7 +111,8 @@ export declare enum ActionType {
     Hitch = 81,
     Unhitch = 82,
     AttachContainer = 83,
-    DetachContainer = 84
+    DetachContainer = 84,
+    Refine = 85
 }
 export declare enum ActionUsability {
     Paused = 0,

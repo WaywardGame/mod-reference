@@ -84,29 +84,29 @@ export declare enum Dictionary {
     Misc = 32,
     ModLoadError = 33,
     ModLoadFailureReason = 34,
-    ModSort = 35,
-    ModType = 36,
-    MultiplayerDisconnectReason = 37,
-    MusicPlaylist = 38,
-    Note = 39,
-    Number = 40,
-    PartOfDay = 41,
-    PowerMode = 42,
-    Quality = 43,
-    Quest = 44,
-    QuestRequirement = 45,
-    SaveSlotSort = 46,
-    Skill = 47,
-    Source = 48,
-    Stat = 49,
-    StatusEffect = 50,
-    TeamMemberResponsibility = 51,
-    Terrain = 52,
-    TileEvent = 53,
-    Ui = 54,
-    UiQuadrant = 55,
-    UnableToJoinReason = 56,
-    ModProvide = 57
+    ModProvide = 35,
+    ModSort = 36,
+    ModType = 37,
+    MultiplayerDisconnectReason = 38,
+    MusicPlaylist = 39,
+    Note = 40,
+    Number = 41,
+    PartOfDay = 42,
+    PowerMode = 43,
+    Quality = 44,
+    Quest = 45,
+    QuestRequirement = 46,
+    SaveSlotSort = 47,
+    Skill = 48,
+    Source = 49,
+    Stat = 50,
+    StatusEffect = 51,
+    TeamMemberResponsibility = 52,
+    Terrain = 53,
+    TileEvent = 54,
+    Ui = 55,
+    UiQuadrant = 56,
+    UnableToJoinReason = 57
 }
 export declare type Enum = {
     [key: string]: number;
@@ -150,6 +150,7 @@ declare const dictionaries: {
     [Dictionary.Misc]: typeof MiscTranslation;
     [Dictionary.ModLoadError]: typeof CanLoadState;
     [Dictionary.ModLoadFailureReason]: typeof ModLoadFailureReason;
+    [Dictionary.ModProvide]: typeof ModProvide;
     [Dictionary.ModSort]: typeof ModSort;
     [Dictionary.ModType]: typeof ModType;
     [Dictionary.MultiplayerDisconnectReason]: typeof DisconnectReason;
@@ -172,7 +173,6 @@ declare const dictionaries: {
     [Dictionary.Ui]: typeof UiTranslation;
     [Dictionary.UiQuadrant]: typeof Quadrant;
     [Dictionary.UnableToJoinReason]: typeof UnableToJoinReason;
-    [Dictionary.ModProvide]: typeof ModProvide;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

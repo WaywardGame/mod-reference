@@ -21,10 +21,19 @@ export default class ItemRecipeRequirementChecker {
     numComponentsNeeded: number;
     private baseComponent;
     private components;
+    private componentItems;
     private adjacentContainers;
     private readonly itemsToProcess;
     constructor(human: Human, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined);
+    /**
+     * Returns the amount of items needed for the component
+     */
     amountNeededForComponent(componentIndex: number): number;
+    /**
+     * Returns the items that will be used by the component
+     * Only valid when trackItems is true
+     */
+    getItemsForComponent(componentIndex: number): IItemArray;
     requirementsMet(): boolean;
     setAdjacentContainers(adjacentContainers: IContainer[] | undefined): void;
     isDiscovered(): boolean;

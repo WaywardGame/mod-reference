@@ -765,7 +765,10 @@ export declare enum ItemType {
     CookedRedSnapper = 464,
     RawWalleye = 465,
     CookedWalleye = 466,
-    WoodenShield = 467
+    WoodenShield = 467,
+    CopperRefinementTools = 468,
+    WroughtIronRefinementTools = 469,
+    IronRefinementTools = 470
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -841,5 +844,6 @@ export declare enum ItemTypeGroup {
     Untradable = 870,
     Cookware = 871,
     LitTorch = 872,
-    Last = 873
+    Refine = 873,
+    Last = 874
 }
