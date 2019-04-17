@@ -16,7 +16,13 @@ export declare enum TerrainDecoration {
     Grass = 0,
     BeachSand = 1,
     DesertSand = 2,
-    Dirt = 3
+    Dirt = 3,
+    CoolingLava = 4
+}
+export declare enum TerrainDecorationStatus {
+    None = 0,
+    Normal = 1,
+    Animated = 2
 }
 export interface ITerrainDecorationBase {
     terrainTypes: TerrainType[];
@@ -34,13 +40,17 @@ export interface ITerrainDecorationVariationAdaption {
      * When not provided, decorated tiles use a rarity of 1.0 (always). 0.0 means never. It's linear.
      */
     rarity?: number;
+    /**
+     * True if it's animated - contains 2 animation frames, just like tiles
+     */
+    animated?: boolean;
 }
 /**
  * Takes an x, y, and z coordinate and a randomly-generated "variation index", and returns an `ITileAdaptation`
  * object for the tile. How the variation index is used to generate the `ITileAdaptation` will be implementation-specific.
  * @param variationIndex A random integer between 1 (inclusive) and 65536 (exclusive)
  */
-export declare type AdaptionFunction = (world: IWorldLayer, x: number, y: number, terrain: TerrainType, adaptation: ITileAdaptation, variationIndex: number) => ITileAdaptation | undefined;
+export declare type AdaptionFunction = (world: IWorldLayer, x: number, y: number, terrain: TerrainType, adaptation: ITileAdaptation, variationIndex: number) => TerrainDecorationStatus;
 export interface ITerrainDecoration extends ITerrainDecorationBase, IModdable {
     type: TerrainDecoration;
 }
@@ -48,7 +58,7 @@ export declare const terrainDecorations: Descriptions<TerrainDecoration, ITerrai
 declare class TerrainDecorations {
     private cachedDecorations;
     has(terrain: TerrainType): boolean;
-    adapt(world: IWorldLayer, tileX: number, tileY: number, terrain: TerrainType, adaptation: ITileAdaptation, variation: number): ITileAdaptation | undefined;
+    adapt(world: IWorldLayer, tileX: number, tileY: number, terrain: TerrainType, adaptation: ITileAdaptation, variation: number): TerrainDecorationStatus;
     protected cacheDecorations(): void;
 }
 declare const _default: TerrainDecorations;
