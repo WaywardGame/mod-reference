@@ -33,6 +33,7 @@ export interface ITerrainDecorationVariationAdaption {
     /**
      * The number of different sprites that could be used for this decoration. For instance, if your image is 3-tiles wide (48x16)
      * and you set this number to 3, it would choose between any of the three tiles randomly for each decorated tile.
+     * For animated decorations, this number is the 16height rows the image. If your image is 128x48, this should be 3.
      */
     variationCount: number;
     /**
@@ -41,7 +42,7 @@ export interface ITerrainDecorationVariationAdaption {
      */
     rarity?: number;
     /**
-     * True if it's animated - contains 2 animation frames, just like tiles
+     * True if it's animated - 8 animation frames - width should be 128 (16 width per frame)
      */
     animated?: boolean;
 }

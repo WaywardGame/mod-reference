@@ -46,6 +46,6 @@ export default class TileLayer {
     setTileBRBG(dataIndex: number, tileX: number, tileY: number): void;
     sendTileToGPU(x: number, y: number, gl: WebGL2RenderingContext): void;
     sendToGPU(gl: WebGL2RenderingContext): void;
-    render(gl: WebGL2RenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number, fixedDepth?: boolean): void;
+    render(gl: WebGL2RenderingContext, x: number, y: number, subTileSize: number, tileScale: number, viewWidth: number, viewHeight: number, fixedDepth?: boolean, animationFrames?: number): void;
     clear(): void;
 }
