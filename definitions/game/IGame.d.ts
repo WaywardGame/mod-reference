@@ -118,7 +118,7 @@ export interface IGame extends EventEmitter.Host<IGameEvents> {
     getHeight(z0: number, z1: number, d: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;
     getMalignity(): number;
-    getMaxDurability(quality: Quality, itemDurability: number): number;
+    getQualityDurabilityBonus(quality: Quality, itemDurability: number): number;
     getMaxHealth(): number;
     getMovementFinishTime(): number;
     getNearestPlayer(x: number, y: number, z?: number): IPlayer | undefined;

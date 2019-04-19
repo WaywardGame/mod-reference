@@ -92,7 +92,7 @@ export default class ItemManager implements IItemManager {
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): Stream<ItemTypeGroup>;
     checkMilestones(player: IPlayer, item: IItem): void;
-    getDefaultDurability(): number;
+    getDefaultDurability(item: IItem): number;
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, qualityBypass?: boolean): Quality | undefined;

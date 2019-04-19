@@ -222,8 +222,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
     getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
-    getRandomQuality(bonusQuality?: number): Quality;
-    getMaxDurability(quality: Quality, itemDurability: number): number;
+    getRandomQuality(bonusQuality?: number): Quality.None | Quality.Exceptional | Quality.Remarkable | Quality.Legendary;
+    getQualityDurabilityBonus(quality: Quality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
     wrapCoordinate(cordinate: number, reference: number): number;
     isFlammable(x: number, y: number, z: number): boolean;

@@ -80,6 +80,8 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     setContents(html: string, escape?: boolean): this;
     store(): this;
     findDescendants(selector: string): NodeListOf<Element>;
+    matches(selector: string): boolean;
+    getIndex(): number | null;
     setTooltip(initializer?: (tooltip: ITooltip) => ITooltip): this;
     removeTooltip(): void;
     /**

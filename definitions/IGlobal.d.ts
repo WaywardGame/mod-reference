@@ -301,8 +301,8 @@ declare global {
 	}
 
 	function Override(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
-
-	function TsIgnore(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
+	function Bound<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
+	function Final<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
 
 	interface CallableFunction extends Function {
 		bind<T, A0, A1, A2, A3, A4, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4): (...args: A) => R;

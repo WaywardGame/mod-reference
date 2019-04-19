@@ -24,6 +24,7 @@ export default class WorldLayerRenderer {
     private dirty;
     private readonly terrainLayer;
     private readonly terrainOverLayer;
+    private readonly terrainDecorationsLayer;
     private readonly doodadLayer;
     private readonly doodadOverLayer;
     constructor(gl: WebGL2RenderingContext, renderer: IWorldRenderer, worldLayer: IWorldLayer, width: number, height: number, positionBuffer: WebGLBuffer);

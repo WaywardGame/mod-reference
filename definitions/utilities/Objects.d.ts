@@ -17,8 +17,6 @@ declare module Objects {
     function stringify(object: any, space?: number | undefined, noDepth?: boolean): string;
 }
 export default Objects;
-export declare function Bound<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
-export declare function Final<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
 export interface IPrivateStore<T> {
     set<K extends keyof T>(key: K, value: T[K]): void;
     get<K extends keyof T>(key: K): T[K];
