@@ -26,18 +26,7 @@ export declare enum ReduceStrategy {
     /**
      * Returns every valid hook result.
      */
-    All 
-    /**
-     * Returns a random valid hook result. (Calls the hook on all mods, then returns a random result from all valid results)
-     *
-     * Warning: Does not use the internal random system. Be careful, this could cause desyncs.
-     */
-    = 3
-    /**
-     * Returns a random valid hook result. (Calls the hook on all mods, then returns a random result from all valid results)
-     *
-     * Warning: Does not use the internal random system. Be careful, this could cause desyncs.
-     */
+    All = 3
 }
 export declare type IReduceStrategy<R> = ReduceStrategy | ((newValue: R, lastValue?: R) => R);
 export default class HookCallFactory<H extends Hook, R = any> {
