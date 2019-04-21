@@ -8,6 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+export declare const enum MultiplayerCompatibility {
+    Clientside = "clientside",
+    Serverside = "serverside",
+    Compatible = "compatible"
+}
 export interface IModConfig {
     readonly name: string;
     readonly description: string;
@@ -18,8 +23,7 @@ export interface IModConfig {
     readonly tags?: string[];
     readonly dependencies?: string[];
     readonly compatibleMinorVersions: number[];
-    readonly multiplayerCompatible?: boolean;
-    readonly multiplayerClientside?: boolean;
+    readonly multiplayer?: MultiplayerCompatibility;
     readonly languages?: string[];
     readonly stylesheets?: string[];
     readonly imageOverrides?: boolean;

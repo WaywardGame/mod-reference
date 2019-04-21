@@ -25,6 +25,7 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> imp
     loadAll(options: Partial<IPlayOptions>): Promise<Array<[ModLoadFailureReason, ...any[]]>>;
     isMultiplayerCompatible(index: number): boolean;
     isMultiplayerClientSide(index: number): boolean;
+    isMultiplayerServerSide(index: number): boolean;
     isUnloadable(index: number): boolean;
     unloadAll(reset?: boolean): Promise<void>;
     setupMods(): Promise<void>;

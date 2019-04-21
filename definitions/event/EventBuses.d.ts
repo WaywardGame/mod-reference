@@ -11,6 +11,7 @@
 import Player from "entity/player/Player";
 import { IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
 import Game from "game/Game";
+import ItemManager from "item/ItemManager";
 import LanguageManager from "language/LanguageManager";
 import ModManager from "mod/ModManager";
 import Multiplayer from "multiplayer/Multiplayer";
@@ -24,7 +25,8 @@ export declare enum EventBus {
     Steamworks = 4,
     Mods = 5,
     Players = 6,
-    LocalPlayer = 7
+    LocalPlayer = 7,
+    Items = 8
 }
 declare const eventBuses: {
     [EventBus.Game](): typeof Game;
@@ -34,6 +36,7 @@ declare const eventBuses: {
     [EventBus.Steamworks](): typeof Steamworks;
     [EventBus.Mods](): typeof ModManager;
     [EventBus.Players](): typeof Player;
+    [EventBus.Items](): typeof ItemManager;
     [EventBus.LocalPlayer](): Player;
 };
 export default eventBuses;

@@ -10,9 +10,10 @@
  */
 import { IStreamable } from "utilities/stream/IStream";
 import Stream, { IPartitions } from "utilities/stream/Stream";
-export default class Partitions<T, K> implements IPartitions<K, T> {
+export default class Partitions<T, K, V = T> implements IPartitions<K, V> {
     private readonly stream;
     private readonly sorter;
+    private readonly mapper;
     private readonly streamMapper;
     private readonly _partitions;
     private readonly partitionKeys;
@@ -20,12 +21,12 @@ export default class Partitions<T, K> implements IPartitions<K, T> {
     private _value;
     private _done;
     private index;
-    readonly value: [K, Stream<T>];
+    readonly value: [K, Stream<V>];
     readonly done: boolean;
-    constructor(stream: IStreamable<T>, sorter: (val: T, index: number) => K, streamMapper: <V>(val: IStreamable<V>) => Stream<V>);
-    get(key: K): Stream<T>;
-    partitions(): Stream<[K, Stream<T>]>;
-    toMap<I extends Iterable<T> = T[]>(mapper?: (value: Stream<T>, key: K) => I): Map<K, I>;
+    constructor(stream: IStreamable<T>, sorter: (val: T, index: number) => K, mapper: (val: T, index: number) => V, streamMapper: <S>(val: IStreamable<S>) => Stream<S>);
+    get(key: K): Stream<V>;
+    partitions(): Stream<[K, Stream<V>]>;
+    toMap<I extends Iterable<V> = V[]>(mapper?: (value: Stream<V>, key: K) => I): Map<K, I>;
     next(): void;
     private getPartition;
     private getFunctionForRetrievingNextInPartition;

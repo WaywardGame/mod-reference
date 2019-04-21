@@ -51,6 +51,8 @@ declare global {
 	type NullaryFunction<O = any> = () => O;
 	type UnaryFunction<I = any, O = any> = (input: I) => O;
 
+	type SortingFunction<T> = (a: T, b: T) => number;
+
 	/**
 	 * An object of descriptions. Each key in E *may* map to a valid description.
 	 * @param E The enum with which to index these descriptions.
@@ -174,7 +176,7 @@ declare global {
 
 	interface INavigation {
 		getNode(x: number, y: number): INavigationNode;
-		findPath(start: INavigationNode, end: INavigationNode): INavigationNode[] | undefined;
+		findPath(start: INavigationNode, end: INavigationNode): { path: INavigationNode[]; scoreG: number; scoreH: number; scoreF: number } | undefined;
 		delete(): void;
 	}
 

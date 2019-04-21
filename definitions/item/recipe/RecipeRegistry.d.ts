@@ -14,9 +14,10 @@ export declare enum RecipeType {
 }
 declare class RecipeRegistry {
     private readonly recipes;
+    private recipeIndex;
     getRecipeDescriptions(): Readonly<Descriptions<RecipeType, Recipe>>;
     stream(): Stream<[RecipeType, Recipe]>;
-    register(recipe: Recipe): void;
+    register(recipe: Recipe): this;
 }
 declare const _default: RecipeRegistry;
 export default _default;

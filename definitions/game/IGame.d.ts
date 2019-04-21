@@ -197,10 +197,12 @@ export interface IGame extends EventEmitter.Host<IGameEvents> {
 }
 export default IGame;
 export interface IGameEvents {
-    globalSlotLoaded(): void;
-    pause(): void;
-    resume(): void;
-    play(): void;
+    globalSlotLoaded(): any;
+    pause(): any;
+    resume(): any;
+    play(): any;
+    tickStart(): any;
+    tickEnd(): any;
 }
 export declare enum TickSpeed {
     Min = 10,

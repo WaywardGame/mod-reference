@@ -29,7 +29,8 @@ export declare enum CanLoadState {
     ReqiredModNotLoaded = 7,
     LocalModPrecedence = 8,
     IncompatibleVersion = 9,
-    DisabledInMultiplayer = 10
+    DisabledInMultiplayer = 10,
+    ServerSideOnNonDedicatedServer = 11
 }
 export declare enum ModLoadFailureReason {
     IsDisabled = 0,
@@ -78,6 +79,7 @@ export interface IModManager extends EventEmitter.Host<IModManagerEvents> {
     isLoaded(index: number): boolean;
     isLoadedByName(name: string): boolean;
     isMultiplayerClientSide(index: number): boolean;
+    isMultiplayerServerSide(index: number): boolean;
     isMultiplayerCompatible(index: number): boolean;
     isUnloadable(index: number): boolean;
     isValid(index: number): boolean;

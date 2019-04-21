@@ -10,6 +10,7 @@
  */
 import { INPC } from "entity/npc/INPC";
 import { IPlayer } from "entity/player/IPlayer";
+import EventEmitter from "event/EventEmitter";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
@@ -18,7 +19,12 @@ import { CraftStatus, IItemManager, IProtectedItemOptions, RequirementInfo, Weig
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import Stream from "utilities/stream/Stream";
-export default class ItemManager implements IItemManager {
+interface ItemManagerEvents {
+    containerItemRemove(item: IItem, previousContainer: IContainer): any;
+    containerItemUpdate(item: IItem, previousContainer: IContainer | undefined, newContainer: IContainer): any;
+    containerItemAdd(item: IItem, newContainer: IContainer): any;
+}
+export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> implements IItemManager {
     private readonly worldContainer;
     private cachedWeights;
     private cachedDecaysIntoWeights;
@@ -111,3 +117,4 @@ export default class ItemManager implements IItemManager {
     private getPlayerFromInventoryContainer;
     private getAbsentPlayerFromInventoryContainer;
 }
+export {};
