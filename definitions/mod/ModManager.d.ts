@@ -18,8 +18,6 @@ import { CanLoadState, ICanLoadInfo, IModManager, IModManagerEvents, ModLoadFail
 import Log from "utilities/Log";
 export default class ModManager extends EventEmitter.Host<IModManagerEvents> implements IModManager {
     private readonly mods;
-    private readonly internalMods;
-    private readonly internalModsElectron;
     private readonly onModInitializedCallbacks;
     constructor();
     loadAll(options: Partial<IPlayOptions>): Promise<Array<[ModLoadFailureReason, ...any[]]>>;

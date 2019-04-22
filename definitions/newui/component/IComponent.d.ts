@@ -13,6 +13,7 @@ import EventEmitter, { IEventEmitter } from "event/EventEmitter";
 import { Dictionary } from "language/Dictionaries";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Translation, { ISerializedTranslation } from "language/Translation";
+import Component from "newui/component/Component";
 import { ContextMenuOption } from "newui/component/ContextMenu";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
 import { IVector2 } from "utilities/math/IVector";
@@ -37,6 +38,8 @@ export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;
 } | {
     before: IComponent;
+} | {
+    sorted(a: Component, b: Component): number;
 };
 export declare module AppendStrategy {
     const Append = "append";
@@ -46,6 +49,13 @@ export declare module AppendStrategy {
     };
     function before(component: IComponent): {
         before: IComponent;
+    };
+    /**
+     * A strategy that will use a sorting function in order to find the position the component should be placed.
+     * This strategy assumes that the parent's children are already sorted.
+     */
+    function sorted<C extends Component>(sortFunction: SortingFunction<C>): {
+        sorted(a: Component, b: Component): number;
     };
 }
 export interface IComponent extends EventEmitter.Host<IComponentEvents> {

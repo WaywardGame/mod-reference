@@ -46,5 +46,15 @@ declare module Arrays {
         get: () => number;
     }>): T[];
     function toggle(arr: any[], value: any, includes?: boolean): number;
+    /**
+     * Given a *sorted* array, a value, and a sorting function, returns the index where the value should be inserted.
+     *
+     * Notes:
+     * - If the input array is not sorted, it won't work. There is no validation to make sure that the array you put in is sorted, either.
+     * - The algorithm works in a similar way to quicksort. It pivots on the centre of the array, and figures out which side the
+     * value will fall on, then pivots on the centre of that side, then again and again until the correct location is found. This
+     * has the effect of heavily reducing the number of required sorting function calls.
+     */
+    function getSortedIndex<T>(array: ArrayLike<T>, value: T, sorter: (a: T, b: T) => number): number;
 }
 export default Arrays;
