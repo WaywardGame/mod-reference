@@ -45,7 +45,7 @@ export interface ISteamworks extends EventEmitter.Host<ISteamworksEvents> {
     hasServerToJoin(): boolean;
     importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
     incrementStat(name: string): void;
-    initialize(): void;
+    initialize(): Promise<void>;
     isDedicatedServer(): boolean;
     isElectron(): boolean;
     isGreenworksEnabled(): boolean;

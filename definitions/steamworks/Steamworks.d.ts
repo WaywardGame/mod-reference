@@ -49,7 +49,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> imp
     isDedicatedServer(): boolean;
     getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
     getMatchmakingServer(): IMatchmakingServer | undefined;
-    initialize(): void;
+    initialize(): Promise<void>;
     onUnload(): void;
     setOverlayWorks(overlayWorks: boolean): void;
     setupMods(): Promise<void>;
