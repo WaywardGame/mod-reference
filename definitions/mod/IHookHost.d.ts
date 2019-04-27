@@ -20,7 +20,7 @@ import { NPCType } from "entity/npc/NPCS";
 import { IMessage } from "entity/player/IMessageManager";
 import IPlayer, { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
-import { IMapRequest } from "game/IGame";
+import { IMapRequest, TileUpdateType } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
 import { BookType, IContainer, IItem, ItemType } from "item/IItem";
@@ -612,11 +612,12 @@ export interface IHookHost {
     /**
      * Called when a tile is updated (tile type changed, doodad created on it, etc)
      * @param tile The tile that was updated
-     * @param x The x position to spawn the creature
-     * @param y The y position to spawn the creature
-     * @param z The z position to spawn the creature
+     * @param x The x position of the updated tile
+     * @param y The y position of the updated tile
+     * @param z The z position of the updated tile
+     * @param tileUpdateType The tile update type
      */
-    onTileUpdate?(tile: ITile, x: number, y: number, z: number): void;
+    onTileUpdate?(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
     /**
      * Called when a turn is ending
      * @param player The player object

@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { TileUpdateType } from "game/IGame";
 import IWorld from "renderer/IWorld";
 import IWorldLayer from "renderer/IWorldLayer";
 import ISerializer from "save/ISerializer";
@@ -26,7 +27,7 @@ export default class World implements IWorld {
     updateAll(): void;
     setupExploredMap(): void;
     resetExploredMap(): void;
-    updateTile(x: number, y: number, z: number, tile: ITile): void;
+    updateTile(x: number, y: number, z: number, tile: ITile, tileUpdateType: TileUpdateType): void;
     serializeObject(serializer: ISerializer): void;
     deserializeObject(serializer: ISerializer): void;
 }

@@ -17,7 +17,7 @@ import IPlayer from "entity/player/IPlayer";
 import StatFactory from "entity/StatFactory";
 import { Events } from "event/EventBuses";
 import EventEmitter from "event/EventEmitter";
-import { FireType } from "game/IGame";
+import { FireType, TileUpdateType } from "game/IGame";
 import { ItemType } from "item/IItem";
 import Translation from "language/Translation";
 import { StatType } from "renderer/INotifier";
@@ -74,6 +74,7 @@ export default abstract class Entity extends EventEmitter.Host<Events<IEntity>> 
     hasStatus(status: StatusType): boolean;
     setStatus(status: StatusType, hasStatusEffect: boolean, reason: StatusEffectChangeReason): void;
     statuses(): Stream<StatusType>;
+    getTileUpdateType(): TileUpdateType;
     getTile(): ITile;
     getPoint(): IVector3;
     getFacingPoint(): IVector3;

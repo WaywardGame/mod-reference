@@ -185,7 +185,7 @@ export interface IGame extends EventEmitter.Host<IGameEvents> {
     shouldRender(): number;
     synchronizeFlowFields(plys: IPlayer[]): void;
     tickRealtime(): void;
-    updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
+    updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
     updateOption(player: IPlayer | undefined, id: keyof IOptions, value: boolean | number): void;
     updateRender(source: RenderSource): void;
     updateReputation(reputation: number): void;
@@ -338,6 +338,17 @@ export declare enum SaveType {
     BackToMainMenu = 3,
     Multiplayer = 4,
     Challenge = 5
+}
+export declare enum TileUpdateType {
+    Player = 0,
+    Doodad = 1,
+    Creature = 2,
+    Item = 3,
+    NPC = 4,
+    TileEvent = 5,
+    Tilled = 6,
+    Terrain = 7,
+    Corpse = 8
 }
 export declare const lineOfSightRadius = 15;
 export declare const lineOfSightMaxRadius = 20;

@@ -20,7 +20,7 @@ import { NPCType } from "entity/npc/NPCS";
 import { IMessage } from "entity/player/IMessageManager";
 import IPlayer, { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
-import { IMapRequest } from "game/IGame";
+import { IMapRequest, TileUpdateType } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
 import { BookType, IContainer, IItem, ItemType } from "item/IItem";
@@ -139,7 +139,7 @@ declare abstract class Mod extends BaseMod implements IHookHost {
     onRenderOverlay(spriteBatch: ISpriteBatch): void;
     onSailToCivilization(player: IPlayer): void;
     onSpawnCreatureFromGroup(creatureGroup: SpawnGroup, creaturePool: CreatureType[], x: number, y: number, z: number): boolean | undefined;
-    onTileUpdate(tile: ITile, x: number, y: number, z: number): void;
+    onTileUpdate(tile: ITile, x: number, y: number, z: number, updateTile: TileUpdateType): void;
     onTurnEnd(player: IPlayer): void;
     onTurnStart(player: IPlayer): void;
     onUpdateWeight(player: IPlayer, newWeight: number): number | undefined;

@@ -31,6 +31,8 @@ export default class CharacterCreationMenu extends Menu {
     private randomizeName;
     private randomize;
     private create;
+    private onStart;
+    private getCharacter;
     private createEditorButton;
     private rotate;
 }

@@ -16,7 +16,7 @@ import { INPC } from "entity/npc/INPC";
 import { IPlayer, TurnType } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { FireStage, FireType, ICrafted, IGame, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TurnMode } from "game/IGame";
+import { FireStage, FireType, ICrafted, IGame, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TileUpdateType, TurnMode } from "game/IGame";
 import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
 import { IItemArray } from "item/IItem";
@@ -219,7 +219,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     directionToMovement(direction: Direction): IVector2;
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     updateOption(player: IPlayer | undefined, id: keyof IOptions, value: boolean | number): void;
-    updateFlowFieldTile(tile: ITile, x: number, y: number, z: number): void;
+    updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
     getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
     getRandomQuality(bonusQuality?: number): Quality.None | Quality.Exceptional | Quality.Remarkable | Quality.Legendary;

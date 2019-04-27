@@ -71,6 +71,7 @@ export interface IPlayer extends IHuman {
     y: number;
     z: number;
     readonly clientStore: IClientStore;
+    readonly walkPath: IVector2[] | undefined;
     movementFinishTime: number;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     checkForGather(): IDoodad | undefined;

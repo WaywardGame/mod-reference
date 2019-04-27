@@ -24,12 +24,12 @@ export default class Menu extends Component implements IMenu, IHookHost {
     canCancel: boolean | undefined;
     isSubmenu: boolean;
     readonly selection: SelectionHandler;
-    protected readonly title: Heading;
-    protected readonly buttonBack: BackButton;
-    protected readonly description: Text;
-    protected readonly content: Component;
-    protected tabContainer: Component;
-    private readonly tabs;
+    readonly title: Heading;
+    readonly buttonBack: BackButton;
+    readonly description: Text;
+    readonly content: Component;
+    tabContainer: Component;
+    readonly tabs: Map<string | number, Tab<string | number | undefined>>;
     constructor(menuId: MenuId | string);
     setTitle(initializer: (title: Heading) => Heading): void;
     setDescription(initializer: (title: Text) => Text): void;

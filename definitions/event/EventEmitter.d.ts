@@ -17,7 +17,7 @@ export interface IEventEmitterHost<E> {
 export interface IEventEmitterHostClass<E> extends Class<IEventEmitterHost<E>> {
 }
 export interface ITrueEventEmitterHostClass<E> extends Class<any> {
-    [SYMBOL_SUBSCRIPTIONS]: Map<keyof E, PriorityMap<Set<IterableOr<Handler<any, any>>>>>;
+    [SYMBOL_SUBSCRIPTIONS]: Map<any, Map<keyof E, PriorityMap<Set<IterableOr<Handler<any, any>>>>>>;
 }
 export interface ISelfSubscribedEmitter<E> {
     [SYMBOL_SUBSCRIPTIONS]: Array<[ISelfSubscribedEmitter<any>, keyof E, string | number | symbol, number?]>;
@@ -55,6 +55,7 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;
+    private stream;
 }
 declare module EventEmitter {
     class Host<E> implements IEventEmitterHost<E> {

@@ -14,7 +14,7 @@ import { IStat, IStatBase, IStatFactory, IStatMax, IStats, Stat } from "entity/I
 import { INPC } from "entity/npc/INPC";
 import IPlayer from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
-import { FireType } from "game/IGame";
+import { FireType, TileUpdateType } from "game/IGame";
 import { ItemType } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { StatType } from "renderer/INotifier";
@@ -43,6 +43,7 @@ export default interface IEntity extends IVector3, EventEmitter.Host<IEntityEven
     getMovementProgress(): number;
     getPoint(): IVector3;
     getTile(): ITile;
+    getTileUpdateType(): TileUpdateType;
     getMoveType(): MoveType;
     setMoveType(moveType: MoveType): void;
     isInFov(): boolean;
