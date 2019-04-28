@@ -169,14 +169,26 @@ declare global {
 		FieldOfView: any;
 		WorldLayer: any;
 		Navigation: INavigationConstructor;
+		DijkstraMap: IDijkstraMapConstructor;
 		KDTree: IKDTreeConstructor;
 	}
 
 	type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
 
+	type IDijkstraMapConstructor = new () => IDijkstraMap;
+
+	interface IDijkstraMap {
+		getNode(x: number, y: number): INavigationNode;
+		updateOrigin(origin: INavigationNode): void;
+		findPath(end: INavigationNode): { success: boolean, path: INavigationNode[]; score: number; };
+		delete(): void;
+	}
+
+	type INavigationConstructor = new (autoConnect: boolean) => INavigation;
+
 	interface INavigation {
 		getNode(x: number, y: number): INavigationNode;
-		findPath(start: INavigationNode, end: INavigationNode): { path: INavigationNode[]; scoreG: number; scoreH: number; scoreF: number } | undefined;
+		findPath(start: INavigationNode, end: INavigationNode): { path: INavigationNode[]; scoreG: number; scoreH: number; scoreF: number; } | undefined;
 		delete(): void;
 	}
 
@@ -188,8 +200,6 @@ declare global {
 		connectTo(node: INavigationNode, direction: number): void;
 		getConnection(direction: number): INavigationNode | undefined;
 	}
-
-	type INavigationConstructor = new (autoConnect: boolean) => INavigation;
 
 	interface IKDTree {
 		insertPoint(x: number, y: number): void;
