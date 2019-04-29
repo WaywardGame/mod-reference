@@ -51,6 +51,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     legendary?: IItemLegendary | undefined;
     step: number | undefined;
     hitchedCreature?: number;
+    readonly fromDescription: import("../../utilities/FromDescription").ISafeFn<IDoodadDescription, undefined>;
     private _description;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
@@ -58,7 +59,6 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     getRegistrarId(): number;
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
-    description(partial: true): Partial<IDoodadDescription>;
     inspect({ context, inspectFire }: Inspection, section: InspectionSection): void;
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;

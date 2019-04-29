@@ -18,6 +18,7 @@ import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
+import { ISafeFn } from "utilities/FromDescription";
 export declare enum CreatureType {
     Slime = 0,
     JellyCube = 1,
@@ -65,6 +66,7 @@ export declare enum CreatureType {
 }
 export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable {
     entityType: EntityType.Creature;
+    fromDescription: ISafeFn<ICreatureDescription, undefined>;
     ai: AiType;
     anim: number;
     loot?: ItemType[];
@@ -84,14 +86,7 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
      * - `creature.getName(undefined, 3)` // "acid spitter demons"
      */
     getName(article?: boolean, count?: number): Translation;
-    /**
-     * Returns the description for this creature
-     */
     description(): ICreatureDescription | undefined;
-    /**
-     * Returns the description for this creature, or an empty object if there is no description.
-     */
-    description(partial: true): Partial<ICreatureDescription>;
     isHidden(): boolean;
     isDefender(): boolean;
     checkForBurn(moveType?: MoveType): boolean;

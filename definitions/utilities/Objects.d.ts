@@ -15,6 +15,7 @@ declare module Objects {
     function addProperty(property: string, value: any): (object: any) => any;
     function followDirections<T>(target: any, directions: string[]): T | undefined;
     function stringify(object: any, space?: number | undefined, noDepth?: boolean): string;
+    function mutable<T>(object: T): Mutable<T>;
 }
 export default Objects;
 export interface IPrivateStore<T> {

@@ -32,6 +32,7 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     type: CreatureType;
     originalMoveType: MoveType | undefined;
     hitchedTo?: number;
+    readonly fromDescription: import("../../utilities/FromDescription").ISafeFn<ICreatureDescription, undefined>;
     private _description;
     private _owner;
     constructor(creatureType?: CreatureType, x?: number, y?: number, z?: number, aberrant?: boolean);
@@ -41,7 +42,6 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     initializeStats(hp: number, maxhp?: number): void;
     getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
-    description(partial: true): Partial<ICreatureDescription>;
     inspect({ inspector, context, inspectEntityHealth }: Inspection, section: InspectionSection): void;
     hasAi(aiType: AiType): boolean;
     isHidden(): boolean;

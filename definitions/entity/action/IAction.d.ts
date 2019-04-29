@@ -21,6 +21,7 @@ import { MilestoneType } from "entity/player/IMilestone";
 import IPlayer, { TurnType } from "entity/player/IPlayer";
 import { Quality } from "game/IObject";
 import { IContainer, IItem, ItemType } from "item/IItem";
+import { RecipeType } from "item/recipe/RecipeRegistry";
 import { ITileEvent } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
 import { Direction } from "utilities/math/Direction";
@@ -138,7 +139,7 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
     readonly type: ActionType;
     readonly actionStack: ReadonlyArray<ActionType>;
     readonly lastAction: ActionType;
-    isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is ActionArgumentType<A>;
+    isArgumentType<A extends ActionArgument>(argument: any, index: number, argumentType: A): argument is ActionArgumentTypeMap<A>;
     get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A, infer E2, infer R> ? ActionExecutor<A, E2, R> : never;
     get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E2, infer R> ? ActionExecutor<A, E2, R> : never;
     setDelay(delay: number, replace?: boolean): this;
@@ -242,11 +243,47 @@ export declare enum ActionArgument {
     RestType = 28,
     TileEvent = 29,
     Vector2 = 30,
-    Vector3 = 31
+    Vector3 = 31,
+    RecipeType = 32
 }
-export declare type ActionArgumentType<X extends ActionArgument> = X extends ActionArgument.Number ? number : X extends ActionArgument.Undefined ? undefined : X extends ActionArgument.Null ? null : X extends ActionArgument.Boolean ? boolean : X extends ActionArgument.Number ? number : X extends ActionArgument.String ? string : X extends ActionArgument.Array ? any[] : X extends ActionArgument.Object ? any : X extends ActionArgument.AttackType ? AttackType : X extends ActionArgument.Container ? IContainer : X extends ActionArgument.Item ? IItem : X extends ActionArgument.ItemNearby ? IItem : X extends ActionArgument.ItemInventory ? IItem : X extends ActionArgument.ItemArray ? IItem[] : X extends ActionArgument.ItemArrayNearby ? IItem[] : X extends ActionArgument.ItemArrayInventory ? IItem[] : X extends ActionArgument.Doodad ? IDoodad : X extends ActionArgument.Corpse ? ICorpse : X extends ActionArgument.Creature ? ICreature : X extends ActionArgument.NPC ? INPC : X extends ActionArgument.Player ? IPlayer : X extends ActionArgument.Human ? Human : X extends ActionArgument.EquipType ? EquipType : X extends ActionArgument.Direction ? Direction : X extends ActionArgument.Quality ? Quality : X extends ActionArgument.ItemType ? ItemType : X extends ActionArgument.Vector2 ? IVector2 : X extends ActionArgument.Vector3 ? IVector3 : X extends ActionArgument.RestType ? RestType : X extends ActionArgument.ActionType ? ActionType : X extends ActionArgument.DoodadType ? DoodadType : X extends ActionArgument.Entity ? EntityPlayerCreatureNpc : X extends ActionArgument.TileEvent ? ITileEvent : never;
-declare type ActionArgumentEntryType<X extends ActionArgument | ActionArgument[]> = X extends ActionArgument ? ActionArgumentType<X> : X extends ActionArgument[] ? ExtractActionArgumentArray<X> : never;
-declare type ExtractActionArgumentArray<X extends ActionArgument[]> = X extends [ActionArgument] ? ActionArgumentType<X[0]> : X extends [ActionArgument, ActionArgument] ? ActionArgumentType<X[0]> | ActionArgumentType<X[1]> : X extends [ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentType<X[0]> | ActionArgumentType<X[1]> | ActionArgumentType<X[2]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentType<X[0]> | ActionArgumentType<X[1]> | ActionArgumentType<X[2]> | ActionArgumentType<X[3]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentType<X[0]> | ActionArgumentType<X[1]> | ActionArgumentType<X[2]> | ActionArgumentType<X[3]> | ActionArgumentType<X[4]> : never;
+export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
+    [ActionArgument.Number]: number;
+    [ActionArgument.Undefined]: undefined;
+    [ActionArgument.Null]: null;
+    [ActionArgument.Boolean]: boolean;
+    [ActionArgument.Number]: number;
+    [ActionArgument.String]: string;
+    [ActionArgument.Array]: any[];
+    [ActionArgument.Object]: any;
+    [ActionArgument.ActionType]: ActionType;
+    [ActionArgument.AttackType]: AttackType;
+    [ActionArgument.Container]: IContainer;
+    [ActionArgument.Corpse]: ICorpse;
+    [ActionArgument.Creature]: ICreature;
+    [ActionArgument.Direction]: Direction;
+    [ActionArgument.Doodad]: IDoodad;
+    [ActionArgument.DoodadType]: DoodadType;
+    [ActionArgument.Entity]: EntityPlayerCreatureNpc;
+    [ActionArgument.EquipType]: EquipType;
+    [ActionArgument.Human]: Human;
+    [ActionArgument.Item]: IItem;
+    [ActionArgument.ItemArray]: IItem[];
+    [ActionArgument.ItemArrayInventory]: IItem[];
+    [ActionArgument.ItemArrayNearby]: IItem[];
+    [ActionArgument.ItemInventory]: IItem;
+    [ActionArgument.ItemNearby]: IItem;
+    [ActionArgument.ItemType]: ItemType;
+    [ActionArgument.NPC]: INPC;
+    [ActionArgument.Player]: IPlayer;
+    [ActionArgument.Quality]: Quality;
+    [ActionArgument.RecipeType]: RecipeType;
+    [ActionArgument.RestType]: RestType;
+    [ActionArgument.TileEvent]: ITileEvent;
+    [ActionArgument.Vector2]: IVector2;
+    [ActionArgument.Vector3]: IVector3;
+}[X];
+declare type ActionArgumentEntryType<X extends ActionArgument | ActionArgument[]> = X extends ActionArgument ? ActionArgumentTypeMap<X> : X extends ActionArgument[] ? ExtractActionArgumentArray<X> : never;
+declare type ExtractActionArgumentArray<X extends ActionArgument[]> = X extends [ActionArgument] ? ActionArgumentTypeMap<X[0]> : X extends [ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> : X extends [ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> | ActionArgumentTypeMap<X[3]> : X extends [ActionArgument, ActionArgument, ActionArgument, ActionArgument, ActionArgument] ? ActionArgumentTypeMap<X[0]> | ActionArgumentTypeMap<X[1]> | ActionArgumentTypeMap<X[2]> | ActionArgumentTypeMap<X[3]> | ActionArgumentTypeMap<X[4]> : never;
 export declare type ActionArgumentTupleTypes<X extends Array<ActionArgument | ActionArgument[]>> = X extends [] ? [] : X extends [ActionArgument | ActionArgument[]] ? Tuple1<ActionArgumentEntryType<X[0]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple2<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple3<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple4<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>> : X extends [ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[], ActionArgument | ActionArgument[]] ? Tuple5<ActionArgumentEntryType<X[0]>, ActionArgumentEntryType<X[1]>, ActionArgumentEntryType<X[2]>, ActionArgumentEntryType<X[3]>, ActionArgumentEntryType<X[4]>> : never;
 export declare type Tuple1<X1> = undefined extends X1 ? [X1?] : [X1];
 export declare type Tuple2<X1, X2> = undefined extends X2 ? (undefined extends X1 ? [X1?, X2?] : [X1, X2?]) : [X1, X2];

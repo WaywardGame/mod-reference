@@ -42,5 +42,7 @@ declare module Math2 {
      */
     function lerp(from: number, to: number, t: number): number;
     function mod(n1: number, n2: number): number;
+    function average(...ns: number[]): number;
+    function sum(...ns: number[]): number;
 }
 export default Math2;

@@ -20,8 +20,10 @@ import { TatteredMap } from "item/IItem";
 import Recipe from "item/recipe/Recipe";
 import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
+import { ISafeFn } from "utilities/FromDescription";
 import { IVector3 } from "utilities/math/IVector";
 export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
+    fromDescription: ISafeFn<IItemDescription, undefined>;
     weight: number;
     equippedId?: number;
     equippedType?: EntityType;
@@ -148,9 +150,12 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     burnsLike?: ItemType[];
     spawnableTiles?: TileGroup;
     gather?: ILiquid;
-    tier?: {
-        [index: number]: number;
-    };
+    /**
+     * How good this item is at being an item of an `ItemTypeGroup`.
+     *
+     * For instance, `ItemType.StoneSpear` has a `ItemTypeGroup.CookingEquipment` tier of 2.
+     */
+    tier?: OptionalDescriptions<ItemTypeGroup, number>;
     recipeCache?: ItemType[];
     onEquip?(item: IItem): void;
     onUnequip?(item: IItem): void;

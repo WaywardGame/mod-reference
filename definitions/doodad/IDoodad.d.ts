@@ -22,8 +22,10 @@ import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
 import { ITile, TerrainType } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
+import { ISafeFn } from "utilities/FromDescription";
 import { IVector3 } from "utilities/math/IVector";
 export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, IInspectable {
+    fromDescription: ISafeFn<IDoodadDescription, undefined>;
     /**
      * @param article Whether to include an article for the name of the doodad. Uses the article rules on the language. Defaults to `true`.
      * @param count The number of this doodad that you're getting the name of. Defaults to `1`.
@@ -34,14 +36,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
      * - `doodad.getName(undefined, 3)` // "stone furnaces"
      */
     getName(article?: boolean, count?: number): Translation;
-    /**
-     * Returns the description for this doodad
-     */
     description(): IDoodadDescription | undefined;
-    /**
-     * Returns the description for this doodad, or an empty object if there is no description.
-     */
-    description(partial: true): Partial<IDoodadDescription>;
     changeType(doodadType: DoodadType): void;
     getOwner(): IPlayer | undefined;
     canGrow(): boolean;
@@ -157,9 +152,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isFence?: boolean;
     isUnlitTorch?: boolean;
     isLitTorch?: boolean;
-    tier?: {
-        [index: number]: number;
-    };
+    tier?: OptionalDescriptions<DoodadTypeGroup, number>;
 }
 export interface IDoodadParticles {
     [index: number]: IRGB;

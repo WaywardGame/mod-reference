@@ -30,6 +30,10 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, EntityTypeTupleType<E2>>;
     clone(): Action<A, never, R>;
 }
-declare type EntityTypeType<E extends EntityType> = E extends EntityType.Creature ? ICreature : E extends EntityType.NPC ? INPC : IPlayer;
-declare type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeType<E[0]> : E extends [EntityType, EntityType] ? EntityTypeType<E[0]> | EntityTypeType<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeType<E[0]> | EntityTypeType<E[1]> | EntityTypeType<E[2]> : never;
+declare type EntityTypeMap<E extends EntityType> = {
+    [EntityType.Creature]: ICreature;
+    [EntityType.NPC]: INPC;
+    [EntityType.Player]: IPlayer;
+}[E];
+declare type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap<E[0]> : E extends [EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> | EntityTypeMap<E[2]> : never;
 export {};

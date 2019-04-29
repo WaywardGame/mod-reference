@@ -18,6 +18,7 @@ declare class RecipeRegistry {
     getRecipeDescriptions(): Readonly<Descriptions<RecipeType, Recipe>>;
     stream(): Stream<[RecipeType, Recipe]>;
     register(recipe: Recipe): this;
+    get(recipe: RecipeType): Recipe | undefined;
 }
 declare const _default: RecipeRegistry;
 export default _default;

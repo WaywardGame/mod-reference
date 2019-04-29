@@ -13,7 +13,7 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 export default class CraftingDialog extends Dialog {
     private readonly craftableRecipes;
-    private craftableInventories;
+    private accessible;
     private readonly sort;
     private readonly craftableWrapper;
     constructor();
@@ -26,5 +26,4 @@ export default class CraftingDialog extends Dialog {
     private addItem;
     private addCraftable;
     private removeItem;
-    private getInventories;
 }

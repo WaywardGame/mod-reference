@@ -43,6 +43,7 @@ declare global {
          * @see `utilities/Collectors` for premade collectors
          */
         collect<X, A extends any[]>(collector: (val: T[], ...args: A) => X, ...args: A): X;
+        flat<U>(this: U[][]): U[];
     }
     interface ReadonlyArray<T> {
         /**
@@ -73,6 +74,7 @@ declare global {
          * @see `utilities/Collectors` for premade collectors
          */
         collect<X, A extends any[]>(collector: (val: T[], ...args: A) => X, ...args: A): X;
+        flat<U>(this: U[][]): U[];
     }
 }
 export default function (): void;

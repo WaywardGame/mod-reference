@@ -10,7 +10,7 @@
  */
 import { SfxType } from "audio/IAudio";
 import actionDescriptions from "entity/action/Actions";
-import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentType, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
+import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentTypeMap, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
 import { EntityPlayerCreatureNpc } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { MilestoneType } from "entity/player/IMilestone";
@@ -56,7 +56,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private constructor();
     skipConfirmation(): this;
     execute(executor: E, ...args: ActionArgumentTupleTypes<A>): R;
-    isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentType<AA>;
+    isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentTypeMap<AA>;
     get<D extends IActionDescription>(action: D): D extends IActionDescription<infer A2, infer E2, infer R2> ? ActionExecutor<A2, E2, R2> : never;
     get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A2, infer E2, infer R2> ? ActionExecutor<A2, E2, R2> : never;
     setDelay(delay: number, replace?: boolean): this;

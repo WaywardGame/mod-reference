@@ -466,6 +466,17 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      */
     abstract toArray<N>(array: N[]): Array<T | N>;
     /**
+     * Collects the items in this Stream to an array, using a mapping function.
+     * @param mapper A mapping function which takes an item in this Stream and returns a replacement item.
+     */
+    abstract toArray<M>(mapper: (value: T, index: number) => M): M[];
+    /**
+     * Appends the items in this Stream to the end of the given array, using a mapping function.
+     * @param array The array to insert into.
+     * @param mapper A mapping function which takes an item in this Stream and returns a replacement item.
+     */
+    abstract toArray<N, M>(array: N[], mapper: (value: T, index: number) => M): Array<T | N | M>;
+    /**
      * Collects the items in this Stream to a Set.
      */
     abstract toSet(): Set<T>;
@@ -473,6 +484,17 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      * Appends the items in this Stream to the end of the given Set.
      */
     abstract toSet<N>(set: Set<N>): Set<T | N>;
+    /**
+     * Collects the items in this Stream to a Set, using a mapping function.
+     * @param mapper A mapping function which takes an item in this Stream and returns a replacement item.
+     */
+    abstract toSet<M>(mapper: (value: T, index: number) => M): Set<M>;
+    /**
+     * Appends the items in this Stream to the end of the given Set, using a mapping function.
+     * @param set The set to insert into.
+     * @param mapper A mapping function which takes an item in this Stream and returns a replacement item.
+     */
+    abstract toSet<N, M>(set: Set<N>, mapper: (value: T, index: number) => M): Set<T | N | M>;
     /**
      * Constructs a Map instance from the key-value pairs in this Stream.
      */
