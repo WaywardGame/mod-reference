@@ -52,6 +52,7 @@ export default abstract class Entity extends EventEmitter.Host<Events<IEntity>> 
     private _inFov;
     constructor();
     abstract getName(): Translation;
+    toString(): string;
     initStat(factory: StatFactory): void;
     hasStat(stat: Stat): boolean;
     removeStat(stat: Stat): void;

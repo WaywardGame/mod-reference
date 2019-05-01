@@ -87,11 +87,12 @@ export interface IPlayer extends IHuman {
     faceDirection(direction: Direction, turnDelay?: number): boolean;
     getDefaultCarveTool(): IItem | undefined;
     getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    getMovementIntent(): IMovementIntent;
+    getDisplayCreature(): CreatureType | undefined;
     getMaxWeight(): number;
+    getMovementIntent(): IMovementIntent;
+    getNextPosition(): IVector3;
     getWeightMovementPenalty(): number;
     getWeightStatus(): WeightStatus;
-    getDisplayCreature(): CreatureType | undefined;
     hasTamedCreature(creature: ICreature): boolean;
     hasWalkPath(): boolean;
     healthSyncCheck(): void;

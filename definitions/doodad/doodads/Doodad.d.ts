@@ -22,6 +22,7 @@ import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
+import { IVector3 } from "utilities/math/IVector";
 declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable {
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
@@ -56,6 +57,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
+    toString(): string;
     getRegistrarId(): number;
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
@@ -63,6 +65,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     changeType(doodadType: DoodadType): void;
     isValid(): boolean;
     getTile(): ITile;
+    getPoint(): IVector3;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;

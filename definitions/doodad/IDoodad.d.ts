@@ -48,6 +48,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     canTrample(): boolean | undefined;
     isValid(): boolean;
     getTile(): ITile;
+    getPoint(): IVector3;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
     /**
