@@ -89,6 +89,7 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
     description(): ICreatureDescription | undefined;
     isHidden(): boolean;
     isDefender(): boolean;
+    isValid(): boolean;
     checkForBurn(moveType?: MoveType): boolean;
     damage(damageInfo: IDamageInfo): number | undefined;
     isTamed(): boolean;

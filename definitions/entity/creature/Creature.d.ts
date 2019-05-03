@@ -47,6 +47,7 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     isHidden(): boolean;
     isDefender(): boolean;
     isTamed(): boolean;
+    isValid(): boolean;
     checkForBurn(moveType?: MoveType): boolean;
     tame(player: IPlayer): boolean;
     increaseTamedCount(): void;

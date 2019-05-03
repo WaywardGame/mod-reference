@@ -36,6 +36,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     ownerIdentifier?: string;
     used?: IItemUsed;
     readonly quality: number;
+    toString(): string;
     /**
      * @param article Whether to include an article for the name of the item. Uses the article rules on the language. Defaults to `true`.
      * @param count The number of this item that you're getting the name of. Defaults to `1`.
