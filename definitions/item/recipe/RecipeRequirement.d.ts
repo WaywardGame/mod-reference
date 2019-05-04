@@ -10,7 +10,6 @@
  */
 import { IDoodad } from "doodad/IDoodad";
 import IEntity from "entity/IEntity";
-import EventEmitter from "event/EventEmitter";
 import { IItem } from "item/IItem";
 import { ITile } from "tile/ITerrain";
 import Stream from "utilities/stream/Stream";
@@ -20,40 +19,38 @@ export declare enum RecipeRequirementType {
     Doodad = 2,
     Fire = 3
 }
-export interface IUseItemStrategy {
-    items: IItem[];
-    freeUsedItem?(api: ICrafter, item: IItem): boolean;
+export interface RecipeInputTypeMap {
+    [RecipeRequirementType.Item]: IItem;
+    [RecipeRequirementType.Tool]: IItem;
+    [RecipeRequirementType.Doodad]: IDoodad;
+    [RecipeRequirementType.Fire]: ITile;
 }
-export declare const enum QualityBonus {
-    ConsumedItems = 0,
-    UsedItems = 1,
-    Doodads = 2
+export declare type RecipeInputType<R extends RecipeRequirementType> = RecipeInputTypeMap[R];
+export interface IRecipeInputUseStrategy<R extends RecipeRequirementType> {
+    inputs: Array<RecipeInputType<R>>;
+    freeUsedInput?(api: ICrafter, input: RecipeInputType<R>): boolean;
+    onCraft?(api: ICrafter, input: RecipeInputType<R>): any;
 }
-export declare const MAX_QUALITY_BONUSES: Readonly<Descriptions<QualityBonus, number>>;
-interface ICrafterEvents {
-    craft(items: IItem[]): any;
-}
-export interface ICrafter extends EventEmitter.Host<ICrafterEvents> {
+export declare const MAX_QUALITY_BONUSES: Readonly<Descriptions<RecipeRequirementType, number>>;
+export interface ICrafter {
+    accessibleItems: IItem[];
     /**
      * Gets a stream of the tiles around the crafter entity.
      * @param includeCrafterTile Whether the tile the crafter is on should be included. Defaults to `true`.
      */
     tilesAroundCrafter(includeCrafterTile?: boolean): Stream<ITile>;
     getCrafter(): IEntity;
-    getUsableItems(): Set<IItem>;
-    getUsedItems(): Stream<IItem>;
-    freeUsedItem(item: IItem): boolean;
-    useItems(useItemStrategy: IUseItemStrategy): void;
+    getUsable<R extends RecipeRequirementType>(type: R): Set<RecipeInputType<R>>;
+    getUsed<R extends RecipeRequirementType>(type: R): Stream<RecipeInputType<R>>;
+    freeUsed<R extends RecipeRequirementType>(type: R, input: RecipeInputType<R>): boolean;
+    use<R extends RecipeRequirementType>(type: R, useStrategy: IRecipeInputUseStrategy<R>): void;
     getQualityBonus(): number;
-    addQualityBonus(type: QualityBonus, bonus: number): this;
-    setQualityBonus(type: QualityBonus, bonus: number): this;
-    getUsableDoodads(): Set<IDoodad>;
-    getUsedDoodads(): Set<IDoodad>;
-    useDoodads(...doodads: IDoodad[]): this;
+    addQualityBonus(type: RecipeRequirementType, bonus: number): this;
+    setQualityBonus(type: RecipeRequirementType, bonus: number): this;
 }
-export default abstract class RecipeRequirement {
-    readonly type: RecipeRequirementType;
-    constructor(type: RecipeRequirementType);
+export default abstract class RecipeRequirement<R extends RecipeRequirementType> {
+    readonly type: R;
+    constructor(type: R);
     abstract isMet(api: ICrafter): boolean;
+    abstract getUsable(api: ICrafter): Iterable<RecipeInputType<R>>;
 }
-export {};

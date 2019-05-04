@@ -10,6 +10,7 @@
  */
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
+import { RecipeLevel } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 export declare class SkillLevel {
     readonly bonus: number;
@@ -23,5 +24,5 @@ export interface ISkillDescription extends IModdable {
     reputation?: number;
 }
 export declare function skillSet(): ISkillSet;
-export declare function skillChance(level: number): number;
+export declare function skillChance(level: RecipeLevel): number;
 export declare const skillDescriptions: OptionalDescriptions<SkillType, ISkillDescription>;

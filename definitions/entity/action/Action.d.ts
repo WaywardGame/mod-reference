@@ -23,11 +23,44 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
     handler: (actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>) => R;
     confirmer?: (actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>;
     constructor(...argumentTypes: A);
+    /**
+     * Add a "pre-execution" handler to this action.
+     *
+     * When an entity attempts to execute an action, the pre-execution handler is the first handler called.
+     * Pre-execution handlers are executed on the **client-side only**.
+     *
+     * @return `false` to cancel the execution of the action.
+     */
     setPreExecutionHandler(handler: (actionApi: IActionApi<E>, ...args: ActionArgumentTupleTypes<A>) => any): this;
+    /**
+     * Add an asynchronous "confirmer" handler to this action.
+     *
+     * When an entity attempts to execute an action, the confirmer is the second handler called (after the pre-execution handler).
+     * Confirmer handlers are executed on the **client-side only**.
+     *
+     * Note: If you use `actionApi.addItems` in a pre-execution handler, a confirmation interrupt will already be shown.
+     * In that case, a confirmer is unnecessary.
+     *
+     * @return `false` to cancel the execution of the action.
+     */
     setConfirmer(confirmer: (actionApi: IActionConfirmerApi<E>, ...args: ActionArgumentTupleTypes<A>) => Promise<boolean>): this;
+    /**
+     * Add a handler for this action.
+     *
+     * Handlers are executed on both the client-side and the server-side.
+     */
     setHandler<H extends (actionApi: IActionHandlerApi<E>, ...args: ActionArgumentTupleTypes<A>) => any>(handler: H): Action<A, E, H extends (...args: any) => infer R2 ? R2 : void>;
+    /**
+     * Sets additional times the action can be used in.
+     */
     setUsableWhen(...usabilities: ActionUsability[]): this;
+    /**
+     * Sets the entities that can use an action.
+     */
     setUsableBy<E2 extends EntityType[]>(...entityTypes: E2): Action<A, EntityTypeTupleType<E2>>;
+    /**
+     * Creates an identical clone of this action.
+     */
     clone(): Action<A, never, R>;
 }
 declare type EntityTypeMap<E extends EntityType> = {

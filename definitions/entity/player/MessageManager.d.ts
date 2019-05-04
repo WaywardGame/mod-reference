@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import IEntity from "entity/IEntity";
 import { IMessage, IMessageManager, Source } from "entity/player/IMessageManager";
 import IPlayer from "entity/player/IPlayer";
 import Message from "language/dictionary/Message";
@@ -41,7 +42,7 @@ export interface IMessageManagerHost {
 export default class MessageManager implements IMessageManager {
     private readonly host;
     private static readonly noOpMessageManager;
-    static get(human?: Human): MessageManager;
+    static get(entity?: IEntity): MessageManager;
     /**
      * Runs a callback with the message manager of every player. For sending messages, equivalent to the following:
      * ```ts

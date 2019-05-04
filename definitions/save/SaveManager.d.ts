@@ -75,7 +75,7 @@ export default class SaveManager implements ISaveManager {
      * Returns the number of bytes the save takes up, or undefined, if an error occurs
      */
     importSave(slot: number, saveObject: SaveObject | string): Promise<number | undefined>;
-    copySave(slot: number, target?: number): Promise<number | undefined>;
+    copySave(slot?: number, target?: number): Promise<number | undefined>;
     deleteSlot(slot: number): Promise<boolean | undefined>;
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteAllData(): Promise<void>;

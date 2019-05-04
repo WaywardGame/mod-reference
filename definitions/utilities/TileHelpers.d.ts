@@ -29,6 +29,13 @@ declare module TileHelpers {
     function setTilledRaw(data: number, value: number): number;
     function getTileVariation(x: number, y: number): number;
     function isTypeInGroup(tile: ITile | TerrainType, group: TileGroup): boolean;
+    function atlas(tile: ITile): {
+        isMountain: boolean;
+        isOre: boolean;
+        isLava: boolean;
+        isWater: boolean;
+        isFloor: boolean;
+    };
     module Overlay {
         function add(tile: ITile, overlay: IOverlayInfo, ifNotExist?: (overlay: IOverlayInfo) => boolean): boolean;
         function has(tile: ITile, filter: (overlay: IOverlayInfo) => boolean): boolean;

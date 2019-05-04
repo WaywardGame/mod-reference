@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ItemType, ItemTypeGroup } from "item/IItem";
-import RecipeRequirement, { ICrafter } from "item/recipe/RecipeRequirement";
-export default class ItemRequirement extends RecipeRequirement {
+import { IItem, ItemType, ItemTypeGroup } from "item/IItem";
+import RecipeRequirement, { ICrafter, RecipeRequirementType } from "item/recipe/RecipeRequirement";
+export default class ItemRequirement extends RecipeRequirement<RecipeRequirementType.Item> {
     readonly item: ItemType | ItemTypeGroup;
     readonly quantity: number;
+    static readonly BASE: ItemRequirement;
     private consume;
     private retainedForDisassembly;
     constructor(item: ItemType | ItemTypeGroup, quantity?: number, initializer?: (requirement: ItemRequirement) => any);
@@ -20,9 +21,10 @@ export default class ItemRequirement extends RecipeRequirement {
     setConsumed(consumed?: boolean): this;
     isRetainedForDisassembly(): boolean;
     setIsRetainedForDisassembly(retainedForDisassembly?: boolean): this;
+    getUsable(api: ICrafter): IItem[];
     isMet(api: ICrafter, quantity?: number): boolean;
     private freeUsedItem;
-    private onItemsUsed;
+    private onCraft;
     private getUsedItems;
     private getQualityBonus;
 }
