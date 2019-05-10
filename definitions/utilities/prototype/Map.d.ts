@@ -30,13 +30,13 @@ declare global {
          *
          * Note: Alias of `map.keys().stream()`
          */
-        keyStream(): Stream<K>;
+        keyStream<K2 = K>(): K extends K2 ? Stream<K2> : never;
         /**
          * Returns a Stream for key-value tuple entries of this Map.
          *
          * Note: Alias of `map.entries().stream()`
          */
-        entryStream(): Stream<[K, V]>;
+        entryStream<K2 = K, V2 = V>(): K extends K2 ? V extends V2 ? Stream<[K2, V2]> : never : never;
     }
 }
 export default function (): void;

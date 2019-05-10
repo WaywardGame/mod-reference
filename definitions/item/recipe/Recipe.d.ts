@@ -48,11 +48,33 @@ declare class Crafter implements ICrafter {
     readonly accessibleItems: IItem[];
     private readonly inputs;
     private readonly qualityBonuses;
+    private readonly usedFilter;
     constructor(recipe: Recipe, crafter: IEntity, accessibleItems: IItem[]);
     tilesAroundCrafter(includeCrafterTile?: boolean): Stream<import("../../tile/ITerrain").ITile>;
     getCrafter(): IEntity;
     getUsable(type: RecipeRequirementType): Set<import("../../doodad/IDoodad").IDoodad> | Set<import("../../tile/ITerrain").ITile> | Set<IItem>;
-    getUsed(type: RecipeRequirementType): Stream<IItem> | Stream<import("../../tile/ITerrain").ITile> | Stream<import("../../doodad/IDoodad").IDoodad>;
+    getUsed(type: RecipeRequirementType): Stream<import("../../doodad/IDoodad").IDoodad | IItem | import("../../tile/ITerrain").ITile>;
+    /**
+     * Returns whether the input could be "freed" (the requirement using it could use sth else instead).
+     *
+     * ### What is this for?
+     *
+     * A single input could be used for more than one thing in a recipe. Consider the following example:
+     *
+     * 1. We have a recipe that takes any rock item, and an item from the "sharpened" group.
+     * 2. We have only one sharpened rock and one large rock in our inventory.
+     * 3. The recipe requirements are iterated through:
+     * 	- For the "any rock item" requirement, the first item that matches is "used". In this case, it's the "sharpened rock".
+     * 	- For the "sharpened group" requirement, the only remaining item is the large rock, so it doesn't match.
+     * 		- Since there were no items that matched the sharpened group, it looks back to the items already "used", and tries
+     * to "free" those items. **That's this function**.
+     * 		- Freeing an item means returning back to the requirement that used it, and checking if any other items will
+     * fit the requirement.
+     * 		- If any other items matched that item, this method returns true, and then the item can be used by the
+     * requirement that needed it to be freed.
+     * 		- In this example, the large rock also fits the "any rock item" requirement, so the sharpened rock is freed
+     * for use by the "sharpened group" requirement.
+     */
     freeUsed<R extends RecipeRequirementType>(type: R, input: RecipeInputType<R>): boolean;
     use<R extends RecipeRequirementType>(type: R, useStrategy: IRecipeInputUseStrategy<R>): this;
     getQualityBonus(): number;
