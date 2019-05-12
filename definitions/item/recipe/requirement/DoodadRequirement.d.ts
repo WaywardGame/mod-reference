@@ -16,6 +16,6 @@ export default class DoodadRequirement extends RecipeRequirement<RecipeRequireme
     constructor(doodad: DoodadType | DoodadTypeGroup);
     getUsable(api: ICrafter): Set<IDoodad>;
     isMet(api: ICrafter): boolean;
-    private onCraft;
+    private onAttemptCraft;
     private getQualityBonus;
 }

@@ -10,5 +10,5 @@
  */
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.RecipeType, ActionArgument.ItemArrayNearby], import("../../IEntity").EntityPlayerCreatureNpc, void>;
+declare const _default: Action<[ActionArgument.RecipeType, ActionArgument.ItemArrayNearby, [ActionArgument.Undefined, ActionArgument.ItemType]], import("../../IEntity").EntityPlayerCreatureNpc, void>;
 export default _default;

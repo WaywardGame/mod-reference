@@ -80,7 +80,12 @@ declare class Crafter implements ICrafter {
     getQualityBonus(): number;
     addQualityBonus(type: RecipeRequirementType, bonus: number): this;
     setQualityBonus(type: RecipeRequirementType, bonus: number): this;
-    getRandomResult(): CraftResult;
-    craft(): void;
+    attemptCraft(): {
+        type: CraftResult;
+        outputs: any[];
+    };
+    private runEvent;
+    private getOutputs;
+    private getRandomResult;
 }
 export {};

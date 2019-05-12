@@ -29,7 +29,9 @@ export declare type RecipeInputType<R extends RecipeRequirementType> = RecipeInp
 export interface IRecipeInputUseStrategy<R extends RecipeRequirementType> {
     inputs: Array<RecipeInputType<R>>;
     freeUsedInput?(api: ICrafter, input: RecipeInputType<R>): boolean;
+    onAttemptCraft?(api: ICrafter, input: RecipeInputType<R>): any;
     onCraft?(api: ICrafter, input: RecipeInputType<R>): any;
+    onFail?(api: ICrafter, input: RecipeInputType<R>): any;
 }
 export declare const MAX_QUALITY_BONUSES: Readonly<Descriptions<RecipeRequirementType, number>>;
 export interface ICrafter {

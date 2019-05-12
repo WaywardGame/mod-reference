@@ -211,6 +211,7 @@ export interface IActionParticle {
     inFront?: boolean;
 }
 export declare function anyOf<A extends ActionArgument[]>(...actions: A): A;
+export declare function optional<A extends ActionArgument[]>(...actions: A): AddHead<ActionArgument.Undefined, A>;
 export declare enum ActionArgument {
     Undefined = 0,
     Null = 1,

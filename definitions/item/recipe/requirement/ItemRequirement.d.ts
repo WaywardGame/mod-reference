@@ -24,7 +24,9 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
     getUsable(api: ICrafter): IItem[];
     isMet(api: ICrafter, quantity?: number): boolean;
     private freeUsedItem;
+    private onAttemptCraft;
     private onCraft;
+    private onFail;
     private getUsedItems;
     private getQualityBonus;
 }
