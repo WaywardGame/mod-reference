@@ -11,7 +11,7 @@
 import { IDoodad } from "doodad/IDoodad";
 import { CreatureType, ICreature } from "entity/creature/ICreature";
 import { EntityType } from "entity/IEntity";
-import IHuman, { EquipType, HairColor, HairStyle, RestType, SkinColor } from "entity/IHuman";
+import IHuman, { EquipType, HairColor, HairStyle, RestType, SkinColor, IRestData } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
 import { MilestoneType } from "entity/player/IMilestone";
@@ -138,26 +138,39 @@ interface IPlayerEvents extends Events<IHuman> {
     updateOption<O extends keyof IOptions>(key: O, value: IOptions[O]): void;
     /**
      * Called when an item is added to the player's inventory
-     * @param player The player object
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
     inventoryItemAdd(item: IItem, container: IContainer): void;
     /**
      * Called when an item is removed from the players inventory
-     * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to.
      */
     inventoryItemRemove(item: IItem, container: IContainer): void;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
-     * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
      */
     inventoryItemUpdate(item: IItem, container: IContainer, previousContainer?: IContainer): void;
+    /**
+     * Called when the players x / y position changes
+     * @param x The players x position
+     * @param y The players y position
+     */
+    processMovement(x: number, y: number): void;
+    /**
+     * Called when the player starts resting
+     * @param restData The data related to the rest event
+     */
+    restStart(restData: IRestData): void;
+    /**
+     * Called when the player stops resting
+     * @param restData The data related to the rest event
+     */
+    restEnd(restData: IRestData): void;
 }
 export declare enum TurnType {
     CheckUnderPlayer = 0,
