@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IItem, ItemType, ItemTypeGroup } from "item/IItem";
+import ItemOutput from "item/recipe/output/ItemOutput";
 import RecipeRequirement, { ICrafter, RecipeRequirementType } from "item/recipe/RecipeRequirement";
 export default class ItemRequirement extends RecipeRequirement<RecipeRequirementType.Item> {
     readonly item: ItemType | ItemTypeGroup;
@@ -16,9 +17,14 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
     static readonly BASE: ItemRequirement;
     private consume;
     private retainedForDisassembly;
+    private inheritQuality;
+    private changeInto?;
     constructor(item: ItemType | ItemTypeGroup, quantity?: number, initializer?: (requirement: ItemRequirement) => any);
     consumed(): boolean;
     setConsumed(consumed?: boolean): this;
+    setInheritQualityFrom(): this;
+    setChangeInto(item: ItemType): this;
+    getChangeInto(): ItemOutput | undefined;
     isRetainedForDisassembly(): boolean;
     setIsRetainedForDisassembly(retainedForDisassembly?: boolean): this;
     getUsable(api: ICrafter): IItem[];

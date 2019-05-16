@@ -222,7 +222,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
     getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
-    getRandomQuality(bonusQuality?: number): Quality.None | Quality.Exceptional | Quality.Remarkable | Quality.Legendary;
+    getRandomQuality(bonusQuality?: number): Quality.None | Quality.Remarkable | Quality.Exceptional | Quality.Legendary;
     getQualityDurabilityBonus(quality: Quality, itemDurability: number): number;
     doLavaEvents(x: number, y: number, z: number): void;
     wrapCoordinate(cordinate: number, reference: number): number;

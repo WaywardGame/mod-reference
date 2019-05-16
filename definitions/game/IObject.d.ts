@@ -31,7 +31,7 @@ export interface IObjectOptions {
 export declare enum Quality {
     None = 0,
     Random = 1,
-    Exceptional = 2,
-    Remarkable = 3,
+    Remarkable = 2,
+    Exceptional = 3,
     Legendary = 4
 }

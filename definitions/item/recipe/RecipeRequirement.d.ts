@@ -10,6 +10,7 @@
  */
 import { IDoodad } from "doodad/IDoodad";
 import IEntity from "entity/IEntity";
+import { Quality } from "game/IObject";
 import { IItem } from "item/IItem";
 import { ITile } from "tile/ITerrain";
 import Stream from "utilities/stream/Stream";
@@ -25,13 +26,13 @@ export interface RecipeInputTypeMap {
     [RecipeRequirementType.Doodad]: IDoodad;
     [RecipeRequirementType.Fire]: ITile;
 }
-export declare type RecipeInputType<R extends RecipeRequirementType> = RecipeInputTypeMap[R];
+export declare type RecipeInputType<R extends RecipeRequirementType = RecipeRequirementType> = RecipeInputTypeMap[R];
 export interface IRecipeInputUseStrategy<R extends RecipeRequirementType> {
     inputs: Array<RecipeInputType<R>>;
-    freeUsedInput?(api: ICrafter, input: RecipeInputType<R>): boolean;
-    onAttemptCraft?(api: ICrafter, input: RecipeInputType<R>): any;
-    onCraft?(api: ICrafter, input: RecipeInputType<R>): any;
-    onFail?(api: ICrafter, input: RecipeInputType<R>): any;
+    freeUsedInput?(api: ICrafter, inputs: Array<RecipeInputType<R>>): boolean;
+    onAttemptCraft?(api: ICrafter, inputs: Array<RecipeInputType<R>>): any;
+    onCraft?(api: ICrafter, inputs: Array<RecipeInputType<R>>): any;
+    onFail?(api: ICrafter, inputs: Array<RecipeInputType<R>>): any;
 }
 export declare const MAX_QUALITY_BONUSES: Readonly<Descriptions<RecipeRequirementType, number>>;
 export interface ICrafter {
@@ -49,6 +50,8 @@ export interface ICrafter {
     getQualityBonus(): number;
     addQualityBonus(type: RecipeRequirementType, bonus: number): this;
     setQualityBonus(type: RecipeRequirementType, bonus: number): this;
+    forceResultQuality(quality?: Quality): this;
+    getForcedResultQuality(): Quality | undefined;
 }
 export default abstract class RecipeRequirement<R extends RecipeRequirementType> {
     readonly type: R;

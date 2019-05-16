@@ -10,6 +10,7 @@
  */
 import IEntity from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
+import { Quality } from "game/IObject";
 import { CraftResult, IItem, RecipeLevel } from "item/IItem";
 import RecipeOutput, { RecipeOutputType } from "item/recipe/RecipeOutput";
 import { RecipeOutputClass } from "item/recipe/RecipeOutputs";
@@ -49,6 +50,7 @@ declare class Crafter implements ICrafter {
     private readonly inputs;
     private readonly qualityBonuses;
     private readonly usedFilter;
+    private forcedQuality?;
     constructor(recipe: Recipe, crafter: IEntity, accessibleItems: IItem[]);
     tilesAroundCrafter(includeCrafterTile?: boolean): Stream<import("../../tile/ITerrain").ITile>;
     getCrafter(): IEntity;
@@ -77,13 +79,17 @@ declare class Crafter implements ICrafter {
      */
     freeUsed<R extends RecipeRequirementType>(type: R, input: RecipeInputType<R>): boolean;
     use<R extends RecipeRequirementType>(type: R, useStrategy: IRecipeInputUseStrategy<R>): this;
+    forceResultQuality(quality?: Quality): this;
+    getForcedResultQuality(): Quality | undefined;
     getQualityBonus(): number;
     addQualityBonus(type: RecipeRequirementType, bonus: number): this;
     setQualityBonus(type: RecipeRequirementType, bonus: number): this;
     attemptCraft(): {
         type: CraftResult;
         outputs: any[];
+        quality: Quality;
     };
+    private getCraftQuality;
     private runEvent;
     private getOutputs;
     private getRandomResult;

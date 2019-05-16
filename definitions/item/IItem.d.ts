@@ -35,7 +35,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     order?: number;
     ownerIdentifier?: string;
     used?: IItemUsed;
-    readonly quality: number;
+    readonly quality: Quality;
     toString(): string;
     /**
      * @param article Whether to include an article for the name of the item. Uses the article rules on the language. Defaults to `true`.
@@ -127,6 +127,13 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     use?: ActionType[];
     ranged?: IRanged;
     recipe?: IRecipe;
+    /**
+     * A list of recipes that have this item as an output.
+     *
+     * This helper is intended for simple recipes that don't need to change how many of the item are created, and from what.
+     * If you intend to output a number of this item greater than one, or you intend to produce this item by changing another item
+     * into it, consider instead registering a recipe directly.
+     */
     recipes?: Array<(recipe: Recipe) => Recipe>;
     disassemble?: boolean;
     requiredForDisassembly?: Array<ItemType | ItemTypeGroup>;

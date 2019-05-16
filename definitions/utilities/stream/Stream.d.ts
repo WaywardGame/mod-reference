@@ -443,8 +443,9 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
     /**
      * Returns a value of type R, generated with the given collector function.
      * @param collector A function that takes the splatted values in this iterable, and returns type R
+     * @param args Other arguments to provide before the items in this stream
      */
-    abstract splat<R>(collector: (...args: T[]) => R): R;
+    abstract splat<R>(collector: (...args: T[]) => R, ...args: T[]): R;
     /**
      * Returns a promise that will return the value of the first completed promise in this stream.
      *
