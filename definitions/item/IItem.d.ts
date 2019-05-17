@@ -781,7 +781,14 @@ export declare enum ItemType {
     WoodenShield = 467,
     CopperRefinementTools = 468,
     WroughtIronRefinementTools = 469,
-    IronRefinementTools = 470
+    IronRefinementTools = 470,
+    ScaleBelt = 471,
+    ScaleVest = 472,
+    ScaleBoots = 473,
+    ScaleCap = 474,
+    ScaleGorget = 475,
+    ScaleLeggings = 476,
+    ScaleGloves = 477
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

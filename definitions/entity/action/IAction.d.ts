@@ -241,11 +241,11 @@ export declare enum ActionArgument {
     NPC = 25,
     Player = 26,
     Quality = 27,
-    RestType = 28,
-    TileEvent = 29,
-    Vector2 = 30,
-    Vector3 = 31,
-    RecipeType = 32
+    RecipeType = 28,
+    RestType = 29,
+    TileEvent = 30,
+    Vector2 = 31,
+    Vector3 = 32
 }
 export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.Number]: number;
