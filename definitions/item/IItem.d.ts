@@ -31,7 +31,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     tatteredMap?: TatteredMap;
     legendary?: IItemLegendary;
     book?: BookType;
-    disassembly?: IItemArray;
+    disassembly?: IItem[];
     order?: number;
     ownerIdentifier?: string;
     used?: IItemUsed;
@@ -99,7 +99,7 @@ export interface IContainable {
 }
 export interface IContainer extends IContainable {
     weightCapacity?: number;
-    containedItems: IItemArray;
+    containedItems: IItem[];
     itemOrders?: number[];
     containerType?: ContainerType;
 }
@@ -192,7 +192,6 @@ export interface IRanged {
     range: number;
     attack: number;
 }
-export declare type IItemArray = IItem[];
 export interface IItemLegendary {
     type: LegendaryType;
     value: number;
@@ -214,7 +213,8 @@ export declare enum LegendaryType {
     Worth = 11,
     TrapDamage = 12,
     MaxWeight = 13,
-    ContainerWeight = 14
+    ContainerWeight = 14,
+    PreservationRate = 15
 }
 export interface IItemUsed {
     usedBy?: string[];

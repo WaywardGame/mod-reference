@@ -19,7 +19,7 @@ import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { FireStage, FireType, ICrafted, IGame, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TileUpdateType, TurnMode } from "game/IGame";
 import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
-import { IItemArray } from "item/IItem";
+import { IItem } from "item/IItem";
 import Translation from "language/Translation";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -64,7 +64,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     difficultyOptions: IDifficultyOptions;
     doodads: SaferArray<IDoodad>;
     flowFieldSyncCount: number;
-    items: IItemArray;
+    items: IItem[];
     lastCreationIds: {
         [index: number]: number;
     };

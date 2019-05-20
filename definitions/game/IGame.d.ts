@@ -18,7 +18,7 @@ import EventEmitter from "event/EventEmitter";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
 import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
-import { IItem, IItemArray } from "item/IItem";
+import { IItem } from "item/IItem";
 import Translation from "language/Translation";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import { INotifier } from "renderer/INotifier";
@@ -56,7 +56,7 @@ export interface IGame extends EventEmitter.Host<IGameEvents> {
         [index: number]: IWell | undefined;
     };
     tileContainers: ITileContainer[];
-    items: IItemArray;
+    items: IItem[];
     creatures: SaferArray<ICreature>;
     doodads: SaferArray<IDoodad>;
     tileEvents: SaferArray<ITileEvent>;

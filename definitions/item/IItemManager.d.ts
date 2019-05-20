@@ -14,7 +14,7 @@ import { IPlayer } from "entity/player/IPlayer";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
-import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription, ItemType, ItemTypeGroup } from "item/IItem";
+import { ContainerReference, IContainable, IContainer, IItem, IItemDescription, ItemType, ItemTypeGroup } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IVector2, IVector3 } from "utilities/math/IVector";
@@ -28,7 +28,7 @@ export interface IItemManager {
     computeContainerWeight(container: IContainer): number;
     countItemsInContainer(container: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(container: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
-    craft(human: Human, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
+    craft(human: Human, itemType: ItemType, itemsToRequire: IItem[], itemsToConsume: IItem[], baseItem?: IItem): CraftStatus;
     create(itemType: ItemType, container: IContainer, quality?: Quality, fake?: boolean): IItem;
     createFake(itemType: ItemType, quality?: Quality): IItem;
     decayItems(): boolean;
@@ -37,7 +37,7 @@ export interface IItemManager {
     getAdjacentContainers(human: Human, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
     getDefaultDurability(item: IItem): number;
-    getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItemArray;
+    getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItem[];
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType): ItemType;
     getGroupItems(itemGroup: ItemTypeGroup | ItemType): Set<ItemType>;
@@ -48,9 +48,9 @@ export interface IItemManager {
     getItemListTranslation(items: IItem[], article?: boolean): Translation;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: IItem[]): number;
-    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItemArray;
-    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItemArray;
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItemArray;
+    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItem[];
+    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItem[];
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions): IItem[];
     getItemTranslations(items: IItem[], article?: boolean): Stream<Translation>;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     getLegendaryWeightCapacity(container: IContainer): number;
@@ -80,7 +80,7 @@ export interface IItemManager {
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): IItem[];
     moveToContainer(human: Human | undefined, item: IItem, container: IContainer): boolean;
     placeItemsAroundLocation(container: IContainer, x: number, y: number, z: number, skipMessage?: boolean): void;
-    reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
+    reduceDismantleWeight(createdItems: IItem[], itemWeight: number, mod?: number): void;
     remove(item: IItem): void;
     removeContainerItems(container: IContainer): void;
     resetMapsInContainer(container: IContainer): void;

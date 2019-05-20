@@ -8,15 +8,15 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IContainer, IItem, IItemArray, IRecipe } from "item/IItem";
+import { IContainer, IItem, IRecipe } from "item/IItem";
 export default class ItemRecipeRequirementChecker {
     private readonly human;
     private readonly recipe?;
     private readonly trackItems?;
     private readonly cacheItems?;
     itemBaseComponent: IItem | undefined;
-    itemComponentsRequired: IItemArray;
-    itemComponentsConsumed: IItemArray;
+    itemComponentsRequired: IItem[];
+    itemComponentsConsumed: IItem[];
     itemComponentsCanBurn: boolean;
     numComponentsNeeded: number;
     private baseComponent;
@@ -33,7 +33,7 @@ export default class ItemRecipeRequirementChecker {
      * Returns the items that will be used by the component
      * Only valid when trackItems is true
      */
-    getItemsForComponent(componentIndex: number): IItemArray;
+    getItemsForComponent(componentIndex: number): IItem[];
     requirementsMet(): boolean;
     setAdjacentContainers(adjacentContainers: IContainer[] | undefined): void;
     isDiscovered(): boolean;

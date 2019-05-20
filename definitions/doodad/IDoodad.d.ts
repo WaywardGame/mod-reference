@@ -17,7 +17,7 @@ import { IPlayer } from "entity/player/IPlayer";
 import { ILootItem } from "game/ILoot";
 import { IInspectable } from "game/inspection/Inspections";
 import { IObject, IObjectDescription, IObjectOptions } from "game/IObject";
-import { IContainer, IItem, IItemArray, IItemLegendary, ItemType } from "item/IItem";
+import { IContainer, IItem, IItemLegendary, ItemType } from "item/IItem";
 import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
 import { ITile, TerrainType } from "tile/ITerrain";
@@ -86,7 +86,7 @@ export interface IDoodadOptions extends IObjectOptions {
     treasure?: boolean;
     weight?: number;
     legendary?: IItemLegendary;
-    disassembly?: IItemArray;
+    disassembly?: IItem[];
     ownerIdentifier?: string;
     item?: IItem;
     step?: number;

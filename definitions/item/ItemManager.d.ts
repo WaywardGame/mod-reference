@@ -14,7 +14,7 @@ import EventEmitter from "event/EventEmitter";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
-import { ContainerReference, IContainable, IContainer, IItem, IItemArray, IItemDescription, ItemType, ItemTypeGroup } from "item/IItem";
+import { ContainerReference, IContainable, IContainer, IItem, IItemDescription, ItemType, ItemTypeGroup } from "item/IItem";
 import { CraftStatus, IItemManager, IProtectedItemOptions, RequirementInfo, WeightType } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -41,7 +41,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     removeContainerItems(container: IContainer): void;
     exists(item: IItem): boolean;
     remove(item: IItem): void;
-    getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItemArray;
+    getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItem[];
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
@@ -66,7 +66,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     getItemTypeGroupName(itemType: ItemType | ItemTypeGroup, article?: boolean, count?: number): Translation;
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
-    craft(human: Human, itemType: ItemType, itemsToRequire: IItemArray, itemsToConsume: IItemArray, baseItem?: IItem): CraftStatus;
+    craft(human: Human, itemType: ItemType, itemsToRequire: IItem[], itemsToConsume: IItem[], baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
@@ -76,9 +76,9 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup): IItem | undefined;
     getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem | undefined;
-    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItemArray;
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItemArray;
-    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItemArray;
+    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem[];
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem[];
+    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): IItem[];
     getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): IItem | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
@@ -87,7 +87,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, protectedItemOptions?: IProtectedItemOptions | undefined): IItem[];
-    reduceDismantleWeight(createdItems: IItemArray, itemWeight: number, mod?: number): void;
+    reduceDismantleWeight(createdItems: IItem[], itemWeight: number, mod?: number): void;
     getItemTranslations(items: IItem[], article?: boolean): Stream<Translation>;
     getItemListTranslation(items: IItem[], article?: boolean): Translation;
     loadReferences(isTraveling: boolean): void;

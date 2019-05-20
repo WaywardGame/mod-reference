@@ -17,7 +17,7 @@ import { IPlayer } from "entity/player/IPlayer";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
 import { Quality } from "game/IObject";
-import { IItem, IItemArray, IItemLegendary, ItemType } from "item/IItem";
+import { IItem, IItemLegendary, ItemType } from "item/IItem";
 import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
@@ -27,9 +27,9 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
     "constructor": typeof Doodad;
-    containedItems: IItemArray;
+    containedItems: IItem[];
     decay?: number;
-    disassembly?: IItemArray;
+    disassembly?: IItem[];
     gatherReady?: boolean;
     stillContainer?: IItem;
     gfx?: number;
@@ -102,6 +102,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     private inspectGrowth;
     private inspectFertility;
     private inspectDurability;
+    private inspectPreservation;
     private processSpecials;
     /**
      * Check for items on top of lit/fire doodads, set them on fire
