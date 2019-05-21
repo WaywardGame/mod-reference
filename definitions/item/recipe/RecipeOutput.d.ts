@@ -8,10 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Crafter from "item/recipe/Crafter";
 export declare enum RecipeOutputType {
     Item = 0
 }
-export default abstract class RecipeOutput {
+export default abstract class RecipeOutput<T> {
     readonly type: RecipeOutputType;
     constructor(type: RecipeOutputType);
+    abstract get(api: Crafter): T;
 }

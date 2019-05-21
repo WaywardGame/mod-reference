@@ -9,13 +9,14 @@
  * https://waywardgame.github.io/
  */
 import { DoodadType, DoodadTypeGroup, IDoodad } from "doodad/IDoodad";
-import RecipeRequirement, { ICrafter, RecipeRequirementType } from "item/recipe/RecipeRequirement";
+import Crafter from "item/recipe/Crafter";
+import RecipeRequirement, { RecipeRequirementType } from "item/recipe/RecipeRequirement";
 export default class DoodadRequirement extends RecipeRequirement<RecipeRequirementType.Doodad> {
     readonly doodad: DoodadType | DoodadTypeGroup;
     static readonly BASE: DoodadRequirement;
     constructor(doodad: DoodadType | DoodadTypeGroup);
-    getUsable(api: ICrafter): Set<IDoodad>;
-    isMet(api: ICrafter): boolean;
+    getUsable(api: Crafter): Set<IDoodad>;
+    isMet(api: Crafter): boolean;
     private onAttemptCraft;
     private getQualityBonus;
 }

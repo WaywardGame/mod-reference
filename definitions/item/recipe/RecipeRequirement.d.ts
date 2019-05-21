@@ -9,11 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { IDoodad } from "doodad/IDoodad";
-import IEntity from "entity/IEntity";
-import { Quality } from "game/IObject";
 import { IItem } from "item/IItem";
+import Crafter from "item/recipe/Crafter";
 import { ITile } from "tile/ITerrain";
-import Stream from "utilities/stream/Stream";
 export declare enum RecipeRequirementType {
     Item = 0,
     Tool = 1,
@@ -29,33 +27,15 @@ export interface RecipeInputTypeMap {
 export declare type RecipeInputType<R extends RecipeRequirementType = RecipeRequirementType> = RecipeInputTypeMap[R];
 export interface IRecipeInputUseStrategy<R extends RecipeRequirementType> {
     inputs: Array<RecipeInputType<R>>;
-    freeUsedInput?(api: ICrafter, inputs: Array<RecipeInputType<R>>): boolean;
-    onAttemptCraft?(api: ICrafter, inputs: Array<RecipeInputType<R>>): any;
-    onCraft?(api: ICrafter, inputs: Array<RecipeInputType<R>>): any;
-    onFail?(api: ICrafter, inputs: Array<RecipeInputType<R>>): any;
+    freeUsedInput?(api: Crafter, inputs: Array<RecipeInputType<R>>): boolean;
+    onAttemptCraft?(api: Crafter, inputs: Array<RecipeInputType<R>>): any;
+    onCraft?(api: Crafter, inputs: Array<RecipeInputType<R>>): any;
+    onFail?(api: Crafter, inputs: Array<RecipeInputType<R>>): any;
 }
 export declare const MAX_QUALITY_BONUSES: Readonly<Descriptions<RecipeRequirementType, number>>;
-export interface ICrafter {
-    accessibleItems: IItem[];
-    /**
-     * Gets a stream of the tiles around the crafter entity.
-     * @param includeCrafterTile Whether the tile the crafter is on should be included. Defaults to `true`.
-     */
-    tilesAroundCrafter(includeCrafterTile?: boolean): Stream<ITile>;
-    getCrafter(): IEntity;
-    getUsable<R extends RecipeRequirementType>(type: R): Set<RecipeInputType<R>>;
-    getUsed<R extends RecipeRequirementType>(type: R): Stream<RecipeInputType<R>>;
-    freeUsed<R extends RecipeRequirementType>(type: R, input: RecipeInputType<R>): boolean;
-    use<R extends RecipeRequirementType>(type: R, useStrategy: IRecipeInputUseStrategy<R>): void;
-    getQualityBonus(): number;
-    addQualityBonus(type: RecipeRequirementType, bonus: number): this;
-    setQualityBonus(type: RecipeRequirementType, bonus: number): this;
-    forceResultQuality(quality?: Quality): this;
-    getForcedResultQuality(): Quality | undefined;
-}
 export default abstract class RecipeRequirement<R extends RecipeRequirementType> {
     readonly type: R;
     constructor(type: R);
-    abstract isMet(api: ICrafter): boolean;
-    abstract getUsable(api: ICrafter): Iterable<RecipeInputType<R>>;
+    abstract isMet(api: Crafter): boolean;
+    abstract getUsable(api: Crafter): Iterable<RecipeInputType<R>>;
 }
