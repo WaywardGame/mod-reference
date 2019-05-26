@@ -91,6 +91,7 @@ export interface IDoodadOptions extends IObjectOptions {
     item?: IItem;
     step?: number;
     hitchedCreature?: number;
+    itemType?: ItemType;
 }
 export declare type IDoodadOld = Partial<IDoodad> & {
     growInto?: DoodadType;

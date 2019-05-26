@@ -177,10 +177,19 @@ declare global {
 
 	type IDijkstraMapConstructor = new () => IDijkstraMap;
 
+	interface IDijkstraMapFindPathResult {
+		success: boolean;
+		path: INavigationNode[];
+		score: number;
+		endX: number;
+		endY: number;
+	}
+
 	interface IDijkstraMap {
 		getNode(x: number, y: number): INavigationNode;
 		updateOrigin(origin: INavigationNode): void;
 		findPath(end: INavigationNode): { success: boolean, path: INavigationNode[]; score: number; };
+		findPath2(result: IDijkstraMapFindPathResult): void;
 		delete(): void;
 	}
 
