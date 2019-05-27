@@ -12,6 +12,7 @@ export interface ISafeFn<T, O = never> {
     <K extends keyof T>(key: K): ISafeFn<Exclude<T[K], undefined | null>, Extract<T[K], undefined | null> | O>;
     get(): T | O;
     get<K extends keyof T>(key: K): T[K] | O;
+    get<K extends keyof T, E>(key: K, orElse: () => E): Exclude<T[K] | O, undefined | null> | E;
 }
 export default function safe<T, K extends keyof T>(description: T): ISafeFn<Exclude<T, undefined | null>, Extract<T, undefined | null>>;
 export default function safe<T, K extends keyof T>(description: T, key: K): ISafeFn<Exclude<(Exclude<T, undefined | null>)[K], undefined | null>, Extract<T, undefined | null> | Extract<T[K], undefined | null>>;

@@ -14,7 +14,7 @@ import EventEmitter from "event/EventEmitter";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
-import { ContainerReference, IContainable, IContainer, IItem, IItemDescription, ItemType, ItemTypeGroup } from "item/IItem";
+import { ContainerReference, IContainable, IContainer, IItem, IItemDescription, IItemWeightComponent, ItemType, ItemTypeGroup } from "item/IItem";
 import { CraftStatus, IItemManager, IProtectedItemOptions, RequirementInfo, WeightType } from "item/IItemManager";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -43,6 +43,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     remove(item: IItem): void;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItem[];
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
+    getWeight(item: IItem | IItemWeightComponent): number;
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
     create(itemType: ItemType, container: IContainer, quality?: Quality): IItem;
@@ -107,6 +108,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     getItemsWeight(items: IItem[]): number;
     inspect({ context }: Inspection, ...items: IItem[]): InspectionResult;
     copyProperties(item: IItem, item2: IItem): void;
+    private getDefaultWeightRange;
     private updateItemOrderInternal;
     private loadReference;
     private removeFromContainerInternal;

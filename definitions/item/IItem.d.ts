@@ -22,9 +22,20 @@ import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
 import { ISafeFn } from "utilities/FromDescription";
 import { IVector3 } from "utilities/math/IVector";
+export interface IItemWeightComponent {
+    weightFraction: number;
+    type: ItemType;
+    tweak?: number;
+}
+export interface IConstructedInfo {
+    disassembly?: IItem[];
+    additionalItemWeights?: IItemWeightComponent[];
+    weightTweak?: number;
+}
 export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
     fromDescription: ISafeFn<IItemDescription, undefined>;
     weight: number;
+    weightFraction: number;
     equippedId?: number;
     equippedType?: EntityType;
     readonly quickSlot?: number;
@@ -32,6 +43,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     legendary?: IItemLegendary;
     book?: BookType;
     disassembly?: IItem[];
+    constructedFrom?: IConstructedInfo;
     order?: number;
     ownerIdentifier?: string;
     used?: IItemUsed;
@@ -116,6 +128,11 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     weight?: number;
     reducedWeight?: number;
     minimumWeight?: number;
+    weightRange?: [number, number];
+    /**
+     * A decimal number between 0 and 1 that will reduce the `weightFraction` of a "raw" item when it's refined.
+     */
+    refiningReduction?: number;
     lit?: ItemType;
     damageModifier?: number;
     isTorch?: boolean;
@@ -791,7 +808,8 @@ export declare enum ItemType {
     ScaleCap = 474,
     ScaleGorget = 475,
     ScaleLeggings = 476,
-    ScaleGloves = 477
+    ScaleGloves = 477,
+    CookedJoshuaTreeFlowers = 478
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

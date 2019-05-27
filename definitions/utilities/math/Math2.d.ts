@@ -41,6 +41,10 @@ declare module Math2 {
      * Example: `lerp(1, 2, .5): 1.5`
      */
     function lerp(from: number, to: number, t: number): number;
+    /**
+     * Given a number between `from` and `to`, returns a decimal how far it is, `t`.
+     */
+    function unlerp(from: number, to: number, lerped: number): number;
     function mod(n1: number, n2: number): number;
     function average(...ns: number[]): number;
     function sum(...ns: number[]): number;

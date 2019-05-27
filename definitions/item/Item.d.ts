@@ -40,11 +40,16 @@ export default class Item implements IItem, IContainer, IContainable, IUnseriali
     tatteredMap: TatteredMap;
     type: ItemType;
     weight: number;
+    weightFraction: number;
     weightCapacity: number;
     readonly fromDescription: import("../utilities/FromDescription").ISafeFn<IItemDescription, undefined>;
     private _description;
     constructor(itemType?: ItemType | undefined, quality?: Quality);
     toString(): string;
+    /**
+     * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
+     */
+    getWeight(): number;
     getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;

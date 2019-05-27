@@ -62,6 +62,19 @@ export interface IItemManager {
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, qualityBypass?: boolean): Quality | undefined;
     getRandomQuality(bonusQuality?: number): Quality;
     getTileContainer(x: number, y: number, z: number): IContainer;
+    /**
+     * Returns the "processed" weight of the given item.
+     * - If the item is a "raw" item — ie, it was not created from other items, this is the `weightFraction` lerping the item's min & max weight.
+     * - If the item is a "constructed" item — ie, it was created from other items, this is the processed weights of all component items added together.
+     *
+     * Processed item weights can also be "tweaked", such as weight additions or reductions.
+     *
+     * @deprecated This method currently shouldn't be used in production code, as it's to do with the new crafting system. Stay tuned.
+     */
+    getWeight(item: IItem): number;
+    /**
+     * Uses the old system to get the weight of an item type.
+     */
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
