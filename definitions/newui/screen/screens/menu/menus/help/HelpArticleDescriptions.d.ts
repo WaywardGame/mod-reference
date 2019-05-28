@@ -40,8 +40,9 @@ export declare enum HelpArticle {
     Gardening = 17,
     Overweight = 18,
     Merchants = 19,
-    Multiplayer = 20,
-    Bugs = 21
+    GameModes = 20,
+    Multiplayer = 21,
+    Bugs = 22
 }
 export declare enum HelpArticleSection {
     Interface = 0,
