@@ -14,7 +14,7 @@ import { IItem, RecipeLevel } from "item/IItem";
 import Crafter from "item/recipe/Crafter";
 import RecipeOutput, { RecipeOutputType } from "item/recipe/RecipeOutput";
 import { RecipeOutputClass } from "item/recipe/RecipeOutputs";
-import RecipeRequirement, { RecipeRequirementType } from "item/recipe/RecipeRequirement";
+import RecipeRequirement, { RecipeInputType, RecipeRequirementType } from "item/recipe/RecipeRequirement";
 import { RecipeRequirementClass } from "item/recipe/RecipeRequirements";
 export default class Recipe {
     /**
@@ -23,12 +23,15 @@ export default class Recipe {
     readonly index: number | undefined;
     private readonly requirements;
     private readonly outputs;
+    private readonly predicates;
     private skill;
     private level;
     private reputation;
     constructor();
     getRequirements(): import("../../utilities/stream/Stream").default<RecipeRequirement<any>>;
     addRequirement<R extends RecipeRequirementType>(requirementType: R, ...args: ArgumentsOf<RecipeRequirementClass<R>>): this;
+    setRequirementPredicate<R extends RecipeRequirementType>(requirementType: R, predicate: (input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>) => boolean): this;
+    predicateMatches<R extends RecipeRequirementType>(requirementType: R, input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>): boolean;
     getOutputs(): import("../../utilities/stream/Stream").default<RecipeOutput<any>>;
     addOutput<R extends RecipeOutputType>(outputType: R, ...args: ArgumentsOf<RecipeOutputClass<R>>): this;
     getSkill(): SkillType;

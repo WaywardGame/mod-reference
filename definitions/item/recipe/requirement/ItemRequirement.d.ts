@@ -21,6 +21,7 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
     private inheritQuality;
     private contributedWeightModifier;
     private changeInto?;
+    private predicate?;
     constructor(item: ItemType | ItemTypeGroup, quantity?: number, initializer?: (requirement: ItemRequirement) => any);
     consumed(): boolean;
     /**
@@ -58,12 +59,14 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
      * Note: The output items will only use this quality by default, it can still be overridden by the item outputs.
      */
     setInheritQualityFrom(): this;
+    setPredicate(predicate: (item: IItem, consumed: boolean) => boolean): this;
     getUsable(api: Crafter): IItem[];
     isMet(api: Crafter, quantity?: number): boolean;
     private freeUsedItem;
     private onAttemptCraft;
     private onCraft;
     private onFail;
+    private itemMatches;
     private getUsedItems;
     private getQualityBonus;
 }

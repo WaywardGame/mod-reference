@@ -55,10 +55,10 @@ declare module TileHelpers {
     /**
      * Array version of TileHelpers.tilesAround
      */
-    function getTilesAround(point: IVector3, includeCurrentTile?: boolean): ITile[];
+    function getTilesAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): ITile[];
     /**
      * IterableIterator version of TileHelpers.getTilesAround
      */
-    function tilesAround(point: IVector3, includeCurrentTile?: boolean): IterableIterator<ITile>;
+    function tilesAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IterableIterator<ITile>;
 }
 export default TileHelpers;

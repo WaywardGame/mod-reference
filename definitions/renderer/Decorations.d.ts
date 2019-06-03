@@ -52,6 +52,10 @@ export interface ITerrainDecorationVariationAdaption {
      * True if it's animated - 8 animation frames - width should be 128 (16 width per frame)
      */
     animated?: boolean;
+    /**
+     * This decoration can only appear if it's surrounded by tiles of the same type (all 8 directions).
+     */
+    innerExclusive?: boolean;
 }
 /**
  * Takes an x, y, and z coordinate and a randomly-generated "variation index", and returns an `ITileAdaptation`

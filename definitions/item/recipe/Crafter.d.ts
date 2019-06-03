@@ -13,6 +13,7 @@ import { Quality } from "game/IObject";
 import { CraftResult, IItem } from "item/IItem";
 import Recipe from "item/recipe/Recipe";
 import { IRecipeInputUseStrategy, RecipeInputType, RecipeRequirementType } from "item/recipe/RecipeRequirement";
+import { RecipeRequirementClass } from "item/recipe/RecipeRequirements";
 import Stream from "utilities/stream/Stream";
 export default class Crafter {
     private readonly recipe;
@@ -30,7 +31,7 @@ export default class Crafter {
      */
     tilesAroundCrafter(includeCrafterTile?: boolean): Stream<import("../../tile/ITerrain").ITile>;
     getCrafter(): IEntity;
-    getUsable<R extends RecipeRequirementType>(type: R): Set<RecipeInputType<R>>;
+    getUsable<R extends RecipeRequirementType>(type: R, requirement: InstanceType<RecipeRequirementClass<R>>): Set<RecipeInputType<R>>;
     getUsed<R extends RecipeRequirementType>(type: R): Stream<RecipeInputType<R>>;
     /**
      * Returns whether the input could be "freed" (the requirement using it could use sth else instead).
@@ -54,7 +55,7 @@ export default class Crafter {
      * for use by the "sharpened group" requirement.
      */
     freeUsed<R extends RecipeRequirementType>(type: R, input: RecipeInputType<R>): boolean;
-    use<R extends RecipeRequirementType>(type: R, useStrategy: IRecipeInputUseStrategy<R>): this;
+    use<R extends RecipeRequirementType>(type: R, useStrategy: IRecipeInputUseStrategy<R>, requirement: InstanceType<RecipeRequirementClass<R>>): this;
     forceResultQuality(quality?: Quality): this;
     getForcedResultQuality(): Quality | undefined;
     getQualityBonus(): number;
