@@ -213,7 +213,7 @@ declare global {
 	interface IKDTree {
 		insertPoint(x: number, y: number): void;
 		deletePoint(x: number, y: number): void;
-		nearestPoint(x: number, y: number): Array<{ x: number; y: number }>;
+		nearestPoints(x: number, y: number): Array<{ x: number; y: number }>;
 		delete(): void;
 	}
 
