@@ -277,16 +277,18 @@ declare global {
 	}
 
 	interface IElectronApi {
-		greenworks: any | Error;
-		napi: INapi;
-		ipc: any;
-		shell: any;
-		os: any;
-		webFrame: any;
-		remote: any;
-		path: IPath;
+		crypto: any;
 		fileSystem: IFileSystem;
+		greenworks: any | Error;
+		ipc: any;
 		matchmakingServer: IMatchmakingServer | undefined;
+		napi: INapi;
+		os: any;
+		path: IPath;
+		remote: any;
+		shell: any;
+		ssh2: any;
+		webFrame: any;
 	}
 
 	interface IElectron {

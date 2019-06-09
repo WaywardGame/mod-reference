@@ -66,7 +66,7 @@ export interface ISteamworks extends EventEmitter.Host<ISteamworksEvents> {
     openUrl(url: string): void;
     openInviteDialog(): void;
     openWorkshop(publishId?: string): Promise<void>;
-    processBackups(): boolean;
+    processBackups(force?: boolean): Promise<boolean>;
     publishMod(modIndex: number): Promise<string>;
     reload(): void;
     sendMessage(name: string, ...data: any[]): boolean;
@@ -133,4 +133,9 @@ export interface IDedicatedServerInfo {
     newGameOptions?: Partial<IPlayOptions> & {
         dailyChallenge?: boolean;
     };
+    ssh: boolean;
+    sshPort?: number;
+    sshAllowedPublicKey?: string;
+    sshUsername?: string;
+    sshPassword?: string;
 }

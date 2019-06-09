@@ -117,6 +117,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     setGlContextSize(width: number, height: number): void;
     resizeRenderer(): void;
     checkWaterFill(x: number, y: number, z: number, needed: number): void;
+    getDailyChallengeSeed(): number;
     consumeWaterTile(x: number, y: number, z: number): void;
     checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
     animateSkeletalRemains(player: IPlayer, x: number, y: number, z: number): void;

@@ -43,6 +43,16 @@ declare global {
          * @see `utilities/Collectors` for premade collectors
          */
         collect<X, A extends any[]>(collector: (val: T[], ...args: A) => X, ...args: A): X;
+        /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the values of the array, and returns type X
+         */
+        splat<X>(collector: (...val: T[]) => X): X;
+        /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the values of the array, and returns type X
+         */
+        splat<X>(collector: (...val: T[]) => X, ...args: T[]): X;
         flat<U>(this: U[][]): U[];
     }
     interface ReadonlyArray<T> {
@@ -65,15 +75,23 @@ declare global {
         /**
          * Returns a value of type X, generated with the given collector function.
          * @param collector A function that takes the iterable, and returns type X
-         * @see `utilities/Collectors` for premade collectors
          */
         collect<X>(collector: (val: T[]) => X): X;
         /**
          * Returns a value of type X, generated with the given collector function.
          * @param collector A function that takes the iterable, and returns type X
-         * @see `utilities/Collectors` for premade collectors
          */
         collect<X, A extends any[]>(collector: (val: T[], ...args: A) => X, ...args: A): X;
+        /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the values of the array, and returns type X
+         */
+        splat<X>(collector: (...val: T[]) => X): X;
+        /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the values of the array, and returns type X
+         */
+        splat<X>(collector: (...val: T[]) => X, ...args: T[]): X;
         flat<U>(this: U[][]): U[];
     }
 }

@@ -27,6 +27,16 @@ declare global {
          */
         collect<X, A extends any[]>(collector: (val: IterableIterator<T>, ...args: A) => X, ...args: A): X;
         /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the values of the iterable, and returns type X
+         */
+        splat<X>(collector: (...val: T[]) => X): X;
+        /**
+         * Returns a value of type X, generated with the given collector function.
+         * @param collector A function that takes the values of the iterable, and returns type X
+         */
+        splat<X>(collector: (...val: T[]) => X, ...args: T[]): X;
+        /**
          * Returns an iterable that will loop only over the entries that match the given filter
          * @param filter A function that returns a truthy value if the entry should be included and a falsey value if it shouldn't
          *

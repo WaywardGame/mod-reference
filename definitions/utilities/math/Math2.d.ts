@@ -48,5 +48,16 @@ declare module Math2 {
     function mod(n1: number, n2: number): number;
     function average(...ns: number[]): number;
     function sum(...ns: number[]): number;
+    /**
+     * Takes an any number of `[weight, number]` tuples, and returns the "weighted average".
+     * @param ns Any number of `[weight, number]` tuples.
+     *
+     * **For example**:
+     * `weightedAverage([1, 0], [3, 1])` returns `0.75`.
+     * - One part `0`, three parts `1`. That adds up to four parts, which means each part is worth `0.25`.
+     * - Three parts `1` means `0.25 * 3`, one part `0` means `0 * 1`.
+     * - `0.75 + 0` is `0.75`.
+     */
+    function weightedAverage(...ns: Array<[number, number]>): number;
 }
 export default Math2;

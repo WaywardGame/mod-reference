@@ -16,14 +16,14 @@ import { IRecipeInputUseStrategy, RecipeInputType, RecipeRequirementType } from 
 import { RecipeRequirementClass } from "item/recipe/RecipeRequirements";
 import Stream from "utilities/stream/Stream";
 export default class Crafter {
-    private readonly recipe;
+    readonly recipe: Recipe;
     private readonly crafter;
     readonly accessibleItems: IItem[];
     private readonly inputs;
     private readonly qualityBonuses;
     private readonly usedFilter;
     private forcedQuality?;
-    private weight;
+    private readonly decays;
     constructor(recipe: Recipe, crafter: IEntity, accessibleItems: IItem[]);
     /**
      * Gets a stream of the tiles around the crafter entity.
@@ -32,7 +32,7 @@ export default class Crafter {
     tilesAroundCrafter(includeCrafterTile?: boolean): Stream<import("../../tile/ITerrain").ITile>;
     getCrafter(): IEntity;
     getUsable<R extends RecipeRequirementType>(type: R, requirement: InstanceType<RecipeRequirementClass<R>>): Set<RecipeInputType<R>>;
-    getUsed<R extends RecipeRequirementType>(type: R): Stream<RecipeInputType<R>>;
+    getUsed<R extends RecipeRequirementType>(type: R, requirement?: InstanceType<RecipeRequirementClass<R>>): Stream<RecipeInputType<R>>;
     /**
      * Returns whether the input could be "freed" (the requirement using it could use sth else instead).
      *
@@ -61,9 +61,8 @@ export default class Crafter {
     getQualityBonus(): number;
     addQualityBonus(type: RecipeRequirementType, bonus: number): this;
     setQualityBonus(type: RecipeRequirementType, bonus: number): this;
-    getWeight(): number;
-    addWeight(weight: number): this;
-    setWeight(weight: number): this;
+    addDecay(decay: number, weight?: number): this;
+    getDecay(): number;
     attemptCraft(): {
         type: CraftResult;
         outputs: any[];

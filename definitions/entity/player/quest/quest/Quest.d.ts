@@ -40,7 +40,7 @@ export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     getTitle(quest: IQuest): Translation | undefined;
     getDescription(quest: IQuest): Translation | undefined;
     getTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[import("../../../../mod/IHookManager").Hook, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
-    getHostTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<[], {}>, player: IPlayer, ...args: any[]) => boolean]>]>;
+    getHostTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<[], {}>, player: IPlayer, ...args: any[]) => boolean]>]>;
     getRequirements(host: IPlayer, instance: IQuest): import("../../../../utilities/stream/Stream").default<RequirementInstance>;
     getRequirement(host: IPlayer, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;

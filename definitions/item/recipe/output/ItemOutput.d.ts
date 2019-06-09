@@ -12,24 +12,33 @@ import { Quality } from "game/IObject";
 import { IItem, ItemType } from "item/IItem";
 import Crafter from "item/recipe/Crafter";
 import RecipeOutput from "item/recipe/RecipeOutput";
-export default class ItemOutput extends RecipeOutput<IItem> {
+import { RecipeInputType, RecipeRequirementType } from "item/recipe/RecipeRequirement";
+import { RecipeRequirementClass } from "item/recipe/RecipeRequirements";
+import ItemRequirement from "item/recipe/requirement/ItemRequirement";
+declare class ItemOutput extends RecipeOutput<IItem> {
     readonly itemType: ItemType;
     readonly quantity: number;
     quality?: Quality;
-    weightInheritance: number;
+    private readonly requirements;
+    private readonly predicates;
+    private intermediate;
     constructor(itemType: ItemType, quantity?: number);
+    addRequirement(...args: ArgumentsOf<typeof ItemRequirement>): this;
+    setRequirementPredicate<R extends RecipeRequirementType>(requirementType: R, predicate: (input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>) => boolean): this;
+    predicateMatches<R extends RecipeRequirementType>(requirementType: R, input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>): boolean;
     setQuality(quality: Quality): this;
-    /**
-     * Recipe inputs will all add up to a certain weight, which is then distributed amongst the output items.
-     * @param weight The "weight" of this item's portion of the total recipe weight. Defaults to `1`
-     *
-     * ### Example:
-     * - Say you had a recipe with a single rock, to produce an apple and a boat. ¯\\\_(ツ)\_/¯
-     * - We'll say the rock weighs `5`.
-     * - If the apple has a "weight inheritance" of `2`, while the boat has a weight inheritance of `1`,
-     * the apple will get `5 * (2/3)` of the weight, and the boat will get `5 * (1/3)` of the weight.
-     */
-    setWeightInheritance(weight: number): this;
     get(api: Crafter): IItem;
+    private getDecay;
     private getOutputInventory;
 }
+declare module ItemOutput {
+    class Intermediate {
+        private readonly output;
+        private readonly decays;
+        constructor(output: ItemOutput);
+        addDecay(decay: number, weight?: number): this;
+        getDecay(): number;
+        predicateMatches<R extends RecipeRequirementType>(requirementType: R, input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>): boolean;
+    }
+}
+export default ItemOutput;

@@ -11,9 +11,10 @@
 import { IDoodad } from "doodad/IDoodad";
 import { CreatureType, ICreature } from "entity/creature/ICreature";
 import { EntityType } from "entity/IEntity";
-import IHuman, { EquipType, HairColor, HairStyle, RestType, SkinColor, IRestData } from "entity/IHuman";
+import IHuman, { EquipType, HairColor, HairStyle, IRestData, RestType, SkinColor } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
+import { IMessage } from "entity/player/IMessageManager";
 import { MilestoneType } from "entity/player/IMilestone";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
@@ -124,7 +125,7 @@ export interface IPlayer extends IHuman {
     walkAlongPath(path: IVector2[] | undefined): void;
 }
 export default IPlayer;
-interface IPlayerEvents extends Events<IHuman> {
+export interface IPlayerEvents extends Events<IHuman> {
     /**
      * @param milestone The milestone that is being updated
      * @param value The new value for this milestone
@@ -171,6 +172,11 @@ interface IPlayerEvents extends Events<IHuman> {
      * @param restData The data related to the rest event
      */
     restEnd(restData: IRestData): void;
+    /**
+     * Called when a message is being disaplyed for a player
+     * @param message The message that will be displayed
+     */
+    displayMessage(message: IMessage): void;
 }
 export declare enum TurnType {
     CheckUnderPlayer = 0,

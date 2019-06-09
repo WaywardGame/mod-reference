@@ -102,7 +102,7 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> imp
     deleteSaveGameMod(name: string): void;
     hasServerToJoin(): boolean;
     onReady(): void;
-    processBackups(): boolean;
+    processBackups(force?: boolean): Promise<boolean>;
     setupMultiplayerLog(): void;
     getMultiplayerLogs(): string;
     multiplayerLog(...args: any[]): void;
@@ -139,5 +139,6 @@ export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> imp
     private getSharePathForModZip;
     private getSharePathForModImage;
     private getFilesInFolder;
+    private processArguments;
     private logDebugInfo;
 }
