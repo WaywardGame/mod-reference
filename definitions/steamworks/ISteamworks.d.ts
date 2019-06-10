@@ -135,7 +135,6 @@ export interface IDedicatedServerInfo {
     };
     ssh: boolean;
     sshPort?: number;
-    sshAllowedPublicKey?: string;
     sshUsername?: string;
     sshPassword?: string;
 }

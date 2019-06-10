@@ -125,7 +125,7 @@ export interface IPlayer extends IHuman {
     walkAlongPath(path: IVector2[] | undefined): void;
 }
 export default IPlayer;
-export interface IPlayerEvents extends Events<IHuman> {
+interface IPlayerEvents extends Events<IHuman> {
     /**
      * @param milestone The milestone that is being updated
      * @param value The new value for this milestone

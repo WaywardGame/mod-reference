@@ -14,9 +14,9 @@ export interface ISshServerOptions {
     fs: IFileSystem;
     serverName: string;
     port: number;
-    serverKey: string;
+    serverKeyPath: string;
+    publicKeyPath: string;
     username: string;
     password?: string;
-    allowedPublicKey?: string;
 }
 export declare function start(options: ISshServerOptions): void;
