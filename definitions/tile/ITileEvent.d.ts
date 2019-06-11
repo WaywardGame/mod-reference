@@ -10,6 +10,7 @@
  */
 import { ILootItem } from "game/ILoot";
 import { IObject, IObjectDescription } from "game/IObject";
+import { ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
@@ -21,6 +22,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable {
     particles?: IRGB;
     graphicVariation?: boolean;
     isFlammable?: boolean;
+    pickUp?: ItemType;
     create?(tileEvent: ITileEvent): void;
     remove?(tileEvent: ITileEvent): void;
     update?(tileEvent: ITileEvent): void;
@@ -38,5 +40,7 @@ export declare enum TileEventType {
     None = 0,
     Fire = 1,
     HoneyFungus = 2,
-    TumblingTumbleweed = 3
+    TumblingTumbleweed = 3,
+    AnimalDroppings = 4,
+    AnimalDung = 5
 }

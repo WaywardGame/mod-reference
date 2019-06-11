@@ -23,5 +23,6 @@ export interface ITileEventManager {
     fireOverflow(x: number, y: number, z: number): void;
     inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
     is(thing: any): thing is ITileEvent;
+    canPickup(tile: ITile): ITileEvent | undefined;
 }
 export default ITileEventManager;

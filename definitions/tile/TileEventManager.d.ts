@@ -24,6 +24,7 @@ export default class TileEventManager implements ITileEventManager {
     getMovementProgress(tileEvent: ITileEvent): number;
     inspect(inspection: Inspection, ...events: ITileEvent[]): InspectionResult;
     is(thing: any): thing is ITileEvent;
+    canPickup(tile: ITile): ITileEvent | undefined;
     private _addToTile;
     private _removeFromTile;
 }

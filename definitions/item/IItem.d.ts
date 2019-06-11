@@ -811,7 +811,9 @@ export declare enum ItemType {
     ScaleGloves = 477,
     CookedJoshuaTreeFlowers = 478,
     SaguaroCactusRibs = 479,
-    BladesOfGrass = 480
+    BladesOfGrass = 480,
+    AnimalDroppings = 481,
+    AnimalDung = 482
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

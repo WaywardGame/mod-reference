@@ -96,5 +96,6 @@ declare const actionDescriptions: {
     [ActionType.Unhitch]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.UpdateDirection]: import("./Action").Action<[import("./IAction").ActionArgument.Direction, [import("./IAction").ActionArgument.Number, import("./IAction").ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.UseItem]: import("./Action").Action<[import("./IAction").ActionArgument.ItemNearby, import("./IAction").ActionArgument.ActionType], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.PickupExcrement]: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
 };
 export default actionDescriptions;

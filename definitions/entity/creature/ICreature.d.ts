@@ -17,6 +17,7 @@ import { LootGroupType } from "item/LootGroups";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
+import { TileEventType } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
 import { ISafeFn } from "utilities/FromDescription";
 export declare enum CreatureType {
@@ -108,6 +109,7 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
     canSwapWith(player: IPlayer): boolean;
     getOwner(): IPlayer | undefined;
     processSpecialAbilities(enemy: IPlayer | ICreature | undefined, bypass?: boolean): boolean;
+    increaseWaste(item: IItem): void;
     initializeStats(hp: number, maxhp?: number): void;
 }
 export interface ICreatureOld extends ICreature {
@@ -190,10 +192,15 @@ export interface ICreatureDescription extends IModdable {
     speed?: number;
     disableHitching?: boolean;
     tileMissChance?: OptionalDescriptions<TileGroup, number>;
+    waste?: IWaste;
 }
 export interface ICreatureLoot {
     item: ItemType;
     chance?: number;
+}
+export interface IWaste {
+    event: TileEventType;
+    timer: number;
 }
 export interface IDamageInfo {
     human?: Human;
