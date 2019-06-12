@@ -39,6 +39,7 @@ export default class SaveData implements ISaveData {
         };
     };
     multiplayerState: IMultiplayerState;
+    multiplayerMessageOfTheDay: string;
     utilitiesEnumsAllocated: {
         [index: string]: IEnumInfo;
     };

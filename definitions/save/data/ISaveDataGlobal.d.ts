@@ -51,6 +51,7 @@ export interface ISaveDataGlobal {
     multiplayerPreviousGames: {
         [index: string]: ICharacter | undefined;
     };
+    multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
     newui: {
         [index: string]: any;

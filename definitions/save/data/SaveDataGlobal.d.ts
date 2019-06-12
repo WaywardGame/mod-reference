@@ -47,6 +47,7 @@ export default class SaveDataGlobal implements ISaveDataGlobal {
     multiplayerPreviousGames: {
         [index: string]: ICharacter | undefined;
     };
+    multiplayerMessageOfTheDay: string;
     characters: ISavedCharacter[];
     newui: {
         [index: string]: any;

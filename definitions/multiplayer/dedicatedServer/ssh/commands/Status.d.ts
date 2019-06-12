@@ -8,12 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export interface IGenericRegistration {
-    type: number;
-}
-export interface IGenericManager<T> {
-    has(type: number): boolean;
-    add(registration: T): void;
-    get(type: number): T | undefined;
-    remove(type: number): void;
-}
+import { SshCommandType } from "../ISshCommand";
+import SshCommand from "../SshCommand";
+declare const _default: SshCommand<SshCommandType.Status>;
+export default _default;

@@ -36,6 +36,7 @@ export interface ISaveData {
         };
     };
     multiplayerState: IMultiplayerState;
+    multiplayerMessageOfTheDay: string;
     utilitiesEnumsAllocated: {
         [index: string]: IEnumInfo;
     };

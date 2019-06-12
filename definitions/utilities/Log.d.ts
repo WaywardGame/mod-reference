@@ -40,15 +40,16 @@ export declare enum LogSource {
     SaveManager = 28,
     Serializer = 29,
     Shaders = 30,
-    SshServer = 31,
-    Steamworks = 32,
-    TileEventManager = 33,
-    Trello = 34,
-    Ui = 35,
-    Utilities = 36,
-    WebAssembly = 37,
-    WebRTCConnection = 38,
-    WebSocketConnection = 39
+    SshCommandManager = 31,
+    SshServer = 32,
+    Steamworks = 33,
+    TileEventManager = 34,
+    Trello = 35,
+    Ui = 36,
+    Utilities = 37,
+    WebAssembly = 38,
+    WebRTCConnection = 39,
+    WebSocketConnection = 40
 }
 declare class Log {
     warn: (...args: any[]) => void;

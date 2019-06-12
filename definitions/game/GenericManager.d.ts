@@ -14,6 +14,7 @@ export default abstract class GenericManager<T extends IGenericRegistration> imp
     private readonly registered;
     constructor();
     abstract setup(instance: GenericManager<T>): void;
+    has(type: number): boolean;
     add(registration: T): void;
     get(type: number): T;
     remove(type: number): void;
