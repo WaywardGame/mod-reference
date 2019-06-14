@@ -11,7 +11,7 @@
 import { IDoodad } from "doodad/IDoodad";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "entity/creature/ICreature";
-import { ICharacter, SkillType } from "entity/IHuman";
+import { ICharacter, ICrafted, SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
 import { IPlayer, TurnType } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
@@ -79,9 +79,6 @@ export interface IGame extends EventEmitter.Host<IGameEvents> {
     previousSaveVersion: IVersionInfo;
     worldId: string;
     tickSpeed: number;
-    crafted: {
-        [index: number]: ICrafted;
-    };
     seeds: ISeeds;
     visible: boolean;
     spriteTexture: WebGLTexture;
@@ -227,6 +224,9 @@ export declare type IGameOld = Partial<IGame> & {
     dailyChallenge: boolean;
     isRealTime: boolean;
     realTimeTickSpeed: TickSpeed;
+    crafted: {
+        [index: number]: ICrafted;
+    };
 };
 export interface IPlayOptions {
     slot: number | undefined;
@@ -248,10 +248,9 @@ export interface IPlayerOptions {
     position?: IVector3;
     character: ICharacter;
     completedMilestones?: number;
-}
-export interface ICrafted {
-    unlockTime: number;
-    newUnlock: boolean;
+    crafted?: {
+        [index: number]: ICrafted;
+    };
 }
 export interface IMapRequest {
     /**

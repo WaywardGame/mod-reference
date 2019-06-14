@@ -9,10 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { DropLocation } from "entity/action/actions/Drop";
-import { ICharacter } from "entity/IHuman";
+import { ICharacter, ICrafted } from "entity/IHuman";
 import { IMilestoneData } from "entity/player/IMilestone";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { ICrafted } from "game/IGame";
 import { InspectType } from "game/inspection/IInspection";
 import { ISerializedTranslation } from "language/Translation";
 import { ModState } from "mod/IModInfo";

@@ -60,6 +60,7 @@ declare const actionDescriptions: {
     [ActionType.Pet]: import("./Action").Action<[], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Pickup]: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.PickupAllItems]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.PickupExcrement]: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.PickupItem]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.PlaceDown]: import("./Action").Action<[import("./IAction").ActionArgument.Item], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Plant]: import("./Action").Action<[import("./IAction").ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
@@ -87,6 +88,7 @@ declare const actionDescriptions: {
     [ActionType.Tame]: import("./Action").Action<[], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Teleport]: import("./Action").Action<[import("./IAction").ActionArgument.ItemInventory], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.TellTime]: import("./Action").Action<[import("./IAction").ActionArgument.ItemNearby], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
+    [ActionType.TestDepth]: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Throw]: import("./Action").Action<[[import("./IAction").ActionArgument.Item, import("./IAction").ActionArgument.Undefined], [import("./IAction").ActionArgument.AttackType, import("./IAction").ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.Till]: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
     [ActionType.Trade]: import("./Action").Action<[import("./IAction").ActionArgument.NPC], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
@@ -96,6 +98,5 @@ declare const actionDescriptions: {
     [ActionType.Unhitch]: import("./Action").Action<[], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.UpdateDirection]: import("./Action").Action<[import("./IAction").ActionArgument.Direction, [import("./IAction").ActionArgument.Number, import("./IAction").ActionArgument.Undefined]], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
     [ActionType.UseItem]: import("./Action").Action<[import("./IAction").ActionArgument.ItemNearby, import("./IAction").ActionArgument.ActionType], import("../npc/INPC").INPC | import("../player/IPlayer").IPlayer, void>;
-    [ActionType.PickupExcrement]: import("./Action").Action<[[import("./IAction").ActionArgument.ItemInventory, import("./IAction").ActionArgument.Undefined]], import("../player/IPlayer").IPlayer, void>;
 };
 export default actionDescriptions;

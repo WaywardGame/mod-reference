@@ -16,7 +16,7 @@ import { INPC } from "entity/npc/INPC";
 import { IPlayer, TurnType } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { FireStage, FireType, ICrafted, IGame, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TileUpdateType, TurnMode } from "game/IGame";
+import { FireStage, FireType, IGame, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TileUpdateType, TurnMode } from "game/IGame";
 import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
 import { IItem } from "item/IItem";
@@ -40,9 +40,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     previousSaveVersion: IVersionInfo;
     absoluteTime: number;
     autoSaveTimer: number;
-    crafted: {
-        [index: number]: ICrafted;
-    };
     fadeInAmount: number | undefined;
     fillCount: number;
     fillTile: boolean[][];
@@ -244,7 +241,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     private playPostSeed;
     private render;
     private simulate;
-    private getPotentialRecipesInContainer;
     private removeAndFixPids;
     private createWorld;
     private createWorldRenderer;

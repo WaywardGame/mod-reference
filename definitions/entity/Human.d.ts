@@ -10,7 +10,7 @@
  */
 import { IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import IHuman, { EquipType, ICustomizations, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
+import IHuman, { EquipType, ICrafted, ICustomizations, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { MilestoneType } from "entity/player/IMilestone";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
@@ -32,6 +32,9 @@ export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity implements IHuman {
     event: IEventEmitter<this, Events<IHuman>>;
     attackFromEquip: IAttackHand;
+    crafted: {
+        [index: number]: ICrafted;
+    };
     customization: ICustomizations;
     deathBy: import("../language/Translation").ISerializedTranslation;
     defense: PlayerDefense;

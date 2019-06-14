@@ -12,7 +12,7 @@ import { ICharacter } from "entity/IHuman";
 import { IPlayer, PlayerState } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
-import { ICrafted, TurnMode } from "game/IGame";
+import { TurnMode } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
@@ -164,9 +164,6 @@ export interface IMultiplayerWorldData {
     difficultyOptions?: IDifficultyOptions;
     saveObject: SaveObject;
     initialFlowFieldPids: number[];
-    crafted: {
-        [index: number]: ICrafted;
-    };
 }
 export interface IMultiplayerMod {
     name: string;

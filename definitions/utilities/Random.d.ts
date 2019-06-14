@@ -22,13 +22,26 @@ export interface IRandomGenerator {
 export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
     generator: G;
     constructor(generator: G);
+    /**
+     * Generates a random number between 0 (inclusive) and 1 (exclusive)
+     */
     float(): number;
+    /**
+     * Generates a random number between 0 (inclusive) and max (exclusive)
+     */
     float(max: number): number;
+    /**
+     * Generates a random number between min (inclusive) and max (exclusive)
+     */
     float(min: number, max: number): number;
     /**
      * Generates a random integer between 0 (inclusive) and max (exclusive)
      */
     int(max: number): number;
+    /**
+     * Generates a random integer between min (inclusive) and max (exclusive)
+     */
+    int(min: number, max: number): number;
     /**
      * Generates a random integer between min and max (inclusive)
      */

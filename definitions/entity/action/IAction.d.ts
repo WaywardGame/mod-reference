@@ -114,7 +114,8 @@ export declare enum ActionType {
     AttachContainer = 83,
     DetachContainer = 84,
     Refine = 85,
-    PickupExcrement = 86
+    PickupExcrement = 86,
+    TestDepth = 87
 }
 export declare enum ActionUsability {
     Paused = 0,

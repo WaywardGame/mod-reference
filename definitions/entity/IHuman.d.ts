@@ -30,6 +30,9 @@ export default interface IHuman extends IEntity {
     event: IEventEmitter<this, IHumanEvents>;
     attackFromEquip: IAttackHand;
     canSendMessage: boolean;
+    crafted: {
+        [index: number]: ICrafted;
+    };
     customization: ICustomizations;
     deathBy: ISerializedTranslation;
     defense: PlayerDefense;
@@ -242,5 +245,9 @@ export declare enum SkillType {
     Taming = 26,
     Gardening = 27,
     Bartering = 28
+}
+export interface ICrafted {
+    unlockTime: number;
+    newUnlock: boolean;
 }
 export {};

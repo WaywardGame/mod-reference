@@ -8,9 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICharacter } from "entity/IHuman";
+import { ICharacter, ICrafted } from "entity/IHuman";
 import { IMilestoneData } from "entity/player/IMilestone";
-import { ICrafted } from "game/IGame";
 import { ModState } from "mod/IModInfo";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import ISaveDataGlobal, { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
