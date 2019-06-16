@@ -68,9 +68,11 @@ export default class TileAtlas implements ITileAtlas {
     doodadItems: OptionalDescriptions<ItemType, DoodadInfo>;
     mounds: OptionalDescriptions<TerrainType, DoodadInfo>;
     private mountainTypes;
+    private mountainGroundTypes;
     private oreTypes;
     generateLookups(): void;
     isMountain(type: TerrainType): boolean;
+    isMountainGround(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
     isLava(type: TerrainType): boolean;
     isWater(type: TerrainType): boolean;

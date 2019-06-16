@@ -50,6 +50,7 @@ export interface ITerrainDescription extends IModdable {
     noResting?: boolean;
     wet?: boolean;
     tileOnConsume?: TerrainType;
+    isMountainGround?: boolean;
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: ICorpse[];
@@ -159,5 +160,7 @@ export declare enum TerrainType {
     SandstoneWithCopper = 31,
     CoolingLava = 32,
     Obsidian = 33,
-    DesertSand = 34
+    DesertSand = 34,
+    RockGround = 35,
+    SandstoneGround = 36
 }

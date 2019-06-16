@@ -23,6 +23,7 @@ export interface IWorldRenderer {
     lavaAdaptor: ITileAdaptor;
     fenceAdaptor: Fence;
     mountainAdaptor: ITileAdaptor;
+    mountainGroundAdaptor: ITileAdaptor;
     wallAdaptor: Wall;
     defaultAdaptor: ITileAdaptor;
     floorAdaptor: ITileAdaptor;

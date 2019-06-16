@@ -23,6 +23,7 @@ export interface ITileAtlas {
     mounds: OptionalDescriptions<TerrainType, DoodadInfo>;
     generateLookups(): void;
     isMountain(type: TerrainType): boolean;
+    isMountainGround(type: TerrainType): boolean;
     isOre(type: TerrainType): boolean;
     isLava(type: TerrainType): boolean;
     isWater(type: TerrainType): boolean;

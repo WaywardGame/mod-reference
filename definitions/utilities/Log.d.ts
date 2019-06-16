@@ -51,19 +51,57 @@ export declare enum LogSource {
     WebRTCConnection = 39,
     WebSocketConnection = 40
 }
-declare class Log {
-    warn: (...args: any[]) => void;
-    error: (...args: any[]) => void;
-    trace: (...args: any[]) => void;
+export interface ILog {
+    debug(...args: any[]): void;
+    error(...args: any[]): void;
+    info(...args: any[]): void;
+    trace(...args: any[]): void;
+    warn(...args: any[]): void;
+    setSources(...sources: Array<LogSource | string>): void;
+}
+export declare enum LogLineType {
+    Debug = 0,
+    Error = 1,
+    Info = 2,
+    Trace = 3,
+    Warn = 4
+}
+export interface ILogLine {
+    type: LogLineType;
+    args: any[];
+}
+declare abstract class BaseLog implements ILog {
     debug: (...args: any[]) => void;
+    error: (...args: any[]) => void;
     info: (...args: any[]) => void;
-    private sources;
+    trace: (...args: any[]) => void;
+    warn: (...args: any[]) => void;
+    protected sources: Array<LogSource | string>;
     constructor(...sources: Array<LogSource | string>);
     setSources(...sources: Array<LogSource | string>): void;
     /**
      * Re-binds the Log methods. Called automatically when the winston instance is set.
      */
-    refresh(): void;
+    abstract setup(): void;
+}
+declare class Log extends BaseLog {
+    /**
+     * Re-binds the Log methods. Called automatically when the winston instance is set.
+     */
+    setup(): void;
+}
+/**
+ * Logs to an in-memory array - not the console
+ */
+export declare class MemoryLog extends BaseLog {
+    lines: ILogLine[];
+    /**
+     * Re-binds the Log methods. Called automatically when the winston instance is set.
+     */
+    setup(): void;
+    setArray(lines: ILogLine[]): void;
+    clear(): void;
+    private addLogLine;
 }
 export interface ISourceFilter {
     /**
@@ -108,8 +146,8 @@ declare module Log {
      */
     function debug(...sources: Array<LogSource | string>): (...args: any[]) => void;
 }
-export declare class NullLog extends Log {
-    refresh(): void;
+declare class NullLog extends BaseLog {
+    setup(): void;
 }
 export declare let nullLog: NullLog;
 export default Log;
