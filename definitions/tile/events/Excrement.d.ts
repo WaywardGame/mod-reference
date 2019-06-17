@@ -11,3 +11,4 @@
 import { ITileEventDescription } from "tile/ITileEvent";
 export declare const animalDroppings: ITileEventDescription;
 export declare const animalDung: ITileEventDescription;
+export declare const guano: ITileEventDescription;

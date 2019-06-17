@@ -10,6 +10,7 @@
  */
 export declare function tuple<T extends any[]>(...items: T): T;
 declare module Arrays {
+    const EMPTY: readonly undefined[];
     /**
      * Produces an array of the numbers @param min (inclusive) to @param max (exclusive), in steps of @param step
      * @param min A number, inclusive

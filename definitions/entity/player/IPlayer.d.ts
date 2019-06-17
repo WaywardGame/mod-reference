@@ -127,6 +127,10 @@ export interface IPlayer extends IHuman {
 export default IPlayer;
 interface IPlayerEvents extends Events<IHuman> {
     /**
+     * Called when the player is spawned. (At the end of `Player.setup`)
+     */
+    spawn(): void;
+    /**
      * @param milestone The milestone that is being updated
      * @param value The new value for this milestone
      * @param max The max value for this milestone

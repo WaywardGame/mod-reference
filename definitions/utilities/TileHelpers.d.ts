@@ -11,6 +11,7 @@
 import { TileGroup } from "entity/creature/ICreature";
 import { IOverlayInfo, ITile, TerrainType } from "tile/ITerrain";
 import { IVector3 } from "utilities/math/IVector";
+import Vector3 from "utilities/math/Vector3";
 declare module TileHelpers {
     const maskGfx = 31;
     const maskType = 4064;
@@ -46,7 +47,7 @@ declare module TileHelpers {
     /**
      * Check is a tile is open
      */
-    function isOpenTile(point: IVector3, tile: ITile): boolean;
+    function isOpenTile(point: IVector3, tile?: ITile): boolean;
     /**
      * Check if a tile is a suitable spawn point
      */
@@ -60,5 +61,7 @@ declare module TileHelpers {
      * IterableIterator version of TileHelpers.getTilesAround
      */
     function tilesAround(point: IVector3, includeCurrentTile?: boolean, includeCorners?: boolean): IterableIterator<ITile>;
+    function tilesInRange(point: IVector3, range: number, includeCurrentTile?: boolean): import("./stream/Stream").default<[Vector3, ITile]>;
+    function openTileInRange(point: IVector3, range: number, includeCurrentTile?: boolean): [Vector3, ITile] | undefined;
 }
 export default TileHelpers;

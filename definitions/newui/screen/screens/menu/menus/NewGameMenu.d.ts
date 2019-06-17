@@ -27,11 +27,13 @@ export default class NewGameMenu extends Menu {
     private tickSpeedRow;
     private buttonNext;
     private customGameOptionsMenu;
+    private milestoneModifiersMenu;
     private multiplayerMode;
     private choiceMultiplayer;
     private choiceSingleplayer;
     private slot;
     private difficultyOptions?;
+    private readonly milestones;
     private wasEditedPreShown;
     constructor();
     create(): void;
@@ -45,6 +47,7 @@ export default class NewGameMenu extends Menu {
     private getStartClickHandler;
     private getPlayOptions;
     private getCustomGameOptionsMenu;
+    private getMilestoneModifiersMenu;
     private getDifficultyOptions;
     private getDefaultSaveName;
 }

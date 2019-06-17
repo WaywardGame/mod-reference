@@ -42,5 +42,6 @@ export declare enum TileEventType {
     HoneyFungus = 2,
     TumblingTumbleweed = 3,
     AnimalDroppings = 4,
-    AnimalDung = 5
+    AnimalDung = 5,
+    Guano = 6
 }

@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { MilestoneType as Milestone } from "entity/player/IMilestone";
-declare const milestones: Descriptions<Milestone, [string, string, string]>;
-export default milestones;
+import { MilestoneType } from "entity/player/IMilestone";
+import Menu from "newui/screen/screens/menu/component/Menu";
+export default class MilestoneModifiersMenu extends Menu {
+    constructor(milestones: Set<MilestoneType>);
+}

@@ -31,7 +31,7 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     setTrigger<H extends Hook>(hook: H, checker: (api: QuestRequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
     setHostTrigger<E extends keyof Events<IPlayer>>(event: E, checker: (api: QuestRequirementApi<this>, player: IPlayer, ...args: ArgumentsOf<Events<IPlayer>[E]>) => boolean): this;
-    getHostTriggers(): IterableIterator<["milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: IPlayer, ...args: any[]) => boolean]>;
+    getHostTriggers(): IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: IPlayer, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: QuestRequirementApi<this>) => boolean): this;
     getInitializeTrigger(): ((api: QuestRequirementApi<this>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;

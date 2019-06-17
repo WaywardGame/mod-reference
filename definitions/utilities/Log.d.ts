@@ -149,5 +149,5 @@ declare module Log {
 declare class NullLog extends BaseLog {
     setup(): void;
 }
-export declare let nullLog: NullLog;
+export declare const nullLog: NullLog;
 export default Log;

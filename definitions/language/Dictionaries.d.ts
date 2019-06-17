@@ -22,6 +22,7 @@ import { QuestRequirementType } from "entity/player/quest/requirement/IRequireme
 import { Difficulty } from "game/Difficulty";
 import { InspectType } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
+import { MilestoneModifierGroup } from "game/modifiers/MilestoneModifier";
 import { PartOfDay } from "game/TimeManager";
 import { BookType, EquipEffect, ItemType, ItemTypeGroup, LegendaryType } from "item/IItem";
 import { GameEndMessage } from "language/dictionary/GameEndMessage";
@@ -81,32 +82,33 @@ export declare enum Dictionary {
     Message = 29,
     MessagesTimestampMode = 30,
     Milestone = 31,
-    Misc = 32,
-    ModLoadError = 33,
-    ModLoadFailureReason = 34,
-    ModProvide = 35,
-    ModSort = 36,
-    ModType = 37,
-    MultiplayerDisconnectReason = 38,
-    MusicPlaylist = 39,
-    Note = 40,
-    Number = 41,
-    PartOfDay = 42,
-    PowerMode = 43,
-    Quality = 44,
-    Quest = 45,
-    QuestRequirement = 46,
-    SaveSlotSort = 47,
-    Skill = 48,
-    Source = 49,
-    Stat = 50,
-    StatusEffect = 51,
-    TeamMemberResponsibility = 52,
-    Terrain = 53,
-    TileEvent = 54,
-    Ui = 55,
-    UiQuadrant = 56,
-    UnableToJoinReason = 57
+    MilestoneModifierGroup = 32,
+    Misc = 33,
+    ModLoadError = 34,
+    ModLoadFailureReason = 35,
+    ModProvide = 36,
+    ModSort = 37,
+    ModType = 38,
+    MultiplayerDisconnectReason = 39,
+    MusicPlaylist = 40,
+    Note = 41,
+    Number = 42,
+    PartOfDay = 43,
+    PowerMode = 44,
+    Quality = 45,
+    Quest = 46,
+    QuestRequirement = 47,
+    SaveSlotSort = 48,
+    Skill = 49,
+    Source = 50,
+    Stat = 51,
+    StatusEffect = 52,
+    TeamMemberResponsibility = 53,
+    Terrain = 54,
+    TileEvent = 55,
+    Ui = 56,
+    UiQuadrant = 57,
+    UnableToJoinReason = 58
 }
 export declare type Enum = {
     [key: string]: number;
@@ -147,6 +149,7 @@ declare const dictionaries: {
     [Dictionary.Message]: typeof Message;
     [Dictionary.MessagesTimestampMode]: typeof MessageTimestamp;
     [Dictionary.Milestone]: typeof MilestoneType;
+    [Dictionary.MilestoneModifierGroup]: typeof MilestoneModifierGroup;
     [Dictionary.Misc]: typeof MiscTranslation;
     [Dictionary.ModLoadError]: typeof CanLoadState;
     [Dictionary.ModLoadFailureReason]: typeof ModLoadFailureReason;

@@ -38,7 +38,8 @@ export declare const enum BookTranslation {
 }
 export declare const enum MilestoneTranslation {
     Name = 0,
-    Description = 1
+    UnlockRequirement = 1,
+    ModifierEffect = 2
 }
 export declare const enum ActionTranslation {
     Name = 0,

@@ -23,6 +23,7 @@ declare global {
          * Deletes all given values from the set. Returns whether any values were deleted.
          */
         deleteAll(...values: T[]): boolean;
+        toggle(has: boolean, ...values: T[]): this;
     }
 }
 export default function (): void;

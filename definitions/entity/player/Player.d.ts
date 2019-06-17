@@ -11,7 +11,7 @@
 import { IDoodad } from "doodad/IDoodad";
 import { CreatureType, ICreature } from "entity/creature/ICreature";
 import Human from "entity/Human";
-import { EntityType, StatusEffectChangeReason, StatusType } from "entity/IEntity";
+import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import IHuman, { EquipType, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { MilestoneType } from "entity/player/IMilestone";
@@ -183,16 +183,10 @@ export default class Player extends Human implements IPlayer {
     moveTo(): boolean;
     protected calculateStats(): void;
     protected swimCheck(): void;
-    private slitherSuckerDamage;
-    private processMovement;
-    /**
-     * Event handler for when resting begins, weight changes, or strength changes.
-     */
-    private onStaminaUseChanged;
     /**
      * Event handler for when a status effect is applied or removed.
      */
-    private onStatusEffectChanged;
+    protected onStatusEffectChanged(status: StatusType, has: boolean): void;
     /**
      * Event handler for `EntityEvent.StatChanged`. Handles special functionality when stats are increased:
      * 1. When resting & stamina is full, resting will be cancelled.
@@ -200,7 +194,13 @@ export default class Player extends Human implements IPlayer {
      * 3. When hunger > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      * 4. When thirst > maximum, damage will be dealt, stamina will be decreased, and a message will be displayed.
      */
-    private onStatChange;
+    protected onStatChange(stat: IStat, oldValue: number, info: IStatChangeInfo): void;
+    private slitherSuckerDamage;
+    private processMovement;
+    /**
+     * Event handler for when resting begins, weight changes, or strength changes.
+     */
+    private onStaminaUseChanged;
     private restTick;
     private staminaSyncCheck;
     private canWriteInHours;
