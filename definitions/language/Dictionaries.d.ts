@@ -16,7 +16,7 @@ import { DamageType, StatusType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { Source } from "entity/player/IMessageManager";
-import { MilestoneType } from "entity/player/IMilestone";
+import { Milestone } from "entity/player/IMilestone";
 import { QuestType } from "entity/player/quest/quest/IQuest";
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { Difficulty } from "game/Difficulty";
@@ -148,7 +148,7 @@ declare const dictionaries: {
     [Dictionary.LegendaryType]: typeof LegendaryType;
     [Dictionary.Message]: typeof Message;
     [Dictionary.MessagesTimestampMode]: typeof MessageTimestamp;
-    [Dictionary.Milestone]: typeof MilestoneType;
+    [Dictionary.Milestone]: typeof Milestone;
     [Dictionary.MilestoneModifierGroup]: typeof MilestoneModifierGroup;
     [Dictionary.Misc]: typeof MiscTranslation;
     [Dictionary.ModLoadError]: typeof CanLoadState;

@@ -12,7 +12,7 @@ import { IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import IHuman, { EquipType, ICrafted, ICustomizations, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import { MilestoneType } from "entity/player/IMilestone";
+import { Milestone } from "entity/player/IMilestone";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
@@ -85,7 +85,7 @@ export default abstract class Human extends Entity implements IHuman {
     getEquippedItem(slot: EquipType): IItem | undefined;
     getEquipSlotForItem(item: IItem): EquipType | undefined;
     getMaxHealth(): number;
-    addMilestone(milestone: MilestoneType, data?: number): void;
+    addMilestone(milestone: Milestone, data?: number): void;
     update(): void;
     updateStatsAndAttributes(): void;
     staminaReduction(skill: SkillType): void;

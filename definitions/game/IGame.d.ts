@@ -13,6 +13,7 @@ import { ICorpse } from "entity/creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "entity/creature/ICreature";
 import { ICharacter, ICrafted, SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
+import { Milestone } from "entity/player/IMilestone";
 import { IPlayer, TurnType } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
@@ -234,6 +235,7 @@ export interface IPlayOptions {
     seed: string | number | undefined;
     difficulty: Difficulty;
     difficultyOptions?: IDifficultyOptions;
+    milestoneModifiers: Set<Milestone>;
     character: ICharacter;
     multiplayer: IMultiplayerOptions | true | undefined;
     multiplayerServerToJoin: ServerInfo | undefined;

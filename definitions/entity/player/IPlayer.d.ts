@@ -15,7 +15,7 @@ import IHuman, { EquipType, HairColor, HairStyle, IRestData, RestType, SkinColor
 import { IStat, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { MilestoneType } from "entity/player/IMilestone";
+import { Milestone } from "entity/player/IMilestone";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
@@ -135,7 +135,7 @@ interface IPlayerEvents extends Events<IHuman> {
      * @param value The new value for this milestone
      * @param max The max value for this milestone
      */
-    milestoneUpdate(milestone: MilestoneType, value: number, max: number): void;
+    milestoneUpdate(milestone: Milestone, value: number, max: number): void;
     /**
      * @param key The key of `IOptions` that was changed on this player
      * @param value The value this key was set to

@@ -17,7 +17,7 @@ import { ICreature } from "entity/creature/ICreature";
 import { AttackType, EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
 import { EquipType, RestType, SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
-import { MilestoneType } from "entity/player/IMilestone";
+import { Milestone } from "entity/player/IMilestone";
 import IPlayer, { TurnType } from "entity/player/IPlayer";
 import { Quality } from "game/IObject";
 import { IContainer, IItem, ItemType } from "item/IItem";
@@ -155,7 +155,7 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
     setReputationChange(amount: number): this;
-    setMilestone(milestone: MilestoneType, data?: number): this;
+    setMilestone(milestone: Milestone, data?: number): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(color: IRGB, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;

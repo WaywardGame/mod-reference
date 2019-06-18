@@ -10,7 +10,7 @@
  */
 import { IDamageInfo } from "entity/creature/ICreature";
 import IEntity from "entity/IEntity";
-import { MilestoneType } from "entity/player/IMilestone";
+import { Milestone } from "entity/player/IMilestone";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
@@ -70,7 +70,7 @@ export default interface IHuman extends IEntity {
      */
     skillCheck(skill: SkillType, check: number): boolean;
     addDelay(delay: number, replace?: boolean): void;
-    addMilestone(milestone: MilestoneType, data?: number): void;
+    addMilestone(milestone: Milestone, data?: number): void;
     burn(burnType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     calculateEquipmentStats(): void;
     cancelResting(reason: RestCancelReason): boolean;

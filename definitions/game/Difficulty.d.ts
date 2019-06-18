@@ -12,6 +12,7 @@ import { CreatureType } from "entity/creature/ICreature";
 import { StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
+import { Milestone } from "entity/player/IMilestone";
 import { ItemType } from "item/IItem";
 import { IVersionInfo } from "utilities/Version";
 export declare enum Difficulty {
@@ -110,7 +111,14 @@ export interface IDifficultyOptions {
      * Whether mods should be disabled
      */
     disableMods: boolean;
+    milestoneModifiers: Set<Milestone>;
 }
+/**
+ * "Partial" difficulty options; used to apply options over top base options. Milestone modifiers can never exist on partial difficulty options.
+ */
+export declare type IDifficultyOptionsPartial = RecursivePartial<IDifficultyOptions> & {
+    milestoneModifiers?: never;
+};
 export interface IDifficultyOptionsStat {
     /**
      * If this is for `Stat.Strength`, this will be the max health and max weight.

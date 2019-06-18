@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { MilestoneType } from "entity/player/IMilestone";
+import { Milestone } from "entity/player/IMilestone";
 import UiTranslation from "language/dictionary/UiTranslation";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 export default class MilestonesDialog extends Dialog {
@@ -16,7 +16,7 @@ export default class MilestonesDialog extends Dialog {
     private readonly sortRow;
     constructor();
     getName(): UiTranslation;
-    onMilestoneUpdate(_: any, milestone: MilestoneType): void;
+    onMilestoneUpdate(_: any, milestone: Milestone): void;
     private sort;
     private sortMilestones;
     private filter;

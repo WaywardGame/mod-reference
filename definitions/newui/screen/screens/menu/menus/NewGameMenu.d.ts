@@ -44,7 +44,7 @@ export default class NewGameMenu extends Menu {
     protected refreshAsync(): Promise<void>;
     private updateDifficulty;
     private refresh;
-    private getStartClickHandler;
+    private startOrNext;
     private getPlayOptions;
     private getCustomGameOptionsMenu;
     private getMilestoneModifiersMenu;

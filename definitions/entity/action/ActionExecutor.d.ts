@@ -13,7 +13,7 @@ import actionDescriptions from "entity/action/Actions";
 import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentTypeMap, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
 import { EntityPlayerCreatureNpc } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
-import { MilestoneType } from "entity/player/IMilestone";
+import { Milestone } from "entity/player/IMilestone";
 import { TurnType } from "entity/player/IPlayer";
 import { IItem } from "item/IItem";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
@@ -68,7 +68,7 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setReputationChange(amount: number): this;
     addSkillGains(...skills: Array<[SkillType, number?]>): this;
     addSkillGains(skill: SkillType, amount?: number): this;
-    setMilestone(milestone: MilestoneType, data?: number): this;
+    setMilestone(milestone: Milestone, data?: number): this;
     setSoundEffect(soundEffect: IActionSoundEffect): this;
     setSoundEffect(type: SfxType, inFront?: boolean): this;
     setParticle(color: IRGB, inFront?: boolean): this;

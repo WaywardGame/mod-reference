@@ -14,7 +14,7 @@ import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import IHuman, { EquipType, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
-import { MilestoneType } from "entity/player/IMilestone";
+import { Milestone } from "entity/player/IMilestone";
 import { IMovementIntent, IPlayer, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
@@ -95,7 +95,7 @@ export default class Player extends Human implements IPlayer {
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
     staminaCheck(): boolean;
-    addMilestone(milestone: MilestoneType, data?: number): void;
+    addMilestone(milestone: Milestone, data?: number): void;
     calculateEquipmentStats(): void;
     getDefaultCarveTool(): IItem | undefined;
     isFacingCarvableTile(): boolean;
