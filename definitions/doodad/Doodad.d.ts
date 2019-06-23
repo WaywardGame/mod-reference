@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType, DoorOrientation, GrowingStage, IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
+import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
 import { ICreature } from "entity/creature/ICreature";
 import { EquipType } from "entity/IHuman";
@@ -52,7 +52,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     legendary?: IItemLegendary | undefined;
     step: number | undefined;
     hitchedCreature?: number;
-    readonly fromDescription: import("../../utilities/FromDescription").ISafeFn<IDoodadDescription, undefined>;
+    readonly fromDescription: import("../utilities/FromDescription").ISafeFn<IDoodadDescription, undefined>;
     private _description;
     static getRegistrarId(): number;
     static setRegistrarId(id: number): void;
@@ -66,6 +66,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     isValid(): boolean;
     getTile(): ITile;
     getPoint(): IVector3;
+    isInGroup(doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;

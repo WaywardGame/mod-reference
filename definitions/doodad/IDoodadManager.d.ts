@@ -9,15 +9,12 @@
  * https://waywardgame.github.io/
  */
 import { DoodadType, DoodadTypeGroup, IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import { ItemType } from "item/IItem";
 export interface IDoodadManager {
     generateLookups(): void;
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;
     isGroup(doodadType: (DoodadType | DoodadTypeGroup)): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
-    isDoodadItemInGroup(itemType: ItemType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
-    getGroupDoodadItems(doodadGroup: DoodadTypeGroup): Set<ItemType>;
     /**
      * Removes a doodad from the world.
      * @param doodad The doodad to remove

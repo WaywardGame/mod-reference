@@ -10,10 +10,8 @@
  */
 import { DoodadType, DoodadTypeGroup, IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import IDoodadManager from "doodad/IDoodadManager";
-import { ItemType } from "item/IItem";
 export default class DoodadManager implements IDoodadManager {
     private cachedGroups;
-    private cachedDooadItemGroups;
     constructor();
     generateLookups(): void;
     create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;
@@ -21,8 +19,6 @@ export default class DoodadManager implements IDoodadManager {
     updateAll(): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
-    isDoodadItemInGroup(itemType: ItemType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;
     getGroupDoodads(doodadGroup: DoodadTypeGroup): Set<DoodadType>;
-    getGroupDoodadItems(doodadGroup: DoodadTypeGroup): Set<ItemType>;
     verifyAndFixItemWeights(): void;
 }

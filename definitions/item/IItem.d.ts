@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DoodadType, DoodadTypeGroup, IDoodad, IDoodadDescription } from "doodad/IDoodad";
+import { DoodadType, DoodadTypeGroup, IDoodad } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
 import { CreatureType, ICreature, TileGroup } from "entity/creature/ICreature";
 import { DamageType, Defense, EntityType } from "entity/IEntity";
@@ -117,8 +117,6 @@ export interface IContainer extends IContainable {
 }
 export interface IItemDescription extends IObjectDescription, IModdable {
     durability?: number;
-    doodad?: IDoodadDescription;
-    doodadType?: DoodadType;
     onBurn?: ItemType[];
     onUse?: {
         [index: number]: any;
@@ -135,7 +133,6 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     refiningReduction?: number;
     lit?: ItemType;
     damageModifier?: number;
-    isTorch?: boolean;
     equip?: EquipType;
     returnOnUse?: [ItemType, boolean];
     inheritWeight?: ItemType;
@@ -176,6 +173,7 @@ export interface IItemDescription extends IObjectDescription, IModdable {
     burnsLike?: ItemType[];
     spawnableTiles?: TileGroup;
     gather?: ILiquid;
+    placeDownType?: DoodadType;
     /**
      * How good this item is at being an item of an `ItemTypeGroup`.
      *
@@ -476,7 +474,7 @@ export declare enum ItemType {
     SandstoneFlooring = 142,
     SpiderSilk = 143,
     AnimalFat = 144,
-    AnimalFatTorch = 145,
+    TallowTorch = 145,
     ClayFlakes = 146,
     GreenSand = 147,
     OldInstructionalScroll = 148,
@@ -536,7 +534,7 @@ export declare enum ItemType {
     SolarStill = 202,
     StoneWaterStill = 203,
     Sundial = 204,
-    LitAnimalFatTorch = 205,
+    LitTallowTorch = 205,
     Sinew = 206,
     ShortBow = 207,
     LongBow = 208,
@@ -814,7 +812,10 @@ export declare enum ItemType {
     BladesOfGrass = 480,
     AnimalDroppings = 481,
     AnimalDung = 482,
-    Guano = 483
+    Guano = 483,
+    Tallow = 484,
+    TallowCandle = 485,
+    LitTallowCandle = 486
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -836,7 +837,7 @@ export declare enum ItemTypeGroup {
     Cordage = 816,
     SharpenedRock = 817,
     Pole = 818,
-    LightSource = 819,
+    FireSource = 819,
     Repair = 820,
     Tongs = 821,
     Hammer = 822,
@@ -889,7 +890,8 @@ export declare enum ItemTypeGroup {
     Sand = 869,
     Untradable = 870,
     Cookware = 871,
-    LitTorch = 872,
-    Refine = 873,
-    Last = 874
+    Refine = 872,
+    LitTorch = 873,
+    LightDevice = 874,
+    Last = 875
 }

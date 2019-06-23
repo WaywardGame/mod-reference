@@ -42,15 +42,15 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;
-    /**
-     * Returns whether the doodad can be trampled
-     */
-    canTrample(): boolean | undefined;
     isValid(): boolean;
     getTile(): ITile;
     getPoint(): IVector3;
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
+    /**
+     * Returns whether the doodad can be trampled
+     */
+    canTrample(): boolean | undefined;
     /**
      * Can the doodad be gathered from in its current form?
      */
@@ -59,24 +59,25 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
      * Can the doodad be gathered from at all?
      */
     isGatherable(): boolean;
-    isEmbers(): boolean;
+    canCauseStatus(human: Human, equipType?: EquipType): boolean;
     canHarvest(): boolean;
     canPickup(human: Human): boolean;
-    getPickupTypes(): ItemType[] | undefined;
-    getActions(): ActionType[] | undefined;
-    getDoodadInfo(): DoodadInfo | undefined;
-    canCauseStatus(human: Human, equipType?: EquipType): boolean;
     causeStatus(human: Human, equipType?: EquipType): void;
     checkForTrampling(source: Human | ICreature): boolean;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
+    getActions(): ActionType[] | undefined;
+    getDamage(human: Human, equipType?: EquipType): number;
     getDefaultDurability(): void;
-    setOffTrap(human?: Human, withMessage?: boolean): void;
+    getDoodadInfo(): DoodadInfo | undefined;
     getGrowthParticles(): IRGB | undefined;
+    getPickupTypes(): ItemType[] | undefined;
     increaseFertility(): boolean;
+    isDangerous(human: Human): boolean;
+    isEmbers(): boolean;
+    isInGroup(doodadGroup: DoodadTypeGroup | DoodadType): boolean;
+    setOffTrap(human?: Human, withMessage?: boolean): void;
     setWellStatus(initial?: boolean): void;
     update(): void;
-    isDangerous(human: Human): boolean;
-    getDamage(human: Human, equipType?: EquipType): number;
 }
 export interface IDoodadOptions extends IObjectOptions {
     gatherReady?: boolean;
@@ -91,7 +92,6 @@ export interface IDoodadOptions extends IObjectOptions {
     item?: IItem;
     step?: number;
     hitchedCreature?: number;
-    itemType?: ItemType;
 }
 export declare type IDoodadOld = Partial<IDoodad> & {
     growInto?: DoodadType;
@@ -134,6 +134,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     particles?: IRGB;
     growthParticles?: IDoodadParticles;
     pickUp?: ItemType[];
+    actionTypes?: ActionType[];
     gatherCanHurtHands?: boolean;
     providesFire?: boolean;
     providesLight?: number;
@@ -152,8 +153,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     isClosedDoor?: boolean;
     isGate?: boolean;
     isFence?: boolean;
-    isUnlitTorch?: boolean;
-    isLitTorch?: boolean;
     tier?: OptionalDescriptions<DoodadTypeGroup, number>;
 }
 export interface IDoodadParticles {
@@ -249,12 +248,22 @@ export declare enum DoodadType {
     CopperAnvil = 83,
     BarkTorchStand = 84,
     LitBarkTorchStand = 85,
-    AnimalFatTorchStand = 86,
-    LitAnimalFatTorchStand = 87,
+    TallowTorchStand = 86,
+    LitTallowTorchStand = 87,
     Item = 88,
     JoshuaTree = 89,
     SaguaroCactus = 90,
-    AloeVera = 91
+    AloeVera = 91,
+    TallowCandle = 92,
+    LitTallowCandle = 93,
+    CottonBedroll = 94,
+    FeatherBedroll = 95,
+    Hammock = 96,
+    LeafBedroll = 97,
+    HitchingPost = 98,
+    ClayBrickWell = 99,
+    SandstoneWell = 100,
+    StoneWell = 101
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -267,7 +276,10 @@ export declare enum DoodadTypeGroup {
     Hitch = 407,
     GatheredPlant = 408,
     FireSource = 409,
-    Last = 410
+    LitTorch = 410,
+    LightDevice = 411,
+    LightSource = 412,
+    Last = 413
 }
 export declare enum DoorOrientation {
     Default = 0,

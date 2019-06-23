@@ -235,7 +235,7 @@ declare enum Message {
     ErrorHasOccured = 223,
     Expert = 224,
     ExtinguishedFire = 225,
-    ExtinguishedTorch = 226,
+    ExtinguishedLightSource = 226,
     FailedToAddFuelToTorch = 227,
     FailedToCatchFish = 228,
     FailedToCauseDamage = 229,
