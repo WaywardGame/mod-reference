@@ -59,7 +59,7 @@ export interface IItemManager {
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: IProtectedItemOptions): IItem[];
     getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
     getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
-    getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, qualityBypass?: boolean): Quality | undefined;
+    getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, qualityBypass?: boolean, bonusChance?: number): Quality | undefined;
     getRandomQuality(bonusQuality?: number): Quality;
     getTileContainer(x: number, y: number, z: number): IContainer;
     /**

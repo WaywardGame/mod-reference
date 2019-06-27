@@ -102,7 +102,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     getDefaultDurability(item: IItem): number;
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
-    getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, qualityBypass?: boolean): Quality | undefined;
+    getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number): Quality | undefined;
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getItemsByWeight(a: number, b: number): number;
     getItemsWeight(items: IItem[]): number;
