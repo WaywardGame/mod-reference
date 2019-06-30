@@ -360,3 +360,4 @@ export declare const lineOfSightDetail = 4;
 export declare const interval = 16.6666;
 export declare const maximumTurnDelay: number;
 export declare const defaultTurnDelay: number;
+export declare const defaultLightColor: import("../utilities/Color").IRGB;

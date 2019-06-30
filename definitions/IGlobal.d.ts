@@ -173,6 +173,19 @@ declare global {
 		KDTree: IKDTreeConstructor;
 	}
 
+	interface IColorGrid {
+		width: number;
+		height: number;
+		data: Uint8Array;
+
+		getRed(x: number, y: number): number;
+		getGreen(x: number, y: number): number;
+		getBlue(x: number, y: number): number;
+		getAlpha(x: number, y: number): number;
+
+		set(x: number, y: number, red: number, blue: number, green: number, alpha: number): void;
+	}
+
 	type IByteGridConstructor = new (width: number, height: number) => IByteGrid;
 
 	type IDijkstraMapConstructor = new () => IDijkstraMap;

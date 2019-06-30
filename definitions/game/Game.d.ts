@@ -208,6 +208,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     getHeight(z0: number, z1: number, d: number): number;
     /**
      * Calculates the light level of a tile.
+     * @returns 32bit number representing RED GREEN BLUE ALPHA
      */
     calculateTileLightLevel(tile: ITile, x: number, y: number, z: number): number;
     getLightSourceAt(x: number, y: number, z: number): number;

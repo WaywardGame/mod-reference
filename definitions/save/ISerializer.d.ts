@@ -66,7 +66,8 @@ export declare enum Types {
     Function = 26,
     ClientStore = 27,
     Vector3 = 28,
-    Vector2 = 29
+    Vector2 = 29,
+    Set = 30
 }
 export declare function SaveProperty(): PropertyDecorator;
 export declare function SaveAllProperties(): ClassDecorator;

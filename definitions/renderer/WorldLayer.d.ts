@@ -17,7 +17,7 @@ export default class WorldLayer implements IWorldLayer {
     readonly width: number;
     readonly height: number;
     readonly level: number;
-    readonly lightLevelMap: IByteGrid;
+    readonly lightLevelMap: IColorGrid;
     readonly lightBlockMap: IByteGrid;
     exploredMap: IExploreMap;
     onTileUpdate: onTileUpdateDelegate;

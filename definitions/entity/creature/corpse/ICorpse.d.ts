@@ -13,6 +13,7 @@ import { SkillType } from "entity/IHuman";
 import { IObject } from "game/IObject";
 import { ItemType } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
+import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
 export interface ICorpseDescription extends IModdable {
     decay?: number;
@@ -23,6 +24,7 @@ export interface ICorpseDescription extends IModdable {
     damage?: number;
     blood?: boolean;
     lightSource?: boolean;
+    lightColor?: IRGB;
     animated?: boolean;
 }
 export interface ICorpseResourceDrop {

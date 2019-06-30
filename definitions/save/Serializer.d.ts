@@ -31,11 +31,13 @@ export default class Serializer implements ISerializer {
     private readArrayV2;
     private readArrayBuffer;
     private readMap;
+    private readSet;
     private writeObject;
     private writeString;
     private writeArrayV2;
     private writeArrayBuffer;
     private writeMap;
+    private writeSet;
     private isInteger;
     private isByteSigned;
     private isByteUnsigned;

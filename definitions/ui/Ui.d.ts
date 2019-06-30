@@ -91,4 +91,5 @@ export default class Ui extends Emitter implements IUi {
     cancelSorting(): void;
     private onBeforeUnloadElectron;
     private onBeforeUnloadBrowser;
+    private logErrorEvent;
 }

@@ -20,7 +20,7 @@ export interface IWorldLayer {
     width: number;
     height: number;
     level: number;
-    lightLevelMap: IByteGrid;
+    lightLevelMap: IColorGrid;
     lightBlockMap: IByteGrid;
     exploredMap: IExploreMap;
     onTileUpdate: onTileUpdateDelegate;

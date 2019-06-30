@@ -184,6 +184,7 @@ export interface ICreatureDescription extends IModdable {
     tamingDifficulty?: number;
     acceptedItems?: Array<ItemType | ItemTypeGroup>;
     lightSource?: boolean;
+    lightColor?: IRGB;
     noStumble?: boolean;
     particlesOnMove?: boolean;
     providesFire?: boolean;
