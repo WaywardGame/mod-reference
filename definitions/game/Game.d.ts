@@ -52,7 +52,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     spawnCoords: IVector3;
     tile: ITileArray;
     tileDecorations: Uint16Array;
-    updateFieldOfView: boolean;
+    _updateFieldOfView: boolean;
+    _updateFieldOfViewForced: boolean;
     contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;
     creatures: SaferArray<ICreature>;
@@ -184,6 +185,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     tickRealtime(): void;
     updateView(updateFov: boolean): void;
     updateView(source: RenderSource, updateFov: boolean): void;
+    updateFieldOfView(source: RenderSource, force?: boolean): void;
     updateRenderInternal(source: RenderSource, fromUpdateView?: boolean): void;
     /**
      * AVOID USING THIS. USE updateTablesAndWeightNextTick INSTEAD!

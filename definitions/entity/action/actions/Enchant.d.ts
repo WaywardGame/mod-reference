@@ -8,8 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ITileEventDescription } from "tile/ITileEvent";
-export declare const animalDroppings: ITileEventDescription;
-export declare const animalDung: ITileEventDescription;
-export declare const guano: ITileEventDescription;
-export declare const wispDust: ITileEventDescription;
+import { Action } from "entity/action/Action";
+import { ActionArgument } from "entity/action/IAction";
+declare const _default: Action<[ActionArgument.ItemNearby, [ActionArgument.ItemNearby, ActionArgument.Undefined]], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer, void>;
+export default _default;

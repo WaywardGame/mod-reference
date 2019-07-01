@@ -46,7 +46,8 @@ export declare enum Milestone {
     Operator = 34,
     Huntsman = 35,
     Contender = 36,
-    Challenger = 37
+    Challenger = 37,
+    DestroyerOfMagi = 38
 }
 export declare enum MilestoneVisibility {
     Visible = 0,

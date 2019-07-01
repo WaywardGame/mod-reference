@@ -86,6 +86,7 @@ export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, 
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: Quality): void;
+    setLegendary(bypassType?: boolean): void;
     acquireNotify(player: IPlayer): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
@@ -815,7 +816,9 @@ export declare enum ItemType {
     Guano = 483,
     Tallow = 484,
     TallowCandle = 485,
-    LitTallowCandle = 486
+    LitTallowCandle = 486,
+    WispDust = 487,
+    MagicalAspect = 488
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,
@@ -893,5 +896,6 @@ export declare enum ItemTypeGroup {
     Refine = 872,
     LitTorch = 873,
     LightDevice = 874,
-    Last = 875
+    Enchant = 875,
+    Last = 876
 }

@@ -23,6 +23,8 @@ export interface ITileEventDescription extends IObjectDescription, IModdable {
     graphicVariation?: boolean;
     isFlammable?: boolean;
     pickUp?: ItemType;
+    lightSource?: boolean;
+    lightColor?: IRGB;
     create?(tileEvent: ITileEvent): void;
     remove?(tileEvent: ITileEvent): void;
     update?(tileEvent: ITileEvent): void;
@@ -43,5 +45,6 @@ export declare enum TileEventType {
     TumblingTumbleweed = 3,
     AnimalDroppings = 4,
     AnimalDung = 5,
-    Guano = 6
+    Guano = 6,
+    WispDust = 7
 }

@@ -50,6 +50,7 @@ declare module MilestoneModifiers {
         [Milestone.TreasureHunter]: undefined;
         [Milestone.Treasurer]: undefined;
         [Milestone.Weathered]: undefined;
+        [Milestone.DestroyerOfMagi]: undefined;
     };
     function getGroup(milestone: Milestone): import("./MilestoneModifier").MilestoneModifierGroup | undefined;
     function initialize(...milestones: Milestone[]): void;
