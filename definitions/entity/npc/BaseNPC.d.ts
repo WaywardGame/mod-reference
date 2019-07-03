@@ -18,7 +18,7 @@ import { ITile } from "tile/ITerrain";
 export default abstract class BaseNPC extends Human implements INPC {
     protected static registrarId: number;
     readonly entityType: EntityType.NPC;
-    "constructor": typeof BaseNPC;
+    readonly constructorFunction: typeof BaseNPC;
     ai: AiType;
     seen: number;
     static getRegistrarId(): number;

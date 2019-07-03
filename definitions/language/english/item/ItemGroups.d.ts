@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { ItemTypeGroup as ItemGroup } from "item/IItem";
-declare const itemGroups: Descriptions<ItemGroup, [string, string?]>;
+declare const itemGroups: Descriptions<ItemGroup, string>;
 export default itemGroups;

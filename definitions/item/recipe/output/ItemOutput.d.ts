@@ -23,7 +23,7 @@ declare class ItemOutput extends RecipeOutput<IItem> {
     private readonly predicates;
     private intermediate;
     constructor(itemType: ItemType, quantity?: number);
-    addRequirement(...args: ArgumentsOf<typeof ItemRequirement>): this;
+    addRequirement(...args: ConstructorParameters<typeof ItemRequirement>): this;
     setRequirementPredicate<R extends RecipeRequirementType>(requirementType: R, predicate: (input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>) => boolean): this;
     predicateMatches<R extends RecipeRequirementType>(requirementType: R, input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>): boolean;
     setQuality(quality: Quality): this;

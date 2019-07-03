@@ -29,11 +29,11 @@ export default class Recipe {
     private reputation;
     constructor();
     getRequirements(): import("../../utilities/stream/Stream").default<RecipeRequirement<any>>;
-    addRequirement<R extends RecipeRequirementType>(requirementType: R, ...args: ArgumentsOf<RecipeRequirementClass<R>>): this;
+    addRequirement<R extends RecipeRequirementType>(requirementType: R, ...args: ConstructorParameters<RecipeRequirementClass<R>>): this;
     setRequirementPredicate<R extends RecipeRequirementType>(requirementType: R, predicate: (input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>) => boolean): this;
     predicateMatches<R extends RecipeRequirementType>(requirementType: R, input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>): boolean;
     getOutputs(): import("../../utilities/stream/Stream").default<RecipeOutput<any>>;
-    addOutput<R extends RecipeOutputType>(outputType: R, ...args: ArgumentsOf<RecipeOutputClass<R>>): this;
+    addOutput<R extends RecipeOutputType>(outputType: R, ...args: ConstructorParameters<RecipeOutputClass<R>>): this;
     getSkill(): SkillType;
     setSkill(skill: SkillType): this;
     getLevel(): RecipeLevel;

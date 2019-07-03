@@ -26,7 +26,6 @@ declare type ArgsOf<F> = ArgumentsOf<Extract<F, AnyFunction>>;
 declare type ReturnOf<F> = ReturnType<Extract<F, AnyFunction>>;
 declare type Handler<H, F> = (host: H, ...args: ArgsOf<F>) => ReturnOf<F>;
 export interface IEventEmitter<H = any, E = any> {
-    copyFrom(emitter: IEventEmitter<H, E>): void;
     emit<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): H;
     emitStream<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;
     emitReduce<K extends keyof E, A extends ReturnOf<E[K]> & Head<ArgsOf<E[K]>>>(event: K, arg: A, ...args: Tail<ArgsOf<E[K]>>): Extract<ReturnOf<E[K]> & Head<ArgsOf<E[K]>>, undefined> extends undefined ? (undefined extends A ? ReturnOf<E[K]> : A) : ReturnOf<E[K]>;

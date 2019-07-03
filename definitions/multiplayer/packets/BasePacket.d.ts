@@ -21,7 +21,7 @@ import { ITileEvent } from "tile/ITileEvent";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class BasePacket {
     protected static registrarId: number;
-    "constructor": typeof BasePacket;
+    readonly constructorFunction: typeof BasePacket;
     protected connection: IConnection;
     protected byteArray: Uint8Array;
     protected dataView: DataView;

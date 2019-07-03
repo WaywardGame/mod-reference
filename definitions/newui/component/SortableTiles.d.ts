@@ -10,14 +10,14 @@
  */
 import Component from "component/Component";
 import { Events } from "event/EventBuses";
-import EventEmitter from "event/EventEmitter";
+import { IEventEmitter } from "event/EventEmitter";
 import Stream from "utilities/stream/Stream";
 interface SortableTilesEvents extends Events<Component> {
     sort(): any;
 }
 export default class SortableTiles<T extends Component> extends Component {
     private readonly variablySized?;
-    readonly event: EventEmitter<this, SortableTilesEvents>;
+    readonly event: IEventEmitter<this, SortableTilesEvents>;
     constructor(variablySized?: "vertical" | "horizontal" | undefined);
     isSorting(): boolean;
     tiles(): Stream<T>;

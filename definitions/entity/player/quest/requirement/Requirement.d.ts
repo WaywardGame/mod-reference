@@ -28,18 +28,18 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
     /**
      * @ts-ignore typescript is dumb
      */
-    setTrigger<H extends Hook>(hook: H, checker: (api: QuestRequirementApi<this>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
+    setTrigger<H extends Hook>(hook: H, checker: (api: IQuestRequirementApi<O, D>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
-    setHostTrigger<E extends keyof Events<IPlayer>>(event: E, checker: (api: QuestRequirementApi<this>, player: IPlayer, ...args: ArgumentsOf<Events<IPlayer>[E]>) => boolean): this;
+    setHostTrigger<E extends keyof Events<IPlayer>>(event: E, checker: (api: IQuestRequirementApi<O, D>, player: IPlayer, ...args: ArgumentsOf<Events<IPlayer>[E]>) => boolean): this;
     getHostTriggers(): IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: IPlayer, ...args: any[]) => boolean]>;
-    setInitializeTrigger(checker: (api: QuestRequirementApi<this>) => boolean): this;
-    getInitializeTrigger(): ((api: QuestRequirementApi<this>) => boolean) | undefined;
+    setInitializeTrigger(checker: (api: IQuestRequirementApi<O, D>) => boolean): this;
+    getInitializeTrigger(): ((api: IQuestRequirementApi<O, D>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;
-    setRelations(handler: (api: QuestRequirementApi<this>) => HighlightSelector[]): this;
-    getRelations(api: QuestRequirementApi<this>): [import("../../../../newui/component/IComponent").HighlightType, string | number][];
-    setTranslation(translation: Translation | ((api: QuestRequirementApi<this>) => Translation)): this;
-    getTranslation(api: QuestRequirementApi<this>): Translation;
-    setCompletionAmountGetter(getter: (api: QuestRequirementApi<this>) => number): this;
-    getCompletionAmount(api: QuestRequirementApi<this>): number;
+    setRelations(handler: (api: IQuestRequirementApi<O, D>) => HighlightSelector[]): this;
+    getRelations(api: IQuestRequirementApi<O, D>): [import("../../../../newui/component/IComponent").HighlightType, string | number][];
+    setTranslation(translation: Translation | ((api: IQuestRequirementApi<O, D>) => Translation)): this;
+    getTranslation(api: IQuestRequirementApi<O, D>): Translation;
+    setCompletionAmountGetter(getter: (api: IQuestRequirementApi<O, D>) => number): this;
+    getCompletionAmount(api: IQuestRequirementApi<O, D>): number;
     protected validateOptions(...options: O): boolean;
 }

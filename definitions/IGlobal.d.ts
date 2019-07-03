@@ -80,10 +80,9 @@ declare global {
 	/**
 	 * Gets the arguments tuple of a function.
 	 */
-	type ArgumentsOf<F extends AnyFunction | Class<any>> =
-		F extends (...args: infer A) => any ? A :
-		F extends new (...args: infer A) => any ? A :
-		[];
+	type ArgumentsOf<T> = Extract<LiterallyJustTheSameThing<Parameters<Extract<T, AnyFunction>>>, any[]>;
+
+	type LiterallyJustTheSameThing<T> = { [K in keyof T]: T[K] };
 
 	type SaferArray<T> = Array<T | undefined>;
 

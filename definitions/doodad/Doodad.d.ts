@@ -26,7 +26,7 @@ import { IVector3 } from "utilities/math/IVector";
 declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable {
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
-    "constructor": typeof Doodad;
+    readonly constructorFunction: typeof Doodad;
     containedItems: IItem[];
     decay?: number;
     disassembly?: IItem[];
