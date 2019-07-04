@@ -9,14 +9,19 @@
  * https://waywardgame.github.io/
  */
 import IDataStorage from "save/datastorage/IDataStorage";
-import { SaveObject } from "save/ISaveManager";
+import { ISaveObject } from "save/ISaveManager";
 export default class LocalStorageDataStorage implements IDataStorage {
     isEnabled(): boolean;
     isReady(): boolean;
     isSlotUsed(slot: number, interval?: number): boolean;
-    saveToSlot(slot: number, saveObject: SaveObject): number;
-    loadFromSlot(slot: number, saveObject: SaveObject): void;
+    saveToSlot(slot: number, saveObject: ISaveObject): number;
+    loadFromSlot(slot: number): ISaveObject;
     deleteSlot(slot: number): boolean;
     deleteAllSlots(): boolean;
     deleteAllData(): void;
+    /**
+     * Enumerates all the keys in local storage for the given slot
+     * @param slot Slot number
+     */
+    private getLocalStorageSlotKeys;
 }

@@ -10,7 +10,7 @@
  */
 import IPlayer from "entity/player/IPlayer";
 import IClientStore from "save/clientStore/IClientStore";
-import { ISaveInfo, ISaveManager, SaveObject, SaveSort, SortDirection } from "save/ISaveManager";
+import { ISaveInfo, ISaveManager, ISaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 import ISerializer from "save/ISerializer";
 export default class SaveManager implements ISaveManager {
     private loadedGlobalSlot;
@@ -52,16 +52,16 @@ export default class SaveManager implements ISaveManager {
      */
     getMostRecentSlot(): Promise<number>;
     /**
-     * Returns a tuple [bytes: number, saveObject: SaveObject]
+     * Returns a tuple [bytes: number, saveObject: ISaveObject]
      */
     save(slot: number, unloading?: boolean): Promise<ISaveInfo>;
     /**
      * Returns whether or not it succeeded
      */
     load(slot: number): Promise<boolean>;
-    loadPartial(slot: number): Promise<SaveObject>;
-    loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
-    loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string | undefined): any;
+    loadPartial(slot: number): Promise<ISaveObject>;
+    loadPartialData(saveObject: ISaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
+    loadPartialDataInside(saveObject: ISaveObject, saveObjectKey: string, key?: string | undefined): any;
     /**
      * Returns the number of bytes the save takes up
      */
@@ -70,17 +70,17 @@ export default class SaveManager implements ISaveManager {
      *  Returns the number of bytes the save takes up
      */
     savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any): Promise<number>;
-    exportSave(slot: number): Promise<SaveObject>;
+    exportSave(slot: number): Promise<ISaveObject>;
     /**
      * Returns the number of bytes the save takes up, or undefined, if an error occurs
      */
-    importSave(slot: number, saveObject: SaveObject | string): Promise<number | undefined>;
+    importSave(slot: number, saveObject: ISaveObject | string): Promise<number | undefined>;
     copySave(slot?: number, target?: number): Promise<number | undefined>;
     deleteSlot(slot: number): Promise<boolean | undefined>;
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteAllData(): Promise<void>;
-    compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
-    decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
+    compressSave(slot: number, saveObject: ISaveObject, exporting?: boolean): void;
+    decompressSave(slot: number, saveObject: ISaveObject, importing?: boolean): void;
     getSerializer(): ISerializer;
     getGameStateAsJson(cleanup?: boolean): string;
     private getPropertiesToSerialize;

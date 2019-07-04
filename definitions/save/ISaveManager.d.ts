@@ -12,12 +12,12 @@ import IPlayer from "entity/player/IPlayer";
 import IClientStore from "save/clientStore/IClientStore";
 import { ISerializer } from "save/ISerializer";
 export interface ISaveManager {
-    compressSave(slot: number, saveObject: SaveObject, exporting?: boolean): void;
-    decompressSave(slot: number, saveObject: SaveObject, importing?: boolean): void;
+    compressSave(slot: number, saveObject: ISaveObject, exporting?: boolean): void;
+    decompressSave(slot: number, saveObject: ISaveObject, importing?: boolean): void;
     deleteAllData(): Promise<void>;
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteSlot(slot: number): Promise<boolean | undefined>;
-    exportSave(slot: number): Promise<SaveObject>;
+    exportSave(slot: number): Promise<ISaveObject>;
     getClientStore(player?: IPlayer): IClientStore;
     getFirstFreeSlot(): Promise<number | undefined>;
     getGameStateAsJson(cleanup?: boolean): string;
@@ -26,14 +26,14 @@ export interface ISaveManager {
     getSlots(): Promise<boolean[]>;
     getUsedSlots(): Promise<number[]>;
     getUsedSlotsSorted(sortBy: SaveSort, direction?: SortDirection): Promise<number[]>;
-    importSave(slot: number, data: SaveObject | string): Promise<number | undefined>;
+    importSave(slot: number, data: ISaveObject | string): Promise<number | undefined>;
     initialize(): void;
     isEnabled(): boolean;
     isSlotUsed(slot: number): Promise<boolean>;
     load(slot: number): Promise<boolean>;
-    loadPartial(slot: number): Promise<SaveObject>;
-    loadPartialData(saveObject: SaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
-    loadPartialDataInside(saveObject: SaveObject, saveObjectKey: string, key?: string | undefined): any;
+    loadPartial(slot: number): Promise<ISaveObject>;
+    loadPartialData(saveObject: ISaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
+    loadPartialDataInside(saveObject: ISaveObject, saveObjectKey: string, key?: string | undefined): any;
     save(slot: number, unloading?: boolean): Promise<ISaveInfo>;
     savePartialData(slot: number, object: any, key: string, saveObjectKey: string): Promise<number>;
     savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any): Promise<number>;
@@ -43,7 +43,7 @@ export default ISaveManager;
 export interface ISaveInfo {
     slot: number;
     bytes?: number;
-    saveObject?: SaveObject;
+    saveObject?: ISaveObject;
 }
 export declare enum SaveSort {
     SaveTime = 0,
@@ -61,10 +61,12 @@ export declare let SLOT_MULTIPLAYER: number;
 export declare let SLOT_COUNT_MAX: number;
 export declare let propertiesToSerialize: ISerializeProperty[];
 export declare let propertiesToSerializeGlobal: ISerializeProperty[];
-export declare class SaveObject {
+export interface ISaveObject {
     version: string;
-    data: any;
     isCompressed: boolean;
+    data: {
+        [index: string]: any;
+    };
 }
 export interface ISerializeProperty {
     key: string;

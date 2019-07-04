@@ -16,7 +16,7 @@ import { TurnMode } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-import { SaveObject } from "save/ISaveManager";
+import { ISaveObject } from "save/ISaveManager";
 import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayerEvents {
     connect(): any;
@@ -162,7 +162,7 @@ export interface IMultiplayerWorldData {
     multiplayerOptions: IMultiplayerOptions;
     difficulty: Difficulty;
     difficultyOptions?: IDifficultyOptions;
-    saveObject: SaveObject;
+    saveObject: ISaveObject;
     initialFlowFieldPids: number[];
 }
 export interface IMultiplayerMod {
