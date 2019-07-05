@@ -16,7 +16,6 @@ export interface CharacterCreationArgs {
 }
 export default class CharacterCreationMenu extends Menu {
     private gameOptions;
-    private startButton;
     private inputName;
     private elementCharacterPreview;
     private swatchesHair;

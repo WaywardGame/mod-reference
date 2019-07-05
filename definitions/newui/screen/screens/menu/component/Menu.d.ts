@@ -12,6 +12,7 @@ import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
+import { BlockRow } from "newui/component/BlockRow";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IComponent } from "newui/component/IComponent";
@@ -24,9 +25,12 @@ export default class Menu extends Component implements IMenu, IHookHost {
     canCancel: boolean | undefined;
     isSubmenu: boolean;
     readonly selection: SelectionHandler;
-    readonly title: Heading;
     readonly buttonBack: BackButton;
+    confirmButtons: ConfirmButtonHandler;
+    readonly title: Heading;
     readonly description: Text;
+    readonly header: BlockRow;
+    readonly staticContent: Component;
     readonly content: Component;
     tabContainer: Component;
     readonly tabs: Map<string | number, Tab<string | number | undefined>>;
@@ -70,12 +74,18 @@ export declare class MenuSection extends Component {
     addContent(...content: ArrayOfIterablesOr<IComponent | undefined>): this;
     dumpContent(): this;
 }
-export declare const enum BackButtonType {
-    Back = 0,
-    Check = 1
-}
 export declare class BackButton extends Button {
     constructor();
-    setType(type: BackButtonType): void;
+}
+export declare class ConfirmButtonHandler {
+    private readonly menu;
+    readonly buttons: ConfirmButton[];
+    readonly heading: Heading;
+    constructor(menu: Menu);
+    initialize(initializer: (button: ConfirmButton) => any): this;
+    setLabel(initializer: (heading: Heading) => any): this;
+}
+export declare class ConfirmButton extends Button {
+    constructor();
 }
 export {};

@@ -84,6 +84,7 @@ export default interface IHuman extends IEntity {
     damage(amount: number, damageMessage: Message | Translation, soundDelay?: number, causesBlood?: boolean): number | undefined;
     damage(damageInfo: IDamageInfo): number | undefined;
     damageRandomEquipment(): void;
+    discoverRecipe(recipeType: ItemType): void;
     equip(item: IItem, slot: EquipType): void;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     getConsumeBonus(item: IItem | undefined, skillUse?: SkillType): number;

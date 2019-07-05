@@ -111,6 +111,7 @@ export default abstract class Human extends Entity implements IHuman {
     getConsumeBonus(item: IItem | undefined, skillUse?: SkillType): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
+    discoverRecipe(recipeType: ItemType): void;
     /**
      * Improve one of the core player stats
      */

@@ -57,5 +57,6 @@ declare module Arrays {
      * has the effect of heavily reducing the number of required sorting function calls.
      */
     function getSortedIndex<T>(array: ArrayLike<T>, value: T, sorter: (a: T, b: T) => number): number;
+    function pushTo<T>(arr: T[]): (...items: T[]) => number;
 }
 export default Arrays;

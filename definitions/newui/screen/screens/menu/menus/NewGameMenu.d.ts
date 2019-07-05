@@ -8,46 +8,32 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { Milestone } from "entity/player/IMilestone";
 import { Difficulty, IDifficultyOptions } from "game/Difficulty";
+import Input from "newui/component/Input";
 import Menu from "newui/screen/screens/menu/component/Menu";
+import TabGameMode from "newui/screen/screens/menu/menus/newgame/TabGameMode";
+import TabGameplayModifiers from "newui/screen/screens/menu/menus/newgame/TabGameplayModifiers";
+import TabMultiplayer from "newui/screen/screens/menu/menus/newgame/TabMultiplayer";
 export default class NewGameMenu extends Menu {
-    private inputName;
-    private inputSeed;
-    private inputSeedRow;
-    private difficulty;
-    private turnMode;
-    private choiceTurnModeManual;
-    private choiceTurnModeRealTime;
-    private choiceTurnModeSimulated;
-    private lobbyType;
-    private choiceLobbyFriends;
-    private choiceLobbyPublic;
-    private inputPVP;
-    private maxPlayersRow;
-    private tickSpeedRow;
-    private buttonNext;
-    private customGameOptionsMenu;
-    private milestoneModifiersMenu;
-    private multiplayerMode;
-    private choiceMultiplayer;
-    private choiceSingleplayer;
+    readonly inputName: Input;
+    readonly inputSeed: Input;
+    readonly tabGameMode: TabGameMode;
+    readonly tabMultiplayer: TabMultiplayer;
+    readonly tabGameplayModifiers: TabGameplayModifiers;
+    difficultyOptions?: IDifficultyOptions;
+    readonly milestones: Set<Milestone>;
     private slot;
-    private difficultyOptions?;
-    private readonly milestones;
     private wasEditedPreShown;
     constructor();
-    create(): void;
     setSeed(seed: string | number, lock?: boolean): this;
     setDifficulty(difficulty: Difficulty, lock?: boolean): this;
     setDifficultyOptions(options: IDifficultyOptions): this;
     setMultiplayer(): this;
+    getDifficultyOptions(): IDifficultyOptions;
     protected refreshAsync(): Promise<void>;
-    private updateDifficulty;
+    private getDefaultSaveName;
     private refresh;
     private startOrNext;
     private getPlayOptions;
-    private getCustomGameOptionsMenu;
-    private getMilestoneModifiersMenu;
-    private getDifficultyOptions;
-    private getDefaultSaveName;
 }
