@@ -17,7 +17,7 @@ import { ICreature } from "entity/creature/ICreature";
 import { AttackType, EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
 import { EquipType, RestType, SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
-import { Milestone } from "entity/player/IMilestone";
+import { Milestone } from "game/milestones/IMilestone";
 import IPlayer, { TurnType } from "entity/player/IPlayer";
 import { Quality } from "game/IObject";
 import { IContainer, IItem, ItemType } from "item/IItem";

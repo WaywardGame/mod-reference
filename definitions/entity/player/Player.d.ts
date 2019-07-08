@@ -14,13 +14,13 @@ import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import IHuman, { EquipType, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
-import { Milestone } from "entity/player/IMilestone";
 import { IMovementIntent, IPlayer, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
+import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, IItem, ItemType } from "item/IItem";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -73,7 +73,6 @@ export default class Player extends Human implements IPlayer {
     nextMoveTime: number;
     nextMoveDirection: Direction | undefined;
     displayCreature?: CreatureType;
-    private _milestoneUpdates;
     private readonly _movementIntent;
     constructor(identifier?: string);
     readonly clientStore: IClientStore;
@@ -95,7 +94,7 @@ export default class Player extends Human implements IPlayer {
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkSkillMilestones(): void;
     staminaCheck(): boolean;
-    addMilestone(milestone: Milestone, data?: number): void;
+    addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
     calculateEquipmentStats(): void;
     getDefaultCarveTool(): IItem | undefined;
     isFacingCarvableTile(): boolean;
@@ -131,7 +130,7 @@ export default class Player extends Human implements IPlayer {
      * Used internally for `Stat.Weight.max`
      */
     getMaxWeight(): number;
-    setup(completedMilestones: number): void;
+    setup(): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;
     getWeightStatus(): WeightStatus;
@@ -167,7 +166,6 @@ export default class Player extends Human implements IPlayer {
     faceDirection(direction: Direction, turnDelay?: number): boolean;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;
-    updateMilestones(): void;
     healthSyncCheck(): void;
     /**
      * This needs to be called whenever the player's strength requires an update.

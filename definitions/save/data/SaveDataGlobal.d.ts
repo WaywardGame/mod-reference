@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { ICharacter, ICrafted } from "entity/IHuman";
-import { IMilestoneData } from "entity/player/IMilestone";
+import { IMilestoneData } from "game/milestones/IMilestone";
 import { ModState } from "mod/IModInfo";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
 import ISaveDataGlobal, { IHighscore, IOptions } from "save/data/ISaveDataGlobal";

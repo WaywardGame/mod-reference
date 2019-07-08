@@ -13,6 +13,7 @@ export default class BindingsMenu extends Menu {
     private readonly modBindingsTab;
     private readonly bindCatcher;
     private readonly bindSections;
+    private readonly filterInput;
     constructor();
     onShow(): void;
     private filterBindRows;

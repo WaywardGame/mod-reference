@@ -10,9 +10,9 @@
  */
 import { DropLocation } from "entity/action/actions/Drop";
 import { ICharacter, ICrafted } from "entity/IHuman";
-import { IMilestoneData } from "entity/player/IMilestone";
-import { Difficulty, IDifficultyOptions } from "game/Difficulty";
+import { GameMode, IGameOptions } from "game/GameMode";
 import { InspectType } from "game/inspection/IInspection";
+import { IMilestoneData } from "game/milestones/IMilestone";
 import { ISerializedTranslation } from "language/Translation";
 import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
@@ -149,11 +149,11 @@ export interface IHighscore {
     message: ISerializedTranslation;
     turns: number;
     score: number;
-    difficulty: Difficulty;
+    difficulty: GameMode;
     date: number;
     characterName: string;
     seed?: string | number;
-    difficultyOptions?: IDifficultyOptions;
+    difficultyOptions?: IGameOptions;
 }
 export declare type IHighscoreOld = Partial<IHighscore> & {
     dailyChallenge: boolean;

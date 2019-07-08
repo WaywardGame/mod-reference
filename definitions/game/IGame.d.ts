@@ -13,11 +13,11 @@ import { ICorpse } from "entity/creature/corpse/ICorpse";
 import { ICreature, IDamageInfo } from "entity/creature/ICreature";
 import { ICharacter, ICrafted, SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
-import { Milestone } from "entity/player/IMilestone";
 import { IPlayer, TurnType } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
-import { Difficulty, IDifficultyOptions } from "game/Difficulty";
+import { GameMode, IGameOptions } from "game/GameMode";
 import { Quality } from "game/IObject";
+import { Milestone } from "game/milestones/IMilestone";
 import TimeManager from "game/TimeManager";
 import { IItem } from "item/IItem";
 import Translation from "language/Translation";
@@ -109,10 +109,9 @@ export interface IGame extends EventEmitter.Host<IGameEvents> {
     getBenignity(): number;
     getBlackness(): number;
     getCameraPosition(): IVector2;
-    getCompletedMilestoneCount(): number;
     getDailyChallengeSeed(): number;
-    getDifficulty(): Difficulty;
-    getDifficultyOptions(): IDifficultyOptions;
+    getDifficulty(): GameMode;
+    getDifficultyOptions(): IGameOptions;
     getExactCameraPosition(): Vector2;
     getFireStage(decay: number): FireStage;
     getHeight(z0: number, z1: number, d: number): number;
@@ -234,8 +233,8 @@ export interface IPlayOptions {
     slot: number | undefined;
     name: string;
     seed: string | number | undefined;
-    difficulty: Difficulty;
-    difficultyOptions?: IDifficultyOptions;
+    difficulty: GameMode;
+    difficultyOptions?: IGameOptions;
     milestoneModifiers: Set<Milestone>;
     character: ICharacter;
     multiplayer: IMultiplayerOptions | true | undefined;
@@ -250,7 +249,6 @@ export interface IPlayerOptions {
     options?: IOptions;
     position?: IVector3;
     character: ICharacter;
-    completedMilestones?: number;
     crafted?: {
         [index: number]: ICrafted;
     };
@@ -357,10 +355,10 @@ export declare enum TileUpdateType {
     Terrain = 7,
     Corpse = 8
 }
-export declare const lineOfSightRadius = 15;
-export declare const lineOfSightMaxRadius = 20;
-export declare const lineOfSightDetail = 4;
-export declare const interval = 16.6666;
-export declare const maximumTurnDelay: number;
-export declare const defaultTurnDelay: number;
-export declare const defaultLightColor: import("../utilities/Color").IRGB;
+export declare const LINE_OF_SIGHT_RADIUS = 15;
+export declare const LINE_OF_SIGHT_RADIUS_MAX = 20;
+export declare const LINE_OF_SIGHT_DETAIL = 4;
+export declare const INTERVAL = 16.6666;
+export declare const TURN_DELAY_MAX: number;
+export declare const TURN_DELAY_DEFAULT: number;
+export declare const LIGHT_COLOR_DEFAULT: import("../utilities/Color").IRGB;

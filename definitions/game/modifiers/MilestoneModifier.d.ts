@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDifficultyOptions } from "game/Difficulty";
+import { IGameOptions } from "game/GameMode";
 export declare enum MilestoneModifierGroup {
     Creatures = 0,
     Skills = 1,
@@ -25,7 +25,7 @@ export default abstract class MilestoneModifier {
     /**
      * Difficulty options to be applied due to this modifier
      */
-    options?: RecursivePartial<IDifficultyOptions>;
+    options?: RecursivePartial<IGameOptions>;
     initialize(): void;
     uninitialize(): void;
     abstract getGroup(): MilestoneModifierGroup;

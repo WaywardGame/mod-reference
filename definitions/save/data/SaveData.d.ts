@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { PlayerState } from "entity/player/IPlayer";
-import { Difficulty } from "game/Difficulty";
+import { GameMode } from "game/GameMode";
 import { ISerializedTranslation } from "language/Translation";
 import { IMultiplayerState } from "multiplayer/IMultiplayer";
 import IClientStore from "save/clientStore/IClientStore";
@@ -22,10 +22,10 @@ export default class SaveData implements ISaveData {
     gameBaseSeed: number | string;
     gameCreationTime: number;
     gameThumbnail: string;
-    gameDifficulty: Difficulty;
+    gameDifficulty: GameMode;
     saveManagerSaveTime: number;
     saveManagerTicks: number;
-    saveManagerDifficulty: Difficulty;
+    saveManagerDifficulty: GameMode;
     saveManagerScore: number;
     saveManagerOriginalVersion: string;
     saveManagerDeathBy: ISerializedTranslation;

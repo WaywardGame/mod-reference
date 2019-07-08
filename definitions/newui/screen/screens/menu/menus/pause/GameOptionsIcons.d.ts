@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDifficultyOptions } from "game/Difficulty";
+import { IGameOptions } from "game/GameMode";
 import { IModdable } from "mod/ModRegistry";
 import { ITooltip } from "newui/component/IComponent";
-export declare enum DifficultyOptionsIcon {
+export declare enum GameOptionsIcon {
     Peaceful = 0,
     Creatures = 1,
     Respawn = 2,
@@ -30,10 +30,10 @@ export declare enum DifficultyOptionsIcon {
     NoItems = 15,
     Weight = 16
 }
-export interface IDifficultyOptionsIcon extends IModdable {
+export interface IGameOptionsIcon extends IModdable {
     imagePath?: string;
-    check(options: IDifficultyOptions): boolean;
-    tooltip?(tooltip: ITooltip, options: IDifficultyOptions): any;
+    check(options: IGameOptions): boolean;
+    tooltip?(tooltip: ITooltip, options: IGameOptions): any;
 }
-declare const difficultyOptionsIcons: Descriptions<DifficultyOptionsIcon, IDifficultyOptionsIcon>;
-export default difficultyOptionsIcons;
+declare const gameOptionsIcons: Descriptions<GameOptionsIcon, IGameOptionsIcon>;
+export default gameOptionsIcons;

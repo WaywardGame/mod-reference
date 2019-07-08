@@ -15,12 +15,12 @@ import IHuman, { EquipType, HairColor, HairStyle, IRestData, RestType, SkinColor
 import { IStat, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
 import { IMessage } from "entity/player/IMessageManager";
-import { Milestone } from "entity/player/IMilestone";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
+import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, IItem, ItemType } from "item/IItem";
 import Message from "language/dictionary/Message";
 import IClientStore from "save/clientStore/IClientStore";
@@ -107,7 +107,7 @@ export interface IPlayer extends IHuman {
     revealItem(itemType: ItemType): void;
     setId(id: number): void;
     setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
-    setup(completedMilestones: number): void;
+    setup(): void;
     showRestInterrupt(restType: RestType): void;
     staminaCheck(): boolean;
     tick(isPassTurn?: boolean): void;
@@ -115,7 +115,6 @@ export interface IPlayer extends IHuman {
     unequipAll(): void;
     updateDialogInfo(dialogIndex: string | number): void;
     updateHandToUse(): void;
-    updateMilestones(): void;
     updateMovementIntent(intent: IMovementIntent): void;
     updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
     updateStatuses(): void;

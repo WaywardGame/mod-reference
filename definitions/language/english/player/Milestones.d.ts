@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Milestone as Milestone } from "entity/player/IMilestone";
+import { Milestone as Milestone } from "game/milestones/IMilestone";
 declare const milestones: Descriptions<Milestone, [string, string, string]>;
 export default milestones;

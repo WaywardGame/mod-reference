@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { GameMode } from "game/GameMode";
 export declare enum Milestone {
     Abnormalizer = 0,
     Chef = 1,
@@ -55,13 +56,31 @@ export declare enum MilestoneVisibility {
     Hidden = 2
 }
 export declare enum MilestoneDataType {
-    Counter = 0,
-    Check = 1
+    /**
+     * This milestone will be granted after being incremented `amount` times.
+     * It does not require each increment to have a different ID, like `counter` does.
+     *
+     * For example, this type could be used for "number of turns played".
+     */
+    Increment = 0,
+    /**
+     * This milestone type requires a number of entries, each of which must be distinct.
+     *
+     * For example, this could be used to check if the player has tamed every single creature type.
+     */
+    Counter = 1,
+    /**
+     * This milestone will be granted when an `amount` of conditions happen simultaneously.
+     *
+     * For example, this could be used to check for a skill level.
+     */
+    Check = 2
 }
 export interface IMilestone {
     amount: number;
-    dataType?: MilestoneDataType;
-    visibility?: MilestoneVisibility;
+    dataType: MilestoneDataType;
+    visibility: MilestoneVisibility;
+    gameModeLock: GameMode[];
 }
 export interface IMilestoneData {
     amount: number;

@@ -11,7 +11,7 @@
 import Menu from "newui/screen/screens/menu/component/Menu";
 import { ISteamFriend } from "steamworks/ISteamworks";
 export default class PauseMenu extends Menu {
-    readonly difficulty: import("../../../../../game/Difficulty").Difficulty;
+    readonly difficulty: import("../../../../../game/GameMode").GameMode;
     readonly pvp: boolean;
     readonly mods: [string, import("../../../../util/Misc").ModLoadability][];
     readonly friends: ISteamFriend[];

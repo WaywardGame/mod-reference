@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IMilestone, Milestone } from "entity/player/IMilestone";
+import { IMilestone, Milestone } from "game/milestones/IMilestone";
 declare module Milestones {
     const descriptions: Descriptions<Milestone, IMilestone>;
     /**
@@ -23,5 +23,8 @@ declare module Milestones {
      * Get a `Stream` of all completed milestones
      */
     function getCompleted(): import("../../utilities/stream/Stream").default<Milestone>;
+    type IMilestoneUpdate = [Milestone, number?];
+    function add(...updates: IMilestoneUpdate[]): void;
+    function update(): void;
 }
 export default Milestones;

@@ -15,7 +15,7 @@ import { SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
 import { IPlayer, TurnType } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
-import { Difficulty, IDifficultyOptions } from "game/Difficulty";
+import { GameMode, IGameOptions } from "game/GameMode";
 import { FireStage, FireType, IGame, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TileUpdateType, TurnMode } from "game/IGame";
 import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
@@ -58,8 +58,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     corpses: SaferArray<ICorpse>;
     creatures: SaferArray<ICreature>;
     creatureSpawnTimer: number;
-    difficulty: Difficulty;
-    difficultyOptions: IDifficultyOptions;
+    difficulty: GameMode;
+    difficultyOptions: IGameOptions;
     doodads: SaferArray<IDoodad>;
     flowFieldSyncCount: number;
     items: IItem[];
@@ -163,8 +163,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     updateAmbientLightLevel(z: number): number;
     calculateAmbientLightLevel(z: number): number;
     updateReputation(reputation: number): void;
-    getDifficulty(): Difficulty;
-    getDifficultyOptions(): IDifficultyOptions;
+    getDifficulty(): GameMode;
+    getDifficultyOptions(): IGameOptions;
     getReputation(): number;
     getMalignity(): number;
     getBenignity(): number;
@@ -221,7 +221,6 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
     updateOption(player: IPlayer | undefined, id: keyof IOptions, value: boolean | number): void;
     updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
-    getCompletedMilestoneCount(): number;
     packGround(x: number, y: number, z: number): void;
     getRandomQuality(bonusQuality?: number): Quality.None | Quality.Remarkable | Quality.Exceptional | Quality.Legendary;
     getQualityDurabilityBonus(quality: Quality, itemDurability: number): number;

@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Milestone } from "entity/player/IMilestone";
-import { Difficulty, IDifficultyOptions } from "game/Difficulty";
+import { GameMode, IGameOptions } from "game/GameMode";
+import { Milestone } from "game/milestones/IMilestone";
 import Input from "newui/component/Input";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import TabGameMode from "newui/screen/screens/menu/menus/newgame/TabGameMode";
@@ -21,16 +21,16 @@ export default class NewGameMenu extends Menu {
     readonly tabGameMode: TabGameMode;
     readonly tabMultiplayer: TabMultiplayer;
     readonly tabGameplayModifiers: TabGameplayModifiers;
-    difficultyOptions?: IDifficultyOptions;
+    difficultyOptions?: IGameOptions;
     readonly milestones: Set<Milestone>;
     private slot;
     private wasEditedPreShown;
     constructor();
     setSeed(seed: string | number, lock?: boolean): this;
-    setDifficulty(difficulty: Difficulty, lock?: boolean): this;
-    setDifficultyOptions(options: IDifficultyOptions): this;
+    setDifficulty(difficulty: GameMode, lock?: boolean): this;
+    setDifficultyOptions(options: IGameOptions): this;
     setMultiplayer(): this;
-    getDifficultyOptions(): IDifficultyOptions;
+    getDifficultyOptions(): IGameOptions;
     protected refreshAsync(): Promise<void>;
     private getDefaultSaveName;
     private refresh;

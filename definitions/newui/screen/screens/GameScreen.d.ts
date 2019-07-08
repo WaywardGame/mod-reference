@@ -55,9 +55,9 @@ export default class GameScreen extends Screen implements IHookHost {
     private readonly gameCanvas;
     constructor();
     openDialog<D = Dialog>(id: DialogId): D;
-    closeDialog(id: DialogId): Promise<void>;
-    toggleDialog(id: DialogId, force?: boolean): void;
-    toggleDialogs(states: IDialogStates): void;
+    closeDialog(id: DialogId): Promise<this>;
+    toggleDialog(id: DialogId, force?: boolean): this;
+    toggleDialogs(states: IDialogStates): this;
     getQuadrantComponent<C extends QuadrantComponent = QuadrantComponent>(id: string | number): C | undefined;
     getQuadrantContainer(): Component;
     isMouseWithin(): boolean;

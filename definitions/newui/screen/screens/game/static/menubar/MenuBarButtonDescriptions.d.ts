@@ -44,11 +44,10 @@ export interface IMenuBarButtonDescription extends IModdable {
     bindable?: Bindable;
     /**
      * What should happen when this button is clicked.
-     * @returns `false` if the activation was cancelled, `true` or `undefined` otherwise.
      */
-    onActivate(): boolean | undefined | void | Promise<void>;
-    tooltip?(tooltip: ITooltip): ITooltip;
-    onCreate?(button: Button): void;
+    onActivate(): any;
+    onCreate?(button: Button): any;
+    tooltip?(tooltip: ITooltip, button: Button): ITooltip;
 }
 export declare enum MenuBarButtonGroup {
     Meta = 0,

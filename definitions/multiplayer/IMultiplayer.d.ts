@@ -11,7 +11,7 @@
 import { ICharacter } from "entity/IHuman";
 import { IPlayer, PlayerState } from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
-import { Difficulty, IDifficultyOptions } from "game/Difficulty";
+import { GameMode, IGameOptions } from "game/GameMode";
 import { TurnMode } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
@@ -160,8 +160,8 @@ export interface IMultiplayerWorldData {
     playerCount: number;
     mods: IMultiplayerMod[];
     multiplayerOptions: IMultiplayerOptions;
-    difficulty: Difficulty;
-    difficultyOptions?: IDifficultyOptions;
+    difficulty: GameMode;
+    difficultyOptions?: IGameOptions;
     saveObject: ISaveObject;
     initialFlowFieldPids: number[];
 }

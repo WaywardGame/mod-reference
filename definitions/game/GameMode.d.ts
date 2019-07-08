@@ -12,16 +12,16 @@ import { CreatureType } from "entity/creature/ICreature";
 import { StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import { Milestone } from "entity/player/IMilestone";
+import { Milestone } from "game/milestones/IMilestone";
 import { ItemType } from "item/IItem";
 import { IVersionInfo } from "utilities/Version";
-export declare enum Difficulty {
+export declare enum GameMode {
     Hardcore = 0,
     Casual = 1,
     Challenge = 2,
     Custom = 3
 }
-export interface IDifficultyOptions {
+export interface IGameOptions {
     /**
      * Whether players respawn when they die
      */
@@ -38,7 +38,7 @@ export interface IDifficultyOptions {
         /**
          * Custom options for each creature.
          */
-        creature: Map<CreatureType, IDifficultyOptionsCreature>;
+        creature: Map<CreatureType, IGameOptionsCreature>;
     };
     time: {
         /**
@@ -62,11 +62,11 @@ export interface IDifficultyOptions {
         /**
          * A map of options for each stat.
          */
-        stats: Map<Stat, IDifficultyOptionsStat>;
+        stats: Map<Stat, IGameOptionsStat>;
         /**
          * A map of options for each status effect.
          */
-        statusEffects: Map<StatusType, IDifficultyOptionsStatusEffect>;
+        statusEffects: Map<StatusType, IGameOptionsStatusEffect>;
         /**
          * Whether skills should be randomly generated.
          *
@@ -76,11 +76,11 @@ export interface IDifficultyOptions {
         /**
          * Configuration that affects every skill which doesn't have its own configuration.
          */
-        globalSkills: IDifficultyOptionsSkill;
+        globalSkills: IGameOptionsSkill;
         /**
          * Custom options for each skill.
          */
-        skills: Map<SkillType, IDifficultyOptionsSkill>;
+        skills: Map<SkillType, IGameOptionsSkill>;
         allRecipesUnlocked: boolean;
         reputation: {
             /**
@@ -116,10 +116,10 @@ export interface IDifficultyOptions {
 /**
  * "Partial" difficulty options; used to apply options over top base options. Milestone modifiers can never exist on partial difficulty options.
  */
-export declare type IDifficultyOptionsPartial = RecursivePartial<IDifficultyOptions> & {
+export declare type IGameOptionsPartial = RecursivePartial<IGameOptions> & {
     milestoneModifiers?: never;
 };
-export interface IDifficultyOptionsStat {
+export interface IGameOptionsStat {
     /**
      * If this is for `Stat.Strength`, this will be the max health and max weight.
      *
@@ -135,7 +135,7 @@ export interface IDifficultyOptionsStat {
      */
     changeTimerMultiplier: number;
 }
-export interface IDifficultyOptionsStatusEffect {
+export interface IGameOptionsStatusEffect {
     /**
      * Whether every player starts with this status effect.
      */
@@ -157,7 +157,7 @@ export interface IDifficultyOptionsStatusEffect {
      */
     effectMultiplier: number;
 }
-export interface IDifficultyOptionsSkill {
+export interface IGameOptionsSkill {
     /**
      * The initial value of this skill.
      */
@@ -167,7 +167,7 @@ export interface IDifficultyOptionsSkill {
      */
     gainMultiplier: number;
 }
-export interface IDifficultyOptionsCreature {
+export interface IGameOptionsCreature {
     /**
      * Can spawn at all.
      */
@@ -178,10 +178,10 @@ export interface IDifficultyOptionsCreature {
     aberrantSpawns: boolean;
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
-export declare function getDefaultDifficultyOptions(difficulty: Difficulty, seed?: number): IDifficultyOptions;
-export interface IDifficultyOptionsOld extends IDifficultyOptions {
+export declare function getDefaultGameOptions(difficulty: GameMode, seed?: number): IGameOptions;
+export interface IGameOptionsOld extends IGameOptions {
     peaceful?: boolean;
 }
-export declare module IDifficultyOptions {
-    function upgrade(difficultyOptions: IDifficultyOptionsOld, version: IVersionInfo): boolean;
+export declare module IGameOptions {
+    function upgrade(difficultyOptions: IGameOptionsOld, version: IVersionInfo): boolean;
 }

@@ -10,7 +10,6 @@
  */
 import { IDamageInfo } from "entity/creature/ICreature";
 import IEntity from "entity/IEntity";
-import { Milestone } from "entity/player/IMilestone";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
@@ -18,6 +17,7 @@ import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
+import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, IItem, ItemType } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Message from "language/dictionary/Message";

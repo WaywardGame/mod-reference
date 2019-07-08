@@ -10,7 +10,7 @@
  */
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
-import { Difficulty } from "game/Difficulty";
+import { GameMode } from "game/GameMode";
 import InputButton from "newui/component/InputButton";
 export interface SaveSlotData {
     slot: number;
@@ -26,7 +26,7 @@ export interface SaveSlotData {
     turns: number;
     seed: string;
     name: string;
-    difficulty: Difficulty;
+    difficulty: GameMode;
 }
 interface ISaveSlotEvents extends Events<InputButton> {
     rename(): any;

@@ -585,6 +585,11 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      * @param user The function to call for each item
      */
     abstract forEach(user: (val: T, index: number) => any): void;
+    /**
+     * Runs a function on each item in this Stream.
+     * @param user The function to call for each item
+     */
+    abstract forEach(splat: true, user: T extends any[] ? ((...args: T) => any) : never): void;
     abstract next(): void;
     /**
      * Returns whether the Stream has a next entry.

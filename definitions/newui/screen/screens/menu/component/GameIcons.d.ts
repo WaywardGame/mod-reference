@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Difficulty } from "game/Difficulty";
+import { GameMode } from "game/GameMode";
 import Component from "newui/component/Component";
 import { IRefreshable } from "newui/component/Refreshable";
 import { ISteamFriend } from "steamworks/ISteamworks";
 export interface IGameIconsHost {
-    difficulty: Difficulty;
+    difficulty: GameMode;
     pvp: boolean;
     mods: Array<[string, string]>;
     friends: ISteamFriend[];

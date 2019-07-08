@@ -10,7 +10,7 @@
  */
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
-import { Difficulty } from "game/Difficulty";
+import { GameMode } from "game/GameMode";
 import ChoiceList, { Choice } from "newui/component/ChoiceList";
 import { Tab } from "newui/screen/screens/menu/component/Menu";
 import CustomGameOptionsMenu from "newui/screen/screens/menu/menus/newgame/CustomGameOptionsMenu";
@@ -33,11 +33,11 @@ interface IDifficultyChoiceEvents extends Events<Choice> {
     updateDailyChallenge(): any;
 }
 declare class DifficultyChoice extends Choice {
-    readonly difficulty: Difficulty;
+    readonly difficulty: GameMode;
     event: IEventEmitter<this, IDifficultyChoiceEvents>;
     isDailyChallenge: boolean;
     private dailyChallengeButton?;
-    constructor(difficulty: Difficulty);
+    constructor(difficulty: GameMode);
     setDailyChallenge(dailyChallenge?: boolean): void;
     private customizeDifficulty;
 }

@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDifficultyOptions } from "game/Difficulty";
+import { IGameOptions } from "game/GameMode";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class CustomGameOptionsMenu extends Menu {
     private readonly options;
     private readonly refreshables;
-    constructor(options: () => IDifficultyOptions);
+    constructor(options: () => IGameOptions);
     protected refresh(): void;
     private exportOptions;
     private importOptions;

@@ -23,7 +23,7 @@ export default IResourceLoader;
 export declare enum PathType {
     Corpse = 0,
     Creature = 1,
-    DifficultyOptionsIcon = 2,
+    GameOptionsIcon = 2,
     Doodad = 3,
     Equip = 4,
     Hairstyle = 5,
