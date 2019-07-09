@@ -33,7 +33,7 @@ export default class InterruptFactory implements IInterruptFactory {
     withInfo(): Promise<void>;
     withInput(input?: (input: IInput) => any): Promise<string>;
     withMenu<M extends IMenu = IMenu>(menuId: MenuId, initializer?: (menu: M) => any): Promise<void>;
-    withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string): Promise<void>;
+    withLoading(until?: Promise<any> | (() => Promise<any>), canCancel?: boolean | (NullaryFunction), specialType?: string, choices?: InterruptChoice[]): Promise<InterruptChoice | undefined>;
     private execute;
     private warnIfNeverShown;
 }

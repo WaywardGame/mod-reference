@@ -18,6 +18,18 @@ export declare enum Responsibility {
     UX = 5,
     Music = 6
 }
+interface IPerson {
+    firstName: string;
+    lastName?: string;
+    nickname?: string;
+    fileName?: string;
+}
+interface ITeamMember extends IPerson {
+    responsibilities: Responsibility[];
+    isCurrentMember?: true;
+}
+export declare const teamMembers: ITeamMember[];
 export default class AboutMenu extends Menu {
     constructor();
 }
+export {};

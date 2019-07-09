@@ -23,7 +23,8 @@ declare enum InterruptChoice {
     Rejoin = 8,
     Rename = 9,
     Retry = 10,
-    SteamWorkshop = 11,
-    Yes = 12
+    SaveAndQuit = 11,
+    SteamWorkshop = 12,
+    Yes = 13
 }
 export default InterruptChoice;

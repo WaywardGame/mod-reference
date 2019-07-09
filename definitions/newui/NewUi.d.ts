@@ -45,7 +45,7 @@ export default class Ui extends EventEmitter.Host<IUiEvents> {
      * Returns an interrupt factory that can only be used to create menus.
      */
     interrupt(): IInterruptMenuFactory;
-    showLoadingInterrupt(interrupt: Interrupt, ...args: any[]): Promise<void>;
+    showLoadingInterrupt(interrupt: Interrupt, ...args: any[]): Promise<InterruptChoice | undefined>;
     hideLoadingInterrupt(): Promise<void>;
     /**
      * @param elements The elements to refresh translations inside
