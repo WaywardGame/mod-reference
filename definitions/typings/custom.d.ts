@@ -74,6 +74,7 @@ interface IServerGameDetails {
 	days: number;
 	mods: IServerMod[];
 	peaceful: boolean;
+	milestoneModifiersAllowed: boolean;
 }
 
 interface IServerMod {

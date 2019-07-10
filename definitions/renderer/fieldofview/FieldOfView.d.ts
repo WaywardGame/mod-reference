@@ -38,7 +38,6 @@ export default class FieldOfView implements IFieldOfView {
     private viewQuadVertexArray;
     private viewQuadBuffer;
     private seed;
-    private lastAmbientLightLevel;
     private transitionFinishTime;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(gl: WebGL2RenderingContext, radius: number, maxRadius: number, subdivisions?: number);

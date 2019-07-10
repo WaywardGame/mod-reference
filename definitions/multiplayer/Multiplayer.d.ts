@@ -12,7 +12,7 @@ import { ICharacter } from "entity/IHuman";
 import IPlayer from "entity/player/IPlayer";
 import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
-import { DisconnectReason, IMultiplayer, IMultiplayerEvents, IMultiplayerOptions, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
+import { DisconnectReason, IMultiplayer, IMultiplayerEvents, IMultiplayerOptions, JoinServerRetryReason, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
@@ -68,7 +68,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     joinServer(serverInfo: ServerInfo, character?: ICharacter): void;
     disconnect(reason?: DisconnectReason, args?: any[], unloading?: boolean): Promise<void>;
-    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): Promise<void>;
+    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;
     disconnectAndResetGameState(reason?: DisconnectReason, reasonDescription?: any[]): Promise<void>;
     kick(player: IPlayer, reason: DisconnectReason.Kick | DisconnectReason.Banned): void;

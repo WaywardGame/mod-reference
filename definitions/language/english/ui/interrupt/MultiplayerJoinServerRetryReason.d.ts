@@ -8,6 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide]:
  * https://waywardgame.github.io/
  */
-import { DisconnectReason } from "multiplayer/IMultiplayer";
-declare const disconnectReasons: Descriptions<DisconnectReason, string>;
-export default disconnectReasons;
+import { JoinServerRetryReason } from "multiplayer/IMultiplayer";
+declare const joinServerRetryReasons: Descriptions<JoinServerRetryReason, string>;
+export default joinServerRetryReasons;

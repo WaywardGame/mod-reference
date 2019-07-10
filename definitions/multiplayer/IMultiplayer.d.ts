@@ -36,7 +36,7 @@ export interface IMultiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
     disconnect(reason?: DisconnectReason, args?: any[], unloading?: boolean): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason, args?: any[]): Promise<void>;
-    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo): void;
+    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): void;
     getBannedPlayers(): string[];
     getClients(): IConnection[];
     getConnectedGameCode(): string | undefined;
@@ -192,4 +192,11 @@ export declare enum UnableToJoinReason {
     VersionMismatch = 6,
     Banned = 7,
     FailedToLoadMods = 8
+}
+export declare enum JoinServerRetryReason {
+    Timeout = 0,
+    UnableToJoinSteamLobby = 1,
+    UnableToConnectToGlobalMatchmakingServer = 2,
+    UnableToConnectToDedicatedMatchmakingServer = 3,
+    WebRTCTimeout = 4
 }
