@@ -79,6 +79,7 @@ export interface IGame extends EventEmitter.Host<IGameEvents> {
     };
     previousSaveVersion: IVersionInfo;
     worldId: string;
+    customMilestoneModifiersAllowed: boolean;
     tickSpeed: number;
     seeds: ISeeds;
     visible: boolean;
@@ -241,6 +242,7 @@ export interface IPlayOptions {
     multiplayerServerToJoin: ServerInfo | undefined;
     turnMode: TurnMode;
     realTimeTickSpeed: number;
+    customMilestoneModifiersAllowed: boolean;
     multiplayerWorld?: IMultiplayerWorldData;
 }
 export interface IPlayerOptions {

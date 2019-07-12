@@ -20,4 +20,5 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private openLogsFolder;
     private toggleDeveloperMode;
     private reloadGame;
+    private unlockAllMilestones;
 }

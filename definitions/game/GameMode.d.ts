@@ -14,6 +14,7 @@ import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
 import { ItemType } from "item/IItem";
+import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import { IVersionInfo } from "utilities/Version";
 export declare enum GameMode {
     Hardcore = 0,
@@ -32,9 +33,11 @@ export interface IGameOptions {
          */
         peaceful: boolean;
         /**
-         * Whether creatures can spawn as aberrant.
+         * @param On Only aberrants can spawn
+         * @param Off Only non-aberrants can spawn
+         * @param Null Either aberrants or non-aberrants can spawn
          */
-        globalAberrantSpawns: boolean;
+        aberrantSpawns: ThreeStateButtonState;
         /**
          * Custom options for each creature.
          */
@@ -173,14 +176,19 @@ export interface IGameOptionsCreature {
      */
     allowSpawning: boolean;
     /**
-     * Can spawn as aberrant.
+     * @param On Only aberrants can spawn
+     * @param Off Only non-aberrants can spawn
+     * @param Null Either aberrants or non-aberrants can spawn
      */
-    aberrantSpawns: boolean;
+    aberrantSpawns: ThreeStateButtonState;
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
 export declare function getDefaultGameOptions(difficulty: GameMode, seed?: number): IGameOptions;
 export interface IGameOptionsOld extends IGameOptions {
     peaceful?: boolean;
+    creatures: IGameOptions["creatures"] & {
+        globalAberrantSpawns?: boolean;
+    };
 }
 export declare module IGameOptions {
     function upgrade(difficultyOptions: IGameOptionsOld, version: IVersionInfo): boolean;

@@ -32,7 +32,7 @@ interface IDifficultyChoiceEvents extends Events<Choice> {
     customizeDifficulty(): any;
     updateDailyChallenge(): any;
 }
-declare class DifficultyChoice extends Choice {
+declare class DifficultyChoice extends Choice<GameMode> {
     readonly difficulty: GameMode;
     event: IEventEmitter<this, IDifficultyChoiceEvents>;
     isDailyChallenge: boolean;

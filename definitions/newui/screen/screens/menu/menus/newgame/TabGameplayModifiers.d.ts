@@ -9,12 +9,17 @@
  * https://waywardgame.github.io/
  */
 import Button from "newui/component/Button";
+import ChoiceList, { Choice } from "newui/component/ChoiceList";
 import { Tab } from "newui/screen/screens/menu/component/Menu";
 import NewGameMenu from "newui/screen/screens/menu/menus/NewGameMenu";
 export default class TabGameplayModifiers extends Tab {
     private readonly menu;
-    readonly milestoneModifiersButton: Button;
+    readonly buttonMilestoneModifiers: Button;
+    readonly choiceClientsInheritHostModifiers: Choice<undefined>;
+    readonly choiceCustomModifiers: Choice<undefined>;
+    readonly choiceListClientsModifiers: ChoiceList<Choice<string | number | undefined>>;
     private milestoneModifiersMenu;
     constructor(menu: NewGameMenu);
+    private onShow;
     private getMilestoneModifiersMenu;
 }

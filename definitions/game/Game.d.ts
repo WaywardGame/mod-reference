@@ -59,7 +59,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     creatures: SaferArray<ICreature>;
     creatureSpawnTimer: number;
     difficulty: GameMode;
-    difficultyOptions: IGameOptions;
+    customMilestoneModifiersAllowed: boolean;
     doodads: SaferArray<IDoodad>;
     flowFieldSyncCount: number;
     items: IItem[];
@@ -104,6 +104,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     private thumbnailResolve?;
     private simulateInterval?;
     private renderingEnabled;
+    private difficultyOptions;
     private playOptions;
     private ambientLightLevelCache;
     readonly isChallenge: boolean;

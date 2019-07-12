@@ -29,7 +29,7 @@ export default class ChoiceList<C extends Choice = Choice> extends BlockRow impl
     setChoices(...choices: ArrayOfIterablesOr<C>): this;
     refresh(): this;
     setRefreshMethod(refreshMethod: (choiceList: this) => C): this;
-    choose(chosen?: C): void;
+    choose(chosen?: C): this;
     findChoice(filter: (choice: C) => boolean): C | undefined;
     private onChoiceChange;
 }

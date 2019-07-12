@@ -12,6 +12,8 @@ declare module Objects {
     function windowKeysToObject(windowKeys: string[]): any;
     function windowKeysToParentObject(windowKeys: string[]): any;
     function deepClone<T>(obj: T): T;
+    function deepMerge<T>(...objs: T[]): T;
+    function deepMerge<O extends any[]>(...objs: O): O[number] & O[number];
     function addProperty(property: string, value: any): (object: any) => any;
     function followDirections<T>(target: any, directions: string[]): T | undefined;
     function stringify(object: any, space?: number | undefined, noDepth?: boolean): string;
