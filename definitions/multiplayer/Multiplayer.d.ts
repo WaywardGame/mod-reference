@@ -101,6 +101,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     preSaveGame(): void;
     postSaveGame(): void;
     updateGlobalServerDirectory(): void;
+    checkConnection(): void;
     isSyncCheckEnabled(syncCheck: MultiplayerSyncCheck): boolean;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
     addBeforeSyncChecks(packet: IPacket): void;

@@ -84,6 +84,7 @@ interface IServerMod {
 }
 
 interface IMatchmakingServer {
+	port: number | undefined;
 	connectCallback: ((connection: IMatchmakingServerConnection, path: string | undefined) => void) | undefined;
 	disconnectCallbacks: Map<string, () => void>;
 	messageCallbacks: Map<string, (data: ArrayBuffer) => void>;
@@ -95,6 +96,7 @@ interface IMatchmakingServer {
 	setLogCallback(logFunc: ((...args: any[]) => void) | undefined): void;
 	updateName(name: string): void;
 	updateDirectory(serverDetails: Partial<IServerServerDetails>, gameDetails: IServerGameDetails): void;
+	checkConnection(): Promise<{ webRtcWorks: boolean; webSocketWorks: boolean; }>;
 	getConnections(): Map<string, IMatchmakingServerConnection>;
 }
 

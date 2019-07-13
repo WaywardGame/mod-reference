@@ -24,11 +24,13 @@ export interface IMultiplayerEvents {
     joinLobby(lobbyId: string): any;
     leaveLobby(lobbyId: string): any;
     stateChange(): any;
+    checkConnection(webRtcWorks: boolean, webSocketWorks: boolean): any;
 }
 export interface IMultiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     addAfterSyncChecks(packet: IPacket): void;
     addBeforeSyncChecks(packet: IPacket): void;
     addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
+    checkConnection(): void;
     clearSyncPacketsWaiting(waitId?: string): void;
     clearSyncPacketWaiting(packet: IPacket, wait: number): void;
     closeConnection(reason: DisconnectReason, connection: IConnection): void;
@@ -119,6 +121,7 @@ export declare const defaultServerPort = 38740;
 export declare const keepAliveInterval = 4000;
 export declare const keepAliveTimeout = 15000;
 export declare const steamLobbyPrefix = "steam:";
+export declare const checkConnectionMatchmakingId = "check";
 export declare const defaultSyncChecks: MultiplayerSyncCheck[];
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export declare function getDefaultMultiplayerOptions(): IMultiplayerOptions;
@@ -180,7 +183,8 @@ export declare enum DisconnectReason {
     ServerShutdown = 6,
     UnableToJoinGame = 7,
     UnableToLoadMods = 8,
-    Banned = 9
+    Banned = 9,
+    CheckConnection = 10
 }
 export declare enum UnableToJoinReason {
     BuildMismatch = 0,

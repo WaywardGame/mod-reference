@@ -28,6 +28,7 @@ export interface MatchmakingMessage {
     data?: MatchmakingMessageData;
 }
 export declare enum MatchmakingMessageDataType {
+    CheckConnection = -3,
     UpdateDirectory = -2,
     IpAddress = -1,
     JoinChannel = 0,
@@ -41,6 +42,12 @@ export interface IMatchmakingMessageData {
     type: MatchmakingMessageDataType;
     matchmakingIdentifier?: string;
     targetMatchmakingIdentifier?: string;
+}
+export interface IMatchmakingCheckConnectionMessageData extends IMatchmakingMessageData {
+    type: MatchmakingMessageDataType.CheckConnection;
+    secret: string;
+    webRtcWorks?: boolean;
+    webSocketWorks?: boolean;
 }
 export interface IMatchmakingUpdateDirectoryMessageData extends IMatchmakingMessageData {
     type: MatchmakingMessageDataType.UpdateDirectory;
@@ -79,4 +86,4 @@ export interface IMatchmakingUnableToJoinGameMessageData extends IMatchmakingMes
     reason: UnableToJoinReason;
     args?: Array<number | string>;
 }
-export declare type MatchmakingMessageData = IMatchmakingUpdateDirectoryMessageData | IMatchmakingIpAddressMessageData | IMatchmakingJoinChannelMessageData | IMatchmakingIceCandidateMessageData | IMatchmakingSessionDescriptionMessageData | IMatchmakingHostIpAddressMessageData | IMatchmakingConnectedMessageData | IMatchmakingUnableToJoinGameMessageData;
+export declare type MatchmakingMessageData = IMatchmakingCheckConnectionMessageData | IMatchmakingUpdateDirectoryMessageData | IMatchmakingIpAddressMessageData | IMatchmakingJoinChannelMessageData | IMatchmakingIceCandidateMessageData | IMatchmakingSessionDescriptionMessageData | IMatchmakingHostIpAddressMessageData | IMatchmakingConnectedMessageData | IMatchmakingUnableToJoinGameMessageData;

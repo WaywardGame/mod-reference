@@ -36,7 +36,7 @@ export interface IItemManager {
     generateLookups(): void;
     getAdjacentContainers(human: Human, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
     getContainerReference(container: IContainer, parentObject?: any, showWarnings?: boolean): ContainerReference;
-    getDefaultDurability(item: IItem): number;
+    getDefaultDurability(weight: number, itemType: ItemType): number;
     getDisassemblyComponents(description: IItemDescription, quality: Quality | undefined): IItem[];
     getDisassemblyComponentsAsItemTypes(description: IItemDescription): Array<ItemType | ItemTypeGroup>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType): ItemType;

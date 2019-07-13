@@ -17,8 +17,14 @@ export default class MultiplayerOptionsMenu extends Menu {
     private readonly choiceLobbyFriends;
     private readonly choiceLobbyPublic;
     private readonly choiceLobbyPrivate;
+    private readonly textWebRTCResult;
+    private readonly textWebSocketResult;
+    private readonly webRTCSpacer;
     private readonly pvp;
     private readonly maxPlayers;
+    private readonly checkConnectionHeading;
+    private readonly checkConnectionBlock;
+    private readonly checkConnectionButton;
     constructor();
     protected refresh(): void;
     private updateMultiplayer;

@@ -155,6 +155,7 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     tier?: OptionalDescriptions<DoodadTypeGroup, number>;
     trapDamage?: number;
     waterStill?: boolean;
+    durability?: number;
 }
 export interface IDoodadParticles {
     [index: number]: IRGB;

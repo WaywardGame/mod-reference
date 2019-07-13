@@ -99,7 +99,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): Stream<ItemTypeGroup>;
     checkMilestones(player: IPlayer, item: IItem): void;
-    getDefaultDurability(item: IItem): number;
+    getDefaultDurability(weight: number, itemType: ItemType): number;
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, allowIncreasedQuality?: boolean, bonusChance?: number): Quality | undefined;
