@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IEntity from "entity/IEntity";
+import Entity from "entity/Entity";
 import { IStat, IStatFactory, IStats, Stat } from "entity/IStats";
 declare class StatFactory implements IStatFactory {
     private readonly result;
@@ -36,7 +36,7 @@ declare class StatFactory implements IStatFactory {
     /**
      * Initializes the `IStat` constructed by this factory on the given entity.
      */
-    initializeOn(entity: IEntity): void;
+    initializeOn(entity: Entity): void;
     get(): IStat;
 }
 declare module StatFactory {

@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IMessage } from "entity/player/IMessageManager";
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { ISshSession, ISshStream } from "./ISsh";
 export default abstract class Shell {
     readonly session: ISshSession;
@@ -29,7 +29,7 @@ export default abstract class Shell {
     flush(): void;
     processData(data: string): Promise<Shell | false | undefined>;
     executeWithMessageRedirect(executor: () => Promise<void>): Promise<void>;
-    displayMessage(_: IPlayer, message: IMessage): void;
+    displayMessage(_: Player, message: IMessage): void;
     /**
      * Writes the marker
      */

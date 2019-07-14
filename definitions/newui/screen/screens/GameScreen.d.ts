@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "entity/creature/ICreature";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
 import { IMapRequest } from "game/IGame";
@@ -64,14 +64,14 @@ export default class GameScreen extends Screen implements IHookHost {
     wasMouseStartWithin(): boolean;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
-    onMove(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
-    onMoveComplete(player: IPlayer): void;
-    onPlayerDamage(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
-    onPlayerDeath(player: IPlayer): boolean | undefined;
-    onPlayerWalkToTilePath(player: IPlayer, path: IVector2[] | undefined): void;
+    onMove(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
+    onMoveComplete(player: Player): void;
+    onPlayerDamage(player: Player, damageInfo: IDamageInfo): number | undefined;
+    onPlayerDeath(player: Player): boolean | undefined;
+    onPlayerWalkToTilePath(player: Player, path: IVector2[] | undefined): void;
     onGameTickEnd(): void;
     onOpenBook(human: Human, book: BookType): void;
-    onReadMap(player: IPlayer, mapRequest: IMapRequest): void;
+    onReadMap(player: Player, mapRequest: IMapRequest): void;
     protected create(): void;
     protected tryShowWorldTooltip(): Promise<void>;
     /**

@@ -9,51 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { Milestone } from "game/milestones/IMilestone";
-import Abnormalizer from "game/modifiers/milestoneModifiers/Abnormalizer";
-import Friendly from "game/modifiers/milestoneModifiers/Friendly";
 declare module MilestoneModifiers {
-    const classes: {
-        [Milestone.Abnormalizer]: typeof Abnormalizer;
-        [Milestone.Artificer]: undefined;
-        [Milestone.Benevolent]: undefined;
-        [Milestone.Boundless]: undefined;
-        [Milestone.Challenger]: undefined;
-        [Milestone.Chef]: undefined;
-        [Milestone.Collector]: undefined;
-        [Milestone.Contender]: undefined;
-        [Milestone.Crafter]: undefined;
-        [Milestone.Doctor]: undefined;
-        [Milestone.DragonSlayer]: undefined;
-        [Milestone.Explorer]: undefined;
-        [Milestone.Exterminator]: undefined;
-        [Milestone.Friendly]: typeof Friendly;
-        [Milestone.Gardener]: undefined;
-        [Milestone.Gatherer]: undefined;
-        [Milestone.Grandmaster]: undefined;
-        [Milestone.Hunter]: undefined;
-        [Milestone.Huntsman]: undefined;
-        [Milestone.Locksmith]: undefined;
-        [Milestone.Malevolent]: undefined;
-        [Milestone.Merchant]: undefined;
-        [Milestone.Navigator]: undefined;
-        [Milestone.Notekeeper]: undefined;
-        [Milestone.Operator]: undefined;
-        [Milestone.Pacifier]: undefined;
-        [Milestone.Prepared]: undefined;
-        [Milestone.Pulchritudinous]: undefined;
-        [Milestone.ReaperOfSouls]: undefined;
-        [Milestone.Seafarer]: undefined;
-        [Milestone.Seasoned]: undefined;
-        [Milestone.Survivor]: undefined;
-        [Milestone.Talented]: undefined;
-        [Milestone.Thrower]: undefined;
-        [Milestone.Trapper]: undefined;
-        [Milestone.TreasureHunter]: undefined;
-        [Milestone.Treasurer]: undefined;
-        [Milestone.Weathered]: undefined;
-        [Milestone.DestroyerOfMagi]: undefined;
-    };
     function getGroup(milestone: Milestone): import("./MilestoneModifier").MilestoneModifierGroup | undefined;
+    function isNotHostExclusive(milestone: Milestone): boolean;
     function initialize(...milestones: Milestone[]): void;
     function uninitialize(): void;
     function options(): import("../../utilities/stream/Stream").default<{

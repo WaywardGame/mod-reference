@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IMessage, Source } from "entity/player/IMessageManager";
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { RequirementInstance } from "entity/player/quest/quest/Quest";
 import { QuestInstance } from "entity/player/quest/QuestManager";
 import { Events } from "event/EventBuses";
@@ -36,7 +36,7 @@ interface IMessagesEvents extends Events<QuadrantComponent> {
 }
 export default class Messages extends QuadrantComponent implements IHookHost {
     static preferredQuadrant: Quadrant;
-    static sendChatMessage(sender: IPlayer, message: string): typeof Messages;
+    static sendChatMessage(sender: Player, message: string): typeof Messages;
     static readonly allFilterName: string;
     private static readonly defaultFilters;
     event: IEventEmitter<this, IMessagesEvents>;
@@ -76,8 +76,8 @@ export default class Messages extends QuadrantComponent implements IHookHost {
     sendPinnedMessage(pinnedMessage: PinnedMessage): PinnedMessage;
     pinQuestRequirement(quest: QuestInstance, requirement?: RequirementInstance): IPinnedMessage | undefined;
     unpinMessage(pinnedMessage: PinnedMessage, time?: number): Promise<void>;
-    onDisplayMessage(player: IPlayer, message: IMessage, addBackwards?: boolean): void;
-    onWrittenNote(player: IPlayer, id: number): void;
+    onDisplayMessage(player: Player, message: IMessage, addBackwards?: boolean): void;
+    onWrittenNote(player: Player, id: number): void;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
     /**
      * Event handler for when the text in the chat box should be sent as a message.

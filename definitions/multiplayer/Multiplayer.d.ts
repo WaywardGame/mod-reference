@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { ICharacter } from "entity/IHuman";
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import { DisconnectReason, IMultiplayer, IMultiplayerEvents, IMultiplayerOptions, JoinServerRetryReason, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
@@ -71,7 +71,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;
     disconnectAndResetGameState(reason?: DisconnectReason, reasonDescription?: any[]): Promise<void>;
-    kick(player: IPlayer, reason: DisconnectReason.Kick | DisconnectReason.Banned): void;
+    kick(player: Player, reason: DisconnectReason.Kick | DisconnectReason.Banned): void;
     onPlaying(): Promise<void>;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onLobbyExited(lobbyId: string): void;

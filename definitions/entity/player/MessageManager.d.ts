@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IEntity from "entity/IEntity";
+import Entity from "entity/Entity";
 import { IMessage, IMessageManager, Source } from "entity/player/IMessageManager";
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import Message from "language/dictionary/Message";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IVector3 } from "utilities/math/IVector";
@@ -42,7 +42,7 @@ export interface IMessageManagerHost {
 export default class MessageManager implements IMessageManager {
     private readonly host;
     private static readonly noOpMessageManager;
-    static get(entity?: IEntity): MessageManager;
+    static get(entity?: Entity): MessageManager;
     /**
      * Runs a callback with the message manager of every player. For sending messages, equivalent to the following:
      * ```ts
@@ -59,7 +59,7 @@ export default class MessageManager implements IMessageManager {
      * Note: When this is called from a client, it actually only displays the message to the client and syncs that with the server.
      * When called from the server, it is sent to every client.
      */
-    static toAll(callback: (manager: MessageManager, player: IPlayer) => boolean): boolean;
+    static toAll(callback: (manager: MessageManager, player: Player) => boolean): boolean;
     private readonly history;
     private lastMessageId;
     private _source;

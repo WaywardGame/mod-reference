@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { IQuestRequirementApi } from "entity/player/quest/requirement/IRequirement";
 import { Events } from "event/EventBuses";
 import Translation from "language/Translation";
@@ -30,8 +30,8 @@ export declare class QuestRequirement<O extends any[] = [], D extends {} = {}> {
      */
     setTrigger<H extends Hook>(hook: H, checker: (api: IQuestRequirementApi<O, D>, ...args: ArgumentsOf<Mod[H]>) => boolean): this;
     getTriggers(): IterableIterator<[Hook, (api: IQuestRequirementApi<O, D>, ...args: any[]) => boolean]>;
-    setHostTrigger<E extends keyof Events<IPlayer>>(event: E, checker: (api: IQuestRequirementApi<O, D>, player: IPlayer, ...args: ArgumentsOf<Events<IPlayer>[E]>) => boolean): this;
-    getHostTriggers(): IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: IPlayer, ...args: any[]) => boolean]>;
+    setHostTrigger<E extends keyof Events<Player>>(event: E, checker: (api: IQuestRequirementApi<O, D>, player: Player, ...args: ArgumentsOf<Events<Player>[E]>) => boolean): this;
+    getHostTriggers(): IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<O, D>, player: Player, ...args: any[]) => boolean]>;
     setInitializeTrigger(checker: (api: IQuestRequirementApi<O, D>) => boolean): this;
     getInitializeTrigger(): ((api: IQuestRequirementApi<O, D>) => boolean) | undefined;
     setRelations(relations: HighlightSelector[]): this;

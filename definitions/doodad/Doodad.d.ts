@@ -13,7 +13,7 @@ import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodad, ID
 import { ActionType } from "entity/action/IAction";
 import { ICreature } from "entity/creature/ICreature";
 import { EquipType } from "entity/IHuman";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
 import { Quality } from "game/IObject";
@@ -82,7 +82,7 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     checkForTrampling(source: Human | ICreature): boolean;
     isDangerous(human: Human): boolean;
     getDamage(human: Human, equipType?: EquipType): number;
-    getOwner(): IPlayer | undefined;
+    getOwner(): Player | undefined;
     damage(forceBreak?: boolean, skipDropAsItem?: boolean, skipSound?: boolean, skipResources?: boolean): void;
     getDefaultDurability(): number;
     addTreasureChestLoot(): void;

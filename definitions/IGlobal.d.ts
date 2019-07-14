@@ -9,41 +9,41 @@
  * https://waywardgame.github.io/
  */
 
-import IAudio from "audio/IAudio";
-import { ICommandManager } from "command/ICommandManager";
-import IDoodadManager from "doodad/IDoodadManager";
-import ICorpseManager from "entity/creature/corpse/ICorpseManager";
-import ICreatureManager from "entity/creature/ICreatureManager";
-import { IFlowFieldManager } from "entity/flowfield/IFlowFieldManager";
+import WAudio from "audio/Audio";
+import CommandManager from "command/CommandManager";
+import DoodadManager from "doodad/DoodadManager";
+import CorpseManager from "entity/creature/corpse/CorpseManager";
+import CreatureManager from "entity/creature/CreatureManager";
+import FlowFieldManager from "entity/flowfield/FlowFieldManager";
 import IHuman from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
-import INPCManager from "entity/npc/INPCManager";
-import IPlayer from "entity/player/IPlayer";
+import NPCManager from "entity/npc/NPCManager";
 import Player from "entity/player/Player";
-import IGame from "game/IGame";
+import Game from "game/Game";
 import { ItemType } from "item/IItem";
-import IItemManager from "item/IItemManager";
+import ItemManager from "item/ItemManager";
 import LanguageManager from "language/LanguageManager";
-import IHookManager from "mod/IHookManager";
-import IModManager from "mod/IModManager";
-import { IMultiplayer, IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
+import HookManager from "mod/HookManager";
+import ModManager from "mod/ModManager";
+import { IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
+import Multiplayer from "multiplayer/Multiplayer";
 import NewUi from "newui/NewUi";
 import GameScreen from "newui/screen/screens/GameScreen";
+import FieldOfView from "renderer/fieldofview/FieldOfView";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
-import IFieldOfView from "renderer/fieldofview/IFieldOfView";
-import ISpriteAtlas from "renderer/ISpriteAtlas";
-import ITileAtlas from "renderer/ITileAtlas";
-import IWorld from "renderer/IWorld";
-import IWorldRenderer from "renderer/IWorldRenderer";
-import IResourceLoader from "resource/IResourceLoader";
-import ISaveData from "save/data/ISaveData";
-import ISaveDataGlobal from "save/data/ISaveDataGlobal";
-import ISaveManager from "save/ISaveManager";
-import ISteamworks from "steamworks/ISteamworks";
-import ITileEventManager from "tile/ITileEventManager";
+import SpriteAtlas from "renderer/SpriteAtlas";
+import TileAtlas from "renderer/TileAtlas";
+import World from "renderer/World";
+import WorldRenderer from "renderer/WorldRenderer";
+import ResourceLoader from "resource/ResourceLoader";
+import SaveData from "save/data/SaveData";
+import SaveDataGlobal from "save/data/SaveDataGlobal";
+import SaveManager from "save/SaveManager";
+import Steamworks from "steamworks/Steamworks";
+import TileEventManager from "tile/TileEventManager";
 import { ISortable, ISortableOptions } from "ui/functional/IFunctionalSortable";
 import { ITooltip, ITooltipOptions } from "ui/functional/IFunctionalTooltip";
-import IUi from "ui/IUi";
+import Ui from "ui/Ui";
 
 declare global {
 
@@ -90,7 +90,7 @@ declare global {
 		-readonly [P in keyof T]: T[P];
 	};
 
-	type Human = IPlayer | INPC | IHuman;
+	type Human = Player | INPC | IHuman;
 
 	type IterableOr<T> = T | Iterable<T>;
 	type ArrayOr<T> = T | T[];
@@ -124,37 +124,37 @@ declare global {
 	}
 
 	// autosort
-	let absentPlayers: IPlayer[];
-	let audio: IAudio;
-	let commandManager: ICommandManager;
-	let corpseManager: ICorpseManager;
-	let creatureManager: ICreatureManager;
-	let doodadManager: IDoodadManager;
-	let fieldOfView: IFieldOfView;
-	let flowFieldManager: IFlowFieldManager;
-	let game: IGame;
+	let absentPlayers: Player[];
+	let audio: WAudio;
+	let commandManager: CommandManager;
+	let corpseManager: CorpseManager;
+	let creatureManager: CreatureManager;
+	let doodadManager: DoodadManager;
+	let fieldOfView: FieldOfView;
+	let flowFieldManager: FlowFieldManager;
+	let game: Game;
 	let gameScreen: GameScreen | undefined;
-	let hookManager: IHookManager;
-	let itemManager: IItemManager;
+	let hookManager: HookManager;
+	let itemManager: ItemManager;
 	let languageManager: LanguageManager;
 	let localPlayer: Player;
-	let modManager: IModManager;
-	let multiplayer: IMultiplayer;
+	let modManager: ModManager;
+	let multiplayer: Multiplayer;
 	let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
 	let newui: NewUi;
-	let npcManager: INPCManager;
-	let players: IPlayer[];
-	let renderer: IWorldRenderer;
-	let resourceLoader: IResourceLoader;
-	let saveData: ISaveData;
-	let saveDataGlobal: ISaveDataGlobal;
-	let saveManager: ISaveManager;
-	let spriteAtlas: ISpriteAtlas;
-	let steamworks: ISteamworks;
-	let tileAtlas: ITileAtlas;
-	let tileEventManager: ITileEventManager;
-	let ui: IUi;
-	let world: IWorld;
+	let npcManager: NPCManager;
+	let players: Player[];
+	let renderer: WorldRenderer;
+	let resourceLoader: ResourceLoader;
+	let saveData: SaveData;
+	let saveDataGlobal: SaveDataGlobal;
+	let saveManager: SaveManager;
+	let spriteAtlas: SpriteAtlas;
+	let steamworks: Steamworks;
+	let tileAtlas: TileAtlas;
+	let tileEventManager: TileEventManager;
+	let ui: Ui;
+	let world: World;
 
 	const VIEWPORT_MIN_WIDTH: number;
 	const VIEWPORT_MIN_HEIGHT: number;

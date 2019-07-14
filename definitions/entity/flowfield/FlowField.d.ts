@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { MoveType } from "entity/IEntity";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import IFlowField from "flowfield/IFlowField";
 import { ITile } from "tile/ITerrain";
 export default class FlowField implements IFlowField {
@@ -23,7 +23,7 @@ export default class FlowField implements IFlowField {
     delete(): void;
     getHashCodes(): string[];
     getFieldValue(x: number, y: number): number;
-    updateField(plys: IPlayer[]): void;
+    updateField(plys: Player[]): void;
     updateTile(gridIndex: number, tile: ITile): void;
     reset(): void;
 }

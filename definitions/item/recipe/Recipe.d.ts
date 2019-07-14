@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IEntity from "entity/IEntity";
+import Entity from "entity/Entity";
 import { SkillType } from "entity/IHuman";
 import { IItem, RecipeLevel } from "item/IItem";
 import Crafter from "item/recipe/Crafter";
@@ -41,7 +41,7 @@ export default class Recipe {
     getReputation(): number;
     setReputation(reputation: number): this;
     canCraft(crafter: Crafter): boolean;
-    canCraft(entity: IEntity, items: IItem[]): boolean;
-    requirementsStatus(entity: IEntity, items: IItem[]): import("../../utilities/stream/Stream").default<[RecipeRequirement<any>, boolean]>;
-    getCrafter(entity: IEntity, items: IItem[]): Crafter;
+    canCraft(entity: Entity, items: IItem[]): boolean;
+    requirementsStatus(entity: Entity, items: IItem[]): import("../../utilities/stream/Stream").default<[RecipeRequirement<any>, boolean]>;
+    getCrafter(entity: Entity, items: IItem[]): Crafter;
 }

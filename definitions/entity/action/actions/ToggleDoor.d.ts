@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { Action } from "entity/action/Action";
-declare const _default: Action<[], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer, boolean>;
+declare const _default: Action<[], import("../../player/Player").default | import("../../npc/INPC").INPC, boolean>;
 export default _default;

@@ -10,5 +10,5 @@
  */
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemInventory], import("../../npc/INPC").INPC | import("../../player/IPlayer").IPlayer, void>;
+declare const _default: Action<[ActionArgument.ItemInventory], import("../../player/Player").default | import("../../npc/INPC").INPC, void>;
 export default _default;

@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { INPC } from "entity/npc/INPC";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
@@ -69,8 +69,8 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     isInGroup(itemType: ItemType, itemGroup: ItemTypeGroup | ItemType): boolean;
     craft(human: Human, itemType: ItemType, itemsToRequire: IItem[], itemsToConsume: IItem[], baseItem?: IItem): CraftStatus;
     decayItems(): boolean;
-    getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
-    getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
+    getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
+    getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
@@ -84,7 +84,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: IItem): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     getAdjacentContainers(human: Human, includeNpcs?: boolean, ignoreOptions?: boolean): IContainer[];
-    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
+    isContainableInAdjacentContainer(player: Player, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
     getOrderedContainerItems(container: IContainer, protectedItemOptions?: IProtectedItemOptions | undefined): IItem[];
@@ -98,7 +98,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> im
     getGroupItems(itemGroup: ItemType | ItemTypeGroup, ancestorGroups?: ItemTypeGroup[]): Set<ItemType>;
     getGroupDefault(itemGroup: ItemTypeGroup, weightType?: WeightType, ancestorGroups?: ItemTypeGroup[]): ItemType;
     getGroups(itemType: ItemType): Stream<ItemTypeGroup>;
-    checkMilestones(player: IPlayer, item: IItem): void;
+    checkMilestones(player: Player, item: IItem): void;
     getDefaultDurability(weight: number, itemType: ItemType): number;
     generateLookups(): void;
     updateItemOrder(container: IContainer, itemOrder: number[] | undefined): void;

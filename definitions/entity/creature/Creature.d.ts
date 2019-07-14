@@ -12,7 +12,7 @@ import { SfxType } from "audio/IAudio";
 import { CreatureType, ICreature, ICreatureDescription, IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import { AiType, EntityType, MoveType } from "entity/IEntity";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import Inspection from "game/inspection/Inspect";
 import { InspectionSection } from "game/inspection/Inspections";
 import { IItem, ItemType } from "item/IItem";
@@ -49,7 +49,7 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     isTamed(): boolean;
     isValid(): boolean;
     checkForBurn(moveType?: MoveType): boolean;
-    tame(player: IPlayer): boolean;
+    tame(player: Player): boolean;
     increaseTamedCount(): void;
     release(): boolean;
     skipNextUpdate(): void;
@@ -61,11 +61,11 @@ export default class Creature extends Entity implements ICreature, IUnserialized
      * @returns Returns whether the creature can keep moving (in the case of creatures with >= 2 speed)
      */
     checkUnder(x?: number, y?: number): boolean;
-    canSwapWith(player: IPlayer): boolean;
-    getOwner(): IPlayer | undefined;
+    canSwapWith(player: Player): boolean;
+    getOwner(): Player | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
     offer(items: IItem[]): IItem | undefined;
-    processSpecialAbilities(enemy: IPlayer | ICreature | undefined, bypass?: boolean): boolean;
+    processSpecialAbilities(enemy: Player | ICreature | undefined, bypass?: boolean): boolean;
     increaseWaste(item: IItem): void;
     onUnserialized(): void;
     protected preMove(oldTile: ITile, tile: ITile): void;

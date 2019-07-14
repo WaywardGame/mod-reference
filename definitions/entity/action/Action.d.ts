@@ -12,7 +12,7 @@ import { ActionArgument, ActionArgumentTupleTypes, ActionUsability, IActionApi, 
 import { ICreature } from "entity/creature/ICreature";
 import { EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
 import { INPC } from "entity/npc/INPC";
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc, R = void> implements IActionDescription<A, E, R> {
     readonly argumentTypes: A;
     readonly usability: {
@@ -66,7 +66,7 @@ export declare class Action<A extends Array<ActionArgument | ActionArgument[]>, 
 declare type EntityTypeMap<E extends EntityType> = {
     [EntityType.Creature]: ICreature;
     [EntityType.NPC]: INPC;
-    [EntityType.Player]: IPlayer;
+    [EntityType.Player]: Player;
 }[E];
 declare type EntityTypeTupleType<E extends EntityType[]> = E extends [EntityType] ? EntityTypeMap<E[0]> : E extends [EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> : E extends [EntityType, EntityType, EntityType] ? EntityTypeMap<E[0]> | EntityTypeMap<E[1]> | EntityTypeMap<E[2]> : never;
 export {};

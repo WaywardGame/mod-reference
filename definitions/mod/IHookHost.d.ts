@@ -13,13 +13,15 @@ import { Command } from "command/ICommand";
 import { DoodadType, IDoodad, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, IActionApi, IActionDescription } from "entity/action/IAction";
 import { CreatureType, ICreature, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
-import IEntity, { AttackType, MoveType } from "entity/IEntity";
+import Entity from "entity/Entity";
+import { AttackType, MoveType } from "entity/IEntity";
 import IHuman, { EquipType, SkillType } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
 import { NPCType } from "entity/npc/NPCS";
 import { IMessage } from "entity/player/IMessageManager";
-import IPlayer, { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
+import { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
 import { INote } from "entity/player/note/NoteManager";
+import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
@@ -84,7 +86,7 @@ export interface IHookHost {
      * @param enemy The enemy (player or creature)
      * @returns False if the creature cannot attack, or undefined to use the default logic
      */
-    canCreatureAttack?(creature: ICreature, enemy: IPlayer | ICreature): boolean | undefined;
+    canCreatureAttack?(creature: ICreature, enemy: Player | ICreature): boolean | undefined;
     /**
      * Called when a creature tries to move
      * @param creature The creature object
@@ -168,7 +170,7 @@ export interface IHookHost {
      * @param attackType The attack type
      * @returns False if the player cannot attack, or undefined to use the default logic
      */
-    canPlayerAttack?(player: IPlayer, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
+    canPlayerAttack?(player: Player, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
     /**
      * Called every frame where the mouse is not hovering over an item
      * @param api The bind catcher api
@@ -208,46 +210,46 @@ export interface IHookHost {
      * @param player The player object
      * @returns The field of view radius for the player or undefined to use the default logic
      */
-    getPlayerFieldOfViewRadius?(player: IPlayer): number | undefined;
+    getPlayerFieldOfViewRadius?(player: Player): number | undefined;
     /**
      * Called when getting the player's maximum health
      * @param maxHealth The current max health of the player (after any other previous mods)
      * @param player The player object
      * @returns The maximum health of the player
      */
-    getPlayerMaxHealth?(maxHealth: number, player: IPlayer): number;
+    getPlayerMaxHealth?(maxHealth: number, player: Player): number;
     /**
      * Called when getting the player's maximum weight
      * @param strength The current max health of the player (after any other previous mods)
      * @param player The player object
      * @returns The maximum health of the player
      */
-    getPlayerMaxWeight?(maxWeight: number, player: IPlayer): number;
+    getPlayerMaxWeight?(maxWeight: number, player: Player): number;
     /**
      * Called when getting the players movement intent
      * @param player The player object
      * @returns The movement intent of the player or undefined to use the default logic
      */
-    getPlayerMovementIntent?(player: IPlayer): IMovementIntent | undefined;
+    getPlayerMovementIntent?(player: Player): IMovementIntent | undefined;
     /**
      * Called when rendering the player in the viewport
      * @param player The player object
      * @param batchLayer The batch layer the player will render in
      * @returns The batch layer the player should render in or undefined to use the default logic
      */
-    getPlayerSpriteBatchLayer?(player: IPlayer, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
+    getPlayerSpriteBatchLayer?(player: Player, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     /**
      * Called when getting the players weight movement penalty
      * @param player The player object
      * @returns The weight movement penalty for the player or undefined to use the default logic
      */
-    getPlayerWeightMovementPenalty?(player: IPlayer): number | undefined;
+    getPlayerWeightMovementPenalty?(player: Player): number | undefined;
     /**
      * Called when getting the players weight status
      * @param player The player object
      * @returns The weight status of the player or undefined to use the default logic
      */
-    getPlayerWeightStatus?(player: IPlayer): WeightStatus | undefined;
+    getPlayerWeightStatus?(player: Player): WeightStatus | undefined;
     /**
      * Called when getting the position to render at. By default, this is the player's location.
      * @param position The player's location
@@ -319,7 +321,7 @@ export interface IHookHost {
      * @param player The player object
      * @param message The message data
      */
-    onDisplayMessage?(player: IPlayer, message: IMessage): void;
+    onDisplayMessage?(player: Player, message: IMessage): void;
     /**
      * Called when a doodad spawns
      * @param doodad The doodad object
@@ -347,7 +349,7 @@ export interface IHookHost {
     /**
      * Called when an entity is killed by another entity.
      */
-    onEntityKill?(attacker: IEntity | IDoodad, target: IEntity): void;
+    onEntityKill?(attacker: Entity | IDoodad, target: Entity): void;
     /**
      * Called when a human's skill changes.
      * @param human The human whose skill changed
@@ -361,21 +363,21 @@ export interface IHookHost {
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    onInventoryItemAdd?(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemAdd?(player: Player | undefined, item: IItem, container: IContainer): void;
     /**
      * Called when an item is removed from the players inventory
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to.
      */
-    onInventoryItemRemove?(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemRemove?(player: Player | undefined, item: IItem, container: IContainer): void;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
-    onInventoryItemUpdate?(player: IPlayer | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemUpdate?(player: Player | undefined, item: IItem, container: IContainer): void;
     /**
      * Called when inspecting a tile, for every section that may be shown. (This includes sections with no content)
      * @param section One of the sections that will be included in the inspection.
@@ -403,14 +405,14 @@ export interface IHookHost {
      * @param item The item being equipped
      * @param slot The slot
      */
-    onItemEquip?(player: IPlayer, item: IItem, slot: EquipType): void;
+    onItemEquip?(player: Player, item: IItem, slot: EquipType): void;
     /**
      * Called when the player quickslots an item
      * @param item The item being quickslotted
      * @param player The player object
      * @param quickSlot The quickslot number
      */
-    onItemQuickslot?(item: IItem, player: IPlayer, quickSlot: number | undefined): void;
+    onItemQuickslot?(item: IItem, player: Player, quickSlot: number | undefined): void;
     /**
      * Called when a creature is damaged
      * @param creature The creature object
@@ -433,7 +435,7 @@ export interface IHookHost {
      * @param creature The creature object
      * @param owner The human which the creature is tamed for
      */
-    onCreatureTamed?(creature: ICreature, owner: IPlayer): void;
+    onCreatureTamed?(creature: ICreature, owner: Player): void;
     /**
      * Called when in-game, on the bind catcher loop (once per frame).
      * @param bindPressed Whether a bind has been pressed. Use this as a final check before processing a bind, and set it to true when a bind was pressed.
@@ -483,12 +485,12 @@ export interface IHookHost {
      * @param direction The direction the player is facing
      * @returns False to cancel the move or undefined to use the default logic
      */
-    onMove?(player: IPlayer, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
+    onMove?(player: Player, nextX: number, nextY: number, tile: ITile, direction: Direction): boolean | undefined;
     /**
      * Called when the player completes a movement
      * @param player The player object
      */
-    onMoveComplete?(player: IPlayer): void;
+    onMoveComplete?(player: Player): void;
     /**
      * Called when the human faces a different direction
      * @param human The human object
@@ -499,7 +501,7 @@ export interface IHookHost {
      * Called when no input is received
      * @param player The player object
      */
-    onNoInputReceived?(player: IPlayer): void;
+    onNoInputReceived?(player: Player): void;
     /**
      * Called when an npc is damaged
      * @param npc The npc object
@@ -529,47 +531,47 @@ export interface IHookHost {
      * @param player The player object
      * @param doodad The doodad object
      */
-    onPickupDoodad?(player: IPlayer, doodad: IDoodad): void;
+    onPickupDoodad?(player: Player, doodad: IDoodad): void;
     /**
      * Called when a player is damaged
      * @param player The player object
      * @param damageInfo The damage info object
      * @returns The amount of damage the player should take (the player will take this damage) or undefined to use the default logic
      */
-    onPlayerDamage?(player: IPlayer, damageInfo: IDamageInfo): number | undefined;
+    onPlayerDamage?(player: Player, damageInfo: IDamageInfo): number | undefined;
     /**
      * Called when a player is killed
      * @param player The player object
      * @returns False to stop the player from dying or undefined to use the default logic
      */
-    onPlayerDeath?(player: IPlayer): boolean | undefined;
+    onPlayerDeath?(player: Player): boolean | undefined;
     /**
      * Called when a player joins the server
      * @param player The player object
      */
-    onPlayerJoin?(player: IPlayer): void;
+    onPlayerJoin?(player: Player): void;
     /**
      * Called when a player leaves the server
      * Note: This hook is not called for the player who left the server (player will never be localPlayer)
      * @param player The player object
      */
-    onPlayerLeave?(player: IPlayer): void;
+    onPlayerLeave?(player: Player): void;
     /**
      * Called when the player tick ends
      * @param player The player object
      */
-    onPlayerTickEnd?(player: IPlayer): void;
+    onPlayerTickEnd?(player: Player): void;
     /**
      * Called when the player tick starts
      * @param player The player object
      */
-    onPlayerTickStart?(player: IPlayer): void;
+    onPlayerTickStart?(player: Player): void;
     /**
      * Called when the players walk to tile path is set
      * @param player The player object
      * @param path The path
      */
-    onPlayerWalkToTilePath?(player: IPlayer, path: IVector2[] | undefined): void;
+    onPlayerWalkToTilePath?(player: Player, path: IVector2[] | undefined): void;
     /**
      * Called when a sound effect is queued
      * @param type The sound effect type
@@ -598,7 +600,7 @@ export interface IHookHost {
      * Called when a player sails to civilization.
      * @param player The player that sailed to civilization
      */
-    onSailToCivilization?(player: IPlayer): void;
+    onSailToCivilization?(player: Player): void;
     /**
      * Called when a creature is spawned from a creature group
      * @param creatureGroup The creature group
@@ -622,32 +624,32 @@ export interface IHookHost {
      * Called when a turn is ending
      * @param player The player object
      */
-    onTurnEnd?(player: IPlayer): void;
+    onTurnEnd?(player: Player): void;
     /**
      * Called when a turn is starting
      * @param player The player object
      */
-    onTurnStart?(player: IPlayer): void;
+    onTurnStart?(player: Player): void;
     /**
      * Called when the players weight is being updated
      * @param player The player object
      * @param newWeight The new weight of the player
      * @returns A number to set the player weight to or undefined to use the default logic
      */
-    onUpdateWeight?(player: IPlayer, newWeight: number): number | undefined;
+    onUpdateWeight?(player: Player, newWeight: number): number | undefined;
     /**
      * Called when the player will write a note.
      * @param player The player object
      * @param note The note that will be written.
      * @returns `false` if the note should be cancelled, or `undefined` to use the default logic
      */
-    onWriteNote?(player: IPlayer, note: INote): false | undefined;
+    onWriteNote?(player: Player, note: INote): false | undefined;
     /**
      * Called when the player has written a note.
      * @param player The player object
      * @param id The id of the note that was written.
      */
-    onWrittenNote?(player: IPlayer, id: number): void;
+    onWrittenNote?(player: Player, id: number): void;
     /**
      * Called after an action has been executed
      * This is called after the action result is used
@@ -700,7 +702,7 @@ export interface IHookHost {
      * @param args The arguments
      * @returns False to cancel the command or undefined to use the default logic
      */
-    preExecuteCommand?(player: IPlayer, command: Command, args: string | undefined): boolean | undefined;
+    preExecuteCommand?(player: Player, command: Command, args: string | undefined): boolean | undefined;
     /**
      * Called before rendering everything
      */
@@ -725,7 +727,7 @@ export interface IHookHost {
      * @param player The player object
      * @returns False to prevent input processing or undefined to use the default logic
      */
-    processInput?(player: IPlayer): boolean | undefined;
+    processInput?(player: Player): boolean | undefined;
     /**
      * Called when different object types are rendered
      * @returns A bitwise list of render flags or undefined to use the default logic
@@ -738,7 +740,7 @@ export interface IHookHost {
      * @param messageId The `Message`, or `-1` if the message being displayed isn't a `Message`
      * @returns False to not display the message or undefined to use the default logic
      */
-    shouldDisplayMessage?(player: IPlayer, message: IMessage, messageId: number): boolean | undefined;
+    shouldDisplayMessage?(player: Player, message: IMessage, messageId: number): boolean | undefined;
     /**
      * Called when determining if the player should stop walking to the tile
      * @returns True to stop walk to tile movement, False to continue walk to tile movement, or undefined to use the default logic

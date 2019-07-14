@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import IFieldOfView from "renderer/fieldofview/IFieldOfView";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
 import { CompiledProgram } from "renderer/Shaders";
@@ -51,7 +51,7 @@ export default class FieldOfView implements IFieldOfView {
     compute(force?: boolean): void;
     createDebugRenderer(): ITextureDebugRenderer;
     canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, lightLevel?: number): boolean;
-    getBounds(player: IPlayer, radius?: number): IBound3;
+    getBounds(player: Player, radius?: number): IBound3;
     private updateExplored;
     private computeLights;
 }

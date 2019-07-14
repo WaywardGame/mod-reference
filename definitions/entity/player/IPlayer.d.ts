@@ -8,123 +8,19 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
-import { CreatureType, ICreature } from "entity/creature/ICreature";
-import { EntityType } from "entity/IEntity";
-import IHuman, { EquipType, HairColor, HairStyle, IRestData, RestType, SkinColor } from "entity/IHuman";
-import { IStat, Stat } from "entity/IStats";
+import { ICreature } from "entity/creature/ICreature";
+import IHuman, { HairColor, HairStyle, IRestData, SkinColor } from "entity/IHuman";
 import { INPC } from "entity/npc/INPC";
 import { IMessage } from "entity/player/IMessageManager";
 import MessageManager from "entity/player/MessageManager";
-import NoteManager from "entity/player/note/NoteManager";
-import QuestManager from "entity/player/quest/QuestManager";
+import Player from "entity/player/Player";
 import { Events } from "event/EventBuses";
-import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, IItem, ItemType } from "item/IItem";
-import Message from "language/dictionary/Message";
-import IClientStore from "save/clientStore/IClientStore";
 import { IOptions } from "save/data/ISaveDataGlobal";
-import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { Direction } from "utilities/math/Direction";
-import { IVector2, IVector3 } from "utilities/math/IVector";
-export interface IPlayer extends IHuman {
-    event: IEventEmitter<this, IPlayerEvents>;
-    entityType: EntityType.Player;
-    absentLastUsedTime: number;
-    containerSortInfo: {
-        [index: string]: IContainerSortInfo;
-    };
-    dialogContainerInfo: IDialogInfo[];
-    dialogInfo: {
-        [index: string]: IDialogInfo;
-    };
-    fromX: number;
-    fromY: number;
-    isConnecting: boolean;
-    isMoving: boolean;
-    isMovingClientside: boolean;
-    lastAttackedBy: Human | ICreature | undefined;
-    lightBonus: number;
-    messages: MessageManager;
-    movementComplete: boolean;
-    movementCompleteZ: number | undefined;
-    movementProgress: number;
-    name: string;
-    nextMoveDirection: Direction | undefined;
-    nextMoveTime: number;
-    nextX: number;
-    nextY: number;
-    noInputReceived: boolean;
-    notes: NoteManager;
-    quests: QuestManager;
-    quickSlotInfo: IQuickSlotInfo[];
-    revealedItems: {
-        [index: number]: boolean;
-    };
-    spawnPoint: IVector3 | undefined;
-    tamedCreatures: number[];
-    travelData: IPlayerTravelData | undefined;
-    turns: number;
-    walkSoundCounter: number;
-    wasAbsentPlayer: boolean;
-    x: number;
-    y: number;
-    z: number;
-    readonly clientStore: IClientStore;
-    readonly walkPath: IVector2[] | undefined;
-    movementFinishTime: number;
-    setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
-    checkForGather(): IDoodad | undefined;
-    checkForStill(): boolean;
-    checkForWell(): boolean;
-    checkReputationMilestones(): void;
-    checkSkillMilestones(): void;
-    checkWeight(): void;
-    equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
-    /**
-     * Returns true if the player changed their facing direction.
-     */
-    faceDirection(direction: Direction, turnDelay?: number): boolean;
-    getDefaultCarveTool(): IItem | undefined;
-    getDialogInfo(dialogIndex: string | number): IDialogInfo;
-    getDisplayCreature(): CreatureType | undefined;
-    getMaxWeight(): number;
-    getMovementIntent(): IMovementIntent;
-    getNextPosition(): IVector3;
-    getWeightMovementPenalty(): number;
-    getWeightStatus(): WeightStatus;
-    hasTamedCreature(creature: ICreature): boolean;
-    hasWalkPath(): boolean;
-    healthSyncCheck(): void;
-    hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
-    isFacingCarvableTile(): boolean;
-    isServer(): boolean;
-    kill(): void;
-    passTurn(turnType?: TurnType): void;
-    processInput(): void;
-    resetMovementStates(): void;
-    revealItem(itemType: ItemType): void;
-    setId(id: number): void;
-    setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
-    setup(): void;
-    showRestInterrupt(restType: RestType): void;
-    staminaCheck(): boolean;
-    tick(isPassTurn?: boolean): void;
-    unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
-    unequipAll(): void;
-    updateDialogInfo(dialogIndex: string | number): void;
-    updateHandToUse(): void;
-    updateMovementIntent(intent: IMovementIntent): void;
-    updateQuickSlotInfo(quickSlot: number, itemType?: ItemType, action?: IContextMenuAction): void;
-    updateStatuses(): void;
-    updateStrength(): void;
-    updateTables(): void;
-    updateTablesAndWeight(): void;
-    walkAlongPath(path: IVector2[] | undefined): void;
-}
-export default IPlayer;
-interface IPlayerEvents extends Events<IHuman> {
+import { IVector2 } from "utilities/math/IVector";
+export interface IPlayerEvents extends Events<IHuman> {
     /**
      * Called when the player is spawned. (At the end of `Player.setup`)
      */
@@ -190,7 +86,7 @@ export interface IAttackHand {
     leftHand: number;
     rightHand: number;
 }
-export declare type IPlayerOld = Partial<IPlayer> & {
+export declare type IPlayerOld = Partial<Player> & {
     gender: 0 | 1;
     talent: number;
     stamina: number;
@@ -241,7 +137,7 @@ export interface IMobCheck {
     y: number;
     z: number;
     creature?: ICreature;
-    player?: IPlayer;
+    player?: Player;
     npc?: INPC;
     obstacle?: boolean;
     water?: boolean;

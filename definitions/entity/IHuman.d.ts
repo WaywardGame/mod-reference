@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "entity/creature/ICreature";
-import IEntity from "entity/IEntity";
+import Entity from "entity/Entity";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
@@ -26,7 +26,7 @@ import { IModdable } from "mod/ModRegistry";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
-export default interface IHuman extends IEntity {
+export default interface IHuman extends Entity {
     event: IEventEmitter<this, IHumanEvents>;
     attackFromEquip: IAttackHand;
     canSendMessage: boolean;
@@ -115,7 +115,7 @@ export default interface IHuman extends IEntity {
     updateReputation(reputation: number): void;
     updateStatsAndAttributes(): void;
 }
-interface IHumanEvents extends Events<IEntity> {
+interface IHumanEvents extends Events<Entity> {
     /**
      * @param skill The skill that is changing
      * @param value The new skill value (core + bonus)

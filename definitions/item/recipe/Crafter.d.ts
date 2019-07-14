@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IEntity from "entity/IEntity";
+import Entity from "entity/Entity";
 import { Quality } from "game/IObject";
 import { CraftResult, IItem } from "item/IItem";
 import Recipe from "item/recipe/Recipe";
@@ -24,13 +24,13 @@ export default class Crafter {
     private readonly usedFilter;
     private forcedQuality?;
     private readonly decays;
-    constructor(recipe: Recipe, crafter: IEntity, accessibleItems: IItem[]);
+    constructor(recipe: Recipe, crafter: Entity, accessibleItems: IItem[]);
     /**
      * Gets a stream of the tiles around the crafter entity.
      * @param includeCrafterTile Whether the tile the crafter is on should be included. Defaults to `true`.
      */
     tilesAroundCrafter(includeCrafterTile?: boolean): Stream<import("../../tile/ITerrain").ITile>;
-    getCrafter(): IEntity;
+    getCrafter(): Entity;
     getUsable<R extends RecipeRequirementType>(type: R, requirement: InstanceType<RecipeRequirementClass<R>>): Set<RecipeInputType<R>>;
     getUsed<R extends RecipeRequirementType>(type: R, requirement?: InstanceType<RecipeRequirementClass<R>>): Stream<RecipeInputType<R>>;
     /**

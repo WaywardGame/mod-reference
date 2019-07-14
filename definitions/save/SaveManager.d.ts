@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import IClientStore from "save/clientStore/IClientStore";
 import { ISaveInfo, ISaveManager, ISaveObject, SaveSort, SortDirection } from "save/ISaveManager";
 import ISerializer from "save/ISerializer";
@@ -42,7 +42,7 @@ export default class SaveManager implements ISaveManager {
     /**
      * Returns the players ClientStore
      */
-    getClientStore(player?: IPlayer): IClientStore;
+    getClientStore(player?: Player): IClientStore;
     /**
      * Gets the used slots, ordered by one of a few properties of the saveData in that slot
      */

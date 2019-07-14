@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { IQuest, QuestType } from "entity/player/quest/quest/IQuest";
 import { RequirementInstance } from "entity/player/quest/quest/Quest";
 import EventEmitter from "event/EventEmitter";
@@ -20,7 +20,7 @@ export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents>
     private readonly hookTriggers;
     private readonly hostTriggers;
     private readonly initializedQuests;
-    constructor(host: IPlayer);
+    constructor(host: Player);
     /**
      * Get all quests
      */
@@ -35,7 +35,7 @@ export default class QuestManager extends EventEmitter.Host<IQuestManagerEvents>
      */
     reset(): this;
     complete(questInstance: QuestInstance): boolean;
-    onPlayerJoin(player: IPlayer): void;
+    onPlayerJoin(player: Player): void;
     onGameStart(isLoadingSave: boolean, playedCount: number): void;
     private init;
     private onUpdateRequirement;
@@ -65,10 +65,10 @@ export interface IQuestManagerEvents {
     requirementMet(quest: QuestInstance, requirement: RequirementInstance): any;
 }
 export declare class QuestInstance extends EventEmitter.Host<IQuestInstanceEvents> {
-    readonly host: IPlayer;
+    readonly host: Player;
     readonly data: IQuest;
     readonly id: number;
-    constructor(host: IPlayer, data: IQuest, id: number);
+    constructor(host: Player, data: IQuest, id: number);
     getTitle(): import("../../../language/Translation").default | undefined;
     getDescription(): import("../../../language/Translation").default | undefined;
     getRequirements(): Stream<RequirementInstance>;

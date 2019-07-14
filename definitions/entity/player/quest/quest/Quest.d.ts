@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { IQuest, QuestType } from "entity/player/quest/quest/IQuest";
 import { QuestInstance } from "entity/player/quest/QuestManager";
 import { IQuestRequirement, IQuestRequirementApi, IQuestRequirementEvents, QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
@@ -40,9 +40,9 @@ export declare class Quest extends EventEmitter.Host<IQuestEvents> {
     getTitle(quest: IQuest): Translation | undefined;
     getDescription(quest: IQuest): Translation | undefined;
     getTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<[import("../../../../mod/IHookManager").Hook, (api: IQuestRequirementApi<[], {}>, ...args: any[]) => boolean]>]>;
-    getHostTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<[], {}>, player: IPlayer, ...args: any[]) => boolean]>]>;
-    getRequirements(host: IPlayer, instance: IQuest): import("../../../../utilities/stream/Stream").default<RequirementInstance>;
-    getRequirement(host: IPlayer, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
+    getHostTriggers(instance: IQuest): import("../../../../utilities/stream/Stream").default<[IQuestRequirement<any[], {}>, IterableIterator<["spawn" | "milestoneUpdate" | "updateOption" | "inventoryItemAdd" | "inventoryItemRemove" | "inventoryItemUpdate" | "processMovement" | "restStart" | "restEnd" | "displayMessage" | "skillChange" | "statChanged" | "statTimerChanged" | "statMaxChanged" | "statBonusChanged" | "statusChange" | "preMove" | "postMove", (api: IQuestRequirementApi<[], {}>, player: Player, ...args: any[]) => boolean]>]>;
+    getRequirements(host: Player, instance: IQuest): import("../../../../utilities/stream/Stream").default<RequirementInstance>;
+    getRequirement(host: Player, quest: IQuest, requirement: IQuestRequirement): RequirementInstance | undefined;
     needsManualCompletion(): boolean;
     protected createRequirements(): import("../../../../utilities/stream/Stream").default<IQuestRequirement<any[], {}>>;
     protected createRequirement<R extends QuestRequirementType>(type: R, ...options: RequirementArgs<R>): IQuestRequirement<RequirementArgs<R>>;
@@ -51,7 +51,7 @@ export declare class RequirementInstance extends EventEmitter.Host<IQuestRequire
     readonly data: IQuestRequirement;
     readonly id: number;
     private readonly api;
-    constructor(host: IPlayer, data: IQuestRequirement, id: number);
+    constructor(host: Player, data: IQuestRequirement, id: number);
     triggerInitialization(): boolean;
     getTranslation(): Translation;
     getCompletionAmount(): number;

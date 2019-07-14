@@ -14,11 +14,10 @@ import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import IHuman, { EquipType, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
-import { IMovementIntent, IPlayer, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
+import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
-import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, IItem, ItemType } from "item/IItem";
@@ -30,8 +29,8 @@ import { IOptions } from "save/data/ISaveDataGlobal";
 import { IContainerSortInfo, IContextMenuAction, IDialogInfo, IQuickSlotInfo } from "ui/IUi";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
-export default class Player extends Human implements IPlayer {
-    event: IEventEmitter<this, Events<IPlayer>>;
+export default class Player extends Human {
+    event: IEventEmitter<this, IPlayerEvents>;
     readonly entityType: EntityType.Player;
     absentLastUsedTime: number;
     containerSortInfo: {
@@ -144,7 +143,7 @@ export default class Player extends Human implements IPlayer {
     updateTablesAndWeight(): void;
     checkReputationMilestones(): void;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
-    setTamedCreatureEnemy(enemy: IPlayer | ICreature): void;
+    setTamedCreatureEnemy(enemy: Player | ICreature): void;
     setPosition(point: IVector3): void;
     getNextPosition(): IVector3;
     setZ(z: number): void;
@@ -163,6 +162,9 @@ export default class Player extends Human implements IPlayer {
     hasWalkPath(): boolean;
     walkAlongPath(path: IVector2[] | undefined): void;
     processInput(): void;
+    /**
+     * Returns true if the player changed their facing direction.
+     */
     faceDirection(direction: Direction, turnDelay?: number): boolean;
     revealItem(itemType: ItemType): void;
     getMovementFinishTime(): number;

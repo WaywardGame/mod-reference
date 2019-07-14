@@ -10,7 +10,7 @@
  */
 import { DoodadType, DoodadTypeGroup, IDoodad } from "doodad/IDoodad";
 import { INPC } from "entity/npc/INPC";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
@@ -24,7 +24,7 @@ export interface IItemManager {
     getItemsWithRecipes(): ReadonlyArray<ItemType>;
     addToContainerInternal(item: IItem, container: IContainer, movingMultiple: boolean, skipMessage?: boolean): boolean;
     breakContainerOnTile(itemContainer: IItem, x: number, y: number, z: number): void;
-    checkMilestones(player: IPlayer, item: IItem): void;
+    checkMilestones(player: Player, item: IItem): void;
     computeContainerWeight(container: IContainer): number;
     countItemsInContainer(container: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: IItem): number;
     countItemsInContainerByGroup(container: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: IItem): number;
@@ -57,8 +57,8 @@ export interface IItemManager {
     getNPCFromInventoryContainer(container: IContainer): INPC | undefined;
     getNPCWithItemInInventory(containable: IContainable): INPC | undefined;
     getOrderedContainerItems(container: IContainer, excludeProtectedItems?: IProtectedItemOptions): IItem[];
-    getPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
-    getAbsentPlayerWithItemInInventory(containable: IContainable): IPlayer | undefined;
+    getPlayerWithItemInInventory(containable: IContainable): Player | undefined;
+    getAbsentPlayerWithItemInInventory(containable: IContainable): Player | undefined;
     getQualityBasedOnSkill(itemQuality: Quality | undefined, skillValue: number, qualityBypass?: boolean, bonusChance?: number): Quality | undefined;
     getRandomQuality(bonusQuality?: number): Quality;
     getTileContainer(x: number, y: number, z: number): IContainer;
@@ -78,7 +78,7 @@ export interface IItemManager {
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     hasAdditionalRequirements(human: Human, craftType: ItemType, message?: Message, faceDoodad?: boolean, isRepairOrDisassembly?: boolean): RequirementInfo;
     hasRoomInContainer(extraWeight: number, container: IContainer, itemToMove?: IItem): boolean;
-    isContainableInAdjacentContainer(player: IPlayer, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
+    isContainableInAdjacentContainer(player: Player, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
     isContainer(obj: unknown): obj is IContainer;
     isGroup(itemType: (ItemType | ItemTypeGroup)): itemType is ItemTypeGroup;

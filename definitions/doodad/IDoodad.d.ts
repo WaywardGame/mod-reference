@@ -13,7 +13,7 @@ import { ActionType } from "entity/action/IAction";
 import { ICreature } from "entity/creature/ICreature";
 import { StatusType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { ILootItem } from "game/ILoot";
 import { IInspectable } from "game/inspection/Inspections";
 import { IObject, IObjectDescription, IObjectOptions } from "game/IObject";
@@ -38,7 +38,7 @@ export interface IDoodad extends IObject<DoodadType>, IDoodadOptions, IVector3, 
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
     changeType(doodadType: DoodadType): void;
-    getOwner(): IPlayer | undefined;
+    getOwner(): Player | undefined;
     canGrow(): boolean;
     getGrowingStage(): GrowingStage | undefined;
     setGrowingStage(stage: GrowingStage, updateTile?: boolean): void;

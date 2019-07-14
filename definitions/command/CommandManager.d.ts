@@ -10,13 +10,13 @@
  */
 import { Command, ICommand } from "command/ICommand";
 import { ICommandManager } from "command/ICommandManager";
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import GenericManager from "game/GenericManager";
 import { IGenericManager } from "game/IGenericManager";
 import { LogSource } from "utilities/Log";
 export default class CommandManager extends GenericManager<ICommand> implements ICommandManager {
     setup(instance: IGenericManager<ICommand>): void;
-    execute(player: IPlayer, cmd: Command, args?: string): void;
+    execute(player: Player, cmd: Command, args?: string): void;
     protected getSource(): LogSource;
     protected getEnumObject(): any;
 }

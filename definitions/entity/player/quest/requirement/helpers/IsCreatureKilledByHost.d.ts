@@ -10,6 +10,6 @@
  */
 import { IDoodad } from "doodad/IDoodad";
 import { ICreature } from "entity/creature/ICreature";
-import IEntity from "entity/IEntity";
-import IPlayer from "entity/player/IPlayer";
-export default function isCreatureKilledByHost(host: IPlayer, attacker: IEntity | IDoodad, target: IEntity): target is ICreature;
+import Entity from "entity/Entity";
+import Player from "entity/player/Player";
+export default function isCreatureKilledByHost(host: Player, attacker: Entity | IDoodad, target: Entity): target is ICreature;

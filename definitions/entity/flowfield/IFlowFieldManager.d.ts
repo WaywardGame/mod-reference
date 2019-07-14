@@ -11,7 +11,7 @@
 import IFlowField from "entity/flowfield/IFlowField";
 import { DebugRendererDelegate } from "entity/flowfield/IFlowFieldDebugRenderer";
 import { MoveType } from "entity/IEntity";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { Direction } from "utilities/math/Direction";
 import { IVector3 } from "utilities/math/IVector";
 export interface IFlowFieldManager {
@@ -25,10 +25,10 @@ export interface IFlowFieldManager {
     getOpposingMoveDirection(worldX: number, worldY: number, worldZ: number, moveType: MoveType): Direction;
     getWidth(): number;
     isInFlowField(point: IVector3): boolean;
-    isPlayerInFlowField(player: IPlayer): boolean;
+    isPlayerInFlowField(player: Player): boolean;
     reset(): void;
     setDelegate(delegate: DebugRendererDelegate): void;
-    setPlayers(plys: IPlayer[]): void;
+    setPlayers(plys: Player[]): void;
     update(): void;
     updateTile(tileX: number, tileY: number, tileZ: number): void;
 }

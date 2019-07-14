@@ -10,31 +10,30 @@
  */
 import { SfxType } from "audio/IAudio";
 import { ICreature } from "entity/creature/ICreature";
-import IEntity, { EntityPlayerCreatureNpc, EntityType, IProperties, IStatChangeInfo, IStatus, MoveType, Property, StatChangeReason, StatusEffectChangeReason, StatusType } from "entity/IEntity";
+import { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatChangeInfo, IStatus, MoveType, Property, StatChangeReason, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
 import { INPC } from "entity/npc/INPC";
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import StatFactory from "entity/StatFactory";
-import { Events } from "event/EventBuses";
 import EventEmitter from "event/EventEmitter";
 import { FireType, TileUpdateType } from "game/IGame";
 import { ItemType } from "item/IItem";
-import Translation from "language/Translation";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { StatType } from "renderer/INotifier";
 import { ITile } from "tile/ITerrain";
 import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Stream from "utilities/stream/Stream";
-export default abstract class Entity extends EventEmitter.Host<Events<IEntity>> implements IEntity {
-    static is(entity: IEntity | undefined, entityType: EntityType.NPC): entity is INPC;
-    static is(entity: IEntity | undefined, entityType: EntityType.Creature): entity is ICreature;
-    static is(entity: IEntity | undefined, entityType: EntityType.Player): entity is IPlayer;
-    static isNot(entity: IEntity | undefined, entityType: EntityType.NPC): entity is Exclude<EntityPlayerCreatureNpc, INPC>;
-    static isNot(entity: IEntity | undefined, entityType: EntityType.Creature): entity is Exclude<EntityPlayerCreatureNpc, ICreature>;
-    static isNot(entity: IEntity | undefined, entityType: EntityType.Player): entity is Exclude<EntityPlayerCreatureNpc, IPlayer>;
+export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
+    static is(entity: Entity | undefined, entityType: EntityType.NPC): entity is INPC;
+    static is(entity: Entity | undefined, entityType: EntityType.Creature): entity is ICreature;
+    static is(entity: Entity | undefined, entityType: EntityType.Player): entity is Player;
+    static isNot(entity: Entity | undefined, entityType: EntityType.NPC): entity is Exclude<EntityPlayerCreatureNpc, INPC>;
+    static isNot(entity: Entity | undefined, entityType: EntityType.Creature): entity is Exclude<EntityPlayerCreatureNpc, ICreature>;
+    static isNot(entity: Entity | undefined, entityType: EntityType.Player): entity is Exclude<EntityPlayerCreatureNpc, Player>;
     entityType: EntityType;
     id: number;
-    renamed?: string;
+    renamed?: string | ISerializedTranslation;
     z: number;
     x: number;
     y: number;
@@ -53,27 +52,128 @@ export default abstract class Entity extends EventEmitter.Host<Events<IEntity>> 
     constructor();
     abstract getName(): Translation;
     toString(): string;
+    /**
+     * Initializes the given stat from the given `StatFactory` instance.
+     * @param factory The factory to initialize the stat from.
+     *
+     * This method will replace existing stats.
+     */
     initStat(factory: StatFactory): void;
+    /**
+     * Returns whether the given stat exists on this entity.
+     */
     hasStat(stat: Stat): boolean;
+    /**
+     * Removes the given stat from this entity.
+     */
     removeStat(stat: Stat): void;
+    /**
+     * Returns the stat object of a given `Stat`. The return type is a vague `IStat`, but can be
+     * passed a type which extends `IStatBase` for automatic narrowing.
+     * @param stat The `Stat` to get
+     */
     getStat<Staty extends IStatBase | undefined = IStat | undefined>(stat: Stat, allowFailure?: boolean): Staty & (Staty extends IStatBase ? {
         base: Staty;
     } : undefined);
     getStatInternal(stat: Stat | IStat): IStatBase;
     getStatInternal(stat: Stat | IStat, allowFailure: true): IStatBase | undefined;
     getStatInternal(stat: Stat | IStat, allowFailure: boolean): IStatBase | undefined;
-    getStatValue(stat: Stat | IStat): number;
+    /**
+     * Returns the value of the given stat, or `undefined` if the stat does not exist.
+     */
+    getStatValue(stat: Stat | IStat): number | undefined;
+    /**
+     * Sets the given `Stat`'s value to the given amount. Triggers `EntityEvent.StatChange`
+     * @param stat The `Stat` to set.
+     * @param amount The amount to set the value to.
+     * @param reason Why this stat is changing.
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
     setStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    /**
+     * Reduces the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
+     * @param stat The `Stat` to reduce.
+     * @param amount The amount to reduce by.
+     * @param reason Why this stat is changing.
+     *
+     * An alias for `increaseStat`, negating the given amount.
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
     reduceStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    /**
+     * Increases the given `Stat` by the given amount. Triggers `EntityEvent.StatChange`
+     * @param stat The `Stat` to increase.
+     * @param amount The amount to increase by.
+     * @param reason Why this stat is changing.
+     *
+     * An alias for `setStat(stat, stat.value + amount, reason)`
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
     increaseStat(stat: Stat | IStat, amount: number, info?: StatChangeReason | IStatChangeInfo): boolean;
+    /**
+     * Change the bonus for a stat.
+     * @param stat The `Stat` to set the bonus of.
+     * @param bonus The amount to increase/decrease the stat.
+     * @param reason Why this stat is changing.
+     *
+     * Triggers `EntityEvent.StatBonusChanged`, then `EntityEvent.StatChanged`
+     */
     setStatBonus(stat: Stat | IStat, bonus: number, info?: StatChangeReason | IStatChangeInfo): void;
+    /**
+     * Returns the `max` of the given stat, or undefined if the stat isn't an `IStatMax`.
+     */
     getStatMax(stat: Stat | IStat): number | undefined;
+    /**
+     * Sets the given `Stat`'s `max` to the given amount. Triggers `EntityEvent.StatMaxChange`
+     * @param stat The `Stat` to set.
+     * @param amount The amount to set the value to.
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
     setStatMax(stat: Stat | IStat, amount: number): void;
+    /**
+     * Sets how frequently the stat should change. Triggers `EntityEvent.StatTimerChange`
+     * @param stat The `Stat` that should change.
+     * @param timer How many turns should pass between changes.
+     * @param amount The amount the stat will change whenever the timer completes. Defaults to increase by `1`.
+     *
+     * If the stat already has a timer going, the difference of the new and old timers
+     * is subtracted from the time remaining.
+     *
+     * This method assumes the stat you're providing exists on this entity. If it doesn't,
+     * it will likely error!
+     */
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatAndMax(stat: Stat | IStat, max: number, current: number): void;
+    /**
+     * Passes the "turn" for stats, decrements their `changeTimer`s. If a stat's timer reaches `0`,
+     * the stat value is changed by `changeAmount` and the `changeTimer` is reset to `nextChangeTimer`
+     */
     updateStats(): void;
+    /**
+     * Returns whether the entity has the given `StatusType`
+     * @param status The status to check
+     */
     hasStatus(status: StatusType): boolean;
+    /**
+     * Sets whether the entity has the given `StatusType`
+     * @param status The status to change
+     * @param to Whether the entity will have the status
+     * @param reason The reason for the change
+     *
+     * Triggers `EntityEvent.StatusChange`
+     */
     setStatus(status: StatusType, hasStatusEffect: boolean, reason: StatusEffectChangeReason): void;
+    /**
+     * Generator for status effects on the entity.
+     */
     statuses(): Stream<StatusType>;
     getTileUpdateType(): TileUpdateType;
     getTile(): ITile;

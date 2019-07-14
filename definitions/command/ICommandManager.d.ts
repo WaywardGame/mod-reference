@@ -9,8 +9,8 @@
  * https://waywardgame.github.io/
  */
 import { Command, ICommand } from "command/ICommand";
-import { IPlayer } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { IGenericManager } from "game/IGenericManager";
 export interface ICommandManager extends IGenericManager<ICommand> {
-    execute(player: IPlayer, cmd: Command, args?: string): void;
+    execute(player: Player, cmd: Command, args?: string): void;
 }

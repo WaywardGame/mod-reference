@@ -9,7 +9,8 @@
  * https://waywardgame.github.io/
  */
 import { ICharacter } from "entity/IHuman";
-import { IPlayer, PlayerState } from "entity/player/IPlayer";
+import { PlayerState } from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { GameMode, IGameOptions } from "game/GameMode";
 import { TurnMode } from "game/IGame";
@@ -52,7 +53,7 @@ export interface IMultiplayer extends EventEmitter.Host<IMultiplayerEvents> {
     isReady(): boolean;
     isServer(): boolean;
     joinServer(info: ServerInfo, character?: ICharacter): void;
-    kick(player: IPlayer, reason: DisconnectReason): void;
+    kick(player: Player, reason: DisconnectReason): void;
     onLobbyEntered(success: boolean, lobbyId: string): void;
     onLobbyExited(lobbyId: string): void;
     onPlaying(): Promise<void>;
@@ -125,7 +126,7 @@ export declare const checkConnectionMatchmakingId = "check";
 export declare const defaultSyncChecks: MultiplayerSyncCheck[];
 export declare const networkingOptions: IMultiplayerNetworkingOptions;
 export declare function getDefaultMultiplayerOptions(): IMultiplayerOptions;
-export declare type PacketTarget = Array<IPlayer | IConnection> | IPlayer | IConnection;
+export declare type PacketTarget = Array<Player | IConnection> | Player | IConnection;
 export interface IMultiplayerOptions {
     lobbyType: LobbyType;
     pvp: boolean;

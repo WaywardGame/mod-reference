@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IEntity, { IStatChangeInfo } from "entity/IEntity";
+import Entity from "entity/Entity";
+import { IStatChangeInfo } from "entity/IEntity";
 import { IStat, IStatMax, Stat } from "entity/IStats";
 import Component from "newui/component/Component";
 import Text from "newui/component/Text";
@@ -17,11 +18,13 @@ import { IStringSection } from "utilities/string/Interpolator";
 export declare abstract class StatElement extends Component {
     private readonly stat;
     private readonly entity;
-    constructor(entity: IEntity, stat: Stat);
+    constructor(entity: Entity, stat: Stat);
     /**
      * Returns the attached entity's `IStat` for this `StatElement`'s `Stat`.
      */
-    getStat<S extends IStat>(): S;
+    getStat<S extends IStat>(): S & (S extends import("../../../../../../../entity/IStats").IStatBase ? {
+        base: S;
+    } : undefined);
     /**
      * Returns the formatted string value of this stat.
      *
@@ -60,7 +63,7 @@ export declare abstract class StatElement extends Component {
 export declare class Statbar extends StatElement {
     private readonly bar;
     private readonly text;
-    constructor(entity: IEntity, stat: Stat);
+    constructor(entity: Entity, stat: Stat);
     getDisplayElement(): Text;
     getGenericStatValue(stat: IStatMax): IStringSection[];
     /**
@@ -72,16 +75,16 @@ export declare class Statbar extends StatElement {
 }
 export declare class StatAttribute extends StatElement {
     private readonly attribute;
-    constructor(entity: IEntity, stat: Stat);
+    constructor(entity: Entity, stat: Stat);
     getDisplayElement(): Text;
 }
 export declare class Statbars extends Component {
     private readonly _statbars;
     readonly statbars: Map<Stat, Statbar>;
-    constructor(entity: IEntity, iterableOfStats: Stream<Stat>);
+    constructor(entity: Entity, iterableOfStats: Stream<Stat>);
 }
 export declare class StatAttributes extends Component {
     private readonly _stats;
     readonly stats: Map<Stat, StatAttribute>;
-    constructor(entity: IEntity, iterableOfStats: Stream<Stat>);
+    constructor(entity: Entity, iterableOfStats: Stream<Stat>);
 }

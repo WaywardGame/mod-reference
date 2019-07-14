@@ -26,6 +26,12 @@ export default abstract class MilestoneModifier {
      * Difficulty options to be applied due to this modifier
      */
     options?: RecursivePartial<IGameOptions>;
+    /**
+     * Whether this milestone modifier is host-exclusive, IE, clients connecting to a server can't select this modifier.
+     *
+     * Modifiers with custom `options: IGameOptions` are always host-exclusive.
+     */
+    isHostExclusive: boolean;
     initialize(): void;
     uninitialize(): void;
     abstract getGroup(): MilestoneModifierGroup;

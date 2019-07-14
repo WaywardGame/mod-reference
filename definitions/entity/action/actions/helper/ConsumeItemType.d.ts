@@ -10,6 +10,6 @@
  */
 import { ActionType, IActionApi } from "entity/action/IAction";
 import { INPC } from "entity/npc/INPC";
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { IItem, ItemType } from "item/IItem";
-export default function consumeItemType(action: IActionApi<IPlayer | INPC>, item: IItem | ItemType, actionType?: ActionType): boolean;
+export default function consumeItemType(action: IActionApi<Player | INPC>, item: IItem | ItemType, actionType?: ActionType): boolean;

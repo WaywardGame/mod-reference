@@ -8,8 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IEntity, { AiType, DamageType, Defense, EntityType, MoveType, StatusType } from "entity/IEntity";
-import { IPlayer } from "entity/player/IPlayer";
+import Entity from "entity/Entity";
+import { AiType, DamageType, Defense, EntityType, MoveType, StatusType } from "entity/IEntity";
+import Player from "entity/player/Player";
 import { IInspectable } from "game/inspection/Inspections";
 import { IObject } from "game/IObject";
 import { IItem, ItemType, ItemTypeGroup } from "item/IItem";
@@ -66,7 +67,7 @@ export declare enum CreatureType {
     Walleye = 42,
     Wisp = 43
 }
-export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable {
+export interface ICreature extends Entity, IObject<CreatureType>, IInspectable {
     entityType: EntityType.Creature;
     fromDescription: ISafeFn<ICreatureDescription, undefined>;
     ai: AiType;
@@ -95,7 +96,7 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
     checkForBurn(moveType?: MoveType): boolean;
     damage(damageInfo: IDamageInfo): number | undefined;
     isTamed(): boolean;
-    tame(player: IPlayer): boolean;
+    tame(player: Player): boolean;
     release(): boolean;
     increaseTamedCount(): void;
     skipNextUpdate(): void;
@@ -107,9 +108,9 @@ export interface ICreature extends IEntity, IObject<CreatureType>, IInspectable 
     update(): boolean;
     moveTo(x: number, y: number, z: number): boolean;
     checkUnder(checkX?: number, checkY?: number): boolean;
-    canSwapWith(player: IPlayer): boolean;
-    getOwner(): IPlayer | undefined;
-    processSpecialAbilities(enemy: IPlayer | ICreature | undefined, bypass?: boolean): boolean;
+    canSwapWith(player: Player): boolean;
+    getOwner(): Player | undefined;
+    processSpecialAbilities(enemy: Player | ICreature | undefined, bypass?: boolean): boolean;
     increaseWaste(item: IItem): void;
     initializeStats(hp: number, maxhp?: number): void;
 }

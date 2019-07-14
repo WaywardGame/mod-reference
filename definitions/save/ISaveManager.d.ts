@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import IClientStore from "save/clientStore/IClientStore";
 import { ISerializer } from "save/ISerializer";
 export interface ISaveManager {
@@ -18,7 +18,7 @@ export interface ISaveManager {
     deleteAllSlots(): Promise<boolean | undefined>;
     deleteSlot(slot: number): Promise<boolean | undefined>;
     exportSave(slot: number): Promise<ISaveObject>;
-    getClientStore(player?: IPlayer): IClientStore;
+    getClientStore(player?: Player): IClientStore;
     getFirstFreeSlot(): Promise<number | undefined>;
     getGameStateAsJson(cleanup?: boolean): string;
     getMostRecentSlot(): Promise<number>;

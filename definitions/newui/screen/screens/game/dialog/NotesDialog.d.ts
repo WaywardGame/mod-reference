@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import IPlayer from "entity/player/IPlayer";
+import Player from "entity/player/Player";
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
 import UiTranslation from "language/dictionary/UiTranslation";
@@ -27,7 +27,7 @@ export default class NotesDialog extends Dialog {
     private note;
     private current;
     constructor();
-    onWrittenNote(player: IPlayer, id: number): void;
+    onWrittenNote(player: Player, id: number): void;
     getName(): UiTranslation;
     showNote(noteId: number): this;
     protected onShow(): void;
