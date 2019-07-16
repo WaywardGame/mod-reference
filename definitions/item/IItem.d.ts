@@ -355,7 +355,7 @@ export declare enum ItemType {
     GoldCoins = 22,
     GoldenChalice = 23,
     GoldenRing = 24,
-    GoldenSword = 25,
+    GoldSword = 25,
     GrassSeeds = 26,
     IronOre = 27,
     WoodenDowels = 28,
@@ -818,7 +818,8 @@ export declare enum ItemType {
     TallowCandle = 485,
     LitTallowCandle = 486,
     WispDust = 487,
-    MagicalAspect = 488
+    MagicalAspect = 488,
+    GoldenSextant = 489
 }
 export declare enum ItemTypeGroup {
     Invalid = 800,

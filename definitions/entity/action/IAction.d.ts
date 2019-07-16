@@ -117,7 +117,8 @@ export declare enum ActionType {
     Refine = 85,
     PickupExcrement = 86,
     TestDepth = 87,
-    Enchant = 88
+    Enchant = 88,
+    Navigate = 89
 }
 export declare enum ActionUsability {
     Paused = 0,
