@@ -9,10 +9,10 @@
  * https://waywardgame.github.io/
  */
 import Entity from "entity/Entity";
-import { IItem } from "item/IItem";
+import Item from "item/Item";
 import { IVector3 } from "utilities/math/IVector";
 declare module Inventories {
-    function ofEntity(entity: Entity): IItem[][];
-    function get(tile: IVector3): IItem[][];
+    function ofEntity(entity: Entity): Item[][];
+    function get(tile: IVector3): Item[][];
 }
 export default Inventories;

@@ -8,16 +8,17 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { CreatureType, ICreature, ICreatureDescription, SpawnGroup, TileGroup } from "entity/creature/ICreature";
-import { ICreatureManager } from "entity/creature/ICreatureManager";
+import Creature from "entity/creature/Creature";
+import { CreatureType, ICreatureDescription, SpawnGroup, TileGroup } from "entity/creature/ICreature";
 import EntityManager from "entity/EntityManager";
+import Human from "entity/Human";
 import { MoveType } from "entity/IEntity";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
-export default class CreatureManager extends EntityManager<ICreature> implements ICreatureManager {
-    getEntities(): (ICreature | undefined)[];
-    getName(creature: ICreature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
-    getHappinessLevel(human: Human, creature: ICreature): number;
+export default class CreatureManager extends EntityManager<Creature> {
+    getEntities(): (Creature | undefined)[];
+    getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
+    getHappinessLevel(human: Human, creature: Creature): number;
     /**
      * Spawns a creature.
      * @param creatureType The type of creature to spawn.
@@ -28,15 +29,15 @@ export default class CreatureManager extends EntityManager<ICreature> implements
      * @param forceAberrant If provided, forces the spawned creature's aberrant state to be the passed boolean. True = aberrant, false = not aberrant. If not provided, the aberrant state is decided based on chance.
      * @param spawnableTiles If set, this will overwrite the creature's description for which tiles it can spawn on
      */
-    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup): ICreature | undefined;
-    spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): ICreature | undefined;
+    spawn(creatureType: CreatureType, x: number, y: number, z: number, bypass?: boolean, forceAberrant?: boolean, spawnTiles?: TileGroup): Creature | undefined;
+    spawnFromGroup(creatureGroup: SpawnGroup, x: number, y: number, z: number, bypass?: boolean): Creature | undefined;
     getSpawnableCreatures(creatureGroup: SpawnGroup, z: number, reputation?: number, time?: number): {
         pool: CreatureType[];
         aberrantChance: number;
     };
-    exists(creature: ICreature): boolean;
-    maybeSpawnClawWorm(target: Human | ICreature): void;
-    remove(creature: ICreature): void;
+    exists(creature: Creature): boolean;
+    maybeSpawnClawWorm(target: Human | Creature): void;
+    remove(creature: Creature): void;
     updateAll(): void;
     /**
      * getMovePenalty

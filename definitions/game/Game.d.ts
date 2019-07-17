@@ -8,19 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
+import Doodad from "doodad/Doodad";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
-import { ICreature, IDamageInfo } from "entity/creature/ICreature";
+import Creature from "entity/creature/Creature";
+import { IDamageInfo } from "entity/creature/ICreature";
+import Human from "entity/Human";
 import { SkillType } from "entity/IHuman";
-import { INPC } from "entity/npc/INPC";
+import NPC from "entity/npc/NPC";
 import { TurnType } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { GameMode, IGameOptions } from "game/GameMode";
-import { FireStage, FireType, IGame, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TileUpdateType, TurnMode } from "game/IGame";
+import { FireStage, FireType, IGameEvents, IMapRequest, IPlayerOptions, IPlayOptions, ISeeds, IWell, RenderSource, SaveType, TileUpdateType, TurnMode } from "game/IGame";
 import { Quality } from "game/IObject";
 import TimeManager from "game/TimeManager";
-import { IItem } from "item/IItem";
+import Item from "item/Item";
 import Translation from "language/Translation";
 import { INotifier } from "renderer/INotifier";
 import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
@@ -33,7 +35,7 @@ import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
-export default class Game extends EventEmitter.Host<IGameEvents> implements IGame {
+export default class Game extends EventEmitter.Host<IGameEvents> {
     readonly interval = 16.6666;
     readonly mapSize = 512;
     readonly mapSizeSq: number;
@@ -57,18 +59,18 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
     _updateFieldOfViewForced: boolean;
     contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;
-    creatures: SaferArray<ICreature>;
+    creatures: SaferArray<Creature>;
     creatureSpawnTimer: number;
     difficulty: GameMode;
     customMilestoneModifiersAllowed: boolean;
-    doodads: SaferArray<IDoodad>;
+    doodads: SaferArray<Doodad>;
     flowFieldSyncCount: number;
-    items: IItem[];
+    items: Item[];
     lastCreationIds: {
         [index: number]: number;
     };
     mapGenVersion: string;
-    npcs: SaferArray<INPC>;
+    npcs: SaferArray<NPC>;
     turnMode: TurnMode;
     tickSpeed: number;
     saveVersion: string;
@@ -195,7 +197,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> implements IGam
      */
     updateTablesAndWeight(): void;
     rangeFinder(weaponRange: number, playerSkillLevel: number): number;
-    damage(target: Human | ICreature, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
+    damage(target: Human | Creature, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
     getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): Player[];
     isPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
     isPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): boolean;

@@ -9,7 +9,8 @@
  * https://waywardgame.github.io/
  */
 import { ActionType, IActionApi } from "entity/action/IAction";
-import { INPC } from "entity/npc/INPC";
+import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
-import { IItem, ItemType } from "item/IItem";
-export default function consumeItemType(action: IActionApi<Player | INPC>, item: IItem | ItemType, actionType?: ActionType): boolean;
+import { ItemType } from "item/IItem";
+import Item from "item/Item";
+export default function consumeItemType(action: IActionApi<Player | NPC>, item: Item | ItemType, actionType?: ActionType): boolean;

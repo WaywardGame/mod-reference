@@ -8,15 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICharacter } from "entity/IHuman";
 import { PlayerState } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
-import EventEmitter from "event/EventEmitter";
 import { GameMode, IGameOptions } from "game/GameMode";
 import { TurnMode } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
-import { IPacket } from "multiplayer/packets/IPacket";
 import { ISaveObject } from "save/ISaveManager";
 import { LobbyType } from "steamworks/ISteamworks";
 export interface IMultiplayerEvents {
@@ -27,61 +24,6 @@ export interface IMultiplayerEvents {
     stateChange(): any;
     checkConnection(webRtcWorks: boolean, webSocketWorks: boolean): any;
 }
-export interface IMultiplayer extends EventEmitter.Host<IMultiplayerEvents> {
-    addAfterSyncChecks(packet: IPacket): void;
-    addBeforeSyncChecks(packet: IPacket): void;
-    addSyncCheck(syncCheck: MultiplayerSyncCheck, value: any): void;
-    checkConnection(): void;
-    clearSyncPacketsWaiting(waitId?: string): void;
-    clearSyncPacketWaiting(packet: IPacket, wait: number): void;
-    closeConnection(reason: DisconnectReason, connection: IConnection): void;
-    convertGameCodeToServerInfo(gameCode: string): ServerInfo;
-    createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
-    disconnect(reason?: DisconnectReason, args?: any[], unloading?: boolean): Promise<void>;
-    disconnectAndResetGameState(reason: DisconnectReason, args?: any[]): Promise<void>;
-    displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): void;
-    getBannedPlayers(): string[];
-    getClients(): IConnection[];
-    getConnectedGameCode(): string | undefined;
-    getConnectedMatchmakingInfo(): IMatchmakingInfo | undefined;
-    getDedicatedServerMatchmakingInfo(matchmakingServer: string, identifier?: string): IMatchmakingInfo;
-    getOptions(): IMultiplayerOptions;
-    getPlayerIdentifier(): string;
-    isClient(): boolean;
-    isConnected(): boolean;
-    isProcessingPacket(): boolean;
-    isReady(): boolean;
-    isServer(): boolean;
-    joinServer(info: ServerInfo, character?: ICharacter): void;
-    kick(player: Player, reason: DisconnectReason): void;
-    onLobbyEntered(success: boolean, lobbyId: string): void;
-    onLobbyExited(lobbyId: string): void;
-    onPlaying(): Promise<void>;
-    pausePacketProcessing(pause: boolean): void;
-    sendPacket(packet: IPacket, exclude?: PacketTarget): void;
-    sendPacketTo(to: PacketTarget, packet: IPacket, force?: boolean): void;
-    setBanned(identifier: string, ban: boolean): boolean;
-    setOptions(options: IMultiplayerOptions): void;
-    suppressSyncChecks(suppress: boolean): void;
-    syncGameState(): void;
-    /**
-     * Sends a packet in a synchronized way to the server or clients
-     *
-     * When ran as a server, clientSide() is called and the packet data is sent to all the clients.
-     *
-     * When ran as a client, the packet is sent to the server. The server is expected to call this method, which in turn sends the packet back to the client. When the client receives the packet, this method a second time and clientSide() is called.
-     *
-     * @param packet The packet
-     * @param clientSide The method to run for the client or server.
-     * @param checkId When true, this packet will not be sent to the server/client if the same packet is already being processed. When false, this packet will not be sent if any packet is already being processed. Useful when dealing with methods that could end up sending multiple packets while a packet is already being processed.
-     * @param wait When true, the client will keep track of what packets it sent to the server. If the client calls this method again before the server responds, it will not send a duplicate packet. It will wait for the server to send the packet back before allowing another one to be sent. When true, it will keep track of duplicate packets based on the packet type. When it's a number, it will keep track of duplicate packets based on the packet type + the number.
-     */
-    syncPacket(packet: IPacket, clientSide?: NullaryFunction, checkId?: boolean, wait?: number | true): any;
-    updateGlobalServerDirectory(): void;
-    updateOptions(updates: Partial<IMultiplayerOptions>): void;
-    updatePlayerId(oldPid: number, newPid: number): void;
-}
-export default IMultiplayer;
 export declare enum MultiplayerSyncCheck {
     ActionAttack = 0,
     ActionMove = 1,

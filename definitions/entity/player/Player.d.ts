@@ -8,11 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
-import { CreatureType, ICreature } from "entity/creature/ICreature";
+import Doodad from "doodad/Doodad";
+import Creature from "entity/creature/Creature";
+import { CreatureType } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
-import IHuman, { EquipType, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
+import { EquipType, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
@@ -20,7 +21,8 @@ import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
 import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
-import { IContainer, IItem, ItemType } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
+import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IExploreMap } from "renderer/IExploreMap";
@@ -43,7 +45,7 @@ export default class Player extends Human {
     hintSeen: boolean[];
     isConnecting: boolean;
     isMoving: boolean;
-    lastAttackedBy: IHuman | ICreature | undefined;
+    lastAttackedBy: Human | Creature | undefined;
     messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
@@ -95,17 +97,17 @@ export default class Player extends Human {
     staminaCheck(): boolean;
     addMilestone(milestone: Milestone, data?: number, update?: boolean): void;
     calculateEquipmentStats(): void;
-    getDefaultCarveTool(): IItem | undefined;
+    getDefaultCarveTool(): Item | undefined;
     isFacingCarvableTile(): boolean;
-    hasTamedCreature(creature: ICreature): boolean;
+    hasTamedCreature(creature: Creature): boolean;
     hasHandToUse(): boolean;
     getAndSwitchHandToUse(): EquipType | undefined;
     /**
      * Ensure handToUse is valid given the players options
      */
     updateHandToUse(): void;
-    equip(item: IItem, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
-    unequip(item: IItem, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
+    equip(item: Item, slot: EquipType, internal?: boolean, switchingHands?: boolean): void;
+    unequip(item: Item, internal?: boolean, skipMessage?: boolean, switchingHands?: boolean): void;
     unequipAll(): void;
     getMovementIntent(): IMovementIntent | {
         intent: Direction;
@@ -136,14 +138,14 @@ export default class Player extends Human {
     getWeightMovementPenalty(): number;
     checkForStill(): boolean;
     checkForWell(): boolean;
-    checkForGather(): IDoodad | undefined;
+    checkForGather(): Doodad | undefined;
     updateTables(): void;
     updateCraftTable(adjacentContainers?: IContainer[]): void;
     updateDismantleTable(adjacentContainers?: IContainer[]): void;
     updateTablesAndWeight(): void;
     checkReputationMilestones(): void;
     hurtHands(damageMessage: Message, toolMessage?: Message, hurtHandsMessage?: Message): boolean;
-    setTamedCreatureEnemy(enemy: Player | ICreature): void;
+    setTamedCreatureEnemy(enemy: Player | Creature): void;
     setPosition(point: IVector3): void;
     getNextPosition(): IVector3;
     setZ(z: number): void;

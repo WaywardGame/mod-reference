@@ -9,13 +9,14 @@
  * https://waywardgame.github.io/
  */
 import { Quality } from "game/IObject";
-import { IItem, ItemType } from "item/IItem";
+import { ItemType } from "item/IItem";
+import Item from "item/Item";
 import Crafter from "item/recipe/Crafter";
 import RecipeOutput from "item/recipe/RecipeOutput";
 import { RecipeInputType, RecipeRequirementType } from "item/recipe/RecipeRequirement";
 import { RecipeRequirementClass } from "item/recipe/RecipeRequirements";
 import ItemRequirement from "item/recipe/requirement/ItemRequirement";
-declare class ItemOutput extends RecipeOutput<IItem> {
+declare class ItemOutput extends RecipeOutput<Item> {
     readonly itemType: ItemType;
     readonly quantity: number;
     quality?: Quality;
@@ -27,7 +28,7 @@ declare class ItemOutput extends RecipeOutput<IItem> {
     setRequirementPredicate<R extends RecipeRequirementType>(requirementType: R, predicate: (input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>) => boolean): this;
     predicateMatches<R extends RecipeRequirementType>(requirementType: R, input: RecipeInputType<R>, requirement: InstanceType<RecipeRequirementClass<R>>): boolean;
     setQuality(quality: Quality): this;
-    get(api: Crafter): IItem;
+    get(api: Crafter): Item;
     private getDecay;
     private getOutputInventory;
 }

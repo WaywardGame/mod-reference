@@ -8,19 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DoodadType, DoodadTypeGroup, IDoodad } from "doodad/IDoodad";
+import { DoodadType, DoodadTypeGroup } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
-import { CreatureType, ICreature, TileGroup } from "entity/creature/ICreature";
-import { DamageType, Defense, EntityType } from "entity/IEntity";
-import IHuman, { EquipType, SkillType } from "entity/IHuman";
+import { CreatureType, TileGroup } from "entity/creature/ICreature";
+import { DamageType, Defense } from "entity/IEntity";
+import { EquipType, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import Player from "entity/player/Player";
-import { IObject, IObjectDescription, IObjectOptions, Quality } from "game/IObject";
-import { TatteredMap } from "item/IItem";
+import { IObjectDescription } from "game/IObject";
+import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
-import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
-import { ISafeFn } from "utilities/FromDescription";
 import { IVector3 } from "utilities/math/IVector";
 export interface IItemWeightComponent {
     weightFraction: number;
@@ -28,75 +25,9 @@ export interface IItemWeightComponent {
     tweak?: number;
 }
 export interface IConstructedInfo {
-    disassembly?: IItem[];
+    disassembly?: Item[];
     additionalItemWeights?: IItemWeightComponent[];
     weightTweak?: number;
-}
-export interface IItem extends IObject<ItemType>, IObjectOptions, IContainable, Partial<IContainer> {
-    fromDescription: ISafeFn<IItemDescription, undefined>;
-    weight: number;
-    weightFraction: number;
-    equippedId?: number;
-    equippedType?: EntityType;
-    readonly quickSlot?: number;
-    tatteredMap?: TatteredMap;
-    legendary?: IItemLegendary;
-    book?: BookType;
-    disassembly?: IItem[];
-    constructedFrom?: IConstructedInfo;
-    order?: number;
-    ownerIdentifier?: string;
-    used?: IItemUsed;
-    readonly quality: Quality;
-    toString(): string;
-    /**
-     * @param article Whether to include an article for the name of the item. Uses the article rules on the language. Defaults to `true`.
-     * @param count The number of this item that you're getting the name of. Defaults to `1`.
-     * @param showCount If `true`, adds the passed count to the translation, using `MiscTranslation.CountThing`.
-     *
-     * Examples:
-     * - `item.getName()` // "a stone axe"
-     * - `item.getName(false)` // "stone axe"
-     * - `item.getName(undefined, 3)` // "stone axes"
-     */
-    getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean): Translation;
-    description(): IItemDescription | undefined;
-    isValid(): boolean;
-    shouldBeProtected(): boolean;
-    getDecayMax(): number;
-    getTotalWeight(): number;
-    getDisassemblyWeight(): number;
-    verifyAndFixItem(): void;
-    damage(source: string, modifier?: number): void;
-    isDamaged(): boolean;
-    isDecayed(): boolean;
-    isEquipped(): boolean;
-    isInTradeContainer(): boolean;
-    getEquipSlot(): EquipType | undefined;
-    setQuickSlot(player: Player, quickSlot: number | undefined): void;
-    clearQuickSlot(): void;
-    changeInto(itemType: ItemType, disableNotify?: boolean): void;
-    returns(): boolean;
-    setUsed(itemUse?: IItemUsed, human?: IHuman): void;
-    spawnOnBreak(): ICreature | undefined;
-    spawnOnDecay(): ICreature | undefined;
-    spawnCreatureOnItem(creatureType: CreatureType | undefined, forceAberrant?: boolean, bypass?: boolean, preferFacingDirection?: Player): ICreature | undefined;
-    getLocation(): IVector3 | undefined;
-    dropInWater(human: Human, x?: number, y?: number, skipParticles?: boolean): void;
-    placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
-    initializeMap(): void;
-    setQuality(quality?: Quality): void;
-    setLegendary(bypassType?: boolean): void;
-    acquireNotify(player: Player): void;
-    getStokeFireValue(): number | undefined;
-    getOnUseBonus(): number;
-    getWorth(legendaryWorth?: boolean): number | undefined;
-    canBurnPlayer(): boolean;
-    getBaseDefense(): number;
-    getDurabilityCharge(): number;
-    revertFromDoodad(doodad: IDoodad): void;
-    getContainerWeightReduction(): number;
-    canBeRefined(): boolean;
 }
 export interface IItemOld {
     equipped?: EquipType;
@@ -112,7 +43,7 @@ export interface IContainable {
 }
 export interface IContainer extends IContainable {
     weightCapacity?: number;
-    containedItems: IItem[];
+    containedItems: Item[];
     itemOrders?: number[];
     containerType?: ContainerType;
 }
@@ -182,8 +113,8 @@ export interface IItemDescription extends IObjectDescription, IModdable {
      */
     tier?: OptionalDescriptions<ItemTypeGroup, number>;
     recipeCache?: ItemType[];
-    onEquip?(item: IItem): void;
-    onUnequip?(item: IItem): void;
+    onEquip?(item: Item): void;
+    onUnequip?(item: Item): void;
 }
 export interface IRecipe {
     baseComponent?: (ItemType | ItemTypeGroup);

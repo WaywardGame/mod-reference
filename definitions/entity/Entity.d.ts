@@ -9,10 +9,10 @@
  * https://waywardgame.github.io/
  */
 import { SfxType } from "audio/IAudio";
-import { ICreature } from "entity/creature/ICreature";
+import Creature from "entity/creature/Creature";
 import { EntityPlayerCreatureNpc, EntityType, IEntityEvents, IProperties, IStatChangeInfo, IStatus, MoveType, Property, StatChangeReason, StatusEffectChangeReason, StatusType } from "entity/IEntity";
 import { IStat, IStatBase, IStats, Stat } from "entity/IStats";
-import { INPC } from "entity/npc/INPC";
+import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import StatFactory from "entity/StatFactory";
 import EventEmitter from "event/EventEmitter";
@@ -25,11 +25,11 @@ import { Direction } from "utilities/math/Direction";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 import Stream from "utilities/stream/Stream";
 export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
-    static is(entity: Entity | undefined, entityType: EntityType.NPC): entity is INPC;
-    static is(entity: Entity | undefined, entityType: EntityType.Creature): entity is ICreature;
+    static is(entity: Entity | undefined, entityType: EntityType.NPC): entity is NPC;
+    static is(entity: Entity | undefined, entityType: EntityType.Creature): entity is Creature;
     static is(entity: Entity | undefined, entityType: EntityType.Player): entity is Player;
-    static isNot(entity: Entity | undefined, entityType: EntityType.NPC): entity is Exclude<EntityPlayerCreatureNpc, INPC>;
-    static isNot(entity: Entity | undefined, entityType: EntityType.Creature): entity is Exclude<EntityPlayerCreatureNpc, ICreature>;
+    static isNot(entity: Entity | undefined, entityType: EntityType.NPC): entity is Exclude<EntityPlayerCreatureNpc, NPC>;
+    static isNot(entity: Entity | undefined, entityType: EntityType.Creature): entity is Exclude<EntityPlayerCreatureNpc, Creature>;
     static isNot(entity: Entity | undefined, entityType: EntityType.Player): entity is Exclude<EntityPlayerCreatureNpc, Player>;
     entityType: EntityType;
     id: number;

@@ -12,13 +12,13 @@ import { ActionType } from "entity/action/IAction";
 import Human from "entity/Human";
 import { AiType, EntityType } from "entity/IEntity";
 import { EquipType, ICustomizations } from "entity/IHuman";
-import { INPC } from "entity/npc/INPC";
-import { IItem, ItemType } from "item/IItem";
+import { ItemType } from "item/IItem";
+import Item from "item/Item";
 import { ITile } from "tile/ITerrain";
-export default abstract class BaseNPC extends Human implements INPC {
+export default abstract class NPC extends Human {
     protected static registrarId: number;
     readonly entityType: EntityType.NPC;
-    readonly constructorFunction: typeof BaseNPC;
+    readonly constructorFunction: typeof NPC;
     ai: AiType;
     seen: number;
     static getRegistrarId(): number;
@@ -52,12 +52,12 @@ export default abstract class BaseNPC extends Human implements INPC {
     /**
      * The equip the npc spawns with - called for every equip type when the npc is created
      */
-    protected abstract getDefaultEquipment(equipType: EquipType): IItem | ItemType | undefined;
+    protected abstract getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
     /**
      * Items the npc should spawn with - called when created
      * This is in addition to the equipment
      */
-    protected abstract getDefaultInventory(): Array<IItem | ItemType>;
+    protected abstract getDefaultInventory(): Array<Item | ItemType>;
     /**
      * The ai type
      */

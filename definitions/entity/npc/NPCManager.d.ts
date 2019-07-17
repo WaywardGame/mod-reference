@@ -9,12 +9,11 @@
  * https://waywardgame.github.io/
  */
 import EntityManager from "entity/EntityManager";
-import { INPC } from "entity/npc/INPC";
-import INPCManager from "entity/npc/INPCManager";
+import NPC from "entity/npc/NPC";
 import { NPCType } from "entity/npc/NPCS";
-export default class NPCManager extends EntityManager<INPC> implements INPCManager {
-    getEntities(): (INPC | undefined)[];
-    spawn(npcType: NPCType, x: number, y: number, z: number): INPC | undefined;
-    remove(npc: INPC): void;
+export default class NPCManager extends EntityManager<NPC> {
+    getEntities(): (NPC | undefined)[];
+    spawn(npcType: NPCType, x: number, y: number, z: number): NPC | undefined;
+    remove(npc: NPC): void;
     updateAll(): void;
 }

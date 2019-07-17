@@ -10,13 +10,16 @@
  */
 import { SfxType } from "audio/IAudio";
 import { Command } from "command/ICommand";
-import { DoodadType, IDoodad, IDoodadOptions } from "doodad/IDoodad";
+import Doodad from "doodad/Doodad";
+import { DoodadType, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType, IActionApi, IActionDescription } from "entity/action/IAction";
-import { CreatureType, ICreature, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
+import Creature from "entity/creature/Creature";
+import { CreatureType, IDamageInfo, SpawnGroup } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
+import Human from "entity/Human";
 import { AttackType, MoveType } from "entity/IEntity";
-import IHuman, { EquipType, SkillType } from "entity/IHuman";
-import { INPC } from "entity/npc/INPC";
+import { EquipType, SkillType } from "entity/IHuman";
+import NPC from "entity/npc/NPC";
 import { NPCType } from "entity/npc/NPCS";
 import { IMessage } from "entity/player/IMessageManager";
 import { IMovementIntent, PlayerState, WeightStatus } from "entity/player/IPlayer";
@@ -25,7 +28,8 @@ import Player from "entity/player/Player";
 import { IMapRequest, TileUpdateType } from "game/IGame";
 import { IInspectionSection } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
-import { BookType, IContainer, IItem, ItemType } from "item/IItem";
+import { BookType, IContainer, ItemType } from "item/IItem";
+import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import { Hook } from "mod/IHookManager";
 import { Bindable, BindCatcherApi } from "newui/BindingManager";
@@ -86,7 +90,7 @@ export interface IHookHost {
      * @param enemy The enemy (player or creature)
      * @returns False if the creature cannot attack, or undefined to use the default logic
      */
-    canCreatureAttack?(creature: ICreature, enemy: Player | ICreature): boolean | undefined;
+    canCreatureAttack?(creature: Creature, enemy: Player | Creature): boolean | undefined;
     /**
      * Called when a creature tries to move
      * @param creature The creature object
@@ -97,7 +101,7 @@ export interface IHookHost {
      * @param moveType The creatures move type
      * @returns True if the creature can move, false if the creature cannot move, or undefined to use the default logic
      */
-    canCreatureMove?(creature: ICreature, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
+    canCreatureMove?(creature: Creature, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     /**
      * Called when a creature is about to be spawned
      * @param type The type of creature
@@ -127,7 +131,7 @@ export interface IHookHost {
      * @param dropAllQuality If not undefined, all items of this quality will be dropped
      * @returns True if the item can be dropped, false if the item can not be dropped, or undefined to use the default logic
      */
-    canDropItem?(human: Human, item: IItem, tile: ITile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
+    canDropItem?(human: Human, item: Item, tile: ITile, dropAll: boolean, dropAllQuality: Quality | undefined): boolean | undefined;
     /**
      * Called before an npc attacks
      * @param npc The npc object
@@ -135,7 +139,7 @@ export interface IHookHost {
      * @param attackType The attack type
      * @returns False if the npc cannot attack, or undefined to use the default logic
      */
-    canNPCAttack?(npc: INPC, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
+    canNPCAttack?(npc: NPC, weapon: Item | undefined, attackType: AttackType): boolean | undefined;
     /**
      * Called when a npc tries to move
      * @param npc The npc object
@@ -146,7 +150,7 @@ export interface IHookHost {
      * @param moveType The npcs move type
      * @returns True if the npc can move, false if the npc cannot move, or undefined to use the default logic
      */
-    canNPCMove?(npc: INPC, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
+    canNPCMove?(npc: NPC, tile: ITile, x: number, y: number, z: number, moveType: MoveType): boolean | undefined;
     /**
      * Called when a npc is about to be spawned
      * @param type The type of npc
@@ -162,7 +166,7 @@ export interface IHookHost {
      * @param doodad The doodad object
      * @returns False if the doodad cannot be picked up, or undefined to use the default logic
      */
-    canPickupDoodad?(human: Human, doodad: IDoodad): boolean | undefined;
+    canPickupDoodad?(human: Human, doodad: Doodad): boolean | undefined;
     /**
      * Called before a player attacks
      * @param player The player object
@@ -170,7 +174,7 @@ export interface IHookHost {
      * @param attackType The attack type
      * @returns False if the player cannot attack, or undefined to use the default logic
      */
-    canPlayerAttack?(player: Player, weapon: IItem | undefined, attackType: AttackType): boolean | undefined;
+    canPlayerAttack?(player: Player, weapon: Item | undefined, attackType: AttackType): boolean | undefined;
     /**
      * Called every frame where the mouse is not hovering over an item
      * @param api The bind catcher api
@@ -183,21 +187,21 @@ export interface IHookHost {
      * @param tile The tile the creature is on
      * @returns False if the player should not see the creature or undefined to use the default logic
      */
-    canSeeCreature?(creature: ICreature, tile: ITile): boolean | undefined;
+    canSeeCreature?(creature: Creature, tile: ITile): boolean | undefined;
     /**
      * Called when calculating npcs in the viewport
      * @param npc The npc object
      * @param tile The tile the npc is on
      * @returns False if the player should not see the npc or undefined to use the default logic
      */
-    canSeeNPC?(npc: INPC, tile: ITile): boolean | undefined;
+    canSeeNPC?(npc: NPC, tile: ITile): boolean | undefined;
     /**
      * Called when rendering creatures in the viewport
      * @param creature The creature object
      * @param batchLayer The batch layer the creature will render in
      * @returns The batch layer the creature should render in or undefined to use the default logic
      */
-    getCreatureSpriteBatchLayer?(creature: ICreature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
+    getCreatureSpriteBatchLayer?(creature: Creature, batchLayer: SpriteBatchLayer): SpriteBatchLayer | undefined;
     /**
      * Called when initializing each sprite batch layer.
      * @param layer The SpriteBatchLayer that is being initialized
@@ -285,32 +289,32 @@ export interface IHookHost {
      * @param tile The tile something was built on
      * @param doodad The doodad that was created on the tile
      */
-    onBuild?(human: Human, item: IItem, tile: ITile, doodad: IDoodad): void;
+    onBuild?(human: Human, item: Item, tile: ITile, doodad: Doodad): void;
     /**
      * Called when an item is added to a container.
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    onContainerItemAdd?(item: IItem, container: IContainer): void;
+    onContainerItemAdd?(item: Item, container: IContainer): void;
     /**
      * Called when an item is removed from a container.
      * @param item The item object
      * @param container The container object the item was removed from.
      */
-    onContainerItemRemove?(item: IItem, container: IContainer): void;
+    onContainerItemRemove?(item: Item, container: IContainer): void;
     /**
      * Called when an item is moved from one container to another.
      * @param item The item object
      * @param containerFrom The container object the item was moved to. This container might be inventory or a container within the inventory.
      * @param containerTo The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
-    onContainerItemUpdate?(item: IItem, containerFrom: IContainer | undefined, containerTo: IContainer): void;
+    onContainerItemUpdate?(item: Item, containerFrom: IContainer | undefined, containerTo: IContainer): void;
     /**
      * Called when an item is crafted
      * @param human The human object
      * @param item The item that was crafted
      */
-    onCraft?(human: Human, item: IItem): void;
+    onCraft?(human: Human, item: Item): void;
     /**
      * Called right after the world is created, but before the renderer
      * @param world The world object
@@ -326,7 +330,7 @@ export interface IHookHost {
      * Called when a doodad spawns
      * @param doodad The doodad object
      */
-    onDoodadSpawn?(doodad: IDoodad): void;
+    onDoodadSpawn?(doodad: Doodad): void;
     /**
      * Called when the game is ending
      * @param state The state of the player (why the game is ending)
@@ -349,35 +353,35 @@ export interface IHookHost {
     /**
      * Called when an entity is killed by another entity.
      */
-    onEntityKill?(attacker: Entity | IDoodad, target: Entity): void;
+    onEntityKill?(attacker: Entity | Doodad, target: Entity): void;
     /**
      * Called when a human's skill changes.
      * @param human The human whose skill changed
      * @param skill The skill that changed
      * @param currentSkill The new value of the skill
      */
-    onHumanSkillChange?(human: IHuman, skill: SkillType, currentSkill: number): void;
+    onHumanSkillChange?(human: Human, skill: SkillType, currentSkill: number): void;
     /**
      * Called when an item is added to the players inventory
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    onInventoryItemAdd?(player: Player | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemAdd?(player: Player | undefined, item: Item, container: IContainer): void;
     /**
      * Called when an item is removed from the players inventory
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to.
      */
-    onInventoryItemRemove?(player: Player | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemRemove?(player: Player | undefined, item: Item, container: IContainer): void;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
      * @param player The player object
      * @param item The item object
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      */
-    onInventoryItemUpdate?(player: Player | undefined, item: IItem, container: IContainer): void;
+    onInventoryItemUpdate?(player: Player | undefined, item: Item, container: IContainer): void;
     /**
      * Called when inspecting a tile, for every section that may be shown. (This includes sections with no content)
      * @param section One of the sections that will be included in the inspection.
@@ -398,44 +402,44 @@ export interface IHookHost {
      * @param modifier The damage modifier
      * @returns The amount of damage the item shouldd take or undefined to use the default logic
      */
-    onItemDamage?(item: IItem, modifier?: number): number | undefined;
+    onItemDamage?(item: Item, modifier?: number): number | undefined;
     /**
      * Called when the player equips an item to a slot
      * @param player The player object
      * @param item The item being equipped
      * @param slot The slot
      */
-    onItemEquip?(player: Player, item: IItem, slot: EquipType): void;
+    onItemEquip?(player: Player, item: Item, slot: EquipType): void;
     /**
      * Called when the player quickslots an item
      * @param item The item being quickslotted
      * @param player The player object
      * @param quickSlot The quickslot number
      */
-    onItemQuickslot?(item: IItem, player: Player, quickSlot: number | undefined): void;
+    onItemQuickslot?(item: Item, player: Player, quickSlot: number | undefined): void;
     /**
      * Called when a creature is damaged
      * @param creature The creature object
      * @param damageInfo The damage info object
      * @returns The amount of damage the creature should take (the creature will take this damage) or undefined to use the default logic
      */
-    onCreatureDamage?(creature: ICreature, damageInfo: IDamageInfo): number | undefined;
+    onCreatureDamage?(creature: Creature, damageInfo: IDamageInfo): number | undefined;
     /**
      * Called when a creature dies
      * @param creature The creature object
      */
-    onCreatureDeath?(creature: ICreature): void;
+    onCreatureDeath?(creature: Creature): void;
     /**
      * Called when a creature spawns
      * @param creature The creature object
      */
-    onCreatureSpawn?(creature: ICreature): void;
+    onCreatureSpawn?(creature: Creature): void;
     /**
      * Called when a creature becomes tamed
      * @param creature The creature object
      * @param owner The human which the creature is tamed for
      */
-    onCreatureTamed?(creature: ICreature, owner: Player): void;
+    onCreatureTamed?(creature: Creature, owner: Player): void;
     /**
      * Called when in-game, on the bind catcher loop (once per frame).
      * @param bindPressed Whether a bind has been pressed. Use this as a final check before processing a bind, and set it to true when a bind was pressed.
@@ -508,18 +512,18 @@ export interface IHookHost {
      * @param damageInfo The damage info object
      * @returns The amount of damage the npc should take (the npc will take this damage) or undefined to use the default logic
      */
-    onNPCDamage?(npc: INPC, damageInfo: IDamageInfo): number | undefined;
+    onNPCDamage?(npc: NPC, damageInfo: IDamageInfo): number | undefined;
     /**
      * Called when an npc is killed
      * @param player The npc object
      * @returns False to stop the npc from dying or undefined to use the default logic
      */
-    onNPCDeath?(npc: INPC): boolean | undefined;
+    onNPCDeath?(npc: NPC): boolean | undefined;
     /**
      * Called when an npc spawns
      * @param npc The npc object
      */
-    onNPCSpawn?(npc: INPC): void;
+    onNPCSpawn?(npc: NPC): void;
     /**
      * Called when a book is opened by a player
      * @param human The human that opened a book
@@ -531,7 +535,7 @@ export interface IHookHost {
      * @param player The player object
      * @param doodad The doodad object
      */
-    onPickupDoodad?(player: Player, doodad: IDoodad): void;
+    onPickupDoodad?(player: Player, doodad: Doodad): void;
     /**
      * Called when a player is damaged
      * @param player The player object

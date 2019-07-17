@@ -8,10 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IItem } from "item/IItem";
+import Item from "item/Item";
 import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedSharedPacket";
 export default class UpdateItemQuickSlotPacket extends PlayerTargetedSharedPacket {
-    item: IItem;
+    item: Item;
     quickSlot: number | undefined;
     isSyncCheckEnabled(): boolean;
     isAllowedWhenPaused(): boolean;

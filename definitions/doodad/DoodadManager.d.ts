@@ -8,14 +8,22 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DoodadType, DoodadTypeGroup, IDoodad, IDoodadOptions } from "doodad/IDoodad";
-import IDoodadManager from "doodad/IDoodadManager";
-export default class DoodadManager implements IDoodadManager {
+import Doodad from "doodad/Doodad";
+import { DoodadType, DoodadTypeGroup, IDoodadOptions } from "doodad/IDoodad";
+export default class DoodadManager {
     private cachedGroups;
     constructor();
     generateLookups(): void;
-    create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): IDoodad | undefined;
-    remove(doodad: IDoodad, removeItems?: boolean): void;
+    create(type: DoodadType, x: number, y: number, z: number, options?: IDoodadOptions): Doodad | undefined;
+    /**
+     * Removes a doodad from the world.
+     * @param doodad The doodad to remove
+     * @param removeItems Whether to remove items.
+     *
+     * Note: This method will remove any items in them whether the `removeItems` parameter is provided or not. If the parameter is not
+     * provided, the assumption is that it will only be called on empty doodads. Therefore, if there *are* items, it will log a warning.
+     */
+    remove(doodad: Doodad, removeItems?: boolean): void;
     updateAll(): void;
     isGroup(doodadType: DoodadType | DoodadTypeGroup): doodadType is DoodadTypeGroup;
     isInGroup(doodadType: DoodadType, doodadGroup: DoodadTypeGroup | DoodadType): boolean;

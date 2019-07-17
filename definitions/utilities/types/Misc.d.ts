@@ -1,5 +1,5 @@
 /*!
- * Copyright Unlok, Vaughn Royko 2011-2019
+ * Copyright Unlok, Vaughn Royko 2011-2018
  * http://www.unlok.ca
  *
  * Credits & Thanks:
@@ -8,13 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { CreatureType } from "entity/creature/ICreature";
-import { MoveType } from "entity/IEntity";
-export interface ISpawnableCreatures {
-    pool: CreatureType[];
-    aberrantChance: number;
-}
-export interface IMoveTypeZ {
-    moveType: MoveType;
-    z: number;
-}
+
+type LiterallyJustTheSameThing<T> = { [K in keyof T]: T[K] };
+
+type Mutable<T> = {
+	-readonly [P in keyof T]: T[P];
+};
+
+type PropertyOf<T, K extends string | number | symbol> = T extends { [key in K]: infer V } ? V : never;

@@ -8,38 +8,6 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Player from "entity/player/Player";
-import IClientStore from "save/clientStore/IClientStore";
-import { ISerializer } from "save/ISerializer";
-export interface ISaveManager {
-    compressSave(slot: number, saveObject: ISaveObject, exporting?: boolean): void;
-    decompressSave(slot: number, saveObject: ISaveObject, importing?: boolean): void;
-    deleteAllData(): Promise<void>;
-    deleteAllSlots(): Promise<boolean | undefined>;
-    deleteSlot(slot: number): Promise<boolean | undefined>;
-    exportSave(slot: number): Promise<ISaveObject>;
-    getClientStore(player?: Player): IClientStore;
-    getFirstFreeSlot(): Promise<number | undefined>;
-    getGameStateAsJson(cleanup?: boolean): string;
-    getMostRecentSlot(): Promise<number>;
-    getSaveCount(): Promise<number>;
-    getSlots(): Promise<boolean[]>;
-    getUsedSlots(): Promise<number[]>;
-    getUsedSlotsSorted(sortBy: SaveSort, direction?: SortDirection): Promise<number[]>;
-    importSave(slot: number, data: ISaveObject | string): Promise<number | undefined>;
-    initialize(): void;
-    isEnabled(): boolean;
-    isSlotUsed(slot: number): Promise<boolean>;
-    load(slot: number): Promise<boolean>;
-    loadPartial(slot: number): Promise<ISaveObject>;
-    loadPartialData(saveObject: ISaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
-    loadPartialDataInside(saveObject: ISaveObject, saveObjectKey: string, key?: string | undefined): any;
-    save(slot: number, unloading?: boolean): Promise<ISaveInfo>;
-    savePartialData(slot: number, object: any, key: string, saveObjectKey: string): Promise<number>;
-    savePartialDataInside(slot: number, saveObjectKey: string, key: string, value: any): Promise<number>;
-    getSerializer(): ISerializer;
-}
-export default ISaveManager;
 export interface ISaveInfo {
     slot: number;
     bytes?: number;

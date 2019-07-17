@@ -14,9 +14,9 @@ import HookCallFactory from "mod/HookCallFactory";
 import { Hook } from "mod/IHookManager";
 import { IModConfig } from "mod/IMod";
 import { IModInfo, IModProvides, ModState, ModType } from "mod/IModInfo";
-import { CanLoadState, ICanLoadInfo, IModManager, IModManagerEvents, ModLoadFailureReason } from "mod/IModManager";
+import { CanLoadState, ICanLoadInfo, IModManagerEvents, ModLoadFailureReason } from "mod/IModManager";
 import Log from "utilities/Log";
-export default class ModManager extends EventEmitter.Host<IModManagerEvents> implements IModManager {
+export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     private readonly mods;
     private readonly onModInitializedCallbacks;
     constructor();
@@ -36,6 +36,12 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> imp
     getLoadedModByName(name: string): IModInfo | undefined;
     getModFromIndex(i: number): IModInfo;
     getEnabledMods(): number[];
+    /**
+     * Returns a `HookCallFactory` for the given hook name.
+     * @param hook A hook name.
+     * @param defaultValue The default value to return
+     * @see `Mod` or `Hook` for a list of valid hook names.
+     */
     getHook<H extends Hook, R = any>(hook: H, defaultValue?: R): HookCallFactory<H, R>;
     load(index: number, loadOrder: number): Promise<void>;
     unload(index: number, cacheHooks?: boolean): Promise<void>;

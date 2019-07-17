@@ -9,12 +9,12 @@
  * https://waywardgame.github.io/
  */
 import { ActionArgument, ActionType } from "entity/action/IAction";
-import { IItem } from "item/IItem";
+import Item from "item/Item";
 import EntityTargetedSharedPacket from "multiplayer/packets/EntityTargetedSharedPacket";
 export default class ActionPacket extends EntityTargetedSharedPacket {
     action: ActionType;
     arguments: any[];
-    items: IItem[];
+    items: Item[];
     argumentTypes: ActionArgument[];
     getDebugInfo(): string;
     process(): void;

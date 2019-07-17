@@ -9,38 +9,41 @@
  * https://waywardgame.github.io/
  */
 import DoodadInfo from "doodad/DoodadInfo";
-import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodad, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
+import { DoodadType, DoodadTypeGroup, DoorOrientation, GrowingStage, IDoodadDescription, IDoodadDoor, IDoodadOptions } from "doodad/IDoodad";
 import { ActionType } from "entity/action/IAction";
-import { ICreature } from "entity/creature/ICreature";
+import Creature from "entity/creature/Creature";
+import Human from "entity/Human";
 import { EquipType } from "entity/IHuman";
 import Player from "entity/player/Player";
 import Inspection from "game/inspection/Inspect";
 import { IInspectable, InspectionSection } from "game/inspection/Inspections";
-import { Quality } from "game/IObject";
-import { IItem, IItemLegendary, ItemType } from "item/IItem";
-import Translation from "language/Translation";
+import { IObject, Quality } from "game/IObject";
+import { IContainer, IItemLegendary, ItemType } from "item/IItem";
+import Item from "item/Item";
+import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
 import { IRGB } from "utilities/Color";
 import { IVector3 } from "utilities/math/IVector";
-declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable {
+export default class Doodad implements Doodad, Partial<IDoodadDoor>, IUnserializedCallback, IInspectable, IObject<DoodadType>, IDoodadOptions, IVector3, Partial<IContainer>, IInspectable {
+    static is(value: any): value is Doodad;
     static getGrowingStageTranslation(growingStage?: GrowingStage, description?: IDoodadDescription): Translation | undefined;
     protected static registrarId: number;
     readonly constructorFunction: typeof Doodad;
-    containedItems: IItem[];
+    containedItems: Item[];
     decay?: number;
-    disassembly?: IItem[];
+    disassembly?: Item[];
     gatherReady?: boolean;
-    stillContainer?: IItem;
+    stillContainer?: Item;
     gfx?: number;
     id: number;
     itemOrders?: number[];
-    maxDur?: number;
-    minDur?: number;
+    maxDur: number;
+    minDur: number;
     orientation?: DoorOrientation;
     ownerIdentifier?: string;
     quality?: Quality;
-    renamed?: string;
+    renamed?: string | ISerializedTranslation;
     spread?: number;
     treasure?: boolean;
     type: DoodadType;
@@ -59,6 +62,15 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     constructor(type?: DoodadType, x?: number, y?: number, z?: number, options?: IDoodadOptions);
     toString(): string;
     getRegistrarId(): number;
+    /**
+     * @param article Whether to include an article for the name of the doodad. Uses the article rules on the language. Defaults to `true`.
+     * @param count The number of this doodad that you're getting the name of. Defaults to `1`.
+     *
+     * Examples:
+     * - `doodad.getName()` // "a stone furnace"
+     * - `doodad.getName(false)` // "stone furnace"
+     * - `doodad.getName(undefined, 3)` // "stone furnaces"
+     */
     getName(article?: boolean, count?: number): Translation;
     description(): IDoodadDescription | undefined;
     inspect({ context, inspectFire }: Inspection, section: InspectionSection): void;
@@ -73,13 +85,22 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
     canPickup(human: Human): boolean;
     getPickupTypes(): ItemType[] | undefined;
     getActions(): ActionType[] | undefined;
+    /**
+     * Can the doodad be gathered from in its current form?
+     */
     canGather(): boolean;
+    /**
+     * Can the doodad be gathered from at all?
+     */
     isGatherable(): boolean;
     isEmbers(): boolean;
     getDoodadInfo(): DoodadInfo | undefined;
     canHarvest(): boolean;
+    /**
+     * Returns whether the doodad can be trampled
+     */
     canTrample(): boolean | undefined;
-    checkForTrampling(source: Human | ICreature): boolean;
+    checkForTrampling(source: Human | Creature): boolean;
     isDangerous(human: Human): boolean;
     getDamage(human: Human, equipType?: EquipType): number;
     getOwner(): Player | undefined;
@@ -126,7 +147,3 @@ declare class Doodad implements IDoodad, Partial<IDoodadDoor>, IUnserializedCall
      */
     private processDecay;
 }
-declare module Doodad {
-    function is(value: any): value is IDoodad;
-}
-export default Doodad;

@@ -10,7 +10,8 @@
  */
 import Entity from "entity/Entity";
 import { Quality } from "game/IObject";
-import { CraftResult, IItem } from "item/IItem";
+import { CraftResult } from "item/IItem";
+import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
 import { IRecipeInputUseStrategy, RecipeInputType, RecipeRequirementType } from "item/recipe/RecipeRequirement";
 import { RecipeRequirementClass } from "item/recipe/RecipeRequirements";
@@ -18,13 +19,13 @@ import Stream from "utilities/stream/Stream";
 export default class Crafter {
     readonly recipe: Recipe;
     private readonly crafter;
-    readonly accessibleItems: IItem[];
+    readonly accessibleItems: Item[];
     private readonly inputs;
     private readonly qualityBonuses;
     private readonly usedFilter;
     private forcedQuality?;
     private readonly decays;
-    constructor(recipe: Recipe, crafter: Entity, accessibleItems: IItem[]);
+    constructor(recipe: Recipe, crafter: Entity, accessibleItems: Item[]);
     /**
      * Gets a stream of the tiles around the crafter entity.
      * @param includeCrafterTile Whether the tile the crafter is on should be included. Defaults to `true`.

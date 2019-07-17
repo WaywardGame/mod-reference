@@ -8,83 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import EventEmitter from "event/EventEmitter";
 import { IPlayOptions } from "game/IGame";
-import { ModType } from "mod/IModInfo";
 export interface ISteamworksEvents {
     overlayShown(): any;
     overlayHidden(): any;
 }
-export interface ISteamworks extends EventEmitter.Host<ISteamworksEvents> {
-    clearSteamRichPresence(): void;
-    closeWindow(): void;
-    createArchive(id: string, source: string, callback: (err?: string) => void): void;
-    createLobby(type: LobbyType): void;
-    createSaveGameMod(name: string, slot: number): Promise<boolean>;
-    deleteSaveGameMod(name: string): void;
-    fillOutWorkshopMod(index: number, item?: IWorkshopItem): void;
-    getAbsolutePath(...p: string[]): string;
-    isAbsolutePath(path: string): boolean;
-    getAppPath(...p: string[]): string;
-    getBetaName(): string;
-    getBuildTime(): number | undefined;
-    getDedicatedServerInfo(): IDedicatedServerInfo | undefined;
-    getFriends(): ISteamFriend[] | undefined;
-    getGlobalStatInt(name: string): number | undefined;
-    getLobbyData(name: string): string | undefined;
-    getLobbyId(): string | undefined;
-    getLobbyMembers(): ISteamFriend[] | undefined;
-    getMatchmakingServer(): IMatchmakingServer | undefined;
-    getModPath(name: string, modType: ModType, file?: string, checkIfExists?: boolean): IModPath | undefined;
-    getMultiplayerLogs(): string;
-    getPublishedMod(publishFileId: string): IWorkshopItem | undefined;
-    getPublishedMods(): IWorkshopItem[] | undefined;
-    getScreenName(): string | undefined;
-    getStatInt(name: string): number | undefined;
-    getSteamId(): ISteamId | undefined;
-    hasServerToJoin(): boolean;
-    importFromSaveGameMod(modIndex: number, json: string, callback: (success: boolean) => void): void;
-    incrementStat(name: string): void;
-    initialize(): Promise<void>;
-    isDedicatedServer(): boolean;
-    isElectron(): boolean;
-    isGreenworksEnabled(): boolean;
-    isInLobby(): boolean;
-    isOverlayWorking(): boolean;
-    isTestMode(): boolean;
-    isUsingAsar(): boolean;
-    joinLobby(lobbyId: string): void;
-    leaveLobby(): void;
-    multiplayerLog(...args: any[]): void;
-    multiplayerLogError(...args: any[]): void;
-    onMessage(name: string, listener: (event: any, ...data: any[]) => any): boolean;
-    onReady(): void;
-    onUnload(): void;
-    openLogsFolder(): void;
-    openModsFolder(): void;
-    openSaveFolder(): void;
-    openUrl(url: string): void;
-    openInviteDialog(): void;
-    openWorkshop(publishId?: string): Promise<void>;
-    processBackups(force?: boolean): Promise<boolean>;
-    publishMod(modIndex: number): Promise<string>;
-    reload(): void;
-    sendMessage(name: string, ...data: any[]): boolean;
-    setDiscordPresence(presenceInfo: INapiDiscordPresenceInfo): void;
-    setLobbyData(name: string, data: string): boolean;
-    setLobbyType(type: LobbyType): boolean;
-    setOverlayWorks(ipg: boolean): void;
-    setSteamRichPresence(key: string, value: string): boolean;
-    setupMods(): Promise<void>;
-    setupMultiplayerLog(): void;
-    startPlaytimeTracking(): void;
-    stopPlaytimeTracking(): void;
-    toggleDeveloperTools(): void;
-    unsubscribe(publishId: string): Promise<void>;
-    updateSteamRichPresence(): void;
-    updateDiscordPresence(): void;
-}
-export default ISteamworks;
 export interface ISteamId {
     accountId: number;
     screenName: string;

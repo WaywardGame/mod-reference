@@ -9,17 +9,19 @@
  * https://waywardgame.github.io/
  */
 import { SfxType } from "audio/IAudio";
-import { CreatureType, ICreature, ICreatureDescription, IDamageInfo } from "entity/creature/ICreature";
+import { CreatureType, ICreatureDescription, IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
 import { AiType, EntityType, MoveType } from "entity/IEntity";
 import Player from "entity/player/Player";
 import Inspection from "game/inspection/Inspect";
-import { InspectionSection } from "game/inspection/Inspections";
-import { IItem, ItemType } from "item/IItem";
+import { IInspectable, InspectionSection } from "game/inspection/Inspections";
+import { IObject } from "game/IObject";
+import { ItemType } from "item/IItem";
+import Item from "item/Item";
 import Translation from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { ITile } from "tile/ITerrain";
-export default class Creature extends Entity implements ICreature, IUnserializedCallback {
+export default class Creature extends Entity implements IUnserializedCallback, IObject<CreatureType>, IInspectable {
     readonly entityType: EntityType.Creature;
     aberrant?: boolean;
     ai: AiType;
@@ -40,6 +42,15 @@ export default class Creature extends Entity implements ICreature, IUnserialized
      * Initializes the creature's stats. Used in the constructor & save conversion.
      */
     initializeStats(hp: number, maxhp?: number): void;
+    /**
+     * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
+     * @param count The number of this creature that you're getting the name of. Defaults to `1`.
+     *
+     * Examples:
+     * - `creature.getName()` // "an acid spitter demon"
+     * - `creature.getName(false)` // "acid spitter demon"
+     * - `creature.getName(undefined, 3)` // "acid spitter demons"
+     */
     getName(article?: boolean, count?: number): Translation;
     description(): ICreatureDescription | undefined;
     inspect({ inspector, context, inspectEntityHealth }: Inspection, section: InspectionSection): void;
@@ -64,9 +75,9 @@ export default class Creature extends Entity implements ICreature, IUnserialized
     canSwapWith(player: Player): boolean;
     getOwner(): Player | undefined;
     damage(damageInfo: IDamageInfo, creatureX?: number, creatureY?: number, creatureZ?: number): number | undefined;
-    offer(items: IItem[]): IItem | undefined;
-    processSpecialAbilities(enemy: Player | ICreature | undefined, bypass?: boolean): boolean;
-    increaseWaste(item: IItem): void;
+    offer(items: Item[]): Item | undefined;
+    processSpecialAbilities(enemy: Player | Creature | undefined, bypass?: boolean): boolean;
+    increaseWaste(item: Item): void;
     onUnserialized(): void;
     protected preMove(oldTile: ITile, tile: ITile): void;
     private inspectResistancesAndVulnerabilities;

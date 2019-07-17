@@ -8,19 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Entity from "entity/Entity";
-import { AiType, DamageType, Defense, EntityType, MoveType, StatusType } from "entity/IEntity";
-import Player from "entity/player/Player";
-import { IInspectable } from "game/inspection/Inspections";
-import { IObject } from "game/IObject";
-import { IItem, ItemType, ItemTypeGroup } from "item/IItem";
+import Creature from "entity/creature/Creature";
+import Human from "entity/Human";
+import { AiType, DamageType, Defense, MoveType, StatusType } from "entity/IEntity";
+import { ItemType, ItemTypeGroup } from "item/IItem";
 import { LootGroupType } from "item/LootGroups";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IModdable } from "mod/ModRegistry";
 import { TileEventType } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
-import { ISafeFn } from "utilities/FromDescription";
 export declare enum CreatureType {
     Slime = 0,
     JellyCube = 1,
@@ -67,54 +64,7 @@ export declare enum CreatureType {
     Walleye = 42,
     Wisp = 43
 }
-export interface ICreature extends Entity, IObject<CreatureType>, IInspectable {
-    entityType: EntityType.Creature;
-    fromDescription: ISafeFn<ICreatureDescription, undefined>;
-    ai: AiType;
-    anim: number;
-    loot?: ItemType[];
-    aberrant?: boolean;
-    respawned?: boolean;
-    enemy?: number;
-    enemyIsPlayer?: boolean;
-    enemyAttempts?: number;
-    hitchedTo?: number;
-    /**
-     * @param article Whether to include an article for the name of the creature. Uses the article rules on the language. Defaults to `true`.
-     * @param count The number of this creature that you're getting the name of. Defaults to `1`.
-     *
-     * Examples:
-     * - `creature.getName()` // "an acid spitter demon"
-     * - `creature.getName(false)` // "acid spitter demon"
-     * - `creature.getName(undefined, 3)` // "acid spitter demons"
-     */
-    getName(article?: boolean, count?: number): Translation;
-    description(): ICreatureDescription | undefined;
-    isHidden(): boolean;
-    isDefender(): boolean;
-    isValid(): boolean;
-    checkForBurn(moveType?: MoveType): boolean;
-    damage(damageInfo: IDamageInfo): number | undefined;
-    isTamed(): boolean;
-    tame(player: Player): boolean;
-    release(): boolean;
-    increaseTamedCount(): void;
-    skipNextUpdate(): void;
-    onUnserialized(): void;
-    offer(items: IItem[]): IItem | undefined;
-    hasAi(aiType: AiType): boolean;
-    setMoveType(moveType: MoveType): void;
-    getMovementFinishTime(): number | undefined;
-    update(): boolean;
-    moveTo(x: number, y: number, z: number): boolean;
-    checkUnder(checkX?: number, checkY?: number): boolean;
-    canSwapWith(player: Player): boolean;
-    getOwner(): Player | undefined;
-    processSpecialAbilities(enemy: Player | ICreature | undefined, bypass?: boolean): boolean;
-    increaseWaste(item: IItem): void;
-    initializeStats(hp: number, maxhp?: number): void;
-}
-export interface ICreatureOld extends ICreature {
+export interface ICreatureOld extends Creature {
     hp: number;
     maxhp: number;
     happiness?: number;
@@ -210,7 +160,7 @@ export interface IDamageInfo {
     amount: number;
     type: DamageType;
     weaponName?: Message | Translation;
-    creature?: ICreature;
+    creature?: Creature;
     skipMilestones?: boolean;
     legacy?: boolean;
     damageMessage?: Message | Translation;

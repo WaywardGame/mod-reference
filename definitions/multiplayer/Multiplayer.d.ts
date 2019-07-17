@@ -12,11 +12,11 @@ import { ICharacter } from "entity/IHuman";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
-import { DisconnectReason, IMultiplayer, IMultiplayerEvents, IMultiplayerOptions, JoinServerRetryReason, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
+import { DisconnectReason, IMultiplayerEvents, IMultiplayerOptions, JoinServerRetryReason, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { IPacket } from "multiplayer/packets/IPacket";
-export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> implements IMultiplayer, IHookHost {
+export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> implements IHookHost {
     private readonly _playerIdentifier;
     private _isServer;
     private _server;

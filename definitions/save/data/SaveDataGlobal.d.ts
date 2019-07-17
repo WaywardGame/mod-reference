@@ -12,10 +12,10 @@ import { ICharacter, ICrafted } from "entity/IHuman";
 import { IMilestoneData } from "game/milestones/IMilestone";
 import { ModState } from "mod/IModInfo";
 import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
-import ISaveDataGlobal, { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
+import { IHighscore, IOptions } from "save/data/ISaveDataGlobal";
 import { IDialogInfo } from "ui/IUi";
 import { IEnumInfo } from "utilities/enum/IEnum";
-export default class SaveDataGlobal implements ISaveDataGlobal {
+export default class SaveDataGlobal {
     static defaultOptions: IOptions;
     gameCrafted: {
         [index: number]: ICrafted;

@@ -10,8 +10,8 @@
  */
 import EventEmitter from "event/EventEmitter";
 import { ModType } from "mod/IModInfo";
-import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworks, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
-export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> implements ISteamworks {
+import { IDedicatedServerInfo, IModPath, ISteamFriend, ISteamId, ISteamworksEvents, IWorkshopItem, LobbyType } from "steamworks/ISteamworks";
+export default class Steamworks extends EventEmitter.Host<ISteamworksEvents> {
     private steamId;
     private betaName;
     private buildTime;

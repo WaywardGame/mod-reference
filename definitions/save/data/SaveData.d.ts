@@ -13,10 +13,9 @@ import { GameMode } from "game/GameMode";
 import { ISerializedTranslation } from "language/Translation";
 import { IMultiplayerState } from "multiplayer/IMultiplayer";
 import IClientStore from "save/clientStore/IClientStore";
-import ISaveData from "save/data/ISaveData";
 import { IEnumInfo } from "utilities/enum/IEnum";
 export declare const saveDataVersionUnknown = "Unknown";
-export default class SaveData implements ISaveData {
+export default class SaveData {
     gameSlotName: string;
     gameState: PlayerState.Won | PlayerState.Ghost | PlayerState.None;
     gameBaseSeed: number | string;

@@ -8,19 +8,21 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICreature } from "entity/creature/ICreature";
-import IHuman, { HairColor, HairStyle, IRestData, SkinColor } from "entity/IHuman";
-import { INPC } from "entity/npc/INPC";
+import Creature from "entity/creature/Creature";
+import Human from "entity/Human";
+import { HairColor, HairStyle, IRestData, SkinColor } from "entity/IHuman";
+import NPC from "entity/npc/NPC";
 import { IMessage } from "entity/player/IMessageManager";
 import MessageManager from "entity/player/MessageManager";
 import Player from "entity/player/Player";
 import { Events } from "event/EventBuses";
 import { Milestone } from "game/milestones/IMilestone";
-import { IContainer, IItem, ItemType } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
+import Item from "item/Item";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { Direction } from "utilities/math/Direction";
 import { IVector2 } from "utilities/math/IVector";
-export interface IPlayerEvents extends Events<IHuman> {
+export interface IPlayerEvents extends Events<Human> {
     /**
      * Called when the player is spawned. (At the end of `Player.setup`)
      */
@@ -41,20 +43,20 @@ export interface IPlayerEvents extends Events<IHuman> {
      * @param item The item object
      * @param container The container object the item was added to. This container might be inventory or a container within the inventory.
      */
-    inventoryItemAdd(item: IItem, container: IContainer): void;
+    inventoryItemAdd(item: Item, container: IContainer): void;
     /**
      * Called when an item is removed from the players inventory
      * @param item The item object
      * @param container The container object the item was moved to.
      */
-    inventoryItemRemove(item: IItem, container: IContainer): void;
+    inventoryItemRemove(item: Item, container: IContainer): void;
     /**
      * Called when an item is moved from one container to another, while still in the players inventory.
      * @param item The item object
      * @param container The container object the item was moved to. This container might be inventory or a container within the inventory.
      * @param previousContainer The container object the item was moved from. This container might be inventory or a container within the inventory.
      */
-    inventoryItemUpdate(item: IItem, container: IContainer, previousContainer?: IContainer): void;
+    inventoryItemUpdate(item: Item, container: IContainer, previousContainer?: IContainer): void;
     /**
      * Called when the players x / y position changes
      * @param x The players x position
@@ -136,9 +138,9 @@ export interface IMobCheck {
     x: number;
     y: number;
     z: number;
-    creature?: ICreature;
+    creature?: Creature;
     player?: Player;
-    npc?: INPC;
+    npc?: NPC;
     obstacle?: boolean;
     water?: boolean;
     freshWater?: boolean;

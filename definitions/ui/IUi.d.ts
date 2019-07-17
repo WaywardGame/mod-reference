@@ -9,7 +9,8 @@
  * https://waywardgame.github.io/
  */
 import { EquipType } from "entity/IHuman";
-import { IContainer, IDismantleComponent, IItem, ItemType } from "item/IItem";
+import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
+import Item from "item/Item";
 import { ScreenId } from "newui/screen/IScreen";
 import { MenuId } from "newui/screen/screens/menu/component/IMenu";
 import Menu from "newui/screen/screens/menu/component/Menu";
@@ -93,7 +94,7 @@ export interface IUi extends IPropSerializable, Emitter {
     updateCraftingDialog(craftableItemTypes: ItemType[], nonCraftableItemTypes: ItemType[]): void;
     updateDismantleTab(dismantleItems: IDismantleComponent): void;
     getInventoryItemOrder(): any[];
-    updateItem(item: IItem): void;
+    updateItem(item: Item): void;
     hideContextMenu(): void;
     hideActionsMenu(): void;
     setFontStyle(): void;
@@ -127,9 +128,9 @@ export interface IUi extends IPropSerializable, Emitter {
     refreshContainerName(container: IContainer): void;
     closeContainer(container: IContainer): void;
     isContainerOpen(container: IContainer): boolean;
-    addItemToContainer(item: IItem, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
+    addItemToContainer(item: Item, container: IContainer, internal?: boolean, isAddingMultipleItems?: boolean): void;
     afterAddingMultipleItemsToContainer(container: IContainer): void;
-    removeItemFromContainer(item: IItem, container: IContainer): void;
+    removeItemFromContainer(item: Item, container: IContainer): void;
     updateInventorySort(): void;
     getDialogInfo(dialogId: DialogId): IDialogInfo;
     setVersionExtra(msg: string): void;

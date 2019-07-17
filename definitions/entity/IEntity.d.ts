@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICreature } from "entity/creature/ICreature";
+import Creature from "entity/creature/Creature";
 import { IStat, IStatMax } from "entity/IStats";
-import { INPC } from "entity/npc/INPC";
+import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { ITile } from "tile/ITerrain";
 export interface IEntityEvents {
@@ -101,7 +101,7 @@ export declare enum Property {
     Talked = 1
 }
 export declare type IProperties = Map<Property, any>;
-export declare type EntityPlayerCreatureNpc = Player | ICreature | INPC;
+export declare type EntityPlayerCreatureNpc = Player | Creature | NPC;
 export declare enum EntityType {
     Player = 0,
     Creature = 1,

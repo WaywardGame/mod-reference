@@ -9,18 +9,36 @@
  * https://waywardgame.github.io/
  */
 import { IHookHost } from "mod/IHookHost";
-import IHookManager, { Hook, ICachedHook, IEmitterHostRegistrationChain } from "mod/IHookManager";
-import IModManager from "mod/IModManager";
+import { Hook, ICachedHook, IEmitterHostRegistrationChain } from "mod/IHookManager";
+import ModManager from "mod/ModManager";
 import Emitter from "utilities/Emitter";
-export default class HookManager implements IHookManager {
+export default class HookManager {
     private readonly hookHosts;
     private readonly modManager;
     private cachedHooks;
-    constructor(modManager: IModManager);
+    constructor(modManager: ModManager);
     register<H extends IHookHost>(host: H, name?: string): H extends Emitter ? IEmitterHostRegistrationChain : void;
-    deregister(host: IHookHost, name?: string, cacheHooks?: boolean): void;
+    /**
+     * Deregisters the given `IHookHost` if it is registered.
+     */
+    deregister(host: IHookHost): void;
+    /**
+     * Deregisters the given `IHookHost` if it is registered under the given name.
+     */
+    deregister(host: IHookHost, name?: string): void;
     getHostsWithHook(hook: Hook): IterableIterator<IHookHost>;
+    /**
+     * Returns the internal list of mods with a hook and their priorities.
+     * @param hook A hook name.
+     * @see `Mod` or `Hook` for a list of valid hook names.
+     */
     getCachedHook(hook: Hook): ICachedHook | undefined;
+    /**
+     * Caches the hooks used by each mod, sorted by priority.
+     *
+     * 1. For every valid mod, cache the hooks for that mod using `cacheHooksForMod`
+     * 2. For all cached hooks, sort the cached list of priorities that all the cached hook methods use.
+     */
     cacheHooks(): void;
     /**
      * Sort cached hooks by priority

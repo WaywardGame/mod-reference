@@ -11,10 +11,10 @@
 import { ActionType } from "entity/action/IAction";
 import { AiType } from "entity/IEntity";
 import { EquipType, ICustomizations } from "entity/IHuman";
-import BaseNPC from "entity/npc/BaseNPC";
-import { INPC } from "entity/npc/INPC";
-import { IItem, ItemType } from "item/IItem";
-export default class MerchantNPC extends BaseNPC implements INPC {
+import NPC from "entity/npc/NPC";
+import { ItemType } from "item/IItem";
+import Item from "item/Item";
+export default class MerchantNPC extends NPC {
     constructor(id?: number, x?: number, y?: number, z?: number);
     update(): void;
     getActions(): ActionType[] | undefined;
@@ -22,7 +22,7 @@ export default class MerchantNPC extends BaseNPC implements INPC {
     protected getDefaultName(): string;
     protected initializeStats(): void;
     protected getDefaultCustomization(): ICustomizations;
-    protected getDefaultEquipment(equipType: EquipType): IItem | ItemType | undefined;
-    protected getDefaultInventory(): Array<IItem | ItemType>;
+    protected getDefaultEquipment(equipType: EquipType): Item | ItemType | undefined;
+    protected getDefaultInventory(): Array<Item | ItemType>;
     protected getDefaultAiType(): AiType;
 }

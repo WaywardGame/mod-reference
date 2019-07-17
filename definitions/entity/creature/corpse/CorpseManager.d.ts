@@ -9,14 +9,13 @@
  * https://waywardgame.github.io/
  */
 import { ICorpse } from "entity/creature/corpse/ICorpse";
-import ICorpseManager from "entity/creature/corpse/ICorpseManager";
 import { CreatureType } from "entity/creature/ICreature";
 import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { ItemType } from "item/IItem";
 import Translation from "language/Translation";
 import Stream from "utilities/stream/Stream";
-export default class CorpseManager implements ICorpseManager {
+export default class CorpseManager {
     create(type: CreatureType, x: number, y: number, z: number, decay?: number, aberrant?: boolean, name?: string, qualityBonus?: number): ICorpse | undefined;
     updateAll(): void;
     getResources(corpse: ICorpse): ItemType[];

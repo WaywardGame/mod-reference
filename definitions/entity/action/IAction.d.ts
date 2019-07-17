@@ -9,19 +9,22 @@
  * https://waywardgame.github.io/
  */
 import { SfxType } from "audio/IAudio";
-import { DoodadType, IDoodad } from "doodad/IDoodad";
+import Doodad from "doodad/Doodad";
+import { DoodadType } from "doodad/IDoodad";
 import ActionExecutor from "entity/action/ActionExecutor";
 import actionDescriptions from "entity/action/Actions";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
-import { ICreature } from "entity/creature/ICreature";
+import Creature from "entity/creature/Creature";
+import Human from "entity/Human";
 import { AttackType, EntityPlayerCreatureNpc, EntityType } from "entity/IEntity";
 import { EquipType, RestType, SkillType } from "entity/IHuman";
-import { INPC } from "entity/npc/INPC";
+import NPC from "entity/npc/NPC";
 import { TurnType } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import { IContainer, IItem, ItemType } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
+import Item from "item/Item";
 import { RecipeType } from "item/recipe/RecipeRegistry";
 import { ITileEvent } from "tile/ITileEvent";
 import { IRGB } from "utilities/Color";
@@ -165,11 +168,11 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
     /**
      * The items passed to this method will be registered as items potentially to be damaged when the action completes.
      */
-    addItems(...items: Array<IItem | undefined>): this;
+    addItems(...items: Array<Item | undefined>): this;
     /**
      * Returns the items registered for this action via `addItems`.
      */
-    getItems(): Stream<IItem>;
+    getItems(): Stream<Item>;
     /**
      * Removes all items added via `addItems`
      */
@@ -177,7 +180,7 @@ export interface IActionApi<E extends EntityPlayerCreatureNpc = EntityPlayerCrea
     /**
      * Removes specific items added by `addItems`
      */
-    removeItems(...items: Array<IItem | undefined>): this;
+    removeItems(...items: Array<Item | undefined>): this;
 }
 export interface IActionHandlerApi<E extends EntityPlayerCreatureNpc = EntityPlayerCreatureNpc> extends IActionApi<E> {
     /**
@@ -265,21 +268,21 @@ export declare type ActionArgumentTypeMap<X extends ActionArgument> = {
     [ActionArgument.AttackType]: AttackType;
     [ActionArgument.Container]: IContainer;
     [ActionArgument.Corpse]: ICorpse;
-    [ActionArgument.Creature]: ICreature;
+    [ActionArgument.Creature]: Creature;
     [ActionArgument.Direction]: Direction;
-    [ActionArgument.Doodad]: IDoodad;
+    [ActionArgument.Doodad]: Doodad;
     [ActionArgument.DoodadType]: DoodadType;
     [ActionArgument.Entity]: EntityPlayerCreatureNpc;
     [ActionArgument.EquipType]: EquipType;
     [ActionArgument.Human]: Human;
-    [ActionArgument.Item]: IItem;
-    [ActionArgument.ItemArray]: IItem[];
-    [ActionArgument.ItemArrayInventory]: IItem[];
-    [ActionArgument.ItemArrayNearby]: IItem[];
-    [ActionArgument.ItemInventory]: IItem;
-    [ActionArgument.ItemNearby]: IItem;
+    [ActionArgument.Item]: Item;
+    [ActionArgument.ItemArray]: Item[];
+    [ActionArgument.ItemArrayInventory]: Item[];
+    [ActionArgument.ItemArrayNearby]: Item[];
+    [ActionArgument.ItemInventory]: Item;
+    [ActionArgument.ItemNearby]: Item;
     [ActionArgument.ItemType]: ItemType;
-    [ActionArgument.NPC]: INPC;
+    [ActionArgument.NPC]: NPC;
     [ActionArgument.Player]: Player;
     [ActionArgument.Quality]: Quality;
     [ActionArgument.RecipeType]: RecipeType;

@@ -9,63 +9,11 @@
  * https://waywardgame.github.io/
  */
 import { DropLocation } from "entity/action/actions/Drop";
-import { ICharacter, ICrafted } from "entity/IHuman";
 import { GameMode, IGameOptions } from "game/GameMode";
 import { InspectType } from "game/inspection/IInspection";
-import { IMilestoneData } from "game/milestones/IMilestone";
 import { ISerializedTranslation } from "language/Translation";
-import { ModState } from "mod/IModInfo";
 import { IBindings } from "newui/BindingManager";
-import { ISavedCharacter } from "newui/screen/screens/menu/menus/character/Character";
-import { IDialogInfo } from "ui/IUi";
-import { IEnumInfo } from "utilities/enum/IEnum";
 import { ISourceFilter } from "utilities/Log";
-export interface ISaveDataGlobal {
-    gameCrafted: {
-        [index: number]: ICrafted;
-    };
-    gameLastPlayedVersion: string;
-    gameHighscores: IHighscore[];
-    gamePlayedCount: number;
-    playerMilestoneData: {
-        [index: number]: IMilestoneData | undefined;
-    };
-    options: IOptions;
-    modManagerModState: {
-        [index: string]: ModState;
-    };
-    modManagerSaveData: {
-        [index: string]: any;
-    };
-    languageManagerSaveData: {
-        language?: string;
-    };
-    utilitiesEnumsAllocated: {
-        [index: string]: IEnumInfo;
-    };
-    savedDialogInfo: {
-        [index: string]: IDialogInfo;
-    };
-    multiplayerBannedPlayers: string[];
-    multiplayerPreviousGames: {
-        [index: string]: ICharacter | undefined;
-    };
-    multiplayerMessageOfTheDay: string;
-    characters: ISavedCharacter[];
-    newui: {
-        [index: string]: any;
-    };
-    lastServerJoined: string | undefined;
-    /**
-     * Resets all options to default
-     */
-    resetOptions(): void;
-    /**
-     * Resets all milestone progress
-     */
-    resetMilestones(): void;
-}
-export default ISaveDataGlobal;
 export interface IOptions {
     alternateContextMenu: boolean;
     alternatingDirectionMovement: boolean;

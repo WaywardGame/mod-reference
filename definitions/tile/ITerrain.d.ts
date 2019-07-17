@@ -9,11 +9,12 @@
  * https://waywardgame.github.io/
  */
 import { SfxType } from "audio/IAudio";
-import { DoodadType, GrowingStage, IDoodad } from "doodad/IDoodad";
+import Doodad from "doodad/Doodad";
+import { DoodadType, GrowingStage } from "doodad/IDoodad";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
-import { ICreature } from "entity/creature/ICreature";
+import Creature from "entity/creature/Creature";
 import { SkillType } from "entity/IHuman";
-import { INPC } from "entity/npc/INPC";
+import NPC from "entity/npc/NPC";
 import { Quality } from "game/IObject";
 import { IContainer } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
@@ -54,11 +55,11 @@ export interface ITerrainDescription extends IModdable {
 }
 export interface ITile extends Partial<ITileContainer> {
     corpses?: ICorpse[];
-    creature?: ICreature;
+    creature?: Creature;
     data: number;
-    doodad?: IDoodad;
+    doodad?: Doodad;
     events?: ITileEvent[];
-    npc?: INPC;
+    npc?: NPC;
     overlays?: IOverlayInfo[];
 }
 export interface ITileOld {

@@ -8,14 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
+import Doodad from "doodad/Doodad";
 import { ICorpse } from "entity/creature/corpse/ICorpse";
-import { ICreature } from "entity/creature/ICreature";
+import Creature from "entity/creature/Creature";
 import Entity from "entity/Entity";
-import { INPC } from "entity/npc/INPC";
+import Human from "entity/Human";
+import NPC from "entity/npc/NPC";
 import { IMovementIntent } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
-import { IContainer, IItem } from "item/IItem";
+import { IContainer } from "item/IItem";
+import Item from "item/Item";
 import BasePacket from "multiplayer/packets/BasePacket";
 import { IVector2, IVector3 } from "utilities/math/IVector";
 export default abstract class IndexedPacket extends BasePacket {
@@ -49,26 +51,26 @@ export default abstract class IndexedPacket extends BasePacket {
     protected writeIndexedVector3(value?: IVector3): void;
     protected readIndexedContainer(): IContainer | undefined;
     protected writeIndexedContainer(value?: IContainer): void;
-    protected readIndexedCreature(): ICreature | undefined;
-    protected writeIndexedCreature(value?: ICreature): void;
+    protected readIndexedCreature(): Creature | undefined;
+    protected writeIndexedCreature(value?: Creature): void;
     protected readIndexedPlayer(): Player | undefined;
     protected writeIndexedPlayer(value?: Player): void;
-    protected readIndexedDoodad(): IDoodad | undefined;
-    protected writeIndexedDoodad(value?: IDoodad): void;
-    protected readIndexedNPC(): INPC | undefined;
-    protected writeIndexedNPC(value?: INPC): void;
+    protected readIndexedDoodad(): Doodad | undefined;
+    protected writeIndexedDoodad(value?: Doodad): void;
+    protected readIndexedNPC(): NPC | undefined;
+    protected writeIndexedNPC(value?: NPC): void;
     protected readIndexedCorpse(): ICorpse | undefined;
     protected writeIndexedCorpse(value?: ICorpse): void;
-    protected readIndexedEntity(): ICreature | INPC | Player | undefined;
+    protected readIndexedEntity(): Creature | NPC | Player | undefined;
     protected writeIndexedEntity(value?: Entity): void;
     protected readIndexedHuman(): Human | undefined;
     protected writeIndexedHuman(value?: Human): void;
-    protected readIndexedItem(): IItem | undefined;
-    protected writeIndexedItem(value?: IItem): void;
+    protected readIndexedItem(): Item | undefined;
+    protected writeIndexedItem(value?: Item): void;
     protected readIndexedMovementIntent(): IMovementIntent | undefined;
     protected writeIndexedMovementIntent(value?: IMovementIntent): void;
-    protected readIndexedItems(): IItem[] | undefined;
-    protected writeIndexedItems(value?: IItem[]): void;
+    protected readIndexedItems(): Item[] | undefined;
+    protected writeIndexedItems(value?: Item[]): void;
     protected readIndexedObject(): any;
     protected writeIndexedObject(value?: any): void;
     protected readIndexedVector2Array(): IVector2[] | undefined;

@@ -11,5 +11,5 @@
 import { Action } from "entity/action/Action";
 import { ActionArgument } from "entity/action/IAction";
 import Player from "entity/player/Player";
-declare const _default: Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], Player | import("../../npc/INPC").INPC, void>;
+declare const _default: Action<[[ActionArgument.Item, ActionArgument.Undefined], [ActionArgument.AttackType, ActionArgument.Undefined]], import("../../npc/NPC").default | Player, void>;
 export default _default;

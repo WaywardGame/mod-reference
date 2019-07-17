@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IItem, ItemType, ItemTypeGroup } from "item/IItem";
+import { ItemType, ItemTypeGroup } from "item/IItem";
+import Item from "item/Item";
 import Crafter from "item/recipe/Crafter";
 import ItemOutput from "item/recipe/output/ItemOutput";
 import RecipeRequirement, { RecipeRequirementType } from "item/recipe/RecipeRequirement";
@@ -51,7 +52,7 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
      * **Note**: The output items will only use this quality by default, it can still be overridden by the item outputs.
      */
     setInheritQualityFrom(): this;
-    setPredicate(predicate: (item: IItem, consumed: boolean) => boolean): this;
+    setPredicate(predicate: (item: Item, consumed: boolean) => boolean): this;
     /**
      * Sets the `ItemOutput` that this requirement will be used for.
      * This is called internally, it should have no real use in recipe construction.
@@ -62,7 +63,7 @@ export default class ItemRequirement extends RecipeRequirement<RecipeRequirement
      * This is called internally, it should have no real use in recipe construction.
      */
     getOutput(): ItemOutput.Intermediate | undefined;
-    getUsable(api: Crafter): IItem[];
+    getUsable(api: Crafter): Item[];
     isMet(api: Crafter, quantity?: number): boolean;
     private freeUsedItem;
     private onAttemptCraft;

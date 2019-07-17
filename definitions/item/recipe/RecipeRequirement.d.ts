@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
-import { IItem } from "item/IItem";
+import Doodad from "doodad/Doodad";
+import Item from "item/Item";
 import Crafter from "item/recipe/Crafter";
 import { ITile } from "tile/ITerrain";
 export declare enum RecipeRequirementType {
@@ -19,9 +19,9 @@ export declare enum RecipeRequirementType {
     Fire = 3
 }
 export interface RecipeInputTypeMap {
-    [RecipeRequirementType.Item]: IItem;
-    [RecipeRequirementType.Tool]: IItem;
-    [RecipeRequirementType.Doodad]: IDoodad;
+    [RecipeRequirementType.Item]: Item;
+    [RecipeRequirementType.Tool]: Item;
+    [RecipeRequirementType.Doodad]: Doodad;
     [RecipeRequirementType.Fire]: ITile;
 }
 export declare type RecipeInputType<R extends RecipeRequirementType = RecipeRequirementType> = RecipeInputTypeMap[R];

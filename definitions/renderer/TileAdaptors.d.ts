@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { DoodadType, IDoodad } from "doodad/IDoodad";
+import Doodad from "doodad/Doodad";
+import { DoodadType } from "doodad/IDoodad";
 import IWorldLayer from "renderer/IWorldLayer";
 import { TerrainTileInfo } from "renderer/TerrainTileInfo";
 import { TerrainType } from "tile/ITerrain";
@@ -41,5 +42,5 @@ export interface IDoodadAdaptor {
 }
 export declare let defaultBackground: TerrainTileInfo;
 export declare function setDefaultBackground(tileInfo: TerrainTileInfo): void;
-export declare function isDoor(doodad?: IDoodad): boolean;
+export declare function isDoor(doodad?: Doodad): boolean;
 export declare function getWaterType(terrainType: TerrainType): number;

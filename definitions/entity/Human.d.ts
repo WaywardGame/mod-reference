@@ -10,27 +10,27 @@
  */
 import { IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import IHuman, { EquipType, ICrafted, ICustomizations, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
+import { EquipType, ICrafted, ICustomizations, IHumanEvents, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import PlayerDefense from "entity/player/PlayerDefense";
 import { ISkillSet } from "entity/player/Skills";
-import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import { IContainer, IItem, ItemType } from "item/IItem";
+import { IContainer, ItemType } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
+import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IOptions } from "save/data/ISaveDataGlobal";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
-export default abstract class Human extends Entity implements IHuman {
-    event: IEventEmitter<this, Events<IHuman>>;
+export default abstract class Human extends Entity {
+    event: IEventEmitter<this, IHumanEvents>;
     attackFromEquip: IAttackHand;
     crafted: {
         [index: number]: ICrafted;
@@ -66,24 +66,38 @@ export default abstract class Human extends Entity implements IHuman {
     getName(): Translation;
     getProtectedItemsOptions(): IProtectedItemOptions;
     getReputation(): number;
+    /**
+     * @returns the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
+     */
     getSkillCore(skill: SkillType): number;
+    /**
+     * Sets the "base value" of the skill (ignoring any bonuses applied by legendary equipment)
+     * @param skill The skill to set the base value of.
+     * @param value The value (between 0 and 100) to set the skill to.
+     */
     setSkillCore(skill: SkillType, value: number): void;
+    /**
+     * @returns The value of the given skill, the sum of the base value and any bonuses from legendary equipment
+     */
     getSkill(skill: SkillType): number;
+    /**
+     * @returns Whether the skill of this human is more than or equal to a random number between `0` and the value of `check`.
+     */
     skillCheck(skill: SkillType, check: number): boolean;
     isResting(): boolean;
     isGhost(): boolean;
     isRestingCancelled(): boolean;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
-    createItemInInventory(itemType: ItemType, quality?: Quality): IItem;
+    createItemInInventory(itemType: ItemType, quality?: Quality): Item;
     hasHandToUse(): boolean;
     getAndSwitchHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;
     getDamageModifier(): number;
     damage(damageInfoOrAmount: IDamageInfo | number, damageMessage?: Message | Translation, soundDelay?: number, causesBlood?: boolean): number | undefined;
-    getEquippedItems(): IItem[];
-    getEquippedItem(slot: EquipType): IItem | undefined;
-    getEquipSlotForItem(item: IItem): EquipType | undefined;
+    getEquippedItems(): Item[];
+    getEquippedItem(slot: EquipType): Item | undefined;
+    getEquipSlotForItem(item: Item): EquipType | undefined;
     getMaxHealth(): number;
     addMilestone(milestone: Milestone, data?: number): void;
     update(): void;
@@ -102,13 +116,13 @@ export default abstract class Human extends Entity implements IHuman {
     setPosition(point: IVector3): void;
     setZ(z: number, updateFlowField?: boolean): void;
     checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
-    equip(item: IItem, slot: EquipType): void;
-    unequip(item: IItem): void;
+    equip(item: Item, slot: EquipType): void;
+    unequip(item: Item): void;
     unequipAll(): void;
     canJump(): boolean;
     hasDelay(): boolean;
     addDelay(delay: number, replace?: boolean): void;
-    getConsumeBonus(item: IItem | undefined, skillUse?: SkillType): number;
+    getConsumeBonus(item: Item | undefined, skillUse?: SkillType): number;
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
     discoverRecipe(recipeType: ItemType): void;

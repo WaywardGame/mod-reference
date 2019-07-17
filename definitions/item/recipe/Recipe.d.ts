@@ -10,7 +10,8 @@
  */
 import Entity from "entity/Entity";
 import { SkillType } from "entity/IHuman";
-import { IItem, RecipeLevel } from "item/IItem";
+import { RecipeLevel } from "item/IItem";
+import Item from "item/Item";
 import Crafter from "item/recipe/Crafter";
 import RecipeOutput, { RecipeOutputType } from "item/recipe/RecipeOutput";
 import { RecipeOutputClass } from "item/recipe/RecipeOutputs";
@@ -41,7 +42,7 @@ export default class Recipe {
     getReputation(): number;
     setReputation(reputation: number): this;
     canCraft(crafter: Crafter): boolean;
-    canCraft(entity: Entity, items: IItem[]): boolean;
-    requirementsStatus(entity: Entity, items: IItem[]): import("../../utilities/stream/Stream").default<[RecipeRequirement<any>, boolean]>;
-    getCrafter(entity: Entity, items: IItem[]): Crafter;
+    canCraft(entity: Entity, items: Item[]): boolean;
+    requirementsStatus(entity: Entity, items: Item[]): import("../../utilities/stream/Stream").default<[RecipeRequirement<any>, boolean]>;
+    getCrafter(entity: Entity, items: Item[]): Crafter;
 }

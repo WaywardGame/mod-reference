@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import Entity from "entity/Entity";
+import Human from "entity/Human";
 import { StatusType } from "entity/IEntity";
 import { IModdable } from "mod/ModRegistry";
 import StatusEffectRenderer from "renderer/StatusEffectRenderer";

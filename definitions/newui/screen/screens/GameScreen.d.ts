@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "entity/creature/ICreature";
+import Human from "entity/Human";
 import Player from "entity/player/Player";
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";

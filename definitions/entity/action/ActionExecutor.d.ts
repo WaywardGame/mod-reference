@@ -15,7 +15,7 @@ import { EntityPlayerCreatureNpc } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
 import { Milestone } from "game/milestones/IMilestone";
-import { IItem } from "item/IItem";
+import Item from "item/Item";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import { IRGB } from "utilities/Color";
 export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc, R> implements IActionApi<E> {
@@ -74,9 +74,9 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     setParticle(color: IRGB, inFront?: boolean): this;
     setParticle(color: IRGB, count?: number, inFront?: boolean): this;
     setParticle(particle: IActionParticle): this;
-    addItems(...addItems: Array<IItem | undefined>): this;
-    getItems(): import("../../utilities/stream/Stream").default<IItem>;
-    removeItems(...items: Array<IItem | undefined>): this;
+    addItems(...addItems: Array<Item | undefined>): this;
+    getItems(): import("../../utilities/stream/Stream").default<Item>;
+    removeItems(...items: Array<Item | undefined>): this;
     setItemsUsed(used?: boolean): this;
     confirmItemsBroken(): Promise<boolean>;
     private executeConfirmer;

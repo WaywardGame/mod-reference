@@ -10,7 +10,7 @@
  */
 import { ItemType } from "item/IItem";
 import Component from "newui/component/Component";
-export default class Item extends Component {
+export default class ItemComponent extends Component {
     readonly itemType: ItemType;
     constructor(itemType: ItemType);
 }

@@ -8,16 +8,18 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IContainer, IItem, IRecipe } from "item/IItem";
+import Human from "entity/Human";
+import { IContainer, IRecipe } from "item/IItem";
+import Item from "item/Item";
 export default class ItemRecipeRequirementChecker {
     private readonly human;
     private readonly recipe?;
     private readonly trackItems?;
     private readonly cacheItems?;
     private readonly canUseItem?;
-    itemBaseComponent: IItem | undefined;
-    itemComponentsRequired: IItem[];
-    itemComponentsConsumed: IItem[];
+    itemBaseComponent: Item | undefined;
+    itemComponentsRequired: Item[];
+    itemComponentsConsumed: Item[];
     itemComponentsCanBurn: boolean;
     numComponentsNeeded: number;
     private baseComponent;
@@ -25,7 +27,7 @@ export default class ItemRecipeRequirementChecker {
     private componentItems;
     private adjacentContainers;
     private readonly itemsToProcess;
-    constructor(human: Human, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined, canUseItem?: ((item: IItem, isConsumed: boolean) => boolean) | undefined);
+    constructor(human: Human, recipe?: IRecipe | undefined, trackItems?: boolean | undefined, cacheItems?: boolean | undefined, canUseItem?: ((item: Item, isConsumed: boolean) => boolean) | undefined);
     /**
      * Returns the amount of items needed for the component
      */
@@ -34,7 +36,7 @@ export default class ItemRecipeRequirementChecker {
      * Returns the items that will be used by the component
      * Only valid when trackItems is true
      */
-    getItemsForComponent(componentIndex: number): IItem[];
+    getItemsForComponent(componentIndex: number): Item[];
     requirementsMet(): boolean;
     setAdjacentContainers(adjacentContainers: IContainer[] | undefined): void;
     isDiscovered(): boolean;

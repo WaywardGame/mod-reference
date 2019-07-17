@@ -8,195 +8,16 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IDoodad } from "doodad/IDoodad";
-import { ICorpse } from "entity/creature/corpse/ICorpse";
-import { ICreature, IDamageInfo } from "entity/creature/ICreature";
-import { ICharacter, ICrafted, SkillType } from "entity/IHuman";
-import { INPC } from "entity/npc/INPC";
-import { TurnType } from "entity/player/IPlayer";
-import Player from "entity/player/Player";
-import EventEmitter from "event/EventEmitter";
+import Creature from "entity/creature/Creature";
+import { ICharacter, ICrafted } from "entity/IHuman";
+import Game from "game/Game";
 import { GameMode, IGameOptions } from "game/GameMode";
-import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import TimeManager from "game/TimeManager";
-import { IItem } from "item/IItem";
-import Translation from "language/Translation";
+import Item from "item/Item";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
-import { INotifier } from "renderer/INotifier";
-import ITextureDebugRenderer from "renderer/ITextureDebugRenderer";
-import { IParticle } from "renderer/particle/IParticle";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";
-import { ISaveInfo } from "save/ISaveManager";
-import { ITile, ITileArray, ITileContainer, ITileData, TerrainType } from "tile/ITerrain";
-import { ITileEvent } from "tile/ITileEvent";
-import { Direction } from "utilities/math/Direction";
-import { IVector2, IVector3 } from "utilities/math/IVector";
-import { default as Vec2, default as Vector2 } from "utilities/math/Vector2";
+import { IVector3 } from "utilities/math/IVector";
 import Vector3 from "utilities/math/Vector3";
-import { IVersionInfo } from "utilities/Version";
-export interface IGame extends EventEmitter.Host<IGameEvents> {
-    interval: number;
-    mapSize: number;
-    mapSizeSq: number;
-    slot: number;
-    version: string;
-    npcs: SaferArray<INPC>;
-    mapGenVersion: string;
-    saveVersion: string | undefined;
-    isLoadingSave: boolean;
-    tile: ITileArray;
-    tileDecorations: Uint16Array;
-    tileData: {
-        [index: number]: {
-            [index: number]: {
-                [index: number]: ITileData[] | undefined;
-            } | undefined;
-        } | undefined;
-    };
-    wellData: {
-        [index: number]: IWell | undefined;
-    };
-    tileContainers: ITileContainer[];
-    items: IItem[];
-    creatures: SaferArray<ICreature>;
-    doodads: SaferArray<IDoodad>;
-    tileEvents: SaferArray<ITileEvent>;
-    corpses: SaferArray<ICorpse>;
-    creatureSpawnTimer: number;
-    saveClear: boolean;
-    playing: boolean;
-    paused: boolean;
-    autoSaveTimer: number;
-    fillCount: number;
-    fillTile: boolean[][];
-    spawnCoords: IVector3;
-    contaminatedWater: IVector3[];
-    fadeInAmount: number | undefined;
-    time: TimeManager;
-    absoluteTime: number;
-    lastCreationIds: {
-        [index: number]: number;
-    };
-    previousSaveVersion: IVersionInfo;
-    worldId: string;
-    customMilestoneModifiersAllowed: boolean;
-    tickSpeed: number;
-    seeds: ISeeds;
-    visible: boolean;
-    spriteTexture: WebGLTexture;
-    spriteTextureSizeInversed: Vec2;
-    tileTexture: WebGLTexture;
-    tileTextureSizeInversed: Vec2;
-    particle: IParticle;
-    debugRenderer: ITextureDebugRenderer;
-    notifier: INotifier;
-    cartographyTexture: WebGLTexture;
-    readonly isChallenge: boolean;
-    addPlayer(playerOptions?: Partial<IPlayerOptions>): Player;
-    addZoomLevel(amount: number): void;
-    animateSkeletalRemains(player: Player, x: number, y: number, z: number): void;
-    canASeeB(aX: number, aY: number, aZ: number, bX: number, bY: number, bZ: number, nondeterministic?: boolean): boolean;
-    changeTile(newTileInfo: TerrainType | ITileData, x: number, y: number, z: number, stackTiles: boolean, dropTiles?: boolean, skipCaveDirt?: boolean): void;
-    checkForHiddenMob(human: Human, x: number, y: number, z: number): void;
-    checkWaterFill(x: number, y: number, z: number, needed: number): void;
-    consumeWaterTile(x: number, y: number, z: number): void;
-    damage(target: Player | ICreature | Human, damageInfo: IDamageInfo, causesBlood?: boolean): number | undefined;
-    deletePlayer(plys: Player[], identifier: string): void;
-    directionToMovement(direction: Direction): IVector2;
-    doLavaEvents(x: number, y: number, z: number): void;
-    enableFlowFieldDebug(): void;
-    fireBreath(x: number, y: number, z: number, facingDirection: Direction, itemName?: Translation, player?: boolean): void;
-    getAmbientLightLevel(z: number): number;
-    getBenignity(): number;
-    getBlackness(): number;
-    getCameraPosition(): IVector2;
-    getDailyChallengeSeed(): number;
-    getDifficulty(): GameMode;
-    getDifficultyOptions(): IGameOptions;
-    getExactCameraPosition(): Vector2;
-    getFireStage(decay: number): FireStage;
-    getHeight(z0: number, z1: number, d: number): number;
-    getLightSourceAt(x: number, y: number, z: number): number;
-    getMalignity(): number;
-    getMaxHealth(): number;
-    getMaxWeight(): number;
-    getMovementFinishTime(): number;
-    getNearestPlayer(x: number, y: number, z?: number): Player | undefined;
-    getOrCreateTile(x: number, y: number, z: number): ITile;
-    getOrCreateTileData(x: number, y: number, z: number): ITileData[];
-    getPlayerByIdentifier(identifier: string, includeAbsent?: boolean): Player | undefined;
-    getPlayerByName(name: string): Player | undefined;
-    getPlayerByPid(pid: number): Player | undefined;
-    getPlayers(includeGhosts?: boolean, includeConnecting?: boolean): Player[];
-    getPlayersAtPosition(position: IVector3, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
-    getPlayersAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
-    getPlayersAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): Player[];
-    getPlayersThatSeePosition(tileX: number, tileY: number, tileZ: number): Player[];
-    getQualityDurabilityBonus(quality: Quality, itemDurability: number): number;
-    getRandomQuality(bonusQuality?: number): Quality;
-    getReputation(): number;
-    getSkillPercent(skill: SkillType): number;
-    getTactics(): number;
-    getTickSpeed(): number;
-    getTile(x: number, y: number, z: number): ITile;
-    getTileData(x: number, y: number, z: number): ITileData[] | undefined;
-    getTileFromPoint(point: IVector3): ITile;
-    getTileUnsafe(x: number, y: number, z: number): ITile;
-    getTurnMode(): TurnMode;
-    getValidPlayerName(name: string | undefined): string;
-    getWrappedCoord(x: number): number;
-    initGl(): Promise<void>;
-    initialize(): void;
-    isFlammable(x: number, y: number, z: number): boolean;
-    isOnFire(tile: ITile): FireType;
-    isPlayerAtPosition(x: number, y: number, z: number, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
-    isPlayerAtTile(tile: ITile, includeGhosts?: boolean, includeConnecting?: boolean): boolean;
-    isPositionEmpty(x: number, y: number, z: number): boolean;
-    isPositionFull(x: number, y: number, z: number): boolean;
-    isRealTimeMode(): boolean;
-    isTileEmpty(tile: ITile): boolean;
-    isTileFull(tile: ITile): boolean;
-    makeCaveEntrance(player: Player): TerrainType | undefined;
-    makeLavaPassage(player: Player): TerrainType | undefined;
-    makeMiniMap(mapRequest: IMapRequest): HTMLCanvasElement;
-    onGlobalSlotLoaded(_: number, success: boolean): void;
-    onSaveLoaded(slot: number): void;
-    packGround(x: number, y: number, z: number): void;
-    passTurn(player: Player, turnType?: TurnType): void;
-    play(options: Partial<IPlayOptions>): Promise<boolean>;
-    processWaterContamination(): void;
-    rangeFinder(weaponRange: number, playerSkillLevel: number): number;
-    removePlayer(pid: number): void;
-    requestPlay(options: Partial<IPlayOptions> & {
-        slot: number;
-    }): Promise<boolean>;
-    resetGameState(skipSave?: boolean): Promise<void>;
-    resetWebGL(): void;
-    resizeRenderer(): void;
-    restartDedicatedServer(): void;
-    saveGame(saveType: SaveType): Promise<ISaveInfo | undefined>;
-    setGlContextSize(width: number, height: number): void;
-    setPaused(paused: boolean, showChatMessage?: boolean): void;
-    setTickSpeed(tickSpeed: number): void;
-    setTile(x: number, y: number, z: number, tile: ITile): ITile;
-    setTurnMode(turnMode: TurnMode): void;
-    setupSave(_: number): void;
-    shouldRender(): number;
-    synchronizeFlowFields(plys: Player[]): void;
-    tickRealtime(): void;
-    updateFlowFieldTile(tile: ITile, x: number, y: number, z: number, tileUpdateType: TileUpdateType): void;
-    updateOption(player: Player | undefined, id: keyof IOptions, value: boolean | number): void;
-    updateRender(source: RenderSource): void;
-    updateReputation(reputation: number): void;
-    updateTablesAndWeight(): void;
-    updateThumbnail(): Promise<void>;
-    updateView(source: RenderSource, updateFov: boolean): void;
-    updateFieldOfView(source: RenderSource, force?: boolean): void;
-    updateZoomLevel(): void;
-    wrapCoordinate(cordinate: number, reference: number): number;
-}
-export default IGame;
 export interface IGameEvents {
     globalSlotLoaded(): any;
     pause(): any;
@@ -215,10 +36,10 @@ export declare enum TurnMode {
     Simulated = 1,
     RealTime = 2
 }
-export declare type IGameOld = Partial<IGame> & {
+export declare type IGameOld = Partial<Game> & {
     dayNight: number;
     dayNightSwitch: 0 | 1;
-    monsters: ICreature[];
+    monsters: Creature[];
     tamedCreatures: number[];
     options: IOptions;
     lastPlayedVersion: string | undefined;
@@ -260,7 +81,7 @@ export interface IMapRequest {
     /**
      * The item containing the map.
      */
-    item: IItem;
+    item: Item;
     /**
      * The tile position of the top-left corner of the map.
      */

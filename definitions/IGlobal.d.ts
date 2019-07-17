@@ -15,8 +15,8 @@ import DoodadManager from "doodad/DoodadManager";
 import CorpseManager from "entity/creature/corpse/CorpseManager";
 import CreatureManager from "entity/creature/CreatureManager";
 import FlowFieldManager from "entity/flowfield/FlowFieldManager";
-import IHuman from "entity/IHuman";
-import { INPC } from "entity/npc/INPC";
+import Human from "entity/Human";
+import NPC from "entity/npc/NPC";
 import NPCManager from "entity/npc/NPCManager";
 import Player from "entity/player/Player";
 import Game from "game/Game";
@@ -47,71 +47,9 @@ import Ui from "ui/Ui";
 
 declare global {
 
-	type AnyFunction = (...args: any[]) => any;
-	type NullaryFunction<O = any> = () => O;
-	type UnaryFunction<I = any, O = any> = (input: I) => O;
-
-	type SortingFunction<T> = (a: T, b: T) => number;
-
-	/**
-	 * An object of descriptions. Each key in E *may* map to a valid description.
-	 * @param E The enum with which to index these descriptions.
-	 * @param V The description type.
-	 */
-	type OptionalDescriptions<E extends string | number, V> = { [key in E]?: V } & { [key: number]: V | undefined };
-
-	/**
-	 * An object of descriptions. Each key in E *will* map to a valid description.
-	 * @param E The enum with which to index these descriptions.
-	 * @param V The description type.
-	 */
-	type Descriptions<E extends string | number, V> = { [key in E]: V } & { [key: number]: V | undefined };
-
-	type NullaryClass<T> = new () => T;
-	type Class<T> = new (...args: any[]) => T;
-	// tslint:disable-next-line ban-types No other type will work here except "Function" 
-	type AnyClass<T> = (Function & { prototype: T });
-
-	/**
-	 * Changes the return type of the given function, or creates a new function from the given arguments and return type. 
-	 */
-	type MaskReturn<F extends any[] | AnyFunction, R> = F extends (...args: infer A) => any ? (...args: A) => R : (...args: Extract<F, any[]>) => R;
-
-	/**
-	 * Gets the arguments tuple of a function.
-	 */
-	type ArgumentsOf<T> = Extract<LiterallyJustTheSameThing<Parameters<Extract<T, AnyFunction>>>, any[]>;
-
-	type LiterallyJustTheSameThing<T> = { [K in keyof T]: T[K] };
-
-	type SaferArray<T> = Array<T | undefined>;
-
-	type Mutable<T> = {
-		-readonly [P in keyof T]: T[P];
-	};
-
-	type Human = Player | INPC | IHuman;
-
-	type IterableOr<T> = T | Iterable<T>;
-	type ArrayOr<T> = T | T[];
-
-	type GeneratorOf<T> = () => Iterable<T>;
-
-	type GetterOfOr<T> = T | (() => T);
-
-	type ArrayOfIterablesOr<T> = Array<T | Iterable<T>>;
-
-	type ReturnTypeOrT<T> = T extends (...args: any[]) => infer R ? R : T;
-	type InstanceOf<T extends Class<any> | AnyClass<any>> = T extends Class<any> ? InstanceType<T> : T extends { prototype: infer P } ? P : never;
-
-	type PropertyOf<T, K extends string | number | symbol> = T extends { [key in K]: infer V } ? V : never;
-
-	type FunctionOrNoParams<H extends AnyFunction> = H | (() => ReturnType<H>);
-
-	type Head<T extends any[]> = T[0];
-	type Tail<A extends any[]> = ((...args: A) => any) extends ((_: any, ...args: infer A2) => any) ? A2 : never;
-
-	type AddHead<H, A extends any[]> = ArgumentsOf<(arg1: H, ...args: A) => any>;
+	////////////////////////////////////
+	// Allow Async Iterators
+	//
 
 	interface AsyncIterator<T> {
 		next(value?: any): Promise<IteratorResult<T>>;
@@ -122,6 +60,23 @@ declare global {
 	interface SymbolConstructor {
 		readonly asyncIterator: unique symbol;
 	}
+
+	////////////////////////////////////
+	// Make `bind` types better
+	//
+
+	interface CallableFunction extends Function {
+		bind<T, A0, A1, A2, A3, A4, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A6, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A8, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8): (...args: A) => R;
+		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, arg9: A9, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, arg9: A9): (...args: A) => R;
+	}
+
+	////////////////////////////////////
+	// Globals
+	//
 
 	// autosort
 	let absentPlayers: Player[];
@@ -155,6 +110,10 @@ declare global {
 	let tileEventManager: TileEventManager;
 	let ui: Ui;
 	let world: World;
+
+	function Override(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
+	function Bound<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
+	function Final<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
 
 	const VIEWPORT_MIN_WIDTH: number;
 	const VIEWPORT_MIN_HEIGHT: number;
@@ -335,16 +294,4 @@ declare global {
 		multiplayerMaxPlayers?: number;
 	}
 
-	function Override(_target: any, _propertyKey: string, _descriptor?: PropertyDescriptor): void;
-	function Bound<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
-	function Final<T extends AnyFunction>(target: any, key: string, descriptor: TypedPropertyDescriptor<T>): TypedPropertyDescriptor<T> | void;
-
-	interface CallableFunction extends Function {
-		bind<T, A0, A1, A2, A3, A4, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4): (...args: A) => R;
-		bind<T, A0, A1, A2, A3, A4, A5, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5): (...args: A) => R;
-		bind<T, A0, A1, A2, A3, A4, A5, A6, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6): (...args: A) => R;
-		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7): (...args: A) => R;
-		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A8, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8): (...args: A) => R;
-		bind<T, A0, A1, A2, A3, A4, A5, A6, A7, A8, A9, A extends any[], R>(this: (this: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, arg9: A9, ...args: A) => R, thisArg: T, arg0: A0, arg1: A1, arg2: A2, arg3: A3, arg4: A4, arg5: A5, arg6: A6, arg7: A7, arg8: A8, arg9: A9): (...args: A) => R;
-	}
 }
