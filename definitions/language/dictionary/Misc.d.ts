@@ -8,60 +8,60 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export declare const enum CreatureTranslation {
+export declare enum CreatureTranslation {
     Name = 0,
     Description = 1
 }
-export declare const enum DoodadTranslation {
+export declare enum DoodadTranslation {
     Name = 0,
     Description = 1
 }
-export declare const enum DoodadItemTranslation {
+export declare enum DoodadItemTranslation {
     Name = 0,
     Description = 1
 }
-export declare const enum TileEventTranslation {
+export declare enum TileEventTranslation {
     Name = 0,
     Description = 1
 }
-export declare const enum ItemTranslation {
+export declare enum ItemTranslation {
     Name = 0,
     Description = 1
 }
-export declare const enum SkillTranslation {
+export declare enum SkillTranslation {
     Name = 0,
     Description = 1
 }
-export declare const enum BookTranslation {
+export declare enum BookTranslation {
     Title = 0,
     Text = 1
 }
-export declare const enum MilestoneTranslation {
+export declare enum MilestoneTranslation {
     Name = 0,
     UnlockRequirement = 1,
     ModifierEffect = 2
 }
-export declare const enum ActionTranslation {
+export declare enum ActionTranslation {
     Name = 0,
     Description = 1
 }
-export declare const enum StatusEffectTranslation {
+export declare enum StatusEffectTranslation {
     Past = 0,
     Name = 1
 }
-export declare const enum QuestTranslation {
+export declare enum QuestTranslation {
     Title = 0,
     Description = 1
 }
-export declare const enum MusicPlaylistTranslation {
+export declare enum MusicPlaylistTranslation {
     Name = 0,
     Tooltip = 1
 }
-export declare const enum DifficultyTranslation {
+export declare enum DifficultyTranslation {
     Name = 0,
     Description = 1
 }
-export declare const enum InterruptTranslation {
+export declare enum InterruptTranslation {
     Title = 0,
     Description = 1
 }

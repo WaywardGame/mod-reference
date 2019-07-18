@@ -25,7 +25,7 @@ export interface IUiEvents {
     interruptClose(options: Partial<InterruptOptions>, result?: string | boolean | InterruptChoice): any;
     loadedFromSave(): any;
 }
-export default class Ui extends EventEmitter.Host<IUiEvents> {
+export declare class NewUi extends EventEmitter.Host<IUiEvents> {
     readonly tooltips: TooltipManager;
     readonly scale: ScaleManager;
     readonly highlights: HighlightManager;
@@ -78,6 +78,10 @@ export default class Ui extends EventEmitter.Host<IUiEvents> {
     setDialogOpacity(opacity?: number, save?: boolean): void;
     addStylesheet(path: string): void;
     removeStylesheet(path: string): void;
+    protected onGlobalSlotLoaded(): void;
+    protected onMessage(_: any, fullscreen: boolean): void;
     protected onInterruptClosed(): void;
     protected onLanguageChange(_: any, language: string): void;
 }
+declare const newui: NewUi;
+export default newui;

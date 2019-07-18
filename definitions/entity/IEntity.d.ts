@@ -96,6 +96,12 @@ export declare enum StatusType {
 export declare type IStatus = Writable<{
     [key in keyof typeof StatusType]: boolean;
 }, keyof typeof StatusType>;
+export interface ICausesStatusEffect {
+    causesStatus?: StatusType[];
+}
+export interface ICausesDamage {
+    damage?: number;
+}
 export declare enum Property {
     Credit = 0,
     Talked = 1

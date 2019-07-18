@@ -15,7 +15,7 @@ import ItemManager from "item/ItemManager";
 import LanguageManager from "language/LanguageManager";
 import ModManager from "mod/ModManager";
 import Multiplayer from "multiplayer/Multiplayer";
-import Ui from "newui/NewUi";
+import NewUi from "newui/NewUi";
 import Steamworks from "steamworks/Steamworks";
 export declare enum EventBus {
     Game = 0,
@@ -31,7 +31,7 @@ export declare enum EventBus {
 declare const eventBuses: {
     [EventBus.Game](): typeof Game;
     [EventBus.Language](): typeof LanguageManager;
-    [EventBus.Ui](): typeof Ui;
+    [EventBus.Ui](): typeof NewUi;
     [EventBus.Multiplayer](): typeof Multiplayer;
     [EventBus.Steamworks](): typeof Steamworks;
     [EventBus.Mods](): typeof ModManager;

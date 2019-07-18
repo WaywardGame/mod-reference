@@ -35,7 +35,7 @@ export interface IInjectionApi<T extends {
 declare type InjectionMethod<T extends {
     [key in K]: AnyFunction;
 }, K extends keyof T> = T[K] extends (...args: infer A) => any ? (api: IInjectionApi<T, K>, ...args: A) => any : never;
-export declare const enum InjectionPosition {
+export declare enum InjectionPosition {
     /**
      * This injection will be called before the target method.
      */

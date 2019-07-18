@@ -10,7 +10,7 @@
  */
 import ISpriteInfo from "renderer/ISpriteInfo";
 import { IRGB } from "utilities/Color";
-import { PriorityMap } from "utilities/PriorityMap";
+import { PriorityMap } from "utilities/map/PriorityMap";
 export declare type IRenderFunction = (sprite: number | ISpriteInfo) => void;
 export declare type IRenderLayerImplementation = (render: IRenderFunction) => any;
 export declare type SpriteLineOrRenderLayerImpl = number | IRenderLayerImplementation;

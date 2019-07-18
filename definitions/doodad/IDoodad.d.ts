@@ -10,7 +10,7 @@
  */
 import Doodad from "doodad/Doodad";
 import { ActionType } from "entity/action/IAction";
-import { StatusType } from "entity/IEntity";
+import { ICausesDamage, ICausesStatusEffect } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { ILootItem } from "game/ILoot";
 import { IObjectDescription, IObjectOptions } from "game/IObject";
@@ -43,10 +43,9 @@ export interface IGroupDescription {
 export interface IDoodadDoor extends Doodad {
     orientation: DoorOrientation;
 }
-export interface IDoodadDescription extends IObjectDescription, IModdable {
+export interface IDoodadDescription extends IObjectDescription, IModdable, ICausesStatusEffect, ICausesDamage {
     actionTypes?: ActionType[];
     allowedTiles?: TerrainType[];
-    blockDig?: boolean;
     blockJump?: boolean;
     blockLos?: boolean;
     blockMove?: boolean;
@@ -56,8 +55,6 @@ export interface IDoodadDescription extends IObjectDescription, IModdable {
     canGrowInCaves?: boolean;
     canStoke?: boolean;
     canTrampleWhenMature?: boolean;
-    causesStatus?: StatusType[];
-    damage?: number;
     disableDrop?: boolean;
     gather?: IDoodadLoot;
     gatherCanHurtHands?: boolean;
@@ -143,68 +140,67 @@ export declare enum DoodadType {
     PoleTorchStand = 37,
     LitPoleTorchStand = 38,
     StoneAnvil = 39,
-    Acid = 40,
-    CaveEntrance = 41,
-    WoodenDoorOpen = 42,
-    WoodenGate = 43,
-    WoodenGateOpen = 44,
-    PoisonIvy = 45,
-    WroughtIronChest = 46,
-    IronChest = 47,
-    OrnateWoodenChest = 48,
-    SkeletalRemains = 49,
-    ClayKiln = 50,
-    LitClayKiln = 51,
-    ClayCampfire = 52,
-    LitClayCampfire = 53,
-    ClayFurnace = 54,
-    LitClayFurnace = 55,
-    ClayWaterStill = 56,
-    LitClayWaterStill = 57,
-    SandstoneCampfire = 58,
-    LitSandstoneCampfire = 59,
-    SandstoneFurnace = 60,
-    LitSandstoneFurnace = 61,
-    SandstoneWaterStill = 62,
-    LitSandstoneWaterStill = 63,
-    StoneKiln = 64,
-    LitStoneKiln = 65,
-    WroughtIronAnvil = 66,
-    IronAnvil = 67,
-    MapleTree = 68,
-    AppleTree = 69,
-    SpruceTree = 70,
-    CypressTree = 71,
-    CoconutTree = 72,
-    Lettuce = 73,
-    PotatoPlant = 74,
-    Carrots = 75,
-    CornStalks = 76,
-    CucumberPlant = 77,
-    TomatoPlant = 78,
-    Pumpkin = 79,
-    SugarCaneStalks = 80,
-    Wheat = 81,
-    CopperChest = 82,
-    CopperAnvil = 83,
-    BarkTorchStand = 84,
-    LitBarkTorchStand = 85,
-    TallowTorchStand = 86,
-    LitTallowTorchStand = 87,
-    Item = 88,
-    JoshuaTree = 89,
-    SaguaroCactus = 90,
-    AloeVera = 91,
-    TallowCandle = 92,
-    LitTallowCandle = 93,
-    CottonBedroll = 94,
-    FeatherBedroll = 95,
-    Hammock = 96,
-    LeafBedroll = 97,
-    HitchingPost = 98,
-    ClayBrickWell = 99,
-    SandstoneWell = 100,
-    StoneWell = 101
+    CaveEntrance = 40,
+    WoodenDoorOpen = 41,
+    WoodenGate = 42,
+    WoodenGateOpen = 43,
+    PoisonIvy = 44,
+    WroughtIronChest = 45,
+    IronChest = 46,
+    OrnateWoodenChest = 47,
+    SkeletalRemains = 48,
+    ClayKiln = 49,
+    LitClayKiln = 50,
+    ClayCampfire = 51,
+    LitClayCampfire = 52,
+    ClayFurnace = 53,
+    LitClayFurnace = 54,
+    ClayWaterStill = 55,
+    LitClayWaterStill = 56,
+    SandstoneCampfire = 57,
+    LitSandstoneCampfire = 58,
+    SandstoneFurnace = 59,
+    LitSandstoneFurnace = 60,
+    SandstoneWaterStill = 61,
+    LitSandstoneWaterStill = 62,
+    StoneKiln = 63,
+    LitStoneKiln = 64,
+    WroughtIronAnvil = 65,
+    IronAnvil = 66,
+    MapleTree = 67,
+    AppleTree = 68,
+    SpruceTree = 69,
+    CypressTree = 70,
+    CoconutTree = 71,
+    Lettuce = 72,
+    PotatoPlant = 73,
+    Carrots = 74,
+    CornStalks = 75,
+    CucumberPlant = 76,
+    TomatoPlant = 77,
+    Pumpkin = 78,
+    SugarCaneStalks = 79,
+    Wheat = 80,
+    CopperChest = 81,
+    CopperAnvil = 82,
+    BarkTorchStand = 83,
+    LitBarkTorchStand = 84,
+    TallowTorchStand = 85,
+    LitTallowTorchStand = 86,
+    Item = 87,
+    JoshuaTree = 88,
+    SaguaroCactus = 89,
+    AloeVera = 90,
+    TallowCandle = 91,
+    LitTallowCandle = 92,
+    CottonBedroll = 93,
+    FeatherBedroll = 94,
+    Hammock = 95,
+    LeafBedroll = 96,
+    HitchingPost = 97,
+    ClayBrickWell = 98,
+    SandstoneWell = 99,
+    StoneWell = 100
 }
 export declare enum DoodadTypeGroup {
     Invalid = 400,
@@ -220,7 +216,8 @@ export declare enum DoodadTypeGroup {
     LitTorch = 410,
     LightDevice = 411,
     LightSource = 412,
-    Last = 413
+    LitStructure = 413,
+    Last = 414
 }
 export declare enum DoorOrientation {
     Default = 0,

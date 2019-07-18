@@ -12,7 +12,7 @@ import { DropLocation } from "entity/action/actions/Drop";
 import { GameMode, IGameOptions } from "game/GameMode";
 import { InspectType } from "game/inspection/IInspection";
 import { ISerializedTranslation } from "language/Translation";
-import { IBindings } from "newui/BindingManager";
+import { IBindings } from "newui/IBindingManager";
 import { ISourceFilter } from "utilities/Log";
 export interface IOptions {
     alternateContextMenu: boolean;

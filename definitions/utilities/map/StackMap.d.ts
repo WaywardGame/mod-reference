@@ -8,7 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Action } from "entity/action/Action";
-import { ActionArgument } from "entity/action/IAction";
-declare const _default: Action<[ActionArgument.ItemNearby, ActionArgument.ActionType], import("../../player/Player").default | import("../../npc/NPC").default, void>;
-export default _default;
+export default class StackMap<K, V> extends Map<K, V> {
+    private readonly maxSize;
+    constructor(entries?: ReadonlyArray<readonly [K, V]> | null, maxSize?: number);
+    set(key: K, value: V): this;
+}

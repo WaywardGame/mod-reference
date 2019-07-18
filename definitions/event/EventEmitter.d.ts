@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { PriorityMap } from "utilities/PriorityMap";
+import { PriorityMap } from "utilities/map/PriorityMap";
 import Stream from "utilities/stream/Stream";
 export declare const SYMBOL_SUBSCRIPTIONS: unique symbol;
 export interface IEventEmitterHost<E> {

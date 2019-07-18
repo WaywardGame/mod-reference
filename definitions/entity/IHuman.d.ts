@@ -35,7 +35,7 @@ export interface ICharacter {
     name: string;
     customization: ICustomizations;
 }
-export declare const enum Delay {
+export declare enum Delay {
     None = 0,
     LongPause = 25,
     Movement = 10,
@@ -147,4 +147,11 @@ export declare enum SkillType {
 export interface ICrafted {
     unlockTime: number;
     newUnlock: boolean;
+}
+export interface ICheckUnderOptions {
+    autoActions?: boolean;
+    enterCave?: boolean;
+    forcePickUp?: boolean;
+    skipDoodadEvents?: boolean;
+    burned?: boolean;
 }

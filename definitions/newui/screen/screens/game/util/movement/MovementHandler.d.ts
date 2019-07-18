@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IDamageInfo } from "entity/creature/ICreature";
-import { BindCatcherApi } from "newui/BindingManager";
+import { BindCatcherApi } from "newui/IBindingManager";
 import WalkToTileHandler from "newui/screen/screens/game/util/movement/WalkToTileHandler";
 import { IVector2 } from "utilities/math/IVector";
 export default class MovementHandler {

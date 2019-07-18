@@ -27,7 +27,6 @@ import HookManager from "mod/HookManager";
 import ModManager from "mod/ModManager";
 import { IMultiplayerNetworkingOptions } from "multiplayer/IMultiplayer";
 import Multiplayer from "multiplayer/Multiplayer";
-import NewUi from "newui/NewUi";
 import GameScreen from "newui/screen/screens/GameScreen";
 import FieldOfView from "renderer/fieldofview/FieldOfView";
 import { IByteGrid } from "renderer/fieldofview/IByteGrid";
@@ -96,7 +95,6 @@ declare global {
 	let modManager: ModManager;
 	let multiplayer: Multiplayer;
 	let multiplayerNetworkingOptions: IMultiplayerNetworkingOptions;
-	let newui: NewUi;
 	let npcManager: NPCManager;
 	let players: Player[];
 	let renderer: WorldRenderer;

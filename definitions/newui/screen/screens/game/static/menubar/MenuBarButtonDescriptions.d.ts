@@ -9,9 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { IModdable } from "mod/ModRegistry";
-import { Bindable } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import { ITooltip } from "newui/component/IComponent";
+import { Bindable } from "newui/IBindingManager";
 export declare enum MenuBarButtonType {
     Menu = 0,
     Save = 1,

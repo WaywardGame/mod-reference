@@ -22,6 +22,7 @@ export default class SaveData {
     gameCreationTime: number;
     gameThumbnail: string;
     gameDifficulty: GameMode;
+    gameBuildTime: number;
     saveManagerSaveTime: number;
     saveManagerTicks: number;
     saveManagerDifficulty: GameMode;

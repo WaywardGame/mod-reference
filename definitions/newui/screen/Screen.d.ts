@@ -9,9 +9,9 @@
  * https://waywardgame.github.io/
  */
 import { IHookHost } from "mod/IHookHost";
-import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Component from "newui/component/Component";
 import { IContextMenu } from "newui/component/IComponent";
+import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import { Background, ScreenId } from "newui/screen/IScreen";
 import Log from "utilities/Log";
 export default abstract class Screen extends Component implements IHookHost {

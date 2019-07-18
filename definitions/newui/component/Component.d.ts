@@ -11,8 +11,8 @@
 import { Events } from "event/EventBuses";
 import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
-import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
 import Stream from "utilities/stream/Stream";
 export default class Component extends EventEmitter.Host<Events<IComponent>> implements IComponent, IHookHost {

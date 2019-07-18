@@ -13,7 +13,7 @@ import { IContainer, IDismantleComponent, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import Message from "language/dictionary/Message";
-import { Bindable, BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import { SortType } from "SortType";
 import { ISortableEvent } from "ui/functional/IFunctionalSortable";
 import { DialogId, IContainerSortInfo, IContextMenuAction, IDialogInfo } from "ui/IUi";

@@ -36,7 +36,7 @@ import UiTranslation from "language/dictionary/UiTranslation";
 import { ModProvide, ModType } from "mod/IModInfo";
 import { CanLoadState, ModLoadFailureReason } from "mod/IModManager";
 import { DisconnectReason, JoinServerRetryReason, UnableToJoinReason } from "multiplayer/IMultiplayer";
-import { Bindable, BindableType } from "newui/BindingManager";
+import { Bindable, BindableType } from "newui/IBindingManager";
 import { Quadrant } from "newui/screen/screens/game/component/QuadrantComponent";
 import { MessageTimestamp } from "newui/screen/screens/game/IGameScreenApi";
 import { CharacterSort } from "newui/screen/screens/menu/menus/character/Character";

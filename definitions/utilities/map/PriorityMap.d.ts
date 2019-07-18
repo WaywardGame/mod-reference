@@ -12,7 +12,7 @@
  * Used for ordering a list of items by "priority". Higher priorities come before lower priorities.
  */
 export declare class PriorityMap<T> {
-    static streamAll<T extends Iterable<any>>(...lists: Array<PriorityMap<T>>): import("./stream/Stream").default<T>;
+    static streamAll<T extends Iterable<any>>(...lists: Array<PriorityMap<T>>): import("../stream/Stream").default<T>;
     private readonly priorities;
     private readonly map;
     getOrDefault(priority: number): T | undefined;
@@ -21,9 +21,9 @@ export declare class PriorityMap<T> {
     /**
      * Returns an iterator of the items in this list.
      */
-    stream(direction?: PriorityListStreamDirection): import("./stream/Stream").default<T>;
+    stream(direction?: PriorityListStreamDirection): import("../stream/Stream").default<T>;
 }
-export declare const enum PriorityListStreamDirection {
+export declare enum PriorityListStreamDirection {
     HighestToLowest = -1,
     LowestToHighest = 1
 }

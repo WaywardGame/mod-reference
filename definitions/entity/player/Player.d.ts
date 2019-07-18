@@ -13,7 +13,7 @@ import Creature from "entity/creature/Creature";
 import { CreatureType } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } from "entity/IEntity";
-import { EquipType, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
+import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
@@ -160,7 +160,7 @@ export default class Player extends Human {
     tick(isPassTurn?: boolean): void;
     kill(): void;
     getMovementProgress(): number;
-    checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
+    checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
     hasWalkPath(): boolean;
     walkAlongPath(path: IVector2[] | undefined): void;
     processInput(): void;

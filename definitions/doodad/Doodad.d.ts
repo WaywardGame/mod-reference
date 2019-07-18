@@ -109,8 +109,7 @@ export default class Doodad implements Doodad, Partial<IDoodadDoor>, IUnserializ
     addTreasureChestLoot(): void;
     blocksMove(): boolean;
     update(): void;
-    canCauseStatus(human: Human, equipType?: EquipType): boolean;
-    causeStatus(human: Human, equipType?: EquipType): void;
+    canCauseStatus(): boolean;
     setOffTrap(human?: Human, withMessage?: boolean): void;
     getGrowthParticles(): IRGB | undefined;
     increaseFertility(): boolean;

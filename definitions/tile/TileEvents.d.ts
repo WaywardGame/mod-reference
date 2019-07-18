@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { ITileEventDescription, TileEventType } from "tile/ITileEvent";
-declare const tileEventDescriptions: OptionalDescriptions<TileEventType, ITileEventDescription>;
+declare const tileEventDescriptions: Descriptions<TileEventType, ITileEventDescription>;
 export default tileEventDescriptions;

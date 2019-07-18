@@ -12,6 +12,7 @@ import { IPlayOptions } from "game/IGame";
 export interface ISteamworksEvents {
     overlayShown(): any;
     overlayHidden(): any;
+    fullscreenUpdate(fullscreen: boolean): any;
 }
 export interface ISteamId {
     accountId: number;

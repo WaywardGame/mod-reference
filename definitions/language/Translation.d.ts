@@ -15,7 +15,7 @@ import { TranslationGenerator } from "newui/component/IComponent";
 import { Random } from "utilities/Random";
 import Interpolator, { ISegment, IStringSection } from "utilities/string/Interpolator";
 export declare type TranslationProvider = (dictionary: Dictionary, entry: number | string, ignoreInvalid?: boolean) => string[] | undefined;
-export declare const enum TextContext {
+export declare enum TextContext {
     None = 0,
     Lowercase = 1,
     Uppercase = 2,
@@ -31,7 +31,7 @@ export interface ISerializedTranslation {
     failWith?: string | ISerializedTranslation | IStringSection[];
     reformatters?: ISerializedTranslation[];
 }
-export declare const enum ListEnder {
+export declare enum ListEnder {
     None = 0,
     And = 1,
     Or = 2

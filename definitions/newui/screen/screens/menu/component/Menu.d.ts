@@ -11,12 +11,12 @@
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
-import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import { BlockRow } from "newui/component/BlockRow";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IComponent } from "newui/component/IComponent";
 import Text, { Heading } from "newui/component/Text";
+import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
 import SelectionHandler from "newui/screen/screens/menu/component/SelectionHandler";
 export default class Menu extends Component implements IMenu, IHookHost {

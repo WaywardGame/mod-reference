@@ -559,7 +559,7 @@ declare enum Message {
     RefusedToBeTamed = 547,
     Reinforce = 548,
     Release = 549,
-    RemovedBlood = 550,
+    ClearedBlood = 550,
     RemoveFromQuickslot = 551,
     Repair = 552,
     RequiredForDisassembleLabel = 553,

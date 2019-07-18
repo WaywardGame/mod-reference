@@ -9,5 +9,5 @@
  * https://waywardgame.github.io/
  */
 import { Action } from "entity/action/Action";
-declare const _default: Action<[], import("../../npc/NPC").default | import("../../player/Player").default, void>;
+declare const _default: Action<[], import("../../player/Player").default | import("../../npc/NPC").default, void>;
 export default _default;

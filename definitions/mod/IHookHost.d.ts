@@ -32,7 +32,7 @@ import { BookType, IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
 import ItemRecipeRequirementChecker from "item/ItemRecipeRequirementChecker";
 import { Hook } from "mod/IHookManager";
-import { Bindable, BindCatcherApi } from "newui/BindingManager";
+import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import ISpriteBatch from "renderer/ISpriteBatch";
 import IWorld from "renderer/IWorld";
 import { RenderFlag, SpriteBatchLayer } from "renderer/IWorldRenderer";

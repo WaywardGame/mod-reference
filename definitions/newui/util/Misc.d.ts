@@ -17,7 +17,7 @@ export declare function startGame(gameOptions: IPlayOptions): void;
 export declare function menuSwitcher<M extends Menu = Menu>(menu: MenuId | M | (() => M), then?: (menu: M, ...args: any[]) => any): (...args: any[]) => void;
 export declare function switchMenu<M extends Menu = Menu>(menu: MenuId | M | (() => M), then?: (menu: M, ...args: any[]) => any, ...args: any[]): void;
 export declare function switchToJoinServer(serverToJoin: ServerInfo): void;
-export declare const enum ModLoadability {
+export declare enum ModLoadability {
     NotEnabled = "notenabled",
     Enabled = "enabled",
     Error = "error"

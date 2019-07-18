@@ -18,7 +18,8 @@ export declare enum InspectType {
     TileEvents = 4,
     Items = 5,
     Corpses = 6,
-    Tile = 7
+    TileEventsMinor = 7,
+    Tile = 8
 }
 export declare enum BasicInspectionPriority {
     Player = 0,
@@ -28,7 +29,8 @@ export declare enum BasicInspectionPriority {
     TileEvents = 4000,
     Items = 5000,
     Corpses = 6000,
-    Tile = 7000
+    TileEventsMinor = 7000,
+    Tile = 8000
 }
 export declare enum InspectionContext {
     Tooltip = 0,
@@ -54,7 +56,7 @@ export interface IInspection {
     /**
      * This inspection is a title. If we're in a tooltip context, this inspection will be a larger font size and use title case.
      */
-    title?: true;
+    title?: boolean;
     /**
      * This inspection is the name of a thing — if we're in a message context, this inspection will be passed to "You see {0}".
      */

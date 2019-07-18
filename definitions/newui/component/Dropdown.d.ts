@@ -11,10 +11,10 @@
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
-import { Bindable, BindCatcherApi } from "newui/BindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { IRefreshableValue } from "newui/component/Refreshable";
+import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 interface IDropdownEvents<O = string | number> extends Events<Component> {
     /**
      * @param optionId The new option which is selected.
@@ -48,10 +48,12 @@ export default class Dropdown<O = string | number> extends Component implements 
     selectDefault(): void;
     setRefreshMethod(refresh: () => IDropdownData<O>): this;
     refresh(): this;
-    private selectNext;
-    private selectPrevious;
-    private selectionMove;
+    protected selectNext(): void;
+    protected selectPrevious(): void;
+    protected selectionMove(direction: "next" | "prev"): void;
+    protected filter(filterBy?: string): void;
+    protected optionMatchesFilter(filter: string, filterWords: string[], option: O, button: Button): boolean;
+    protected optionMatchesFilterWord(word: string, option: O, text: string): boolean;
     private updateWrapperPosition;
-    private filter;
 }
 export {};

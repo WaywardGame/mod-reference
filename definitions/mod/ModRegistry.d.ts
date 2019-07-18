@@ -36,7 +36,7 @@ import Language from "language/Language";
 import LanguageExtension from "language/LanguageExtension";
 import InterModRegistry, { InterModRegistration } from "mod/InterModRegistry";
 import { IPacketClass } from "multiplayer/packets/Packets";
-import { Bindable, IBinding } from "newui/BindingManager";
+import { Bindable, IBinding } from "newui/IBindingManager";
 import Dialog from "newui/screen/screens/game/component/Dialog";
 import { DialogId, IDialogDescription } from "newui/screen/screens/game/Dialogs";
 import { IMenuBarButtonDescription, MenuBarButtonType } from "newui/screen/screens/game/static/menubar/MenuBarButtonDescriptions";
@@ -578,7 +578,7 @@ export interface IRegistryRegisteredPropertyIntermediateGetter<H, T> {
      */
     get<K extends keyof H>(key: K): H[K] extends T ? T : typeof INVALID;
 }
-export declare const enum RegistryRegisteredIntermediateType {
+export declare enum RegistryRegisteredIntermediateType {
     Property = 0,
     Callback = 1
 }

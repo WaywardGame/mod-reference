@@ -8,9 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Doodad from "doodad/Doodad";
 import { IDamageInfo } from "entity/creature/ICreature";
 import Entity from "entity/Entity";
-import { EquipType, ICrafted, ICustomizations, IHumanEvents, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
+import { ICausesDamage } from "entity/IEntity";
+import { EquipType, ICheckUnderOptions, ICrafted, ICustomizations, IHumanEvents, IRestData, RestCancelReason, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { IAttackHand, IMobCheck, PlayerState } from "entity/player/IPlayer";
 import MessageManager from "entity/player/MessageManager";
@@ -27,6 +29,7 @@ import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
 import { IOptions } from "save/data/ISaveDataGlobal";
+import { ITileEvent } from "tile/ITileEvent";
 import { IVector3 } from "utilities/math/IVector";
 export declare const REPUTATION_MAX = 64000;
 export default abstract class Human extends Entity {
@@ -107,7 +110,6 @@ export default abstract class Human extends Entity {
     setRaft(itemId: number | undefined): boolean;
     skillGain(skillType: SkillType, mod?: number, bypass?: boolean): void;
     checkForTargetInRange(range: number, includePlayers?: boolean): IMobCheck;
-    checkAndRemoveBlood(): boolean;
     getBurnDamage(fireType: FireType, skipParry?: boolean, equipType?: EquipType): number;
     /**
      * Burn the player
@@ -115,7 +117,8 @@ export default abstract class Human extends Entity {
     burn(fireType: FireType, skipMessage?: boolean, skipParry?: boolean, equipType?: EquipType, fromCombat?: boolean): number | undefined;
     setPosition(point: IVector3): void;
     setZ(z: number, updateFlowField?: boolean): void;
-    checkUnder(inFacingDirection?: boolean, autoActions?: boolean, enterCave?: boolean, forcePickUp?: boolean, skipDoodadEvents?: boolean): void;
+    checkUnder(inFacingDirection?: boolean, options?: ICheckUnderOptions): ICheckUnderOptions;
+    damageBySteppingOn(thing: Doodad | ITileEvent, options?: ICheckUnderOptions): ICheckUnderOptions;
     equip(item: Item, slot: EquipType): void;
     unequip(item: Item): void;
     unequipAll(): void;
@@ -126,6 +129,8 @@ export default abstract class Human extends Entity {
     checkForGatherFire(): Translation | undefined;
     calculateEquipmentStats(): void;
     discoverRecipe(recipeType: ItemType): void;
+    getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
+    causeStatus(thing: Doodad | ITileEvent, equipForProtection?: EquipType): void;
     /**
      * Improve one of the core player stats
      */

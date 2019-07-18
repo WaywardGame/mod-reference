@@ -22,7 +22,6 @@ export interface ICorpseDescription extends IModdable {
     carve?: boolean;
     skill?: SkillType;
     damage?: number;
-    blood?: boolean;
     lightSource?: boolean;
     lightColor?: IRGB;
     animated?: boolean;
