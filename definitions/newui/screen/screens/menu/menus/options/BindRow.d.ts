@@ -8,11 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { Bindable, IBinding } from "newui/IBindingManager";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
 import { TranslationGenerator } from "newui/component/IComponent";
 import { IRefreshable } from "newui/component/Refreshable";
+import { Bindable, IBinding } from "newui/IBindingManager";
 export declare class BindRow extends Button implements IRefreshable {
     private readonly currentBinds;
     private readonly bind;

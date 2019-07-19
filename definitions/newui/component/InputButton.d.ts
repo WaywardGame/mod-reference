@@ -22,6 +22,9 @@ export default class InputButton extends Button {
     private _editMode;
     editMode: boolean;
     constructor(inputInitializer: (input: Input) => any);
+    getInputText(): string;
+    setInputText(text: string): void;
+    focus(): void;
     private onInputChange;
     private onInputDone;
 }

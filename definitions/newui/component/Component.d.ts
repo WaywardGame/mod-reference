@@ -11,7 +11,7 @@
 import { Events } from "event/EventBuses";
 import EventEmitter from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
-import { AppendStrategy, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
+import { AppendStrategy, IBox, IComponent, IContextMenu, IHighlight, ITooltip, Namespace, SelectableLayer } from "newui/component/IComponent";
 import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulator } from "newui/util/ComponentManipulator";
 import Stream from "utilities/stream/Stream";
@@ -20,6 +20,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     static get<C extends Component = Component>(selector: string): C;
     static get<C extends Component = Component>(element: Element): C;
     static get<C extends Component = Component>(event: Event): C;
+    static get<C extends Component = Component>(element?: Element | null): C | undefined;
     static all(selector: string): Stream<Component>;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
@@ -38,6 +39,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     private tooltipInitializer;
     private highlight;
     private readonly debounces;
+    private box?;
     readonly selectable: SelectableLayer | false;
     /**
      * Alias of `.element.addEventListener`
@@ -80,9 +82,10 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     setContents(html: string, escape?: boolean): this;
     store(): this;
     findDescendants(selector: string): NodeListOf<Element>;
+    closest(selector: string): Element | null;
     matches(selector: string): boolean;
     getIndex(): number | null;
-    setTooltip(initializer?: (tooltip: ITooltip) => ITooltip): this;
+    setTooltip(initializer?: (tooltip: ITooltip) => ITooltip, showOnHover?: boolean): this;
     removeTooltip(): void;
     /**
      * Remove the context menu from this element
@@ -95,7 +98,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     setHighlight(highlight: IHighlight): this;
     removeHighlight(): void;
     setStyle(property: string, value: string | number): this;
-    getBox(): DOMRect | ClientRect;
+    getBox(regenIfZero?: boolean, forceRegen?: boolean): IBox;
     getOffset(): {
         top: number;
         left: number;
@@ -112,7 +115,7 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     schedule<A extends any[]>(ms: number, debounce: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(ms: number, debounce: number, cb?: (this: this, button: this) => any, ...args: any[]): this;
     repaint(): void;
-    forceShowTooltip(): void;
+    forceShowTooltip(onlyIfHovered?: boolean): void;
     private onMouseEnterForTooltip;
     private onMouseLeaveForTooltip;
     private onMouseEnterForHighlights;

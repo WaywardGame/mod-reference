@@ -27,6 +27,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     lightSource?: boolean;
     lightColor?: IRGB;
     damage?: number;
+    durability?: number;
     /**
      * Whether the tile event prevents things such as carving, digging, movement, etc.
      */
@@ -47,6 +48,8 @@ export interface ITileEvent extends IObject<TileEventType>, IVector3 {
     fromY: number;
     movementFinishTime?: number;
     step?: number;
+    minDur?: number;
+    maxDur?: number;
 }
 export declare enum TileEventType {
     None = 0,

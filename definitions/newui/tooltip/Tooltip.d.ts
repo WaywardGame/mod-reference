@@ -14,14 +14,14 @@ import Component from "newui/component/Component";
 import { ITooltip, TooltipLocation } from "newui/component/IComponent";
 import Text, { Paragraph } from "newui/component/Text";
 export default class Tooltip extends Component implements ITooltip {
-    private readonly source;
+    protected readonly source: Component;
     event: IEventEmitter<this, Events<ITooltip>>;
     readonly location: TooltipLocation;
     cache: boolean;
-    private box;
-    private sourceBox;
-    private lastBoxTime;
+    private forceShown;
     constructor(source: Component);
+    setForceShown(forceShown?: boolean): this;
+    wasForceShown(): boolean;
     setLocation(location: TooltipLocation): this;
     /**
      * Sets the max width of this tooltip.
@@ -36,8 +36,8 @@ export default class Tooltip extends Component implements ITooltip {
     updatePosition(position?: {
         x: number;
         y: number;
-    }, force?: boolean): this;
-    private onShow;
-    private onHide;
+    }, regenerateBox?: boolean): this;
+    protected onShow(): void;
+    protected onHide(): void;
     private onMouseMove;
 }

@@ -13,13 +13,18 @@ import { IEventEmitter } from "event/EventEmitter";
 import { IHookHost } from "mod/IHookHost";
 import Button from "newui/component/Button";
 import Component from "newui/component/Component";
+import InputButton from "newui/component/InputButton";
 import { IRefreshableValue } from "newui/component/Refreshable";
 import { Bindable, BindCatcherApi } from "newui/IBindingManager";
+import { SelectDirection } from "newui/INewUi";
 interface IDropdownEvents<O = string | number> extends Events<Component> {
     /**
      * @param optionId The new option which is selected.
      */
     selection(optionId: O, isFirstSelection: boolean): any;
+    open(): any;
+    close(): any;
+    filterChange(text: string): any;
 }
 export declare type IDropdownOption<OptionId = string | number> = [OptionId, (option: Button) => any];
 export interface IDropdownData<OptionId = string | number> {
@@ -28,32 +33,38 @@ export interface IDropdownData<OptionId = string | number> {
 }
 export default class Dropdown<O = string | number> extends Component implements IRefreshableValue<IDropdownData<O>>, IHookHost {
     event: IEventEmitter<this, IDropdownEvents<O>>;
+    readonly inputButton: InputButton;
     protected optionsWrapper: Component;
     private readonly optionsWrapperWrapper;
-    private readonly inputButton;
     private readonly options;
     private refreshMethod;
     private visibleOptions;
     private defaultOption?;
-    private open;
+    private isOpen;
     private isFirstSelection;
+    private lastFilter;
     private _selection;
     readonly selection: O;
     private hovered;
+    private shouldRetainLastFilter;
     constructor();
+    retainLastFilter(retainLastFilter?: boolean): this;
     onBindLoop(bindPressed: Bindable, api: BindCatcherApi): Bindable;
-    showDropdown(): void;
-    hideDropdown(): void;
+    open(): void;
+    close(): void;
     select(optionId: O | undefined): void;
     selectDefault(): void;
     setRefreshMethod(refresh: () => IDropdownData<O>): this;
     refresh(): this;
+    openedDirection(): SelectDirection.Up | SelectDirection.Down;
+    protected isMouseWithin(api: BindCatcherApi): boolean;
     protected selectNext(): void;
     protected selectPrevious(): void;
     protected selectionMove(direction: "next" | "prev"): void;
-    protected filter(filterBy?: string): void;
+    protected filter(filterBy?: string): this;
     protected optionMatchesFilter(filter: string, filterWords: string[], option: O, button: Button): boolean;
     protected optionMatchesFilterWord(word: string, option: O, text: string): boolean;
+    protected onRegenerateBox(): void;
     private updateWrapperPosition;
 }
 export {};

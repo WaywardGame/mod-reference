@@ -8,11 +8,12 @@
 * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
 * https://waywardgame.github.io/
 */
+import Component from "newui/component/Component";
 import { IComponent } from "newui/component/IComponent";
 import { ITooltipManager } from "newui/INewUi";
 import Tooltip from "newui/tooltip/Tooltip";
 export default class TooltipManager implements ITooltipManager {
-    private readonly tooltipWrapper;
+    readonly tooltipWrapper: Component;
     private host;
     private tooltip;
     constructor();

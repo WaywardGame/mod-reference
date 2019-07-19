@@ -65,11 +65,11 @@ interface IDialogEvents extends Events<Component> {
     /**
      * Emitted when the dialog is resized
      */
-    resize(): any;
+    resize(wDiff: number, hDiff: number): any;
     /**
      * Emitted when the dialog is moved
      */
-    move(): any;
+    move(xDiff: number, yDiff: number): any;
     /**
      * Emitted when the dialog panel changes
      * @param id The string or number representing the panel that was switched to

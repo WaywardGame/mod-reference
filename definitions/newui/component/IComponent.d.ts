@@ -21,18 +21,19 @@ import Vector2 from "utilities/math/Vector2";
 import Stream from "utilities/stream/Stream";
 import { IStringSection } from "utilities/string/Interpolator";
 interface IComponentEvents {
-    show(): void;
-    hide(): void;
-    append(to: HTMLElement | IComponent): void;
-    remove(): void;
-    removeForAppend(): void;
-    addChild(child: HTMLElement | IComponent): void;
-    removeChild(): void;
-    inputChange(event: Event): void;
+    show(): any;
+    hide(): any;
+    append(to: HTMLElement | IComponent): any;
+    remove(): any;
+    removeForAppend(): any;
+    addChild(child: HTMLElement | IComponent): any;
+    removeChild(): any;
+    inputChange(event: Event): any;
     /**
      * @returns `false` to cancel removal.
      */
     willRemove(): boolean | void;
+    regenerateBox(box: IBox): any;
 }
 export declare type AppendStrategy = "append" | "prepend" | {
     after: IComponent;
@@ -275,7 +276,7 @@ export interface ITooltip extends IComponent {
     addHeading(initializer: (text: IText) => any): this;
     addParagraph(initializer: (text: IText) => any): this;
     addList(...initializers: Array<((text: IText) => any) | undefined | false>): this;
-    updatePosition(position: IVector2, force?: true): this;
+    updatePosition(position: IVector2, forceRegenerateBox?: true): this;
 }
 export interface IText extends IComponent {
     setText(translation: TranslationGenerator): this;
@@ -294,5 +295,13 @@ export declare enum HighlightType {
     Stat = 0,
     MenuBarButton = 1,
     Selector = 2
+}
+export interface IBox {
+    bottom: number;
+    height: number;
+    left: number;
+    right: number;
+    top: number;
+    width: number;
 }
 export {};
