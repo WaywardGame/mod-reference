@@ -28,6 +28,7 @@ export interface ITileEventDescription extends IObjectDescription, IModdable, IC
     lightColor?: IRGB;
     damage?: number;
     durability?: number;
+    isWaste?: boolean;
     /**
      * Whether the tile event prevents things such as carving, digging, movement, etc.
      */

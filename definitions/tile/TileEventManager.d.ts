@@ -32,6 +32,7 @@ export default class TileEventManager {
     blocksTile(tile: ITile): boolean;
     createBlood(x: number, y: number, z: number): void;
     clearBlood(position: IVector3, executor: NPC | Player): boolean;
+    moveExcrement(position: IVector3): void;
     getName(tileEvent: ITileEvent): Translation;
     private _addToTile;
     private _removeFromTile;
