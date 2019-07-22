@@ -191,5 +191,5 @@ export interface IGameOptionsOld extends IGameOptions {
     };
 }
 export declare module IGameOptions {
-    function upgrade(difficultyOptions: IGameOptionsOld, version: IVersionInfo): boolean;
+    function upgrade(difficultyOptions: IGameOptionsOld, version: IVersionInfo): string[];
 }
