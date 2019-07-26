@@ -76,6 +76,7 @@ export interface IPlayerOptions {
     crafted?: {
         [index: number]: ICrafted;
     };
+    milestoneModifiers?: Set<Milestone>;
 }
 export interface IMapRequest {
     /**

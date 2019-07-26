@@ -107,6 +107,7 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private thumbnailResolve?;
     private simulateInterval?;
     private renderingEnabled;
+    private readonly modifierManager;
     private difficultyOptions;
     private playOptions;
     private ambientLightLevelCache;
@@ -167,8 +168,9 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     updateAmbientLightLevel(z: number): number;
     calculateAmbientLightLevel(z: number): number;
     updateReputation(reputation: number): void;
-    getDifficulty(): GameMode;
-    getDifficultyOptions(): IGameOptions;
+    getGameMode(): GameMode;
+    getGameOptionsBeforeModifiers(): IGameOptions;
+    getGameOptions(): IGameOptions;
     getReputation(): number;
     getMalignity(): number;
     getBenignity(): number;

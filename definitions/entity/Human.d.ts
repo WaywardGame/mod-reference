@@ -23,7 +23,7 @@ import { IEventEmitter } from "event/EventEmitter";
 import { FireType } from "game/IGame";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
-import { IContainer, ItemType } from "item/IItem";
+import { IContainer, ItemType, ItemTypeGroup } from "item/IItem";
 import { IProtectedItemOptions } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
@@ -92,7 +92,7 @@ export default abstract class Human extends Entity {
     isRestingCancelled(): boolean;
     startResting(restData: IRestData): void;
     cancelResting(reason: RestCancelReason): boolean;
-    createItemInInventory(itemType: ItemType, quality?: Quality): Item;
+    createItemInInventory(itemType: ItemType | ItemTypeGroup, quality?: Quality): Item;
     hasHandToUse(): boolean;
     getAndSwitchHandToUse(): EquipType | undefined;
     damageRandomEquipment(): void;
@@ -131,6 +131,7 @@ export default abstract class Human extends Entity {
     discoverRecipe(recipeType: ItemType): void;
     getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
     causeStatus(thing: Doodad | ITileEvent, equipForProtection?: EquipType): void;
+    protected getSkillGainMultiplier(skillType: SkillType): number;
     /**
      * Improve one of the core player stats
      */

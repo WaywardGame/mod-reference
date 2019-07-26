@@ -8,10 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-
-type RecursivePartial<T> = {
-	[0]: {
-		[P in keyof T]?: RecursivePartial<T[P]>;
-	};
-	[1]: T | undefined;
-}[T extends Map<any, any> ? 1 : T extends Set<any> ? 1 : T extends object ? 0 : 1];
+import { IGameOptionsPartial } from "game/GameMode";
+import MilestoneModifier, { MilestoneModifierGroup } from "game/modifiers/MilestoneModifier";
+export default class Collector extends MilestoneModifier {
+    options: IGameOptionsPartial;
+    getGroup(): MilestoneModifierGroup;
+}

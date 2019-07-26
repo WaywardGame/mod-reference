@@ -16,9 +16,7 @@ export declare class SkillLevel {
     readonly bonus: number;
     readonly core: number;
 }
-export interface ISkillSet {
-    [index: number]: SkillLevel | undefined;
-}
+export declare type ISkillSet = OptionalDescriptions<SkillType, SkillLevel>;
 export interface ISkillDescription extends IModdable {
     attribute?: Stat;
     reputation?: number;

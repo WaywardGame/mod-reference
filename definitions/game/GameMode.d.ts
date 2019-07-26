@@ -13,7 +13,7 @@ import { StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
-import { ItemType } from "item/IItem";
+import { ItemType, ItemTypeGroup } from "item/IItem";
 import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import { IVersionInfo } from "utilities/Version";
 export declare enum GameMode {
@@ -61,60 +61,69 @@ export interface IGameOptions {
          */
         dayPercent?: number;
     };
-    player: {
-        /**
-         * A map of options for each stat.
-         */
-        stats: Map<Stat, IGameOptionsStat>;
-        /**
-         * A map of options for each status effect.
-         */
-        statusEffects: Map<StatusType, IGameOptionsStatusEffect>;
-        /**
-         * Whether skills should be randomly generated.
-         *
-         * Note: Randomly generated skills can be overwritten by custom options in `skills`.
-         */
-        randomSkills: boolean;
-        /**
-         * Configuration that affects every skill which doesn't have its own configuration.
-         */
-        globalSkills: IGameOptionsSkill;
-        /**
-         * Custom options for each skill.
-         */
-        skills: Map<SkillType, IGameOptionsSkill>;
-        allRecipesUnlocked: boolean;
-        reputation: {
-            /**
-             * The initial malignity
-             */
-            initialMalignity: number;
-            /**
-             * The initial benignity
-             */
-            initialBenignity: number;
-            /**
-             * The rate at which malignity is gained
-             */
-            malignityMultiplier: number;
-            /**
-             * The rate at which benignity is gained
-             */
-            benignityMultiplier: number;
-        };
-        /**
-         * - Set to `false` to disable initial items
-         * - Set to `true` to randomly generate initial items
-         * - Set to an `ItemType[]` to spawn with a specific set of items
-         */
-        initialItems: boolean | ItemType[];
-    };
+    player: IGameOptionsPlayer;
     /**
      * Whether mods should be disabled
      */
     disableMods: boolean;
     milestoneModifiers: Set<Milestone>;
+}
+export interface IGameOptionsPlayer {
+    /**
+     * A map of options for each stat.
+     */
+    stats: Map<Stat, IGameOptionsStat>;
+    /**
+     * A map of options for each status effect.
+     */
+    statusEffects: Map<StatusType, IGameOptionsStatusEffect>;
+    skills: {
+        /**
+         * Amount of starting skills the player has (by default, 1 or 0, depending on mode)
+         *
+         * Note: Randomly generated skills can be overwritten by custom options in `skills`.
+         */
+        initialCount: number;
+        /**
+         * Configuration that affects every skill which doesn't have its own configuration.
+         */
+        global: IGameOptionsSkill;
+        /**
+         * Custom options for each skill.
+         */
+        customs: Map<SkillType, IGameOptionsSkill>;
+    };
+    allRecipesUnlocked: boolean;
+    reputation: {
+        /**
+         * The initial malignity
+         */
+        initialMalignity: number;
+        /**
+         * The initial benignity
+         */
+        initialBenignity: number;
+        /**
+         * The rate at which malignity is gained
+         */
+        malignityMultiplier: number;
+        /**
+         * The rate at which benignity is gained
+         */
+        benignityMultiplier: number;
+    };
+    inventory: {
+        /**
+         * - Set to `false` to disable initial items
+         * - Set to `true` to randomly generate initial items
+         * - Set to an `ItemType[]` to spawn with a specific set of items
+         */
+        randomItems: boolean;
+        /**
+         * An additional set of items the player should spawn with.
+         */
+        additionalItems: Array<ItemType | ItemTypeGroup>;
+    };
 }
 /**
  * "Partial" difficulty options; used to apply options over top base options. Milestone modifiers can never exist on partial difficulty options.
@@ -189,7 +198,13 @@ export interface IGameOptionsOld extends IGameOptions {
     creatures: IGameOptions["creatures"] & {
         globalAberrantSpawns?: boolean;
     };
+    player: IGameOptions["player"] & {
+        initialItems?: boolean | ItemType[];
+        randomSkills?: boolean;
+        globalSkills: IGameOptionsSkill;
+        skills: Map<SkillType, IGameOptionsSkill>;
+    };
 }
 export declare module IGameOptions {
-    function upgrade(difficultyOptions: IGameOptionsOld, version: IVersionInfo): string[];
+    function upgrade(difficultyOptions: IGameOptions, version: IVersionInfo): string[];
 }

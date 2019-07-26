@@ -20,6 +20,7 @@ import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
 import { IEventEmitter } from "event/EventEmitter";
+import { IGameOptionsPlayer } from "game/GameMode";
 import { Milestone } from "game/milestones/IMilestone";
 import { IContainer, ItemType } from "item/IItem";
 import Item from "item/Item";
@@ -63,6 +64,7 @@ export default class Player extends Human {
     travelData: IPlayerTravelData | undefined;
     turns: number;
     walkSoundCounter: number;
+    milestoneModifiers: Set<Milestone>;
     walkPath: IVector2[] | undefined;
     exploredMap: IExploreMap[] | undefined;
     isMovingClientside: boolean;
@@ -75,9 +77,11 @@ export default class Player extends Human {
     nextMoveDirection: Direction | undefined;
     displayCreature?: CreatureType;
     private readonly _movementIntent;
+    private readonly modifierManager;
     constructor(identifier?: string);
     readonly clientStore: IClientStore;
     setOptions(options: IOptions): void;
+    getGameOptions(): IGameOptionsPlayer;
     getDisplayCreature(): CreatureType | undefined;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;
     setStatChangeTimer(stat: Stat | IStat, timer: number, amt?: number): void;
@@ -180,9 +184,10 @@ export default class Player extends Human {
      */
     updateStrength(): void;
     /**
-     * Do not call.
+     * @deprecated Do not call this with players.
      */
     moveTo(): boolean;
+    protected getSkillGainMultiplier(skillType: SkillType): number;
     protected calculateStats(): void;
     protected swimCheck(): void;
     /**

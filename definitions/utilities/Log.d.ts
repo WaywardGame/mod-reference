@@ -49,7 +49,8 @@ export declare enum LogSource {
     Utilities = 37,
     WebAssembly = 38,
     WebRTCConnection = 39,
-    WebSocketConnection = 40
+    WebSocketConnection = 40,
+    Reflow = 41
 }
 export interface ILog {
     debug(...args: any[]): void;

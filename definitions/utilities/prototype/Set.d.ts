@@ -23,6 +23,14 @@ declare global {
          * Deletes all given values from the set. Returns whether any values were deleted.
          */
         deleteAll(...values: T[]): boolean;
+        /**
+         * Adds all given values to the set.
+         */
+        addFrom(...values: Array<Iterable<T>>): this;
+        /**
+         * Deletes all given values from the set. Returns whether any values were deleted.
+         */
+        deleteFrom(...values: Array<Iterable<T>>): boolean;
         toggle(has: boolean, ...values: T[]): this;
     }
 }

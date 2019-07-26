@@ -11,6 +11,7 @@
 import { ICharacter } from "entity/IHuman";
 import Player from "entity/player/Player";
 import EventEmitter from "event/EventEmitter";
+import { Milestone } from "game/milestones/IMilestone";
 import { IHookHost } from "mod/IHookHost";
 import { DisconnectReason, IMultiplayerEvents, IMultiplayerOptions, JoinServerRetryReason, MultiplayerSyncCheck, PacketTarget, ServerInfo, UnableToJoinReason } from "multiplayer/IMultiplayer";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
@@ -30,6 +31,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     private _dedicatedMatchmakingRetryTimeoutId;
     private _options;
     private _character;
+    private _milestoneModifiers?;
     private _incomingPacketQueue;
     private _incomingPacketProcessingPaused;
     private _packetTickIntervalId;
@@ -66,7 +68,7 @@ export default class Multiplayer extends EventEmitter.Host<IMultiplayerEvents> i
     getBannedPlayers(): string[];
     setBanned(identifier: string, ban: boolean): boolean;
     createServer(serverInfo: ServerInfo, options?: IMultiplayerOptions): void;
-    joinServer(serverInfo: ServerInfo, character?: ICharacter): void;
+    joinServer(serverInfo: ServerInfo, character?: ICharacter, milestoneModifiers?: Set<Milestone>): void;
     disconnect(reason?: DisconnectReason, args?: any[], unloading?: boolean): Promise<void>;
     displayJoinServerRetryDialog(matchmakingInfo: IMatchmakingInfo, retryReason: JoinServerRetryReason): Promise<void>;
     disconnectAndResetGameState(reason: DisconnectReason.UnableToJoinGame, unableToJoinReason: UnableToJoinReason): Promise<void>;

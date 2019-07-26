@@ -829,5 +829,7 @@ export declare enum ItemTypeGroup {
     LightDevice = 873,
     Enchantment = 874,
     Other = 875,
-    Last = 876
+    CookedFood = 876,
+    All = 877,
+    Last = 878
 }
