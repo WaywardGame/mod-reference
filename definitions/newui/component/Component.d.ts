@@ -17,15 +17,19 @@ import { AttributeManipulator, ClassManipulator, DataManipulator, StyleManipulat
 import Stream from "utilities/stream/Stream";
 export default class Component extends EventEmitter.Host<Events<IComponent>> implements IComponent, IHookHost {
     private static readonly map;
-    static get<C extends Component = Component>(selector: string): C;
-    static get<C extends Component = Component>(element: Element): C;
-    static get<C extends Component = Component>(event: Event): C;
-    static get<C extends Component = Component>(element?: Element | null): C | undefined;
+    static get<C extends Component = Component>(selector: string, create?: false): C;
+    static get<C extends Component = Component>(element: Element, create?: false): C;
+    static get<C extends Component = Component>(event: Event, create?: false): C;
+    static get<C extends Component = Component>(element?: Element | null, create?: false): C | undefined;
     static all(selector: string): Stream<Component>;
     static findDescendants(inElement: IComponent | HTMLElement, selector: string, includeSelf?: boolean): HTMLElement[];
     static getSelectableLayer(element: IComponent | HTMLElement): number | false;
     static append(elementToMove: string | IComponent | HTMLElement, placeToAppendTo: string | IComponent | HTMLElement, strategy?: AppendStrategy): void;
     static remove(elementToRemove: string | IComponent | HTMLElement): void;
+    private static appendRegenerateBoxes;
+    private static regenerateAncestorBoxes;
+    private static regenerateSiblingBoxes;
+    private static regenerateDescendantBoxes;
     readonly element: HTMLElement;
     readonly classes: ClassManipulator<this>;
     readonly attributes: AttributeManipulator<this>;
@@ -40,6 +44,8 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     private highlight;
     private readonly debounces;
     private box?;
+    private boxCacheLastScroll?;
+    private boxCacheScrollable?;
     readonly selectable: SelectableLayer | false;
     /**
      * Alias of `.element.addEventListener`
@@ -107,7 +113,6 @@ export default class Component extends EventEmitter.Host<Events<IComponent>> imp
     getChildren<C extends Component = Component>(): Stream<C>;
     scrollTo(child: Component, ms?: number): void;
     scrollTo(child: Component, offsetTop: number, ms?: number): void;
-    getStyle(styleName: string): string;
     schedule<A extends any[]>(cb: (this: this, button: this, ...args: A) => any, ...args: A): this;
     schedule(cb?: (this: this, button: this) => any, ...args: any[]): this;
     schedule<A extends any[]>(ms: number, cb: (this: this, button: this, ...args: A) => any, ...args: A): this;

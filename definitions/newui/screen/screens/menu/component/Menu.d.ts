@@ -23,7 +23,7 @@ export default class Menu extends Component implements IMenu, IHookHost {
     event: IEventEmitter<this, Events<IMenu>>;
     menuId: MenuId | string;
     canCancel: boolean | undefined;
-    isSubmenu: boolean;
+    readonly isSubmenu: boolean;
     readonly selection: SelectionHandler;
     readonly buttonBack: BackButton;
     confirmButtons: ConfirmButtonHandler;
@@ -35,9 +35,10 @@ export default class Menu extends Component implements IMenu, IHookHost {
     tabContainer: Component;
     readonly tabs: Map<string | number, Tab<string | number | undefined>>;
     constructor(menuId: MenuId | string);
-    setTitle(initializer: (title: Heading) => Heading): void;
-    setDescription(initializer: (title: Text) => Text): void;
-    setOnBeforeShow(beforeShow: () => void | Promise<void>): void;
+    setTitle(initializer: (title: Heading) => Heading): this;
+    setDescription(initializer: (title: Text) => Text): this;
+    setIsSubmenu(submenu?: boolean): this;
+    setOnBeforeShow(beforeShow: () => void | Promise<void>): this;
     show(): this;
     scrollToTop(): void;
     scrollToTabSection(tabId: string | number): this;

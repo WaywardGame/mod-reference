@@ -188,12 +188,6 @@ export interface IComponent extends EventEmitter.Host<IComponentEvents> {
      */
     scrollTo(child: IComponent, ms?: number): void;
     /**
-     * Returns the computed style property value of the given style name.
-     *
-     * An alias of `getComputedStyle(element).getPropertyValue(styleName)`
-     */
-    getStyle(styleName: string): string;
-    /**
      * Runs the given callback with the given arguments. `this` and the first argument are this element.
      * @param cb The callback to run.
      * @param args The arguments with which to call the callback.

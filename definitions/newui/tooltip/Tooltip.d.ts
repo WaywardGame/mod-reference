@@ -19,15 +19,16 @@ export default class Tooltip extends Component implements ITooltip {
     readonly location: TooltipLocation;
     cache: boolean;
     private forceShown;
+    private maxWidth;
     constructor(source: Component);
     setForceShown(forceShown?: boolean): this;
     wasForceShown(): boolean;
     setLocation(location: TooltipLocation): this;
     /**
      * Sets the max width of this tooltip.
-     * @param maxWidth If a number, the max-width of the tooltip is this value * ui scale. If a string, the value is used directly.
+     * @param maxWidth The max-width of the tooltip is this value * ui scale.
      */
-    setMaxWidth(maxWidth?: number | string): this;
+    setMaxWidth(maxWidth?: number): this;
     setNoCache(): this;
     addText(initializer: (text: Text) => any): this;
     addHeading(initializer: (text: Text) => any): this;

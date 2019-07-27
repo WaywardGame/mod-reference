@@ -12,32 +12,6 @@ import InterruptChoice from "language/dictionary/InterruptChoice";
 import { HighlightSelector, IComponent, IHighlight, ITooltip, TranslationGenerator } from "newui/component/IComponent";
 import { IInput } from "newui/component/IInput";
 import { IMenu, MenuId } from "newui/screen/screens/menu/component/IMenu";
-export interface IScaleManager {
-    /**
-     * Returns the minimum scale we allow (0.5, multiplier)
-     */
-    getMinimum(): number;
-    /**
-     * Returns the maximum scale the screen size will allow (multiplier)
-     */
-    getMaximum(): number;
-    /**
-     * Returns the current UI scale (after being clamped by min & max).
-     */
-    getCurrent(): number;
-    /**
-     * Returns the currently "requested" UI scale.
-     */
-    getRequested(): number;
-    /**
-     * Requests a new UI scale, a multiplier of the default size.
-     */
-    request(scale: number): void;
-    /**
-     * Updates the UI scale based on the current viewport.
-     */
-    update(): void;
-}
 export interface ITooltipManager {
     show(host: IComponent, force?: boolean): ITooltip | undefined;
     hide(host?: IComponent): void;

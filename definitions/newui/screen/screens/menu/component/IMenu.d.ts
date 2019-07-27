@@ -38,12 +38,5 @@ export interface IMenu extends IComponent {
     event: IEventEmitter<this, IMenuEvents>;
     canCancel: boolean | undefined;
     isSubmenu: boolean;
-    selection: ISelectionHandler;
-}
-export interface ISelectionHandler {
-    selectNext(sound?: boolean): void;
-    selectPrevious(sound?: boolean): void;
-    select(element: HTMLElement): void;
-    getSelection(): HTMLElement;
 }
 export {};

@@ -38,5 +38,6 @@ export default class InterruptMenu extends Menu {
     protected onCancel(triggerChoose?: boolean): void;
     protected onEnter(): void;
     protected onHide(): any;
+    protected onShow(): any;
 }
 export {};
