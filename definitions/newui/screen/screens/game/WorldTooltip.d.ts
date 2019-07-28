@@ -12,11 +12,12 @@ import Component from "newui/component/Component";
 import { ITooltip } from "newui/component/IComponent";
 export default class WorldTooltipHandler {
     private lastMousePosition?;
-    private lastPosition?;
+    private position?;
     private tooltip?;
     constructor(gameScreen: Component);
     initializeTooltip(tooltip: ITooltip): ITooltip;
     update(force?: boolean): void;
     private onTooltipMove;
     private refreshTooltip;
+    private initializeTooltipContent;
 }

@@ -187,3 +187,4 @@ export declare const INTERVAL = 16.6666;
 export declare const TURN_DELAY_MAX: number;
 export declare const TURN_DELAY_DEFAULT: number;
 export declare const LIGHT_COLOR_DEFAULT: import("../utilities/Color").IRGB;
+export declare const TOOLTIP_DELAY_DEFAULT = 170;

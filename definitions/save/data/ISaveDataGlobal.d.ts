@@ -52,6 +52,7 @@ export interface IOptions {
     tooltips: {
         [key in InspectType]: boolean | undefined;
     };
+    tooltipDelay: number;
     uiScale: number;
     useAdjacentContainers: boolean;
     useNewCraftingSystem: boolean;
