@@ -16,7 +16,7 @@ import { InspectionResult } from "game/inspection/IInspection";
 import Inspection from "game/inspection/Inspect";
 import { Quality } from "game/IObject";
 import { ContainerReference, IContainable, IContainer, IItemDescription, IItemWeightComponent, ItemType, ItemTypeGroup } from "item/IItem";
-import { CraftStatus, IProtectedItemOptions, RequirementInfo, WeightType } from "item/IItemManager";
+import { CraftStatus, RequirementInfo, WeightType } from "item/IItemManager";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -88,12 +88,12 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getNPCWithItemInInventory(containable: IContainable): NPC | undefined;
     countItemsInContainer(containers: IContainer | IContainer[], itemTypeSearch: ItemType, ignoreItem?: Item): number;
     countItemsInContainerByGroup(containers: IContainer | IContainer[], itemTypeGroupSearch: ItemTypeGroup, ignoreItem?: Item): number;
-    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, excludeProtectedItems?: IProtectedItemOptions | undefined): Item | undefined;
+    getItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item, human?: Human): Item | undefined;
     getItemForHuman(human: Human, search: ItemType | ItemTypeGroup): Item | undefined;
-    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, excludeProtectedItems?: IProtectedItemOptions | undefined): Item | undefined;
-    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): Item[];
-    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): Item[];
-    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, excludeProtectedItems?: IProtectedItemOptions | undefined): Item[];
+    getItemInContainerByGroup(container: IContainer, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number, human?: Human): Item | undefined;
+    getItemsInContainer(container: IContainer, includeSubContainers?: boolean, human?: Human): Item[];
+    getItemsInContainerByType(container: IContainer, itemType: ItemType, includeSubContainers?: boolean, human?: Human): Item[];
+    getItemsInContainerByGroup(container: IContainer, itemGroup: ItemTypeGroup, includeSubContainers?: boolean, human?: Human): Item[];
     getItemInInventoryByGroup(human: Human, itemTypeGroupSearch: ItemTypeGroup, ignoreItemId?: number): Item | undefined;
     isItemInContainer(container: IContainer, itemTypeSearch: ItemType, ignoreItem?: Item): boolean;
     isContainableInContainer(containable: IContainable, container: IContainer): boolean;
@@ -101,7 +101,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     isContainableInAdjacentContainer(player: Player, containable: IContainable, includeNpcs?: boolean, ignoreOptions?: boolean): boolean;
     isInInventory(containable: IContainable): boolean;
     isTileContainer(container: IContainer | undefined): boolean;
-    getOrderedContainerItems(container: IContainer, protectedItemOptions?: IProtectedItemOptions | undefined): Item[];
+    getOrderedContainerItems(container: IContainer, human?: Human, allowProtectedItems?: boolean): Item[];
     reduceDismantleWeight(createdItems: Item[], itemWeight: number, mod?: number): void;
     getItemTranslations(items: Item[], article?: boolean): Stream<Translation>;
     getItemListTranslation(items: Item[], article?: boolean): Translation;
@@ -122,6 +122,7 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     getItemsWeight(items: Item[]): number;
     inspect({ context }: Inspection, ...items: Item[]): InspectionResult;
     copyProperties(item: Item, item2: Item): void;
+    getPlayerFromInventoryContainer(container: IContainer): Player | undefined;
     private getDefaultWeightRange;
     private updateItemOrderInternal;
     private loadReference;
@@ -130,7 +131,6 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
     private getCraftQualityBonus;
     private computeCraftQualityBonus;
     private isCraftSuccessful;
-    private getPlayerFromInventoryContainer;
     private getAbsentPlayerFromInventoryContainer;
 }
 export {};

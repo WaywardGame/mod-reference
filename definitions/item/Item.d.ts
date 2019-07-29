@@ -66,7 +66,8 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     getName(article?: boolean, count?: number, showCount?: boolean, showQuality?: boolean): Translation;
     description(): IItemDescription | undefined;
     isValid(): boolean;
-    shouldBeProtected(): boolean;
+    isProtected(human: Human): boolean;
+    areItemsProtectedWithin(human: Human): boolean;
     getDecayMax(): number;
     getTotalWeight(): number;
     getDisassemblyWeight(): number;
