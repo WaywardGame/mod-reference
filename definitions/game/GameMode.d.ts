@@ -124,6 +124,17 @@ export interface IGameOptionsPlayer {
          */
         additionalItems: Array<ItemType | ItemTypeGroup>;
     };
+    crafting: {
+        /**
+         * A multiplier for the durability of each item.
+         */
+        durabilityMultiplier: number;
+        /**
+         * A multiplier for the difficulty of each level of craft.
+         * TODO: Set to Map<RecipeLevel, number> when we can support maps in milestone modifier overrides?
+         */
+        difficultyMultiplier: number;
+    };
 }
 /**
  * "Partial" difficulty options; used to apply options over top base options. Milestone modifiers can never exist on partial difficulty options.
