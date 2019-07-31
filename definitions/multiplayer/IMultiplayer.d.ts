@@ -10,7 +10,7 @@
  */
 import { PlayerState } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
-import { GameMode, IGameOptions } from "game/GameMode";
+import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { TurnMode } from "game/IGame";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";

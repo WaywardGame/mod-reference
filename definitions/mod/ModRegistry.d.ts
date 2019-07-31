@@ -23,7 +23,7 @@ import { Quest } from "entity/player/quest/quest/Quest";
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 import { ISkillDescription } from "entity/player/Skills";
-import { ChallengeModifier, IDailyChallengeModifier } from "game/Challenge";
+import { ChallengeModifier, IChallengeModifier } from "game/Challenge";
 import { InspectType } from "game/inspection/IInspection";
 import { IInspectionHandler } from "game/inspection/Inspections";
 import { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "item/IItem";
@@ -56,7 +56,7 @@ export declare enum ModRegistrationType {
     Bindable = 1,
     Command = 2,
     Creature = 3,
-    DailyChallengeModifier = 4,
+    ChallengeModifier = 4,
     Dialog = 5,
     Dictionary = 6,
     Doodad = 7,
@@ -101,10 +101,10 @@ export interface IInspectionTypeRegistration extends IBaseModRegistration {
     name: string;
     description: IInspectionHandler | IInspectionHandler["handle"];
 }
-export interface IDailyChallengeModifierRegistration extends IBaseModRegistration {
-    type: ModRegistrationType.DailyChallengeModifier;
+export interface IChallengeModifierRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.ChallengeModifier;
     name: string;
-    description: IDailyChallengeModifier | IDailyChallengeModifier["apply"];
+    description: IChallengeModifier | IChallengeModifier["options"];
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -454,7 +454,7 @@ declare module Register {
      * Registers a daily challenge modifier, a "modifier" that will change based on the seed in daily challenge mode.
      * @param description The definition of the daily challenge modifier.
      */
-    function dailyChallengeModifier(name: string, description: IDailyChallengeModifier | IDailyChallengeModifier["apply"]): <K extends string | number | symbol, T extends { [k in K]: ChallengeModifier; }>(target: T, key: K) => void;
+    function dailyChallengeModifier(name: string, description: IChallengeModifier | IChallengeModifier["options"]): <K extends string | number | symbol, T extends { [k in K]: ChallengeModifier; }>(target: T, key: K) => void;
     /**
      * Registers a menu bar button.
      * @param description The definition of the menu bar button.

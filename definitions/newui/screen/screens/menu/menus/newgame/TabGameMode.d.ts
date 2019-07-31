@@ -10,7 +10,7 @@
  */
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
-import { GameMode } from "game/GameMode";
+import { GameMode } from "game/options/IGameOptions";
 import ChoiceList, { Choice } from "newui/component/ChoiceList";
 import { Tab } from "newui/screen/screens/menu/component/Menu";
 import CustomGameOptionsMenu from "newui/screen/screens/menu/menus/newgame/CustomGameOptionsMenu";

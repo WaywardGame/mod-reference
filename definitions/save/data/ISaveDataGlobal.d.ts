@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { DropLocation } from "entity/action/actions/Drop";
-import { GameMode, IGameOptions } from "game/GameMode";
+import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { InspectType } from "game/inspection/IInspection";
 import { ISerializedTranslation } from "language/Translation";
 import { IBindings } from "newui/IBindingManager";

@@ -8,8 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { GameMode, IGameOptions } from "game/GameMode";
 import { Milestone } from "game/milestones/IMilestone";
+import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import Input from "newui/component/Input";
 import Menu from "newui/screen/screens/menu/component/Menu";
 import TabGameMode from "newui/screen/screens/menu/menus/newgame/TabGameMode";

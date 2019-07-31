@@ -10,7 +10,7 @@
  */
 import { Events } from "event/EventBuses";
 import { IEventEmitter } from "event/EventEmitter";
-import { GameMode } from "game/GameMode";
+import { GameMode } from "game/options/IGameOptions";
 import InputButton from "newui/component/InputButton";
 export interface SaveSlotData {
     slot: number;

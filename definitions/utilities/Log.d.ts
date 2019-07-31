@@ -112,7 +112,7 @@ export interface ISourceFilter {
     /**
      * Any source present in this array will not appear in the console.
      */
-    disabledSources: string[];
+    disabledSources: Array<keyof typeof LogSource>;
 }
 declare module Log {
     /**

@@ -20,9 +20,9 @@ import MessageManager from "entity/player/MessageManager";
 import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
 import { IEventEmitter } from "event/EventEmitter";
-import { IGameOptionsPlayer } from "game/GameMode";
+import { IGameOptionsPlayer } from "game/options/IGameOptions";
 import { Milestone } from "game/milestones/IMilestone";
-import { IContainer, ItemType } from "item/IItem";
+import { IContainer, ItemType, RecipeLevel } from "item/IItem";
 import Item from "item/Item";
 import Message from "language/dictionary/Message";
 import Translation from "language/Translation";
@@ -126,6 +126,7 @@ export default class Player extends Human {
      * if the result of the hook is `undefined`.
      */
     getMaxHealth(): number;
+    getCraftingDifficulty(level: RecipeLevel): number;
     /**
      * Gets the strength of the player.
      *

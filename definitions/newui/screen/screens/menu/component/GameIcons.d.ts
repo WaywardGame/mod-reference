@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { GameMode } from "game/GameMode";
+import { GameMode } from "game/options/IGameOptions";
 import Component from "newui/component/Component";
 import { IRefreshable } from "newui/component/Refreshable";
 import { ISteamFriend } from "steamworks/ISteamworks";

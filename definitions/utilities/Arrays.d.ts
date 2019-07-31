@@ -8,7 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export declare function tuple<T extends any[]>(...items: T): T;
+export declare function Tuple<T extends any[]>(...items: T): T;
+export declare module Tuple {
+    function is<T extends any[]>(value: unknown): value is T;
+}
 declare module Arrays {
     const EMPTY: readonly undefined[];
     /**

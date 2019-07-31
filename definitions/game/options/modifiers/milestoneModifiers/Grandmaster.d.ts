@@ -8,9 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IGameOptionsPartial } from "game/GameMode";
-import MilestoneModifier, { MilestoneModifierGroup } from "game/modifiers/MilestoneModifier";
-export default class Benevolent extends MilestoneModifier {
+import { IGameOptionsPartial } from "game/options/IGameOptions";
+import MilestoneModifier, { MilestoneModifierGroup } from "game/options/modifiers/MilestoneModifier";
+export default class Grandmaster extends MilestoneModifier {
     options: IGameOptionsPartial;
     getGroup(): MilestoneModifierGroup;
 }

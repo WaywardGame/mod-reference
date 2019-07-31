@@ -17,7 +17,7 @@ import Player from "entity/player/Player";
 import StatFactory from "entity/StatFactory";
 import EventEmitter from "event/EventEmitter";
 import { FireType, TileUpdateType } from "game/IGame";
-import { ItemType } from "item/IItem";
+import { ItemType, RecipeLevel } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { StatType } from "renderer/INotifier";
 import { ITile } from "tile/ITerrain";
@@ -175,6 +175,7 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
      * Generator for status effects on the entity.
      */
     statuses(): Stream<StatusType>;
+    getCraftingDifficulty(level: RecipeLevel): number;
     getTileUpdateType(): TileUpdateType;
     getTile(): ITile;
     getPoint(): IVector3;

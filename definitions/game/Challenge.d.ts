@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { StatusType } from "entity/IEntity";
-import { IGameOptions } from "game/GameMode";
+import { IGameOptionsPartial } from "game/options/IGameOptions";
 export declare enum ChallengeModifier {
     NoHealthRegeneration = 0,
     NoStaminaRegeneration = 1,
@@ -26,8 +26,8 @@ export declare enum ChallengeModifier {
     MalignityRate = 12
 }
 export declare const EXCLUSIVE_MODIFIERS: ChallengeModifier[][];
-export declare function applyChallengeModifiers(difficultyOptions: IGameOptions, seed?: number): IGameOptions;
-export interface IDailyChallengeModifier {
+export declare function generateChallengeModifiers(seed?: number): IGameOptionsPartial[];
+export interface IChallengeModifier {
     /**
      * How often this modifier should be chosen compared to the others
      */
@@ -37,13 +37,15 @@ export interface IDailyChallengeModifier {
      */
     challenge?: number;
     /**
-     * Applies this modifier to the difficulty options.
+     * Game options to apply when this modifier is active
      */
-    apply(difficultyOptions: IGameOptions): number | void;
+    options: IGameOptionsPartial | ((modifier: {
+        challenge: number;
+    }) => IGameOptionsPartial);
 }
 export declare const PERMANENT_STATUS_EFFECT_MULTIPLIER_RATE = 4;
 export declare const PERMANENT_STATUS_EFFECT_MULTIPLIER = 0.5;
-declare const dailyChallengeModifiers: Descriptions<ChallengeModifier, IDailyChallengeModifier>;
+declare const dailyChallengeModifiers: Descriptions<ChallengeModifier, IChallengeModifier>;
 export default dailyChallengeModifiers;
 export declare function isPermanentEffect(effect: StatusType): boolean;
-export declare function isEternalNight(options?: IGameOptions): boolean;
+export declare function isEternalNight(options?: import("./options/IGameOptions").IGameOptions): boolean;

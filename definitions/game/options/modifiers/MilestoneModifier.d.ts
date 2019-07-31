@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IGameOptionsPartial } from "game/GameMode";
+import { IGameOptionsPartial } from "game/options/IGameOptions";
 export declare enum MilestoneModifierGroup {
     Creatures = 0,
     Skills = 1,

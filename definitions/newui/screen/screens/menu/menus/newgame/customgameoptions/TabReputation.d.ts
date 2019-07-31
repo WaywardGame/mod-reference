@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IGameOptions } from "game/GameMode";
+import { IGameOptions } from "game/options/IGameOptions";
 import CustomGameOptionsTab from "newui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
 export default class TabReputation extends CustomGameOptionsTab {
     constructor(options: () => IGameOptions);

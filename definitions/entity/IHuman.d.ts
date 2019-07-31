@@ -10,6 +10,7 @@
  */
 import Entity from "entity/Entity";
 import { Events } from "event/EventBuses";
+import { RecipeLevel } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
 export interface IHumanEvents extends Events<Entity> {
@@ -155,3 +156,4 @@ export interface ICheckUnderOptions {
     skipDoodadEvents?: boolean;
     burned?: boolean;
 }
+export declare const craftingChances: Descriptions<RecipeLevel, number>;
