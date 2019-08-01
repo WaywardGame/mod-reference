@@ -8,12 +8,12 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IHasImagePath } from "game/IObject";
+import { IModdable } from "mod/ModRegistry";
 import { PathType } from "resource/IResourceLoader";
 export interface IResourceData {
     enumObject: any;
-    descriptions?: {
-        [key: number]: any;
-    };
+    descriptions?: OptionalDescriptions<number, IModdable & IHasImagePath> | ((key: number) => (IModdable & IHasImagePath) | undefined);
     referencedType?: PathType;
 }
 declare module ResourcePath {

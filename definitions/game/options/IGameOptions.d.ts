@@ -42,6 +42,14 @@ export interface IGameOptions {
          * Custom options for each creature.
          */
         creature: Map<CreatureType, IGameOptionsCreature>;
+        /**
+         * Multiplier for damage of creatures
+         */
+        damageMultiplier: number;
+        /**
+         * Multiplier for health of creatures
+         */
+        healthMultiplier: number;
     };
     time: {
         /**
@@ -201,4 +209,12 @@ export interface IGameOptionsCreature {
      * @param Null Either aberrants or non-aberrants can spawn
      */
     aberrantSpawns: ThreeStateButtonState;
+    /**
+     * A multiplier for the chance of this creature executing a special attack.
+     */
+    specialAttackChanceMultiplier: number;
+    /**
+     * Chance for creature to spawn as tamed (uses Random.chance)
+     */
+    chanceToSpawnTamed: number;
 }

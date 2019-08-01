@@ -10,6 +10,7 @@
  */
 import Entity from "entity/Entity";
 import { Events } from "event/EventBuses";
+import { IHasImagePath } from "game/IObject";
 import { RecipeLevel } from "item/IItem";
 import { IModdable } from "mod/ModRegistry";
 import { IRGB } from "utilities/Color";
@@ -20,9 +21,8 @@ export interface IHumanEvents extends Events<Entity> {
      */
     skillChange(skill: SkillType, value: number): void;
 }
-export interface IHairstyleDescription extends IModdable {
+export interface IHairstyleDescription extends IModdable, IHasImagePath {
     name: string;
-    imagePath?: string;
 }
 export interface IColorDescription extends IModdable {
     color: IRGB;

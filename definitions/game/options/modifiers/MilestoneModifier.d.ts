@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IHasImagePath } from "game/IObject";
+import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPartial } from "game/options/IGameOptions";
 export declare enum MilestoneModifierGroup {
     Creatures = 0,
@@ -21,7 +23,9 @@ export declare enum MilestoneModifierGroup {
     Turns = 8,
     Challenge = 9
 }
-export default abstract class MilestoneModifier {
+export default abstract class MilestoneModifier implements IHasImagePath {
+    imagePath?: string;
+    after?: Milestone[];
     /**
      * Difficulty options to be applied due to this modifier
      */

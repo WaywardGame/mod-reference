@@ -8,6 +8,7 @@
 * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
 * https://waywardgame.github.io/
 */
+import { IHasImagePath } from "game/IObject";
 import TranslationsProvider from "language/TranslationsProvider";
 import { IModConfig } from "mod/IMod";
 import Mod from "mod/Mod";
@@ -79,9 +80,8 @@ export interface IModProvides {
     imageOverrides: boolean;
     customizations: boolean;
 }
-export interface IImageOverrideDescription {
+export interface IImageOverrideDescription extends IHasImagePath {
     replace: string;
-    imagePath?: string;
     animated?: boolean;
 }
 export declare type IImageOverrides = Array<string | IImageOverrideDescription>;

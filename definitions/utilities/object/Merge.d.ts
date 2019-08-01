@@ -18,8 +18,8 @@ declare class Mergeable<T> {
 }
 declare module Merge {
     function REPLACE<T>(value: T): Mergeable<T> & T;
-    function ADD(amt: number): Mergeable<number> & number;
-    function SUBTRACT(amt: number): Mergeable<number> & number;
+    function ADD(amt: number, maxValue?: number): Mergeable<number> & number;
+    function SUBTRACT(amt: number, minValue?: number): Mergeable<number> & number;
     function MULTIPLY(amt: number): Mergeable<number> & number;
     function DIVIDE(amt: number): Mergeable<number> & number;
     function CONCAT(str: string): Mergeable<string> & string;

@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IHasImagePath } from "game/IObject";
 import { IGameOptions, IGameOptionsPlayer } from "game/options/IGameOptions";
 import { IModdable } from "mod/ModRegistry";
 import { ITooltip } from "newui/component/IComponent";
@@ -30,8 +31,7 @@ export declare enum GameOptionsIcon {
     NoItems = 15,
     Weight = 16
 }
-export interface IGameOptionsIcon extends IModdable {
-    imagePath?: string;
+export interface IGameOptionsIcon extends IModdable, IHasImagePath {
     check(options: IGameOptions, localPlayerOption: IGameOptionsPlayer): boolean;
     tooltip?(tooltip: ITooltip, options: IGameOptions, localPlayerOption: IGameOptionsPlayer): any;
 }

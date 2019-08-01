@@ -8,9 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IHasImagePath } from "game/IObject";
-import { IModdable } from "mod/ModRegistry";
-import { OverlayType } from "tile/ITerrain";
-export interface IOverlayDescription extends IModdable, IHasImagePath {
+export default class DefaultMap<K, V> extends Map<K, V> {
+    readonly defaultValue: V;
+    constructor(defaultValue: V, entries?: ReadonlyArray<readonly [K, V]>);
 }
-export declare const overlayDescriptions: OptionalDescriptions<OverlayType, IOverlayDescription>;

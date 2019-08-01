@@ -15,12 +15,17 @@ export interface IObject<T> {
     id: number;
     renamed?: string | ISerializedTranslation;
 }
-export interface IObjectDescription {
+export interface IObjectDescription extends IHasImagePath {
     decayMax?: number;
     skillUse?: SkillType;
     weightCapacity?: number;
-    imagePath?: string;
     preservationChance?: number;
+}
+export interface IHasImagePath {
+    /**
+     * A replacement image to use. Used in modding.
+     */
+    imagePath?: string;
 }
 export interface IObjectOptions {
     decay?: number;

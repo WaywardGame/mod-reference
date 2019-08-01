@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { ISafeFn } from "utilities/FromDescription";
 import Stream from "utilities/stream/Stream";
 declare global {
     interface Map<K, V> {
@@ -26,6 +27,7 @@ declare global {
          * @param assign Whether the generated default will be stored in the map.
          */
         getOrDefault<K2 extends K>(key: K2, defaultGenerator: (key: K2) => V, assign: true): V;
+        getSafe(key: K): ISafeFn<V, undefined>;
         /**
          * Returns a Stream for the values of this Map.
          *

@@ -12,4 +12,8 @@ import { Milestone } from "game/milestones/IMilestone";
 import Menu from "newui/screen/screens/menu/component/Menu";
 export default class MilestoneModifiersMenu extends Menu {
     constructor(milestones: Set<Milestone>, allowHostMilestones: boolean);
+    /**
+     * Returns the formatted CSS url for the stat icon.
+     */
+    private getMilestoneIcon;
 }

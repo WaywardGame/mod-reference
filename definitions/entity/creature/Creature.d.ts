@@ -86,6 +86,8 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     private checkCreatureMove;
     private findPlayersWithinRadius;
     private processAttack;
+    private shouldSpecialAttack;
+    private specialAttack;
     private processMovement;
     /**
      * Some creatures can break doodads, leading to lost rest or sleep when near them

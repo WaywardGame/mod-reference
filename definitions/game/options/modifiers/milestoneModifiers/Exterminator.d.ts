@@ -11,7 +11,7 @@
 import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPartial } from "game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup } from "game/options/modifiers/MilestoneModifier";
-export default class Grandmaster extends MilestoneModifier {
+export default class Exterminator extends MilestoneModifier {
     after: Milestone[];
     options: IGameOptionsPartial;
     getGroup(): MilestoneModifierGroup;

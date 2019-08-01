@@ -31,7 +31,7 @@ export declare enum TerrainDecorationStatus {
     Normal = 1,
     Animated = 2
 }
-export interface ITerrainDecorationBase {
+export interface ITerrainDecorationBase extends IModdable {
     terrainTypes: TerrainType[];
     animated?: boolean;
     adapt: AdaptionFunction | ITerrainDecorationVariationAdaption;
