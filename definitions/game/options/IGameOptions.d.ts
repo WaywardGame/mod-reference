@@ -50,6 +50,10 @@ export interface IGameOptions {
          * Multiplier for health of creatures
          */
         healthMultiplier: number;
+        /**
+         * Chance for creature to spawn as scared (uses Random.chance)
+         */
+        chanceToSpawnScared: number;
     };
     time: {
         /**

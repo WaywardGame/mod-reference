@@ -10,7 +10,7 @@
  */
 
 type NullaryClass<T> = new () => T;
-type Class<T> = new (...args: any[]) => T;
+type Class<T, A extends any[] = any[]> = new (...args: A) => T;
 // tslint:disable-next-line ban-types No other type will work here except "Function" 
 type AnyClass<T> = (Function & { prototype: T });
 

@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import Player from "entity/player/Player";
 import { IHasImagePath } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPartial } from "game/options/IGameOptions";
@@ -24,6 +25,7 @@ export declare enum MilestoneModifierGroup {
     Challenge = 9
 }
 export default abstract class MilestoneModifier implements IHasImagePath {
+    readonly milestone: Milestone;
     imagePath?: string;
     after?: Milestone[];
     /**
@@ -36,7 +38,9 @@ export default abstract class MilestoneModifier implements IHasImagePath {
      * Modifiers with custom `options: IGameOptions` are always host-exclusive.
      */
     isHostExclusive: boolean;
+    constructor(milestone: Milestone);
     initialize(): void;
     uninitialize(): void;
+    isEnabledForPlayer(player: Player): boolean;
     abstract getGroup(): MilestoneModifierGroup;
 }
