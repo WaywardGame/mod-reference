@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import Player from "entity/player/Player";
+import Entity from "entity/Entity";
 import { IHasImagePath } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import { IGameOptionsPartial } from "game/options/IGameOptions";
@@ -41,6 +41,6 @@ export default abstract class MilestoneModifier implements IHasImagePath {
     constructor(milestone: Milestone);
     initialize(): void;
     uninitialize(): void;
-    isEnabledForPlayer(player: Player): boolean;
+    isEnabledForPlayer(entity: Entity): boolean;
     abstract getGroup(): MilestoneModifierGroup;
 }

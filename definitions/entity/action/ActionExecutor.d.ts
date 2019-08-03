@@ -10,17 +10,29 @@
  */
 import { SfxType } from "audio/IAudio";
 import actionDescriptions from "entity/action/Actions";
-import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentTypeMap, ActionType, IActionApi, IActionDescription, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
+import { ActionArgument, ActionArgumentTupleTypes, ActionArgumentTypeMap, ActionType, IActionApi, IActionDescription, IActionHandlerApi, IActionParticle, IActionSoundEffect } from "entity/action/IAction";
 import { EntityPlayerCreatureNpc } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { TurnType } from "entity/player/IPlayer";
+import EventEmitter from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
 import Item from "item/Item";
 import ActionPacket from "multiplayer/packets/shared/ActionPacket";
 import { IRGB } from "utilities/Color";
-export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc, R> implements IActionApi<E> {
-    private readonly action;
-    readonly type: number;
+interface ActionEvents {
+    /**
+     * Called before an action is executed
+     * This is called before the action result is used
+     * @returns False to cancel the action
+     */
+    preExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): false | void;
+    /**
+     * Called after an action has been executed
+     * This is called after the action result is used
+     */
+    postExecuteAction(actionType: ActionType, actionApi: IActionHandlerApi<any>, args: any[]): any;
+}
+export default class ActionExecutor<A extends Array<ActionArgument | ActionArgument[]>, E extends EntityPlayerCreatureNpc, R> extends EventEmitter.Host<ActionEvents> implements IActionApi<E> {
     /**
      * Gets an action by its description. If you're using the Action class for constructing the descriptions, just pass the action instance.
      *
@@ -34,11 +46,12 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
      */
     static get<T extends ActionType>(action: T): (typeof actionDescriptions)[T] extends IActionDescription<infer A, infer E, infer R> ? ActionExecutor<A, E, R> : never;
     static executeMultiplayer(packet: ActionPacket, actionExecutor?: ActionExecutor<Array<ActionArgument | ActionArgument[]>, EntityPlayerCreatureNpc, any>): any;
-    private _executor;
     readonly executor: E;
-    private _actionStack;
     readonly actionStack: ActionType[];
     readonly lastAction: ActionType;
+    readonly type: ActionType;
+    private _executor;
+    private _actionStack;
     private executionStage;
     private shouldSkipConfirmation;
     private readonly privateStore;
@@ -53,7 +66,8 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private updateRender?;
     private readonly items;
     private itemsUsed;
-    private constructor();
+    private readonly action;
+    constructor(action?: IActionDescription<A, E>, type?: number | undefined);
     skipConfirmation(): this;
     execute(executor: E, ...args: ActionArgumentTupleTypes<A>): R;
     isArgumentType<AA extends ActionArgument>(argument: any, index: number, argumentType: AA): argument is ActionArgumentTypeMap<AA>;
@@ -87,3 +101,4 @@ export default class ActionExecutor<A extends Array<ActionArgument | ActionArgum
     private isUsableWhen;
 }
 export declare function getArgumentType(executor: EntityPlayerCreatureNpc, expected: ActionArgument | ActionArgument[], actual: unknown): ActionArgument | undefined;
+export {};

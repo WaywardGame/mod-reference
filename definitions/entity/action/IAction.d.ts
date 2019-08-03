@@ -299,5 +299,7 @@ export declare type Tuple2<X1, X2> = undefined extends X2 ? (undefined extends X
 export declare type Tuple3<X1, X2, X3> = undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?] : [X1, X2?, X3?]) : [X1, X2, X3?]) : [X1, X2, X3];
 export declare type Tuple4<X1, X2, X3, X4> = undefined extends X4 ? (undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?, X4?] : [X1, X2?, X3?, X4?]) : [X1, X2, X3?, X4?]) : [X1, X2, X3, X4?]) : [X1, X2, X3, X4];
 export declare type Tuple5<X1, X2, X3, X4, X5> = undefined extends X5 ? (undefined extends X4 ? (undefined extends X3 ? (undefined extends X2 ? (undefined extends X1 ? [X1?, X2?, X3?, X4?, X5?] : [X1, X2?, X3?, X4?, X5?]) : [X1, X2, X3?, X4?, X5?]) : [X1, X2, X3, X4?, X5?]) : [X1, X2, X3, X4, X5?]) : [X1, X2, X3, X4, X5];
-export declare type ActionArguments<A extends IActionDescription<any, any>> = A extends IActionDescription<infer AA, any> ? ActionArgumentTupleTypes<AA> : never;
+export declare type ActionArguments<A extends IActionDescription<any, any> | ActionType> = A extends ActionType ? (typeof actionDescriptions[A] extends IActionDescription<infer AA, any> ? ActionArgumentTupleTypes<AA> : never) : A extends IActionDescription<infer AA, any> ? ActionArgumentTupleTypes<AA> : never;
+export declare type ActionEntities<A extends IActionDescription<any, any> | ActionType> = A extends ActionType ? (typeof actionDescriptions[A] extends IActionDescription<any, infer E> ? E : never) : A extends IActionDescription<any, infer E> ? E : never;
+export declare type ActionApi<A extends IActionDescription<any, any> | ActionType> = IActionApi<ActionEntities<A>>;
 export {};

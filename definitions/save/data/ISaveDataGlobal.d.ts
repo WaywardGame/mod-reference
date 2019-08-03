@@ -49,10 +49,10 @@ export interface IOptions {
     rightHand: boolean;
     shouldLoadLastSave: boolean;
     skipSplash: boolean;
+    tooltipDelay: number;
     tooltips: {
         [key in InspectType]: boolean | undefined;
     };
-    tooltipDelay: number;
     uiScale: number;
     useAdjacentContainers: boolean;
     useNewCraftingSystem: boolean;

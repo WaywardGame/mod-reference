@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import ActionExecutor from "entity/action/ActionExecutor";
 import Player from "entity/player/Player";
 import { IEventEmitterHost, IEventEmitterHostClass } from "event/EventEmitter";
 import Game from "game/Game";
@@ -26,7 +27,8 @@ export declare enum EventBus {
     Mods = 5,
     Players = 6,
     LocalPlayer = 7,
-    Items = 8
+    Items = 8,
+    Actions = 9
 }
 declare const eventBuses: {
     [EventBus.Game](): typeof Game;
@@ -38,6 +40,7 @@ declare const eventBuses: {
     [EventBus.Players](): typeof Player;
     [EventBus.Items](): typeof ItemManager;
     [EventBus.LocalPlayer](): Player;
+    [EventBus.Actions](): typeof ActionExecutor;
 };
 export default eventBuses;
 export declare module EventBus {

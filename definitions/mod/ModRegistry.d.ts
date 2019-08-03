@@ -54,9 +54,9 @@ export declare const SYMBOL_MOD_REGISTRATIONS: unique symbol;
 export declare enum ModRegistrationType {
     Action = 0,
     Bindable = 1,
-    Command = 2,
-    Creature = 3,
-    ChallengeModifier = 4,
+    ChallengeModifier = 2,
+    Command = 3,
+    Creature = 4,
     Dialog = 5,
     Dictionary = 6,
     Doodad = 7,

@@ -15,6 +15,7 @@ import Human from "entity/Human";
 import { MoveType } from "entity/IEntity";
 import Translation from "language/Translation";
 import { ITile } from "tile/ITerrain";
+import Vector3 from "utilities/math/Vector3";
 export default class CreatureManager extends EntityManager<Creature> {
     getEntities(): (Creature | undefined)[];
     getName(creature: Creature | CreatureType, aberrant?: boolean, count?: number, article?: boolean): Translation;
@@ -46,5 +47,6 @@ export default class CreatureManager extends EntityManager<Creature> {
     getMovePenalty(moveType: MoveType, tile: ITile, isFinalMove?: boolean): number;
     checkSpawnReputation(creatureDescription: ICreatureDescription, reputation?: number, bypass?: boolean): boolean;
     getCreaturesWithSpawnGroup(group?: SpawnGroup, checkReputation?: boolean, reputation?: number): CreatureType[];
+    spawnGuardians(position: Vector3, amount: number): number;
     private getReputationAberrantBonus;
 }

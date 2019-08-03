@@ -147,6 +147,12 @@ export interface IGameOptionsPlayer {
          */
         difficultyMultiplier: number;
     };
+    actions: {
+        /**
+         * Chance to spawn guardians after successful lockpicks
+         */
+        spawnGuardiansOnLockpick: boolean;
+    };
 }
 /**
  * "Partial" difficulty options; used to apply options over top base options. Milestone modifiers can never exist on partial difficulty options.
