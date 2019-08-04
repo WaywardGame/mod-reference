@@ -69,5 +69,7 @@ export declare enum Types {
     Vector2 = 29,
     Set = 30
 }
+export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
+export declare const SYMBOL_SAVE_ALL_PROPERTIES: unique symbol;
 export declare function SaveProperty(): PropertyDecorator;
 export declare function SaveAllProperties(): ClassDecorator;

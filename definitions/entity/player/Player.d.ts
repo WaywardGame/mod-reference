@@ -16,8 +16,6 @@ import { EntityType, IStatChangeInfo, StatusEffectChangeReason, StatusType } fro
 import { EquipType, ICheckUnderOptions, IRestData, RestCancelReason, RestType, SkillType } from "entity/IHuman";
 import { IStat, Stat } from "entity/IStats";
 import { IMovementIntent, IPlayerEvents, IPlayerTravelData, TurnType, WeightStatus } from "entity/player/IPlayer";
-import MessageManager from "entity/player/MessageManager";
-import NoteManager from "entity/player/note/NoteManager";
 import QuestManager from "entity/player/quest/QuestManager";
 import { IEventEmitter } from "event/EventEmitter";
 import { Milestone } from "game/milestones/IMilestone";
@@ -47,12 +45,10 @@ export default class Player extends Human {
     isConnecting: boolean;
     isMoving: boolean;
     lastAttackedBy: Human | Creature | undefined;
-    messages: MessageManager;
     movementComplete: boolean;
     movementCompleteZ: number | undefined;
     name: string;
     noInputReceived: boolean;
-    notes: NoteManager;
     quests: QuestManager;
     quickSlotInfo: IQuickSlotInfo[];
     realTimeTickActionDelay: number;
@@ -185,9 +181,14 @@ export default class Player extends Human {
      */
     updateStrength(): void;
     /**
+     * Returns the bartering bonus for a given credit value
+     */
+    getBarteringBonus(baseCredits: number): number;
+    /**
      * @deprecated Do not call this with players.
      */
     moveTo(): boolean;
+    protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
     protected calculateStats(): void;
     protected swimCheck(): void;

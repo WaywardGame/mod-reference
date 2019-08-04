@@ -8,8 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-export default class DefaultMap<K, V> extends Map<K, V> {
-    readonly defaultValue: V;
-    constructor(defaultValue: V, entries?: ReadonlyArray<readonly [K, V]>);
-    initialize(key: K): V;
+import { IGameOptionsPartial } from "game/options/IGameOptions";
+import MilestoneModifier, { MilestoneModifierGroup } from "game/options/modifiers/MilestoneModifier";
+export default class Merchant extends MilestoneModifier {
+    options: IGameOptionsPartial;
+    getGroup(): MilestoneModifierGroup;
 }

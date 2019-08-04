@@ -14,6 +14,7 @@ import { CreatureType } from "entity/creature/ICreature";
 import Human from "entity/Human";
 import { EntityType } from "entity/IEntity";
 import { EquipType } from "entity/IHuman";
+import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
 import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ItemType, TatteredMap } from "item/IItem";
@@ -95,7 +96,8 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     acquireNotify(player: Player): void;
     getStokeFireValue(): number | undefined;
     getOnUseBonus(): number;
-    getWorth(legendaryWorth?: boolean): number | undefined;
+    getWorth(legendaryWorth?: boolean): number;
+    getTraderSellPrice(player: Player | NPC, legendaryWorth?: boolean): number;
     canBurnPlayer(): boolean;
     getBaseDefense(): number;
     getDurabilityCharge(): number;

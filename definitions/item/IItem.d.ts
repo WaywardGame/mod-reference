@@ -14,7 +14,6 @@ import { CreatureType, TileGroup } from "entity/creature/ICreature";
 import { DamageType, Defense } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
-import Player from "entity/player/Player";
 import { IObjectDescription } from "game/IObject";
 import Item from "item/Item";
 import Recipe from "item/recipe/Recipe";
@@ -202,7 +201,6 @@ export interface IBaseContainerReference {
 }
 export interface IPlayerInventoryContainerReference extends IBaseContainerReference {
     type: ContainerReferenceType.PlayerInventory;
-    player: Player;
     pid: number;
     identifier?: string;
 }

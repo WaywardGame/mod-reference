@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IRange } from "utilities/math/Range";
 import { Random } from "utilities/Random";
 import { IStreamable } from "utilities/stream/IStream";
 declare type Flat1<T> = T extends Iterable<infer X> ? X | Extract<T, string> | Exclude<T, Iterable<any>> : never;
@@ -53,6 +54,7 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
     static of<A extends any[]>(...args: A): Stream<A[number]>;
     static range(end: number): Stream<number>;
     static range(start: number, end?: number, step?: number): Stream<number>;
+    static range(range: IRange, step?: number): Stream<number>;
     /**
      * Returns a Stream that iterates over the entries of a map, in key-value tuples.
      */

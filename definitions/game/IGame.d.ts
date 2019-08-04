@@ -11,8 +11,8 @@
 import Creature from "entity/creature/Creature";
 import { ICharacter, ICrafted } from "entity/IHuman";
 import Game from "game/Game";
-import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { Milestone } from "game/milestones/IMilestone";
+import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import Item from "item/Item";
 import { IMultiplayerOptions, IMultiplayerWorldData, ServerInfo } from "multiplayer/IMultiplayer";
 import { IHighscoreOld, IOptions } from "save/data/ISaveDataGlobal";

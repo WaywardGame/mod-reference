@@ -10,8 +10,8 @@
  */
 import { PlayerState } from "entity/player/IPlayer";
 import Player from "entity/player/Player";
-import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { TurnMode } from "game/IGame";
+import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import { IMatchmakingInfo } from "multiplayer/matchmaking/IMatchmaking";
 import { IConnection } from "multiplayer/networking/IConnection";
 import { ISaveObject } from "save/ISaveManager";
@@ -61,8 +61,6 @@ export declare enum MultiplayerSyncCheck {
 }
 export declare const maxPlayers = 32;
 export declare const defaultServerPort = 38740;
-export declare const keepAliveInterval = 4000;
-export declare const keepAliveTimeout = 15000;
 export declare const steamLobbyPrefix = "steam:";
 export declare const checkConnectionMatchmakingId = "check";
 export declare const defaultSyncChecks: MultiplayerSyncCheck[];
@@ -94,6 +92,11 @@ export interface IMultiplayerNetworkingOptions {
     stopWebRtc: boolean;
     fakeRoundTripTime: number;
     recentPacketTracking: number;
+    joinServerTimeout: number;
+    webRtcTimeout: number;
+    connectionTimeout: number;
+    keepAliveInterval: number;
+    keepAliveTimeout: number;
 }
 export declare type ServerInfo = string | IMatchmakingInfo;
 export declare enum PacketAcceptType {

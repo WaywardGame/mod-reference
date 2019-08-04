@@ -8,6 +8,8 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IRange } from "utilities/math/Range";
+import { RecursivePartial } from "utilities/types/Recursive";
 declare function Merge<T>(...objs: Array<RecursivePartial<T>>): T;
 declare function Merge<T>(...objs: T[]): T;
 declare function Merge<O extends any[]>(...objs: O): O[number] & O[number];
@@ -17,7 +19,13 @@ declare class Mergeable<T> {
     mask(): this & T;
 }
 declare module Merge {
+    /**
+     * Replaces the existing value with the given value.
+     */
     function REPLACE<T>(value: T): Mergeable<T> & T;
+    /**
+     * Applies the given mapping function to the existing value, replacing it with the result.
+     */
     function FUNCTION<T>(mappingFunction: (value?: T) => T): Mergeable<T> & T;
     function ADD(amt: number, maxValue?: number): Mergeable<number> & number;
     function SUBTRACT(amt: number, minValue?: number): Mergeable<number> & number;
@@ -38,5 +46,9 @@ declare module Merge {
      * Note: Tuples (created with `Tuple()`) use "MERGE_ARRAY" by default.
      */
     function MERGE_ARRAY<A extends any[]>(...values: A): Mergeable<A>;
+    /**
+     * Applies the given merge strategy to both the `minimum` and `maximum` values in the existing range.
+     */
+    function RANGE(merge: Mergeable<number> & number): Mergeable<IRange> & IRange;
 }
 export default Merge;

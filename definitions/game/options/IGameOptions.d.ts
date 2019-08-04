@@ -15,6 +15,9 @@ import { Stat } from "entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
 import { ItemType, ItemTypeGroup } from "item/IItem";
 import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
+import DefaultMap from "utilities/map/DefaultMap";
+import { IRange } from "utilities/math/Range";
+import { RecursivePartial } from "utilities/types/Recursive";
 export declare enum GameMode {
     Hardcore = 0,
     Casual = 1,
@@ -41,7 +44,7 @@ export interface IGameOptions {
         /**
          * Custom options for each creature.
          */
-        creature: Map<CreatureType, IGameOptionsCreature>;
+        creature: DefaultMap<CreatureType, IGameOptionsCreature>;
         /**
          * Multiplier for damage of creatures
          */
@@ -74,6 +77,18 @@ export interface IGameOptions {
         dayPercent?: number;
     };
     player: IGameOptionsPlayer;
+    npcs: {
+        merchants: {
+            /**
+             * A multiplier for the price of each merchant item.
+             */
+            priceMultiplier: number;
+            /**
+             * The number of items a merchant spawns with.
+             */
+            initialItems: IRange;
+        };
+    };
     /**
      * Whether mods should be disabled
      */
@@ -84,11 +99,11 @@ export interface IGameOptionsPlayer {
     /**
      * A map of options for each stat.
      */
-    stats: Map<Stat, IGameOptionsStat>;
+    stats: DefaultMap<Stat, IGameOptionsStat>;
     /**
      * A map of options for each status effect.
      */
-    statusEffects: Map<StatusType, IGameOptionsStatusEffect>;
+    statusEffects: DefaultMap<StatusType, IGameOptionsStatusEffect>;
     skills: {
         /**
          * Amount of starting skills the player has (by default, 1 or 0, depending on mode)
@@ -103,7 +118,7 @@ export interface IGameOptionsPlayer {
         /**
          * Custom options for each skill.
          */
-        customs: Map<SkillType, IGameOptionsSkill>;
+        customs: DefaultMap<SkillType, IGameOptionsSkill>;
     };
     allRecipesUnlocked: boolean;
     reputation: {
@@ -149,7 +164,7 @@ export interface IGameOptionsPlayer {
     };
     actions: {
         /**
-         * Chance to spawn guardians after successful lockpicks
+         * Chance to spawn guardians after successful lockpicks.
          */
         spawnGuardiansOnLockpick: boolean;
     };
@@ -162,11 +177,10 @@ export declare type IGameOptionsPartial = RecursivePartial<IGameOptions> & {
 };
 export interface IGameOptionsStat {
     /**
-     * If this is for `Stat.Strength`, this will be the max health and max weight.
-     *
-     * Otherwise: A percentage: 0-100. The initial value of the stat, or `undefined` if it should be generated randomly
+     * If the given value is a decimanl number less than or equal to `1`, sets the stat value to a percentage of the max.
+     * Otherwise, sets the stat to the given value.
      */
-    initialValue?: number;
+    initialValue: number;
     /**
      * The max value of the state, or `undefined` if it should be generated randomly
      */
@@ -175,6 +189,10 @@ export interface IGameOptionsStat {
      * A multiplier for the speed at which the stat changes `1` is "default", `0` is "none", `2` is "two times speed"
      */
     changeTimerMultiplier: number;
+    /**
+     * A bonus value to apply to the stat.
+     */
+    bonus?: number;
 }
 export interface IGameOptionsStatusEffect {
     /**

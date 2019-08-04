@@ -114,6 +114,7 @@ export interface ISourceFilter {
      */
     disabledSources: Array<keyof typeof LogSource>;
 }
+export declare const defaultSourceFilter: ISourceFilter;
 declare module Log {
     /**
      * Takes a winston instance and a path. Updates the static Log methods to use the winston instance.

@@ -38,6 +38,10 @@ export default abstract class NPC extends Human {
     addAiType(ai: AiType): void;
     updateDirection(x: number, y: number): void;
     /**
+     * Returns the bartering bonus for a given credit value
+     */
+    getBarteringBonus(baseCredits: number): number;
+    /**
      * The name of the npc - called when created
      */
     protected abstract getDefaultName(): string;

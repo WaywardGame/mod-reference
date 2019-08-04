@@ -131,6 +131,7 @@ export default abstract class Human extends Entity {
     discoverRecipe(recipeType: ItemType): void;
     getDamage(causesDamage: ICausesDamage, equipType?: EquipType): number;
     causeStatus(thing: Doodad | ITileEvent, equipForProtection?: EquipType): void;
+    protected getBaseStatBonuses(): OptionalDescriptions<Stat, number>;
     protected getSkillGainMultiplier(skillType: SkillType): number;
     /**
      * Improve one of the core player stats

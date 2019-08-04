@@ -8,6 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
+import { IRange } from "utilities/math/Range";
 export interface IRandomPushed {
     seed: number;
     history?: IRandomHistory[];
@@ -35,6 +36,10 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      */
     float(min: number, max: number): number;
     /**
+     * Generates a random number from the given range.
+     */
+    float(range: IRange): number;
+    /**
      * Generates a random integer between 0 (inclusive) and max (exclusive)
      */
     int(max: number): number;
@@ -42,6 +47,10 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      * Generates a random integer between min (inclusive) and max (exclusive)
      */
     int(min: number, max: number): number;
+    /**
+     * Generates a random integer from the given range.
+     */
+    int(range: IRange): number;
     /**
      * Generates a random integer between min and max (inclusive)
      */
