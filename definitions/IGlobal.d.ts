@@ -120,6 +120,7 @@ declare global {
 	let Module: IWaywardCPP;
 
 	interface IWaywardCPP {
+		Game: IWaywardCPPGame;
 		ByteGrid: IByteGridConstructor;
 		FlowField: any;
 		FieldOfView: any;
@@ -127,6 +128,10 @@ declare global {
 		Navigation: INavigationConstructor;
 		DijkstraMap: IDijkstraMapConstructor;
 		KDTree: IKDTreeConstructor;
+	}
+
+	interface IWaywardCPPGame {
+		setMapSize(size: number): void;
 	}
 
 	interface IColorGrid {

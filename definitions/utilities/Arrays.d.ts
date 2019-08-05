@@ -46,9 +46,7 @@ declare module Arrays {
      * Shuffles the contents of the given array using the Fisher-Yates Shuffle: https://bost.ocks.org/mike/shuffle/
      * @returns The given array after shuffling its contents.
      */
-    function shuffle<T>(arr: T[], r?: import("./Random").Random<{
-        get: () => number;
-    }>): T[];
+    function shuffle<T>(arr: T[], r?: () => number): T[];
     function toggle(arr: any[], value: any, includes?: boolean): number;
     /**
      * Given a *sorted* array, a value, and a sorting function, returns the index where the value should be inserted.

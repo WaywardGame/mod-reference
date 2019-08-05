@@ -65,6 +65,7 @@ export interface IPlayOptions {
     turnMode: TurnMode;
     realTimeTickSpeed: number;
     customMilestoneModifiersAllowed: boolean;
+    mapSize: number | undefined;
     multiplayerWorld?: IMultiplayerWorldData;
 }
 export interface IPlayerOptions {
@@ -180,6 +181,7 @@ export declare enum TileUpdateType {
     Terrain = 7,
     Corpse = 8
 }
+export declare const DEFAULT_MAP_SIZE = 512;
 export declare const LINE_OF_SIGHT_RADIUS = 15;
 export declare const LINE_OF_SIGHT_RADIUS_MAX = 20;
 export declare const LINE_OF_SIGHT_DETAIL = 4;

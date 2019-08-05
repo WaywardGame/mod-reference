@@ -49,7 +49,7 @@ export interface IPartitions<K, V> extends IStreamable<[K, Stream<V>]> {
  * ```
  */
 export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
-    static readonly empty: Stream<any>;
+    static empty<T = any>(): Stream<T>;
     static from<T>(iterable: Iterable<T> | IStreamable<T>): Stream<T>;
     static of<A extends any[]>(...args: A): Stream<A[number]>;
     static range(end: number): Stream<number>;
@@ -220,7 +220,7 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      *
      * Note: This method is an alias of `stream.toArray().shuffle(random).stream()`
      */
-    abstract shuffle(random?: Random): Stream<T>;
+    abstract shuffle(random?: () => number): Stream<T>;
     /**
      * Returns a `Partitions` instance which allows sorting items of this Stream into separate sub-streams, or "partitions".
      * @param sorter A function which takes an item in this Stream and maps it to the "key" of its partition.

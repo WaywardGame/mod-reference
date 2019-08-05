@@ -63,6 +63,10 @@ export default class TimeManager {
      */
     readonly day: number;
     /**
+     * Returns whether time is frozen.
+     */
+    isFrozen(): boolean;
+    /**
      * Increments `ticks`.
      */
     nextTick(): void;

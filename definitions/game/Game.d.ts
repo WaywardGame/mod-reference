@@ -37,8 +37,6 @@ import Vector2 from "utilities/math/Vector2";
 import { IVersionInfo } from "utilities/Version";
 export default class Game extends EventEmitter.Host<IGameEvents> {
     readonly interval = 16.6666;
-    readonly mapSize = 512;
-    readonly mapSizeSq: number;
     slot: number;
     previousSaveVersion: IVersionInfo;
     absoluteTime: number;
@@ -57,6 +55,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     tileDecorations: Uint16Array;
     _updateFieldOfView: boolean;
     _updateFieldOfViewForced: boolean;
+    mapSize: number;
+    mapSizeSq: number;
     contaminatedWater: IVector3[];
     corpses: SaferArray<ICorpse>;
     creatures: SaferArray<Creature>;
@@ -107,7 +107,8 @@ export default class Game extends EventEmitter.Host<IGameEvents> {
     private thumbnailResolve?;
     private simulateInterval?;
     private renderingEnabled;
-    private readonly modifierManager;
+    private readonly milestonesCollection;
+    private challengeCollection?;
     private difficultyOptions;
     private playOptions;
     private ambientLightLevelCache;

@@ -8,6 +8,14 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
-declare const milestoneModifierGroups: Descriptions<MilestoneModifierGroup, string>;
-export default milestoneModifierGroups;
+import ChallengeModifier from "game/options/modifiers/challenge/ChallengeModifier";
+export default class MalignityRate extends ChallengeModifier {
+    readonly weight = 1;
+    readonly options: () => {
+        player: {
+            reputation: {
+                malignityMultiplier: number;
+            };
+        };
+    };
+}

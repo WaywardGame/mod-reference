@@ -149,8 +149,6 @@ export declare const setupSpawnItems: ItemType[];
 export declare const setupWaterItems: ItemType[];
 export declare const setupToolItems: ItemType[];
 export declare const setupMiscItems: ItemType[];
-export declare const setupHealthItems: ItemType[];
-export declare const setupLightItems: ItemType[];
 export declare const setupBookItems: ItemType[];
 export declare function getDirectionFromMovement(x: number, y: number): Direction.East | Direction.North | Direction.West | Direction.South;
 export interface IInputMovement extends IVector2 {

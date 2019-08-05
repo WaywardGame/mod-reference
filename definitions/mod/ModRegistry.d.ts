@@ -23,7 +23,6 @@ import { Quest } from "entity/player/quest/quest/Quest";
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
 import { QuestRequirement } from "entity/player/quest/requirement/Requirement";
 import { ISkillDescription } from "entity/player/Skills";
-import { ChallengeModifier, IChallengeModifier } from "game/Challenge";
 import { InspectType } from "game/inspection/IInspection";
 import { IInspectionHandler } from "game/inspection/Inspections";
 import { IItemDescription, IItemGroupDescription, ItemType, ItemTypeGroup } from "item/IItem";
@@ -100,11 +99,6 @@ export interface IInspectionTypeRegistration extends IBaseModRegistration {
     type: ModRegistrationType.InspectionType;
     name: string;
     description: IInspectionHandler | IInspectionHandler["handle"];
-}
-export interface IChallengeModifierRegistration extends IBaseModRegistration {
-    type: ModRegistrationType.ChallengeModifier;
-    name: string;
-    description: IChallengeModifier | IChallengeModifier["options"];
 }
 export interface IMusicTrackRegistration extends IBaseModRegistration {
     type: ModRegistrationType.MusicTrack;
@@ -450,11 +444,6 @@ declare module Register {
      * @param description The definition of the inspection type.
      */
     function inspectionType(name: string, description: IInspectionHandler | IInspectionHandler["handle"]): <K extends string | number | symbol, T extends { [k in K]: InspectType; }>(target: T, key: K) => void;
-    /**
-     * Registers a daily challenge modifier, a "modifier" that will change based on the seed in daily challenge mode.
-     * @param description The definition of the daily challenge modifier.
-     */
-    function dailyChallengeModifier(name: string, description: IChallengeModifier | IChallengeModifier["options"]): <K extends string | number | symbol, T extends { [k in K]: ChallengeModifier; }>(target: T, key: K) => void;
     /**
      * Registers a menu bar button.
      * @param description The definition of the menu bar button.

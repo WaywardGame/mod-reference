@@ -61,7 +61,6 @@ export default class SaveManager {
     load(slot: number): Promise<boolean>;
     loadPartial(slot: number): Promise<ISaveObject>;
     loadPartialData(saveObject: ISaveObject, object: any, key: string, saveObjectKey?: string, skipCompression?: boolean, importing?: boolean): void;
-    loadPartialDataInside(saveObject: ISaveObject, saveObjectKey: string, key?: string | undefined): any;
     /**
      * Returns the number of bytes the save takes up
      */

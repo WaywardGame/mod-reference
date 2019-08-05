@@ -22,7 +22,7 @@ import { InspectType } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode } from "game/options/IGameOptions";
-import { MilestoneModifierGroup } from "game/options/modifiers/MilestoneModifier";
+import { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
 import { PartOfDay } from "game/TimeManager";
 import { BookType, EquipEffect, ItemType, ItemTypeGroup, LegendaryType } from "item/IItem";
 import { GameEndMessage } from "language/dictionary/GameEndMessage";

@@ -13,6 +13,7 @@ import { StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
+import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import { ItemType, ItemTypeGroup } from "item/IItem";
 import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import DefaultMap from "utilities/map/DefaultMap";
@@ -93,7 +94,10 @@ export interface IGameOptions {
      * Whether mods should be disabled
      */
     disableMods: boolean;
-    milestoneModifiers: Set<Milestone>;
+    modifiers: {
+        milestones: Set<Milestone>;
+        challenge: Set<Challenge>;
+    };
 }
 export interface IGameOptionsPlayer {
     /**
