@@ -9,7 +9,20 @@
  * https://waywardgame.github.io/
  */
 import { IGameOptions } from "game/options/IGameOptions";
+import { CheckButton } from "newui/component/CheckButton";
+import ChoiceList, { Choice } from "newui/component/ChoiceList";
+import { RangeRow } from "newui/component/RangeRow";
 import CustomGameOptionsTab from "newui/screen/screens/menu/menus/newgame/customgameoptions/CustomGameOptionsTab";
 export default class TabTime extends CustomGameOptionsTab {
+    private readonly options;
+    readonly eternalDay: Choice<"day">;
+    readonly eternalNight: Choice<"night">;
+    readonly choiceListEternalTime: ChoiceList<Choice<"day" | "night">, true>;
+    readonly checkButtonTimeFrozen: CheckButton;
+    readonly rangeInitialTime: RangeRow;
+    readonly rangeDayLength: RangeRow;
+    readonly rangeDayPercent: RangeRow;
+    private readonly defaultDayLength;
+    private readonly defaultDayPercent;
     constructor(options: () => IGameOptions);
 }

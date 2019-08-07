@@ -17,11 +17,11 @@ export default class TabMultiplayer extends Tab {
     private readonly menu;
     readonly choiceSingleplayer: Choice<undefined>;
     readonly choiceMultiplayer: Choice<undefined>;
-    readonly multiplayerMode: ChoiceList<Choice<string | number | undefined>>;
+    readonly multiplayerMode: ChoiceList<Choice<string | number | undefined>, false>;
     readonly choiceLobbyFriends: Choice<undefined>;
     readonly choiceLobbyPublic: Choice<undefined>;
     readonly choiceLobbyPrivate: Choice<undefined>;
-    readonly lobbyType: ChoiceList<Choice<string | number | undefined>>;
+    readonly lobbyType: ChoiceList<Choice<string | number | undefined>, false>;
     readonly inputPVP: CheckButton;
     readonly maxPlayersRow: RangeRow;
     readonly tickSpeedRow: RangeRow;

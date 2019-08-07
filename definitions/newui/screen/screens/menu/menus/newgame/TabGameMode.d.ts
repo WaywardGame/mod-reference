@@ -18,11 +18,11 @@ import NewGameMenu from "newui/screen/screens/menu/menus/NewGameMenu";
 export default class TabGameMode extends Tab {
     private readonly menu;
     customGameOptionsMenu: CustomGameOptionsMenu;
-    readonly gameMode: ChoiceList<DifficultyChoice>;
+    readonly gameMode: ChoiceList<DifficultyChoice, false>;
     readonly choiceTurnModeManual: Choice<undefined>;
     readonly choiceTurnModeSimulated: Choice<undefined>;
     readonly choiceTurnModeRealTime: Choice<undefined>;
-    readonly turnMode: ChoiceList<Choice<string | number | undefined>>;
+    readonly turnMode: ChoiceList<Choice<string | number | undefined>, false>;
     constructor(menu: NewGameMenu);
     private getCustomGameOptionsMenu;
     private updateDifficulty;

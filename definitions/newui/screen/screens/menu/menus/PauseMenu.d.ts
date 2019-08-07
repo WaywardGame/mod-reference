@@ -19,7 +19,7 @@ export default class PauseMenu extends Menu {
     private readonly multiplayerButton;
     private readonly optionsRow;
     private readonly multiplayerRow;
-    private readonly difficultyOptionIcons;
+    private readonly iconsGameModifiers;
     private readonly pauseButton;
     private readonly gameIcons;
     private multiplayerOptionsMenu;
@@ -31,9 +31,17 @@ export default class PauseMenu extends Menu {
     private refreshGameIcons;
     private refreshDifficultyOptions;
     /**
-     * Returns the formatted CSS url for the stat icon.
+     * Returns the formatted CSS url for the game options icon.
      */
-    private getDifficultyOptionsIcon;
+    private getGameOptionsIcon;
+    /**
+     * Returns the formatted CSS url for the challenge icon.
+     */
+    private getChallengeIcon;
+    /**
+     * Returns the formatted CSS url for the milestone icon.
+     */
+    private getMilestoneIcon;
     private getHeadingText;
     private getParagraphText;
     private onQuitButtonClick;

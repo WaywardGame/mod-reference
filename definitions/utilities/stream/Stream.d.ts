@@ -533,17 +533,13 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
     /**
      * Puts the key-value pairs in this Stream into the given object.
      */
-    abstract toObject<O>(obj: O): T extends [infer K, infer V] ? O & {
-        [key in Extract<K, string | number | symbol>]: V;
-    } : never;
+    abstract toObject<O>(obj: O): T extends [infer K, infer V] ? (K extends Key<O> ? (V extends Value<O> ? O : never) : never) : never;
     /**
      * Puts the key-value pairs in this Stream into the given object, using a mapping function.
      * @param map The map to put key-value pairs into.
      * @param mapper A mapping function which takes an item in this Stream and returns a key-value pair.
      */
-    abstract toObject<K extends string | number | symbol, V, O>(obj: O, mapper: (value: T, index: number) => [K, V]): O & {
-        [key in K]: V;
-    };
+    abstract toObject<O>(obj: O, mapper: (value: T, index: number) => Entry<O>): O;
     /**
      * Combines the items in this Stream into a string.
      * @param concatenator A substring to be placed between every item in this Stream. If not provided, uses `""`

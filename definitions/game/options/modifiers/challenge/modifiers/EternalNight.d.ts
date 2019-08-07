@@ -21,7 +21,9 @@ export default class EternalNight extends ChallengeModifier {
         };
         player: {
             inventory: {
-                additionalItems: ItemTypeGroup[];
+                equipment: {
+                    type: ItemTypeGroup;
+                }[];
             };
         };
     };

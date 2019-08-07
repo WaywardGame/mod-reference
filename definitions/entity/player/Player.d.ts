@@ -73,10 +73,13 @@ export default class Player extends Human {
     nextMoveDirection: Direction | undefined;
     displayCreature?: CreatureType;
     private readonly _movementIntent;
-    private readonly modifierManager;
+    private readonly milestonesCollection;
+    private gameOptionsCached?;
+    private handEquippedToLast;
     constructor(identifier?: string);
     readonly clientStore: IClientStore;
     setOptions(options: IOptions): void;
+    getGameOptionsBeforeModifiers(): IGameOptionsPlayer;
     getGameOptions(): IGameOptionsPlayer;
     getDisplayCreature(): CreatureType | undefined;
     setStatChangeTimerIgnoreDifficultyOptions(stat: Stat | IStat, timer: number, amt?: number): void;

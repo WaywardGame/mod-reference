@@ -10,11 +10,15 @@
  */
 import ChallengeModifier from "game/options/modifiers/challenge/ChallengeModifier";
 import { Challenge } from "game/options/modifiers/challenge/IChallenge";
-import GameplayModifiersManager from "game/options/modifiers/GameplayModifiersManager";
+import GameplayModifiersManager, { GameplayModifiersCollection } from "game/options/modifiers/GameplayModifiersManager";
+import { ITooltip } from "newui/component/IComponent";
 export declare const EXCLUSIVE_MODIFIERS: Challenge[][];
 declare class ChallengeModifiersManager extends GameplayModifiersManager<Challenge, ChallengeModifier> {
     constructor();
-    createCollection(seed?: number): import("../GameplayModifiersManager").GameplayModifiersCollection<Challenge, ChallengeModifier>;
+    createCollection(seed?: number): ChallengeModifiersCollection;
 }
 declare const _default: ChallengeModifiersManager;
 export default _default;
+export declare class ChallengeModifiersCollection extends GameplayModifiersCollection<Challenge, ChallengeModifier> {
+    getTooltip(challenge: Challenge, tooltip: ITooltip): ITooltip;
+}

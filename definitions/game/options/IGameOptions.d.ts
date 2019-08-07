@@ -13,7 +13,6 @@ import { StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
-import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import { ItemType, ItemTypeGroup } from "item/IItem";
 import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import DefaultMap from "utilities/map/DefaultMap";
@@ -26,6 +25,7 @@ export declare enum GameMode {
     Custom = 3
 }
 export declare const TIME_ETERNAL_NIGHT = 0.7;
+export declare const TIME_ETERNAL_DAY = 0.3;
 export interface IGameOptions {
     /**
      * Whether players respawn when they die
@@ -94,10 +94,7 @@ export interface IGameOptions {
      * Whether mods should be disabled
      */
     disableMods: boolean;
-    modifiers: {
-        milestones: Set<Milestone>;
-        challenge: Set<Challenge>;
-    };
+    milestoneModifiers: Set<Milestone>;
 }
 export interface IGameOptionsPlayer {
     /**
@@ -153,7 +150,14 @@ export interface IGameOptionsPlayer {
         /**
          * An additional set of items the player should spawn with.
          */
-        additionalItems: Array<ItemType | ItemTypeGroup>;
+        additionalItems: Array<ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>>;
+        /**
+         * An additional set of items the player should spawn with that should be equipped.
+         */
+        equipment: Array<{
+            type: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>;
+            priority?: number;
+        }>;
     };
     crafting: {
         /**

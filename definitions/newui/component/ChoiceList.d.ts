@@ -14,21 +14,24 @@ import { BlockRow } from "newui/component/BlockRow";
 import { CheckButton } from "newui/component/CheckButton";
 import { IDisableable } from "newui/component/IComponent";
 import { IRefreshableValue } from "newui/component/Refreshable";
-interface IChoiceListEvents<C extends Choice = Choice> extends Events<BlockRow> {
-    choose(choice: C): any;
+interface IChoiceListEvents<C extends Choice = Choice, OPTIONAL extends boolean = false> extends Events<BlockRow> {
+    choose(choice: OPTIONAL extends true ? C | undefined : C): any;
 }
-export default class ChoiceList<C extends Choice = Choice> extends BlockRow implements IRefreshableValue<C>, IDisableable {
-    event: IEventEmitter<this, IChoiceListEvents<C>>;
+export default class ChoiceList<C extends Choice = Choice, OPTIONAL extends boolean = false> extends BlockRow implements IRefreshableValue<OPTIONAL extends true ? C | undefined : C>, IDisableable {
+    event: IEventEmitter<this, IChoiceListEvents<C, OPTIONAL>>;
     private refreshMethod;
     private _selection;
-    readonly choice: C;
+    readonly choice: OPTIONAL extends true ? C | undefined : C;
     private _disabled;
     readonly disabled: boolean;
+    private _canChooseNone;
+    readonly canChooseNone: boolean;
     constructor();
+    setCanChooseNone(): ChoiceList<C, true>;
     setDisabled(val: boolean): this;
     setChoices(...choices: ArrayOfIterablesOr<C>): this;
     refresh(): this;
-    setRefreshMethod(refreshMethod: (choiceList: this) => C): this;
+    setRefreshMethod(refreshMethod: (choiceList: this) => OPTIONAL extends true ? C | undefined : C): this;
     choose(chosen?: C): this;
     findChoice(filter: (choice: C) => boolean): C | undefined;
     private onChoiceChange;

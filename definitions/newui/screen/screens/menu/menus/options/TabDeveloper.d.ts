@@ -21,4 +21,5 @@ export default class TabDeveloper extends Tab implements IRefreshable {
     private toggleDeveloperMode;
     private reloadGame;
     private unlockAllMilestones;
+    private unlockAllRecipes;
 }

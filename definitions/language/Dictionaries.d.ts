@@ -22,6 +22,7 @@ import { InspectType } from "game/inspection/IInspection";
 import { Quality } from "game/IObject";
 import { Milestone } from "game/milestones/IMilestone";
 import { GameMode } from "game/options/IGameOptions";
+import { Challenge } from "game/options/modifiers/challenge/IChallenge";
 import { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
 import { PartOfDay } from "game/TimeManager";
 import { BookType, EquipEffect, ItemType, ItemTypeGroup, LegendaryType } from "item/IItem";
@@ -108,7 +109,8 @@ export declare enum Dictionary {
     TileEvent = 55,
     Ui = 56,
     UiQuadrant = 57,
-    UnableToJoinReason = 58
+    UnableToJoinReason = 58,
+    Challenge = 59
 }
 export declare type Enum = {
     [key: string]: number;
@@ -176,6 +178,7 @@ declare const dictionaries: {
     [Dictionary.Ui]: typeof UiTranslation;
     [Dictionary.UiQuadrant]: typeof Quadrant;
     [Dictionary.UnableToJoinReason]: typeof UnableToJoinReason;
+    [Dictionary.Challenge]: typeof Challenge;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

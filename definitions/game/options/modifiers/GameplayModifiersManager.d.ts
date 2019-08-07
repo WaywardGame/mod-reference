@@ -12,16 +12,16 @@ import GameplayModifier from "game/options/modifiers/GameplayModifier";
 export default class GameplayModifiersManager<ID extends number, MODIFIER extends GameplayModifier<ID>> {
     protected readonly instances: Map<ID, MODIFIER>;
     constructor(enumObject: any, classes: OptionalDescriptions<ID, Class<MODIFIER, [ID]>>);
-    getImage(milestone: ID): string | undefined;
-    getModifierInstance(milestone: ID): MODIFIER | undefined;
+    getImage(id: ID): string | undefined;
+    getModifierInstance(id: ID): MODIFIER | undefined;
     createCollection(): GameplayModifiersCollection<ID, MODIFIER>;
 }
 export declare class GameplayModifiersCollection<ID extends number, MODIFIER extends GameplayModifier<ID>> {
     private readonly manager;
-    private readonly initializedModifiers;
+    protected readonly initializedModifiers: Map<ID, MODIFIER>;
     constructor(manager: GameplayModifiersManager<ID, MODIFIER>);
     initialize(...ids: ID[]): void;
     uninitialize(): void;
     options(): import("../../../utilities/stream/Stream").default<import("../IGameOptions").IGameOptionsPartial>;
-    initialized(): Set<ID>;
+    initialized(): IterableIterator<ID>;
 }

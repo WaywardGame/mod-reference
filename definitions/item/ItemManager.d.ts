@@ -60,8 +60,8 @@ export default class ItemManager extends EventEmitter.Host<ItemManagerEvents> {
      */
     getWeight(itemType: ItemType, weightType?: WeightType): number;
     weightTree(itemType: ItemType, weightType?: WeightType, debug?: boolean, depth?: number): number;
-    create(itemType: ItemType | ItemTypeGroup, container: IContainer, quality?: Quality): Item;
-    createFake(itemType: ItemType | ItemTypeGroup, quality?: Quality): Item;
+    create(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, container: IContainer, quality?: Quality): Item;
+    createFake(itemType: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>, quality?: Quality): Item;
     isContainer(obj: unknown): obj is IContainer;
     moveAllFromContainerToInventory(human: Human, container: IContainer, ofQuality?: Quality): Item[];
     computeContainerWeight(container: IContainer): number;

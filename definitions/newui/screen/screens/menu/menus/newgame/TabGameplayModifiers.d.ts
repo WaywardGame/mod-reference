@@ -17,7 +17,7 @@ export default class TabGameplayModifiers extends Tab {
     readonly buttonMilestoneModifiers: Button;
     readonly choiceClientsInheritHostModifiers: Choice<undefined>;
     readonly choiceCustomModifiers: Choice<undefined>;
-    readonly choiceListClientsModifiers: ChoiceList<Choice<string | number | undefined>>;
+    readonly choiceListClientsModifiers: ChoiceList<Choice<string | number | undefined>, false>;
     private milestoneModifiersMenu;
     constructor(menu: NewGameMenu);
     private onShow;
