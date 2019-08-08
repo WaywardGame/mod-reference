@@ -9,9 +9,6 @@
  * https://waywardgame.github.io/
  */
 import Component from "newui/component/Component";
-import Text from "newui/component/Text";
-export declare class Block extends Component {
+export declare class Article extends Component {
     constructor();
-    addText(textInitializer: (text: Text) => any): this;
-    addIcon(initializer: (component: Component) => any): this;
 }

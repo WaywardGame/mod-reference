@@ -94,6 +94,10 @@ export default class ModManager extends EventEmitter.Host<IModManagerEvents> {
     uninitialize(index: number): boolean;
     uninitializeAll(): void;
     /**
+     * Returns whether every mod that's enabled.
+     */
+    canUnlockMilestones(): boolean;
+    /**
      * Loads all of the stylesheets from the given mod.
      */
     private initializeStylesheets;

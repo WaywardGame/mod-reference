@@ -12,12 +12,14 @@ import { Milestone } from "game/milestones/IMilestone";
 import { GameMode, IGameOptions } from "game/options/IGameOptions";
 import Input from "newui/component/Input";
 import Menu from "newui/screen/screens/menu/component/Menu";
+import MilestonesNotUnlockableWarning from "newui/screen/screens/menu/component/MilestonesNotUnlockableWarning";
 import TabGameMode from "newui/screen/screens/menu/menus/newgame/TabGameMode";
 import TabGameplayModifiers from "newui/screen/screens/menu/menus/newgame/TabGameplayModifiers";
 import TabMultiplayer from "newui/screen/screens/menu/menus/newgame/TabMultiplayer";
 export default class NewGameMenu extends Menu {
     readonly inputName: Input;
     readonly inputSeed: Input;
+    readonly milestonesNotUnlockableWarning: MilestonesNotUnlockableWarning;
     readonly tabGameMode: TabGameMode;
     readonly tabMultiplayer: TabMultiplayer;
     readonly tabGameplayModifiers: TabGameplayModifiers;

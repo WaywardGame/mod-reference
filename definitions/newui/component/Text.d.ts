@@ -23,6 +23,7 @@ export default class Text extends Component {
     constructor(elementType?: string);
     setSegments(...segments: ISegment[]): this;
     setText(text?: TranslationGenerator): this;
+    setText(refresh: false, text?: TranslationGenerator): this;
     getText(): TranslationGenerator | undefined;
     getTextAsString(): string;
     refresh(): void;

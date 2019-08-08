@@ -9,7 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { CreatureType } from "entity/creature/ICreature";
-import { StatusType } from "entity/IEntity";
+import { AttackType, StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
@@ -176,6 +176,10 @@ export interface IGameOptionsPlayer {
          */
         spawnGuardiansOnLockpick: boolean;
     };
+    /**
+     * Add player damage multiplier based on attack type.
+     */
+    damageMultiplier: DefaultMap<AttackType, number>;
 }
 /**
  * "Partial" difficulty options; used to apply options over top base options. Milestone modifiers can never exist on partial difficulty options.

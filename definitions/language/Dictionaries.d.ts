@@ -62,7 +62,7 @@ export declare enum Dictionary {
     Corpse = 8,
     Creature = 9,
     DamageType = 10,
-    Difficulty = 11,
+    GameMode = 11,
     Doodad = 12,
     DoodadGroup = 13,
     EquipEffect = 14,
@@ -130,12 +130,12 @@ declare const dictionaries: {
     [Dictionary.Corpse]: typeof CreatureType;
     [Dictionary.Creature]: typeof CreatureType;
     [Dictionary.DamageType]: typeof DamageType;
-    [Dictionary.Difficulty]: typeof GameMode;
     [Dictionary.Doodad]: typeof DoodadType;
     [Dictionary.DoodadGroup]: typeof DoodadTypeGroup;
     [Dictionary.EquipEffect]: typeof EquipEffect;
     [Dictionary.EquipSlot]: typeof EquipType;
     [Dictionary.GameEndMessage]: typeof GameEndMessage;
+    [Dictionary.GameMode]: typeof GameMode;
     [Dictionary.Growth]: typeof GrowingStage;
     [Dictionary.GrowthFungus]: typeof GrowingStage;
     [Dictionary.HelpArticle]: typeof HelpArticle;

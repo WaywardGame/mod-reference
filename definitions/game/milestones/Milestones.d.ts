@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import { IMilestone, Milestone } from "game/milestones/IMilestone";
+import { GameMode } from "game/options/IGameOptions";
 declare module Milestones {
     const descriptions: Descriptions<Milestone, IMilestone>;
     /**
@@ -26,5 +27,7 @@ declare module Milestones {
     type IMilestoneUpdate = [Milestone, number?];
     function add(...updates: IMilestoneUpdate[]): void;
     function update(): void;
+    function areUnlockable(mode?: GameMode): boolean;
+    function areUnlockableInMode(mode?: GameMode): boolean;
 }
 export default Milestones;

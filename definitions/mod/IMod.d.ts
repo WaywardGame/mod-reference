@@ -29,6 +29,7 @@ export interface IModConfig {
     readonly imageOverrides?: boolean;
     readonly customizations?: boolean;
     readonly publishedFileId?: string;
+    readonly allowUnlockingMilestones?: boolean;
 }
 export interface IModEvents {
     unload(): any;

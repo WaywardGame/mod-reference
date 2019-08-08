@@ -25,7 +25,7 @@ export default class TabGameMode extends Tab {
     readonly turnMode: ChoiceList<Choice<string | number | undefined>, false>;
     constructor(menu: NewGameMenu);
     private getCustomGameOptionsMenu;
-    private updateDifficulty;
+    private updateGameMode;
     private onChangeTurnMode;
 }
 interface IDifficultyChoiceEvents extends Events<Choice> {
