@@ -36,10 +36,12 @@ export default class TileLayer {
     static setTileTexture(texture: WebGLTexture, textureSizeInversed: Vec2): any;
     static compileShaders(gl: WebGL2RenderingContext): void;
     constructor(width: number, height: number, gl: WebGL2RenderingContext, positionBuffer: WebGLBuffer);
+    getTileTLFG(dataIndex: number): [number, number];
     setTileTLFG(dataIndex: number, tileX: number, tileY: number): void;
     setTileTRFG(dataIndex: number, tileX: number, tileY: number): void;
     setTileBLFG(dataIndex: number, tileX: number, tileY: number): void;
     setTileBRFG(dataIndex: number, tileX: number, tileY: number): void;
+    getTileTLBG(dataIndex: number): [number, number];
     setTileTLBG(dataIndex: number, tileX: number, tileY: number): void;
     setTileTRBG(dataIndex: number, tileX: number, tileY: number): void;
     setTileBLBG(dataIndex: number, tileX: number, tileY: number): void;

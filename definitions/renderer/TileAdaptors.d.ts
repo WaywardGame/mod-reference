@@ -44,3 +44,4 @@ export declare let defaultBackground: TerrainTileInfo;
 export declare function setDefaultBackground(tileInfo: TerrainTileInfo): void;
 export declare function isDoor(doodad?: Doodad): boolean;
 export declare function getWaterType(terrainType: TerrainType): number;
+export declare const emptyTileAdaptor: ITileAdaptation;
