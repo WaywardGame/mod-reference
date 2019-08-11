@@ -36,6 +36,15 @@ export interface IPropSerializable {
 /**
  * Do not add anything to this list unless Spacetech approves it
  */
+/**
+ * Do not add anything to this list unless Spacetech approves it
+ */
+/**
+ * Do not add anything to this list unless Spacetech approves it
+ */
+/**
+ * Do not add anything to this list unless Spacetech approves it
+ */
 export declare enum Types {
     Invalid = 0,
     Undefined = 1,
@@ -67,7 +76,9 @@ export declare enum Types {
     ClientStore = 27,
     Vector3 = 28,
     Vector2 = 29,
-    Set = 30
+    Set = 30,
+    RandomRange = 31,
+    RandomItem = 32
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
 export declare const SYMBOL_SAVE_ALL_PROPERTIES: unique symbol;

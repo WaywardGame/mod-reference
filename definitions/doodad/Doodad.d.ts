@@ -114,6 +114,10 @@ export default class Doodad implements Doodad, Partial<IDoodadDoor>, IUnserializ
     getGrowthParticles(): IRGB | undefined;
     increaseFertility(): boolean;
     /**
+     * Return extra trap damage based on player multiplier and legendary status
+     */
+    getTrapDamageBonus(baseDamage: number, human?: Human): number;
+    /**
      * Keep our wells up-to-date with what is happening underground
      */
     setWellStatus(): void;

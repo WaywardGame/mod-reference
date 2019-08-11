@@ -10,7 +10,7 @@
  */
 import Player from "entity/player/Player";
 import ChallengeModifier from "game/options/modifiers/challenge/ChallengeModifier";
-import { ItemTypeGroup } from "item/IItem";
+import RandomItem from "utilities/random/generators/RandomItem";
 export default class EternalNight extends ChallengeModifier {
     readonly weight = 0.5;
     readonly challenge = 150;
@@ -22,7 +22,7 @@ export default class EternalNight extends ChallengeModifier {
         player: {
             inventory: {
                 equipment: {
-                    type: ItemTypeGroup;
+                    type: RandomItem;
                 }[];
             };
         };

@@ -19,12 +19,6 @@ export default function range(maximum: number): IRange;
  */
 export default function range(minimum: number, maximum: number): IRange;
 export interface IRange {
-    /**
-     * Inclusive
-     */
     minimum: number;
-    /**
-     * Exclusive
-     */
     maximum: number;
 }

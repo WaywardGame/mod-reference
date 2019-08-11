@@ -55,6 +55,7 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      * Generates a random integer between min and max (inclusive)
      */
     intInRange(min: number, max: number): number;
+    intInRange(range: IRange): number;
     /**
      * Generates a random boolean
      */
@@ -80,6 +81,7 @@ export declare class Random<G extends IRandomGenerator = IRandomGenerator> {
      * Returns a random T from the given choices, where each choice is weighted by a number. Higher numbers = higher chance.
      */
     weightedChoice<T>(choices: Array<[number, T]>): T;
+    withGenerator<T>(generator: G, execute: () => T): T;
 }
 export declare function convertStringToSeed(seed: string | number): number;
 export declare class SeededGenerator implements IRandomGenerator {
@@ -99,8 +101,17 @@ export declare class SeededGenerator implements IRandomGenerator {
     startHistory(): void;
     stopHistory(): IRandomHistory[];
 }
-declare const seededRandom: Random<SeededGenerator>;
 export declare const generalRandom: Random<{
     get: () => number;
 }>;
+declare const seededRandom: Random<SeededGenerator>;
 export default seededRandom;
+export declare const randomMilestoneModifiers: Random<SeededGenerator>;
+export declare enum RandomInstance {
+    Seeded = 0,
+    MilestoneModifiers = 1
+}
+export declare const randoms: {
+    [RandomInstance.Seeded]: Random<SeededGenerator>;
+    [RandomInstance.MilestoneModifiers]: Random<SeededGenerator>;
+};

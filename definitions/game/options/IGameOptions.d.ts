@@ -13,10 +13,11 @@ import { AttackType, StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
-import { ItemType, ItemTypeGroup } from "item/IItem";
+import { ItemType } from "item/IItem";
 import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import DefaultMap from "utilities/map/DefaultMap";
-import { IRange } from "utilities/math/Range";
+import RandomItem from "utilities/random/generators/RandomItem";
+import RandomRange from "utilities/random/generators/RandomRange";
 import { RecursivePartial } from "utilities/types/Recursive";
 export declare enum GameMode {
     Hardcore = 0,
@@ -87,7 +88,7 @@ export interface IGameOptions {
             /**
              * The number of items a merchant spawns with.
              */
-            initialItems: IRange;
+            initialItems: RandomRange[];
         };
     };
     /**
@@ -111,7 +112,7 @@ export interface IGameOptionsPlayer {
          *
          * Note: Randomly generated skills can be overwritten by custom options in `skills`.
          */
-        initialCount: number;
+        initial: RandomRange[];
         /**
          * Configuration that affects every skill which doesn't have its own configuration.
          */
@@ -144,18 +145,17 @@ export interface IGameOptionsPlayer {
         /**
          * - Set to `false` to disable initial items
          * - Set to `true` to randomly generate initial items
-         * - Set to an `ItemType[]` to spawn with a specific set of items
          */
         randomItems: boolean;
         /**
          * An additional set of items the player should spawn with.
          */
-        additionalItems: Array<ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>>;
+        additionalItems: Array<ItemType | RandomItem>;
         /**
          * An additional set of items the player should spawn with that should be equipped.
          */
         equipment: Array<{
-            type: ItemType | ItemTypeGroup | Array<ItemType | ItemTypeGroup>;
+            type: ItemType | RandomItem;
             priority?: number;
         }>;
     };
@@ -176,10 +176,16 @@ export interface IGameOptionsPlayer {
          */
         spawnGuardiansOnLockpick: boolean;
     };
-    /**
-     * Add player damage multiplier based on attack type.
-     */
-    damageMultiplier: DefaultMap<AttackType, number>;
+    damage: {
+        /**
+         * Add player damage multiplier based on attack type (used within Attack action).
+         */
+        attackMultiplier: DefaultMap<AttackType, number>;
+        /**
+         * Add player damage multiplier based on attack type (used within Attack action).
+         */
+        trapMultiplier: number;
+    };
 }
 /**
  * "Partial" difficulty options; used to apply options over top base options. Milestone modifiers can never exist on partial difficulty options.

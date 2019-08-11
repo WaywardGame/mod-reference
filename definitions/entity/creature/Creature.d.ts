@@ -59,6 +59,7 @@ export default class Creature extends Entity implements IUnserializedCallback, I
     isDefender(): boolean;
     isTamed(): boolean;
     isValid(): boolean;
+    preventNextMovement(): void;
     checkForBurn(moveType?: MoveType): boolean;
     tame(player: Player): boolean;
     increaseTamedCount(): void;

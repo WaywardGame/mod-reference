@@ -10,7 +10,7 @@
  */
 import { IGameOptionsPartial } from "game/options/IGameOptions";
 import MilestoneModifier, { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
-export default class Notekeeper extends MilestoneModifier {
+export default class Treasurer extends MilestoneModifier {
     options: IGameOptionsPartial;
     getGroup(): MilestoneModifierGroup;
 }

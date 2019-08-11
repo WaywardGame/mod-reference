@@ -9,6 +9,7 @@
  * https://waywardgame.github.io/
  */
 import DefaultMap from "utilities/map/DefaultMap";
+import RandomValueGenerator from "utilities/random/RandomValueGenerator";
 export declare type RecursivePartial<T> = {
     map: T extends Map<infer K, infer V> ? Map<K, RecursivePartial<V>> : never;
     defaultmap: T extends DefaultMap<infer K, infer V> ? DefaultMap<K, RecursivePartial<V>> : never;
@@ -17,4 +18,4 @@ export declare type RecursivePartial<T> = {
         [P in keyof T]?: RecursivePartial<T[P]>;
     };
     other: T | undefined;
-}[T extends Map<any, any> ? "map" : T extends DefaultMap<any, any> ? "defaultmap" : T extends Set<any> ? "set" : T extends object ? "object" : "other"];
+}[T extends Map<any, any> ? "map" : T extends DefaultMap<any, any> ? "defaultmap" : T extends Set<any> ? "set" : T extends RandomValueGenerator<any> ? "other" : T extends object ? "object" : "other"];

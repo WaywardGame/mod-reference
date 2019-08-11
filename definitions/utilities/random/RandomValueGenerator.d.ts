@@ -8,9 +8,10 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { IGameOptionsPartial } from "game/options/IGameOptions";
-import MilestoneModifier, { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
-export default class Notekeeper extends MilestoneModifier {
-    options: IGameOptionsPartial;
-    getGroup(): MilestoneModifierGroup;
+import { RandomInstance } from "utilities/Random";
+export default abstract class RandomValueGenerator<T> {
+    random?: RandomInstance;
+    value?: T;
+    constructor(random?: RandomInstance, value?: T);
+    getRandom(): import("../Random").Random<import("../Random").SeededGenerator>;
 }

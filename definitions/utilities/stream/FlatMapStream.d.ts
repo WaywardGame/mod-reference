@@ -17,6 +17,6 @@ export default class FlatMapStream<T, R> implements IStreamable<R> {
     private _done;
     readonly value: R;
     readonly done: boolean;
-    constructor(stream: IStreamable<T>, mapper?: ((value: T) => Iterable<R>) | undefined);
+    constructor(stream: IStreamable<T>, mapper?: ((value: T) => T | Iterable<R>) | undefined);
     next(): void;
 }
