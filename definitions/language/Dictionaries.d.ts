@@ -15,6 +15,7 @@ import { CreatureType } from "entity/creature/ICreature";
 import { DamageType, StatusType } from "entity/IEntity";
 import { EquipType, SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
+import { NPCType } from "entity/npc/NPCS";
 import { Source } from "entity/player/IMessageManager";
 import { QuestType } from "entity/player/quest/quest/IQuest";
 import { QuestRequirementType } from "entity/player/quest/requirement/IRequirement";
@@ -56,61 +57,62 @@ export declare enum Dictionary {
     BindableType = 2,
     BindPress = 3,
     Book = 4,
-    ChangelogSection = 5,
-    CharacterSort = 6,
-    Command = 7,
-    Corpse = 8,
-    Creature = 9,
-    DamageType = 10,
-    GameMode = 11,
+    Challenge = 5,
+    ChangelogSection = 6,
+    CharacterSort = 7,
+    Command = 8,
+    Corpse = 9,
+    Creature = 10,
+    DamageType = 11,
     Doodad = 12,
     DoodadGroup = 13,
     EquipEffect = 14,
     EquipSlot = 15,
     GameEndMessage = 16,
-    Growth = 17,
-    GrowthFungus = 18,
-    HelpArticle = 19,
-    HighscoreSort = 20,
-    HumanName = 21,
-    InspectType = 22,
-    Interrupt = 23,
-    InterruptChoice = 24,
-    Item = 25,
-    ItemGroup = 26,
-    JoinServerRetryReason = 27,
-    LegendaryType = 28,
-    Message = 29,
-    MessagesTimestampMode = 30,
-    Milestone = 31,
-    MilestoneModifierGroup = 32,
-    Misc = 33,
-    ModLoadError = 34,
-    ModLoadFailureReason = 35,
-    ModProvide = 36,
-    ModSort = 37,
-    ModType = 38,
-    MultiplayerDisconnectReason = 39,
-    MusicPlaylist = 40,
-    Note = 41,
-    Number = 42,
-    PartOfDay = 43,
-    PowerMode = 44,
-    Quality = 45,
-    Quest = 46,
-    QuestRequirement = 47,
-    SaveSlotSort = 48,
-    Skill = 49,
-    Source = 50,
-    Stat = 51,
-    StatusEffect = 52,
-    TeamMemberResponsibility = 53,
-    Terrain = 54,
-    TileEvent = 55,
-    Ui = 56,
-    UiQuadrant = 57,
-    UnableToJoinReason = 58,
-    Challenge = 59
+    GameMode = 17,
+    Growth = 18,
+    GrowthFungus = 19,
+    HelpArticle = 20,
+    HighscoreSort = 21,
+    HumanName = 22,
+    InspectType = 23,
+    Interrupt = 24,
+    InterruptChoice = 25,
+    Item = 26,
+    ItemGroup = 27,
+    JoinServerRetryReason = 28,
+    LegendaryType = 29,
+    Message = 30,
+    MessagesTimestampMode = 31,
+    Milestone = 32,
+    MilestoneModifierGroup = 33,
+    Misc = 34,
+    ModLoadError = 35,
+    ModLoadFailureReason = 36,
+    ModProvide = 37,
+    ModSort = 38,
+    ModType = 39,
+    MultiplayerDisconnectReason = 40,
+    MusicPlaylist = 41,
+    Note = 42,
+    NPC = 43,
+    Number = 44,
+    PartOfDay = 45,
+    PowerMode = 46,
+    Quality = 47,
+    Quest = 48,
+    QuestRequirement = 49,
+    SaveSlotSort = 50,
+    Skill = 51,
+    Source = 52,
+    Stat = 53,
+    StatusEffect = 54,
+    TeamMemberResponsibility = 55,
+    Terrain = 56,
+    TileEvent = 57,
+    Ui = 58,
+    UiQuadrant = 59,
+    UnableToJoinReason = 60
 }
 export declare type Enum = {
     [key: string]: number;
@@ -124,6 +126,7 @@ declare const dictionaries: {
     [Dictionary.BindableType]: typeof BindableType;
     [Dictionary.BindPress]: symbol;
     [Dictionary.Book]: typeof BookType;
+    [Dictionary.Challenge]: typeof Challenge;
     [Dictionary.ChangelogSection]: typeof ChangelogSection;
     [Dictionary.CharacterSort]: typeof CharacterSort;
     [Dictionary.Command]: typeof Command;
@@ -161,6 +164,7 @@ declare const dictionaries: {
     [Dictionary.MultiplayerDisconnectReason]: typeof DisconnectReason;
     [Dictionary.MusicPlaylist]: typeof MusicPlaylist;
     [Dictionary.Note]: typeof Note;
+    [Dictionary.NPC]: typeof NPCType;
     [Dictionary.Number]: symbol;
     [Dictionary.PartOfDay]: typeof PartOfDay;
     [Dictionary.PowerMode]: typeof PowerMode;
@@ -178,7 +182,6 @@ declare const dictionaries: {
     [Dictionary.Ui]: typeof UiTranslation;
     [Dictionary.UiQuadrant]: typeof Quadrant;
     [Dictionary.UnableToJoinReason]: typeof UnableToJoinReason;
-    [Dictionary.Challenge]: typeof Challenge;
 };
 export { dictionaries as strictDictionaries };
 declare const _default: Descriptions<Dictionary, typeof SYMBOL_ANY_DICTIONARY | Enum>;

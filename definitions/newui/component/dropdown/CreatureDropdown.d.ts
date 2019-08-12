@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICorpseDescription } from "entity/creature/corpse/ICorpse";
 import { CreatureType } from "entity/creature/ICreature";
-export declare let corpseDescriptions: OptionalDescriptions<CreatureType, ICorpseDescription>;
-export default corpseDescriptions;
+import { IDropdownOption } from "newui/component/Dropdown";
+import EnumDropdown from "newui/component/dropdown/EnumDropdown";
+export default class CreatureDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof CreatureType, OTHER_OPTIONS> {
+    constructor(defaultOption: OTHER_OPTIONS | keyof typeof CreatureType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+}

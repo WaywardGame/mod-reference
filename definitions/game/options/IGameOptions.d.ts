@@ -8,12 +8,11 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { CreatureType } from "entity/creature/ICreature";
+import { CreatureType, TileGroup } from "entity/creature/ICreature";
 import { AttackType, StatusType } from "entity/IEntity";
 import { SkillType } from "entity/IHuman";
 import { Stat } from "entity/IStats";
 import { Milestone } from "game/milestones/IMilestone";
-import { ItemType } from "item/IItem";
 import { ThreeStateButtonState } from "newui/component/ThreeStateButton";
 import DefaultMap from "utilities/map/DefaultMap";
 import RandomItem from "utilities/random/generators/RandomItem";
@@ -150,12 +149,12 @@ export interface IGameOptionsPlayer {
         /**
          * An additional set of items the player should spawn with.
          */
-        additionalItems: Array<ItemType | RandomItem>;
+        additionalItems: RandomItem[];
         /**
          * An additional set of items the player should spawn with that should be equipped.
          */
         equipment: Array<{
-            type: ItemType | RandomItem;
+            type: RandomItem;
             priority?: number;
         }>;
     };
@@ -263,4 +262,12 @@ export interface IGameOptionsCreature {
      * Chance for creature to spawn as tamed (uses Random.chance)
      */
     chanceToSpawnTamed: number;
+    /**
+     * Forces the creature to always be present in the spawn pool, overwriting allowSpawning.
+     */
+    alwaysSpawn: boolean;
+    /**
+     * Modifies the tiles the creature can spawn on.
+     */
+    spawnTiles: TileGroup;
 }

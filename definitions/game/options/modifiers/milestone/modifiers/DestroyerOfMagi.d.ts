@@ -8,7 +8,9 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ICorpseDescription } from "entity/creature/corpse/ICorpse";
-import { CreatureType } from "entity/creature/ICreature";
-export declare let corpseDescriptions: OptionalDescriptions<CreatureType, ICorpseDescription>;
-export default corpseDescriptions;
+import { IGameOptionsPartial } from "game/options/IGameOptions";
+import MilestoneModifier, { MilestoneModifierGroup } from "game/options/modifiers/milestone/MilestoneModifier";
+export default class DestroyerOfMagi extends MilestoneModifier {
+    options: IGameOptionsPartial;
+    getGroup(): MilestoneModifierGroup;
+}

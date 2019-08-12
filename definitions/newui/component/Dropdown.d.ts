@@ -53,7 +53,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     open(): void;
     close(): void;
     select(optionId: O | undefined): void;
-    selectDefault(): void;
+    selectDefault(): this;
     setRefreshMethod(refresh: () => IDropdownData<O>): this;
     refresh(): this;
     openedDirection(): SelectDirection.Up | SelectDirection.Down;
