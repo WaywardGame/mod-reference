@@ -15,12 +15,13 @@ import { Bindable, BindCatcherApi } from "newui/IBindingManager";
 import { Background, ScreenId } from "newui/screen/IScreen";
 import Log from "utilities/Log";
 export default abstract class Screen extends Component implements IHookHost {
+    readonly type: ScreenId;
     isOverlayScreen: boolean;
     protected lastTooltipSource?: Component;
     protected log: Log;
     private contextMenu?;
     background: Background;
-    constructor(screenId: ScreenId);
+    constructor(type: ScreenId);
     /**
      * Remove the context menu from this element
      */

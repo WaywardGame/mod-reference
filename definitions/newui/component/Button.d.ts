@@ -15,6 +15,7 @@ import { IDisableable, TranslationGenerator } from "newui/component/IComponent";
 import Text, { Paragraph } from "newui/component/Text";
 interface IButtonEvents extends Events<Component> {
     activate(): void;
+    toggleDisabled(disabled: boolean): any;
 }
 export default class Button extends Component implements IDisableable {
     event: IEventEmitter<this, IButtonEvents>;

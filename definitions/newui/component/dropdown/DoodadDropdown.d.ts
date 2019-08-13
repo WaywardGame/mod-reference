@@ -12,7 +12,7 @@ import { DoodadType, DoodadTypeGroup } from "doodad/IDoodad";
 import { IDropdownOption } from "newui/component/Dropdown";
 import GroupDropdown from "newui/component/GroupDropdown";
 export declare class DoodadDropdown<OTHER_OPTIONS extends string = never> extends GroupDropdown<typeof DoodadType, OTHER_OPTIONS, DoodadTypeGroup> {
-    constructor(defaultOption: OTHER_OPTIONS | keyof typeof DoodadType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    constructor(defaultOption: OTHER_OPTIONS | DoodadType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
     protected filterEnum(id: DoodadType): boolean;
     protected getGroupName(group: DoodadTypeGroup): string;
     protected isInGroup(doodad: DoodadType, group: DoodadTypeGroup): boolean;

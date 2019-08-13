@@ -12,5 +12,5 @@ import { IDropdownOption } from "newui/component/Dropdown";
 import EnumDropdown from "newui/component/dropdown/EnumDropdown";
 import { TerrainType } from "tile/ITerrain";
 export default class TerrainDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof TerrainType, OTHER_OPTIONS> {
-    constructor(defaultOption: OTHER_OPTIONS | keyof typeof TerrainType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    constructor(defaultOption: OTHER_OPTIONS | TerrainType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
 }

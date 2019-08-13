@@ -33,10 +33,10 @@ export interface IDropdownData<OptionId = string | number> {
 }
 export default class Dropdown<O = string | number> extends Component implements IRefreshableValue<IDropdownData<O>>, IHookHost {
     event: IEventEmitter<this, IDropdownEvents<O>>;
+    readonly options: Map<O, Button>;
     readonly inputButton: InputButton;
     protected optionsWrapper: Component;
     private readonly optionsWrapperWrapper;
-    private readonly options;
     private refreshMethod;
     private visibleOptions;
     private defaultOption?;
@@ -65,6 +65,7 @@ export default class Dropdown<O = string | number> extends Component implements 
     protected optionMatchesFilter(filter: string, filterWords: string[], option: O, button: Button): boolean;
     protected optionMatchesFilterWord(word: string, option: O, text: string): boolean;
     protected onRegenerateBox(): void;
+    private updateOptions;
     private updateWrapperPosition;
 }
 export {};

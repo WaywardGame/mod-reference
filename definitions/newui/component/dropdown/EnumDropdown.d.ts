@@ -11,9 +11,10 @@
 import { Dictionary } from "language/Dictionaries";
 import Translation from "language/Translation";
 import Dropdown, { IDropdownOption } from "newui/component/Dropdown";
-export default class EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string, KEYS = keyof ENUM_OBJECT> extends Dropdown<KEYS | OTHER_OPTIONS> {
+export default class EnumDropdown<ENUM_OBJECT, OTHER_OPTIONS extends string, VALUES = ENUM_OBJECT[keyof ENUM_OBJECT]> extends Dropdown<VALUES | OTHER_OPTIONS> {
     protected readonly enumObject: ENUM_OBJECT;
-    constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: KEYS | OTHER_OPTIONS, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
-    protected getTranslation(id: ENUM_OBJECT[keyof ENUM_OBJECT], dictionary: Dictionary): Translation;
-    protected filterEnum?(id: ENUM_OBJECT[keyof ENUM_OBJECT]): boolean;
+    readonly selectionName: keyof ENUM_OBJECT | undefined;
+    constructor(enumObject: ENUM_OBJECT, dictionary: Dictionary, defaultOption: VALUES | OTHER_OPTIONS, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    protected getTranslation(id: VALUES, dictionary: Dictionary): Translation;
+    protected filterEnum?(id: VALUES): boolean;
 }

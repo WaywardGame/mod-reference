@@ -11,8 +11,8 @@
 import { ItemType, ItemTypeGroup } from "item/IItem";
 import { IDropdownOption } from "newui/component/Dropdown";
 import GroupDropdown from "newui/component/GroupDropdown";
-export default class ItemDropdown<OTHER_OPTIONS extends string = never> extends GroupDropdown<typeof ItemType, OTHER_OPTIONS, ItemTypeGroup, Exclude<keyof typeof ItemType, "None">> {
-    constructor(defaultOption: OTHER_OPTIONS | Exclude<keyof typeof ItemType, "None">, options?: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+export default class ItemDropdown<OTHER_OPTIONS extends string = never> extends GroupDropdown<typeof ItemType, OTHER_OPTIONS, ItemTypeGroup, Exclude<ItemType, ItemType.None>> {
+    constructor(defaultOption: OTHER_OPTIONS | Exclude<ItemType, ItemType.None>, options?: Iterable<IDropdownOption<OTHER_OPTIONS>>);
     protected filterEnum(value: ItemType): boolean;
     protected getGroupName(group: ItemTypeGroup): string;
     protected isInGroup(item: ItemType, group: ItemTypeGroup): boolean;

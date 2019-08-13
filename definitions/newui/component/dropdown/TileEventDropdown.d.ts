@@ -11,7 +11,7 @@
 import { IDropdownOption } from "newui/component/Dropdown";
 import EnumDropdown from "newui/component/dropdown/EnumDropdown";
 import { TileEventType } from "tile/ITileEvent";
-export default class TileEventDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof TileEventType, OTHER_OPTIONS, Exclude<keyof typeof TileEventType, "None">> {
-    constructor(defaultOption: OTHER_OPTIONS | Exclude<keyof typeof TileEventType, "None">, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+export default class TileEventDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof TileEventType, OTHER_OPTIONS, Exclude<TileEventType, TileEventType.None>> {
+    constructor(defaultOption: OTHER_OPTIONS | Exclude<TileEventType, TileEventType.None>, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
     protected filterEnum(value: TileEventType): boolean;
 }

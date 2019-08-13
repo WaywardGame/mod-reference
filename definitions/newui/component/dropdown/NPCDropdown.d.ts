@@ -12,5 +12,5 @@ import { NPCType } from "entity/npc/NPCS";
 import { IDropdownOption } from "newui/component/Dropdown";
 import EnumDropdown from "newui/component/dropdown/EnumDropdown";
 export default class NPCDropdown<OTHER_OPTIONS extends string = never> extends EnumDropdown<typeof NPCType, OTHER_OPTIONS> {
-    constructor(defaultOption: OTHER_OPTIONS | keyof typeof NPCType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
+    constructor(defaultOption: OTHER_OPTIONS | NPCType, options: Iterable<IDropdownOption<OTHER_OPTIONS>>);
 }

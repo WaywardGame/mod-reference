@@ -135,6 +135,7 @@ export default class Player extends Human {
      * Used internally for `Stat.Weight.max`
      */
     getMaxWeight(): number;
+    setupLoad(): void;
     setup(): void;
     updateReputation(reputation: number): void;
     checkWeight(): void;
