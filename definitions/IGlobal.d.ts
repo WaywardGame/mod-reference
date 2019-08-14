@@ -225,8 +225,10 @@ declare global {
 
 	interface IFileStream {
 		on(type: "error", callback: (err: any) => void): void;
-		write(data: string): void;
+		on(type: "drain", callback: () => void): void;
+		write(data: string): boolean;
 		close(): void;
+		bytesWritten: number;
 	}
 
 	interface IFile extends IFileStat {

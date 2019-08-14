@@ -53,4 +53,5 @@ export default class ResourceLoader implements IResourceLoader {
     private loadOverlays;
     private loadOverlay;
     private loadOthers;
+    private warnIfTextureOutOfBounds;
 }
