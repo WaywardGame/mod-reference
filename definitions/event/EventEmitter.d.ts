@@ -17,7 +17,7 @@ export interface IEventEmitterHost<E> {
 export interface IEventEmitterHostClass<E> extends Class<IEventEmitterHost<E>> {
 }
 export interface ITrueEventEmitterHostClass<E> extends Class<any> {
-    [SYMBOL_SUBSCRIPTIONS]: Map<any, Map<keyof E, PriorityMap<Set<IterableOr<Handler<any, any>>>>>>;
+    [SYMBOL_SUBSCRIPTIONS]: Map<any, Map<keyof E, PriorityMap<Set<Iterable<string | Handler<any, any>>>>>>;
 }
 export interface ISelfSubscribedEmitter<E> {
     [SYMBOL_SUBSCRIPTIONS]: Array<[ISelfSubscribedEmitter<any>, keyof E, string | number | symbol, number?]>;
@@ -49,8 +49,8 @@ declare class EventEmitter<H, E> implements IEventEmitter<H, E> {
     emitStream<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Stream<ReturnOf<E[K]>>;
     emitReduce<K extends keyof E, A extends ReturnOf<E[K]> & Head<ArgsOf<E[K]>>>(event: K, arg: A, ...args: Tail<ArgsOf<E[K]>>): Extract<ReturnOf<E[K]> & Head<ArgsOf<E[K]>>, undefined> extends undefined ? (undefined extends A ? ReturnOf<E[K]> : A) : ReturnOf<E[K]>;
     emitAsync<K extends keyof E>(event: K, ...args: ArgsOf<E[K]>): Promise<any>;
-    subscribe<K extends ArrayOr<keyof E>>(events: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
-    unsubscribe<K extends ArrayOr<keyof E>>(events: K, handler: IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): boolean;
+    subscribe<K extends ArrayOr<keyof E>>(events: K, handler: keyof H | IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): H;
+    unsubscribe<K extends ArrayOr<keyof E>>(events: K, handler: keyof H | IterableOr<Handler<H, K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>, priority?: number): boolean;
     waitFor<K extends ArrayOr<keyof E>>(events: K, priority?: number): Promise<ArgsOf<K extends any[] ? E[K[number]] : E[Extract<K, keyof E>]>>;
     until<E2>(emitter: IEventEmitterHost<E2>, ...events: Array<keyof E2>): IUntilSubscriber<H, E>;
     until(promise: Promise<any>): IUntilSubscriber<H, E>;

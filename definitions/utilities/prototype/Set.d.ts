@@ -31,6 +31,10 @@ declare global {
          * Deletes all given values from the set. Returns whether any values were deleted.
          */
         deleteFrom(...values: Array<Iterable<T>>): boolean;
+        /**
+         * Deletes all given values from the set that match the given predicate. Returns whether any values were deleted.
+         */
+        deleteWhere(predicate: (value: T) => any): boolean;
         toggle(has: boolean, ...values: T[]): this;
     }
 }
