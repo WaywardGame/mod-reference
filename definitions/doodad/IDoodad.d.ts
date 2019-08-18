@@ -35,7 +35,7 @@ export interface IDoodadOptions extends IObjectOptions {
 export declare type IDoodadOld = Partial<Doodad> & {
     growInto?: DoodadType;
 };
-export interface IGroupDescription {
+export interface IDoodadGroupDescription {
     name: string;
     prefix?: string;
     suffix?: string;

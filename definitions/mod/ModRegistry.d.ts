@@ -10,7 +10,7 @@
  */
 import { Music, SfxType } from "audio/IAudio";
 import { Command, CommandCallback } from "command/ICommand";
-import { DoodadType, IDoodadDescription } from "doodad/IDoodad";
+import { DoodadType, DoodadTypeGroup, IDoodadDescription, IDoodadGroupDescription } from "doodad/IDoodad";
 import { ActionType, IActionDescription } from "entity/action/IAction";
 import { ICorpseDescription } from "entity/creature/corpse/ICorpse";
 import { CreatureType, ICreatureDescription } from "entity/creature/ICreature";
@@ -59,33 +59,34 @@ export declare enum ModRegistrationType {
     Dialog = 5,
     Dictionary = 6,
     Doodad = 7,
-    HelpArticle = 8,
-    InspectionType = 9,
-    InterModRegistration = 10,
-    InterModRegistry = 11,
-    Interrupt = 12,
-    InterruptChoice = 13,
-    Item = 14,
-    ItemGroup = 15,
-    Language = 16,
-    LanguageExtension = 17,
-    MenuBarButton = 18,
-    Message = 19,
-    MessageSource = 20,
-    MusicTrack = 21,
-    Note = 22,
-    NPC = 23,
-    OptionsSection = 24,
-    Overlay = 25,
-    Packet = 26,
-    Quest = 27,
-    QuestRequirement = 28,
-    Registry = 29,
-    Skill = 30,
-    SoundEffect = 31,
-    Terrain = 32,
-    TerrainDecoration = 33,
-    TileEvent = 34
+    DoodadGroup = 8,
+    HelpArticle = 9,
+    InspectionType = 10,
+    InterModRegistration = 11,
+    InterModRegistry = 12,
+    Interrupt = 13,
+    InterruptChoice = 14,
+    Item = 15,
+    ItemGroup = 16,
+    Language = 17,
+    LanguageExtension = 18,
+    MenuBarButton = 19,
+    Message = 20,
+    MessageSource = 21,
+    MusicTrack = 22,
+    Note = 23,
+    NPC = 24,
+    OptionsSection = 25,
+    Overlay = 26,
+    Packet = 27,
+    Quest = 28,
+    QuestRequirement = 29,
+    Registry = 30,
+    Skill = 31,
+    SoundEffect = 32,
+    Terrain = 33,
+    TerrainDecoration = 34,
+    TileEvent = 35
 }
 export interface ILanguageRegistration extends IBaseModRegistration {
     type: ModRegistrationType.Language;
@@ -233,6 +234,11 @@ export interface IDoodadRegistration extends IBaseModRegistration {
     name: string;
     description?: IDoodadDescription;
 }
+export interface IDoodadGroupRegistration extends IBaseModRegistration {
+    type: ModRegistrationType.DoodadGroup;
+    name: string;
+    description: IDoodadGroupDescription;
+}
 export interface ITileEventRegistration extends IBaseModRegistration {
     type: ModRegistrationType.TileEvent;
     name: string;
@@ -253,7 +259,7 @@ export interface IQuestRequirementRegistration extends IBaseModRegistration {
     name: string;
     description: QuestRequirement;
 }
-export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
+export declare type ModRegistration = (IActionRegistration | IBindableRegistration | ICommandRegistration | ICreatureRegistration | IDialogRegistration | IDictionaryRegistration | IDoodadRegistration | IDoodadGroupRegistration | IHelpArticleRegistration | IInspectionTypeRegistration | IInterModRegistration | IInterModRegistryRegistration | IInterruptChoiceRegistration | IInterruptRegistration | IItemGroupRegistration | IItemRegistration | ILanguageExtensionRegistration | ILanguageRegistration | IMenuBarButtonRegistration | IMessageRegistration | IMessageSourceRegistration | IMusicTrackRegistration | INoteRegistration | INPCRegistration | IOptionsSectionRegistration | IOverlayRegistration | IPacketRegistration | IQuestRegistration | IQuestRequirementRegistration | IRegistryRegistration | ISkillRegistration | ISoundEffectRegistration | ITerrainDecorationRegistration | ITerrainRegistration | ITileEventRegistration);
 declare module Register {
     /**
      * Registers a class as a sub-registry. The class can contain its own `@Register` decorators, and they will be loaded by the higher-level registry.
@@ -455,6 +461,11 @@ declare module Register {
      */
     function itemGroup(name: string, description: IItemGroupDescription): <K extends string | number | symbol, T extends { [k in K]: ItemTypeGroup; }>(target: T, key: K) => void;
     /**
+     * Registers a doodad group.
+     * @param description The definition of the doodad group.
+     */
+    function doodadGroup(name: string, description: IDoodadGroupDescription): <K extends string | number | symbol, T extends { [k in K]: DoodadTypeGroup; }>(target: T, key: K) => void;
+    /**
      * Registers a quest.
      * @param description The definition of the quest.
      */
@@ -490,82 +501,65 @@ export declare const SYMBOL_REGISTRATION_ID: unique symbol;
 export interface RegisteredMethod {
     [SYMBOL_REGISTRATION_ID]: number;
 }
-declare const INVALID: unique symbol;
 /**
- * This function and module is for retrieving the IDs of other registered things.
+ * This function is for retrieving the IDs of other registered things, to be used within other `@Register` decorators.
  *
- * # As a module
- * Provides the method `id`, which is for retrieving the ID of `@Register`'d functions. For more information on using this method,
- * see that method's documentation.
- *
- * # As a function
- * As a function, its only purpose is for within other `@Register` decorators. It *does not actually return the ID*, but a temporary
- * value that is internally used in lieu of it. Do *not* use this method outside of a decorator, and assume you're going to get the
- * correct ID. You're not.
- *
- * To, it requires two type parameters:
+ * Pass the registry type as the `H` type parameter.
  * @param H The "Host" of the registration.
- * @param T The type of the registration.
  *
  * For example, if you're trying to get a bindable that was registered by your mod, you would call it like this:
- * `Registry<YourModClass, Bindable>().get("theNameOfTheFieldThatContainsTheBindableYouWant")`
+ * `Registry<YourModClass>().get("bindableFieldName")`
  *
  * Here's a full example (excerpt from [Starter Quest](https://github.com/WaywardGame/starterquest)):
  * ```ts
- * @Register.bindable("Toggle", { key: "KeyJ" })
- * 	public readonly bindable: Bindable;
+ *  class StarterQuest extends Mod {
+ *  	@Register.bindable("Toggle", { key: "KeyJ" })
+ * 		public readonly bindable: Bindable;
  *
- * 	@Register.menuBarButton("Starter Quest", {
- * 		bindable: registry<StarterQuest, Bindable>().get("bindable"),
- * 		tooltip: tooltip => tooltip.addText(text => text
- * 			.setText(new Translation(this.dictionary, StarterQuestDictionary.StarterQuestTitle))),
- * 		onActivate: () => ui.toggleDialog(this.dialog)
- * 	})
- * 	public readonly menuBarButton: MenuBarButtonType;
+ * 		@Register.menuBarButton("Starter Quest", {
+ * 			bindable: Registry<StarterQuest>().get("bindable"),
+ * 			tooltip: tooltip => tooltip.addText(text => text
+ * 				.setText(new Translation(this.dictionary, StarterQuestDictionary.StarterQuestTitle))),
+ * 			onActivate: () => ui.toggleDialog(this.dialog)
+ * 		})
+ * 		public readonly menuBarButton: MenuBarButtonType;
+ *  }
  * ```
  */
-export declare function Registry<H, T extends CommandCallback>(): IRegistryRegisteredCommandIntermediateGetter<H, T>;
-export declare function Registry<H, T>(): IRegistryRegisteredPropertyIntermediateGetter<H, T>;
+export declare function Registry<H>(): {
+    /**
+     * @param key A key of the registry `H`.
+     * @returns An intermediate value referencing the `T` stored in the given key in `H`.
+     *
+     * As much as you may wish it was, the returned value is not actually the type it claims to be. Do not use it as such.
+     */
+    get<K extends keyof H>(key: K): H[K];
+    /**
+     * @param key The key of `H` which contains `T`.
+     * @returns An intermediate value referencing the `T` stored in the given key in `H`
+     */
+    getMethod<K extends keyof H>(key: K): H[K];
+};
 export declare module Registry {
     /**
      * Returns the ID of a registered action or command callback which was decorated with its respective `@Register` decorator.
      * @param method An action or command callback method
      */
-    function id<M extends AnyFunction>(method: M): Command;
+    function functionId<M extends AnyFunction>(method: M): Command;
     /**
      * Used internally for `Registry<H, T>.get(key)`
      */
     class Registered {
-        readonly key: string;
+        readonly key: string | number | symbol;
         readonly type: RegistryRegisteredIntermediateType;
-        constructor(key: string, type: RegistryRegisteredIntermediateType);
+        constructor(key: string | number | symbol, type: RegistryRegisteredIntermediateType);
+        mask<T>(): T;
     }
 }
 export interface IBaseModRegistration {
     type: ModRegistrationType;
     key: string;
     registrationId: number;
-}
-export interface IRegistryRegisteredActionIntermediateGetter<H, T> {
-    /**
-     * @param key The key of `H` which contains an `ActionCallback`.
-     * @returns An intermediate value referencing the `ActionCallback` stored in the given key in `H`
-     */
-    getAction<K extends keyof H>(key: K): H[K] extends T ? ActionType : typeof INVALID;
-}
-export interface IRegistryRegisteredCommandIntermediateGetter<H, T> {
-    /**
-     * @param key The key of `H` which contains a `CommandCallback`.
-     * @returns An intermediate value referencing the `CommandCallback` stored in the given key in `H`
-     */
-    getCommand<K extends keyof H>(key: K): H[K] extends T ? Command : typeof INVALID;
-}
-export interface IRegistryRegisteredPropertyIntermediateGetter<H, T> {
-    /**
-     * @param key The key of `H` which contains `T`.
-     * @returns An intermediate value referencing the `T` stored in the given key in `H`
-     */
-    get<K extends keyof H>(key: K): H[K] extends T ? T : typeof INVALID;
 }
 export declare enum RegistryRegisteredIntermediateType {
     Property = 0,
