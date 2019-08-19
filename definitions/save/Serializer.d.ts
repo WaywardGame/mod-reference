@@ -8,7 +8,7 @@
  * Wayward is a copyrighted and licensed work. Modification and/or distribution of any source files is prohibited. If you wish to modify the game in any way, please refer to the modding guide:
  * https://waywardgame.github.io/
  */
-import { ISerializer } from "save/ISerializer";
+import { ISerializer, SavePropertyFlag } from "save/ISerializer";
 export default class Serializer implements ISerializer {
     static readonly maxBytes = 100000000;
     private static readonly buffer;
@@ -18,7 +18,8 @@ export default class Serializer implements ISerializer {
     byteOffset: number;
     private readonly version;
     private readonly skipOnUnserialized;
-    constructor(version: string, skipOnUnserialized?: boolean);
+    private readonly includeFlags;
+    constructor(version: string, skipOnUnserialized?: boolean, includeFlags?: SavePropertyFlag);
     saveToUint8Array(object: any, objectKey: any): Uint8Array | undefined;
     saveToString(object: any, objectKey: any): string | undefined;
     load(object: any, objectKey: any, data: string | Uint8Array): void;

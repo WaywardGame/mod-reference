@@ -81,6 +81,24 @@ export declare enum Types {
     RandomItem = 32
 }
 export declare const SYMBOL_SAVE_PROPERTIES: unique symbol;
+export declare const SYMBOL_SAVE_PROPERTY_FLAGS: unique symbol;
 export declare const SYMBOL_SAVE_ALL_PROPERTIES: unique symbol;
-export declare function SaveProperty(): PropertyDecorator;
+export declare enum SavePropertyFlag {
+    /**
+     * Normal property
+     */
+    Normal = 1,
+    /**
+     * Exclude this property from being included in the game state json
+     * This likely means the property is not fully synced between the server and client
+     */
+    ExcludeFromGameStateJson = 2,
+    /**
+     * Exclude this property from being included in the game state json when in singleplayer
+     * This should be used for certain properties that can change between new games that use the same seed
+     */
+    ExcludeFromGameStateJsonInSingleplayer = 4,
+    All = 65535
+}
+export declare function SaveProperty(flags?: SavePropertyFlag): PropertyDecorator;
 export declare function SaveAllProperties(): ClassDecorator;

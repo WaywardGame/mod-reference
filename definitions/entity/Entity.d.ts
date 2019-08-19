@@ -37,7 +37,13 @@ export default abstract class Entity extends EventEmitter.Host<IEntityEvents> {
     z: number;
     x: number;
     y: number;
+    /**
+     * Not guaranteed to be synced between the server and client for Player entities
+     */
     fromX: number;
+    /**
+     * Not guaranteed to be synced between the server and client for Player entities
+     */
     fromY: number;
     moveType: MoveType | undefined;
     anim: number;
