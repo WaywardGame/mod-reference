@@ -17,7 +17,7 @@ import { EquipType } from "entity/IHuman";
 import NPC from "entity/npc/NPC";
 import Player from "entity/player/Player";
 import { IObject, IObjectOptions, Quality } from "game/IObject";
-import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ItemType, TatteredMap } from "item/IItem";
+import { BookType, IConstructedInfo, IContainable, IContainer, IItemDescription, IItemLegendary, IItemUsed, ItemType, LegendaryType, TatteredMap } from "item/IItem";
 import Translation, { ISerializedTranslation } from "language/Translation";
 import { IUnserializedCallback } from "save/ISerializer";
 import { IVector3 } from "utilities/math/IVector";
@@ -92,6 +92,7 @@ export default class Item implements IContainer, IContainable, IUnserializedCall
     placeOnTile(x: number, y: number, z: number, force: boolean, skipMessage?: boolean): boolean;
     initializeMap(): void;
     setQuality(quality?: Quality): void;
+    getAcceptableLegendaryTypes(): LegendaryType[];
     setLegendary(bypassType?: boolean): void;
     acquireNotify(player: Player): void;
     getStokeFireValue(): number | undefined;
