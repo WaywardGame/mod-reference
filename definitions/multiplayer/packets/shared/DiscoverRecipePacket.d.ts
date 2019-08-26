@@ -12,6 +12,7 @@ import { ItemType } from "item/IItem";
 import PlayerTargetedSharedPacket from "multiplayer/packets/PlayerTargetedSharedPacket";
 export default class DiscoverRecipePacket extends PlayerTargetedSharedPacket {
     recipeType: ItemType;
+    newUnlock: boolean;
     unlockTime: number;
     process(): void;
 }
