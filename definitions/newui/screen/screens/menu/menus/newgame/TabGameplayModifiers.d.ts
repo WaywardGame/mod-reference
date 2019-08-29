@@ -20,6 +20,7 @@ export default class TabGameplayModifiers extends Tab {
     readonly choiceListClientsModifiers: ChoiceList<Choice<string | number | undefined>, false>;
     private milestoneModifiersMenu;
     constructor(menu: NewGameMenu);
+    resetMilestoneModifiers(): this;
     private onShow;
     private getMilestoneModifiersMenu;
 }

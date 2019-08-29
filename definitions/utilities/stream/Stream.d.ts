@@ -257,6 +257,11 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      */
     abstract collectStream(): Stream<T>;
     /**
+     * Returns a new Stream of the same type, after first collecting this Stream into an array.
+     * @param user A function that will take a separate stream created from the items in this stream.
+     */
+    abstract collectStream(user?: (stream: Stream<T>) => any): Stream<T>;
+    /**
      * Returns the item at the given index, or `undefined` if it does not exist.
      *
      * Note: An alias for `drop(index - 1).first()`.
@@ -588,6 +593,16 @@ export default abstract class Stream<T> implements IStreamable<T>, Iterable<T> {
      * @param user The function to call for each item
      */
     abstract forEach(splat: true, user: T extends any[] ? ((...args: T) => any) : never): void;
+    /**
+     * Runs a function on each item in this Stream, then returns a new Stream containing all the items in this Stream.
+     * @param user The function to call for each item
+     */
+    abstract forEachStream(user: (val: T, index: number) => any): Stream<T>;
+    /**
+     * Runs a function on each item in this Stream, then returns a new Stream containing all the items in this Stream.
+     * @param user The function to call for each item
+     */
+    abstract forEachStream(splat: true, user: T extends any[] ? ((...args: T) => any) : never): Stream<T>;
     abstract next(): void;
     /**
      * Returns whether the Stream has a next entry.

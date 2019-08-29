@@ -247,7 +247,7 @@ export declare enum RecipeLevel {
 export declare enum BookType {
     RandomEvent = 0,
     IslandPresence = 1,
-    Treasure = 2,
+    Treasures = 2,
     Deities = 3,
     PastCivilizations = 4,
     SandCasting = 5,
@@ -255,7 +255,9 @@ export declare enum BookType {
     TrappersJournal = 7,
     TheForce = 8,
     IslandRiddle = 9,
-    Trapped = 10
+    Trapped = 10,
+    PowderyCatalog = 11,
+    OnWaterAndHydration = 12
 }
 export interface TatteredMap extends IVector3 {
     reinitialize?: boolean;
