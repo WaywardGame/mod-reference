@@ -23,5 +23,6 @@ export declare enum Command {
     Ban = 5,
     Unban = 6,
     Pause = 7,
-    Save = 8
+    Save = 8,
+    Sync = 9
 }

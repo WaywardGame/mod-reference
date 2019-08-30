@@ -25,6 +25,7 @@ export interface ICorpseDescription extends IModdable {
     lightSource?: boolean;
     lightColor?: IRGB;
     animated?: boolean;
+    isFlammable?: boolean;
 }
 export interface ICorpseResourceDrop {
     item: ItemType;
