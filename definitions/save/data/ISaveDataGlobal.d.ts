@@ -18,6 +18,7 @@ export interface IOptions {
     alternateContextMenu: boolean;
     alternatingDirectionMovement: boolean;
     alwaysShowMoreInformation: boolean;
+    autoAttack: boolean;
     autoGatherHarvest: boolean;
     autoPickup: boolean;
     bindings: IBindings;

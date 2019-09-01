@@ -19,28 +19,28 @@ import Multiplayer from "multiplayer/Multiplayer";
 import NewUi from "newui/NewUi";
 import Steamworks from "steamworks/Steamworks";
 export declare enum EventBus {
-    Game = 0,
-    Ui = 1,
-    Language = 2,
-    Multiplayer = 3,
-    Steamworks = 4,
+    Actions = 0,
+    Game = 1,
+    Items = 2,
+    Language = 3,
+    LocalPlayer = 4,
     Mods = 5,
-    Players = 6,
-    LocalPlayer = 7,
-    Items = 8,
-    Actions = 9
+    Multiplayer = 6,
+    Players = 7,
+    Steamworks = 8,
+    Ui = 9
 }
 declare const eventBuses: {
-    [EventBus.Game](): typeof Game;
-    [EventBus.Language](): typeof LanguageManager;
-    [EventBus.Ui](): typeof NewUi;
-    [EventBus.Multiplayer](): typeof Multiplayer;
-    [EventBus.Steamworks](): typeof Steamworks;
-    [EventBus.Mods](): typeof ModManager;
-    [EventBus.Players](): typeof Player;
-    [EventBus.Items](): typeof ItemManager;
-    [EventBus.LocalPlayer](): Player;
     [EventBus.Actions](): typeof ActionExecutor;
+    [EventBus.Game](): typeof Game;
+    [EventBus.Items](): typeof ItemManager;
+    [EventBus.Language](): typeof LanguageManager;
+    [EventBus.LocalPlayer](): Player;
+    [EventBus.Mods](): typeof ModManager;
+    [EventBus.Multiplayer](): typeof Multiplayer;
+    [EventBus.Players](): typeof Player;
+    [EventBus.Steamworks](): typeof Steamworks;
+    [EventBus.Ui](): typeof NewUi;
 };
 export default eventBuses;
 export declare module EventBus {

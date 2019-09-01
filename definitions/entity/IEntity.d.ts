@@ -144,7 +144,8 @@ export declare enum AttackType {
     Shoot = 2,
     Sling = 3,
     Fire = 4,
-    ThrowItem = 5
+    ThrowItem = 5,
+    Generic = 6
 }
 export declare enum DamageType {
     Blunt = 1,
